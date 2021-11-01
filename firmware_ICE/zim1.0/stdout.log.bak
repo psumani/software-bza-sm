@@ -1,0 +1,46 @@
+Running in Lattice mode
+
+
+Starting:    C:\lscc\iCEcube2.2017.08\synpbase\bin64\mbin\synbatch.exe
+Install:     C:\lscc\iCEcube2.2017.08\synpbase
+Hostname:    DESKTOP-0637D1U
+Date:        Mon Jun 11 09:39:02 2018
+Version:     L-2016.09L+ice40
+
+Arguments:   -product synplify_pro -batch zim_syn.prj
+ProductType: synplify_pro
+
+
+
+
+
+log file: "F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_Implmnt\zim.srr"
+Running: zim_Implmnt in foreground
+
+Running zim_syn|zim_Implmnt
+
+Running: compile (Compile) on zim_syn|zim_Implmnt
+# Mon Jun 11 09:39:02 2018
+
+Running: compile_flow (Compile Process) on zim_syn|zim_Implmnt
+# Mon Jun 11 09:39:02 2018
+
+Running: compiler (Compile Input) on zim_syn|zim_Implmnt
+# Mon Jun 11 09:39:02 2018
+compiler exited with errors
+Job failed on: zim_syn|zim_Implmnt
+
+Job: "compiler" terminated with error status: 2
+See log file: "F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_Implmnt\synlog\zim_compiler.srr"
+# Mon Jun 11 09:39:03 2018
+
+Return Code: 2
+Run Time:00h:00m:01s
+Complete: Compile Process on zim_syn|zim_Implmnt
+Complete: Compile on zim_syn|zim_Implmnt
+Complete: Logic Synthesis on zim_syn|zim_Implmnt
+
+exit status=2
+
+exit status=2
+

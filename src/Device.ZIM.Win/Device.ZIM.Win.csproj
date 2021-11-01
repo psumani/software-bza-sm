@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AFFFB0DB-031F-4CD6-99F3-7B450AC89E52}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZiveLab.Device.ZIM.Win</RootNamespace>
+    <AssemblyName>ZiveLab.Device.ZIM.Win</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analysis\WaveForm.cs" />
+    <Compile Include="Analysis\ZCalibration.cs" />
+    <Compile Include="CustomEventArgs.cs" />
+    <Compile Include="Panels\PanelAux.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelAux.Designer.cs">
+      <DependentUpon>PanelAux.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelBlank.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelBlank.Designer.cs">
+      <DependentUpon>PanelBlank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\panelCooker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\panelCooker.Designer.cs">
+      <DependentUpon>panelCooker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelCookerHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelCookerHeader.Designer.cs">
+      <DependentUpon>PanelCookerHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelNoiseLevel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelNoiseLevel.Designer.cs">
+      <DependentUpon>PanelNoiseLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelNoiseLevelHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelNoiseLevelHeader.Designer.cs">
+      <DependentUpon>PanelNoiseLevelHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelSamplesHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelSamplesHeader.Designer.cs">
+      <DependentUpon>PanelSamplesHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelSamples.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelSamples.Designer.cs">
+      <DependentUpon>PanelSamples.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelStepSamples.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelStepSamples.Designer.cs">
+      <DependentUpon>PanelStepSamples.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelXYGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelXYGraph.Designer.cs">
+      <DependentUpon>PanelXYGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelBode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelBode.Designer.cs">
+      <DependentUpon>PanelBode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelAbout.Designer.cs">
+      <DependentUpon>PanelAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\GraphType.cs" />
+    <Compile Include="Controls\PopUp\PopupPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PopUp\PopupPanel.Designer.cs">
+      <DependentUpon>PopupPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Panels\PanelFindBestIRange.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelFindBestIRange.Designer.cs">
+      <DependentUpon>PanelFindBestIRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelNyquist.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelNyquist.Designer.cs">
+      <DependentUpon>PanelNyquist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelSelectCurrentRange.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelSelectCurrentRange.Designer.cs">
+      <DependentUpon>PanelSelectCurrentRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\PanelSetupParameters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\PanelSetupParameters.Designer.cs">
+      <DependentUpon>PanelSetupParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatusPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StatusPanel.Designer.cs">
+      <DependentUpon>StatusPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\SpringItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\SpringItem.Designer.cs">
+      <DependentUpon>SpringItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Panels\PanelAux.resx">
+      <DependentUpon>PanelAux.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelBlank.resx">
+      <DependentUpon>PanelBlank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\panelCooker.resx">
+      <DependentUpon>panelCooker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelCookerHeader.resx">
+      <DependentUpon>PanelCookerHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelNoiseLevel.resx">
+      <DependentUpon>PanelNoiseLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelNoiseLevelHeader.resx">
+      <DependentUpon>PanelNoiseLevelHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelSamplesHeader.resx">
+      <DependentUpon>PanelSamplesHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelSamples.resx">
+      <DependentUpon>PanelSamples.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelStepSamples.resx">
+      <DependentUpon>PanelStepSamples.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelXYGraph.resx">
+      <DependentUpon>PanelXYGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelBode.resx">
+      <DependentUpon>PanelBode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelAbout.resx">
+      <DependentUpon>PanelAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelFindBestIRange.resx">
+      <DependentUpon>PanelFindBestIRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelNyquist.resx">
+      <DependentUpon>PanelNyquist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelSelectCurrentRange.resx">
+      <DependentUpon>PanelSelectCurrentRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\PanelSetupParameters.resx">
+      <DependentUpon>PanelSetupParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatusPanel.resx">
+      <DependentUpon>StatusPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\SpringItem.resx">
+      <DependentUpon>SpringItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Device.ZIM\Device.ZIM.csproj">
+      <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
+      <Name>Device.ZIM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Primer\Primer.csproj">
+      <Project>{9b8b724d-8456-401e-b996-10d24982f727}</Project>
+      <Name>Primer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="paket.references" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoscaleX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoscaleXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoscaleY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportToExcel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MatchScale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanningX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanningXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanningY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pointer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TestSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HambergerMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-left-bold-box-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-right-bold-box-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkbox-blank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkbox-blank-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-left-bold-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-right-bold-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkbox-blank-circle-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkbox-blank-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play-circle-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CopyToClipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshvac_run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomPoint.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoompointCursor.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cursor1.cur" />
+    <Content Include="Zoompoint.cur" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="LiveCharts">
+          <HintPath>..\..\packages\LiveCharts\lib\net45\LiveCharts.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="LiveCharts.WinForms">
+          <HintPath>..\..\packages\LiveCharts.WinForms\lib\net45\LiveCharts.WinForms.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="LiveCharts.Wpf">
+          <HintPath>..\..\packages\LiveCharts.Wpf\lib\net45\LiveCharts.Wpf.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="MathNet.Numerics">
+          <HintPath>..\..\packages\MathNet.Numerics\lib\net40\MathNet.Numerics.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>

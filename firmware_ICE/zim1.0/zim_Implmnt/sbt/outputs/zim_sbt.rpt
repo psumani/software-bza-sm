@@ -1,0 +1,141 @@
+* ******************************************************************************
+
+* iCEcube Report
+
+* Version:            2020.12.27943
+
+* Build Date:         Dec  9 2020 17:31:51
+
+* File Generated:     Oct 13 2021 17:22:42
+
+* Purpose:            General info of design implementation
+
+* Copyright (C) 2006-2010 by Lattice Semiconductor Corp. All rights reserved.
+
+* ******************************************************************************
+
+Synthesis/Placement Summary:
+----------------------------
+    Status:  Successful
+    Runtime: 4 seconds
+
+Device Info:
+------------
+    Device Family: iCE40
+    Device:        iCE40HX4K
+    Package:       TQ144
+
+Design statistics:
+------------------
+    FFs:                  778
+    LUTs:                 1544
+    RAMs:                 12
+    IOBs:                 54
+    GBs:                  0
+    PLLs:                 1
+    Warm Boots:           0
+
+Logic Resource Utilization:
+---------------------------
+    Total Logic Cells: 1551/3520
+        Combinational Logic Cells: 773      out of   3520      21.9602%
+        Sequential Logic Cells:    778      out of   3520      22.1023%
+        Logic Tiles:               309      out of   440       70.2273%
+    Registers: 
+        Logic Registers:           778      out of   3520      22.1023%
+        IO Registers:              0        out of   880       0
+    Block RAMs:                    12       out of   20        60%
+    Warm Boots:                    0        out of   1         0%
+    Pins:
+        Input Pins:                14       out of   107       13.0841%
+        Output Pins:               40       out of   107       37.3832%
+        InOut Pins:                0        out of   107       0%
+    Global Buffers:                0        out of   8         0%
+    PLLs:                          1        out of   2         50%
+
+IO Bank Utilization:
+--------------------
+    Bank 3: 28       out of   28        100%
+    Bank 1: 29       out of   29        100%
+    Bank 0: 27       out of   27        100%
+    Bank 2: 19       out of   23        82.6087%
+
+Detailed I/O Info:
+------------------
+    Input Pins: 
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function    Signal Name   
+    ----------  ---------  -----------  -------  -------  -----------    -----------   
+    15          Input      SB_LVCMOS    No       3        Simple Input   VAC_MISO      
+    16          Input      SB_LVCMOS    No       3        Simple Input   VAC_DRDY      
+    22          Input      SB_LVCMOS    No       3        Simple Input   VDC_SDO       
+    29          Input      SB_LVCMOS    Yes      3        Simple Input   RTD_DRDY      
+    34          Input      SB_LVCMOS    Yes      3        Simple Input   RTD_SDO       
+    37          Input      SB_LVCMOS    Yes      2        Simple Input   ICE_SYSCLK    
+    44          Input      SB_LVCMOS    Yes      2        Simple Input   THERMOSTAT    
+    47          Input      SB_LVCMOS    Yes      2        Simple Input   EIS_SYNCCLK   
+    73          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_SPI_SCLK  
+    74          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_SPI_MOSI  
+    76          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_SPI_CE0   
+    80          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_GPMO_2    
+    139         Input      SB_LVCMOS    No       0        Simple Input   IAC_MISO      
+    141         Input      SB_LVCMOS    No       0        Simple Input   IAC_DRDY      
+
+    Output Pins: 
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function    Signal Name   
+    ----------  ---------  -----------  -------  -------  -----------    -----------   
+    1           Output     SB_LVCMOS    No       3        Simple Output  VAC_OSR0      
+    2           Output     SB_LVCMOS    No       3        Simple Output  VAC_OSR1      
+    3           Output     SB_LVCMOS    No       3        Simple Output  VAC_FLT0      
+    4           Output     SB_LVCMOS    No       3        Simple Output  VAC_FLT1      
+    9           Output     SB_LVCMOS    No       3        Simple Output  VAC_CLK       
+    10          Output     SB_LVCMOS    No       3        Simple Output  VAC_CS        
+    11          Output     SB_LVCMOS    No       3        Simple Output  VAC_SCLK      
+    12          Output     SB_LVCMOS    No       3        Simple Output  VAC_MOSI      
+    23          Output     SB_LVCMOS    No       3        Simple Output  VDC_SCLK      
+    24          Output     SB_LVCMOS    No       3        Simple Output  VDC_CLK       
+    25          Output     SB_LVCMOS    No       3        Simple Output  VDC_RNG0      
+    28          Output     SB_LVCMOS    No       3        Simple Output  AMPV_POW      
+    31          Output     SB_LVCMOS    No       3        Simple Output  RTD_SDI       
+    32          Output     SB_LVCMOS    No       3        Simple Output  RTD_SCLK      
+    33          Output     SB_LVCMOS    No       3        Simple Output  RTD_CS        
+    38          Output     SB_LVCMOS    No       2        Simple Output  TEST_LED      
+    39          Output     SB_LVCMOS    No       2        Simple Output  DDS_MCLK1     
+    41          Output     SB_LVCMOS    No       2        Simple Output  DDS_CS1       
+    42          Output     SB_LVCMOS    No       2        Simple Output  DDS_SCK1      
+    43          Output     SB_LVCMOS    No       2        Simple Output  DDS_MOSI1     
+    45          Output     SB_LVCMOS    No       2        Simple Output  STAT_COMM     
+    75          Output     SB_LVCMOS    No       1        Simple Output  ICE_SPI_MISO  
+    81          Output     SB_LVCMOS    No       1        Simple Output  ICE_GPMI_0    
+    110         Output     SB_LVCMOS    No       0        Simple Output  DDS_CS        
+    112         Output     SB_LVCMOS    No       0        Simple Output  DDS_SCK       
+    113         Output     SB_LVCMOS    No       0        Simple Output  DDS_MOSI      
+    114         Output     SB_LVCMOS    No       0        Simple Output  DDS_MCLK      
+    115         Output     SB_LVCMOS    No       0        Simple Output  DDS_RNG_0     
+    120         Output     SB_LVCMOS    No       0        Simple Output  CONT_SD       
+    121         Output     SB_LVCMOS    No       0        Simple Output  SELIRNG0      
+    122         Output     SB_LVCMOS    No       0        Simple Output  SELIRNG1      
+    124         Output     SB_LVCMOS    No       0        Simple Output  IAC_OSR0      
+    125         Output     SB_LVCMOS    No       0        Simple Output  IAC_OSR1      
+    130         Output     SB_LVCMOS    No       0        Simple Output  IAC_FLT0      
+    134         Output     SB_LVCMOS    No       0        Simple Output  IAC_FLT1      
+    135         Output     SB_LVCMOS    No       0        Simple Output  IAC_CLK       
+    136         Output     SB_LVCMOS    No       0        Simple Output  IAC_CS        
+    137         Output     SB_LVCMOS    No       0        Simple Output  IAC_SCLK      
+    138         Output     SB_LVCMOS    No       0        Simple Output  IAC_MOSI      
+    142         Output     SB_LVCMOS    No       0        Simple Output  AC_ADC_SYNC   
+
+
+
+Router Summary:
+---------------
+    Status:  Successful
+    Runtime: 45 seconds
+
+Routing Resource Utilization:
+-----------------------------
+              Local line of tile    12650 out of 146184      8.65348%
+                          Span 4     3244 out of  29696      10.924%
+                         Span 12      571 out of   5632      10.1385%
+                  Global network        2 out of      8      25%
+      Vertical Inter-LUT Connect      208 out of   6720      3.09524%
+

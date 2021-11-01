@@ -1,0 +1,2 @@
+c:\SignTools\SignTool\signtool.exe sign /ac c:\SignTools\GlobalSign\MSCV-GlobalSign.cer /s my .\bin\Release\bm.exe
+c:\SignTools\SignTool\signtool.exe timestamp /t http://timestamp.globalsign.com/scripts/timestamp.dll .\bin\Release\bm.exe

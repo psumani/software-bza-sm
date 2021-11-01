@@ -1,0 +1,53 @@
+BZA 교정 정리
+
+1. 프로그램 실행 후 장치 연결.
+
+2. CTRL + ALT + M 을 눌러서 관리모드로 설정.
+
+3. 메뉴 Device Configuration-Device Information을 선택하여 Configuration 창을 염.
+4. Configuration 창에서 메뉴 File-Edit dummy resistor info 를 선택하여 
+   Dummy 정보 확인, 수정 및 적용(장치에적용).
+
+5. Range[Vdc] tab을 선택하여 Vdc X10과 Vdc X1을 교정.
+
+6. Range[Temp] tab을 선택하여 Temperature(PT-100) 교정.
+
+7. Configuration 창을 종료한 후 초기 창에서 Control and Measure 버튼을 선택하여 
+   Control and Measure창을 염.
+
+8. 10mΩ dummy연결, 400mA range, 10~0.05Hz, Density 5, delay 1 조건으로 
+   -> 가변저항(R199)를 돌려서 저주파수의 Phase를 0 부근으로 되도록 여러번 반족하여 조정.
+     (참고) Phase가 +쪽으로 올라가면 가변저항을 시계방향으로 돌리고,
+            Phase가 +쪽으로 올라가면 가변저항을 시계방향 반대방향으로 돌려 0으로 맞춤.
+     (주의) 교정 정보가 없어야 하므로 교정정보가 초기화 된 상태에서 진행해야 함.
+
+9. 1Ω dummy 연결,메뉴 Calibration - Calib parameter with 1Ω.을 선택.
+
+10. 10mΩ dummy 연결,메뉴 Calibration - 2A gain setting with 10mΩ.을 선택.
+
+11. 메뉴 Reporting - 2A range  with 10mΩ.을 선택 시험이 종료하면,
+    메뉴 Reporting - Save Report data를 선택하여 저장.
+
+12. 100mΩ dummy 연결,메뉴 Calibration - 200mA gain setting with 100mΩ.을 선택.
+
+13. 메뉴 Reporting - 200mA range  with 100mΩ.을 선택 시험이 종료하면,
+    메뉴 Reporting - Save Report data를 선택하여 위 11번에서 저장했던 파일로 저장.
+    (참고) 이전 저장한 데이타의 아래 위치에 현 결과를 추가하여 저장하게 됨.
+
+14. 1Ω dummy 연결,메뉴 Calibration - 20mA gain setting with 1Ω.을 선택.
+
+15. 메뉴 Reporting - 20mA range  with 1Ω.을 선택 시험이 종료하면,
+    메뉴 Reporting - Save Report data를 선택하여 위 11번에서 저장했던 파일로 저장.
+    (참고) 이전 저장한 데이타의 아래 위치에 현 결과를 추가하여 저장하게 됨.
+
+16. 10Ω dummy 연결,메뉴 Calibration - 2mA gain setting with 10Ω.을 선택.
+
+17. 메뉴 Reporting - 2mA range  with 10Ω.을 선택 시험이 종료하면,
+    메뉴 Reporting - Save Report data를 선택하여 위 11번에서 저장했던 파일로 저장.
+    (참고) 이전 저장한 데이타의 아래 위치에 현 결과를 추가하여 저장하게 됨.
+
+18. Control and Measure 창을 종료한 후 초기 창에서 
+    메뉴 Device Configuration-Device Information을 선택하여 Configuration 창을 염.
+
+19. Configuration 창에서 메뉴 File - Saves the information of the ranges as a file.을 선택하여
+    장치의 전체 정보를 파일로 저장.

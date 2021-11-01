@@ -1,0 +1,14 @@
+----------------------------------------------------------------------
+Report for cell CLK_DIV.TECH
+Register bits:  39 of 3520 (1.108%)
+I/O cells:      0
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY        45          100.0
+                             SB_DFF         2          100.0
+                            SB_DFFE        31          100.0
+                           SB_DFFER         1          100.0
+                          SB_DFFESR         1          100.0
+                            SB_DFFR         4          100.0
+                            SB_LUT4       150          100.0
+                              TOTAL       234

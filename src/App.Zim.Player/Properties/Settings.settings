@@ -1,0 +1,90 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="App.Zim.Player.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ExpectedZ" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="MaxVrms" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="RequestedSNR" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="IP0" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">169</Value>
+    </Setting>
+    <Setting Name="IP1" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">254</Value>
+    </Setting>
+    <Setting Name="IP2" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">17</Value>
+    </Setting>
+    <Setting Name="IP3" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2000</Value>
+    </Setting>
+    <Setting Name="PathSIFFW" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PathZIMFW" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FileNameZIMFW" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FileNameSIFFW" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PathRangeInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PathWebService" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Inductance0" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5.7367E-08</Value>
+    </Setting>
+    <Setting Name="Inductance1" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5.247E-08</Value>
+    </Setting>
+    <Setting Name="Inductance2" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.07241E-07</Value>
+    </Setting>
+    <Setting Name="Inductance3" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.893E-06</Value>
+    </Setting>
+    <Setting Name="RDummy0" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.00998886</Value>
+    </Setting>
+    <Setting Name="RDummy1" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.09982</Value>
+    </Setting>
+    <Setting Name="RDummy2" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.00061</Value>
+    </Setting>
+    <Setting Name="RDummy3" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">9.96536</Value>
+    </Setting>
+    <Setting Name="PathData" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Power" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="RefreshTime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="BatParaFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AutoConnDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="CommTimeOut" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

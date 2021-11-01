@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1F3D06B-032C-4C7A-A4E2-497709702106}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>App.ZIM.FactorySetting</RootNamespace>
+    <AssemblyName>App.ZIM.FactorySetting</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LanSetLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\external\LanSetLib\LanSetLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmTestFpga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTestFpga.Designer.cs">
+      <DependentUpon>frmTestFpga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBurnZIM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBurnZIM.Designer.cs">
+      <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConnDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConnDlg.designer.cs">
+      <DependentUpon>frmConnDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInputString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInputString.Designer.cs">
+      <DependentUpon>frmInputString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetProductInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetProductInfo.Designer.cs">
+      <DependentUpon>frmSetProductInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWebServceCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWebServceCfg.Designer.cs">
+      <DependentUpon>frmWebServceCfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmBurnZIM.resx">
+      <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConnDlg.resx">
+      <DependentUpon>frmConnDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInputString.resx">
+      <DependentUpon>frmInputString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetProductInfo.resx">
+      <DependentUpon>frmSetProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTestFpga.resx">
+      <DependentUpon>frmTestFpga.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWebServceCfg.resx">
+      <DependentUpon>frmWebServceCfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Device.ZIM.Win\Device.ZIM.Win.csproj">
+      <Project>{afffb0db-031f-4cd6-99f3-7b450ac89e52}</Project>
+      <Name>Device.ZIM.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.ZIM\Device.ZIM.csproj">
+      <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
+      <Name>Device.ZIM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BatMag.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

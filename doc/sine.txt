@@ -1,0 +1,17 @@
+Sine generation
+   DDS - AD9837BCPZ
+         Maximum Master clock 		16MHz
+         Resolution   			28bit, about 0.06Hz@16MHz
+         
+         BZA Master clock               125KHz = 16MHz/128   == 
+         Resolution   			28bit, 0.0004656612873Hz@125KHz
+
+ADC Master clock
+   DDS - AD9837BCPZ
+         Maximum Master clock 		16MHz
+         Resolution   			28bit, about 0.06Hz@16MHz
+
+   ADC - ADS127L01IPBSR - VLP Mode
+         Max. Master clock              4.0MHz
+         Min. Master clock              0.1MHz
+         

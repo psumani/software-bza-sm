@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5041427B-B705-432F-892E-517674795571}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>App.Zim.Player</RootNamespace>
+    <AssemblyName>BM</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <PublishUrl>게시\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\bm.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmCalWebVars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalWebVars.Designer.cs">
+      <DependentUpon>frmCalWebVars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAppSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAppSetting.Designer.cs">
+      <DependentUpon>frmAppSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBatPara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBatPara.Designer.cs">
+      <DependentUpon>frmBatPara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCountdown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCountdown.Designer.cs">
+      <DependentUpon>frmCountdown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetMaxRange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetMaxRange.Designer.cs">
+      <DependentUpon>frmSetMaxRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCalibRtd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalibRtd.Designer.cs">
+      <DependentUpon>frmCalibRtd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCalibVdc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalibVdc.Designer.cs">
+      <DependentUpon>frmCalibVdc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBurnZIM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBurnZIM.designer.cs">
+      <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConnDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConnDlg.Designer.cs">
+      <DependentUpon>frmConnDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFreqGen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFreqGen.Designer.cs">
+      <DependentUpon>frmFreqGen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInputDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInputDlg.Designer.cs">
+      <DependentUpon>frmInputDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInputValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInputValue.designer.cs">
+      <DependentUpon>frmInputValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfig.Designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChannel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChannel.Designer.cs">
+      <DependentUpon>FormChannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetDataFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetDataFormat.Designer.cs">
+      <DependentUpon>frmSetDataFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUploadICEFW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUploadICEFW.Designer.cs">
+      <DependentUpon>frmUploadICEFW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWebServceCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWebServceCfg.designer.cs">
+      <DependentUpon>frmWebServceCfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAppSetting.resx">
+      <DependentUpon>frmAppSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBatPara.resx">
+      <DependentUpon>frmBatPara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalWebVars.resx">
+      <DependentUpon>frmCalWebVars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCountdown.resx">
+      <DependentUpon>frmCountdown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetMaxRange.resx">
+      <DependentUpon>frmSetMaxRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalibRtd.resx">
+      <DependentUpon>frmCalibRtd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalibVdc.resx">
+      <DependentUpon>frmCalibVdc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBurnZIM.resx">
+      <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConnDlg.resx">
+      <DependentUpon>frmConnDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFreqGen.resx">
+      <DependentUpon>frmFreqGen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInputDlg.resx">
+      <DependentUpon>frmInputDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInputValue.resx">
+      <DependentUpon>frmInputValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfig.resx">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChannel.resx">
+      <DependentUpon>FormChannel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetDataFormat.resx">
+      <DependentUpon>frmSetDataFormat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUploadICEFW.resx">
+      <DependentUpon>frmUploadICEFW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWebServceCfg.resx">
+      <DependentUpon>frmWebServceCfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="paket.references" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BatMag.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bm.ico" />
+    <None Include="Resources\bm.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Device.ZIM.Win\Device.ZIM.Win.csproj">
+      <Project>{afffb0db-031f-4cd6-99f3-7b450ac89e52}</Project>
+      <Name>Device.ZIM.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.ZIM\Device.ZIM.csproj">
+      <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
+      <Name>Device.ZIM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Primer\Primer.csproj">
+      <Project>{9b8b724d-8456-401e-b996-10d24982f727}</Project>
+      <Name>Primer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZiveUniFile\ZiveUniFile.csproj">
+      <Project>{32020151-2ccf-4082-88d0-39345b84e995}</Project>
+      <Name>ZiveUniFile</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="LiveCharts">
+          <HintPath>..\..\packages\LiveCharts\lib\net45\LiveCharts.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="LiveCharts.WinForms">
+          <HintPath>..\..\packages\LiveCharts.WinForms\lib\net45\LiveCharts.WinForms.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="LiveCharts.Wpf">
+          <HintPath>..\..\packages\LiveCharts.Wpf\lib\net45\LiveCharts.Wpf.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="MathNet.Numerics">
+          <HintPath>..\..\packages\MathNet.Numerics\lib\net40\MathNet.Numerics.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <PropertyGroup>
+    <PostBuildEvent>c:\SignTools\SignTool\signtool.exe sign /V /fd sha256 /sha1 "4541d7145cc08ec5df1d244f69b4dec2844d3ad0" /tr "http://sha256timestamp.ws.symantec.com/sha256/timestamp" /td sha256  F:\SM_Git_Repositories\software-zlog-sm\src\App.Zim.Player\bin\Release\bm.exe</PostBuildEvent>
+  </PropertyGroup>
+</Project>
