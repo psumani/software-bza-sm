@@ -61,7 +61,7 @@ namespace ZiveLab.Device.ZIM
                 }
             }
         }
-
+        
         public bool IsValideStat { get { return eisstate != EisState.none; } }
 
         EisState eisstate = EisState.none;
@@ -1296,6 +1296,7 @@ namespace ZiveLab.Device.ZIM
         }
 
         int skipCycle;
+        
         public int SkipCycle
         {
             get { return skipCycle; }
@@ -1305,6 +1306,20 @@ namespace ZiveLab.Device.ZIM
                 {
                     skipCycle = value;
                     OnPropertyChanged("SkipCycle");
+                }
+            }
+        }
+
+        double FinalCalibFreq;
+        public double Finalcalibfreq
+        {
+            get { return FinalCalibFreq; }
+            set
+            {
+                if (FinalCalibFreq != value)
+                {
+                    FinalCalibFreq = value;
+                    OnPropertyChanged("FinalCalibFreq");
                 }
             }
         }
@@ -1355,6 +1370,7 @@ namespace ZiveLab.Device.ZIM
         {
             InitialFrequency = 1000.0;
             FinalFrequency = 1.0;
+            Finalcalibfreq = 0.05;
             Density = 10;
             Iteration = 1;
             Cycle = 0; // Auto
@@ -1537,8 +1553,8 @@ namespace ZiveLab.Device.ZIM
         {
             InitialFrequency = 3900.0;
 
-            FinalFrequency =  0.05;
-
+            FinalFrequency = FinalCalibFreq;  
+            
             Density =  10;
             Iteration = 1;
             MaxInitialDelay = 12;

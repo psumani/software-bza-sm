@@ -23,6 +23,7 @@ namespace App.Zim.Player
             numRefreshtime.Value = Properties.Settings.Default.RefreshTime;
             numconndelay.Value = Properties.Settings.Default.AutoConnDelay;
             numtimeout.Value = Properties.Settings.Default.CommTimeOut;
+            numfreq.Value = (int)(Properties.Settings.Default.FinalCalibFreq * 1000.0);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -31,6 +32,8 @@ namespace App.Zim.Player
             Properties.Settings.Default.AutoConnDelay = (int)numconndelay.Value;
             Properties.Settings.Default.RefreshTime = (int)numRefreshtime.Value;
             Properties.Settings.Default.CommTimeOut = (int)numtimeout.Value;
+            Properties.Settings.Default.FinalCalibFreq = (double)numfreq.Value / 1000.0;
+            
             Properties.Settings.Default.Save();
             this.DialogResult = DialogResult.OK;
         }

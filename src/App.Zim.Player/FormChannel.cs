@@ -92,7 +92,7 @@ namespace App.Zim.Player
             
             Refreshtime = Properties.Settings.Default.RefreshTime;
             AutoConnDelay = Properties.Settings.Default.AutoConnDelay;
-
+            
             // Use Timer to keep UI thread responsive when reading packets
             Timer delayedTimer = new Timer() { Interval = 100 };
             delayedTimer.Tick += delegate
@@ -133,7 +133,7 @@ namespace App.Zim.Player
                 ReadExpParameters();
                 ChStatus.SetProperty(meis_cond);
 
-
+                
                 // Read all
                 ReadInitSamples();
 
@@ -1193,6 +1193,7 @@ namespace App.Zim.Player
 
             this.Text = "Calibration mode" + sTitle;
 
+            ChStatus.ZParameters.Finalcalibfreq = Properties.Settings.Default.FinalCalibFreq;
             meis_cond = ChStatus.ZParameters.ToCalibPacket(4);
 
             if (!WriteExpParameters(meis_cond)) return;

@@ -358,5 +358,17 @@ namespace App.Zim.Player.Properties {
                 this["CommTimeOut"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.05")]
+        public double FinalCalibFreq {
+            get {
+                return ((double)(this["FinalCalibFreq"]));
+            }
+            set {
+                this["FinalCalibFreq"] = value;
+            }
+        }
     }
 }

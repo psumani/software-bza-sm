@@ -1114,13 +1114,9 @@ void http_process_handler(uint8_t s, st_http_request * p_http_request)
 void SendJson(char* pdata)
 {
     SendString(HTTP_SOCKET, (char*)c_HTTP_200_OK);
-//	if (GetStatus(HTTP_SOCKET) != Sn_SR_ESTABLISHED) return;        
     SendString(HTTP_SOCKET, (char*)c_HTTP_Access_All);
-//	if (GetStatus(HTTP_SOCKET) != Sn_SR_ESTABLISHED) return;        
     SendString(HTTP_SOCKET, (char*)c_HTTP_Content_Json);
-//	if (GetStatus(HTTP_SOCKET) != Sn_SR_ESTABLISHED) return;        
-    SendString(HTTP_SOCKET, (char*)c_HTTP_EmptyLine);
-//	if (GetStatus(HTTP_SOCKET) != Sn_SR_ESTABLISHED) return;        
+    SendString(HTTP_SOCKET, (char*)c_HTTP_EmptyLine); 
     SendString(HTTP_SOCKET, pdata);
 }
 
@@ -1139,7 +1135,10 @@ void HTTP_Server(void)
             if(socket(HTTP_SOCKET, Sn_MR_TCP, HTTP_PORT, 0))
             {
                 if(!listen(HTTP_SOCKET))
+				{
                     close(HTTP_SOCKET);
+				}
+				
             }
             else
             {
@@ -1154,13 +1153,15 @@ void HTTP_Server(void)
 				m_pGlobalVar->LedBusy = true;
 			}
             break;
-            
+           
+			
         case Sn_SR_ESTABLISHED :     
             // HTTP Process states
 			if(m_pGlobalVar->LedBusyStat == 0)
 			{
 				m_pGlobalVar->LedBusy = false;
 			}
+			
             switch(HTTPSock_Status[HTTP_SOCKET].sock_status)
             {
                 case STATE_HTTP_IDLE :
@@ -1207,15 +1208,16 @@ void HTTP_Server(void)
        	case Sn_SR_CLOSEWAIT:  
 			disconnect(HTTP_SOCKET); //close(HTTP_SOCKET);
 			break;
-/*		
+		
         case Sn_SR_FINWAIT:
 		case Sn_SR_CLOSING:
 		case Sn_SR_TIMEWAIT:
 		case Sn_SR_LASTACK:
 			close(HTTP_SOCKET); // Force closing the socket 
 			break;
-		*/
+		
 		default: 
+			
             break;
     }
 }

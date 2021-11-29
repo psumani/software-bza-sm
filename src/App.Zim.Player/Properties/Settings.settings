@@ -86,5 +86,8 @@
     <Setting Name="CommTimeOut" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8000</Value>
     </Setting>
+    <Setting Name="FinalCalibFreq" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.05</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -32,7 +32,7 @@ byte socket(SOCKET s, byte protocol, ushort port, byte flag)
 		{
 
 		}
-		
+
 		return 1;
 	}	
 	
@@ -57,15 +57,21 @@ byte listen(SOCKET s)
 {
 	if(*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0003)) == Sn_SR_INIT)
 	{
-		*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0001)) = Sn_CR_LISTEN;
 		
+		*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0001)) = Sn_CR_LISTEN;
 		while(*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0001)))
 		{
 		}
 		
-		return 1;
+		if(*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0003)) == Sn_SR_LISTEN)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
-	
 	return 0;
 }
 
@@ -100,7 +106,10 @@ ushort send(SOCKET s, byte* buf, ushort len)
 		freesize = GetTransFreeSize(s);
 		
 		
-		if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) return 0;
+		if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) 
+		{
+			return 0;
+		}
 		
 		/*
 		status = REG_Sn_STATUS(s);
@@ -123,11 +132,26 @@ ushort send(SOCKET s, byte* buf, ushort len)
 		if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) return 0;
     }
 
+	/*
 	while((REG_Sn_INT(s) & Sn_IR_SEND_OK) != Sn_IR_SEND_OK)
 	{
 		if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) return 0;
 	}
-
+*/
+	
+	 while((REG_Sn_INT(s) & Sn_IR_SEND_OK) != Sn_IR_SEND_OK)
+        {
+            if(REG_Sn_INT(s) == Sn_IR_TIMEOUT)
+            {
+                REG_Sn_INT(s) = Sn_IR_SEND_OK | Sn_IR_TIMEOUT;
+                return 0;
+            }
+			
+			if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) 
+			{
+				return 0;
+			}
+        }
 	
 	REG_Sn_INT(s) = Sn_IR_SEND_OK;
 	return ret;
@@ -174,7 +198,10 @@ uint16 sendto(SOCKET s, const uint8 *buf, uint16 len, uint8 *addr, uint16 port)
                 REG_Sn_INT(s) = Sn_IR_SEND_OK | Sn_IR_TIMEOUT;
                 return 0;
             }
-			if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) return 0;
+			if(REG_Sn_STATUS(s) != Sn_SR_ESTABLISHED) 
+			{
+				return 0;
+			}
         }
         
         REG_Sn_INT(s) = Sn_IR_SEND_OK;
