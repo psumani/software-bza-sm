@@ -83,6 +83,69 @@ namespace ZiveLab.Device.ZIM.Packets
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_Eis_Cable
+    {
+        byte selected;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public double []Ls;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
+        public byte[] bnouse;
+        public double dnouse;
+        public st_zim_Eis_Cable(byte init)
+        {
+            int i;
+            selected = 0;
+            Ls = new double[4];
+            for(i=0; i<4; i++)
+            {
+                Ls[i] = 0.0;
+            }
+            bnouse = new byte[7];
+            for (i = 0; i < 7; i++)
+            {
+                bnouse[i] = 0;
+            }
+
+            dnouse = 0.0;
+        }
+
+        public void initialize()
+        {
+            int i;
+            selected = 0;
+            for (i = 0; i < 4; i++)
+            {
+                Ls[i] = 0.0;
+            }
+            for (i = 0; i < 7; i++)
+            {
+                bnouse[i] = 0;
+            }
+
+            dnouse = 0.0;
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zim_Eis_Cable)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_Eis_Cable));
+            pinnedArr.Free();
+        }
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct st_zim_Eis_Comp_Ls
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
@@ -224,7 +287,7 @@ namespace ZiveLab.Device.ZIM.Packets
     {
         public byte ID;
         public st_zim_Safety_inf mSafety;
-        public st_zim_Eis_Cal_info mEisCalInfo;
+        public st_zim_Eis_Cable mEisCable;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_RNGCNT)]
         public st_zim_adc_rnginf[] iac_rng;
         public st_zim_adc_rnginf vac_rng;
@@ -238,7 +301,7 @@ namespace ZiveLab.Device.ZIM.Packets
         {
             ID = DeviceConstants.ID_RANGEINFO;
             mSafety = new st_zim_Safety_inf(0);
-            mEisCalInfo = new st_zim_Eis_Cal_info(0);
+            mEisCable = new st_zim_Eis_Cable(0);
 
             iac_rng = new st_zim_adc_rnginf[DeviceConstants.MAX_IAC_RNGCNT];
             iac_rng[0] = new st_zim_adc_rnginf(DeviceConstants.ADC_IAC_RNG0_MAX, DeviceConstants.ADC_IAC_RNG0_MIN);

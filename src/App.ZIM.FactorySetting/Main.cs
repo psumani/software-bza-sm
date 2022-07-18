@@ -164,8 +164,9 @@ namespace App.ZIM.FactorySetting
             string str;
             eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
             if (mtype == eDeviceType.ZIM
-                || mtype == eDeviceType.BZA1000
-                || mtype == eDeviceType.BZA100)
+                || mtype == eDeviceType.SBZA
+                || mtype == eDeviceType.MBZA
+                || mtype == eDeviceType.ZBCS)
             {
                 str = "(SIF II)";
                 LnklblSetSIFWebToLan.Enabled = true;
@@ -188,10 +189,10 @@ namespace App.ZIM.FactorySetting
 
         public void RefreshZimInfo()
         {
-            eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
+            /*eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
             if (mtype != eDeviceType.ZIM
-                && mtype != eDeviceType.BZA1000
-                && mtype != eDeviceType.BZA100
+                && mtype != eDeviceType.SBZA
+                && mtype != eDeviceType.MBZA
                 && mtype != eDeviceType.ZBCS)
             {
                 if (mCommZim.isConnected == true)
@@ -226,7 +227,7 @@ namespace App.ZIM.FactorySetting
                         return;
                     }
                 }
-            }
+            }*/
             mSysCfg.mZimCfg.ZimBDVersion = 0;
             mSysCfg.mZimCfg.ZimFWVersion = 0;
             mSysCfg.mZimCfg.cModel[0] = 0x30;

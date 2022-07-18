@@ -4,6 +4,7 @@ namespace ZiveLab.Device.ZIM
 {
     public static class DeviceConstants
     {
+
         public const Int64 MIN_MAC_ADDR = 0x1BC5081000;
         public const Int64 MAX_MAC_ADDR = 0x1BC5081FFF;
         public const double PI = 3.14159265358979323846;
@@ -28,6 +29,14 @@ namespace ZiveLab.Device.ZIM
         public const double ADC_IAC_RNG3_MAX = 0.00256;
         public const double ADC_IAC_RNG3_MIN = -0.00256;
         public const double ADC_IAC_RNG3_FACTOR = ((ADC_IAC_RNG3_MAX - ADC_IAC_RNG3_MIN) / 16777216.0); //24bit
+
+        public const double ADC_IAC_RNG4_MAX = 0.000256;
+        public const double ADC_IAC_RNG4_MIN = -0.000256;
+        public const double ADC_IAC_RNG4_FACTOR = ((ADC_IAC_RNG4_MAX - ADC_IAC_RNG4_MIN) / 16777216.0); //24bit
+
+        public const double ADC_IAC_RNG5_MAX = 0.0000256;
+        public const double ADC_IAC_RNG5_MIN = -0.0000256;
+        public const double ADC_IAC_RNG5_FACTOR = ((ADC_IAC_RNG5_MAX - ADC_IAC_RNG5_MIN) / 16777216.0); //24bit
 
         public const double ADC_VAC_RNG_MAX = 0.256;
         public const double ADC_VAC_RNG_MIN = -0.256;
@@ -56,15 +65,16 @@ namespace ZiveLab.Device.ZIM
         public const int CFG_EIS_START = 0x2;
         public const int CFG_EIS_STOP = 0x4;
         public const int CFG_EIS_DATAIDX_MASK = 0x0FFF;
-        
-        public const double MAX_EIS_FREQUENCY = 20000.0;
-        public const double MIN_EIS_FREQUENCY = 0.01;
+
+        public const double MAX_EIS_FREQUENCY = 200000.0;
+        public const double MIN_EIS_FREQUENCY = 0.001;
         public const int MAX_EIS_DENSITY = 20;
         public const int MAX_EIS_POINT = 1024;
         public const int MAX_EIS_CYC_POINT = 512;
-        public const int MIN_EIS_CYC_POINT = 16;
+        public const int MIN_EIS_CYC_POINT = 32;
         public const int MAX_EIS_RAWADC_POINT = MAX_EIS_POINT;
         public const int MAX_EIS_RAWVAL_POINT = MAX_EIS_POINT;
+        public const int DEF_EIS_COMP_CRNG = 4;
 
         public const int MAX_EIS_RT_RAW_POINT = 64;
 
@@ -113,10 +123,12 @@ namespace ZiveLab.Device.ZIM
         public const double DEV_DEFAULT_POWER = 40.0;
         public const double DEV_MAX_POWER = 80.0;
 
-        public const double DDS_SIG_MCLK = 125000.0;
+        public const double DDS_SIG_MCLK_LOW = 125000.0;
+        public const double DDS_SIG_MCLK_HI = 16000000.0;
         public const double DDS_CLK_MCLK = 16000000.0;
         public const double DDS_FREQ_RES = 268435455.0;
-        public const double DDS_SIG_CONST = (DDS_FREQ_RES / DDS_SIG_MCLK);
+        public const double DDS_SIG_CONST_LOW = (DDS_FREQ_RES / DDS_SIG_MCLK_LOW);
+        public const double DDS_SIG_CONST_HI = (DDS_FREQ_RES / DDS_SIG_MCLK_HI);
         public const double DDS_CLK_CONST = (DDS_FREQ_RES / DDS_CLK_MCLK);
 
         public const string S_WEB_LIMITFILE = "src\\limit.json";

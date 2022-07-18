@@ -344,9 +344,6 @@ namespace ZiveLab.Device.ZIM.Win
 
             cm.MenuItems.Add("-");
 
-
-
-            
             var menuCalib = new MenuItem("Calibration");
 
             menuCalWith1ohm = new MenuItem("Calib parameter with 1Ω."); // 20mA
@@ -386,28 +383,28 @@ namespace ZiveLab.Device.ZIM.Win
 
             var menuCalInit = new MenuItem("Initialize the calibration key.");
 
-            menuCalInitAt1ohm = new MenuItem("Calib parameter with 1Ω."); 
+            menuCalInitAt1ohm = new MenuItem("Calib parameter."); 
             menuCalInitAt1ohm.Click += delegate
             {
                 OnCalInitAt1ohmMenuSelected(null);
             };
             menuCalInit.MenuItems.Add(menuCalInitAt1ohm);
 
-            menuCalGainInitAt2A = new MenuItem("2A gain setting with 10mΩ."); 
+            menuCalGainInitAt2A = new MenuItem("2A gain."); 
             menuCalGainInitAt2A.Click += delegate
             {
                 OnCalGainInitAt2AMenuSelected(null);
             };
             menuCalInit.MenuItems.Add(menuCalGainInitAt2A);
 
-            menuCalGainInitAt200mA = new MenuItem("200mA gain setting with 10mΩ."); 
+            menuCalGainInitAt200mA = new MenuItem("200mA gain."); 
             menuCalGainInitAt200mA.Click += delegate
             {
                 OnCalGainInitAt200mAMenuSelected(null);
             };
             menuCalInit.MenuItems.Add(menuCalGainInitAt200mA);
 
-            menuCalGainInitAt20mA = new MenuItem("20mA gain setting with 1Ω.");
+            menuCalGainInitAt20mA = new MenuItem("20mA gain.");
             menuCalGainInitAt20mA.Click += delegate
             {
                 OnCalGainInitAt20mAMenuSelected(null);
@@ -415,7 +412,7 @@ namespace ZiveLab.Device.ZIM.Win
             menuCalInit.MenuItems.Add(menuCalGainInitAt20mA);
 
 
-            menuCalGainInitAt2mA = new MenuItem("2mA gain setting with 1Ω.");
+            menuCalGainInitAt2mA = new MenuItem("2mA.");
             menuCalGainInitAt2mA.Click += delegate
             {
                 OnCalGainInitAt2mAMenuSelected(null);
@@ -664,11 +661,11 @@ namespace ZiveLab.Device.ZIM.Win
         private MenuItem menuAbout;
         private MenuItem menuOpenWebPage;
      
-        private MenuItem menuCalInitAt1ohm;
-        private MenuItem menuCalGainInitAt2A;
-        private MenuItem menuCalGainInitAt200mA;
-        private MenuItem menuCalGainInitAt20mA;
-        private MenuItem menuCalGainInitAt2mA;
+        public MenuItem menuCalInitAt1ohm;
+        public MenuItem menuCalGainInitAt2A;
+        public MenuItem menuCalGainInitAt200mA;
+        public MenuItem menuCalGainInitAt20mA;
+        public MenuItem menuCalGainInitAt2mA;
 
         private MenuItem menuReporting;
         private MenuItem menuCalInitAtAll;

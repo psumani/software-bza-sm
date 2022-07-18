@@ -39,15 +39,17 @@
             this.txtIP3 = new System.Windows.Forms.TextBox();
             this.btnFind = new System.Windows.Forms.Button();
             this.Findlist = new System.Windows.Forms.ListBox();
-            this.progScan = new System.Windows.Forms.ProgressBar();
+            this.FindErrlist = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.chkdhcp = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 115);
+            this.label1.Location = new System.Drawing.Point(13, 230);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 19);
             this.label1.TabIndex = 1;
@@ -57,7 +59,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(62, 150);
+            this.label2.Location = new System.Drawing.Point(363, 233);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 19);
             this.label2.TabIndex = 2;
@@ -66,14 +68,14 @@
             // txtPort
             // 
             this.txtPort.Enabled = false;
-            this.txtPort.Location = new System.Drawing.Point(170, 147);
+            this.txtPort.Location = new System.Drawing.Point(460, 230);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(50, 26);
             this.txtPort.TabIndex = 3;
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(419, 110);
+            this.btnConnect.Location = new System.Drawing.Point(327, 271);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(83, 29);
             this.btnConnect.TabIndex = 4;
@@ -83,7 +85,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(419, 145);
+            this.btnCancel.Location = new System.Drawing.Point(430, 271);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 29);
             this.btnCancel.TabIndex = 5;
@@ -93,39 +95,39 @@
             // 
             // txtIP0
             // 
-            this.txtIP0.Location = new System.Drawing.Point(170, 114);
+            this.txtIP0.Location = new System.Drawing.Point(141, 229);
             this.txtIP0.Name = "txtIP0";
             this.txtIP0.Size = new System.Drawing.Size(36, 26);
             this.txtIP0.TabIndex = 6;
             // 
             // txtIP1
             // 
-            this.txtIP1.Location = new System.Drawing.Point(213, 114);
+            this.txtIP1.Location = new System.Drawing.Point(184, 229);
             this.txtIP1.Name = "txtIP1";
             this.txtIP1.Size = new System.Drawing.Size(36, 26);
             this.txtIP1.TabIndex = 7;
             // 
             // txtIP2
             // 
-            this.txtIP2.Location = new System.Drawing.Point(255, 114);
+            this.txtIP2.Location = new System.Drawing.Point(226, 229);
             this.txtIP2.Name = "txtIP2";
             this.txtIP2.Size = new System.Drawing.Size(36, 26);
             this.txtIP2.TabIndex = 8;
             // 
             // txtIP3
             // 
-            this.txtIP3.Location = new System.Drawing.Point(298, 114);
+            this.txtIP3.Location = new System.Drawing.Point(269, 229);
             this.txtIP3.Name = "txtIP3";
             this.txtIP3.Size = new System.Drawing.Size(36, 26);
             this.txtIP3.TabIndex = 9;
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(10, 9);
+            this.btnFind.Location = new System.Drawing.Point(198, 271);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(153, 29);
+            this.btnFind.Size = new System.Drawing.Size(83, 29);
             this.btnFind.TabIndex = 10;
-            this.btnFind.Text = "Search all devices";
+            this.btnFind.Text = "Search";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
@@ -133,38 +135,62 @@
             // 
             this.Findlist.FormattingEnabled = true;
             this.Findlist.ItemHeight = 19;
-            this.Findlist.Location = new System.Drawing.Point(195, 12);
+            this.Findlist.Location = new System.Drawing.Point(16, 143);
             this.Findlist.Name = "Findlist";
             this.Findlist.ScrollAlwaysVisible = true;
-            this.Findlist.Size = new System.Drawing.Size(307, 80);
+            this.Findlist.Size = new System.Drawing.Size(494, 80);
             this.Findlist.TabIndex = 11;
             this.Findlist.SelectedIndexChanged += new System.EventHandler(this.Findlist_SelectedIndexChanged);
             // 
-            // progScan
+            // FindErrlist
             // 
-            this.progScan.Location = new System.Drawing.Point(11, 69);
-            this.progScan.Name = "progScan";
-            this.progScan.Size = new System.Drawing.Size(152, 23);
-            this.progScan.TabIndex = 12;
-            this.progScan.Visible = false;
+            this.FindErrlist.FormattingEnabled = true;
+            this.FindErrlist.ItemHeight = 19;
+            this.FindErrlist.Location = new System.Drawing.Point(16, 31);
+            this.FindErrlist.Name = "FindErrlist";
+            this.FindErrlist.ScrollAlwaysVisible = true;
+            this.FindErrlist.Size = new System.Drawing.Size(494, 80);
+            this.FindErrlist.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.DarkRed;
+            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(234, 19);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "< Device not available. >";
             // 
             // labelWarning
             // 
             this.labelWarning.AutoSize = true;
-            this.labelWarning.Location = new System.Drawing.Point(27, 41);
+            this.labelWarning.ForeColor = System.Drawing.Color.Black;
+            this.labelWarning.Location = new System.Drawing.Point(12, 121);
             this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(153, 19);
-            this.labelWarning.TabIndex = 13;
-            this.labelWarning.Text = "No devices found";
-            this.labelWarning.Visible = false;
+            this.labelWarning.Size = new System.Drawing.Size(207, 19);
+            this.labelWarning.TabIndex = 16;
+            this.labelWarning.Text = "< Available devices. >";
+            // 
+            // chkdhcp
+            // 
+            this.chkdhcp.AutoSize = true;
+            this.chkdhcp.Location = new System.Drawing.Point(12, 275);
+            this.chkdhcp.Name = "chkdhcp";
+            this.chkdhcp.Size = new System.Drawing.Size(181, 23);
+            this.chkdhcp.TabIndex = 18;
+            this.chkdhcp.Text = "Searce with DHCP.";
+            this.chkdhcp.UseVisualStyleBackColor = true;
             // 
             // frmConnDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 187);
+            this.ClientSize = new System.Drawing.Size(525, 313);
+            this.Controls.Add(this.chkdhcp);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelWarning);
-            this.Controls.Add(this.progScan);
+            this.Controls.Add(this.FindErrlist);
             this.Controls.Add(this.Findlist);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.txtIP3);
@@ -202,7 +228,9 @@
         private System.Windows.Forms.TextBox txtIP3;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.ListBox Findlist;
-        private System.Windows.Forms.ProgressBar progScan;
+        private System.Windows.Forms.ListBox FindErrlist;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.CheckBox chkdhcp;
     }
 }

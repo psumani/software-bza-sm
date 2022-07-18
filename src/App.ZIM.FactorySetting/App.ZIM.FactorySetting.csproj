@@ -138,6 +138,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\BatMag.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Device.ZIM.Win\Device.ZIM.Win.csproj">
       <Project>{afffb0db-031f-4cd6-99f3-7b450ac89e52}</Project>
       <Name>Device.ZIM.Win</Name>
@@ -146,9 +149,6 @@
       <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
       <Name>Device.ZIM</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BatMag.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

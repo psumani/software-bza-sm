@@ -12,7 +12,7 @@ namespace ZiveLab.Device.ZIM.Interface
         public int DataLength;
         public byte Reserved01;
         public byte Error;
-
+        
         public stPacketHeader(byte id, short frameCount, short frameNumber, int dataLength)
         {
             ID = id;

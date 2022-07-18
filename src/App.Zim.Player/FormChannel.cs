@@ -10,12 +10,14 @@ using ZiveLab.Device.ZIM.Win.Analysis;
 using System.Collections.Generic;
 using System.Numerics;
 using MathNet.Numerics;
+using System.Runtime.InteropServices;
 
 namespace App.Zim.Player
 {
 
     public partial class FormChannel : Form
     {
+
         public CommObj ChObj;
         public int Refreshtime = 250;
         public int AutoConnDelay = 8;
@@ -23,6 +25,7 @@ namespace App.Zim.Player
         public bool ManaMode;
         public stConnCfg mConnCfg;
         private ChannelStatus ChStatus = new ChannelStatus();
+        private BzaRemote ChRemote;   
         private static st_zim_eis_status meis_status;
         private st_zim_eis_item[] meis_item;
         private st_zim_eis_item[] meis_Fit_item;
@@ -73,6 +76,8 @@ namespace App.Zim.Player
             panelBode.DataBindings.Add(new Binding("ZData", ChStatus, "ZData"));
             panelBode.ShowToolbar = true;
             panelNyquist.ShowToolbar = true;
+
+            
         }
 
         private void FormChannel_Load(object sender, EventArgs e)
@@ -85,11 +90,72 @@ namespace App.Zim.Player
             mConnStat = new stEthernetCfg(0);
             mRanges = new st_zim_rnginf(0);
             ReadAbout(ref mConnStat, ref mSysCfg, ref mRanges);
-            ChStatus.mType = (eDeviceType)mSysCfg.mSIFCfg.Type;
+            ChStatus.mType = (eZimType)(mSysCfg.mZimCfg.cModel[0] - 0x30);
+
+
             ChStatus.SetProperty(mConnStat, mSysCfg, mRanges);
             sTitle = string.Format(" - {0}[{1}].", ChObj.mComm.HostName, Encoding.Default.GetString(mConnCfg.mEthernetCfg.hostname).Trim('\0'));
             this.Text = "Control and Measure" + sTitle;
-            
+
+            if (ChStatus.mType == eZimType.BZA60HZ)
+            {
+                if (Properties.Settings.Default.CalibRange == 0) statusPanel.menuCalWith1ohm.Text = "200mA range calibration using a 100mΩdummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 1) statusPanel.menuCalWith1ohm.Text = "40mA range calibration using a 100mΩ dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 2 ) statusPanel.menuCalWith1ohm.Text = "20mA range calibration using a 1Ω dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 3) statusPanel.menuCalWith1ohm.Text = "4mA range calibration using a 1Ω dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 4) statusPanel.menuCalWith1ohm.Text = "2mA range calibration using a 10Ω dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 5) statusPanel.menuCalWith1ohm.Text = "400uA range calibration using a 10Ω dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 6) statusPanel.menuCalWith1ohm.Text = "200uA range calibration using a 100Ω dummy resistor.";
+                else statusPanel.menuCalWith1ohm.Text = "40uA range calibration using a 100Ω dummy resistor.";
+
+                statusPanel.menuCalGainWith2A.Text = "200mA gain setting with 100mΩ.";
+                statusPanel.menuCalGainWith200mA.Text = "20mA gain setting with 1Ω.";
+                statusPanel.menuCalGainWith20mA.Text = "2mA gain setting with 10Ω.";
+                statusPanel.menuCalGainWith2mA.Text = "200uA gain setting with 100Ω.";
+
+                statusPanel.menuCalInitAt1ohm.Text = "Calib parameter";
+                statusPanel.menuCalGainInitAt2A.Text = "200mA gain ";
+                statusPanel.menuCalGainInitAt200mA.Text = "20mA gain";
+                statusPanel.menuCalGainInitAt20mA.Text = "2mA gain";
+                statusPanel.menuCalGainInitAt2mA.Text = "200uA gain";
+
+                statusPanel.menuReportWith2A.Text = "200mA range with 100mΩ.";
+                statusPanel.menuReportWith200mA.Text = "20mA range with 1Ω.";
+                statusPanel.menuReportWith20mA.Text = "2mA range with 10Ω.";
+                statusPanel.menuReportWith2mA.Text = "200uA range with 100Ω.";
+            }
+            else
+            {
+                if (Properties.Settings.Default.CalibRange == 0) statusPanel.menuCalWith1ohm.Text = "2A range calibration using a 10mΩdummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 1) statusPanel.menuCalWith1ohm.Text = "400mA range calibration using a 10mΩ dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 2) statusPanel.menuCalWith1ohm.Text = "200mA range calibration using a 100mΩ dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 3) statusPanel.menuCalWith1ohm.Text = "40mA range calibration using a 100mΩ dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 4) statusPanel.menuCalWith1ohm.Text = "20mA range calibration using a 1Ω dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 5) statusPanel.menuCalWith1ohm.Text = "4mA range calibration using a 1Ω dummy resistor.";
+                else if (Properties.Settings.Default.CalibRange == 6) statusPanel.menuCalWith1ohm.Text = "2mA range calibration using a 10Ω dummy resistor.";
+                else statusPanel.menuCalWith1ohm.Text = "400uA range calibration using a 10Ω dummy resistor.";
+
+                if (Properties.Settings.Default.CalibRange == 0 || Properties.Settings.Default.CalibRange == 1) statusPanel.menuCalWith1ohm.Text = "Calib parameter with 10mΩ.";
+                else if (Properties.Settings.Default.CalibRange == 2 || Properties.Settings.Default.CalibRange == 3) statusPanel.menuCalWith1ohm.Text = "Calib parameter with 100mΩ.";
+                else if (Properties.Settings.Default.CalibRange == 4 || Properties.Settings.Default.CalibRange == 5) statusPanel.menuCalWith1ohm.Text = "Calib parameter with 1Ω.";
+                else statusPanel.menuCalWith1ohm.Text = "Calib parameter with 10Ω.";
+
+                statusPanel.menuCalGainWith2A.Text = "2A gain setting with 10mΩ.";
+                statusPanel.menuCalGainWith200mA.Text = "200mA gain setting with 100mΩ.";
+                statusPanel.menuCalGainWith20mA.Text = "20mA gain setting with 1Ω.";
+                statusPanel.menuCalGainWith2mA.Text = "2mA gain setting with 10Ω.";
+                statusPanel.menuCalInitAt1ohm.Text = "Calib parameter";
+                statusPanel.menuCalGainInitAt2A.Text = "2A gain ";
+                statusPanel.menuCalGainInitAt200mA.Text = "200mA gain";
+                statusPanel.menuCalGainInitAt20mA.Text = "20mA gain";
+                statusPanel.menuCalGainInitAt2mA.Text = "2mA gain";
+
+                statusPanel.menuReportWith2A.Text = "2A range with 10mΩ.";
+                statusPanel.menuReportWith200mA.Text = "200mA range with 100mΩ.";
+                statusPanel.menuReportWith20mA.Text = "20mA range with 1Ω.";
+                statusPanel.menuReportWith2mA.Text = "2mA range with 10Ω.";
+            }
+
             Refreshtime = Properties.Settings.Default.RefreshTime;
             AutoConnDelay = Properties.Settings.Default.AutoConnDelay;
             
@@ -149,6 +215,12 @@ namespace App.Zim.Player
             CalibCheckAppliedMenu();
             delayedTimer.Start();
             Cursor.Current = Cursors.Default;
+            ChRemote = new BzaRemote(Path.Combine(Properties.Settings.Default.PathRemote, "Control.ini"),
+                Path.Combine(Properties.Settings.Default.PathRemote, "Status.ini"),
+                mSysCfg,
+                meis_cond,
+                meis_status,
+                ChStatus);
         }
 
         private bool ChkEisCalVar(st_zim_Eis_Cal_info inf)
@@ -172,8 +244,6 @@ namespace App.Zim.Player
 
         private bool ChkEisCalGainVar(int nRange)
         {
-            int nrng = nRange * 2;
-            
             if(mRanges.iac_rng[nRange].gain == 1.0 || mRanges.iac_rng[nRange].gain == 0.0
                 || mRanges.iac_rng[nRange].offset == 1.0 || mRanges.iac_rng[nRange].offset == 0.0)
             {
@@ -184,7 +254,7 @@ namespace App.Zim.Player
 
         private void CalibCheckAppliedMenu()
         {
-            this.statusPanel.menuCalWith1ohm.Checked = ChkEisCalVar(mRanges.mEisIRngCalInfo[4]);
+            this.statusPanel.menuCalWith1ohm.Checked = ChkEisCalVar(mRanges.mEisIRngCalInfo[Properties.Settings.Default.CalibRange]);
 
             this.statusPanel.menuCalGainWith2A.Checked = ChkEisCalGainVar(0);
             this.statusPanel.menuCalGainWith200mA.Checked = ChkEisCalGainVar(1);
@@ -257,7 +327,7 @@ namespace App.Zim.Player
 
         private void ProcGetGain(int CRange)
         {
-            ZCalibration zCal = new ZCalibration(meis_item, ref meis_Fit_item, meis_item.Length, mRanges.mEisIRngCalInfo[4], mRanges.mEirIrngCompLs.Ls[4]);
+            ZCalibration zCal = new ZCalibration(meis_item, ref meis_Fit_item, meis_item.Length, mRanges.mEisIRngCalInfo[Properties.Settings.Default.CalibRange], mRanges.mEirIrngCompLs.Ls[Properties.Settings.Default.CalibRange]);
 
             if (zCal.Rtrue <= 0.0)
             {
@@ -265,31 +335,61 @@ namespace App.Zim.Player
                 return;
             }
             double dGain = 1.0;
-            if (CRange == 0)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy0;
-                mRanges.iac_rng[0].gain = dGain;
-                mRanges.iac_rng[0].offset = dGain;
-            }
-            else if (CRange == 1)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
-                mRanges.iac_rng[1].gain = dGain;
-                mRanges.iac_rng[1].offset = dGain;
-            }
-            else if (CRange == 2)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
-                mRanges.iac_rng[2].gain = dGain;
-                mRanges.iac_rng[2].offset = dGain;
-            }
-            else 
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
-                mRanges.iac_rng[3].gain = dGain;
-                mRanges.iac_rng[3].offset = dGain;
-            }
 
+            if (ChStatus.mType == eZimType.BZA60HZ)
+            {
+                if (CRange == 0 || CRange == 1)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
+                    mRanges.iac_rng[0].gain = dGain;
+                    mRanges.iac_rng[0].offset = dGain;
+                }
+                else if (CRange == 2 || CRange == 3)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
+                    mRanges.iac_rng[1].gain = dGain;
+                    mRanges.iac_rng[1].offset = dGain;
+                }
+                else if (CRange == 4 || CRange == 5)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
+                    mRanges.iac_rng[2].gain = dGain;
+                    mRanges.iac_rng[2].offset = dGain;
+                }
+                else
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy4;
+                    mRanges.iac_rng[3].gain = dGain;
+                    mRanges.iac_rng[3].offset = dGain;
+                }
+            }
+            else
+            {
+                if (CRange == 0 || CRange == 1)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy0;
+                    mRanges.iac_rng[0].gain = dGain;
+                    mRanges.iac_rng[0].offset = dGain;
+                }
+                else if (CRange == 2 || CRange == 3)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
+                    mRanges.iac_rng[1].gain = dGain;
+                    mRanges.iac_rng[1].offset = dGain;
+                }
+                else if (CRange == 4 || CRange == 5)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
+                    mRanges.iac_rng[2].gain = dGain;
+                    mRanges.iac_rng[2].offset = dGain;
+                }
+                else
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
+                    mRanges.iac_rng[3].gain = dGain;
+                    mRanges.iac_rng[3].offset = dGain;
+                }
+            }
             ApplyGain(ref meis_Fit_item, meis_Fit_item.Length, dGain);
 
             RefreshChangeTestData(meis_Fit_item);
@@ -335,92 +435,88 @@ namespace App.Zim.Player
                 MessageBox.Show("There was a problem with the calibration. ", sMsgTitle + "' Calibration",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
-
-            
-
-
             double dGain = 1.0;
 
-            if (CRange == 0)
+            if (ChStatus.mType == eZimType.BZA60HZ)
             {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy0;
-                mRanges.iac_rng[0].gain = dGain;
-            }
-            else if (CRange == 1)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy0;
-                mRanges.iac_rng[0].offset = dGain;
-            }
-            else if (CRange == 2)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
-                mRanges.iac_rng[1].gain = dGain;
-            }
-            else if (CRange == 3)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
-                mRanges.iac_rng[1].offset = dGain;
-            }
-            else if (CRange == 4)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
-                mRanges.iac_rng[2].gain = dGain;
-            }
-            else if (CRange == 5)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
-                mRanges.iac_rng[2].offset = dGain;
-            }
-            else if (CRange == 6)
-            {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
-                mRanges.iac_rng[3].gain = dGain;
+                if (CRange == 0 || CRange == 1)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
+                    mRanges.iac_rng[0].gain = dGain;
+                    mRanges.iac_rng[0].offset = dGain;
+                }
+                else if (CRange == 2 || CRange == 3)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
+                    mRanges.iac_rng[1].gain = dGain;
+                    mRanges.iac_rng[1].offset = dGain;
+                }
+                else if (CRange == 4 || CRange == 5)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
+                    mRanges.iac_rng[2].gain = dGain;
+                    mRanges.iac_rng[2].offset = dGain;
+                }
+                else 
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy4;
+                    mRanges.iac_rng[3].gain = dGain;
+                    mRanges.iac_rng[3].offset = dGain;
+                }
             }
             else
             {
-                dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
-                mRanges.iac_rng[3].offset = dGain;
+                if (CRange == 0 || CRange == 1)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy0;
+                    mRanges.iac_rng[0].gain = dGain;
+                    mRanges.iac_rng[0].offset = dGain;
+                }
+                else if (CRange == 2 || CRange == 3)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy1;
+                    mRanges.iac_rng[1].gain = dGain;
+                    mRanges.iac_rng[1].offset = dGain;
+                }
+                else if (CRange == 4 || CRange == 5)
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy2;
+                    mRanges.iac_rng[2].gain = dGain;
+                    mRanges.iac_rng[2].offset = dGain;
+                }
+                else
+                {
+                    dGain = zCal.Rtrue / Properties.Settings.Default.RDummy3;
+                    mRanges.iac_rng[3].gain = dGain;
+                    mRanges.iac_rng[3].offset = dGain;
+                }
             }
 
             ApplyGain(ref meis_Fit_item, meis_Fit_item.Length, dGain);
 
             RefreshChangeTestData(meis_Fit_item);
 
-            if (CRange == 4)  // 만약을 위해 공통 교정정보를 갱신해 준다. 예전 사용 변수 현재는 사용하지 않는다.
+            for (int i = 0; i < 8; i++)
             {
-                mRanges.mEisCalInfo.n1 = zCal.Coefficients[0];
-                mRanges.mEisCalInfo.n2 = zCal.Coefficients[1];
-                mRanges.mEisCalInfo.n3 = zCal.Coefficients[2];
-                mRanges.mEisCalInfo.d1 = zCal.Coefficients[3];
-                mRanges.mEisCalInfo.d2 = zCal.Coefficients[4];
-                mRanges.mEisCalInfo.d3 = zCal.Coefficients[5];
+                mRanges.mEisIRngCalInfo[i].n1 = zCal.Coefficients[0];
+                mRanges.mEisIRngCalInfo[i].n2 = zCal.Coefficients[1];
+                mRanges.mEisIRngCalInfo[i].n3 = zCal.Coefficients[2];
+                mRanges.mEisIRngCalInfo[i].d1 = zCal.Coefficients[3];
+                mRanges.mEisIRngCalInfo[i].d2 = zCal.Coefficients[4];
+                mRanges.mEisIRngCalInfo[i].d3 = zCal.Coefficients[5];
+            }
 
+            if (CRange == Properties.Settings.Default.CalibRange)  // 만약을 위해 공통 교정정보를 갱신해 준다. 예전 사용 변수 현재는 사용하지 않는다.
+            {
                 for (int i = 0; i < 8; i++)
                 {
-                    if (i == 4)
-                    {
-                        mRanges.mEisIRngCalInfo[i].n1 = zCal.Coefficients[0];
-                        mRanges.mEisIRngCalInfo[i].n2 = zCal.Coefficients[1];
-                        mRanges.mEisIRngCalInfo[i].n3 = zCal.Coefficients[2];
-                        mRanges.mEisIRngCalInfo[i].d1 = zCal.Coefficients[3];
-                        mRanges.mEisIRngCalInfo[i].d2 = zCal.Coefficients[4];
-                        mRanges.mEisIRngCalInfo[i].d3 = zCal.Coefficients[5];
-                    }
-                    else
-                    {
-                        if(mRanges.mEisIRngCalInfo[i].n1 == 0.0 || mRanges.mEisIRngCalInfo[i].n2 == 0.0 || mRanges.mEisIRngCalInfo[i].n3 == 0.0
-                            || mRanges.mEisIRngCalInfo[i].d1 == 0.0 || mRanges.mEisIRngCalInfo[i].d2 == 0.0 || mRanges.mEisIRngCalInfo[i].d3 == 0.0)
-                        {
-                            mRanges.mEisIRngCalInfo[i].n1 = zCal.Coefficients[0];
-                            mRanges.mEisIRngCalInfo[i].n2 = zCal.Coefficients[1];
-                            mRanges.mEisIRngCalInfo[i].n3 = zCal.Coefficients[2];
-                            mRanges.mEisIRngCalInfo[i].d1 = zCal.Coefficients[3];
-                            mRanges.mEisIRngCalInfo[i].d2 = zCal.Coefficients[4];
-                            mRanges.mEisIRngCalInfo[i].d3 = zCal.Coefficients[5];
-                        }
-                    }
+                    mRanges.mEisIRngCalInfo[i].n1 = zCal.Coefficients[0];
+                    mRanges.mEisIRngCalInfo[i].n2 = zCal.Coefficients[1];
+                    mRanges.mEisIRngCalInfo[i].n3 = zCal.Coefficients[2];
+                    mRanges.mEisIRngCalInfo[i].d1 = zCal.Coefficients[3];
+                    mRanges.mEisIRngCalInfo[i].d2 = zCal.Coefficients[4];
+                    mRanges.mEisIRngCalInfo[i].d3 = zCal.Coefficients[5];
                 }
-
             }
             else
             {
@@ -431,6 +527,7 @@ namespace App.Zim.Player
                 mRanges.mEisIRngCalInfo[CRange].d2 = zCal.Coefficients[4];
                 mRanges.mEisIRngCalInfo[CRange].d3 = zCal.Coefficients[5];
             }
+            
 
             bool bapply = ApplyRangesInfo();
 
@@ -564,6 +661,7 @@ namespace App.Zim.Player
                 {
                     lastitem++;
                     if (lastitem > meis_cond.count) lastitem = meis_cond.count;
+                   
                 }
             }
             
@@ -605,7 +703,7 @@ namespace App.Zim.Player
                     }
                     stepIndex = lastitem;
                 }
-
+                
                 listView.Enabled = true;
             }
             else
@@ -630,12 +728,11 @@ namespace App.Zim.Player
                         }
                         stepIndex = lastitem;
                     }
-
+                    
                     StartFlag = false;
                 }
                 else
                 {
-
                     if (RepeatMode == true)
                     {
                         //                       if (stepIndex < 30)
@@ -667,14 +764,43 @@ namespace App.Zim.Player
                 //listView.Enabled = false;
             }
 
+            ChRemote.WriteStatus(lastitem-1, ChStatus, meis_cond, meis_status);
+            ChRemote.ReadControl();
+            if (ChRemote.RemoteOn == true)
+            {
+                if (ChRemote.OldControlStart != ChRemote.ControlStart)
+                {
+                    if (ChRemote.ControlStart == true)
+                    {
+                        if (ChRemote.StatusStart == false)
+                        {
+
+                            Remote_StartExperiment();
+
+                            ChRemote.StartTest();
+                        }
+                    }
+                    else
+                    {
+                        if (ChRemote.StatusStart == true)
+                        {
+                            Remote_StopExperiment();
+
+                            ChRemote.StopTest();
+                        }
+                    }
+                    ChRemote.OldControlStart = ChRemote.ControlStart;
+                }
+            }
+
             if ((ChStatus.State == State.Idle || ChStatus.State == State.DetecteNotYetCalibrated) && ChStatus.CalibMode > 0 && meis_cond.count == stepIndex)
             {
                 int iCalMode = ChStatus.CalibMode;
                 ChStatus.CalibMode = 0;
-                if (iCalMode == 1) ProcFitting(4);
+                if (iCalMode == 1) ProcFitting(Properties.Settings.Default.CalibRange);
                 else
                 {
-                    ProcGetGain(iCalMode - 2);
+                    ProcGetGain(iCalMode - 2);   // iCalMode - 2 = 0,1,2,3, = range
                 }
             }
 
@@ -763,7 +889,7 @@ namespace App.Zim.Player
             int i;
             bool bCondNone = false;
 
-
+            
             // Set cursor as hourglass
             Cursor.Current = Cursors.WaitCursor;
 
@@ -1036,7 +1162,7 @@ namespace App.Zim.Player
             MessageBoxIcon ico = new MessageBoxIcon();
             ico = MessageBoxIcon.Information;
 
-            if (ChkEisCalVar(mRanges.mEisIRngCalInfo[4]) == false)
+            if (ChkEisCalVar(mRanges.mEisIRngCalInfo[Properties.Settings.Default.CalibRange]) == false)
             {
                 MessageBox.Show("Calibration Parameter is not ready.", sMsgTitle + ", Reporting", MessageBoxButtons.OK, ico);
                 return;
@@ -1044,33 +1170,71 @@ namespace App.Zim.Player
 
             str = "";
 
-            if (type == 1) // 100m
+            if (ChStatus.mType == eZimType.BZA60HZ)
             {
-                str += "The DC voltage cannot be measured in reporting mode.\n";
-                str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
-
-                str += "The current range used for 100mΩ resistance is 200mA.\n\n";
-                str += "To continue reporting, connect the 10mΩresistor and press the OK button.\n\n";
-                ico = MessageBoxIcon.Warning;
+                if (type == 2 || type == 3) // 100m
+                {
+                    str += "The DC voltage cannot be measured in reporting mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 2) str += "The current range used for 1Ω resistance is 20mA.\n\n";
+                    else str += "The current range used for 1Ω resistance is 4mA.\n\n";
+                    str += "To continue reporting, connect the 1Ωresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
+                else if (type == 4 || type == 5) // 1000m
+                {
+                    if (type == 4) str += "The current range used for 10Ω resistance is 2mA.\n\n";
+                    else str += "The current range used for 10Ω resistance is 400uA.\n\n";
+                    str += "To continue reporting, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else if (type == 6 || type == 7) // 10000m
+                {
+                    if (type == 6) str += "The current range used for 100Ω resistance is 200uA.\n\n";
+                    else str += "The current range used for 100Ω resistance is 40uA.\n\n";
+                    str += "To continue reporting, connect the 100Ωresistor and press the OK button.\n\n";
+                }
+                else //10m
+                {
+                    str += "The DC voltage cannot be measured in reporting mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 0) str += "The current range used for 100mΩ resistance is 200mA.\n\n";
+                    else str += "The current range used for 100mΩ resistance is 40mA.\n\n";
+                    str += "To continue reporting, connect the 100mΩresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
             }
-            else if (type == 2) // 1000m
+            else
             {
-                str += "The current range used for 1Ω resistance is 20mA.\n\n";
-                str += "To continue reporting, connect the 1Ωresistor and press the OK button.\n\n";
-            }
-            else if (type == 3) // 10000m
-            {
-                str += "The current range used for 10Ω resistance is 2mA.\n\n";
-                str += "To continue reporting, connect the 10Ωresistor and press the OK button.\n\n";
-            }
-            else //10m
-            {
-                str += "The DC voltage cannot be measured in reporting mode.\n";
-                str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
-
-                str += "The current range used for 10mΩ resistance is 2A.\n\n";
-                str += "To continue reporting, connect the 10mΩresistor and press the OK button.\n\n";
-                ico = MessageBoxIcon.Warning;
+                if (type == 2 || type == 3) // 100m
+                {
+                    str += "The DC voltage cannot be measured in reporting mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 2) str += "The current range used for 100mΩ resistance is 200mA.\n\n";
+                    else str += "The current range used for 100mΩ resistance is 40mA.\n\n";
+                    str += "To continue reporting, connect the 10mΩresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
+                else if (type == 4 || type == 5) // 1000m
+                {
+                    if (type == 4) str += "The current range used for 1Ω resistance is 20mA.\n\n";
+                    else str += "The current range used for 1Ω resistance is 4mA.\n\n";
+                    str += "To continue reporting, connect the 1Ωresistor and press the OK button.\n\n";
+                }
+                else if (type == 6 || type == 7) // 10000m
+                {
+                    if (type == 6) str += "The current range used for 10Ω resistance is 2mA.\n\n";
+                    else str += "The current range used for 10Ω resistance is 400uA.\n\n";
+                    str += "To continue reporting, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else //10m
+                {
+                    str += "The DC voltage cannot be measured in reporting mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 0) str += "The current range used for 10mΩ resistance is 2A.\n\n";
+                    else str += "The current range used for 10mΩ resistance is 400mA.\n\n";
+                    str += "To continue reporting, connect the 10mΩresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
             }
 
             if (MessageBox.Show(str, sMsgTitle + ", Reporting",
@@ -1111,42 +1275,82 @@ namespace App.Zim.Player
             MessageBoxIcon ico = new MessageBoxIcon();
             ico = MessageBoxIcon.Information;
 
-            if(ChkEisCalVar(mRanges.mEisIRngCalInfo[4]) == false)
+            
+
+            if (ChkEisCalVar(mRanges.mEisIRngCalInfo[Properties.Settings.Default.CalibRange]) == false)
             {
-                MessageBox.Show("Calibration Parameter is not ready. Please do Calib parameter with 1Ohm at first.", sMsgTitle + ", Calibration", MessageBoxButtons.OK, ico);
+                MessageBox.Show("Calibration Parameter is not ready.", sMsgTitle + ", Calibration", MessageBoxButtons.OK, ico);
                 return;
             }
 
             str = "";
-
-            if (type == 1) // 100m
+            if (ChStatus.mType == eZimType.BZA60HZ)
             {
-                str += "The DC voltage cannot be measured in calibration mode.\n";
-                str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
-
-                str += "The current range used for 100mΩ resistance is 200mA.\n\n";
-                str += "To continue calibration, connect the 10mΩresistor and press the OK button.\n\n";
-                ico = MessageBoxIcon.Warning;
+                if (type == 2 || type == 3) 
+                {
+                    str += "The DC voltage cannot be measured in calibration mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if(type == 2)  str += "The current range used for 1Ω resistance is 20mA.\n\n";
+                    else str += "The current range used for 1Ω resistance is 4mA.\n\n";
+                    str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
+                else if (type == 4 || type == 5) // 1000m
+                {
+                    if (type == 4) str += "The current range used for 10Ω resistance is 2mA.\n\n";
+                    else str += "The current range used for 10Ω resistance is 400uA.\n\n";
+                    str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else if (type == 6 || type == 7) // 10000m
+                {
+                    if (type == 6) str += "The current range used for 100Ω resistance is 200uA.\n\n";
+                    else str += "The current range used for 100Ω resistance is 40uA.\n\n";
+                    str += "To continue calibration, connect the 100Ωresistor and press the OK button.\n\n";
+                }
+                else //10m
+                {
+                    str += "The DC voltage cannot be measured in calibration mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 0) str += "The current range used for 100mΩ resistance is 200mA.\n\n";
+                    else str += "The current range used for 100mΩ resistance is 40mA.\n\n";
+                    str += "To continue calibration, connect the 100mΩresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
             }
-            else if (type == 2) // 1000m
+            else
             {
-                str += "The current range used for 1Ω resistance is 20mA.\n\n";
-                str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                if (type == 2 || type == 3) // 100m
+                {
+                    str += "The DC voltage cannot be measured in calibration mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 2) str += "The current range used for 100mΩ resistance is 200mA.\n\n";
+                    else str += "The current range used for 100mΩ resistance is 40mA.\n\n";
+                    str += "To continue calibration, connect the 10mΩresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
+                else if (type == 4 || type == 5) // 1000m
+                {
+                    if (type == 4) str += "The current range used for 1Ω resistance is 20mA.\n\n";
+                    else str += "The current range used for 1Ω resistance is 4mA.\n\n";
+                    str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                }
+                else if (type == 6 || type == 7) // 10000m
+                {
+                    if (type == 6) str += "The current range used for 10Ω resistance is 2mA.\n\n";
+                    else str += "The current range used for 10Ω resistance is 400uA.\n\n";
+                    str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else //10m
+                {
+                    str += "The DC voltage cannot be measured in calibration mode.\n";
+                    str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
+                    if (type == 0) str += "The current range used for 10mΩ resistance is 2A.\n\n";
+                    else str += "The current range used for 10mΩ resistance is 400mA.\n\n";
+                    str += "To continue calibration, connect the 10mΩresistor and press the OK button.\n\n";
+                    ico = MessageBoxIcon.Warning;
+                }
             }
-            else if (type == 3) // 10000m
-            {
-                str += "The current range used for 10Ω resistance is 2mA.\n\n";
-                str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
-            }
-            else //10m
-            {
-                str += "The DC voltage cannot be measured in calibration mode.\n";
-                str += "if the actual DC voltage is high, a device may be troubled if the current range is high.\n\n";
-
-                str += "The current range used for 10mΩ resistance is 2A.\n\n";
-                str += "To continue calibration, connect the 10mΩresistor and press the OK button.\n\n";
-                ico = MessageBoxIcon.Warning;
-            }
+            
 
             if (MessageBox.Show(str, sMsgTitle + ", Calibration",
                     MessageBoxButtons.OKCancel, ico, MessageBoxDefaultButton.Button2) != DialogResult.OK) return;
@@ -1180,21 +1384,109 @@ namespace App.Zim.Player
 
         private void StartCalibrationProcess()
         {
-            string str;
+            string str = "";
             MessageBoxIcon ico = new MessageBoxIcon();
             ico = MessageBoxIcon.Information;
 
-            str = "The current range used for 1Ω resistance is 20mA.\n\n";
-            str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
-           
+            if (ChStatus.mType == eZimType.BZA60HZ)
+            {
+                if (Properties.Settings.Default.CalibRange == 1)
+                {
+                    str = "The current range used for 100mΩ resistance is40mA.\n\n";
+                    str += "To continue calibration, connect the 100mΩresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 2)
+                {
+                    str = "The current range used for 1Ω resistance is 20mA.\n\n";
+                    str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 3)
+                {
+                    str = "The current range used for 1Ω resistance is 4mA.\n\n";
+                    str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 4)
+                {
+                    str = "The current range used for 10Ω resistance is 2mA.\n\n";
+                    str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 5)
+                {
+                    str = "The current range used for 10Ω resistance is 400uA.\n\n";
+                    str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 6)
+                {
+                    str = "The current range used for 100Ω resistance is 200uA.\n\n";
+                    str += "To continue calibration, connect the 100Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 7)
+                {
+                    str = "The current range used for 100Ω resistance is 40uA.\n\n";
+                    str += "To continue calibration, connect the 100Ωresistor and press the OK button.\n\n";
+                }
+                else 
+                {
+                    str = "The current range used for 100mΩ resistance is 200mA.\n\n";
+                    str += "To continue calibration, connect the 100mΩresistor and press the OK button.\n\n";
+                }
+            }
+            else
+            {
+                if (Properties.Settings.Default.CalibRange == 1)
+                {
+                    str = "The current range used for 10mΩ resistance is 400mA.\n\n";
+                    str += "To continue calibration, connect the 10mΩresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 2)
+                {
+                    str = "The current range used for 100mΩ resistance is 200mA.\n\n";
+                    str += "To continue calibration, connect the 100mΩresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 3)
+                {
+                    str = "The current range used for 100mΩ resistance is 40mA.\n\n";
+                    str += "To continue calibration, connect the 100mΩresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 4)
+                {
+                    str = "The current range used for 1Ω resistance is 20mA.\n\n";
+                    str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 5)
+                {
+                    str = "The current range used for 1Ω resistance is 4mA.\n\n";
+                    str += "To continue calibration, connect the 1Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 6)
+                {
+                    str = "The current range used for 10Ω resistance is 2mA.\n\n";
+                    str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else if (Properties.Settings.Default.CalibRange == 7)
+                {
+                    str = "The current range used for 10Ω resistance is 400uA.\n\n";
+                    str += "To continue calibration, connect the 10Ωresistor and press the OK button.\n\n";
+                }
+                else
+                {
+                    str = "The current range used for 10mΩ resistance is 2A.\n\n";
+                    str += "To continue calibration, connect the 10mΩresistor and press the OK button.\n\n";
+                }
+
+            }
+            
 
             if (MessageBox.Show(str, sMsgTitle + ", Calibration",
                     MessageBoxButtons.OKCancel, ico, MessageBoxDefaultButton.Button2) != DialogResult.OK) return;
 
             this.Text = "Calibration mode" + sTitle;
 
+
+
             ChStatus.ZParameters.Finalcalibfreq = Properties.Settings.Default.FinalCalibFreq;
-            meis_cond = ChStatus.ZParameters.ToCalibPacket(4);
+            ChStatus.ZParameters.BegincalibFreq = Properties.Settings.Default.BeginCalibFreq;
+            meis_cond = ChStatus.ZParameters.ToCalibPacket(Properties.Settings.Default.CalibRange);
 
             if (!WriteExpParameters(meis_cond)) return;
 
@@ -1222,6 +1514,7 @@ namespace App.Zim.Player
 
         private string GetCurrentRangeDescription(CurrentRange iRange)
         {
+            if (ChStatus.mType == eZimType.BZA60HZ) return GetCurrentRangeDescriptionLZ(iRange);
 
             switch (iRange)
             {
@@ -1243,6 +1536,32 @@ namespace App.Zim.Player
                     return "2mA";
                 case CurrentRange.I400uA:
                     return "400uA";
+            }
+        }
+
+        private string GetCurrentRangeDescriptionLZ(CurrentRange iRange)
+        {
+
+            switch (iRange)
+            {
+                default:
+                    return "Auto";
+                case CurrentRange.I2A:
+                    return "200mA";
+                case CurrentRange.I400mA:
+                    return "40mA";
+                case CurrentRange.I200mA:
+                    return "20mA";
+                case CurrentRange.I40mA:
+                    return "4mA";
+                case CurrentRange.I20mA:
+                    return "2mA";
+                case CurrentRange.I4mA:
+                    return "400uA";
+                case CurrentRange.I2mA:
+                    return "200uA";
+                case CurrentRange.I400uA:
+                    return "40uA";
             }
         }
 
@@ -1317,13 +1636,86 @@ namespace App.Zim.Player
             stepIndex = 0;
 
         }
+        private void Remote_StopExperiment()
+        {
+            System.Windows.Forms.Cursor.Current = Cursors.Default;
+            RepeatMode = false;
+            ChStatus.CalibMode = 0;
+            ChObj.CmdStopMeasurement();
+            this.Text = "Control and Measure" + sTitle;
+        }
+        private bool Remote_StartExperiment()
+        {
+            if(ChRemote.SetCondition == true)
+            {
+                statusPanel.Cooker_ZParameters.InitialFrequency = ChRemote.InitialFrequency;
+                statusPanel.Cooker_ZParameters.FinalFrequency = ChRemote.FinalFrequency;
+                statusPanel.Cooker_ZParameters.Density = ChRemote.Density;
+                statusPanel.Cooker_ZParameters.Iteration = ChRemote.Iteration;
+                statusPanel.Cooker_ZParameters.MaxInitialDelay = ChRemote.MaxInitialDelay;
+                statusPanel.Cooker_ZParameters.SkipCycle = (int)ChRemote.SkipCycle;
+                statusPanel.Cooker_ZParameters.IRange = ChRemote.IRange;
+            }
+            meis_cond = statusPanel.Cooker_ZParameters.ToPacket();
+            if (!WriteExpParameters(meis_cond))
+            {
+                MessageBox.Show("Failed apply.", sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+
+            // Initialize mesi_item
+            meis_item = new st_zim_eis_item[statusPanel.Cooker_ZParameters.Frequencies.Count];
+            for (int i = 0; i < statusPanel.Cooker_ZParameters.Frequencies.Count; i++)
+            {
+                meis_item[i] = new st_zim_eis_item(0);
+                meis_item[i].info.freq = statusPanel.Cooker_ZParameters.Frequencies[i];
+            }
+            ChStatus.CalibMode = 0;
+            RepeatMode = false;
+
+
+            InitializeListview();
+            PrepareListViewForNewMeasurement();
+
+            ChStatus.SetProperty(meis_item);
+            statusPanel.Index = 0;
+            stepIndex = 0;
+            ChObj.CmdStartToMeasureImpedance();
+            StartFlag = true;
+
+
+            return true;
+        }
 
         private void statusPanel_RefreshVacClicked(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = Cursors.Default;
+            var cond = e as ParametersEventArgs;
+            if (cond == null) return;
+
+          
+            meis_cond = cond.Parameters.ToPacket();
+            
+
+            if (!WriteExpParameters(meis_cond)) return;
+
+            // Initialize mesi_item
+            meis_item = new st_zim_eis_item[cond.Parameters.Frequencies.Count];
+            for (int i = 0; i < cond.Parameters.Frequencies.Count; i++)
+            {
+                meis_item[i] = new st_zim_eis_item(0);
+                meis_item[i].info.freq = cond.Parameters.Frequencies[i];
+            }
             ChStatus.CalibMode = 0;
-            ChObj.CmdRefreshVac();
-            this.Text = "Refresh Vac mode" + sTitle;
+
+            RepeatMode = false;
+
+            InitializeListview();
+            PrepareListViewForNewMeasurement();
+
+            ChStatus.SetProperty(meis_item);
+            statusPanel.Index = 0;
+            stepIndex = 0;
         }
 
         private void statusPanel_StopExperimentClicked(object sender, EventArgs e)
@@ -1337,10 +1729,35 @@ namespace App.Zim.Player
 
         private void statusPanel_MeasureNoiseLevelClicked(object sender, EventArgs e)
         {
+            var cond = e as ParametersEventArgs;
+            if (cond == null) return;
+
+            if (maux_vdc.value < 1.0)
+            {
+                MessageBox.Show("Measurement of DC voltage is not normal.", sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            }
+
+            meis_cond = cond.Parameters.ToPacket();
+            if (!WriteExpParameters(meis_cond))
+            {
+                MessageBox.Show("Failed apply.", sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            meis_item = new st_zim_eis_item[cond.Parameters.Frequencies.Count];
+            for (int i = 0; i < cond.Parameters.Frequencies.Count; i++)
+            {
+                meis_item[i] = new st_zim_eis_item(0);
+                meis_item[i].info.freq = cond.Parameters.Frequencies[i];
+            }
+
+
+            MessageBox.Show("Succeed apply.", sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            /*
             st_zim_eis_rms_Inf RmsInfo;
             RmsInfo = new st_zim_eis_rms_Inf(0);
             RmsInfo.IRange = (int)(e as IRangeEventArgs).IRange;
-            ChObj.CmdStartToMeasureNoise(RmsInfo);
+            ChObj.CmdStartToMeasureNoise(RmsInfo);*/
         }
 
         private void statusPanel_MenuConnecting(object sender, EventArgs e)
@@ -1364,15 +1781,15 @@ namespace App.Zim.Player
         }
         private void statusPanel_CalGainWith200mAMenuSelected(object sender, EventArgs e)
         {
-            StartCalibGainProcess(1);
+            StartCalibGainProcess(2);
         }
         private void statusPanel_CalGainWith20mAMenuSelected(object sender, EventArgs e)
         {
-            StartCalibGainProcess(2);
+            StartCalibGainProcess(4);
         }
         private void statusPanel_CalGainWith2mAMenuSelected(object sender, EventArgs e)
         {
-            StartCalibGainProcess(3);
+            StartCalibGainProcess(6);
         }
 
         private void statusPanel_ReportWith2AMenuSelected(object sender, EventArgs e)
@@ -1381,15 +1798,15 @@ namespace App.Zim.Player
         }
         private void statusPanel_ReportWith200mAMenuSelected(object sender, EventArgs e)
         {
-            StartReportProcess(1);
+            StartReportProcess(2);
         }
         private void statusPanel_ReportWith20mAMenuSelected(object sender, EventArgs e)
         {
-            StartReportProcess(2);
+            StartReportProcess(4);
         }
         private void statusPanel_ReportWith2mAMenuSelected(object sender, EventArgs e)
         { 
-            StartReportProcess(3);
+            StartReportProcess(6);
         }
 
         private void ProcInitKey(ref st_zim_Eis_Cal_info inf)
@@ -1407,7 +1824,7 @@ namespace App.Zim.Player
             if (MessageBox.Show("Initializes the calibration key. All previous calibration key values are erased. Would you like to continue?", sMsgTitle + ", Calibration",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.OK) return;
 
-            ProcInitKey(ref mRanges.mEisCalInfo);
+           
             ProcInitKey(ref mRanges.mEisIRngCalInfo[0]);
             ProcInitKey(ref mRanges.mEisIRngCalInfo[1]);
             ProcInitKey(ref mRanges.mEisIRngCalInfo[2]);
@@ -1444,7 +1861,7 @@ namespace App.Zim.Player
         {
             if (MessageBox.Show("Initializes the calibration key. All previous calibration key values are erased. Would you like to continue?", sMsgTitle + ", Calibration",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.OK) return;
-            ProcInitKey(ref mRanges.mEisCalInfo);
+
             ProcInitKey(ref mRanges.mEisIRngCalInfo[0]);
             ProcInitKey(ref mRanges.mEisIRngCalInfo[1]);
             ProcInitKey(ref mRanges.mEisIRngCalInfo[2]);
@@ -1453,15 +1870,6 @@ namespace App.Zim.Player
             ProcInitKey(ref mRanges.mEisIRngCalInfo[5]);
             ProcInitKey(ref mRanges.mEisIRngCalInfo[6]);
             ProcInitKey(ref mRanges.mEisIRngCalInfo[7]);
-
-            mRanges.iac_rng[0].gain = 1.0;
-            mRanges.iac_rng[0].offset = 1.0;
-            mRanges.iac_rng[1].gain = 1.0;
-            mRanges.iac_rng[1].offset = 1.0;
-            mRanges.iac_rng[2].gain = 1.0;
-            mRanges.iac_rng[2].offset = 1.0;
-            mRanges.iac_rng[3].gain = 1.0;
-            mRanges.iac_rng[3].offset = 1.0;
 
 
             if (ApplyRangesInfo() == false)
@@ -1712,9 +2120,19 @@ namespace App.Zim.Player
                     str = "";
                     for (j = 2; j < 5; j++)
                     {
-                        str += listView.Items[i].SubItems[j].Text.Replace("\r", "").Replace("\n", "") + "\t";
+                        str1 = listView.Items[i].SubItems[j].Text.Replace("\r", "").Replace("\n", "");
+                        if (str1 == "-" || str1 == "NaN")
+                        {
+                            str = "";
+                            break;
+                        }
+                        else
+                        {
+                            str += str1 + "\t";
+                        }
                     }
-                    sw.WriteLine(str);
+                    if(str == "") break;
+                    else sw.WriteLine(str);
                 }
             }
             else
@@ -1738,6 +2156,7 @@ namespace App.Zim.Player
         private void statusPanel_SaveRptMenuSelected(object sender, EventArgs e)
         {
             string str;
+            string str1;
             int i;
             int j;
 
@@ -1812,8 +2231,18 @@ namespace App.Zim.Player
                 str = "";
                 for (j = 0; j < listView.Columns.Count; j++)
                 {
-                    str += listView.Items[row].SubItems[j].Text.Replace("\r", "").Replace("\n", "") + ",";
+                    str1 = listView.Items[row].SubItems[j].Text.Replace("\r", "").Replace("\n", "");
+                    if (str1 == "-," || str1 == "NaN,")
+                    {
+                        str = "";
+                        break;
+                    }
+                    else
+                    {
+                        str += str1 + ",";
+                    }
                 }
+                if (str == "") break;
                 sw.WriteLine(str);
             }
             /*

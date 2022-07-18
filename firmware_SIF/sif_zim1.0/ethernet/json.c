@@ -76,17 +76,25 @@ void GetModelStr(char* src,byte model)
 {
     switch(model)
     {
-        case WBCS: strcpy(src, "WBCS");
+        case DEV_UNKNOWN: strcpy(src, "Unknown");
             break;
-        case SMART: strcpy(src, "SMART Series");
+		case DEV_BZA1000A:
+			strcpy(src, "ZIM1000");
             break;
-        case ZIM: strcpy(src, "ZIM");
+		case DEV_BZA1000:
+			strcpy(src, "BZA1000");
             break;
-        case BZA1000: strcpy(src, "BZA1000");
+        case DEV_BZA500:
+			strcpy(src, "BZA500");
             break;
-        case BZA100: strcpy(src, "BZA100");
+		case DEV_BZA100:
+			strcpy(src, "BZA100");
             break;
-		case ZBCS : strcpy(src, "ZBCS");
+		case DEV_BZA60:
+			strcpy(src, "BZA60");
+            break;
+		case DEV_BZA60HZ:
+			strcpy(src, "BZA60HZ");
             break;
         default: strcpy(src, "Unknown");
             break;
@@ -97,13 +105,27 @@ void GetVRangeStr(char* src,byte model)
 {
     switch(model)
     {
-        case ZIM: strcpy(src, "1000V/100V");
+		case DEV_UNKNOWN: 
+		case DEV_BZA1000A:
+			strcpy(src, "1000V/100V");
             break;
-        case BZA1000: strcpy(src, "1000V/100V");
+        case DEV_BZA1000:
+			strcpy(src, "1000V/100V");
             break;
-        case BZA100: strcpy(src, "100V/10V");
+		case DEV_BZA500:
+			strcpy(src, "500V/50V");
             break;
-        default: strcpy(src, "10V");
+        case DEV_BZA100:
+			strcpy(src, "100V/10V");
+            break;
+		case DEV_BZA60:
+			strcpy(src, "60V/6V");
+            break;
+		case DEV_BZA60HZ:
+			strcpy(src, "60V/6V");
+            break;
+        default: 
+			strcpy(src, "1000V/100V");
             break;
     }
 }
@@ -201,10 +223,12 @@ double GetIdc(st_zim_eis_item* pitem)
 ////// 2019-03-22 Json Data
 void SetJsonAbout(void)
 {
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
+	
     memset(m_pJsonAbout, 0x0, MAX_JSON_ABOUT);
 	
-	char strModel[30]; GetModelStr(strModel,m_pSysConfig->mSIFCfg.Type);
-	char strVRng[20]; GetVRangeStr(strVRng,m_pSysConfig->mSIFCfg.Type);
+	char strModel[30]; GetModelStr(strModel,type);
+	char strVRng[20]; GetVRangeStr(strVRng,type);
     char strmacaddr[20]; memset(strmacaddr, 0, sizeof(strmacaddr));
     byte macaddr[6]; GetSHAReg(macaddr);
     sprintf(strmacaddr, "%02X:%02X:%02X:%02X:%02X:%02X", macaddr[0], macaddr[1], macaddr[2], macaddr[3], macaddr[4], macaddr[5]);

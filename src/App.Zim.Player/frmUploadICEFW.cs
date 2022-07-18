@@ -863,7 +863,6 @@ namespace App.Zim.Player
         {
             if (mCommZim.ReadData(ref mZim.adc_vdc) == false)
             {
-                MessageBox.Show("VAC 측정값 받기가 실패하였습니다.");
                 return;
             }
 

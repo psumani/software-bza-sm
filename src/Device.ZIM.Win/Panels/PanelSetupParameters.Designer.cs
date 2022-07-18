@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textIteration = new System.Windows.Forms.TextBox();
             this.txtDensity = new System.Windows.Forms.TextBox();
             this.txtSkipCycle = new System.Windows.Forms.TextBox();
@@ -50,6 +51,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonUploadCond = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -270,10 +273,11 @@
             // buttonStart
             // 
             this.buttonStart.Image = global::ZiveLab.Device.ZIM.Win.Properties.Resources.Play;
-            this.buttonStart.Location = new System.Drawing.Point(15, 17);
+            this.buttonStart.Location = new System.Drawing.Point(72, 17);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(41, 45);
             this.buttonStart.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.buttonStart, "Start experiment");
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
@@ -305,11 +309,23 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // buttonUploadCond
+            // 
+            this.buttonUploadCond.Image = global::ZiveLab.Device.ZIM.Win.Properties.Resources.play_circle_outline;
+            this.buttonUploadCond.Location = new System.Drawing.Point(15, 17);
+            this.buttonUploadCond.Name = "buttonUploadCond";
+            this.buttonUploadCond.Size = new System.Drawing.Size(41, 45);
+            this.buttonUploadCond.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.buttonUploadCond, "Upload condition.");
+            this.buttonUploadCond.UseVisualStyleBackColor = true;
+            this.buttonUploadCond.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PanelSetupParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.buttonUploadCond);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStart);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -346,5 +362,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonUploadCond;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

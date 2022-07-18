@@ -73,13 +73,10 @@ namespace App.Zim.Player
             Cursor.Current = Cursors.WaitCursor;
 
             Findlist.Items.Clear();
-            labelWarning.Visible = false;
+            FindErrlist.Items.Clear();
 
-            pingHost = new PingHost();// new PingHost(pingCompleted);
-
-            progScan.Maximum = pingHost.ListOfIPs.Count;
-            progScan.Value = 0;
-            progScan.Step = 1;
+            pingHost = new PingHost(chkdhcp.Checked);// new PingHost(pingCompleted);
+   
 
             var success = Task.Run(async () => { await pingHost.ScanAsync(); }).Wait(300000);
 
@@ -91,19 +88,35 @@ namespace App.Zim.Player
                 foreach (var pair in dic)
                 {
                     var ip = pair.Key;
-                   // var mac = string.Join(":", pair.Value.GetAddressBytes().Select(b => b.ToString("X2")));
-                   // var hostName = ip.GetHostName();
-                    var str = string.Format("{0} [{1}]", ip, pair.Value);
-
-                   // var str = string.Format("{0} [{1}] {2}", ip, mac, hostName);
+                    var mac = string.Join(":", pair.Value.mac.GetAddressBytes().Select(b => b.ToString("X2")));
+                    var hostName = ip.GetHostName();
+                    var str = string.Format("{0} [{1}/ Device:{2}]::{3}", ip, pair.Value.shostname, ((eDeviceType)(pair.Value.findsifcfg.Type)).GetDescription(), pair.Value.findsifcfg.GetSerialNumber());
                     Findlist.Items.Add(str);
+                }
+
+                dic = pingHost.SearchedErrDevice;//.ToSortedDictionary();
+                foreach (var pair in dic)
+                {
+                    var ip = pair.Key;
+                    var mac = string.Join(":", pair.Value.mac.GetAddressBytes().Select(b => b.ToString("X2")));
+                    var hostName = ip.GetHostName();
+
+                    var str = string.Format("{0} [{1}/ Device:{2}]::{3}", ip, pair.Value.shostname, ((eDeviceType)(pair.Value.findsifcfg.Type)).GetDescription(), pair.Value.findsifcfg.GetSerialNumber());
+                    if (pair.Value.busy == true)
+                    {
+                        str += "= Busy";
+                    }
+                    else
+                    {
+                        str += "= Ready";
+                    }
+
+                    FindErrlist.Items.Add(str);
                 }
             }
             catch
             {
             }
-
-            labelWarning.Visible = (pingHost.SearchedDevice.Count == 0);
 
             // Set cursor as default arrow
             Cursor.Current = Cursors.Default;
@@ -111,14 +124,7 @@ namespace App.Zim.Player
         
         private void pingCompleted(object sender, EventArgs e)
         {
-            if (progScan.InvokeRequired)
-            {
-                progScan.Invoke(new Action(() => { progScan.Value++; }));
-            }
-            else
-            {
-                progScan.PerformStep();
-            }
+            
         }
 
         private void Findlist_SelectedIndexChanged(object sender, EventArgs e)

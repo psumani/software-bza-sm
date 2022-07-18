@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ZiveLab.Device.ZIM;
+using ZiveLab.Device.ZIM.Interface;
 using ZiveLab.Device.ZIM.Packets;
 using ZiveLab.Device.ZIM.Utilities;
 namespace App.ZIM.FactorySetting
@@ -23,50 +24,44 @@ namespace App.ZIM.FactorySetting
             mDevType = (eDeviceType)mSysCfg.mSIFCfg.Type;
             mCommZim = mSetCommZim;
 
+            CboAddr.Items.Clear();
+            for (int i = 0; i < SIFConstants.MAX_DEVICE_CHANNEL; i++) CboAddr.Items.Add(i.ToString());
+            CboAddr.SelectedIndex = 0;
+
+            this.Text = "Set up product information - ZIM Board.";
+
             if (Type == 0)
             {
-                this.Text = "Set up product information - SIF Board.";
-
+                LblAddr.Visible = false;
+                CboAddr.Visible = false;
+                
                 CboBdType.Items.Clear();
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.WBCS));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.SMART));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.ZIM));
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.BZA1000));
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.BZA100));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.SBZA));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.MBZA));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.ZBCS));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.CXM));
                 CboBdType.SelectedIndex = (int)mSysCfg.mSIFCfg.Type;
 
                 ViewSifInformation();
             }
             else
             {
-                this.Text = "Set up product information - ZIM Board.";
 
-                CboAddr.Items.Clear();
-                CboAddr.Items.Add("SPI");
-                for (int i = 0; i < 16; i++) CboAddr.Items.Add(i.ToString());
-                CboAddr.SelectedIndex = 0;
-
-                if (mDevType == eDeviceType.ZIM
-                     || mDevType == eDeviceType.BZA1000
-                     || mDevType == eDeviceType.BZA100)
-                {
-                    LblAddr.Visible = false;
-                    CboAddr.Visible = false;
-                }
-                else
-                {
-                    LblAddr.Visible = true;
-                    CboAddr.Visible = true;
-                }
+                LblAddr.Visible = false;
+                CboAddr.Visible = false;
 
                 CboBdType.Items.Clear();
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eFpgaType.UNKNOWN));
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eFpgaType.ZIM));
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eFpgaType.BZA1000));
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eFpgaType.BZA100));
-                CboBdType.Items.Add(Extensions.GetEnumDescription(eFpgaType.ZBCS));
-
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.UNKNOWN));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA1000A));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA1000));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA500));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA100));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA60));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA60HZ));
+                
                 int zimtype = mSysCfg.mZimCfg.cModel[0] - 0x30;
                 if (zimtype >= CboBdType.Items.Count || zimtype < 0) CboBdType.SelectedIndex = 0;
                 else CboBdType.SelectedIndex = (int)zimtype;
@@ -85,11 +80,12 @@ namespace App.ZIM.FactorySetting
 
             LblProductName.Text = "IF";
 
-            CboBdType.SelectedIndex = mSysCfg.mSIFCfg.Type;
+            CboBdType.SelectedIndex = (int)mSysCfg.mSIFCfg.Type;
 
             if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.ZIM
-                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.BZA1000
-                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.BZA100)
+                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.SBZA
+                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.MBZA
+                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.ZBCS)
             {
                 LblBdType.Text = "(SIF II)";
             }
@@ -116,11 +112,11 @@ namespace App.ZIM.FactorySetting
         public void ViewZimInformation()
         {
             string str;
-            eFpgaSnID mSnID;
+            eZimSnID mSnID;
             int zimtype = mSysCfg.mZimCfg.cModel[0] - 0x30;
 
-            if (zimtype >= CboBdType.Items.Count || zimtype < 0) mSnID = eFpgaSnID.UNKNOWN;
-            else mSnID = (eFpgaSnID)zimtype;
+            if (zimtype >= CboBdType.Items.Count || zimtype < 0) mSnID = eZimSnID.UNKNOWN;
+            else mSnID = (eZimSnID)zimtype;
 
             LblProductName.Text = Extensions.GetEnumDescription(mSnID);
 
@@ -156,7 +152,7 @@ namespace App.ZIM.FactorySetting
             bool bres;
             mSysCfg.mZimCfg.SetBoardVer(string.Format("{0}{1}{2}{3}", numBdVer0.Value, numBdVer1.Value, numBdVer2.Value, numBdVer3.Value));
             mSysCfg.mZimCfg.SetFirmwareVer(string.Format("{0}{1}{2}{3}", numFwVer0.Value, numFwVer1.Value, numFwVer2.Value, numFwVer3.Value));
-            mSysCfg.mZimCfg.SetSerialNumber((byte)CboBdType.SelectedIndex,maskSerial.Text);
+            mSysCfg.mZimCfg.SetSerialNumber((byte)CboBdType.SelectedIndex, maskSerial.Text);
             bres = mCommZim.mComm.WriteToDevice(0x63, addr, mSysCfg.ToByteArray());
             return bres;
         }
@@ -172,13 +168,11 @@ namespace App.ZIM.FactorySetting
                 return;
             }
 
-            if (mDevType == eDeviceType.ZIM 
-                || mDevType == eDeviceType.BZA1000
-                || mDevType == eDeviceType.BZA100) Addr = 0;
-            else Addr = CboAddr.SelectedIndex;
 
+            Addr = 0;
             if (Type == 0)
             {
+                
                 bstatus = SetupSifInformation(Addr);
             }
             else

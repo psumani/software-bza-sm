@@ -2,6 +2,7 @@
 {
     public class SIFConstants
     {
+        public const int MAX_DEVICE_CHANNEL = 4;
         public const byte PACKET_ID = 0x8A;
         public const int DATA_LEN = 500;
         public const int PACKET_SIZE = 512;

@@ -18,6 +18,21 @@ namespace ZiveLab.Device.ZIM
     {
         #region Public Properties
 
+        string ResultFile;
+
+        public string ResultFileName
+        {
+            get { return ResultFile; }
+            set
+            {
+                if (ResultFile != value)
+                {
+                    ResultFile = value;
+                    OnPropertyChanged("ResultFileName");
+                }
+            }
+        }
+
         DeviceInfo about = new DeviceInfo();
         public DeviceInfo About
         {
@@ -91,7 +106,19 @@ namespace ZiveLab.Device.ZIM
                 }
             }
         }
-
+        
+        public CurrentRange_BZA60HZ CurrentRange_BZA60HZ
+        { 
+            get { return (CurrentRange_BZA60HZ)currentRange; }
+            set
+            {
+                if (currentRange != (CurrentRange)value)
+                {
+                    currentRange = (CurrentRange)value;
+                    OnPropertyChanged("CurrentRange_BZA60HZ");
+                }
+            }
+        }
 
         CurrentRange currentRange = CurrentRange.NotAssigned;
         public CurrentRange CurrentRange
@@ -313,11 +340,11 @@ namespace ZiveLab.Device.ZIM
 
         #endregion INotifyPropertyChanged Members
 
-        public eDeviceType mType;
+        public eZimType mType;
 
         public ChannelStatus()
         {
-            mType = eDeviceType.ZIM;
+            mType = eZimType.BZA1000;
             eisstate = EisState.none;
             State = State.NotAssigned;
             VoltageRange = VoltageRange.NotAssigned;
@@ -500,6 +527,7 @@ namespace ZiveLab.Device.ZIM
                 if (item.info.freq > 0)
                 {
                     var data = new ZItem(item);
+                    data.mType = mType;
                     ZData.Add(data);
                 }
                 else
@@ -516,6 +544,7 @@ namespace ZiveLab.Device.ZIM
 
             //if (State == State.Running || State == State.InitDelay || State == State.Finished || State == State.Stopped)
                 ZData[index] = new ZItem(packet);
+                ZData[index].mType = mType;
         }
 
         /// <summary>
@@ -530,6 +559,7 @@ namespace ZiveLab.Device.ZIM
                 if (packet[i].info.freq > 0)
                 {
                     var data = new ZItem(packet[i], subPacket[i].raw_val);
+                    data.mType = mType;
                     ZData.Add(data);
                 }
                 else
@@ -851,6 +881,7 @@ namespace ZiveLab.Device.ZIM
         #region Public Properties
 
         double time;
+        public eZimType mType;
         public double Time
         {
             get { return time; }
@@ -920,15 +951,15 @@ namespace ZiveLab.Device.ZIM
             }
         }
 
-        CurrentRange currentRange;
-        public CurrentRange CurrentRange
+        int currRange;
+        public int CurrRange
         {
-            get { return currentRange; }
+            get { return currRange; }
             set
             {
-                if (currentRange != value)
+                if (currRange != value)
                 {
-                    currentRange = value;
+                    currRange = value;
                     OnPropertyChanged("IRangeIdx");
                 }
             }
@@ -992,6 +1023,7 @@ namespace ZiveLab.Device.ZIM
 
         public ZItem()
         {
+            mType = eZimType.BZA1000;
             VoltageSamples.CollectionChanged += delegate
             {
                 OnPropertyChanged("VoltageSamples");
@@ -1004,6 +1036,7 @@ namespace ZiveLab.Device.ZIM
 
         public ZItem(st_zim_eis_item packet)
         {
+            mType = eZimType.BZA1000;
             VoltageSamples.CollectionChanged += delegate
             {
                 OnPropertyChanged("VoltageSamples");
@@ -1049,6 +1082,16 @@ namespace ZiveLab.Device.ZIM
             SamplingRate = Frequency * (double)VoltageSamples.Count / Cycle;
         }
 
+        public double GetIdc()
+        {
+            return -0.5 * GetCurrentRangeValue(CurrRange);
+        }
+
+        public double GetIRange()
+        {
+            return  GetCurrentRangeValue(CurrRange);
+        }
+
         public DisplayZItem ToDisplayZItem(int idx = -1)
         {
             var item = new DisplayZItem()
@@ -1060,10 +1103,10 @@ namespace ZiveLab.Device.ZIM
                 Zimag = Impedance.Imaginary,
                 Zmod = Impedance.Magnitude,
                 Zphase = Impedance.Phase * 180.0 / Constants.Pi,
-                Idc = -0.5 * GetCurrentRangeValue(CurrentRange),
+                Idc = -0.5 * GetCurrentRangeValue(CurrRange),
                 Vdc = AuxVoltage,
                 Temp = AuxTemperature,
-                IRange = GetCurrentRangeValue(CurrentRange),
+                IRange = GetCurrentRangeValue(CurrRange),
             };
 
             return item;
@@ -1088,33 +1131,83 @@ namespace ZiveLab.Device.ZIM
             }
             AuxVoltage = packet.info.vdc.end;
             AuxTemperature = packet.info.rtd.end;
-            CurrentRange = (CurrentRange)packet.info.iacrng;
+            CurrRange = (int)packet.info.iacrng;
 
             Cycle = packet.info.cycle;
         }
 
-        private double GetCurrentRangeValue(CurrentRange iRange)
+        private double GetCurrentRangeHzValue(CurrentRange_BZA60HZ iRange)
         {
+            double dret = 0.2;
             switch (iRange)
             {
                 default:
-                case CurrentRange.I2A:
-                    return 2.0;
-                case CurrentRange.I400mA:
-                    return 0.4;
-                case CurrentRange.I200mA:
-                    return 0.2;
-                case CurrentRange.I40mA:
-                    return 0.04;
-                case CurrentRange.I20mA:
-                    return 0.02;
-                case CurrentRange.I4mA:
-                    return 0.004;
-                case CurrentRange.I2mA:
-                    return 0.002;
-                case CurrentRange.I400uA:
-                    return 0.0004;
+                case CurrentRange_BZA60HZ.I200mA:
+                    dret = 0.2;
+                    break;
+                case CurrentRange_BZA60HZ.I40mA:
+                    dret = 0.04;
+                    break;
+                case CurrentRange_BZA60HZ.I20mA:
+                    dret = 0.02;
+                    break;
+                case CurrentRange_BZA60HZ.I4mA:
+                    dret = 0.004;
+                    break;
+                case CurrentRange_BZA60HZ.I2mA:
+                    dret = 0.002;
+                    break;
+                case CurrentRange_BZA60HZ.I400uA:
+                    dret = 0.0004;
+                    break;
+                case CurrentRange_BZA60HZ.I200uA:
+                    dret = 0.0002;
+                    break;
+                case CurrentRange_BZA60HZ.I40uA:
+                    dret = 0.00004;
+                    break;
             }
+            return dret;
+        }
+
+        private double GetCurrentRangeValue(int iRange)
+        {
+            double dret = 2.0;
+            CurrentRange crng = (CurrentRange)iRange;
+            if (mType == eZimType.BZA60HZ)
+            {
+                dret = GetCurrentRangeHzValue((CurrentRange_BZA60HZ)iRange);
+            }
+            
+            switch (crng)
+            {
+                default:
+                case CurrentRange.I2A:
+                    dret = 2.0;
+                    break;
+                case CurrentRange.I400mA:
+                    dret = 0.4;
+                    break;
+                case CurrentRange.I200mA:
+                    dret = 0.2;
+                    break;
+                case CurrentRange.I40mA:
+                    dret = 0.04;
+                    break;
+                case CurrentRange.I20mA:
+                    dret = 0.02;
+                    break;
+                case CurrentRange.I4mA:
+                    dret = 0.004;
+                    break;
+                case CurrentRange.I2mA:
+                    dret = 0.002;
+                    break;
+                case CurrentRange.I400uA:
+                    dret = 0.0004;
+                    break;
+            }
+            return dret;
         }
 
         #endregion Private Methods
@@ -1267,8 +1360,8 @@ namespace ZiveLab.Device.ZIM
             }
         }
 
-        CurrentRange iRange;
-        public CurrentRange IRange
+        int iRange;
+        public int IRange
         {
             get { return iRange; }
             set
@@ -1323,7 +1416,21 @@ namespace ZiveLab.Device.ZIM
                 }
             }
         }
+        double BeginCalibFreq;
+        public double BegincalibFreq
+        {
+            get { return BeginCalibFreq; }
+            set
+            {
+                if (BeginCalibFreq != value)
+                {
+                    BeginCalibFreq = value;
+                    OnPropertyChanged("BeginCalibFreq");
+                }
+            }
+        }
 
+        
         double zexpected;
         public double Zexpected
         {
@@ -1370,11 +1477,12 @@ namespace ZiveLab.Device.ZIM
         {
             InitialFrequency = 1000.0;
             FinalFrequency = 1.0;
+            BegincalibFreq = 40000.0;
             Finalcalibfreq = 0.05;
             Density = 10;
             Iteration = 1;
             Cycle = 0; // Auto
-            IRange = CurrentRange.I200mA;
+            IRange = (int)CurrentRange.I200mA;
             MaxInitialDelay = 12.0;
             SkipCycle = 1;
             Zexpected = 0.001;
@@ -1411,7 +1519,7 @@ namespace ZiveLab.Device.ZIM
                 Cycle = packet.item[0].cycle;
             }
 
-            IRange = (CurrentRange)(packet.iacrng - 1); // Note iacrng = 0: Auto, 1: 2A, 2: 400mA, ....
+            IRange = (int)(packet.iacrng - 1); // Note iacrng = 0: Auto, 1: 2A, 2: 400mA, ....
             MaxInitialDelay = packet.ondelay;
             SkipCycle = (int)packet.skipcycle;
             Zexpected = packet.expected_Z;
@@ -1427,23 +1535,8 @@ namespace ZiveLab.Device.ZIM
             Iteration = 1;
             MaxInitialDelay = 12;
             SkipCycle = 1;
-
-            if (type == 1)
-            {
-                IRange = CurrentRange.I200mA;
-            }
-            else if (type == 2)
-            {
-                IRange = CurrentRange.I20mA;
-            }
-            else if (type == 3)
-            {
-                IRange = CurrentRange.I2mA;
-            }
-            else
-            {
-                IRange = CurrentRange.I2A;
-            }
+            IRange = type;
+           
 
             var freq = BuildCalibFrequencies(InitialFrequency, FinalFrequency, Density, Iteration);
 
@@ -1493,23 +1586,8 @@ namespace ZiveLab.Device.ZIM
             Iteration = 1;
             MaxInitialDelay = 12;
             SkipCycle = 1;
-
-            if (type == 1) 
-            {
-                IRange = CurrentRange.I200mA;
-            }
-            else if (type == 2)
-            {
-                IRange = CurrentRange.I20mA;
-            }
-            else if (type == 3) 
-            {
-                IRange = CurrentRange.I2mA;
-            }
-            else 
-            {
-                IRange = CurrentRange.I2A;
-            }
+            IRange = type;
+            
 
             var freq = BuildCalibFrequencies(InitialFrequency, FinalFrequency, Density, Iteration);
 
@@ -1551,46 +1629,16 @@ namespace ZiveLab.Device.ZIM
 
         public st_zim_eis_cond ToCalibPacket(int type)
         {
-            InitialFrequency = 3900.0;
+            InitialFrequency = BegincalibFreq; // DeviceConstants.MAX_EIS_FREQUENCY;//   3900.0; //4000.0
 
-            FinalFrequency = FinalCalibFreq;  
+            FinalFrequency = FinalCalibFreq;
             
             Density =  10;
             Iteration = 1;
             MaxInitialDelay = 12;
             SkipCycle = 1;
-            if (type == 1) // 10m
-            {
-                IRange = CurrentRange.I400mA;
-            }
-            else if (type == 2) // 100m
-            {
-                IRange = CurrentRange.I200mA;
-            }
-            else if (type == 3) // 100m
-            {
-                IRange = CurrentRange.I40mA;
-            }
-            else if (type == 4) // 1000m
-            {
-                IRange = CurrentRange.I20mA;
-            }
-            else if (type == 5) // 1000m
-            {
-                IRange =CurrentRange.I4mA;
-            }
-            else if (type == 6) // 10000m
-            {
-                IRange = CurrentRange.I2mA;
-            }
-            else if (type == 7) // 10000m
-            {
-                IRange = CurrentRange.I400uA;
-            }
-            else //10m
-            {
-                IRange = CurrentRange.I2A;
-            }
+            IRange = type;
+            
 
             var freq = BuildCalibFrequencies(InitialFrequency, FinalFrequency, Density, Iteration);
 

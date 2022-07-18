@@ -127,19 +127,18 @@
             this.buttonRefreshVac.Enabled = false;
             this.buttonRefreshVac.FlatAppearance.BorderSize = 0;
             this.buttonRefreshVac.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRefreshVac.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.buttonRefreshVac.ForeColor = System.Drawing.Color.SeaGreen;
+            this.buttonRefreshVac.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRefreshVac.ForeColor = System.Drawing.Color.Black;
             this.buttonRefreshVac.Image = global::ZiveLab.Device.ZIM.Win.Properties.Resources.play_circle_outline;
-            this.buttonRefreshVac.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonRefreshVac.Location = new System.Drawing.Point(142, 14);
+            this.buttonRefreshVac.Location = new System.Drawing.Point(47, 19);
             this.buttonRefreshVac.Name = "buttonRefreshVac";
-            this.buttonRefreshVac.Size = new System.Drawing.Size(43, 45);
+            this.buttonRefreshVac.Size = new System.Drawing.Size(30, 30);
             this.buttonRefreshVac.TabIndex = 31;
-            this.buttonRefreshVac.Text = "VAC";
             this.buttonRefreshVac.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.buttonRefreshVac.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip.SetToolTip(this.buttonRefreshVac, "Refresh Vac");
+            this.toolTip.SetToolTip(this.buttonRefreshVac, "Upload condition.");
             this.buttonRefreshVac.UseVisualStyleBackColor = true;
+            this.buttonRefreshVac.CheckedChanged += new System.EventHandler(this.buttonRefreshVac_CheckedChanged);
             this.buttonRefreshVac.Click += new System.EventHandler(this.buttonRefreshVac_Click);
             // 
             // buttonRefresh
@@ -202,7 +201,7 @@
             this.buttonStop.FlatAppearance.BorderSize = 0;
             this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStop.Image = global::ZiveLab.Device.ZIM.Win.Properties.Resources.Stop;
-            this.buttonStop.Location = new System.Drawing.Point(77, 19);
+            this.buttonStop.Location = new System.Drawing.Point(89, 19);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(30, 30);
             this.buttonStop.TabIndex = 18;
@@ -270,12 +269,13 @@
             this.buttonStart.FlatAppearance.BorderSize = 0;
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Image = global::ZiveLab.Device.ZIM.Win.Properties.Resources.Play;
-            this.buttonStart.Location = new System.Drawing.Point(41, 19);
+            this.buttonStart.Location = new System.Drawing.Point(127, 19);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(30, 30);
             this.buttonStart.TabIndex = 17;
             this.toolTip.SetToolTip(this.buttonStart, "Start experiment");
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.CheckedChanged += new System.EventHandler(this.buttonStart_CheckedChanged);
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // panelCooker

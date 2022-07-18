@@ -56,6 +56,8 @@
             this.btRefRtd = new System.Windows.Forms.Button();
             this.ListTempRng = new System.Windows.Forms.ListView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.mPower = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.cboRngEisCal = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btRefEisCal = new System.Windows.Forms.Button();
@@ -89,10 +91,6 @@
             this.menuWebService_Setup = new System.Windows.Forms.ToolStripMenuItem();
             this.testSineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.mInductor = new System.Windows.Forms.TextBox();
-            this.mPower = new System.Windows.Forms.TextBox();
             this.TabCtrl.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -153,10 +151,10 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.listNetInf);
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Location = new System.Drawing.Point(4, 42);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(387, 244);
+            this.tabPage1.Size = new System.Drawing.Size(387, 225);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Network";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -164,9 +162,9 @@
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.listDevInf);
-            this.tabPage7.Location = new System.Drawing.Point(4, 23);
+            this.tabPage7.Location = new System.Drawing.Point(4, 42);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(387, 244);
+            this.tabPage7.Size = new System.Drawing.Size(387, 225);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Device";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -187,10 +185,10 @@
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.cboIacRng);
             this.tabPage2.Controls.Add(this.ListIacRng);
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Location = new System.Drawing.Point(4, 42);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(387, 244);
+            this.tabPage2.Size = new System.Drawing.Size(387, 225);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Range[Iac]";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -208,7 +206,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 19);
+            this.label3.Location = new System.Drawing.Point(17, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 14);
             this.label3.TabIndex = 2;
@@ -222,7 +220,7 @@
             "0.2A",
             "0.02A",
             "0.002A"});
-            this.cboIacRng.Location = new System.Drawing.Point(128, 15);
+            this.cboIacRng.Location = new System.Drawing.Point(128, 10);
             this.cboIacRng.Name = "cboIacRng";
             this.cboIacRng.Size = new System.Drawing.Size(99, 22);
             this.cboIacRng.TabIndex = 1;
@@ -230,9 +228,9 @@
             // 
             // ListIacRng
             // 
-            this.ListIacRng.Location = new System.Drawing.Point(19, 45);
+            this.ListIacRng.Location = new System.Drawing.Point(19, 38);
             this.ListIacRng.Name = "ListIacRng";
-            this.ListIacRng.Size = new System.Drawing.Size(349, 132);
+            this.ListIacRng.Size = new System.Drawing.Size(349, 141);
             this.ListIacRng.TabIndex = 0;
             this.ListIacRng.UseCompatibleStateImageBehavior = false;
             this.ListIacRng.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListIacRng_MouseDoubleClick);
@@ -241,9 +239,9 @@
             // 
             this.tabPage3.Controls.Add(this.btRefVac);
             this.tabPage3.Controls.Add(this.ListVacRng);
-            this.tabPage3.Location = new System.Drawing.Point(4, 23);
+            this.tabPage3.Location = new System.Drawing.Point(4, 42);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(387, 244);
+            this.tabPage3.Size = new System.Drawing.Size(387, 225);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Range[Vac]";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -260,9 +258,9 @@
             // 
             // ListVacRng
             // 
-            this.ListVacRng.Location = new System.Drawing.Point(23, 26);
+            this.ListVacRng.Location = new System.Drawing.Point(23, 17);
             this.ListVacRng.Name = "ListVacRng";
-            this.ListVacRng.Size = new System.Drawing.Size(344, 153);
+            this.ListVacRng.Size = new System.Drawing.Size(344, 162);
             this.ListVacRng.TabIndex = 1;
             this.ListVacRng.UseCompatibleStateImageBehavior = false;
             this.ListVacRng.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListVacRng_MouseDoubleClick);
@@ -315,7 +313,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 15);
+            this.label4.Location = new System.Drawing.Point(19, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 14);
             this.label4.TabIndex = 4;
@@ -327,7 +325,7 @@
             this.cboSelVdc.Items.AddRange(new object[] {
             "X1",
             "X0.1"});
-            this.cboSelVdc.Location = new System.Drawing.Point(131, 10);
+            this.cboSelVdc.Location = new System.Drawing.Point(131, 8);
             this.cboSelVdc.Name = "cboSelVdc";
             this.cboSelVdc.Size = new System.Drawing.Size(73, 22);
             this.cboSelVdc.TabIndex = 3;
@@ -335,9 +333,9 @@
             // 
             // ListVdcRng
             // 
-            this.ListVdcRng.Location = new System.Drawing.Point(21, 43);
+            this.ListVdcRng.Location = new System.Drawing.Point(21, 38);
             this.ListVdcRng.Name = "ListVdcRng";
-            this.ListVdcRng.Size = new System.Drawing.Size(345, 133);
+            this.ListVdcRng.Size = new System.Drawing.Size(345, 140);
             this.ListVdcRng.TabIndex = 2;
             this.ListVdcRng.UseCompatibleStateImageBehavior = false;
             this.ListVdcRng.SelectedIndexChanged += new System.EventHandler(this.ListVdcRng_SelectedIndexChanged);
@@ -357,7 +355,7 @@
             // 
             // btTempCal
             // 
-            this.btTempCal.Location = new System.Drawing.Point(129, 184);
+            this.btTempCal.Location = new System.Drawing.Point(129, 188);
             this.btTempCal.Name = "btTempCal";
             this.btTempCal.Size = new System.Drawing.Size(105, 27);
             this.btTempCal.TabIndex = 15;
@@ -367,7 +365,7 @@
             // 
             // btRefRtd
             // 
-            this.btRefRtd.Location = new System.Drawing.Point(299, 184);
+            this.btRefRtd.Location = new System.Drawing.Point(299, 188);
             this.btRefRtd.Name = "btRefRtd";
             this.btRefRtd.Size = new System.Drawing.Size(67, 27);
             this.btRefRtd.TabIndex = 12;
@@ -377,9 +375,9 @@
             // 
             // ListTempRng
             // 
-            this.ListTempRng.Location = new System.Drawing.Point(20, 21);
+            this.ListTempRng.Location = new System.Drawing.Point(20, 11);
             this.ListTempRng.Name = "ListTempRng";
-            this.ListTempRng.Size = new System.Drawing.Size(346, 149);
+            this.ListTempRng.Size = new System.Drawing.Size(346, 167);
             this.ListTempRng.TabIndex = 3;
             this.ListTempRng.UseCompatibleStateImageBehavior = false;
             this.ListTempRng.SelectedIndexChanged += new System.EventHandler(this.ListTempRng_SelectedIndexChanged);
@@ -388,9 +386,7 @@
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.mPower);
-            this.tabPage6.Controls.Add(this.mInductor);
             this.tabPage6.Controls.Add(this.label5);
-            this.tabPage6.Controls.Add(this.label2);
             this.tabPage6.Controls.Add(this.cboRngEisCal);
             this.tabPage6.Controls.Add(this.label1);
             this.tabPage6.Controls.Add(this.btRefEisCal);
@@ -401,6 +397,23 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "EIS Cal. and Safety";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // mPower
+            // 
+            this.mPower.Location = new System.Drawing.Point(131, 196);
+            this.mPower.Name = "mPower";
+            this.mPower.ReadOnly = true;
+            this.mPower.Size = new System.Drawing.Size(65, 22);
+            this.mPower.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 199);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(112, 14);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Safety Power(W)";
             // 
             // cboRngEisCal
             // 
@@ -414,7 +427,7 @@
             "4mA",
             "2mA",
             "400uA"});
-            this.cboRngEisCal.Location = new System.Drawing.Point(129, 15);
+            this.cboRngEisCal.Location = new System.Drawing.Point(129, 9);
             this.cboRngEisCal.Name = "cboRngEisCal";
             this.cboRngEisCal.Size = new System.Drawing.Size(103, 22);
             this.cboRngEisCal.TabIndex = 15;
@@ -423,7 +436,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 19);
+            this.label1.Location = new System.Drawing.Point(19, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 14);
             this.label1.TabIndex = 14;
@@ -431,7 +444,7 @@
             // 
             // btRefEisCal
             // 
-            this.btRefEisCal.Location = new System.Drawing.Point(297, 12);
+            this.btRefEisCal.Location = new System.Drawing.Point(297, 6);
             this.btRefEisCal.Name = "btRefEisCal";
             this.btRefEisCal.Size = new System.Drawing.Size(67, 27);
             this.btRefEisCal.TabIndex = 13;
@@ -442,9 +455,9 @@
             // ListCal
             // 
             this.ListCal.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.ListCal.Location = new System.Drawing.Point(16, 43);
+            this.ListCal.Location = new System.Drawing.Point(16, 37);
             this.ListCal.Name = "ListCal";
-            this.ListCal.Size = new System.Drawing.Size(347, 145);
+            this.ListCal.Size = new System.Drawing.Size(347, 151);
             this.ListCal.TabIndex = 4;
             this.ListCal.UseCompatibleStateImageBehavior = false;
             this.ListCal.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListCal_MouseDoubleClick);
@@ -659,42 +672,6 @@
             this.testSineToolStripMenuItem.Text = "Test Sine";
             this.testSineToolStripMenuItem.Click += new System.EventHandler(this.testSineToolStripMenuItem_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 200);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 14);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Inductance(H)";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(187, 199);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 14);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Safety Power(W)";
-            // 
-            // mInductor
-            // 
-            this.mInductor.Location = new System.Drawing.Point(109, 195);
-            this.mInductor.Name = "mInductor";
-            this.mInductor.ReadOnly = true;
-            this.mInductor.Size = new System.Drawing.Size(73, 22);
-            this.mInductor.TabIndex = 18;
-            this.mInductor.TextChanged += new System.EventHandler(this.mInductor_TextChanged);
-            this.mInductor.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mInductor_MouseDoubleClick);
-            // 
-            // mPower
-            // 
-            this.mPower.Location = new System.Drawing.Point(299, 195);
-            this.mPower.Name = "mPower";
-            this.mPower.ReadOnly = true;
-            this.mPower.Size = new System.Drawing.Size(65, 22);
-            this.mPower.TabIndex = 19;
-            // 
             // frmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -792,9 +769,7 @@
         private System.Windows.Forms.ToolStripMenuItem editDummyResistorInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox mPower;
-        private System.Windows.Forms.TextBox mInductor;
     }
 }

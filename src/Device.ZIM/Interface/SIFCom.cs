@@ -71,7 +71,7 @@ namespace ZiveLab.Device.ZIM.Interface
                 tcpClient.NoDelay = true;
 
                 IAsyncResult ar = tcpClient.BeginConnect(HostName, Port, null, null);
-                if(ar.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(4), false))
+                if (ar.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(4), false))
                 {
                     tcpClient.EndConnect(ar);
                     networkStream = tcpClient.GetStream();
@@ -97,14 +97,14 @@ namespace ZiveLab.Device.ZIM.Interface
             return isConnected;
         }
 
-        public void Dispose() 
+        public void Dispose()
         {
             if (networkStream != null)
                 networkStream.Close(1000);
 
             if (tcpClient != null)
                 tcpClient.Close();
-            
+
         }
 
         public void SetReceiveTime(int ms)
@@ -337,7 +337,7 @@ namespace ZiveLab.Device.ZIM.Interface
 
                 if (!Write(buff))
                     return false;
-                
+
                 result = true;
             }
             catch (Exception)

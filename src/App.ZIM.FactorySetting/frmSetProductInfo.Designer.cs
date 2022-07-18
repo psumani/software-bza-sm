@@ -346,7 +346,7 @@
             // CboAddr
             // 
             this.CboAddr.FormattingEnabled = true;
-            this.CboAddr.Location = new System.Drawing.Point(108, 1);
+            this.CboAddr.Location = new System.Drawing.Point(418, 33);
             this.CboAddr.Name = "CboAddr";
             this.CboAddr.Size = new System.Drawing.Size(59, 25);
             this.CboAddr.TabIndex = 25;
@@ -354,11 +354,11 @@
             // LblAddr
             // 
             this.LblAddr.AutoSize = true;
-            this.LblAddr.Location = new System.Drawing.Point(17, 5);
+            this.LblAddr.Location = new System.Drawing.Point(347, 37);
             this.LblAddr.Name = "LblAddr";
-            this.LblAddr.Size = new System.Drawing.Size(92, 17);
+            this.LblAddr.Size = new System.Drawing.Size(65, 17);
             this.LblAddr.TabIndex = 24;
-            this.LblAddr.Text = "ZFK Address : ";
+            this.LblAddr.Text = "Channel : ";
             // 
             // frmSetProductInfo
             // 

@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Zim.Player", "App.Zim.Player.csproj", "{5041427B-B705-432F-892E-517674795571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device.ZIM", "..\Device.ZIM\Device.ZIM.csproj", "{1297C0E9-5170-48CD-A37A-9A23022F0013}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device.ZIM.Win", "..\Device.ZIM.Win\Device.ZIM.Win.csproj", "{AFFFB0DB-031F-4CD6-99F3-7B450AC89E52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Primer", "..\Primer\Primer.csproj", "{9B8B724D-8456-401E-B996-10D24982F727}"
@@ -14,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZiveUniFile", "..\ZiveUniFile\ZiveUniFile.csproj", "{32020151-2CCF-4082-88D0-39345B84E995}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.ZIM.FactorySetting", "..\App.ZIM.FactorySetting\App.ZIM.FactorySetting.csproj", "{C1F3D06B-032C-4C7A-A4E2-497709702106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device.ZIM", "..\Device.ZIM\Device.ZIM.csproj", "{1297C0E9-5170-48CD-A37A-9A23022F0013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.RemoteTest", "..\App.RemoteTest\App.RemoteTest.csproj", "{9F93EE80-1481-45A1-A089-9659991ED92A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +27,6 @@ Global
 		{5041427B-B705-432F-892E-517674795571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5041427B-B705-432F-892E-517674795571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5041427B-B705-432F-892E-517674795571}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFFFB0DB-031F-4CD6-99F3-7B450AC89E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFFFB0DB-031F-4CD6-99F3-7B450AC89E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFFFB0DB-031F-4CD6-99F3-7B450AC89E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +43,14 @@ Global
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1297C0E9-5170-48CD-A37A-9A23022F0013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F93EE80-1481-45A1-A089-9659991ED92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F93EE80-1481-45A1-A089-9659991ED92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F93EE80-1481-45A1-A089-9659991ED92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F93EE80-1481-45A1-A089-9659991ED92A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

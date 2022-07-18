@@ -1,0 +1,10 @@
+C1.Win.C1InputPanel.C1InputPanel, C1.Win.C1InputPanel.4, Version=4.0.20123.156, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1FlexGrid.C1FlexGrid, C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1Command.C1OutBar, C1.Win.C1Command.4, Version=4.0.20123.19538, Culture=neutral, PublicKeyToken=e808566f358766d8
+C1.Win.C1List.C1Combo, C1.Win.C1List.4, Version=4.1.20123.220, Culture=neutral, PublicKeyToken=6b24f8f981dbd7bc
+C1.Win.C1Input.C1TextBox, C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a
+C1.Win.C1FlexGrid.Classic.C1FlexGridClassic, C1.Win.C1FlexGrid.Classic.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1Command.C1CommandHolder, C1.Win.C1Command.4, Version=4.0.20123.19538, Culture=neutral, PublicKeyToken=e808566f358766d8
+C1.Win.C1Command.C1TopicBar, C1.Win.C1Command.4, Version=4.0.20123.19538, Culture=neutral, PublicKeyToken=e808566f358766d8
+C1.Win.C1Command.C1NavBar, C1.Win.C1Command.4, Version=4.0.20123.19538, Culture=neutral, PublicKeyToken=e808566f358766d8
+C1.Win.C1Input.C1Button, C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a

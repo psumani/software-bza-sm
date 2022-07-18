@@ -1654,11 +1654,20 @@ inline void InitEisCalInf(st_zim_Eis_Cal_info* pEis_cal_info)
 void InitRangeInf(void)
 {
 	int i;
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
 	
 	m_pGlobalVar->ranges.ID = ID_RANGEINFO;
 	m_pGlobalVar->ranges.mSafety.MaxPower = DEF_DEFAULT_POWER;
-	
-	InitEisCalInf(&m_pGlobalVar->ranges.mEisCalInfo);
+	m_pGlobalVar->ranges.mEisCable.selected = 0;
+	for(i=0; i<4; i++)
+	{
+		m_pGlobalVar->ranges.mEisCable.Ls[i] = 0.0;
+	}
+	for(i=0; i<4; i++)
+	{
+		m_pGlobalVar->ranges.mEisCable.bnouse[i] = 0;
+	}
+	m_pGlobalVar->ranges.mEisCable.dnouse = 0.0;
 	for(i=0; i<MAX_IAC_CTRL_RNGCNT; i++)
 	{
 		InitEisCalInf(&m_pGlobalVar->ranges.mEisIRngCalInfo[i]);
@@ -1681,32 +1690,60 @@ void InitRangeInf(void)
 	m_pGlobalVar->ranges.rtd_rng.gain = 1.0;
 	m_pGlobalVar->ranges.rtd_rng.offset = 0.0;
 	
-	
-	iRange[0] = DEF_IAC_RNG0_MAX;
-	m_pGlobalVar->ranges.iac_rng[0].maximum = DEF_ADC_IAC_RNG0_MAX;
-	m_pGlobalVar->ranges.iac_rng[0].minimum = DEF_ADC_IAC_RNG0_MIN;
-	m_pGlobalVar->ranges.iac_rng[0].factor = DEF_ADC_IAC_RNG0_FACTOR;
+	if(type == DEV_BZA60HZ)
+	{
+		iRange[0] = DEF_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].maximum = DEF_ADC_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].minimum = DEF_ADC_IAC_RNG1_MIN;
+		m_pGlobalVar->ranges.iac_rng[0].factor = DEF_ADC_IAC_RNG1_FACTOR;
+		
+		iRange[1] = DEF_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].maximum = DEF_ADC_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].minimum = DEF_ADC_IAC_RNG2_MIN;
+		m_pGlobalVar->ranges.iac_rng[1].factor = DEF_ADC_IAC_RNG2_FACTOR;
+		
+		iRange[2] = DEF_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].maximum = DEF_ADC_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].minimum = DEF_ADC_IAC_RNG3_MIN;
+		m_pGlobalVar->ranges.iac_rng[2].factor = DEF_ADC_IAC_RNG3_FACTOR;
+		
+		iRange[3] = DEF_IAC_RNG4_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].maximum = DEF_ADC_IAC_RNG4_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].minimum = DEF_ADC_IAC_RNG4_MIN;
+		m_pGlobalVar->ranges.iac_rng[3].factor = DEF_ADC_IAC_RNG4_FACTOR;
+	}
+	else
+	{
+		iRange[0] = DEF_IAC_RNG0_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].maximum = DEF_ADC_IAC_RNG0_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].minimum = DEF_ADC_IAC_RNG0_MIN;
+		m_pGlobalVar->ranges.iac_rng[0].factor = DEF_ADC_IAC_RNG0_FACTOR;
+
+		iRange[1] = DEF_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].maximum = DEF_ADC_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].minimum = DEF_ADC_IAC_RNG1_MIN;
+		m_pGlobalVar->ranges.iac_rng[1].factor = DEF_ADC_IAC_RNG1_FACTOR;
+
+		iRange[2] = DEF_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].maximum = DEF_ADC_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].minimum = DEF_ADC_IAC_RNG2_MIN;
+		m_pGlobalVar->ranges.iac_rng[2].factor = DEF_ADC_IAC_RNG2_FACTOR;
+
+		iRange[3] = DEF_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].maximum = DEF_ADC_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].minimum = DEF_ADC_IAC_RNG3_MIN;
+		m_pGlobalVar->ranges.iac_rng[3].factor = DEF_ADC_IAC_RNG3_FACTOR;
+	}
+
 	m_pGlobalVar->ranges.iac_rng[0].gain = 1.0;
 	m_pGlobalVar->ranges.iac_rng[0].offset = 1.0;
 	
-	iRange[1] = DEF_IAC_RNG1_MAX;
-	m_pGlobalVar->ranges.iac_rng[1].maximum = DEF_ADC_IAC_RNG1_MAX;
-	m_pGlobalVar->ranges.iac_rng[1].minimum = DEF_ADC_IAC_RNG1_MIN;
-	m_pGlobalVar->ranges.iac_rng[1].factor = DEF_ADC_IAC_RNG1_FACTOR;
 	m_pGlobalVar->ranges.iac_rng[1].gain = 1.0;
 	m_pGlobalVar->ranges.iac_rng[1].offset = 1.0;
-	
-	iRange[2] = DEF_IAC_RNG2_MAX;
-	m_pGlobalVar->ranges.iac_rng[2].maximum = DEF_ADC_IAC_RNG2_MAX;
-	m_pGlobalVar->ranges.iac_rng[2].minimum = DEF_ADC_IAC_RNG2_MIN;
-	m_pGlobalVar->ranges.iac_rng[2].factor = DEF_ADC_IAC_RNG2_FACTOR;
+
 	m_pGlobalVar->ranges.iac_rng[2].gain = 1.0;
 	m_pGlobalVar->ranges.iac_rng[2].offset = 1.0;
 
-	iRange[3] = DEF_IAC_RNG3_MAX;
-	m_pGlobalVar->ranges.iac_rng[3].maximum = DEF_ADC_IAC_RNG3_MAX;
-	m_pGlobalVar->ranges.iac_rng[3].minimum = DEF_ADC_IAC_RNG3_MIN;
-	m_pGlobalVar->ranges.iac_rng[3].factor = DEF_ADC_IAC_RNG3_FACTOR;
 	m_pGlobalVar->ranges.iac_rng[3].gain = 1.0;
 	m_pGlobalVar->ranges.iac_rng[3].offset = 1.0;
 
@@ -1721,22 +1758,8 @@ void InitRangeInf(void)
 	m_pGlobalVar->ranges.vac_rng.factor = DEF_ADC_VAC_RNG_FACTOR;
 	m_pGlobalVar->ranges.vac_rng.gain = 1.0;
 	m_pGlobalVar->ranges.vac_rng.offset = 0.0;
-	
-	if(m_pSysConfig->mSIFCfg.Type == ZIM || m_pSysConfig->mSIFCfg.Type == BZA1000)
-	{
-		m_pGlobalVar->ranges.vdc_rng[0].maximum = 1500.0;
-		m_pGlobalVar->ranges.vdc_rng[0].minimum = -1500.0;
-		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR;
-		m_pGlobalVar->ranges.vdc_rng[0].gain = 1.0;
-		m_pGlobalVar->ranges.vdc_rng[0].offset = 0.0;
-		
-		m_pGlobalVar->ranges.vdc_rng[1].maximum = 100.0;
-		m_pGlobalVar->ranges.vdc_rng[1].minimum = -100.0;
-		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR;
-		m_pGlobalVar->ranges.vdc_rng[1].gain = 1.0;
-		m_pGlobalVar->ranges.vdc_rng[1].offset = 0.0;
-	}
-	else if(m_pSysConfig->mSIFCfg.Type == BZA100)
+
+	if(type == DEV_BZA100)
 	{
 		m_pGlobalVar->ranges.vdc_rng[0].maximum = 100.0;
 		m_pGlobalVar->ranges.vdc_rng[0].minimum = -100.0;
@@ -1750,12 +1773,56 @@ void InitRangeInf(void)
 		m_pGlobalVar->ranges.vdc_rng[1].gain = 1.0;
 		m_pGlobalVar->ranges.vdc_rng[1].offset = 0.0;
 	}
+	else if(type == DEV_BZA500)
+	{
+		m_pGlobalVar->ranges.vdc_rng[0].maximum = 500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].minimum = -500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR;
+		m_pGlobalVar->ranges.vdc_rng[0].gain = 1.0;
+		m_pGlobalVar->ranges.vdc_rng[0].offset = 0.0;
+		
+		m_pGlobalVar->ranges.vdc_rng[1].maximum = 50.0;
+		m_pGlobalVar->ranges.vdc_rng[1].minimum = -50.0;
+		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR;
+		m_pGlobalVar->ranges.vdc_rng[1].gain = 1.0;
+		m_pGlobalVar->ranges.vdc_rng[1].offset = 0.0;
+	}
+	else if(type == DEV_BZA60 || type == DEV_BZA60HZ)
+	{
+		m_pGlobalVar->ranges.vdc_rng[0].maximum = 60.0;
+		m_pGlobalVar->ranges.vdc_rng[0].minimum = -60.0;
+		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR1;
+		m_pGlobalVar->ranges.vdc_rng[0].gain = 1.0;
+		m_pGlobalVar->ranges.vdc_rng[0].offset = 0.0;
+		
+		m_pGlobalVar->ranges.vdc_rng[1].maximum = 6.0;
+		m_pGlobalVar->ranges.vdc_rng[1].minimum = -6.0;
+		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR1;
+		m_pGlobalVar->ranges.vdc_rng[1].gain = 1.0;
+		m_pGlobalVar->ranges.vdc_rng[1].offset = 0.0;
+	}
+	else
+	{
+		m_pGlobalVar->ranges.vdc_rng[0].maximum = 1500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].minimum = -1500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR;
+		m_pGlobalVar->ranges.vdc_rng[0].gain = 1.0;
+		m_pGlobalVar->ranges.vdc_rng[0].offset = 0.0;
+		
+		m_pGlobalVar->ranges.vdc_rng[1].maximum = 100.0;
+		m_pGlobalVar->ranges.vdc_rng[1].minimum = -100.0;
+		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR;
+		m_pGlobalVar->ranges.vdc_rng[1].gain = 1.0;
+		m_pGlobalVar->ranges.vdc_rng[1].offset = 0.0;
+	}
+	
 	
 }
 
 void InitFixRangeInf(void)
 {
 	int i;
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
 	
 	m_pGlobalVar->ranges.ID = ID_RANGEINFO;
 	
@@ -1764,7 +1831,21 @@ void InitFixRangeInf(void)
 		m_pGlobalVar->ranges.mSafety.MaxPower = DEF_DEV_MAX_POWER;
 	}
 	*/
-	FixEisCalInf(&m_pGlobalVar->ranges.mEisCalInfo);
+	if(m_pGlobalVar->ranges.mEisCable.selected > 3) 
+	{
+		m_pGlobalVar->ranges.mEisCable.selected = 0;
+		for(i=0; i<4; i++)
+		{
+			m_pGlobalVar->ranges.mEisCable.Ls[i] = 0.0;
+		}
+		for(i=0; i<4; i++)
+		{
+			m_pGlobalVar->ranges.mEisCable.bnouse[i] = 0;
+		}
+		m_pGlobalVar->ranges.mEisCable.dnouse = 0.0;
+	}
+	
+	
 	for(i=0; i<MAX_IAC_CTRL_RNGCNT; i++)
 	{
 		FixEisCalInf(&m_pGlobalVar->ranges.mEisIRngCalInfo[i]);
@@ -1786,25 +1867,50 @@ void InitFixRangeInf(void)
 	m_pGlobalVar->ranges.rtd_rng.minimum = DEF_ADC_RTD_CONST_MIN;
 	m_pGlobalVar->ranges.rtd_rng.factor = DEF_ADC_RTD_CONST_PT100;
 	
-	iRange[0] = DEF_IAC_RNG0_MAX;
-	m_pGlobalVar->ranges.iac_rng[0].maximum = DEF_ADC_IAC_RNG0_MAX;
-	m_pGlobalVar->ranges.iac_rng[0].minimum = DEF_ADC_IAC_RNG0_MIN;
-	m_pGlobalVar->ranges.iac_rng[0].factor = DEF_ADC_IAC_RNG0_FACTOR;
+	if(type == DEV_BZA60HZ)
+	{
+		iRange[0] = DEF_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].maximum = DEF_ADC_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].minimum = DEF_ADC_IAC_RNG1_MIN;
+		m_pGlobalVar->ranges.iac_rng[0].factor = DEF_ADC_IAC_RNG1_FACTOR;
 
-	iRange[1] = DEF_IAC_RNG1_MAX;
-	m_pGlobalVar->ranges.iac_rng[1].maximum = DEF_ADC_IAC_RNG1_MAX;
-	m_pGlobalVar->ranges.iac_rng[1].minimum = DEF_ADC_IAC_RNG1_MIN;
-	m_pGlobalVar->ranges.iac_rng[1].factor = DEF_ADC_IAC_RNG1_FACTOR;
+		iRange[1] = DEF_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].maximum = DEF_ADC_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].minimum = DEF_ADC_IAC_RNG2_MIN;
+		m_pGlobalVar->ranges.iac_rng[1].factor = DEF_ADC_IAC_RNG2_FACTOR;
+		
+		iRange[2] = DEF_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].maximum = DEF_ADC_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].minimum = DEF_ADC_IAC_RNG3_MIN;
+		m_pGlobalVar->ranges.iac_rng[2].factor = DEF_ADC_IAC_RNG3_FACTOR;
+		
+		iRange[3] = DEF_IAC_RNG4_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].maximum = DEF_ADC_IAC_RNG4_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].minimum = DEF_ADC_IAC_RNG4_MIN;
+		m_pGlobalVar->ranges.iac_rng[3].factor = DEF_ADC_IAC_RNG4_FACTOR;
+	}
+	else
+	{
+		iRange[0] = DEF_IAC_RNG0_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].maximum = DEF_ADC_IAC_RNG0_MAX;
+		m_pGlobalVar->ranges.iac_rng[0].minimum = DEF_ADC_IAC_RNG0_MIN;
+		m_pGlobalVar->ranges.iac_rng[0].factor = DEF_ADC_IAC_RNG0_FACTOR;
 
-	iRange[2] = DEF_IAC_RNG2_MAX;
-	m_pGlobalVar->ranges.iac_rng[2].maximum = DEF_ADC_IAC_RNG2_MAX;
-	m_pGlobalVar->ranges.iac_rng[2].minimum = DEF_ADC_IAC_RNG2_MIN;
-	m_pGlobalVar->ranges.iac_rng[2].factor = DEF_ADC_IAC_RNG2_FACTOR;
+		iRange[1] = DEF_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].maximum = DEF_ADC_IAC_RNG1_MAX;
+		m_pGlobalVar->ranges.iac_rng[1].minimum = DEF_ADC_IAC_RNG1_MIN;
+		m_pGlobalVar->ranges.iac_rng[1].factor = DEF_ADC_IAC_RNG1_FACTOR;
 
-	iRange[3] = DEF_IAC_RNG3_MAX;
-	m_pGlobalVar->ranges.iac_rng[3].maximum = DEF_ADC_IAC_RNG3_MAX;
-	m_pGlobalVar->ranges.iac_rng[3].minimum = DEF_ADC_IAC_RNG3_MIN;
-	m_pGlobalVar->ranges.iac_rng[3].factor = DEF_ADC_IAC_RNG3_FACTOR;
+		iRange[2] = DEF_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].maximum = DEF_ADC_IAC_RNG2_MAX;
+		m_pGlobalVar->ranges.iac_rng[2].minimum = DEF_ADC_IAC_RNG2_MIN;
+		m_pGlobalVar->ranges.iac_rng[2].factor = DEF_ADC_IAC_RNG2_FACTOR;
+
+		iRange[3] = DEF_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].maximum = DEF_ADC_IAC_RNG3_MAX;
+		m_pGlobalVar->ranges.iac_rng[3].minimum = DEF_ADC_IAC_RNG3_MIN;
+		m_pGlobalVar->ranges.iac_rng[3].factor = DEF_ADC_IAC_RNG3_FACTOR;
+	}
 
 	m_pGlobalVar->ranges.vac_rng.maximum = DEF_ADC_VAC_RNG_MAX;
 	m_pGlobalVar->ranges.vac_rng.minimum = DEF_ADC_VAC_RNG_MIN;
@@ -1813,17 +1919,8 @@ void InitFixRangeInf(void)
 	m_pGlobalVar->ranges.vac_rng.maximum = DEF_ADC_VAC_RNG_MAX;
 	m_pGlobalVar->ranges.vac_rng.minimum = DEF_ADC_VAC_RNG_MIN;
 	m_pGlobalVar->ranges.vac_rng.factor = DEF_ADC_VAC_RNG_FACTOR;
-	if(m_pSysConfig->mSIFCfg.Type == ZIM || m_pSysConfig->mSIFCfg.Type == BZA1000)
-	{
-		m_pGlobalVar->ranges.vdc_rng[0].maximum = 1500.0;
-		m_pGlobalVar->ranges.vdc_rng[0].minimum = -1500.0;
-		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR;
-		
-		m_pGlobalVar->ranges.vdc_rng[1].maximum = 100.0;
-		m_pGlobalVar->ranges.vdc_rng[1].minimum = -100.0;
-		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR;
-	}
-	else if(m_pSysConfig->mSIFCfg.Type == BZA100)
+	
+	if(type == DEV_BZA100)
 	{
 		m_pGlobalVar->ranges.vdc_rng[0].maximum = 100.0;
 		m_pGlobalVar->ranges.vdc_rng[0].minimum = -100.0;
@@ -1832,6 +1929,36 @@ void InitFixRangeInf(void)
 		m_pGlobalVar->ranges.vdc_rng[1].maximum = 10.0;
 		m_pGlobalVar->ranges.vdc_rng[1].minimum = -10.0;
 		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR1;
+	}	
+	else if(type == DEV_BZA60 || type == DEV_BZA60HZ)
+	{
+		m_pGlobalVar->ranges.vdc_rng[0].maximum = 60.0;
+		m_pGlobalVar->ranges.vdc_rng[0].minimum = -60.0;
+		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR1;
+		
+		m_pGlobalVar->ranges.vdc_rng[1].maximum = 6.0;
+		m_pGlobalVar->ranges.vdc_rng[1].minimum = -6.0;
+		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR1;
+	}	
+	else if(type == DEV_BZA500)
+	{
+		m_pGlobalVar->ranges.vdc_rng[0].maximum = 500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].minimum = -500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR;
+		
+		m_pGlobalVar->ranges.vdc_rng[1].maximum = 50.0;
+		m_pGlobalVar->ranges.vdc_rng[1].minimum = -50.0;
+		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR;
+	}	
+	else
+	{
+		m_pGlobalVar->ranges.vdc_rng[0].maximum = 1500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].minimum = -1500.0;
+		m_pGlobalVar->ranges.vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR;
+		
+		m_pGlobalVar->ranges.vdc_rng[1].maximum = 100.0;
+		m_pGlobalVar->ranges.vdc_rng[1].minimum = -100.0;
+		m_pGlobalVar->ranges.vdc_rng[1].factor = DEF_ADC_VDC_RNG1_FACTOR;
 	}
 }
 
@@ -1929,6 +2056,7 @@ void SetZimSerialIntToChar(uint nSerial, char* pSerialChar)
 
 inline INT_32 CheckRangeInfo(void)
 {
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
 	if(m_pGlobalVar->ranges.ID != ID_RANGEINFO) return _ERROR;
 	
 	if(m_pGlobalVar->ranges.rtd_rng.maximum != DEF_ADC_RTD_CONST_MAX) return _ERROR;
@@ -1955,17 +2083,8 @@ inline INT_32 CheckRangeInfo(void)
 	if(m_pGlobalVar->ranges.vac_rng.minimum != DEF_ADC_VAC_RNG_MIN) return _ERROR;
 	if(m_pGlobalVar->ranges.vac_rng.factor != DEF_ADC_VAC_RNG_FACTOR) return _ERROR;
 	*/
-	if(m_pSysConfig->mSIFCfg.Type == ZIM || m_pSysConfig->mSIFCfg.Type == BZA1000)
-	{
-		if(m_pGlobalVar->ranges.vdc_rng[0].maximum != 1500.0) return _ERROR;
-		if(m_pGlobalVar->ranges.vdc_rng[0].minimum != -1500.0) return _ERROR;
-		if(m_pGlobalVar->ranges.vdc_rng[0].factor != DEF_ADC_VDC_RNG0_FACTOR) return _ERROR;
-		
-		if(m_pGlobalVar->ranges.vdc_rng[1].maximum != 100.0) return _ERROR;
-		if(m_pGlobalVar->ranges.vdc_rng[1].minimum != -100.0) return _ERROR;
-		if(m_pGlobalVar->ranges.vdc_rng[1].factor != DEF_ADC_VDC_RNG1_FACTOR) return _ERROR;
-	}
-	else if(m_pSysConfig->mSIFCfg.Type == BZA100)
+	
+	if(type == DEV_BZA100)
 	{
 		if(m_pGlobalVar->ranges.vdc_rng[0].maximum != 100.0) return _ERROR;
 		if(m_pGlobalVar->ranges.vdc_rng[0].minimum != -100.0) return _ERROR;
@@ -1975,6 +2094,37 @@ inline INT_32 CheckRangeInfo(void)
 		if(m_pGlobalVar->ranges.vdc_rng[1].minimum != -10.0) return _ERROR;
 		if(m_pGlobalVar->ranges.vdc_rng[1].factor != DEF_ADC_VDC_RNG1_FACTOR1) return _ERROR;
 	}
+	else if(type == DEV_BZA60 || type == DEV_BZA60HZ)
+	{
+		if(m_pGlobalVar->ranges.vdc_rng[0].maximum != 100.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[0].minimum != -100.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[0].factor != DEF_ADC_VDC_RNG0_FACTOR1) return _ERROR;
+		
+		if(m_pGlobalVar->ranges.vdc_rng[1].maximum != 10.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[1].minimum != -10.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[1].factor != DEF_ADC_VDC_RNG1_FACTOR1) return _ERROR;
+	}
+	else if(type == DEV_BZA500)
+	{
+		if(m_pGlobalVar->ranges.vdc_rng[0].maximum != 500.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[0].minimum != -500.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[0].factor != DEF_ADC_VDC_RNG0_FACTOR) return _ERROR;
+		
+		if(m_pGlobalVar->ranges.vdc_rng[1].maximum != 50.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[1].minimum != -50.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[1].factor != DEF_ADC_VDC_RNG1_FACTOR) return _ERROR;
+	}
+	else
+	{
+		if(m_pGlobalVar->ranges.vdc_rng[0].maximum != 1500.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[0].minimum != -1500.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[0].factor != DEF_ADC_VDC_RNG0_FACTOR) return _ERROR;
+		
+		if(m_pGlobalVar->ranges.vdc_rng[1].maximum != 100.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[1].minimum != -100.0) return _ERROR;
+		if(m_pGlobalVar->ranges.vdc_rng[1].factor != DEF_ADC_VDC_RNG1_FACTOR) return _ERROR;
+	}
+	
 	return _NO_ERROR;
 }
 
@@ -2062,7 +2212,20 @@ INT_32 EepromCheckZim(INT_32 devid, UNS_32 sAddr)
 		}
 		
 		memcpy(&m_pGlobalVar->ranges.mSafety, &mOldRangeInf.mSafety, sizeof(st_zim_Safety_inf));
-		memcpy(&m_pGlobalVar->ranges.mEisCalInfo, &mOldRangeInf.mEisCalInfo, sizeof(st_zim_Eis_Cal_info));
+		
+		m_pGlobalVar->ranges.mEisCable.selected = 0;
+				
+		for(i=0; i<4; i++)
+		{
+			m_pGlobalVar->ranges.mEisCable.Ls[i] = 0.0;
+		}
+		for(i=0; i<4; i++)
+		{
+			m_pGlobalVar->ranges.mEisCable.bnouse[i] = 0;
+		}
+		
+		m_pGlobalVar->ranges.mEisCable.dnouse = 0.0;
+		
 		memcpy(&m_pGlobalVar->ranges.vdc_rng[0], &mOldRangeInf.vdc_rng[0], sizeof(st_zim_adc_rnginf)*DEF_MAX_VDC_RNGCNT);
 		memcpy(&m_pGlobalVar->ranges.rtd_rng, &mOldRangeInf.rtd_rng, sizeof(st_zim_adc_rnginf));
 	}
@@ -2102,9 +2265,15 @@ INT_32 ScanZIM(INT_32 devid, UNS_32 sAddr)
 	{
 		return _ERROR;
 	}
-	if(EepromCheckZim(devid,sAddr) == _ERROR) 
+	
+	if(m_pGlobalVar->bNoEprom == 0)
 	{
-		return _ERROR;
+		if(EepromCheckZim(devid,sAddr) == _ERROR) 
+		{
+			m_pGlobalVar->bNoEprom = 1;
+			return _ERROR;
+		}
+		SaveRangeInfo();
 	}
 	return _NO_ERROR;
 }

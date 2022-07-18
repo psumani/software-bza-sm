@@ -200,12 +200,25 @@ void InitDeviceControl(void)
 
 void apply_req_dds_signal(void)
 {
+	ushort blow = 1;
+	double dConst = DEF_DDS_SIG_CONST_LOW;
 	st_zim_dds* preqdds = &m_pGlobalVar->mStatusInf.mreqdevice.dds_sig;
 	st_zim_dds* pdds = &m_pGlobalVar->mStatusInf.mdevice.dds_sig;
 	st_zim_dds_flow* pflow = &m_pGlobalVar->mStatusInf.flow_dds_sig;
-
+	
+	double dMaxFreq = (double)MIN_EIS_CYC_POINT * 32.0 * preqdds->frequency; // 100KHz = 102,400,000
+	int UB = (int)log2((double)MAX_EIS_ADC_MCLK / dMaxFreq);
+	
+	if(UB < 0)
+	{
+		blow = 0;
+		dConst = DEF_DDS_SIG_CONST_HI;
+	}
+	
+	proc_SetLowMclk(blow);
+	
 	pflow->req.ctrl = DDS_SIG_DEFAULT_CTRL;
-	pflow->req.freq = (uint)(preqdds->frequency * (double)DEF_DDS_SIG_CONST);
+	pflow->req.freq = (uint)(preqdds->frequency * dConst);
 	pdds->frequency = preqdds->frequency;
 	
 	pflow->req.phase = (uint)(preqdds->Phase * (double)DEF_DDS_PHASE_CONST);
@@ -947,15 +960,19 @@ void proc_auto_vdc_proc(void)
 {
 	if(m_pGlobalVar->mStatusInf.AutoVdcRange == 0) return;
 	
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
+	
 	st_zim_adc_vdc * pvdc = &m_pGlobalVar->mStatusInf.mdevice.adc_vdc;
 	st_zim_do* preqdo = &m_pGlobalVar->mStatusInf.mreqdevice.ctrl_do;
 	double dtmp = fabs(pvdc->value);
 	double dtmp1 = m_pGlobalVar->ranges.vdc_rng[1].maximum * 1.1;
 	double dtmp2 = m_pGlobalVar->ranges.vdc_rng[1].maximum *0.9;
-	if(m_pSysConfig->mSIFCfg.Type == BZA100)
+	
+	if(type == DEV_BZA100)
 	{
 		dtmp1 = m_pGlobalVar->ranges.vdc_rng[1].maximum * 1.02;
 	}
+	
 	if(dtmp > dtmp1) 
 	{
 		preqdo->data |= DEF_DEVDO_VDC_RNG0;
@@ -966,12 +983,15 @@ void proc_auto_vdc_proc(void)
 	}
 }
 
-void proc_SetLowMclk(bool bLow)
+void proc_SetLowMclk(ushort bLow)
 {
 	st_zim_do* preqdo = &m_pGlobalVar->mStatusInf.mreqdevice.ctrl_do;
 	
-	if(bLow == true) preqdo->data |= DEF_DEVDO_DDSMCLK_LOW;
-	else preqdo->data &= DEF_DEVDO_DDSMCLK_HI;
+	preqdo->data &= DEF_DEVDO_DDSMCLK_LOW;
+	
+	if(bLow == 0) preqdo->data |= DEF_DEVDO_DDSMCLK_HI;
+
+	set_device_DO();
 }
 
 void proc_power_VAC(bool bOn)
@@ -1363,8 +1383,8 @@ inline bool proc_eis_data_conv(int freqindex)
 	if(m_pGlobalVar->bCalib == 0)
 	{
 		//2021/09/07 -------------------------------------------------------------------
-		CompImpedanceItem(pitem,4); 
-		pitem->zdata.img = pitem->zdata.img + (2.0 * PI * pitem->info.freq * m_pGlobalVar->ranges.mEirIrngCompLs.Ls[4]);
+		CompImpedanceItem(pitem,m_pGlobalVar->mStatusInf.iac_rngno); 
+		pitem->zdata.img = pitem->zdata.img + (2.0 * PI * pitem->info.freq * m_pGlobalVar->ranges.mEirIrngCompLs.Ls[m_pGlobalVar->mStatusInf.iac_rngno]);
 		//------------------------------------------------------------------------------
 
 		//CompImpedanceItem(pitem);
@@ -1388,6 +1408,7 @@ inline bool proc_eis_data_conv(int freqindex)
 		if(m_pGlobalVar->mStatusInf.iac_rngno == 0 || m_pGlobalVar->mStatusInf.iac_rngno == 2 
 		   || m_pGlobalVar->mStatusInf.iac_rngno == 4 || m_pGlobalVar->mStatusInf.iac_rngno == 6) dgain = m_pGlobalVar->ranges.iac_rng[m_pGlobalVar->mStatusInf.iac_in_rngno].gain;
 		else dgain = m_pGlobalVar->ranges.iac_rng[m_pGlobalVar->mStatusInf.iac_in_rngno].offset;
+		
 		if(dgain == 0.0) dgain = 1.0;
 				
 		pitem->zdata.mag /= dgain;
@@ -1405,7 +1426,7 @@ inline bool proc_eis_data_conv(int freqindex)
 
 bool proc_eis_chk_Control(double rate, double mag)
 {
-	int rng;
+	int rng; 
 	int gain;
 	double drng;
 	double dLimitRate;
@@ -1491,67 +1512,100 @@ inline  void ApplyCalcConfigADCForDelay() //Find OSR and number of points in a c
 	st_zim_adc_ac_cfg* preqcfg = &m_pGlobalVar->mStatusInf.mreqdevice.adc_ac.cfg;
 	st_zim_dds* pddssig = &m_pGlobalVar->mStatusInf.mdevice.dds_sig;
 	int MinCycPoint = MIN_EIS_CYC_POINT;
-
-	m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)(m_pGlobalVar->mStatusInf.mreqdevice.dds_sig.frequency * (double)DEF_DDS_SIG_CONST);
-	pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq / (double)DEF_DDS_SIG_CONST;
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
+	
+	double dMaxFreq = (double)MIN_EIS_CYC_POINT * 32.0 * pddssig->frequency; // 100KHz = 102,400,000
+	double  dSubhFreq = DEF_FREQUENCY_SUBHAMONIC;
+	int nArg,osrArg;
+	int LB,UB;
+	int nMaxArg,osrMaxArg;
+	int retPoint,cycles,nMaxCycle;
+	
+	int nPointSubH = 0;
+	bool blow = true;
+	
+	double  dConstFlt = 2.0;
+	
+	if(m_pGlobalVar->mStatusInf.mreqdevice.adc_ac.cfg.iac_flt == DEF_FLT_LOWLATENCY) dConstFlt = 4.0;
+	
 	pddssig->reset = 0;
 	
-	if(pddssig->frequency > 1000.0) // ddsclk 주파수가 3900 이상일때 불안정한 동작 . 포인트 수를 줄여 안정적 주파수대를 사용.
+	if(type == DEV_BZA60HZ)
 	{
-		MinCycPoint = MIN_EIS_CYC_POINT_H;
+		dSubhFreq = DEF_FREQUENCY_SUBH_HZ;
 	}
-	
-	int osrMaxArg = 2;
-	int nMaxArg = 2; //4cycle 가능.
-	
-	int LB = MAX(0, ((int)(log2(MIN_EIS_ADC_MCLK / ((double)MinCycPoint * 32.0 * pddssig->frequency))))-2);
-	int UB = (int)log2(MAX_EIS_ADC_MCLK / ((double)MinCycPoint * 32.0 * pddssig->frequency));
-	
-	int nArg = MIN(nMaxArg, LB);
-	
-	
-	int osrArg =MIN(osrMaxArg,(int)((UB - nArg) * 0.25)-1);
-	osrArg = MAX(osrArg,0);
+
+	if(pddssig->frequency >= dSubhFreq)
+	{
+		blow = false;
+		osrArg = 0;
 		
-	int retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
-	
-	
-	int cycles;
-	int nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 4초
-
-	if(retPoint == 0) cycles = 0;
-	else cycles = (int)(MAX_EIS_POINT / retPoint);
-	
-	cycles = MIN(nMaxCycle,cycles);
-	cycles = MAX(cycles,1);
-	retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
-
-	//VLP Mode-FLT 10, WB2-01
-	m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(4.0,(double)osrArg)/(double)DEF_DDS_MCLK_RATE); //128 = 125K/16M //
-	pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
-	
-	/*
-	
-	int osrMaxArg = 3;
-	int nMaxArg = 4;
-	
-	if(pddssig->frequency > 3900.0) // ddsclk 주파수가 4MHz 이상일때 불안정한 동작 . 포인트 수를 줄여 안정적 주파수대를 사용.
-	{
+		dMaxFreq = (double)MIN_EIS_CYC_POINT_H * 32.0 * pddssig->frequency;
+		
 		MinCycPoint = MIN_EIS_CYC_POINT_H;
+		retPoint = MIN_EIS_CYC_POINT_H; // * 2;
+		nPointSubH = retPoint  * 32 + 1; 
+		//MinCycPoint = MIN_EIS_CYC_POINT_H;
+		//retPoint  = 32;
+		
+		//dMaxFreq = (double)retPoint * 32.0 * peis->eis_cond.item[index].freq;
+		//nPointSubH = MAX(floor((dMaxFreq/100000)/retPoint),1) * retPoint  * 32 + 1;
+		//nPointSubH = 1025;
+		
+		pddsclk->frequency = ((pddssig->frequency * (double)retPoint) / nPointSubH) * 32.0;
+		
+		
+		m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)ceil((pddsclk->frequency * (double)DEF_DDS_CLK_CONST));
+		pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
+
+		m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)floor(pddssig->frequency * DEF_DDS_SIG_CONST_HI);
+		pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_HI;
+		
+		nMaxCycle = (int)MAX(2,2.0/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 , 최대시간 4초
+		
+		if(retPoint == 0) cycles = 0;
+		else cycles = (int)(MAX_EIS_POINT / retPoint);
+		cycles = MIN(nMaxCycle,cycles);
+		cycles = MAX(cycles,1);
+		
+	}
+	else
+	{
+		osrMaxArg = 2;
+		nMaxArg = 2; //4cycle 가능.
+		
+	
+		m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)(pddssig->frequency * DEF_DDS_SIG_CONST_LOW);
+		pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_LOW;
+
+		LB = (int)log2((double)MIN_EIS_ADC_MCLK / dMaxFreq);
+		UB = (int)log2((double)MAX_EIS_ADC_MCLK / dMaxFreq);
+		
+		LB = MAX(0, LB-2);
+		nArg = MIN(nMaxArg, LB);
+		osrArg =MIN(osrMaxArg,(int)((UB - nArg) * 0.25)-1);
+		osrArg = MAX(osrArg,0);
+		
+		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
+		nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 4초
+
+		if(retPoint == 0) cycles = 0;
+		else cycles = (int)(MAX_EIS_POINT / retPoint);
+		cycles = MIN(nMaxCycle,cycles);
+		cycles = MAX(cycles,1);
+		
+		retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
+		
+		//VLP Mode-FLT 10, WB2-01
+		m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(dConstFlt,(double)osrArg)/DEF_DDS_MCLK_RATE_LOW); //128 = 125K/16M //
+		pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
+		
 	}
 	
-	int LB = MAX(0, ((int)(log2(MIN_EIS_ADC_MCLK / (MinCycPoint * 32.0 * pddssig->frequency))))-2);
-	int UB = (int)log2(MAX_EIS_ADC_MCLK / (MinCycPoint * 32.0 * pddssig->frequency));
 	
-	int nArg = MIN(nMaxArg, LB);
-	int osrArg = MIN(osrMaxArg,(int)((UB - nArg)/2.0)-1);
-	osrArg = MAX(osrArg,0);
 
-	int retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
-	m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq * retPoint * 32.0 * pow(4.0,(double)osrArg)/128.0); //128 = 125K/16M
-	pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;*/
-	pddsclk->reset = 0;
-	
+	proc_SetLowMclk(blow); 
+
 	preqcfg->vac_osr = osrArg;
 	preqcfg->iac_osr = osrArg;
 	
@@ -1559,90 +1613,116 @@ inline  void ApplyCalcConfigADCForDelay() //Find OSR and number of points in a c
 	proc_adc_ac_cfg();
 }
 
+    
 
 inline  void ApplyCalcConfigADC(int index) //Find OSR and number of points in a cycle
 {
-	/*
-	fin : input frequency to test
-	n : # points in a cycle, SampligRate = N * fin
-		nMin : minimum points = 32
-		nMaxArg : exponent of maximum points = 4, n = nMin * 2^4 = 512
-	osr : Over-sampling ratio, 
-		osrMin : minimum OSR = 32
-		osrMaxArg : expoennt of maximum OSR = 3, OSR = osrMin * 4^3 = 2048
-
-	find max OSR to satisfy following
-		(1) 0.1E6 <= n * fin * osr <= 4.4E6
-		(2) 32 * 2^nMinArg <= n <= 32 * 2^nMaxArg
-		(3) 32 * 4^osrMinArg <= osr <= 32 * 4^osrMaxArg
-	
-	(1) can be re-written as following
-		log2(0.1E6 / 32 / 32 / fin) <= nArg + 2 * osrArg <= log2(4.4E6 / 32 / 32 / fin)
-	Let
-		int LB = max(0, (int)(log2(0.1E6 / 32 / 32 / fin) + 0.5))
-		int UB = min(osrMaxArg, (int)(log2(4.4E6 / 32 / 32 / fin)))
-	Therefore,  
-		int osrArg = min(osrMaxArg, UB/2) 
-		int nArg = min(nMaxArg, UB - 2 * osrArg)
-
-	Finally, 
-		osr = osrMin * 4^osrArg
-		n = nMin * 2^nArg
-
-	Example 1:
-		for fin = 1 kHz,
-		LB = 0
-		UB = 2
-		osrArg = min(3, 2/2) = min(3, 1) = 1
-		nArg = min(4, 2 - 2*1) = 0
-		therefore, osr = osrMin * 4^1 = 128, n = nMin * 2^0 = 32
-	Example 2:
-		for fin = 1 Hz,
-		LB = 7
-		UB = 12
-		osrArg = min(3, 12/2) = 3
-		nArg = min(4, 12 - 2*3) = 4
-		therefore, osr = osrMin * 4^3 = 2048, n = nMin * 2^4 = 512
-		
-    */
-	
 	st_zim_eis* peis = &m_pGlobalVar->mStatusInf.meis;
 	st_zim_dds* pddsclk = &m_pGlobalVar->mStatusInf.mdevice.dds_clk;
 	st_zim_adc_ac_cfg* preqcfg = &m_pGlobalVar->mStatusInf.mreqdevice.adc_ac.cfg;
 	st_zim_dds* pddssig = &m_pGlobalVar->mStatusInf.mdevice.dds_sig;
+	
+	double  dMaxFreq = (double)MIN_EIS_CYC_POINT * 32.0 * pddssig->frequency; // 100KHz = 102,400,000
+	double  dSubhFreq = DEF_FREQUENCY_SUBHAMONIC;
+	
+	
+	int type = m_pSysConfig->mZimCfg.cModel[0]-0x30;
+	
+	int nArg,osrArg;
+	int LB,UB;
+	int nMaxArg,osrMaxArg;
+	int retPoint,cycles,nMaxCycle;
+	int nPointSubH;
+	
 	int MinCycPoint = MIN_EIS_CYC_POINT;
+	double  dConstFlt = 2.0;
 	
-	//peis->eis_cond.item[index].freq = FixedPoint(peis->eis_cond.item[index].freq,3);
+	if(m_pGlobalVar->mStatusInf.mreqdevice.adc_ac.cfg.iac_flt == DEF_FLT_LOWLATENCY) dConstFlt = 4.0;
 	
-	if(peis->eis_cond.item[index].freq > 1000.0) // ddsclk 주파수가 3900이상일때 불안정한 동작 . 포인트 수를 줄여 안정적 주파수대를 사용.
-	{
-		MinCycPoint = MIN_EIS_CYC_POINT_H;
-	}
-		
-		
+	bool blow = true;
+	
 	pddssig->reset = 0;
-	/*
-//------------------------------------------------------------------------------------------------------------------	
-	int LB = (int)(log2(MIN_EIS_ADC_MCLK / (MinCycPoint * 32.0 * peis->eis_cond.item[index].freq)));
-	int UB = (int)log2(MAX_EIS_ADC_MCLK / (MinCycPoint * 32.0 * peis->eis_cond.item[index].freq));
 	
-	int osrMaxArg = 1;
-	int nMaxArg = 1; //4cycle 가능.
-	int nArg= MIN(nMaxArg, MAX(0,MIN(LB,UB)));
+	if(type == DEV_BZA60HZ) 
+	{
+		dSubhFreq = DEF_FREQUENCY_SUBH_HZ;
+	}
+
+	if(peis->eis_cond.item[index].freq >= dSubhFreq)
+	{
+		blow = false;
+		osrArg = 0;
+		
+		
+		
+		dMaxFreq = (double)MIN_EIS_CYC_POINT_H * 32.0 * pddssig->frequency;
+		
+		MinCycPoint = MIN_EIS_CYC_POINT_H;
+		retPoint = MIN_EIS_CYC_POINT_H; // * 2;
+		nPointSubH = retPoint  * 32 + 1; 
+		//retPoint = 32;
+		//MinCycPoint = MIN_EIS_CYC_POINT_H;
+		//dMaxFreq = (double)retPoint * 32.0 * peis->eis_cond.item[index].freq;
+		//nPointSubH = MAX(floor((dMaxFreq/100000)/retPoint),1) * retPoint  * 32 + 1;
+		//nPointSubH = 1025;
+		pddsclk->frequency = ((peis->eis_cond.item[index].freq * (double)retPoint) / nPointSubH) * 32.0;
+		
+		
+		m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)ceil((pddsclk->frequency * (double)DEF_DDS_CLK_CONST));
+		pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
 	
-	int osrArg = MIN(osrMaxArg,(int)((UB - nArg) * 0.5)-1);
-	osrArg = MAX(osrArg,0);
-	int retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
+//		(pddsclk->frequency  * nPointSubH) / (32.0 * retPoint)
+		m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)floor(peis->eis_cond.item[index].freq * DEF_DDS_SIG_CONST_HI);
+		pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_HI;
+		
+		peis->eis_cond.item[index].freq = pddssig->frequency;
+
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,2.0/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 , 최대시간 2초
+		
+		if(retPoint == 0) cycles = 0;
+		else cycles = (int)(MAX_EIS_POINT / retPoint);
+		cycles = MIN(nMaxCycle,cycles);
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
+	}
+	else
+	{
+		m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)(peis->eis_cond.item[index].freq * DEF_DDS_SIG_CONST_LOW);
+		pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_LOW;
+		peis->eis_cond.item[index].freq = pddssig->frequency;
+		
+		osrMaxArg = 2;
+		nMaxArg = 2; //4cycle 가능.
+
+		LB = (int)log2((double)MIN_EIS_ADC_MCLK / dMaxFreq);
+		UB = (int)log2((double)MAX_EIS_ADC_MCLK / dMaxFreq);
+		
+		LB = MAX(0, LB-2);
+		nArg = MIN(nMaxArg, LB);
+		osrArg =MIN(osrMaxArg,(int)((UB - nArg) * 0.25)-1);
+		osrArg = MAX(osrArg,0);
+		
+		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
+		//nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 6초
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)pow(2,(int)log2(pddssig->frequency)));
+		
+		if(retPoint == 0) cycles = 0;
+		else cycles = (int)(MAX_EIS_POINT / retPoint);
+		
+		cycles = MIN(nMaxCycle,cycles);
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
+		retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
+		
+		
+		//VLP Mode-FLT 10, WB2-01
+		m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(dConstFlt,(double)osrArg)/DEF_DDS_MCLK_RATE_LOW); //128 = 125K/16M //
+		pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
+		
+	}
 	
-	int cycles;
-	int nMaxCycle = MAX(1,(int)pow(2.0,(int)log2(peis->eis_cond.item[index].freq * 2.0))); //최소 싸이클 1 , 최대시간 8초
-	if(retPoint == 0) cycles = 0;
-	else cycles = (int)(MAX_EIS_POINT / retPoint);
-	cycles = MIN(nMaxCycle,cycles);
-	if(peis->eis_cond.item[index].cycle > 0) cycles = MIN(cycles,peis->eis_cond.item[index].cycle); 
-	//cycles = MAX(cycles,2);
 	
-	//retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
+
+	proc_SetLowMclk(blow); 
+
 	peis->eis_raw[index].info.cycle = cycles;
 	peis->eis_raw[index].info.cycpoint = retPoint;
 		
@@ -1651,74 +1731,13 @@ inline  void ApplyCalcConfigADC(int index) //Find OSR and number of points in a 
 	peis->eis_status.WorkDatacnt = 0;
 	peis->eis_status.LoadDatacnt = 0;
 	
-	pddsclk->frequency = peis->eis_cond.item[index].freq * retPoint * 32.0 * pow(4.0,osrArg);
-
-	m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(pddsclk->frequency * (double)DEF_DDS_CLK_CONST);
-	pddsclk->frequency = m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq  / (double)DEF_DDS_CLK_CONST;
-
-	m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)(peis->eis_cond.item[index].freq * ((double)DEF_DDS_FREQ_RES / pddsclk->frequency));
-	pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq * (pddsclk->frequency / (double)DEF_DDS_FREQ_RES);
-	peis->eis_cond.item[index].freq =  pddssig->frequency;
-	//VLP Mode-FLT 10, WB2-01
-
-	*/
-	
-	
-	
-	
-	m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq = (uint)(peis->eis_cond.item[index].freq * (double)DEF_DDS_SIG_CONST);
-	pddssig->frequency = m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq / (double)DEF_DDS_SIG_CONST;
-	
-	peis->eis_cond.item[index].freq = pddssig->frequency;
-
-	int osrMaxArg = 2;
-	int nMaxArg = 2; //4cycle 가능.
-	
-	int LB = MAX(0, ((int)(log2(MIN_EIS_ADC_MCLK / ((double)MinCycPoint * 32.0 * peis->eis_cond.item[index].freq))))-2);
-	int UB = (int)log2(MAX_EIS_ADC_MCLK / ((double)MinCycPoint * 32.0 * peis->eis_cond.item[index].freq));
-	
-	int nArg = MIN(nMaxArg, LB);
-	
-	
-	int osrArg =MIN(osrMaxArg,(int)((UB - nArg) * 0.25)-1);
-	osrArg = MAX(osrArg,0);
-		
-	int retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
-	
-	
-	int cycles;
-	int nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 4초
-
-	if(retPoint == 0) cycles = 0;
-	else cycles = (int)(MAX_EIS_POINT / retPoint);
-	
-	cycles = MIN(nMaxCycle,cycles);
-	if(peis->eis_cond.item[index].cycle > 0) cycles = MIN(cycles,peis->eis_cond.item[index].cycle); 
-	cycles = MAX(cycles,1);
-	retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
-	peis->eis_raw[index].info.cycle = cycles;
-	peis->eis_raw[index].info.cycpoint = retPoint;
-		
-	peis->eis_raw[index].info.Ns = peis->eis_raw[index].info.cycpoint * peis->eis_raw[index].info.cycle;
-	peis->eis_status.totaldatacnt = peis->eis_raw[index].info.cycpoint * peis->eis_raw[index].info.cycle;
-	peis->eis_status.WorkDatacnt = 0;
-	peis->eis_status.LoadDatacnt = 0;
-	
-	//VLP Mode-FLT 10, WB2-01
-	m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mStatusInf.flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(4.0,(double)osrArg)/(double)DEF_DDS_MCLK_RATE); //128 = 125K/16M //
-	pddsclk->frequency =   m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
-	
-	
-	//pddsclk->frequency =  pddssig->frequency * (double)retPoint * 32.0 * pow(4.0,(double)osrArg);
-	//m_pGlobalVar->mStatusInf.flow_dds_clk.req.freq = (uint)(pddsclk->frequency * (double)DEF_DDS_CLK_CONST);
-//-------------------------------------------------------------------------------------------------------------------------
-
 	peis->eis_status.freq = peis->eis_cond.item[index].freq;
 	peis->eis_raw[index].info.freq = peis->eis_status.freq;
 	
 	m_pGlobalVar->mStatusInf.mdevice.eis.points = peis->eis_status.totaldatacnt;
 	m_pGlobalVar->mStatusInf.RealSkip = MAX((peis->eis_raw[index].info.cycpoint / 32),1);
 	
+
 	preqcfg->vac_osr = osrArg;
 	preqcfg->iac_osr = osrArg;
 	
@@ -1730,10 +1749,10 @@ inline  void ApplyCalcConfigADC(int index) //Find OSR and number of points in a 
 inline void proc_eis_SineForDelay(void)
 {
 	ushort buf;
+	
 	st_zim_dds* pddssig = &m_pGlobalVar->mStatusInf.mdevice.dds_sig;
-
-
 	m_pGlobalVar->mStatusInf.mreqdevice.dds_sig.frequency = DEF_SINECTRL_FREQ;
+
 	m_pGlobalVar->mStatusInf.mreqdevice.dds_sig.Phase = DEF_SINECTRL_PHASE;
 	pddssig->Phase = DEF_SINECTRL_PHASE;
 	m_pGlobalVar->mStatusInf.flow_dds_sig.req.phase = (uint)(pddssig->Phase * (double)DEF_DDS_PHASE_CONST);
@@ -1829,7 +1848,6 @@ inline void proc_eis_init(ushort index)
 
 	/*if(index == 0) m_pGlobalVar->mStatusInf.flow_dds_sig.req.ctrl = DDS_SIG_RESET;  //20201006 수정
 	else */m_pGlobalVar->mStatusInf.flow_dds_sig.req.ctrl = DDS_SIG_DEFAULT_CTRL;
-	
 	buf = m_pGlobalVar->mStatusInf.flow_dds_sig.req.ctrl & 0x3FFF;
 	if(ICE_write_16bits(ICE_CMD_DDS_SIG,buf) == _ERROR)
 	{
@@ -2278,6 +2296,7 @@ inline void proc_eis_ControlFail(void)
 
 inline bool chkTestCondition()
 {
+
 	if(m_pGlobalVar->mStatusInf.mdevice.adc_vdc.value < -2.0)
 	{
 		m_pGlobalVar->mStatusInf.meis.eis_status.teststatus = DEF_EIS_TESTSTATUS_FAIL;
@@ -2296,6 +2315,7 @@ inline bool chkTestCondition()
 		if(m_pGlobalVar->Start == 1) m_pGlobalVar->Stop  = DEF_EIS_LASTTESTSTATUS_VACSTABLE;
 		return false;
 	}
+	
 	return true;
 }
 

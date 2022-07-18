@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZiveLab.Device.ZIM;
@@ -11,12 +12,10 @@ namespace App.ZIM.FactorySetting
     {
         public CommObj mCommZim;
         PingHost1 pingHost1;
-
         public frmConnDlg(ref CommObj mSetCommZim)
         {
             mCommZim = mSetCommZim;
             InitializeComponent();
-            this.Icon = Properties.Resources.BatMag;
             DoubleBuffered = true;
         }
 
@@ -61,21 +60,20 @@ namespace App.ZIM.FactorySetting
         {
             // Set cursor as hourglass
             Cursor.Current = Cursors.WaitCursor;
+            pingHost1 = new PingHost1(chkdhcp.Checked);// new PingHost(pingCompleted);
 
-            if(mCommZim.isConnected)
+            pingHost1.chksearchdhcp = chkdhcp.Checked;
+
+            if (mCommZim.isConnected)
             {
                 mCommZim.Dispose();
             }
             Findlist.Items.Clear();
-            labelWarning.Visible = false;
+            FindErrlist.Items.Clear();
 
-            pingHost1 = new PingHost1();// new PingHost(pingCompleted);
+            
 
-            progScan.Maximum = pingHost1.ListOfIPs.Count;
-            progScan.Value = 0;
-            progScan.Step = 1;
-
-            var success = Task.Run(async () => { await pingHost1.ScanAsync(); }).Wait(300000);
+            var success = Task.Run(async () => { await pingHost1.ScanAsync();  }).Wait(300000);
 
             try
             {
@@ -83,16 +81,36 @@ namespace App.ZIM.FactorySetting
                 foreach (var pair in dic)
                 {
                     var ip = pair.Key;
-                    var mac = string.Join(":", pair.Value.GetAddressBytes().Select(b => b.ToString("X2")));
-                    var hostName = ip.GetHostName();
-                    var str = string.Format("{0} [{1}] {2}", ip, mac, hostName);
+                    var mac = string.Join(":", pair.Value.mac.GetAddressBytes().Select(b => b.ToString("X2")));
+                    var str = string.Format("{0} [{1}/ Device:{2}]::{3}", ip, mac, ((eDeviceType)(pair.Value.findsifcfg.Type)).GetDescription(), pair.Value.findsifcfg.GetSerialNumber());
                     Findlist.Items.Add(str);
                 }
+
+                dic = pingHost1.SearchedErrDevice;//.ToSortedDictionary();
+                foreach (var pair in dic)
+                {
+                    var ip = pair.Key;
+                    var mac = string.Join(":", pair.Value.mac.GetAddressBytes().Select(b => b.ToString("X2")));
+                    var hostName = ip.GetHostName();
+
+                    var str = string.Format("{0} [{1}/ Device:{2}]::{3}", ip, mac, ((eDeviceType)(pair.Value.findsifcfg.Type)).GetDescription(), pair.Value.findsifcfg.GetSerialNumber());
+                    if (pair.Value.busy == true)
+                    {
+                        str += ": Busy";
+                    }
+                    else
+                    {
+                        str += ": Ready";
+                    }
+
+                    FindErrlist.Items.Add(str);
+                }
+                
+
+
             }
             catch
             { }
-
-            labelWarning.Visible = (pingHost1.SearchedDevice.Count == 0);
 
             // Set cursor as default arrow
             Cursor.Current = Cursors.Default;
@@ -100,14 +118,7 @@ namespace App.ZIM.FactorySetting
         
         private void pingCompleted(object sender, EventArgs e)
         {
-            if (progScan.InvokeRequired)
-            {
-                progScan.Invoke(new Action(() => { progScan.Value++; }));
-            }
-            else
-            {
-                progScan.PerformStep();
-            }
+            
         }
 
         private void Findlist_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,5 +133,7 @@ namespace App.ZIM.FactorySetting
             txtIP2.Text = string.Format("{0}", mCommZim.mConnTargetCfg.IpAddress[2]);
             txtIP3.Text = string.Format("{0}", mCommZim.mConnTargetCfg.IpAddress[3]);
         }
+
+        
     }
 }

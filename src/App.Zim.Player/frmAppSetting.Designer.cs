@@ -39,10 +39,15 @@
             this.numtimeout = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.numfreq = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numBeginFreq = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboCalRng = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numRefreshtime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numconndelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numtimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numfreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBeginFreq)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -94,7 +99,7 @@
             0,
             0});
             this.numRefreshtime.Name = "numRefreshtime";
-            this.numRefreshtime.Size = new System.Drawing.Size(69, 23);
+            this.numRefreshtime.Size = new System.Drawing.Size(89, 23);
             this.numRefreshtime.TabIndex = 8;
             this.numRefreshtime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numRefreshtime.Value = new decimal(new int[] {
@@ -127,7 +132,7 @@
             0,
             0});
             this.numconndelay.Name = "numconndelay";
-            this.numconndelay.Size = new System.Drawing.Size(69, 23);
+            this.numconndelay.Size = new System.Drawing.Size(89, 23);
             this.numconndelay.TabIndex = 10;
             this.numconndelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numconndelay.Value = new decimal(new int[] {
@@ -165,7 +170,7 @@
             0,
             0});
             this.numtimeout.Name = "numtimeout";
-            this.numtimeout.Size = new System.Drawing.Size(69, 23);
+            this.numtimeout.Size = new System.Drawing.Size(89, 23);
             this.numtimeout.TabIndex = 12;
             this.numtimeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numtimeout.Value = new decimal(new int[] {
@@ -177,7 +182,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 120);
+            this.label4.Location = new System.Drawing.Point(18, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(190, 12);
             this.label4.TabIndex = 13;
@@ -191,7 +196,7 @@
             0,
             0,
             0});
-            this.numfreq.Location = new System.Drawing.Point(214, 116);
+            this.numfreq.Location = new System.Drawing.Point(214, 183);
             this.numfreq.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -203,7 +208,7 @@
             0,
             0});
             this.numfreq.Name = "numfreq";
-            this.numfreq.Size = new System.Drawing.Size(69, 23);
+            this.numfreq.Size = new System.Drawing.Size(89, 23);
             this.numfreq.TabIndex = 14;
             this.numfreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numfreq.Value = new decimal(new int[] {
@@ -212,11 +217,70 @@
             0,
             0});
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 160);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(184, 12);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Begin calibration frequency(Hz)";
+            // 
+            // numBeginFreq
+            // 
+            this.numBeginFreq.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numBeginFreq.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numBeginFreq.Location = new System.Drawing.Point(214, 154);
+            this.numBeginFreq.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numBeginFreq.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numBeginFreq.Name = "numBeginFreq";
+            this.numBeginFreq.Size = new System.Drawing.Size(89, 23);
+            this.numBeginFreq.TabIndex = 16;
+            this.numBeginFreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numBeginFreq.Value = new decimal(new int[] {
+            40000,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 131);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(144, 12);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Calibration current range";
+            // 
+            // cboCalRng
+            // 
+            this.cboCalRng.FormattingEnabled = true;
+            this.cboCalRng.Location = new System.Drawing.Point(214, 127);
+            this.cboCalRng.Name = "cboCalRng";
+            this.cboCalRng.Size = new System.Drawing.Size(89, 20);
+            this.cboCalRng.TabIndex = 18;
+            // 
             // frmAppSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 154);
+            this.ClientSize = new System.Drawing.Size(416, 213);
+            this.Controls.Add(this.cboCalRng);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.numBeginFreq);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.numfreq);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.numtimeout);
@@ -239,6 +303,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numconndelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numtimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numfreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBeginFreq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,5 +320,9 @@
         private System.Windows.Forms.NumericUpDown numtimeout;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numfreq;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numBeginFreq;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cboCalRng;
     }
 }

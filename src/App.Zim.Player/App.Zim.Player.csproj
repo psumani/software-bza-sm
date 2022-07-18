@@ -64,6 +64,12 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>6BDE2D8759D0953035E890742FB7109D43C2490A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://timestamp.globalsign.com/tsa/r6advanced1</ManifestTimestampUrl>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -90,6 +96,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BzaRemote.cs" />
     <Compile Include="frmCalWebVars.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,6 +384,7 @@
     </When>
   </Choose>
   <PropertyGroup>
-    <PostBuildEvent>c:\SignTools\SignTool\signtool.exe sign /V /fd sha256 /sha1 "4541d7145cc08ec5df1d244f69b4dec2844d3ad0" /tr "http://sha256timestamp.ws.symantec.com/sha256/timestamp" /td sha256  F:\SM_Git_Repositories\software-zlog-sm\src\App.Zim.Player\bin\Release\bm.exe</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

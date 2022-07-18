@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConnDlg));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
@@ -39,15 +40,17 @@
             this.txtIP3 = new System.Windows.Forms.TextBox();
             this.btnFind = new System.Windows.Forms.Button();
             this.Findlist = new System.Windows.Forms.ListBox();
-            this.progScan = new System.Windows.Forms.ProgressBar();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.FindErrlist = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.chkdhcp = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(23, 115);
+            this.label1.Location = new System.Drawing.Point(12, 222);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 19);
             this.label1.TabIndex = 1;
@@ -57,7 +60,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(55, 150);
+            this.label2.Location = new System.Drawing.Point(351, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 19);
             this.label2.TabIndex = 2;
@@ -66,16 +69,16 @@
             // txtPort
             // 
             this.txtPort.Enabled = false;
-            this.txtPort.Location = new System.Drawing.Point(151, 147);
+            this.txtPort.Location = new System.Drawing.Point(459, 219);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(45, 27);
+            this.txtPort.Size = new System.Drawing.Size(50, 26);
             this.txtPort.TabIndex = 3;
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(350, 110);
+            this.btnConnect.Location = new System.Drawing.Point(340, 257);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(74, 29);
+            this.btnConnect.Size = new System.Drawing.Size(83, 29);
             this.btnConnect.TabIndex = 4;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -83,9 +86,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(350, 145);
+            this.btnCancel.Location = new System.Drawing.Point(430, 257);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(74, 29);
+            this.btnCancel.Size = new System.Drawing.Size(83, 29);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -93,39 +96,39 @@
             // 
             // txtIP0
             // 
-            this.txtIP0.Location = new System.Drawing.Point(151, 114);
+            this.txtIP0.Location = new System.Drawing.Point(163, 218);
             this.txtIP0.Name = "txtIP0";
-            this.txtIP0.Size = new System.Drawing.Size(32, 27);
+            this.txtIP0.Size = new System.Drawing.Size(36, 26);
             this.txtIP0.TabIndex = 6;
             // 
             // txtIP1
             // 
-            this.txtIP1.Location = new System.Drawing.Point(189, 114);
+            this.txtIP1.Location = new System.Drawing.Point(206, 218);
             this.txtIP1.Name = "txtIP1";
-            this.txtIP1.Size = new System.Drawing.Size(32, 27);
+            this.txtIP1.Size = new System.Drawing.Size(36, 26);
             this.txtIP1.TabIndex = 7;
             // 
             // txtIP2
             // 
-            this.txtIP2.Location = new System.Drawing.Point(227, 114);
+            this.txtIP2.Location = new System.Drawing.Point(249, 218);
             this.txtIP2.Name = "txtIP2";
-            this.txtIP2.Size = new System.Drawing.Size(32, 27);
+            this.txtIP2.Size = new System.Drawing.Size(36, 26);
             this.txtIP2.TabIndex = 8;
             // 
             // txtIP3
             // 
-            this.txtIP3.Location = new System.Drawing.Point(265, 114);
+            this.txtIP3.Location = new System.Drawing.Point(291, 218);
             this.txtIP3.Name = "txtIP3";
-            this.txtIP3.Size = new System.Drawing.Size(32, 27);
+            this.txtIP3.Size = new System.Drawing.Size(36, 26);
             this.txtIP3.TabIndex = 9;
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(9, 9);
+            this.btnFind.Location = new System.Drawing.Point(230, 257);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(136, 29);
+            this.btnFind.Size = new System.Drawing.Size(83, 29);
             this.btnFind.TabIndex = 10;
-            this.btnFind.Text = "Search all devices";
+            this.btnFind.Text = "Search";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
@@ -133,38 +136,62 @@
             // 
             this.Findlist.FormattingEnabled = true;
             this.Findlist.ItemHeight = 19;
-            this.Findlist.Location = new System.Drawing.Point(151, 12);
+            this.Findlist.Location = new System.Drawing.Point(14, 129);
             this.Findlist.Name = "Findlist";
             this.Findlist.ScrollAlwaysVisible = true;
-            this.Findlist.Size = new System.Drawing.Size(273, 80);
+            this.Findlist.Size = new System.Drawing.Size(496, 80);
             this.Findlist.TabIndex = 11;
             this.Findlist.SelectedIndexChanged += new System.EventHandler(this.Findlist_SelectedIndexChanged);
-            // 
-            // progScan
-            // 
-            this.progScan.Location = new System.Drawing.Point(10, 69);
-            this.progScan.Name = "progScan";
-            this.progScan.Size = new System.Drawing.Size(135, 23);
-            this.progScan.TabIndex = 12;
-            this.progScan.Visible = false;
             // 
             // labelWarning
             // 
             this.labelWarning.AutoSize = true;
-            this.labelWarning.Location = new System.Drawing.Point(24, 41);
+            this.labelWarning.ForeColor = System.Drawing.Color.Black;
+            this.labelWarning.Location = new System.Drawing.Point(16, 107);
             this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(121, 19);
+            this.labelWarning.Size = new System.Drawing.Size(207, 19);
             this.labelWarning.TabIndex = 13;
-            this.labelWarning.Text = "No devices found";
-            this.labelWarning.Visible = false;
+            this.labelWarning.Text = "< Available devices. >";
+            // 
+            // FindErrlist
+            // 
+            this.FindErrlist.FormattingEnabled = true;
+            this.FindErrlist.ItemHeight = 19;
+            this.FindErrlist.Location = new System.Drawing.Point(14, 22);
+            this.FindErrlist.Name = "FindErrlist";
+            this.FindErrlist.ScrollAlwaysVisible = true;
+            this.FindErrlist.Size = new System.Drawing.Size(496, 80);
+            this.FindErrlist.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.DarkRed;
+            this.label3.Location = new System.Drawing.Point(12, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(234, 19);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "< Device not available. >";
+            // 
+            // chkdhcp
+            // 
+            this.chkdhcp.AutoSize = true;
+            this.chkdhcp.Location = new System.Drawing.Point(17, 261);
+            this.chkdhcp.Name = "chkdhcp";
+            this.chkdhcp.Size = new System.Drawing.Size(181, 23);
+            this.chkdhcp.TabIndex = 16;
+            this.chkdhcp.Text = "Searce with DHCP.";
+            this.chkdhcp.UseVisualStyleBackColor = true;
             // 
             // frmConnDlg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 187);
+            this.ClientSize = new System.Drawing.Size(528, 306);
+            this.Controls.Add(this.chkdhcp);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.FindErrlist);
             this.Controls.Add(this.labelWarning);
-            this.Controls.Add(this.progScan);
             this.Controls.Add(this.Findlist);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.txtIP3);
@@ -176,8 +203,9 @@
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -202,7 +230,9 @@
         private System.Windows.Forms.TextBox txtIP3;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.ListBox Findlist;
-        private System.Windows.Forms.ProgressBar progScan;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.ListBox FindErrlist;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chkdhcp;
     }
 }

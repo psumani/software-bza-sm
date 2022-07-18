@@ -370,5 +370,89 @@ namespace App.Zim.Player.Properties {
                 this["FinalCalibFreq"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40000")]
+        public double BeginCalibFreq {
+            get {
+                return ((double)(this["BeginCalibFreq"]));
+            }
+            set {
+                this["BeginCalibFreq"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int CalibRange {
+            get {
+                return ((int)(this["CalibRange"]));
+            }
+            set {
+                this["CalibRange"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double RDummy4 {
+            get {
+                return ((double)(this["RDummy4"]));
+            }
+            set {
+                this["RDummy4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public double RDummy5 {
+            get {
+                return ((double)(this["RDummy5"]));
+            }
+            set {
+                this["RDummy5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double Inductance4 {
+            get {
+                return ((double)(this["Inductance4"]));
+            }
+            set {
+                this["Inductance4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double Inductance5 {
+            get {
+                return ((double)(this["Inductance5"]));
+            }
+            set {
+                this["Inductance5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PathRemote {
+            get {
+                return ((string)(this["PathRemote"]));
+            }
+            set {
+                this["PathRemote"] = value;
+            }
+        }
     }
 }

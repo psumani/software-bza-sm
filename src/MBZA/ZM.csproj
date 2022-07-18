@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9A84B15A-2155-4C27-B571-5736AA1023A5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZiveLab.ZM</RootNamespace>
+    <AssemblyName>ZM</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>게시\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ZiveLab.ZM.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>zm.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1FlexGrid.Classic.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Sizer.4, Version=4.1.20123.71, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="CircularProgress">
+      <HintPath>.\CircularProgress.dll</HintPath>
+    </Reference>
+    <Reference Include="DataManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DataManager\DataManager.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>packages\MathNet.Numerics.4.7.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NationalInstruments.Common, Version=15.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298" />
+    <Reference Include="NationalInstruments.UI, Version=15.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4" />
+    <Reference Include="NationalInstruments.UI.WindowsForms, Version=15.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BZAChPan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BZAChPan.Designer.cs">
+      <DependentUpon>BZAChPan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BZA_global.cs" />
+    <Compile Include="frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfig.designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDummyDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDummyDlg.designer.cs">
+      <DependentUpon>frmDummyDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetBatPara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetBatPara.designer.cs">
+      <DependentUpon>frmSetBatPara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInputValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInputValue.designer.cs">
+      <DependentUpon>frmInputValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetMaxRange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetMaxRange.designer.cs">
+      <DependentUpon>frmSetMaxRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileCondition.cs" />
+    <Compile Include="FileResult.cs" />
+    <Compile Include="frmBatPara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBatPara.Designer.cs">
+      <DependentUpon>frmBatPara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBurnZIM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBurnZIM.designer.cs">
+      <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalibration.Designer.cs">
+      <DependentUpon>frmCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCalibRtd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalibRtd.designer.cs">
+      <DependentUpon>frmCalibRtd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCalibVdc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalibVdc.designer.cs">
+      <DependentUpon>frmCalibVdc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTestDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTestDevice.Designer.cs">
+      <DependentUpon>frmTestDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfomationGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfomationGrid.designer.cs">
+      <DependentUpon>InfomationGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStart.Designer.cs">
+      <DependentUpon>frmStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTechApply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTechApply.Designer.cs">
+      <DependentUpon>frmTechApply.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegBZA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegBZA.Designer.cs">
+      <DependentUpon>frmRegBZA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTechniq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTechniq.Designer.cs">
+      <DependentUpon>frmTechniq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplash.Designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRealview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRealview.Designer.cs">
+      <DependentUpon>frmRealview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelProgress.Designer.cs">
+      <DependentUpon>LabelProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MBZA_Interface.cs" />
+    <Compile Include="MBZA_MapMem.cs" />
+    <Compile Include="MBZA_StructDef.cs" />
+    <Compile Include="PanelAbout.cs" />
+    <Compile Include="PanelAbout.designer.cs">
+      <DependentUpon>PanelAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PopupPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PopupPanel.designer.cs">
+      <DependentUpon>PopupPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSM_LIB\PSM_Converting.cs" />
+    <Compile Include="PSM_LIB\PSM_File.cs" />
+    <Compile Include="PSM_LIB\PSM_Number.cs" />
+    <Compile Include="PSM_LIB\PSM_Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpringItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpringItem.designer.cs">
+      <DependentUpon>SpringItem.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BZAChPan.resx">
+      <DependentUpon>BZAChPan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBatPara.resx">
+      <DependentUpon>frmBatPara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBurnZIM.resx">
+      <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalibration.resx">
+      <DependentUpon>frmCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalibRtd.resx">
+      <DependentUpon>frmCalibRtd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalibVdc.resx">
+      <DependentUpon>frmCalibVdc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfig.resx">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDummyDlg.resx">
+      <DependentUpon>frmDummyDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetBatPara.resx">
+      <DependentUpon>frmSetBatPara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTestDevice.resx">
+      <DependentUpon>frmTestDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfomationGrid.resx">
+      <DependentUpon>InfomationGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInputValue.resx">
+      <DependentUpon>frmInputValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegBZA.resx">
+      <DependentUpon>frmRegBZA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetMaxRange.resx">
+      <DependentUpon>frmSetMaxRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStart.resx">
+      <DependentUpon>frmStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTechApply.resx">
+      <DependentUpon>frmTechApply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTechniq.resx">
+      <DependentUpon>frmTechniq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRealview.resx">
+      <DependentUpon>frmRealview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelProgress.resx">
+      <DependentUpon>LabelProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelAbout.resx">
+      <DependentUpon>PanelAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="PSM_LIB\PSM_Window.resx">
+      <DependentUpon>PSM_Window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpringItem.resx">
+      <DependentUpon>SpringItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\MBZA.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MBZA.ZIM\ZM_ZIM.csproj">
+      <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
+      <Name>ZM_ZIM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Animation\Loop0.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Animation\Loop1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Animation\Loop2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Animation\Loop3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Animation\Loop4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Animation\Loop5.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\MBZA1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxCWUIControlsLib">
+      <Guid>{D940E4E4-6079-11CE-88CB-0020AF6845F6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="CWUIControlsLib">
+      <Guid>{D940E4E4-6079-11CE-88CB-0020AF6845F6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\arrow-left-bold-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\arrow-left-bold-box-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\arrow-right-bold-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\arrow-right-bold-box-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\AutoscaleX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\AutoscaleXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\AutoscaleY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\checkbox-blank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\checkbox-blank-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\checkbox-blank-circle-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\checkbox-blank-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\chevron-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\chevron-right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\CopyToClipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\ExportData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\ExportImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\ExportToExcel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\HambergerMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\MatchScale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\PanningX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\PanningXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\PanningY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\PanX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\PanXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\PanY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\play-circle-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Pointer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\settings-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\Stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\TestSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\ZoomIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\ZoomOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\ZoomPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\png\제목 없음.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\Config.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\deviceinfo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\Upload.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\write.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\burn1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\List1\FileSelect.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Exit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\Device.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\chip1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\List.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\schedule.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\Tool1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\Tool2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\Tool3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image2\images %2815%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image2\images %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image2\images %2812%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image3\images %287%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image3\images %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image3\images %2811%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image3\images %289%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image3\images %2813%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image4\reports.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image4\images %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image4\Research.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image4\Untitled - 40.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image4\Untitled - 122.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image1\DisGate.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image\ConnGate.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image5\add-link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image5\delete-link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image5\edit-link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image5\link--v2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Image5\broken-link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="zm.ico" />
+    <None Include="doc\Image\zm.ico" />
+    <None Include="doc\Image\zm1.ico" />
+    <None Include="doc\Image\zm1_0000.ico" />
+    <None Include="doc\Image\zm1_0001.ico" />
+    <None Include="doc\Image\zm1_0002.ico" />
+    <None Include="doc\Image\zm1_0003.ico" />
+    <None Include="doc\Image\zm1_0004.ico" />
+    <None Include="doc\Image\zm1_0005.ico" />
+    <None Include="doc\Image\zm1_0006.ico" />
+    <None Include="doc\Image\zm1_0007.ico" />
+    <None Include="doc\Image\zm1_0008.ico" />
+    <None Include="doc\Image\zm1_0009.ico" />
+    <None Include="Resources\DeviceTest.png" />
+    <None Include="Resources\DescriptionViewer.png" />
+    <None Include="Resources\Report.png" />
+    <None Include="Resources\EditRelationship.png" />
+    <None Include="Resources\ViewBox.png" />
+    <None Include="Resources\ViewFull.png" />
+    <None Include="Resources\View.png" />
+    <None Include="doc\Image4\report.ico" />
+    <None Include="doc\Image1\write.ico" />
+    <None Include="doc\Image0\folder.ico" />
+    <None Include="doc\Image0\object11.ico" />
+    <None Include="doc\Image0\object12.ico" />
+    <None Include="doc\Image0\object21.ico" />
+    <None Include="doc\Image0\object22.ico" />
+    <None Include="doc\Image0\object31.ico" />
+    <None Include="doc\Image0\object32.ico" />
+    <None Include="doc\Image0\object41.ico" />
+    <None Include="doc\Image0\object42.ico" />
+    <None Include="doc\Image0\CalibCmds.ico" />
+    <None Include="doc\Image0\LogRefresh.ico" />
+    <None Include="doc\Image0\start1.ico" />
+    <None Include="doc\Image0\start2.ico" />
+    <None Include="doc\Image0\start3.ico" />
+    <None Include="doc\Image0\start4.ico" />
+    <None Include="doc\Image0\start5.ico" />
+    <None Include="doc\Image0\ViewRefresh.ico" />
+    <None Include="doc\Image3\images %2818%29.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

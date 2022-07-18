@@ -9,7 +9,8 @@ namespace ZiveLab.Device.ZIM.Win.Panels
     public partial class PanelSetupParameters : UserControl
     {
         public ZParameters Parameters;
-
+        public eZimType mType;
+ 
         public event EventHandler StartExperimentClicked;
         protected virtual void OnStartExperimentClicked(EventArgs e)
         {
@@ -17,7 +18,14 @@ namespace ZiveLab.Device.ZIM.Win.Panels
             if (handler != null)
                 handler(this, e);
         }
-      
+
+        public event EventHandler RefreshVacClicked;
+        protected virtual void OnRefreshVacClicked(EventArgs e)
+        {
+            var handler = RefreshVacClicked;
+            if (handler != null)
+                handler(this, e);
+        }
 
         public PanelSetupParameters()
         {
@@ -33,13 +41,30 @@ namespace ZiveLab.Device.ZIM.Win.Panels
                 Parameters = new ZParameters();
             }
 
-            cbIRange.Items.Clear();
+            
+
+                cbIRange.Items.Clear();
             //cbIRange.Items.Add("Auto");
-            var iRanges = Enum.GetValues(typeof(CurrentRange)).Cast<CurrentRange>();
-            foreach (var item in iRanges)
+
+            
+            if (mType == eZimType.BZA60HZ)
             {
-                cbIRange.Items.Add(item.GetDescription());
+                var iRanges = Enum.GetValues(typeof(CurrentRange_BZA60HZ)).Cast<CurrentRange_BZA60HZ>();
+                foreach (var item in iRanges)
+                {
+                    cbIRange.Items.Add(item.GetDescription());
+                }
             }
+            else
+            {
+                var iRanges = Enum.GetValues(typeof(CurrentRange)).Cast<CurrentRange>();
+                foreach (var item in iRanges)
+                {
+                    cbIRange.Items.Add(item.GetDescription());
+                }
+            }
+            
+
             cbIRange.Items.RemoveAt(cbIRange.Items.Count - 1); // remove "Auto"
 
             cbCycle.Items.Clear();
@@ -257,7 +282,7 @@ namespace ZiveLab.Device.ZIM.Win.Panels
 
         private void cbIRange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Parameters.IRange = (CurrentRange)(cbIRange.SelectedIndex);
+            Parameters.IRange = cbIRange.SelectedIndex;
         }
 
         private void cbCycle_SelectedIndexChanged(object sender, EventArgs e)
@@ -270,6 +295,11 @@ namespace ZiveLab.Device.ZIM.Win.Panels
         private void buttonStart_Click(object sender, EventArgs e)
         {
             OnStartExperimentClicked(e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OnRefreshVacClicked(e);
         }
     }
 }

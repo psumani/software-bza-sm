@@ -261,6 +261,10 @@
       <Project>{9b8b724d-8456-401e-b996-10d24982f727}</Project>
       <Name>Primer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZiveUniFile\ZiveUniFile.csproj">
+      <Project>{32020151-2ccf-4082-88d0-39345b84e995}</Project>
+      <Name>ZiveUniFile</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

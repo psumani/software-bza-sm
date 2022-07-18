@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:45:10
 
-* File Generated:     Oct 13 2021 17:22:42
+* File Generated:     Dec 7 2021 19:27:34
 
 * Purpose:            Router runtime info
 
@@ -18,28 +18,28 @@ Executing : C:\lscc\iCEcube2.2020.12\sbt_backend\bin\win32\opt\sbrouter.exe C:\l
 I1203: Reading Design zim
 I1202: Reading Architecture of device iCE40HX4K
 Warning-1403: No clock is reaching the reference clock pin 'REFERENCECLK' of PLL instance 'pll_main.zim_pll_inst'. So, no clocks will be inferred at output of this PLL
-Warning-1034: Found non-unate timing arc, from pin "in1" to pin "lcout" of instance "comm_spi.i20203_4_lut_3_lut_LC_14_3_2", in the clock network. Converting the timing arc to positive-unate
-Warning-1034: Found non-unate timing arc, from pin "in1" to pin "ltout" of instance "comm_spi.i20203_4_lut_3_lut_LC_14_3_2", in the clock network. Converting the timing arc to positive-unate
-Warning-1035: Removing timing arc from pin "comm_spi.i20208_4_lut_3_lut_LC_16_7_1/in0" to pin "comm_spi.i20208_4_lut_3_lut_LC_16_7_1/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20223_4_lut_3_lut_LC_16_4_6/in0" to pin "comm_spi.i20223_4_lut_3_lut_LC_16_4_6/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20213_4_lut_3_lut_LC_14_9_6/in0" to pin "comm_spi.i20213_4_lut_3_lut_LC_14_9_6/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20203_4_lut_3_lut_LC_14_3_2/in0" to pin "comm_spi.i20203_4_lut_3_lut_LC_14_3_2/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20253_4_lut_3_lut_LC_13_5_3/in0" to pin "comm_spi.i20253_4_lut_3_lut_LC_13_5_3/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20218_4_lut_3_lut_LC_13_4_4/in0" to pin "comm_spi.i20218_4_lut_3_lut_LC_13_4_4/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20248_4_lut_3_lut_LC_12_9_6/in0" to pin "comm_spi.i20248_4_lut_3_lut_LC_12_9_6/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20228_4_lut_3_lut_LC_12_9_1/in0" to pin "comm_spi.i20228_4_lut_3_lut_LC_12_9_1/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20233_4_lut_3_lut_LC_11_9_4/in0" to pin "comm_spi.i20233_4_lut_3_lut_LC_11_9_4/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20243_4_lut_3_lut_LC_9_11_3/in0" to pin "comm_spi.i20243_4_lut_3_lut_LC_9_11_3/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i20238_4_lut_3_lut_LC_9_11_1/in0" to pin "comm_spi.i20238_4_lut_3_lut_LC_9_11_1/lcout" to break the combinatorial loop
+Warning-1034: Found non-unate timing arc, from pin "in1" to pin "lcout" of instance "comm_spi.i19480_4_lut_3_lut_LC_17_4_6", in the clock network. Converting the timing arc to positive-unate
+Warning-1034: Found non-unate timing arc, from pin "in1" to pin "ltout" of instance "comm_spi.i19480_4_lut_3_lut_LC_17_4_6", in the clock network. Converting the timing arc to positive-unate
+Warning-1035: Removing timing arc from pin "comm_spi.i19520_4_lut_3_lut_LC_13_8_6/in0" to pin "comm_spi.i19520_4_lut_3_lut_LC_13_8_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19525_4_lut_3_lut_LC_13_4_0/in0" to pin "comm_spi.i19525_4_lut_3_lut_LC_13_4_0/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19495_4_lut_3_lut_LC_22_11_6/in0" to pin "comm_spi.i19495_4_lut_3_lut_LC_22_11_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19530_4_lut_3_lut_LC_22_9_6/in0" to pin "comm_spi.i19530_4_lut_3_lut_LC_22_9_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19505_4_lut_3_lut_LC_20_10_5/in0" to pin "comm_spi.i19505_4_lut_3_lut_LC_20_10_5/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19515_4_lut_3_lut_LC_19_12_1/in0" to pin "comm_spi.i19515_4_lut_3_lut_LC_19_12_1/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19485_4_lut_3_lut_LC_17_6_6/in0" to pin "comm_spi.i19485_4_lut_3_lut_LC_17_6_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19500_4_lut_3_lut_LC_13_4_5/in0" to pin "comm_spi.i19500_4_lut_3_lut_LC_13_4_5/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19510_4_lut_3_lut_LC_17_6_4/in0" to pin "comm_spi.i19510_4_lut_3_lut_LC_17_6_4/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19480_4_lut_3_lut_LC_17_4_6/in0" to pin "comm_spi.i19480_4_lut_3_lut_LC_17_4_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i19490_4_lut_3_lut_LC_16_8_5/in0" to pin "comm_spi.i19490_4_lut_3_lut_LC_16_8_5/lcout" to break the combinatorial loop
 I1209: Started routing
-I1223: Total Nets : 1879 
-I1212: Iteration  1 :   370 unrouted : 15 seconds
-I1212: Iteration  2 :    80 unrouted : 7 seconds
-I1212: Iteration  3 :    32 unrouted : 1 seconds
+I1223: Total Nets : 1722 
+I1212: Iteration  1 :   343 unrouted : 27 seconds
+I1212: Iteration  2 :    80 unrouted : 12 seconds
+I1212: Iteration  3 :    29 unrouted : 4 seconds
 I1212: Iteration  4 :     0 unrouted : 1 seconds
 I1215: Routing is successful
 I1206: Completed routing
 I1204: Writing Design zim
 I1210: Writing routes
 I1218: Exiting the router
-I1224: Router run-time : 46 seconds
+I1224: Router run-time : 88 seconds

@@ -115,7 +115,7 @@ namespace ZiveLab.Device.ZIM.Packets
             pinnedArr.Free();
         }
     }
-    
+
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct st_zim_eis_zdata
@@ -249,7 +249,7 @@ namespace ZiveLab.Device.ZIM.Packets
             density = 10;
             iteration = 1;
             count = 0;
-            iacrng = 0; 
+            iacrng = 0;
             ondelay = 12.0;
             skipcycle = 1.0;
             expected_Z = 1.0;
@@ -674,7 +674,7 @@ namespace ZiveLab.Device.ZIM.Packets
         public double nouse2;
         public st_zim_eis_status(byte init)
         {
-            teststatus = DeviceConstants.EIS_TESTSTATUS_NONE; 
+            teststatus = DeviceConstants.EIS_TESTSTATUS_NONE;
             status = DeviceConstants.EIS_STATUS_NONE;
             iac_rngno = 0;
             iac_in_rngno = 0;
@@ -688,7 +688,7 @@ namespace ZiveLab.Device.ZIM.Packets
             runTimeStamp = 0;
             runidxTimeStamp = 0;
             FinTimeStamp = 0;
-            rtc = new st_rtc(0); 
+            rtc = new st_rtc(0);
             RmsInfo = new st_zim_eis_rms_Inf(0);
             Real_val = new st_zim_eis_raw_val[DeviceConstants.MAX_EIS_RAWVAL_POINT];
             for (int i = 0; i < DeviceConstants.MAX_EIS_RAWVAL_POINT; i++)

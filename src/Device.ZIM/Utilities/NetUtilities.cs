@@ -38,15 +38,14 @@ namespace ZiveLab.Device.ZIM.Utilities
             return new PhysicalAddress(macBytes);
         }
 
-    
-        public static bool ChkExistLocalIPAddress(FindScanIP[] mArrIp, FindScanIP mIp,int count)
+        public static bool ChkExistLocalIPAddress(FindScanIP[] mArrIp, FindScanIP mIp, int count)
         {
             int i;
-            for(i=0; i< count; i++)
+            for (i = 0; i < count; i++)
             {
-                if(mArrIp[i].IpAddress[0] == mIp.IpAddress[0] 
-                    && mArrIp[i].IpAddress[1] == mIp.IpAddress[1]
-                    && mArrIp[i].IpAddress[2] == mIp.IpAddress[2])
+                if (mArrIp[i].IpAddress[0] == mIp.IpAddress[0]
+                    && mArrIp[i].IpAddress[1] == mIp.IpAddress[1])
+//                    && mArrIp[i].IpAddress[2] == mIp.IpAddress[2])
                 {
                     return true;
                 }
@@ -90,7 +89,7 @@ namespace ZiveLab.Device.ZIM.Utilities
                     {
                         mIp.IpAddress[0] = 169;
                         mIp.IpAddress[1] = 254;
-                        mIp.IpAddress[2] = 17;
+                        mIp.IpAddress[2] = localIP[2]; //17;
                         if (ChkExistLocalIPAddress(mArrIp, mIp, FindCount) == false)
                         {
                             mArrIp[FindCount].IpAddress[0] = mIp.IpAddress[0];

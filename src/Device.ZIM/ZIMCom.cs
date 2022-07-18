@@ -17,7 +17,7 @@ namespace ZiveLab.Device.ZIM
     {
         public bool isConnected;
         public int LimitTimerOut;
-        public int  iEnableCommTimeout;
+        public int iEnableCommTimeout;
         public SIFCom mComm;
         public stConnTargetCfg mConnTargetCfg; // rename to NetworkEndPoint
         public eDeviceType mDevType;
@@ -40,7 +40,7 @@ namespace ZiveLab.Device.ZIM
         public bool HostNameToIP(string sHost, ref byte[] Address)
         {
             IPAddress ip;
-            if(IPAddress.TryParse(sHost, out ip) == false)
+            if (IPAddress.TryParse(sHost, out ip) == false)
             {
                 return false;
             }
@@ -57,7 +57,7 @@ namespace ZiveLab.Device.ZIM
         {
             return string.Format("{0}.{1}.{2}.{3}", mConnTargetCfg.IpAddress[0],
                 mConnTargetCfg.IpAddress[1], mConnTargetCfg.IpAddress[2], mConnTargetCfg.IpAddress[3]);
-        }        
+        }
         private bool CheckMacAddress(PhysicalAddress mac)
         {
             Int64 physical = Int64.Parse(mac.ToString(), NumberStyles.HexNumber);
@@ -94,17 +94,17 @@ namespace ZiveLab.Device.ZIM
             mDevType = eDeviceType.WBCS;
             Console.WriteLine(" received this message: {0}", e.ToString());
         }
-        
-        public bool Connect()
+
+        public bool Connect(bool bsearch = false)
         {
             if (mComm != null)
             {
-                
+
                 mComm.Dispose();
             }
 
             isConnected = false;
-            mDevType = eDeviceType.WBCS;
+
             string hn = GetHostName();
 
             mComm = new SIFCom(hn, mConnTargetCfg.Port);
@@ -113,23 +113,25 @@ namespace ZiveLab.Device.ZIM
                 mComm.Dispose();
                 return false;
             }
-/*
-            if (CheckModelOfSif() == false)
-            {
-                return false;
-            }
+            /*
+                        if (CheckModelOfSif() == false)
+                        {
+                            return false;
+                        }
 
-            if(mDevType != eDeviceType.ZIM)
-            {
-                return false;
-            }
+                        if(mDevType != eDeviceType.ZIM)
+                        {
+                            return false;
+                        }
             */
-            if (CmdEnableCommTimeOut(iEnableCommTimeout) == false)
+            if (bsearch == true)
             {
-                mComm.Dispose();
-                return false;
+                if (CmdEnableCommTimeOut(iEnableCommTimeout) == false)
+                {
+                    mComm.Dispose();
+                    return false;
+                }
             }
-
             mComm.DisconnectedDevice += DisonnectProc;
             isConnected = true;
             return true;
@@ -152,10 +154,10 @@ namespace ZiveLab.Device.ZIM
             return true;
         }
 
-        public bool CmdStartToMeasureNoise(st_zim_eis_rms_Inf info)
+        public bool CmdStoreConnCfgInfo()
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.CHK_NOISE, 0, 0, info.ToByteArray()) == false)
+            if (mComm.WriteToDevice(CommandSet.SAVE_CONN_INFO) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -174,6 +176,17 @@ namespace ZiveLab.Device.ZIM
             return true;
         }
 
+        public bool CmdStartToMeasureNoise( st_zim_eis_rms_Inf info)
+        {
+            if (isConnected == false) return false;
+            if (mComm.WriteToDevice(CommandSet.CHK_NOISE, 0, info.ToByteArray()) == false)
+            {
+                mComm.Dispose();
+                return false;
+            }
+            return true;
+        }
+
         public bool CmdSetVdcAutoRange(int iAuto)
         {
             if (isConnected == false) return false;
@@ -185,7 +198,7 @@ namespace ZiveLab.Device.ZIM
             return true;
         }
 
-        
+
         public bool CmdStartToMeasureImpedance(bool bcalib = false)
         {
             var rtc = new st_rtc();
@@ -193,7 +206,7 @@ namespace ZiveLab.Device.ZIM
             int iCalib = 0;
             if (isConnected == false) return false;
             if (bcalib == true) iCalib = 1;
-            
+
             if (mComm.WriteToDevice(CommandSet.START_DEVICE, iCalib, rtc.ToByteArray()) == false)
             {
                 mComm.Dispose();
@@ -204,7 +217,7 @@ namespace ZiveLab.Device.ZIM
         public bool CmdRefreshVac()
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.REFRESH_VAC) == false)
+            if (mComm.WriteToDevice(CommandSet.REFRESH_VAC, 0, null) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -215,7 +228,7 @@ namespace ZiveLab.Device.ZIM
         public bool CmdStopMeasurement()
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.STOP_DEVICE) == false)
+            if (mComm.WriteToDevice(CommandSet.STOP_DEVICE, 0, null) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -225,7 +238,7 @@ namespace ZiveLab.Device.ZIM
         public bool CmdStoreRangesInfo()
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.SAVE_RNGINFO) == false)
+            if (mComm.WriteToDevice(CommandSet.SAVE_RNGINFO, 0, null) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -233,16 +246,7 @@ namespace ZiveLab.Device.ZIM
             return true;
         }
 
-        public bool CmdStoreConnCfgInfo()
-        {
-            if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.SAVE_CONN_INFO) == false)
-            {
-                mComm.Dispose();
-                return false;
-            }
-            return true;
-        }
+
 
         public bool CmdInitRangesInfo()
         {
@@ -272,7 +276,7 @@ namespace ZiveLab.Device.ZIM
         public bool CmdConnectPromOfZIM(int Addr)
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.CONN_FPGA_PROM, Addr,null) == false)
+            if (mComm.WriteToDevice(CommandSet.CONN_FPGA_PROM, Addr, null) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -297,7 +301,7 @@ namespace ZiveLab.Device.ZIM
             */
 
             mComm.SetReceiveTime(20000);
-            
+
             if (mComm.WriteToDevice(CommandSet.EREASE_FPGA_PROM) == false)
             {
                 mComm.SetReceiveTime(LimitTimerOut);
@@ -324,9 +328,9 @@ namespace ZiveLab.Device.ZIM
         {
             if (isConnected == false) return null;
             mComm.SetReceiveTime(20000);
-            byte[]  bytes = mComm.ReadFromDevice(CommandSet.READ_FPGA_PROM, address);
+            byte[] bytes = mComm.ReadFromDevice(CommandSet.READ_FPGA_PROM, address);
             mComm.SetReceiveTime(LimitTimerOut);
-            if(bytes == null)
+            if (bytes == null)
             {
                 mComm.Dispose();
             }
@@ -366,7 +370,7 @@ namespace ZiveLab.Device.ZIM
             }
             return true;
         }
-        
+
         public byte[] CmdReadRtdOfZIM()
         {
             if (isConnected == false) return null;
@@ -388,7 +392,7 @@ namespace ZiveLab.Device.ZIM
             }
             return true;
         }
-        
+
 
         public bool WriteData(st_TestCmd data)
         {
@@ -412,7 +416,7 @@ namespace ZiveLab.Device.ZIM
             }
             return true;
         }
-        
+
         public bool WriteData(stUserEthernetCfg data)
         {
             if (isConnected == false) return false;
@@ -434,7 +438,7 @@ namespace ZiveLab.Device.ZIM
             }
             return true;
         }
-        
+
         public bool WriteData(st_zim_do data)
         {
             if (isConnected == false) return false;
@@ -472,6 +476,22 @@ namespace ZiveLab.Device.ZIM
 
         #region Read
 
+        public bool ReadFindSifcfg(ref stFindSIFCfg data)
+        {
+            byte[] buf;
+            if (isConnected == false) return false;
+            buf = mComm.ReadFromDevice(CommandSet.CMD_GET_FINDSIFCFG, (int)0);
+
+            if (buf == null)
+            {
+                mComm.Dispose();
+                return false;
+            }
+
+            data.ToWritePtr(buf);
+            return true;
+        }
+
         public bool ReadData(ref st_zim_adc_ac_data data)
         {
             byte[] buf;
@@ -503,7 +523,7 @@ namespace ZiveLab.Device.ZIM
             data.ToWritePtr(buf);
             return true;
         }
-        
+
         public bool ReadData(ref st_zim_adc_vdc data)
         {
             byte[] buf;
@@ -693,7 +713,7 @@ namespace ZiveLab.Device.ZIM
             {
                 len = length > defWebSiteInfomation.PAGE_SIZE ? defWebSiteInfomation.PAGE_SIZE : length;
                 tmpbuf = mComm.ReadFromDevice(CommandSet.CMD_GET_RDNAND, (int)ipage);
-                if(tmpbuf == null)
+                if (tmpbuf == null)
                 {
                     mComm.Dispose();
                     return false;
@@ -711,7 +731,7 @@ namespace ZiveLab.Device.ZIM
         public bool EreaseNandBlock(int iblock)
         {
             if (isConnected == false) return false;
-            if( mComm.WriteToDevice(CommandSet.CMD_ERASE_NAND,(int)iblock, null) == false)
+            if (mComm.WriteToDevice(CommandSet.CMD_ERASE_NAND, (int)iblock, null) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -785,7 +805,7 @@ namespace ZiveLab.Device.ZIM
             while (length > 0)
             {
                 len = length > defWebSiteInfomation.PAGE_SIZE ? defWebSiteInfomation.PAGE_SIZE : length;
-                
+
                 temp = mComm.ReadFromDevice(CommandSet.CMD_GET_RDNAND, (int)ipage);
                 if (temp == null)
                 {
@@ -835,7 +855,7 @@ namespace ZiveLab.Device.ZIM
             }
 
             block = defWebSiteInfomation.LIMIT_BLOCK_BASE;
-            
+
             for (int i = 0; i < 200; i++)
             {
                 if (EreaseNandBlock(block + i) == false)
@@ -939,7 +959,7 @@ namespace ZiveLab.Device.ZIM
 
             for (int i = 0; i < 200; i++)
             {
-                if(EreaseNandBlock(block + i) == false)
+                if (EreaseNandBlock(block + i) == false)
                 {
                     str = string.Format("Failed erase block-{0}.", block + i);
                     MessageBox.Show(str, "Communication", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -950,12 +970,12 @@ namespace ZiveLab.Device.ZIM
             }
 
 
-            sroot = Encoding.Default.GetString(data.existroot).Trim('\0'); 
+            sroot = Encoding.Default.GetString(data.existroot).Trim('\0');
 
             for (int i = 0; i < data.FileCount; i++)
             {
                 str = Encoding.Default.GetString(data.sFileHeaders[i].Name).Trim('\0');
-               if(str.Length < 1)
+                if (str.Length < 1)
                 {
                     MessageBox.Show("Detected bad file.", "Communication", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     mComm.SetReceiveTime(LimitTimerOut);
@@ -1146,7 +1166,7 @@ namespace ZiveLab.Device.ZIM
         {
             data.ID = DeviceConstants.ID_RANGEINFO;
 
-            if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM1, 0, data.ToByteArray()) == false)
+            if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM, 0, data.ToByteArray()) == false)
             {
                 Connect();
                 return false;
@@ -1155,7 +1175,7 @@ namespace ZiveLab.Device.ZIM
 
         }
 
-        public int Read_ROM_Of_Zim(int addr,int size,ref byte[] pdata)
+        public int Read_ROM_Of_Zim(int addr, int size, ref byte[] pdata)
         {
             byte[] buf;
             if (isConnected == false) return 0;
@@ -1171,20 +1191,20 @@ namespace ZiveLab.Device.ZIM
             return buf.Length;
         }
 
-      
+
 
         public bool Write_ROM_Of_Zim(int addr, ref byte[] pdata)
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM1, addr, pdata) == false)
+            if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM, addr, pdata) == false)
             {
                 mComm.Dispose();
                 return false;
             }
             return true;
-            
+
         }
-        
+
 
         public bool refresh_SPI_ZFK_ROM()
         {
@@ -1221,7 +1241,7 @@ namespace ZiveLab.Device.ZIM
         private bool disposed;
         public void Dispose()
         {
-            
+
             this.Dispose(true);
         }
 

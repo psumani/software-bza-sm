@@ -71,14 +71,49 @@ namespace ZiveLab.Device.ZIM.Win.Panels
 
             // Voltage Range
             var vRangeText = "";
-            if (Status.mType == eDeviceType.BZA100)
+            var iRangeText = "";
+            if (Status.mType == eZimType.BZA100)
             {
                 vRangeText = (Status == null || Status.State == State.NotAssigned)
                     ? "--"
                     : ((VoltageRange_BZA100)Status.VoltageRange).GetDescription() + " range";
+                iRangeText = (Status == null || Status.State == State.NotAssigned)
+                        ? "--"
+                        : Status.CurrentRange.GetDescription() + " range";
+            }
+            else if (Status.mType == eZimType.BZA60 || Status.mType == eZimType.BZA60HZ)
+            { 
+                vRangeText = (Status == null || Status.State == State.NotAssigned)
+                    ? "--"
+                    : ((VoltageRange_BZA60)Status.VoltageRange).GetDescription() + " range";
+                if (Status.mType == eZimType.BZA60HZ)
+                {
+                    iRangeText = (Status == null || Status.State == State.NotAssigned)
+                        ? "--"
+                        : ((CurrentRange_BZA60HZ)(Status.CurrentRange)).GetDescription() + " range";
+                }
+                else
+                {
+                    iRangeText = (Status == null || Status.State == State.NotAssigned)
+                        ? "--"
+                        : Status.CurrentRange.GetDescription() + " range";
+                }
+            }
+            else if (Status.mType == eZimType.BZA500)
+            {
+                vRangeText = (Status == null || Status.State == State.NotAssigned)
+                    ? "--"
+                    : ((VoltageRange_BZA500)Status.VoltageRange).GetDescription() + " range";
+                iRangeText = (Status == null || Status.State == State.NotAssigned)
+                        ? "--"
+                        : Status.CurrentRange.GetDescription() + " range";
             }
             else
             {
+                iRangeText = (Status == null || Status.State == State.NotAssigned)
+                ? "--"
+                : Status.CurrentRange.GetDescription() + " range";
+
                 vRangeText = (Status == null || Status.State == State.NotAssigned)
                    ? "--"
                    : Status.VoltageRange.GetDescription() + " range";
@@ -87,9 +122,7 @@ namespace ZiveLab.Device.ZIM.Win.Panels
                     labelVRange.Text = vRangeText;
 
             // Current range
-            var iRangeText = (Status == null || Status.State == State.NotAssigned)
-                ? "--"
-                : Status.CurrentRange.GetDescription() + " range";
+            
             if (labelIRange.Text != iRangeText)
                 labelIRange.Text = iRangeText;
 

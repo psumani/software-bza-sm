@@ -2,6 +2,9 @@
 {
     public static class CommandSet 
     {
+
+        public const byte CMD_GET_FINDSIFCFG = 0x00;
+
         public const byte CMD_GET_RDNAND = 0x05;
 
         public const byte CMD_ERASE_NAND = 0x30;
@@ -29,6 +32,7 @@
         public const byte READ_FPGA_PROM = 0x96;
         public const byte READ_ZIM_ROM = 0x97;
         public const byte PROG_ZIM_ROM = 0x98;
+        
         public const byte REF_SPI_ZFK_ROM = 0x99;
 
         public const byte READ_ZIM_ROM1 = 0x9A;

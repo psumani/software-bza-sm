@@ -177,7 +177,7 @@ namespace ZiveLab.Device.ZIM.Win.Analysis
             {
                 if (item.info.freq >= 0.1 && item.info.freq <= 10)
                 {
-                    if (item.zdata.phase > -0.02 && item.zdata.phase < 0.02)
+                    if (item.zdata.phase > -0.05 && item.zdata.phase < 0.05)
                     {
                         dtotal += item.zdata.mag;
                         if (dmax < item.zdata.mag) dmax = item.zdata.mag;

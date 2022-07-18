@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZiveLab.Device.ZIM;
+using ZiveLab.Device.ZIM.Interface;
 
 namespace App.ZIM.FactorySetting
 {
@@ -22,23 +23,22 @@ namespace App.ZIM.FactorySetting
             this.Icon = Properties.Resources.BatMag;
             mCommZim = mSetCommZim;
             InitProgressStatus();
+
             CboAddr.Items.Clear();
-            CboAddr.Items.Add("SPI");
-            for(int i=0; i<16; i++) CboAddr.Items.Add(i.ToString());
+            for(int i=0; i< SIFConstants.MAX_DEVICE_CHANNEL; i++) CboAddr.Items.Add(i.ToString());
             CboAddr.SelectedIndex = 0;
 
             mDevType = mdevtype;
-            if (mDevType == eDeviceType.ZIM
-                || mDevType == eDeviceType.BZA1000
-                || mDevType == eDeviceType.BZA100)
-            {
-                LblAddr.Visible = false;
-                CboAddr.Visible = false;
-            }
-            else
+
+            if (mDevType == eDeviceType.MBZA)
             {
                 LblAddr.Visible = true;
                 CboAddr.Visible = true;
+            }
+            else
+            {
+                LblAddr.Visible = false;
+                CboAddr.Visible = false;
             }
 
             if (Properties.Settings.Default.FilePathZim.Length < 3)
@@ -291,10 +291,8 @@ namespace App.ZIM.FactorySetting
             InitProgressStatus();
             if (File.Exists(txtFilePath.Text))
             {
-                if (mDevType == eDeviceType.ZIM
-                    || mDevType == eDeviceType.BZA1000
-                    || mDevType == eDeviceType.BZA100) Addr = 0;
-                else Addr = CboAddr.SelectedIndex;
+                if (mDevType == eDeviceType.MBZA) Addr = CboAddr.SelectedIndex;
+                else Addr = 0;
 
 
                 if (ResetAndConnectPROM(Addr) == true)

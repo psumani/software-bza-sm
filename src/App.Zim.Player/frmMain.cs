@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using ZiveLab.Device.ZIM;
@@ -23,7 +24,6 @@ namespace App.Zim.Player
         {
             InitializeComponent();
 
-            
             mConnCfg = new stConnCfg(0);
             mCommZim = new CommObj(Properties.Settings.Default.CommTimeOut);
             mSysCfg = new stSystemConfig(0);
@@ -53,6 +53,12 @@ namespace App.Zim.Player
                 System.IO.Directory.CreateDirectory(Properties.Settings.Default.PathSIFFW);
             }
             
+            if (Properties.Settings.Default.PathRemote.Length < 5) Properties.Settings.Default.PathRemote = Path.Combine("C:\\ZIVE DATA\\BM\\", "Remote");
+            if (!System.IO.Directory.Exists(Properties.Settings.Default.PathRemote))
+            {
+                System.IO.Directory.CreateDirectory(Properties.Settings.Default.PathRemote);
+            }
+
             if (Properties.Settings.Default.FileNameSIFFW.Length < 5) Properties.Settings.Default.FileNameSIFFW = "default.sif";
 
             if (Properties.Settings.Default.PathData.Length < 5) Properties.Settings.Default.PathData = Path.Combine("C:\\ZIVE DATA\\BM\\", "Data");

@@ -143,9 +143,30 @@ namespace ZiveLab.Device.ZIM.Win.Panels
                     ? "-- Hz"
                     : string.Format("{0:#0.00} Hz", Status.LastFrequency);
 
-                labelZmag.Text = double.IsNaN(Status.LastFrequency) || double.IsNaN(Status.LastImpedance.Magnitude)
-                    ? "--"
-                    : string.Format("{0:#0.000}", Status.LastImpedance.Magnitude * 1000.0);
+                if (double.IsNaN(Status.LastFrequency) || double.IsNaN(Status.LastImpedance.Magnitude))
+                {
+                    labelZmag.Text = "--";
+                    labelUnitZmag.Text = "Ω";
+                }
+                else
+                {
+                    double Magnitude = Status.LastImpedance.Magnitude;
+                    if (Magnitude < 1.0)
+                    {
+                        Magnitude *= 1000.0;
+                        labelUnitZmag.Text = "mΩ";
+                    }
+                    else if (Magnitude >= 1000000.0)
+                    {
+                        Magnitude /= 1000.0;
+                        labelUnitZmag.Text = "KΩ";
+                    }
+                    else
+                    {
+                        labelUnitZmag.Text = "Ω";
+                    }
+                    labelZmag.Text = string.Format("{0:#0.000}", Magnitude);
+                }
 
                 labelZphase.Text = double.IsNaN(Status.LastFrequency) || double.IsNaN(Status.LastImpedance.Phase)
                     ? "--"
@@ -177,10 +198,30 @@ namespace ZiveLab.Device.ZIM.Win.Panels
                 labelFrequency.Text = !isAvailableZData
                     ? "-- Hz"
                     : string.Format("{0:#0.00} Hz", Status.ZData[Index].Frequency);
-
-                labelZmag.Text = !isAvailableZData
-                    ? "--"
-                    : string.Format("{0:#0.000}", Status.ZData[Index].Impedance.Magnitude * 1000.0);
+                if (!isAvailableZData)
+                {
+                    labelZmag.Text = "--";
+                    labelUnitZmag.Text = "Ω";
+                }
+                else
+                {
+                    double Magnitude = Status.ZData[Index].Impedance.Magnitude;
+                    if (Magnitude < 1.0)
+                    {
+                        Magnitude *= 1000.0;
+                        labelUnitZmag.Text = "mΩ";
+                    }
+                    else if (Magnitude >= 1000000.0)
+                    {
+                        Magnitude /= 1000.0;
+                        labelUnitZmag.Text = "KΩ";
+                    }
+                    else
+                    {
+                        labelUnitZmag.Text = "Ω";
+                    }
+                    labelZmag.Text = string.Format("{0:#0.000}", Magnitude);
+                }
 
                 labelZphase.Text = !isAvailableZData
                     ? "--"
@@ -210,11 +251,15 @@ namespace ZiveLab.Device.ZIM.Win.Panels
             buttonStop.Enabled = (Status.State == State.Running || Status.State == State.InitDelay || Status.State == State.RefreshVac);
 
             buttonRefreshVac.Enabled = (Status.State != State.Running
-                                && Status.State != State.InitDelay
-                                && Status.State != State.RunningNoiseLevel
-                                && Status.State != State.RefreshVac
-                                && Status.State == State.DetectedNotYetReady);
-
+                               && Status.State != State.InitDelay
+                               && Status.State != State.RunningNoiseLevel
+                               && Status.State != State.RefreshVac
+                               && Status.State != State.DetectedNotYetReady
+                               && Status.State != State.DetectedFaild
+                               && Status.State != State.DetecteNoZIM
+                               && Status.State != State.DetectedOverTemperatue
+                               && Status.IsValidParameters);
+       
             buttonRefresh.Enabled = (Status.State == State.Idle
                                 || Status.State == State.Stopped
                                 || Status.State == State.DetecteNotYetCalibrated
@@ -274,7 +319,7 @@ namespace ZiveLab.Device.ZIM.Win.Panels
             control.Checked = false;
 
             var par = Status.IsValidParameters ? Status.ZParameters : null;
-            var panelControl = new PanelSetupParameters() { Parameters = par };
+            var panelControl = new PanelSetupParameters() { Parameters = par, mType = Status.mType };
             var popupPanel = new PopupPanel(panelControl);
             popupPanel.ShowingAnimation = PopupAnimations.Slide | PopupAnimations.TopToBottom;
             popupPanel.HidingAnimation = PopupAnimations.Slide | PopupAnimations.BottomToTop;
@@ -288,7 +333,15 @@ namespace ZiveLab.Device.ZIM.Win.Panels
                 var args = new ParametersEventArgs(panelControl.Parameters);
                 OnStartExperimentClicked(args);
             };
-        }
+            panelControl.RefreshVacClicked += delegate
+            {
+                popupPanel.Close();
+                Status.ZParameters = panelControl.Parameters;
+                var args = new ParametersEventArgs(panelControl.Parameters);
+                OnRefreshVacClicked(args);
+            };
+
+    }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -303,8 +356,8 @@ namespace ZiveLab.Device.ZIM.Win.Panels
         {
             var control = sender as CheckBox;
             control.Checked = false;
-
-            OnRefreshVacClicked(e);
+            var args = new ParametersEventArgs(Status.ZParameters);
+            OnRefreshVacClicked(args);
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -391,6 +444,16 @@ namespace ZiveLab.Device.ZIM.Win.Panels
         #endregion Private Event Handlers
 
         private void panelCooker_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRefreshVac_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonStart_CheckedChanged(object sender, EventArgs e)
         {
 
         }

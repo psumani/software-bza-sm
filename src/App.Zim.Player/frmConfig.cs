@@ -29,6 +29,8 @@ namespace App.Zim.Player
 
             DoubleBuffered = true;
             bLoad = false;
+
+            
         }
 
         private void frmConfig_Load(object sender, EventArgs e)
@@ -50,7 +52,26 @@ namespace App.Zim.Player
 
             mCommZim.CmdSetVdcAutoRange(0);
 
+
+            cboIacRng.Items.Clear();
+            cboIacRng.Items.Insert(0, GetCurrentRangeDescription(0));
+            cboIacRng.Items.Insert(1, GetCurrentRangeDescription(2));
+            cboIacRng.Items.Insert(2, GetCurrentRangeDescription(4));
+            cboIacRng.Items.Insert(3, GetCurrentRangeDescription(6));
+
+            cboRngEisCal.Items.Clear();
+            cboRngEisCal.Items.Insert(0, GetCurrentRangeDescription(0));
+            cboRngEisCal.Items.Insert(1, GetCurrentRangeDescription(1));
+            cboRngEisCal.Items.Insert(2, GetCurrentRangeDescription(2));
+            cboRngEisCal.Items.Insert(3, GetCurrentRangeDescription(3));
+            cboRngEisCal.Items.Insert(4, GetCurrentRangeDescription(4));
+            cboRngEisCal.Items.Insert(5, GetCurrentRangeDescription(5));
+            cboRngEisCal.Items.Insert(6, GetCurrentRangeDescription(6));
+            cboRngEisCal.Items.Insert(7, GetCurrentRangeDescription(7));
+
+
             cboIacRng.SelectedIndex = 0;
+
             cboSelVdc.SelectedIndex = 0;
             cboRngEisCal.SelectedIndex = 0;
 
@@ -65,6 +86,43 @@ namespace App.Zim.Player
             RefreshTempRangeInfo();
             RefreshEisCalInfo();
             bLoad = true;
+        }
+
+        private string GetCurrentRangeDescription(int index)
+        {
+            string str = "";
+            eZimType ztype = (eZimType)(mSysCfg.mZimCfg.cModel[0] - 0x30);
+            if (ztype == eZimType.BZA60HZ)
+            {
+                str = "200mA";
+                switch (index)
+                {
+                    case 0: str = "200mA"; break;
+                    case 1: str = "40mA"; break;
+                    case 2: str = "20mA"; break;
+                    case 3: str = "4mA"; break;
+                    case 4: str = "2mA"; break;
+                    case 5: str = "400uA"; break;
+                    case 6: str = "200uA"; break;
+                    case 7: str = "40uA"; break;
+                }
+            }
+            else
+            {
+                str = "2A";
+                switch (index)
+                {
+                    case 0: str = "2A"; break;
+                    case 1: str = "400mA"; break;
+                    case 2: str = "200mA"; break;
+                    case 3: str = "40mA"; break;
+                    case 4: str = "20mA"; break;
+                    case 5: str = "4mA"; break;
+                    case 6: str = "2mA"; break;
+                    case 7: str = "400uA"; break;
+                }
+            }
+            return str;
         }
 
         private void SetControlZIM(bool bLoadOn)
@@ -503,18 +561,11 @@ namespace App.Zim.Player
             imtem = new ListViewItem(new string[] { "d3", str });
             ListCal.Items.Add(imtem);
 
-            mInductor.Text = string.Format("{0:0.0#######e+0}", ranges.mEirIrngCompLs.Ls[4]);
-            mPower.Text = string.Format("{0:0.0}", ranges.mSafety.MaxPower);
-
-            /*
             str = string.Format("{0:0.0#######e+0}", ranges.mEirIrngCompLs.Ls[irng]);
             imtem = new ListViewItem(new string[] { "Inductance(H)", str });
             ListCal.Items.Add(imtem);
-
-            str = string.Format("{0:0.0#######}", ranges.mSafety.MaxPower);
-            imtem = new ListViewItem(new string[] { "Safety Power(W)", str });
-            ListCal.Items.Add(imtem);*/
-
+            
+            mPower.Text = string.Format("{0:0.0}", ranges.mSafety.MaxPower);
         }
 
         private void cboIacRng_SelectedIndexChanged(object sender, EventArgs e)
@@ -622,7 +673,7 @@ namespace App.Zim.Player
                 else
                 {
                     ranges.mSafety.ToWritePtr(tranges.mSafety.ToByteArray());
-                    ranges.mEisCalInfo.ToWritePtr(tranges.mEisCalInfo.ToByteArray());
+                    ranges.mEisCable.ToWritePtr(tranges.mEisCable.ToByteArray());
 
                     for (i = 0; i < DeviceConstants.MAX_VDC_RNGCNT; i++)
                     {
@@ -870,7 +921,7 @@ namespace App.Zim.Player
                 string sValue = lvItem.SubItems[1].Text.Trim();
 
                 if (sTitle == "n1" || sTitle == "n2" || sTitle == "n3" || sTitle == "d1"
-                    || sTitle == "d2" || sTitle == "d3")// || sTitle == "Inductance(H)"  || sTitle == "Safety Power(W)")
+                    || sTitle == "d2" || sTitle == "d3" || sTitle == "Inductance(H)")
                 {
                     frmInputValue frm = new frmInputValue(sTitle, sValue);
                     if (frm.ShowDialog() == DialogResult.OK)
@@ -881,18 +932,10 @@ namespace App.Zim.Player
                         else if (sTitle == "d1") ranges.mEisIRngCalInfo[irng].d1 = Convert.ToDouble(frm.sInValue);
                         else if (sTitle == "d2") ranges.mEisIRngCalInfo[irng].d2 = Convert.ToDouble(frm.sInValue);
                         else if (sTitle == "d3") ranges.mEisIRngCalInfo[irng].d3 = Convert.ToDouble(frm.sInValue);
-                        /* else if (sTitle == "Inductance(H)")
-                         {
-                             ranges.mEirIrngCompLs.Ls[irng] = Convert.ToDouble(frm.sInValue);
-                         }
-                         else
-                         {
-                             ranges.mSafety.MaxPower = Convert.ToDouble(frm.sInValue);
-                             //if (ranges.mSafety.MaxPower > DeviceConstants.DEV_MAX_POWER)
-                             //{
-                             //    ranges.mSafety.MaxPower = DeviceConstants.DEV_MAX_POWER;
-                             //}
-                         }*/
+                        else if (sTitle == "Inductance(H)")
+                        {
+                            ranges.mEirIrngCompLs.Ls[irng] = Convert.ToDouble(frm.sInValue);
+                        }
                         RefreshEisCalInfo();
                     }
                 }
@@ -926,15 +969,30 @@ namespace App.Zim.Player
                 MessageBox.Show("Failed read information.");
                 return;
             }
+            eZimType ztype = (eZimType)(mSysCfg.mZimCfg.cModel[0] - 0x30);
 
-            ranges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance0;
-            ranges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance0;
-            ranges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance1;
-            ranges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance1;
-            ranges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance2;
-            ranges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance2;
-            ranges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance3;
-            ranges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance3;
+            if (ztype == eZimType.BZA60HZ)
+            {
+                ranges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance1;
+                ranges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance1;
+                ranges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance2;
+                ranges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance2;
+                ranges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance3;
+                ranges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance3;
+                ranges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance4;
+                ranges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance4;
+            }
+            else
+            {
+                ranges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance0;
+                ranges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance0;
+                ranges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance1;
+                ranges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance1;
+                ranges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance2;
+                ranges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance2;
+                ranges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance3;
+                ranges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance3;
+            }
 
             ranges.mSafety.MaxPower = Properties.Settings.Default.Power;
 
@@ -1168,11 +1226,12 @@ namespace App.Zim.Player
 
         private void InitRangeInfo(ref st_zim_rnginf tRanges)
         {
+            eZimType ztype = (eZimType)(mSysCfg.mZimCfg.cModel[0] - 0x30);
+
             tRanges.ID = DeviceConstants.ID_RANGEINFO;
             tRanges.mSafety.MaxPower = DeviceConstants.DEV_DEFAULT_POWER;
 
-
-            InitEisCalInf(ref tRanges.mEisCalInfo);
+            tRanges.mEisCable.initialize();
 
             InitEisCalInf(ref tRanges.mEisIRngCalInfo[0]);
 
@@ -1190,16 +1249,31 @@ namespace App.Zim.Player
 
             InitEisCalInf(ref tRanges.mEisIRngCalInfo[7]);
 
+            if (ztype == eZimType.BZA60HZ)
+            {
+                tRanges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance1;
+                tRanges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance1;
+                tRanges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance2;
+                tRanges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance2;
+                tRanges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance3;
+                tRanges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance3;
+                tRanges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance4;
+                tRanges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance4;
+            }
+            else
+            {
+                tRanges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance0;
+                tRanges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance0;
+                tRanges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance1;
+                tRanges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance1;
+                tRanges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance2;
+                tRanges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance2;
+                tRanges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance3;
+                tRanges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance3;
+            }
 
 
-            tRanges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance0;
-            tRanges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance0;
-            tRanges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance1;
-            tRanges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance1;
-            tRanges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance2;
-            tRanges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance2;
-            tRanges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance3;
-            tRanges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance3;
+                
             //PT-1000 - 1000ohm : 0'C, RREF - 4000ohm
             //PT-100  -  100ohm : 0'C. RREF -  400ohm
 
@@ -1210,30 +1284,59 @@ namespace App.Zim.Player
             tRanges.rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT100;
             tRanges.rtd_rng.gain = 1.0;
             tRanges.rtd_rng.offset = 0.0;
+            if (ztype == eZimType.BZA60HZ)
+            {
+                tRanges.iac_rng[0].maximum = DeviceConstants.ADC_IAC_RNG1_MAX;
+                tRanges.iac_rng[0].minimum = DeviceConstants.ADC_IAC_RNG1_MIN;
+                tRanges.iac_rng[0].factor = DeviceConstants.ADC_IAC_RNG1_FACTOR;
+                tRanges.iac_rng[0].gain = 1.0;
+                tRanges.iac_rng[0].offset = 1.0;
 
-            tRanges.iac_rng[0].maximum = DeviceConstants.ADC_IAC_RNG0_MAX;
-            tRanges.iac_rng[0].minimum = DeviceConstants.ADC_IAC_RNG0_MIN;
-            tRanges.iac_rng[0].factor = DeviceConstants.ADC_IAC_RNG0_FACTOR;
-            tRanges.iac_rng[0].gain = 1.0;
-            tRanges.iac_rng[0].offset = 1.0;
+                tRanges.iac_rng[1].maximum = DeviceConstants.ADC_IAC_RNG2_MAX;
+                tRanges.iac_rng[1].minimum = DeviceConstants.ADC_IAC_RNG2_MIN;
+                tRanges.iac_rng[1].factor = DeviceConstants.ADC_IAC_RNG2_FACTOR;
+                tRanges.iac_rng[1].gain = 1.0;
+                tRanges.iac_rng[1].offset = 1.0;
 
-            tRanges.iac_rng[1].maximum = DeviceConstants.ADC_IAC_RNG1_MAX;
-            tRanges.iac_rng[1].minimum = DeviceConstants.ADC_IAC_RNG1_MIN;
-            tRanges.iac_rng[1].factor = DeviceConstants.ADC_IAC_RNG1_FACTOR;
-            tRanges.iac_rng[1].gain = 1.0;
-            tRanges.iac_rng[1].offset = 1.0;
+                tRanges.iac_rng[2].maximum = DeviceConstants.ADC_IAC_RNG3_MAX;
+                tRanges.iac_rng[2].minimum = DeviceConstants.ADC_IAC_RNG3_MIN;
+                tRanges.iac_rng[2].factor = DeviceConstants.ADC_IAC_RNG3_FACTOR;
+                tRanges.iac_rng[2].gain = 1.0;
+                tRanges.iac_rng[2].offset = 1.0;
 
-            tRanges.iac_rng[2].maximum = DeviceConstants.ADC_IAC_RNG2_MAX;
-            tRanges.iac_rng[2].minimum = DeviceConstants.ADC_IAC_RNG2_MIN;
-            tRanges.iac_rng[2].factor = DeviceConstants.ADC_IAC_RNG2_FACTOR;
-            tRanges.iac_rng[2].gain = 1.0;
-            tRanges.iac_rng[2].offset = 1.0;
+                tRanges.iac_rng[3].maximum = DeviceConstants.ADC_IAC_RNG4_MAX;
+                tRanges.iac_rng[3].minimum = DeviceConstants.ADC_IAC_RNG4_MIN;
+                tRanges.iac_rng[3].factor = DeviceConstants.ADC_IAC_RNG4_FACTOR;
+                tRanges.iac_rng[3].gain = 1.0;
+                tRanges.iac_rng[3].offset = 1.0;
+            }
+            else
+            {
+                tRanges.iac_rng[0].maximum = DeviceConstants.ADC_IAC_RNG0_MAX;
+                tRanges.iac_rng[0].minimum = DeviceConstants.ADC_IAC_RNG0_MIN;
+                tRanges.iac_rng[0].factor = DeviceConstants.ADC_IAC_RNG0_FACTOR;
+                tRanges.iac_rng[0].gain = 1.0;
+                tRanges.iac_rng[0].offset = 1.0;
 
-            tRanges.iac_rng[3].maximum = DeviceConstants.ADC_IAC_RNG3_MAX;
-            tRanges.iac_rng[3].minimum = DeviceConstants.ADC_IAC_RNG3_MIN;
-            tRanges.iac_rng[3].factor = DeviceConstants.ADC_IAC_RNG3_FACTOR;
-            tRanges.iac_rng[3].gain = 1.0;
-            tRanges.iac_rng[3].offset = 1.0;
+                tRanges.iac_rng[1].maximum = DeviceConstants.ADC_IAC_RNG1_MAX;
+                tRanges.iac_rng[1].minimum = DeviceConstants.ADC_IAC_RNG1_MIN;
+                tRanges.iac_rng[1].factor = DeviceConstants.ADC_IAC_RNG1_FACTOR;
+                tRanges.iac_rng[1].gain = 1.0;
+                tRanges.iac_rng[1].offset = 1.0;
+
+                tRanges.iac_rng[2].maximum = DeviceConstants.ADC_IAC_RNG2_MAX;
+                tRanges.iac_rng[2].minimum = DeviceConstants.ADC_IAC_RNG2_MIN;
+                tRanges.iac_rng[2].factor = DeviceConstants.ADC_IAC_RNG2_FACTOR;
+                tRanges.iac_rng[2].gain = 1.0;
+                tRanges.iac_rng[2].offset = 1.0;
+
+                tRanges.iac_rng[3].maximum = DeviceConstants.ADC_IAC_RNG3_MAX;
+                tRanges.iac_rng[3].minimum = DeviceConstants.ADC_IAC_RNG3_MIN;
+                tRanges.iac_rng[3].factor = DeviceConstants.ADC_IAC_RNG3_FACTOR;
+                tRanges.iac_rng[3].gain = 1.0;
+                tRanges.iac_rng[3].offset = 1.0;
+            }
+            
 
             tRanges.vac_rng.maximum = DeviceConstants.ADC_VAC_RNG_MAX;
             tRanges.vac_rng.minimum = DeviceConstants.ADC_VAC_RNG_MIN;
@@ -1296,17 +1399,34 @@ namespace App.Zim.Player
 
         private void editDummyResistorInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            eZimType ztype = (eZimType)(mSysCfg.mZimCfg.cModel[0] - 0x30);
             frmInputDlg mdlg = new frmInputDlg();
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
-                ranges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance0;
-                ranges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance0;
-                ranges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance1;
-                ranges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance1;
-                ranges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance2;
-                ranges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance2;
-                ranges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance3;
-                ranges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance2; //Properties.Settings.Default.Inductance3;
+                if (ztype == eZimType.BZA60HZ)
+                {
+                    ranges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance1;
+                    ranges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance1;
+                    ranges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance2;
+                    ranges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance2;
+                    ranges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance3;
+                    ranges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance3;
+                    ranges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance4;
+                    ranges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance4;
+                }
+                else
+                {
+                    ranges.mEirIrngCompLs.Ls[0] = Properties.Settings.Default.Inductance0;
+                    ranges.mEirIrngCompLs.Ls[1] = Properties.Settings.Default.Inductance0;
+                    ranges.mEirIrngCompLs.Ls[2] = Properties.Settings.Default.Inductance1;
+                    ranges.mEirIrngCompLs.Ls[3] = Properties.Settings.Default.Inductance1;
+                    ranges.mEirIrngCompLs.Ls[4] = Properties.Settings.Default.Inductance2;
+                    ranges.mEirIrngCompLs.Ls[5] = Properties.Settings.Default.Inductance2;
+                    ranges.mEirIrngCompLs.Ls[6] = Properties.Settings.Default.Inductance3;
+                    ranges.mEirIrngCompLs.Ls[7] = Properties.Settings.Default.Inductance3;
+                }
+
+                    
 
                 ranges.mSafety.MaxPower = Properties.Settings.Default.Power;
 
@@ -1346,28 +1466,5 @@ namespace App.Zim.Player
             }
         }
 
-        private void mInductor_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mInductor_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            string sTitle = "Inductance(H)";
-            string sValue = mInductor.Text;
-
-            frmInputValue frm = new frmInputValue(sTitle, sValue);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                ranges.mEirIrngCompLs.Ls[0] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[1] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[2] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[3] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[4] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[5] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[6] = Convert.ToDouble(frm.sInValue);
-                ranges.mEirIrngCompLs.Ls[7] = Convert.ToDouble(frm.sInValue);
-            }
-        }
     }
 }

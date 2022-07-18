@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZiveUniFile\ZiveUniFile.csproj">
-      <Project>{32020151-2CCF-4082-88D0-39345B84E995}</Project>
+      <Project>{32020151-2ccf-4082-88d0-39345b84e995}</Project>
       <Name>ZiveUniFile</Name>
     </ProjectReference>
   </ItemGroup>

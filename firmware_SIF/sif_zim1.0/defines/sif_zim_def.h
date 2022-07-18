@@ -15,9 +15,9 @@
 
 
 #define FIRMWARE_VER_MAJOR	4  //0.256
-#define FIRMWARE_VER_MINOR	1
-#define FIRMWARE_VER_REV	2
-#define FIRMWARE_VER_BUILD	3
+#define FIRMWARE_VER_MINOR	6
+#define FIRMWARE_VER_REV	1
+#define FIRMWARE_VER_BUILD	0
 
 #define HW_ENABLE			0x1	
 #define HW_DISABLE			0x0	
@@ -25,6 +25,7 @@
 
 #define DHCP_SOCK_NUM       0
 #define TCP_SOCK_NUM        1
+#define FIND_SOCK_NUM       2
 
 #define DEF_COMM_TIMEOUT    	8000
 
@@ -36,9 +37,10 @@
 
 #define NAND_BLOCK_CONNCFG	    16 
 #define NAND_BLOCK_SYSINF       17
-
+#define NAND_BLOCK_RANGEINF     19
 #define NAND_PAGE_CONNCFGINF	(NAND_BLOCK_CONNCFG * NAND_PG_PER_BLK)
 #define NAND_PAGE_SYSINF	    (NAND_BLOCK_SYSINF * NAND_PG_PER_BLK)
+#define NAND_PAGE_RANGEINF	    (NAND_BLOCK_RANGEINF * NAND_PG_PER_BLK)
 
 #define NAND_BLOCK_FILEHEAD     128
 #define NAND_PAGE_FILEHEAD      NAND_BLOCK_FILEHEAD * NAND_PAGE_PER_BLOCK
@@ -61,7 +63,8 @@
 #define DEF_ABSTOLERANCE 1.0e-8
 
 typedef enum { READHEADER, READDATA, PARSING } ePackStatus;
-typedef enum { WBCS, SMART, ZIM, BZA1000, BZA100,ZBCS } eDeviceType;
+typedef enum { DEV_UNKNOWN, DEV_BZA1000A, DEV_BZA1000, DEV_BZA500, DEV_BZA100,DEV_BZA60,DEV_BZA60HZ} eDeviceType;
+typedef enum { SIF_WBCS, SIF_SMART, SIF_ZIM, SIF_SBZA, SIF_MBZA ,SIF_ZBCS,SIF_CXM } eSifType;
 
 #pragma pack(1)
 ///////////////////////////////////////////////////
@@ -75,6 +78,15 @@ typedef struct
     byte            Revision;
     byte            Build;
 } stVersion;
+
+typedef struct
+{
+	byte Type;	
+	stVersion BoardVersion;
+	stVersion FirmwareVersion;
+	byte      Serial[ID_LENGTH];
+	byte SockStat;	
+} stFindSIFCfg;	
 
 typedef struct
 {
@@ -169,16 +181,24 @@ typedef struct
 #define     DDS_REG_ADDR_PHASE1			0xE000
 
 #define 	PI 							3.14159265358979323846
-#define 	DEF_DDS_SIG_MCLK			125000.0
+#define 	DEF_DDS_SIG_MCLK_LOW		125000.0
+#define 	DEF_DDS_SIG_MCLK_HI			16000000.0
+#define 	DEF_FREQUENCY_SUBHAMONIC	20000.0 //3000.0
+#define 	DEF_FREQUENCY_SUBH_HZ		8000.0 //3000.0
 #define 	DEF_DDS_CLK_MCLK			16000000.0
 
 #define 	DEF_DDS_FREQ_RES			268435456.0  	// 2^28-1
 
-#define 	DEF_DDS_SIG_CONST			((double)DEF_DDS_FREQ_RES / (double)DEF_DDS_SIG_MCLK)
+#define 	DEF_EIS_COMP_CRNG			6
+#define 	DEF_EIS_MIN_CYCLE			2
+
+#define 	DEF_DDS_SIG_CONST_LOW		((double)DEF_DDS_FREQ_RES / (double)DEF_DDS_SIG_MCLK_LOW)
+#define 	DEF_DDS_SIG_CONST_HI		((double)DEF_DDS_FREQ_RES / (double)DEF_DDS_SIG_MCLK_HI)
 
 #define 	DEF_DDS_CLK_CONST			((double)DEF_DDS_FREQ_RES / (double)DEF_DDS_CLK_MCLK)
-#define 	DEF_DDS_MCLK_RATE			((double)DEF_DDS_CLK_MCLK / (double)DEF_DDS_SIG_MCLK)
 
+#define 	DEF_DDS_MCLK_RATE_LOW		((double)DEF_DDS_CLK_MCLK / (double)DEF_DDS_SIG_MCLK_LOW)
+#define 	DEF_DDS_MCLK_RATE_HI		((double)DEF_DDS_CLK_MCLK / (double)DEF_DDS_SIG_MCLK_HI)
 
 #define 	DEF_DDS_PHASE_RES			4096.0  		// 2^12-1
 #define 	DEF_DDS_PHASE_MAX			(2.0 * PI) 
@@ -294,9 +314,10 @@ typedef struct
 #define DEF_DEVDO_VDC_RNG1		0xFFEF
 #define DEF_DEVDO_VAC_PWROFF	0x20
 #define DEF_DEVDO_VAC_PWRON		0xFFDF
-#define DEF_DEVDO_DDSMCLK_LOW	0x40
-#define DEF_DEVDO_DDSMCLK_HI	0xFFBF
+#define DEF_DEVDO_DDSMCLK_HI	0x0040
+#define DEF_DEVDO_DDSMCLK_LOW	0xFFBF
 #define DEF_DEVDO_CLRIRNG		0xFFF1
+#define DEF_DEVDO_MASK			0xFF37
 
 #define MAX_EIS_POINT			1024
 #define MAX_EIS_RAW_POINT		MAX_EIS_POINT
@@ -306,12 +327,12 @@ typedef struct
 
 #define MAX_EIS_FREQ_CNT		200
 #define MIN_EIS_FREQUENCY       0.01
-#define MAX_EIS_FREQUENCY       7800.0 //20000.0
-#define MAX_EIS_ADC_MCLK		4000000.0 //4400000.0
+#define MAX_EIS_FREQUENCY       200000.0 //20000.0
+#define MAX_EIS_ADC_MCLK		3000000.0 //4400000.0
 #define MIN_EIS_ADC_MCLK		100000.0
 #define MAX_EIS_CYC_POINT		512
-#define MIN_EIS_CYC_POINT		32
-#define MIN_EIS_CYC_POINT_H		16
+#define MIN_EIS_CYC_POINT		8  // 32
+#define MIN_EIS_CYC_POINT_H		8  // 16
 
 #define DEF_FLT_WIDEBAND1           0
 #define DEF_FLT_WIDEBAND2           1
@@ -610,7 +631,7 @@ typedef struct
 	ushort              OpenI2C;
 	ushort              OpenMX25V;
 	ushort              OpenSPI;
- 
+ 	ushort				bNoEprom;
 	ushort              ResetICE;
 	ushort              TmpResetICE;
 	ushort              Commerror;

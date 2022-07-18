@@ -1,0 +1,31 @@
+﻿[SIF Board]
+Serial number : IF0000Z11531
+Board version : 1.1.0.0
+Firmware version : 4.1.2.1
+
+[ZIM Board]
+Serial number : IM2000011470
+Board version : 1.7.0.0
+Firmware version : 4.0.0.2
+
+[Parameters]
+Current Range(A) : 2A
+Initial Frequency(Hz) : 10.000
+Final Frequency(Hz) : 0.100
+Density(pts/decade) : 1
+Iteration : 1
+Initial Delay Time(s) : 12.0
+Skip Cycle : 1
+Started : 2022-04-26 19:18:23
+[OCV]
+Value : 0.006V
+
+
+
+
+
+[Data]
+Pt,Time (s),Freq (Hz),Zreal (Ω),Zimag (Ω),Zmod (Ω),Zphase (°),Idc (A),Vdc (V),Temp (°C),IRange (A),
+1,1.951,9.99961,0.00998539,7.14882E-06,0.0099854,0.041,-1,-0.003,0.0,2,
+2,7.583,0.999775,0.00998676,-2.22192E-05,0.00998679,-0.127,-1,-0.003,0.0,2,
+3,39.650,0.0996515,0.0100569,-0.000209426,0.010059,-1.193,-1,-0.012,0.0,2,

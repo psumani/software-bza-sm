@@ -168,6 +168,21 @@ architecture behav of zim is
 			DATA_VLD 		: out 	std_logic
 		);
 	end component;
+	
+	component ADC_ADS127 is
+		Port (
+			CLK 			: in 		std_logic; 						         -- system clock :  MHz clock
+			RESET			: in		std_logic; 
+			TRIG 			: in 		std_logic;
+			DTRIG 		: out 	std_logic; 
+			ADC_DATA		: out 	std_logic_vector(23 downto 0); 		-- Last read adc value
+			SCLK 			: out 	std_logic; 		-- SPI clock :  MHz
+			CS 			: out 	std_logic; 		-- SPI chip select, active in low
+			MOSI 			: out 	std_logic; 		-- SPI serial data from master to slave
+			MISO 			: in 		std_logic; 		-- SPI serial data from slave to master
+			DRDY 			: in 		std_logic 		-- SPI serial data from slave to master
+		);
+	end component;
 
 	component DDS_AD9837 is
 		Port (
@@ -193,20 +208,7 @@ architecture behav of zim is
 		);
 	end component;
 	
-	component ADC_ADS127 is
-		Port (
-			CLK 			: in 		std_logic; 						         -- system clock :  MHz clock
-			RESET			: in		std_logic; 
-			TRIG 			: in 		std_logic;
-			DTRIG 		: out 	std_logic; 
-			ADC_DATA		: out 	std_logic_vector(23 downto 0); 		-- Last read adc value
-			SCLK 			: out 	std_logic; 		-- SPI clock :  MHz
-			CS 			: out 	std_logic; 		-- SPI chip select, active in low
-			MOSI 			: out 	std_logic; 		-- SPI serial data from master to slave
-			MISO 			: in 		std_logic; 		-- SPI serial data from slave to master
-			DRDY 			: in 		std_logic 		-- SPI serial data from slave to master
-		);
-	end component;
+	
 
 	component ADC_ADS1252 is
 		Port (
@@ -319,14 +321,14 @@ architecture behav of zim is
 	signal SecClk				: std_logic := '0';
 	signal secclk_cnt    	: std_logic_vector(31 downto 0):= x"00000000";
 	
-	signal buf_version 		: std_logic_vector(15 downto 0)  := x"0FA2";  -- 4001
+	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1004";  -- 4100
 	
 begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
 	TEST_LED 		<= SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
 	
-	DDS_MCLK 		<= dds0_mclk;  -- 125KHz = 16MHz / 128
-	DDS_MCLK1 		<= clk_16MHz; 	-- 16MHz 
+	DDS_MCLK 		<= dds0_mclk when buf_control(6) = '0' else clk_16MHz;  -- 125KHz = 16MHz / 128
+	DDS_MCLK1 		<= not clk_16MHz; 	-- 16MHz 
 	
 	--acadc_trig 		<= EIS_SYNCCLK; 
 	VAC_CLK			<= not EIS_SYNCCLK;  
@@ -665,20 +667,20 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						comm_buf(0)			<= buf_version(15 downto 8);
 						comm_buf(1)			<= buf_version(7 downto 0);
 
-					when "1110001" =>
-						comm_length			<= 1;
-						comm_buf(0)			<= comm_test_buf_24(7 downto 0);
-						
-					when "1110010" =>
-						comm_length			<= 2;
-						comm_buf(0)			<= comm_test_buf_24(15 downto 8);
-						comm_buf(1)			<= comm_test_buf_24(7 downto 0);
-						
-					when "1110011" =>
-						comm_length			<= 3;
-						comm_buf(0)			<= comm_test_buf_24(23 downto 16);
-						comm_buf(1)			<= comm_test_buf_24(15 downto 8);
-						comm_buf(2)			<= comm_test_buf_24(7 downto 0);
+--					when "1110001" =>
+--						comm_length			<= 1;
+--						comm_buf(0)			<= comm_test_buf_24(7 downto 0);
+--						
+--					when "1110010" =>
+--						comm_length			<= 2;
+--						comm_buf(0)			<= comm_test_buf_24(15 downto 8);
+--						comm_buf(1)			<= comm_test_buf_24(7 downto 0);
+--						
+--					when "1110011" =>
+--						comm_length			<= 3;
+--						comm_buf(0)			<= comm_test_buf_24(23 downto 16);
+--						comm_buf(1)			<= comm_test_buf_24(15 downto 8);
+--						comm_buf(2)			<= comm_test_buf_24(7 downto 0);
 						
 					when others =>
 						comm_state			<= s_comm_err;
@@ -780,20 +782,20 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						data_idxvec(7 downto 0)				<= comm_buf(1);
 						data_index		<= conv_integer(comm_buf(0) & comm_buf(1));
 
-					when "1110001" =>
-						comm_test_buf_24(7 downto 0) 	<= comm_buf(0);
-						buf_device_acadc		<= comm_buf(0);		
-					
-					when "1110010" =>
-						comm_test_buf_24(15 downto 8)		<= comm_buf(0);
-						comm_test_buf_24(7 downto 0)		<= comm_buf(1);
-						buf_device_acadc		<= comm_buf(1);		
-					
-					when "1110011" =>	
-						comm_test_buf_24(23 downto 16)	<= comm_buf(0);
-						comm_test_buf_24(15 downto 8)		<= comm_buf(1);
-						comm_test_buf_24(7 downto 0)		<= comm_buf(2);
-						buf_device_acadc		<= comm_buf(2);	
+--					when "1110001" =>
+--						comm_test_buf_24(7 downto 0) 	<= comm_buf(0);
+--						buf_device_acadc		<= comm_buf(0);		
+--					
+--					when "1110010" =>
+--						comm_test_buf_24(15 downto 8)		<= comm_buf(0);
+--						comm_test_buf_24(7 downto 0)		<= comm_buf(1);
+--						buf_device_acadc		<= comm_buf(1);		
+--					
+--					when "1110011" =>	
+--						comm_test_buf_24(23 downto 16)	<= comm_buf(0);
+--						comm_test_buf_24(15 downto 8)		<= comm_buf(1);
+--						comm_test_buf_24(7 downto 0)		<= comm_buf(2);
+--						buf_device_acadc		<= comm_buf(2);	
 						
 					when others =>
 						comm_state			<= s_comm_err;
@@ -837,6 +839,34 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		DATA_VLD => comm_data_vld
 	);
 	
+	ADC_IAC : ADC_ADS127 
+	port map (
+		CLK 			=> clk_IAC_ADC, 
+		RESET			=> '0',
+		TRIG			=> acadc_trig, 
+		DTRIG			=> acadc_dtrig_i,	
+		ADC_DATA		=> buf_adcdata_iac, 		
+		SCLK 			=> IAC_SCLK, 	
+		CS 			=> IAC_CS, 	
+		MOSI 			=> IAC_MOSI, 	
+		MISO 			=> IAC_MISO, 	
+		DRDY 			=> IAC_DRDY 	
+	);
+
+	ADC_VAC : ADC_ADS127 
+	port map (
+		CLK 			=> clk_VAC_ADC, 	
+		RESET			=> '0',
+		TRIG			=> acadc_trig, 
+		DTRIG			=> acadc_dtrig_v,	
+		ADC_DATA		=> buf_adcdata_vac, 		
+		SCLK 			=> VAC_SCLK, 	
+		CS 			=> VAC_CS, 	
+		MOSI 			=> VAC_MOSI, 	
+		MISO 			=> VAC_MISO, 	
+		DRDY 			=> VAC_DRDY 	
+	);
+	
 	SIG_DDS : DDS_AD9837 
 	port map (
 			CLK 		=> clk_dds0, 	
@@ -869,33 +899,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			DRDY			=> RTD_DRDY 
 	);
 
-	ADC_IAC : ADC_ADS127 
-	port map (
-		CLK 			=> clk_IAC_ADC, 
-		RESET			=> '0',
-		TRIG			=> acadc_trig, 
-		DTRIG			=> acadc_dtrig_i,	
-		ADC_DATA		=> buf_adcdata_iac, 		
-		SCLK 			=> IAC_SCLK, 	
-		CS 			=> IAC_CS, 	
-		MOSI 			=> IAC_MOSI, 	
-		MISO 			=> IAC_MISO, 	
-		DRDY 			=> IAC_DRDY 	
-	);
-
-	ADC_VAC : ADC_ADS127 
-	port map (
-		CLK 			=> clk_VAC_ADC, 	
-		RESET			=> '0',
-		TRIG			=> acadc_trig, 
-		DTRIG			=> acadc_dtrig_v,	
-		ADC_DATA		=> buf_adcdata_vac, 		
-		SCLK 			=> VAC_SCLK, 	
-		CS 			=> VAC_CS, 	
-		MOSI 			=> VAC_MOSI, 	
-		MISO 			=> VAC_MISO, 	
-		DRDY 			=> VAC_DRDY 	
-	);
+	
 	
 	ADC_VDC : ADC_ADS1252
 	Port map (

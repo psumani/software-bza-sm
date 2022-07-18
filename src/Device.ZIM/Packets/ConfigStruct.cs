@@ -2,6 +2,7 @@
 using System.Text;
 using System.Runtime.InteropServices;
 using ZiveLab.Device.ZIM.Utilities;
+using System.Net.NetworkInformation;
 
 namespace ZiveLab.Device.ZIM.Packets
 {
@@ -40,6 +41,167 @@ namespace ZiveLab.Device.ZIM.Packets
             pinnedArr.Free();
         }
     }
+    
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct stFindSIFCfg
+    {
+        public byte Type;
+        public stVersion BoardVersion;
+        public stVersion FirmwareVersion;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
+        public byte[] Serial;
+        public byte SockStat;
+        public stFindSIFCfg(byte init)
+        {
+            Type = (byte)eDeviceType.ZIM;
+            BoardVersion = new stVersion(0);
+            FirmwareVersion = new stVersion(0);
+            SockStat = 0;
+            Serial = new byte[12];
+            Serial[0] = (byte)'I';
+            Serial[1] = (byte)'F';
+            Serial[2] = 0x0;
+            Serial[3] = 0x0;
+            Serial[4] = 0x0;
+            Serial[5] = 0x0;
+            Serial[6] = 0x0;
+            Serial[7] = 0x0;
+            Serial[8] = 0x0;
+            Serial[9] = 0x0;
+            Serial[10] = 0x0;
+            Serial[11] = 0x0;
+        }
+        
+        public string GetSerialNumber()
+        {
+            return Encoding.Default.GetString(Serial);
+        }
+
+        public void SetSerialNumber(string str)
+        {
+            byte[] tmp = Encoding.Default.GetBytes(str.ToCharArray());
+            int i, j;
+
+            j = 0;
+            Serial[j] = (byte)'I';
+            j++;
+            Serial[j] = (byte)'F';
+            j++;
+            for (i = 1; i < 20; i += 2)
+            {
+                Serial[j] = tmp[i];
+                j++;
+            }
+        }
+        public string GetFirmwareVer()
+        {
+            return string.Format("{0}.{1}.{2}.{3}", FirmwareVersion.Major, FirmwareVersion.Minor, FirmwareVersion.Revision, FirmwareVersion.Build);
+        }
+        public bool SetFirmwareVer(string str)
+        {
+            string stmp;
+            int tmp;
+            if (str.Length == 7)
+            {
+                stmp = str.Replace(".", "");
+            }
+            else
+            {
+                stmp = str;
+            }
+
+            if (str.Length == 4)
+            {
+                tmp = Convert.ToUInt16(stmp);
+
+                FirmwareVersion.Major = (byte)(tmp / 1000);
+                if (FirmwareVersion.Major > 0) tmp = tmp % (FirmwareVersion.Major * 1000);
+                FirmwareVersion.Minor = (byte)(tmp / 100);
+                if (FirmwareVersion.Minor > 0) tmp = tmp % (FirmwareVersion.Minor * 100);
+                FirmwareVersion.Revision = (byte)(tmp / 10);
+                if (FirmwareVersion.Revision > 0) tmp = tmp % (FirmwareVersion.Revision * 10);
+                FirmwareVersion.Build = (byte)tmp;
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+        public string GetBoardVer()
+        {
+            return string.Format("{0}.{1}.{2}.{3}", BoardVersion.Major, BoardVersion.Minor, BoardVersion.Revision, BoardVersion.Build);
+        }
+        public bool SetBoardVer(string str)
+        {
+            string stmp;
+            int tmp;
+            if (str.Length == 7)
+            {
+                stmp = str.Replace(".", "");
+            }
+            else
+            {
+                stmp = str;
+            }
+
+            if (str.Length == 4)
+            {
+                tmp = Convert.ToUInt16(stmp);
+
+                BoardVersion.Major = (byte)(tmp / 1000);
+                if (BoardVersion.Major > 0) tmp = tmp % (BoardVersion.Major * 1000);
+                BoardVersion.Minor = (byte)(tmp / 100);
+                if (BoardVersion.Minor > 0) tmp = tmp % (BoardVersion.Minor * 100);
+                BoardVersion.Revision = (byte)(tmp / 10);
+                if (BoardVersion.Revision > 0) tmp = tmp % (BoardVersion.Revision * 10);
+                BoardVersion.Build = (byte)tmp;
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+       
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stFindSIFCfg)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stFindSIFCfg));
+            pinnedArr.Free();
+        }
+    }
+
+    public class stFindDevice
+    {
+        public PhysicalAddress mac;
+        public stFindSIFCfg findsifcfg;
+        public bool chkconnected;
+        public bool busy;
+        public string shostname;
+        public stFindDevice()
+        {
+            mac = new PhysicalAddress(null);
+            findsifcfg = new stFindSIFCfg(0);
+            findsifcfg.Type = 0xFF;
+            busy = true;
+            chkconnected = false;
+            shostname = "";
+        }
+    }
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -49,7 +211,7 @@ namespace ZiveLab.Device.ZIM.Packets
         public stVersion BoardVersion;
         public stVersion FirmwareVersion;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
-        public  byte[] Serial;
+        public byte[] Serial;
         public stSIFCfg(byte init)
         {
             Type = (byte)eDeviceType.ZIM;
@@ -126,9 +288,9 @@ namespace ZiveLab.Device.ZIM.Packets
             if (str.Length == 4)
             {
                 tmp = Convert.ToUInt16(stmp);
-               
-                BoardVersion.Major = (byte)(tmp/1000);
-                if(BoardVersion.Major > 0) tmp = tmp % (BoardVersion.Major * 1000);
+
+                BoardVersion.Major = (byte)(tmp / 1000);
+                if (BoardVersion.Major > 0) tmp = tmp % (BoardVersion.Major * 1000);
                 BoardVersion.Minor = (byte)(tmp / 100);
                 if (BoardVersion.Minor > 0) tmp = tmp % (BoardVersion.Minor * 100);
                 BoardVersion.Revision = (byte)(tmp / 10);
@@ -148,7 +310,7 @@ namespace ZiveLab.Device.ZIM.Packets
 
         public void SetSerialNumber(string str)
         {
-            byte [] tmp = Encoding.Default.GetBytes(str.ToCharArray());
+            byte[] tmp = Encoding.Default.GetBytes(str.ToCharArray());
             int i, j;
 
             j = 0;
@@ -156,7 +318,7 @@ namespace ZiveLab.Device.ZIM.Packets
             j++;
             Serial[j] = (byte)'F';
             j++;
-            for (i=1; i<20; i+=2)
+            for (i = 1; i < 20; i += 2)
             {
                 Serial[j] = tmp[i];
                 j++;
@@ -214,20 +376,20 @@ namespace ZiveLab.Device.ZIM.Packets
 
             for (i = 0; i < 8; i++)
             {
-                tmp = (byte)((nVal >> (i*4)) & (uint)0xf);
-                mChar[7-i] = (byte)(0x30 + tmp);
+                tmp = (byte)((nVal >> (i * 4)) & (uint)0xf);
+                mChar[7 - i] = (byte)(0x30 + tmp);
             }
             return Encoding.Default.GetString(mChar); ;
         }
 
         public string UshortToByteString(ushort nVal)
         {
-            char [] mChar = new char[5];
+            char[] mChar = new char[5];
             Array.Clear(mChar, 0, 5);
             mChar = string.Format("{0:0000}", nVal).ToCharArray();
             return string.Format("{0}.{1}.{2}.{3}", mChar[0], mChar[1], mChar[2], mChar[3]);
         }
-             
+
 
 
         public string GetSerialNumber()
@@ -237,7 +399,7 @@ namespace ZiveLab.Device.ZIM.Packets
             if (i < 0) i = 0;
             else if (i > 5) i = 5;
 
-            str = string.Format("{0}{1}{2}", Extensions.GetEnumDescription((eFpgaSnID)i), (char)cModel[1], UintToByteString(nSerial));
+            str = string.Format("{0}{1}{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)cModel[1], UintToByteString(nSerial));
             return str;
         }
 
@@ -248,7 +410,7 @@ namespace ZiveLab.Device.ZIM.Packets
 
         public string GetBoardType()
         {
-            eFpgaType mtype = (eFpgaType)(cModel[0]-0x30);
+            eZimType mtype = (eZimType)(cModel[0] - 0x30);
             return Extensions.GetEnumDescription(mtype);
         }
 
@@ -306,7 +468,7 @@ namespace ZiveLab.Device.ZIM.Packets
         {
             string sTmp;
             int index = 0;
-            
+
             uint tmp;
             int i;
             sTmp = str.Replace(" ", "");
@@ -324,7 +486,7 @@ namespace ZiveLab.Device.ZIM.Packets
 
             for (i = 0; i < 8; i++)
             {
-                tmp += (uint)((mChar[index] & 0xFF) - 0x30) << ((7-i) * 4);
+                tmp += (uint)((mChar[index] & 0xFF) - 0x30) << ((7 - i) * 4);
                 index++;
             }
             nSerial = tmp;
@@ -391,7 +553,7 @@ namespace ZiveLab.Device.ZIM.Packets
             Port = 2000;
             byte[] barr = Encoding.Default.GetBytes("ZIM-0000");
             Array.Clear(hostname, 0, 20);
-            Array.Copy(barr, 0,hostname, 0, barr.Length);
+            Array.Copy(barr, 0, hostname, 0, barr.Length);
         }
         public byte[] ToByteArray()
         {
@@ -480,7 +642,7 @@ namespace ZiveLab.Device.ZIM.Packets
         {
             byte[] arr = ToByteArray();
             int Size = Marshal.SizeOf(this);
-            byte[] NoMaxarr = new byte[Size-6];
+            byte[] NoMaxarr = new byte[Size - 6];
             Array.Copy(arr, 6, NoMaxarr, 0, Size - 6);
             return NoMaxarr;
         }
@@ -582,6 +744,8 @@ namespace ZiveLab.Device.ZIM.Packets
         }
     }
 
+
+
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct stSystemConfig
@@ -671,7 +835,7 @@ namespace ZiveLab.Device.ZIM.Packets
     public struct stWebSiteLimitInfo
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 22)]
-        public byte [] Alias;
+        public byte[] Alias;
         public double zrehigh;
         public double zmodhigh;
         public double zimaghigh;
