@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabtech = new System.Windows.Forms.TabControl();
             this.tabtech1 = new System.Windows.Forms.TabPage();
+            this.cboeiscyc = new System.Windows.Forms.ComboBox();
+            this.cboeisskipcyc = new System.Windows.Forms.ComboBox();
+            this.lbleiscycle = new System.Windows.Forms.Label();
+            this.lbleisskipcycle = new System.Windows.Forms.Label();
             this.txteisrepeat = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbleisiteration = new System.Windows.Forms.Label();
             this.txteisdensity = new System.Windows.Forms.TextBox();
             this.txteisfinalfreq = new System.Windows.Forms.TextBox();
             this.txteisinitfreq = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbleisdensity = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabtech2 = new System.Windows.Forms.TabPage();
@@ -43,9 +48,9 @@
             this.txthfrtotaltime = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txthfrinterval = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblhfrinterval = new System.Windows.Forms.Label();
             this.txthfrfreq = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblhfrfreq = new System.Windows.Forms.Label();
             this.tabtech3 = new System.Windows.Forms.TabPage();
             this.chkrpend = new System.Windows.Forms.CheckBox();
             this.chkprrcelloffwait = new System.Windows.Forms.CheckBox();
@@ -61,9 +66,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkondelaystable = new System.Windows.Forms.CheckBox();
             this.txtondelay = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblondelay = new System.Windows.Forms.Label();
             this.cboIrange = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbliRange = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtbattid = new System.Windows.Forms.TextBox();
             this.txtcreator = new System.Windows.Forms.TextBox();
@@ -76,6 +81,13 @@
             this.btsave = new System.Windows.Forms.Button();
             this.btapply = new System.Windows.Forms.Button();
             this.btclose = new System.Windows.Forms.Button();
+            this.techtree = new System.Windows.Forms.TreeView();
+            this.lbltech = new System.Windows.Forms.Label();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.lblctrlrate = new System.Windows.Forms.Label();
+            this.txtMonCutoff = new System.Windows.Forms.TextBox();
+            this.lblcutoff = new System.Windows.Forms.Label();
+            this.cbomonctrl = new System.Windows.Forms.ComboBox();
             this.tabtech.SuspendLayout();
             this.tabtech1.SuspendLayout();
             this.tabtech2.SuspendLayout();
@@ -89,7 +101,7 @@
             this.tabtech.Controls.Add(this.tabtech1);
             this.tabtech.Controls.Add(this.tabtech2);
             this.tabtech.Controls.Add(this.tabtech3);
-            this.tabtech.Location = new System.Drawing.Point(9, 6);
+            this.tabtech.Location = new System.Drawing.Point(164, 8);
             this.tabtech.Name = "tabtech";
             this.tabtech.SelectedIndex = 0;
             this.tabtech.Size = new System.Drawing.Size(423, 204);
@@ -99,12 +111,16 @@
             // tabtech1
             // 
             this.tabtech1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabtech1.Controls.Add(this.cboeiscyc);
+            this.tabtech1.Controls.Add(this.cboeisskipcyc);
+            this.tabtech1.Controls.Add(this.lbleiscycle);
+            this.tabtech1.Controls.Add(this.lbleisskipcycle);
             this.tabtech1.Controls.Add(this.txteisrepeat);
-            this.tabtech1.Controls.Add(this.label6);
+            this.tabtech1.Controls.Add(this.lbleisiteration);
             this.tabtech1.Controls.Add(this.txteisdensity);
             this.tabtech1.Controls.Add(this.txteisfinalfreq);
             this.tabtech1.Controls.Add(this.txteisinitfreq);
-            this.tabtech1.Controls.Add(this.label4);
+            this.tabtech1.Controls.Add(this.lbleisdensity);
             this.tabtech1.Controls.Add(this.label3);
             this.tabtech1.Controls.Add(this.label2);
             this.tabtech1.Location = new System.Drawing.Point(4, 23);
@@ -112,36 +128,70 @@
             this.tabtech1.Padding = new System.Windows.Forms.Padding(3);
             this.tabtech1.Size = new System.Drawing.Size(415, 177);
             this.tabtech1.TabIndex = 0;
-            this.tabtech1.Text = "Galvanostatic EIS";
+            this.tabtech1.Text = "a";
+            // 
+            // cboeiscyc
+            // 
+            this.cboeiscyc.FormattingEnabled = true;
+            this.cboeiscyc.Location = new System.Drawing.Point(194, 147);
+            this.cboeiscyc.Name = "cboeiscyc";
+            this.cboeiscyc.Size = new System.Drawing.Size(86, 22);
+            this.cboeiscyc.TabIndex = 24;
+            // 
+            // cboeisskipcyc
+            // 
+            this.cboeisskipcyc.FormattingEnabled = true;
+            this.cboeisskipcyc.Location = new System.Drawing.Point(194, 120);
+            this.cboeisskipcyc.Name = "cboeisskipcyc";
+            this.cboeisskipcyc.Size = new System.Drawing.Size(86, 22);
+            this.cboeisskipcyc.TabIndex = 23;
+            // 
+            // lbleiscycle
+            // 
+            this.lbleiscycle.AutoSize = true;
+            this.lbleiscycle.Location = new System.Drawing.Point(40, 152);
+            this.lbleiscycle.Name = "lbleiscycle";
+            this.lbleiscycle.Size = new System.Drawing.Size(84, 14);
+            this.lbleiscycle.TabIndex = 22;
+            this.lbleiscycle.Text = "Cycle count";
+            // 
+            // lbleisskipcycle
+            // 
+            this.lbleisskipcycle.AutoSize = true;
+            this.lbleisskipcycle.Location = new System.Drawing.Point(40, 125);
+            this.lbleisskipcycle.Name = "lbleisskipcycle";
+            this.lbleisskipcycle.Size = new System.Drawing.Size(77, 14);
+            this.lbleisskipcycle.TabIndex = 20;
+            this.lbleisskipcycle.Text = "Skip cycle";
             // 
             // txteisrepeat
             // 
-            this.txteisrepeat.Location = new System.Drawing.Point(174, 98);
+            this.txteisrepeat.Location = new System.Drawing.Point(194, 93);
             this.txteisrepeat.Name = "txteisrepeat";
-            this.txteisrepeat.Size = new System.Drawing.Size(70, 22);
+            this.txteisrepeat.Size = new System.Drawing.Size(86, 22);
             this.txteisrepeat.TabIndex = 19;
             this.txteisrepeat.Leave += new System.EventHandler(this.txteisrepeat_Leave);
             // 
-            // label6
+            // lbleisiteration
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 101);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 14);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Iteration";
+            this.lbleisiteration.AutoSize = true;
+            this.lbleisiteration.Location = new System.Drawing.Point(40, 96);
+            this.lbleisiteration.Name = "lbleisiteration";
+            this.lbleisiteration.Size = new System.Drawing.Size(70, 14);
+            this.lbleisiteration.TabIndex = 18;
+            this.lbleisiteration.Text = "Iteration";
             // 
             // txteisdensity
             // 
-            this.txteisdensity.Location = new System.Drawing.Point(174, 70);
+            this.txteisdensity.Location = new System.Drawing.Point(194, 65);
             this.txteisdensity.Name = "txteisdensity";
-            this.txteisdensity.Size = new System.Drawing.Size(70, 22);
+            this.txteisdensity.Size = new System.Drawing.Size(86, 22);
             this.txteisdensity.TabIndex = 17;
             this.txteisdensity.Leave += new System.EventHandler(this.txteisdensity_Leave);
             // 
             // txteisfinalfreq
             // 
-            this.txteisfinalfreq.Location = new System.Drawing.Point(174, 42);
+            this.txteisfinalfreq.Location = new System.Drawing.Point(194, 37);
             this.txteisfinalfreq.Name = "txteisfinalfreq";
             this.txteisfinalfreq.Size = new System.Drawing.Size(86, 22);
             this.txteisfinalfreq.TabIndex = 16;
@@ -149,25 +199,25 @@
             // 
             // txteisinitfreq
             // 
-            this.txteisinitfreq.Location = new System.Drawing.Point(174, 14);
+            this.txteisinitfreq.Location = new System.Drawing.Point(194, 9);
             this.txteisinitfreq.Name = "txteisinitfreq";
             this.txteisinitfreq.Size = new System.Drawing.Size(86, 22);
             this.txteisinitfreq.TabIndex = 15;
             this.txteisinitfreq.Leave += new System.EventHandler(this.txteisinitfreq_Leave);
             // 
-            // label4
+            // lbleisdensity
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 14);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Density";
+            this.lbleisdensity.AutoSize = true;
+            this.lbleisdensity.Location = new System.Drawing.Point(40, 68);
+            this.lbleisdensity.Name = "lbleisdensity";
+            this.lbleisdensity.Size = new System.Drawing.Size(56, 14);
+            this.lbleisdensity.TabIndex = 12;
+            this.lbleisdensity.Text = "Density";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 46);
+            this.label3.Location = new System.Drawing.Point(38, 41);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 14);
             this.label3.TabIndex = 11;
@@ -176,7 +226,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 18);
+            this.label2.Location = new System.Drawing.Point(38, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(154, 14);
             this.label2.TabIndex = 10;
@@ -185,24 +235,28 @@
             // tabtech2
             // 
             this.tabtech2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabtech2.Controls.Add(this.cbomonctrl);
+            this.tabtech2.Controls.Add(this.txtMonCutoff);
+            this.tabtech2.Controls.Add(this.lblcutoff);
+            this.tabtech2.Controls.Add(this.lblctrlrate);
             this.tabtech2.Controls.Add(this.chkhfrcelloffwait);
             this.tabtech2.Controls.Add(this.txthfrtotaltime);
             this.tabtech2.Controls.Add(this.label14);
             this.tabtech2.Controls.Add(this.txthfrinterval);
-            this.tabtech2.Controls.Add(this.label13);
+            this.tabtech2.Controls.Add(this.lblhfrinterval);
             this.tabtech2.Controls.Add(this.txthfrfreq);
-            this.tabtech2.Controls.Add(this.label12);
+            this.tabtech2.Controls.Add(this.lblhfrfreq);
             this.tabtech2.Location = new System.Drawing.Point(4, 23);
             this.tabtech2.Name = "tabtech2";
             this.tabtech2.Padding = new System.Windows.Forms.Padding(3);
             this.tabtech2.Size = new System.Drawing.Size(415, 177);
             this.tabtech2.TabIndex = 1;
-            this.tabtech2.Text = "Galvanostatic HFR ";
+            this.tabtech2.Text = "b";
             // 
             // chkhfrcelloffwait
             // 
             this.chkhfrcelloffwait.AutoSize = true;
-            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 67);
+            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 96);
             this.chkhfrcelloffwait.Name = "chkhfrcelloffwait";
             this.chkhfrcelloffwait.Size = new System.Drawing.Size(166, 18);
             this.chkhfrcelloffwait.TabIndex = 25;
@@ -212,7 +266,7 @@
             // 
             // txthfrtotaltime
             // 
-            this.txthfrtotaltime.Location = new System.Drawing.Point(174, 93);
+            this.txthfrtotaltime.Location = new System.Drawing.Point(174, 69);
             this.txthfrtotaltime.Name = "txthfrtotaltime";
             this.txthfrtotaltime.Size = new System.Drawing.Size(86, 22);
             this.txthfrtotaltime.TabIndex = 21;
@@ -221,7 +275,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(20, 96);
+            this.label14.Location = new System.Drawing.Point(20, 72);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(98, 14);
             this.label14.TabIndex = 20;
@@ -235,14 +289,14 @@
             this.txthfrinterval.TabIndex = 19;
             this.txthfrinterval.Leave += new System.EventHandler(this.txthfrinterval_Leave);
             // 
-            // label13
+            // lblhfrinterval
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 45);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(84, 14);
-            this.label13.TabIndex = 18;
-            this.label13.Text = "Interval(s)";
+            this.lblhfrinterval.AutoSize = true;
+            this.lblhfrinterval.Location = new System.Drawing.Point(20, 45);
+            this.lblhfrinterval.Name = "lblhfrinterval";
+            this.lblhfrinterval.Size = new System.Drawing.Size(84, 14);
+            this.lblhfrinterval.TabIndex = 18;
+            this.lblhfrinterval.Text = "Interval(s)";
             // 
             // txthfrfreq
             // 
@@ -252,14 +306,14 @@
             this.txthfrfreq.TabIndex = 17;
             this.txthfrfreq.Leave += new System.EventHandler(this.txthfrfreq_Leave);
             // 
-            // label12
+            // lblhfrfreq
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(21, 18);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(98, 14);
-            this.label12.TabIndex = 16;
-            this.label12.Text = "Frequency(Hz)";
+            this.lblhfrfreq.AutoSize = true;
+            this.lblhfrfreq.Location = new System.Drawing.Point(21, 18);
+            this.lblhfrfreq.Name = "lblhfrfreq";
+            this.lblhfrfreq.Size = new System.Drawing.Size(98, 14);
+            this.lblhfrfreq.TabIndex = 16;
+            this.lblhfrfreq.Text = "Frequency(Hz)";
             // 
             // tabtech3
             // 
@@ -279,7 +333,7 @@
             this.tabtech3.Name = "tabtech3";
             this.tabtech3.Size = new System.Drawing.Size(415, 177);
             this.tabtech3.TabIndex = 2;
-            this.tabtech3.Text = "Rs Pseudo Rp";
+            this.tabtech3.Text = "c";
             // 
             // chkrpend
             // 
@@ -383,11 +437,11 @@
             // 
             this.panel1.Controls.Add(this.chkondelaystable);
             this.panel1.Controls.Add(this.txtondelay);
-            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.lblondelay);
             this.panel1.Controls.Add(this.cboIrange);
-            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.lbliRange);
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Location = new System.Drawing.Point(10, 216);
+            this.panel1.Location = new System.Drawing.Point(164, 218);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(418, 200);
             this.panel1.TabIndex = 10;
@@ -411,14 +465,14 @@
             this.txtondelay.TabIndex = 23;
             this.txtondelay.Leave += new System.EventHandler(this.txtondelay_Leave);
             // 
-            // label11
+            // lblondelay
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(24, 19);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(84, 14);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "On delay(s)";
+            this.lblondelay.AutoSize = true;
+            this.lblondelay.Location = new System.Drawing.Point(24, 19);
+            this.lblondelay.Name = "lblondelay";
+            this.lblondelay.Size = new System.Drawing.Size(84, 14);
+            this.lblondelay.TabIndex = 22;
+            this.lblondelay.Text = "On delay(s)";
             // 
             // cboIrange
             // 
@@ -429,14 +483,14 @@
             this.cboIrange.TabIndex = 20;
             this.cboIrange.SelectedIndexChanged += new System.EventHandler(this.cboIrange_SelectedIndexChanged);
             // 
-            // label5
+            // lbliRange
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 14);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "I Range";
+            this.lbliRange.AutoSize = true;
+            this.lbliRange.Location = new System.Drawing.Point(24, 57);
+            this.lbliRange.Name = "lbliRange";
+            this.lbliRange.Size = new System.Drawing.Size(56, 14);
+            this.lbliRange.TabIndex = 19;
+            this.lbliRange.Text = "I Range";
             // 
             // groupBox2
             // 
@@ -491,9 +545,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(19, 55);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(154, 14);
+            this.label8.Size = new System.Drawing.Size(147, 14);
             this.label8.TabIndex = 18;
-            this.label8.Text = "Nominal capacity(mAH)";
+            this.label8.Text = "Nominal capacity(AH)";
             // 
             // label7
             // 
@@ -506,7 +560,7 @@
             // 
             // btopen
             // 
-            this.btopen.Location = new System.Drawing.Point(449, 29);
+            this.btopen.Location = new System.Drawing.Point(596, 32);
             this.btopen.Name = "btopen";
             this.btopen.Size = new System.Drawing.Size(73, 26);
             this.btopen.TabIndex = 11;
@@ -516,7 +570,7 @@
             // 
             // btsaveas
             // 
-            this.btsaveas.Location = new System.Drawing.Point(449, 186);
+            this.btsaveas.Location = new System.Drawing.Point(596, 188);
             this.btsaveas.Name = "btsaveas";
             this.btsaveas.Size = new System.Drawing.Size(73, 26);
             this.btsaveas.TabIndex = 12;
@@ -526,7 +580,7 @@
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(449, 143);
+            this.btsave.Location = new System.Drawing.Point(596, 144);
             this.btsave.Name = "btsave";
             this.btsave.Size = new System.Drawing.Size(73, 26);
             this.btsave.TabIndex = 13;
@@ -536,7 +590,7 @@
             // 
             // btapply
             // 
-            this.btapply.Location = new System.Drawing.Point(449, 296);
+            this.btapply.Location = new System.Drawing.Point(596, 298);
             this.btapply.Name = "btapply";
             this.btapply.Size = new System.Drawing.Size(73, 26);
             this.btapply.TabIndex = 14;
@@ -546,7 +600,7 @@
             // 
             // btclose
             // 
-            this.btclose.Location = new System.Drawing.Point(449, 390);
+            this.btclose.Location = new System.Drawing.Point(596, 392);
             this.btclose.Name = "btclose";
             this.btclose.Size = new System.Drawing.Size(73, 26);
             this.btclose.TabIndex = 15;
@@ -554,11 +608,72 @@
             this.btclose.UseVisualStyleBackColor = true;
             this.btclose.Click += new System.EventHandler(this.btclose_Click);
             // 
+            // techtree
+            // 
+            this.techtree.HideSelection = false;
+            this.techtree.Location = new System.Drawing.Point(8, 31);
+            this.techtree.Name = "techtree";
+            this.techtree.Size = new System.Drawing.Size(149, 386);
+            this.techtree.TabIndex = 16;
+            this.techtree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.techtree_NodeMouseClick);
+            // 
+            // lbltech
+            // 
+            this.lbltech.AutoSize = true;
+            this.lbltech.Location = new System.Drawing.Point(11, 12);
+            this.lbltech.Name = "lbltech";
+            this.lbltech.Size = new System.Drawing.Size(112, 14);
+            this.lbltech.TabIndex = 17;
+            this.lbltech.Text = "Technique type.";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // lblctrlrate
+            // 
+            this.lblctrlrate.AutoSize = true;
+            this.lblctrlrate.Location = new System.Drawing.Point(21, 120);
+            this.lblctrlrate.Name = "lblctrlrate";
+            this.lblctrlrate.Size = new System.Drawing.Size(147, 14);
+            this.lblctrlrate.TabIndex = 26;
+            this.lblctrlrate.Text = "Discharge Control(A)";
+            // 
+            // txtMonCutoff
+            // 
+            this.txtMonCutoff.Location = new System.Drawing.Point(175, 147);
+            this.txtMonCutoff.Name = "txtMonCutoff";
+            this.txtMonCutoff.Size = new System.Drawing.Size(86, 22);
+            this.txtMonCutoff.TabIndex = 29;
+            this.txtMonCutoff.Leave += new System.EventHandler(this.txtMonCutoff_Leave);
+            // 
+            // lblcutoff
+            // 
+            this.lblcutoff.AutoSize = true;
+            this.lblcutoff.Location = new System.Drawing.Point(21, 150);
+            this.lblcutoff.Name = "lblcutoff";
+            this.lblcutoff.Size = new System.Drawing.Size(133, 14);
+            this.lblcutoff.TabIndex = 28;
+            this.lblcutoff.Text = "Cut-off voltage(V)";
+            // 
+            // cbomonctrl
+            // 
+            this.cbomonctrl.FormattingEnabled = true;
+            this.cbomonctrl.Location = new System.Drawing.Point(175, 118);
+            this.cbomonctrl.Name = "cbomonctrl";
+            this.cbomonctrl.Size = new System.Drawing.Size(86, 22);
+            this.cbomonctrl.TabIndex = 30;
+            this.cbomonctrl.SelectedIndexChanged += new System.EventHandler(this.cbomonctrl_SelectedIndexChanged);
+            // 
             // frmTechniq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 426);
+            this.ClientSize = new System.Drawing.Size(678, 427);
+            this.Controls.Add(this.lbltech);
+            this.Controls.Add(this.techtree);
             this.Controls.Add(this.btclose);
             this.Controls.Add(this.btapply);
             this.Controls.Add(this.btsave);
@@ -591,6 +706,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -600,7 +716,7 @@
         private System.Windows.Forms.TabPage tabtech1;
         private System.Windows.Forms.TabPage tabtech2;
         private System.Windows.Forms.TabPage tabtech3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbleisdensity;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txteisdensity;
@@ -609,9 +725,9 @@
         private System.Windows.Forms.TextBox txthfrtotaltime;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txthfrinterval;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblhfrinterval;
         private System.Windows.Forms.TextBox txthfrfreq;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblhfrfreq;
         private System.Windows.Forms.TextBox txtprrtotaltime;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txtprrinterval;
@@ -636,13 +752,24 @@
         private System.Windows.Forms.TextBox txtbattid;
         private System.Windows.Forms.ComboBox cboIrange;
         private System.Windows.Forms.TextBox txteisrepeat;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbleisiteration;
         private System.Windows.Forms.CheckBox chkhfrcelloffwait;
         private System.Windows.Forms.CheckBox chkprrcelloffwait;
         private System.Windows.Forms.CheckBox chkondelaystable;
         private System.Windows.Forms.TextBox txtondelay;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblondelay;
+        private System.Windows.Forms.Label lbliRange;
         private System.Windows.Forms.CheckBox chkrpend;
+        private System.Windows.Forms.Label lbleiscycle;
+        private System.Windows.Forms.Label lbleisskipcycle;
+        private System.Windows.Forms.TreeView techtree;
+        private System.Windows.Forms.Label lbltech;
+        private System.Windows.Forms.ComboBox cboeiscyc;
+        private System.Windows.Forms.ComboBox cboeisskipcyc;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TextBox txtMonCutoff;
+        private System.Windows.Forms.Label lblcutoff;
+        private System.Windows.Forms.Label lblctrlrate;
+        private System.Windows.Forms.ComboBox cbomonctrl;
     }
 }

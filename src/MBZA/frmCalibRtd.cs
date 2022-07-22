@@ -19,19 +19,20 @@ namespace ZiveLab.ZM
     {
         private string Serial;
         private int sifch;
+        private int ch;
         private stZimCfg mZim;
        
-        public frmCalibRtd(string tserial, int tsifch)
+        public frmCalibRtd(int tch,string tserial, int tsifch)
         {
             InitializeComponent();
             DoubleBuffered = true;
-
+            ch = tch;
             Serial = tserial;
             sifch = tsifch;
             
             mZim = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-            InitView();
-
+            InitView(); 
+            this.Text = string.Format("Calibration Temperature[PT-100] - CH{0}[{1}-{2}].", ch + 1, Serial, sifch + 1);
         }
         private void InitList(ref ListView mlstv)
         {

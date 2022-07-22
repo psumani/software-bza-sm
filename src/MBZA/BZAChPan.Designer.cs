@@ -206,6 +206,7 @@
             this.lblResult = new System.Windows.Forms.Label();
             this.lblTech = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblcsfreq1 = new System.Windows.Forms.Label();
             this.legend1 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem11 = new NationalInstruments.UI.LegendItem();
             this.Grp1Plot1 = new NationalInstruments.UI.ScatterPlot();
@@ -225,6 +226,7 @@
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor2 = new NationalInstruments.UI.XYCursor();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblcsfreq2 = new System.Windows.Forms.Label();
             this.legend2 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem21 = new NationalInstruments.UI.LegendItem();
             this.Grp2Plot1 = new NationalInstruments.UI.ScatterPlot();
@@ -252,8 +254,6 @@
             this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
             this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
-            this.lblcsfreq1 = new System.Windows.Forms.Label();
-            this.lblcsfreq2 = new System.Windows.Forms.Label();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
@@ -611,54 +611,54 @@
             // MenuModeCursor10
             // 
             this.MenuModeCursor10.Name = "MenuModeCursor10";
-            this.MenuModeCursor10.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor10.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor10.Text = "None";
             this.MenuModeCursor10.Click += new System.EventHandler(this.MenuModeCursor10_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(104, 6);
             // 
             // MenuModeCursor11
             // 
             this.MenuModeCursor11.Name = "MenuModeCursor11";
-            this.MenuModeCursor11.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor11.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor11.Text = "Plot-1";
             this.MenuModeCursor11.Click += new System.EventHandler(this.MenuModeCursor11_Click);
             // 
             // MenuModeCursor12
             // 
             this.MenuModeCursor12.Name = "MenuModeCursor12";
-            this.MenuModeCursor12.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor12.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor12.Text = "Plot-2";
             this.MenuModeCursor12.Click += new System.EventHandler(this.MenuModeCursor12_Click);
             // 
             // MenuModeCursor13
             // 
             this.MenuModeCursor13.Name = "MenuModeCursor13";
-            this.MenuModeCursor13.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor13.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor13.Text = "Plot-3";
             this.MenuModeCursor13.Click += new System.EventHandler(this.MenuModeCursor13_Click);
             // 
             // MenuModeCursor14
             // 
             this.MenuModeCursor14.Name = "MenuModeCursor14";
-            this.MenuModeCursor14.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor14.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor14.Text = "Plot-4";
             this.MenuModeCursor14.Click += new System.EventHandler(this.MenuModeCursor14_Click);
             // 
             // MenuModeCursor15
             // 
             this.MenuModeCursor15.Name = "MenuModeCursor15";
-            this.MenuModeCursor15.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor15.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor15.Text = "Plot-5";
             this.MenuModeCursor15.Click += new System.EventHandler(this.MenuModeCursor15_Click);
             // 
             // MenuModeCursor16
             // 
             this.MenuModeCursor16.Name = "MenuModeCursor16";
-            this.MenuModeCursor16.Size = new System.Drawing.Size(152, 22);
+            this.MenuModeCursor16.Size = new System.Drawing.Size(107, 22);
             this.MenuModeCursor16.Text = "Plot-6";
             this.MenuModeCursor16.Click += new System.EventHandler(this.MenuModeCursor16_Click);
             // 
@@ -1207,7 +1207,7 @@
             this.RtMenuGraphMode2.CheckOnClick = true;
             this.RtMenuGraphMode2.Name = "RtMenuGraphMode2";
             this.RtMenuGraphMode2.Size = new System.Drawing.Size(145, 22);
-            this.RtMenuGraphMode2.Text = "T vs I,V";
+            this.RtMenuGraphMode2.Text = "I,V vs t";
             this.RtMenuGraphMode2.Click += new System.EventHandler(this.RtMenuGraphMode2_Click);
             // 
             // toolStripSeparator22
@@ -1702,6 +1702,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lblcsfreq1
+            // 
+            this.lblcsfreq1.AutoSize = true;
+            this.lblcsfreq1.Location = new System.Drawing.Point(11, 13);
+            this.lblcsfreq1.Name = "lblcsfreq1";
+            this.lblcsfreq1.Size = new System.Drawing.Size(49, 14);
+            this.lblcsfreq1.TabIndex = 90;
+            this.lblcsfreq1.Text = "label1";
+            // 
             // legend1
             // 
             this.legend1.Border = NationalInstruments.UI.Border.Dotted;
@@ -1833,6 +1842,15 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lblcsfreq2
+            // 
+            this.lblcsfreq2.AutoSize = true;
+            this.lblcsfreq2.Location = new System.Drawing.Point(12, 12);
+            this.lblcsfreq2.Name = "lblcsfreq2";
+            this.lblcsfreq2.Size = new System.Drawing.Size(49, 14);
+            this.lblcsfreq2.TabIndex = 91;
+            this.lblcsfreq2.Text = "label1";
             // 
             // legend2
             // 
@@ -2030,24 +2048,6 @@
             // 
             this.RtlegendItem2.Source = this.RTPlot2;
             this.RtlegendItem2.Text = "Current";
-            // 
-            // lblcsfreq1
-            // 
-            this.lblcsfreq1.AutoSize = true;
-            this.lblcsfreq1.Location = new System.Drawing.Point(11, 13);
-            this.lblcsfreq1.Name = "lblcsfreq1";
-            this.lblcsfreq1.Size = new System.Drawing.Size(49, 14);
-            this.lblcsfreq1.TabIndex = 90;
-            this.lblcsfreq1.Text = "label1";
-            // 
-            // lblcsfreq2
-            // 
-            this.lblcsfreq2.AutoSize = true;
-            this.lblcsfreq2.Location = new System.Drawing.Point(12, 12);
-            this.lblcsfreq2.Name = "lblcsfreq2";
-            this.lblcsfreq2.Size = new System.Drawing.Size(49, 14);
-            this.lblcsfreq2.TabIndex = 91;
-            this.lblcsfreq2.Text = "label1";
             // 
             // BZAChPan
             // 

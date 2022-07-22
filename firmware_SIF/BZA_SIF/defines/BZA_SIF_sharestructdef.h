@@ -8,7 +8,7 @@
 
 typedef enum { DEV_UNKNOWN, DEV_BZA1000A, DEV_BZA1000, DEV_BZA500, DEV_BZA100,DEV_BZA60} eDeviceType;
 typedef enum { SIF_WBCS, SIF_SMART, SIF_ZIM, SIF_SBZA, SIF_MBZA ,SIF_ZBCS,SIF_CXM } eSifType;
-typedef enum { TECH_EIS, TECH_HFR, TECH_PRR} eTaskType;
+typedef enum { TECH_EIS, TECH_HFR, TECH_PRR, TECH_MON, TECH_QIS,} eTechType;
 
 #pragma pack(1)
 #define DEF_I2C_TIMEOUT                       				1000

@@ -78,7 +78,8 @@ namespace ZiveLab.ZM
         ReadPromOfZIM,
         ProgramPromOfZIM,
         DisconnectPromOfZIM,
-        GetSystem_info,
+        GetDeviceinfo,
+        SaveDeviceInfo,
     }
 
     public enum enCmdZim
@@ -674,13 +675,13 @@ namespace ZiveLab.ZM
             return TransCommand(sSerial, cmd, null);
         }
 
-        public static bool GetSystem_info(string sSerial)
+        public static bool GetDeviceinfo(string sSerial)
         {
             MBZA_SifCommand cmd;
 
             cmd.target = (short)enTarget.Sif;
             cmd.flag = (short)enFlag.Cmd;
-            cmd.cmd = (short)enCmdSif.GetSystem_info;
+            cmd.cmd = (short)enCmdSif.GetDeviceinfo;
             cmd.ch = -1;
             cmd.addr = -1;
             cmd.wrlen = 0;
@@ -696,6 +697,20 @@ namespace ZiveLab.ZM
             cmd.flag = (short)enFlag.Cmd;
             cmd.cmd = (short)enCmdZim.SaveRangeInfo;
             cmd.ch = ch;
+            cmd.addr = 0;
+            cmd.wrlen = 0;
+            cmd.rdlen = 0;
+            return TransCommand(sSerial, cmd, null);
+        }
+
+        public static bool SaveDeviceinfo(string sSerial)
+        {
+            MBZA_SifCommand cmd;
+
+            cmd.target = (short)enTarget.Sif;
+            cmd.flag = (short)enFlag.Cmd;
+            cmd.cmd = (short)enCmdSif.SaveDeviceInfo;
+            cmd.ch = -1;
             cmd.addr = 0;
             cmd.wrlen = 0;
             cmd.rdlen = 0;

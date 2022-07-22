@@ -23,6 +23,7 @@ double FixedPoint(double Value,int FixPnt);
 int proc_read_version(int ch);
 int CheckThermoStat(int ch);
 bool proc_chk_run(void);
+bool proc_eis_dcoff(int ch);
 
 void Set_IceResetB(bool on);
 bool CheckIceCfgDone(void);
@@ -40,4 +41,5 @@ void DefaultDeviceProc(int ch);
 void AuxProc(int ch);
 void RefreshFPGA(int ch);
 bool proc_eis_main(int ch);
+void Flow_monitor(int ch);
 #endif

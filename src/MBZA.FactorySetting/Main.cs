@@ -504,8 +504,9 @@ namespace ZiveLab.ZM.FactorySetting
             dlg.Multiselect = false;
             dlg.DefaultExt = "sif";
             dlg.Filter = "sif files (*.sif)|*.sif|All files (*.*)|*.*";
-            dlg.FileName = ZM.FactorySetting.Properties.Settings.Default.FilePathSIF;
             dlg.InitialDirectory = Path.GetDirectoryName(ZM.FactorySetting.Properties.Settings.Default.FilePathSIF);
+            dlg.FileName = Path.GetFileName(ZM.FactorySetting.Properties.Settings.Default.FilePathSIF);
+            dlg.Title = "Select the SIF firmware file to update.";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {

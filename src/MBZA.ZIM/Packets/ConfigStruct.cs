@@ -865,7 +865,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
         public string GetHostname()
         {
-            return Encoding.Default.GetString(hostname).Trim('\0');
+            return Encoding.UTF8.GetString(hostname).Trim('\0');
         }
 
         public bool SetIPAddress(string sAddress)
@@ -934,7 +934,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void SetHostname(string shost)
         {
             int len = 20;
-            byte[] barr = Encoding.Default.GetBytes(shost);
+            byte[] barr = Encoding.UTF8.GetBytes(shost);
             Array.Clear(hostname, 0, 20);
             if (len > barr.Length) len = barr.Length;
             Array.Copy(barr, 0, hostname, 0, len);
@@ -968,7 +968,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public bool PropDhcp
         {
             get { return (dhcp == 1)?true:false; }
-            set { dhcp = (byte)(value ? 1 : 0); }
+            set { dhcp = (byte)(value ? 1 : 0);  }
         }
 
         [ReadOnlyAttribute(false)]
@@ -976,7 +976,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public string PropIp
         {
             get { return GetIPAddress(); }
-            set { SetIPAddress(value); }
+            set { SetIPAddress(value);   }
         }
 
         [ReadOnlyAttribute(false)]
@@ -984,7 +984,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public string Propsubnetmask
         {
             get { return GetSubnetmask(); }
-            set { SetSubnetmask(value); }
+            set { SetSubnetmask(value);   }
         }
 
         [ReadOnlyAttribute(false)]
@@ -992,14 +992,14 @@ namespace ZiveLab.ZM.ZIM.Packets
         public string Propgateway
         {
             get { return GetGateway(); }
-            set { SetGateway(value); }
+            set { SetGateway(value);   }
         }
-        [ReadOnlyAttribute(false)]
+        [ReadOnlyAttribute(true)]
         [DisplayName("Port"), DescriptionAttribute("Edit port number of device.")]
         public int Propport
         {
             get { return Port; }
-            set { Port = value; }
+            //set { Port = value; }
         }
 
         [ReadOnlyAttribute(false)]
@@ -1007,7 +1007,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public string Prophostname
         {
             get { return GetHostname(); }
-            set { SetHostname(value); }
+            set { SetHostname(value);   }
         }
         #endregion //#region ** Properties
     }

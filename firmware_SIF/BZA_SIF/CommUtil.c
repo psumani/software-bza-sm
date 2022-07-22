@@ -251,7 +251,7 @@ void Parsing(int s)
 		case DEF_CMD_GET_SYSTEM_INFO:	 
             {
                 m_PtrWrData[s] = (byte*)m_pSysConfig;
-                m_SendDataSize[s] = DEF_SIZE_SYS_CFG;
+                m_SendDataSize[s] = sizeof(stSystemConfig);
                 m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
                 m_SendFrameNo[s] = 0;
                 break;
@@ -259,21 +259,41 @@ void Parsing(int s)
 
         case DEF_CMD_SAVE_SYSTEM_INFO : 
             {
-                memcpy(m_pSysConfig, pCmdData, sizeof(stSystemConfig));
-				memcpy(m_pConnCfg->Serial,m_pSysConfig->mSIFCfg.Serial,12);
+				memcpy(m_pSysConfig, pCmdData, sizeof(stSystemConfig));
 				
                 m_pGlobalVar->nTimeTick = m_pSysConfig->DaqTick;
                 if(m_pGlobalVar->nTimeTick < 0) m_pGlobalVar->nTimeTick = 1;
 				
-				if(SaveSysCfgInfo() == false)
-				{
-				  	SendError(s,DEF_ERROR_STORESYSINF);
-					return;
-				}
-				
                 break;
             }
 		
+		case DEF_CMD_GET_DEVCE_INFO:	 
+            {
+				stDevInf mDev;
+				memcpy(&mDev, pCmdData, sizeof(stDevInf));
+				memcpy(&mDev.mConnCfg,m_pConnCfg,sizeof(stConnCfg));
+				memcpy(&mDev.mSysCfg,m_pSysConfig,sizeof(stSystemConfig));
+				
+                m_PtrWrData[s] = (byte*)&mDev;
+                m_SendDataSize[s] = sizeof(stDevInf);
+                m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
+                m_SendFrameNo[s] = 0;
+                break;
+            }
+
+        case DEF_CMD_SAVE_DEVICE_INFO : 
+            {
+				stDevInf mDev;
+				memcpy(&mDev, pCmdData, sizeof(stDevInf));
+				
+				memcpy(m_pConnCfg,&mDev.mConnCfg,sizeof(stConnCfg));
+				memcpy(m_pSysConfig,&mDev.mSysCfg,sizeof(stSystemConfig));
+				
+                m_pGlobalVar->nTimeTick = m_pSysConfig->DaqTick;
+                if(m_pGlobalVar->nTimeTick < 0) m_pGlobalVar->nTimeTick = 1;
+                break;
+            }
+			
 		case DEF_CMD_SAVE_CONN_INFO :
 			{
 				memcpy(m_pConnCfg, pCmdData, DEF_SIZE_CONN_CFG);
@@ -839,7 +859,7 @@ void Parsing(int s)
                 break;
             }	
 			
-		case CMD_SAVE_RNGINFO :	
+		case CMD_WRITE_ROM :	
 			{
 				if(pCmdHeader->Slot < 0)
 				{
@@ -847,8 +867,18 @@ void Parsing(int s)
 					return;
 				}
 				ch = pCmdHeader->Slot;
+
+				if(SaveConnCfgInfo() == false)
+				{
+					SendError(s,DEF_ERROR_STORESYSINF);
+					return;
+				}
 				
-				SaveSysCfgInfo();
+				if(SaveSysCfgInfo() == false)
+				{
+				  	SendError(s,DEF_ERROR_STORESYSINF);
+					return;
+				}
 				
 				if(m_pSysConfig->EnaROM[ch] == 1)
 				{

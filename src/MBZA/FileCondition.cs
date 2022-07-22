@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
 
 namespace ZiveLab.ZM
@@ -15,7 +16,7 @@ namespace ZiveLab.ZM
         public stTech mtech;
         public FileCondition()
         {
-            mtech = new stTech(0);
+            mtech = new stTech(enTechType.TECH_EIS);
         }
 
         public bool Save(string filename, stTech ttech)

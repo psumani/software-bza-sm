@@ -190,9 +190,9 @@ namespace ZiveLab.ZM
             dlg.Multiselect = false;
             dlg.DefaultExt = "Lmt";
             dlg.Filter = "BAT Parameter files (*.Lmt)|*.Lmt|All files (*.*)|*.*";
-            dlg.FileName = sListFile;
-            dlg.InitialDirectory = Path.GetDirectoryName(Path.GetDirectoryName(sListFile));
-
+            
+            dlg.InitialDirectory = Path.GetDirectoryName(sListFile);
+            dlg.FileName = Path.GetFileName(sListFile);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 LoadListFromXml(dlg.FileName);
@@ -232,7 +232,7 @@ namespace ZiveLab.ZM
             dlg.Filter = "BAT Parameter files (*.Lmt)|*.Lmt|All files (*.*)|*.*";
             dlg.FileName = sListFile;
             dlg.InitialDirectory = Path.GetDirectoryName(sListFile);
-
+            dlg.FileName = Path.GetFileName(sListFile);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 SaveListToXml(dlg.FileName);

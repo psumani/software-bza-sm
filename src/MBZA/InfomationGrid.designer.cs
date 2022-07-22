@@ -65,7 +65,6 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripApplyDev = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripWriteROM = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.loadChFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +99,7 @@
             this.calibrationStartToolStripMenuItem,
             this.acculacyCheckStartToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(246, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(246, 120);
             // 
             // clearCalibrationItemsToolStripMenuItem
             // 
@@ -152,7 +151,7 @@
             this.propertyGrid1.BackColor = System.Drawing.SystemColors.Control;
             this.propertyGrid1.CommandsDisabledLinkColor = System.Drawing.SystemColors.ControlDark;
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.propertyGrid1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.propertyGrid1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.propertyGrid1.LineColor = System.Drawing.SystemColors.Control;
             this.propertyGrid1.Location = new System.Drawing.Point(205, 0);
             this.propertyGrid1.Name = "propertyGrid1";
@@ -210,6 +209,7 @@
             this.toolStripSplitButton3.Size = new System.Drawing.Size(32, 22);
             this.toolStripSplitButton3.Text = "User function";
             this.toolStripSplitButton3.ToolTipText = "Calibration and testing of devices.";
+            this.toolStripSplitButton3.Visible = false;
             // 
             // toolStripVdcX1
             // 
@@ -345,7 +345,6 @@
             this.toolStripSeparator7,
             this.ToolStripApplyDev,
             this.toolStripSeparator8,
-            this.toolStripSeparator9,
             this.ToolStripWriteROM});
             this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
             this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -398,11 +397,6 @@
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(340, 6);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(340, 6);
             // 
             // ToolStripWriteROM
             // 
@@ -507,7 +501,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripCheckHT;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem toolStripInitInfo;
         private System.Windows.Forms.ToolStripMenuItem toolStripAppDummy;
     }

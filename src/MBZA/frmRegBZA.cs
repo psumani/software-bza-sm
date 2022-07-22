@@ -940,6 +940,7 @@ namespace ZiveLab.ZM
         private void LnkLblSave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SaveFileDialog saveDlg = new SaveFileDialog();
+            saveDlg.Title = "Save channel link information file.";
             saveDlg.InitialDirectory = Path.GetDirectoryName(gBZA.FileLnkCh);
             saveDlg.FileName = Path.GetFileName(gBZA.FileLnkCh);
             saveDlg.Filter = "ZM Channel link(*.mcl)|*.mcl|All files (*.*)|*.*";
@@ -961,6 +962,7 @@ namespace ZiveLab.ZM
         private void LnkLblLoad_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenFileDialog loadDlg = new OpenFileDialog();
+            loadDlg.Title = "Open Channel Link Information File.";
             loadDlg.InitialDirectory = Path.GetDirectoryName(gBZA.FileLnkCh);
             loadDlg.FileName = Path.GetFileName(gBZA.FileLnkCh);
             loadDlg.Filter = "ZM Channel link(*.mcl)|*.mcl|All files (*.*)|*.*";
@@ -1121,9 +1123,9 @@ namespace ZiveLab.ZM
             dlg.Multiselect = false;
             dlg.DefaultExt = "sif";
             dlg.Filter = "sif files (*.sif)|*.sif|All files (*.*)|*.*";
+            dlg.Title = "Select the SIF firmware file to update.";
 
-
-            dlg.FileName = Path.Combine(gBZA.appcfg.PathSIFFW, gBZA.appcfg.FileNameSIFFW);
+            dlg.FileName = gBZA.appcfg.FileNameSIFFW;
             dlg.InitialDirectory = gBZA.appcfg.PathSIFFW;
 
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -1232,7 +1234,7 @@ namespace ZiveLab.ZM
             }
             else
             {
-                if (MBZA_MapUtil.GetSystem_info(sSelSerial2) == false)
+                if (MBZA_MapUtil.GetDeviceinfo(sSelSerial2) == false)
                 {
                     MessageBox.Show("The command failed[GET_SYSTEM_INFO].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

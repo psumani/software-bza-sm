@@ -34,6 +34,8 @@
         public const byte GET_ZIMCFG = 0x6A;
         public const byte CHK_FPGA = 0x6B;
         public const byte CMD_GET_SIFCFG = 0x6C;
+        public const byte GET_DEVICE_INFO = 0x6D;
+        public const byte SAVE_DEVICE_INFO = 0x6E;
 
         public const byte REFRESH_VAC = 0x77;
         public const byte START_DEVICE = 0x78;
@@ -58,7 +60,7 @@
         public const byte GET_RNGINFO = 0xA6;
         public const byte SET_RNGINFO = 0xA7;
 
-        public const byte SAVE_RNGINFO = 0xAA;
+        public const byte WRITE_ROM = 0xAA;
         public const byte TEST_COMM = 0xAB;
         public const byte INIT_RNGINFO = 0xAC;
         public const byte GET_COND_CALIB = 0xAD;

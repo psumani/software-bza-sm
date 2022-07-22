@@ -27,10 +27,12 @@ namespace ZiveLab.ZM
         stTech_Info minfo;
         stTech mtech;
         bool bFirst;
-        public frmStart(List<int> tlstch = null)
+        bool bGroup;
+        public frmStart(bool tGroup, List<int> tlstch = null)
         {
             InitializeComponent();
             bFirst = true;
+            bGroup = tGroup;
             oldindex = -1;
             if (tlstch.Count < 1 || tlstch == null)
             {
@@ -38,12 +40,15 @@ namespace ZiveLab.ZM
                 DialogResult = DialogResult.Cancel;
                 return;
             }
+
+
             lstch = new List<int>();
             lstTech = new List<stTech_Info>();
             mtech = new stTech(0);
             minfo = new stTech_Info(0);
             
             chkapptech.Checked = true;
+
             lstch = tlstch;
 
             listbox1.Items.Clear();
@@ -51,7 +56,7 @@ namespace ZiveLab.ZM
             foreach (var val in lstch)
             {
                 listbox1.Items.Add(string.Format("CH-{0}", val + 1));
-                if(GetTechInfo(val,ref minfo) == true)
+                if (GetTechInfo(val, ref minfo) == true)
                 {
                     lstTech.Add(minfo);
                 }
@@ -62,10 +67,22 @@ namespace ZiveLab.ZM
                     return;
                 }
             }
+
             listbox1.SelectedIndex = 0;
-            if(lstch.Count == 1)
+
+            ich = lstch[listbox1.SelectedIndex];
+            sch = ich.ToString();
+            sSerial = gBZA.ChLnkLst[sch].sSerial;
+            iSifCh = gBZA.ChLnkLst[sch].SifCh;
+            minfo = lstTech[listbox1.SelectedIndex];
+            if (bGroup == false)
             {
                 groupBox3.Visible = false;
+                this.Text = string.Format("Set the experimental start conditions for channel {0}.", ich + 1);
+            }
+            else
+            {
+                this.Text = "Set the experimental start conditions for group channels.";
             }
         }
 
@@ -88,11 +105,15 @@ namespace ZiveLab.ZM
 
         private void RefreshInformation()
         {
-            ich = lstch[listbox1.SelectedIndex];
-            sch = ich.ToString();
-            sSerial = gBZA.ChLnkLst[sch].sSerial;
-            iSifCh = gBZA.ChLnkLst[sch].SifCh;
-            minfo = lstTech[listbox1.SelectedIndex];
+            if (bGroup == true)
+            {
+                ich = lstch[listbox1.SelectedIndex];
+                sch = ich.ToString();
+                sSerial = gBZA.ChLnkLst[sch].sSerial;
+                iSifCh = gBZA.ChLnkLst[sch].SifCh;
+                minfo = lstTech[listbox1.SelectedIndex];
+            }
+
             txttechfile.Text = gBZA.SifLnkLst[sSerial].MBZAIF.condfilename[iSifCh];
             oldindex = listbox1.SelectedIndex;
             if (chkapptech.Checked == true)
@@ -136,7 +157,7 @@ namespace ZiveLab.ZM
 
         private void listbox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (bFirst == false)
+            if (bFirst == false && bGroup == true)
             {
                 if (oldindex > -1 && oldindex != listbox1.SelectedIndex)
                 {

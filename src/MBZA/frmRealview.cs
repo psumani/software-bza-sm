@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,33 +16,51 @@ namespace ZiveLab.ZM
     public partial class frmRealview : Form
     {
         List<int> chs;
-        BZAChPan[] chpan;
+        List<int> chs1;
         public event EventHandler chevent;
-        public event EventHandler evSizeChanged;
         public event EventHandler CloseThis;
         string fileinf;
-        bool bload;
-        public frmRealview(bool load)
+        int iMode;
+        
+        Point OriginalLocation;
+        Size OriginalSize;
+        public frmRealview(int tmode, int ich = -1) // 0-reg, 1-grp, 2-ingle
         {
-            bload = load;
+            iMode = tmode;
+
             fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
 
-            
+            if(iMode == 0)
+            {
+                this.Text = "Real-time monitor.";
+            }
+            else if(iMode == 2)
+            {
+                this.Text = string.Format("Real-time monitor of channel {0}.", ich + 1);
+            }
+            else
+            {
+                this.Text = "Real-time monitor of the group.";
+            }
+
+            Properties.Settings.Default.MaxWinCh = -1;
+            Properties.Settings.Default.GrpMaxWinCh = -1;
 
             InitializeComponent();
             chs = new List<int>();
-            chs.Clear();
-            
-            
+            chs1 = new List<int>();
+
+            OriginalSize = new Size(484, 393);
+
             timer1.Stop();
 
             
         }
-        
-        public void SetChannel(List<int> lst)
+
+        public void SetChannel(int ich)
         {
-           
             timer1.Stop();
+            iMode = 2;
 
             if (chevent != null)
             {
@@ -50,69 +69,10 @@ namespace ZiveLab.ZM
                     chevent -= (EventHandler)ev;
                 }
             }
-
-            if (evSizeChanged != null)
-            {
-                foreach (Delegate ev in evSizeChanged.GetInvocationList())
-                {
-                    evSizeChanged -= (EventHandler)ev;
-                }
-            }
-
-            chs = lst;
-
-            if (File.Exists(fileinf) == false)
-            {
-                SaveChannelsInfo();
-            }
+            chs.Clear();
+            chs.Add(ich);
 
             string sch;
-            foreach (var ch in chs)
-            {
-                sch = ch.ToString();
-                if (gBZA.ChLnkLst.ContainsKey(sch))
-                {
-                    var value = gBZA.ChLnkLst[sch];
-                    if(gBZA.SifLnkLst.ContainsKey(value.sSerial))
-                    {
-                        if(gBZA.SifLnkLst[value.sSerial].bLinked == true 
-                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
-                        {
-                            continue;
-                        }
-                    }
-                }
-                chs.Remove(ch);
-            }
-
-
-            chpan = new BZAChPan[chs.Count];
-            timer1.Interval = (int)(500 / chs.Count);
-
-            chs.Sort();
-            int i = 0;
-            pan.Controls.Clear();
-            foreach (var ch in chs)
-            {
-                chpan[i] = new BZAChPan(ch, ref chevent, ref evSizeChanged, ref pan);
-                pan.Controls.Add(chpan[i]);
-            }
-
-            timer1.Start();
-        }
-
-        void LoadChannelsInfo()
-        {
-            SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
-            chs = mFile.LoadXmlToObj(fileinf, chs);
-
-            string sch;
-            if(chs.Count < 1)
-            {
-                MessageBox.Show("The channel to display is not registered or cannot be found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             foreach (var ch in chs)
             {
                 sch = ch.ToString();
@@ -131,8 +91,35 @@ namespace ZiveLab.ZM
                 chs.Remove(ch);
             }
 
-            chpan = new BZAChPan[chs.Count];
+            chs1 = chs;
             timer1.Interval = (int)(500 / chs.Count);
+
+            chs.Sort();
+
+            pan.Controls.Clear();
+
+            BZAChPan chpan = new BZAChPan(ich, ref chevent, new EventHandler(ShowMaxChild));
+            chpan.SetbtSize(false);
+
+            pan.Controls.Add(chpan);
+
+            chpan.MaxWindowsProc(true);
+            OriginalLocation = chpan.Location;
+            //OriginalSize = chpan.Size;
+            chpan.Location = new Point(0, 0);
+            chpan.Size = new Size(pan.Size.Width - 6, pan.Size.Height - 6);
+            pan.AutoScroll = false;
+
+            this.Text = string.Format("Real-time monitor of channel {0}.",ich+1);
+
+            timer1.Start();
+        }
+
+        public void SetChannel(List<int> lst)
+        {
+           
+            timer1.Stop();
+
             if (chevent != null)
             {
                 foreach (Delegate ev in chevent.GetInvocationList())
@@ -140,26 +127,116 @@ namespace ZiveLab.ZM
                     chevent -= (EventHandler)ev;
                 }
             }
-            if (evSizeChanged != null)
+
+            chs.Clear();
+            string sch;
+            foreach (var ch in lst)
             {
-                foreach (Delegate ev in evSizeChanged.GetInvocationList())
+                sch = ch.ToString();
+                if (gBZA.ChLnkLst.ContainsKey(sch))
                 {
-                    evSizeChanged -= (EventHandler)ev;
+                    var value = gBZA.ChLnkLst[sch];
+                    if(gBZA.SifLnkLst.ContainsKey(value.sSerial))
+                    {
+                        if(gBZA.SifLnkLst[value.sSerial].bLinked == true 
+                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
+                        {
+                            chs.Add(ch);
+                            continue;
+                        }
+                    }
                 }
             }
 
-            chs.Sort();
-            int i = 0;
+            chs1 = chs;
+            timer1.Interval = (int)(500 / chs.Count);
+            if (timer1.Interval < 500) timer1.Interval = 500;
 
+            chs.Sort();
             pan.Controls.Clear();
             foreach (var ch in chs)
             {
-                chpan[i] = new BZAChPan(ch, ref chevent,ref evSizeChanged,ref pan);
-                pan.Controls.Add(chpan[i]);
+                pan.Controls.Add(new BZAChPan(ch, ref chevent, new EventHandler(ShowMaxChild)));
             }
+            ShowChildWindows();
+            timer1.Start();
+        }
+
+        void LoadChannelsInfo()
+        {
+            SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
+            List<int> tlst = new List<int>();
+
+            tlst = mFile.LoadXmlToObj(fileinf, chs);
+
+            string sch;
+            if(tlst.Count < 1)
+            {
+                MessageBox.Show("The channel to display is not registered or cannot be found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            chs.Clear();
+            foreach (var ch in tlst)
+            {
+                sch = ch.ToString();
+                if (gBZA.ChLnkLst.ContainsKey(sch))
+                {
+                    var value = gBZA.ChLnkLst[sch];
+                    if (gBZA.SifLnkLst.ContainsKey(value.sSerial))
+                    {
+                        if (gBZA.SifLnkLst[value.sSerial].bLinked == true
+                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
+                        {
+                            chs.Add(ch);
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            chs1 = chs;
+            timer1.Interval = (int)(500 / chs.Count);
+            if (timer1.Interval < 500) timer1.Interval = 500;
+
+            if (chevent != null)
+            {
+                foreach (Delegate ev in chevent.GetInvocationList())
+                {
+                    chevent -= (EventHandler)ev;
+                }
+            }
+            
+            chs.Sort();
+            pan.Controls.Clear();
+            foreach (var ch in chs)
+            {
+                pan.Controls.Add(new BZAChPan(ch, ref chevent, new EventHandler(ShowMaxChild)));
+            }
+            if (iMode == 1) Properties.Settings.Default.GrpMaxWinCh = -1;
+            else Properties.Settings.Default.MaxWinCh = -1;
+
+            ShowChildWindows();
 
             timer1.Start();
 
+        }
+        
+        private void ShowMaxChild(object sender, EventArgs e)
+        {
+            BZAChPan chpan = (BZAChPan)sender;
+            if (chpan.bMaxWindow)
+            {
+                if (iMode == 1) Properties.Settings.Default.GrpMaxWinCh = -1;
+                else if (iMode == 0) Properties.Settings.Default.MaxWinCh = -1;
+            }
+            else
+            {
+                if (iMode == 1) Properties.Settings.Default.GrpMaxWinCh = chpan.ch;
+                else if (iMode == 0) Properties.Settings.Default.MaxWinCh = chpan.ch;
+            }
+            Properties.Settings.Default.Save();
+            
+            ShowChildWindows();
         }
 
         void SaveChannelsInfo()
@@ -169,7 +246,7 @@ namespace ZiveLab.ZM
         }
         private void frmRealview_Load(object sender, EventArgs e)
         {
-            if (bload == true)
+            if (iMode == 1)
             {
                 if (gBZA.appcfg.GroupRealviewSize == new Size(0, 0) || gBZA.appcfg.GroupRealviewLocation == new Point(0, 0) || gBZA.appcfg.GroupRealviewLocation.X == -32000 || gBZA.appcfg.GroupRealviewLocation.Y == -32000)
                 {
@@ -183,7 +260,7 @@ namespace ZiveLab.ZM
 
                 }
             }
-            else
+            else if(iMode == 2)
             {
                 if (gBZA.appcfg.RealviewSize == new Size(0, 0) || gBZA.appcfg.RealviewLocation == new Point(0, 0) || gBZA.appcfg.RealviewLocation.X == -32000 || gBZA.appcfg.RealviewLocation.Y == -32000)
                 {
@@ -196,15 +273,165 @@ namespace ZiveLab.ZM
                     this.StartPosition = FormStartPosition.Manual;
                 }
             }
+            else
+            {
+                if (gBZA.appcfg.RegRealviewSize == new Size(0, 0) || gBZA.appcfg.RegRealviewLocation == new Point(0, 0) || gBZA.appcfg.RegRealviewLocation.X == -32000 || gBZA.appcfg.RegRealviewLocation.Y == -32000)
+                {
+                    this.StartPosition = FormStartPosition.CenterParent;
+                }
+                else
+                {
+                    this.Location = gBZA.appcfg.RegRealviewLocation;
+                    this.Size = gBZA.appcfg.RegRealviewSize;
+                    this.StartPosition = FormStartPosition.Manual;
+                }
+            }
 
-            if (bload)
+            if (iMode == 0)
             {
                 if (File.Exists(fileinf))
                 {
                     LoadChannelsInfo();
                 }
+                else
+                {
+                    frmTechApply frm = new frmTechApply(fileinf);
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadChannelsInfo();
+                    }
+                }
             }
-            evSizeChanged?.Invoke(pan, e);
+            ShowChildWindows();
+        }
+
+        void ShowChildWindows()
+        {
+            if (iMode == 2)
+            {
+                return;
+            }
+
+            int i = 0;
+            BZAChPan chpan;
+            int SelCh;
+
+            if (iMode == 0)
+            {
+                SelCh = Properties.Settings.Default.MaxWinCh;
+            }
+            else 
+            {
+                SelCh = Properties.Settings.Default.GrpMaxWinCh;
+            }
+           
+            if (SelCh >= 0)
+            {
+                /*chpan = (BZAChPan)pan.Controls[0];
+                chpan.Size = new Size(0, 0);
+
+                chpan = (BZAChPan)pan.Controls[1];
+                OriginalLocation = chpan.Location;
+                //OriginalSize = chpan.Size;
+                chpan.Location = new Point(0, 0);
+                chpan.Size = new Size(pan.Size.Width - 6, pan.Size.Height - 6);
+                pan.AutoScroll = false;
+                chpan.MaxWindowsProc(true);
+                */
+                i = 0;
+                foreach (var ch in chs)
+                {
+                    chpan = (BZAChPan)pan.Controls[i];
+                    if (chpan.ch == SelCh)
+                    {
+                        chpan.MaxWindowsProc(true);
+                        OriginalLocation = chpan.Location;
+                        //OriginalSize = chpan.Size;
+                        chpan.Location = new Point(0, 0);
+                        chpan.Size = new Size(pan.Size.Width - 6, pan.Size.Height - 6);
+                        pan.AutoScroll = false;
+                    }
+                    else
+                    {
+                        chpan.MaxWindowsProc(false);
+                        chpan.Size = new Size(0,0);
+                    }
+                }
+            }
+            else
+            {
+                
+                i = 0;
+                foreach (var ch in chs)
+                {
+                    chpan = (BZAChPan)pan.Controls[i];
+                    if (chpan.Size.Width > OriginalSize.Width && chpan.Size.Height > OriginalSize.Height)
+                    {
+                        chpan.Location = OriginalLocation;
+                    }
+                    chpan.Size = OriginalSize;
+                    chpan.MaxWindowsProc(false);
+                    pan.AutoScroll = true;
+                }
+                /*
+                chpan = (BZAChPan)pan.Controls[0];
+                chpan.Size = OriginalSize;
+                chpan.MaxWindowsProc(false);
+
+                chpan = (BZAChPan)pan.Controls[1];
+                chpan.Location = OriginalLocation;
+                chpan.Size = OriginalSize;
+                chpan.MaxWindowsProc(false);*/
+            }
+            
+        }
+
+        void ResizeWindow()
+        {
+            int i = 0;
+            BZAChPan chpan;
+            int SelCh;
+
+            if (iMode == 0)
+            {
+                SelCh = Properties.Settings.Default.MaxWinCh;
+            }
+            else if (iMode == 1)
+            {
+                SelCh = Properties.Settings.Default.GrpMaxWinCh;
+            }
+            else
+            {
+                if (pan.Controls.Count < 1)
+                {
+                    return;
+                }
+                chpan = (BZAChPan)pan.Controls[0];
+                if (chpan.bMaxWindow)
+                {
+                    chpan.Location = new Point(0, 0);
+                    chpan.Size = new Size(pan.Size.Width - 6, pan.Size.Height - 6);
+                }
+                return;
+            }
+
+            if (SelCh >= 0)
+            {
+                /*chpan = (BZAChPan)pan.Controls[1];
+                chpan.Location = new Point(0, 0);
+                chpan.Size = new Size(pan.Size.Width - 6, pan.Size.Height - 6);*/
+                
+                i = 0;
+                foreach (var ch in chs)
+                {
+                    chpan = (BZAChPan)pan.Controls[i];
+                    if (chpan.bMaxWindow)
+                    {
+                        chpan.Location = new Point(0, 0);
+                        chpan.Size = new Size(pan.Size.Width - 6, pan.Size.Height - 6);
+                    }
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -234,23 +461,23 @@ namespace ZiveLab.ZM
 
         private void pan_SizeChanged(object sender, EventArgs e)
         {
-            if (bload)
+            if (iMode == 1)
             {
                 gBZA.appcfg.GroupRealviewSize = this.Size;
                 gBZA.appcfg.Save();
             }
-            else
+            else if(iMode == 2)
             {
                 gBZA.appcfg.RealviewSize = this.Size;
                 gBZA.appcfg.Save();
             }
+            else
+            {
+                gBZA.appcfg.RegRealviewSize = this.Size;
+                gBZA.appcfg.Save();
+            }
 
-            evSizeChanged?.Invoke(pan, e);
-        }
-
-        private void openChannelRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveChannelsInfo();
+            ResizeWindow();
         }
 
         private void frmRealview_FormClosing(object sender, FormClosingEventArgs e)
@@ -258,16 +485,22 @@ namespace ZiveLab.ZM
             Point pt = this.Location;
             if (pt.X != -32000 && pt.Y != -32000)
             {
-                if (bload)
+                if (iMode == 1)
                 {
                     gBZA.appcfg.GroupRealviewLocation = pt;
                     gBZA.appcfg.GroupRealviewSize = this.Size;
                     gBZA.appcfg.Save();
                 }
-                else
+                else if (iMode == 2)
                 {
                     gBZA.appcfg.RealviewLocation = pt;
                     gBZA.appcfg.RealviewSize = this.Size;
+                    gBZA.appcfg.Save();
+                }
+                else
+                {
+                    gBZA.appcfg.RegRealviewLocation = pt;
+                    gBZA.appcfg.RegRealviewSize = this.Size;
                     gBZA.appcfg.Save();
                 }
             }

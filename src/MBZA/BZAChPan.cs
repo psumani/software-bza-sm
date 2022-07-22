@@ -50,6 +50,8 @@ namespace ZiveLab.ZM
         public int rtmode1;
         public int rtmode2;
 
+        public event EventHandler evShowmax;
+
         bool LegendMove0;
         bool LegendMove1;
         bool LegendMove2;
@@ -64,14 +66,12 @@ namespace ZiveLab.ZM
 
         MBZA_ChannelInfo About;
 
-        Point OriginalLocation;
-        Size OriginalSize;
-        FlowLayoutPanel pan;
-
         ImageList imageList;
         stTech_EIS techeis;
         stTech_HFR techhfr;
         stTech_PRR techprr;
+        stTech_MON techmon;
+        stTech_QIS techqis;
 
         ToolTip toolTip;
         int formatmode;
@@ -81,7 +81,7 @@ namespace ZiveLab.ZM
         FormatString fs_dd;
         int oldcursorindex1;
         int oldcursorindex2;
-        public BZAChPan(int ich, ref EventHandler evtimer, ref EventHandler evchgSize, ref FlowLayoutPanel parentcontrol)
+        public BZAChPan(int ich, ref EventHandler evtimer, EventHandler evshowmax)
         {
             InitializeComponent();
 
@@ -93,6 +93,8 @@ namespace ZiveLab.ZM
             techeis = new stTech_EIS(0);
             techhfr = new stTech_HFR(0);
             techprr = new stTech_PRR(0);
+            techmon = new stTech_MON(0);
+            techqis = new stTech_QIS(0);
 
             ch = ich;
             sch = ch.ToString();
@@ -102,11 +104,6 @@ namespace ZiveLab.ZM
 
             About = new MBZA_ChannelInfo(serial, sifch);
 
-            pan = parentcontrol;
-
-           
-            OriginalLocation = this.Location;
-            OriginalSize = this.Size;
 
             
             imageList = new ImageList();
@@ -193,14 +190,12 @@ namespace ZiveLab.ZM
             GrpPlotCount1 = 1;
             GrpPlotCount2 = 2;
 
-            if (Properties.Settings.Default.MaxWinCh == ch) bMaxWindow = true;
-            else bMaxWindow = false;
+           
 
             lblprog.LabelText = string.Format("Channel {0:00}", ch + 1);
 
             evtimer += new EventHandler(TimerProc);
-            evchgSize += new EventHandler(ResizeParentProc);
-
+            evShowmax += evshowmax;
 
 
             lblprog.Prog_Max = 1000;
@@ -220,9 +215,13 @@ namespace ZiveLab.ZM
             ViewInformation();
         }
 
+        public void SetbtSize(bool bEnable)
+        {
+            btSize.Enabled = bEnable; 
+        }
+
         private void BZAChPan_Load(object sender, EventArgs e)
         {
-            MaxWindowsProc();
         }
 
         void TimerProc(object sender, EventArgs e)
@@ -250,15 +249,6 @@ namespace ZiveLab.ZM
             
         }
 
-        void ResizeParentProc(object sender, EventArgs e)
-        {
-            if (bMaxWindow == true)
-            {
-                this.Location = new Point(0, 0);
-                this.Size = new Size(pan.Size.Width - 5, pan.Size.Height - 5);
-            }
-        }
-        
 
         private void grp1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -1133,19 +1123,188 @@ namespace ZiveLab.ZM
             if (OldTechType != gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type)
             {
                 OldTechType = gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type;
-                if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type == 1)
+                if ((enTechType)OldTechType == enTechType.TECH_MON)
+                {
+                    if (this.tabgrp.TabPages.Contains(this.tabPage3) == true) this.tabgrp.TabPages.Remove(this.tabPage3);
+                    legend2.Visible = false;
+                }
+                else
+                {
+                    if (this.tabgrp.TabPages.Contains(this.tabPage3) == false) this.tabgrp.TabPages.Add(this.tabPage3);
+                    legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
+                }
+                if ((enTechType)OldTechType == enTechType.TECH_HFR) 
                 {
                     InitGraphHFR();
                 }
-                else if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type == 2)
+                else if ((enTechType)OldTechType == enTechType.TECH_PRR)
                 {
                     InitGraphPRR();
+                }
+                else if ((enTechType)OldTechType == enTechType.TECH_MON)
+                {
+                    InitGraphMON();
+                }
+                else if ((enTechType)OldTechType == enTechType.TECH_QIS)
+                {
+                    InitGraphQIS();
                 }
                 else
                 {
                     InitGraphEIS();
                 }
             }
+        }
+
+        private void InitGraphQIS()
+        {
+            tabgrp.TabPages[0].Text = "Info.";
+            tabgrp.TabPages[1].Text = "Niquest plot";
+
+            grp1.XAxes[0].Caption = "Z real(Ω)";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            grp1.YAxes[0].Caption = "-Z image(Ω)";
+            grp1.YAxes[1].Caption = "";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = false;
+
+            grp1.Plots[0].Visible = true;
+            grp1.Plots[1].Visible = false;
+            grp1.Plots[2].Visible = false;
+            grp1.Plots[3].Visible = false;
+            grp1.Plots[4].Visible = false;
+            grp1.Plots[5].Visible = false;
+
+            grp1.Plots[0].XAxis = grp1.XAxes[0];
+            grp1.Plots[0].YAxis = grp1.YAxes[0];
+
+            legend1.Items[0].Text = "-Zimg";
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = false;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+
+
+
+            tabgrp.TabPages[2].Text = "Bode plot";
+
+            grp2.XAxes[0].Caption = "Frequency(Hz)";
+            grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            grp2.YAxes[0].Caption = "Zmag(Ω)";
+            grp2.YAxes[1].Caption = "Zphase(°C)";
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+
+            grp2.Plots[0].XAxis = grp2.XAxes[0];
+            grp2.Plots[0].YAxis = grp2.YAxes[0];
+            grp2.Plots[1].XAxis = grp2.XAxes[0];
+            grp2.Plots[1].YAxis = grp2.YAxes[1];
+
+            grp2.Plots[0].Visible = true;
+            grp2.Plots[1].Visible = true;
+            grp2.Plots[2].Visible = false;
+            grp2.Plots[3].Visible = false;
+            grp2.Plots[4].Visible = false;
+            grp2.Plots[5].Visible = false;
+
+            legend2.Items[0].Text = "Zmag";
+            legend2.Items[1].Text = "Zphase";
+
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+
+
+            
+            GrpPlotCount1 = 1;
+            GrpPlotCount2 = 2;
+        }
+
+        private void InitGraphMON()
+        {
+
+            
+            tabgrp.TabPages[0].Text = "Info.";
+            tabgrp.TabPages[1].Text = "Vdc,Temp. vs t";
+
+            grp1.Plots[0].Visible = true;
+            grp1.Plots[1].Visible = true;
+            grp1.Plots[2].Visible = false;
+            grp1.Plots[3].Visible = false;
+            grp1.Plots[4].Visible = false;
+            grp1.Plots[5].Visible = false;
+
+            grp1.XAxes[0].Caption = "Time(s)";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            formatmode = 0;
+
+            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            grp1.YAxes[0].Caption = "Vdc(V)";
+            grp1.YAxes[1].Caption = "Temp.(°C)";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = true;
+
+            grp1.Plots[0].XAxis = grp1.XAxes[0];
+            grp1.Plots[0].YAxis = grp1.YAxes[0];
+            grp1.Plots[1].XAxis = grp1.XAxes[0];
+            grp1.Plots[1].YAxis = grp1.YAxes[1];
+
+            legend1.Items[0].Text = "Vdc";
+            legend1.Items[1].Text = "Temp.";
+
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = true;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+            /*
+            tabgrp.TabPages[2].Text = "Vdc,Temp. vs t";
+
+            grp2.XAxes[0].Caption = "Time(s)";
+            grp2.XAxes[0].ScaleType = ScaleType.Linear;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            grp2.YAxes[0].Caption = "Vdc(V)";
+            grp2.YAxes[1].Caption = "Temp.(°C)";
+
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+
+            grp2.Plots[0].XAxis = grp2.XAxes[0];
+            grp2.Plots[0].YAxis = grp2.YAxes[0];
+            grp2.Plots[1].XAxis = grp2.XAxes[0];
+            grp2.Plots[1].YAxis = grp2.YAxes[1];
+
+            grp2.Plots[0].Visible = true;
+            grp2.Plots[1].Visible = true;
+            grp2.Plots[2].Visible = false;
+            grp2.Plots[3].Visible = false;
+            grp2.Plots[4].Visible = false;
+            grp2.Plots[5].Visible = false;
+
+            legend2.Items[0].Text = "Vdc";
+            legend2.Items[1].Text = "Temp.";
+
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+            */
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 0;
         }
 
         private void InitGraphEIS()
@@ -1225,7 +1384,7 @@ namespace ZiveLab.ZM
         {
 
             tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "T vs Zreal,Vdc";
+            tabgrp.TabPages[1].Text = "Zre,Vdc vs t";
 
             grp1.Plots[0].Visible = true;
             grp1.Plots[1].Visible = true;
@@ -1239,7 +1398,7 @@ namespace ZiveLab.ZM
             formatmode = 0;
 
             grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            grp1.YAxes[0].Caption = "Zreal(Ω)";
+            grp1.YAxes[0].Caption = "Zre(Ω)";
             grp1.YAxes[1].Caption = "Vdc(V)";
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
@@ -1250,7 +1409,7 @@ namespace ZiveLab.ZM
             grp1.Plots[1].XAxis = grp1.XAxes[0];
             grp1.Plots[1].YAxis = grp1.YAxes[1];
 
-            legend1.Items[0].Text = "Zreal";
+            legend1.Items[0].Text = "Zre";
             legend1.Items[1].Text = "Vdc";
 
             legend1.Items[0].Visible = true;
@@ -1261,7 +1420,7 @@ namespace ZiveLab.ZM
             legend1.Items[5].Visible = false;
 
             
-            tabgrp.TabPages[2].Text = "T vs Cs,Cp";
+            tabgrp.TabPages[2].Text = "Cs,Cp vs t";
 
             grp2.XAxes[0].Caption = "Time(s)";
             grp2.XAxes[0].ScaleType = ScaleType.Linear;
@@ -1307,8 +1466,8 @@ namespace ZiveLab.ZM
             grp1.ClearData();
             grp2.ClearData();
             tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "T vs Rs,P_Rp";
-            tabgrp.TabPages[2].Text = "T vs Cs,Cp";
+            tabgrp.TabPages[1].Text = "Rs,P_Rp vs t";
+            tabgrp.TabPages[2].Text = "Cs,Cp vs t";
 
             formatmode = 0;
 
@@ -1663,7 +1822,8 @@ namespace ZiveLab.ZM
                 lblResult.Text = string.Format("    Result: {0}", str);
 
                 lblBattid.Text = string.Format("Battery id: {0}", Encoding.UTF8.GetString(headinfo.batid).Trim('\0'));
-                lblCapa.Text = string.Format("Nominal AH: {0:0.0##} AH", headinfo.Capa);
+
+                lblCapa.Text = string.Format("Nominal AH: {0} AH", SM_Number.ToString(headinfo.Capa, enSM_TypeNumberToString.SIPrefix, 5));
                 lblUser.Text = string.Format("      User: {0}", Encoding.UTF8.GetString(headinfo.user).Trim('\0'));
                 lblMemo.Text = string.Format("      Memo: {0}", Encoding.UTF8.GetString(headinfo.memo).Trim('\0'));
             }
@@ -1675,26 +1835,46 @@ namespace ZiveLab.ZM
             TimeSpan ElapsedTime = TimeSpan.FromMilliseconds(chstat.RunTimeStamp);
             bool brun = gBZA.CheckStatusRun(chstat);
             bool bcalibMode = gBZA.CheckStatusCalibMode(chstat);
+            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type;
 
             lblTestStatus.Text = GetTestStatus(chstat);
             lblErrStatus.Text = GetErrStatus(chstat, brun);
 
 
-            if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type == 1)
+            if (techtype == enTechType.TECH_HFR)
             {
                 gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetHFR(ref techhfr);
                 lblprog.Prog_Val = (int)(((chstat.RunTimeStamp * 0.001) / (double)techhfr.totaltime) * 1000.0);
             }
-            else if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type == 2)
+            else if (techtype == enTechType.TECH_PRR)
             {
                 gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetPRR(ref techprr);
                 lblprog.Prog_Val = (int)(((chstat.RunTimeStamp * 0.001) / (double)techprr.totaltime) * 1000.0);
+            }
+            else if (techtype == enTechType.TECH_MON)
+            {
+                if((enEisState)chstat.eis_status.status == enEisState.mondelay)
+                {
+                    lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].ondelay) * 1000.0);
+                }
+                else
+                {
+                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetMON(ref techmon);
+                    lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)techmon.totaltime) * 1000.0);
+                }
+                
+            }
+            else if(techtype == enTechType.TECH_QIS)
+            {
+                gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetQIS(ref techqis);
+                lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
             }
             else
             {
                 gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetEIS(ref techeis);
                 lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
             }
+
             if (bcalibMode == true)
             {
                 btstart.Enabled = false;
@@ -1727,11 +1907,32 @@ namespace ZiveLab.ZM
                 {
                     ViewInformation();
                     InitGraphType();
-                    lblprog.Prog_Color = Color.Lime;
+                    if (techtype == enTechType.TECH_MON)
+                    {
+                        lblprog.Prog_Color = Color.Yellow;
+                    }
+                    else
+                    {
+                        lblprog.Prog_Color = Color.Lime;
+                    }
                 }
                 else
                 {
-                    if(lblprog.Prog_Color != Color.Lime) lblprog.Prog_Color = Color.Lime;
+                    if (techtype == enTechType.TECH_MON)
+                    {
+                        if ((enEisState)chstat.eis_status.status == enEisState.mondelay)
+                        {
+                            if (lblprog.Prog_Color != Color.Yellow) lblprog.Prog_Color = Color.Yellow;
+                        }
+                        else
+                        {
+                            if (lblprog.Prog_Color != Color.Lime) lblprog.Prog_Color = Color.Lime;
+                        }
+                    }
+                    else
+                    {
+                        if (lblprog.Prog_Color != Color.Lime) lblprog.Prog_Color = Color.Lime;
+                    }
                 }
                 btstart.ImageKey = "stop";
                 
@@ -1767,23 +1968,23 @@ namespace ZiveLab.ZM
 
             if (chstat.Vdc >= 1000.0)
             {
-                lblVdc.Text = string.Format("    VDC: {0,8:###0.0##}KV", chstat.Vdc * 0.001);
+                lblVdc.Text = string.Format("    Vdc: {0,8:###0.0##}KV", chstat.Vdc * 0.001);
             }
             else
             {
-                lblVdc.Text = string.Format("    VDC: {0,8:###0.0##} V", chstat.Vdc);
+                lblVdc.Text = string.Format("    Vdc: {0,8:###0.0##} V", chstat.Vdc);
             }
 
             if (chstat.Veoc >= 1000.0)
             {
-                lblVeoc.Text = string.Format("    VDC: {0,8:###0.0##}KV", chstat.Veoc * 0.001);
+                lblVeoc.Text = string.Format("   Veoc: {0,8:###0.0##}KV", chstat.Veoc * 0.001);
             }
             else
             {
-                lblVeoc.Text = string.Format("    VDC: {0,8:###0.0##} V", chstat.Veoc);
+                lblVeoc.Text = string.Format("   Veoc: {0,8:###0.0##} V", chstat.Veoc);
             }
 
-            lblTemp.Text = string.Format(" PT-100: {0,8:###0.0##} °C", chstat.Temperature);
+            lblTemp.Text = string.Format("  Temp.: {0,8:###0.0##} °C", chstat.Temperature);
 
             if (brun)
             {
@@ -2003,6 +2204,20 @@ namespace ZiveLab.ZM
             }
         }
 
+        private void RefreshGraphQIS()
+        {
+            if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
+            {
+                grp1.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].ly[0].ToArray());
+            }
+
+            if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
+            {
+                grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
+                grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+            }
+        }
+
         private void RefreshGraphHFR()
         {
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
@@ -2102,16 +2317,44 @@ namespace ZiveLab.ZM
 
         }
 
+        private void RefreshGraphMON()
+        {
+            if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
+            {
+                grp1.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].ly[0].ToArray());
+                grp1.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].ly[0].ToArray());
+            }
+            /*
+            if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
+            {
+                grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
+                grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+            }
+            */
+            if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3 || GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
+            {
+                RefreshGraphAxisTimeView();
+            }
+        }
+
         private void RefreshGraph()
         {
-
-            if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type == 1)
+            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type;
+            if (techtype == enTechType.TECH_HFR)
             {
                 RefreshGraphHFR();
             }
-            else if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type == 2)
+            else if (techtype == enTechType.TECH_PRR)
             {
                 RefreshGraphPRR();
+            }
+            else if (techtype == enTechType.TECH_MON)
+            {
+                RefreshGraphMON();
+            }
+            else if (techtype == enTechType.TECH_QIS)
+            {
+                RefreshGraphQIS();
             }
             else
             {
@@ -2804,86 +3047,72 @@ namespace ZiveLab.ZM
 
         }
 
-        void MaxWindowsProc()
+        public void MaxWindowsProc(bool bmax)
         {
+            bMaxWindow = bmax;
             if (bMaxWindow == false)
             {
                 btSize.ImageKey = "max";
-                this.Location = OriginalLocation;
-                this.Size = OriginalSize;
-                pan.AutoScroll = true;
             }
             else
             {
                 btSize.ImageKey = "normal";
-                OriginalLocation = this.Location;
-                OriginalSize = this.Size;
-
-                this.Location = new Point(0, 0);
-                this.Size = new Size(pan.Size.Width - 5, pan.Size.Height - 5);
-                pan.AutoScroll = false;
             }
         }
 
         private void btSize_Click(object sender, EventArgs e)
         {
-            if(bMaxWindow == true)
-            {
-                Properties.Settings.Default.MaxWinCh = -1;
-                bMaxWindow = false;
-                btSize.ImageKey = "max";
-                this.Location = OriginalLocation;
-                this.Size = OriginalSize;
-                pan.AutoScroll = true;
-            }
-            else
-            {
-                Properties.Settings.Default.MaxWinCh = ch;
-                bMaxWindow = true;
-                btSize.ImageKey = "normal";
-                OriginalLocation = this.Location;
-                OriginalSize = this.Size;
-
-                this.Location = new Point(0, 0);
-                this.Size = new Size(pan.Size.Width-5, pan.Size.Height - 5);
-                pan.AutoScroll = false;
-            }
-            Properties.Settings.Default.Save();
+            
+            evShowmax?.Invoke(this, e);
+            
         }
 
-        private void bttech_Click(object sender, EventArgs e)
+        private void SelectTechFile()
         {
             string sch = ch.ToString();
             string filename = gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch];
             string sext = Path.GetExtension(filename).ToUpper();
-
+            string sfilt;
 
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
-            dlg.InitialDirectory = gBZA.appcfg.PathSch;
+            
 
-            dlg.Filter = "Galvanostatic EIS (*.eis) | *.eis|Galvanostatic HFR (*.hfr) |*.hfr|Pseudo Rs Rp mearsurement (*.prr) | *.Prr|All files (*.*)|*.*";
-
+            sfilt = "Galvanostatic EIS (*.eis) | *.eis|";
+            sfilt += "Galvanostatic HFR (*.hfr) |*.hfr|";
+            sfilt += "Pseudo Rs Rp mearsurement (*.prr) | *.prr|";
+            sfilt += "Vdc/Temp. monitor (*.vtm) | *.vtm|";
+            sfilt += "Quick galvanostatic EIS (*.eis) | *.eis";
+            dlg.Title = string.Format("Selection of technique file to be used for channel {0}.", ch + 1);
+            dlg.Filter = sfilt;
             if (sext == "HFR")
             {
-                dlg.Title = "Open Galvanostatic HFR technique file.";
                 dlg.DefaultExt = "hfr";
                 dlg.FilterIndex = 2;
             }
             else if (sext == "PRR")
             {
-                dlg.Title = "Open Pseudo Rs Rp mearsurement technique file.";
                 dlg.DefaultExt = "prr";
                 dlg.FilterIndex = 3;
             }
+            else if (sext == "VTM")
+            {
+                dlg.DefaultExt = "prr";
+                dlg.FilterIndex = 4;
+            }
+            else if (sext == "QIS")
+            {
+                dlg.DefaultExt = "prr";
+                dlg.FilterIndex = 5;
+            }
             else
             {
-                dlg.Title = "Open Galvanostatic EIS technique file.";
                 dlg.DefaultExt = "eis";
                 dlg.FilterIndex = 1;
             }
-            dlg.FileName = filename; 
+            dlg.InitialDirectory = Path.GetDirectoryName(filename); //  gBZA.appcfg.PathSch;
+            dlg.FileName = Path.GetFileName(filename);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 filename = dlg.FileName;
@@ -2899,6 +3128,11 @@ namespace ZiveLab.ZM
 
                 gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
             }
+        }
+
+        private void bttech_Click(object sender, EventArgs e)
+        {
+            SelectTechFile();
         }
         private void OpenTechFile(string filename)
         {
@@ -2920,8 +3154,8 @@ namespace ZiveLab.ZM
         {
             string sch = ch.ToString();
             string filename = gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch];
-
-            OpenTechFile(filename);
+            eZimType type = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetZIMType();
+            OpenTechFile(ch, filename,type);
         }
 
         private void btstart_Click(object sender, EventArgs e)
@@ -2943,7 +3177,7 @@ namespace ZiveLab.ZM
                 lstch.Clear();
                 lstch.Add(ch);
 
-                frmStart frm = new frmStart(lstch);
+                frmStart frm = new frmStart(false,lstch);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     MBZA_MapUtil.CtrlStart(serial, sifch, false);
@@ -3030,25 +3264,7 @@ namespace ZiveLab.ZM
 
             OpenDataEditor(dvea.DataFileName);
         }
-
-        private void OpenTechFile(int ch, string filename, eZimType type = eZimType.UNKNOWN)
-        {
-            
-            frmTechniq frmTech = new frmTechniq(ch, filename, type);
-            if (gBZA.appcfg.TechLocation == new Point(0, 0) || gBZA.appcfg.TechLocation.X == -32000 || gBZA.appcfg.TechLocation.Y == -32000)
-            {
-                frmTech.StartPosition = FormStartPosition.CenterScreen;
-            }
-            else
-            {
-                frmTech.Location = gBZA.appcfg.TechLocation;
-                frmTech.StartPosition = FormStartPosition.Manual;
-            }
-
-            frmTech.ShowDialog();
-
-        }
-
+        
         private bool SaveTempTechFileofResFile(string filename, ref string techfullpath, ref eZimType type)
         {
             string str;
@@ -3063,7 +3279,7 @@ namespace ZiveLab.ZM
             FileResult mfile = new FileResult();
             if (mfile.Open(filename) == true)
             {
-                stTech mtech = new stTech(0);
+                stTech mtech = new stTech(enTechType.TECH_EIS);
                 FileCondition fc = new FileCondition();
                 str = Encoding.UTF8.GetString(mfile.tmphead.mInfo.techfile).Trim('\0');
                 techfilename = Path.GetFileName(str);
@@ -3102,9 +3318,9 @@ namespace ZiveLab.ZM
             return true;
         }
 
-        private void OpenTechFile(int ch, string filename)
+        private void OpenTechFile(int ch, string filename, eZimType type = eZimType.UNKNOWN)
         {
-            frmTechniq frmTech = new frmTechniq(ch, filename);
+            frmTechniq frmTech = new frmTechniq(ch, filename, type);
             if (gBZA.appcfg.TechLocation == new Point(0, 0) || gBZA.appcfg.TechLocation.X == -32000 || gBZA.appcfg.TechLocation.Y == -32000)
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
@@ -3115,7 +3331,7 @@ namespace ZiveLab.ZM
                 frmTech.StartPosition = FormStartPosition.Manual;
             }
 
-            frmTech.ShowDialog();
+            if(frmTech.bopen)  frmTech.ShowDialog();
         }
 
         private void EgForm_OpenTechEditorClick(object sender, EventArgs e)
@@ -3129,18 +3345,15 @@ namespace ZiveLab.ZM
                 MessageBox.Show("Failed to generate tested technical file.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            OpenTechFile(-1, stechfile, type);
+            
+            OpenTechFile(ch, stechfile, type);
         }
 
 
         private void btgrp_Click(object sender, EventArgs e)
         {
-            Button bt = (Button)sender;
-            int ch = Convert.ToInt32(bt.Tag);
-            string sch = ch.ToString();
-            string sSerial = gBZA.ChLnkLst[sch].sSerial;
-            int iSifCh = gBZA.ChLnkLst[sch].SifCh;
-            string filename = gBZA.SifLnkLst[sSerial].MBZAIF.resfilename[iSifCh];
+
+            string filename = gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch];
 
             string[] sfile = new string[1];
             sfile[0] = filename;
@@ -3150,12 +3363,7 @@ namespace ZiveLab.ZM
 
         private void btreport_Click(object sender, EventArgs e)
         {
-            Button bt = (Button)sender;
-            int ch = Convert.ToInt32(bt.Tag);
-            string sch = ch.ToString();
-            string sSerial = gBZA.ChLnkLst[sch].sSerial;
-            int iSifCh = gBZA.ChLnkLst[sch].SifCh;
-            string filename = gBZA.SifLnkLst[sSerial].MBZAIF.resfilename[iSifCh];
+            string filename = gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch];
 
             OpenDataEditor(filename);
         }
@@ -3181,12 +3389,15 @@ namespace ZiveLab.ZM
             }
 
             SaveFileDialog saveDlg = new SaveFileDialog();
-            saveDlg.InitialDirectory = gBZA.appcfg.PathData;
+
+            
+
             saveDlg.Title = "Reload and saving result data file of ZM.";
             saveDlg.DefaultExt = "*.zmf";
             saveDlg.Filter = "Result data files of ZM (*.zmf) |*.zmf";
             saveDlg.OverwritePrompt = true;
-            saveDlg.FileName = gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch];
+            saveDlg.InitialDirectory =  Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
+            saveDlg.FileName = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
 
             if (saveDlg.ShowDialog() == DialogResult.Cancel)
             {
@@ -3316,8 +3527,8 @@ namespace ZiveLab.ZM
         {
            
             string filename = gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch];
-
-            OpenTechFile(filename);
+            eZimType type = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetZIMType();
+            OpenTechFile(ch, filename,type);
         }
 
         private void MenuResopenFilegraph_Click(object sender, EventArgs e)
@@ -3391,52 +3602,7 @@ namespace ZiveLab.ZM
 
         private void MenuTechchangeTechFile_Click(object sender, EventArgs e)
         {
-            string sch = ch.ToString();
-            string filename = gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch];
-            string sext = Path.GetExtension(filename).ToUpper();
-
-
-
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = false;
-            dlg.InitialDirectory = gBZA.appcfg.PathSch;
-
-            dlg.Filter = "Galvanostatic EIS (*.eis) | *.eis|Galvanostatic HFR (*.hfr) |*.hfr|Pseudo Rs Rp mearsurement (*.prr) | *.Prr|All files (*.*)|*.*";
-
-            if (sext == "HFR")
-            {
-                dlg.Title = "Open Galvanostatic HFR technique file.";
-                dlg.DefaultExt = "hfr";
-                dlg.FilterIndex = 2;
-            }
-            else if (sext == "PRR")
-            {
-                dlg.Title = "Open Pseudo Rs Rp mearsurement technique file.";
-                dlg.DefaultExt = "prr";
-                dlg.FilterIndex = 3;
-            }
-            else
-            {
-                dlg.Title = "Open Galvanostatic EIS technique file.";
-                dlg.DefaultExt = "eis";
-                dlg.FilterIndex = 1;
-            }
-            dlg.FileName = filename;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                filename = dlg.FileName;
-                gBZA.appcfg.PathSch = Path.GetDirectoryName(dlg.FileName);
-                gBZA.appcfg.Save();
-
-                var Value = gBZA.ChLnkLst[sch];
-                Value.mChInf.FileCond = filename;
-                gBZA.ChLnkLst[sch] = Value;
-
-                gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch] = filename;
-
-
-                gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
-            }
+            SelectTechFile();
         }
 
         private void lblCapa_Click(object sender, EventArgs e)
@@ -3464,6 +3630,12 @@ namespace ZiveLab.ZM
         {
             if (GrpCtrlMode1 > 3)
             {
+                if (this.tabgrp.TabPages.Contains(this.tabPage3) == false)
+                {
+                    lblcsfreq1.Visible = false;
+                    grp1.CaptionVisible = false;
+                    return;
+                }
                 int idx = grp1.Cursors[0].GetCurrentIndex();
                 if (oldcursorindex1 != idx)
                 {
@@ -3508,6 +3680,13 @@ namespace ZiveLab.ZM
         {
             if (GrpCtrlMode2 > 3)
             {
+                if (this.tabgrp.TabPages.Contains(this.tabPage3) == false)
+                {
+                    lblcsfreq2.Visible = false;
+                    grp2.CaptionVisible = false;
+                    return;
+                }
+
                 if (gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type > 0)
                 {
                     int idx = grp2.Cursors[0].GetCurrentIndex();

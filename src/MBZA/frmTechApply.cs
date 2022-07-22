@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SMLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,31 +15,112 @@ namespace ZiveLab.ZM
 {
     public partial class frmTechApply : Form
     {
-        public List<string> chklist;
+        public List<int> chklist;
         public string filename;
+        bool bRegChannel;
         public frmTechApply(string filecond)
         {
             InitializeComponent();
-            chklist = new List<string>();
+            chklist = new List<int>();
+            bRegChannel = false;
             filename = filecond;
+            this.Text = "Select channels to apply the thchnique file to.";
+
+            RefreshAppList();
         }
 
-        private void frmTechApply_Load(object sender, EventArgs e)
+        public frmTechApply(string fileinf,List<int> list) // Register ch
+        {
+            InitializeComponent();
+            chklist = new List<int>();
+            if(list == null)
+            {
+                if (File.Exists(fileinf))
+                {
+                    SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
+                    chklist = mFile.LoadXmlToObj(fileinf, chklist);
+                }
+            }
+            else
+            {
+                chklist = list;
+            }
+            bRegChannel = true;
+            filename = fileinf;
+            this.Text = "Registering  channel(s) for real time monitor";
+
+            RefreshRegList();
+        }
+
+        private void RefreshAppList()
         {
             int i = 0;
             int ich;
-            
+
             lstbox.Items.Clear();
             foreach (var pair in gBZA.ChLnkLst)
             {
+                if (gBZA.SifLnkLst.ContainsKey(pair.Value.sSerial) == false) continue;
                 if (gBZA.CheckStatusRun(gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.mChStatInf[pair.Value.SifCh])) continue;
                 if (gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.mChStatInf[pair.Value.SifCh])) continue;
 
                 ich = Convert.ToInt32(pair.Key) + 1;
                 lstbox.Items.Add(string.Format("Channel {0}", ich));
-                lstbox.SetItemChecked(i, true);
+
+                if(filename == gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.condfilename[pair.Value.SifCh])
+                {
+                    lstbox.SetItemChecked(i, true);
+                }
+                else
+                {
+                    lstbox.SetItemChecked(i, false);
+                }
+
                 i++;
             }
+        }
+
+        private void RefreshRegList()
+        {
+            int i = 0;
+            int ich;
+
+            lstbox.Items.Clear();
+            foreach (var pair in gBZA.ChLnkLst)
+            {
+                if (gBZA.SifLnkLst.ContainsKey(pair.Value.sSerial) == false) continue;
+
+                if (gBZA.CheckStatusRun(gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.mChStatInf[pair.Value.SifCh])) continue;
+                if (gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.mChStatInf[pair.Value.SifCh])) continue;
+
+                ich = Convert.ToInt32(pair.Key);
+
+                lstbox.Items.Add(string.Format("Channel {0}", ich+1));
+
+                if (chklist == null || chklist.Count <= 0)
+                {
+                    lstbox.SetItemChecked(i, false);
+                }
+                else
+                {
+                    if (chklist.Find(x => x == ich) >= 0)
+                    {
+                        lstbox.SetItemChecked(i, true);
+                    }
+                    else
+                    {
+                        lstbox.SetItemChecked(i, false);
+                    }
+                }
+                i++;
+            }
+        }
+
+        private void frmTechApply_Load(object sender, EventArgs e)
+        {
+            
+
+
                 
         }
 
@@ -63,8 +146,9 @@ namespace ZiveLab.ZM
             string sitem;
             string sch;
             int ich;
-            
-            
+
+
+            chklist.Clear();
             for (int i = 0; i < lstbox.Items.Count; i++)
             {
                 if (lstbox.GetItemChecked(i) == true)
@@ -73,12 +157,27 @@ namespace ZiveLab.ZM
                     rch = sitem.Substring(8);
                     ich = Convert.ToInt32(rch) - 1;
                     sch = ich.ToString();
-                    var chlnkinf = gBZA.ChLnkLst[sch];
-                    gBZA.SifLnkLst[chlnkinf.sSerial].MBZAIF.condfilename[chlnkinf.SifCh] = chlnkinf.mChInf.FileCond = filename;
-                    gBZA.ChLnkLst[sch] = chlnkinf;
+                    if (bRegChannel)
+                    {
+                        chklist.Add(ich);
+                    }
+                    else
+                    {
+                        var chlnkinf = gBZA.ChLnkLst[sch];
+                        gBZA.SifLnkLst[chlnkinf.sSerial].MBZAIF.condfilename[chlnkinf.SifCh] = chlnkinf.mChInf.FileCond = filename;
+                        gBZA.ChLnkLst[sch] = chlnkinf;
+                    }
                 }
             }
-            gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
+            if (bRegChannel == false)
+            {
+                gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
+            }
+            else
+            {
+                SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
+                mFile.SaveObjToXml(filename, chklist);
+            }
             
             DialogResult = DialogResult.OK;
         }

@@ -113,9 +113,8 @@ namespace ZiveLab.ZM
             dlg.DefaultExt = "zim";
             dlg.Filter = "zim files (*.zim)|*.zim|All files (*.*)|*.*";
 
-            dlg.FileName = Path.Combine(gBZA.appcfg.PathZIMFW, gBZA.appcfg.FileNameZIMFW);
             dlg.InitialDirectory = gBZA.appcfg.PathZIMFW;
-            
+            dlg.FileName = gBZA.appcfg.FileNameZIMFW;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtFilePath.Text = dlg.FileName;

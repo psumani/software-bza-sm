@@ -291,7 +291,7 @@ namespace ZiveLab.ZM.ZIM
         public bool CmdStoreRangesInfo(int nSlot)
         {
             if (isConnected == false) return false;
-            if (mComm.WriteToDevice(CommandSet.SAVE_RNGINFO, nSlot, 0, null) == false)
+            if (mComm.WriteToDevice(CommandSet.WRITE_ROM, nSlot, 0, null) == false)
             {
                 mComm.Dispose();
                 return false;
@@ -441,11 +441,22 @@ namespace ZiveLab.ZM.ZIM
             }
             return true;
         }
-        
+        public bool WriteData(stDevInf data)
+        {
+            if (isConnected == false) return false;
 
+            if (mComm.WriteToDevice(CommandSet.SAVE_DEVICE_INFO, -1, data.ToByteArray()) == false)
+            {
+                mComm.Dispose();
+                return false;
+            }
+            return true;
+        }
+        
         public bool WriteData(int nSlot, st_TestCmd data)
         {
             if (isConnected == false) return false;
+
             if (mComm.WriteToDevice(CommandSet.TEST_COMM, nSlot, data.ToByteArray()) == false)
             {
                 mComm.Dispose();
@@ -551,7 +562,7 @@ namespace ZiveLab.ZM.ZIM
 
         public bool ReadData(int nSlot, ref stZimCfg data)
         {
-            byte[] buf; 
+            byte[] buf;
             if (isConnected == false) return false;
             buf = mComm.ReadFromDevice(CommandSet.GET_ZIMCFG, nSlot);
 
@@ -564,7 +575,7 @@ namespace ZiveLab.ZM.ZIM
             data.ToWritePtr(buf);
             return true;
         }
-
+        
         public bool WriteData(int nSlot, stResHeaderInfo data)
         {
             if (isConnected == false) return false;
@@ -1373,6 +1384,23 @@ namespace ZiveLab.ZM.ZIM
             mComm.SetReceiveTime(LimitTimerOut);
             return true;
         }
+
+        public bool ReadData(ref stDevInf data)
+        {
+            byte[] buf;
+            if (isConnected == false) return false;
+            buf = mComm.ReadFromDevice(CommandSet.GET_DEVICE_INFO, -1, (int)0);
+
+            if (buf == null)
+            {
+                mComm.Dispose();
+                return false;
+            }
+
+            data.ToWritePtr(buf);
+            return true;
+        }
+
         public bool ReadData(ref stSystemConfig data)
         {
             byte[] buf;

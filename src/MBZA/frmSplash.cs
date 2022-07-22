@@ -53,7 +53,10 @@ namespace ZiveLab.ZM
 
             changeBZA = false;
 
-            
+            gBZA.pingHost = new PingHost(true);
+
+
+
             backgroundWorker1.RunWorkerAsync();
         }
 

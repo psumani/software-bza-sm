@@ -16,7 +16,7 @@
 #define FIRMWARE_VER_MAJOR	6  //0.256
 #define FIRMWARE_VER_MINOR	0
 #define FIRMWARE_VER_REV	0
-#define FIRMWARE_VER_BUILD	3
+#define FIRMWARE_VER_BUILD	7
 
 #define HW_ENABLE			0x1	
 #define HW_DISABLE			0x0	
@@ -139,7 +139,8 @@
 #define DEF_EIS_STATUS_FIN			11
 #define DEF_EIS_STATUS_END			12
 #define DEF_EIS_STATUS_WAIT			13
-
+#define DEF_EIS_STATUS_MONDELAY		14
+#define DEF_EIS_STATUS_SAMPLE		15
 
 
 #define DEF_SINECTRL_FREQ 			4000.0
@@ -232,8 +233,11 @@ typedef struct
     uint            DaqTick;
 } stSystemConfig;
 
-
-
+typedef struct
+{
+    stConnCfg            mConnCfg;
+	stSystemConfig       mSysCfg;
+} stDevInf;
 
 #define DEF_SIZE_RANGE  	sizeof(st_zim_rnginf)
 #define DEF_SIZE_ZIMCFG  	sizeof(stZimCfg)
@@ -582,6 +586,8 @@ typedef struct
 	ushort				ondelaystable;
 	
 	ushort 				celloffwait;
+	double              CtrlRate;
+	double              CutoffV;
 	ushort				timeproc;
 	uint 				m_MsDurStamp;
 	uint 				m_MsDurLimit;
@@ -594,6 +600,9 @@ typedef struct
 
 	ushort 				Iac_rngno;
     ushort 				Vdc_rngno; // 0- auto
+	
+	ushort				skipcycle;
+	ushort				setcycle;
 	
 	double				MaxP;
 	double				MaxI;
@@ -620,7 +629,8 @@ typedef struct
         double bias;
 		ushort density;
 		int    iteration;
-		int 	inouse;
+		ushort skipcycle;
+		ushort cycle;
 		double nouse[3];
 } st_Tech_EIS;
 
@@ -631,7 +641,10 @@ typedef struct
         double interval;
 		double totaltime;
 		ushort celloffwait;
-		double nouse[3];
+		ushort skipcycle;
+		ushort cycle;
+		int    inouse;
+		double nouse[2];
 } st_Tech_HFR;
 
 typedef struct 
@@ -643,19 +656,34 @@ typedef struct
 		double interval;
 		double totaltime;
 		ushort celloffwait;
-		double nouse;
+		ushort skipcycle;
+		ushort cycle;
+		int    inouse;
 } st_Tech_PRR;
+
+typedef struct 
+{
+		ushort celloffwait;
+		double interval;
+		double totaltime;
+		double CutoffV;
+        double nouse[4];
+       
+} st_Tech_MON;
  
 typedef union  
 {
 	st_Tech_EIS		eis;
 	st_Tech_HFR		hfr;
 	st_Tech_PRR 	prr;
+	st_Tech_MON     mon;
+	st_Tech_EIS     qis;
 }un_TechType;
 
 
 typedef struct 
 {
+	ushort 				CheckVal;
 	stVersion 			version;
 	ushort 				type;
 	un_TechType 		tech;

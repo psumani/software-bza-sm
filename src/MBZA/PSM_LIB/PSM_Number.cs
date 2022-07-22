@@ -159,14 +159,14 @@ namespace SMLib
                 if (dimension == 0) sformat = "";
                 else sformat = string.Format("{0,1}{1}",((enSM_SymbolSIPrefix)(dimension / 3)).ToString(),strunit);
 
-                sformat = String.Format("{{0,{0}:N{1}}} {2}", Digitcount, downdim, sformat);
+                sformat = String.Format("{{0,{0}:N{1}}}{2}", Digitcount, downdim, sformat);
                 
             }
             else
             {
                 sformat = String.Format("{{0,{0}:e{1}}}{2}", Digitcount, downdim, strunit);
             }
-            sRet = String.Format(sformat,value);
+            sRet = String.Format(sformat, procvalue);
             return sRet;
         }
 
@@ -216,6 +216,7 @@ namespace SMLib
             if (plusvalue == false) procvalue *= -1.0;
             if(dimension == 0) sRet = String.Format("{0}{1}", procvalue, strunit);
             else sRet = String.Format("{0}{1}{2}", procvalue, ((enSM_SymbolSIPrefix)dimension), strunit);
+
             return sRet;
         }
 
@@ -296,7 +297,7 @@ namespace SMLib
             {
                 sformat = String.Format("{{0,{0}:e{1}}}{2}", Digitcount, downdim, strunit);
             }
-            sRet = String.Format(sformat,value);
+            sRet = String.Format(sformat, procvalue);
             return sRet;
         }
 
@@ -513,6 +514,385 @@ namespace SMLib
             tmpstr = String.Format("{0:02d}/{1:02d}:{2:02d}:{3:02d}{5:00.{4}#}", day, hour, minute, fcnt, Milli);
             return tmpstr;
         }
+
+        public static double SM_atof(string sval)
+        {
+            string stime = sval.Trim();
+            int nLen = stime.Length;
+            string str = "";
+            string str1 = "";
+            double dTemp;
+            double dTemp1;
+            for (int i = 0; i < nLen; i++)
+            {
+                str1 = stime.Substring(i, 1);
+                switch (str1)
+                {
+                    case "e":
+                    case "0":
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                    case "9":
+                    case "+":
+                    case "-":
+                    case "E":
+                    case ".":
+                        break;
+                    default:
+                        str1 = "";
+                        break;
+                }
+                str += str1;
+            }
+            dTemp = Convert.ToDouble(str);
+            dTemp1 = 1.0f;
+
+            str1 = stime.Substring(nLen - 1, 1);
+            switch (str1)
+            {
+                case "T": dTemp1 = 1e12; break;
+                case "G": dTemp1 = 1e9; break;
+                case "M": dTemp1 = 1e6; break;
+                case "K": dTemp1 = 1e3; break;
+                case "k": dTemp1 = 1e3; break;
+                case "m": dTemp1 = 1e-3; break;
+                case "u": dTemp1 = 1e-6; break;
+                case "n": dTemp1 = 1e-9; break;
+                case "p": dTemp1 = 1e-12; break;
+                case "f": dTemp1 = 1e-15; break;
+                case "a": dTemp1 = 1e-18; break;
+            }
+            dTemp *= dTemp1;
+            return dTemp;
+        }
+
+        public static int searchnumber(int startindex, string sval)
+        {
+            char[] chars = new char[sval.Length];
+            chars = sval.ToCharArray();
+
+            int i = startindex;
+
+            while (true)
+            {
+                if (i >= sval.Length)
+                {
+                    break;
+                }
+
+                if (chars[i] == 0)
+                {
+                    return i;
+                }
+                if (char.IsDigit(chars[i]))
+                {
+                    return i;
+                }
+                i++;
+            }
+            return -1;
+        }
+        public static double atot(string buffer)		// Ascii to Time
+        {
+            double[] itemvalue = new double[3];
+            int itemcount, currentvalue;
+            double dotvalue;
+            double timevalue, multiplevalue;
+            string stime = buffer.Trim();
+            int pos = 0;
+            if (stime.IndexOf('e') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('E') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('T') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('G') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('M') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('K') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('k') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('m') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('u') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('n') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('p') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('f') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+            if (stime.IndexOf('a') >= 0)
+            {
+                return SM_atof(buffer);
+            }
+
+            char[] chars = stime.ToCharArray();
+            char schar = (char)0;
+            itemvalue[0] = itemvalue[1] = itemvalue[2] = 0.0;
+            currentvalue = 0;
+            itemcount = 0;
+            pos = 0;
+
+            for (itemcount = 0; itemcount < 3; itemcount++)
+            {
+                dotvalue = 0.0;
+
+                pos = searchnumber(pos, stime);
+                if (pos < 0 || pos >= stime.Length)
+                {
+                    break;
+                }
+
+                schar = chars[pos];
+                pos++;
+                if (schar == (char)0)
+                {
+                    break;
+                }
+
+                while (true)
+                {
+                    currentvalue *= 10;
+                    currentvalue += (schar - 0x30);
+                    dotvalue *= 10;
+                    if (pos >= stime.Length)
+                    {
+                        break;
+                    }
+                    while (true)
+                    {
+                        schar = chars[pos];
+                        if (schar == '.')
+                        {
+                            dotvalue = 1;
+                            pos++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (char.IsDigit(schar))
+                    {
+                        pos++;
+                        continue;
+                    }
+                    break;
+                }
+                if (dotvalue == 0.0)
+                {
+                    itemvalue[itemcount] = currentvalue;
+                }
+                else
+                {
+                    itemvalue[itemcount] = currentvalue / dotvalue;
+                }
+                currentvalue = 0;
+            }
+            timevalue = 0.0;
+            multiplevalue = 1.0;
+            for (int i = (itemcount - 1); i >= 0; i--)
+            {
+                timevalue += itemvalue[i] * multiplevalue;
+                multiplevalue *= 60.0;
+            }
+            return timevalue;
+        }
+
+        public static string DelLastZero(string str)
+        {
+            int i = 0;
+            int Lastzero = str.Length;
+            int nLen = str.Length;
+            string c;
+
+            while (true)
+            {
+                c = str.Substring(nLen - i - 1, 1);
+                if (c == ".")
+                {
+                    i++;
+                    break;
+                }
+                else if (c == "0")
+                {
+                    Lastzero = nLen - i - 1;
+                }
+                else
+                {
+                    break;
+                }
+                i++;
+            }
+            return str.Substring(0, Lastzero);
+        }
+
+        public static string GetTimeString(double dsecond)
+        {
+            string str;
+            double dval = Math.Floor(dsecond * 1000000.0 + 0.5) / 1000000.0;
+            double Milli, IntSec;
+
+            IntSec = Math.Floor(dval);
+            Milli = dval - IntSec;
+            long MilliSecond = (long)IntSec;
+            int LessMicro = (int)(Milli * 1000000.0 + 0.5);
+            int hour = 0, minute = 0;
+
+            if (MilliSecond >= 3600)
+            {
+                hour = (int)(MilliSecond / 3600);
+                MilliSecond %= 3600;
+            }
+            if (MilliSecond >= 60)
+            {
+                minute = (int)(MilliSecond / 60);
+                MilliSecond %= 60;
+            }
+            if (hour == 0)
+            {
+                if (minute == 0)
+                {
+                    if (LessMicro == 0)
+                    {
+                        str = string.Format("{0:D1}", MilliSecond);
+                    }
+                    else
+                    {
+                        if (LessMicro < 10)
+                        {
+                            str = string.Format("{0:D1}.00000{1:D1}", MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 100)
+                        {
+                            str = string.Format("{0:D1}.0000{1:D2}", MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 1000)
+                        {
+                            str = string.Format("{0:D1}.000{1:D3}", MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 10000)
+                        {
+                            str = string.Format("{0:D1}.00{1:D4}", MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 100000)
+                        {
+                            str = string.Format("{0:D1}.0{1:D5}", MilliSecond, LessMicro);
+                        }
+                        else
+                        {
+                            str = string.Format("{0:D1}.{1:D6}", MilliSecond, LessMicro);
+                        }
+                        str = DelLastZero(str);
+                    }
+                }
+                else
+                {
+                    if (LessMicro == 0)
+                    {
+                        str = string.Format("{0:D1}:{1:D2}", minute, MilliSecond);
+                    }
+                    else
+                    {
+                        if (LessMicro < 10)
+                        {
+                            str = string.Format("{0:D1}:{1:D2}.00000{2:D1}", minute, MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 100)
+                        {
+                            str = string.Format("{0:D1}:{1:D2}.0000{2:D2}", minute, MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 1000)
+                        {
+                            str = string.Format("{0:D1}:{1:D2}.000{2:D3}", minute, MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 10000)
+                        {
+                            str = string.Format("{0:D1}:{1:D2}.00{2:D4}", minute, MilliSecond, LessMicro);
+                        }
+                        else if (LessMicro < 100000)
+                        {
+                            str = string.Format("{0:D1}:{1:D2}.0{2:D5}", minute, MilliSecond, LessMicro);
+                        }
+                        else
+                        {
+                            str = string.Format("{0:D1}:{1:D2}.{2:D6}", minute, MilliSecond, LessMicro);
+                        }
+                        str = DelLastZero(str);
+                    }
+                }
+
+            }
+            else
+            {
+                if (LessMicro == 0)
+                {
+                    str = string.Format("{0:D1}:{1:D2}:{2:D2}", hour, minute, MilliSecond);
+                }
+                else
+                {
+                    if (LessMicro < 10)
+                    {
+                        str = string.Format("{0:D1}:{1:D2}:{2:D2}.00000{3:D1}", hour, minute, MilliSecond, LessMicro);
+                    }
+                    else if (LessMicro < 100)
+                    {
+                        str = string.Format("{0:D1}:{1:D2}:{2:D2}.0000{3:D2}", hour, minute, MilliSecond, LessMicro);
+                    }
+                    else if (LessMicro < 1000)
+                    {
+                        str = string.Format("{0:D1}:{1:D2}:{2:D2}.000{3:D3}", hour, minute, MilliSecond, LessMicro);
+                    }
+                    else if (LessMicro < 10000)
+                    {
+                        str = string.Format("{0:D1}:{1:D2}:{2:D2}.00{3:D4}", hour, minute, MilliSecond, LessMicro);
+                    }
+                    else if (LessMicro < 100000)
+                    {
+                        str = string.Format("{0:D1}:{1:D2}:{2:D2}.0{3:D5}", hour, minute, MilliSecond, LessMicro);
+                    }
+                    else
+                    {
+                        str = string.Format("{0:D1}:{1:D2}:{2:D2}.{3:D6}", hour, minute, MilliSecond, LessMicro);
+                    }
+                    str = DelLastZero(str);
+                }
+            }
+            return str;
+        }
         /*
         public string SetTimeFloatString(double value)
         {
@@ -610,6 +990,6 @@ namespace SMLib
             return str;
         }
         */
-        
+
     }
 }

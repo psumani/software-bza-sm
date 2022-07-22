@@ -1042,5 +1042,17 @@ namespace ZiveLab.ZM.Properties {
                 this["MaxWinCh"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int GrpMaxWinCh {
+            get {
+                return ((int)(this["GrpMaxWinCh"]));
+            }
+            set {
+                this["GrpMaxWinCh"] = value;
+            }
+        }
     }
 }

@@ -70,6 +70,8 @@
             this.dataEditorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.realtimeMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.realtimeMonitorRegChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.gtip = new System.Windows.Forms.ToolTip(this.components);
             this.btselall = new System.Windows.Forms.Button();
             this.btdeselall = new System.Windows.Forms.Button();
@@ -90,6 +92,8 @@
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtRealMon = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripRtRegCh = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hgrid)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -423,7 +427,9 @@
             // windowsToolStripMenuItem
             // 
             this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.realtimeMonitorToolStripMenuItem});
+            this.realtimeMonitorToolStripMenuItem,
+            this.toolStripSeparator20,
+            this.realtimeMonitorRegChannel});
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
             this.windowsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.windowsToolStripMenuItem.Text = "&Windows";
@@ -432,10 +438,24 @@
             // 
             this.realtimeMonitorToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.List;
             this.realtimeMonitorToolStripMenuItem.Name = "realtimeMonitorToolStripMenuItem";
-            this.realtimeMonitorToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.realtimeMonitorToolStripMenuItem.Text = "&Realtime monitor";
+            this.realtimeMonitorToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
+            this.realtimeMonitorToolStripMenuItem.Text = "&Real-time monitor.";
             this.realtimeMonitorToolStripMenuItem.ToolTipText = "You can control registered channels or check real-time information.";
             this.realtimeMonitorToolStripMenuItem.Click += new System.EventHandler(this.realtimeMonitorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(282, 6);
+            // 
+            // realtimeMonitorRegChannel
+            // 
+            this.realtimeMonitorRegChannel.Image = ((System.Drawing.Image)(resources.GetObject("realtimeMonitorRegChannel.Image")));
+            this.realtimeMonitorRegChannel.Name = "realtimeMonitorRegChannel";
+            this.realtimeMonitorRegChannel.Size = new System.Drawing.Size(285, 22);
+            this.realtimeMonitorRegChannel.Text = "Real-time monitor channel registration.";
+            this.realtimeMonitorRegChannel.ToolTipText = "Set the channel displayed on the real-time monitor.";
+            this.realtimeMonitorRegChannel.Click += new System.EventHandler(this.realtimeMonitorRegChannel_Click);
             // 
             // btselall
             // 
@@ -522,7 +542,9 @@
             this.toolStripSeparator17,
             this.toolStripBtReport,
             this.toolStripSeparator18,
-            this.toolStripBtRealMon});
+            this.toolStripBtRealMon,
+            this.toolStripSeparator21,
+            this.toolStripRtRegCh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1593, 25);
@@ -627,6 +649,22 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Group tools/";
             // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripRtRegCh
+            // 
+            this.toolStripRtRegCh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripRtRegCh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRtRegCh.Image")));
+            this.toolStripRtRegCh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripRtRegCh.Name = "toolStripRtRegCh";
+            this.toolStripRtRegCh.Size = new System.Drawing.Size(23, 22);
+            this.toolStripRtRegCh.Text = "Real-time monitor channel registration.";
+            this.toolStripRtRegCh.ToolTipText = "Set the channel displayed on the real-time monitor.";
+            this.toolStripRtRegCh.Click += new System.EventHandler(this.toolStripRtRegCh_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -724,6 +762,10 @@
         private System.Windows.Forms.ToolStripButton toolStripBtRealMon;
         private System.Windows.Forms.ToolStripMenuItem setDefaultWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.ToolStripMenuItem realtimeMonitorRegChannel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+        private System.Windows.Forms.ToolStripButton toolStripRtRegCh;
     }
 }
 

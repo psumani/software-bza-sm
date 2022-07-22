@@ -42,6 +42,8 @@ namespace ZiveLab.ZM
 
         public Point RealviewLocation;
         public Size RealviewSize;
+        public Point RegRealviewLocation;
+        public Size RegRealviewSize;
         public Point GroupRealviewLocation;
         public Size GroupRealviewSize;
         public Point MainLocation;
@@ -85,6 +87,8 @@ namespace ZiveLab.ZM
             CommTimeOut = 8000;
             RealviewLocation = new Point(0, 0);
             RealviewSize = new Size(0, 0);
+            RegRealviewLocation = new Point(0, 0);
+            RegRealviewSize = new Size(0, 0);
             GroupRealviewLocation = new Point(0, 0);
             GroupRealviewSize = new Size(0, 0);
             MainLocation = new Point(0, 0);
@@ -343,7 +347,7 @@ namespace ZiveLab.ZM
     }
     public class cls_rtdata
     {
-        public ushort techtype;
+        public enTechType techtype;
         public ushort arrcnt;
         public bool [] barr;
         public ushort findex;
@@ -351,7 +355,7 @@ namespace ZiveLab.ZM
         public st_zim_rt rtgrp;
         public cls_rtdata()
         {
-            techtype = 0;
+            techtype = enTechType.TECH_EIS;
             arrcnt = 1;
             rawdata = new st_zim_rt_raw();
             rtgrp = new st_zim_rt();
@@ -367,28 +371,35 @@ namespace ZiveLab.ZM
             stTech_EIS eis = new stTech_EIS(0);
             stTech_HFR hfr = new stTech_HFR(0);
             stTech_PRR prr = new stTech_PRR(0);
+            stTech_MON mon = new stTech_MON(0);
+            stTech_QIS qis = new stTech_QIS(0);
 
-            techtype = tech.type;
+            techtype = (enTechType)tech.type;
             rawdata.Initialize();
             rtgrp.Initialize();
 
             findex = 0;
 
-            if (techtype == 1)
+            if (techtype == enTechType.TECH_HFR)
             {
                 eis.initialize();
                 tech.GetHFR(ref hfr);
                 prr.initialize();
+                mon.initialize();
+                qis.initialize();
                 barr[0] = true;
                 barr[1] = false;
                 barr[2] = false;
                 arrcnt = 1;
             }
-            else if (techtype == 2)
+            else if (techtype == enTechType.TECH_PRR)
             {
                 eis.initialize();
                 hfr.initialize();
                 tech.GetPRR(ref prr);
+                mon.initialize();
+                qis.initialize();
+
                 arrcnt = 0;
                 barr[0] = false;
                 barr[1] = false;
@@ -409,11 +420,39 @@ namespace ZiveLab.ZM
                     arrcnt++;
                 }
             }
+            else if (techtype == enTechType.TECH_MON)
+            {
+                eis.initialize();
+                hfr.initialize();
+                prr.initialize();
+                tech.GetMON(ref mon);
+                qis.initialize();
+                barr[0] = true;
+                barr[1] = false;
+                barr[2] = false;
+                arrcnt = 1;
+            }
+            else if (techtype == enTechType.TECH_QIS)
+            {
+                eis.initialize();
+                hfr.initialize();
+                prr.initialize();
+                mon.initialize();
+                tech.GetQIS(ref qis);
+
+                barr[0] = true;
+                barr[1] = false;
+                barr[2] = false;
+                arrcnt = 1;
+            }
             else
             {
                 tech.GetEIS(ref eis);
                 hfr.initialize();
                 prr.initialize();
+                mon.initialize();
+                qis.initialize();
+
                 barr[0] = true;
                 barr[1] = false;
                 barr[2] = false;
@@ -438,15 +477,41 @@ namespace ZiveLab.ZM
 
         }
 
-        public void Append(stDefTestData[] arrd,int count = 1)
+        public void Append(stDefTestData mdata, ref int oldcycle)
+        {
+            if (oldcycle != mdata.nCycle)
+            {
+                if (oldcycle >= 0)
+                {
+                    oldcycle = mdata.nCycle;
+                    DataAppend(mdata, true);
+                    return;
+                }
+                oldcycle = mdata.nCycle;
+            }
+            DataAppend(mdata, false);
+        }
+
+        public void Append(stDefTestData[] arrd,int count, ref int oldcycle)
         {
             for(int i=0; i<count; i++)
             {
-                Append(arrd[i]);
+                if(oldcycle != arrd[i].nCycle)
+                {
+                    if(oldcycle >= 0)
+                    {
+                        oldcycle = arrd[i].nCycle;
+                        DataAppend(arrd[i],true);
+                        continue;
+                    }
+                    oldcycle = arrd[i].nCycle;
+                }
+                DataAppend(arrd[i],false);
+
             }
         }
         
-        public void Append(stDefTestData d)
+        public void DataAppend(stDefTestData d, bool bnan)
         {
             double zmag = Math.Sqrt(d.real * d.real + d.img * d.img);
             double zph = Math.Atan2(d.img, d.real) * 180.0 / DeviceConstants.PI;
@@ -455,9 +520,10 @@ namespace ZiveLab.ZM
             double Ymag = Math.Sqrt((double)(Yre * Yre + Yimg * Yimg));
             double cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * d.img);
             double cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
-
-            if (techtype == 1)
+            
+            if (techtype == enTechType.TECH_HFR)
             {
+                
                 rtgrp.plot[0].freq[0].Add(d.fFreq);
                 rtgrp.plot[0].lx[0].Add(d.TestTime);
                 rtgrp.plot[0].ly[0].Add(d.real);
@@ -474,7 +540,7 @@ namespace ZiveLab.ZM
                 rtgrp.plot[3].lx[0].Add(d.TestTime);
                 rtgrp.plot[3].ly[0].Add(cp);
             }
-            else if (techtype == 2)
+            else if (techtype == enTechType.TECH_PRR)
             {
                 if (arrcnt == 0) return;
                 int Lastindex;
@@ -542,8 +608,55 @@ namespace ZiveLab.ZM
                 }       
                 
             }
+            else if (techtype == enTechType.TECH_MON)
+            {
+                rtgrp.plot[0].freq[0].Add(0.0);
+                rtgrp.plot[0].lx[0].Add(d.TestTime);
+                rtgrp.plot[0].ly[0].Add(d.Vdc);
+
+                rtgrp.plot[1].freq[0].Add(0.0);
+                rtgrp.plot[1].lx[0].Add(d.TestTime);
+                rtgrp.plot[1].ly[0].Add(d.Temperature);
+                /*
+                rtgrp.plot[2].freq[0].Add(0.0);
+                rtgrp.plot[2].lx[0].Add(d.TestTime);
+                rtgrp.plot[2].ly[0].Add(d.Vdc);
+
+                rtgrp.plot[3].freq[0].Add(0.0);
+                rtgrp.plot[3].lx[0].Add(d.TestTime);
+                rtgrp.plot[3].ly[0].Add(d.Temperature);
+                */
+            }
+            else if (techtype == enTechType.TECH_QIS)
+            {
+                rtgrp.plot[0].freq[0].Add(d.fFreq);
+                rtgrp.plot[0].lx[0].Add(d.real);
+                rtgrp.plot[0].ly[0].Add(d.img * -1.0);
+
+                rtgrp.plot[2].freq[0].Add(d.fFreq);
+                rtgrp.plot[2].lx[0].Add(d.fFreq);
+                rtgrp.plot[2].ly[0].Add(zmag);
+
+                rtgrp.plot[3].freq[0].Add(d.fFreq);
+                rtgrp.plot[3].lx[0].Add(d.fFreq);
+                rtgrp.plot[3].ly[0].Add(zph);
+            }
             else
             {
+                if (bnan)
+                {
+                    rtgrp.plot[0].freq[0].Add(double.NaN);
+                    rtgrp.plot[0].lx[0].Add(double.NaN);
+                    rtgrp.plot[0].ly[0].Add(double.NaN);
+
+                    rtgrp.plot[2].freq[0].Add(double.NaN);
+                    rtgrp.plot[2].lx[0].Add(double.NaN);
+                    rtgrp.plot[2].ly[0].Add(double.NaN);
+
+                    rtgrp.plot[3].freq[0].Add(double.NaN);
+                    rtgrp.plot[3].lx[0].Add(double.NaN);
+                    rtgrp.plot[3].ly[0].Add(double.NaN);
+                }
                 rtgrp.plot[0].freq[0].Add(d.fFreq);
                 rtgrp.plot[0].lx[0].Add(d.real);
                 rtgrp.plot[0].ly[0].Add(d.img * -1.0);
@@ -685,15 +798,14 @@ namespace ZiveLab.ZM
 
         public void SetType(eZimType ztype)
         {
-            int rng = 0;
             type = ztype;
             stype = type.GetDescription();
             RangeCount = 4;
             
             for (int i = 0; i < 4; i++)
             {
-                rng = i * 2;
-                sRange[i] = string.Format("{0}", ((enCurrentRange)rng).GetDescription());
+
+                sRange[i] = string.Format("{0}", ((enCurrentRange)(i*2)).GetDescription());
             }
         }
 

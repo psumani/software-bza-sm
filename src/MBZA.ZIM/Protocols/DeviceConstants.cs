@@ -21,6 +21,8 @@ namespace ZiveLab.ZM.ZIM
         public static double[] Const_DefaultLDummy = { 0.0, 0.000000064476, 0.000000112196, 0.000000084638, 0.00000008, 0.00000000000022, 0.000052, 0.0,};
 
         public const double DEFAULT_POWER = 40.0;
+
+        public const ushort TECHFILESIZE = 222;
     }
     
     public static class DeviceConstants
@@ -41,6 +43,8 @@ namespace ZiveLab.ZM.ZIM
         public const byte RES_MINOR = 0;
         public const byte RES_REVISION = 0;
         public const byte RES_BUILD = 0;
+
+        public const ushort CHECKSCHVAL = 12345;
 
         public const byte SCH_MAJOR = 1;
         public const byte SCH_MINOR = 0;
@@ -211,5 +215,6 @@ namespace ZiveLab.ZM.ZIM
         public const double DDS_CLK_CONST = (DDS_FREQ_RES / DDS_CLK_MCLK);
 
         public const string S_WEB_LIMITFILE = "src\\limit.json";
+        
     }
 }

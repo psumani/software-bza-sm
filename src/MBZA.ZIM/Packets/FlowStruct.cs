@@ -754,7 +754,8 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double bias;
         public ushort density;
         public int iteration;
-        public int inouse;
+        public ushort skipcycle;
+        public ushort cycle;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public double[] nouse;
         public stTech_EIS(int init)
@@ -764,7 +765,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             density = 10;
             iteration = 1;
             bias = 0.0;
-            inouse = 0;
+            skipcycle = 1;
+            cycle = 0;
             nouse = new double[3];
             for (int i = 0; i < 3; i++)
             {
@@ -778,7 +780,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             density = 10;
             iteration = 1;
             bias = 0.0;
-            inouse = 0;
+            skipcycle = 1;
+            cycle = 0;
             for (int i = 0; i < 3; i++)
             {
                 nouse[i] = 0.0;
@@ -857,7 +860,10 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double interval;
         public double totaltime;
         public ushort celloffwait;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+        public ushort skipcycle;
+        public ushort cycle;
+        public int inouse;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public double[] nouse;
 
         public stTech_HFR(int init)
@@ -868,8 +874,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             totaltime = 3600;
             celloffwait = 0;
 
-            nouse = new double[3];
-            for (int i = 0; i < 3; i++)
+            skipcycle = 1;
+            cycle = 0;
+            inouse = 0;
+
+            nouse = new double[2];
+            for (int i = 0; i < 2; i++)
             {
                 nouse[i] = 0.0;
             }
@@ -883,8 +893,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             totaltime = 3600;
             celloffwait = 0;
 
+            skipcycle = 1;
+            cycle = 0;
+            inouse = 0;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 nouse[i] = 0.0;
             }
@@ -919,7 +932,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double interval;
         public double totaltime;
         public ushort celloffwait;
-        public double nouse;
+
+        public ushort skipcycle;
+        public ushort cycle;
+        public int    inouse;
+
         public stTech_PRR(int init)
         {
             rsfreq = 4000.0;
@@ -929,7 +946,9 @@ namespace ZiveLab.ZM.ZIM.Packets
             interval = 60;
             totaltime = 3600;
             celloffwait = 0;
-            nouse = 0.0;
+            skipcycle = 1;
+            cycle = 0;
+            inouse = 0;
         }
 
         public void initialize()
@@ -941,7 +960,9 @@ namespace ZiveLab.ZM.ZIM.Packets
             interval = 60;
             totaltime = 3600;
             celloffwait = 0;
-            nouse = 0.0;
+            skipcycle = 1;
+            cycle = 0;
+            inouse = 0;
         }
         public byte[] ToByteArray()
         {
@@ -962,6 +983,164 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
     }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1), Serializable]
+    public struct stTech_MON
+    {
+        public ushort celloffwait;
+        public double sampletime;
+        public double totaltime;
+        public double CutoffV;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public double[] nouse;
+
+        public stTech_MON(int init)
+        {
+            celloffwait = 1;
+            sampletime = 1.0;
+            totaltime = 60.0;
+            CutoffV = 0.0;
+            nouse = new double[4];
+            for (int i = 0; i < 4; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+
+        public void initialize()
+        {
+            celloffwait = 1;
+            sampletime = 1.0;
+            totaltime = 60.0;
+            CutoffV = 0.0;
+            for (int i = 0; i < 4; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stTech_MON)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stTech_MON));
+            pinnedArr.Free();
+        }
+    }
+    
+    [StructLayout(LayoutKind.Sequential, Pack = 1), Serializable]
+    public struct stTech_QIS
+    {
+        public double initfreq;
+        public double finalfreq;
+        public double bias;
+        public ushort density;
+        public int iteration;
+        public ushort skipcycle;
+        public ushort cycle;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+        public double[] nouse;
+        public stTech_QIS(int init)
+        {
+            initfreq = 1000.0;
+            finalfreq = 1.0;
+            density = 4;
+            iteration = 1;
+            bias = 0.0;
+            skipcycle = 0;
+            cycle = 1;
+            nouse = new double[3];
+            for (int i = 0; i < 3; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+        public void initialize()
+        {
+            initfreq = 1000.0;
+            finalfreq = 1.0;
+            density = 4;
+            iteration = 1;
+            bias = 0.0;
+            skipcycle = 0;
+            cycle = 1;
+            for (int i = 0; i < 3; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+
+        int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int density)
+        {
+            bool isInitLog = Math.Abs(Math.Log10(initialFrequency)) == (double)((int)Math.Abs(Math.Log10(initialFrequency)));
+            bool isFinalLog = Math.Abs(Math.Log10(finalFrequency)) == (double)((int)Math.Abs(Math.Log10(finalFrequency)));
+
+            int Factor = (isInitLog && isFinalLog) ? 1 : 0;
+
+            //double x = 0.5 + fabs(log10(finalFrequency) - log10(initialFrequency)) * density;
+            double x = Math.Abs(Math.Log10(finalFrequency) - Math.Log10(initialFrequency)) * density;
+
+            return Factor + (int)Math.Ceiling(x); //mRounding(x,0);
+        }
+
+        public int GetFreqCount()
+        {
+            int iret = 0;
+            int tdensity = Math.Max((int)density, 0);
+            int titeration = Math.Max(iteration, 1);
+
+            double tinitfreq = Math.Max(initfreq, DeviceConstants.MIN_EIS_FREQUENCY);
+            double tfinalfreq = Math.Max(finalfreq, DeviceConstants.MIN_EIS_FREQUENCY);
+
+
+            tinitfreq = Math.Min(tinitfreq, DeviceConstants.MAX_EIS_FREQUENCY);
+            tfinalfreq = Math.Min(tfinalfreq, DeviceConstants.MAX_EIS_FREQUENCY);
+
+            if (tinitfreq == tfinalfreq)
+            {
+                iret = 1;
+            }
+            else
+            {
+                if (tdensity == 0)
+                {
+                    iret = 2;
+                }
+                else
+                {
+                    iret = GetNumberOfFrequncies(tinitfreq, tfinalfreq, tdensity);
+                }
+            }
+            iret *= iteration;
+            return iret;
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stTech_QIS)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stTech_QIS));
+            pinnedArr.Free();
+        }
+    }
     /*
     [StructLayout(LayoutKind.Explicit, Pack = 1), Serializable]
     public struct stTechType
@@ -1041,6 +1220,7 @@ namespace ZiveLab.ZM.ZIM.Packets
     [StructLayout(LayoutKind.Sequential, Pack = 1), Serializable]
     public struct stTech
     {
+        public ushort CheckVal;
         public stVersion version;
         public ushort type;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 58)] //Max size of technique
@@ -1050,17 +1230,19 @@ namespace ZiveLab.ZM.ZIM.Packets
         public ushort irange;
         public ushort vrange;
         public stTech_Info info;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public double[] NoUse;
-        public stTech(int init)
+        public ushort usNoUse;
+        public int    iNoUse;
+        public double NoUse;
+        public stTech(enTechType techtype = enTechType.TECH_EIS)
         {
+            CheckVal = DeviceConstants.CHECKSCHVAL;
             version = new stVersion(0);
             version.Major = DeviceConstants.SCH_MAJOR;
             version.Minor = DeviceConstants.SCH_MINOR;
             version.Revision = DeviceConstants.SCH_REVISION;
             version.Build = DeviceConstants.SCH_BUILD;
 
-            type = 0;
+            type = (ushort)techtype;
             ondelay = 5.0;
             ondelaystable = 1;
             irange = 2;
@@ -1070,27 +1252,37 @@ namespace ZiveLab.ZM.ZIM.Packets
             Array.Clear(tech, 0, 58);
 
             info = new stTech_Info(0);
-
-            NoUse = new double[2];
-            for (int i = 0; i < 2; i++)
-            {
-                NoUse[i] = 0.0;
-            }
+            usNoUse = 0;
+            iNoUse = 0;
+            NoUse = 0.0;
         }
 
-        public void initialize(int techtype)
+        public void initialize(enTechType techtype)
         {
             type = (ushort)techtype;
-            ondelay = 5.0;
-            ondelaystable = 1;
+            if(techtype == enTechType.TECH_MON)
+            {
+                ondelay = 0.0;
+                ondelaystable = 0;
+            }
+            else if(techtype == enTechType.TECH_QIS)
+            {
+                ondelay = 1.0;
+                ondelaystable = 0;
+            }
+            else
+            {
+                ondelay = 5.0;
+                ondelaystable = 1;
+            }
+            
             irange = 2;
             vrange = 0;
             Array.Clear(tech, 0, 58);
             info.initialize();
-            for (int i = 0; i < 2; i++)
-            {
-                NoUse[i] = 0.0;
-            }
+            usNoUse = 0;
+            iNoUse = 0;
+            NoUse = 0.0;
         }
 
         public void GetEIS(ref stTech_EIS techeis)
@@ -1120,6 +1312,27 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
 
         public void SetHFR(stTech_HFR val)
+        {
+            tech = val.ToByteArray();
+        }
+
+        public void GetMON(ref stTech_MON techvdc)
+        {
+            techvdc.ToWritePtr(tech);
+        }
+
+
+        public void SetMON(stTech_MON val)
+        {
+            tech = val.ToByteArray();
+        }
+        
+        public void GetQIS(ref stTech_QIS techqeis)
+        {
+            techqeis.ToWritePtr(tech);
+
+        }
+        public void SetQIS(stTech_QIS val)
         {
             tech = val.ToByteArray();
         }

@@ -76,9 +76,9 @@ namespace ZiveLab.ZM.FactorySetting
             dlg.Multiselect = false;
             dlg.DefaultExt = "zim";
             dlg.Filter = "zim files (*.zim)|*.zim|All files (*.*)|*.*";
-            dlg.FileName = txtFilePath.Text;
             dlg.InitialDirectory = Path.GetDirectoryName(txtFilePath.Text);
-
+            dlg.FileName = Path.GetFileName(txtFilePath.Text);
+            dlg.Title = "Select the ZIM firmware file to update.";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtFilePath.Text = dlg.FileName;

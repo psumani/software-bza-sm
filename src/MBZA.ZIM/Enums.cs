@@ -136,15 +136,15 @@ namespace ZiveLab.ZM.ZIM
         Finished,
         [Description("Stopped.")]
         Stopped,
-        [Description("Ready(Not calibration).")]
+        [Description("Ready(No calibration).")]
         nc_Ready = 0x20,
-        [Description("Running(Not calibration).")]
+        [Description("Running(No calibration).")]
         nc_Running,
-        [Description("Calibration(Not calibration).")]
+        [Description("Calibration(No calibration).")]
         nc_Calibration,
-        [Description("Finished(Not calibration).")]
+        [Description("Finished(No calibration).")]
         nc_Finished,
-        [Description("Stopped(Not calibration).")]
+        [Description("Stopped(No calibration).")]
         nc_Stopped,
     }
 
@@ -213,6 +213,23 @@ namespace ZiveLab.ZM.ZIM
         end,
         [Description("Waiting")]
         wait,
+        [Description("Delay after load on")]
+        mondelay,
+        [Description("Vdc/Temp.Monitor")]
+        monsample,
+    }
+    public enum enTechType
+    {
+        [Description("Galvanostatic EIS")]
+        TECH_EIS = 0,
+        [Description("Galvanostatic HFR ")]
+        TECH_HFR,
+        [Description("Rs Pseudo Rp")]
+        TECH_PRR,
+        [Description("Vdc/Temp monitor")]
+        TECH_MON,
+        [Description("Quick galvanostatic EIS")]
+        TECH_QIS,
     }
 
     public enum enVoltageRange
@@ -237,10 +254,8 @@ namespace ZiveLab.ZM.ZIM
     
     public enum enCurrentRange_HC
     {
-        [Description("Auto")]
-        Auto = 0,
         [Description(" 20 A")]
-        I20A,
+        I20A = 0,
         [Description("  4 A")]
         I4A,
         [Description("  2 A")]
@@ -259,10 +274,8 @@ namespace ZiveLab.ZM.ZIM
 
     public enum enCurrentRange_HZ
     {
-        [Description("Auto")]
-        Auto = 0,
         [Description(" 20mA")]
-        I20mA,
+        I20mA = 0,
         [Description("  4mA")]
         I4mA,
         [Description("  2mA")]
@@ -281,10 +294,8 @@ namespace ZiveLab.ZM.ZIM
 
     public enum enCurrentRange
     {
-        [Description("Auto")]
-        Auto = 0,
         [Description("  2 A")]
-        I2A,
+        I2A = 0,
         [Description("400mA")]
         I400mA,
         [Description("200mA")]
@@ -301,12 +312,30 @@ namespace ZiveLab.ZM.ZIM
         I400uA,
     }
 
+    public enum enCurrentControl
+    {
+        [Description("  1 A")]
+        I2A = 0,
+        [Description("200mA")]
+        I400mA,
+        [Description("100mA")]
+        I200mA,
+        [Description(" 20mA")]
+        I40mA,
+        [Description(" 10mA")]
+        I20mA,
+        [Description("  2mA")]
+        I4mA,
+        [Description("  1mA")]
+        I2mA,
+        [Description("200uA")]
+        I400uA,
+    }
+
     public enum enDescRangeI
     {
-        [Description("Auto")]
-        Auto = 0,
         [Description("2A")]
-        I2A,
+        I2A = 0,
         [Description("400mA")]
         I400mA,
         [Description("200mA")]

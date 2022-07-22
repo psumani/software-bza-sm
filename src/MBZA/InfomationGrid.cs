@@ -99,17 +99,8 @@ namespace ZiveLab.ZM
             Serial = tserial;
             sifch = tsifch;
             selch = tselch;
-            if (bFirst == true)
-            {
-                RefreshTreeViewStat();
-                RefreshPropertyGrid(treeView1.SelectedNode);
-            }
-            else
-            {
-                bFirst = true;
-                RefreshTreeView();
-            }
-            
+            RefreshTreeProc();
+                        
         }
 
         private void UncheckedAll()
@@ -448,6 +439,13 @@ namespace ZiveLab.ZM
                 return 2;
             }
             return 1;
+        }
+
+        public int RefreshTreeViewErr(TreeNode SelectItem = null)
+        {
+            treeView1.Nodes.Clear();
+            
+            return 0;
         }
 
         public int RefreshTreeView(TreeNode SelectItem = null)
@@ -1136,27 +1134,31 @@ namespace ZiveLab.ZM
             return null;
         }
 
-        private void RefreshPropertyGrid(TreeNode node)
+        private void RefreshPropertyGrid(TreeNode node = null)
         {
-    
 
-            var obj = GetLootObject(node);
-
-
-            
-
-            if (obj == null)
+            if (node == null)
             {
                 RecreatePropertyGridToolBar(-1);
                 SelectNode = null;
+                this.propertyGrid1.SelectedObject = null;
             }
             else
             {
-                SelectNode = node;
+                var obj = GetLootObject(node);
+
+                if (obj == null)
+                {
+                    RecreatePropertyGridToolBar(-1);
+                    SelectNode = null;
+                }
+                else
+                {
+                    SelectNode = node;
+                }
+                RecreatePropertyGridToolBar(node.ImageIndex);
+                this.propertyGrid1.SelectedObject = obj;
             }
-            
-            RecreatePropertyGridToolBar(node.ImageIndex);
-            this.propertyGrid1.SelectedObject = obj;
 
             FormUtil.ResizePropertyGridSplitter(this.propertyGrid1, 50);
 
@@ -1290,15 +1292,15 @@ namespace ZiveLab.ZM
             Finished,
             [Description("Stopped.")]
             Stopped,
-            [Description("Ready(Not calibration).")]
+            [Description("Ready(No calibration).")]
             nc_Ready = 0x20,
-            [Description("Running(Not calibration).")]
+            [Description("Running(No calibration).")]
             nc_Running,
-            [Description("Calibration(Not calibration).")]
+            [Description("Calibration(No calibration).")]
             nc_Calibration,
-            [Description("Finished(Not calibration).")]
+            [Description("Finished(No calibration).")]
             nc_Finished,
-            [Description("Stopped(Not calibration).")]
+            [Description("Stopped(No calibration).")]
             nc_Stopped,
         }
 
@@ -1375,7 +1377,7 @@ namespace ZiveLab.ZM
                             MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        frmCalibVdc frm = new frmCalibVdc(Serial, sifch, item);
+                        frmCalibVdc frm = new frmCalibVdc(selch,Serial, sifch, item);
                         frm.ShowDialog();
                         RefreshTreeViewStat();
                         RefreshPropertyGrid(this.SelectNode);
@@ -1393,7 +1395,7 @@ namespace ZiveLab.ZM
                         MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    frmCalibRtd frm = new frmCalibRtd(Serial,sifch);
+                    frmCalibRtd frm = new frmCalibRtd(selch,Serial, sifch);
                     frm.ShowDialog();
                     RefreshTreeViewStat();
                     RefreshPropertyGrid(this.SelectNode);
@@ -1504,7 +1506,7 @@ namespace ZiveLab.ZM
             }
 
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch] = p;
-            
+            gBZA.SifLnkLst[Serial].mDevInf = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf;
         }
 
         void BtChangeRange_Click(object sender, EventArgs e)
@@ -1554,7 +1556,7 @@ namespace ZiveLab.ZM
             dlg.Multiselect = false;
             dlg.DefaultExt = "sif";
             dlg.Filter = "sif files (*.sif)|*.sif|All files (*.*)|*.*";
-
+            dlg.Title = "Select the SIF firmware file to update.";
 
             dlg.FileName = Path.Combine(gBZA.appcfg.PathSIFFW, gBZA.appcfg.FileNameSIFFW);
             dlg.InitialDirectory = gBZA.appcfg.PathSIFFW;
@@ -1873,19 +1875,19 @@ namespace ZiveLab.ZM
         
         private void toolStripVdcX1_Click(object sender, EventArgs e)
         {
-            frmCalibVdc frm = new frmCalibVdc(Serial, sifch, 0);
+            frmCalibVdc frm = new frmCalibVdc(selch, Serial, sifch, 0);
             frm.ShowDialog();
         }
 
         private void toolStripVdcX10_Click(object sender, EventArgs e)
         {
-            frmCalibVdc frm = new frmCalibVdc(Serial, sifch, 1);
+            frmCalibVdc frm = new frmCalibVdc(selch, Serial, sifch, 1);
             frm.ShowDialog();
         }
 
         private void toolStripCalibTemp_Click(object sender, EventArgs e)
         {
-            frmCalibRtd frm = new frmCalibRtd(Serial, sifch);
+            frmCalibRtd frm = new frmCalibRtd(selch, Serial, sifch);
             frm.ShowDialog();
         }
 
@@ -1967,6 +1969,7 @@ namespace ZiveLab.ZM
             dlg.Title = "Saves the information of the ranges";
             dlg.DefaultExt = "xml";
             dlg.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+
             dlg.FileName = GetrangeFileName(Serial, sifch);
             dlg.InitialDirectory = gBZA.appcfg.PathRangeInfo;
 
@@ -2103,8 +2106,61 @@ namespace ZiveLab.ZM
                 tRanges.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX0;
                 tRanges.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX0;
             }
+
+        }
+
+        private void RefreshTreeProc()
+        {
+            bool berr = false;
+            bool bconn = true;
+            if (gBZA.SifLnkLst.ContainsKey(Serial) == false)
+            {
+                berr = true;
+            }
+            else
+            {
+                if (gBZA.SifLnkLst[Serial].MBZAIF.bConnect == false)
+                {
+                    bconn = false;
+                }
+            }
+            if (berr || bconn == false)
+            {
+                toolStripSplitButton1.Enabled = false;
+                toolStripSplitButton2.Enabled = false;
+
+                propertyGrid1.Enabled = false;
+            }
+            else
+            {
+                toolStripSplitButton1.Enabled = true;
+                toolStripSplitButton2.Enabled = true;
+
+                propertyGrid1.Enabled = true;
+            }
+            if(berr)
+            {
+                bFirst = false;
+                RefreshTreeViewErr();
+                RefreshPropertyGrid(treeView1.SelectedNode);
+            }
+            else
+            {
+                if (bFirst == true)
+                {
+                    RefreshTreeViewStat();
+                    RefreshPropertyGrid(treeView1.SelectedNode);
+                }
+                else
+                {
+                    bFirst = true;
+                    RefreshTreeView();
+                }
+            }
+                
             
         }
+        
 
         private void toolStripInitInfo_Click(object sender, EventArgs e)
         {
@@ -2123,7 +2179,7 @@ namespace ZiveLab.ZM
         private void ToolStripRefreshbydevice_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            bool res = MBZA_MapUtil.GetSystem_info(Serial);
+            bool res = MBZA_MapUtil.GetDeviceinfo(Serial);
 
             if(res == true)
             {
@@ -2143,7 +2199,7 @@ namespace ZiveLab.ZM
         private void ToolStripApplyDev_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            bool res = MBZA_MapUtil.Save_Range_info(Serial,sifch);
+            bool res = MBZA_MapUtil.SaveDeviceinfo(Serial);
 
             this.Cursor = Cursors.Default;
 

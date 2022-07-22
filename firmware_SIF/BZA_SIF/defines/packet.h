@@ -71,7 +71,8 @@
 #define DEF_CMD_GET_ZIMCFG			0x6A
 #define DEF_CMD_CHK_FPGA			0x6B
 #define DEF_CMD_GET_SIFCFG			0x6C
-
+#define DEF_CMD_GET_DEVCE_INFO		0x6D
+#define DEF_CMD_SAVE_DEVICE_INFO	0x6E 
 
 #define DEF_LAN_CMD_READCNTOT				0x75
 #define DEF_LAN_CMD_RESETCNTOT				0x76
@@ -102,7 +103,7 @@
 #define CMD_GET_RNGINFO1					0xA8
 #define CMD_SET_RNGINFO1					0xA9
 
-#define CMD_SAVE_RNGINFO					0xAA
+#define CMD_WRITE_ROM					    0xAA
 #define CMD_INIT_RNGINFO					0xAC
 
 #define CMD_GET_COND_CALIB					0xAD

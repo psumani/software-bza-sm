@@ -640,6 +640,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="doc\DeviceTest_active.png" />
+    <None Include="doc\DeviceTest_inactive.png" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />

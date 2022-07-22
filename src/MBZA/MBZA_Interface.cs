@@ -42,7 +42,7 @@ namespace ZiveLab.ZM
         public stResHeaderInfo[] mHeadinf;
         public bool[] bRemote;
         public int[] RemoteCh;
-
+        public int[] OldCycle;
         bool bThread;
         
         public CommObj mCommZim;
@@ -71,11 +71,13 @@ namespace ZiveLab.ZM
             mHeadinf = new stResHeaderInfo[MBZA_Constant.MAX_DEV_CHANNEL];
             bRemote = new bool[MBZA_Constant.MAX_DEV_CHANNEL];
             RemoteCh = new int[MBZA_Constant.MAX_DEV_CHANNEL];
+            OldCycle = new int[MBZA_Constant.MAX_DEV_CHANNEL];
             string str;
             stTech_EIS meis = new stTech_EIS(0);
             
             for (int i=0; i< MBZA_Constant.MAX_DEV_CHANNEL; i++ )
             {
+                OldCycle[i] = -1;
                 mChStatInf[i] = new stChStatusInf(0);
                 tech[i] = new stTech(0);
                 tech[i].version = new stVersion(0);
@@ -131,51 +133,63 @@ namespace ZiveLab.ZM
             Th = new Thread(new ThreadStart(this.Thread_CommObj));
             this.Th.Start();
         }
+        private void RefreshConnect()
+        {
+            bConnect = false;
+            if (mCommZim.Connect() == true)
+            {
+                bConnect = true;
+                if (mCommZim.CheckModelOfSif() == true)
+                {
 
+                    if (mCommZim.mDevType == eDeviceType.SBZA || mCommZim.mDevType == eDeviceType.MBZA)
+                    {
+                        mCommZim.ReadConnectStatus(ref mConnection);
+
+                        RefreshHeadinfo();
+                        RefreshTechfiles();
+                        RefreshDeviceInfo();
+
+                        serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
+
+                        mCommZim.CmdEnableCommTimeOut(0);
+                    }
+                }
+                if(gBZA.SifLnkLst.ContainsKey(serial))
+                {
+                    gBZA.SifLnkLst[serial].mDevInf.ToWritePtr(mDevInf.ToByteArray());
+                }
+                
+            }
+        }
         private int Connect()
         {
             bConnect = false;
-            if (mCommZim.Connect() == false) return 0;
-
-            if (mCommZim.CheckModelOfSif() == false)
+            if (mCommZim.Connect() == true)
             {
-                mCommZim.Dispose();
-                return -1;
-            }
-
-            
-
-            
-
-            if (mCommZim.mDevType == eDeviceType.SBZA || mCommZim.mDevType == eDeviceType.MBZA)
-            {
-
-                
-
-                mCommZim.ReadConnectStatus(ref mConnection);
-
-                RefreshHeadinfo();
-                RefreshTechfiles();
-                RefreshDeviceInfo();
-
-                serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
-
-                if (mCommZim.CmdEnableCommTimeOut(0) == false)
-                {
-                    mCommZim.Dispose();
-                    return -3;
-                }
                 bConnect = true;
+                if (mCommZim.CheckModelOfSif() == true)
+                {
 
-        
+                    if (mCommZim.mDevType == eDeviceType.SBZA || mCommZim.mDevType == eDeviceType.MBZA)
+                    {
+                        mCommZim.ReadConnectStatus(ref mConnection);
 
-                Thread_Run();
-                
-                return 1;
+                        RefreshHeadinfo();
+                        RefreshTechfiles();
+                        RefreshDeviceInfo();
+
+                        serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
+
+                        mCommZim.CmdEnableCommTimeOut(0);
+                    }
+                }
             }
 
-            mCommZim.Dispose();
-            return -2;
+
+            Thread_Run();
+
+            return 1;
         }
 
         public void RefreshHeadinfo()
@@ -190,29 +204,30 @@ namespace ZiveLab.ZM
 
         public int ConnectBZA(string sip, int port = 2000)
         {
-            if (bConnect == true)
-            {
-                return -4;
-            }
-
             mCommZim.HostNameToIP(sip, ref mCommZim.mConnTargetCfg.IpAddress);
             mCommZim.mConnTargetCfg.Port = port;
             mSetCfg = mCommZim.mConnTargetCfg;
             mCommZim.mDevType = (eDeviceType)mDevInf.mSysCfg.mSIFCfg.Type;
+
+            if (bThread == true)
+            {
+                return -4;
+            }
 
             return Connect();
 
         }
         public int ConnectBZA(stConnTargetCfg tSetCfg)
         {
-            if (bConnect == true)
+            mCommZim.mConnTargetCfg = tSetCfg;
+            mSetCfg = tSetCfg;
+            mCommZim.mDevType = (eDeviceType)mDevInf.mSysCfg.mSIFCfg.Type;
+
+            if (bThread == true)
             {
                 return -4;
             }
 
-            mCommZim.mConnTargetCfg = tSetCfg;
-            mSetCfg = tSetCfg;
-            mCommZim.mDevType = (eDeviceType)mDevInf.mSysCfg.mSIFCfg.Type;
             return Connect();
         }
 
@@ -355,14 +370,23 @@ namespace ZiveLab.ZM
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
             }
-            else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdSif.GetSystem_info)
+            else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdSif.GetDeviceinfo)
             {
-                if (mCommZim.ReadData(ref mDevInf.mSysCfg) == false)
+                if (mCommZim.ReadData(ref mDevInf) == false)
+                {
+                    res = (UInt16)enResult.FLAG_FAIL;
+                }
+            }
+            else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdSif.SaveDeviceInfo)
+            {
+                if (mCommZim.WriteData(this.mDevInf) == false)
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
             }
             
+
+
 
             return res;
         }
@@ -381,7 +405,7 @@ namespace ZiveLab.ZM
 
                 if (mCommZim.CmdSetVdcAutoRange(ch, this.mMapMem.mHeader.mCommand.addr) == false)
                 {
-                    res = (UInt16)enResult.FLAG_FAIL; 
+                    res = (UInt16)enResult.FLAG_FAIL;
                 }
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.SetCalibmode)
@@ -397,7 +421,7 @@ namespace ZiveLab.ZM
 
                 if (mCommZim.ReadData(ch, ref this.mdevice[ch].ctrl_do) == false)
                 {
-                    res = (UInt16)enResult.FLAG_FAIL; 
+                    res = (UInt16)enResult.FLAG_FAIL;
                 }
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.GetADCVDC)
@@ -477,13 +501,15 @@ namespace ZiveLab.ZM
                     return res;
                 }
 
+                
+
                 if (bCalib == true)
                 {
                     stResHeader head = new stResHeader(0);
                     head.SetTechFile(Encoding.UTF8.GetBytes(calcondfilename[ch]));
                     head.SetMemo(Encoding.UTF8.GetBytes(""));
                     head.mInfo.Ch = gBZA.SifLnkLst[serial].iLinkCh[ch];
-                    head.mInfo.Serial = Encoding.UTF8.GetBytes(serial); 
+                    head.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
                     head.mInfo.sifch = ch;
                     head.mInfo.Error = 0;
                     head.tech = techcalib[ch];
@@ -505,6 +531,7 @@ namespace ZiveLab.ZM
                         res = (UInt16)enResult.FLAG_FAIL;
                     }
                 }
+                OldCycle[ch] = -1;
                 mHeadinf[ch] = mresfile[ch].tmphead.mInfo;
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.Stop)
@@ -516,7 +543,7 @@ namespace ZiveLab.ZM
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.UploadTech)
             {
-                if (mCommZim.WriteData(this.mMapMem.mHeader.mCommand.ch,tech[this.mMapMem.mHeader.mCommand.ch]) == false)
+                if (mCommZim.WriteData(this.mMapMem.mHeader.mCommand.ch, tech[this.mMapMem.mHeader.mCommand.ch]) == false)
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
@@ -534,13 +561,13 @@ namespace ZiveLab.ZM
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
-/*                else
-                {
-                    if (mCommZim.CmdStoreRangesInfo(this.mMapMem.mHeader.mCommand.ch) == false)
-                    {
-                        res = (UInt16)enResult.FLAG_FAIL;
-                    }
-                }*/               
+                /*                else
+                                {
+                                    if (mCommZim.CmdStoreRangesInfo(this.mMapMem.mHeader.mCommand.ch) == false)
+                                    {
+                                        res = (UInt16)enResult.FLAG_FAIL;
+                                    }
+                                }*/
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.WriteROM)
             {
@@ -558,7 +585,7 @@ namespace ZiveLab.ZM
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.RefreshResHead)
             {
-                if (mCommZim.ReadData(this.mMapMem.mHeader.mCommand.ch,ref mHeadinf[this.mMapMem.mHeader.mCommand.ch]) == false)
+                if (mCommZim.ReadData(this.mMapMem.mHeader.mCommand.ch, ref mHeadinf[this.mMapMem.mHeader.mCommand.ch]) == false)
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
@@ -611,7 +638,7 @@ namespace ZiveLab.ZM
                     if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
                     {
                         mresfile[ch].AppendData(testdata, loadcount);
-                        mChRtGrp[ch].Append(testdata, loadcount);
+                        mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
                     }
                     else
                     {
@@ -647,7 +674,7 @@ namespace ZiveLab.ZM
                         if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
                         {
                             mresfile[ch].AppendData(testdata, loadcount);
-                            mChRtGrp[ch].Append(testdata, loadcount);
+                            mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
                         }
 
                         if (brun) mresfile[ch].bStart = true;
@@ -863,11 +890,12 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
+                    OldCycle[ch] = -1;
                     stDefTestData tdata = new stDefTestData(0);
                     for (int d = 0; d < mresfile[ch].datacount; d++)
                     {
                         mresfile[ch].read(d, ref tdata);
-                        mChRtGrp[ch].Append(tdata);
+                        mChRtGrp[ch].Append(tdata, ref OldCycle[ch]);
                     }
 
                 }
@@ -921,13 +949,14 @@ namespace ZiveLab.ZM
                     {
                         if (mresfile[ch].Open(resfilename[ch]))
                         {
+                            OldCycle[ch] = -1;
                             stDefTestData tdata = new stDefTestData(0);
                             mChRtGrp[ch].Initialize(tech[ch]);  //mresfile[ch].tmphead.tech)
 
                             for (int d = 0; d < mresfile[ch].datacount; d++)
                             {
                                 mresfile[ch].read(d, ref tdata);
-                                mChRtGrp[ch].Append(tdata);
+                                mChRtGrp[ch].Append(tdata,ref OldCycle[ch]);
                             }
 
                             mHeadinf[ch] = mresfile[ch].tmphead.mInfo;
@@ -945,7 +974,7 @@ namespace ZiveLab.ZM
                         mresfile[ch].tmphead.inf_sif = this.mDevInf.mSysCfg.mSIFCfg;
                         mresfile[ch].tmphead.inf_sifch = this.mDevInf.mSysCfg.mZimCfg[ch];
                         mresfile[ch].tmphead.tech = this.tech[ch];
-
+                        OldCycle[ch] = -1;
                         if (mresfile[ch].Create(resfilename[ch], gBZA.SifLnkLst[serial].iLinkCh[ch], serial, ch) == true)
                         {
                             if (brun == true)
@@ -994,10 +1023,11 @@ namespace ZiveLab.ZM
             {
                 if(mCommZim.mComm.Connected == false)
                 {
+                    bConnect = false;
                     if (this.bThread == false) break;
                     Thread.Sleep(200);
-                    mCommZim.Connect();
-
+                    RefreshConnect();
+                    bConnect = mCommZim.mComm.Connected;
                     continue;
                 }
 

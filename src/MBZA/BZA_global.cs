@@ -302,18 +302,14 @@ namespace ZiveLab.ZM
                             pair.Value.MBZAIF.resfilename[i] = gBZA.ChLnkLst[sch].mChInf.FileResult;
                         }
                     }
-                    if (pair.Value.MBZAIF.bConnect == false)
-                    {
-                        pair.Value.MBZAIF.mDevInf.ToWritePtr(pair.Value.mDevInf.ToByteArray());
 
-                        if (pair.Value.MBZAIF.ConnectBZA(pair.Value.sip) == 1)
-                        {
-                            pair.Value.mDevInf.ToWritePtr(pair.Value.MBZAIF.mDevInf.ToByteArray());
-                        }
-                        else
-                        {
-                            LinkSifErr++;
-                        }
+                    pair.Value.MBZAIF.mDevInf.ToWritePtr(pair.Value.mDevInf.ToByteArray());
+                    pair.Value.MBZAIF.ConnectBZA(pair.Value.sip);
+
+                    if (pair.Value.MBZAIF.bConnect)
+                    {
+                        pair.Value.mDevInf.ToWritePtr(pair.Value.MBZAIF.mDevInf.ToByteArray());
+                        continue;
                     }
                 }
 

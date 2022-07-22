@@ -21,26 +21,29 @@ namespace ZiveLab.ZM
     {
         private string Serial;
         private string sTitle;
+        private int ch;
         private int sifch;
         private int rng;
         private stZimCfg mZim;
 
-        public frmCalibVdc(string tserial, int tsifch, int trng)
+        public frmCalibVdc(int tch, string tserial, int tsifch, int trng)
         {
             InitializeComponent();
             DoubleBuffered = true;
 
+            ch = tch;
             Serial = tserial;
             sifch = tsifch;
             rng = trng;
-            if(trng == 0)
+            
+            if (trng == 0)
             {
-                this.Text = string.Format("Calibration DC Voltage[x1.0:{0}]", ((enVoltageRange_BZA100)rng).GetDescription());
+                this.Text = string.Format("Calibration DC Voltage[x1.0:{0}] - CH{0}[{1}-{2}].", ((enVoltageRange_BZA100)rng).GetDescription(), ch + 1, Serial, sifch + 1);
                 sTitle = "VDC_X1";
             }
             else
             {
-                this.Text = string.Format("Calibration DC Voltage[x0.1:{0}]", ((enVoltageRange_BZA100)rng).GetDescription());
+                this.Text = string.Format("Calibration DC Voltage[x0.1:{0}] - CH{0}[{1}-{2}].", ((enVoltageRange_BZA100)rng).GetDescription(), ch + 1, Serial, sifch + 1);
                 sTitle = "VDC_X10";
             }
             

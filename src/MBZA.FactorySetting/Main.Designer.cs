@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lnkinitsifcfg = new System.Windows.Forms.LinkLabel();
             this.ChkEnaChROM = new System.Windows.Forms.CheckBox();
             this.BtRefreshZIM = new System.Windows.Forms.Button();
             this.ChkEnaCh = new System.Windows.Forms.CheckBox();
@@ -63,7 +64,6 @@
             this.LnklblBurnSifToUsb = new System.Windows.Forms.LinkLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BtInitZIM = new System.Windows.Forms.Button();
-            this.lnkinitsifcfg = new System.Windows.Forms.LinkLabel();
             this.tabPage1.SuspendLayout();
             this.GrpCh.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -99,6 +99,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ZIM-SIF";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lnkinitsifcfg
+            // 
+            this.lnkinitsifcfg.AutoSize = true;
+            this.lnkinitsifcfg.LinkColor = System.Drawing.Color.Red;
+            this.lnkinitsifcfg.Location = new System.Drawing.Point(46, 116);
+            this.lnkinitsifcfg.Name = "lnkinitsifcfg";
+            this.lnkinitsifcfg.Size = new System.Drawing.Size(245, 12);
+            this.lnkinitsifcfg.TabIndex = 31;
+            this.lnkinitsifcfg.TabStop = true;
+            this.lnkinitsifcfg.Text = "> Initialize configuration information of SIF.";
+            this.lnkinitsifcfg.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkinitsifcfg_LinkClicked);
             // 
             // ChkEnaChROM
             // 
@@ -307,10 +319,10 @@
             this.lnklblchghostname.AutoSize = true;
             this.lnklblchghostname.Location = new System.Drawing.Point(33, 226);
             this.lnklblchghostname.Name = "lnklblchghostname";
-            this.lnklblchghostname.Size = new System.Drawing.Size(130, 12);
+            this.lnklblchghostname.Size = new System.Drawing.Size(132, 12);
             this.lnklblchghostname.TabIndex = 20;
             this.lnklblchghostname.TabStop = true;
-            this.lnklblchghostname.Text = "> Hostname:ZIM-0000";
+            this.lnklblchghostname.Text = "> Hostname:BZA-0000";
             this.lnklblchghostname.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblchghostname_LinkClicked);
             // 
             // LnklblRefSifWebInf
@@ -456,18 +468,6 @@
             this.BtInitZIM.Text = "Reset";
             this.BtInitZIM.UseVisualStyleBackColor = true;
             this.BtInitZIM.Click += new System.EventHandler(this.BtInitZIM_Click);
-            // 
-            // lnkinitsifcfg
-            // 
-            this.lnkinitsifcfg.AutoSize = true;
-            this.lnkinitsifcfg.LinkColor = System.Drawing.Color.Red;
-            this.lnkinitsifcfg.Location = new System.Drawing.Point(46, 116);
-            this.lnkinitsifcfg.Name = "lnkinitsifcfg";
-            this.lnkinitsifcfg.Size = new System.Drawing.Size(245, 12);
-            this.lnkinitsifcfg.TabIndex = 31;
-            this.lnkinitsifcfg.TabStop = true;
-            this.lnkinitsifcfg.Text = "> Initialize configuration information of SIF.";
-            this.lnkinitsifcfg.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkinitsifcfg_LinkClicked);
             // 
             // Main
             // 

@@ -32,6 +32,7 @@ namespace ZiveLab.ZM.ZIM.Utilities
             
         }
 
+        
         private void BuildPingList()
         {
             List<string> list = new List<string>();
@@ -63,6 +64,8 @@ namespace ZiveLab.ZM.ZIM.Utilities
             {
                 mIps[i] = new FindScanIP(0);
             }
+
+
 
             if (chksearchdhcp == true)
             {
@@ -219,16 +222,13 @@ namespace ZiveLab.ZM.ZIM.Utilities
                 }
                 Thread.Sleep(10);
 
-                if (mCommZim.ReadData(ref mScanBzaInf.mDevInf.mSysCfg))
+                if (mCommZim.ReadData(ref mScanBzaInf.mDevInf))
                 {
-                    if (mCommZim.ReadData(ref mScanBzaInf.mDevInf.mConnCfg))
-                    {
-                        mScanBzaInf.bBza = 1;
-                        mCommZim.Dispose();
-                        return true;
-                    }
+                    mScanBzaInf.bBza = 1;
+                    mCommZim.Dispose();
+                    return true;
                 }
-
+                
                 mCommZim.Dispose();
             }
             return false;

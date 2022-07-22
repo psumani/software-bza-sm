@@ -85,7 +85,7 @@ namespace ZiveLab.ZM
             Serial = tserial;
             sifch = tsifch;
 
-            this.Text = string.Format("EIS calibration {0:000}[{1}-{2}].", ch + 1, Serial, sifch + 1);
+            this.Text = string.Format("EIS calibration - CH{0}[{1}-{2}].", ch + 1, Serial, sifch + 1);
 
             if (trng < 0)
             {
@@ -107,12 +107,10 @@ namespace ZiveLab.ZM
             {
                 cborange.Items.Add(item.GetDescription());
             }
-        
-            cborange.Items.RemoveAt(0); // remove "Auto"
 
             cborange.SelectedIndex = rng;
 
-            mtech = new stTech(0);
+            mtech = new stTech();
             techeis = new stTech_EIS(0);
 
             mtech = gBZA.SifLnkLst[Serial].MBZAIF.techcalib[sifch];
@@ -157,6 +155,7 @@ namespace ZiveLab.ZM
         }
         private void LoadFile()
         {
+            int oldcycel = -1;
             if(File.Exists(sLogDataFile) == true)
             {
                 usefile = true;
@@ -178,7 +177,7 @@ namespace ZiveLab.ZM
                     {
                         MessageBox.Show("Failed to read all data.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    mRtData.Append(data, DataCount);
+                    mRtData.Append(data, DataCount, ref oldcycel);
                     grdlist.Rows.Count = DataCount + 2;
                     st_zim_zPacket mpacket = new st_zim_zPacket(0);
                     mRtGrp.Initialize();
@@ -773,6 +772,19 @@ namespace ZiveLab.ZM
 
                     grdpara.Enabled = false;
                 }
+                else
+                {
+                    numdelay.Enabled = true;
+                    txtbeginfreq.Enabled = true;
+                    txtFinishfreq.Enabled = true;
+                    numdensity.Enabled = true;
+                    cborange.Enabled = false;//
+
+                    lnkCalculate.Enabled = true;
+                    lnksave.Enabled = true;
+
+                    grdpara.Enabled = true;
+                }
             }
 
             if (brun)
@@ -1348,7 +1360,7 @@ namespace ZiveLab.ZM
                 mtech.type = 0;
                 mtech.ondelay = (double)numdelay.Value;
                 mtech.ondelaystable = 1;
-                mtech.irange = (ushort)(rng+1);
+                mtech.irange = (ushort)rng;
 
                 str = txtbeginfreq.Text;
                 RefreshFrequency(ref str, ref techeis.initfreq);
@@ -2243,5 +2255,6 @@ namespace ZiveLab.ZM
                 MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

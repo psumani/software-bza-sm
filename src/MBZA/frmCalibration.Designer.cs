@@ -94,9 +94,6 @@
             this.BdGrpMenuGraphInitialize = new System.Windows.Forms.ToolStripMenuItem();
             this.grdpara = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.grpchstat = new System.Windows.Forms.GroupBox();
-            this.lblfreq = new System.Windows.Forms.Label();
-            this.lblprogfreq = new System.Windows.Forms.Label();
-            this.labelElapsedTime = new System.Windows.Forms.Label();
             this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
             this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
             this.RTPlot1 = new NationalInstruments.UI.ScatterPlot();
@@ -105,7 +102,7 @@
             this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
             this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.RTyAxis2 = new NationalInstruments.UI.YAxis();
-            this.lblZphase = new System.Windows.Forms.Label();
+            this.lblfreq = new System.Windows.Forms.Label();
             this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.RtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.graphModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,6 +127,9 @@
             this.plot2ColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.gridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblprogfreq = new System.Windows.Forms.Label();
+            this.labelElapsedTime = new System.Windows.Forms.Label();
+            this.lblZphase = new System.Windows.Forms.Label();
             this.lblZmag = new System.Windows.Forms.Label();
             this.lblErrStatus = new System.Windows.Forms.Label();
             this.lblTestStatus = new System.Windows.Forms.Label();
@@ -688,9 +688,7 @@
             this.grpchstat.Controls.Add(this.lblfreq);
             this.grpchstat.Controls.Add(this.lblprogfreq);
             this.grpchstat.Controls.Add(this.labelElapsedTime);
-            this.grpchstat.Controls.Add(this.Rtlegend);
             this.grpchstat.Controls.Add(this.lblZphase);
-            this.grpchstat.Controls.Add(this.grprt);
             this.grpchstat.Controls.Add(this.lblZmag);
             this.grpchstat.Controls.Add(this.lblErrStatus);
             this.grpchstat.Controls.Add(this.lblTestStatus);
@@ -705,34 +703,6 @@
             this.grpchstat.TabStop = false;
             this.grpchstat.Text = "[ Channel status ]";
             // 
-            // lblfreq
-            // 
-            this.lblfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblfreq.Location = new System.Drawing.Point(10, 145);
-            this.lblfreq.Name = "lblfreq";
-            this.lblfreq.Size = new System.Drawing.Size(150, 15);
-            this.lblfreq.TabIndex = 84;
-            this.lblfreq.Text = "  Freq.: ------ Hz";
-            // 
-            // lblprogfreq
-            // 
-            this.lblprogfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprogfreq.Location = new System.Drawing.Point(10, 197);
-            this.lblprogfreq.Name = "lblprogfreq";
-            this.lblprogfreq.Size = new System.Drawing.Size(150, 15);
-            this.lblprogfreq.TabIndex = 83;
-            this.lblprogfreq.Text = "Working: ------ Hz";
-            // 
-            // labelElapsedTime
-            // 
-            this.labelElapsedTime.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelElapsedTime.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelElapsedTime.Location = new System.Drawing.Point(10, 70);
-            this.labelElapsedTime.Name = "labelElapsedTime";
-            this.labelElapsedTime.Size = new System.Drawing.Size(150, 15);
-            this.labelElapsedTime.TabIndex = 80;
-            this.labelElapsedTime.Text = "Elapsed: 000:00:00";
-            // 
             // Rtlegend
             // 
             this.Rtlegend.Border = NationalInstruments.UI.Border.Dotted;
@@ -741,10 +711,10 @@
             this.RtlegendItem1,
             this.RtlegendItem2});
             this.Rtlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Rtlegend.Location = new System.Drawing.Point(232, 70);
+            this.Rtlegend.Location = new System.Drawing.Point(418, 125);
             this.Rtlegend.Name = "Rtlegend";
             this.Rtlegend.Size = new System.Drawing.Size(83, 30);
-            this.Rtlegend.TabIndex = 89;
+            this.Rtlegend.TabIndex = 93;
             // 
             // RtlegendItem1
             // 
@@ -809,26 +779,26 @@
             this.RTyAxis2.MinorDivisions.TickVisible = true;
             this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
             // 
-            // lblZphase
+            // lblfreq
             // 
-            this.lblZphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZphase.Location = new System.Drawing.Point(10, 180);
-            this.lblZphase.Name = "lblZphase";
-            this.lblZphase.Size = new System.Drawing.Size(150, 15);
-            this.lblZphase.TabIndex = 82;
-            this.lblZphase.Text = " Zphase: ------ °";
+            this.lblfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfreq.Location = new System.Drawing.Point(10, 145);
+            this.lblfreq.Name = "lblfreq";
+            this.lblfreq.Size = new System.Drawing.Size(150, 15);
+            this.lblfreq.TabIndex = 84;
+            this.lblfreq.Text = "  Freq.: ------ Hz";
             // 
             // grprt
             // 
             this.grprt.ContextMenuStrip = this.RtMenuStrip;
-            this.grprt.Location = new System.Drawing.Point(162, 69);
+            this.grprt.Location = new System.Drawing.Point(350, 117);
             this.grprt.Name = "grprt";
             this.grprt.PlotAreaColor = System.Drawing.Color.White;
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.RTPlot1,
             this.RTPlot2});
             this.grprt.Size = new System.Drawing.Size(158, 144);
-            this.grprt.TabIndex = 86;
+            this.grprt.TabIndex = 92;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.RTxAxis1});
@@ -860,7 +830,7 @@
             // 
             this.vVsIToolStripMenuItem.CheckOnClick = true;
             this.vVsIToolStripMenuItem.Name = "vVsIToolStripMenuItem";
-            this.vVsIToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.vVsIToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.vVsIToolStripMenuItem.Text = "V vs I";
             this.vVsIToolStripMenuItem.Click += new System.EventHandler(this.vVsIToolStripMenuItem_Click);
             // 
@@ -868,8 +838,8 @@
             // 
             this.tVsIVToolStripMenuItem.CheckOnClick = true;
             this.tVsIVToolStripMenuItem.Name = "tVsIVToolStripMenuItem";
-            this.tVsIVToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.tVsIVToolStripMenuItem.Text = "T vs I,V";
+            this.tVsIVToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.tVsIVToolStripMenuItem.Text = "I,V vs t";
             this.tVsIVToolStripMenuItem.Click += new System.EventHandler(this.tVsIVToolStripMenuItem_Click);
             // 
             // graphSizeToolStripMenuItem
@@ -1012,6 +982,34 @@
             this.gridToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
             this.gridToolStripMenuItem2.Text = "Grid";
             this.gridToolStripMenuItem2.Click += new System.EventHandler(this.gridToolStripMenuItem2_Click);
+            // 
+            // lblprogfreq
+            // 
+            this.lblprogfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprogfreq.Location = new System.Drawing.Point(10, 197);
+            this.lblprogfreq.Name = "lblprogfreq";
+            this.lblprogfreq.Size = new System.Drawing.Size(150, 15);
+            this.lblprogfreq.TabIndex = 83;
+            this.lblprogfreq.Text = "Working: ------ Hz";
+            // 
+            // labelElapsedTime
+            // 
+            this.labelElapsedTime.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelElapsedTime.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelElapsedTime.Location = new System.Drawing.Point(10, 70);
+            this.labelElapsedTime.Name = "labelElapsedTime";
+            this.labelElapsedTime.Size = new System.Drawing.Size(150, 15);
+            this.labelElapsedTime.TabIndex = 80;
+            this.labelElapsedTime.Text = "Elapsed: 000:00:00";
+            // 
+            // lblZphase
+            // 
+            this.lblZphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZphase.Location = new System.Drawing.Point(10, 180);
+            this.lblZphase.Name = "lblZphase";
+            this.lblZphase.Size = new System.Drawing.Size(150, 15);
+            this.lblZphase.TabIndex = 82;
+            this.lblZphase.Text = " Zphase: ------ °";
             // 
             // lblZmag
             // 
@@ -1471,6 +1469,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 706);
+            this.Controls.Add(this.Rtlegend);
+            this.Controls.Add(this.grprt);
             this.Controls.Add(this.numdelay);
             this.Controls.Add(this.numdensity);
             this.Controls.Add(this.cborange);
@@ -1591,12 +1591,6 @@
         private NationalInstruments.UI.YAxis Grp1_yAxis2;
         private System.Windows.Forms.TabPage tabPgList;
         private C1.Win.C1FlexGrid.C1FlexGrid grdlist;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph grprt;
-        private NationalInstruments.UI.ScatterPlot RTPlot1;
-        private NationalInstruments.UI.XAxis RTxAxis1;
-        private NationalInstruments.UI.YAxis RTyAxis1;
-        private NationalInstruments.UI.ScatterPlot RTPlot2;
-        private NationalInstruments.UI.YAxis RTyAxis2;
         private System.Windows.Forms.TabControl tabgrp;
         private System.Windows.Forms.ToolStripMenuItem xAxisColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem graphColorToolStripMenuItem1;
@@ -1642,9 +1636,6 @@
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewLegend;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphViewLegend;
         private System.Windows.Forms.ToolStripMenuItem legendToolStripMenuItem;
-        private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
-        private NationalInstruments.UI.LegendItem RtlegendItem1;
-        private NationalInstruments.UI.LegendItem RtlegendItem2;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColorGridcolor;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gridColorToolStripMenuItem;
@@ -1672,5 +1663,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
+        private NationalInstruments.UI.LegendItem RtlegendItem1;
+        private NationalInstruments.UI.ScatterPlot RTPlot1;
+        private NationalInstruments.UI.XAxis RTxAxis1;
+        private NationalInstruments.UI.YAxis RTyAxis1;
+        private NationalInstruments.UI.LegendItem RtlegendItem2;
+        private NationalInstruments.UI.ScatterPlot RTPlot2;
+        private NationalInstruments.UI.YAxis RTyAxis2;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph grprt;
     }
 }

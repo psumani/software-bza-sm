@@ -78,7 +78,7 @@ namespace ZiveLab.ZM.FactorySetting
 
         private void btInit_Click(object sender, EventArgs e)
         {
-            txtinput.Text = string.Format("ZIM-{0:X2}{1:X2}", mConnCfg.mEthernetCfg.Mac[4], mConnCfg.mEthernetCfg.Mac[5]);
+            txtinput.Text = string.Format("BZA-{0:X2}{1:X2}", mConnCfg.mEthernetCfg.Mac[4], mConnCfg.mEthernetCfg.Mac[5]);
         }
     }
 }
