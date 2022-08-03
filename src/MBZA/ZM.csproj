@@ -100,6 +100,12 @@
       <DependentUpon>BZAChPan.cs</DependentUpon>
     </Compile>
     <Compile Include="BZA_global.cs" />
+    <Compile Include="FrmAboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAboutBox.Designer.cs">
+      <DependentUpon>FrmAboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,12 @@
     </Compile>
     <Compile Include="frmDummyDlg.designer.cs">
       <DependentUpon>frmDummyDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMdiMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMdiMain.Designer.cs">
+      <DependentUpon>frmMdiMain.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSetBatPara.cs">
       <SubType>Form</SubType>
@@ -252,6 +264,9 @@
     <EmbeddedResource Include="BZAChPan.resx">
       <DependentUpon>BZAChPan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmAboutBox.resx">
+      <DependentUpon>FrmAboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBatPara.resx">
       <DependentUpon>frmBatPara.cs</DependentUpon>
     </EmbeddedResource>
@@ -272,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDummyDlg.resx">
       <DependentUpon>frmDummyDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMdiMain.resx">
+      <DependentUpon>frmMdiMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetBatPara.resx">
       <DependentUpon>frmSetBatPara.cs</DependentUpon>
@@ -642,6 +660,16 @@
   <ItemGroup>
     <None Include="doc\DeviceTest_active.png" />
     <None Include="doc\DeviceTest_inactive.png" />
+    <None Include="doc\Image0\Desc.ico" />
+    <None Include="doc\Image1\Config.ico" />
+    <None Include="doc\Image0\CalibFail.ico" />
+    <None Include="doc\Image0\monitor.ico" />
+    <None Include="doc\Image0\monitor.png" />
+    <None Include="doc\realtimenew_16x16.ico" />
+    <None Include="doc\realtimenew_16x16.png" />
+    <None Include="doc\wonatech.png" />
+    <None Include="doc\Image\zm1_about.ico" />
+    <None Include="doc\realtimenew2.ico" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />

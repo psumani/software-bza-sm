@@ -1262,12 +1262,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             type = (ushort)techtype;
             if(techtype == enTechType.TECH_MON)
             {
-                ondelay = 0.0;
+                ondelay = 2.0;
                 ondelaystable = 0;
             }
             else if(techtype == enTechType.TECH_QIS)
             {
-                ondelay = 1.0;
+                ondelay = 2.0;
                 ondelaystable = 0;
             }
             else
@@ -1607,6 +1607,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             Array.Copy(name, techfile, len);
         }
 
+        public string GetTechFile()
+        {
+            return Encoding.UTF8.GetString(techfile).Trim('\0');
+        }
+        
         public void SetBattId(byte[] id)
         {
             int len = id.Length;
@@ -1693,6 +1698,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             mInfo.SetTechFile(name);
         }
 
+        public string GetTechFile()
+        {
+            return mInfo.GetTechFile();
+        }
+
         public void SetBattId(byte[] id)
         {
             mInfo.SetBattId(id);
@@ -1745,10 +1755,6 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double Temperature;
         public double iacrng;
         public double vdcrng;
-
-       
-
-       
 
         public stDefTestData(int init)
         {

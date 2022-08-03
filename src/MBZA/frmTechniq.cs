@@ -32,13 +32,13 @@ namespace ZiveLab.ZM
         public bool loaderr;
         public string filename;
         public string filefullpath;
-
+        public bool bClose;
         public frmTechniq(int tch, string sfile = "", eZimType type = eZimType.UNKNOWN)
         {
             InitializeComponent();
 
             int i;
-
+            bClose = false;
             loaderr = false;
             techtype = enTechType.TECH_EIS;
 
@@ -138,12 +138,11 @@ namespace ZiveLab.ZM
                     cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax, "A"));
                     cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax * zim.ranges.iac_rng[i].controlgain, "A"));
                     cbomonctrl.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax * 0.5, "A"));
-                    cbomonctrl.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax * zim.ranges.iac_rng[i].controlgain * 0.5, "A"));
                 }
             }
 
             cboIrange.SelectedIndex = 2;
-            cbomonctrl.SelectedIndex = 2;
+            cbomonctrl.SelectedIndex = 1;
             filefullpath = sfile;
             if (File.Exists(filefullpath))
             {
@@ -173,10 +172,11 @@ namespace ZiveLab.ZM
             
             if (changetech)
             {
+
+                btopen.Visible = false;
                 lbltech.Visible = false;
                 techtree.Visible = false;
-                btopen.Visible = false;
-                btsaveas.Visible = false;
+
                 tabtech.Location = new Point(8, 8);
                 panel1.Location = new Point(8, 218);
                 btopen.Location = new Point(440, 32);
@@ -197,14 +197,14 @@ namespace ZiveLab.ZM
                 btapply.Location = new Point(596, 298);
                 btclose.Location = new Point(596, 392);
                 this.Size = new Size(694, 466);
-                btsaveas.Visible = true;
-                btopen.Visible = true;
+
                 lbltech.Visible = true;
                 techtree.Visible = true;
-
             }
-        }
 
+
+        }
+        
         private void frmTechniq_Load(object sender, EventArgs e)
         {
         }
@@ -403,9 +403,6 @@ namespace ZiveLab.ZM
             byte[] arr;
             int len;
 
-            
-            
-
             arr = Encoding.UTF8.GetBytes(txtbattid.Text);
             len = arr.Count();
             if (len > DeviceConstants.BATIDSIZE) len = DeviceConstants.BATIDSIZE;
@@ -507,27 +504,27 @@ namespace ZiveLab.ZM
                 eis.cycle = (ushort)GetCycleFromCycIdx(cboeiscyc.SelectedIndex);
             }
 
+            
             if (techtype == enTechType.TECH_MON)
             {
                 mtech.ondelaystable = 0;
-                chkondelaystable.Checked = (mtech.ondelaystable == 1) ? true : false;
-                mtech.ondelay = 0.0;
-                txtondelay.Text = SM_Number.GetTimeString(mtech.ondelay);
+                chkondelaystable.Checked = false;
+                mtech.ondelay = 2.0;
 
                 if (mon.celloffwait == 0)
                 {
-                    mtech.irange = (ushort)cbomonctrl.SelectedIndex;
+                    mtech.irange = (ushort)(cbomonctrl.SelectedIndex * 2);
                 }
                 else
                 {
-                    mtech.irange = 2;
+                    mtech.irange = 1;
                 }
             }
             else if (techtype == enTechType.TECH_QIS)
             {
                 mtech.ondelaystable = 0;
                 chkondelaystable.Checked = (mtech.ondelaystable == 1) ? true : false;
-                mtech.ondelay = 1.0;
+                mtech.ondelay = 2.0;
                 txtondelay.Text = SM_Number.GetTimeString(mtech.ondelay);
                 mtech.irange = (ushort)cboIrange.SelectedIndex;
             }
@@ -605,13 +602,6 @@ namespace ZiveLab.ZM
                     lblctrlrate.Visible = false;
                     lblcutoff.Visible = false;
                     txtMonCutoff.Visible = false;
-
-                    mtech.ondelay = 1.0;
-                    mtech.ondelaystable = 0;
-
-                    lblondelay.Visible = false;
-                    txtondelay.Visible = false;
-                    chkondelaystable.Visible = false;
                 }
                 else
                 {
@@ -623,11 +613,13 @@ namespace ZiveLab.ZM
                     //mon.CtrlRate = SM_Number.ToDouble(txtMonCont.Text) * 0.01;
                     //mon.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
 
-                    lblondelay.Visible = true;
-                    txtondelay.Visible = true;
-                    chkondelaystable.Visible = true;
                 }
-                
+                mtech.ondelay = 2.0;
+                mtech.ondelaystable = 0;
+
+                lblondelay.Visible = false;
+                txtondelay.Visible = false;
+                chkondelaystable.Visible = false;
 
                 txtMonCutoff.Text = string.Format(" {0,4:##0.0}", mon.CutoffV);
 
@@ -635,7 +627,7 @@ namespace ZiveLab.ZM
                 lblhfrinterval.Text = "Sample time(s)";
                 txthfrfreq.Text = "0";
                 txthfrfreq.Visible = false;
-                chkhfrcelloffwait.Text = "Load off for eoc monitor.";
+                chkhfrcelloffwait.Text = "Load off for Eoc monitor.";
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -652,7 +644,7 @@ namespace ZiveLab.ZM
                 qis.cycle = 1;
                 cboeiscyc.SelectedIndex = GetCycIdxFromCycle(qis.cycle);
 
-                mtech.ondelay = 0.0;
+                mtech.ondelay = 2.0;
                 mtech.ondelaystable = 0;
 
                 lbleisdensity.Visible = false;
@@ -677,7 +669,7 @@ namespace ZiveLab.ZM
                 txteisrepeat.Text = eis.iteration.ToString();
                 
                 if (eis.skipcycle > 10) eis.skipcycle = 10;
-                if (eis.skipcycle < 0) eis.skipcycle = 0;
+                if (eis.skipcycle < 1) eis.skipcycle = 1;
                 cboeisskipcyc.SelectedIndex = eis.skipcycle;
                 if (eis.cycle > 128) eis.cycle = 128;
                 if (eis.cycle < 0) eis.cycle = 0;
@@ -707,7 +699,7 @@ namespace ZiveLab.ZM
                 cboIrange.Visible = true;
             }
             cboIrange.SelectedIndex = mtech.irange;
-            cbomonctrl.SelectedIndex = mtech.irange;
+            cbomonctrl.SelectedIndex = (int)(mtech.irange / 2);
 
             txtondelay.Text = SM_Number.GetTimeString(mtech.ondelay);
             chkondelaystable.Checked = (mtech.ondelaystable == 0) ? false : true;
@@ -901,16 +893,64 @@ namespace ZiveLab.ZM
             }
         }
 
-        private void txthfrinterval_Leave(object sender, EventArgs e)
+        private int GetWillSampleCount()
         {
+            int count = 0;
+            double tmp;
             if (techtype == enTechType.TECH_HFR)
             {
-                hfr.interval = SM_Number.atot(txthfrinterval.Text);
+                count = (int)(hfr.totaltime / hfr.interval);
+            }
+            else if (techtype == enTechType.TECH_MON)
+            {
+                count = (int)(mon.totaltime / mon.sampletime);
+            }
+            else if (techtype == enTechType.TECH_PRR)
+            {
+                tmp = 3.0;
+                if (prr.rdendfreq == 0.0)
+                {
+                    tmp = 2.0;
+                }
+                count = (int)(prr.totaltime / (prr.interval * tmp));
+            }
+            else if (techtype == enTechType.TECH_QIS)
+            {
+                count = qis.GetFreqCount();
+            }
+            else
+            {
+                count = eis.GetFreqCount();
+            }
+            return count;
+        }
+
+        private void txthfrinterval_Leave(object sender, EventArgs e)
+        {
+            double tmp = SM_Number.atot(txthfrinterval.Text);
+            
+
+            if (techtype == enTechType.TECH_HFR)
+            {
+                if (tmp < 0.1)
+                {
+                    MessageBox.Show("The minimum value of the interval time is 100 ms.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = 0.1;
+                }
+
+                hfr.interval = tmp;
                 txthfrinterval.Text = SM_Number.GetTimeString(hfr.interval);
             }
             else if (techtype == enTechType.TECH_MON)
             {
-                mon.sampletime = SM_Number.atot(txthfrinterval.Text);
+                if (tmp < 0.1)
+                {
+                    MessageBox.Show("The minimum value of the sampling time is 100 ms.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = 0.1;
+                }
+
+
+                mon.sampletime = tmp;
                 txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
             }
         }
@@ -1008,8 +1048,8 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_MON)
             {
-                dlg.Filter = "Vdc/Temp monitor (*.vtm) |*.vtm";
-                dlg.Title = "Open Vdc/Temp monitor technique file.";
+                dlg.Filter = "V/T monitor (*.vtm) |*.vtm";
+                dlg.Title = "Open Voltage/Temperature monitor technique file.";
                 dlg.DefaultExt = "vtm";
             }
             else if (techtype == enTechType.TECH_QIS)
@@ -1067,7 +1107,7 @@ namespace ZiveLab.ZM
                 if (this.tabtech.TabPages.Contains(this.tabtech1) == true) this.tabtech.TabPages.Remove(this.tabtech1);
                 if (this.tabtech.TabPages.Contains(this.tabtech2) == false) this.tabtech.TabPages.Add(this.tabtech2);
                 if (this.tabtech.TabPages.Contains(this.tabtech3) == true) this.tabtech.TabPages.Remove(this.tabtech3);
-                this.tabtech2.Text = "Vdc/Temperature monitor";
+                this.tabtech2.Text = "Voltage/Temperature monitor";
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -1093,10 +1133,13 @@ namespace ZiveLab.ZM
             if (bopen == true && File.Exists(filefullpath) == true)
             {
                 string smsg;
+
                 string str = CheckCanSave(filefullpath);
-                if(str.Length > 0)
+                string str1;
+                if (str.Length > 1)
                 {
-                    smsg = string.Format("The following channels are experimenting with this technique file. \r\n Channels : {0}",str);
+                    str1 = str.Substring(0, str.Length - 1);
+                    smsg = string.Format("The following channels are experimenting with this technique file. \r\n  * Channels : {0}", str1);
                     MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
@@ -1160,9 +1203,9 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_MON)
             {
-                saveDlg.Title = "Save as Vdc/Temp monitor technique file.";
+                saveDlg.Title = "Save as Voltage/Temperature monitor technique file.";
                 saveDlg.DefaultExt = "*.vtm";
-                saveDlg.Filter = "Vdc/Temp monitor(*.vtm) | *.vtm";
+                saveDlg.Filter = "V/T monitor(*.vtm) | *.vtm";
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -1192,9 +1235,10 @@ namespace ZiveLab.ZM
             {
                 return false;
             }
-
+            filefullpath = saveDlg.FileName;
             string smsg;
             string str = CheckCanSave(filefullpath);
+
             if (str.Length > 0)
             {
                 smsg = string.Format("The following channels are experimenting with this technique file. \r\n Channels : {0}", str);
@@ -1245,11 +1289,24 @@ namespace ZiveLab.ZM
 
         private void btsave_Click(object sender, EventArgs e)
         {
+            
+            if(GetWillSampleCount() > MBZA_Constant.MAX_DATA_CNT)
+            {
+                string smsg = string.Format("The current setting exceeds the maximum number of storable experimental data {0}. \r\nPlease check your settings and try again.", MBZA_Constant.MAX_DATA_CNT);
+                MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Save();
         }
 
         private void btsaveas_Click(object sender, EventArgs e)
         {
+            if (GetWillSampleCount() > MBZA_Constant.MAX_DATA_CNT)
+            {
+                string smsg = string.Format("The current setting exceeds the maximum number of storable experimental data {0}. \r\nPlease check your settings and try again.", MBZA_Constant.MAX_DATA_CNT);
+                MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             SaveAs();
         }
 
@@ -1271,7 +1328,17 @@ namespace ZiveLab.ZM
         }
         private void btapply_Click(object sender, EventArgs e)
         {
-            Save();
+            if (GetWillSampleCount() > MBZA_Constant.MAX_DATA_CNT)
+            {
+                string smsg = string.Format("The current setting exceeds the maximum number of storable experimental data {0}. \r\nPlease check your settings and try again.", MBZA_Constant.MAX_DATA_CNT);
+                MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (Save() == false)
+            {
+                return;
+            }
 
             frmTechApply frm = new frmTechApply(filefullpath);
             
@@ -1315,7 +1382,11 @@ namespace ZiveLab.ZM
 
         private void frmTechniq_LocationChanged(object sender, EventArgs e)
         {
-            
+            if (bClose) return;
+            if (this.WindowState != FormWindowState.Normal) return;
+            Point pt = this.Location;
+            gBZA.appcfg.TechLocation = pt;
+            gBZA.appcfg.Save();
         }
 
         private void frmTechniq_SizeChanged(object sender, EventArgs e)
@@ -1328,8 +1399,12 @@ namespace ZiveLab.ZM
             
             if (chkrpend.Checked == true)
             {
+                /*if (txtprrrpendfreq.ReadOnly == true)
+                {
+                    prr.rdendfreq = prr.rdfreq;
+                }
+                */
                 txtprrrpendfreq.ReadOnly = false;
-                prr.rdendfreq = prr.rdfreq;
             }
             else
             {
@@ -1341,14 +1416,8 @@ namespace ZiveLab.ZM
 
         private void frmTechniq_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Point pt = this.Location;
-
-
-            if (pt.X != -32000 && pt.Y != -32000)
-            {
-                gBZA.appcfg.TechLocation = pt;
-                gBZA.appcfg.Save();
-            }
+            bClose = true;
+            
         }
 
         private void techtree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -1380,7 +1449,18 @@ namespace ZiveLab.ZM
 
         private void cbomonctrl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mtech.irange = (ushort)cbomonctrl.SelectedIndex;
+            mtech.irange = (ushort)(cbomonctrl.SelectedIndex * 2);
+        }
+
+        private void cboeisskipcyc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            eis.skipcycle = (ushort)GetCycleFromCycIdx(cboeisskipcyc.SelectedIndex);
+            
+        }
+
+        private void cboeiscyc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            eis.cycle = (ushort)GetCycleFromCycIdx(cboeiscyc.SelectedIndex);
         }
     }
 }

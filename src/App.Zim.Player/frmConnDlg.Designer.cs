@@ -75,7 +75,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(327, 271);
+            this.btnConnect.Location = new System.Drawing.Point(460, 275);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(83, 29);
             this.btnConnect.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(430, 271);
+            this.btnCancel.Location = new System.Drawing.Point(571, 275);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 29);
             this.btnCancel.TabIndex = 5;
@@ -123,7 +123,7 @@
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(198, 271);
+            this.btnFind.Location = new System.Drawing.Point(243, 271);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(83, 29);
             this.btnFind.TabIndex = 10;
@@ -138,7 +138,7 @@
             this.Findlist.Location = new System.Drawing.Point(16, 143);
             this.Findlist.Name = "Findlist";
             this.Findlist.ScrollAlwaysVisible = true;
-            this.Findlist.Size = new System.Drawing.Size(494, 80);
+            this.Findlist.Size = new System.Drawing.Size(650, 80);
             this.Findlist.TabIndex = 11;
             this.Findlist.SelectedIndexChanged += new System.EventHandler(this.Findlist_SelectedIndexChanged);
             // 
@@ -149,7 +149,7 @@
             this.FindErrlist.Location = new System.Drawing.Point(16, 31);
             this.FindErrlist.Name = "FindErrlist";
             this.FindErrlist.ScrollAlwaysVisible = true;
-            this.FindErrlist.Size = new System.Drawing.Size(494, 80);
+            this.FindErrlist.Size = new System.Drawing.Size(650, 80);
             this.FindErrlist.TabIndex = 12;
             // 
             // label3
@@ -186,7 +186,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 313);
+            this.ClientSize = new System.Drawing.Size(681, 313);
             this.Controls.Add(this.chkdhcp);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelWarning);

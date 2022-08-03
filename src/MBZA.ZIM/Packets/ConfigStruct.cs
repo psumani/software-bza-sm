@@ -1084,7 +1084,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public string GetSerialNumber()
         {
-            return Encoding.Default.GetString(Serial);
+            return Encoding.Default.GetString(Serial).Trim('\0');
         }
 
         public void SetSerialNumber(string str)

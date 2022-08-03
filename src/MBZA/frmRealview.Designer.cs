@@ -58,10 +58,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRealview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Real time monitor";
+            this.Text = "Real-time monitor";
+            this.Activated += new System.EventHandler(this.frmRealview_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmRealview_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmRealview_FormClosed);
             this.Load += new System.EventHandler(this.frmRealview_Load);
+            this.MdiChildActivate += new System.EventHandler(this.frmRealview_MdiChildActivate);
             this.LocationChanged += new System.EventHandler(this.frmRealview_LocationChanged);
             this.SizeChanged += new System.EventHandler(this.frmRealview_SizeChanged);
             this.Move += new System.EventHandler(this.frmRealview_Move);

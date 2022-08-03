@@ -78,11 +78,12 @@
             // 
             // lstbox
             // 
+            this.lstbox.CheckOnClick = true;
             this.lstbox.FormattingEnabled = true;
             this.lstbox.Location = new System.Drawing.Point(7, 8);
             this.lstbox.Name = "lstbox";
             this.lstbox.Size = new System.Drawing.Size(272, 191);
-            this.lstbox.TabIndex = 5;
+            this.lstbox.TabIndex = 1;
             // 
             // frmTechApply
             // 

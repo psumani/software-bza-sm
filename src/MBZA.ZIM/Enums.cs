@@ -146,6 +146,8 @@ namespace ZiveLab.ZM.ZIM
         nc_Finished,
         [Description("Stopped(No calibration).")]
         nc_Stopped,
+        [Description("Load data from device.")]
+        LoadData,
     }
 
     public enum enStatError
@@ -215,7 +217,7 @@ namespace ZiveLab.ZM.ZIM
         wait,
         [Description("Delay after load on")]
         mondelay,
-        [Description("Vdc/Temp.Monitor")]
+        [Description("Voltage/Temp.Monitor")]
         monsample,
     }
     public enum enTechType
@@ -226,7 +228,7 @@ namespace ZiveLab.ZM.ZIM
         TECH_HFR,
         [Description("Rs Pseudo Rp")]
         TECH_PRR,
-        [Description("Vdc/Temp monitor")]
+        [Description("Voltage/Temp monitor")]
         TECH_MON,
         [Description("Quick galvanostatic EIS")]
         TECH_QIS,
@@ -314,22 +316,14 @@ namespace ZiveLab.ZM.ZIM
 
     public enum enCurrentControl
     {
-        [Description("  1 A")]
+        [Description("1.07 A")]
         I2A = 0,
-        [Description("200mA")]
-        I400mA,
-        [Description("100mA")]
-        I200mA,
-        [Description(" 20mA")]
-        I40mA,
-        [Description(" 10mA")]
-        I20mA,
-        [Description("  2mA")]
-        I4mA,
-        [Description("  1mA")]
-        I2mA,
-        [Description("200uA")]
-        I400uA,
+        [Description(" 111mA")]
+        I200mA = 2,
+        [Description("11.1mA")]
+        I20mA = 4,
+        [Description("1.11mA")]
+        I2mA = 5,
     }
 
     public enum enDescRangeI

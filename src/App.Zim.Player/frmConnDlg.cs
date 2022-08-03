@@ -80,8 +80,7 @@ namespace App.Zim.Player
 
             var success = Task.Run(async () => { await pingHost.ScanAsync(); }).Wait(300000);
 
-
-
+            
             try
             {
                 var dic = pingHost.SearchedDevice;//.ToSortedDictionary();

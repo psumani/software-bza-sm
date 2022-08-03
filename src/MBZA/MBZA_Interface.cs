@@ -27,16 +27,18 @@ namespace ZiveLab.ZM
         public stChStatusInf[] mChStatInf;
         public cls_rtdata[] mChRtGrp;
 
+        public int[] Lnkch;
         public string[] resfilename;
-        public string[] Oldresfilename;
         public string[] condfilename;
         public string[] OldCondfilename;
         public string[] calcondfilename;
+        public bool[] bLoadData;
+        public bool[] bEnableLoadData;
 
         public stTech[] techcalib;
         public stTech[] tech;
-
-        public FileCondition[] mcondfile;
+        public stTech[] Oldtech;
+        
         public FileResult[] mresfile;
 
         public stResHeaderInfo[] mHeadinf;
@@ -60,18 +62,22 @@ namespace ZiveLab.ZM
             mChStatInf = new stChStatusInf[MBZA_Constant.MAX_DEV_CHANNEL];
             mChRtGrp = new cls_rtdata[MBZA_Constant.MAX_DEV_CHANNEL];
             mresfile = new FileResult[MBZA_Constant.MAX_DEV_CHANNEL];
-            mcondfile = new FileCondition[MBZA_Constant.MAX_DEV_CHANNEL];
+            
             condfilename = new string[MBZA_Constant.MAX_DEV_CHANNEL];
             OldCondfilename = new string[MBZA_Constant.MAX_DEV_CHANNEL];
             resfilename = new string[MBZA_Constant.MAX_DEV_CHANNEL];
-            Oldresfilename = new string[MBZA_Constant.MAX_DEV_CHANNEL];
             tech = new stTech[MBZA_Constant.MAX_DEV_CHANNEL];
             techcalib = new stTech[MBZA_Constant.MAX_DEV_CHANNEL];
+            Oldtech = new stTech[MBZA_Constant.MAX_DEV_CHANNEL];
             calcondfilename = new string[MBZA_Constant.MAX_DEV_CHANNEL];
             mHeadinf = new stResHeaderInfo[MBZA_Constant.MAX_DEV_CHANNEL];
             bRemote = new bool[MBZA_Constant.MAX_DEV_CHANNEL];
             RemoteCh = new int[MBZA_Constant.MAX_DEV_CHANNEL];
             OldCycle = new int[MBZA_Constant.MAX_DEV_CHANNEL];
+            bLoadData = new bool[MBZA_Constant.MAX_DEV_CHANNEL];
+            bEnableLoadData = new bool[MBZA_Constant.MAX_DEV_CHANNEL];
+
+            Lnkch = new int[MBZA_Constant.MAX_DEV_CHANNEL];
             string str;
             stTech_EIS meis = new stTech_EIS(0);
             
@@ -81,7 +87,10 @@ namespace ZiveLab.ZM
                 mChStatInf[i] = new stChStatusInf(0);
                 tech[i] = new stTech(0);
                 tech[i].version = new stVersion(0);
+                Lnkch[i] = -1;
                 bRemote[i] = false;
+                bLoadData[i] = false;
+                bEnableLoadData[i] = true;
                 RemoteCh[i] = -1;
                 techcalib[i] = new stTech(0);
                 str = string.Format("Calibration_{0}.eis", i);
@@ -113,12 +122,11 @@ namespace ZiveLab.ZM
                 mChRtGrp[i] = new cls_rtdata();
                 mresfile[i] = new FileResult();
                 mHeadinf[i] = new stResHeaderInfo(0);
-                mcondfile[i] = new FileCondition();
+                
                 mdevice[i] = new st_zim_device(0);
                 resfilename[i] = "";
                 condfilename[i] = "";
                 OldCondfilename[i] = "";
-                Oldresfilename[i] = "";
             }
             
             bConnect = false;
@@ -471,8 +479,18 @@ namespace ZiveLab.ZM
                 bool bCalib = BitConverter.ToBoolean(pdata, 0);
                 var rtc = new st_rtc();
 
+                if (bCalib == true)
+                {
+                    OldCondfilename[ch] = calcondfilename[ch];
+                    Oldtech[ch] = techcalib[ch];
+                }
+                else
+                {
+                    OldCondfilename[ch] = condfilename[ch];
+                    Oldtech[ch] = tech[ch];
+                }
+                mChRtGrp[ch].Initialize(Oldtech[ch]);
 
-                mChRtGrp[ch].Initialize(tech[ch]);
 
                 rtc.tick = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
                 if (mCommZim.CmdStartToMeasureImpedance(this.mMapMem.mHeader.mCommand.ch, rtc, bCalib) == false)
@@ -502,7 +520,6 @@ namespace ZiveLab.ZM
                 }
 
                 
-
                 if (bCalib == true)
                 {
                     stResHeader head = new stResHeader(0);
@@ -512,9 +529,11 @@ namespace ZiveLab.ZM
                     head.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
                     head.mInfo.sifch = ch;
                     head.mInfo.Error = 0;
+
                     head.tech = techcalib[ch];
                     head.inf_sif = mDevInf.mSysCfg.mSIFCfg;
                     head.inf_sifch = mDevInf.mSysCfg.mZimCfg[ch];
+
                     if (mresfile[ch].Start(this.resfilename[ch], head, rtc) == false)
                     {
                         Debug.WriteLine(string.Format("channel {0:00} : Resfile start error.", ch + 1));
@@ -523,7 +542,7 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-
+                    mresfile[ch].tmphead.tech = tech[ch];
                     mresfile[ch].tmphead.mInfo = mHeadinf[ch];
                     if (mresfile[ch].Start(this.resfilename[ch], rtc, gBZA.SifLnkLst[serial].iLinkCh[ch], serial, ch) == false)
                     {
@@ -531,6 +550,7 @@ namespace ZiveLab.ZM
                         res = (UInt16)enResult.FLAG_FAIL;
                     }
                 }
+
                 OldCycle[ch] = -1;
                 mHeadinf[ch] = mresfile[ch].tmphead.mInfo;
             }
@@ -541,8 +561,32 @@ namespace ZiveLab.ZM
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
             }
+            else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.LoadDataStart)
+            {
+                stResHeader head = new stResHeader(0);
+
+                head = mresfile[ch].tmphead;
+                head.mInfo = mHeadinf[ch];
+
+                if (mresfile[ch].Create(this.resfilename[ch], head) == false)
+                {
+                    Debug.WriteLine(string.Format("channel {0:00} : Resfile start error.", ch + 1));
+                    res = (UInt16)enResult.FLAG_FAIL;
+                }
+                mChRtGrp[ch].Initialize(mresfile[ch].tmphead.tech);
+
+                bEnableLoadData[ch] = true;
+                bLoadData[ch] = true;
+            }
+            else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.LoadDataStop)
+            {
+                bEnableLoadData[ch] = false;
+                bLoadData[ch] = false;
+            }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.UploadTech)
             {
+                RefreshTechfile(ch, true);
+
                 if (mCommZim.WriteData(this.mMapMem.mHeader.mCommand.ch, tech[this.mMapMem.mHeader.mCommand.ch]) == false)
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
@@ -630,6 +674,37 @@ namespace ZiveLab.ZM
 
             if (mresfile[ch].bStart == true)
             {
+                bEnableLoadData[ch] = true;
+
+                if (brun == false)
+                {
+                    if (mresfile[ch].StopContinue(mChStatInf[ch].LastError) == false)
+                    {
+                        return false;
+                    }
+                    bLoadData[ch] = true;
+                    mHeadinf[ch] = mresfile[ch].tmphead.mInfo;
+                }
+                else
+                {
+                    if (mChStatInf[ch].eis_status.rescount > mresfile[ch].datacount)
+                    {
+                        loadcount = mChStatInf[ch].eis_status.rescount - mresfile[ch].datacount;
+                        if (loadcount > MBZA_Constant.MAX_COM_DATA_CNT) loadcount = MBZA_Constant.MAX_COM_DATA_CNT;
+
+                        if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
+                        {
+                            mresfile[ch].AppendData(testdata, loadcount);
+                            mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+
+                /*
                 if (mChStatInf[ch].eis_status.rescount > mresfile[ch].datacount)
                 {
                     loadcount = mChStatInf[ch].eis_status.rescount - mresfile[ch].datacount;
@@ -649,21 +724,23 @@ namespace ZiveLab.ZM
                 {
                     if (brun == false)
                     {
-                        if (mresfile[ch].Stop(mChStatInf[ch].LastError) == false)
+                        if (mresfile[ch].StopContinue(mChStatInf[ch].LastError) == false)
                         {
                             return false;
                         }
+                        bLoadData[ch] = true;
                         mHeadinf[ch] = mresfile[ch].tmphead.mInfo;
                     }
-                }
+                }*/
             }
             else
             {
-                if (mChStatInf[ch].eis_status.rescount > mresfile[ch].datacount)
+                if (mChStatInf[ch].eis_status.rescount > mresfile[ch].datacount && bEnableLoadData[ch])
                 {
                     if (mresfile[ch].bopen == false)
                     {
                         OpenResfile(ch, brun, (enTestState)teststate);
+                        bLoadData[ch] = true;
                     }
 
                     if (mresfile[ch].bopen == true)
@@ -688,6 +765,8 @@ namespace ZiveLab.ZM
                         if (mresfile[ch].bopen == true)
                         {
                             mresfile[ch].CloseFile();
+                            bEnableLoadData[ch] = false;
+                            bLoadData[ch] = false;
                         }
                     }
                 }
@@ -769,7 +848,8 @@ namespace ZiveLab.ZM
                         gBZA.WriteIniStrData("Status", "StartError", StatusFilename, "Technique file openning error");
                         return;
                     }
-                   
+                    Oldtech[ch] = tech[ch];
+                    OldCondfilename[ch] = condfilename[ch];
                     var rtc = new st_rtc();
 
                     if (mCommZim.WriteData(ch, tech[ch]) == false)
@@ -861,7 +941,7 @@ namespace ZiveLab.ZM
                 if (errstate == enStatError.ErrCommZim) continue;
 
 
-                RefreshTechfile(ch);
+                
 
                 mChRtGrp[ch].Append(mChStatInf[ch].eis_status.Real_val);
 
@@ -879,7 +959,6 @@ namespace ZiveLab.ZM
 
         public void OpenResfile(int ch, bool brun, enTestState teststate)
         {
-            mChRtGrp[ch].Initialize(mresfile[ch].tmphead.tech);
 
             if (File.Exists(resfilename[ch]))
             {
@@ -891,13 +970,15 @@ namespace ZiveLab.ZM
                 else
                 {
                     OldCycle[ch] = -1;
+                    Oldtech[ch] = mresfile[ch].tmphead.tech;
+                    OldCondfilename[ch] = mresfile[ch].tmphead.mInfo.GetTechFile();
+                    mChRtGrp[ch].Initialize(mresfile[ch].tmphead.tech);
                     stDefTestData tdata = new stDefTestData(0);
                     for (int d = 0; d < mresfile[ch].datacount; d++)
                     {
                         mresfile[ch].read(d, ref tdata);
                         mChRtGrp[ch].Append(tdata, ref OldCycle[ch]);
                     }
-
                 }
             }
             else
@@ -910,14 +991,13 @@ namespace ZiveLab.ZM
                 if ((enTestState)teststate == enTestState.Calibration || (enTestState)teststate == enTestState.nc_Calibration)
                 {
                     mresfile[ch].tmphead.SetTechFile(Encoding.UTF8.GetBytes(calcondfilename[ch]));
-                    mresfile[ch].tmphead.tech = techcalib[ch];
                 }
                 else
                 {
-                    mresfile[ch].tmphead.SetTechFile(Encoding.UTF8.GetBytes(condfilename[ch]));
-                    mresfile[ch].tmphead.tech = tech[ch];
+                    mresfile[ch].tmphead.SetTechFile(Encoding.UTF8.GetBytes(OldCondfilename[ch]));
                 }
-
+                mresfile[ch].tmphead.tech = Oldtech[ch];
+                mresfile[ch].tmphead.mInfo = mHeadinf[ch];
                 mChRtGrp[ch].Initialize(mresfile[ch].tmphead.tech);
                 mresfile[ch].tmphead.inf_sif = mDevInf.mSysCfg.mSIFCfg;
                 mresfile[ch].tmphead.inf_sifch = mDevInf.mSysCfg.mZimCfg[ch];
@@ -951,7 +1031,7 @@ namespace ZiveLab.ZM
                         {
                             OldCycle[ch] = -1;
                             stDefTestData tdata = new stDefTestData(0);
-                            mChRtGrp[ch].Initialize(tech[ch]);  //mresfile[ch].tmphead.tech)
+                            mChRtGrp[ch].Initialize(Oldtech[ch]);  //mresfile[ch].tmphead.tech)
 
                             for (int d = 0; d < mresfile[ch].datacount; d++)
                             {
@@ -965,7 +1045,10 @@ namespace ZiveLab.ZM
                             {
                                 mresfile[ch].bStart = true;
                             }
-
+                            else
+                            {
+                                bLoadData[ch] = true;
+                            }
                         }
                     }
                     else
@@ -980,6 +1063,10 @@ namespace ZiveLab.ZM
                             if (brun == true)
                             {
                                 mresfile[ch].bStart = true;
+                            }
+                            else
+                            {
+                                bLoadData[ch] = true;
                             }
                         }
                         mHeadinf[ch] = mresfile[ch].tmphead.mInfo;
@@ -996,21 +1083,38 @@ namespace ZiveLab.ZM
                 if (this.mDevInf.mSysCfg.EnaZIM[ch] == 0) continue;
                 if (this.mDevInf.mSysCfg.ChkZIM[ch] == 0) continue;
 
-                RefreshTechfile(ch);
+                RefreshTechfile(ch,true);
             }
         }
 
-        void RefreshTechfile(int ch)
+        void RefreshTechfile(int ch, bool refresh = false)
         {
-            if (OldCondfilename[ch] == "" || OldCondfilename[ch] != condfilename[ch])
+            FileCondition fc = new FileCondition();
+            if(File.Exists(condfilename[ch]))
             {
-                OldCondfilename[ch] = condfilename[ch];
-
-                if (mcondfile[ch].OpenFile(condfilename[ch], ref tech[ch]) == false)
+                if (fc.OpenFile(condfilename[ch], ref tech[ch]) == false)
                 {
                     tech[ch].initialize(0);
                 }
             }
+            else
+            {
+                tech[ch].initialize(0);
+            }
+            
+            if(condfilename[ch] == OldCondfilename[ch] || File.Exists(OldCondfilename[ch])== false)
+            {
+                OldCondfilename[ch] = condfilename[ch];
+                Oldtech[ch] = tech[ch];
+            }
+            else
+            {
+                if (fc.OpenFile(OldCondfilename[ch], ref Oldtech[ch]) == false)
+                {
+                    Oldtech[ch].initialize(0);
+                }
+            }
+            
         }
 
         void Thread_CommObj()
@@ -1044,7 +1148,7 @@ namespace ZiveLab.ZM
                         CommandProc();
                     }
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
             this.mMapMem.mHeader.mStat.Stop = 1;
             this.mMapMem.mHeader.mStat.Result = (UInt16)enResult.FLAG_FAIL;

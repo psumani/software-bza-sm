@@ -21,32 +21,40 @@ namespace ZiveLab.ZM
         public event EventHandler CloseThis;
         string fileinf;
         int iMode;
-        
+        public bool bClose;
+        public bool bFirst;
         Point OriginalLocation;
         Size OriginalSize;
         public frmRealview(int tmode, int ich = -1) // 0-reg, 1-grp, 2-ingle
         {
+            InitializeComponent();
+
             iMode = tmode;
 
             fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
+            bClose = false;
+            bFirst = true;
 
-            if(iMode == 0)
+            if (iMode == 0)
             {
                 this.Text = "Real-time monitor.";
+                this.Icon = ZM.Properties.Resources.List1;
             }
             else if(iMode == 2)
             {
                 this.Text = string.Format("Real-time monitor of channel {0}.", ich + 1);
+                this.Icon = ZM.Properties.Resources.List1;
             }
             else
             {
                 this.Text = "Real-time monitor of the group.";
+                this.Icon = ZM.Properties.Resources.List1;
             }
 
             Properties.Settings.Default.MaxWinCh = -1;
             Properties.Settings.Default.GrpMaxWinCh = -1;
 
-            InitializeComponent();
+            
             chs = new List<int>();
             chs1 = new List<int>();
 
@@ -71,25 +79,6 @@ namespace ZiveLab.ZM
             }
             chs.Clear();
             chs.Add(ich);
-
-            string sch;
-            foreach (var ch in chs)
-            {
-                sch = ch.ToString();
-                if (gBZA.ChLnkLst.ContainsKey(sch))
-                {
-                    var value = gBZA.ChLnkLst[sch];
-                    if (gBZA.SifLnkLst.ContainsKey(value.sSerial))
-                    {
-                        if (gBZA.SifLnkLst[value.sSerial].bLinked == true
-                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
-                        {
-                            continue;
-                        }
-                    }
-                }
-                chs.Remove(ch);
-            }
 
             chs1 = chs;
             timer1.Interval = (int)(500 / chs.Count);
@@ -226,13 +215,25 @@ namespace ZiveLab.ZM
             BZAChPan chpan = (BZAChPan)sender;
             if (chpan.bMaxWindow)
             {
-                if (iMode == 1) Properties.Settings.Default.GrpMaxWinCh = -1;
-                else if (iMode == 0) Properties.Settings.Default.MaxWinCh = -1;
+                if (iMode == 1)
+                {
+                    Properties.Settings.Default.GrpMaxWinCh = -1;
+                }
+                else if (iMode == 0)
+                {
+                    Properties.Settings.Default.MaxWinCh = -1;
+                }
             }
             else
             {
-                if (iMode == 1) Properties.Settings.Default.GrpMaxWinCh = chpan.ch;
-                else if (iMode == 0) Properties.Settings.Default.MaxWinCh = chpan.ch;
+                if (iMode == 1)
+                {
+                    Properties.Settings.Default.GrpMaxWinCh = chpan.ch;
+                }
+                else if (iMode == 0)
+                {
+                    Properties.Settings.Default.MaxWinCh = chpan.ch;
+                }
             }
             Properties.Settings.Default.Save();
             
@@ -246,9 +247,22 @@ namespace ZiveLab.ZM
         }
         private void frmRealview_Load(object sender, EventArgs e)
         {
+            if (iMode == 0)
+            {
+                this.Icon = ZM.Properties.Resources.List1;
+            }
+            else if (iMode == 2)
+            {
+                this.Icon = ZM.Properties.Resources.List1;
+            }
+            else
+            {
+                this.Icon = ZM.Properties.Resources.List1;
+            }
+
             if (iMode == 1)
             {
-                if (gBZA.appcfg.GroupRealviewSize == new Size(0, 0) || gBZA.appcfg.GroupRealviewLocation == new Point(0, 0) || gBZA.appcfg.GroupRealviewLocation.X == -32000 || gBZA.appcfg.GroupRealviewLocation.Y == -32000)
+                if (gBZA.appcfg.GroupRealviewSize == new Size(0, 0) || gBZA.appcfg.GroupRealviewLocation == new Point(0, 0))
                 {
                     this.StartPosition = FormStartPosition.CenterParent;
                 }
@@ -262,7 +276,7 @@ namespace ZiveLab.ZM
             }
             else if(iMode == 2)
             {
-                if (gBZA.appcfg.RealviewSize == new Size(0, 0) || gBZA.appcfg.RealviewLocation == new Point(0, 0) || gBZA.appcfg.RealviewLocation.X == -32000 || gBZA.appcfg.RealviewLocation.Y == -32000)
+                if (gBZA.appcfg.RealviewSize == new Size(0, 0) || gBZA.appcfg.RealviewLocation == new Point(0, 0))
                 {
                     this.StartPosition = FormStartPosition.CenterParent;
                 }
@@ -275,7 +289,7 @@ namespace ZiveLab.ZM
             }
             else
             {
-                if (gBZA.appcfg.RegRealviewSize == new Size(0, 0) || gBZA.appcfg.RegRealviewLocation == new Point(0, 0) || gBZA.appcfg.RegRealviewLocation.X == -32000 || gBZA.appcfg.RegRealviewLocation.Y == -32000)
+                if (gBZA.appcfg.RegRealviewSize == new Size(0, 0) || gBZA.appcfg.RegRealviewLocation == new Point(0, 0))
                 {
                     this.StartPosition = FormStartPosition.CenterParent;
                 }
@@ -303,6 +317,7 @@ namespace ZiveLab.ZM
                 }
             }
             ShowChildWindows();
+            bFirst = false;
         }
 
         void ShowChildWindows()
@@ -356,6 +371,7 @@ namespace ZiveLab.ZM
                         chpan.MaxWindowsProc(false);
                         chpan.Size = new Size(0,0);
                     }
+                    i++;
                 }
             }
             else
@@ -372,6 +388,7 @@ namespace ZiveLab.ZM
                     chpan.Size = OriginalSize;
                     chpan.MaxWindowsProc(false);
                     pan.AutoScroll = true;
+                    i++;
                 }
                 /*
                 chpan = (BZAChPan)pan.Controls[0];
@@ -456,54 +473,85 @@ namespace ZiveLab.ZM
 
         private void frmRealview_LocationChanged(object sender, EventArgs e)
         {
-            
+            if (bClose || bFirst) return;
+            if (this.WindowState == FormWindowState.Minimized) return;
+            Point pt = this.Location;
+            if (iMode == 1)
+            {
+                gBZA.appcfg.GrpRtWinStatus = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    gBZA.appcfg.GroupRealviewSize = this.Size;
+                    gBZA.appcfg.GroupRealviewLocation = pt;
+                }
+            }
+            else if (iMode == 2)
+            {
+                gBZA.appcfg.RtWinStatus = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    gBZA.appcfg.RealviewSize = this.Size;
+                    gBZA.appcfg.RealviewLocation = pt;
+                }
+            }
+            else
+            {
+                gBZA.appcfg.RegRtWinStatus = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    gBZA.appcfg.RegRealviewSize = this.Size;
+                    gBZA.appcfg.RegRealviewLocation = pt;
+                }
+            }
+            gBZA.appcfg.Save();
         }
 
         private void pan_SizeChanged(object sender, EventArgs e)
         {
+            if (bClose || bFirst) return;
+            if (this.WindowState == FormWindowState.Minimized) return;
             if (iMode == 1)
             {
-                gBZA.appcfg.GroupRealviewSize = this.Size;
-                gBZA.appcfg.Save();
+                gBZA.appcfg.GrpRtWinStatus = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    gBZA.appcfg.GroupRealviewSize = this.Size;
+                }
             }
             else if(iMode == 2)
             {
-                gBZA.appcfg.RealviewSize = this.Size;
-                gBZA.appcfg.Save();
+                gBZA.appcfg.RtWinStatus = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    gBZA.appcfg.RealviewSize = this.Size;
+                }
             }
             else
             {
-                gBZA.appcfg.RegRealviewSize = this.Size;
-                gBZA.appcfg.Save();
+                gBZA.appcfg.RegRtWinStatus = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    gBZA.appcfg.RegRealviewSize = this.Size;
+                }
             }
-
+            gBZA.appcfg.Save();
             ResizeWindow();
         }
 
         private void frmRealview_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Point pt = this.Location;
-            if (pt.X != -32000 && pt.Y != -32000)
-            {
-                if (iMode == 1)
-                {
-                    gBZA.appcfg.GroupRealviewLocation = pt;
-                    gBZA.appcfg.GroupRealviewSize = this.Size;
-                    gBZA.appcfg.Save();
-                }
-                else if (iMode == 2)
-                {
-                    gBZA.appcfg.RealviewLocation = pt;
-                    gBZA.appcfg.RealviewSize = this.Size;
-                    gBZA.appcfg.Save();
-                }
-                else
-                {
-                    gBZA.appcfg.RegRealviewLocation = pt;
-                    gBZA.appcfg.RegRealviewSize = this.Size;
-                    gBZA.appcfg.Save();
-                }
-            }
+            bClose = true;
+           
+        }
+
+        private void frmRealview_Activated(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void frmRealview_MdiChildActivate(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -27,6 +27,7 @@ namespace ZiveLab.ZM
         stTech_Info minfo;
         stTech mtech;
         bool bFirst;
+        bool bError;
         bool bGroup;
         public frmStart(bool tGroup, List<int> tlstch = null)
         {
@@ -34,6 +35,8 @@ namespace ZiveLab.ZM
             bFirst = true;
             bGroup = tGroup;
             oldindex = -1;
+
+            bError = false;
             if (tlstch.Count < 1 || tlstch == null)
             {
                 MessageBox.Show("There is no channel selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -63,6 +66,7 @@ namespace ZiveLab.ZM
                 else
                 {
                     MessageBox.Show(string.Format("There is a problem with the condition file specified for channel {0}.", val + 1), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    bError = true;
                     DialogResult = DialogResult.Cancel;
                     return;
                 }
@@ -92,15 +96,19 @@ namespace ZiveLab.ZM
             string tsSerial = gBZA.ChLnkLst[tsch].sSerial;
             int tiSifCh = gBZA.ChLnkLst[tsch].SifCh;
             stTech tmtech = new stTech(0);
-
-            txttechfile.Text = gBZA.SifLnkLst[tsSerial].MBZAIF.condfilename[tiSifCh];
-            FileCondition fc = new FileCondition();
-            if (fc.OpenFile(txttechfile.Text, ref tmtech) == false)
+            if(gBZA.SifLnkLst.ContainsKey(tsSerial))
             {
-                return false;
+                txttechfile.Text = gBZA.SifLnkLst[tsSerial].MBZAIF.condfilename[tiSifCh];
+                FileCondition fc = new FileCondition();
+                if (fc.OpenFile(txttechfile.Text, ref tmtech) == false)
+                {
+                    return false;
+                }
+                minfo = tmtech.info;
+                return true;
             }
-            minfo = tmtech.info;
-            return true;
+
+            return false;
         }
 
         private void RefreshInformation()
@@ -135,13 +143,20 @@ namespace ZiveLab.ZM
         }
         private void frmStart_Load(object sender, EventArgs e)
         {
-            txtfilepath.Text = gBZA.appcfg.PathData;
-            txtfilename.Text = "";
+            if (bError)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+            else
+            {
+                txtfilepath.Text = gBZA.appcfg.PathData;
+                txtfilename.Text = "";
 
-            RefreshInformation();
+                RefreshInformation();
 
-            txtmemo.Text = "";
-            bFirst = false;
+                txtmemo.Text = "";
+                bFirst = false;
+            }
         }
 
         private void btselpath_Click(object sender, EventArgs e)
@@ -329,6 +344,73 @@ namespace ZiveLab.ZM
             }
             return serrch;
         }
+
+        private int GetWillSampleCount(stTech tTech)
+        {
+            int count = 0;
+            double tmp;
+            enTechType techtype = (enTechType)tTech.type;
+
+            if (techtype  == enTechType.TECH_HFR)
+            {
+                stTech_HFR hfr = new stTech_HFR(0);
+                tTech.GetHFR(ref hfr);
+                count = (int)(hfr.totaltime / hfr.interval);
+            }
+            else if (techtype == enTechType.TECH_MON)
+            {
+                stTech_MON mon = new stTech_MON(0);
+                tTech.GetMON(ref mon);
+                count = (int)(mon.totaltime / mon.sampletime);
+            }
+            else if (techtype == enTechType.TECH_PRR)
+            {
+                stTech_PRR prr = new stTech_PRR(0);
+                tTech.GetPRR(ref prr);
+                tmp = 3.0;
+                if (prr.rdendfreq == 0.0)
+                {
+                    tmp = 2.0;
+                }
+                count = (int)(prr.totaltime / (prr.interval * tmp));
+            }
+            else if (techtype == enTechType.TECH_QIS)
+            {
+                stTech_QIS qis = new stTech_QIS(0);
+                tTech.GetQIS(ref qis);
+                count = qis.GetFreqCount();
+            }
+            else
+            {
+                stTech_EIS eis = new stTech_EIS(0);
+                tTech.GetEIS(ref eis);
+                count = eis.GetFreqCount();
+            }
+            return count;
+        }
+
+        private string chkSamplesOfTechfile()
+        {
+            string serrch = "";
+            stLinkSifCh LnkCh = new stLinkSifCh(0);
+            string sifid;
+            int sifch;
+
+            foreach (var val in lstch)
+            {
+                LnkCh = gBZA.ChLnkLst[val.ToString()];
+                sifid = LnkCh.sSerial;
+                sifch = LnkCh.SifCh;
+                if(GetWillSampleCount(gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch]) > MBZA_Constant.MAX_DATA_CNT)
+                {
+                    serrch += string.Format("{0:00} ", val + 1);
+                }
+            }
+            
+            return serrch;
+        }
+
+
         private void btstart_Click(object sender, EventArgs e)
         {
             string sname;
@@ -366,6 +448,16 @@ namespace ZiveLab.ZM
             {
 
                 smsg = string.Format("There is a problem with the technique file set for channels({0}). Please check and try again.", serr);
+                gBZA.ShowErrBox(smsg);
+                return;
+            }
+
+            serr = chkSamplesOfTechfile();
+
+            if (serr.Trim().Length > 0)
+            {
+
+                smsg = string.Format("In the channel below, the expected number of experimental data in the technical file has exceeded the maximum storable {0} experimental data. \r\nPlease check the contents of the technical file and try again.\r\n\r\n * Channel: {1}", MBZA_Constant.MAX_DATA_CNT, serr);
                 gBZA.ShowErrBox(smsg);
                 return;
             }

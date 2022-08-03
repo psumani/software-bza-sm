@@ -269,6 +269,51 @@ namespace ZiveLab.ZM
             return true;
         }
 
+        public bool Create(string filename, stResHeader head)
+        {
+            try
+            {
+                CloseFile();
+
+                sfilename = filename;
+
+                fs = new FileStream(sfilename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+                if (fs == null)
+                {
+                    return false;
+                }
+                datacount = 0;
+                fs.SetLength(0);
+
+                tmphead = head;
+
+                WriteHead(head);
+
+                bStart = false;
+                bopen = true;
+                bwrite = true;
+                sfilename = filename;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(string.Format("{0}", e.Message));
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool StopContinue(ushort Error)
+        {
+            if (bStart == false) return false;
+            bStart = false;
+            tmphead.mInfo.rtc_end.tick = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            tmphead.mInfo.Error = Error;
+            WriteHead();
+            return true;
+        }
+
         public bool Stop(ushort Error)
         {
             if (bStart == false) return false;
@@ -307,6 +352,7 @@ namespace ZiveLab.ZM
                 fs.Write(data[i].ToByteArray(), 0, len_data);
                 datacount++;
             }
+            fs.Flush();
         }
 
         public void AppendData(stDefTestData data)
@@ -314,6 +360,7 @@ namespace ZiveLab.ZM
             fs.Seek(0, SeekOrigin.End);
             fs.Write(data.ToByteArray(), 0, len_data);
             datacount++;
+            fs.Flush();
         }
 
         public bool Write(int index, stDefTestData data)
@@ -322,6 +369,8 @@ namespace ZiveLab.ZM
             fs.Seek(pos, SeekOrigin.Begin);
 
             fs.Write(data.ToByteArray(), 0, len_data);
+
+            fs.Flush();
             return true;
         }
 

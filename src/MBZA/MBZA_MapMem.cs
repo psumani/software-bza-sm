@@ -96,6 +96,8 @@ namespace ZiveLab.ZM
         SetDDSSIG,
         Start,
         Stop,
+        LoadDataStart,
+        LoadDataStop,
         UploadTech,
         UploadCalibTech,
         UploadResHead,
@@ -761,6 +763,34 @@ namespace ZiveLab.ZM
             return TransCommand(sSerial, cmd, null);
         }
 
+        public static bool LoadDataStart(string sSerial, int ch)
+        {
+            MBZA_SifCommand cmd;
+
+            cmd.target = (short)enTarget.Zim;
+            cmd.flag = (short)enFlag.Cmd;
+            cmd.cmd = (short)enCmdZim.LoadDataStart;
+            cmd.ch = ch;
+            cmd.addr = 0;
+            cmd.wrlen = 0;
+            cmd.rdlen = 0;
+            return TransCommand(sSerial, cmd, null);
+        }
+
+        public static bool LoadDataStop(string sSerial, int ch)
+        {
+            MBZA_SifCommand cmd;
+
+            cmd.target = (short)enTarget.Zim;
+            cmd.flag = (short)enFlag.Cmd;
+            cmd.cmd = (short)enCmdZim.LoadDataStop;
+            cmd.ch = ch;
+            cmd.addr = 0;
+            cmd.wrlen = 0;
+            cmd.rdlen = 0;
+            return TransCommand(sSerial, cmd, null);
+        }
+        
         public static bool UploadTechnique(string sSerial, int ch)
         {
             MBZA_SifCommand cmd;

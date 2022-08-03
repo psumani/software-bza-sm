@@ -44,6 +44,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabtech2 = new System.Windows.Forms.TabPage();
+            this.cbomonctrl = new System.Windows.Forms.ComboBox();
+            this.txtMonCutoff = new System.Windows.Forms.TextBox();
+            this.lblcutoff = new System.Windows.Forms.Label();
+            this.lblctrlrate = new System.Windows.Forms.Label();
             this.chkhfrcelloffwait = new System.Windows.Forms.CheckBox();
             this.txthfrtotaltime = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -84,10 +88,6 @@
             this.techtree = new System.Windows.Forms.TreeView();
             this.lbltech = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.lblctrlrate = new System.Windows.Forms.Label();
-            this.txtMonCutoff = new System.Windows.Forms.TextBox();
-            this.lblcutoff = new System.Windows.Forms.Label();
-            this.cbomonctrl = new System.Windows.Forms.ComboBox();
             this.tabtech.SuspendLayout();
             this.tabtech1.SuspendLayout();
             this.tabtech2.SuspendLayout();
@@ -137,6 +137,7 @@
             this.cboeiscyc.Name = "cboeiscyc";
             this.cboeiscyc.Size = new System.Drawing.Size(86, 22);
             this.cboeiscyc.TabIndex = 24;
+            this.cboeiscyc.SelectedIndexChanged += new System.EventHandler(this.cboeiscyc_SelectedIndexChanged);
             // 
             // cboeisskipcyc
             // 
@@ -145,6 +146,7 @@
             this.cboeisskipcyc.Name = "cboeisskipcyc";
             this.cboeisskipcyc.Size = new System.Drawing.Size(86, 22);
             this.cboeisskipcyc.TabIndex = 23;
+            this.cboeisskipcyc.SelectedIndexChanged += new System.EventHandler(this.cboeisskipcyc_SelectedIndexChanged);
             // 
             // lbleiscycle
             // 
@@ -252,6 +254,41 @@
             this.tabtech2.Size = new System.Drawing.Size(415, 177);
             this.tabtech2.TabIndex = 1;
             this.tabtech2.Text = "b";
+            // 
+            // cbomonctrl
+            // 
+            this.cbomonctrl.FormattingEnabled = true;
+            this.cbomonctrl.Location = new System.Drawing.Point(175, 118);
+            this.cbomonctrl.Name = "cbomonctrl";
+            this.cbomonctrl.Size = new System.Drawing.Size(86, 22);
+            this.cbomonctrl.TabIndex = 30;
+            this.cbomonctrl.SelectedIndexChanged += new System.EventHandler(this.cbomonctrl_SelectedIndexChanged);
+            // 
+            // txtMonCutoff
+            // 
+            this.txtMonCutoff.Location = new System.Drawing.Point(175, 147);
+            this.txtMonCutoff.Name = "txtMonCutoff";
+            this.txtMonCutoff.Size = new System.Drawing.Size(86, 22);
+            this.txtMonCutoff.TabIndex = 29;
+            this.txtMonCutoff.Leave += new System.EventHandler(this.txtMonCutoff_Leave);
+            // 
+            // lblcutoff
+            // 
+            this.lblcutoff.AutoSize = true;
+            this.lblcutoff.Location = new System.Drawing.Point(21, 150);
+            this.lblcutoff.Name = "lblcutoff";
+            this.lblcutoff.Size = new System.Drawing.Size(133, 14);
+            this.lblcutoff.TabIndex = 28;
+            this.lblcutoff.Text = "Cut-off voltage(V)";
+            // 
+            // lblctrlrate
+            // 
+            this.lblctrlrate.AutoSize = true;
+            this.lblctrlrate.Location = new System.Drawing.Point(21, 120);
+            this.lblctrlrate.Name = "lblctrlrate";
+            this.lblctrlrate.Size = new System.Drawing.Size(126, 14);
+            this.lblctrlrate.TabIndex = 26;
+            this.lblctrlrate.Text = "Discharge Control";
             // 
             // chkhfrcelloffwait
             // 
@@ -631,41 +668,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // lblctrlrate
-            // 
-            this.lblctrlrate.AutoSize = true;
-            this.lblctrlrate.Location = new System.Drawing.Point(21, 120);
-            this.lblctrlrate.Name = "lblctrlrate";
-            this.lblctrlrate.Size = new System.Drawing.Size(147, 14);
-            this.lblctrlrate.TabIndex = 26;
-            this.lblctrlrate.Text = "Discharge Control(A)";
-            // 
-            // txtMonCutoff
-            // 
-            this.txtMonCutoff.Location = new System.Drawing.Point(175, 147);
-            this.txtMonCutoff.Name = "txtMonCutoff";
-            this.txtMonCutoff.Size = new System.Drawing.Size(86, 22);
-            this.txtMonCutoff.TabIndex = 29;
-            this.txtMonCutoff.Leave += new System.EventHandler(this.txtMonCutoff_Leave);
-            // 
-            // lblcutoff
-            // 
-            this.lblcutoff.AutoSize = true;
-            this.lblcutoff.Location = new System.Drawing.Point(21, 150);
-            this.lblcutoff.Name = "lblcutoff";
-            this.lblcutoff.Size = new System.Drawing.Size(133, 14);
-            this.lblcutoff.TabIndex = 28;
-            this.lblcutoff.Text = "Cut-off voltage(V)";
-            // 
-            // cbomonctrl
-            // 
-            this.cbomonctrl.FormattingEnabled = true;
-            this.cbomonctrl.Location = new System.Drawing.Point(175, 118);
-            this.cbomonctrl.Name = "cbomonctrl";
-            this.cbomonctrl.Size = new System.Drawing.Size(86, 22);
-            this.cbomonctrl.TabIndex = 30;
-            this.cbomonctrl.SelectedIndexChanged += new System.EventHandler(this.cbomonctrl_SelectedIndexChanged);
             // 
             // frmTechniq
             // 

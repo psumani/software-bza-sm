@@ -39,7 +39,6 @@ namespace ZiveLab.ZM
 
         public int GraphSizeMode;
         public bool bMaxWindow;
-        private int rtsize;
 
         string AppTitle;
         string AppVer;
@@ -51,6 +50,8 @@ namespace ZiveLab.ZM
         public int rtmode2;
 
         public event EventHandler evShowmax;
+
+        double GrpSpaceRate;
 
         bool LegendMove0;
         bool LegendMove1;
@@ -74,16 +75,21 @@ namespace ZiveLab.ZM
         stTech_QIS techqis;
 
         ToolTip toolTip;
-        int formatmode;
+        bool xTimemode0;
+        bool xTimemode1;
         FormatString fs_ss;
         FormatString fs_mm;
         FormatString fs_hh;
         FormatString fs_dd;
         int oldcursorindex1;
         int oldcursorindex2;
+        int LastPlotPoint;
+        int LastPlotPoint1;
         public BZAChPan(int ich, ref EventHandler evtimer, EventHandler evshowmax)
         {
             InitializeComponent();
+
+            GrpSpaceRate = 0.01;
 
             fs_ss = new FormatString(FormatStringMode.ElapsedTime, @"ss");
             fs_mm = new FormatString(FormatStringMode.ElapsedTime, @"m\:ss");
@@ -151,17 +157,12 @@ namespace ZiveLab.ZM
 
             toolTip = new ToolTip();
 
-            toolTip.AutoPopDelay = 2000;
-            toolTip.InitialDelay = 1000;
-            toolTip.ReshowDelay = 500;
-      
-            toolTip.ShowAlways = true;
-            toolTip.IsBalloon = true;
-
+            toolTip.RemoveAll();
+            
             toolTip.SetToolTip(this.bttech, "Select the schedule file to use for testing.");
             toolTip.SetToolTip(this.btTechEdit, "Check or edit the contents of the selected schedule file.");
             toolTip.SetToolTip(this.btstart, "Start or stop testing.");
-            toolTip.SetToolTip(this.btloaddata, "Receive the result from the channel and save it to the desired file.");
+            toolTip.SetToolTip(this.btloaddata, "Receive or stop receiving results on channel.");
             toolTip.SetToolTip(this.btgrp, "Displays the current result file as a graph.");
             toolTip.SetToolTip(this.btreport, "Displays the current result file as a report.");
             toolTip.SetToolTip(this.btabout, "Shows channel information.");
@@ -169,11 +170,18 @@ namespace ZiveLab.ZM
             toolTip.SetToolTip(this.grprt, "Double-click the graph to change the size of the window to maximum or normal size.");
             toolTip.SetToolTip(this.grp1, "Double-click the graph to change the size of the window to maximum or normal size.");
             toolTip.SetToolTip(this.grp2, "Double-click the graph to change the size of the window to maximum or normal size.");
-
+            toolTip.SetToolTip(this.lbldatacount, "Displays the number of resulting data and the number of data stored in the file.\r\n Number of result data (number of result file data).");
+            
             toolTip.SetToolTip(this.lblTech, "");
             toolTip.SetToolTip(this.lblResult, "");
 
-            rtsize = 0;
+            toolTip.AutoPopDelay = 3000;
+            toolTip.InitialDelay = 500;
+            toolTip.ReshowDelay = 500;
+
+            toolTip.ShowAlways = true;
+            toolTip.IsBalloon = true;
+
             bRtGrpPause = false;
             rtmode = 0;
             rtmode1 = 0;
@@ -186,7 +194,8 @@ namespace ZiveLab.ZM
             LegendMove1 = false;
             LegendMove2 = false;
             GraphSizeMode = 0;
-
+            xTimemode0 = false;
+            xTimemode1 = false;
             GrpPlotCount1 = 1;
             GrpPlotCount2 = 2;
 
@@ -203,16 +212,19 @@ namespace ZiveLab.ZM
             lblprog.Prog_Val = 0;
             lblprog.Prog_Color = Color.DarkGray;
 
+            
             InitRtGraph();
             InitGraph1();
             InitGraph2();
+            LastPlotPoint = 0;
+            LastPlotPoint1 = 0;
 
             MakeAppTitle();
 
             OldTechType = -1;
             InitGraphType();
             RefreshGraphSize();
-            ViewInformation();
+            RefreshTestInformation();
         }
 
         public void SetbtSize(bool bEnable)
@@ -226,6 +238,11 @@ namespace ZiveLab.ZM
 
         void TimerProc(object sender, EventArgs e)
         {
+            if(gBZA.SifLnkLst.ContainsKey(serial) == false)
+            {
+                return;
+            }
+
             if (gBZA.SifLnkLst[serial].MBZAIF.bConnect == false)
             {
                 bttech.Enabled = false;
@@ -252,11 +269,7 @@ namespace ZiveLab.ZM
 
         private void grp1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if(bMaxWindow == true && GraphSizeMode == 1)
-            {
-                MessageBox.Show("You cannot change the graph size from maximum to normal when the channel window is at its maximum size.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            
             if (GraphSizeMode == 0) GraphSizeMode = 1;
             else GraphSizeMode = 0;
 
@@ -265,12 +278,7 @@ namespace ZiveLab.ZM
 
         private void grp2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (bMaxWindow == true && GraphSizeMode == 1)
-            {
-                MessageBox.Show("You cannot change the graph size from maximum to normal when the channel window is at its maximum size.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
+            
             if (GraphSizeMode == 0) GraphSizeMode = 1;
             else GraphSizeMode = 0;
 
@@ -279,32 +287,16 @@ namespace ZiveLab.ZM
 
         private void BZAChPan_SizeChanged(object sender, EventArgs e)
         {
-            if (rtsize == 1) ChgRTGraphSize();
             if (GraphSizeMode == 1)  RefreshGraphSize();
         }
 
         private void grprt_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (bMaxWindow == true && rtsize == 1)
-            {
-                MessageBox.Show("You cannot change the graph size from maximum to normal when the channel window is at its maximum size.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            if (GraphSizeMode == 0) GraphSizeMode = 1;
+            else GraphSizeMode = 0;
 
-            if (rtsize == 0)
-            {
-                rtsize = 1;
-                RtMenuGraphModeDefault.Checked = false;
-                RtMenuGraphModeMax.Checked = true;
-            }
-            else
-            {
-                rtsize = 0;
-                RtMenuGraphModeDefault.Checked = true;
-                RtMenuGraphModeMax.Checked = false;
-            }
+            RefreshGraphSize();
 
-            ChgRTGraphSize();
         }
 
         #region GrpUtil
@@ -727,7 +719,6 @@ namespace ZiveLab.ZM
         private void InitRtGraph()
         {
             rtmode = 0;
-            rtsize = 0;
 
             grprt.PlotAreaColor = Properties.Settings.Default.RtGrp_BackColor;
             grprt.PlotAreaBorder = Border.Dotted;
@@ -789,7 +780,9 @@ namespace ZiveLab.ZM
             RtMenuGraphLine.Checked = Properties.Settings.Default.RtGrp_Plot_ViewLine;
             RtMenuGraphPoint.Checked = Properties.Settings.Default.RtGrp_Plot_ViewPoint;
             RtMenuGraphGrid.Checked = Properties.Settings.Default.RtGrp_GridView;
-            RtMenuGraphLegend.Checked = false;
+            RtMenuGraphLegend.Checked = Properties.Settings.Default.RtGrpLegendView;
+            Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
+            Properties.Settings.Default.RtGrpLegendView = MenuPlotLegend1.Checked;
 
             grprt.Plots[0].LineWidth = DeviceConstants.Linewidth;
             grprt.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
@@ -833,7 +826,6 @@ namespace ZiveLab.ZM
             }
             RefreshRtView();
             Rtlegend.Width = 82;
-            ChgRTGraphSize();
 
             RefreshRt();
         }
@@ -859,22 +851,30 @@ namespace ZiveLab.ZM
 
             grp1.Plots[0].LineWidth = DeviceConstants.Linewidth;
             grp1.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-
+            grp1.Plots[0].HistoryCapacity = 100000;
             grp1.Plots[1].LineWidth = DeviceConstants.Linewidth;
             grp1.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[1].HistoryCapacity = 100000;
 
             grp1.Plots[2].LineWidth = DeviceConstants.Linewidth;
             grp1.Plots[2].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[2].HistoryCapacity = 100000;
 
             grp1.Plots[3].LineWidth = DeviceConstants.Linewidth;
             grp1.Plots[3].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[3].HistoryCapacity = 100000;
 
             grp1.Plots[4].LineWidth = DeviceConstants.Linewidth;
             grp1.Plots[4].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[4].HistoryCapacity = 100000;
 
             grp1.Plots[5].LineWidth = DeviceConstants.Linewidth;
             grp1.Plots[5].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[5].HistoryCapacity = 100000;
 
+            grp1.Plots[6].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[6].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[6].HistoryCapacity = 100000;
 
             if (Properties.Settings.Default.GrpPlotLine11) grp1.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
             else grp1.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
@@ -975,8 +975,12 @@ namespace ZiveLab.ZM
             lblcsfreq1.Visible = false;
             grp1.CaptionVisible = false;
 
+            grp1.ClearData();
+            
+
             ApplyGraphModeMenu(1);
             RefreshGraphMode(1);
+            
         }
 
         private void InitGraph2()
@@ -1000,21 +1004,35 @@ namespace ZiveLab.ZM
 
             grp2.Plots[0].LineWidth = DeviceConstants.Linewidth;
             grp2.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[0].HistoryCapacity = 100000;
 
             grp2.Plots[1].LineWidth = DeviceConstants.Linewidth;
             grp2.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[1].HistoryCapacity = 100000;
 
             grp2.Plots[2].LineWidth = DeviceConstants.Linewidth;
             grp2.Plots[2].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[2].HistoryCapacity = 100000;
 
             grp2.Plots[3].LineWidth = DeviceConstants.Linewidth;
             grp2.Plots[3].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[3].HistoryCapacity = 100000;
 
             grp2.Plots[4].LineWidth = DeviceConstants.Linewidth;
             grp2.Plots[4].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[4].HistoryCapacity = 100000;
 
             grp2.Plots[5].LineWidth = DeviceConstants.Linewidth;
             grp2.Plots[5].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[5].HistoryCapacity = 100000;
+
+            grp2.Plots[6].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[6].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[6].HistoryCapacity = 100000;
+
+            grp2.Plots[7].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[7].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[7].HistoryCapacity = 100000;
 
             if (Properties.Settings.Default.GrpPlotLine21) grp2.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
             else grp2.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
@@ -1111,6 +1129,8 @@ namespace ZiveLab.ZM
             legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
             MenuPlotLegend2.Checked = Properties.Settings.Default.GrpViewLegend2;
 
+            grp2.ClearData();
+
             GrpCtrlMode2 = 0;
             lblcsfreq2.Visible = false;
             grp2.CaptionVisible = false;
@@ -1118,20 +1138,28 @@ namespace ZiveLab.ZM
             RefreshGraphMode(2);
         }
 
-        private void InitGraphType()
+        private void InitGraphType(bool brefresgraph = true)
         {
-            if (OldTechType != gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type)
+            if(gBZA.SifLnkLst.ContainsKey(serial) ==false)
             {
-                OldTechType = gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type;
+                return;
+            }
+            if (OldTechType != gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type || brefresgraph == true)
+            {
+                OldTechType = gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
                 if ((enTechType)OldTechType == enTechType.TECH_MON)
                 {
-                    if (this.tabgrp.TabPages.Contains(this.tabPage3) == true) this.tabgrp.TabPages.Remove(this.tabPage3);
+                    if (this.tabgrp.TabPages.Contains(this.TabGrp2) == true) this.tabgrp.TabPages.Remove(this.TabGrp2);
                     legend2.Visible = false;
+                    if (this.tabgrp.TabPages.Contains(this.TabGrpRaw) == true) this.tabgrp.TabPages.Remove(this.TabGrpRaw);
+                    Rtlegend.Visible = false;
                 }
                 else
                 {
-                    if (this.tabgrp.TabPages.Contains(this.tabPage3) == false) this.tabgrp.TabPages.Add(this.tabPage3);
+                    if (this.tabgrp.TabPages.Contains(this.TabGrp2) == false) this.tabgrp.TabPages.Add(this.TabGrp2);
                     legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
+                    if (this.tabgrp.TabPages.Contains(this.TabGrpRaw) == false) this.tabgrp.TabPages.Add(this.TabGrpRaw);
+                    Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
                 }
                 if ((enTechType)OldTechType == enTechType.TECH_HFR) 
                 {
@@ -1153,22 +1181,30 @@ namespace ZiveLab.ZM
                 {
                     InitGraphEIS();
                 }
+                LastPlotPoint = 0;
+                LastPlotPoint1 = 0;
+                grp1.ClearData();
+                grp2.ClearData();
             }
         }
 
         private void InitGraphQIS()
         {
-            tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "Niquest plot";
+            TabGrpRaw.Text = "AC waveform";
+            TabGrp1.Text = "Niquest plot";
 
             grp1.XAxes[0].Caption = "Z real(Ω)";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
             grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode0 = false;
+
             grp1.YAxes[0].Caption = "-Z image(Ω)";
             grp1.YAxes[1].Caption = "";
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
             grp1.YAxes[1].Visible = false;
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
 
             grp1.Plots[0].Visible = true;
             grp1.Plots[1].Visible = false;
@@ -1176,6 +1212,7 @@ namespace ZiveLab.ZM
             grp1.Plots[3].Visible = false;
             grp1.Plots[4].Visible = false;
             grp1.Plots[5].Visible = false;
+            grp1.Plots[6].Visible = true;
 
             grp1.Plots[0].XAxis = grp1.XAxes[0];
             grp1.Plots[0].YAxis = grp1.YAxes[0];
@@ -1187,19 +1224,24 @@ namespace ZiveLab.ZM
             legend1.Items[3].Visible = false;
             legend1.Items[4].Visible = false;
             legend1.Items[5].Visible = false;
+            legend1.Items[6].Text = "-Zimg";
+            legend1.Items[6].Visible = true;
 
 
-
-            tabgrp.TabPages[2].Text = "Bode plot";
+            TabGrp2.Text = "Bode plot";
 
             grp2.XAxes[0].Caption = "Frequency(Hz)";
             grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
             grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode1 = false;
+
             grp2.YAxes[0].Caption = "Zmag(Ω)";
             grp2.YAxes[1].Caption = "Zphase(°C)";
             grp2.XAxes[0].Visible = true;
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
 
             grp2.Plots[0].XAxis = grp2.XAxes[0];
             grp2.Plots[0].YAxis = grp2.YAxes[0];
@@ -1212,43 +1254,65 @@ namespace ZiveLab.ZM
             grp2.Plots[3].Visible = false;
             grp2.Plots[4].Visible = false;
             grp2.Plots[5].Visible = false;
+            grp2.Plots[6].Visible = true;
+            grp2.Plots[7].Visible = true;
 
             legend2.Items[0].Text = "Zmag";
             legend2.Items[1].Text = "Zphase";
-
+            legend2.Items[6].Text = "Zmag";
+            legend2.Items[7].Text = "Zphase";
             legend2.Items[0].Visible = true;
             legend2.Items[1].Visible = true;
             legend2.Items[2].Visible = false;
             legend2.Items[3].Visible = false;
             legend2.Items[4].Visible = false;
             legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
 
 
-            
-            GrpPlotCount1 = 1;
-            GrpPlotCount2 = 2;
+
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 4;
         }
 
         private void InitGraphMON()
         {
 
-            
-            tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "Vdc,Temp. vs t";
 
+            TabGrpRaw.Text = "AC waveform";
+
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
+            {
+                TabGrp1.Text = "Eoc,Temp. vs t";
+                grp1.YAxes[0].Caption = "Eoc(V)";
+                legend1.Items[0].Text = "Eoc";
+               
+            }
+            else
+            {
+                TabGrp1.Text = "Vdc,Temp. vs t";
+                grp1.YAxes[0].Caption = "Vdc(V)";
+                legend1.Items[0].Text = "Vdc";
+            }
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
             grp1.Plots[0].Visible = true;
             grp1.Plots[1].Visible = true;
             grp1.Plots[2].Visible = false;
             grp1.Plots[3].Visible = false;
             grp1.Plots[4].Visible = false;
             grp1.Plots[5].Visible = false;
+            grp1.Plots[6].Visible = false;
 
-            grp1.XAxes[0].Caption = "Time(s)";
+            grp1.XAxes[0].Caption = "Time";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            formatmode = 0;
+            xTimemode0 = true;
+            
 
             grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            grp1.YAxes[0].Caption = "Vdc(V)";
             grp1.YAxes[1].Caption = "Temp.(°C)";
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
@@ -1259,7 +1323,7 @@ namespace ZiveLab.ZM
             grp1.Plots[1].XAxis = grp1.XAxes[0];
             grp1.Plots[1].YAxis = grp1.YAxes[1];
 
-            legend1.Items[0].Text = "Vdc";
+            
             legend1.Items[1].Text = "Temp.";
 
             legend1.Items[0].Visible = true;
@@ -1268,12 +1332,17 @@ namespace ZiveLab.ZM
             legend1.Items[3].Visible = false;
             legend1.Items[4].Visible = false;
             legend1.Items[5].Visible = false;
-            /*
-            tabgrp.TabPages[2].Text = "Vdc,Temp. vs t";
+            legend1.Items[6].Visible = false;
 
-            grp2.XAxes[0].Caption = "Time(s)";
+            xTimemode1 = false;
+            /*
+            TabGrp2.Text = "Vdc,Temp. vs t";
+
+            grp2.XAxes[0].Caption = "Time";
             grp2.XAxes[0].ScaleType = ScaleType.Linear;
             grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
+
             grp2.YAxes[0].Caption = "Vdc(V)";
             grp2.YAxes[1].Caption = "Temp.(°C)";
 
@@ -1292,6 +1361,8 @@ namespace ZiveLab.ZM
             grp2.Plots[3].Visible = false;
             grp2.Plots[4].Visible = false;
             grp2.Plots[5].Visible = false;
+            grp2.Plots[6].Visible = false;
+            grp2.Plots[7].Visible = false;
 
             legend2.Items[0].Text = "Vdc";
             legend2.Items[1].Text = "Temp.";
@@ -1302,6 +1373,8 @@ namespace ZiveLab.ZM
             legend2.Items[3].Visible = false;
             legend2.Items[4].Visible = false;
             legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
             */
             GrpPlotCount1 = 2;
             GrpPlotCount2 = 0;
@@ -1309,17 +1382,21 @@ namespace ZiveLab.ZM
 
         private void InitGraphEIS()
         {
-            tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "Niquest plot";
+            TabGrpRaw.Text = "AC waveform";
+            TabGrp1.Text = "Niquest plot";
 
             grp1.XAxes[0].Caption = "Z real(Ω)";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
             grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode0 = false;
             grp1.YAxes[0].Caption = "-Z image(Ω)";
             grp1.YAxes[1].Caption = "";
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
             grp1.YAxes[1].Visible = false;
+
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
 
             grp1.Plots[0].Visible = true;
             grp1.Plots[1].Visible = false;
@@ -1327,6 +1404,7 @@ namespace ZiveLab.ZM
             grp1.Plots[3].Visible = false;
             grp1.Plots[4].Visible = false;
             grp1.Plots[5].Visible = false;
+            grp1.Plots[6].Visible = true;
 
             grp1.Plots[0].XAxis = grp1.XAxes[0];
             grp1.Plots[0].YAxis = grp1.YAxes[0];
@@ -1338,19 +1416,23 @@ namespace ZiveLab.ZM
             legend1.Items[3].Visible = false;
             legend1.Items[4].Visible = false;
             legend1.Items[5].Visible = false;
+            legend1.Items[6].Text = "-Zimg";
+            legend1.Items[6].Visible = true;
 
-            
 
-            tabgrp.TabPages[2].Text = "Bode plot";
+            TabGrp2.Text = "Bode plot";
 
             grp2.XAxes[0].Caption = "Frequency(Hz)";
             grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
             grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode1 = false;
             grp2.YAxes[0].Caption = "Zmag(Ω)";
             grp2.YAxes[1].Caption = "Zphase(°C)";
             grp2.XAxes[0].Visible = true;
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
 
             grp2.Plots[0].XAxis = grp2.XAxes[0];
             grp2.Plots[0].YAxis = grp2.YAxes[0];
@@ -1363,9 +1445,14 @@ namespace ZiveLab.ZM
             grp2.Plots[3].Visible = false;
             grp2.Plots[4].Visible = false;
             grp2.Plots[5].Visible = false;
+            grp2.Plots[6].Visible = true;
+            grp2.Plots[7].Visible = true;
 
             legend2.Items[0].Text = "Zmag";
             legend2.Items[1].Text = "Zphase";
+
+            legend2.Items[6].Text = "Zmag";
+            legend2.Items[7].Text = "Zphase";
 
             legend2.Items[0].Visible = true;
             legend2.Items[1].Visible = true;
@@ -1373,18 +1460,34 @@ namespace ZiveLab.ZM
             legend2.Items[3].Visible = false;
             legend2.Items[4].Visible = false;
             legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = true;
+            legend2.Items[7].Visible = true;
 
-            
 
-            GrpPlotCount1 = 1;
-            GrpPlotCount2 = 2;
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 4;
         }
 
         private void InitGraphHFR()
         {
 
-            tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "Zre,Vdc vs t";
+            TabGrpRaw.Text = "AC waveform";
+
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
+            {
+                TabGrp1.Text = "Zre,Eoc vs t";
+                grp1.YAxes[1].Caption = "Eoc(V)";
+                legend1.Items[1].Text = "Eoc";
+            }
+            else
+            {
+                TabGrp1.Text = "Zre,Vdc vs t";
+                grp1.YAxes[1].Caption = "Vdc(V)";
+                legend1.Items[1].Text = "Vdc";
+            }
+
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.#####");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
 
             grp1.Plots[0].Visible = true;
             grp1.Plots[1].Visible = true;
@@ -1392,14 +1495,15 @@ namespace ZiveLab.ZM
             grp1.Plots[3].Visible = false;
             grp1.Plots[4].Visible = false;
             grp1.Plots[5].Visible = false;
+            grp1.Plots[6].Visible = false;
 
-            grp1.XAxes[0].Caption = "Time(s)";
+            grp1.XAxes[0].Caption = "Time";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            formatmode = 0;
+            xTimemode0 = true;
 
             grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
             grp1.YAxes[0].Caption = "Zre(Ω)";
-            grp1.YAxes[1].Caption = "Vdc(V)";
+            
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
             grp1.YAxes[1].Visible = true;
@@ -1410,7 +1514,7 @@ namespace ZiveLab.ZM
             grp1.Plots[1].YAxis = grp1.YAxes[1];
 
             legend1.Items[0].Text = "Zre";
-            legend1.Items[1].Text = "Vdc";
+            
 
             legend1.Items[0].Visible = true;
             legend1.Items[1].Visible = true;
@@ -1418,16 +1522,18 @@ namespace ZiveLab.ZM
             legend1.Items[3].Visible = false;
             legend1.Items[4].Visible = false;
             legend1.Items[5].Visible = false;
+            legend1.Items[6].Visible = false;
 
-            
-            tabgrp.TabPages[2].Text = "Cs,Cp vs t";
+            TabGrp2.Text = "Cs,Cp vs t";
 
-            grp2.XAxes[0].Caption = "Time(s)";
+            grp2.XAxes[0].Caption = "Time";
             grp2.XAxes[0].ScaleType = ScaleType.Linear;
             grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
             grp2.YAxes[0].Caption = "Cs(uF)";
             grp2.YAxes[1].Caption = "Cp(uF)";
-
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             grp2.XAxes[0].Visible = true;
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
@@ -1443,6 +1549,8 @@ namespace ZiveLab.ZM
             grp2.Plots[3].Visible = false;
             grp2.Plots[4].Visible = false;
             grp2.Plots[5].Visible = false;
+            grp2.Plots[6].Visible = false;
+            grp2.Plots[7].Visible = false;
 
             legend2.Items[0].Text = "Cs";
             legend2.Items[1].Text = "Cp";
@@ -1453,6 +1561,8 @@ namespace ZiveLab.ZM
             legend2.Items[3].Visible = false;
             legend2.Items[4].Visible = false;
             legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
 
             GrpPlotCount1 = 2;
             GrpPlotCount2 = 2;
@@ -1465,31 +1575,36 @@ namespace ZiveLab.ZM
 
             grp1.ClearData();
             grp2.ClearData();
-            tabgrp.TabPages[0].Text = "Info.";
-            tabgrp.TabPages[1].Text = "Rs,P_Rp vs t";
-            tabgrp.TabPages[2].Text = "Cs,Cp vs t";
+            TabGrpRaw.Text = "AC waveform";
+            TabGrp1.Text = "Rs,P_Rp vs t";
+            TabGrp2.Text = "Cs,Cp vs t";
 
-            formatmode = 0;
-
-            grp1.XAxes[0].Caption = "Time(s)";
+            grp1.XAxes[0].Caption = "Time";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
             grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode0 = true;
+
             grp1.YAxes[0].Caption = "R(Ω)";
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
 
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+
             grp1.YAxes[1].Caption = "";
             grp1.YAxes[1].Visible = false;
 
-            grp2.XAxes[0].Caption = "Time(s)";
+            grp2.XAxes[0].Caption = "Time";
             grp2.XAxes[0].ScaleType = ScaleType.Linear;
             grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
             grp2.YAxes[0].Caption = "Cs(uF)";
             grp2.YAxes[1].Caption = "Cp(uF)";
             grp2.XAxes[0].Visible = true;
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
-            
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             for (i = 0; i < 6; i++)
             {
                 grp1.Plots[i].XAxis = grp1.XAxes[0];
@@ -1567,7 +1682,12 @@ namespace ZiveLab.ZM
                     legend2.Items[i+3].Visible = false;
                 }
             }
-
+            legend1.Items[6].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
+            grp1.Plots[6].Visible = false;
+            grp2.Plots[6].Visible = false;
+            grp2.Plots[7].Visible = false;
 
             GrpPlotCount1 = 2; // grp.arrcnt * 2;
             GrpPlotCount2 = grp.arrcnt * 2;
@@ -1577,61 +1697,10 @@ namespace ZiveLab.ZM
         #endregion Grpinit
 
         #region GrpRefresh
-
-        private void RefreshRtLegend()
-        {
-            Point pnt = grprt.Location;
-            Size legSize = Rtlegend.Size;
-
-            if (rtmode == 1)
-            {
-                Rtlegend.Items[0].Visible = true;
-                Rtlegend.Items[0].Text = "Voltage";
-                Rtlegend.Items[1].Visible = true;
-                Rtlegend.Items[1].Text = "Current";
-                legSize.Height = 54;
-            }
-            else
-            {
-                Rtlegend.Items[0].Visible = true;
-                Rtlegend.Items[0].Text = "Current";
-                Rtlegend.Items[1].Visible = false;
-                Rtlegend.Items[1].Text = "";
-                legSize.Height = 30;
-            }
-            Rtlegend.Size = legSize;
-
-            pnt.X = pnt.X + grprt.Size.Width - Rtlegend.Size.Width - 3;
-            pnt.Y = pnt.Y + 3;
-
-            Rtlegend.Location = pnt;
-            Rtlegend.Visible = RtMenuGraphLegend.Checked;
-        }
-
-        private void ChgRTGraphSize()
-        {
-            if (rtsize == 0)
-            {
-                RtMenuGraphModeDefault.Checked = true;
-                RtMenuGraphModeMax.Checked = false;
-                grprt.Size = new Size(146, 128);
-                grprt.Location = new Point(8, 258);
-                tabgrp.Visible = true;
-            }
-            else
-            {
-                RtMenuGraphModeDefault.Checked = false;
-                RtMenuGraphModeMax.Checked = true;
-                tabgrp.Visible = false;
-                grprt.Size = new Size(this.ClientRectangle.Width - 16, this.ClientRectangle.Height - 43);
-                grprt.Location = new Point(8, 27);
-            }
-            RefreshRtLegend();
-        }
-
-
+                
         private void RefreshLegendSize()
         {
+            RefreshLegendSize(0);
             RefreshLegendSize(1);
             RefreshLegendSize(2);
         }
@@ -1649,7 +1718,7 @@ namespace ZiveLab.ZM
                 tpos.Y = tpos.Y + 3;
                 legend1.Location = tpos;
             }
-            else
+            else if (index == 2)
             {
 
                 legend2.Width = 80;
@@ -1660,19 +1729,35 @@ namespace ZiveLab.ZM
                 tpos.Y = tpos.Y + 3;
                 legend2.Location = tpos;
             }
+            else
+            {
+                Rtlegend.Width = 80;
+                Rtlegend.Height = 23 * 2 + 8;
+
+                tpos = Rtlegend.Location;
+                tpos.X = tpos.X + Rtlegend.Width - Rtlegend.Width - 3;
+                tpos.Y = tpos.Y + 3;
+                Rtlegend.Location = tpos;
+                
+            }
         }
 
         private void RefreshGraphSize()
         {
             if (GraphSizeMode == 0)
             {
-                RtMenuGraphModeDefault.Checked = true;
-                RtMenuGraphModeMax.Checked = false;
-
-                tabgrp.Location = new Point(160,66);
-                tabgrp.Size = new Size(320, 320);
-                grprt.Visible = true;
-                /*
+                if (bMaxWindow == true)
+                {
+                    tabgrp.Location = new Point(163, 100);
+                    tabgrp.Size = new Size(ClientRectangle.Size.Width - 16 - 163, ClientRectangle.Size.Height - 16 - 66);
+                }
+                else
+                {
+                    tabgrp.Location = new Point(163, 100);
+                    tabgrp.Size = new Size(312, 218);
+                }
+                /*grprt.Visible = true;
+                
                 grp1.Size = new Size(182, 186);
                 grp1.Location = new Point(4, 6);
                 grp2.Size = new Size(182, 186);
@@ -1680,13 +1765,10 @@ namespace ZiveLab.ZM
             }
             else
             {
-                RtMenuGraphModeDefault.Checked = false;
-                RtMenuGraphModeMax.Checked = true;
-
                 tabgrp.Location = new Point(6,27);
                 tabgrp.Size = new Size(ClientRectangle.Size.Width - 16, ClientRectangle.Size.Height - 16);
-                grprt.Visible = false;
-                /*grp1.Size = new Size(tabgrp.Width - 18, tabgrp.Height - 38);
+                /*grprt.Visible = false;
+                grp1.Size = new Size(tabgrp.Width - 18, tabgrp.Height - 38);
                 grp1.Location = new Point(4, 6);
                 grp2.Size = new Size(tabgrp.Width - 18, tabgrp.Height - 38);
                 grp2.Location = new Point(4, 6);*/
@@ -1739,6 +1821,10 @@ namespace ZiveLab.ZM
             {
                 return Color.DarkBlue;
             }
+            if(gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
+            {
+                return Color.DarkGreen;
+            }
             return Color.Black;
         }
 
@@ -1780,54 +1866,101 @@ namespace ZiveLab.ZM
             return string.Format("{0:G}", dt);
         }
 
-        private void ViewInformation()
+        private void RefreshTestInformation()
         {
+            string str;
+            string str1;
+            if (gBZA.SifLnkLst.ContainsKey(serial) == false)
+            {
+                toolTip.SetToolTip(this.lblResult, "");
+                toolTip.SetToolTip(this.lblTech, "");
+                return;
+            }
             stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
             stResHeaderInfo headinfo = gBZA.SifLnkLst[serial].MBZAIF.mHeadinf[sifch];
            
-            string str;
+
             DateTime sdt = new DateTime(headinfo.rtc_begin.tick * TimeSpan.TicksPerMillisecond);
             DateTime edt = new DateTime(headinfo.rtc_end.tick * TimeSpan.TicksPerMillisecond);
 
-            lblStarted.Text = string.Format("   Started: {0:G}", sdt);
+            str = "  location:";
+            str1 = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch]);
+            str += str1;
+            toolTip.SetToolTip(this.lblTech, str);
 
-            if (gBZA.CheckStatusRun(chstat)) lblFinished.Text = "  Finished: Proceeding...";
-            else lblFinished.Text = string.Format("  Finished: {0:G}", edt);
-
-            if (gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch].Length < 5)
+            str = string.Format("   Started: {0:G}", sdt);
+            str += "\r\n";
+            if (gBZA.CheckStatusRun(chstat)) str1 =  "  Finished: Proceeding...";
+            else str1 = string.Format("  Finished: {0:G}", edt);
+            str += str1;
+            if (gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch].Length > 5)
             {
-                str = "";
-                toolTip.SetToolTip(this.lblTech, str);
-                lblTech.Text = string.Format(" Technique: {0}", str);
+                str += "\r\n  location:";
+                str1 = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
+                str += str1;
+                str += "\r\n";
+                str += string.Format("Battery id: {0}\r\n", Encoding.UTF8.GetString(headinfo.batid).Trim('\0'));
+                str += string.Format("Nominal AH: {0} AH\r\n", SM_Number.ToString(headinfo.Capa, enSM_TypeNumberToString.SIPrefix, 5));
+                str += string.Format("      User: {0}\r\n", Encoding.UTF8.GetString(headinfo.user).Trim('\0'));
+                str += string.Format("      Memo: {0}", Encoding.UTF8.GetString(headinfo.memo).Trim('\0'));
+            }
+            toolTip.SetToolTip(this.lblResult, str);
+        }
+
+        private void ViewReloadStatus()
+        {
+            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
+            stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
+            if (gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
+            {
+                if (btloaddata.ImageKey == "save")
+                {
+                    RefreshTestInformation();
+                    InitGraphType(true);
+                    if (techtype == enTechType.TECH_MON)
+                    {
+                        lblprog.Prog_Color = Color.Yellow;
+                    }
+                    else
+                    {
+                        lblprog.Prog_Color = Color.Lime;
+                    }
+                }
+                else
+                {
+                    if (techtype == enTechType.TECH_MON)
+                    {
+                        if ((enEisState)chstat.eis_status.status == enEisState.mondelay)
+                        {
+                            if (lblprog.Prog_Color != Color.Yellow) lblprog.Prog_Color = Color.Yellow;
+                        }
+                        else
+                        {
+                            if (lblprog.Prog_Color != Color.Lime) lblprog.Prog_Color = Color.Lime;
+                        }
+                    }
+                    else
+                    {
+                        if (lblprog.Prog_Color != Color.Lime) lblprog.Prog_Color = Color.Lime;
+                    }
+                }
+                btloaddata.ImageKey = "stop";
             }
             else
             {
-                str = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch]);
-                toolTip.SetToolTip(this.lblTech, str);
-                str = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch]);
-                lblTech.Text = string.Format(" Technique: {0}", str);
-            }
-
-            if (gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch].Length < 5)
-            {
-                str = "";
-                toolTip.SetToolTip(this.lblResult, str);
-                lblResult.Text = string.Format("    Result: {0}", str);
-            }
-            else
-            {
-                str = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
-                toolTip.SetToolTip(this.lblResult, str);
-                str = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
-                lblResult.Text = string.Format("    Result: {0}", str);
-
-                lblBattid.Text = string.Format("Battery id: {0}", Encoding.UTF8.GetString(headinfo.batid).Trim('\0'));
-
-                lblCapa.Text = string.Format("Nominal AH: {0} AH", SM_Number.ToString(headinfo.Capa, enSM_TypeNumberToString.SIPrefix, 5));
-                lblUser.Text = string.Format("      User: {0}", Encoding.UTF8.GetString(headinfo.user).Trim('\0'));
-                lblMemo.Text = string.Format("      Memo: {0}", Encoding.UTF8.GetString(headinfo.memo).Trim('\0'));
+                if (btloaddata.ImageKey == "stop")
+                {
+                    lblprog.Prog_Color = Color.LightGray;
+                    RefreshTestInformation();
+                    btloaddata.ImageKey = "save";
+                }
+                else
+                {
+                    if (lblprog.Prog_Color != Color.LightGray) lblprog.Prog_Color = Color.LightGray;
+                }
             }
         }
+
         private void ViewStatus()
         {
             stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
@@ -1835,44 +1968,59 @@ namespace ZiveLab.ZM
             TimeSpan ElapsedTime = TimeSpan.FromMilliseconds(chstat.RunTimeStamp);
             bool brun = gBZA.CheckStatusRun(chstat);
             bool bcalibMode = gBZA.CheckStatusCalibMode(chstat);
-            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type;
+            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
+            string str;
 
-            lblTestStatus.Text = GetTestStatus(chstat);
-            lblErrStatus.Text = GetErrStatus(chstat, brun);
-
-
-            if (techtype == enTechType.TECH_HFR)
+            if (gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
             {
-                gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetHFR(ref techhfr);
-                lblprog.Prog_Val = (int)(((chstat.RunTimeStamp * 0.001) / (double)techhfr.totaltime) * 1000.0);
-            }
-            else if (techtype == enTechType.TECH_PRR)
-            {
-                gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetPRR(ref techprr);
-                lblprog.Prog_Val = (int)(((chstat.RunTimeStamp * 0.001) / (double)techprr.totaltime) * 1000.0);
-            }
-            else if (techtype == enTechType.TECH_MON)
-            {
-                if((enEisState)chstat.eis_status.status == enEisState.mondelay)
-                {
-                    lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].ondelay) * 1000.0);
-                }
-                else
-                {
-                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetMON(ref techmon);
-                    lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)techmon.totaltime) * 1000.0);
-                }
-                
-            }
-            else if(techtype == enTechType.TECH_QIS)
-            {
-                gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetQIS(ref techqis);
-                lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
+                lblTestStatus.Text = string.Format(" Status: {0}", (enTestState.LoadData).GetDescription());
             }
             else
             {
-                gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetEIS(ref techeis);
-                lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
+                lblTestStatus.Text = GetTestStatus(chstat);
+            }
+
+            lblErrStatus.Text = GetErrStatus(chstat, brun);
+
+            if (gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
+            {
+                lblprog.Prog_Val = (int)((((double)gBZA.SifLnkLst[serial].MBZAIF.mresfile[sifch].datacount / (double)chstat.eis_status.rescount)) * 1000.0);
+            }
+            else
+            {
+                if (techtype == enTechType.TECH_HFR)
+                {
+                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetHFR(ref techhfr);
+                    lblprog.Prog_Val = (int)(((chstat.RunTimeStamp * 0.001) / (double)techhfr.totaltime) * 1000.0);
+                }
+                else if (techtype == enTechType.TECH_PRR)
+                {
+                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetPRR(ref techprr);
+                    lblprog.Prog_Val = (int)(((chstat.RunTimeStamp * 0.001) / (double)techprr.totaltime) * 1000.0);
+                }
+                else if (techtype == enTechType.TECH_MON)
+                {
+                    if ((enEisState)chstat.eis_status.status == enEisState.mondelay)
+                    {
+                        lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].ondelay) * 1000.0);
+                    }
+                    else
+                    {
+                        gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetMON(ref techmon);
+                        lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)techmon.totaltime) * 1000.0);
+                    }
+
+                }
+                else if (techtype == enTechType.TECH_QIS)
+                {
+                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetQIS(ref techqis);
+                    lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
+                }
+                else
+                {
+                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetEIS(ref techeis);
+                    lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
+                }
             }
 
             if (bcalibMode == true)
@@ -1881,23 +2029,34 @@ namespace ZiveLab.ZM
                 btloaddata.Enabled = false;
                 MenuTechchangeTechFile.Enabled = false;
                 bttech.Enabled = false;
-                btTechEdit.Enabled = false;
+                btTechEdit.Enabled = true;
             }
             else
             {
-                btstart.Enabled = true;
-                btTechEdit.Enabled = true;
-                if (brun)
+                if(gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
                 {
-                    btloaddata.Enabled = false;
+                    btstart.Enabled = false;
+                    btloaddata.Enabled = true;
                     MenuTechchangeTechFile.Enabled = false;
                     bttech.Enabled = false;
+                    btTechEdit.Enabled = true;
                 }
                 else
                 {
-                    btloaddata.Enabled = true;
-                    MenuTechchangeTechFile.Enabled = true;
-                    bttech.Enabled = true;
+                    btstart.Enabled = true;
+                    btTechEdit.Enabled = true;
+                    if (brun)
+                    {
+                        btloaddata.Enabled = false;
+                        MenuTechchangeTechFile.Enabled = false;
+                        bttech.Enabled = false;
+                    }
+                    else
+                    {
+                        btloaddata.Enabled = true;
+                        MenuTechchangeTechFile.Enabled = true;
+                        bttech.Enabled = true;
+                    }
                 }
            }
 
@@ -1905,8 +2064,8 @@ namespace ZiveLab.ZM
             {
                 if (btstart.ImageKey == "play")
                 {
-                    ViewInformation();
-                    InitGraphType();
+                    RefreshTestInformation();
+                    InitGraphType(true);
                     if (techtype == enTechType.TECH_MON)
                     {
                         lblprog.Prog_Color = Color.Yellow;
@@ -1939,22 +2098,46 @@ namespace ZiveLab.ZM
             }
             else
             {
+                
                 if (btstart.ImageKey == "stop")
                 {
                     lblprog.Prog_Color = Color.LightGray;
-                    ViewInformation();
+                    RefreshTestInformation();
                     btstart.ImageKey = "play";
                 }
                 else
                 {
-                    if (lblprog.Prog_Color != Color.LightGray) lblprog.Prog_Color = Color.LightGray;
+                    ViewReloadStatus();
+                    //if (lblprog.Prog_Color != Color.LightGray) lblprog.Prog_Color = Color.LightGray;
                 }
             }
 
 
+            
+
+            if (gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch].Length < 5)
+            {
+                str = "";
+                lblTech.Text = string.Format(" Tech. : {0}", str);
+            }
+            else
+            {
+                str = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch]);
+                lblTech.Text = string.Format(" Tech. : {0}", str);
+            }
+
+            if (gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch].Length < 5)
+            {
+                str = "";
+                lblResult.Text = string.Format(" Result: {0}", str);
+            }
+            else
+            {
+                str = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
+                lblResult.Text = string.Format(" Result: {0}", str);
+            }
+            lbldatacount.Text = string.Format("   Data: {0}({1})", chstat.eis_status.rescount, gBZA.SifLnkLst[serial].MBZAIF.mresfile[sifch].datacount);
             labelElapsedTime.Text = string.Format("Elapsed: {0,4:###0}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
-            lbldatacount.Text = string.Format("Data count: {0}", chstat.eis_status.rescount);
-           
 
             eZimType zimtype = (eZimType)chstat.ZimType; // (eZimType)(gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].info.cModel[0] - 0x30);
             double crngval = mrng.iac_rng[chstat.Iac_in_rngno].realmax;
@@ -1970,18 +2153,26 @@ namespace ZiveLab.ZM
             {
                 lblVdc.Text = string.Format("    Vdc: {0,8:###0.0##}KV", chstat.Vdc * 0.001);
             }
-            else
+            else if (chstat.Vdc >= 10.0)
             {
                 lblVdc.Text = string.Format("    Vdc: {0,8:###0.0##} V", chstat.Vdc);
+            }
+            else
+            {
+                lblVdc.Text = string.Format("    Vdc: {0,8:###0.0##}mV", chstat.Vdc * 1000.0);
             }
 
             if (chstat.Veoc >= 1000.0)
             {
-                lblVeoc.Text = string.Format("   Veoc: {0,8:###0.0##}KV", chstat.Veoc * 0.001);
+                lblVeoc.Text = string.Format("    Eoc: {0,8:###0.0##}KV", chstat.Veoc * 0.001);
+            }
+            else if (chstat.Veoc >= 10.0)
+            {
+                lblVeoc.Text = string.Format("    Eoc: {0,8:###0.0##} V", chstat.Veoc);
             }
             else
             {
-                lblVeoc.Text = string.Format("   Veoc: {0,8:###0.0##} V", chstat.Veoc);
+                lblVeoc.Text = string.Format("    Eoc: {0,8:###0.0##}mV", chstat.Veoc * 1000.0);
             }
 
             lblTemp.Text = string.Format("  Temp.: {0,8:###0.0##} °C", chstat.Temperature);
@@ -2098,6 +2289,10 @@ namespace ZiveLab.ZM
             lblTestStatus.ForeColor = GetTestStatusColor(chstat);
             lblErrStatus.ForeColor = GetErrorStatusColor(chstat, lblTestStatus.ForeColor);
 
+            lblTech.ForeColor = lblTestStatus.ForeColor;
+            lblResult.ForeColor = lblTestStatus.ForeColor;
+            lbldatacount.ForeColor = lblTestStatus.ForeColor;
+
             labelElapsedTime.ForeColor = lblTestStatus.ForeColor;
             lblRange.ForeColor = lblTestStatus.ForeColor;
             lblVeoc.ForeColor = lblTestStatus.ForeColor;
@@ -2113,27 +2308,7 @@ namespace ZiveLab.ZM
 
         private void RefreshRtView()
         {
-            if (rtsize == 0)
-            {
-                grprt.XAxes[0].Visible = false;
-                grprt.YAxes[0].Visible = false;
-                grprt.YAxes[1].Visible = false;
-            }
-            else
-            {
-                if (rtmode == 0)
-                {
-                    grprt.XAxes[0].Visible = true;
-                    grprt.YAxes[0].Visible = true;
-                    grprt.YAxes[1].Visible = false;
-                }
-                else
-                {
-                    grprt.XAxes[0].Visible = true;
-                    grprt.YAxes[0].Visible = true;
-                    grprt.YAxes[1].Visible = true;
-                }
-            }
+            
             if (rtmode == 0)
             {
                 grprt.Plots[0].Visible = true;
@@ -2163,183 +2338,855 @@ namespace ZiveLab.ZM
                 grprt.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.idx, gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.dv, 0, gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.count); // V
                 grprt.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.idx, gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.di, 0, gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.count); // I
             }
-
-            if (rtsize == 0)
-            {
-                grprt.XAxes[0].Visible = false;
-                grprt.YAxes[0].Visible = false;
-                grprt.YAxes[1].Visible = false;
-            }
-            else
-            {
-                if (rtmode == 0)
-                {
-                    grprt.XAxes[0].Visible = true;
-                    grprt.YAxes[0].Visible = true;
-                    grprt.YAxes[1].Visible = false;
-                }
-                else
-                {
-                    grprt.XAxes[0].Visible = true;
-                    grprt.YAxes[0].Visible = true;
-                    grprt.YAxes[1].Visible = true;
-                }
-            }
-
-            RefreshRtLegend();
         }
 
 
         private void RefreshGraphEIS()
         {
+            st_zim_rt rtgrp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+            double maxval;
+            double minval;
+            double cmpval;
+
+            int plotcount0 = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].Count;
+            int plotcount1 = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[1].Count;
+            int appendcount0 = 0;
+            int appendcount1 = 0;
+            if (plotcount0 == 0 && plotcount1 == 0) return;
+
+            if (plotcount0 == LastPlotPoint && plotcount1 == LastPlotPoint1) return;
+            int st0 = 0;
+            int st1 = 0;
+            if (plotcount0 < LastPlotPoint)
+            {
+                LastPlotPoint = 0;
+                st0 = 0;
+                grp1.Plots[0].ClearData();
+                grp2.Plots[0].ClearData();
+                grp2.Plots[1].ClearData();
+            }
+            else
+            {
+                st0 = LastPlotPoint;
+                appendcount0 = plotcount0 - LastPlotPoint;
+                LastPlotPoint = plotcount0;
+            }
+
+            if (plotcount1 < LastPlotPoint1)
+            {
+                LastPlotPoint1 = 0;
+                st1 = 0;
+                grp1.Plots[6].ClearData();
+                grp2.Plots[6].ClearData();
+                grp2.Plots[7].ClearData();
+            }
+            else
+            {
+                st1 = LastPlotPoint1;
+                appendcount1 = plotcount1 - LastPlotPoint1;
+                LastPlotPoint1 = plotcount1;
+            }
+
+            double[] tx = null;
+            double[] ty = null;
+            double[] ptx0 = new double[appendcount0];
+            double[] pty0 = new double[appendcount0];
+            double[] ptx1 = new double[appendcount1];
+            double[] pty1 = new double[appendcount1];
+            
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
             {
-                grp1.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].ly[0].ToArray());
+                if (appendcount0 > 0)
+                {
+                    tx = rtgrp.plot[0].lx[0].ToArray();
+                    ty = rtgrp.plot[0].ly[0].ToArray();
+                    Array.Copy(tx, st0, ptx0, 0, appendcount0);
+                    Array.Copy(ty, st0, pty0, 0, appendcount0);
+                    grp1.Plots[0].PlotXYAppend(ptx0, pty0);
+                    //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                }
+                if (appendcount1 > 0)
+                {
+                    tx = rtgrp.plot[0].lx[1].ToArray();
+                    ty = rtgrp.plot[0].ly[1].ToArray();
+                    Array.Copy(tx, st1, ptx1, 0, appendcount1);
+                    Array.Copy(ty, st1, pty1, 0, appendcount1);
+                    grp1.Plots[6].PlotXYAppend(ptx1, pty1);
+                    //grp1.Plots[6].PlotXY(rtgrp.plot[0].lx[1].ToArray(), rtgrp.plot[0].ly[1].ToArray());
+                }
+                
+                maxval = rtgrp.plot[0].Maxval[0];
+                minval = rtgrp.plot[0].Minval[0];
+                if (maxval < rtgrp.plot[0].Maxval[1])
+                {
+                    maxval = rtgrp.plot[0].Maxval[1];
+                }
+                if (minval > rtgrp.plot[0].Minval[1])
+                {
+                    minval = rtgrp.plot[0].Minval[1];
+                }
+
+                cmpval = Math.Abs(maxval);
+                if(cmpval < Math.Abs(minval))
+                {
+                    cmpval = Math.Abs(minval);
+                }
+                maxval = maxval + (cmpval * GrpSpaceRate);
+                minval = minval - (cmpval * GrpSpaceRate);
+                if(minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp1.YAxes[0].Range = new Range(minval, maxval);
+               
             }
 
             if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
-                grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+                if (appendcount0 > 0)
+                {
+                    tx = rtgrp.plot[2].lx[0].ToArray();
+                    ty = rtgrp.plot[2].ly[0].ToArray();
+                    Array.Copy(tx, st0, ptx0, 0, appendcount0);
+                    Array.Copy(ty, st0, pty0, 0, appendcount0);
+                    grp2.Plots[0].PlotXYAppend(ptx0, pty0);
+                    //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
+                }
+                if (appendcount1 > 0)
+                {
+                    tx = rtgrp.plot[2].lx[1].ToArray();
+                    ty = rtgrp.plot[2].ly[1].ToArray();
+                    Array.Copy(tx, st1, ptx1, 0, appendcount1);
+                    Array.Copy(ty, st1, pty1, 0, appendcount1);
+                    grp2.Plots[6].PlotXYAppend(ptx1, pty1);
+                    //grp2.Plots[6].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray());
+                }
+                
+                maxval = rtgrp.plot[2].Maxval[0];
+                minval = rtgrp.plot[2].Minval[0];
+                if (maxval < rtgrp.plot[2].Maxval[1])
+                {
+                    maxval = rtgrp.plot[2].Maxval[1];
+                }
+                if (minval > rtgrp.plot[2].Minval[1])
+                {
+                    minval = rtgrp.plot[2].Minval[1];
+                }
+
+                cmpval = Math.Abs(maxval);
+                if (cmpval < Math.Abs(minval))
+                {
+                    cmpval = Math.Abs(minval);
+                }
+                maxval = maxval + (cmpval * GrpSpaceRate);
+                minval = minval - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp2.YAxes[0].Range = new Range(minval, maxval);
+
+                if (appendcount0 > 0)
+                {
+                    tx = rtgrp.plot[3].lx[0].ToArray();
+                    ty = rtgrp.plot[3].ly[0].ToArray();
+                    Array.Copy(tx, st0, ptx0, 0, appendcount0);
+                    Array.Copy(ty, st0, pty0, 0, appendcount0);
+                    grp2.Plots[1].PlotXYAppend(ptx0, pty0);
+                    //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
+                }
+                if (appendcount1 > 0)
+                {
+                    tx = rtgrp.plot[3].lx[1].ToArray();
+                    ty = rtgrp.plot[3].ly[1].ToArray();
+                    Array.Copy(tx, st1, ptx1, 0, appendcount1);
+                    Array.Copy(ty, st1, pty1, 0, appendcount1);
+                    grp2.Plots[7].PlotXYAppend(ptx1, pty1);
+                    //grp2.Plots[7].PlotXY(rtgrp.plot[3].lx[1].ToArray(), rtgrp.plot[3].ly[1].ToArray());
+                }
+
+                maxval = rtgrp.plot[3].Maxval[0];
+                minval = rtgrp.plot[3].Minval[0];
+                if (maxval < rtgrp.plot[3].Maxval[1])
+                {
+                    maxval = rtgrp.plot[3].Maxval[1];
+                }
+                if (minval > rtgrp.plot[3].Minval[1])
+                {
+                    minval = rtgrp.plot[3].Minval[1];
+                }
+
+                cmpval = Math.Abs(maxval);
+                if (cmpval < Math.Abs(minval))
+                {
+                    cmpval = Math.Abs(minval);
+                }
+                maxval = maxval + (cmpval * GrpSpaceRate);
+                minval = minval - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp2.YAxes[1].Range = new Range(minval, maxval);
             }
         }
 
         private void RefreshGraphQIS()
         {
+            st_zim_rt rtgrp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+            double maxval;
+            double minval;
+            double cmpval;
+
+            int plotcount0 = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].Count;
+            int plotcount1 = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[1].Count;
+            int appendcount0 = 0;
+            int appendcount1 = 0;
+            if (plotcount0 == 0 && plotcount1 == 0) return;
+
+            if (plotcount0 == LastPlotPoint && plotcount1 == LastPlotPoint1) return;
+            int st0 = 0;
+            int st1 = 0;
+
+            if (plotcount0 < LastPlotPoint)
+            {
+                LastPlotPoint = 0;
+                st0 = 0;
+                grp1.Plots[0].ClearData();
+                grp2.Plots[0].ClearData();
+                grp2.Plots[1].ClearData();
+            }
+            else
+            {
+                st0 = LastPlotPoint;
+                appendcount0 = plotcount0 - LastPlotPoint;
+                LastPlotPoint = plotcount0;
+            }
+
+            if (plotcount1 < LastPlotPoint1)
+            {
+                LastPlotPoint1 = 0;
+                st1 = 0;
+                grp1.Plots[6].ClearData();
+                grp2.Plots[6].ClearData();
+                grp2.Plots[7].ClearData();
+            }
+            else
+            {
+                st1 = LastPlotPoint1;
+                appendcount1 = plotcount1 - LastPlotPoint1;
+                LastPlotPoint1 = plotcount1;
+            }
+
+            double[] tx = null;
+            double[] ty = null;
+            double[] ptx0 = new double[appendcount0];
+            double[] pty0 = new double[appendcount0];
+            double[] ptx1 = new double[appendcount1];
+            double[] pty1 = new double[appendcount1];
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
             {
-                grp1.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].ly[0].ToArray());
+                if(appendcount0 > 0)
+                {
+                    tx = rtgrp.plot[0].lx[0].ToArray();
+                    ty = rtgrp.plot[0].ly[0].ToArray();
+                    Array.Copy(tx, st0, ptx0, 0, appendcount0);
+                    Array.Copy(ty, st0, pty0, 0, appendcount0);
+                    grp1.Plots[0].PlotXYAppend(ptx0, pty0);
+                    //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                }
+                if (appendcount1 > 0)
+                {
+                    tx = rtgrp.plot[0].lx[1].ToArray();
+                    ty = rtgrp.plot[0].ly[1].ToArray();
+                    Array.Copy(tx, st1, ptx1, 0, appendcount1);
+                    Array.Copy(ty, st1, pty1, 0, appendcount1);
+                    grp1.Plots[6].PlotXYAppend(ptx1, pty1);
+                    //grp1.Plots[6].PlotXY(rtgrp.plot[0].lx[1].ToArray(), rtgrp.plot[0].ly[1].ToArray());
+                }
+                
+                maxval = rtgrp.plot[0].Maxval[0];
+                minval = rtgrp.plot[0].Minval[0];
+                if (maxval < rtgrp.plot[0].Maxval[1])
+                {
+                    maxval = rtgrp.plot[0].Maxval[1];
+                }
+                if (minval > rtgrp.plot[0].Minval[1])
+                {
+                    minval = rtgrp.plot[0].Minval[1];
+                }
+
+                cmpval = Math.Abs(maxval);
+                if (cmpval < Math.Abs(minval))
+                {
+                    cmpval = Math.Abs(minval);
+                }
+                maxval = maxval + (cmpval * GrpSpaceRate);
+                minval = minval - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp1.YAxes[0].Range = new Range(minval, maxval);
             }
 
             if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
-                grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+                if (appendcount0 > 0)
+                {
+                    tx = rtgrp.plot[2].lx[0].ToArray();
+                    ty = rtgrp.plot[2].ly[0].ToArray();
+                    Array.Copy(tx, st0, ptx0, 0, appendcount0);
+                    Array.Copy(ty, st0, pty0, 0, appendcount0);
+                    grp2.Plots[0].PlotXYAppend(ptx0, pty0);
+                    //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
+                }
+                if (appendcount1 > 0)
+                {
+                    tx = rtgrp.plot[2].lx[1].ToArray();
+                    ty = rtgrp.plot[2].ly[1].ToArray();
+                    Array.Copy(tx, st1, ptx1, 0, appendcount1);
+                    Array.Copy(ty, st1, pty1, 0, appendcount1);
+                    grp2.Plots[6].PlotXYAppend(ptx1, pty1);
+                    //grp2.Plots[6].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray());
+                }
+                
+                maxval = rtgrp.plot[2].Maxval[0];
+                minval = rtgrp.plot[2].Minval[0];
+                if (maxval < rtgrp.plot[2].Maxval[1])
+                {
+                    maxval = rtgrp.plot[2].Maxval[1];
+                }
+                if (minval > rtgrp.plot[2].Minval[1])
+                {
+                    minval = rtgrp.plot[2].Minval[1];
+                }
+
+                cmpval = Math.Abs(maxval);
+                if (cmpval < Math.Abs(minval))
+                {
+                    cmpval = Math.Abs(minval);
+                }
+                maxval = maxval + (cmpval * GrpSpaceRate);
+                minval = minval - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp2.YAxes[0].Range = new Range(minval, maxval);
+
+                if (appendcount0 > 0)
+                {
+                    tx = rtgrp.plot[3].lx[0].ToArray();
+                    ty = rtgrp.plot[3].ly[0].ToArray();
+                    grp2.Plots[1].PlotXYAppend(tx, ty, st0, appendcount0);
+                    //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
+                }
+                if (appendcount1 > 0)
+                {
+                    tx = rtgrp.plot[3].lx[1].ToArray();
+                    ty = rtgrp.plot[3].ly[1].ToArray();
+                    grp2.Plots[7].PlotXYAppend(tx, ty, st1, appendcount1);
+                    //grp2.Plots[7].PlotXY(rtgrp.plot[3].lx[1].ToArray(), rtgrp.plot[3].ly[1].ToArray());
+                }
+                
+                maxval = rtgrp.plot[3].Maxval[0];
+                minval = rtgrp.plot[3].Minval[0];
+                if (maxval < rtgrp.plot[3].Maxval[1])
+                {
+                    maxval = rtgrp.plot[3].Maxval[1];
+                }
+                if (minval > rtgrp.plot[3].Minval[1])
+                {
+                    minval = rtgrp.plot[3].Minval[1];
+                }
+
+                cmpval = Math.Abs(maxval);
+                if (cmpval < Math.Abs(minval))
+                {
+                    cmpval = Math.Abs(minval);
+                }
+                maxval = maxval + (cmpval * GrpSpaceRate);
+                minval = minval - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp2.YAxes[1].Range = new Range(minval, maxval);
             }
         }
 
         private void RefreshGraphHFR()
         {
+            st_zim_rt rtgrp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+            double maxval;
+            double minval;
+            double cmpval;
+
+            int plotcount = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].Count;
+            int appendcount = 0;
+            if (plotcount == 0) return;
+            if (plotcount == LastPlotPoint) return;
+            int st = 0;
+
+            if (plotcount < LastPlotPoint)
+            {
+                st = 0;
+                LastPlotPoint = 0;
+                grp1.ClearData();
+                grp2.ClearData();
+            }
+            else
+            {
+                st = LastPlotPoint;
+                appendcount = plotcount - LastPlotPoint;
+                LastPlotPoint = plotcount;
+            }
+
+            double[] tx = null;
+            double[] ty = null;
+            double[] ptx = new double[appendcount];
+            double[] pty = new double[appendcount];
+            double time0 = -1.0;
+            double time1 = -1.0;
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
             {
-                grp1.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].ly[0].ToArray());
-                grp1.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].ly[0].ToArray());
+                tx = rtgrp.plot[0].lx[0].ToArray();
+                ty = rtgrp.plot[0].ly[0].ToArray();
+                Array.Copy(tx, st, ptx, 0, appendcount);
+                Array.Copy(ty, st, pty, 0, appendcount);
+                time0 = ptx[appendcount - 1];
+                grp1.Plots[0].PlotXYAppend(ptx, pty);
+                //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+
+                cmpval = Math.Abs(rtgrp.plot[0].Maxval[0]);
+                if (cmpval < Math.Abs(rtgrp.plot[0].Minval[0]))
+                {
+                    cmpval = Math.Abs(rtgrp.plot[0].Minval[0]);
+                }
+
+                maxval = rtgrp.plot[0].Maxval[0] + (cmpval * GrpSpaceRate);
+                minval = rtgrp.plot[0].Minval[0] - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp1.YAxes[0].Range = new Range(minval, maxval);
+
+                tx = rtgrp.plot[1].lx[0].ToArray();
+                ty = rtgrp.plot[1].ly[0].ToArray();
+                Array.Copy(tx, st, ptx, 0, appendcount);
+                Array.Copy(ty, st, pty, 0, appendcount);
+                grp1.Plots[1].PlotXYAppend(ptx, pty);
+                //grp1.Plots[1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
+
+                cmpval = Math.Abs(rtgrp.plot[1].Maxval[0]);
+                if (cmpval < Math.Abs(rtgrp.plot[1].Minval[0]))
+                {
+                    cmpval = Math.Abs(rtgrp.plot[1].Minval[0]);
+                }
+
+                maxval = rtgrp.plot[1].Maxval[0] + (cmpval * GrpSpaceRate);
+                minval = rtgrp.plot[1].Minval[0] - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp1.YAxes[1].Range = new Range(minval, maxval);
+
             }
 
             if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
-                grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+                tx = rtgrp.plot[2].lx[0].ToArray();
+                ty = rtgrp.plot[2].ly[0].ToArray();
+                Array.Copy(tx, st, ptx, 0, appendcount);
+                Array.Copy(ty, st, pty, 0, appendcount);
+                time1 = ptx[appendcount - 1];
+                grp2.Plots[0].PlotXYAppend(ptx, pty);
+                //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
+                cmpval = Math.Abs(rtgrp.plot[2].Maxval[0]);
+                if (cmpval < Math.Abs(rtgrp.plot[2].Minval[0]))
+                {
+                    cmpval = Math.Abs(rtgrp.plot[2].Minval[0]);
+                }
+
+                maxval = rtgrp.plot[2].Maxval[0] + (cmpval * GrpSpaceRate);
+                minval = rtgrp.plot[2].Minval[0] - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp2.YAxes[0].Range = new Range(minval, maxval);
+
+                tx = rtgrp.plot[3].lx[0].ToArray();
+                ty = rtgrp.plot[3].ly[0].ToArray();
+                Array.Copy(tx, st, ptx, 0, appendcount);
+                Array.Copy(ty, st, pty, 0, appendcount);
+                grp2.Plots[1].PlotXYAppend(ptx, pty);
+                //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
+
+                cmpval = Math.Abs(rtgrp.plot[3].Maxval[0]);
+                if (cmpval < Math.Abs(rtgrp.plot[3].Minval[0]))
+                {
+                    cmpval = Math.Abs(rtgrp.plot[3].Minval[0]);
+                }
+
+                maxval = rtgrp.plot[3].Maxval[0] + (cmpval * GrpSpaceRate);
+                minval = rtgrp.plot[3].Minval[0] - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp2.YAxes[1].Range = new Range(minval, maxval);
             }
 
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3 || GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                RefreshGraphAxisTimeView();
+                RefreshGraphAxisTimeView(time0, time1);
             }
         }
-
-        private void RefreshGraphAxisTimeView()
+        
+        private void RefreshGraphAxisTimeView(double time0, double time1)
         {
-            int cnt = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].Count;
-            if (cnt < 1) return;
-
-            double value = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0][cnt - 1];
-
-
-            if (formatmode > 0)
+            double value = 0.0;
+            
+            if(xTimemode0 == true && time0 >= 0.0)
             {
-                if (value < 60)
+                value = time0;
+                if (value < 60.0)
                 {
-                    formatmode = 0;
                     grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-                    grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-                    return;
+                }
+                else if (value < 3600.0)
+                {
+                    grp1.XAxes[0].MajorDivisions.LabelFormat = fs_mm;
+                }
+                else if (value < 86400)
+                {
+                    grp1.XAxes[0].MajorDivisions.LabelFormat = fs_hh;
+                }
+                else
+                {
+                    grp1.XAxes[0].MajorDivisions.LabelFormat = fs_dd;
                 }
             }
-
-            if (formatmode == 0)
+            if (xTimemode1 == true && time1 >= 0.0)
             {
-                if (value > 60)
+                value = time1;
+                if (value < 60.0)
                 {
-                    formatmode = 1;
-                    grp1.XAxes[0].MajorDivisions.LabelFormat = fs_mm;
+                    grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+                }
+                else if (value < 3600.0)
+                {
                     grp2.XAxes[0].MajorDivisions.LabelFormat = fs_mm;
                 }
-            }
-            else if (formatmode == 1)
-            {
-                if (value > 3600)
+                else if (value < 86400)
                 {
-                    formatmode = 2;
-                    grp1.XAxes[0].MajorDivisions.LabelFormat = fs_hh;
                     grp2.XAxes[0].MajorDivisions.LabelFormat = fs_hh;
                 }
-            }
-            else if (formatmode == 2)
-            {
-                if (value > 86400)
+                else
                 {
-                    formatmode = 3;
-                    grp1.XAxes[0].MajorDivisions.LabelFormat = fs_dd;
                     grp2.XAxes[0].MajorDivisions.LabelFormat = fs_dd;
                 }
             }
+            
         }
         private void RefreshGraphPRR()
         {
             int i;
-            var grp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch];
-           
-            if (grp.arrcnt == 0) return;
+            st_zim_rt rtgrp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+            //double maxval;
+            //double minval;
+            //double cmpval;
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt == 0) return;
 
-       
-            for (i = 0; i < 3; i++)
+            int plotcount = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt-1].Count;
+            int appendcount = 0;
+            int st = 0;
+            if (plotcount == 0) return;
+            if (plotcount == LastPlotPoint) return;
+
+
+            if (plotcount < LastPlotPoint)
+            {
+                LastPlotPoint = 0;
+                st = LastPlotPoint;
+                grp1.ClearData();
+                grp2.ClearData();
+            }
+            else
+            {
+                st = LastPlotPoint;
+                appendcount = plotcount - LastPlotPoint;
+                LastPlotPoint = plotcount;
+            }
+
+            double[] tx = null;
+            double[] ty = null;
+            double[] ptx = new double[appendcount];
+            double[] pty = new double[appendcount];
+            double time0 = -1.0;
+            double time1 = -1.0;
+
+            for (i = 0; i < gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt; i++)
             {
                 if (i < 2)
                 {
                     if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
-                    { 
-                        grp1.Plots[i].PlotXY(grp.rtgrp.plot[0].lx[i].ToArray(), grp.rtgrp.plot[0].ly[i].ToArray());
-                        //grp1.Plots[i + 3].PlotXY(grp.rtgrp.plot[1].lx[i].ToArray(), grp.rtgrp.plot[1].ly[i].ToArray());
+                    {
+                        tx = rtgrp.plot[0].lx[i].ToArray();
+                        ty = rtgrp.plot[0].ly[i].ToArray();
+                        Array.Copy(tx, st, ptx, 0, appendcount);
+                        Array.Copy(ty, st, pty, 0, appendcount);
+                        grp1.Plots[i].PlotXYAppend(ptx, pty);
+                        time0 = ptx[appendcount - 1];
+                        //grp1.Plots[i].PlotXY(rtgrp.plot[0].lx[i].ToArray(), rtgrp.plot[0].ly[i].ToArray());
+
+                        /*
+                        tx = rtgrp.plot[1].lx[i].ToArray();
+                        ty = rtgrp.plot[1].ly[i].ToArray();
+                        Array.Copy(tx, st, ptx, 0, appendcount);
+                        Array.Copy(ty, st, pty, 0, appendcount);
+                        grp1.Plots[i+3].PlotXYAppend(ptx, pty);
+                        //grp1.Plots[i + 3].PlotXY(grp.rtgrp.plot[1].lx[i].ToArray(), grp.rtgrp.plot[1].ly[i].ToArray(), 0, rtgrp.plot[1].ly[i].Count);
+                        */
                     }
                 }
+
                 if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
                 {
-                    grp2.Plots[i].PlotXY(grp.rtgrp.plot[2].lx[i].ToArray(), grp.rtgrp.plot[2].ly[i].ToArray());
-                    grp2.Plots[i + 3].PlotXY(grp.rtgrp.plot[3].lx[i].ToArray(), grp.rtgrp.plot[3].ly[i].ToArray());
+                    tx = rtgrp.plot[2].lx[i].ToArray();
+                    ty = rtgrp.plot[2].ly[i].ToArray();
+                    Array.Copy(tx, st, ptx, 0, appendcount);
+                    Array.Copy(ty, st, pty, 0, appendcount);
+                    grp2.Plots[i].PlotXYAppend(ptx, pty);
+                    time1 = ptx[appendcount - 1];
+                    //grp2.Plots[i].PlotXY(rtgrp.plot[2].lx[i].ToArray(), rtgrp.plot[2].ly[i].ToArray());
+
+                    tx = rtgrp.plot[3].lx[i].ToArray();
+                    ty = rtgrp.plot[3].ly[i].ToArray();
+                    Array.Copy(tx, st, ptx, 0, appendcount);
+                    Array.Copy(ty, st, pty, 0, appendcount);
+                    grp2.Plots[i + 3].PlotXYAppend(ptx, pty);
+
+                    //grp2.Plots[i + 3].PlotXY(rtgrp.plot[3].lx[i].ToArray(), rtgrp.plot[3].ly[i].ToArray());
                 }
             }
+            /*
+            maxval = rtgrp.plot[0].Maxval[0];
+            if (maxval < rtgrp.plot[0].Maxval[1]) maxval = rtgrp.plot[0].Maxval[1];
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt > 2)
+            {
+                if (maxval < rtgrp.plot[0].Maxval[2]) maxval = rtgrp.plot[0].Maxval[2];
+            }
+
+            minval = rtgrp.plot[0].Minval[0];
+            if (minval > rtgrp.plot[0].Minval[1]) minval = rtgrp.plot[0].Minval[1];
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt > 2)
+            {
+                if (minval > rtgrp.plot[0].Minval[2]) minval = rtgrp.plot[0].Minval[2];
+            }
+                
+
+
+            cmpval = Math.Abs(maxval);
+            if (cmpval < Math.Abs(minval))
+            {
+                cmpval = Math.Abs(minval);
+            }
+
+            maxval = maxval + (cmpval * GrpSpaceRate);
+            minval = maxval - (cmpval * GrpSpaceRate);
+            if (minval == maxval && maxval == 0.0)
+            {
+                minval = -1.0;
+                maxval = +1.0;
+            }
+            grp1.YAxes[0].Range = new Range(minval, maxval);
+
+            maxval = rtgrp.plot[2].Maxval[0];
+            if (maxval < rtgrp.plot[2].Maxval[1]) maxval = rtgrp.plot[2].Maxval[1];
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt > 2)
+            {
+                if (maxval < rtgrp.plot[2].Maxval[2]) maxval = rtgrp.plot[2].Maxval[2];
+            }
+            
+            minval = rtgrp.plot[2].Minval[0];
+            if (minval > rtgrp.plot[2].Minval[1]) minval = rtgrp.plot[2].Minval[1];
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt > 2)
+            {
+                if (minval > rtgrp.plot[2].Minval[2]) minval = rtgrp.plot[2].Minval[2];
+            }
+
+            cmpval = Math.Abs(maxval);
+            if (cmpval < Math.Abs(minval))
+            {
+                cmpval = Math.Abs(minval);
+            }
+
+            maxval = maxval + (cmpval * GrpSpaceRate);
+            minval = maxval - (cmpval * GrpSpaceRate);
+            if (minval == maxval && maxval == 0.0)
+            {
+                minval = -1.0;
+                maxval = +1.0;
+            }
+            grp2.YAxes[0].Range = new Range(minval, maxval);
+
+            maxval = rtgrp.plot[3].Maxval[0];
+            if (maxval < rtgrp.plot[3].Maxval[1]) maxval = rtgrp.plot[3].Maxval[1];
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt > 2)
+            {
+                if (maxval < rtgrp.plot[3].Maxval[2]) maxval = rtgrp.plot[3].Maxval[2];
+            }
+
+            minval = rtgrp.plot[3].Minval[0];
+            if (minval > rtgrp.plot[3].Minval[1]) minval = rtgrp.plot[3].Minval[1];
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt > 2)
+            {
+                if (minval > rtgrp.plot[3].Minval[2]) minval = rtgrp.plot[3].Minval[2];
+            }
+                
+
+            cmpval = Math.Abs(maxval);
+            if (cmpval < Math.Abs(minval))
+            {
+                cmpval = Math.Abs(minval);
+            }
+
+            maxval = maxval + (cmpval * GrpSpaceRate);
+            minval = maxval - (cmpval * GrpSpaceRate);
+            if (minval == maxval && maxval == 0.0)
+            {
+                minval = -1.0;
+                maxval = +1.0;
+            }
+            grp2.YAxes[1].Range = new Range(minval, maxval);
+            */
 
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3 || GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                RefreshGraphAxisTimeView();
+                RefreshGraphAxisTimeView(time0, time1);
             }
 
         }
 
         private void RefreshGraphMON()
         {
+            st_zim_rt rtgrp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+            double maxval;
+            double minval;
+            double cmpval;
+
+            int plotcount = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].ly[0].Count;
+            int appendcount = 0;
+            int st = 0;
+            if (plotcount == 0) return;
+            if (plotcount == LastPlotPoint) return;
+            if (plotcount < LastPlotPoint)
+            {
+                LastPlotPoint = 0;
+                st = LastPlotPoint;
+                grp1.ClearData();
+                grp2.ClearData();
+            }
+            else
+            {
+                st = LastPlotPoint;
+                appendcount = plotcount - LastPlotPoint;
+                LastPlotPoint = plotcount;
+            }
+
+            double[] tx = null;
+            double[] ty = null;
+            double[] ptx = new double[appendcount];
+            double[] pty = new double[appendcount];
+            double time0 = -1.0;
+            double time1 = -1.0;
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
             {
-                grp1.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[0].ly[0].ToArray());
-                grp1.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[1].ly[0].ToArray());
+                tx = rtgrp.plot[0].lx[0].ToArray();
+                ty = rtgrp.plot[0].ly[0].ToArray();
+                Array.Copy(tx, st, ptx, 0, appendcount);
+                Array.Copy(ty, st, pty, 0, appendcount);
+                time0 = ptx[appendcount - 1];
+                grp1.Plots[0].PlotXYAppend(ptx, pty);
+
+                //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                cmpval = Math.Abs(rtgrp.plot[0].Maxval[0]);
+                if (cmpval < Math.Abs(rtgrp.plot[0].Minval[0]))
+                {
+                    cmpval = Math.Abs(rtgrp.plot[0].Minval[0]);
+                }
+                
+                maxval = rtgrp.plot[0].Maxval[0] + (cmpval * GrpSpaceRate);
+                minval = rtgrp.plot[0].Minval[0] - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp1.YAxes[0].Range = new Range(minval, maxval);
+
+                tx = rtgrp.plot[1].lx[0].ToArray();
+                ty = rtgrp.plot[1].ly[0].ToArray();
+                Array.Copy(tx, st, ptx, 0, appendcount);
+                Array.Copy(ty, st, pty, 0, appendcount);
+                grp1.Plots[1].PlotXYAppend(ptx, pty);
+                //grp1.Plots[1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
+
+                cmpval = Math.Abs(rtgrp.plot[1].Maxval[0]);
+                if (cmpval < Math.Abs(rtgrp.plot[1].Minval[0]))
+                {
+                    cmpval = Math.Abs(rtgrp.plot[1].Minval[0]);
+                }
+
+                maxval = rtgrp.plot[1].Maxval[0] + (cmpval * GrpSpaceRate);
+                minval = rtgrp.plot[1].Minval[0] - (cmpval * GrpSpaceRate);
+                if (minval == maxval && maxval == 0.0)
+                {
+                    minval = -1.0;
+                    maxval = +1.0;
+                }
+                grp1.YAxes[1].Range = new Range(minval, maxval);
             }
             /*
             if (GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
-                grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+                tx = rtgrp.plot[2].lx[0].ToArray();
+                ty = rtgrp.plot[2].ly[0].ToArray();
+                grp2.Plots[0].PlotXYAppend(tx, ty, plotcount, appendcount);
+                //grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
+
+                tx = rtgrp.plot[3].lx[0].ToArray();
+                ty = rtgrp.plot[3].ly[0].ToArray();
+                grp2.Plots[1].PlotXYAppend(tx, ty, plotcount, appendcount);
+                //grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
             }
             */
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3 || GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
             {
-                RefreshGraphAxisTimeView();
+                RefreshGraphAxisTimeView(time0 , time1);
             }
         }
-
+        
         private void RefreshGraph()
         {
-            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].type;
+            
+            enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
+
             if (techtype == enTechType.TECH_HFR)
             {
                 RefreshGraphHFR();
@@ -2384,21 +3231,6 @@ namespace ZiveLab.ZM
             RefreshRtView();
         }
 
-        private void RtMenuGraphModeDefault_Click(object sender, EventArgs e)
-        {
-            rtsize = 0;
-            RtMenuGraphModeMax.Checked = false;
-            ChgRTGraphSize();
-            
-        }
-
-        private void RtMenuGraphModeMax_Click(object sender, EventArgs e)
-        {
-            rtsize = 1;
-            RtMenuGraphModeDefault.Checked = false;
-            ChgRTGraphSize();
-        }
-
         private void RtMenuGraphLine_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.RtGrp_Plot_ViewLine = RtMenuGraphLine.Checked;
@@ -2436,7 +3268,9 @@ namespace ZiveLab.ZM
             if (RtMenuGraphLegend.Checked == true) RtMenuGraphLegend.Checked = false;
             else RtMenuGraphLegend.Checked = true;
 
-            RefreshRtLegend();
+            Rtlegend.Visible = RtMenuGraphLegend.Checked;
+            Properties.Settings.Default.RtGrpLegendView = MenuPlotLegend1.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void RtMenuGraphGrid_Click(object sender, EventArgs e)
@@ -3081,29 +3915,29 @@ namespace ZiveLab.ZM
 
             sfilt = "Galvanostatic EIS (*.eis) | *.eis|";
             sfilt += "Galvanostatic HFR (*.hfr) |*.hfr|";
-            sfilt += "Pseudo Rs Rp mearsurement (*.prr) | *.prr|";
-            sfilt += "Vdc/Temp. monitor (*.vtm) | *.vtm|";
-            sfilt += "Quick galvanostatic EIS (*.eis) | *.eis";
+            sfilt += "Pseudo Rs Rp (*.prr) | *.prr|";
+            sfilt += "V/T monitor (*.vtm) | *.vtm|";
+            sfilt += "Quick galvanostatic EIS (*.qis) | *.Qis";
             dlg.Title = string.Format("Selection of technique file to be used for channel {0}.", ch + 1);
             dlg.Filter = sfilt;
-            if (sext == "HFR")
+            if (sext == ".HFR")
             {
                 dlg.DefaultExt = "hfr";
                 dlg.FilterIndex = 2;
             }
-            else if (sext == "PRR")
+            else if (sext == ".PRR")
             {
                 dlg.DefaultExt = "prr";
                 dlg.FilterIndex = 3;
             }
-            else if (sext == "VTM")
+            else if (sext == ".VTM")
             {
-                dlg.DefaultExt = "prr";
+                dlg.DefaultExt = "vtm";
                 dlg.FilterIndex = 4;
             }
-            else if (sext == "QIS")
+            else if (sext == ".QIS")
             {
-                dlg.DefaultExt = "prr";
+                dlg.DefaultExt = "qis";
                 dlg.FilterIndex = 5;
             }
             else
@@ -3122,11 +3956,9 @@ namespace ZiveLab.ZM
                 var Value = gBZA.ChLnkLst[sch];
                 Value.mChInf.FileCond = filename;
                 gBZA.ChLnkLst[sch] = Value;
+                gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
 
                 gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch] = filename;
-
-
-                gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
             }
         }
 
@@ -3137,7 +3969,7 @@ namespace ZiveLab.ZM
         private void OpenTechFile(string filename)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename);
-            if (gBZA.appcfg.TechLocation == new Point(0, 0) || gBZA.appcfg.TechLocation.X  == -32000 || gBZA.appcfg.TechLocation.Y == -32000)
+            if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
             }
@@ -3321,7 +4153,7 @@ namespace ZiveLab.ZM
         private void OpenTechFile(int ch, string filename, eZimType type = eZimType.UNKNOWN)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
-            if (gBZA.appcfg.TechLocation == new Point(0, 0) || gBZA.appcfg.TechLocation.X == -32000 || gBZA.appcfg.TechLocation.Y == -32000)
+            if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
             }
@@ -3382,11 +4214,21 @@ namespace ZiveLab.ZM
 
         private void btloaddata_Click(object sender, EventArgs e)
         {
+            if (gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
+            {
+                if (MessageBox.Show("Are you sure you want to end the load process ?", gBZA.sMsgTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    MBZA_MapUtil.LoadDataStop(serial, sifch);
+                }
+                return;
+            }
+            
             if (gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch].eis_status.rescount < 1)
             {
                 gBZA.ShowInfoBox("The requested operation cannot proceed because test result data is not available.");
                 return;
             }
+
 
             SaveFileDialog saveDlg = new SaveFileDialog();
 
@@ -3408,15 +4250,14 @@ namespace ZiveLab.ZM
             gBZA.appcfg.PathData = Path.GetDirectoryName(saveDlg.FileName);
             gBZA.appcfg.Save();
 
-            
-
             var Value = gBZA.ChLnkLst[sch];
             Value.mChInf.FileResult = saveDlg.FileName;
             gBZA.ChLnkLst[sch] = Value;
-
             gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
-
             gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch] = saveDlg.FileName;
+
+            MBZA_MapUtil.LoadDataStart(serial, sifch);
+
         }
 
         private void grp1_Resize(object sender, EventArgs e)
@@ -3630,7 +4471,7 @@ namespace ZiveLab.ZM
         {
             if (GrpCtrlMode1 > 3)
             {
-                if (this.tabgrp.TabPages.Contains(this.tabPage3) == false)
+                if (this.tabgrp.TabPages.Contains(this.TabGrp2) == false)
                 {
                     lblcsfreq1.Visible = false;
                     grp1.CaptionVisible = false;
@@ -3680,7 +4521,7 @@ namespace ZiveLab.ZM
         {
             if (GrpCtrlMode2 > 3)
             {
-                if (this.tabgrp.TabPages.Contains(this.tabPage3) == false)
+                if (this.tabgrp.TabPages.Contains(this.TabGrp2) == false)
                 {
                     lblcsfreq2.Visible = false;
                     grp2.CaptionVisible = false;

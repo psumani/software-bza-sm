@@ -165,7 +165,7 @@ namespace ZiveLab.ZM
                 usefile = false;
                 return;
             }
-
+            bool ChkCalib = ChkEisCalInf(rng);
             if (mlogfile.Open(sLogDataFile) == true)
             {
                 if (mlogfile.datacount > 0)
@@ -177,6 +177,7 @@ namespace ZiveLab.ZM
                     {
                         MessageBox.Show("Failed to read all data.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    mRtData.Initialize(mlogfile.tmphead.tech);
                     mRtData.Append(data, DataCount, ref oldcycel);
                     grdlist.Rows.Count = DataCount + 2;
                     st_zim_zPacket mpacket = new st_zim_zPacket(0);
@@ -188,14 +189,10 @@ namespace ZiveLab.ZM
                         mpacket.img = data[i].img;
                         mpacket.mag = Math.Sqrt(mpacket.real * mpacket.real + mpacket.img * mpacket.img);
                         mpacket.phase = Math.Atan2(mpacket.img, mpacket.real) * 180.0 / DeviceConstants.PI;
-
-                        mRtGrp.plot[0].lx[0].Add(mpacket.real);
-                        mRtGrp.plot[0].ly[0].Add(mpacket.img * -1.0);
-
-                        mRtGrp.plot[2].lx[0].Add(mpacket.freq);
-                        mRtGrp.plot[2].ly[0].Add(mpacket.mag);
-                        mRtGrp.plot[3].lx[0].Add(mpacket.freq);
-                        mRtGrp.plot[3].ly[0].Add(mpacket.phase);
+                        if (ChkCalib == false)
+                        {
+                            
+                         }
 
                         listPacket.Add(mpacket);
 
@@ -208,16 +205,27 @@ namespace ZiveLab.ZM
 
                         grdlist[i + 2, 4] = GetDataString(mpacket.mag);
                         grdlist[i + 2, 5] = GetDataString(mpacket.phase);
+                        if (ChkCalib == false)
+                        {
+                            mRtGrp.plot[0].lx[0].Add(mpacket.real);
+                            mRtGrp.plot[0].ly[0].Add(mpacket.img * -1.0);
 
-                        grdlist[i + 2, 6] = GetDataString(mpacket.real);
-                        grdlist[i + 2, 7] = GetDataString(mpacket.img);
+                            mRtGrp.plot[2].lx[0].Add(mpacket.freq);
+                            mRtGrp.plot[2].ly[0].Add(mpacket.mag);
+                            mRtGrp.plot[3].lx[0].Add(mpacket.freq);
+                            mRtGrp.plot[3].ly[0].Add(mpacket.phase);
 
-                        grdlist[i + 2, 8] = GetDataString(mpacket.mag);
-                        grdlist[i + 2, 9] = GetDataString(mpacket.phase);
+                            grdlist[i + 2, 6] = GetDataString(mpacket.real);
+                            grdlist[i + 2, 7] = GetDataString(mpacket.img);
+
+                            grdlist[i + 2, 8] = GetDataString(mpacket.mag);
+                            grdlist[i + 2, 9] = GetDataString(mpacket.phase);
+                        }
                     }
 
-                    if (ChkEisCalInf(rng) == true)
+                    if (ChkCalib)
                     {
+                        mRtGrp.Initialize();
                         ProcApplyFitting(rng);
                     }
                    
@@ -972,7 +980,7 @@ namespace ZiveLab.ZM
         private void RefreshGraphEIS()
         {
 
-            st_zim_rt rtgrp;
+            st_zim_rt rtgrp = new st_zim_rt();
 
             if (usefile == true)
             {
@@ -980,12 +988,17 @@ namespace ZiveLab.ZM
             }
             else
             {
-                rtgrp = gBZA.SifLnkLst[Serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+                if ((enTechType)gBZA.SifLnkLst[Serial].MBZAIF.Oldtech[sifch].type == enTechType.TECH_EIS &&
+                      gBZA.SifLnkLst[Serial].MBZAIF.OldCondfilename[sifch] == gBZA.SifLnkLst[Serial].MBZAIF.calcondfilename[sifch])
+                {
+                    rtgrp = gBZA.SifLnkLst[Serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+                }
             }
+
 
             grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
             grp1.Plots[1].PlotXY(mRtGrp.plot[0].lx[0].ToArray(), mRtGrp.plot[0].ly[0].ToArray());
-
+            grp1.Plots[0].Visible = true;
             grp1.Plots[1].Visible = true;
             
 
@@ -996,6 +1009,7 @@ namespace ZiveLab.ZM
             grp2.Plots[2].PlotXY(mRtGrp.plot[2].lx[0].ToArray(), mRtGrp.plot[2].ly[0].ToArray());
             grp2.Plots[3].PlotXY(mRtGrp.plot[3].lx[0].ToArray(), mRtGrp.plot[3].ly[0].ToArray());
 
+            grp2.Plots[0].Visible = true;
             grp2.Plots[1].Visible = true;
             grp2.Plots[2].Visible = true;
             grp2.Plots[3].Visible = true;
@@ -1173,62 +1187,71 @@ namespace ZiveLab.ZM
             if (usefile == true)
             {
                 rtgrp = mRtData.rtgrp;
+                if (rtgrp.plot[3].ly[0].Count != DataCount)
+                {
+                    DataCount = rtgrp.plot[3].ly[0].Count;
+                    RefreshGraphEIS();
+                }
             }
             else
             {
-                rtgrp = gBZA.SifLnkLst[Serial].MBZAIF.mChRtGrp[sifch].rtgrp;
-            }
-
-
-            if (rtgrp.plot[0].lx[0].Count != DataCount)
-            {
-                DataCount = rtgrp.plot[0].lx[0].Count;
-
-                grdlist.Redraw = false;
-
-                int grdrowcount = grdlist.Rows.Count - 2;
-                grdlist.Rows.Count = DataCount + 2;
-
-                for (int row = grdrowcount; row < DataCount; row++)
+                if ((enTechType)gBZA.SifLnkLst[Serial].MBZAIF.Oldtech[sifch].type == enTechType.TECH_EIS &&
+                      gBZA.SifLnkLst[Serial].MBZAIF.OldCondfilename[sifch] == gBZA.SifLnkLst[Serial].MBZAIF.calcondfilename[sifch] &&
+                      rng == gBZA.SifLnkLst[Serial].MBZAIF.Oldtech[sifch].irange)
                 {
-                    if (usefile == false)
+                    rtgrp = gBZA.SifLnkLst[Serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+
+                    if (rtgrp.plot[3].ly[0].Count != DataCount)
                     {
-                        mpacket.freq = rtgrp.plot[2].lx[0][row];
-                        mpacket.real = rtgrp.plot[0].lx[0][row];
-                        mpacket.img = rtgrp.plot[0].ly[0][row] * -1.0;
-                        mpacket.mag = rtgrp.plot[2].ly[0][row];
-                        mpacket.phase = rtgrp.plot[3].ly[0][row];
-                        mRtGrp.plot[0].lx[0].Add(mpacket.real);
-                        mRtGrp.plot[0].ly[0].Add(mpacket.img * -1.0);
+                        DataCount = rtgrp.plot[3].ly[0].Count;
 
-                        mRtGrp.plot[2].lx[0].Add(mpacket.freq);
-                        mRtGrp.plot[2].ly[0].Add(mpacket.mag);
-                        mRtGrp.plot[3].lx[0].Add(mpacket.freq);
-                        mRtGrp.plot[3].ly[0].Add(mpacket.phase);
+                        grdlist.Redraw = false;
 
-                        listPacket.Add(mpacket);
+                        int grdrowcount = grdlist.Rows.Count - 2;
+                        grdlist.Rows.Count = DataCount + 2;
+
+                        for (int row = grdrowcount; row < DataCount; row++)
+                        {
+                            if (usefile == false)
+                            {
+                                mpacket.freq = rtgrp.plot[0].freq[0][row];
+                                mpacket.real = rtgrp.plot[0].lx[0][row];
+                                mpacket.img = rtgrp.plot[0].ly[0][row] * -1.0;
+                                mpacket.mag = rtgrp.plot[2].ly[0][row];
+                                mpacket.phase = rtgrp.plot[3].ly[0][row];
+
+                                mRtGrp.plot[0].lx[0].Add(mpacket.real);
+                                mRtGrp.plot[0].ly[0].Add(mpacket.img * -1.0);
+
+                                mRtGrp.plot[2].lx[0].Add(mpacket.freq);
+                                mRtGrp.plot[2].ly[0].Add(mpacket.mag);
+                                mRtGrp.plot[3].lx[0].Add(mpacket.freq);
+                                mRtGrp.plot[3].ly[0].Add(mpacket.phase);
+
+                                listPacket.Add(mpacket);
+                            }
+
+                            grdlist[row + 2, 0] = row + 1;
+
+                            grdlist[row + 2, 1] = GetDataString(rtgrp.plot[2].lx[0][row]);
+
+                            grdlist[row + 2, 2] = GetDataString(rtgrp.plot[0].lx[0][row]);
+                            grdlist[row + 2, 3] = GetDataString(rtgrp.plot[0].ly[0][row]);
+
+                            grdlist[row + 2, 4] = GetDataString(rtgrp.plot[2].ly[0][row]);
+                            grdlist[row + 2, 5] = GetDataString(rtgrp.plot[3].ly[0][row]);
+
+                            grdlist[row + 2, 6] = GetDataString(mRtGrp.plot[0].lx[0][row]);
+                            grdlist[row + 2, 7] = GetDataString(mRtGrp.plot[0].ly[0][row]);
+
+                            grdlist[row + 2, 8] = GetDataString(mRtGrp.plot[2].ly[0][row]);
+                            grdlist[row + 2, 9] = GetDataString(mRtGrp.plot[3].ly[0][row]);
+
+                        }
+                        grdlist.Redraw = true;
+                        RefreshGraphEIS();
                     }
-
-                    grdlist[row + 2, 0] = row+1;
-
-                    grdlist[row+2, 1] = GetDataString(rtgrp.plot[2].lx[0][row]);
-
-                    grdlist[row + 2, 2] = GetDataString(rtgrp.plot[0].lx[0][row]);
-                    grdlist[row + 2, 3] = GetDataString(rtgrp.plot[0].ly[0][row]);
-
-                    grdlist[row + 2, 4] = GetDataString(rtgrp.plot[2].ly[0][row]);
-                    grdlist[row + 2, 5] = GetDataString(rtgrp.plot[3].ly[0][row]);
-
-                    grdlist[row + 2, 6] = GetDataString(mRtGrp.plot[0].lx[0][row]);
-                    grdlist[row + 2, 7] = GetDataString(mRtGrp.plot[0].ly[0][row]);
-
-                    grdlist[row + 2, 8] = GetDataString(mRtGrp.plot[2].ly[0][row]);
-                    grdlist[row + 2, 9] = GetDataString(mRtGrp.plot[3].ly[0][row]);
-
                 }
-                grdlist.Redraw = true;
-                
-                RefreshGraphEIS();
             }
         }
 
@@ -2250,6 +2273,8 @@ namespace ZiveLab.ZM
 
         private void frmCalibration_FormClosing(object sender, FormClosingEventArgs e)
         {
+            timer1.Stop();
+
             if (MBZA_MapUtil.SetCalibMode(Serial, sifch, false) == false)
             {
                 MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);

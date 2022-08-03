@@ -11,6 +11,7 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_APP_DEVICE = 8;
         public const int ChannelMapSize = 512;
         public const int MAX_COM_DATA_CNT = 20;
+        public const int MAX_DATA_CNT = 100000;
         public const string AppCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM.CFG";
         public static string[] Const_LootPart = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", };
         public static string[] Const_RangePart = { "Iac", "Vac", "Vdc", "Temperature","Safety" };

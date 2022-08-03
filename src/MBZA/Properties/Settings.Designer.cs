@@ -1054,5 +1054,17 @@ namespace ZiveLab.ZM.Properties {
                 this["GrpMaxWinCh"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RtGrpLegendView {
+            get {
+                return ((bool)(this["RtGrpLegendView"]));
+            }
+            set {
+                this["RtGrpLegendView"] = value;
+            }
+        }
     }
 }

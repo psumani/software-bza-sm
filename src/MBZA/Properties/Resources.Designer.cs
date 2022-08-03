@@ -153,6 +153,16 @@ namespace ZiveLab.ZM.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap CalibFail {
+            get {
+                object obj = ResourceManager.GetObject("CalibFail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap checkbox_blank {
             get {
                 object obj = ResourceManager.GetObject("checkbox_blank", resourceCulture);
@@ -221,12 +231,12 @@ namespace ZiveLab.ZM.Properties {
         }
         
         /// <summary>
-        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Icon Config {
+        internal static System.Drawing.Bitmap Config {
             get {
                 object obj = ResourceManager.GetObject("Config", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -256,6 +266,16 @@ namespace ZiveLab.ZM.Properties {
         internal static System.Drawing.Bitmap Cursor {
             get {
                 object obj = ResourceManager.GetObject("Cursor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Desc {
+            get {
+                object obj = ResourceManager.GetObject("Desc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -423,6 +443,16 @@ namespace ZiveLab.ZM.Properties {
         /// <summary>
         ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Icon List1 {
+            get {
+                object obj = ResourceManager.GetObject("List1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Icon LogRefresh {
             get {
                 object obj = ResourceManager.GetObject("LogRefresh", resourceCulture);
@@ -507,6 +537,26 @@ namespace ZiveLab.ZM.Properties {
             get {
                 object obj = ResourceManager.GetObject("MBZA1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Icon monitor {
+            get {
+                object obj = ResourceManager.GetObject("monitor", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap monitor1 {
+            get {
+                object obj = ResourceManager.GetObject("monitor1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -717,6 +767,26 @@ namespace ZiveLab.ZM.Properties {
             get {
                 object obj = ResourceManager.GetObject("Print", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap realtimenew_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("realtimenew_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Icon realtimenew2 {
+            get {
+                object obj = ResourceManager.GetObject("realtimenew2", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -981,6 +1051,16 @@ namespace ZiveLab.ZM.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap wonatech {
+            get {
+                object obj = ResourceManager.GetObject("wonatech", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Icon write {
@@ -991,12 +1071,12 @@ namespace ZiveLab.ZM.Properties {
         }
         
         /// <summary>
-        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Icon zm {
+        internal static System.Drawing.Bitmap zm {
             get {
                 object obj = ResourceManager.GetObject("zm", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1107,6 +1187,16 @@ namespace ZiveLab.ZM.Properties {
             get {
                 object obj = ResourceManager.GetObject("zm1_0009", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap zm1_about {
+            get {
+                object obj = ResourceManager.GetObject("zm1_about", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

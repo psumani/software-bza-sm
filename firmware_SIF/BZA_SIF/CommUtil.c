@@ -1386,7 +1386,8 @@ void Parsing(int s)
             SendError(s,DEF_ERROR_BAD_COMMAND);
 			return;
 	}
-	if(m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT)
+
+	if(m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT && s == TCP_SOCK_NUM)
     {
       *((byte*)(REG_CH_BASE + (m_Socket[s] * REG_CH_SIZE) + 0x0003)) = Sn_SR_CLOSED;
     }
@@ -1457,7 +1458,7 @@ void TCP_Poll(int s,int port)
 				recv(m_Socket[s], (byte*)&packet, sizeof(Packet));	
 				
 				checksum = GenCheckSum((byte*)&packet, sizeof(Packet));
-				if(m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT)
+				if(m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT && s == TCP_SOCK_NUM)
                 {
                       close(m_Socket[s]);
                       m_pGlobalVar->CommTimeOut = 0;
@@ -1494,15 +1495,19 @@ void TCP_Poll(int s,int port)
 				close(m_Socket[s]);
 				m_SocketStatus[s] = START;
 			}
-			
-			if(*((byte*)(REG_CH_BASE + (m_Socket[s] * REG_CH_SIZE) + 0x0003)) == Sn_SR_CLOSED  || m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT)
+			else if(*((byte*)(REG_CH_BASE + (m_Socket[s] * REG_CH_SIZE) + 0x0003)) == Sn_SR_CLOSED  || m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT)
 			{
 				m_pGlobalVar->CommTimeOut = 0;
 				close(m_Socket[s]);			
 				m_SocketStatus[s] = START;				
 			}
-			
-			if(m_pGlobalVar->prevrecvsize != recvsize)
+			else if(m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT &&  s == TCP_SOCK_NUM)
+			{
+				m_pGlobalVar->CommTimeOut = 0;
+				close(m_Socket[s]);			
+				m_SocketStatus[s] = START;		
+			}
+			else if(m_pGlobalVar->prevrecvsize != recvsize)
 			{
 				m_pGlobalVar->CommTimeOut = 0;
 				m_pGlobalVar->prevrecvsize = recvsize;

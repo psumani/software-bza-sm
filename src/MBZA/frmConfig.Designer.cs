@@ -134,6 +134,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConfig_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmConfig_FormClosed);
             this.Load += new System.EventHandler(this.frmConfig_Load);
+            this.LocationChanged += new System.EventHandler(this.frmConfig_LocationChanged);
+            this.SizeChanged += new System.EventHandler(this.frmConfig_SizeChanged);
             this.groupBox1.ResumeLayout(false);
             this.grtinf.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

@@ -19,11 +19,12 @@ namespace ZiveLab.ZM
         string selsif;
         int selsifch;
         int selch;
+        bool bClose;
         public event EventHandler CloseThis;
         public frmConfig()
         {
             InitializeComponent();
-
+            bClose = false;
             selsif = "";
             selsifch = -1;
             selch = -1;
@@ -66,13 +67,9 @@ namespace ZiveLab.ZM
 
         private void frmConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bClose = true;
             // mCommZim.CmdSetVdcAutoRange(1);
-            Point pt = this.Location;
-            if (pt.X != -32000 && pt.Y != -32000)
-            {
-                gBZA.appcfg.CfgLocation = pt;
-                gBZA.appcfg.Save();
-            }
+
         }
 
        
@@ -105,6 +102,34 @@ namespace ZiveLab.ZM
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
             }
+        }
+
+        private void frmConfig_LocationChanged(object sender, EventArgs e)
+        {
+            if (bClose) return;
+            if (this.WindowState == FormWindowState.Minimized) return;
+            
+            gBZA.appcfg.CfgWinStatus = this.WindowState;
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                gBZA.appcfg.CfgLocation = this.Location;
+                gBZA.appcfg.CfgSize = this.Size;
+            }
+            gBZA.appcfg.Save();
+        }
+
+        private void frmConfig_SizeChanged(object sender, EventArgs e)
+        {
+            if (bClose) return;
+            if (this.WindowState == FormWindowState.Minimized) return;
+
+            gBZA.appcfg.CfgWinStatus = this.WindowState;
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                gBZA.appcfg.CfgLocation = this.Location;
+                gBZA.appcfg.CfgSize = this.Size;
+            }
+            gBZA.appcfg.Save();
         }
     }
 }

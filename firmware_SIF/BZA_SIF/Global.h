@@ -38,7 +38,7 @@ extern char* m_pJsonSamples;
 extern char* m_pHtmlBuff;
 
 
-
+extern double ContVal[1][DEF_MAX_IAC_RNGCNT];
 extern int _InitLedDelay;
 extern byte _NandBuffer[NAND_MAIN_SIZE + NAND_SPARE_SIZE];
 

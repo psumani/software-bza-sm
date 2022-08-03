@@ -110,6 +110,12 @@ namespace App.Zim.Player
 
         private void btnConnsif_Click(object sender, EventArgs e)
         {
+
+            if (mCommZim.mComm != null)
+            {
+                mCommZim.mComm.Dispose();
+            }
+
             frmConnDlg form = new frmConnDlg() { mCommZim = mCommZim, mConnCfg = mConnCfg };
             if(form.ShowDialog() == DialogResult.OK)
             {

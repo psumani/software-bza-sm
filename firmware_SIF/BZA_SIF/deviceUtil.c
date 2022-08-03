@@ -698,6 +698,7 @@ inline void proc_adc_rtd(int ch)
 							* m_pSysConfig->mZimCfg[ch].ranges.rtd_rng.gain 
 							+ m_pSysConfig->mZimCfg[ch].ranges.rtd_rng.offset;
 		}
+		prtd->data.Tvalue = floor(prtd->data.Tvalue * 100.0 + 0.5) * 0.01;
 		m_pGlobalVar->mChVar[ch].mChStatInf.Temperature = prtd->data.Tvalue;
 		proc_adc_rtd_cfg(ch);
 	}
@@ -836,6 +837,16 @@ inline void proc_adc_vdc_data(int ch)
 					* m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[m_pGlobalVar->mChVar[ch].mChStatInf.Vdc_rngno].gain 
 					+ m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[m_pGlobalVar->mChVar[ch].mChStatInf.Vdc_rngno].offset;
 	}
+	
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA60)
+	{
+		pvdc->value = floor(pvdc->value * 1000000.0 + 0.5) * 0.000001;
+	}
+	else
+	{
+		pvdc->value = floor(pvdc->value * 100000.0 + 0.5) * 0.00001;
+	}
+		
 	m_pGlobalVar->mChVar[ch].mChStatInf.Vdc = pvdc->value;
 }
 
@@ -1173,21 +1184,28 @@ inline bool ChkSysCalVars(int ch)
 	return true;
 }
 
-
 inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 {
 	st_zim_Eis_Cal_info* pEis_cal_info = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
 	
+	double f = praw->freq;
+	double fsq = f * f;
+	double a;
+	double b;
+	double c;
+	double d;
+	double aa;
+	double bb;
+
 	if (ChkEisCalVar(pEis_cal_info) == false)
 	{
 		return;
 	}
-	double f = praw->freq;
-	double fsq = f * f;
-	double a = 1 + pEis_cal_info->n3 * fsq;
-	double b = (pEis_cal_info->n1 / f) + (pEis_cal_info->n2 * f);
-	double c = 1 + pEis_cal_info->d3 * fsq;
-	double d = (pEis_cal_info->d1 / f) + (pEis_cal_info->d2 * f);
+	
+	a = 1 + pEis_cal_info->n3 * fsq;
+	b = (pEis_cal_info->n1 / f) + (pEis_cal_info->n2 * f);
+	c = 1 + pEis_cal_info->d3 * fsq;
+	d = (pEis_cal_info->d1 / f) + (pEis_cal_info->d2 * f);
 
 	if(c == 0.0 && d == 0.0)
 	{
@@ -1196,8 +1214,8 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 		return;
 	}
 		
-	double aa = (a * c + b * d) / (c * c + d * d);
-	double bb = (b * c - a * d) / (c * c + d * d);
+	aa = (a * c + b * d) / (c * c + d * d);
+	bb = (b * c - a * d) / (c * c + d * d);
 		
 	a = praw->zdata.real;
 	b = praw->zdata.img;
@@ -1234,6 +1252,7 @@ inline bool proc_eis_data_conv(int ch)
 		m_pGlobalVar->mChVar[ch].mChStatInf.DispPhase = pstatus->zdata.phase;
 		return false;
 	}
+	
 	nCycle = (ushort)floor(pstatus->LoadDatacnt / pstatus->cycpoint); //devide
 	if(pstatus->cycle > nCycle) 
 	{
@@ -1245,8 +1264,9 @@ inline bool proc_eis_data_conv(int ch)
 	}
 	
 	pstatus->cycle = nCycle;
+	praw->freq = pstatus->freq;
 	peis->eis_raw_new.Ns = pstatus->cycpoint * pstatus->cycle;
-
+	
 	memcpy(tRaw_val,praw->raw_val,sizeof(st_zim_eis_raw_val)*MAX_EIS_RAW_POINT); 
 	
 	if(RemoveTrend(tRaw_val,peis->eis_raw_new.raw_val,pstatus->totaldatacnt,pstatus->cycpoint,&mCompdrift) == false)
@@ -1399,13 +1419,16 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 		pddssig->frequency = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_HI;
 		
 		nMaxCycle = (int)MAX(2,4.0/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 , 최대시간 4초
-		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
-		{
-			nMaxCycle = MIN(nMaxCycle,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
-		}
+		
 		if(retPoint == 0) cycles = 0;
 		else cycles = (int)(MAX_EIS_POINT / retPoint);
 		cycles = MIN(nMaxCycle,cycles);
+		
+		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
+		{
+			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
+		}
+		
 		cycles = MAX(cycles,1);
 	}
 	else
@@ -1427,10 +1450,7 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 		
 		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
 		nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 4초
-		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
-		{
-			nMaxCycle = MIN(nMaxCycle,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
-		}
+		
 		
 		if(retPoint == 0) cycles = 0;
 		else cycles = (int)(MAX_EIS_POINT / retPoint);
@@ -1438,6 +1458,13 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 		cycles = MAX(cycles,1);
 		
 		retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
+		
+		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
+		{
+			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
+		}
+		cycles = MAX(cycles,1);
+		
 		
 		//VLP Mode-FLT 10, WB2-01
 		m_pGlobalVar->mChVar[ch].flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mChVar[ch].flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(dConstFlt,(double)osrArg)/DEF_DDS_MCLK_RATE_LOW); //128 = 125K/16M //
@@ -1516,14 +1543,17 @@ inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cyc
 		pStatus->freq = pddssig->frequency;
 
 		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,2.0/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 , 최대시간 4초
-		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
-		{
-			nMaxCycle = MIN(nMaxCycle,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
-		}
+		
 		if(retPoint == 0) cycles = 0;
 		else cycles = (int)(MAX_EIS_POINT / retPoint);
 		cycles = MIN(nMaxCycle,cycles);
 		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
+		
+		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
+		{
+			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
+		}
+		cycles = MAX(cycles,1);
 	}
 	else
 	{
@@ -1547,19 +1577,22 @@ inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cyc
 		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
 		//nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 6초
 		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)pow(2,(int)log2(pddssig->frequency)));
-		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
-		{
-			nMaxCycle = MIN(nMaxCycle,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
-		}
+		
 		
 		if(retPoint == 0) cycles = 0;
 		else cycles = (int)(MAX_EIS_POINT / retPoint);
 		
 		cycles = MIN(nMaxCycle,cycles);
 		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
+		
+		cycles = MAX(cycles,1);
 		retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
 		
-		
+		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
+		{
+			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
+		}
+		cycles = MAX(cycles,1);
 		//VLP Mode-FLT 10, WB2-01
 		m_pGlobalVar->mChVar[ch].flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mChVar[ch].flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(dConstFlt,(double)osrArg)/DEF_DDS_MCLK_RATE_LOW); //128 = 125K/16M //
 		pddsclk->frequency =   m_pGlobalVar->mChVar[ch].flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
@@ -1603,8 +1636,7 @@ inline void proc_eis_SineForDelay(int ch)
 	ApplyCalcConfigADCForDelay(ch);
 
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_RESET;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1616,8 +1648,7 @@ inline void proc_eis_SineForDelay(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_RESET_H;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1637,15 +1668,13 @@ inline void proc_eis_SineForDelay(int ch)
 	
 
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1657,8 +1686,7 @@ inline void proc_eis_SineForDelay(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRLH;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1670,8 +1698,7 @@ inline void proc_eis_SineForDelay(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1690,8 +1717,7 @@ inline void proc_eis_init(int ch)
 	ApplyCalcConfigADC(ch);
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1703,10 +1729,7 @@ inline void proc_eis_init(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_DEFAULT_CTRLH;
-
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	
-	if(ICE_write_16bits(ch,ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch,ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1718,8 +1741,7 @@ inline void proc_eis_init(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch,ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch,ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1733,8 +1755,7 @@ inline void proc_eis_init(int ch)
 	
 	
 	m_pGlobalVar->mStatusInf.flow_dds_sig.req.ctrl = DDS_SIG_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mStatusInf.flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ICE_CMD_DDS_SIG,m_pGlobalVar->mStatusInf.flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1742,8 +1763,7 @@ inline void proc_eis_init(int ch)
 
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1755,8 +1775,7 @@ inline void proc_eis_init(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRLH;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1768,8 +1787,7 @@ inline void proc_eis_init(int ch)
 	}
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRL;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,m_pGlobalVar->mChVar[ch].flow_dds_clk.req.ctrl) == _ERROR)
 	{
 		return;
 	}
@@ -1933,12 +1951,10 @@ inline void proc_eis_ControlFail(int ch)
 bool proc_eis_dcoff(int ch)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
-	ushort buf;
-	
+
 	pch->mChStatInf.BiasOn = 0;
 	pch->flow_dds_sig.req.ctrl = DDS_SIG_PWDN; // Ctrl 0V;
-	buf = pch->flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,pch->flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
 		return false;
@@ -1949,20 +1965,17 @@ bool proc_eis_dcoff(int ch)
 
 inline bool proc_eis_dcon(int ch)
 {
-	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
 	ushort buf;
-	
+	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
 	pch->mChStatInf.BiasOn = 1;
 	
 	pch->flow_dds_sig.req.ctrl = DDS_SIG_RESET;
-	buf = pch->flow_dds_sig.req.ctrl & 0x3FFF;
-	
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,pch->flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
 		return false;
 	}
-	/*
+	
 	pch->mreqdevice.dds_sig.Phase = DEF_SINECTRL_PHASE;
 	pch->mdevice.dds_sig.Phase = DEF_SINECTRL_PHASE;
     pch->flow_dds_sig.req.phase = (uint)(pch->mdevice.dds_sig.Phase * (double)DEF_DDS_PHASE_CONST);
@@ -1973,7 +1986,7 @@ inline bool proc_eis_dcon(int ch)
 		return false;
 	}
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.stat.phase  =  m_pGlobalVar->mChVar[ch].flow_dds_sig.req.phase;
-	*/
+	
 	return true;
 }
 
@@ -1996,8 +2009,10 @@ bool proc_writedata(int ch)
 	pdata->TaskTime = pch->mChStatInf.TaskTimeStamp / 1000.0;
 
 	pdata->RangeV = m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[pch->mChStatInf.Vdc_rngno].realmax;
+	
 	pdata->Veoc = pch->mChStatInf.Veoc;
 	pdata->Vdc = pch->mChStatInf.Vdc;
+	
 	if((pch->mChStatInf.Iac_rngno % 2) == 0)
 	{
 		pdata->RangeA = m_pSysConfig->mZimCfg[ch].ranges.iac_rng[pch->mChStatInf.Iac_in_rngno].realmax;
@@ -2006,11 +2021,12 @@ bool proc_writedata(int ch)
 	{
 		pdata->RangeA = m_pSysConfig->mZimCfg[ch].ranges.iac_rng[pch->mChStatInf.Iac_in_rngno].realmax * 0.2;	
 	}
-	
-	pdata->Idc = pdata->RangeA * pch->mFlow.CtrlRate;
+
+	pdata->Idc = ContVal[0][pch->mChStatInf.Iac_in_rngno];
 	
 	
 	pdata->Temperature = pch->mChStatInf.Temperature;
+	
 	pdata->fFreq = pch->mChStatInf.eis_status.freq;
 	pdata->Zre = pch->mChStatInf.eis_status.zdata.real;
 	pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
@@ -2022,13 +2038,11 @@ bool proc_writedata(int ch)
 inline void proc_eisflow_dcon(int ch)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
-	ushort buf;
-	
+
 	if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp && pch->mFlow.m_MsFlowdelayStamp < 10000)
 	{
 		pch->flow_dds_sig.req.ctrl = DDS_SIG_RESET;
-		buf = pch->flow_dds_sig.req.ctrl & 0x3FFF;
-		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,pch->flow_dds_sig.req.ctrl) == _ERROR)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
 			return;
@@ -2061,7 +2075,7 @@ inline void proc_eisflow_dcon(int ch)
 		}
 	}
 }
-
+/*
 inline void proc_mon_chkslope(int ch)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
@@ -2096,7 +2110,7 @@ inline void proc_mon_chkslope(int ch)
 		}
 	}			
 }
-
+*/
 inline void proc_eis_chkslope(int ch)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
@@ -2165,16 +2179,14 @@ bool proc_eis_main(int ch)
 		pch->meis.eis_raw.Ns = pch->mChStatInf.eis_status.totaldatacnt;
 		
 		pch->flow_dds_sig.req.ctrl = DDS_SIG_PWDN; // DDS_SIG_RESET;
-		buf = pch->flow_dds_sig.req.ctrl & 0x3FFF;
-		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,pch->flow_dds_sig.req.ctrl) == _ERROR)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
 			return false;
 		}
 				
 		pch->flow_dds_clk.req.ctrl = DDS_CLK_DEFAULT_CTRL;
-		buf = pch->flow_dds_clk.req.ctrl & 0x3FFF;
-		if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,buf) == _ERROR)
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_CLK,pch->flow_dds_clk.req.ctrl) == _ERROR)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
 			return false;
@@ -2328,7 +2340,8 @@ bool proc_eis_main(int ch)
 			}
 			pch->mChStatInf.NextCycleNo = pch->mFlow.m_loopcnt;
 			pch->mChStatInf.eis_status.freq = dfreq;
-			proc_eis_dcon(ch);
+			
+			
 			if(pch->mFlow.timeproc == 1 && buf == 1)
 			{
 				if(pch->mChStatInf.RunTimeStamp >= pch->mFlow.m_MsEndTimeLimit)
@@ -2341,7 +2354,12 @@ bool proc_eis_main(int ch)
 
 				if(pch->mFlow.celloffwait == 1)
 				{
+					proc_eis_dcoff(ch);
 					proc_eis_LoadOn(ch, 0);
+				}
+				else 
+				{
+					proc_eis_dcon(ch);
 				}
 
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_WAIT;
@@ -2430,7 +2448,7 @@ void Flow_monitor(int ch)
 {
 	bool bWrite = false;
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
-
+/*
 	if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_MONDELAY)
 	{
 		if(pch->mFlow.m_MsOndelayLimit <= pch->mFlow.OndelayTimeStamp)
@@ -2449,7 +2467,7 @@ void Flow_monitor(int ch)
 		return;
 	}
 	
-	
+	*/
 	
 	if(pch->mFlow.m_MsDurLimit <= pch->mFlow.m_MsDurStamp)
 	{

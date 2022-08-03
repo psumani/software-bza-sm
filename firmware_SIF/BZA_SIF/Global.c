@@ -31,6 +31,7 @@ stDefTestData*  m_pTestData[MAX_DEV_CHANNEL];
 	
 //..SMART Device info ..block 18
 
+double ContVal[1][DEF_MAX_IAC_RNGCNT] = {1.07,0.111,0.0111,0.00111};
 
 int _InitLedDelay = 200;
 byte _NandBuffer[NAND_MAIN_SIZE + NAND_SPARE_SIZE];

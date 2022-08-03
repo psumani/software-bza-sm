@@ -63,9 +63,6 @@ double RoundToSignificantDigits(double d, int digits)
     return scale * mRounding(d / scale, digits);
 }
 
-
-
-
 inline ushort Get_Task_RngA(int ch)
 {
 	ushort rng = 0; 
@@ -262,7 +259,7 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	aPoints = GetNumberOfFrequncies(peis->initfreq, peis->finalfreq, density);
 	
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
-	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex > aPoints)
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex >= aPoints)
 	{
 		m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex = 1;
 		m_pGlobalVar->mChVar[ch].mFlow.m_loopcnt++;
@@ -383,13 +380,11 @@ inline bool CheckCmdDI(int ch)
 inline bool proc_mon_dcControl(int ch)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
-	ushort buf;
 	
 	pch->mChStatInf.BiasOn = 1;
 	
 	m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_RESET;
-	buf = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl & 0x3FFF;
-	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+	if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
 	{
 		m_pGlobalVar->mChVar[ch].mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
 		return false;
@@ -489,8 +484,8 @@ inline void proc_init_test(int ch)
 		pch->mFlow.timeproc = 0;
 		pch->mFlow.m_MsDurLimit = 0;
 		pch->mFlow.m_MsEndTimeLimit = 0;
-		pch->mFlow.skipcycle = 0;
-		pch->mFlow.setcycle = 1;
+		pch->mFlow.skipcycle = pTech->tech.qis.skipcycle;
+		pch->mFlow.setcycle = pTech->tech.qis.cycle;
 	}
 	else
 	{
@@ -576,14 +571,11 @@ void proc_test_main(int ch)
 				if(pch->mFlow.celloffwait == 0)
 				{
 					proc_mon_dcControl(ch);
-					pch->mFlow.m_MsFlowdelayLimit = 10; 
-					pch->mFlow.m_MsFlowdelayStamp = 0;
-					pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_MONDELAY;
 				}
-				else
-				{
-					pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_SAMPLE;
-				}
+				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_SAMPLE;
+
+				pch->mFlow.m_MsFlowdelayLimit = 0; 
+				pch->mFlow.m_MsFlowdelayStamp = 0;
 			}
 			else 
 			{
