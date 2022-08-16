@@ -80,10 +80,11 @@ namespace ZiveLab.ZM
             this.imageList1.Images.Add(Properties.Resources.object22);
             this.imageList1.Images.Add(Properties.Resources.folder);
             this.imageList1.Images.Add(Properties.Resources.folder);
-            this.treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+
+            //this.treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.treeView1.CheckBoxes = false;
             this.treeView1.ImageList = this.imageList1;
-            
+
             RecreatePropertyGridToolBar(-1);
 
          }
@@ -447,6 +448,7 @@ namespace ZiveLab.ZM
             
             return 0;
         }
+               
 
         public int RefreshTreeView(TreeNode SelectItem = null)
         {
@@ -487,14 +489,19 @@ namespace ZiveLab.ZM
                     node.ToolTipText = (string)node.Tag;
                 }
             }
+
             if (SelectItem != null)
             {
                 treeView1.SelectedNode = SelectItem;
+                treeView1.Refresh();
+
+
             }
             else
             {
                 treeView1.SelectedNode = treeView1.Nodes[0];
             }
+            treeView1.HideSelection = true;
             return 0;
         }
 
@@ -750,7 +757,7 @@ namespace ZiveLab.ZM
                         toolStrip.Items.Add(item);
                     }
 
-                    if (index < 8 || index == 13)
+                    if (index < 8 || index == 13  || index == 15)
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "BtLocalApply";
@@ -765,11 +772,11 @@ namespace ZiveLab.ZM
                         toolStrip.Items.Add(item);
                     }
 
-                    if (index == 1 || index == 2)
+                    if (index == 1 || index == 2 || index == 15 || index == 17)
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "BtChangeRange";
-                        item.Image =ZM.Properties.Resources.settings_outline;
+                        item.Image = ZM.Properties.Resources.settings_outline;
                         item.Click += new EventHandler(BtChangeRange_Click);
                         item.ToolTipText = "Initialize(Resetting) this range information.";
                         item.AutoToolTip = true;
@@ -778,7 +785,10 @@ namespace ZiveLab.ZM
                         item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
+                    }
 
+                    if (index == 1 || index == 2 )
+                    { 
                         item = new ToolStripMenuItem();
                         item.Name = "BtStartCalib";
                         item.Image =ZM.Properties.Resources.object41.ToBitmap();
@@ -791,7 +801,8 @@ namespace ZiveLab.ZM
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
                     }
-                    else if (index == 10)
+
+                    if (index == 10)
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "ChangeFwSif";
@@ -805,7 +816,8 @@ namespace ZiveLab.ZM
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
                     }
-                    else if (index == 11)
+
+                    if (index == 11)
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "ChangeFwZim";
@@ -1357,11 +1369,9 @@ namespace ZiveLab.ZM
                         }
                     }
                     frmCalibration frm = new frmCalibration(selch, Serial, sifch, item);
-                    if(frm.ShowDialog() == DialogResult.OK)
-                    {
-                        RefreshTreeViewStat();
-                        RefreshPropertyGrid(this.SelectNode);
-                    }
+                    frm.ShowDialog();
+                    RefreshTreeViewStat();
+                    RefreshPropertyGrid(this.SelectNode);
                     return;
                 }
                 else if (item == 1) //vac
@@ -1512,7 +1522,7 @@ namespace ZiveLab.ZM
         void BtChangeRange_Click(object sender, EventArgs e)
         {
             int[] nodeval;
-
+            int trng = 0;
             var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             if(treeView1.SelectedNode == null)
             {
@@ -1528,10 +1538,21 @@ namespace ZiveLab.ZM
                 {
                     if (nodeval[2] >= 1 && nodeval[2] < 5)
                     {
-                        if(nodeval[3] == 0)
+                        /*if(nodeval[3] == 0)
                         {
                             ChangeRangeMaxMin(ref p.ranges.iac_rng[nodeval[2]-1]);
                         }
+                        else if (nodeval[3] == 1)
+                        {*/
+                        trng = (nodeval[2] - 1) * 2;
+                        InitEisCalInf(ref p.ranges.mEisIRngCalInfo[trng]);
+                        InitEisCalInf(ref p.ranges.mEisIRngCalInfo[trng+1]);
+                        p.ranges.iac_rng[nodeval[2] - 1].gain1 = 1.0;
+                        p.ranges.iac_rng[nodeval[2] - 1].gain2 = 1.0;
+
+                        RefreshTreeViewStat();
+                        RefreshPropertyGrid(treeView1.SelectedNode);
+                        //}
                     }
                 }
                 else if (nodeval[1] == 2)
@@ -1877,50 +1898,72 @@ namespace ZiveLab.ZM
         {
             frmCalibVdc frm = new frmCalibVdc(selch, Serial, sifch, 0);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripVdcX10_Click(object sender, EventArgs e)
         {
             frmCalibVdc frm = new frmCalibVdc(selch, Serial, sifch, 1);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripCalibTemp_Click(object sender, EventArgs e)
         {
             frmCalibRtd frm = new frmCalibRtd(selch, Serial, sifch);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripzerophase_Click(object sender, EventArgs e)
         {
-            
-
             frmCalibration frm = new frmCalibration(selch, Serial, sifch, -1);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripCalib0_Click(object sender, EventArgs e)
         {
             frmCalibration frm = new frmCalibration(selch, Serial, sifch, 0);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripCalib1_Click(object sender, EventArgs e)
         {
             frmCalibration frm = new frmCalibration(selch, Serial, sifch, 1);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripCalib2_Click(object sender, EventArgs e)
         {
             frmCalibration frm = new frmCalibration(selch,Serial, sifch, 2);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripCalib3_Click(object sender, EventArgs e)
         {
             frmCalibration frm = new frmCalibration(selch, Serial, sifch, 3);
             frm.ShowDialog();
+
+            RefreshTreeViewStat();
+            RefreshPropertyGrid(treeView1.SelectedNode);
         }
 
         private void toolStripControlDevice_Click(object sender, EventArgs e)

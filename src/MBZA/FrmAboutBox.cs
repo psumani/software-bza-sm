@@ -14,9 +14,9 @@ namespace ZiveLab.ZM
         public FrmAboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("{0} 정보", AssemblyTitle);
+            this.Text = String.Format("{0} Inmformation.", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("버전 {0}", AssemblyVersion);
+            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;

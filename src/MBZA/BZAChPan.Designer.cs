@@ -251,6 +251,7 @@
             this.lblResult = new System.Windows.Forms.Label();
             this.lblTech = new System.Windows.Forms.Label();
             this.lblprog = new ZiveLab.ZM.LabelProgress();
+            this.lblIdc = new System.Windows.Forms.Label();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
@@ -1100,7 +1101,7 @@
             // lblZphase
             // 
             this.lblZphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZphase.Location = new System.Drawing.Point(6, 282);
+            this.lblZphase.Location = new System.Drawing.Point(6, 299);
             this.lblZphase.Name = "lblZphase";
             this.lblZphase.Size = new System.Drawing.Size(154, 15);
             this.lblZphase.TabIndex = 48;
@@ -1109,7 +1110,7 @@
             // lblZmag
             // 
             this.lblZmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZmag.Location = new System.Drawing.Point(6, 265);
+            this.lblZmag.Location = new System.Drawing.Point(6, 282);
             this.lblZmag.Name = "lblZmag";
             this.lblZmag.Size = new System.Drawing.Size(154, 15);
             this.lblZmag.TabIndex = 46;
@@ -1118,7 +1119,7 @@
             // lblfreq
             // 
             this.lblfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblfreq.Location = new System.Drawing.Point(6, 212);
+            this.lblfreq.Location = new System.Drawing.Point(6, 229);
             this.lblfreq.Name = "lblfreq";
             this.lblfreq.Size = new System.Drawing.Size(154, 15);
             this.lblfreq.TabIndex = 45;
@@ -1127,7 +1128,7 @@
             // lblTemp
             // 
             this.lblTemp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemp.Location = new System.Drawing.Point(6, 195);
+            this.lblTemp.Location = new System.Drawing.Point(6, 212);
             this.lblTemp.Name = "lblTemp";
             this.lblTemp.Size = new System.Drawing.Size(154, 15);
             this.lblTemp.TabIndex = 40;
@@ -1136,7 +1137,7 @@
             // lblVdc
             // 
             this.lblVdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVdc.Location = new System.Drawing.Point(6, 161);
+            this.lblVdc.Location = new System.Drawing.Point(6, 178);
             this.lblVdc.Name = "lblVdc";
             this.lblVdc.Size = new System.Drawing.Size(154, 15);
             this.lblVdc.TabIndex = 39;
@@ -1164,7 +1165,7 @@
             // lblprogfreq
             // 
             this.lblprogfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprogfreq.Location = new System.Drawing.Point(6, 299);
+            this.lblprogfreq.Location = new System.Drawing.Point(6, 316);
             this.lblprogfreq.Name = "lblprogfreq";
             this.lblprogfreq.Size = new System.Drawing.Size(154, 15);
             this.lblprogfreq.TabIndex = 50;
@@ -1491,7 +1492,7 @@
             // lblVeoc
             // 
             this.lblVeoc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVeoc.Location = new System.Drawing.Point(6, 178);
+            this.lblVeoc.Location = new System.Drawing.Point(6, 195);
             this.lblVeoc.Name = "lblVeoc";
             this.lblVeoc.Size = new System.Drawing.Size(154, 15);
             this.lblVeoc.TabIndex = 97;
@@ -1500,7 +1501,7 @@
             // lblzimg
             // 
             this.lblzimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblzimg.Location = new System.Drawing.Point(6, 248);
+            this.lblzimg.Location = new System.Drawing.Point(6, 265);
             this.lblzimg.Name = "lblzimg";
             this.lblzimg.Size = new System.Drawing.Size(154, 15);
             this.lblzimg.TabIndex = 99;
@@ -1509,7 +1510,7 @@
             // lblzreal
             // 
             this.lblzreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblzreal.Location = new System.Drawing.Point(6, 231);
+            this.lblzreal.Location = new System.Drawing.Point(6, 248);
             this.lblzreal.Name = "lblzreal";
             this.lblzreal.Size = new System.Drawing.Size(154, 15);
             this.lblzreal.TabIndex = 98;
@@ -1528,7 +1529,7 @@
             this.tabgrp.Multiline = true;
             this.tabgrp.Name = "tabgrp";
             this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(312, 218);
+            this.tabgrp.Size = new System.Drawing.Size(312, 233);
             this.tabgrp.TabIndex = 100;
             // 
             // TabGrp1
@@ -1539,7 +1540,7 @@
             this.TabGrp1.Location = new System.Drawing.Point(4, 23);
             this.TabGrp1.Name = "TabGrp1";
             this.TabGrp1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabGrp1.Size = new System.Drawing.Size(304, 191);
+            this.TabGrp1.Size = new System.Drawing.Size(304, 206);
             this.TabGrp1.TabIndex = 1;
             this.TabGrp1.Text = "tabPage2";
             this.TabGrp1.UseVisualStyleBackColor = true;
@@ -1669,7 +1670,7 @@
             this.Grp1Plot5,
             this.Grp1Plot6,
             this.Grp1Plot7});
-            this.grp1.Size = new System.Drawing.Size(294, 179);
+            this.grp1.Size = new System.Drawing.Size(294, 199);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1695,7 +1696,7 @@
             this.TabGrp2.Controls.Add(this.grp2);
             this.TabGrp2.Location = new System.Drawing.Point(4, 23);
             this.TabGrp2.Name = "TabGrp2";
-            this.TabGrp2.Size = new System.Drawing.Size(307, 215);
+            this.TabGrp2.Size = new System.Drawing.Size(304, 206);
             this.TabGrp2.TabIndex = 2;
             this.TabGrp2.Text = "tabPage3";
             this.TabGrp2.UseVisualStyleBackColor = true;
@@ -1725,7 +1726,7 @@
             this.legend2.ItemSize = new System.Drawing.Size(24, 20);
             this.legend2.Location = new System.Drawing.Point(207, 8);
             this.legend2.Name = "legend2";
-            this.legend2.Size = new System.Drawing.Size(83, 203);
+            this.legend2.Size = new System.Drawing.Size(82, 183);
             this.legend2.TabIndex = 90;
             // 
             // legendItem21
@@ -1844,7 +1845,7 @@
             this.Grp2Plot6,
             this.Grp2Plot7,
             this.Grp2Plot8});
-            this.grp2.Size = new System.Drawing.Size(299, 207);
+            this.grp2.Size = new System.Drawing.Size(297, 199);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
             this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1866,7 +1867,7 @@
             this.TabGrpRaw.Controls.Add(this.grprt);
             this.TabGrpRaw.Location = new System.Drawing.Point(4, 23);
             this.TabGrpRaw.Name = "TabGrpRaw";
-            this.TabGrpRaw.Size = new System.Drawing.Size(307, 215);
+            this.TabGrpRaw.Size = new System.Drawing.Size(304, 206);
             this.TabGrpRaw.TabIndex = 3;
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
@@ -1938,13 +1939,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grprt.ContextMenuStrip = this.RtMenuStrip;
-            this.grprt.Location = new System.Drawing.Point(6, 6);
+            this.grprt.Location = new System.Drawing.Point(4, 5);
             this.grprt.Name = "grprt";
             this.grprt.PlotAreaColor = System.Drawing.Color.White;
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.RTPlot1,
             this.RTPlot2});
-            this.grprt.Size = new System.Drawing.Size(298, 206);
+            this.grprt.Size = new System.Drawing.Size(295, 197);
             this.grprt.TabIndex = 109;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -2007,6 +2008,15 @@
             this.lblprog.TabIndex = 56;
             this.lblprog.Load += new System.EventHandler(this.lblprog_Load);
             // 
+            // lblIdc
+            // 
+            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdc.Location = new System.Drawing.Point(5, 161);
+            this.lblIdc.Name = "lblIdc";
+            this.lblIdc.Size = new System.Drawing.Size(154, 15);
+            this.lblIdc.TabIndex = 112;
+            this.lblIdc.Text = "    Idc: -------- A";
+            // 
             // BZAChPan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2036,11 +2046,12 @@
             this.Controls.Add(this.lblErrStatus);
             this.Controls.Add(this.lblTestStatus);
             this.Controls.Add(this.lblRange);
+            this.Controls.Add(this.lblIdc);
             this.Controls.Add(this.lblVdc);
             this.Controls.Add(this.lblTemp);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BZAChPan";
-            this.Size = new System.Drawing.Size(482, 321);
+            this.Size = new System.Drawing.Size(482, 336);
             this.Load += new System.EventHandler(this.BZAChPan_Load);
             this.SizeChanged += new System.EventHandler(this.BZAChPan_SizeChanged);
             this.menu_1.ResumeLayout(false);
@@ -2289,5 +2300,6 @@
         private System.Windows.Forms.Label lbldatacount;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label lblTech;
+        private System.Windows.Forms.Label lblIdc;
     }
 }

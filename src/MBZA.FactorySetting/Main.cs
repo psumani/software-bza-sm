@@ -200,6 +200,7 @@ namespace ZiveLab.ZM.FactorySetting
             }
 
             eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
+            mCommZim.mDevType = (eDeviceType)mSysCfg.mSIFCfg.Type;
             cboChannel.Items.Clear();
 
             if (mtype == eDeviceType.MBZA)

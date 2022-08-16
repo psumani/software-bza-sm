@@ -95,7 +95,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(468, 560);
+            this.tabPage1.Size = new System.Drawing.Size(468, 567);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ZIM-SIF";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@
             this.GrpCh.Controls.Add(this.lblZimFwVer);
             this.GrpCh.Controls.Add(this.lblZimBdVer);
             this.GrpCh.Controls.Add(this.LnklblSetZIMCfgToLan);
-            this.GrpCh.Location = new System.Drawing.Point(20, 320);
+            this.GrpCh.Location = new System.Drawing.Point(20, 328);
             this.GrpCh.Name = "GrpCh";
             this.GrpCh.Size = new System.Drawing.Size(423, 231);
             this.GrpCh.TabIndex = 27;
@@ -455,7 +455,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 9);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(476, 586);
+            this.tabControl1.Size = new System.Drawing.Size(476, 593);
             this.tabControl1.TabIndex = 0;
             // 
             // BtInitZIM
@@ -473,13 +473,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 601);
+            this.ClientSize = new System.Drawing.Size(500, 607);
             this.Controls.Add(this.BtInitZIM);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Factory Setting of ZIM-SIF";
+            this.Text = "Factory Setting of ZM";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

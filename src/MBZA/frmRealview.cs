@@ -30,7 +30,7 @@ namespace ZiveLab.ZM
             InitializeComponent();
 
             iMode = tmode;
-
+            DoubleBuffered = true;
             fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
             bClose = false;
             bFirst = true;
@@ -86,8 +86,8 @@ namespace ZiveLab.ZM
             chs.Sort();
 
             pan.Controls.Clear();
-
-            BZAChPan chpan = new BZAChPan(ich, ref chevent, new EventHandler(ShowMaxChild));
+    
+            BZAChPan chpan = new BZAChPan(ich, ref chevent, new EventHandler(ShowMaxChild), this.MdiParent);
             chpan.SetbtSize(false);
 
             pan.Controls.Add(chpan);
@@ -108,7 +108,7 @@ namespace ZiveLab.ZM
         {
            
             timer1.Stop();
-
+       
             if (chevent != null)
             {
                 foreach (Delegate ev in chevent.GetInvocationList())
@@ -145,7 +145,8 @@ namespace ZiveLab.ZM
             pan.Controls.Clear();
             foreach (var ch in chs)
             {
-                pan.Controls.Add(new BZAChPan(ch, ref chevent, new EventHandler(ShowMaxChild)));
+                pan.Controls.Add(new BZAChPan(ch, ref chevent, new EventHandler(ShowMaxChild),this.MdiParent));
+
             }
             ShowChildWindows();
             timer1.Start();
@@ -199,7 +200,7 @@ namespace ZiveLab.ZM
             pan.Controls.Clear();
             foreach (var ch in chs)
             {
-                pan.Controls.Add(new BZAChPan(ch, ref chevent, new EventHandler(ShowMaxChild)));
+                pan.Controls.Add(new BZAChPan(ch, ref chevent, new EventHandler(ShowMaxChild),this.MdiParent));
             }
             if (iMode == 1) Properties.Settings.Default.GrpMaxWinCh = -1;
             else Properties.Settings.Default.MaxWinCh = -1;

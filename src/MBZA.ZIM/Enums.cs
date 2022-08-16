@@ -323,7 +323,7 @@ namespace ZiveLab.ZM.ZIM
         [Description("11.1mA")]
         I20mA = 4,
         [Description("1.11mA")]
-        I2mA = 5,
+        I2mA = 6,
     }
 
     public enum enDescRangeI

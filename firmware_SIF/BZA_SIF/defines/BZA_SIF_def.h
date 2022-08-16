@@ -15,8 +15,9 @@
 
 #define FIRMWARE_VER_MAJOR	6  //0.256
 #define FIRMWARE_VER_MINOR	0
-#define FIRMWARE_VER_REV	1
-#define FIRMWARE_VER_BUILD	6
+#define FIRMWARE_VER_REV	2
+#define FIRMWARE_VER_BUILD	3
+
 
 #define HW_ENABLE			0x1	
 #define HW_DISABLE			0x0	
@@ -26,7 +27,7 @@
 #define TCP_SOCK_NUM        1
 #define FIND_SOCK_NUM       2
 
-#define DEF_COMM_TIMEOUT    	8000
+#define DEF_COMM_TIMEOUT    	3000
 
 // NAND Memory Define
 #define NAND_MAINSIZE_PAGE      512
@@ -553,6 +554,7 @@ typedef struct
 	
 	double 				Veoc;
 	double 				Vdc;
+	double 				Idc;
 	double 				Temperature;
 	
 	ushort 				RealSkip;
@@ -564,7 +566,7 @@ typedef struct
 	double 				DispFreq;
 	double 				DispMag;
 	double 				DispPhase;
-	double 				nouse1;
+	
     double 				nouse2;
 } stChStatusInf;
 
@@ -586,7 +588,6 @@ typedef struct
 	ushort				ondelaystable;
 	
 	ushort 				celloffwait;
-	double              CtrlRate;
 	double              CutoffV;
 	ushort				timeproc;
 	uint 				m_MsDurStamp;

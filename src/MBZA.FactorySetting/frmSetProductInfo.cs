@@ -93,18 +93,47 @@ namespace ZiveLab.ZM.FactorySetting
             }
 
             str  = mSysCfg.mSIFCfg.GetBoardVer();
-            numBdVer0.Value = Convert.ToDecimal(str.Substring(0, 1));
-            numBdVer1.Value = Convert.ToDecimal(str.Substring(2, 1));
-            numBdVer2.Value = Convert.ToDecimal(str.Substring(4, 1));
-            numBdVer3.Value = Convert.ToDecimal(str.Substring(6, 1));
+            if (str.Length == 7)
+            {
+                numBdVer0.Value = Convert.ToDecimal(str.Substring(0, 1));
+                numBdVer1.Value = Convert.ToDecimal(str.Substring(2, 1));
+                numBdVer2.Value = Convert.ToDecimal(str.Substring(4, 1));
+                numBdVer3.Value = Convert.ToDecimal(str.Substring(6, 1));
+            }
+            else
+            {
+                numBdVer0.Value = 0;
+                numBdVer1.Value = 0;
+                numBdVer2.Value = 0;
+                numBdVer3.Value = 0;
+            }
 
             str = mSysCfg.mSIFCfg.GetFirmwareVer();
-            numFwVer0.Value = Convert.ToDecimal(str.Substring(0, 1));
-            numFwVer1.Value = Convert.ToDecimal(str.Substring(2, 1));
-            numFwVer2.Value = Convert.ToDecimal(str.Substring(4, 1));
-            numFwVer3.Value = Convert.ToDecimal(str.Substring(6, 1));
+            if (str.Length == 7)
+            {
+                numFwVer0.Value = Convert.ToDecimal(str.Substring(0, 1));
+                numFwVer1.Value = Convert.ToDecimal(str.Substring(2, 1));
+                numFwVer2.Value = Convert.ToDecimal(str.Substring(4, 1));
+                numFwVer3.Value = Convert.ToDecimal(str.Substring(6, 1));
+            }
+            else
+            {
+                numFwVer0.Value = 0;
+                numFwVer1.Value = 0;
+                numFwVer2.Value = 0;
+                numFwVer3.Value = 0;
+            }
             maskSerial.Mask = " & & & & & & & & & & ";
-            maskSerial.Text = mConnCfg.GetSerialNumber().Substring(2);
+            str = mConnCfg.GetSerialNumber();
+            if(str.Length > 2)
+            {
+                maskSerial.Text = mConnCfg.GetSerialNumber().Substring(2);
+            }
+            else
+            {
+                maskSerial.Text = "";
+            }
+            
         }
 
         public void ViewZimInformation()

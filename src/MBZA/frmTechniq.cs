@@ -116,17 +116,14 @@ namespace ZiveLab.ZM
             {
                 if (type == eZimType.UNKNOWN) zimtype = eZimType.BZA1000;
                 else zimtype = type;
+
                 var iRanges = Enum.GetValues(typeof(enCurrentRange)).Cast<enCurrentRange>();
                 foreach (var item in iRanges)
                 {
                     cboIrange.Items.Add(item.GetDescription());
                 }
 
-                var iControl = Enum.GetValues(typeof(enCurrentControl)).Cast<enCurrentControl>();
-                foreach (var icontitem in iControl)
-                {
-                    cbomonctrl.Items.Add(icontitem.GetDescription());
-                }
+                
 
             }
             else
@@ -137,9 +134,15 @@ namespace ZiveLab.ZM
                 {
                     cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax, "A"));
                     cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax * zim.ranges.iac_rng[i].controlgain, "A"));
-                    cbomonctrl.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax * 0.5, "A"));
                 }
             }
+
+            var iControl = Enum.GetValues(typeof(enCurrentControl)).Cast<enCurrentControl>();
+            foreach (var icontitem in iControl)
+            {
+                cbomonctrl.Items.Add(icontitem.GetDescription());
+            }
+
 
             cboIrange.SelectedIndex = 2;
             cbomonctrl.SelectedIndex = 1;

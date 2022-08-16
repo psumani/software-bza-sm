@@ -27,6 +27,7 @@ namespace ZiveLab.ZM
         private int sifch;
         private int ch;
         private int rng;
+        private int otherrng;
         private bool usefile;
         private int rtmode;
         private int rtsize;
@@ -91,13 +92,23 @@ namespace ZiveLab.ZM
             {
                 rng = 0;
             }
+
             rng = trng;
+
+            if((rng % 2) > 0)
+            {
+                otherrng = rng / 2;
+            }
+            else
+            {
+                otherrng = rng + 1;
+            }
 
             string str = string.Format("{0}\\Cal_{1}_rng{2}.zmf", Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber(), rng);
             sLogDataFile = Path.Combine(gBZA.appcfg.PathLog, str);
 
 
-            ranges = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges;
+            ranges.ToWritePtr(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToByteArray());
 
             zimtype = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetZIMType();
             cborange.Items.Clear();
@@ -226,7 +237,7 @@ namespace ZiveLab.ZM
                     if (ChkCalib)
                     {
                         mRtGrp.Initialize();
-                        ProcApplyFitting(rng);
+                        ProcApplyFitting();
                     }
                    
                     DataCount = 0;
@@ -1281,9 +1292,9 @@ namespace ZiveLab.ZM
         }
 
 
-        private void ProcFitting(int CRange)
+        private void ProcFitting()
         {
-            int trng = CRange / 2;
+            int trng = rng / 2;
             
 
 
@@ -1295,40 +1306,32 @@ namespace ZiveLab.ZM
                 return;
             }
 
-            ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, 0.0, ranges.mDummy[CRange]); 
+            ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, 0.0, ranges.mDummy[rng]);
 
-            if((CRange%2) == 0) ranges.iac_rng[trng].gain1 = zCal.Gain;
-            else ranges.iac_rng[trng].gain2 = zCal.Gain;
+            
+            ranges.iac_rng[trng].gain1 = zCal.Gain;
+            ranges.iac_rng[trng].gain2 = zCal.Gain;
 
             zCal.ApplyGain(ref fititems, fititems.Length, zCal.Gain);
 
             RefreshChangeTestData(fititems);
-            ranges.mEisIRngCalInfo[CRange].n1 = zCal.Coefficients[0];
-            ranges.mEisIRngCalInfo[CRange].n2 = zCal.Coefficients[1];
-            ranges.mEisIRngCalInfo[CRange].n3 = zCal.Coefficients[2];
-            ranges.mEisIRngCalInfo[CRange].d1 = zCal.Coefficients[3];
-            ranges.mEisIRngCalInfo[CRange].d2 = zCal.Coefficients[4];
-            ranges.mEisIRngCalInfo[CRange].d3 = zCal.Coefficients[5];
+            ranges.mEisIRngCalInfo[rng].n1 = zCal.Coefficients[0];
+            ranges.mEisIRngCalInfo[rng].n2 = zCal.Coefficients[1];
+            ranges.mEisIRngCalInfo[rng].n3 = zCal.Coefficients[2];
+            ranges.mEisIRngCalInfo[rng].d1 = zCal.Coefficients[3];
+            ranges.mEisIRngCalInfo[rng].d2 = zCal.Coefficients[4];
+            ranges.mEisIRngCalInfo[rng].d3 = zCal.Coefficients[5];
 
-            /*
-            int trng1 = trng * 2;
-            ranges.mEisIRngCalInfo[trng1].n1 = zCal.Coefficients[0];
-            ranges.mEisIRngCalInfo[trng1].n2 = zCal.Coefficients[1];
-            ranges.mEisIRngCalInfo[trng1].n3 = zCal.Coefficients[2];
-            ranges.mEisIRngCalInfo[trng1].d1 = zCal.Coefficients[3];
-            ranges.mEisIRngCalInfo[trng1].d2 = zCal.Coefficients[4];
-            ranges.mEisIRngCalInfo[trng1].d3 = zCal.Coefficients[5];
-            trng1++;
-            ranges.mEisIRngCalInfo[trng1].n1 = zCal.Coefficients[0];
-            ranges.mEisIRngCalInfo[trng1].n2 = zCal.Coefficients[1];
-            ranges.mEisIRngCalInfo[trng1].n3 = zCal.Coefficients[2];
-            ranges.mEisIRngCalInfo[trng1].d1 = zCal.Coefficients[3];
-            ranges.mEisIRngCalInfo[trng1].d2 = zCal.Coefficients[4];
-            ranges.mEisIRngCalInfo[trng1].d3 = zCal.Coefficients[5];
-            */
+            ranges.mEisIRngCalInfo[otherrng].n1 = zCal.Coefficients[0];
+            ranges.mEisIRngCalInfo[otherrng].n2 = zCal.Coefficients[1];
+            ranges.mEisIRngCalInfo[otherrng].n3 = zCal.Coefficients[2];
+            ranges.mEisIRngCalInfo[otherrng].d1 = zCal.Coefficients[3];
+            ranges.mEisIRngCalInfo[otherrng].d2 = zCal.Coefficients[4];
+            ranges.mEisIRngCalInfo[otherrng].d3 = zCal.Coefficients[5];
+            
         }
 
-        private void ProcApplyFitting(int CRange)
+        private void ProcApplyFitting()
         {
             items = listPacket.ToArray();
             fititems = listPacket.ToArray();
@@ -1339,9 +1342,12 @@ namespace ZiveLab.ZM
                 return;
             }
             double tgain = 1.0;
-            if ((CRange % 2) == 0) tgain = ranges.iac_rng[CRange / 2].gain1;
-            else tgain = ranges.iac_rng[CRange / 2].gain2;
-            ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, ranges.mEisIRngCalInfo[CRange], tgain, ranges.mDummy[CRange]);
+            int trng = rng / 2;
+
+            if ((rng % 2) == 0) tgain = ranges.iac_rng[trng].gain1;
+            else tgain = ranges.iac_rng[trng].gain2;
+
+            ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, ranges.mEisIRngCalInfo[rng], tgain, ranges.mDummy[rng]);
 
             zCal.ApplyGain(ref fititems, fititems.Length, zCal.Gain);
 
@@ -1350,7 +1356,7 @@ namespace ZiveLab.ZM
 
         private void lnkCalculate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProcFitting(rng);
+            ProcFitting();
 
             RefreshPara();
             RefreshGraphEIS();
@@ -1445,6 +1451,8 @@ namespace ZiveLab.ZM
         private void lnksave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+
+            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(ranges.ToByteArray());
 
             bool res = MBZA_MapUtil.Save_Range_info(Serial, sifch);
 

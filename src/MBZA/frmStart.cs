@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.WindowsAPICodePack;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -161,13 +162,16 @@ namespace ZiveLab.ZM
 
         private void btselpath_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.Title = "Set result file location.";
             dialog.InitialDirectory = txtfilepath.Text;
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 txtfilepath.Text = dialog.FileName;
             }
+            this.Enabled = true;
         }
 
         private void listbox1_SelectedIndexChanged(object sender, EventArgs e)

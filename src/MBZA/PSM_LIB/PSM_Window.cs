@@ -37,6 +37,7 @@ namespace SMLib
 
             ComboBox combo = new ComboBox() { Left = (int)((formwidth - Combowidth) * 0.5), Top = 40, Width = Combowidth };
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo.MaxDropDownItems = 10;
             combo.Items.AddRange(items);
             combo.SelectedIndex = defaultvalue;
 

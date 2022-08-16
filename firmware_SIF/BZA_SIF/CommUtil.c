@@ -1436,12 +1436,19 @@ void TCP_Poll(int s,int port)
 		break;
 	case LISTEN:
 		OnLed2(true);
-		if(s == TCP_SOCK_NUM) m_pGlobalVar->LedBusyStat = 0;
+		if(s == TCP_SOCK_NUM) 
+		{
+			m_pGlobalVar->LedBusyStat = 0;
+		}
 		if(*((byte*)(REG_CH_BASE + (m_Socket[s] * REG_CH_SIZE) + 0x0003)) == Sn_SR_ESTABLISHED)
 		{			
-			if(s == TCP_SOCK_NUM) m_pGlobalVar->LedBusyStat = 1;
-			m_SocketStatus[s] = ESTABLISHED;	
+			if(s == TCP_SOCK_NUM) 
+			{
+				m_pGlobalVar->LedBusyStat = 1;				
+			}
 			m_pGlobalVar->CommTimeOut = 0;
+			m_SocketStatus[s] = ESTABLISHED;	
+			
 			m_pGlobalVar->prevrecvsize = 0;
 		}
 
@@ -1450,7 +1457,10 @@ void TCP_Poll(int s,int port)
 		{
 			OnLed2(false);			
 			recvsize = GetRecvDataSize(m_Socket[s]);			
-			if(s == TCP_SOCK_NUM) m_pGlobalVar->LedBusyStat = 1;
+			if(s == TCP_SOCK_NUM) 
+			{
+				m_pGlobalVar->LedBusyStat = 1;
+			}
 			if(recvsize >= sizeof(Packet))
 			{
 				Packet packet;
@@ -1500,13 +1510,7 @@ void TCP_Poll(int s,int port)
 				m_pGlobalVar->CommTimeOut = 0;
 				close(m_Socket[s]);			
 				m_SocketStatus[s] = START;				
-			}
-			else if(m_pGlobalVar->CommTimeOut > DEF_COMM_TIMEOUT &&  s == TCP_SOCK_NUM)
-			{
-				m_pGlobalVar->CommTimeOut = 0;
-				close(m_Socket[s]);			
-				m_SocketStatus[s] = START;		
-			}
+			}		
 			else if(m_pGlobalVar->prevrecvsize != recvsize)
 			{
 				m_pGlobalVar->CommTimeOut = 0;

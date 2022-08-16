@@ -270,6 +270,7 @@
             // 
             // frmStart
             // 
+            this.AcceptButton = this.btstart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 342);
@@ -286,7 +287,6 @@
             this.Name = "frmStart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuration start condition.";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmStart_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -167,7 +167,8 @@ int GetFreqCount(int ch)
 	
 	st_Tech* ptech = &m_pGlobalVar->mChVar[ch].mTech;
     int iret = 0;
-	if(ptech->type == TECH_HFR)
+	
+	if(ptech->type == TECH_HFR) 
 	{
 		iret ++;
 		return iret;
@@ -261,12 +262,13 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex >= aPoints)
 	{
-		m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex = 1;
+		
 		m_pGlobalVar->mChVar[ch].mFlow.m_loopcnt++;
 		if(m_pGlobalVar->mChVar[ch].mFlow.m_loopcnt >= m_pGlobalVar->mChVar[ch].mFlow.m_iteration)
 		{
 			return 0.0;
 		}
+		else m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex = 1;
 		return dfreq;
 	}
 	
@@ -433,7 +435,6 @@ inline void proc_init_test(int ch)
 	
 	pch->mFlow.m_MsOndelayLimit = (uint)(pTech->ondelay * 1000.0);
 	pch->mFlow.ondelaystable = pTech->ondelaystable;
-	pch->mFlow.CtrlRate = 0.5;
 	
 	if(pTech->type == TECH_HFR)
 	{
@@ -462,7 +463,6 @@ inline void proc_init_test(int ch)
 		if(pch->mFlow.celloffwait == 1) 
 		{
 			proc_eis_LoadOn(ch, 0);   
-			pch->mFlow.CtrlRate = 0.0;
 		}
 		else
 		{
@@ -558,7 +558,7 @@ void proc_test_main(int ch)
 	bool bmonitor = Check_monitor(ch);
 	if(pch->mChStatInf.TaskNo != pch->mChStatInf.NextTaskNo)
 	{
-	
+		pch->mChStatInf.BiasOn = 0;
 		if(pch->mChStatInf.TaskNo == -1)
 		{
 			memset(pch->mChStatInf.eis_status.Real_val,0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT);
@@ -583,11 +583,11 @@ void proc_test_main(int ch)
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_BEGIN;
 			}
 			pch->m_msSlop = 0;
-			pch->mChStatInf.BiasOn = 0;
 			pch->mChStatInf.eis_status.Freqindex = 0;
 			pch->mChStatInf.RunTimeStamp = 0;
 			pch->mChStatInf.TaskTimeStamp = 0;
 			pch->mChStatInf.CycleTimeStamp = 0;
+			AuxProc(ch);
 		}
 		
 		if(pch->mChStatInf.CycleNo != pch->mChStatInf.NextCycleNo)

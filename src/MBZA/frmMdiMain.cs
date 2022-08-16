@@ -227,7 +227,7 @@ namespace ZiveLab.ZM
             frm.Icon = ZM.Properties.Resources.zm1;
             frm.TopMost = true;
 
-            this.timer1.Stop();
+            
 
             if (frm.ShowDialog() == DialogResult.Cancel)
             {
@@ -318,6 +318,8 @@ namespace ZiveLab.ZM
             if (frmRtView == null)
             {
                 frmRtView = new frmRealview(2);
+                frmRtView.ShowInTaskbar = false;
+
                 frmRtView.MdiParent = this;
                 frmRtView.CloseThis += FrmRealview_CloseThis;
 
@@ -437,7 +439,8 @@ namespace ZiveLab.ZM
             }
             else
             {
-                if(frmMainView.WindowState == FormWindowState.Minimized)
+                frmMainView.InitMainView();
+                if (frmMainView.WindowState == FormWindowState.Minimized)
                 {
                     frmMainView.WindowState = gBZA.appcfg.MainViewWinStatus;
                     if (gBZA.appcfg.MainViewWinStatus == FormWindowState.Normal)
@@ -493,9 +496,16 @@ namespace ZiveLab.ZM
 
         private void RefreshDeviceRegBZA()
         {
+            this.timer1.Stop();
             bRefresh = false;
             this.Visible = false;
             notifyIcon1.Visible = false;
+            /*
+            if (frmMainView != null)
+            {
+                frmMainView.Close();
+            }
+            */
             if (ExecuteSplash() == true)
             {
                 gBZA.ConnectSifs();
@@ -517,6 +527,7 @@ namespace ZiveLab.ZM
                 View_MainHome();
 
             }
+
             try
             {
                 this.Visible = true;
@@ -655,6 +666,7 @@ namespace ZiveLab.ZM
             deForm.OpenEisGraphClick += DeForm_OpenEisGraphClick;
 
             deForm.MdiParent = this;
+            deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
 
             deForm.Show();
@@ -730,6 +742,8 @@ namespace ZiveLab.ZM
         private void OpenTechFile(int ch, string filename, eZimType type = eZimType.UNKNOWN)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
+            frmTech.ShowInTaskbar = false;
+            frmTech.MdiParent = this;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
@@ -739,10 +753,12 @@ namespace ZiveLab.ZM
                 frmTech.Location = gBZA.appcfg.TechLocation;
                 frmTech.StartPosition = FormStartPosition.Manual;
             }
+            
             if (frmTech.loaderr == false)
             {
-                frmTech.ShowDialog();
+                frmTech.Show();
             }
+            frmTech.WindowState = FormWindowState.Normal;
         }
 
         private void EgForm_OpenTechEditorClick(object sender, EventArgs e)
@@ -773,7 +789,7 @@ namespace ZiveLab.ZM
             egForm.UnitC = false;
             egForm.TimeFormat = 1;
             egForm.MdiParent = this;
-
+            egForm.ShowInTaskbar = false;
             egForm.OpenDataEditorClick += EgForm_OpenDataEditorClick;
             egForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
             egForm.Show();
@@ -928,6 +944,8 @@ namespace ZiveLab.ZM
                 if (frmRegRtView == null)
                 {
                     frmRegRtView = new frmRealview(0);
+                    frmRegRtView.ShowInTaskbar = false;
+                    //frmRegRtView.MdiParent = this;
                     if (gBZA.appcfg.RegRealviewSize == new Size(0, 0) )
                     {
                         frmRegRtView.StartPosition = FormStartPosition.CenterParent;
@@ -997,6 +1015,7 @@ namespace ZiveLab.ZM
                 if (frmGrpRtView == null)
                 {
                     frmGrpRtView = new frmRealview(1);
+                    frmGrpRtView.ShowInTaskbar = false;
                     frmGrpRtView.MdiParent = this;
                     if (gBZA.appcfg.GroupRealviewSize == new Size(0, 0) )
                     {
@@ -1214,9 +1233,13 @@ namespace ZiveLab.ZM
             {
                 this.AniIdx = 0;
             }
-            if (bRefresh)
+            if (frmMainView != null &&  bRefresh)
             {
-                evTimer?.Invoke(this, e);
+                if (frmMainView.bFirst == false && frmMainView.bClose == false)
+                {
+                    evTimer?.Invoke(this, e);
+                }
+                
             }
         }
 

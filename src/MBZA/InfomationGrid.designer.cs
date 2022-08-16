@@ -82,7 +82,7 @@
             this.treeView1.Location = new System.Drawing.Point(0, 25);
             this.treeView1.Name = "treeView1";
             this.treeView1.ShowNodeToolTips = true;
-            this.treeView1.Size = new System.Drawing.Size(201, 322);
+            this.treeView1.Size = new System.Drawing.Size(134, 322);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeView1.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView1_DrawNode);
@@ -153,10 +153,10 @@
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Right;
             this.propertyGrid1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.propertyGrid1.LineColor = System.Drawing.SystemColors.Control;
-            this.propertyGrid1.Location = new System.Drawing.Point(205, 0);
+            this.propertyGrid1.Location = new System.Drawing.Point(138, 0);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.propertyGrid1.Size = new System.Drawing.Size(230, 347);
+            this.propertyGrid1.Size = new System.Drawing.Size(362, 347);
             this.propertyGrid1.TabIndex = 1;
             this.propertyGrid1.Resize += new System.EventHandler(this.propertyGrid1_Resize);
             // 
@@ -164,7 +164,7 @@
             // 
             this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(201, 0);
+            this.splitter1.Location = new System.Drawing.Point(134, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(4, 347);
             this.splitter1.TabIndex = 2;
@@ -180,7 +180,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(201, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(134, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -452,7 +452,7 @@
             this.Controls.Add(this.propertyGrid1);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "InfomationGrid";
-            this.Size = new System.Drawing.Size(435, 347);
+            this.Size = new System.Drawing.Size(500, 347);
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

@@ -1423,6 +1423,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_rtc rtc;
         public double Veoc;
         public double Vdc;
+        public double Idc;
 
         public double Temperature;
         public ushort RealSkip;
@@ -1435,8 +1436,8 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double DispMag;
         public double DispPhase;
         
+        
         public double nouse1;
-        public double nouse2;
         public stChStatusInf(byte init)
         {
             bCheck = 0;
@@ -1460,6 +1461,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             rtc = new st_rtc(0);
             Veoc = 0.0;
             Vdc = 0.0;
+            Idc = 0.0;
             Temperature = 0.0;
 
             RealSkip = 0;
@@ -1472,7 +1474,6 @@ namespace ZiveLab.ZM.ZIM.Packets
             DispPhase = 0.0;
            
             nouse1 = 0.0;
-            nouse2 = 0.0;
         }
 
         public int GetSize()

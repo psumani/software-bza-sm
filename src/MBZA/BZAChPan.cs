@@ -45,6 +45,7 @@ namespace ZiveLab.ZM
 
         bool bRtGrpPause;
 
+        public Form MdiParent;
         public int rtmode;
         public int rtmode1;
         public int rtmode2;
@@ -85,12 +86,13 @@ namespace ZiveLab.ZM
         int oldcursorindex2;
         int LastPlotPoint;
         int LastPlotPoint1;
-        public BZAChPan(int ich, ref EventHandler evtimer, EventHandler evshowmax)
+        public BZAChPan(int ich, ref EventHandler evtimer, EventHandler evshowmax, Form tMdiparent)
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             GrpSpaceRate = 0.01;
-
+            MdiParent = tMdiparent;
             fs_ss = new FormatString(FormatStringMode.ElapsedTime, @"ss");
             fs_mm = new FormatString(FormatStringMode.ElapsedTime, @"m\:ss");
             fs_hh = new FormatString(FormatStringMode.ElapsedTime, @"h\:mm\:ss");
@@ -170,7 +172,7 @@ namespace ZiveLab.ZM
             toolTip.SetToolTip(this.grprt, "Double-click the graph to change the size of the window to maximum or normal size.");
             toolTip.SetToolTip(this.grp1, "Double-click the graph to change the size of the window to maximum or normal size.");
             toolTip.SetToolTip(this.grp2, "Double-click the graph to change the size of the window to maximum or normal size.");
-            toolTip.SetToolTip(this.lbldatacount, "Displays the number of resulting data and the number of data stored in the file.\r\n Number of result data (number of result file data).");
+            toolTip.SetToolTip(this.lbldatacount, "Display the number of data stored in the data file and the number of data points in BZA memory.\r\n Data number of result file (data number of BZA memory).");
             
             toolTip.SetToolTip(this.lblTech, "");
             toolTip.SetToolTip(this.lblResult, "");
@@ -811,7 +813,7 @@ namespace ZiveLab.ZM
                 grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
                 grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
             }
-
+            grprt.YAxes[0].Visible = true;
             if (rtmode == 0)
             {
                 RtMenuGraphMode1.Checked = true;
@@ -1884,7 +1886,14 @@ namespace ZiveLab.ZM
             DateTime edt = new DateTime(headinfo.rtc_end.tick * TimeSpan.TicksPerMillisecond);
 
             str = "  location:";
-            str1 = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch]);
+            if (gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch].Length < 5)
+            {
+                str1 = "None.";
+            }
+            else
+            {
+                str1 = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch]);
+            }
             str += str1;
             toolTip.SetToolTip(this.lblTech, str);
 
@@ -1903,6 +1912,10 @@ namespace ZiveLab.ZM
                 str += string.Format("Nominal AH: {0} AH\r\n", SM_Number.ToString(headinfo.Capa, enSM_TypeNumberToString.SIPrefix, 5));
                 str += string.Format("      User: {0}\r\n", Encoding.UTF8.GetString(headinfo.user).Trim('\0'));
                 str += string.Format("      Memo: {0}", Encoding.UTF8.GetString(headinfo.memo).Trim('\0'));
+            }
+            else
+            {
+                str += "\r\n  location: None.";
             }
             toolTip.SetToolTip(this.lblResult, str);
         }
@@ -2117,7 +2130,7 @@ namespace ZiveLab.ZM
 
             if (gBZA.SifLnkLst[serial].MBZAIF.condfilename[sifch].Length < 5)
             {
-                str = "";
+                str = "None.";
                 lblTech.Text = string.Format(" Tech. : {0}", str);
             }
             else
@@ -2128,7 +2141,7 @@ namespace ZiveLab.ZM
 
             if (gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch].Length < 5)
             {
-                str = "";
+                str = "None.";
                 lblResult.Text = string.Format(" Result: {0}", str);
             }
             else
@@ -2136,7 +2149,7 @@ namespace ZiveLab.ZM
                 str = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
                 lblResult.Text = string.Format(" Result: {0}", str);
             }
-            lbldatacount.Text = string.Format("   Data: {0}({1})", chstat.eis_status.rescount, gBZA.SifLnkLst[serial].MBZAIF.mresfile[sifch].datacount);
+            lbldatacount.Text = string.Format("   Data: {0}({1})", gBZA.SifLnkLst[serial].MBZAIF.mresfile[sifch].datacount, chstat.eis_status.rescount);
             labelElapsedTime.Text = string.Format("Elapsed: {0,4:###0}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
 
             eZimType zimtype = (eZimType)chstat.ZimType; // (eZimType)(gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].info.cModel[0] - 0x30);
@@ -2148,6 +2161,19 @@ namespace ZiveLab.ZM
             }
 
             lblRange.Text = string.Format("  Range: {0}/ {1}", SM_Number.ToRangeString(crngval, "A"), SM_Number.ToRangeString(mrng.vdc_rng[chstat.Vdc_rngno].realmax, "V"));
+
+            if (chstat.Idc >= 1.0)
+            {
+                lblIdc.Text = string.Format("    Idc: {0,8:###0.0##} A", chstat.Idc);
+            }
+            else if (chstat.Idc >= 0.001)
+            {
+                lblIdc.Text = string.Format("    Idc: {0,8:###0.0##}mA", chstat.Idc * 1000.0);
+            }
+            else
+            {
+                lblIdc.Text = string.Format("    Idc: {0,8:###0.0##}uA", chstat.Idc * 1000000.0);
+            }
 
             if (chstat.Vdc >= 1000.0)
             {
@@ -2297,6 +2323,7 @@ namespace ZiveLab.ZM
             lblRange.ForeColor = lblTestStatus.ForeColor;
             lblVeoc.ForeColor = lblTestStatus.ForeColor;
             lblVdc.ForeColor = lblTestStatus.ForeColor;
+            lblIdc.ForeColor = lblTestStatus.ForeColor;
             lblTemp.ForeColor = lblTestStatus.ForeColor;
             lblfreq.ForeColor = lblTestStatus.ForeColor;
             lblzreal.ForeColor = lblTestStatus.ForeColor;
@@ -3969,6 +3996,8 @@ namespace ZiveLab.ZM
         private void OpenTechFile(string filename)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename);
+            frmTech.ShowInTaskbar = false;
+            frmTech.MdiParent = this.MdiParent;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
@@ -3979,7 +4008,8 @@ namespace ZiveLab.ZM
                 frmTech.StartPosition = FormStartPosition.Manual;
             }
 
-            frmTech.ShowDialog();
+            frmTech.Show();
+            frmTech.WindowState = FormWindowState.Normal;
         }
 
         private void btTechEdit_Click(object sender, EventArgs e)
@@ -4077,13 +4107,14 @@ namespace ZiveLab.ZM
             deForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             //deForm.SchTempPath = gBZA.appcfg.PathSchTemp;
             deForm.TimeFormat = 1;
-
+            
             deForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
             //deForm.OpenGeneralGraphClick += DeForm_OpenGeneralGraphClick;
             //deForm.OpenCycleGraphClick += DeForm_OpenCycleGraphClick;
             deForm.OpenEisGraphClick += DeForm_OpenEisGraphClick;
+            deForm.MdiParent = this.MdiParent;
 
-            //deForm.MdiParent = this;
+            deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
 
             deForm.Show();
@@ -4153,6 +4184,8 @@ namespace ZiveLab.ZM
         private void OpenTechFile(int ch, string filename, eZimType type = eZimType.UNKNOWN)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
+            frmTech.ShowInTaskbar = false;
+            frmTech.MdiParent = this.MdiParent;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
@@ -4163,7 +4196,8 @@ namespace ZiveLab.ZM
                 frmTech.StartPosition = FormStartPosition.Manual;
             }
 
-            if(frmTech.bopen)  frmTech.ShowDialog();
+            if(frmTech.bopen)  frmTech.Show();
+            frmTech.WindowState = FormWindowState.Normal;
         }
 
         private void EgForm_OpenTechEditorClick(object sender, EventArgs e)
@@ -4419,8 +4453,8 @@ namespace ZiveLab.ZM
             //egForm.SchTempPath = gBZA.appcfg.PathSchTemp;
             egForm.UnitC = false;
             egForm.TimeFormat = 1;
-            //egForm.MdiParent = this;
-
+            egForm.MdiParent = this.MdiParent;
+            egForm.ShowInTaskbar = false;
             egForm.OpenDataEditorClick += EgForm_OpenDataEditorClick;
             egForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
             egForm.Show();

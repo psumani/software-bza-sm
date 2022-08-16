@@ -992,14 +992,17 @@ namespace ZiveLab.ZM
 
 
             PromptDialog dlg = new PromptDialog();
-           
+
             List<string> ItemList = new List<string>();
             int ireg;
             int ireg1;
             string sreg;
             string sreg1;
+            string sMsg = "";
+            bool bremove = false;
+            bool breg = false;
 
-            if(BzaChRow <= 0)
+            if (BzaChRow <= 0)
             {
                 MessageBox.Show("The BZA channel is not selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1021,9 +1024,114 @@ namespace ZiveLab.ZM
                 ireg = Convert.ToInt32(sreg);
             }
 
-            ireg1 = dlg.ShowComboDialog("Please select the channel of the application you want to register.", ItemList.ToArray(), ireg, gBZA.sMsgTitle,100, 500);
+            ireg1 = dlg.ShowComboDialog("Please select the channel of the application you want to register.", ItemList.ToArray(), ireg, gBZA.sMsgTitle, 100, 500);
 
-            if(ireg != ireg1)
+            if (ireg != ireg1)
+            {
+                if (ireg > 0)
+                {
+                    bremove = true;
+                }
+
+                if (ireg1 > 0)
+                {
+                    breg = true;
+                }
+            }
+
+            if (bremove)
+            {
+                if (breg)
+                {
+                    sMsg = string.Format("Do you want to release registered channel {0} and ", ireg);
+                    sMsg += string.Format("register as channel {0} ?", ireg1);
+                }
+                else
+                {
+                    sMsg = string.Format("Do you want to release registered channel {0}. ", ireg);
+                }
+            }
+            else
+            {
+                if (breg)
+                {
+                    sMsg = string.Format("Do you want to register as channel {0} ?", ireg1);
+                }
+                else
+                {
+                    MessageBox.Show("The BZA channel is not selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            if (MessageBox.Show(sMsg, gBZA.sMsgTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+            {
+                return;
+            }
+            sreg = string.Format("{0}", ireg - 1);
+            sreg1 = string.Format("{0}", ireg1 - 1);
+            if (breg)
+            {
+                if (gBZA.ChLnkLst.ContainsKey(sreg1))
+                {
+                    sMsg = string.Format("Channel {0} is already registered.Do you want to proceed ?", ireg1);
+                    if (MessageBox.Show(sMsg, gBZA.sMsgTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                    if (gBZA.SifLnkLst.ContainsKey(gBZA.ChLnkLst[sreg1].sSerial))
+                    {
+                        if (gBZA.SifLnkLst[gBZA.ChLnkLst[sreg1].sSerial].MBZAIF.bConnect)
+                        {
+                            gBZA.SifLnkLst[gBZA.ChLnkLst[sreg1].sSerial].MBZAIF.StopThread();
+                        }
+                        gBZA.SifLnkLst[gBZA.ChLnkLst[sreg1].sSerial].iLinkCh[gBZA.ChLnkLst[sreg1].SifCh] = -1;
+                    }
+                    gBZA.ChLnkLst.Remove(sreg1);
+                }
+
+                stLinkSifCh tval = new stLinkSifCh(0);
+                tval.bChkSIF = true;
+                tval.bChkCh = true;
+                tval.sip = gBZA.SifLnkLst[sSelSerial2].sip;
+                tval.sMac = gBZA.SifLnkLst[sSelSerial2].sMac;
+                tval.sSerial = sSelSerial2;
+                tval.SifCh = BzaChRow - 1;
+                gBZA.SifLnkLst[sSelSerial2].iLinkCh[BzaChRow - 1] = ireg1 - 1;
+
+                if (gBZA.ChLnkLst.ContainsKey(sreg1))
+                {
+                    gBZA.ChLnkLst[sreg1] = tval;
+                }
+                else
+                {
+                    gBZA.ChLnkLst.Add(sreg1, tval);
+                }
+            }
+
+            if (bremove)
+            {
+                if (ireg > 0)
+                {
+                    sreg = string.Format("{0}", ireg - 1);
+                    if (gBZA.ChLnkLst.ContainsKey(sreg))
+                    {
+                        if (gBZA.SifLnkLst.ContainsKey(gBZA.ChLnkLst[sreg].sSerial))
+                        {
+                            if (gBZA.SifLnkLst[gBZA.ChLnkLst[sreg].sSerial].MBZAIF.bConnect)
+                            {
+                                gBZA.SifLnkLst[gBZA.ChLnkLst[sreg].sSerial].MBZAIF.StopThread();
+                            }
+                            gBZA.SifLnkLst[gBZA.ChLnkLst[sreg].sSerial].iLinkCh[gBZA.ChLnkLst[sreg].SifCh] = -1;
+                        }
+                        gBZA.ChLnkLst.Remove(sreg);
+                    }
+                }
+            }
+
+            RefreshAll();
+            /*
+            if (ireg != ireg1)
             {
                 if(ireg1 == 0)
                 {
@@ -1043,7 +1151,7 @@ namespace ZiveLab.ZM
                     {
                         sreg1 = string.Format("{0}", ireg1 - 1);
                         sreg = string.Format("{0}", ireg - 1);
-                        string sMsg = "";
+                       
                         
 
                             
@@ -1067,6 +1175,7 @@ namespace ZiveLab.ZM
                             }
                             if (gBZA.SifLnkLst.ContainsKey(gBZA.ChLnkLst[sreg1].sSerial))
                             {
+                                gBZA.SifLnkLst[gBZA.ChLnkLst[sreg1].sSerial].MBZAIF.StopThread();
                                 gBZA.SifLnkLst[gBZA.ChLnkLst[sreg1].sSerial].iLinkCh[gBZA.ChLnkLst[sreg1].SifCh] = -1;
                             }
                         }
@@ -1086,8 +1195,8 @@ namespace ZiveLab.ZM
                         tval.sMac = gBZA.SifLnkLst[sSelSerial2].sMac;
                         tval.sSerial = sSelSerial2;
                         tval.SifCh = BzaChRow - 1;
-
                         gBZA.SifLnkLst[sSelSerial2].iLinkCh[BzaChRow - 1] = ireg1-1;
+
                         if (gBZA.ChLnkLst.ContainsKey(sreg1))
                         {
                             gBZA.ChLnkLst[sreg1] = tval;
@@ -1100,8 +1209,8 @@ namespace ZiveLab.ZM
                         RefreshAll();
                     }
                 }
-
-            }
+                
+            }*/
         }
 
         private void UploadZim_Click(object sender, EventArgs e)
@@ -1334,6 +1443,7 @@ namespace ZiveLab.ZM
                 
                 if(gBZA.SifLnkLst.ContainsKey(value.sSerial))
                 {
+                    gBZA.SifLnkLst[value.sSerial].MBZAIF.StopThread();
                     gBZA.SifLnkLst[value.sSerial].iLinkCh[value.SifCh] = -1;
                     for (int i=0; i<MBZA_Constant.MAX_DEV_CHANNEL; i++)
                     {

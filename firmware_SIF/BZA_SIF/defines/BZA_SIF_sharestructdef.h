@@ -39,6 +39,7 @@ typedef struct
 #define MAX_DECADE								4
 #define MAX_DATAPOINT							(MAX_DENSITY * MAX_DECADE)
 
+#define     DEF_HIFREQ_CALIBRANGE		4
 
 #define     DEF_MAX_IAC_RNGCNT			4
 #define     MAX_IAC_CTRL_RNGCNT			8

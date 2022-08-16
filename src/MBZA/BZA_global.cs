@@ -48,6 +48,12 @@ namespace ZiveLab.ZM
             _flex.Controls.Add(_ctl);
         }
 
+        internal void Clear()
+        {
+            _flex.Controls.Clear();
+            _flex.Clear();
+        }
+
         internal bool UpdatePosition()
         {
             // get row/col indices

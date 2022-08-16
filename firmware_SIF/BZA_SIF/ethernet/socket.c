@@ -43,7 +43,11 @@ byte test;
 
 void close(SOCKET s)
 {
-    if(s == TCP_SOCK_NUM) m_pGlobalVar->LedBusyStat = 0;
+    if(s == TCP_SOCK_NUM)
+	{
+		m_pGlobalVar->LedBusyStat = 0;
+	}
+	
 	*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0001)) = Sn_CR_CLOSE;
 	
 	while(*((byte*)(REG_CH_BASE + (s * REG_CH_SIZE) + 0x0003)))

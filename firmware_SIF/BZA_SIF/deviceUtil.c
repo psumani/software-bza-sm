@@ -1028,8 +1028,12 @@ void proc_eis_LoadOn(int ch, ushort loadon)
 	st_zim_do* preqdo = &m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do;
 
 	if (loadon == 1) preqdo->data |= DEF_DEVDO_CONT_SD;
-	else  preqdo->data &= DEF_DEVDO_CONT_CLRSD;
+	else  
+	{
+		preqdo->data &= DEF_DEVDO_CONT_CLRSD;
+	}
 	m_pGlobalVar->mChVar[ch].mChStatInf.LoadOn = loadon;
+	
 }
 
 inline void NR_FFT(int iAddr,ushort Ns) // data[0...2*Ns-1]
@@ -1187,6 +1191,7 @@ inline bool ChkSysCalVars(int ch)
 inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 {
 	st_zim_Eis_Cal_info* pEis_cal_info = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
+	st_zim_Eis_Cal_info* pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE];
 	
 	double f = praw->freq;
 	double fsq = f * f;
@@ -1197,15 +1202,20 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 	double aa;
 	double bb;
 
+	if (ChkEisCalVar(pEis_cal_info1) == false)
+	{
+		return;
+	}
+	pEis_cal_info1 = pEis_cal_info;
 	if (ChkEisCalVar(pEis_cal_info) == false)
 	{
 		return;
 	}
 	
-	a = 1 + pEis_cal_info->n3 * fsq;
-	b = (pEis_cal_info->n1 / f) + (pEis_cal_info->n2 * f);
-	c = 1 + pEis_cal_info->d3 * fsq;
-	d = (pEis_cal_info->d1 / f) + (pEis_cal_info->d2 * f);
+	a = 1 + pEis_cal_info1->n3 * fsq;
+	b = (pEis_cal_info->n1 / f) + (pEis_cal_info1->n2 * f);
+	c = 1 + pEis_cal_info1->d3 * fsq;
+	d = (pEis_cal_info->d1 / f) + (pEis_cal_info1->d2 * f);
 
 	if(c == 0.0 && d == 0.0)
 	{
@@ -2022,7 +2032,7 @@ bool proc_writedata(int ch)
 		pdata->RangeA = m_pSysConfig->mZimCfg[ch].ranges.iac_rng[pch->mChStatInf.Iac_in_rngno].realmax * 0.2;	
 	}
 
-	pdata->Idc = ContVal[0][pch->mChStatInf.Iac_in_rngno];
+	pdata->Idc = pch->mChStatInf.Idc;  
 	
 	
 	pdata->Temperature = pch->mChStatInf.Temperature;
@@ -2048,7 +2058,7 @@ inline void proc_eisflow_dcon(int ch)
 			return;
 		}
 		
-		
+		pch->mChStatInf.BiasOn = 1;
 		pch->mFlow.m_MsFlowdelayStamp = 10000;
 		pch->mFlow.m_MsFlowdelayLimit = 11000; 
 	}
@@ -2064,7 +2074,6 @@ inline void proc_eisflow_dcon(int ch)
 		{
 			pch->bChkSlope = 0;
 			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_ONDELAY;
-			pch->mChStatInf.BiasOn = 1;
 			pch->mFlow.m_MsFlowdelayStamp = 0;
 			pch->mFlow.m_MsFlowdelayLimit = 1000; 
 			pch->mFlow.OndelayTimeStamp = 0;
@@ -2075,6 +2084,7 @@ inline void proc_eisflow_dcon(int ch)
 		}
 	}
 }
+
 /*
 inline void proc_mon_chkslope(int ch)
 {
@@ -2250,6 +2260,7 @@ bool proc_eis_main(int ch)
 			else
 			{
 				proc_eisflow_dcon(ch);
+				
 			}
 		}
 	}
@@ -2270,6 +2281,7 @@ bool proc_eis_main(int ch)
 	{
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 		{
+			AuxProc(ch);
 			proc_eis_init(ch);
 
 			pch->meis.eis_raw.freq = pch->mChStatInf.eis_status.freq;
@@ -2672,6 +2684,7 @@ void AuxProc(int ch)
 {
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_ING) return;
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_FFT) return;
+	
 	if(m_pGlobalVar->mChVar[ch].TmpResetICE > 0) return;			  
 	proc_adc_rtd(ch);
 	if(m_pGlobalVar->mChVar[ch].TmpResetICE > 0) return;
@@ -2681,6 +2694,33 @@ void AuxProc(int ch)
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.LoadOn == 0)
 	{
 		m_pGlobalVar->mChVar[ch].mChStatInf.Veoc = m_pGlobalVar->mChVar[ch].mChStatInf.Vdc;
+		m_pGlobalVar->mChVar[ch].mChStatInf.Idc = 0.0;
+	}
+	else
+	{
+		if(m_pGlobalVar->mChVar[ch].mChStatInf.BiasOn == 1 && (m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus & 0xF) == DEF_TESTSTATUS_RUNNING)
+		{
+			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_MON)
+			{
+				m_pGlobalVar->mChVar[ch].mChStatInf.Idc =  ContVal[0][m_pGlobalVar->mChVar[ch].mChStatInf.Iac_in_rngno];
+			}
+			else
+			{
+				st_zim_adci_rnginf mrng = m_pSysConfig->mZimCfg[ch].ranges.iac_rng[m_pGlobalVar->mChVar[ch].mChStatInf.Iac_in_rngno];
+				if((m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno % 2) == 0)
+				{
+					m_pGlobalVar->mChVar[ch].mChStatInf.Idc = mrng.realmax * 0.5;
+				}
+				else
+				{
+					m_pGlobalVar->mChVar[ch].mChStatInf.Idc = mrng.realmax * mrng.controlgain * 0.5;
+				}
+			}
+		}
+		else
+		{
+			m_pGlobalVar->mChVar[ch].mChStatInf.Idc = 0.0;
+		}
 	}
 	if(m_pGlobalVar->mChVar[ch].TmpResetICE > 0) return;
 	CheckThermoStat(ch);

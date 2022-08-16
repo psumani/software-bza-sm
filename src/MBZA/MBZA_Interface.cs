@@ -141,6 +141,31 @@ namespace ZiveLab.ZM
             Th = new Thread(new ThreadStart(this.Thread_CommObj));
             this.Th.Start();
         }
+
+        public bool SimplePing(string sip)
+        {
+            Ping pingSender = new Ping();
+            PingReply reply;
+            try
+            {
+                reply = pingSender.Send(IPAddress.Parse(sip), 2000);
+
+                if (reply.Status == IPStatus.Success) //핑이 제대로 들어가고 있을 경우
+                {
+                    return true;
+                }
+                else //핑이 제대로 들어가지 않고 있을 경우 
+                {
+                    Debug.WriteLine(reply.Status);
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            return false;
+        }
+
         private void RefreshConnect()
         {
             bConnect = false;
@@ -160,7 +185,7 @@ namespace ZiveLab.ZM
 
                         serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
 
-                        mCommZim.CmdEnableCommTimeOut(0);
+                        mCommZim.CmdEnableCommTimeOut(1);
                     }
                 }
                 if(gBZA.SifLnkLst.ContainsKey(serial))
@@ -189,7 +214,7 @@ namespace ZiveLab.ZM
 
                         serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
 
-                        mCommZim.CmdEnableCommTimeOut(0);
+                        mCommZim.CmdEnableCommTimeOut(1);
                     }
                 }
             }
@@ -1129,8 +1154,11 @@ namespace ZiveLab.ZM
                 {
                     bConnect = false;
                     if (this.bThread == false) break;
-                    Thread.Sleep(200);
-                    RefreshConnect();
+                    Thread.Sleep(100);
+                    if (this.SimplePing(mCommZim.GetHostName()) == true)
+                    {
+                        RefreshConnect();
+                    }
                     bConnect = mCommZim.mComm.Connected;
                     continue;
                 }

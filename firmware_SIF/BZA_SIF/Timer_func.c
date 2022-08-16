@@ -12,10 +12,10 @@ inline bool checkCalib()
 	{
 		if(m_pGlobalVar->mChVar[ch].bCalib == 1)
 		{
-			return false;
+			return true;
 		}
 	}
-	return true;
+	return false;
 }
 
 inline bool checkCommTimer()

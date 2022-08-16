@@ -31,10 +31,10 @@ namespace ZiveLab.ZM
         public event EventHandler evOpenEditor;
         public event EventHandler CloseThis;
 
-        bool bFirst;
+        public bool bFirst;
         private int DispTick;
         private bool bRefresh;
-        bool bClose;
+        public bool bClose;
         ArrayList ArrMon;
         ArrayList ArrSrart;
         ArrayList ArrReload;
@@ -188,7 +188,7 @@ namespace ZiveLab.ZM
             this.Icon = ZM.Properties.Resources.monitor;
         }
 
-        private void InitMainView()
+        public void InitMainView()
         {
             InitGrid();
             ViewGrid();
@@ -223,6 +223,67 @@ namespace ZiveLab.ZM
             return true;
         }
 
+        private void ClearHostedConts()
+        {
+            int count;
+
+            count = ArrMon.Count;
+            foreach (HostedControl cont in ArrMon)
+            {
+                cont.Clear();
+            }
+            ArrMon.RemoveRange(0, count);
+            ArrMon.Clear();
+
+            count = ArrSrart.Count;
+            foreach (HostedControl cont in ArrSrart)
+            {
+                cont.Clear();
+            }
+            ArrSrart.RemoveRange(0, count);
+            ArrSrart.Clear();
+
+            count = ArrReload.Count;
+            foreach (HostedControl cont in ArrReload)
+            {
+                cont.Clear();
+            }
+            ArrReload.RemoveRange(0, count);
+            ArrReload.Clear();
+
+            count = ArrOpen.Count;
+            foreach (HostedControl cont in ArrOpen)
+            {
+                cont.Clear();
+            }
+            ArrOpen.RemoveRange(0, count);
+            ArrOpen.Clear();
+
+            count = ArrView.Count;
+            foreach (HostedControl cont in ArrView)
+            {
+                cont.Clear();
+            }
+            ArrView.RemoveRange(0, count);
+            ArrView.Clear();
+
+            count = ArrGraph.Count;
+            foreach (HostedControl cont in ArrGraph)
+            {
+                cont.Clear();
+            }
+            ArrGraph.RemoveRange(0, count);
+            ArrGraph.Clear();
+
+            count = ArrReport.Count;
+            foreach (HostedControl cont in ArrReport)
+            {
+                cont.Clear();
+            }
+            ArrReport.RemoveRange(0, count);
+            ArrReport.Clear();
+        }
+
         private void InitGrid()
         {
             int i;
@@ -230,13 +291,27 @@ namespace ZiveLab.ZM
             string[] sTitle2 = new string[17] { "Channel", "Group", "Last Status", "Elapsed(s)", "Range", "Vdc(V)", "Temp.(°C)",      "File name",          "Tools",          "Tools", "Control", "Control",   "File name",       "Tools",       "Tools",  "Data count", "Remote", };
             int[] iwidth = new int[17]       {        60,      50,            180,           80,      80,       70,           70,              150,                32,              32,        32,        32,           150,            32,            32,            90,       50, };
 
+
             hgrid.Redraw = false;
+
+            int rows = hgrid.Rows.Count;
+            if (rows > hgrid.Rows.Fixed)
+            {
+                rows -= hgrid.Rows.Fixed;
+                hgrid.Rows.RemoveRange(hgrid.Rows.Fixed, rows);
+            }
+
+            ClearHostedConts();
+
+
+            
+            
             hgrid.Cols.Count = 17;
             hgrid.Cols.Fixed = 0;
             hgrid.Rows.Count = 2;
             hgrid.Rows.Fixed = 2;
             hgrid.SelectionMode = SelectionModeEnum.Row;
-
+            
 
 
             for (i=0; i<17; i++)
@@ -288,13 +363,8 @@ namespace ZiveLab.ZM
             AddMergedRange(hgrid.GetCellRange(0, 16, 1, 16));
             hgrid.Redraw = true;
 
-            ArrMon = new ArrayList();
-            ArrSrart = new ArrayList();
-            ArrReload = new ArrayList();
-            ArrOpen = new ArrayList();
-            ArrView = new ArrayList();
-            ArrGraph = new ArrayList();
-            ArrReport = new ArrayList();
+            
+
         }
         bool ChkStatusRun(string tserial, int tSifCh)
         {
@@ -651,7 +721,7 @@ namespace ZiveLab.ZM
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true) str = "Unknown";
                         else
                         {
-                            str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].eis_status.rescount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[Value.SifCh].datacount);
+                            str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[Value.SifCh].datacount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].eis_status.rescount);
                         }
                         hgrid.SetData(row, i, str);
                     }
@@ -718,7 +788,7 @@ namespace ZiveLab.ZM
                         {
                             btGridMon[ch].Enabled = true;
                         }
-                        ArrMon.Add(new HostedControl(hgrid, btGridMon[ch], row, i));
+                        //ArrMon.Add(new HostedControl(hgrid, btGridMon[ch], row, i));
                         
                         str = (ch + 1).ToString();
                         hgrid.SetData(row, i, str);
@@ -921,7 +991,7 @@ namespace ZiveLab.ZM
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true) str = "Unknown";
                         else
                         {
-                            str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].eis_status.rescount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[Value.SifCh].datacount);
+                            str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[Value.SifCh].datacount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].eis_status.rescount);
                         }
                         hgrid.SetData(row, i, str);
                     }
@@ -1136,6 +1206,8 @@ namespace ZiveLab.ZM
         private void OpenTechFile(int ch, string filename,eZimType type = eZimType.UNKNOWN)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
+            frmTech.ShowInTaskbar = false;
+            frmTech.MdiParent = this.MdiParent;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
@@ -1147,8 +1219,9 @@ namespace ZiveLab.ZM
             }
             if(frmTech.loaderr == false)
             {
-                frmTech.ShowDialog();
+                frmTech.Show();
             }
+            frmTech.WindowState = FormWindowState.Normal;
         }
         
         private void hgrid_MouseMove(object sender, MouseEventArgs e)
@@ -1240,7 +1313,7 @@ namespace ZiveLab.ZM
                 }
                 else if (ht.Column == 15)
                 {
-                    tip = string.Format("Displays the number of result data and filing data of channel {0} respectively.\r\n Number of result data (number of result file data).", tsch);
+                    tip = string.Format("Display the number of data stored in the data file and the number of data points in BZA memory.\r\n Data number of result file (data number of BZA memory).", tsch);
                 }
                 else if (ht.Column == 16)
                 {
