@@ -187,11 +187,10 @@ static void ISR_MSTimer(void)
 			m_pGlobalVar->mChVar[ch].OverT_Timer ++;
 			if(m_pGlobalVar->mChVar[ch].OverT_Timer > 1000000) m_pGlobalVar->mChVar[ch].OverT_Timer = 1000000;
 		}
-		
-		
+		m_pGlobalVar->mChVar[ch].m_msReset ++;
+		if(m_pGlobalVar->mChVar[ch].m_msReset > 1000000) m_pGlobalVar->mChVar[ch].m_msReset = 1000000;
 	}
-	m_pGlobalVar->m_msReset ++;
-	if(m_pGlobalVar->m_msReset > 1000000) m_pGlobalVar->m_msReset = 1000000;
+	
 	
 	
 	m_pGlobalVar->m_msADC ++;

@@ -567,8 +567,7 @@ void Parsing(int s)
 				{
 					if(m_pGlobalVar->mStatusInf.mode == 1)
 					{
-						m_pGlobalVar->CmdResetICE = 1;
-						m_pGlobalVar->ResetCh = pCmdHeader->Slot;
+						m_pGlobalVar->mChVar[pCmdHeader->Slot].CmdResetICE = 1;
 					}
 					else
 					{
@@ -582,13 +581,18 @@ void Parsing(int s)
 		
 		case CMD_RESET_CLR_FPGA_ICE:	
 			{
-				if(m_pGlobalVar->mStatusInf.mode == 1)
+				if(pCmdHeader->Slot >= 0)
 				{
-					m_pGlobalVar->CmdResetICE = 2;
-				}
-				else
-				{
-					Set_IceResetB(false);
+					if(m_pGlobalVar->mStatusInf.mode == 1)
+					{
+						m_pGlobalVar->mChVar[pCmdHeader->Slot].CmdResetICE = 2;
+					}
+					else
+					{
+						SetDevChannel(pCmdHeader->Slot);
+						delay(100);
+						Set_IceResetB(false);
+					}
 				}
 				break;
 			}

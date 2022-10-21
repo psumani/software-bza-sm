@@ -17,7 +17,6 @@ namespace ZiveLab.ZM
 {
     public partial class frmRegBZA : Form
     {
-
         bool bInitLnk;
         bool bInitBza;
         bool bInitBzaCh;
@@ -25,6 +24,7 @@ namespace ZiveLab.ZM
         int LnkRow;
         int BzaRow;
         int BzaChRow;
+
 
         int ScanSIFCnt;
         int ScanChCnt;
@@ -43,7 +43,6 @@ namespace ZiveLab.ZM
         public frmRegBZA()
         {
             InitializeComponent();
-
             Icon tIcon =ZM.Properties.Resources.Tool3;
 
             ScanChCount = gBZA.ScanChCount;
@@ -87,7 +86,8 @@ namespace ZiveLab.ZM
 
             UpdateDeviceInfo();
 
-            RefreshAll();
+            InitGridAll();
+
         }
 
         public void UpdateDeviceInfo()
@@ -120,8 +120,47 @@ namespace ZiveLab.ZM
             RefreshBZA();
         }
 
-
         private void RefreshAll()
+        {
+            InitGridAll();
+            //RefreshGrdRegCh();
+        }
+
+        private void RefreshBZA()
+        {
+            RefreshGrdScanBza();
+        }
+
+        private void RefreshBZACh()
+        {
+            RefreshGrdScanBzaCh();
+        }
+
+        private void InitGridAll()
+        {
+            InitGrdRegCh();
+            InitGrdScanBza();
+            InitGrdScanBzaCh();
+            ViewGrdRegCh();
+        }
+
+        private void InitBZA()
+        {
+
+            InitGrdScanBza();
+            InitGrdScanBzaCh();
+            ViewGrdScanBza();
+        }
+
+        private void InitBZACh()
+        {
+
+            InitGrdScanBzaCh();
+            ViewGrdScanBzaCh();
+
+        }
+
+        /*private void RefreshAll()
         {
             InitGrdRegCh();
             ViewGrdRegCh();
@@ -137,7 +176,7 @@ namespace ZiveLab.ZM
             }
             
         }
-
+        
         private void RefreshBZA()
         {
 
@@ -160,6 +199,8 @@ namespace ZiveLab.ZM
 
         }
 
+        */
+
         private void InitGrdRegCh()
         {
             bInitLnk = true;
@@ -167,6 +208,7 @@ namespace ZiveLab.ZM
           
             int i;
             string[] sTitle = new string[4] { "CH", "SIF Serial", "CH in SIF", "Status", };
+
             grdChs.Cols = 4;
             grdChs.Rows = 1;
             grdChs.FixedCols = 1;
@@ -179,7 +221,7 @@ namespace ZiveLab.ZM
             grdChs.SelectionMode = C1.Win.C1FlexGrid.Classic.SelModeSettings.flexSelectionByRow;
             grdChs.AllowUserResizing = C1.Win.C1FlexGrid.Classic.AllowUserResizeSettings.flexResizeNone;
             grdChs.Editable = C1.Win.C1FlexGrid.Classic.EditableSettings.flexEDNone;
-
+            
             grdChs.AutoGenerateColumns = true;
             grdChs.AutoResize = true;
             grdChs.AutoSizeMode = C1.Win.C1FlexGrid.Classic.AutoSizeSettings.flexAutoSizeColWidth;
@@ -210,6 +252,7 @@ namespace ZiveLab.ZM
             }
             grdChs.SelectionMode = C1.Win.C1FlexGrid.Classic.SelModeSettings.flexSelectionByRow;
             grdChs.Editable = C1.Win.C1FlexGrid.Classic.EditableSettings.flexEDNone;
+
         }
 
         private void InitGrdScanBzaCh()
@@ -218,6 +261,7 @@ namespace ZiveLab.ZM
             
             int i;
             string[] sTitle = new string[7] { "CH in SIF ", "Serial No.", "Type", "Detected","Firmware","Board","Linked CH", };
+
             grdBzaCh.Cols = 7;
             grdBzaCh.Rows = 1;
             grdBzaCh.FixedCols = 1;
@@ -282,6 +326,7 @@ namespace ZiveLab.ZM
           
             int i;
             string[] sTitle = new string[7] { "Serial No.", "Type","Firmware","Mac address", "IP Address", "Connection", "Channels",  };
+
             grdBZAs.Cols = 7;
             grdBZAs.Rows = 1;
             grdBZAs.FixedCols = 1;
@@ -337,6 +382,169 @@ namespace ZiveLab.ZM
             }
             grdBZAs.SelectionMode = C1.Win.C1FlexGrid.Classic.SelModeSettings.flexSelectionByRow;
             grdBZAs.Editable = C1.Win.C1FlexGrid.Classic.EditableSettings.flexEDNone;
+
+        }
+
+        private void RefreshGrdRegCh()
+        {
+            bInitLnk = true;
+            int tSelCh = SelCh;
+            string tSelSerial1 = sSelSerial1;
+            string tSelSerial2 = sSelSerial2;
+            string strLink;
+            string strCh;
+            int tSelSifCh = SelSifCh;
+            
+            int row = 0;
+            int col = 0;
+            string str = "";
+
+            RegListCnt = 0;
+
+            var list = gBZA.ChLnkLst.Keys.ToList();
+            list.Sort();
+            grdChs.Rows = 1;
+            
+            foreach (var key in list)
+            {
+                var Value = gBZA.ChLnkLst[key];
+                RegListCnt++;
+                grdChs.Rows++;
+                for (col = 0; col < 4; col++)
+                {
+
+                    switch (col)
+                    {
+                        case 0:
+                            str = string.Format("{0}", Convert.ToInt32(key) + 1); ;
+                            break;
+                        case 1:
+                            str = Value.sSerial;
+                            break;
+                        case 2:
+                            str = string.Format("{0}", Value.SifCh + 1);
+                            break;
+                        case 3:
+                            if (Value.bChkSIF == true && Value.bChkCh == true)
+                            {
+                                str = "OK";
+                            }
+                            else
+                            {
+                                if (Value.bChkSIF == false)
+                                {
+                                    str = "ERR-SIF";
+                                }
+                                else
+                                {
+                                    str = "ERR-CH";
+                                }
+
+                            }
+                            break;
+
+                    }
+
+                    grdChs.set_TextMatrix(row + 1, col, str);
+
+                    if (col > 0)
+                    {
+                        grdChs.Row = row + 1;
+                        grdChs.Col = col;
+
+                        if (Value.bChkSIF == true && Value.bChkCh == true)
+                        {
+                            grdChs.ForeColor = Color.DarkBlue;
+                        }
+                        else
+                        {
+                            grdChs.ForeColor = Color.DarkRed;
+                        }
+                    }
+                }
+                row++;
+            }
+
+
+            if (LnkRow > 0 && LnkRow <= RegListCnt)
+            {
+                
+            }
+            else if (RegListCnt > 0)
+            {
+                if (LnkRow <= 0)
+                {
+                    LnkRow = 1;
+                }
+                else if (LnkRow > RegListCnt)
+                {
+                    LnkRow = RegListCnt;
+                }
+            
+            }
+            else
+            {
+                grdChs.ContextMenuStrip = null;
+                SelCh = -1;
+                LnkRow = 0;
+                SelSifCh = -1;
+                sSelSerial1 = "";
+                sSelSerial2 = "";
+                lblSelectReg.Text = "* Selected: None.";
+                bInitLnk = false;
+
+                RefreshGrdScanBza();
+                return;
+            }
+
+
+
+            strLink = grdChs.get_TextMatrix(LnkRow, 0);
+            tSelCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 0));
+            tSelSerial1 = grdChs.get_TextMatrix(LnkRow, 1);
+            tSelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2))-1;
+
+            grdChs.Row = LnkRow;
+            grdChs.Col = 1;
+            grdChs.ForeColorSel = grdChs.ForeColor;
+            
+
+            grdChs.ContextMenuStrip = RegMenu;
+
+
+            if (gBZA.ChLnkLst.ContainsKey(strLink) == true)
+            {
+                tSelSerial1 = gBZA.ChLnkLst[strLink].sSerial;
+                strCh = gBZA.ChLnkLst[strLink].SifCh.ToString();
+                lblSelectReg.Text = string.Format("* Selected: {0} Linked {1}-{2}.", strLink, tSelSerial1, strCh);
+
+            }
+            else
+            {
+                lblSelectReg.Text = string.Format("* Selected: {0} Linked not found.", strLink);
+
+            }
+
+           
+            if (sSelSerial1 != tSelSerial1)
+            {
+                sSelSerial1 = tSelSerial1;
+                
+                BzaRow = 0;
+            }
+           else
+            {
+                if(SelSifCh != tSelSifCh)
+                {
+                    SelSifCh = tSelSifCh;
+                    BzaChRow = 0;
+                }
+            }
+            grdChs.Select(LnkRow, 1, 1, 1, true);
+            SelCh = tSelCh;
+            bInitLnk = false;
+
+            RefreshGrdScanBza();
 
         }
 
@@ -510,7 +718,7 @@ namespace ZiveLab.ZM
                         case 5:
                             if(Value.MBZAIF.bConnect == true)
                             {
-                                str = "REGISTERED";
+                                str = "CONNECTED";
                             }
                             else
                             {
@@ -543,13 +751,12 @@ namespace ZiveLab.ZM
                         }
                     }
                 }
+                if (key == sSelSerial1)
+                {
+                    Matchrow = row+1;
+                }
                 row++;
                 ScanSIFCnt++;
-                if(key == sSelSerial1)
-                {
-                    Matchrow = row;
-                }
-                
             }
    
             bInitBza = false;
@@ -558,7 +765,7 @@ namespace ZiveLab.ZM
                 if (Matchrow <= 0) Matchrow = 1;
 
                 grdBZAs.Select(Matchrow, 1, 1, 1, true);
-                
+                BzaRow = Matchrow;
             }
             else
             {
@@ -569,6 +776,163 @@ namespace ZiveLab.ZM
                 lblSelectReg.Text = "* Selected: None.";
             }
             
+        }
+
+        private void RefreshGrdScanBza()
+        {
+            bInitBza = true;
+            int Matchrow = -1;
+            int row = 0;
+            int col = 0;
+            string str = "";
+            string stype;
+            string sver;
+
+            eDeviceType mtype = eDeviceType.SBZA;
+
+            ScanSIFCnt = 0;
+
+            var list = gBZA.SifLnkLst.Keys.ToList();
+            list.Sort();
+
+            grdBZAs.Rows = 1;
+
+            foreach (var key in list)
+            {
+                var Value = gBZA.SifLnkLst[key];
+
+                mtype = (eDeviceType)Value.mFindSifCfg.Type;
+
+                if (rdoBZA.Checked == true)
+                {
+                    if (mtype != eDeviceType.MBZA && mtype != eDeviceType.SBZA) continue;
+                    if (Value.MBZAIF.bConnect == false && Value.mFindSifCfg.SockStat != (byte)eSockStatus.LISTEN) continue;
+                    if (Value.ChCnt < 0) continue;
+                }
+
+                grdBZAs.Rows++;
+
+                for (col = 0; col < 7; col++)
+                {
+                    switch (col)
+                    {
+                        case 0:
+                            str = key;
+                            break;
+                        case 1:
+                            str = Extensions.GetEnumDescription(mtype);
+                            break;
+                        case 2:
+                            str = Value.mFindSifCfg.GetFirmwareVer();
+                            break;
+                        case 3:
+                            str = Value.sMac;
+                            break;
+                        case 4:
+                            str = Value.sip;
+                            break;
+                        case 5:
+                            if (Value.MBZAIF.bConnect == true)
+                            {
+                                str = "CONNECTED";
+                            }
+                            else
+                            {
+                                if (Value.mFindSifCfg.SockStat == (byte)eSockStatus.LISTEN)
+                                {
+                                    str = "READY";
+                                }
+                                else
+                                {
+                                    str = "BUSY";
+                                }
+                            }
+                            break;
+                        case 6:
+                            str = Value.ChCnt.ToString();
+                            break;
+                    }
+                    grdBZAs.set_TextMatrix(row + 1, col, str);
+                    if (col > 0)
+                    {
+                        grdBZAs.Row = row + 1;
+                        grdBZAs.Col = col;
+                        if (GetChkLinkBza(key) == false)
+                        {
+                            grdBZAs.ForeColor = Color.DarkRed;
+                        }
+                        else
+                        {
+                            grdBZAs.ForeColor = Color.DarkBlue;
+                        }
+                    }
+                }
+
+                if (key == sSelSerial1)
+                {
+                    Matchrow = row + 1;
+                }
+
+                row++;
+                ScanSIFCnt++;
+
+            }
+
+            
+
+            if (Matchrow > 0)
+            {
+                if(Matchrow != BzaRow)
+                {
+                    BzaRow = Matchrow;
+                    BzaChRow = 0;
+                    grdBZAs.Select(BzaRow, 1, 1, 1, true);
+                }
+                
+            }
+            else
+            {
+                BzaChRow = 0;
+                if (ScanSIFCnt > 0)
+                {
+                    BzaRow = 1;
+                    grdBZAs.Select(BzaRow, 1, 1, 1, true);
+                }
+                else
+                {
+                    BzaRow = 0;
+                    sSelSerial2 = "";
+                    lblselsif.Text = "* Selected: None.";
+                    lblSelectReg.Text = "* Selected: None.";
+                    InitGrdScanBzaCh();
+                    ViewGrdScanBzaCh();
+                    return;
+                }
+            }
+
+           
+
+            sSelSerial2 = grdBZAs.get_TextMatrix(BzaRow, 0);
+            stype = grdBZAs.get_TextMatrix(BzaRow, 1);
+            sver = grdBZAs.get_TextMatrix(BzaRow, 2);
+            str = string.Format("* Selected: {0}, Type:{1}, ver:{2}.", sSelSerial2, stype, sver);
+            lblselsif.Text = str;
+
+            grdBZAs.Row = BzaRow;
+            grdBZAs.Col = 1;
+            grdBZAs.ForeColorSel = grdBZAs.ForeColor;
+
+            if (sSelSerial2 == sSelSerial1)
+            {
+                SelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2))-1;
+            }
+            else
+            {
+                SelSifCh = -1;
+            }
+            bInitBza = false;
+            RefreshGrdScanBzaCh();
+
         }
 
         private bool GetChkLinkBza(string tSerial)
@@ -722,15 +1086,152 @@ namespace ZiveLab.ZM
             
         }
 
-        private void grdBZAs_RowColChange(object sender, EventArgs e)
+        private void RefreshGrdScanBzaCh()
         {
-            int row1 = 0;
-            int row2 = 0;
-            int col1 = 0;
-            int col2 = 0;
+            bInitBzaCh = true;
 
-            grdBZAs.GetSelection(out row1, out col1, out row2, out col2);
-            grdBZAs_SelRow(row1);
+            int row = 0;
+            int Matchrow = -1;
+            int col = 0;
+            int ch = 0;
+            int Maxch = 0;
+            string str = "";
+
+            this.CmdBZALink.ForeColor = Color.DarkGray;
+
+            ScanChCnt = 0;
+            if (gBZA.SifLnkLst.ContainsKey(sSelSerial2) == false)
+            {
+                return;
+            }
+
+            var pair = gBZA.SifLnkLst[sSelSerial2];
+
+            eDeviceType mtype = (eDeviceType)pair.mDevInf.mSysCfg.mSIFCfg.Type;
+
+            if (mtype != eDeviceType.SBZA && mtype != eDeviceType.MBZA)
+            {
+                return;
+            }
+
+            Maxch = 1;
+            if (mtype == eDeviceType.MBZA)
+            {
+                Maxch = MBZA_Constant.MAX_DEV_CHANNEL;
+            }
+
+            grdBzaCh.Rows = 1;
+            for (ch = 0; ch < Maxch; ch++)
+            {
+                if (pair.mDevInf.mSysCfg.EnaZIM[ch] == 0) continue;
+
+                grdBzaCh.Rows++;
+                for (col = 0; col < 7; col++)
+                {
+                    switch (col)
+                    {
+                        case 0:
+                            str = (ch + 1).ToString();
+                            break;
+                        case 1:
+                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetSerialNumber();
+                            break;
+                        case 2:
+                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].info.GetZimTypeString();
+                            break;
+                        case 3:
+                            if (pair.mDevInf.mSysCfg.ChkZIM[ch] == 0) str = "No";
+                            else str = "Yes";
+                            break;
+                        case 4:
+                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetFirmwareVer();
+                            break;
+                        case 5:
+                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetBoardTypeString() + " " + pair.mDevInf.mSysCfg.mZimCfg[ch].GetBoardVer();
+                            break;
+                        case 6:
+                            if (pair.iLinkCh[ch] == -1)
+                            {
+                                str = "None";
+                            }
+                            else
+                            {
+                                str = string.Format("{0}", pair.iLinkCh[ch] + 1);
+                            }
+                            break;
+
+                    }
+                    grdBzaCh.set_TextMatrix(row + 1, col, str);
+
+                    if (col > 0)
+                    {
+                        grdBzaCh.Row = row + 1;
+                        grdBzaCh.Col = col;
+
+                        if (pair.iLinkCh[ch] == -1)
+                        {
+                            grdBzaCh.ForeColor = Color.DarkRed;
+                        }
+                        else
+                        {
+                            grdBzaCh.ForeColor = Color.DarkBlue;
+                        }
+                    }
+                }
+
+                if (SelSifCh == ch && sSelSerial1 == sSelSerial2 && sSelSerial2 != "")
+                {
+                    Matchrow = row+1;
+                }
+
+                row++;
+                ScanChCnt++;
+                
+            }
+            bInitBzaCh = false;
+
+            if (Matchrow <= 0)
+            {
+                if (ScanChCnt > 0)
+                {
+                    if (BzaChRow <= 0)
+                    {
+                        BzaChRow = 1;
+                        
+                    }
+                }
+                else
+                {
+                    grdBzaCh.ContextMenuStrip = null;
+                    lblSelectReg.Text = "* Selected: None.";
+                    BzaChRow = 0;
+                    return;
+                }
+            }
+            else
+            {
+                if (BzaChRow != Matchrow)
+                {
+                    grdBzaCh.Select(BzaChRow, 1, 1, 1, true);
+                    BzaChRow = Matchrow;
+                }
+            }
+            
+
+            if (BzaChRow > 0 && BzaChRow <= ScanChCnt)
+            {
+                grdBzaCh.Row = BzaChRow;
+                grdBzaCh.Col = 1;
+                grdBzaCh.ForeColorSel = grdBzaCh.ForeColor;
+                grdBzaCh.ContextMenuStrip = ScanMenu;
+            }
+            else
+            {
+                grdBzaCh.ContextMenuStrip = null;
+                lblSelectReg.Text = "* Selected: None.";
+            }
+
+            bInitBzaCh = false;
         }
 
         private void grdBZAs_SelRow(int row)
@@ -749,19 +1250,20 @@ namespace ZiveLab.ZM
 
             if(sSelSerial2 == sSelSerial1)
             {
-                SelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2));
+                SelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2))-1;
             }
             else
             {
                 SelSifCh = -1;
             }
 
-            
-            BzaRow = row;
+            if(BzaRow != row)
+            {
+                BzaRow = row;
+                BzaChRow = 0;
+            }
+            RefreshGrdScanBzaCh();
 
-           
-            InitGrdScanBzaCh();
-            ViewGrdScanBzaCh();
         }
 
         private void grdBZAChs_SelRow(int row)
@@ -802,7 +1304,7 @@ namespace ZiveLab.ZM
             grdBzaCh.ForeColorSel = grdBzaCh.ForeColor;
 
             grdBzaCh.ContextMenuStrip = ScanMenu;
-            SelSifCh = Convert.ToInt32(strCh);
+            SelSifCh = Convert.ToInt32(strCh)-1;
             BzaChRow = row;
             
         }
@@ -811,31 +1313,27 @@ namespace ZiveLab.ZM
         {
             string strCh = "";
             string strLink = "";
+            string tSelSerial1 = sSelSerial1;
+            int tSelSifCh = SelSifCh;
 
             if (row <= 0 || bInitLnk == true) return;
             LnkRow = row;
-            grdChs.Row = LnkRow;
-            grdChs.Col = 1;
-            grdChs.ForeColorSel = grdChs.ForeColor;
-
-            strLink = grdChs.get_TextMatrix(row, 0);
+            strLink = grdChs.get_TextMatrix(LnkRow, 0);
             SelCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 0));
-            sSelSerial1 = grdChs.get_TextMatrix(LnkRow, 1);
-            sSelSerial2 = grdChs.get_TextMatrix(LnkRow, 1);
-            SelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2));
+            tSelSerial1 = grdChs.get_TextMatrix(LnkRow, 1);
+            tSelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2))-1;
 
             grdChs.Row = LnkRow;
             grdChs.Col = 1;
             grdChs.ForeColorSel = grdChs.ForeColor;
-            grdChs.Select(LnkRow, 1, 1, 1, true);
-
             grdChs.ContextMenuStrip = RegMenu;
+
+
             if (gBZA.ChLnkLst.ContainsKey(strLink) == true)
             {
-                sSelSerial1 = gBZA.ChLnkLst[strLink].sSerial;
-                sSelSerial2 = gBZA.ChLnkLst[strLink].sSerial;
+                tSelSerial1 = gBZA.ChLnkLst[strLink].sSerial;
                 strCh = gBZA.ChLnkLst[strLink].SifCh.ToString();
-                lblSelectReg.Text = string.Format("* Selected: {0} Linked {1}-{2}.", strLink, sSelSerial1, strCh);
+                lblSelectReg.Text = string.Format("* Selected: {0} Linked {1}-{2}.", strLink, tSelSerial1, strCh);
                 
             }
             else
@@ -844,12 +1342,20 @@ namespace ZiveLab.ZM
 
             }
 
-           
-            InitGrdScanBza();
-            ViewGrdScanBza();
-            
-            InitGrdScanBzaCh();
-            ViewGrdScanBzaCh();
+
+            if (sSelSerial1 != tSelSerial1)
+            {
+                sSelSerial1 = tSelSerial1;
+                BzaRow = 0;
+            }
+            if(SelSifCh != tSelSifCh)
+            {
+                BzaChRow = 0;
+                SelSifCh = tSelSifCh;
+            }
+
+
+            RefreshGrdScanBza();
             
         }
 
@@ -899,33 +1405,7 @@ namespace ZiveLab.ZM
                 }*/
         }
 
-        private void grdChs_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void grdChs_RowColChange(object sender, EventArgs e)
-        {
-            int row1 = 0;
-            int row2 = 0;
-            int col1 = 0;
-            int col2 = 0;
-
-            grdChs.GetSelection(out row1, out col1, out row2, out col2);
-            grdChs_SelRow(row1);
-        }
-
-        private void grdBzaCh_RowColChange(object sender, EventArgs e)
-        {
-            int row1 = 0;
-            int row2 = 0;
-            int col1 = 0;
-            int col2 = 0;
-
-            grdBzaCh.GetSelection(out row1, out col1, out row2, out col2);
-            grdBZAChs_SelRow(row1);
-
-        }
+        
 
         private void rdoAll_CheckedChanged(object sender, EventArgs e)
         {
@@ -1024,7 +1504,7 @@ namespace ZiveLab.ZM
                 ireg = Convert.ToInt32(sreg);
             }
 
-            ireg1 = dlg.ShowComboDialog("Please select the channel of the application you want to register.", ItemList.ToArray(), ireg, gBZA.sMsgTitle, 100, 500);
+            ireg1 = dlg.ShowComboDialog("Please select the channel of the application you want to register.", ItemList.ToArray(), ireg, gBZA.sMsgTitle, 100, 500,5);
 
             if (ireg != ireg1)
             {
@@ -1129,6 +1609,11 @@ namespace ZiveLab.ZM
                 }
             }
 
+            if(breg == true)
+            {
+                LnkRow = ireg1;
+            }
+            
             RefreshAll();
             /*
             if (ireg != ireg1)
@@ -1443,15 +1928,22 @@ namespace ZiveLab.ZM
                 
                 if(gBZA.SifLnkLst.ContainsKey(value.sSerial))
                 {
-                    gBZA.SifLnkLst[value.sSerial].MBZAIF.StopThread();
+                    
                     gBZA.SifLnkLst[value.sSerial].iLinkCh[value.SifCh] = -1;
                     for (int i=0; i<MBZA_Constant.MAX_DEV_CHANNEL; i++)
                     {
-                        if(gBZA.SifLnkLst[value.sSerial].iLinkCh[i] > -1)
+                        if (gBZA.SifLnkLst[value.sSerial].mDevInf.mSysCfg.EnaZIM[i] == 1)
                         {
-                            blink = true;
-                            break;
+                            if (gBZA.SifLnkLst[value.sSerial].iLinkCh[i] > -1)
+                            {
+                                blink = true;
+                                break;
+                            }
                         }
+                    }
+                    if (blink == false)
+                    {
+                        gBZA.SifLnkLst[value.sSerial].MBZAIF.StopThread();
                     }
                     gBZA.SifLnkLst[value.sSerial].SetLink(blink);
                 }
@@ -1464,6 +1956,71 @@ namespace ZiveLab.ZM
             {
                 MessageBox.Show("The registered channel information could not be found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void grdChs_MouseDown(object sender, MouseEventArgs e)
+        {
+       
+        }
+
+        private void grdBZAs_RowColChange(object sender, EventArgs e)
+        {
+            int row1 = 0;
+            int row2 = 0;
+            int col1 = 0;
+            int col2 = 0;
+            if (bInitBza == true) return;
+            grdBZAs.GetSelection(out row1, out col1, out row2, out col2);
+            if (row1 <= 0) return;
+            grdBZAs_SelRow(row1);
+        }
+
+        private void grdChs_RowColChange(object sender, EventArgs e)
+        {
+            int row1 = 0;
+            int row2 = 0;
+            int col1 = 0;
+            int col2 = 0;
+            if (bInitLnk == true) return;
+
+            grdChs.GetSelection(out row1, out col1, out row2, out col2);
+            if (row1 <= 0) return;
+
+            grdChs_SelRow(row1);
+        }
+   
+
+        private void grdBzaCh_RowColChange(object sender, EventArgs e)
+        {
+            int row1 = 0;
+            int row2 = 0;
+            int col1 = 0;
+            int col2 = 0;
+
+            if (bInitBzaCh == true) return;
+            grdBzaCh.GetSelection(out row1, out col1, out row2, out col2);
+            if (row1 <= 0) return;
+            grdBZAChs_SelRow(row1);
+
+        }
+
+        private void grdBzaCh_SelChange(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grdChs_SelChange(object sender, EventArgs e)
+        {
+        }
+
+        private void grdChs_EnterCell(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grdChs_CellChanged(object sender, C1.Win.C1FlexGrid.RowColEventArgs e)
+        {
+
         }
     }
 }

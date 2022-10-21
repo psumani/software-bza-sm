@@ -1663,6 +1663,7 @@ namespace ZiveLab.ZM
                     sch = (ich - 1).ToString();
                     sSerial = gBZA.ChLnkLst[sch].sSerial;
                     iSifCh = gBZA.ChLnkLst[sch].SifCh;
+
                     if(gBZA.SifLnkLst.ContainsKey(sSerial) == false)
                     {
                         continue;

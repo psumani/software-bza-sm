@@ -28,14 +28,6 @@ static const CLKPWR_CLK_T spiclks [2] = {CLKPWR_SPI1_CLK, CLKPWR_SPI2_CLK};
  * SPI driver private functions
  **********************************************************************/
 
-inline void spi_delay(int cnt)
-{
-	int i;
-	for(i=0; i<cnt; i++)
-	{
-	}
-}
-
 
 /***********************************************************************
  *
@@ -518,7 +510,6 @@ INT_32 spi_write(INT_32 spi_id, void *buf, INT_32 count)
 	{
 		spi_ioctl(spi_id,SPI_TXRX,1);
 		spi_ioctl(spi_id,SPI_CLEAR_INTS,0);
-		
 		nLen = count; 
 
 		while (nLen > 0)
@@ -609,6 +600,7 @@ INT_32 spi_read(INT_32 spi_id, void *buf, INT_32 count)
 			}
 			
 			spicfgptr->regptr->con |= SPI_CON_SHIFT_OFF;
+			spi_ioctl(spi_id,SPI_ONLYDELAY,1);	
 			if((spicfgptr->regptr->stat & SPI_STAT_BE) == 0x00)
 			{
 				tmp1 = spicfgptr->regptr->dat;
@@ -648,28 +640,51 @@ INT_32 spi_iceread(INT_32 spi_id, void *buf, INT_32 count)
 	UNS_16 *data16 = (UNS_16 *) buf;
 	UNS_8 *data8 = (UNS_8 *) buf;
 
-	
 	if (spicfgptr->init == TRUE)
 	{
 		ncount = 0;
-		
-		
+
 		spi_ioctl(spi_id,SPI_CLEAR_RX_BUFFER,0);
 		spi_ioctl(spi_id,SPI_TXRX,0);
 		spi_ioctl(spi_id,SPI_CLEAR_INTS,0);
-		
 		nLen = count;
 		nrdLen = count;
 		m_pGlobalVar->nSPITickOn = 1;
+		
 		while (nLen > 0)
 		{
-			
 			if((spicfgptr->regptr->stat & SPI_STAT_BF) == 0)
 			{
 				spicfgptr->regptr->dat = (UNS_32)0x55;
 				nLen --;
 			}
-
+			
+			spicfgptr->regptr->con |= SPI_CON_SHIFT_OFF;
+			while(spicfgptr->regptr->stat & SPI_STAT_BE)
+			{
+				if(m_pGlobalVar->nSPITick > 10) 
+				{
+					spicfgptr->regptr->con &= ~SPI_CON_SHIFT_OFF;
+					return ncount;
+				}
+			}
+			
+			tmp1 = spicfgptr->regptr->dat;
+					
+			if (spicfgptr->dsize == 1)
+			{
+				*data8 = (UNS_8) tmp1;
+				data8++;
+			}
+			else
+			{
+				*data16 = (UNS_16) tmp1;
+				data16++;
+			}
+			nrdLen--;
+			ncount++;
+			spicfgptr->regptr->con &= ~SPI_CON_SHIFT_OFF;
+			/*
 			while(1)
 			{
 				
@@ -694,8 +709,12 @@ INT_32 spi_iceread(INT_32 spi_id, void *buf, INT_32 count)
 					break;
 				}
 				spicfgptr->regptr->con &= ~SPI_CON_SHIFT_OFF;
-				if(m_pGlobalVar->nSPITick > 10) return ncount;
+				if(m_pGlobalVar->nSPITick > 10) 
+				{
+					return ncount;
+				}
 			}
+			*/
 			m_pGlobalVar->nSPITick = 0;
 		}
 		m_pGlobalVar->nSPITickOn = 0;
@@ -705,7 +724,6 @@ INT_32 spi_iceread(INT_32 spi_id, void *buf, INT_32 count)
 	
 	return ncount;
 }
-
 
 /***********************************************************************
  *

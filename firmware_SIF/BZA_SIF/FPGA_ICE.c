@@ -1,30 +1,16 @@
 #include "BZA_SIF.h"
 
-void ICE_delay(int cnt)
+inline void Spi_BaseDelay()
 {
 	int i;
-	for(i=0; i<cnt; i++)
+	for(i=0; i<100; i++)
 	{
 	}
-}
-
-inline void Spi_delay(int cnt)
-{
-	int i;
-	for(i=0; i<cnt; i++)
-	{
-	}
-}
-
-INT_32 check_icespi(void)
-{
-	if(CheckIceCfgDone() == false) return _ERROR;
-	return _NO_ERROR;
 }
 
  inline void ICE_chip_deselect(void)
 {
-	P3_OUTP_SET_bit.GPO_04 = 1;
+	P3_OUTP_SET_bit.GPO_04 = 1; //chip deselect
 }
 
 inline void ICE_chip_select(void)
@@ -46,18 +32,19 @@ bool CheckStart()
 	int ndelay = 0;
 	int nErrCount = 0;
 	bool bret = true;
-	
+
 	while(1)
 	{
 		if(P2_INP_STATE_bit.P2_9 == 0) break;
 		ndelay ++;
-		if(ndelay >= 50)
+		if(ndelay >= 100)
 		{
 			ICE_chip_select();
-			Spi_delay(100);
+			Spi_BaseDelay();
 			ndelay = 0;
 			nErrCount ++;
 			ICE_chip_deselect();
+			Spi_BaseDelay();
 			if(nErrCount > ICE_ERRRES_CNT)
 			{
 				bret = false;
@@ -82,10 +69,11 @@ bool CheckStart()
 		if(ndelay >= 100)
 		{
 			ICE_chip_deselect();
-			Spi_delay(100);
+			Spi_BaseDelay();
 			nErrCount ++;
 			ndelay = 0;
 			ICE_chip_select();
+			Spi_BaseDelay();
 			if(nErrCount > ICE_ERRRES_CNT)
 			{
 				bret = false;
@@ -93,7 +81,7 @@ bool CheckStart()
 			}
 		}
 	}
-	Spi_delay(100);
+
 	return bret;
 }
 
@@ -103,11 +91,10 @@ bool CheckResult(void)
 	int nErrCount = 0;
 	bool bret = true;
 	
-	if(P2_INP_STATE_bit.P2_9 == 0) 
+	if(P2_INP_STATE_bit.P2_9 == 0)
 	{
 		return false;
 	}
-	
 	ICE_chip_deselect();
 
 	while(1)
@@ -117,10 +104,11 @@ bool CheckResult(void)
 		if(ndelay >= 100)
 		{
 			ICE_chip_select();
-			Spi_delay(100);
+			Spi_BaseDelay();
 			nErrCount ++;
 			ndelay = 0;
 			ICE_chip_deselect();
+			Spi_BaseDelay();
 			if(nErrCount > ICE_ERRRES_CNT)
 			{
 				bret = false;
@@ -128,7 +116,7 @@ bool CheckResult(void)
 			}
 		}
 	}
-	Spi_delay(1000);
+
 	return bret;
 }
 
@@ -189,7 +177,7 @@ INT_32 ICE_read_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 	}
 	
 	SetDevChannel(ch);
-	
+
 	if(CheckStart() == false)
 	{
 		SetErrorProc(ch);
@@ -198,15 +186,14 @@ INT_32 ICE_read_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 
 	
 	len = spi_write(ICE_SPI_NO, (void*)&tx_buf, 1);
-
+		
+	
 	if (len != 1) 
 	{
 		ICE_chip_deselect();
 		SetErrorProc(ch);
 		return _ERROR;
 	}
-	
-	Spi_delay(100);
 	
 	len = spi_iceread(ICE_SPI_NO, (void*)pdata, 1); 
 	
@@ -230,19 +217,17 @@ INT_32 ICE_read_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 INT_32 ICE_Verify_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 {
 	INT_32 len;
-	UNS_8 tx_buf = cmd  | ICE_CMD_READ;;
+	UNS_8 tx_buf = cmd  | ICE_CMD_READ;
 	
-	SetDevChannel(ch);
-	
+
 	if(CheckStart() == false)
 	{
 		SetErrorProc(ch);
 		return _ERROR;
 	}
 
-	
 	len = spi_write(ICE_SPI_NO, (void*)&tx_buf, 1);
-
+		
 	if (len != 1) 
 	{
 		ICE_chip_deselect();
@@ -250,7 +235,6 @@ INT_32 ICE_Verify_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 		return _ERROR;
 	}
 	
-	Spi_delay(100);
 	len = spi_iceread(ICE_SPI_NO, (void*)pdata, 1); 
 	
 
@@ -260,7 +244,6 @@ INT_32 ICE_Verify_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 		return _ERROR;
 	}
 
-	
 	if (len != 1) 
 	{
 		SetErrorProc(ch);
@@ -271,9 +254,7 @@ INT_32 ICE_Verify_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 
 INT_32 ICE_write_byte(INT_32 ch, UNS_8 cmd, UNS_8 data)
 {
-	INT_32 iret;
 	INT_32 len;
-	INT_32 chktry;
 	UNS_8 tx_buf[2];
 	UNS_8 rx_buf;
 	
@@ -287,52 +268,40 @@ INT_32 ICE_write_byte(INT_32 ch, UNS_8 cmd, UNS_8 data)
 		return _ERROR;
 	}
 	SetDevChannel(ch);
-	iret = _NO_ERROR;
-	chktry = 0;
+
 	tx_buf[0] = cmd;
 	tx_buf[1] = data;
 	
-	while(1)
-	{
-		if(CheckStart() == false)
-		{
-			SetErrorProc(ch);
-			iret = _ERROR;
-			break;
-		}
 
-		len = spi_write(ICE_SPI_NO, (void*)tx_buf, 2);
+	if(CheckStart() == false)
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+
+	len = spi_write(ICE_SPI_NO, (void*)tx_buf, 2);
+	
+	if(CheckResult() == false)
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
 		
-		if(CheckResult() == false)
+	if (len != 2) 
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	
+	if(ICE_Verify_byte(ch, cmd, &rx_buf) == _NO_ERROR)
+	{
+		if(data == rx_buf)
 		{
-			SetErrorProc(ch);
-			iret = _ERROR;
-			break;
-		}
-		
-		if (len != 2) 
-		{
-			SetErrorProc(ch);
-			iret = _ERROR;
-			break;
-		}
-		
-		if(ICE_Verify_byte(ch, cmd, &rx_buf) == _NO_ERROR)
-		{
-			if(data == rx_buf)
-			{
-				break;
-			}
-		}
-		
-		chktry ++;
-		if(chktry > ICE_VERIFY_CNT) 
-		{
-			iret = _ERROR;
-			break;
+			return _NO_ERROR;
 		}
 	}
-	return iret;
+		
+	return _ERROR;
 }
 
 INT_32 ICE_read_16bits(INT_32 ch,UNS_8 cmd, UNS_16* pdata)
@@ -363,16 +332,19 @@ INT_32 ICE_read_16bits(INT_32 ch,UNS_8 cmd, UNS_16* pdata)
 	}
 
 	len = spi_write(ICE_SPI_NO, (void*)&tx_buf, 1);
-
+		
+	
 	if (len != 1) 
 	{
 		ICE_chip_deselect();
 		SetErrorProc(ch);
 		return _ERROR;
 	}
-	Spi_delay(100);
+	
+	
+	
 	len = spi_iceread(ICE_SPI_NO, (void*)rx_buf, 2); 
-
+	
 	if(CheckResult() == false)
 	{
 		SetErrorProc(ch);
@@ -398,9 +370,19 @@ INT_32 ICE_Verify_16bits(INT_32 ch, UNS_8 cmd, UNS_8* pdata)
 {
 	INT_32 len;
 	UNS_8 tx_buf; 
-	UNS_8 r_buf[2];
+	UNS_8 r_buf[3];
 	
 	SetDevChannel(ch);
+	
+	if(m_pGlobalVar->OpenSPI == FALSE)
+	{
+		return _ERROR;
+	}
+	
+	if(CheckIceCfgDone() == false)
+	{
+		return _ERROR;
+	}
 	
 	tx_buf = cmd | ICE_CMD_READ;
 
@@ -418,9 +400,9 @@ INT_32 ICE_Verify_16bits(INT_32 ch, UNS_8 cmd, UNS_8* pdata)
 		SetErrorProc(ch);
 		return _ERROR;
 	}
-	Spi_delay(100);
-	len = spi_iceread(ICE_SPI_NO, (void*)r_buf, 2); 
 
+	len = spi_iceread(ICE_SPI_NO, (void*)r_buf, 2); 
+	
 	if(CheckResult() == false)
 	{
 		SetErrorProc(ch);
@@ -441,9 +423,7 @@ INT_32 ICE_Verify_16bits(INT_32 ch, UNS_8 cmd, UNS_8* pdata)
 
 INT_32 ICE_write_16bits(INT_32 ch, UNS_8 cmd, UNS_16 data)
 {
-	INT_32 iret;
 	INT_32 len;
-	INT_32 chktry;
 	UNS_8 tx_buf[3];
 	UNS_8 rx_buf[2];
 	
@@ -457,50 +437,37 @@ INT_32 ICE_write_16bits(INT_32 ch, UNS_8 cmd, UNS_16 data)
 		return _ERROR;
 	}
 	SetDevChannel(ch);
-	iret = _NO_ERROR;
+
 	tx_buf[0] = cmd;
 	tx_buf[1] = (UNS_8)((data >> 8) & 0xFF);
 	tx_buf[2] = (UNS_8)(data & 0xFF);
-	chktry = 0;
-	while(1)
+
+
+	if(CheckStart() == false)
 	{
-		if(CheckStart() == false)
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	len = spi_write(ICE_SPI_NO, (void*)tx_buf, 3);
+	if(CheckResult() == false)
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	
+	if (len != 3) 
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	if(ICE_Verify_16bits(ch, cmd, rx_buf) == _NO_ERROR)
+	{
+		if(tx_buf[1] == rx_buf[0] && tx_buf[2] == rx_buf[1])
 		{
-			SetErrorProc(ch);
-			iret = _ERROR;
-			break;
-		}
-		len = spi_write(ICE_SPI_NO, (void*)tx_buf, 3);
-		if(CheckResult() == false)
-		{
-			SetErrorProc(ch);
-			iret = _ERROR;
-			break;
-		}
-		
-		if (len != 3) 
-		{
-			SetErrorProc(ch);
-			iret = _ERROR;
-			break;
-		}
-			
-		if(ICE_Verify_16bits(ch, cmd, rx_buf) == _NO_ERROR)
-		{
-			if(tx_buf[1] == rx_buf[0] && tx_buf[2] == rx_buf[1])
-			{
-				break;
-			}
-		}
-		chktry ++;
-		if(chktry > ICE_VERIFY_CNT) 
-		{
-			iret = _ERROR;
-			break;
+			return _NO_ERROR;
 		}
 	}
-
-	return iret;
+	return _ERROR;
 }
 
 
@@ -584,7 +551,7 @@ INT_32 ICE_read_adc24bit(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 	UNS_8 tx_buf; 
 	UNS_8 rx_buf[3];
 	INT_32 tmp = 0;
-
+	
 	if(m_pGlobalVar->OpenSPI == FALSE)
 	{
 		return _ERROR;
@@ -605,7 +572,7 @@ INT_32 ICE_read_adc24bit(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 	}
 	
 	len = spi_write(ICE_SPI_NO, (void*)&tx_buf, 1);
-
+	
 	if (len != 1) 
 	{
 		ICE_chip_deselect();
@@ -648,7 +615,7 @@ INT_32 ICE_read_24bits(INT_32 ch, UNS_8 cmd, UNS_32* pdata)
 	UNS_8 tx_buf; 
 	UNS_8 rx_buf[3];
 	UNS_32 tmp = 0;
-
+	
 	if(m_pGlobalVar->OpenSPI == FALSE)
 	{
 		return _ERROR;
@@ -667,8 +634,6 @@ INT_32 ICE_read_24bits(INT_32 ch, UNS_8 cmd, UNS_32* pdata)
 		SetErrorProc(ch);
 		return _ERROR;
 	}
-
-	
 	len = spi_write(ICE_SPI_NO, (void*)&tx_buf, 1);
 
 	if (len != 1) 
@@ -748,7 +713,7 @@ INT_32 ICE_read_bytes(INT_32 ch, UNS_8 cmd, UNS_8* pdata, UNS_32 length)
 {
 	INT_32 len;
 	UNS_8 tx_buf; 
-
+	
 	if(m_pGlobalVar->OpenSPI == FALSE)
 	{
 		return _ERROR;
@@ -770,7 +735,7 @@ INT_32 ICE_read_bytes(INT_32 ch, UNS_8 cmd, UNS_8* pdata, UNS_32 length)
 	}
 	
 	len = spi_write(ICE_SPI_NO, (void*)tx_buf, 1);
-	
+
 	if (len != 1) 
 	{
 		ICE_chip_deselect();
@@ -848,7 +813,7 @@ INT_32 ICE_spi_open(void)
 	mCfg.highclk_spi_frames = FALSE;
 	mCfg.usesecond_clk_spi = FALSE;
 	
-	mCfg.spi_clk = 4000000;
+	mCfg.spi_clk = 2000000;
 	mCfg.transmitter = 1;
 	
 	if (spi_open(ICE_SPI_NO,(UNS_32)&mCfg) == _ERROR) 

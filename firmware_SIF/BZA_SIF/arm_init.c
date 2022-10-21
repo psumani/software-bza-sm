@@ -212,7 +212,7 @@ void Init_arm(void)
 	SPI_CTRL_bit.SPI1_PIN_SEL = 1;				// 1bit, 0-Pin action is manual mode, 1-Pin action is SPI block.
 	SPI_CTRL_bit.SPI1_CLK_OUT = 0;				// 1bit, set clock pin in manual mode.
 	SPI_CTRL_bit.SPI1_DATIO = 0;				// 1bit, set data pin in manual mode.
-	
+
 	//--SPI 2 
 	SPI_CTRL_bit.SPI2_CLK_ENA = 1;				// 1bit
 	SPI_CTRL_bit.SPI2_PIN_SEL = 1;				// 1bit, 0-Pin action is manual mode, 1-Pin action is SPI block.

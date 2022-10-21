@@ -1,5 +1,70 @@
 #include "BZA_SIF.h"
 
+
+inline void Ch_Seldelay()
+{
+	int i;
+	for(i=0; i<100; i++)
+	{
+	}
+}
+
+
+inline void CmdResetProc(int ch)	
+{
+	if(m_pGlobalVar->mChVar[ch].ResetICE == 1)
+	{
+		if(m_pGlobalVar->mChVar[ch].CmdResetICE == 2)
+		{
+			m_pGlobalVar->mChVar[ch].ResetICE = 2;
+			m_pGlobalVar->mChVar[ch].CmdResetICE = 0;
+			m_pGlobalVar->mChVar[ch].m_msReset = 0;
+			Set_IceResetB(false);
+			
+		}
+	}
+	else if(m_pGlobalVar->mChVar[ch].ResetICE == 2)
+	{
+		if(m_pGlobalVar->mChVar[ch].m_msReset >= 100)
+		{
+			m_pGlobalVar->mChVar[ch].ResetICE = 0;
+		}
+	}
+	else if(m_pGlobalVar->mChVar[ch].ResetICE == 3)
+	{
+		if(m_pGlobalVar->mChVar[ch].m_msReset >= 100)
+		{
+			Set_IceResetB(false);
+			m_pGlobalVar->mChVar[ch].ResetICE = 2;
+		}
+	}
+	else
+	{
+		m_pGlobalVar->mChVar[ch].ResetICE = 0;
+	}
+}
+
+void AllChReset(bool brst)
+{
+	if(brst == false)
+	{
+		Set_IceResetB(false);
+		Ch_Seldelay();
+		Ch_Seldelay();
+		Ch_Seldelay();
+		P3_OUTP_SET_bit.GPO_11 = 1;  
+	}
+	else
+	{
+		P3_OUTP_CLR_bit.GPO_11 = 1;
+		Ch_Seldelay();
+		Ch_Seldelay();
+		Ch_Seldelay();
+		Set_IceResetB(true);	
+	}
+	
+}
+
 void SetDevChannel(int ch)
 {
 	if(ch != m_pGlobalVar->mStatusInf.LastCh)
@@ -21,18 +86,14 @@ void SetDevChannel(int ch)
 		{
 			P3_OUTP_CLR_bit.GPO_10 = 1;
 		}
-		if(ch & 0x4)
-		{
-			P3_OUTP_SET_bit.GPO_11 = 1;  
-		}
-		else
-		{
-			P3_OUTP_CLR_bit.GPO_11 = 1;
-		}
+		
+		P3_OUTP_SET_bit.GPO_11 = 1;  
 		
 		m_pGlobalVar->mStatusInf.LastCh = ch;
 	}
 }
+
+
 
 
 double mRounding( double x, int digit)
@@ -259,7 +320,7 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 
 	aPoints = GetNumberOfFrequncies(peis->initfreq, peis->finalfreq, density);
 	
-	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
+	
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex >= aPoints)
 	{
 		
@@ -289,7 +350,7 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 		dfreq = MIN(dfreq,peis->finalfreq);
 	}
 	dfreq = RoundToSignificantDigits(dfreq, 6);
-	
+	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
 	return dfreq;
 }
 
@@ -660,40 +721,61 @@ void DeviceMainProc(void)
 	bool bFindProc = false;
 	
 	
-	if(m_pGlobalVar->m_msAux >= 500) bAuxProc = true;
-	if(m_pGlobalVar->m_msFind > 1000) bFindProc = true;
-
+	if(m_pGlobalVar->m_msAux >= 250) 
+	{
+		bAuxProc = true;
+		m_pGlobalVar->m_msAux = 0;
+		m_pGlobalVar->m_AuxCh ++;
+		if(m_pGlobalVar->m_AuxCh >= m_pGlobalVar->mStatusInf.MaxChannel)m_pGlobalVar->m_AuxCh = 0;
+	}
+	
+	if(m_pGlobalVar->m_msFind > 375) 
+	{
+		m_pGlobalVar->m_msFind = 0;
+		bFindProc = true;
+		m_pGlobalVar->m_FindCh ++;
+		if(m_pGlobalVar->m_FindCh >= m_pGlobalVar->mStatusInf.MaxChannel)m_pGlobalVar->m_FindCh = 0;
+	}
 
 	for(ch=0; ch < m_pGlobalVar->mStatusInf.MaxChannel; ch++)
 	{
-		if(m_pSysConfig->EnaZIM[ch] == FALSE) 
+		Set_IceResetB(false);
+		
+		if(m_pSysConfig->EnaZIM[ch] == 0) 
 		{
 			continue;
 		}
 		
 		SetDevChannel(ch);
+		Ch_Seldelay();
+
+		if(m_pGlobalVar->mChVar[ch].ResetICE > 0)
+		{
+			CmdResetProc(ch);
+			continue;
+		}
+		
 		
 		if(m_pSysConfig->ChkZIM[ch] == FALSE)
 		{
-			if(bFindProc == true) 
+			if(bFindProc == true && m_pGlobalVar->m_FindCh == ch) 
 			{
 				if(FindZimProc(ch) == TRUE)
 				{
 					proc_power_VAC(ch, false);
-					InitFixRangeInf(ch);
+					if(m_pSysConfig->EnaROM[ch] == 0) InitFixRangeInf(ch);
 					InitDevice(ch);
 					m_pSysConfig->ChkZIM[ch] = TRUE;
 					m_pGlobalVar->mChVar[ch].TmpResetICE = 0;
 				}
 				else
 				{
-					if(m_pGlobalVar->m_msReset >= 5000)
+					if(m_pGlobalVar->mChVar[ch].m_msReset >= 5000)
 					{
-						m_pGlobalVar->ResetCh = ch;
-						m_pGlobalVar->ResetICE = 3;
-						m_pGlobalVar->m_msReset = 0;
+						m_pGlobalVar->mChVar[ch].ResetICE = 3;
+						m_pGlobalVar->mChVar[ch].m_msReset = 0;
 						m_pSysConfig->ChkZIM[ch] = FALSE;
-						m_pGlobalVar->mChVar[m_pGlobalVar->ResetCh].mChStatInf.ErrorStatus = DEF_LAST_ERROR_RESETZIM;
+						m_pGlobalVar->mChVar[ch].mChStatInf.ErrorStatus = DEF_LAST_ERROR_RESETZIM;
 						Set_IceResetB(true);
 						break;
 					}
@@ -712,17 +794,16 @@ void DeviceMainProc(void)
 
 		if(m_pGlobalVar->mChVar[ch].TmpResetICE == 1)
 		{
-			m_pGlobalVar->ResetCh = ch;
-			m_pGlobalVar->ResetICE = 3;
-			m_pGlobalVar->m_msReset = 0;
+			m_pGlobalVar->mChVar[ch].TmpResetICE = 0;
+			m_pGlobalVar->mChVar[ch].ResetICE = 3;
+			m_pGlobalVar->mChVar[ch].m_msReset = 0;
 			m_pSysConfig->ChkZIM[ch] = FALSE;
-			m_pGlobalVar->mChVar[m_pGlobalVar->ResetCh].mChStatInf.ErrorStatus = DEF_LAST_ERROR_RESETZIM;
+			m_pGlobalVar->mChVar[ch].mChStatInf.ErrorStatus = DEF_LAST_ERROR_RESETZIM;
 			Set_IceResetB(true);
 			break;
 		}
 		
-		
-		if(bAuxProc == true) 
+		if(bAuxProc == true && m_pGlobalVar->m_AuxCh == ch) 
 		{
 			AuxProc(ch); 
 		}
@@ -774,11 +855,6 @@ void DeviceMainProc(void)
 		set_device_DO(ch);
 	}
 		
-	
-	if(bAuxProc == true)	
-	{
-		m_pGlobalVar->m_msAux = 0;
-	}
 	if(bFindProc == true)	
 	{
 		m_pGlobalVar->m_MsI2CdelayStamp = 0;

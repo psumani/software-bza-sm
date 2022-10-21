@@ -73,13 +73,6 @@ void InitDeviceControl(void)
 }
 
 // 0 : LED9, 1 : LED11, 2 : LED10, 3 : LED7, 4 : EXT
-inline void Device_delay(int cnt)
-{
-	int i;
-	for(i=0; i<cnt; i++)
-	{
-	}
-}
 
 void OnLed_Y(bool on)		
 {
@@ -680,6 +673,7 @@ inline void proc_adc_rtd(int ch)
 			}
 		}
 		prtd->data.Tvalue = 0.0;
+		m_pGlobalVar->mChVar[ch].mChStatInf.Temperature = prtd->data.Tvalue;
 		prtd->config.data |= 0x6;
 		
 		if(ICE_write_byte(ch, ICE_CMD_RTD_CFG, prtd->config.data) == _ERROR)
@@ -917,11 +911,13 @@ inline int Get_Rng_A(int ch)
 	int orng = 0; 
 	double maxA = 0.0;
 	double tmp = 0.0;
-	st_zim_adc_vdc * pvdc = &m_pGlobalVar->mChVar[ch].mdevice.adc_vdc;
+	//st_zim_adc_vdc * pvdc = &m_pGlobalVar->mChVar[ch].mdevice.adc_vdc;
+	//if(pvdc->value == 0.0 || m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower == 0.0) return 0;
+	//maxA = fabs(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower / pvdc->value);
 	
-	if(pvdc->value == 0.0 || m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower == 0.0) return 0;
-	maxA = fabs(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower / pvdc->value);
-
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.Veoc == 0.0 || m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower == 0.0) return 0;
+	maxA = fabs(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower / m_pGlobalVar->mChVar[ch].mChStatInf.Veoc);
+	
 	while(1)
 	{
 		tmp =m_pSysConfig->mZimCfg[ch].ranges.iac_rng[rng].realmax;
@@ -1360,7 +1356,6 @@ inline bool proc_eis_data_conv(int ch)
 	
 	return true;
 }
-
 
 inline bool proc_eis_chk_Control(int ch, double rate, double mag)
 {
@@ -1872,6 +1867,7 @@ inline void proc_eis_chk_ing(int ch)
 	ushort j;
 	int tmpi;
 	int tmpv;
+	ushort rawdatacnt;
 	
 	stChStatusInf* pChStatus = &m_pGlobalVar->mChVar[ch].mChStatInf;
 
@@ -1879,14 +1875,23 @@ inline void proc_eis_chk_ing(int ch)
 	{
 		return;
 	}
-	pChStatus->eis_status.WorkDatacnt = buf & 0x0FFF;
-	
-	if((buf & 0x8000) == 0x8000)
+	rawdatacnt = buf & 0x0FFF;
+	if(pChStatus->eis_status.LoadDatacnt < rawdatacnt)
 	{
-		pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
+		pChStatus->eis_status.WorkDatacnt = pChStatus->eis_status.LoadDatacnt + MIN(10,(rawdatacnt - pChStatus->eis_status.LoadDatacnt));
 	}
-	
-	
+	else
+	{
+		pChStatus->eis_status.WorkDatacnt = rawdatacnt;
+		if((buf & 0x8000) == 0x8000)
+		{
+			pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
+			return;
+		}
+	}
+
+	//pChStatus->eis_status.WorkDatacnt = buf & 0x0FFF;
+
 	if(pChStatus->eis_status.LoadDatacnt < pChStatus->eis_status.WorkDatacnt)
 	{
 		for(i=pChStatus->eis_status.LoadDatacnt; i< pChStatus->eis_status.WorkDatacnt; i++)
@@ -1916,6 +1921,7 @@ inline void proc_eis_chk_ing(int ch)
 		}
 		pChStatus->eis_status.LoadDatacnt = pChStatus->eis_status.WorkDatacnt;
 	}
+
 }
 
 
@@ -2266,7 +2272,7 @@ bool proc_eis_main(int ch)
 	}
 	else if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_ONDELAY)
 	{
-		if(pch->mFlow.m_MsOndelayLimit >= pch->mFlow.OndelayTimeStamp)
+		if(pch->mFlow.m_MsOndelayLimit <= pch->mFlow.OndelayTimeStamp)
 		{
 			pch->mFlow.m_MsFlowdelayLimit = 0; 
 			pch->mFlow.m_MsFlowdelayStamp = 0;
@@ -2350,9 +2356,9 @@ bool proc_eis_main(int ch)
 				pch->mFlow.m_MsFlowdelayStamp = 0;
 				return true;
 			}
+			
 			pch->mChStatInf.NextCycleNo = pch->mFlow.m_loopcnt;
 			pch->mChStatInf.eis_status.freq = dfreq;
-			
 			
 			if(pch->mFlow.timeproc == 1 && buf == 1)
 			{
@@ -2363,7 +2369,6 @@ bool proc_eis_main(int ch)
 					pch->mFlow.m_MsFlowdelayStamp = 0;
 					return true;
 				}
-
 				if(pch->mFlow.celloffwait == 1)
 				{
 					proc_eis_dcoff(ch);
@@ -2377,6 +2382,7 @@ bool proc_eis_main(int ch)
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_WAIT;
 				return true;
 			}
+
 			
 			memset(pch->mChStatInf.eis_status.Real_val,0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT);
 			memcpy(&pch->meis.eis_raw, &pch->meis.eis_raw_new,sizeof(st_zim_eis_raw));

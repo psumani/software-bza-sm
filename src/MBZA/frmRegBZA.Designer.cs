@@ -87,6 +87,9 @@
             this.grdChs.TabIndex = 4;
             this.grdChs.TreeColor = System.Drawing.Color.DarkGray;
             this.grdChs.RowColChange += new System.EventHandler(this.grdChs_RowColChange);
+            this.grdChs.SelChange += new System.EventHandler(this.grdChs_SelChange);
+            this.grdChs.EnterCell += new System.EventHandler(this.grdChs_EnterCell);
+            this.grdChs.CellChanged += new C1.Win.C1FlexGrid.RowColEventHandler(this.grdChs_CellChanged);
             this.grdChs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grdChs_MouseDown);
             // 
             // RegMenu
@@ -288,8 +291,6 @@
             // 
             // grdBzaCh
             // 
-            this.grdBzaCh.AllowBigSelection = false;
-            this.grdBzaCh.AllowSelection = false;
             this.grdBzaCh.AllowUserResizing = C1.Win.C1FlexGrid.Classic.AllowUserResizeSettings.flexResizeNone;
             this.grdBzaCh.BackColorSel = System.Drawing.Color.LemonChiffon;
             this.grdBzaCh.ColumnInfo = "10,1,0,0,0,95,Columns:";
@@ -304,12 +305,14 @@
             this.grdBzaCh.NodeOpenPicture = null;
             this.grdBzaCh.OutlineCol = -1;
             this.grdBzaCh.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.grdBzaCh.SelectionMode = C1.Win.C1FlexGrid.Classic.SelModeSettings.flexSelectionByRow;
             this.grdBzaCh.ShowCursor = true;
             this.grdBzaCh.Size = new System.Drawing.Size(556, 149);
             this.grdBzaCh.StyleInfo = resources.GetString("grdBzaCh.StyleInfo");
             this.grdBzaCh.TabIndex = 10;
             this.grdBzaCh.TreeColor = System.Drawing.Color.DarkGray;
             this.grdBzaCh.RowColChange += new System.EventHandler(this.grdBzaCh_RowColChange);
+            this.grdBzaCh.SelChange += new System.EventHandler(this.grdBzaCh_SelChange);
             // 
             // LnkLblLoad
             // 

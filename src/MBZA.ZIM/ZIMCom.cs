@@ -145,7 +145,6 @@ namespace ZiveLab.ZM.ZIM
             }
 
             */
-
             
 
             mComm.DisconnectedDevice += DisonnectProc;
@@ -1561,7 +1560,7 @@ namespace ZiveLab.ZM.ZIM
             if (this.disposed) return;
             if (disposing)
             {
-                mComm.Dispose();
+                if(mComm != null) mComm.Dispose();
             }
             // .NET Framework에 의하여 관리되지 않는 외부 리소스들을 여기서 정리합니다.
             this.disposed = true;

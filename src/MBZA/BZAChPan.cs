@@ -2200,7 +2200,6 @@ namespace ZiveLab.ZM
             {
                 lblVeoc.Text = string.Format("    Eoc: {0,8:###0.0##}mV", chstat.Veoc * 1000.0);
             }
-
             lblTemp.Text = string.Format("  Temp.: {0,8:###0.0##} °C", chstat.Temperature);
 
             if (brun)
@@ -4186,7 +4185,9 @@ namespace ZiveLab.ZM
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
             frmTech.ShowInTaskbar = false;
             frmTech.MdiParent = this.MdiParent;
-            if (gBZA.appcfg.TechLocation == new Point(0, 0))
+
+            frmTech.StartPosition = FormStartPosition.CenterScreen;
+            /*if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
             }
@@ -4195,7 +4196,7 @@ namespace ZiveLab.ZM
                 frmTech.Location = gBZA.appcfg.TechLocation;
                 frmTech.StartPosition = FormStartPosition.Manual;
             }
-
+            */
             if(frmTech.bopen)  frmTech.Show();
             frmTech.WindowState = FormWindowState.Normal;
         }

@@ -560,7 +560,7 @@ namespace ZiveLab.ZM
             grp2.XAxes[0].MinorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view | Properties.Settings.Default.BdGrp_Grid_Y2view;
             grp2.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
             grp2.XAxes[0].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.XAxes[0].MinorDivisions.GridVisible = false;
+           // grp2.XAxes[0].MinorDivisions.GridVisible = false;
 
             grp2.YAxes[0].Caption = "Z magnitude(Ω)";
             grp2.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
@@ -572,7 +572,7 @@ namespace ZiveLab.ZM
             grp2.YAxes[0].MinorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view;
             grp2.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
             grp2.YAxes[0].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.YAxes[0].MinorDivisions.GridVisible = false;
+            //grp2.YAxes[0].MinorDivisions.GridVisible = false;
             
 
 
@@ -586,7 +586,7 @@ namespace ZiveLab.ZM
             grp2.YAxes[1].MinorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y2view;
             grp2.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
             grp2.YAxes[1].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.YAxes[1].MinorDivisions.GridVisible = false;
+           // grp2.YAxes[1].MinorDivisions.GridVisible = false;
 
             grp2.Plots[0].LineColor = Properties.Settings.Default.BdGrp_Plot1_color;
             grp2.Plots[0].PointColor = Properties.Settings.Default.BdGrp_Plot1_color;
@@ -855,9 +855,8 @@ namespace ZiveLab.ZM
             {
                 lblVdc.Text = string.Format("    VDC: {0,8:###0.0##} V", chstat.Vdc);
             }
-
             lblTemp.Text = string.Format(" PT-100: {0,8:###0.0##} °C", chstat.Temperature);
-
+           
             if (bcalibmode)
             {
 

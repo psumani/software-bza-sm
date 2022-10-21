@@ -668,7 +668,7 @@ namespace ZiveLab.ZM
             deForm.MdiParent = this;
             deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
-
+            
             deForm.Show();
             if (filename != null)
             {
@@ -946,10 +946,12 @@ namespace ZiveLab.ZM
                     frmRegRtView = new frmRealview(0);
                     frmRegRtView.ShowInTaskbar = false;
                     //frmRegRtView.MdiParent = this;
+
                     if (gBZA.appcfg.RegRealviewSize == new Size(0, 0) )
                     {
                         frmRegRtView.StartPosition = FormStartPosition.CenterParent;
                         frmRegRtView.WindowState = FormWindowState.Normal;
+
                         gBZA.appcfg.RegRtWinStatus = frmRegRtView.WindowState;
                         gBZA.appcfg.Save();
                     }
@@ -963,6 +965,7 @@ namespace ZiveLab.ZM
                             frmRegRtView.StartPosition = FormStartPosition.Manual;
                         }
                     }
+                  
                     frmRegRtView.CloseThis += FrmRegRealview_CloseThis;
                     frmRegRtView.Show();
                 }

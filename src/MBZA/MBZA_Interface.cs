@@ -282,9 +282,12 @@ namespace ZiveLab.ZM
         public void StopThread()
         {
             this.bThread = false;
-            while (this.Th.IsAlive)
+            if (this.Th != null)
             {
-                Thread.Sleep(1);
+                while (this.Th.IsAlive)
+                {
+                    Thread.Sleep(1);
+                }
             }
             mCommZim.Dispose();
         }

@@ -1,3 +1,4 @@
-NationalInstruments.UI.WindowsForms.ScatterGraph, NationalInstruments.UI.WindowsForms, Version=15.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4
-NationalInstruments.UI.WindowsForms.Legend, NationalInstruments.UI.WindowsForms, Version=15.0.45.49153, Culture=neutral, PublicKeyToken=4febd62461bf11a4
+NationalInstruments.UI.WindowsForms.Legend, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298
+C1.Win.C1FlexGrid.Classic.C1FlexGridClassic, C1.Win.C1FlexGrid.Classic.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da
 C1.Win.C1FlexGrid.C1FlexGrid, C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da
+NationalInstruments.UI.WindowsForms.ScatterGraph, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298

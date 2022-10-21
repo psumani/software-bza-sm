@@ -1,5 +1,6 @@
 #ifndef _H_TASK_UTIL_H
 #define _H_TASK_UTIL_H
+void AllChReset(bool brst);
 void SetDevChannel(int ch);
 double GetNextFreq(int ch, ushort* restart);
 void proc_test_main(int ch);

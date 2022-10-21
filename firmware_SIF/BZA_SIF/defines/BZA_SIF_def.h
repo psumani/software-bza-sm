@@ -16,7 +16,7 @@
 #define FIRMWARE_VER_MAJOR	6  //0.256
 #define FIRMWARE_VER_MINOR	0
 #define FIRMWARE_VER_REV	2
-#define FIRMWARE_VER_BUILD	3
+#define FIRMWARE_VER_BUILD	4
 
 
 #define HW_ENABLE			0x1	
@@ -729,7 +729,12 @@ typedef struct
 	ushort              Stop;
 	ushort              bCalib;
 	ushort              FlagOverT;
+	
 	ushort				TmpResetICE;
+	ushort              CmdResetICE;
+	ushort              ResetICE;
+	uint 				m_msReset;
+	
 	ushort 				bChkSlope;
 	uint 				m_msSlop;
 
@@ -784,21 +789,17 @@ typedef struct
 	uint 				m_msADC;
 	uint 				m_msAux;
 	uint 				m_msFind;
+	short 				m_FindCh;
 	int 				CommTimeOut;
 	int 				CommTimeResp;
 	ushort 				CommLed;
+	short 				m_AuxCh;
 
     int                 nTimeTick;      
 	int                 nI2CWriteDelayTick[2];
 	int                 nSPITickOn; 
 	int                 nSPITick;
-	
-	ushort              CmdResetICE;
-	ushort              ResetICE;
-	ushort              TmpResetICE;
-	uint 				m_msReset;
-	int					ResetCh;
-	
+
 	ushort 				prevrecvsize;
 	ushort 				prevrecvsize1;
 	stStatusInf			mStatusInf;

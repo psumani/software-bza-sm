@@ -207,8 +207,7 @@ static void set_DHCP_network(void)
     SetSUBVar(pSubnetMask);
     ApplySUBReg();
     SetSIPReg(pSrcIpAddr);
-    
-    w5100_sysinit(0x55, 0x55);
+	//w5100_sysinit(0x55, 0x55);
 }
 
 static void proc_ip_conflict(void)
@@ -232,9 +231,7 @@ uint init_dhcpc_ch(SOCKET s)
     SetSHAReg(pSrcMacAddr);
     
     SetIntMaskReg(0xEF);
-    
-    w5100_sysinit(0x55, 0x55);
-    
+ 	//w5100_sysinit(0x55, 0x55);    
     if(!socket(s, Sn_MR_UDP, DHCP_CLIENT_PORT, 0x00))
         ret = 0;
     else

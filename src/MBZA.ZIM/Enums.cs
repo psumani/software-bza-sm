@@ -160,7 +160,7 @@ namespace ZiveLab.ZM.ZIM
         NotReady,
         [Description("Not found channel...")]
         NoZim,
-        [Description("Communition error...")]
+        [Description("Communication error...")]
         ErrCommZim,
         [Description("Failed control...")]
         ContFail,

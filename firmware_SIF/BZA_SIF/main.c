@@ -12,39 +12,7 @@ inline int GetMaxChannel(void)
 	return MaxCh;
 }
 
-inline void CmdResetProc(void)	
-{
-	if(m_pGlobalVar->ResetICE == 1)
-	{
-		if(m_pGlobalVar->CmdResetICE == 2)
-		{
-			m_pGlobalVar->ResetICE = 2;
-			m_pGlobalVar->CmdResetICE = 0;
-			m_pGlobalVar->m_msReset = 0;
-			Set_IceResetB(false);
-			
-		}
-	}
-	else if(m_pGlobalVar->ResetICE == 2)
-	{
-		if(m_pGlobalVar->m_msReset >= 100)
-		{
-			m_pGlobalVar->ResetICE = 0;
-		}
-	}
-	else if(m_pGlobalVar->ResetICE == 3)
-	{
-		if(m_pGlobalVar->m_msReset >= 100)
-		{
-			Set_IceResetB(false);
-			m_pGlobalVar->ResetICE = 2;
-		}
-	}
-	else
-	{
-		m_pGlobalVar->ResetICE = 0;
-	}
-}
+
 
 int main()
 {
@@ -53,12 +21,16 @@ int main()
 	Initialize();
 	
     m_pGlobalVar->m_msFind = 0;
+	m_pGlobalVar->m_FindCh = -1;
+	
 	m_pGlobalVar->m_MsI2CdelayStamp = 0;
 	m_pGlobalVar->m_msAux = 0;
+	m_pGlobalVar->m_AuxCh = -1;
 	m_pGlobalVar->m_msADC = 0;
 	m_pGlobalVar->mStatusInf.mode = 1;
 	m_pGlobalVar->mStatusInf.LastCh = -1;
 	m_pGlobalVar->LedFlowStat = 1;
+	
 	while(bFlag)
 	{	
 		ICE_BzaCommStat(m_pGlobalVar->LedBusy);
@@ -75,14 +47,7 @@ int main()
 				
 			if(m_pGlobalVar->mStatusInf.mode == 1)
 			{
-				if(m_pGlobalVar->ResetICE == 0)
-				{
-					DeviceMainProc();
-				}
-				else
-				{
-					CmdResetProc();
-				}
+				DeviceMainProc();
 			}
 		}
 

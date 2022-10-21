@@ -250,7 +250,6 @@ namespace ZiveLab.ZM
                     {
                         try
                         {
-                            gBZA.SifLnkLst[Value.sSerial].iLinkCh[0] = 1;
                             gBZA.SifLnkLst[Value.sSerial].iLinkCh[Value.SifCh] = Int32.Parse(key);
                             gBZA.SifLnkLst[Value.sSerial].bLinked = true;
                             if (gBZA.SifLnkLst[Value.sSerial].mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1)

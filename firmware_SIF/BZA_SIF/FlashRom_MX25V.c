@@ -199,12 +199,14 @@ INT_32 MX25V_read_rdid(mx25v_id* pid)
 	len = spi_write(MX25V_SPI_NO, tx_buf, 1); 
 	if (len != 1) 
 	{
+		MX25V_chip_deselect();
 		return _ERROR;
 	}
 	
 	len = spi_read(MX25V_SPI_NO, rx_buf, 3);
 	if (len != 3) 
 	{
+		MX25V_chip_deselect();
 		return _ERROR;
 	}
 	
@@ -234,6 +236,7 @@ INT_32 MX25V_write_status(UNS_8 value)
 	len = spi_write(MX25V_SPI_NO, tx_buf, 2);
 	if (len != 2) 
 	{
+		MX25V_chip_deselect();
 		return _ERROR;
 	}
 
@@ -267,12 +270,14 @@ INT_32 MX25V_read_buffer(UNS_32 address, void *data, UNS_32 length)
 	len = spi_write(MX25V_SPI_NO, tx_buf, 4);
 	if (len != 4) 
 	{
+		MX25V_chip_deselect();
 		return _ERROR;
 	}
 
 	len = spi_read(MX25V_SPI_NO, data, length);
 	if (len != length) 
 	{
+		MX25V_chip_deselect();
 		return _ERROR;
 	}
 
@@ -493,12 +498,12 @@ INT_32 MX25V_checkrom(void)
 	mx25v_id mPROMid;
 	
 	memset(&mPROMid,0x0,sizeof(mPROMid));
+
 //	MX25V_read_res(&mPROMid);
 //	MX25V_delay(10);
 //	MX25V_read_rems(&mPROMid);
 //	MX25V_delay(10);
 	mx25v_exit_deep_powerdown();
-	
 	MX25V_read_rdid(&mPROMid);
 
 	if(mPROMid.manufacturer_id != 0xC2) return _ERROR;
@@ -552,7 +557,7 @@ INT_32 MX25V_spi_open(void)
 	mCfg.highclk_spi_frames = FALSE;
 	mCfg.usesecond_clk_spi = FALSE;
 	
-	mCfg.spi_clk = 8000000;
+	mCfg.spi_clk = 6000000;
 	mCfg.transmitter = 1;
 	
 	if (spi_open(MX25V_SPI_NO,(UNS_32)&mCfg) == _ERROR) 

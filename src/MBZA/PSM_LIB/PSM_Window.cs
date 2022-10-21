@@ -19,7 +19,7 @@ namespace SMLib
         }
 
         //test width = 300
-        public int ShowComboDialog(string sdescription, string[] items, int defaultvalue, string caption, int Combowidth,int formwidth)
+        public int ShowComboDialog(string sdescription, string[] items, int defaultvalue, string caption, int Combowidth,int formwidth,int MaxDropDown = 10)
         {
             this.Font = new Font("Consolas", 9.0f);
             this.TopMost = true;
@@ -37,8 +37,8 @@ namespace SMLib
 
             ComboBox combo = new ComboBox() { Left = (int)((formwidth - Combowidth) * 0.5), Top = 40, Width = Combowidth };
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo.MaxDropDownItems = 10;
             combo.Items.AddRange(items);
+            combo.DropDownHeight = MaxDropDown * combo.Height;
             combo.SelectedIndex = defaultvalue;
 
             Button btcancel = new Button() { Text = "Cancel", Left = formwidth - 90, Top = 70, Width = 60 };

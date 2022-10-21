@@ -163,6 +163,9 @@ extern byte* pSrcIpAddr;
 void InitEthernet(void)
 {
 	int i;
+	
+	w5100_sysinit(0x55, 0x55);
+	
 	memcpy(&m_pGlobalVar->mEthernetCfg,&m_pConnCfg->mEthernetCfg,sizeof(m_pConnCfg->mEthernetCfg));
 		
     pSrcMacAddr = m_pGlobalVar->mEthernetCfg.Mac;
@@ -201,7 +204,7 @@ void InitEthernet(void)
         }
         
         w5100_init();
-        w5100_sysinit(0x55, 0x55);
+		//w5100_sysinit(0x55, 0x55);
     } 
 	
     for(i = 0; i < MAX_SOCKET_NUM; i++)
@@ -339,8 +342,7 @@ void InitGlobalVar(void)
 	m_pGlobalVar->OpenSPI = FALSE;
 	m_pGlobalVar->mStatusInf.EnaChkTimeOut = 0;
 
-	m_pGlobalVar->ResetICE = 0;
-	m_pGlobalVar->ResetCh = -1;
+	
 
 	for(ch=0; ch<MAX_DEV_CHANNEL; ch++)
 	{
@@ -348,6 +350,7 @@ void InitGlobalVar(void)
 		m_pGlobalVar->mChVar[ch].Start = 0;
 		m_pGlobalVar->mChVar[ch].Stop = DEF_LAST_ERROR_NONE;
 		m_pGlobalVar->mChVar[ch].TmpResetICE = 0;
+		m_pGlobalVar->mChVar[ch].ResetICE = 0;
 		SetDevChannel(ch);
 		InitDevice(ch);
 	}
@@ -581,24 +584,29 @@ unsigned char LoadSystemInformation(void)
 
 void Initialize(void)
 {
-	
 	Init_arm();
+	
     InitMemoryMap();	
 	InitSysConfig();
 
+	//AllChReset(false);
 	Set_IceResetB(false);
+	
 	
     m_pGlobalVar->mStatusInf.ChkInitProc = LoadSystemInformation();
 
 	OnLed0(true);
 	
 	InitGlobalVar();
+	
+	
 	m_pGlobalVar->LedFlowStat = 0;
 
 	Init_Timer();
 
     __enable_interrupt();
 	
+		
 	Init_SPI();
 	
 	OnLed1(true);
@@ -607,8 +615,6 @@ void Initialize(void)
 	{
 		m_pGlobalVar->OpenI2C = TRUE;
 	}
-	
-	
 	
 	//OnLed2(true);
 	
