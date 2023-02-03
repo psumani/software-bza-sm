@@ -93,7 +93,7 @@ namespace ZiveLab.ZM.ZIM.Analysis
             {
                 if (item.freq >= 1 && item.freq <= 10)
                 {
-                    if (item.phase > -0.05 && item.phase < 0.05)
+                    if (item.phase > -0.1 && item.phase < 0.1) // +/- 0.05 to +/- 0.1
                     {
                         dtotal += item.mag;
                         if (dmax < item.mag) dmax = item.mag;

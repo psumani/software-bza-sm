@@ -8,7 +8,7 @@
 
 typedef enum { DEV_UNKNOWN, DEV_BZA1000A, DEV_BZA1000, DEV_BZA500, DEV_BZA100,DEV_BZA60} eDeviceType;
 typedef enum { SIF_WBCS, SIF_SMART, SIF_ZIM, SIF_SBZA, SIF_MBZA ,SIF_ZBCS,SIF_CXM } eSifType;
-typedef enum { TECH_EIS, TECH_HFR, TECH_PRR, TECH_MON, TECH_QIS,} eTechType;
+typedef enum { TECH_EIS, TECH_HFR, TECH_PRR, TECH_MON, TECH_QIS,TECH_DCH,} eTechType;
 
 #pragma pack(1)
 #define DEF_I2C_TIMEOUT                       				1000
@@ -200,7 +200,7 @@ typedef struct
 typedef struct
 {	
 	double					MaxPower;
-	double					Nouse[4];
+	double					NoUse[4];
 } st_zim_Safety_inf;
 
 typedef struct
@@ -208,6 +208,18 @@ typedef struct
 	byte          			ID;
 	st_zim_Safety_inf		mSafety;
 } st_zim_chkrnginf;
+
+typedef struct
+{	
+	double			offset;
+} st_zim_Idc_rnginf_Ofs;
+
+
+
+typedef struct
+{	
+	st_zim_Idc_rnginf_Ofs			idcofs[MAX_IAC_CTRL_RNGCNT];
+} st_zim_Idc_rnginf;
 
 typedef struct
 {	
@@ -227,6 +239,8 @@ typedef struct
 	st_zim_adc_rnginf 		rtd_rng;
 	st_zim_Eis_Cal_info		mEisIRngCalInfo[MAX_IAC_CTRL_RNGCNT];	
 	st_zim_dummy      		mDummy[MAX_IAC_CTRL_RNGCNT];
+	st_zim_Idc_rnginf		idc_rng;
+	double					NoUse[20];
 } st_zim_rnginf;
 
 #define DEF_RTD_COEF_LEN	6

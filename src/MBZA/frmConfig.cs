@@ -31,13 +31,13 @@ namespace ZiveLab.ZM
             sch = "";
 
             DoubleBuffered = true;
-
-            
         }
 
         private void frmConfig_Load(object sender, EventArgs e)
         {
             RefreshListCh();
+
+            this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.ConfigureComputer);
         }
 
         void RefreshListCh()

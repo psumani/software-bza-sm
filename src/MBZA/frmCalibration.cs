@@ -409,14 +409,17 @@ namespace ZiveLab.ZM
             {
                 Rtlegend.Items[0].Visible = true;
                 Rtlegend.Items[0].Text = "Voltage";
+                Rtlegend.Items[0].Source = grprt.Plots[0];
                 Rtlegend.Items[1].Visible = true;
                 Rtlegend.Items[1].Text = "Current";
+                Rtlegend.Items[0].Source = grprt.Plots[1];
                 legSize.Height = 55;
             }
             else
             {
                 Rtlegend.Items[0].Visible = true;
                 Rtlegend.Items[0].Text = "Current";
+                Rtlegend.Items[0].Source = grprt.Plots[0];
                 Rtlegend.Items[1].Visible = false;
                 Rtlegend.Items[1].Text = "";
                 legSize.Height = 30;
@@ -437,16 +440,16 @@ namespace ZiveLab.ZM
                 defaultToolStripMenuItem.Checked = true;
                 maximumToolStripMenuItem.Checked = false;
                 grprt.Size = new Size(162, 144);
-                grprt.Location = new Point(170, 76);
+                grprt.Location = new Point(172, 76);
 
             }
             else 
             {
                 defaultToolStripMenuItem.Checked = false;
                 maximumToolStripMenuItem.Checked = true;
-
+                grprt.Location = new Point(5, 5);
                 grprt.Size = new Size(this.ClientRectangle.Width - 16, this.ClientRectangle.Height - 16);
-                grprt.Location = new Point(8, 6);
+                
             }
             RefreshRtLegend();
         }
@@ -1464,12 +1467,7 @@ namespace ZiveLab.ZM
                 return;
             }
 
-            res = MBZA_MapUtil.WriteROM(Serial, sifch);
-
             this.Cursor = Cursors.Default;
-            if (res == true)
-                MessageBox.Show("Range information is written to ROM.");
-            else MessageBox.Show("Failed to write range information to ROM.");
 
         }
 
@@ -2288,5 +2286,9 @@ namespace ZiveLab.ZM
             }
         }
 
+        private void grprt_PlotDataChanged(object sender, XYPlotDataChangedEventArgs e)
+        {
+
+        }
     }
 }

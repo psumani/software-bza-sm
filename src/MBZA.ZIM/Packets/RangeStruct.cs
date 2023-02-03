@@ -89,6 +89,159 @@ namespace ZiveLab.ZM.ZIM.Packets
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_Idc_rnginf_Ofs
+    {
+        public double offset;
+        public st_zim_Idc_rnginf_Ofs(int init)
+        {
+            offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+        }
+
+        public void Initialize()
+        {
+            offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zim_Idc_rnginf_Ofs)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_Idc_rnginf_Ofs));
+            pinnedArr.Free();
+        }
+
+        #region ** Properties
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit offset value for IDC control.")]
+        public double PropOffset
+        {
+            get { return offset; }
+            set { offset = value; }
+        }
+
+        #endregion //#region ** Properties
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_Idc_rnginf
+    {
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
+        public st_zim_Idc_rnginf_Ofs[] idcofs;
+        public st_zim_Idc_rnginf(int init)
+        {
+            idcofs = new st_zim_Idc_rnginf_Ofs[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+            for(int i=0; i< DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            {
+                idcofs[i] = new st_zim_Idc_rnginf_Ofs(0);
+            }
+            
+        }
+
+        public void Initialize()
+        {
+            for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            {
+                idcofs[i].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+            }
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zim_Idc_rnginf)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_Idc_rnginf));
+            pinnedArr.Free();
+        }
+
+        #region ** Properties
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange1 X1"), DescriptionAttribute("Edit IDC offset value for IRange1 X1.")]
+        public double PropOffset1
+        {
+            get { return idcofs[0].offset; }
+            set { idcofs[0].offset = value; }
+        }
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange1 X0.2"), DescriptionAttribute("Edit IDC offset value for IRange1 X0.2.")]
+        public double PropOffset2
+        {
+            get { return idcofs[1].offset; }
+            set { idcofs[1].offset = value; }
+        }
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange2 X1"), DescriptionAttribute("Edit IDC offset value for IRange2 X1.")]
+        public double PropOffset3
+        {
+            get { return idcofs[2].offset; }
+            set { idcofs[2].offset = value; }
+        }
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange2 X0.2"), DescriptionAttribute("Edit IDC offset value for IRange2 X0.2.")]
+        public double PropOffset4
+        {
+            get { return idcofs[3].offset; }
+            set { idcofs[3].offset = value; }
+        }
+        [DisplayName("IRange3 X1"), DescriptionAttribute("Edit IDC offset value for IRange3 X1.")]
+        public double PropOffset5
+        {
+            get { return idcofs[4].offset; }
+            set { idcofs[4].offset = value; }
+        }
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange3 X0.2"), DescriptionAttribute("Edit IDC offset value for IRange3 X0.2.")]
+        public double PropOffset6
+        {
+            get { return idcofs[5].offset; }
+            set { idcofs[5].offset = value; }
+        }
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange4 X1"), DescriptionAttribute("Edit IDC offset value for IRange4 X1.")]
+        public double PropOffset7
+        {
+            get { return idcofs[6].offset; }
+            set { idcofs[6].offset = value; }
+        }
+        [ReadOnlyAttribute(false)]
+        [DisplayName("IRange4 X0.2"), DescriptionAttribute("Edit IDC offset value for IRange4 X0.2.")]
+        public double PropOffset8
+        {
+            get { return idcofs[7].offset; }
+            set { idcofs[7].offset = value; }
+        }
+
+        #endregion //#region ** Properties
+    }
+
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct st_zim_vdc_rnginf
     {
         public double realmax;
@@ -574,6 +727,14 @@ namespace ZiveLab.ZM.ZIM.Packets
             Nouse2 = 0.0;
         }
 
+        public st_zim_dummy(double tLs, double tR)
+        {
+            Ls = tLs;
+            R = tR;
+            Nouse1 = 0.0;
+            Nouse2 = 0.0;
+        }
+
         #region ** Properties
         [ReadOnlyAttribute(false)]
         [DisplayName("Inducance(H)"), DescriptionAttribute("Edit inductance of range.")]
@@ -599,15 +760,51 @@ namespace ZiveLab.ZM.ZIM.Packets
     {
         public double MaxPower;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public double[] NoUse;
-        public st_zim_Safety_inf(byte init)
+        public double[] nouse;
+        
+        public st_zim_Safety_inf(eZimType tType)
         {
-            MaxPower = DeviceConstants.DEV_MAX_POWER;
-            NoUse = new double[4];
-            NoUse[0] = 0.0;
-            NoUse[1] = 0.0;
-            NoUse[2] = 0.0;
-            NoUse[3] = 0.0;
+            if (tType == eZimType.BZA500)
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA500_POWER;
+            }
+            else if (tType == eZimType.BZA100)
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA100_POWER;
+            }
+            else if (tType == eZimType.BZA60)
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA60_POWER;
+            }
+            else
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA1000_POWER;
+            }
+            nouse = new double[4];
+            for(int i=0; i<4; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+
+        public void Initialize(eZimType tType)
+        {
+            if (tType == eZimType.BZA500)
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA500_POWER;
+            }
+            else if (tType == eZimType.BZA100)
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA100_POWER;
+            }
+            else if (tType == eZimType.BZA60)
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA60_POWER;
+            }
+            else
+            {
+                MaxPower = DeviceConstants.DEFAULT_BZA1000_POWER;
+            }
         }
 
         public byte[] ToByteArray()
@@ -657,10 +854,18 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_zim_Eis_Cal_info[] mEisIRngCalInfo; // not use
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
         public st_zim_dummy[] mDummy;
+        public st_zim_Idc_rnginf Idc_rnginf;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
+        public double[] nouse;
+
         public st_zim_rnginf(eZimType mtype)
         {
+            int i;
+
             ID = DeviceConstants.ID_RANGEINFO;
             mSafety = new st_zim_Safety_inf(0);
+
+            Idc_rnginf = new st_zim_Idc_rnginf(0);
 
             iac_rng = new st_zim_adci_rnginf[DeviceConstants.MAX_IAC_RNGCNT];
             iac_rng[0] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
@@ -698,23 +903,33 @@ namespace ZiveLab.ZM.ZIM.Packets
 
             mEisIRngCalInfo = new st_zim_Eis_Cal_info[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
 
-            mEisIRngCalInfo[0] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[1] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[2] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[3] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[4] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[5] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[6] = new st_zim_Eis_Cal_info(0);
-            mEisIRngCalInfo[7] = new st_zim_Eis_Cal_info(0);
+            for (i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            {
+                mEisIRngCalInfo[i] = new st_zim_Eis_Cal_info(0);
+            }
 
             mDummy = new st_zim_dummy[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+            mDummy[0] = new st_zim_dummy(0.000000064476, 0.009987261);
+            mDummy[1] = new st_zim_dummy(0.000000064476, 0.009987261);
+            mDummy[2] = new st_zim_dummy(0.000000112196, 0.099952);
+            mDummy[3] = new st_zim_dummy(0.000000112196, 0.099952);
+            mDummy[4] = new st_zim_dummy(0.000000084638, 0.997961);
+            mDummy[5] = new st_zim_dummy(0.000000084638, 0.997961);
+            mDummy[6] = new st_zim_dummy(0.00000008, 9.999281);
+            mDummy[7] = new st_zim_dummy(0.00000008, 9.999281);
+
+            nouse = new double[20];
+            for (i = 0; i < 20; i++)
+            {
+                nouse[i] = 0.0;
+            }
         }
 
         public void Initialize(eZimType mtype)
         {
             int i;
             ID = DeviceConstants.ID_RANGEINFO;
-            mSafety.MaxPower = DeviceConstants.DEV_MAX_POWER;
+            
             iac_rng[0].Initialize(DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
             iac_rng[1].Initialize(DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
             iac_rng[2].Initialize(DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
@@ -723,21 +938,25 @@ namespace ZiveLab.ZM.ZIM.Packets
 
             if (mtype == eZimType.BZA500)
             {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA500_POWER;
                 vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX1, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
                 vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX1, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
             }
             else if (mtype == eZimType.BZA100)
             {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA100_POWER;
                 vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX2, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
                 vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX2, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
             }
             else if (mtype == eZimType.BZA60)
             {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA60_POWER;
                 vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX3, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
                 vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX3, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
             }
             else
             {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA1000_POWER;
                 vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX0, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
                 vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX0, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
             }
@@ -748,7 +967,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             {
                 mEisIRngCalInfo[i].Initialize();
             }
-
+            Idc_rnginf.Initialize();
+            
             mDummy[0].Ls = 0.000000064476;
             mDummy[1].Ls = 0.000000064476;
             mDummy[2].Ls = 0.000000112196;
@@ -766,6 +986,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             mDummy[5].R = 0.997961;
             mDummy[6].R = 9.999115;
             mDummy[7].R = 9.999115;
+
+            for (i = 0; i < 20; i++)
+            {
+                nouse[i] = 0.0;
+            }
+
         }
         public byte[] ToByteArray()
         {

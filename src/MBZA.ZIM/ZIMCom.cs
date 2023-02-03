@@ -196,6 +196,17 @@ namespace ZiveLab.ZM.ZIM
         {
             if (mComm.WriteToDevice(CommandSet.SET_SIFMODE, -1, iMode, null) == false)
             {
+                //mComm.Dispose();
+                return false;
+            }
+            iSifMode = iMode;
+            return true;
+        }
+
+        public bool CmdSetCmdMode(int nCh, int iMode)
+        {
+            if (mComm.WriteToDevice(CommandSet.SET_SIFMODE, nCh, iMode, null) == false)
+            {
                 mComm.Dispose();
                 return false;
             }

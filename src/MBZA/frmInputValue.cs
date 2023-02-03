@@ -26,6 +26,7 @@ namespace ZiveLab.ZM
             InitializeComponent();
 
             this.Text = "Change " + sItem + " value";
+            this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.EditInput);
             inType = Type;
 
             if (inType == 0)

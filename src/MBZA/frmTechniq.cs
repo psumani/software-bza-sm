@@ -27,6 +27,7 @@ namespace ZiveLab.ZM
         public stTech_PRR prr;
         public stTech_MON mon;
         public stTech_QIS qis;
+        public stTech_DCH dch;
         public enTechType techtype;
         public bool bopen;
         public bool loaderr;
@@ -49,6 +50,7 @@ namespace ZiveLab.ZM
             prr = new stTech_PRR(0);
             mon = new stTech_MON(0);
             qis = new stTech_QIS(0);
+            dch = new stTech_DCH(0);
 
             TechInitialize();
 
@@ -145,7 +147,7 @@ namespace ZiveLab.ZM
 
 
             cboIrange.SelectedIndex = 2;
-            cbomonctrl.SelectedIndex = 1;
+            cbomonctrl.SelectedIndex = 2;
             filefullpath = sfile;
             if (File.Exists(filefullpath))
             {
@@ -238,6 +240,11 @@ namespace ZiveLab.ZM
                 qis.initialize();
                 mtech.SetQIS(qis);
             }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                dch.initialize();
+                mtech.SetDCH(dch);
+            }
             else
             {
                 eis.initialize();
@@ -272,6 +279,10 @@ namespace ZiveLab.ZM
             else if (techtype == enTechType.TECH_QIS)
             {
                 sext = "qis";
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                sext = "dch";
             }
             else
             {
@@ -356,6 +367,7 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 mon.initialize();
                 qis.initialize();
+                dch.initialize();
             }
             else if ((enTechType)mtech.type == enTechType.TECH_PRR)
             {
@@ -364,6 +376,7 @@ namespace ZiveLab.ZM
                 mtech.GetPRR(ref prr);
                 mon.initialize();
                 qis.initialize();
+                dch.initialize();
             }
             else if ((enTechType)mtech.type == enTechType.TECH_MON)
             {
@@ -372,6 +385,7 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 mtech.GetMON(ref mon);
                 qis.initialize();
+                dch.initialize();
             }
             else if ((enTechType)mtech.type == enTechType.TECH_QIS)
             {
@@ -380,6 +394,16 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 mon.initialize();
                 mtech.GetQIS(ref qis);
+                dch.initialize();
+            }
+            else if ((enTechType)mtech.type == enTechType.TECH_DCH)
+            {
+                eis.initialize();
+                hfr.initialize();
+                prr.initialize();
+                mon.initialize();
+                qis.initialize();
+                mtech.GetDCH(ref dch);
             }
             else
             {
@@ -388,6 +412,7 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 mon.initialize();
                 qis.initialize();
+                dch.initialize();
             }
             
             bopen = true;
@@ -465,11 +490,6 @@ namespace ZiveLab.ZM
 
                 mon.totaltime = SM_Number.atot(txthfrtotaltime.Text);
                 txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
-
-                mon.celloffwait = (ushort)(chkhfrcelloffwait.Checked ? 1 : 0);
-                
-                mon.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
-                txtMonCutoff.Text = SM_Number.ToString(mon.CutoffV, enSM_TypeNumberToString.SIPrefix);
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -489,6 +509,17 @@ namespace ZiveLab.ZM
                 qis.cycle = 1;
                 cboeiscyc.SelectedIndex = GetCycIdxFromCycle(qis.cycle);
                 
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                mon.sampletime = SM_Number.atot(txthfrinterval.Text);
+                txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
+
+                mon.totaltime = SM_Number.atot(txthfrtotaltime.Text);
+                txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
+
+                dch.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
+                txtMonCutoff.Text = SM_Number.ToString(dch.CutoffV, enSM_TypeNumberToString.SIPrefix);
             }
             else
             {
@@ -513,15 +544,7 @@ namespace ZiveLab.ZM
                 mtech.ondelaystable = 0;
                 chkondelaystable.Checked = false;
                 mtech.ondelay = 2.0;
-
-                if (mon.celloffwait == 0)
-                {
-                    mtech.irange = (ushort)(cbomonctrl.SelectedIndex * 2);
-                }
-                else
-                {
-                    mtech.irange = 1;
-                }
+                mtech.irange = 2;
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -530,6 +553,13 @@ namespace ZiveLab.ZM
                 mtech.ondelay = 2.0;
                 txtondelay.Text = SM_Number.GetTimeString(mtech.ondelay);
                 mtech.irange = (ushort)cboIrange.SelectedIndex;
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                mtech.ondelaystable = 0;
+                chkondelaystable.Checked = false;
+                mtech.ondelay = 2.0;
+                mtech.irange = (ushort)cbomonctrl.SelectedIndex;
             }
             else
             {
@@ -548,7 +578,7 @@ namespace ZiveLab.ZM
             if (techtype == enTechType.TECH_HFR)
             {
                 lblhfrinterval.Text = "Interval(s)";
-                chkhfrcelloffwait.Text = "Load off at waiting.";
+                chkhfrcelloffwait.Visible = true;
                 txthfrfreq.Text = GetFreqString(ref hfr.freq);
                 txthfrinterval.Text = SM_Number.GetTimeString(hfr.interval);
                 txthfrtotaltime.Text = SM_Number.GetTimeString(hfr.totaltime);
@@ -592,45 +622,26 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_MON)
             {
-                chkhfrcelloffwait.Text = "Load off";
-                
-
+                chkhfrcelloffwait.Visible = false;
                 txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
                 txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
-                chkhfrcelloffwait.Checked = (mon.celloffwait == 1)? true : false;
-                
-                if (mon.celloffwait == 1)
-                {
-                    cbomonctrl.Visible = false;
-                    lblctrlrate.Visible = false;
-                    lblcutoff.Visible = false;
-                    txtMonCutoff.Visible = false;
-                }
-                else
-                {
-                    cbomonctrl.Visible = true;
-                    lblctrlrate.Visible = true;
-                    lblcutoff.Visible = true;
-                    txtMonCutoff.Visible = true;
-
-                    //mon.CtrlRate = SM_Number.ToDouble(txtMonCont.Text) * 0.01;
-                    //mon.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
-
-                }
+               
+                cbomonctrl.Visible = false;
+                lblctrlrate.Visible = false;
+                lblcutoff.Visible = false;
+                txtMonCutoff.Visible = false;
+               
                 mtech.ondelay = 2.0;
                 mtech.ondelaystable = 0;
 
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
-
-                txtMonCutoff.Text = string.Format(" {0,4:##0.0}", mon.CutoffV);
-
+                
                 lblhfrfreq.Visible = false;
                 lblhfrinterval.Text = "Sample time(s)";
                 txthfrfreq.Text = "0";
                 txthfrfreq.Visible = false;
-                chkhfrcelloffwait.Text = "Load off for Eoc monitor.";
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -663,6 +674,33 @@ namespace ZiveLab.ZM
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
             }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                chkhfrcelloffwait.Visible = false;
+
+
+                txthfrinterval.Text = SM_Number.GetTimeString(dch.sampletime);
+                txthfrtotaltime.Text = SM_Number.GetTimeString(dch.totaltime);
+                
+                cbomonctrl.Visible = true;
+                lblctrlrate.Visible = true;
+                lblcutoff.Visible = true;
+                txtMonCutoff.Visible = true;
+                
+                mtech.ondelay = 2.0;
+                mtech.ondelaystable = 0;
+
+                lblondelay.Visible = false;
+                txtondelay.Visible = false;
+                chkondelaystable.Visible = false;
+
+                txtMonCutoff.Text = string.Format(" {0,4:##0.0}", dch.CutoffV);
+
+                lblhfrfreq.Visible = false;
+                lblhfrinterval.Text = "Sample time(s)";
+                txthfrfreq.Text = "0";
+                txthfrfreq.Visible = false;
+            }
             else
             {
                 txteisinitfreq.Text = GetFreqString(ref eis.initfreq);
@@ -691,7 +729,7 @@ namespace ZiveLab.ZM
                 txtondelay.Visible = true;
                 chkondelaystable.Visible = true;
             }
-            if (techtype == enTechType.TECH_MON)
+            if (techtype == enTechType.TECH_MON || techtype == enTechType.TECH_DCH)
             {
                 lbliRange.Visible = false;
                 cboIrange.Visible = false;
@@ -701,8 +739,8 @@ namespace ZiveLab.ZM
                 lbliRange.Visible = true;
                 cboIrange.Visible = true;
             }
-            cboIrange.SelectedIndex = mtech.irange;
-            cbomonctrl.SelectedIndex = (int)(mtech.irange / 2);
+            cboIrange.SelectedIndex = (int)mtech.irange;
+            cbomonctrl.SelectedIndex = (int)mtech.irange;
 
             txtondelay.Text = SM_Number.GetTimeString(mtech.ondelay);
             chkondelaystable.Checked = (mtech.ondelaystable == 0) ? false : true;
@@ -732,10 +770,6 @@ namespace ZiveLab.ZM
 
             return string.Format("{0:#0.###}", freq);
         }
-
-        
-
-
 
         public bool RefreshFrequency(ref string sval, ref double freq)
         {
@@ -921,6 +955,10 @@ namespace ZiveLab.ZM
             {
                 count = qis.GetFreqCount();
             }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                count = (int)(dch.totaltime / dch.sampletime);
+            }
             else
             {
                 count = eis.GetFreqCount();
@@ -956,6 +994,18 @@ namespace ZiveLab.ZM
                 mon.sampletime = tmp;
                 txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
             }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                if (tmp < 0.1)
+                {
+                    MessageBox.Show("The minimum value of the sampling time is 100 ms.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = 0.1;
+                }
+
+
+                dch.sampletime = tmp;
+                txthfrinterval.Text = SM_Number.GetTimeString(dch.sampletime);
+            }
         }
 
         private void txthfrtotaltime_Leave(object sender, EventArgs e)
@@ -969,6 +1019,11 @@ namespace ZiveLab.ZM
             {
                 mon.totaltime = SM_Number.atot(txthfrtotaltime.Text);
                 txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                dch.totaltime = SM_Number.atot(txthfrtotaltime.Text);
+                txthfrtotaltime.Text = SM_Number.GetTimeString(dch.totaltime);
             }
         }
 
@@ -1051,8 +1106,8 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_MON)
             {
-                dlg.Filter = "V/T monitor (*.vtm) |*.vtm";
-                dlg.Title = "Open Voltage/Temperature monitor technique file.";
+                dlg.Filter = "Eoc/Temp. monitor (*.vtm) |*.vtm";
+                dlg.Title = "Open Eoc/Temperature monitor technique file.";
                 dlg.DefaultExt = "vtm";
             }
             else if (techtype == enTechType.TECH_QIS)
@@ -1060,6 +1115,12 @@ namespace ZiveLab.ZM
                 dlg.Filter = "Quick galvanostatic EIS (*.qis) |*.qis";
                 dlg.Title = "Open Quick galvanostatic EIS technique file.";
                 dlg.DefaultExt = "qis";
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                dlg.Filter = "Discharge test(*.dch) |*.dch";
+                dlg.Title = "Open Discharge test technique file.";
+                dlg.DefaultExt = "vtm";
             }
             else
             {
@@ -1110,7 +1171,7 @@ namespace ZiveLab.ZM
                 if (this.tabtech.TabPages.Contains(this.tabtech1) == true) this.tabtech.TabPages.Remove(this.tabtech1);
                 if (this.tabtech.TabPages.Contains(this.tabtech2) == false) this.tabtech.TabPages.Add(this.tabtech2);
                 if (this.tabtech.TabPages.Contains(this.tabtech3) == true) this.tabtech.TabPages.Remove(this.tabtech3);
-                this.tabtech2.Text = "Voltage/Temperature monitor";
+                this.tabtech2.Text = "Eoc/Temperature monitor";
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -1118,6 +1179,13 @@ namespace ZiveLab.ZM
                 if (this.tabtech.TabPages.Contains(this.tabtech2) == true) this.tabtech.TabPages.Remove(this.tabtech2);
                 if (this.tabtech.TabPages.Contains(this.tabtech3) == true) this.tabtech.TabPages.Remove(this.tabtech3);
                 this.tabtech1.Text = "Quick galvanostatic EIS";
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                if (this.tabtech.TabPages.Contains(this.tabtech1) == true) this.tabtech.TabPages.Remove(this.tabtech1);
+                if (this.tabtech.TabPages.Contains(this.tabtech2) == false) this.tabtech.TabPages.Add(this.tabtech2);
+                if (this.tabtech.TabPages.Contains(this.tabtech3) == true) this.tabtech.TabPages.Remove(this.tabtech3);
+                this.tabtech2.Text = "Discharde test";
             }
             else 
             {
@@ -1164,6 +1232,10 @@ namespace ZiveLab.ZM
                 else if (techtype == enTechType.TECH_QIS)
                 {
                     mtech.SetQIS(qis);
+                }
+                else if (techtype == enTechType.TECH_DCH)
+                {
+                    mtech.SetDCH(dch);
                 }
                 else
                 {
@@ -1215,6 +1287,12 @@ namespace ZiveLab.ZM
                 saveDlg.Title = "Save as Quick galvanostatic EIS technique file.";
                 saveDlg.DefaultExt = "*.qis";
                 saveDlg.Filter = "Quick galvanostatic EIS (*.qis) | *.qis";
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                saveDlg.Title = "Save as Discharge test technique file.";
+                saveDlg.DefaultExt = "*.dch";
+                saveDlg.Filter = "Discharge test(*.dch) | *.dch";
             }
             else
             {
@@ -1274,6 +1352,10 @@ namespace ZiveLab.ZM
             else if (techtype == enTechType.TECH_QIS)
             {
                 mtech.SetQIS(qis);
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                mtech.SetDCH(dch);
             }
             else
             {
@@ -1367,15 +1449,6 @@ namespace ZiveLab.ZM
         private void chkhfrcelloffwait_CheckedChanged(object sender, EventArgs e)
         {
             hfr.celloffwait = (ushort)(chkhfrcelloffwait.Checked ? 1 : 0);
-            if(techtype == enTechType.TECH_MON)
-            {
-                mon.celloffwait = (ushort)(chkhfrcelloffwait.Checked ? 1 : 0);
-                ViewTechnique();
-            }
-            else if (techtype == enTechType.TECH_HFR)
-            {
-                hfr.celloffwait = (ushort)(chkhfrcelloffwait.Checked ? 1 : 0);
-            }
         }
 
         private void chkprrcelloffwait_CheckedChanged(object sender, EventArgs e)
@@ -1436,23 +1509,23 @@ namespace ZiveLab.ZM
         private void txtMonCutoff_Leave(object sender, EventArgs e)
         {
             double tval = 0.0;
-            if (techtype == enTechType.TECH_MON)
+            if (techtype == enTechType.TECH_DCH)
             {
                 if (double.TryParse(txtMonCutoff.Text, out tval) == true)
                 {
-                    mon.CutoffV = tval;
+                    dch.CutoffV = tval;
                 }
                 else
                 {
                     MessageBox.Show("There is a problem with the input of the value. \r\n Please check and try again.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                txtMonCutoff.Text = string.Format(" {0,4:##0.0}", mon.CutoffV);
+                txtMonCutoff.Text = string.Format(" {0,4:##0.0}", dch.CutoffV);
             }
         }
 
         private void cbomonctrl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mtech.irange = (ushort)(cbomonctrl.SelectedIndex * 2);
+            mtech.irange = (ushort)cbomonctrl.SelectedIndex;
         }
 
         private void cboeisskipcyc_SelectedIndexChanged(object sender, EventArgs e)

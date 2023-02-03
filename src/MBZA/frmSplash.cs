@@ -176,7 +176,10 @@ namespace ZiveLab.ZM
                             if (pair.Value.mDevInf.mSysCfg.EnaZIM[j] == 1)
                             {
                                 ChannelCount++;
-                                ScanChCount++;
+                                if (pair.Value.mDevInf.mSysCfg.ChkZIM[j] == 1)
+                                {
+                                    ScanChCount++;
+                                }
                             }
                         }
                     }
@@ -185,7 +188,10 @@ namespace ZiveLab.ZM
                         if (pair.Value.mDevInf.mSysCfg.EnaZIM[0] == 1)
                         {
                             ChannelCount++;
-                            ScanChCount++;
+                            if (pair.Value.mDevInf.mSysCfg.ChkZIM[j] == 1)
+                            {
+                                ScanChCount++;
+                            }
                         }
                     }
 
@@ -205,9 +211,18 @@ namespace ZiveLab.ZM
                     {
                         if (gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.EnaZIM[j] == 1)
                         {
-                            str = string.Format("      -> CH{0} = {1}[{2}({3} {4}),Firmware:{5}] \r\n", j + 1, gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.mZimCfg[j].GetSerialNumber(),
+                            str = string.Format("      -> CH{0}={1}[{2}({3} {4}),Firmware:{5}]", j + 1, gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.mZimCfg[j].GetSerialNumber(),
                                 gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.mZimCfg[j].GetZimTypeString(), gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.mZimCfg[j].GetBoardTypeString(),
                                gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.mZimCfg[j].GetBoardVer(), gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.mZimCfg[j].GetFirmwareVer());
+
+                            if (gBZA.SifLnkLst[tSerial].mDevInf.mSysCfg.ChkZIM[j] == 1)
+                            {
+                                str += "-Found. \r\n";
+                            }
+                            else
+                            {
+                                str += "-Not found. \r\n";
+                            }
                             txtResult.Text += str;
                         }
                     }
@@ -215,7 +230,7 @@ namespace ZiveLab.ZM
                 ScanSifCount++;
             }
 
-            str = string.Format("   => SIF Board : {0} EA, Total channels : {1} Found! \r\n\r\n", ScanSifCount, ScanChCount);
+            str = string.Format("   => SIF Board : {0}, Registered channels :{1}, Searched channels:{2}.\r\n\r\n", ScanSifCount, ChannelCount, ScanChCount);
             txtResult.Text += str;
 
 
@@ -334,7 +349,7 @@ namespace ZiveLab.ZM
             LblAction.Text = string.Format("* {0} BZA, {1} channels found. linked channels is {2}.", gBZA.ScanSifCount, gBZA.ScanChCount, gBZA.RegOkChCount);
             CircProgress.Visible = false;
 
-            gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
+            //gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
 
             txtResult.DeselectAll();
             txtResult.Select(txtResult.Text.Length, 0);

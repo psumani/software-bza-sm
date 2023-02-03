@@ -78,6 +78,7 @@ namespace ZiveLab.ZM
         ReadPromOfZIM,
         ProgramPromOfZIM,
         DisconnectPromOfZIM,
+        CheckFPGA,
         GetDeviceinfo,
         SaveDeviceInfo,
     }
@@ -458,6 +459,23 @@ namespace ZiveLab.ZM
             return TransCommand(sSerial, cmd, data);
         }
 
+        public static bool SetCmdMode(string sSerial,int nCh, int iEnable)
+        {
+            MBZA_SifCommand cmd;
+
+            cmd.target = (short)enTarget.Sif;
+            cmd.flag = (short)enFlag.Cmd;
+            cmd.cmd = (short)enCmdSif.SetCmdMode;
+            cmd.ch = nCh;
+            cmd.addr = 0;
+
+            byte[] data = BitConverter.GetBytes(iEnable);
+
+            cmd.wrlen = data.Length;
+            cmd.rdlen = 0;
+            return TransCommand(sSerial, cmd, data);
+        }
+
         public static bool SetChannel(string sSerial, int ch)
         {
             MBZA_SifCommand cmd;
@@ -677,6 +695,22 @@ namespace ZiveLab.ZM
             return TransCommand(sSerial, cmd, null);
         }
 
+        public static bool VheckFPGAOfZIM(string sSerial, int ch)
+        {
+            MBZA_SifCommand cmd;
+
+            cmd.target = (short)enTarget.Sif;
+            cmd.flag = (short)enFlag.Cmd;
+            cmd.cmd = (short)enCmdSif.CheckFPGA;
+            cmd.ch = ch;
+            cmd.addr = -1;
+
+            cmd.wrlen = 0;
+            cmd.rdlen = 0;
+            return TransCommand(sSerial, cmd, null);
+        }
+
+        
         public static bool GetDeviceinfo(string sSerial)
         {
             MBZA_SifCommand cmd;

@@ -32,10 +32,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstch = new System.Windows.Forms.ListBox();
             this.grtinf = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ToolStripConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripDummyInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.infoch = new ZiveLab.ZM.InfomationGrid();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ToolStripDummyInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.grtinf.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -80,32 +79,6 @@
             this.grtinf.TabStop = false;
             this.grtinf.Text = "[ Channel 0 (serial-0) ]";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripConfiguration});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(890, 24);
-            this.menuStrip1.TabIndex = 20;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // ToolStripConfiguration
-            // 
-            this.ToolStripConfiguration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripDummyInfo});
-            this.ToolStripConfiguration.Name = "ToolStripConfiguration";
-            this.ToolStripConfiguration.Size = new System.Drawing.Size(93, 20);
-            this.ToolStripConfiguration.Text = "Configuration";
-            // 
-            // ToolStripDummyInfo
-            // 
-            this.ToolStripDummyInfo.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripDummyInfo.Image")));
-            this.ToolStripDummyInfo.Name = "ToolStripDummyInfo";
-            this.ToolStripDummyInfo.Size = new System.Drawing.Size(210, 22);
-            this.ToolStripDummyInfo.Text = "Edit dummy information.";
-            this.ToolStripDummyInfo.Click += new System.EventHandler(this.ToolStripDummyInfo_Click);
-            // 
             // infoch
             // 
             this.infoch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -117,6 +90,25 @@
             this.infoch.Size = new System.Drawing.Size(710, 339);
             this.infoch.TabIndex = 19;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.AllowMerge = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripDummyInfo});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(890, 24);
+            this.menuStrip1.TabIndex = 20;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ToolStripDummyInfo
+            // 
+            this.ToolStripDummyInfo.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripDummyInfo.Image")));
+            this.ToolStripDummyInfo.Name = "ToolStripDummyInfo";
+            this.ToolStripDummyInfo.Size = new System.Drawing.Size(171, 20);
+            this.ToolStripDummyInfo.Text = "Edit dummy information.";
+            this.ToolStripDummyInfo.Click += new System.EventHandler(this.ToolStripDummyInfo_Click);
+            // 
             // frmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -126,7 +118,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configuration";
@@ -150,7 +141,6 @@
         private System.Windows.Forms.GroupBox grtinf;
         private InfomationGrid infoch;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripConfiguration;
         private System.Windows.Forms.ToolStripMenuItem ToolStripDummyInfo;
     }
 }

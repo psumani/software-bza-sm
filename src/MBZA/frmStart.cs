@@ -89,6 +89,7 @@ namespace ZiveLab.ZM
             {
                 this.Text = "Set the experimental start conditions for group channels.";
             }
+            this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.StartLogging);
         }
 
         private bool GetTechInfo(int ch, ref stTech_Info minfo)
@@ -267,7 +268,9 @@ namespace ZiveLab.ZM
             stTech tech = new stTech(0);
             string sifid;
             int sifch;
-             
+            double tmpI = 0.0;
+            ushort irng;
+
             foreach (var val in lstch)
             {
                 LnkCh = gBZA.ChLnkLst[val.ToString()];
@@ -276,16 +279,50 @@ namespace ZiveLab.ZM
 
                 if (fc.OpenFile(gBZA.SifLnkLst[sifid].MBZAIF.condfilename[sifch], ref tech) == false)
                 {
-                    serrch += string.Format("{0:00} ", val + 1);
+                    serrch += string.Format("   -> {0:00}::Technique file error detection.\r\n ", val + 1);
                 }
                 
                 gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch] = tech;
+                tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc;
+                irng = getLimitRangeI(sifid, sifch, tmpI);
+                if (tech.irange < irng)
+                {
+                    serrch += string.Format("   ->{0:00}::Range use error exceeding permissible power.\r\n ", val + 1);
+                }
             }
 
             
             return serrch;
         }
 
+        private ushort getLimitRangeI(string sifid,int sifch,double current)
+        {
+            ushort orng = 0;
+            ushort rng = 0;
+            double tmp = 0.0;
+            while (true)
+            {
+                tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.iac_rng[rng].realmax;
+
+                if (current < tmp)
+                {
+                    orng++;
+                    tmp = tmp * 0.2;
+                    if (current < tmp)
+                    {
+                        orng++;
+                        if ((DeviceConstants.MAX_IAC_RNGCNT - 1) <= rng) break;
+                    }
+                    else break;
+                }
+                else break;
+
+                rng++;
+            }
+
+            return orng;
+        }
+        
         private string UploadTechfile()
         {
             string serrch = "";
@@ -384,6 +421,12 @@ namespace ZiveLab.ZM
                 tTech.GetQIS(ref qis);
                 count = qis.GetFreqCount();
             }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                stTech_DCH dch = new stTech_DCH(0);
+                tTech.GetDCH(ref dch);
+                count = (int)(dch.totaltime / dch.sampletime);
+            }
             else
             {
                 stTech_EIS eis = new stTech_EIS(0);
@@ -451,7 +494,7 @@ namespace ZiveLab.ZM
             if (serr.Trim().Length > 0)
             {
 
-                smsg = string.Format("There is a problem with the technique file set for channels({0}). Please check and try again.", serr);
+                smsg = string.Format("There is a problem with the technique file set for channels. \r\n{0} \r\n Please check and try again.", serr);
                 gBZA.ShowErrBox(smsg);
                 return;
             }

@@ -280,7 +280,7 @@ void InitDevice(int ch)
 	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data.vac.value = 0.0;
 	
 	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.frequency = 1000.0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.Phase = 270.0;
+	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.Phase = DEF_SINECTRL_PHASE;
 	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.reset = 0;
 	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.pwdn = 1;
 		
@@ -335,7 +335,7 @@ void InitGlobalVar(void)
 	int ch;
     
     m_pGlobalVar->nTimeTick = m_pSysConfig->DaqTick;
-    if(m_pGlobalVar->nTimeTick < 0) m_pGlobalVar->nTimeTick = 1;
+    if(m_pGlobalVar->nTimeTick <= 0) m_pGlobalVar->nTimeTick = 1;
 
 	m_pGlobalVar->OpenI2C = FALSE;
 	m_pGlobalVar->OpenMX25V = FALSE;
@@ -351,6 +351,8 @@ void InitGlobalVar(void)
 		m_pGlobalVar->mChVar[ch].Stop = DEF_LAST_ERROR_NONE;
 		m_pGlobalVar->mChVar[ch].TmpResetICE = 0;
 		m_pGlobalVar->mChVar[ch].ResetICE = 0;
+		m_pGlobalVar->mChVar[ch].LoadCfg = 0;
+		m_pGlobalVar->mChVar[ch].CntVdcChg = 0;
 		SetDevChannel(ch);
 		InitDevice(ch);
 	}
@@ -568,6 +570,7 @@ unsigned char LoadSystemInformation(void)
     {
         SaveSysCfgInfo();
     }
+	
 	m_pSysConfig->ChkZIM[0] = 0;
 	m_pSysConfig->ChkZIM[1] = 0;
 	m_pSysConfig->ChkZIM[2] = 0;
@@ -579,6 +582,12 @@ unsigned char LoadSystemInformation(void)
 	m_pSysConfig->mSIFCfg.FirmwareVersion.Minor = FIRMWARE_VER_MINOR;
 	m_pSysConfig->mSIFCfg.FirmwareVersion.Revision = FIRMWARE_VER_REV;
 	m_pSysConfig->mSIFCfg.FirmwareVersion.Build = FIRMWARE_VER_BUILD;
+	
+	m_pSysConfig->BaseTick = 1;
+    m_pSysConfig->DaqTick = 200;
+	
+	
+	
 	return true;
 }
 
@@ -618,10 +627,13 @@ void Initialize(void)
 	
 	//OnLed2(true);
 	
+	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_SBZA || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MBZA)
+	{
+		ScanMainProc();
+	}		
+
 	InitEthernet();
-	
-	
-	
+
 	OnLed3(true);
 	
 

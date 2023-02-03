@@ -66,7 +66,7 @@
             // 
             this.lnkRegister.AutoSize = true;
             this.lnkRegister.LinkColor = System.Drawing.Color.Blue;
-            this.lnkRegister.Location = new System.Drawing.Point(586, 213);
+            this.lnkRegister.Location = new System.Drawing.Point(586, 234);
             this.lnkRegister.Name = "lnkRegister";
             this.lnkRegister.Size = new System.Drawing.Size(238, 14);
             this.lnkRegister.TabIndex = 6;
@@ -78,7 +78,7 @@
             // 
             this.LnkContinue.AutoSize = true;
             this.LnkContinue.LinkColor = System.Drawing.Color.Blue;
-            this.LnkContinue.Location = new System.Drawing.Point(586, 316);
+            this.LnkContinue.Location = new System.Drawing.Point(582, 367);
             this.LnkContinue.Name = "LnkContinue";
             this.LnkContinue.Size = new System.Drawing.Size(147, 14);
             this.LnkContinue.TabIndex = 7;
@@ -124,7 +124,7 @@
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResult.Size = new System.Drawing.Size(570, 180);
+            this.txtResult.Size = new System.Drawing.Size(570, 219);
             this.txtResult.TabIndex = 11;
             // 
             // pictureBox1
@@ -141,7 +141,7 @@
             // 
             this.lnkExit.AutoSize = true;
             this.lnkExit.LinkColor = System.Drawing.Color.Blue;
-            this.lnkExit.Location = new System.Drawing.Point(586, 278);
+            this.lnkExit.Location = new System.Drawing.Point(582, 306);
             this.lnkExit.Name = "lnkExit";
             this.lnkExit.Size = new System.Drawing.Size(168, 14);
             this.lnkExit.TabIndex = 13;
@@ -177,7 +177,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(831, 351);
+            this.ClientSize = new System.Drawing.Size(831, 393);
             this.Controls.Add(this.LblVer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lnkExit);

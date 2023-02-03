@@ -52,11 +52,11 @@ namespace ZiveLab.ZM
                     MessageBox.Show("The command failed[EnableCommTimeOut].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-   /*             if (MBZA_MapUtil.SetCmdMode(sSerial, 0) == false)
+                if (MBZA_MapUtil.SetCmdMode(sSerial, sifch, 1) == false)
                 {
                     MessageBox.Show("The command failed[SetCmdMode].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                if (MBZA_MapUtil.SetChannel(sSerial, sifch) == false)
+   /*             if (MBZA_MapUtil.SetChannel(sSerial, sifch) == false)
                 {
                     MessageBox.Show("The command failed[SetChannel].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -115,7 +115,7 @@ namespace ZiveLab.ZM
             DDS_SIG_Reset.Checked = true;
             rdozero.Checked = true;
             DDS_SIG_Freq.Text = "100";
-            DDS_SIG_Phase.Text = "270.0";
+            DDS_SIG_Phase.Text = "4.71";
 
             cboirange.SelectedIndex = 0;
             cbovdcrange.SelectedIndex = 0;
@@ -202,7 +202,7 @@ namespace ZiveLab.ZM
             vdcval.Text = string.Format("{0}", mdevice.adc_vdc.value);
             vacval.Text = string.Format("{0}", mdevice.adc_ac.data.vac.value);
             iacval.Text = string.Format("{0}", mdevice.adc_ac.data.iac.value);
-            rtdtempval.Text = string.Format("{0}", mdevice.adc_rtd.data.Rvalue);
+            rtdtempval.Text = string.Format("{0}", mdevice.adc_rtd.data.Tvalue);
             if (mdevice.adc_rtd.data.fault == 0) lblerrtemp.BackColor = SystemColors.Control;
             else lblerrtemp.BackColor = Color.Red;
 
@@ -273,6 +273,10 @@ namespace ZiveLab.ZM
         {
             double dtmp;
 
+            mdevice.dds_sig.reset = 0;
+            mdevice.dds_sig.Half = 0;
+            mdevice.dds_sig.pwdn = 0;
+
             if (DDS_SIG_Reset.Checked == true)
             {
                 mdevice.dds_sig.reset = 1;
@@ -306,19 +310,25 @@ namespace ZiveLab.ZM
                     }
                 }
             }
-            if (Double.TryParse(DDS_SIG_Freq.Text, out dtmp) == false)
-            {
-                MessageBox.Show("Error value of frequency.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            mdevice.dds_sig.frequency = dtmp;
 
-            if (Double.TryParse(DDS_SIG_Phase.Text, out dtmp) == false)
+            if (mdevice.dds_sig.Half == 0 && mdevice.dds_sig.pwdn == 0)
             {
-                MessageBox.Show("Error value of phase.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+
+                if (Double.TryParse(DDS_SIG_Freq.Text, out dtmp) == false)
+                {
+                    MessageBox.Show("Error value of frequency.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                mdevice.dds_sig.frequency = dtmp;
+
+                if (Double.TryParse(DDS_SIG_Phase.Text, out dtmp) == false)
+                {
+                    MessageBox.Show("Error value of phase.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                mdevice.dds_sig.Phase = dtmp;
             }
-            mdevice.dds_sig.Phase = dtmp;
+
             if (bconnect == false)
             {
                 if (mCommZim.WriteConfigSignalDDS(sifch, mdevice.dds_sig) == false)
@@ -337,7 +347,6 @@ namespace ZiveLab.ZM
                     return;
                 }
             }
-         
         }
 
         private void btnSetDDS_SIG_Click(object sender, EventArgs e)
@@ -395,10 +404,10 @@ namespace ZiveLab.ZM
         private void frmTestDevice_FormClosed(object sender, FormClosedEventArgs e)
         {
             InitControl();
-            /*
+            
             if (bconnect == false)
             {
-                if (mCommZim.CmdSetCmdMode(0) == true)
+                if (mCommZim.CmdSetCmdMode(sifch,0) == true)
                 {
                     mCommZim.CmdEnableCommTimeOut(0);
                 }
@@ -407,12 +416,12 @@ namespace ZiveLab.ZM
             else
             {
 
-                if (MBZA_MapUtil.SetCmdMode(sSerial, 0) == false)
+                if (MBZA_MapUtil.SetCmdMode(sSerial, sifch, 0) == false)
                 {
                     MBZA_MapUtil.EnableCommTimeOut(sSerial, 0);
                 }
             }
-            */
+            
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -39,7 +39,7 @@ begin
 
 	MCLK	<= adcmclk;
 	
-	process(adcmclk, adc_state, MISO)
+	process(adcmclk, adc_state, MISO) 
 	begin
 		if rising_edge(adcmclk) then
 			case adc_state is
@@ -101,7 +101,7 @@ begin
 				
 			when s_read5 =>
 				SCLK 				<= '1';
-				if avg_cnt = x"800" then
+				if avg_cnt = x"800" then 
 					cmd_rdadcbuf(34) <= not cmd_rdadcbuf(34);
 					adc_state 		<= s_read6;
 				else
@@ -137,7 +137,7 @@ begin
 	Port map (
 			ICLK			=> CLK,		-- 16MHz
 			OCLK			=> adcmclk, -- 
-			DIVIDE		=> x"0010"  
+			DIVIDE		=> x"0010"  --0010
 	);
 	
 end behav;

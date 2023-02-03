@@ -986,35 +986,34 @@ namespace ZiveLab.ZM.ZIM.Packets
     [StructLayout(LayoutKind.Sequential, Pack = 1), Serializable]
     public struct stTech_MON
     {
-        public ushort celloffwait;
+        public ushort nouse0;
         public double sampletime;
         public double totaltime;
-        public double CutoffV;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public double[] nouse;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 5)]
+        public double[] nouse1;
 
         public stTech_MON(int init)
         {
-            celloffwait = 1;
+            nouse0 = 0;
             sampletime = 1.0;
             totaltime = 60.0;
-            CutoffV = 0.0;
-            nouse = new double[4];
-            for (int i = 0; i < 4; i++)
+           
+            nouse1 = new double[5];
+            for (int i = 0; i < 5; i++)
             {
-                nouse[i] = 0.0;
+                nouse1[i] = 0.0;
             }
         }
 
         public void initialize()
         {
-            celloffwait = 1;
+            nouse0 = 0;
             sampletime = 1.0;
             totaltime = 60.0;
-            CutoffV = 0.0;
-            for (int i = 0; i < 4; i++)
+          
+            for (int i = 0; i < 5; i++)
             {
-                nouse[i] = 0.0;
+                nouse1[i] = 0.0;
             }
         }
         public byte[] ToByteArray()
@@ -1141,6 +1140,59 @@ namespace ZiveLab.ZM.ZIM.Packets
             pinnedArr.Free();
         }
     }
+
+    public struct stTech_DCH
+    {
+        public double sampletime;
+        public double totaltime;
+        public double CutoffV;
+        public ushort nouse0;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public double[] nouse1;
+
+        public stTech_DCH(int init)
+        {
+            sampletime = 1.0;
+            totaltime = 10800.0;
+            CutoffV = 0.0;
+            nouse0 = 0;
+            nouse1 = new double[4];
+            for (int i = 0; i < 4; i++)
+            {
+                nouse1[i] = 0.0;
+            }
+        }
+
+        public void initialize()
+        {
+            sampletime = 1.0;
+            totaltime = 10800.0;
+            CutoffV = 0.0;
+            nouse0 = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                nouse1[i] = 0.0;
+            }
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stTech_DCH)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stTech_DCH));
+            pinnedArr.Free();
+        }
+    }
+
     /*
     [StructLayout(LayoutKind.Explicit, Pack = 1), Serializable]
     public struct stTechType
@@ -1270,6 +1322,11 @@ namespace ZiveLab.ZM.ZIM.Packets
                 ondelay = 2.0;
                 ondelaystable = 0;
             }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                ondelay = 2.0;
+                ondelaystable = 0;
+            }
             else
             {
                 ondelay = 5.0;
@@ -1287,7 +1344,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public void GetEIS(ref stTech_EIS techeis)
         {
-            
+            if (tech == null) return;
             techeis.ToWritePtr(tech);
         }
 
@@ -1316,9 +1373,9 @@ namespace ZiveLab.ZM.ZIM.Packets
             tech = val.ToByteArray();
         }
 
-        public void GetMON(ref stTech_MON techvdc)
+        public void GetMON(ref stTech_MON techmon)
         {
-            techvdc.ToWritePtr(tech);
+            techmon.ToWritePtr(tech);
         }
 
 
@@ -1333,6 +1390,17 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         }
         public void SetQIS(stTech_QIS val)
+        {
+            tech = val.ToByteArray();
+        }
+
+        public void GetDCH(ref stTech_DCH techdch)
+        {
+            techdch.ToWritePtr(tech);
+        }
+
+
+        public void SetDCH(stTech_DCH val)
         {
             tech = val.ToByteArray();
         }

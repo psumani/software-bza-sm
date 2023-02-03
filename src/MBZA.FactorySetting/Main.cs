@@ -62,7 +62,7 @@ namespace ZiveLab.ZM.FactorySetting
 
                 if (mCommZim.CmdSetCmdMode(0) == false)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_MODE].");
+                    MessageBox.Show("It may be an unsupported version or there is a communication problem.[DEFINE_COMMAND.CMD_SET_MODE].");
                     return;
                 }
 
@@ -215,7 +215,7 @@ namespace ZiveLab.ZM.FactorySetting
             idevch = 0;
             Thread.Sleep(2000);
         }
-
+       
         public void RefreshSifInfo()
         {
             string str;
@@ -226,11 +226,10 @@ namespace ZiveLab.ZM.FactorySetting
 
             LnklblSetSIFCfgToLan.Enabled = mCommZim.isConnected;
             LnklblRefSifInf.Enabled = mCommZim.isConnected;
-
+            
 
             if (mtype == eDeviceType.SBZA || mtype == eDeviceType.MBZA)
             {
-                str = " (BZA Series.)";
 //                LnklblSetSIFWebToLan.Enabled = true;
 //                LnklblRefSifWebInf.Enabled = true;
                 LnklblInitialize.Enabled = true;
@@ -252,7 +251,6 @@ namespace ZiveLab.ZM.FactorySetting
             }
             else
             {
-                str = " (Not supported.)";
 //              LnklblSetSIFWebToLan.Enabled = false;
 //              LnklblRefSifWebInf.Enabled = false;
                 
@@ -260,7 +258,10 @@ namespace ZiveLab.ZM.FactorySetting
                 cboChannel.Enabled = false;
             }
 
-            lblSifBdType.Text = string.Format("1) Board type : {0} {1}", Extensions.GetEnumDescription(mtype), str);
+            str = mConnCfg.GetSerialNumber();
+            eProductType Producttype = mConnCfg.GetProductType();
+
+            lblSifBdType.Text = string.Format("1) Board type : {0} / {1}", Extensions.GetEnumDescription(mtype), Extensions.GetEnumDescription(Producttype));
             lblSifBdVer.Text = string.Format("2) Board version : {0}", mSysCfg.mSIFCfg.GetBoardVer());
             lblSifFwVer.Text = string.Format("3) Firmware version : {0}", mSysCfg.mSIFCfg.GetFirmwareVer());
             lblSifSerial.Text = string.Format("4) Serial number : {0}", mSysCfg.mSIFCfg.GetSerialNumber());
@@ -442,7 +443,7 @@ namespace ZiveLab.ZM.FactorySetting
 
                     if (mCommZim.CmdSetCmdMode(0) == false)
                     {
-                        MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_MODE].");
+                        MessageBox.Show("It may be an unsupported version or there is a communication problem.[DEFINE_COMMAND.CMD_SET_MODE].");
                         return;
                     }
                 }

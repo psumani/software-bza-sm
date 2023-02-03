@@ -25,6 +25,7 @@ namespace ZiveLab.ZM
             chklist = new List<int>();
             bRegChannel = false;
             filename = filecond;
+            this.Icon = gBZA.BitmapToIcon(Properties.Resources.Registry);
             this.Text = "Select channels to apply the thchnique file to.";
 
             RefreshAppList();

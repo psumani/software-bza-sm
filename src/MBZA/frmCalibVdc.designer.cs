@@ -61,6 +61,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.BtOpenFolder = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtRangeStat = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,15 +173,15 @@
             this.groupBox2.Controls.Add(this.btRefresh1);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.txtReal1);
-            this.groupBox2.Location = new System.Drawing.Point(184, 43);
+            this.groupBox2.Location = new System.Drawing.Point(184, 54);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(378, 56);
+            this.groupBox2.Size = new System.Drawing.Size(378, 49);
             this.groupBox2.TabIndex = 47;
             this.groupBox2.TabStop = false;
             // 
             // txtTarget1
             // 
-            this.txtTarget1.Location = new System.Drawing.Point(57, 20);
+            this.txtTarget1.Location = new System.Drawing.Point(62, 15);
             this.txtTarget1.Name = "txtTarget1";
             this.txtTarget1.Size = new System.Drawing.Size(85, 22);
             this.txtTarget1.TabIndex = 9;
@@ -187,7 +189,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 24);
+            this.label1.Location = new System.Drawing.Point(9, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 7;
@@ -195,7 +197,7 @@
             // 
             // btRefresh1
             // 
-            this.btRefresh1.Location = new System.Drawing.Point(297, 18);
+            this.btRefresh1.Location = new System.Drawing.Point(302, 13);
             this.btRefresh1.Name = "btRefresh1";
             this.btRefresh1.Size = new System.Drawing.Size(64, 27);
             this.btRefresh1.TabIndex = 11;
@@ -206,7 +208,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(150, 26);
+            this.label9.Location = new System.Drawing.Point(155, 21);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 14);
             this.label9.TabIndex = 8;
@@ -214,7 +216,7 @@
             // 
             // txtReal1
             // 
-            this.txtReal1.Location = new System.Drawing.Point(186, 21);
+            this.txtReal1.Location = new System.Drawing.Point(191, 16);
             this.txtReal1.Name = "txtReal1";
             this.txtReal1.Size = new System.Drawing.Size(85, 22);
             this.txtReal1.TabIndex = 10;
@@ -261,7 +263,7 @@
             // chkCalib1
             // 
             this.chkCalib1.AutoSize = true;
-            this.chkCalib1.Location = new System.Drawing.Point(184, 23);
+            this.chkCalib1.Location = new System.Drawing.Point(184, 31);
             this.chkCalib1.Name = "chkCalib1";
             this.chkCalib1.Size = new System.Drawing.Size(103, 18);
             this.chkCalib1.TabIndex = 45;
@@ -279,7 +281,7 @@
             // 
             // txtGain1
             // 
-            this.txtGain1.Location = new System.Drawing.Point(330, 21);
+            this.txtGain1.Location = new System.Drawing.Point(330, 29);
             this.txtGain1.Name = "txtGain1";
             this.txtGain1.ReadOnly = true;
             this.txtGain1.Size = new System.Drawing.Size(85, 22);
@@ -295,7 +297,7 @@
             // 
             // txtOffset1
             // 
-            this.txtOffset1.Location = new System.Drawing.Point(477, 21);
+            this.txtOffset1.Location = new System.Drawing.Point(477, 29);
             this.txtOffset1.Name = "txtOffset1";
             this.txtOffset1.ReadOnly = true;
             this.txtOffset1.Size = new System.Drawing.Size(85, 22);
@@ -312,7 +314,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(293, 25);
+            this.label11.Location = new System.Drawing.Point(293, 33);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 14);
             this.label11.TabIndex = 52;
@@ -330,7 +332,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(422, 24);
+            this.label13.Location = new System.Drawing.Point(422, 32);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(49, 14);
             this.label13.TabIndex = 53;
@@ -355,11 +357,31 @@
             this.BtOpenFolder.UseVisualStyleBackColor = true;
             this.BtOpenFolder.Click += new System.EventHandler(this.BtOpenFolder_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(235, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 14);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Range status";
+            // 
+            // txtRangeStat
+            // 
+            this.txtRangeStat.Location = new System.Drawing.Point(330, 0);
+            this.txtRangeStat.Name = "txtRangeStat";
+            this.txtRangeStat.ReadOnly = true;
+            this.txtRangeStat.Size = new System.Drawing.Size(85, 22);
+            this.txtRangeStat.TabIndex = 72;
+            this.txtRangeStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frmCalibVdc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 520);
+            this.Controls.Add(this.txtRangeStat);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.BtOpenFolder);
             this.Controls.Add(this.btCheckCal1);
             this.Controls.Add(this.txtResSquare1);
@@ -434,5 +456,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button BtOpenFolder;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtRangeStat;
     }
 }

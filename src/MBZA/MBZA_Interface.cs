@@ -182,10 +182,12 @@ namespace ZiveLab.ZM
                         RefreshHeadinfo();
                         RefreshTechfiles();
                         RefreshDeviceInfo();
-
+                        
                         serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
 
                         mCommZim.CmdEnableCommTimeOut(1);
+
+                        RefreshDeviceStatus();
                     }
                 }
                 if(gBZA.SifLnkLst.ContainsKey(serial))
@@ -215,6 +217,8 @@ namespace ZiveLab.ZM
                         serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
 
                         mCommZim.CmdEnableCommTimeOut(1);
+
+                        RefreshDeviceStatus();
                     }
                 }
             }
@@ -276,7 +280,23 @@ namespace ZiveLab.ZM
                 return false;
 
             }
+           
+
             return true;
+        }
+
+        public void RefreshDeviceStatus()
+        {
+            for (int ch = 0; ch < MBZA_Constant.MAX_DEV_CHANNEL; ch++)
+            {
+                if (this.mDevInf.mSysCfg.EnaZIM[ch] == 0) continue;
+                if (this.mDevInf.mSysCfg.ChkZIM[ch] == 0) continue;
+                if (mCommZim.ReadData(ch, ref this.mdevice[ch].ctrl_do) == false)
+                {
+                    continue;
+                }
+
+            }
         }
 
         public void StopThread()
@@ -337,7 +357,7 @@ namespace ZiveLab.ZM
 
                 int iEnable = BitConverter.ToInt32(pdata, 0);
 
-                if (mCommZim.CmdSetCmdMode(iEnable) == false)
+                if (mCommZim.CmdSetCmdMode(this.mMapMem.mHeader.mCommand.ch, iEnable) == false)
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
@@ -406,6 +426,13 @@ namespace ZiveLab.ZM
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
             }
+            else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdSif.CheckFPGA)
+            {
+                if (mCommZim.CheckFPGAofZIM(this.mMapMem.mHeader.mCommand.ch) == false)
+                {
+                    res = (UInt16)enResult.FLAG_FAIL;
+                }
+            }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdSif.GetDeviceinfo)
             {
                 if (mCommZim.ReadData(ref mDevInf) == false)
@@ -421,9 +448,6 @@ namespace ZiveLab.ZM
                 }
             }
             
-
-
-
             return res;
         }
 
@@ -1157,12 +1181,12 @@ namespace ZiveLab.ZM
                 {
                     bConnect = false;
                     if (this.bThread == false) break;
-                    Thread.Sleep(100);
                     if (this.SimplePing(mCommZim.GetHostName()) == true)
                     {
                         RefreshConnect();
                     }
                     bConnect = mCommZim.mComm.Connected;
+                    Thread.Sleep(10);
                     continue;
                 }
 
@@ -1179,7 +1203,7 @@ namespace ZiveLab.ZM
                         CommandProc();
                     }
                 }
-                Thread.Sleep(50);
+                Thread.Sleep(10);
             }
             this.mMapMem.mHeader.mStat.Stop = 1;
             this.mMapMem.mHeader.mStat.Result = (UInt16)enResult.FLAG_FAIL;

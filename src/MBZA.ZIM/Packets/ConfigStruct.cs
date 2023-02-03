@@ -82,6 +82,22 @@ namespace ZiveLab.ZM.ZIM.Packets
             Serial[11] = 0x0;
         }
 
+        public eProductType GetProductType()
+        {
+            eProductType iret = eProductType.UNKNOWN;
+            string str1 = Encoding.Default.GetString(Serial).Trim('\0');
+            if (str1.Length != 12) return iret;
+
+            string str = str1.Substring(3, 1);
+
+
+            if (str == "A") iret = eProductType.BZA60;
+            else if (str == "B") iret = eProductType.BZA100;
+            else if (str == "C") iret = eProductType.BZA500;
+            else if (str == "D") iret = eProductType.BZA1000;
+            return iret;
+        }
+        
         public string GetTypeString()
         {
             return Extensions.GetEnumDescription((eDeviceType)Type);
@@ -163,21 +179,10 @@ namespace ZiveLab.ZM.ZIM.Packets
             return Encoding.Default.GetString(Serial);
         }
 
+        
         public void SetSerialNumber(string str)
         {
-            byte[] tmp = Encoding.Default.GetBytes(str.ToCharArray());
-            int i, j;
-
-            j = 0;
-            Serial[j] = (byte)'I';
-            j++;
-            Serial[j] = (byte)'F';
-            j++;
-            for (i = 1; i < 20; i += 2)
-            {
-                Serial[j] = tmp[i];
-                j++;
-            }
+            Serial = Encoding.Default.GetBytes(str.ToCharArray());
         }
 
         public byte[] ToByteArray()
@@ -383,6 +388,15 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             int i;
             byte tmp;
+
+            byte[] mChar = new byte[5];
+            Array.Clear(mChar, 0, 5);
+            for (i = 0; i < 5; i++)
+            {
+                tmp = (byte)((nVal >> (i * 4)) & (uint)0xf);
+                mChar[4 - i] = (byte)(0x30 + tmp);
+            }
+            /*
             byte[] mChar = new byte[8];
             Array.Clear(mChar, 0, 8);
 
@@ -391,6 +405,8 @@ namespace ZiveLab.ZM.ZIM.Packets
                 tmp = (byte)((nVal >> (i * 4)) & (uint)0xf);
                 mChar[7 - i] = (byte)(0x30 + tmp);
             }
+            */
+            
             return Encoding.Default.GetString(mChar).Trim('\0');
         }
 
@@ -409,7 +425,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             if (i < 0) i = 0;
             else if (i > 5) i = 5;
 
-            str = string.Format("{0}{1}{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)cModel[1], UintToByteString(nSerial));
+            str = string.Format("{0}{1}0000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)cModel[1], UintToByteString(nSerial));
             return str;
         }
 
@@ -562,6 +578,16 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             int i;
             byte tmp;
+            byte[] mChar = new byte[5];
+            Array.Clear(mChar, 0, 5);
+
+            for (i = 0; i < 5; i++)
+            {
+                tmp = (byte)((nVal >> (i * 4)) & (uint)0xf);
+                mChar[4 - i] = (byte)(0x30 + tmp);
+            }
+
+            /*
             byte[] mChar = new byte[8];
             Array.Clear(mChar, 0, 8);
 
@@ -570,6 +596,7 @@ namespace ZiveLab.ZM.ZIM.Packets
                 tmp = (byte)((nVal >> (i*4)) & (uint)0xf);
                 mChar[7-i] = (byte)(0x30 + tmp);
             }
+            */
             return Encoding.Default.GetString(mChar).Trim('\0'); 
         }
 
@@ -588,7 +615,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             int i = info.cModel[0] - 0x30;
             string str;
 
-            str = string.Format("{0}{1}{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)info.cModel[1], UintToByteString(info.nSerial));
+            str = string.Format("{0}{1}000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)info.cModel[1], UintToByteString(info.nSerial));
             return str;
         }
 
@@ -680,20 +707,21 @@ namespace ZiveLab.ZM.ZIM.Packets
             int i;
             sTmp = str.Replace(" ", "");
 
-            if (sTmp.Length != 9 && sTmp.Length != 12) return false;
-            if (sTmp.Length == 12) index = 3;
+            if (sTmp.Length != 5 && sTmp.Length != 12) return false;
+            if (sTmp.Length == 12) index = 7;
+
+
 
             char[] mChar = sTmp.ToCharArray();
 
             info.cModel[0] = (byte)(type + 0x30);
-            info.cModel[1] = (byte)(mChar[index] & 0xFF);
-            index++;
+            info.cModel[1] = 0x30;
 
             tmp = 0;
 
-            for (i = 0; i < 8; i++)
+            for (i = 0; i < 5; i++)
             {
-                tmp += (uint)((mChar[index] & 0xFF) - 0x30) << ((7-i) * 4);
+                tmp += (uint)((mChar[index] & 0xFF) - 0x30) << ((4-i) * 4);
                 index++;
             }
             info.nSerial = tmp;
@@ -781,7 +809,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             pinnedArr.Free();
         }
     }
-    
+
+    public enum enDhcpMode
+    {
+        False,
+        True,
+    }
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -965,10 +998,10 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
         [ReadOnlyAttribute(false)]
         [DisplayName("DHCP"), DescriptionAttribute("Edit DHCP status of device.")]
-        public bool PropDhcp
+        public enDhcpMode PropDhcp
         {
-            get { return (dhcp == 1)?true:false; }
-            set { dhcp = (byte)(value ? 1 : 0);  }
+            get { return (enDhcpMode)dhcp; }
+            set { dhcp = (byte)value;  }
         }
 
         [ReadOnlyAttribute(false)]
@@ -1087,23 +1120,27 @@ namespace ZiveLab.ZM.ZIM.Packets
             return Encoding.Default.GetString(Serial).Trim('\0');
         }
 
+        public eProductType GetProductType()
+        {
+            eProductType iret = eProductType.UNKNOWN;
+            string str1 = Encoding.Default.GetString(Serial).Trim('\0');
+            if (str1.Length != 12) return iret;
+
+            string str = str1.Substring(3, 1);
+         
+            
+            if (str == "A") iret = eProductType.BZA60;
+            else if (str == "B") iret = eProductType.BZA100;
+            else if (str == "C") iret = eProductType.BZA500;
+            else if (str == "D") iret = eProductType.BZA1000;
+            return iret;
+        }
+
         public void SetSerialNumber(string str)
         {
-            byte[] tmp = Encoding.Default.GetBytes(str.ToCharArray());
-            int i, j;
-
-            j = 0;
-            Serial[j] = (byte)'I';
-            j++;
-            Serial[j] = (byte)'F';
-            j++;
-            for (i = 1; i < 20; i += 2)
-            {
-                Serial[j] = tmp[i];
-                j++;
-            }
+            Serial = Encoding.Default.GetBytes(str.ToCharArray());
         }
-        
+
         public byte[] ToByteArray()
         {
             int Size = Marshal.SizeOf(this);

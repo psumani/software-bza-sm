@@ -43,7 +43,7 @@ namespace ZiveLab.ZM
         public frmRegBZA()
         {
             InitializeComponent();
-            Icon tIcon =ZM.Properties.Resources.Tool3;
+            
 
             ScanChCount = gBZA.ScanChCount;
             ScanSifCount = gBZA.ScanSifCount;
@@ -70,7 +70,7 @@ namespace ZiveLab.ZM
             SelCh = -1;
             SelSifCh = -1;
 
-            this.Icon =ZM.Properties.Resources.Tool3;
+            this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.EditLink);
 
             this.UploadSif.Image =ZM.Properties.Resources.chip1.ToBitmap();
             this.UploadZim.Image =ZM.Properties.Resources.chip1.ToBitmap();
@@ -142,6 +142,7 @@ namespace ZiveLab.ZM
             InitGrdScanBza();
             InitGrdScanBzaCh();
             ViewGrdRegCh();
+            
         }
 
         private void InitBZA()
@@ -646,6 +647,8 @@ namespace ZiveLab.ZM
                 sSelSerial1 = "";
                 sSelSerial2 = "";
                 lblSelectReg.Text = "* Selected: None.";
+
+                RefreshGrdScanBza();
             }
 
         }
@@ -1488,6 +1491,14 @@ namespace ZiveLab.ZM
                 return;
             }
 
+            if(grdBzaCh.get_TextMatrix(BzaChRow, 3) == "No")
+            {
+                if (MessageBox.Show("The channel is registered but not found.\r\n Do you want to continue?", gBZA.sMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             ItemList.Add("None");
             for (int i = 0; i < MBZA_Constant.MAX_APP_CHANNEL; i++)
             {
@@ -1700,17 +1711,20 @@ namespace ZiveLab.ZM
 
         private void UploadZim_Click(object sender, EventArgs e)
         {
-            if(SelSifCh < 1)
+            if(SelSifCh < 0)
             {
                 MessageBox.Show("Not selected channel !", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             
-            frmBurnZIM frm = new frmBurnZIM(sSelSerial2, SelSifCh-1, gBZA.SifLnkLst[sSelSerial2].MBZAIF.bConnect);
+            frmBurnZIM frm = new frmBurnZIM(sSelSerial2, SelSifCh, gBZA.SifLnkLst[sSelSerial2].MBZAIF.bConnect);
             frm.ShowDialog();
+
+            RefreshGrdScanBzaCh();
+
         }
 
-        private void UploadSif_Click(object sender, EventArgs e)
+    private void UploadSif_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog dlg = new OpenFileDialog();
@@ -1806,6 +1820,13 @@ namespace ZiveLab.ZM
 
         private void btRefreshSifCh_Click(object sender, EventArgs e)
         {
+            if(gBZA.SifLnkLst.ContainsKey(sSelSerial2) == false)
+            {
+                MessageBox.Show("The device is not selected or cannot be found in the list.");
+                InitGrdScanBzaCh();
+                return;
+            }
+            
             if (gBZA.SifLnkLst[sSelSerial2].MBZAIF.bConnect == false)
             {
                 CommObj mCommZim = new CommObj();
@@ -1907,7 +1928,7 @@ namespace ZiveLab.ZM
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)//Cancel registered
         {
             List<string> ItemList = new List<string>();
 

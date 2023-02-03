@@ -67,7 +67,7 @@ namespace ZiveLab.ZM
                 RDummy[i] = MBZA_Constant.Const_DefaultRDummy[i];
                 LDummy[i] = MBZA_Constant.Const_DefaultLDummy[i];
             }
-            Power = MBZA_Constant.DEFAULT_POWER;
+            Power = MBZA_Constant.DEFAULT_BZA60_POWER;
 
             PathZIMFW = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Firmware");
             PathSIFFW = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Firmware");
@@ -418,6 +418,7 @@ namespace ZiveLab.ZM
             stTech_PRR prr = new stTech_PRR(0);
             stTech_MON mon = new stTech_MON(0);
             stTech_QIS qis = new stTech_QIS(0);
+            stTech_DCH dch = new stTech_DCH(0);
 
             techtype = (enTechType)tech.type;
             rawdata.Initialize();
@@ -432,6 +433,8 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 mon.initialize();
                 qis.initialize();
+                dch.initialize();
+
                 barr[0] = true;
                 barr[1] = false;
                 barr[2] = false;
@@ -445,6 +448,7 @@ namespace ZiveLab.ZM
                 tech.GetPRR(ref prr);
                 mon.initialize();
                 qis.initialize();
+                dch.initialize();
 
                 arrcnt = 0;
                 barr[0] = false;
@@ -475,11 +479,12 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 tech.GetMON(ref mon);
                 qis.initialize();
+                dch.initialize();
                 barr[0] = true;
                 barr[1] = false;
                 barr[2] = false;
                 arrcnt = 1;
-                loadoff = (mon.celloffwait == 1) ? true : false;
+                loadoff = true;
             }
             else if (techtype == enTechType.TECH_QIS)
             {
@@ -488,6 +493,22 @@ namespace ZiveLab.ZM
                 prr.initialize();
                 mon.initialize();
                 tech.GetQIS(ref qis);
+                dch.initialize();
+
+                barr[0] = true;
+                barr[1] = false;
+                barr[2] = false;
+                arrcnt = 1;
+                loadoff = false;
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                eis.initialize();
+                hfr.initialize();
+                prr.initialize();
+                mon.initialize();
+                qis.initialize();
+                tech.GetDCH(ref dch);
 
                 barr[0] = true;
                 barr[1] = false;
@@ -572,6 +593,7 @@ namespace ZiveLab.ZM
             double cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * d.img);
             double cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
             double tmp;
+
             if (techtype == enTechType.TECH_HFR)
             {
                 if (rtgrp.plot[0].Maxval[0] < d.real) rtgrp.plot[0].Maxval[0] = d.real;
@@ -676,14 +698,7 @@ namespace ZiveLab.ZM
                 rtgrp.plot[0].freq[0].Add(0.0);
                 rtgrp.plot[0].lx[0].Add(d.TestTime);
 
-                if (loadoff)
-                {
-                    tmp = d.Veoc;
-                }
-                else
-                {
-                    tmp = d.Vdc;
-                }
+                tmp = d.Veoc;
                 rtgrp.plot[0].ly[0].Add(tmp);
 
 
@@ -722,6 +737,36 @@ namespace ZiveLab.ZM
                 rtgrp.plot[3].freq[0].Add(d.fFreq);
                 rtgrp.plot[3].lx[0].Add(d.fFreq);
                 rtgrp.plot[3].ly[0].Add(zph);
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                rtgrp.plot[0].freq[0].Add(0.0);
+                rtgrp.plot[0].lx[0].Add(d.TestTime);
+
+                tmp = d.Vdc;
+                rtgrp.plot[0].ly[0].Add(tmp);
+
+
+                rtgrp.plot[1].freq[0].Add(0.0);
+                rtgrp.plot[1].lx[0].Add(d.TestTime);
+                rtgrp.plot[1].ly[0].Add(d.Temperature);
+                /*
+                rtgrp.plot[2].freq[0].Add(0.0);
+                rtgrp.plot[2].lx[0].Add(d.TestTime);
+                if (loadoff)
+                {
+                    tmp = d.Veoc;
+                }
+                else
+                {
+                    tmp = d.Vdc;
+                }
+                rtgrp.plot[2].ly[0].Add(tmp);
+                
+                rtgrp.plot[3].freq[0].Add(0.0);
+                rtgrp.plot[3].lx[0].Add(d.TestTime);
+                rtgrp.plot[3].ly[0].Add(d.Temperature);
+                */
             }
             else
             {
@@ -924,14 +969,8 @@ namespace ZiveLab.ZM
                 rtgrp.plot[0].freq[0].Add(0.0);
                 rtgrp.plot[0].lx[0].Add(d.TestTime);
 
-                if (loadoff)
-                {
-                    tmp = d.Veoc;
-                }
-                else
-                {
-                    tmp = d.Vdc;
-                }
+                tmp = d.Veoc;
+
                 rtgrp.plot[0].count[0]++;
                 rtgrp.plot[0].ly[0].Add(tmp);
                 if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
@@ -977,6 +1016,9 @@ namespace ZiveLab.ZM
                 if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
                 if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
 
+                if (rtgrp.plot[0].Maxval[2] < d.real) rtgrp.plot[0].Maxval[2] = d.real;
+                if (rtgrp.plot[0].Minval[2] > d.real) rtgrp.plot[0].Minval[2] = d.real;
+
                 rtgrp.plot[2].count[0]++;
                 rtgrp.plot[2].freq[0].Add(d.fFreq);
                 rtgrp.plot[2].lx[0].Add(d.fFreq);
@@ -984,12 +1026,53 @@ namespace ZiveLab.ZM
                 if (rtgrp.plot[2].Maxval[0] < zmag) rtgrp.plot[2].Maxval[0] = zmag;
                 if (rtgrp.plot[2].Minval[0] > zmag) rtgrp.plot[2].Minval[0] = zmag;
 
+                if (rtgrp.plot[2].Maxval[2] < d.fFreq) rtgrp.plot[2].Maxval[2] = d.fFreq;
+                if (rtgrp.plot[2].Minval[2] > d.fFreq) rtgrp.plot[2].Minval[2] = d.fFreq;
+
                 rtgrp.plot[3].count[0]++;
                 rtgrp.plot[3].freq[0].Add(d.fFreq);
                 rtgrp.plot[3].lx[0].Add(d.fFreq);
                 rtgrp.plot[3].ly[0].Add(zph);
                 if (rtgrp.plot[3].Maxval[0] < zph) rtgrp.plot[3].Maxval[0] = zph;
                 if (rtgrp.plot[3].Minval[0] > zph) rtgrp.plot[3].Minval[0] = zph;
+
+                if (rtgrp.plot[3].Maxval[2] < d.fFreq) rtgrp.plot[3].Maxval[2] = d.fFreq;
+                if (rtgrp.plot[3].Minval[2] > d.fFreq) rtgrp.plot[3].Minval[2] = d.fFreq;
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+
+                rtgrp.plot[0].freq[0].Add(0.0);
+                rtgrp.plot[0].lx[0].Add(d.TestTime);
+                tmp = d.Vdc;
+               
+                rtgrp.plot[0].count[0]++;
+                rtgrp.plot[0].ly[0].Add(tmp);
+                if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
+                if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
+
+                rtgrp.plot[1].count[0]++;
+                rtgrp.plot[1].freq[0].Add(0.0);
+                rtgrp.plot[1].lx[0].Add(d.TestTime);
+                rtgrp.plot[1].ly[0].Add(d.Temperature);
+                if (rtgrp.plot[1].Maxval[0] < d.Temperature) rtgrp.plot[1].Maxval[0] = d.Temperature;
+                if (rtgrp.plot[1].Minval[0] > d.Temperature) rtgrp.plot[1].Minval[0] = d.Temperature;
+                /*
+                rtgrp.plot[2].freq[0].Add(0.0);
+                rtgrp.plot[2].lx[0].Add(d.TestTime);
+                tmp = d.Vdc;
+                rtgrp.plot[2].count[0]++;
+                rtgrp.plot[2].ly[0].Add(tmp);
+                if (rtgrp.plot[2].Maxval[0] < tmp) rtgrp.plot[2].Maxval[0] = tmp;
+                if (rtgrp.plot[2].Minval[0] > tmp) rtgrp.plot[2].Minval[0] = tmp;
+                
+                rtgrp.plot[3].count[0]++;
+                rtgrp.plot[3].freq[0].Add(0.0);
+                rtgrp.plot[3].lx[0].Add(d.TestTime);
+                rtgrp.plot[3].ly[0].Add(d.Temperature);
+                if (rtgrp.plot[2].Maxval[0] < d.Temperature) rtgrp.plot[2].Maxval[0] = d.Temperature;
+                if (rtgrp.plot[2].Minval[0] > d.Temperature) rtgrp.plot[2].Minval[0] = d.Temperature;
+                */
             }
             else
             {
@@ -1062,6 +1145,8 @@ namespace ZiveLab.ZM
                 rtgrp.plot[0].ly[0].Add(tmp);
                 if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
                 if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
+                if (rtgrp.plot[0].Maxval[2] < d.real) rtgrp.plot[0].Maxval[2] = d.real;
+                if (rtgrp.plot[0].Minval[2] > d.real) rtgrp.plot[0].Minval[2] = d.real;
 
                 rtgrp.plot[2].count[0]++;
                 rtgrp.plot[2].freq[0].Add(d.fFreq);
@@ -1069,6 +1154,8 @@ namespace ZiveLab.ZM
                 rtgrp.plot[2].ly[0].Add(zmag);
                 if (rtgrp.plot[2].Maxval[0] < zmag) rtgrp.plot[2].Maxval[0] = zmag;
                 if (rtgrp.plot[2].Minval[0] > zmag) rtgrp.plot[2].Minval[0] = zmag;
+                if (rtgrp.plot[2].Maxval[2] < d.fFreq) rtgrp.plot[2].Maxval[2] = d.fFreq;
+                if (rtgrp.plot[2].Minval[2] > d.fFreq) rtgrp.plot[2].Minval[2] = d.fFreq;
 
                 rtgrp.plot[3].count[0]++;
                 rtgrp.plot[3].freq[0].Add(d.fFreq);
@@ -1076,6 +1163,8 @@ namespace ZiveLab.ZM
                 rtgrp.plot[3].ly[0].Add(zph);
                 if (rtgrp.plot[3].Maxval[0] < zph) rtgrp.plot[3].Maxval[0] = zph;
                 if (rtgrp.plot[3].Minval[0] > zph) rtgrp.plot[3].Minval[0] = zph;
+                if (rtgrp.plot[3].Maxval[2] < d.fFreq) rtgrp.plot[3].Maxval[2] = d.fFreq;
+                if (rtgrp.plot[3].Minval[2] > d.fFreq) rtgrp.plot[3].Minval[2] = d.fFreq;
             }
             
         }
@@ -1190,6 +1279,186 @@ namespace ZiveLab.ZM
         }
     }
 
+    public class stPropIdc
+    {
+        eZimType type;
+        public string stype;
+        public int RangeCount;
+        public string[] sRange;
+        public st_zim_Idc_rnginf Idc_rnginf;
+        public stPropIdc()
+        {
+            sRange = new string[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+            Idc_rnginf = new st_zim_Idc_rnginf(0);
+            SetType(eZimType.BZA100);
+        }
+
+        public void SetType(eZimType ztype)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = DeviceConstants.MAX_IAC_CTRL_RNGCNT;
+
+            for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            {
+                sRange[i] = string.Format("{0}", ((enCurrentRange)i).GetDescription());
+            }
+        }
+
+        public void SetType(eZimType ztype, double[] Range, st_zim_Idc_rnginf tinf)
+        {
+
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = DeviceConstants.MAX_IAC_CTRL_RNGCNT;
+            Idc_rnginf.ToWritePtr(tinf.ToByteArray());
+            for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            { 
+                sRange[i] = SM_Number.ToRangeString(Range[i], "A");
+            }
+        }
+
+        public void GetInformation(ref st_zim_Idc_rnginf tinf)
+        {
+            tinf.ToWritePtr(Idc_rnginf.ToByteArray());
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Channel type"), DescriptionAttribute("View type of channel.")]
+        public string PropStrType
+        {
+            get { return stype; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range count"), DescriptionAttribute("View count of Idc ranges.")]
+        public string PropRangeCount
+        {
+            get { return RangeCount.ToString(); }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 1 (A) "), DescriptionAttribute("View control IDC value of range 1.")]
+        public string PropRange1
+        {
+            get { return sRange[0]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 1.")]
+        public double Propoffset1
+        {
+            get { return Idc_rnginf.idcofs[0].offset; }
+            set { Idc_rnginf.idcofs[0].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 2 (A)"), DescriptionAttribute("View control IDC value of range 2.")]
+        public string PropRange2
+        {
+            get { return sRange[1]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 2.")]
+        public double Propoffset2
+        {
+            get { return Idc_rnginf.idcofs[1].offset; }
+            set { Idc_rnginf.idcofs[1].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 3 (A)"), DescriptionAttribute("View control IDC value of range 3.")]
+        public string PropRange3
+        {
+            get { return sRange[2]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 3.")]
+        public double Propoffset3
+        {
+            get { return Idc_rnginf.idcofs[2].offset; }
+            set { Idc_rnginf.idcofs[2].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 4 (A)"), DescriptionAttribute("View control IDC value of range 4.")]
+        public string PropRange4
+        {
+            get { return sRange[3]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 4.")]
+        public double Propoffset4
+        {
+            get { return Idc_rnginf.idcofs[3].offset; }
+            set { Idc_rnginf.idcofs[3].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 5 (A)"), DescriptionAttribute("View control IDC value of range 5.")]
+        public string PropRange5
+        {
+            get { return sRange[4]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 5.")]
+        public double Propoffset5
+        {
+            get { return Idc_rnginf.idcofs[4].offset; }
+            set { Idc_rnginf.idcofs[4].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 6 (A)"), DescriptionAttribute("View control IDC value of range 6.")]
+        public string PropRange6
+        {
+            get { return sRange[5]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 6.")]
+        public double Propoffset6
+        {
+            get { return Idc_rnginf.idcofs[5].offset; }
+            set { Idc_rnginf.idcofs[5].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 7 (A)"), DescriptionAttribute("View control IDC value of range 7.")]
+        public string PropRange7
+        {
+            get { return sRange[6]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 7.")]
+        public double Propoffset7
+        {
+            get { return Idc_rnginf.idcofs[6].offset; }
+            set { Idc_rnginf.idcofs[6].offset = value; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Control IDC 8 (A)"), DescriptionAttribute("View control IDC value of range 8.")]
+        public string PropRange8
+        {
+            get { return sRange[7]; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Offset(rad)"), DescriptionAttribute("Edit Offset phase for range 8.")]
+        public double Propoffset8
+        {
+            get { return Idc_rnginf.idcofs[7].offset; }
+            set { Idc_rnginf.idcofs[7].offset = value; }
+        }
+
+        #endregion //#region ** Properties
+    }
 
     public class stPropIac
     {
@@ -1337,7 +1606,9 @@ namespace ZiveLab.ZM
         }
         #endregion //#region ** Properties
     }
+
     
+
     public class stPropConnInf
     {
         string MacAddr;
@@ -1356,10 +1627,10 @@ namespace ZiveLab.ZM
             port = "";
         }
 
-        public void SetInformation(stEthernetCfg cfg)
+        public void SetInformation( stEthernetCfg cfg)
         {
             MacAddr = BitConverter.ToString(cfg.Mac);
-            dhcpmode = (cfg.dhcp == 1) ? "Using DHCP" : "Manually";
+            dhcpmode = (cfg.dhcp == 1) ? "Succeed" : "No response.";
             IP = string.Format("{0}.{1}.{2}.{3}", cfg.IpAddress[0]
                                                    , cfg.IpAddress[1]
                                                    , cfg.IpAddress[2]
@@ -1374,6 +1645,7 @@ namespace ZiveLab.ZM
                                                   , cfg.Gateway[3]);
             port = cfg.Port.ToString();
         }
+        
 
         #region ** Properties
         [ReadOnlyAttribute(true)]
@@ -1423,6 +1695,7 @@ namespace ZiveLab.ZM
     {
         string Serial;
         string stype;
+        string sproductmodel;
         string FirmwareVersion;
         string BoardVersion;
         uint BaseTick;
@@ -1440,6 +1713,7 @@ namespace ZiveLab.ZM
             BaseTick = 1;
             DaqTick = 200;
             stype = Extensions.GetEnumDescription(eDeviceType.SBZA);
+            sproductmodel = Extensions.GetEnumDescription(eProductType.UNKNOWN);
             for (int i=0; i< MBZA_Constant.MAX_DEV_CHANNEL; i++)
             {
                 EnableChs[i] = false;
@@ -1460,7 +1734,7 @@ namespace ZiveLab.ZM
                                                   , cfg.mSIFCfg.BoardVersion.Revision
                                                   , cfg.mSIFCfg.BoardVersion.Build);
             stype = cfg.mSIFCfg.GetTypeString();
-
+            sproductmodel = Extensions.GetEnumDescription(cfg.mSIFCfg.GetProductType());
             BaseTick = cfg.BaseTick;
             DaqTick = cfg.DaqTick;
             for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
@@ -1479,7 +1753,14 @@ namespace ZiveLab.ZM
         }
 
         [ReadOnlyAttribute(true)]
-        [DisplayName("Type"), DescriptionAttribute("View type of SIF board.")]
+        [DisplayName("Product model"), DescriptionAttribute("View product model of SIF board.")]
+        public string PropProductModel
+        {
+            get { return sproductmodel; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Product type"), DescriptionAttribute("View product type of SIF board.")]
         public string PropType
         {
             get { return stype; }
@@ -1669,7 +1950,80 @@ namespace ZiveLab.ZM
         #endregion //#region ** Properties
 
     }
-    
+
+    public class stPropIdcCalib
+    {
+        bool bCalib;
+        int nControlgain;
+        string[] srng;
+
+        public stPropIdcCalib()
+        {
+            bCalib = false;
+            nControlgain = 2;
+            srng = new string[2];
+            srng[0] = "";
+            srng[1] = "";
+        }
+
+        private bool ChkCalInf(double offset)
+        {
+            if (double.IsNaN(offset) || offset == 0.0 || offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET) return false;
+            
+            return true;
+        }
+
+        public void SetInformation(stSystemConfig cfg, int trng, int sifch)
+        {
+            bool tmp = true;
+            int rng = trng * 2;
+            eZimType type = (eZimType)(cfg.mZimCfg[sifch].info.cModel[0] - 0x30);
+            
+
+            if (double.IsNaN(cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset) || cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset == 0.0 || cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+            {
+                tmp = false;
+            }
+
+            bCalib = tmp;
+
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
+
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Calibration status"), DescriptionAttribute("View calibration status of ZIM board.")]
+        public bool PropCalib
+        {
+            get { return bCalib; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Gain count"), DescriptionAttribute("View gain count of ZIM board.")]
+        public int PropnControlgain
+        {
+            get { return nControlgain; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Gain X1(A)"), DescriptionAttribute("View X1 gain of ZIM board.")]
+        public string PropGain1
+        {
+            get { return srng[0]; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Gain X0.2(A)"), DescriptionAttribute("View X0.2 gain of ZIM board.")]
+        public string PropGain2
+        {
+            get { return srng[1]; }
+        }
+
+        #endregion //#region ** Properties
+
+    }
+
     public class stPropIacCalib
     {
         bool bCalib;

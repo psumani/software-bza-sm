@@ -76,6 +76,20 @@ namespace ZiveLab.ZM.ZIM
         CXM,
     }
 
+    public enum eProductType
+    {
+        [Description("UNKNOWN")]
+        UNKNOWN,
+        [Description("BZA60")]
+        BZA60,
+        [Description("BZA100")]
+        BZA100,
+        [Description("BZA500 ")]
+        BZA500,
+        [Description("BZA1000")]
+        BZA1000,
+    }
+
     public enum eZimType
     {
         [Description("UNKNOWN")]
@@ -110,7 +124,7 @@ namespace ZiveLab.ZM.ZIM
 
     public enum eZimSnID
     {
-        [Description("IM?")]
+        [Description("IM-")]
         UNKNOWN,
         [Description("IM2")]
         BZA1000A,
@@ -217,8 +231,12 @@ namespace ZiveLab.ZM.ZIM
         wait,
         [Description("Delay after load on")]
         mondelay,
-        [Description("Voltage/Temp.Monitor")]
+        [Description("Eoc/Temp.sampling")]
+        sample,
+        [Description("Eoc/Temp.sampling")]
         monsample,
+        [Description("Discharge sampling")]
+        dchsample,
     }
     public enum enTechType
     {
@@ -228,10 +246,12 @@ namespace ZiveLab.ZM.ZIM
         TECH_HFR,
         [Description("Rs Pseudo Rp")]
         TECH_PRR,
-        [Description("Voltage/Temp monitor")]
+        [Description("Eoc/Temp monitor")]
         TECH_MON,
         [Description("Quick galvanostatic EIS")]
         TECH_QIS,
+        [Description("Discharge test")]
+        TECH_DCH,
     }
 
     public enum enVoltageRange
@@ -316,19 +336,27 @@ namespace ZiveLab.ZM.ZIM
 
     public enum enCurrentControl
     {
-        [Description("1.07 A")]
+        [Description("  1 A")]
         I2A = 0,
-        [Description(" 111mA")]
+        [Description("200mA")]
+        I400mAA = 1,
+        [Description("100mA")]
         I200mA = 2,
-        [Description("11.1mA")]
+        [Description(" 20mA")]
+        I40mA = 3,
+        [Description(" 10mA")]
         I20mA = 4,
-        [Description("1.11mA")]
+        [Description("  2mA")]
+        I4mA = 5,
+        [Description("  1mA")]
         I2mA = 6,
+        [Description("200uA")]
+        I400uA = 7,
     }
 
     public enum enDescRangeI
     {
-        [Description("2A")]
+        [Description("2 A")]
         I2A = 0,
         [Description("400mA")]
         I400mA,

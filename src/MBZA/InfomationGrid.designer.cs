@@ -77,7 +77,6 @@
             // treeView1
             // 
             this.treeView1.CheckBoxes = true;
-            this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 25);
             this.treeView1.Name = "treeView1";

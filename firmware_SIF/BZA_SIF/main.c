@@ -1,16 +1,7 @@
 #include "init.h"
 #include "BZA_SIF.h"
 
-inline int GetMaxChannel(void)
-{
-	int  MaxCh = MAX_DEV_CHANNEL;
-	
-	if(m_pSysConfig->mSIFCfg.Type != (byte)SIF_MBZA)
-	{
-		MaxCh = 1;
-	}
-	return MaxCh;
-}
+
 
 
 
@@ -24,6 +15,7 @@ int main()
 	m_pGlobalVar->m_FindCh = -1;
 	
 	m_pGlobalVar->m_MsI2CdelayStamp = 0;
+	m_pGlobalVar->m_msRefreshDC = 0;
 	m_pGlobalVar->m_msAux = 0;
 	m_pGlobalVar->m_AuxCh = -1;
 	m_pGlobalVar->m_msADC = 0;
@@ -44,7 +36,7 @@ int main()
 			{
 				m_pGlobalVar->mStatusInf.mode = 0;
 			}
-				
+	
 			if(m_pGlobalVar->mStatusInf.mode == 1)
 			{
 				DeviceMainProc();

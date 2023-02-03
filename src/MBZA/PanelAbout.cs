@@ -256,7 +256,7 @@ namespace ZiveLab.ZM
             Port = gBZA.SifLnkLst[serial].MBZAIF.mConnection.Port;
             
             HostName = Encoding.UTF8.GetString(gBZA.SifLnkLst[serial].MBZAIF.mConnection.hostname).Trim('\0');
-            ConfigureIP = (gBZA.SifLnkLst[serial].MBZAIF.mConnection.dhcp == 1) ? "Using DHCP" : "Manually";
+            ConfigureIP = (gBZA.SifLnkLst[serial].MBZAIF.mConnection.dhcp == 1) ? "Succeed" : "No response.";
 
             devicemodel = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.GetTypeString();
 

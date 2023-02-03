@@ -29,6 +29,7 @@ void Set_IceResetB(bool on);
 bool CheckIceCfgDone(void);
 void InitDeviceControl(void);
 void proc_eis_reset(int ch);
+void apply_req_dds_dcsignal(int ch);
 void apply_req_dds_signal(int ch);
 void apply_req_dds_clock(int ch);
 void apply_adc_ac_cfg(int ch);
@@ -42,4 +43,5 @@ void AuxProc(int ch);
 void RefreshFPGA(int ch);
 bool proc_eis_main(int ch);
 void Flow_monitor(int ch);
+void Flow_discharger(int ch);
 #endif

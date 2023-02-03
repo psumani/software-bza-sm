@@ -111,15 +111,20 @@ namespace ZiveLab.ZM
         
         private void btApply0_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             mZim.ranges.rtd_rng.gain = Convert.ToDouble(txtGain0.Text);
             mZim.ranges.rtd_rng.offset = Convert.ToDouble(txtOffset0.Text);
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch] = mZim;
             if (MBZA_MapUtil.Save_Range_info(Serial, sifch) == false)
             {
+                this.Cursor = Cursors.Default;
                 MessageBox.Show("The operation failed.");
                 return;
             }
+            
             SaveLogInfo();
+            this.Cursor = Cursors.Default;
             MessageBox.Show("The operation has been successful.");
         }
 

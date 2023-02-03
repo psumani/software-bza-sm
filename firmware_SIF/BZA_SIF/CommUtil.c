@@ -262,7 +262,7 @@ void Parsing(int s)
 				memcpy(m_pSysConfig, pCmdData, sizeof(stSystemConfig));
 				
                 m_pGlobalVar->nTimeTick = m_pSysConfig->DaqTick;
-                if(m_pGlobalVar->nTimeTick < 0) m_pGlobalVar->nTimeTick = 1;
+                if(m_pGlobalVar->nTimeTick <= 0) m_pGlobalVar->nTimeTick = 1;
 				
                 break;
             }
@@ -445,21 +445,28 @@ void Parsing(int s)
 			
 		case DEF_CMD_SET_SIFMODE:
 			{
-				if(pCmdHeader->Address == 1)
+				if(pCmdHeader->Slot < 0)
 				{
-					m_pGlobalVar->mStatusInf.mode = 1;
+					if(pCmdHeader->Address == 1)
+					{
+						m_pGlobalVar->mStatusInf.mode = 1;
+					}
+					else
+					{
+						if(m_pGlobalVar->mStatusInf.mode == 1)
+						{
+							if(proc_chk_run() == true)
+							{
+								SendError(s,DEF_ERROR_STARTED);
+								return;
+							}
+							m_pGlobalVar->mStatusInf.mode = 2;
+						}
+					}
 				}
 				else
 				{
-					if(m_pGlobalVar->mStatusInf.mode == 1)
-					{
-						if(proc_chk_run() == true)
-						{
-							SendError(s,DEF_ERROR_STARTED);
-							return;
-						}
-						m_pGlobalVar->mStatusInf.mode = 2;
-					}
+					m_pGlobalVar->mChVar[pCmdHeader->Slot].bTestMode = pCmdHeader->Address;
 				}
 				break;
 			}
@@ -585,7 +592,7 @@ void Parsing(int s)
 				{
 					if(m_pGlobalVar->mStatusInf.mode == 1)
 					{
-						m_pGlobalVar->mChVar[pCmdHeader->Slot].CmdResetICE = 2;
+						m_pGlobalVar->mChVar[pCmdHeader->Slot].CmdResetICE = 3;
 					}
 					else
 					{
@@ -710,17 +717,25 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
-				
-				SetDevChannel(ch);
 				
 				if(pCmdData[10] != ID_RANGEINFO)
 				{
 					SendError(s,DEF_ERROR_NOMATCHVERSION);
 					return;
 				}
+
+				ch = pCmdHeader->Slot;
 				
 				memcpy(&m_pSysConfig->mZimCfg[ch],pCmdData,sizeof(stZimCfg));
+				if(SaveSysCfgInfo() == false)
+				{
+				  	SendError(s,DEF_ERROR_STORESYSINF);
+					return;
+				}
+				
+				ch = pCmdHeader->Slot;
+				
+				SetDevChannel(ch);
 				
 				if(WriteZimCfgInfo(ch, 0,EEPROM_ADDR) == _ERROR)
 				{
@@ -731,12 +746,6 @@ void Parsing(int s)
 				if(WriteRangeInfo(ch, 0,EEPROM_ADDR) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
-					return;
-				}
-				
-				if(SaveSysCfgInfo() == false)
-				{
-				  	SendError(s,DEF_ERROR_STORESYSINF);
 					return;
 				}
 				break;
@@ -865,13 +874,6 @@ void Parsing(int s)
 			
 		case CMD_WRITE_ROM :	
 			{
-				if(pCmdHeader->Slot < 0)
-				{
-					SendError(s,DEF_ERROR_CMDFAIL);
-					return;
-				}
-				ch = pCmdHeader->Slot;
-
 				if(SaveConnCfgInfo() == false)
 				{
 					SendError(s,DEF_ERROR_STORESYSINF);
@@ -880,18 +882,36 @@ void Parsing(int s)
 				
 				if(SaveSysCfgInfo() == false)
 				{
-				  	SendError(s,DEF_ERROR_STORESYSINF);
+					SendError(s,DEF_ERROR_STORESYSINF);
 					return;
 				}
 				
-				if(m_pSysConfig->EnaROM[ch] == 1)
+				
+				if(pCmdHeader->Slot >= 0 && pCmdHeader->Slot < 4)
 				{
-					SetDevChannel(ch);
-					
-					if(WriteRangeInfo(ch, 0,EEPROM_ADDR) == _ERROR)
+					ch = pCmdHeader->Slot;
+
+					if(SaveConnCfgInfo() == false)
 					{
-						SendError(s,DEF_ERROR_STOREZIMINF);
+						SendError(s,DEF_ERROR_STORESYSINF);
 						return;
+					}
+					
+					if(SaveSysCfgInfo() == false)
+					{
+						SendError(s,DEF_ERROR_STORESYSINF);
+						return;
+					}
+					
+					if(m_pSysConfig->EnaROM[ch] == 1)
+					{
+						SetDevChannel(ch);
+						
+						if(WriteRangeInfo(ch, 0,EEPROM_ADDR) == _ERROR)
+						{
+							SendError(s,DEF_ERROR_STOREZIMINF);
+							return;
+						}
 					}
 				}
 				break;
@@ -983,7 +1003,14 @@ void Parsing(int s)
 				else
 				{
 					memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig, pCmdData, sizeof(st_zim_dds));
-					apply_req_dds_signal(ch);
+					if(m_pGlobalVar->mChVar[ch].bTestMode < 2)
+					{
+						apply_req_dds_signal(ch);
+					}
+					else
+					{
+						apply_req_dds_dcsignal(ch);
+					}
 				}
                 break;
             }
@@ -1068,9 +1095,8 @@ void Parsing(int s)
 				}
 				else
 				{
-
-					m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data &= ~DEF_DEVDO_MASK;
-					m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data |= (*pCmdData & DEF_DEVDO_MASK);
+					m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data &= ~0x1F;
+					m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data |= (*pCmdData & 0x1F);
 				}
 				break;
             }

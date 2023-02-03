@@ -1678,12 +1678,11 @@ void InitRangeInf(int ch)
 	int i;
 
 	m_pSysConfig->mZimCfg[ch].ranges.ID = ID_RANGEINFO;
-	m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_DEFAULT_POWER;
 	m_pGlobalVar->mChVar[ch].mChStatInf.ZimType = m_pSysConfig->mZimCfg[ch].info.cModel[0] - 0x30;
-
 	for(i=0; i<MAX_IAC_CTRL_RNGCNT; i++)
 	{
 		InitEisCalInf(&m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[i]);
+		m_pSysConfig->mZimCfg[ch].ranges.idc_rng.idcofs[i].offset = DEF_MONDCCTRL_PHASE;
 	}
 	
 	m_pSysConfig->mZimCfg[ch].ranges.mDummy[0].Ls = 0.000000064476;
@@ -1716,8 +1715,7 @@ void InitRangeInf(int ch)
 	InitIacRangeInf(&m_pSysConfig->mZimCfg[ch].ranges.iac_rng[1],DEF_IAC_RNG2_MAX,DEF_ADC_IAC_RNG2_MAX,DEF_ADC_IAC_RNG2_MIN);
 	InitIacRangeInf(&m_pSysConfig->mZimCfg[ch].ranges.iac_rng[2],DEF_IAC_RNG3_MAX,DEF_ADC_IAC_RNG3_MAX,DEF_ADC_IAC_RNG3_MIN);
 	InitIacRangeInf(&m_pSysConfig->mZimCfg[ch].ranges.iac_rng[3],DEF_IAC_RNG4_MAX,DEF_ADC_IAC_RNG4_MAX,DEF_ADC_IAC_RNG4_MIN);
-	
-	
+
 	m_pSysConfig->mZimCfg[ch].ranges.vac_rng.realmax = DEF_ADC_VAC_RNG_RMAX;
 	m_pSysConfig->mZimCfg[ch].ranges.vac_rng.maximum = DEF_ADC_VAC_RNG_MAX;
 	m_pSysConfig->mZimCfg[ch].ranges.vac_rng.minimum = DEF_ADC_VAC_RNG_MIN;
@@ -1757,42 +1755,87 @@ void InitRangeInf(int ch)
 	
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA500)
 	{
+		m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA500_DEFAULT_POWER;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[0].realmax = DEF_ADC_VDC_RNG0_RMAX1;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax = DEF_ADC_VDC_RNG1_RMAX1;
 	}
 	else if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA100)
 	{
+		m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA100_DEFAULT_POWER;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[0].realmax = DEF_ADC_VDC_RNG0_RMAX2;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax = DEF_ADC_VDC_RNG1_RMAX2;
 	}
 	else if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA60)
 	{
+		m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA60_DEFAULT_POWER;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[0].realmax = DEF_ADC_VDC_RNG0_RMAX3;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax = DEF_ADC_VDC_RNG1_RMAX3;
 	}
 	else
 	{
+		m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA100_DEFAULT_POWER;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[0].realmax = DEF_ADC_VDC_RNG0_RMAX0;
 		m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax = DEF_ADC_VDC_RNG1_RMAX0;
+	}
+	for(i=0; i<4; i++)
+	{
+		m_pSysConfig->mZimCfg[ch].ranges.mSafety.NoUse[i] = 0.0;
 	}
 }
 
 void InitFixRangeInf(int ch)
 {
 	int i;
-	
+	double tpow;
 	m_pSysConfig->mZimCfg[ch].ranges.ID = ID_RANGEINFO;
-	
-	if(isnan(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower))
-	{
-		m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_DEFAULT_POWER;
-	}
-	
+
 	m_pGlobalVar->mChVar[ch].mChStatInf.ZimType = m_pSysConfig->mZimCfg[ch].info.cModel[0] - 0x30;
 
+	if(isnan(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower))
+	{
+		if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA60)
+		{
+			m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA60_DEFAULT_POWER;
+		}
+		else if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA100)
+		{
+			m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA100_DEFAULT_POWER;
+		}
+		else if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA500)
+		{
+			m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA500_DEFAULT_POWER;
+		}
+		else
+		{
+			m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = DEF_BZA1000_DEFAULT_POWER;
+		}
+	}
+	else
+	{
+		if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA60)
+		{
+			 tpow = DEF_BZA60_DEFAULT_POWER;
+		}
+		else if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA100)
+		{
+			tpow = DEF_BZA100_DEFAULT_POWER;
+		}
+		else if(m_pGlobalVar->mChVar[ch].mChStatInf.ZimType == DEV_BZA500)
+		{
+			tpow = DEF_BZA500_DEFAULT_POWER;
+		}
+		else
+		{
+			tpow = m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower;
+		}
+		tpow *= 1.2;
+		if(tpow < m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower) m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower = tpow;
+	}
+	
 	for(i=0; i<MAX_IAC_CTRL_RNGCNT; i++)
 	{
 		FixEisCalInf(&m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[i]);
+		if(isnan(m_pSysConfig->mZimCfg[ch].ranges.idc_rng.idcofs[i].offset)) m_pSysConfig->mZimCfg[ch].ranges.idc_rng.idcofs[i].offset = DEF_MONDCCTRL_PHASE;
 	}
 	
 	if(isnan(m_pSysConfig->mZimCfg[ch].ranges.mDummy[0].Ls)) m_pSysConfig->mZimCfg[ch].ranges.mDummy[0].Ls = 0.000000064476;
@@ -2041,29 +2084,22 @@ INT_32 EepromCheckZim(INT_16 ch, INT_32 devid,UNS_32 sAddr)
 		i2c_Defaultdelay();
 		if(EepromWriteRead(devid,sAddr,0x0,(void*)&m_id,sizeof(st_zim_id))  == _ERROR) 
 		{
+			continue;
+		}
+	
+		if(m_id.version != DEF_ZIM_HEADER_VER
+		    || m_id.signature[0] != 'B'
+			|| m_id.signature[1] != 'Z'
+			|| m_id.signature[2] != 'A')
+		{
 			EepromInitZimId(&m_id);
 			if(EepromWrite(devid,sAddr,0x0,(void*)&m_id,sizeof(st_zim_id))  == _ERROR) 
 			{
 				return _ERROR;
 			}
-		}
-	
-		if(m_id.version != DEF_ZIM_HEADER_VER)
-		{
 			continue;
 		}
-		if(m_id.signature[0] != 'B')
-		{
-			continue;
-		}
-		if(m_id.signature[1] != 'Z')
-		{
-			continue;
-		}
-		if(m_id.signature[2] != 'A')
-		{
-			continue;
-		}
+		
 		return _NO_ERROR;
 	}
 
@@ -2115,17 +2151,13 @@ INT_32 ScanZIM(INT_16 ch, INT_32 devid, UNS_32 sAddr)
 	{
 		return _ERROR;
 	}
-	
-	if(EepromApplyZim(ch,devid,sAddr) == _ERROR)
+	if(m_pGlobalVar->mChVar[ch].LoadCfg == 0)
 	{
-		return _ERROR;
+		if(EepromApplyZim(ch,devid,sAddr) == _ERROR)
+		{
+			return _ERROR;
+		}
 	}
-		
-	if(proc_read_version(ch) == _ERROR) 
-	{
-		return _ERROR;
-	}
-
 	return _NO_ERROR;
 }
 

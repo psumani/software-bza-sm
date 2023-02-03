@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Interface;
@@ -310,15 +311,6 @@ namespace ZiveLab.ZM
             this.Refresh();
             if (bconnect == false)
             { 
-                if (Addr == 0)
-                {
-                    if (mCommZim.CmdResetFPGA(ich, true) == false)
-                    {
-                        MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
-
                 if (mCommZim.CmdConnectPromOfZIM(ich, Addr) == false)
                 {
                     MessageBox.Show("The command failed[DEFINE_COMMAND.CONN_FPGA_PROM].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -327,14 +319,6 @@ namespace ZiveLab.ZM
             }
             else
             {
-                if (Addr == 0)
-                {
-                    if (MBZA_MapUtil.ResetFPGA(sSerial, ich, true) == false)
-                    {
-                        MessageBox.Show("The command failed[ResetFPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
                 if (MBZA_MapUtil.ConnectPromOfZIM(sSerial, ich, Addr) == false)
                 {
                     MessageBox.Show("The command failed[ConnectPromOfZIM].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -388,6 +372,18 @@ namespace ZiveLab.ZM
                 {
                     MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_CLR_FPGA_ICE].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                Thread.Sleep(100);
+
+                if (mCommZim.CheckFPGAofZIM(ich) == false)
+                {
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.CheckFPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (mCommZim.ReadData(ref gBZA.SifLnkLst[sSerial].mDevInf) == false)
+                {
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.CheckFPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -399,10 +395,26 @@ namespace ZiveLab.ZM
 
                 if (MBZA_MapUtil.ResetFPGA(sSerial, ich, false) == false)
                 {
-                    MessageBox.Show("The command failed[ResetFPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The command failed[Reset clear FPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                Thread.Sleep(100);
+
+                if (MBZA_MapUtil.VheckFPGAOfZIM(sSerial, ich) == false)
+                {
+                    MessageBox.Show("The command failed[CheckFPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                if (MBZA_MapUtil.GetDeviceinfo(sSerial) == false)
+                {
+                    MessageBox.Show("The command failed[Get Device info].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
+
+
 
             lblBurn5.ForeColor = Color.Green;
             this.Refresh();
@@ -428,7 +440,7 @@ namespace ZiveLab.ZM
                             {
                                 if (DisconnAndRunFpga() == true)
                                 {
-
+                                    
                                 }
                             }
                         }
@@ -464,7 +476,7 @@ namespace ZiveLab.ZM
         {
             if(bconnect == false)
             {
-                if (mCommZim.CmdSetCmdMode(0) == true)
+                if (mCommZim.CmdSetCmdMode(1) == true)
                 {
                     mCommZim.CmdEnableCommTimeOut(0);
                 }
@@ -473,7 +485,7 @@ namespace ZiveLab.ZM
             else
             {
                 
-                if (MBZA_MapUtil.SetCmdMode(sSerial, 0) == false)
+                if (MBZA_MapUtil.SetCmdMode(sSerial, 1) == false)
                 {
                     MBZA_MapUtil.EnableCommTimeOut(sSerial, 0);
                 }

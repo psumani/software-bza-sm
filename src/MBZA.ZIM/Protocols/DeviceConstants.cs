@@ -14,14 +14,17 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_DATA_CNT = 100000;
         public const string AppCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM.CFG";
         public static string[] Const_LootPart = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", };
-        public static string[] Const_RangePart = { "Iac", "Vac", "Vdc", "Temperature","Safety" };
+        public static string[] Const_RangePart = { "Iac","Idc", "Vac", "Vdc", "Temperature","Safety" };
         public static string[] Const_RangeIacItems = { "Calibration vars", "Compensation dummy", };
         public static string[] Const_RangeIacGain = { "X1", "X0.2", };
-
+        public static string[] Const_RangeIdcGain = { "X1", "X0.2", };
         public static double[] Const_DefaultRDummy = { 0.001,0.009987261, 0.099952, 0.997961, 9.999115, 99.612, 996.9,10000.0 };
         public static double[] Const_DefaultLDummy = { 0.0, 0.000000064476, 0.000000112196, 0.000000084638, 0.00000008, 0.00000000000022, 0.000052, 0.0,};
 
-        public const double DEFAULT_POWER = 40.0;
+        public const double DEFAULT_BZA60_POWER = 20.0;
+        public const double DEFAULT_BZA100_POWER = 30.0;
+        public const double DEFAULT_BZA500_POWER = 40.0;
+        public const double DEFAULT_BZA1000_POWER = 60.0;
 
         public const ushort TECHFILESIZE = 222;
     }
@@ -37,11 +40,14 @@ namespace ZiveLab.ZM.ZIM
         public const int USERSIZE = 40;
         public const int BATIDSIZE = 40;
 
-        public const double DEV_DEFAULT_POWER = 40.0;
-        public const double DEV_MAX_POWER = 80.0;
+        public const double DEV_DEFAULT_IDC_OFFSET = 3.6;
+        public const double DEFAULT_BZA60_POWER = 20.0;
+        public const double DEFAULT_BZA100_POWER = 30.0;
+        public const double DEFAULT_BZA500_POWER = 40.0;
+        public const double DEFAULT_BZA1000_POWER = 60.0;
 
         public const byte RES_MAJOR = 1;
-        public const byte RES_MINOR = 0;
+        public const byte RES_MINOR = 1;
         public const byte RES_REVISION = 0;
         public const byte RES_BUILD = 0;
 

@@ -252,6 +252,7 @@ architecture behav of zim is
 	--signal dds vars
 	signal dds0_mclkcnt   	: std_logic_vector(7 downto 0):= x"01";
 	signal dds0_mclk			: std_logic := '0';
+	signal dds0_mclk_out		: std_logic := '0';
 	signal clk_dds0			: std_logic := '0';
 	signal buf_dds0 			: std_logic_vector(15 downto 0):= x"0000";
 	signal trig_dds0			: std_logic := '0';
@@ -316,18 +317,19 @@ architecture behav of zim is
 	
 	signal wdtick_flag		: std_logic := '0';
 	signal flagcntwd			: std_logic := '0';
-	signal wdtick_cnt    	: std_logic_vector(27 downto 0):= x"0000000";
+	signal wdtick_cnt    	: std_logic_vector(3 downto 0):= x"0";
+	--signal wdtick_cnt    	: std_logic_vector(27 downto 0):= x"0000000";
 	
 	signal SecClk				: std_logic := '0';
 	signal secclk_cnt    	: std_logic_vector(31 downto 0):= x"00000000";
 	
-	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1004";  -- 4100
+	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1770";  -- 6000
 	
 begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
 	TEST_LED 		<= SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
 	
-	DDS_MCLK 		<= dds0_mclk when buf_control(6) = '0' else clk_16MHz;  -- 125KHz = 16MHz / 128
+	DDS_MCLK 	<= dds0_mclk when buf_control(6) = '0' else clk_16MHz;  -- 125KHz = 16MHz / 128
 	DDS_MCLK1 		<= not clk_16MHz; 	-- 16MHz 
 	
 	--acadc_trig 		<= EIS_SYNCCLK; 
@@ -394,17 +396,17 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		end if;
 	end process;	
 	
-	process(clk_16MHz) --16000000 / 16000000 = 1Hz , 16000000 * 2 = 01E84800
+	process(SecClk) --16000000 / 16000000 = 1Hz , 16000000 * 2 = 01E84800
 	begin
 		if flagcntwd = '1' then
 			wdtick_flag	<= '0'; 
-			wdtick_cnt <= x"0000000";
-		elsif rising_edge(clk_16MHz) then 
+			wdtick_cnt <= x"0";
+		elsif rising_edge(SecClk) then 
 			if wdtick_flag	= '0' then
 				wdtick_cnt <= wdtick_cnt + "1";
-				if wdtick_cnt = x"1E84800" then
+				if wdtick_cnt = x"4" then
 					wdtick_flag	<= '1'; 
-					wdtick_cnt <= x"0000000";
+					wdtick_cnt <= x"0";
 				end if;
 			end if;
 		end if;
@@ -666,6 +668,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						comm_length			<= 2; 
 						comm_buf(0)			<= buf_version(15 downto 8);
 						comm_buf(1)			<= buf_version(7 downto 0);
+						
 
 --					when "1110001" =>
 --						comm_length			<= 1;
@@ -887,6 +890,15 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			MOSI		=> DDS_MOSI1
 	);
 
+	ADC_VDC : ADC_ADS1252
+	Port map (
+		CLK 			=> clk_VDC_ADC,			
+		ADC_DATA		=> buf_adcdata_vdc, 	
+		MCLK 			=> VDC_CLK, 	
+		SCLK 			=> VDC_SCLK, 	
+		MISO 			=> VDC_SDO
+	);
+	
 	RTD : ADC_MAX31865 
 	port map (
 			CLK 			=> clk_RTD, 	
@@ -901,14 +913,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
 	
 	
-	ADC_VDC : ADC_ADS1252
-	Port map (
-		CLK 			=> clk_VDC_ADC,			
-		ADC_DATA		=> buf_adcdata_vdc, 	
-		MCLK 			=> VDC_CLK, 	
-		SCLK 			=> VDC_SCLK, 	
-		MISO 			=> VDC_SDO
-	);
+	
 
 	
 end behav;

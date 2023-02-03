@@ -97,53 +97,9 @@ namespace ZiveLab.ZM
             }
         }
 
-        private void LnkLblRegApply_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
-            double[] Rtmp = new double[MBZA_Constant.MAX_DUMMY];
-            double[] Itmp = new double[MBZA_Constant.MAX_DUMMY];
-            
-            double Powtmp = 0.0;
 
-            bool ret = true;
-            
-
-            if (double.TryParse(mResistor0.Text, out Rtmp[0]) == false) ret = false;
-            if (double.TryParse(mResistor1.Text, out Rtmp[1]) == false) ret = false;
-            if (double.TryParse(mResistor2.Text, out Rtmp[2]) == false) ret = false;
-            if (double.TryParse(mResistor3.Text, out Rtmp[3]) == false) ret = false;
-            if (double.TryParse(mResistor4.Text, out Rtmp[4]) == false) ret = false;
-            if (double.TryParse(mResistor5.Text, out Rtmp[5]) == false) ret = false;
-            if (double.TryParse(mResistor6.Text, out Rtmp[6]) == false) ret = false;
-            if (double.TryParse(mResistor7.Text, out Rtmp[7]) == false) ret = false;
-            if (double.TryParse(mInduct0.Text, out Itmp[0]) == false) ret = false;
-            if (double.TryParse(mInduct1.Text, out Itmp[1]) == false) ret = false;
-            if (double.TryParse(mInduct2.Text, out Itmp[2]) == false) ret = false;
-            if (double.TryParse(mInduct3.Text, out Itmp[3]) == false) ret = false;
-            if (double.TryParse(mInduct4.Text, out Itmp[4]) == false) ret = false;
-            if (double.TryParse(mInduct5.Text, out Itmp[5]) == false) ret = false;
-            if (double.TryParse(mInduct6.Text, out Itmp[6]) == false) ret = false;
-            if (double.TryParse(mInduct7.Text, out Itmp[7]) == false) ret = false;
-
-            if (double.TryParse(mPower.Text, out Powtmp) == false) ret = false;
-
-            if (ret == true)
-            {
-                for (int i = 0; i < MBZA_Constant.MAX_DUMMY; i++)
-                {
-                    gBZA.appcfg.RDummy[i] = Rtmp[i];
-                    gBZA.appcfg.LDummy[i] = Itmp[i];
-                }
-                
-                gBZA.appcfg.Power = Powtmp;
-
-                gBZA.appcfg.Save();
-
-                this.DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show("Some of the entered values ​​cannot be replaced with numbers.\r\n Please check and try again.", "Dummy information.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

@@ -15,8 +15,8 @@
 
 #define FIRMWARE_VER_MAJOR	6  //0.256
 #define FIRMWARE_VER_MINOR	0
-#define FIRMWARE_VER_REV	2
-#define FIRMWARE_VER_BUILD	4
+#define FIRMWARE_VER_REV	4
+#define FIRMWARE_VER_BUILD	3
 
 
 #define HW_ENABLE			0x1	
@@ -142,6 +142,8 @@
 #define DEF_EIS_STATUS_WAIT			13
 #define DEF_EIS_STATUS_MONDELAY		14
 #define DEF_EIS_STATUS_SAMPLE		15
+#define DEF_EIS_STATUS_MONSAMPLE	16
+#define DEF_EIS_STATUS_DCHSAMPLE	17
 
 
 #define DEF_SINECTRL_FREQ 			4000.0
@@ -154,6 +156,8 @@
 #define DEF_MAX_SLOPECHECK_RAW      20
 #define DEF_MAX_SLOPECHECK_TICK     100
 
+#define DEF_MONDCCTRL_FREQ 			0.000001
+#define DEF_MONDCCTRL_PHASE			3.6
 
 #pragma pack(1)
 ///////////////////////////////////////////////////
@@ -249,6 +253,7 @@ typedef struct
 
 #define		DDS_BIT28		0x2000
 #define		DDS_HLB			0x1000
+#define		DDS_HLB_CLR		0xEFFF
 #define		DDS_FSEL1		0x800
 #define		DDS_PSEL1		0x400
 #define		DDS_RESET		0x100
@@ -310,8 +315,11 @@ typedef struct
 #define 	DEF_ADC_RTD_CONST_PT1000    (4000.0 / 32786.0) // 4000 - RREF
 #define 	DEF_ADC_RTD_CONST_PT100    	(400.0 / 32786.0) // 400 - RREF
 
+#define 	DEF_BZA60_DEFAULT_POWER		20.0
+#define 	DEF_BZA100_DEFAULT_POWER	30.0
+#define 	DEF_BZA500_DEFAULT_POWER	40.0
+#define 	DEF_BZA1000_DEFAULT_POWER	60.0
 #define 	DEF_DEFAULT_POWER			60.0
-#define 	DEF_DEV_MAX_POWER			80.0
 
 
 typedef struct
@@ -497,7 +505,7 @@ typedef struct
 	st_zim_eis_zdata	zdata;
 	st_zim_eis_raw_val 	Real_val[MAX_EIS_RT_RAW_POINT];
 } st_zim_eis_status;
-	
+
 #define DEF_CFG_EIS_RESET 			0x4
 #define DEF_CFG_EIS_STOP 			0x2
 #define DEF_CFG_EIS_START 			0x1
@@ -664,14 +672,21 @@ typedef struct
 
 typedef struct 
 {
-		ushort celloffwait;
+		ushort nouse0;
+		double interval;
+		double totaltime;
+        double nouse1[5];
+} st_Tech_MON;
+
+typedef struct 
+{
 		double interval;
 		double totaltime;
 		double CutoffV;
-        double nouse[4];
-       
-} st_Tech_MON;
- 
+		ushort nouse0;
+        double nouse1[4];
+} st_Tech_DCH;
+
 typedef union  
 {
 	st_Tech_EIS		eis;
@@ -679,6 +694,7 @@ typedef union
 	st_Tech_PRR 	prr;
 	st_Tech_MON     mon;
 	st_Tech_EIS     qis;
+	st_Tech_DCH     dch;
 }un_TechType;
 
 
@@ -728,6 +744,7 @@ typedef struct
 	ushort              Start;
 	ushort              Stop;
 	ushort              bCalib;
+	ushort              bTestMode;
 	ushort              FlagOverT;
 	
 	ushort				TmpResetICE;
@@ -737,7 +754,8 @@ typedef struct
 	
 	ushort 				bChkSlope;
 	uint 				m_msSlop;
-
+	ushort              LoadCfg;
+	ushort              CntVdcChg;
 	int					OverT_Timer;
 	
 	ushort 				bSigLowFreq;
@@ -757,9 +775,9 @@ typedef struct
 	st_zim_dds_flow  	flow_dds_clk;
 	st_zim_dds_flow  	flow_dds_sig;
 	st_zim_adc_flow		flow_adc_ac;
+	
 	st_zim_device  		mdevice;
 	st_zim_device  		mreqdevice;
-	st_zim_rnginf   	ranges;
     void*				pindata;
     void*				poutdata;
 } stGlobalChVar;
@@ -773,10 +791,7 @@ typedef struct
 	ushort              OpenMX25V;
 	ushort              OpenSPI;
  
-	
-	
 	ushort              Commerror;
-
 	bool              	LedBusy;
 	ushort              LedBusyStat;
 	ushort              LedBusyTick;
@@ -788,6 +803,7 @@ typedef struct
 	uint 				m_MsI2CdelayStamp;
 	uint 				m_msADC;
 	uint 				m_msAux;
+	uint 				m_msRefreshDC;
 	uint 				m_msFind;
 	short 				m_FindCh;
 	int 				CommTimeOut;

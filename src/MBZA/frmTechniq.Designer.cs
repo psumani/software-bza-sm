@@ -48,7 +48,6 @@
             this.txtMonCutoff = new System.Windows.Forms.TextBox();
             this.lblcutoff = new System.Windows.Forms.Label();
             this.lblctrlrate = new System.Windows.Forms.Label();
-            this.chkhfrcelloffwait = new System.Windows.Forms.CheckBox();
             this.txthfrtotaltime = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txthfrinterval = new System.Windows.Forms.TextBox();
@@ -88,6 +87,7 @@
             this.techtree = new System.Windows.Forms.TreeView();
             this.lbltech = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.chkhfrcelloffwait = new System.Windows.Forms.CheckBox();
             this.tabtech.SuspendLayout();
             this.tabtech1.SuspendLayout();
             this.tabtech2.SuspendLayout();
@@ -288,18 +288,7 @@
             this.lblctrlrate.Name = "lblctrlrate";
             this.lblctrlrate.Size = new System.Drawing.Size(126, 14);
             this.lblctrlrate.TabIndex = 26;
-            this.lblctrlrate.Text = "Discharge Control";
-            // 
-            // chkhfrcelloffwait
-            // 
-            this.chkhfrcelloffwait.AutoSize = true;
-            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 96);
-            this.chkhfrcelloffwait.Name = "chkhfrcelloffwait";
-            this.chkhfrcelloffwait.Size = new System.Drawing.Size(166, 18);
-            this.chkhfrcelloffwait.TabIndex = 25;
-            this.chkhfrcelloffwait.Text = "Load off at waiting.";
-            this.chkhfrcelloffwait.UseVisualStyleBackColor = true;
-            this.chkhfrcelloffwait.CheckedChanged += new System.EventHandler(this.chkhfrcelloffwait_CheckedChanged);
+            this.lblctrlrate.Text = "Discharge current";
             // 
             // txthfrtotaltime
             // 
@@ -669,6 +658,17 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // chkhfrcelloffwait
+            // 
+            this.chkhfrcelloffwait.AutoSize = true;
+            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 96);
+            this.chkhfrcelloffwait.Name = "chkhfrcelloffwait";
+            this.chkhfrcelloffwait.Size = new System.Drawing.Size(166, 18);
+            this.chkhfrcelloffwait.TabIndex = 25;
+            this.chkhfrcelloffwait.Text = "Load off at waiting.";
+            this.chkhfrcelloffwait.UseVisualStyleBackColor = true;
+            this.chkhfrcelloffwait.CheckedChanged += new System.EventHandler(this.chkhfrcelloffwait_CheckedChanged);
+            // 
             // frmTechniq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -756,7 +756,6 @@
         private System.Windows.Forms.ComboBox cboIrange;
         private System.Windows.Forms.TextBox txteisrepeat;
         private System.Windows.Forms.Label lbleisiteration;
-        private System.Windows.Forms.CheckBox chkhfrcelloffwait;
         private System.Windows.Forms.CheckBox chkprrcelloffwait;
         private System.Windows.Forms.CheckBox chkondelaystable;
         private System.Windows.Forms.TextBox txtondelay;
@@ -774,5 +773,6 @@
         private System.Windows.Forms.Label lblcutoff;
         private System.Windows.Forms.Label lblctrlrate;
         private System.Windows.Forms.ComboBox cbomonctrl;
+        private System.Windows.Forms.CheckBox chkhfrcelloffwait;
     }
 }

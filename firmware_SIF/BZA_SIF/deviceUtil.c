@@ -253,9 +253,29 @@ bool CheckIceCfgDone(void)
 	return false;
 }
 
+void apply_req_dds_dcsignal(int ch)
+{
+	st_zim_dds_flow* pflow = &m_pGlobalVar->mChVar[ch].flow_dds_sig;
+	st_zim_dds* preqdds = &m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig;
+	st_zim_dds* pdds = &m_pGlobalVar->mChVar[ch].mdevice.dds_sig;
+	
+	double dConst = DEF_DDS_SIG_CONST_LOW;
+	
+	m_pGlobalVar->mChVar[ch].bSigLowFreq = 1;
+	
+	pflow->req.ctrl = DDS_SIG_DEFAULT_CTRL;
+	pflow->req.freq = (uint)(DEF_MONDCCTRL_FREQ * dConst);
+	pdds->frequency = DEF_MONDCCTRL_FREQ;
 
-
-
+	preqdds->reset = 0;
+	pdds->reset = preqdds->reset;
+	preqdds->pwdn = 0;
+	preqdds->Half = 0;
+	pflow->req.phase = (uint)(preqdds->Phase * (double)DEF_DDS_PHASE_CONST) & 0xFFF;
+	pdds->Phase = preqdds->Phase;
+	pdds->pwdn = preqdds->pwdn;
+	pdds->Half = preqdds->Half;
+}
 
 void apply_req_dds_signal(int ch)
 {
@@ -329,7 +349,7 @@ void apply_req_dds_signal(int ch)
 		pflow->req.ctrl &= CLR_DDS_DIV2;	
 	}
 
-	pflow->req.phase = (uint)(preqdds->Phase * (double)DEF_DDS_PHASE_CONST);
+	pflow->req.phase = (uint)(preqdds->Phase * (double)DEF_DDS_PHASE_CONST) & 0xFFF;
 	pdds->Phase = preqdds->Phase;
 	
 	pdds->Half = preqdds->Half;
@@ -428,11 +448,72 @@ inline void proc_SetLowMclk(int ch, ushort bLow)
 	set_device_DO(ch);
 }
 
-inline void set_dds_sig(int ch)
+inline void set_dds_sig_dc(int ch)
 {
 	ushort buf;
 	st_zim_dds_flow* pflowddssig = &m_pGlobalVar->mChVar[ch].flow_dds_sig;
 
+	if(pflowddssig->stat.freq !=  pflowddssig->req.freq || pflowddssig->stat.phase !=  pflowddssig->req.phase)
+	{
+		m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = DDS_SIG_RESET;
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
+		{
+			return;
+		}
+		
+		m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl |= DDS_HLB;
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
+		{
+			return;
+		}
+			
+		buf = (ushort)DDS_REG_ADDR_FREQ0 | (ushort)((pflowddssig->req.freq  >> 14) & 0x3FFF);
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+		{
+			return;
+		}
+			
+		m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl &= DDS_HLB_CLR;
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
+		{
+			return;
+		}
+		
+		buf = (ushort)DDS_REG_ADDR_FREQ0 | (ushort)(pflowddssig->req.freq  & 0x3FFF);	
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+		{
+			return;
+		}
+		
+		m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl = 0;
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,m_pGlobalVar->mChVar[ch].flow_dds_sig.req.ctrl) == _ERROR)
+		{
+			return;
+		}
+		pflowddssig->stat.freq  =  pflowddssig->req.freq;
+		pflowddssig->stat.phase  =  pflowddssig->req.phase;
+		m_pGlobalVar->m_msRefreshDC = 0;
+	}
+	if(m_pGlobalVar->m_msRefreshDC > 50)
+	{
+		m_pGlobalVar->m_msRefreshDC = 0;
+
+		buf = (ushort)DDS_REG_ADDR_PHASE0 | (ushort)(pflowddssig->req.phase & 0xFFF);
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+		{
+			return;
+		}
+		
+		pflowddssig->stat.phase  =  pflowddssig->req.phase;
+
+	}
+}
+
+inline void set_dds_sig(int ch)
+{
+	ushort buf;
+	st_zim_dds_flow* pflowddssig = &m_pGlobalVar->mChVar[ch].flow_dds_sig;
+	
 	proc_SetLowMclk(ch, m_pGlobalVar->mChVar[ch].bSigLowFreq);
 	
 	if(pflowddssig->stat.freq !=  pflowddssig->req.freq)
@@ -726,6 +807,7 @@ int CheckThermoStat(int ch)
 		{
 			if(m_pGlobalVar->mChVar[ch].OverT_Timer > 3000) 
 			{
+				
 				m_pGlobalVar->mChVar[ch].FlagOverT = 1;
 				return 1;
 			}
@@ -911,16 +993,14 @@ inline int Get_Rng_A(int ch)
 	int orng = 0; 
 	double maxA = 0.0;
 	double tmp = 0.0;
-	//st_zim_adc_vdc * pvdc = &m_pGlobalVar->mChVar[ch].mdevice.adc_vdc;
-	//if(pvdc->value == 0.0 || m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower == 0.0) return 0;
-	//maxA = fabs(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower / pvdc->value);
-	
+
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.Veoc == 0.0 || m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower == 0.0) return 0;
 	maxA = fabs(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower / m_pGlobalVar->mChVar[ch].mChStatInf.Veoc);
 	
 	while(1)
 	{
 		tmp =m_pSysConfig->mZimCfg[ch].ranges.iac_rng[rng].realmax;
+		
 		if(maxA < tmp)
 		{
 			orng ++;
@@ -949,15 +1029,39 @@ inline void proc_auto_vdc_proc(int ch)
 	
 	double dtmp = fabs(pvdc->value);
 	double dtmp1 = m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax * 1.1;
-	double dtmp2 = m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax *0.9;
+	double dtmp2 = m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].realmax *0.95;
+	
+	
 	
 	if(dtmp > dtmp1) 
 	{
-		preqdo->data |= DEF_DEVDO_VDC_RNG0;
+		if(m_pGlobalVar->mChVar[ch].mChStatInf.Vdc_rngno == 1)
+		{
+			m_pGlobalVar->mChVar[ch].CntVdcChg ++;
+			if(m_pGlobalVar->mChVar[ch].CntVdcChg >= 2)
+			{
+				preqdo->data |= DEF_DEVDO_VDC_RNG0;
+			}
+		}
+		else
+		{
+			m_pGlobalVar->mChVar[ch].CntVdcChg = 0;
+		}
 	}
 	else if(dtmp < dtmp2) 
 	{
-		preqdo->data &= DEF_DEVDO_VDC_RNG1;
+		if(m_pGlobalVar->mChVar[ch].mChStatInf.Vdc_rngno == 0)
+		{
+			m_pGlobalVar->mChVar[ch].CntVdcChg ++;
+			if(m_pGlobalVar->mChVar[ch].CntVdcChg >= 2)
+			{
+				preqdo->data &= DEF_DEVDO_VDC_RNG1;
+			}
+		}
+		else
+		{
+			m_pGlobalVar->mChVar[ch].CntVdcChg = 0;
+		}
 	}
 }
 
@@ -986,7 +1090,6 @@ void proc_eis_setrange(int ch,int setrange)
 
 	irng = 0;
 	if(m_pGlobalVar->mChVar[ch].bCalib == 0) irng = Get_Rng_A(ch);
-	
 	
 	if(irng < setrange)
 	{
@@ -1029,7 +1132,6 @@ void proc_eis_LoadOn(int ch, ushort loadon)
 		preqdo->data &= DEF_DEVDO_CONT_CLRSD;
 	}
 	m_pGlobalVar->mChVar[ch].mChStatInf.LoadOn = loadon;
-	
 }
 
 inline void NR_FFT(int iAddr,ushort Ns) // data[0...2*Ns-1]
@@ -1202,7 +1304,7 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 	{
 		return;
 	}
-	pEis_cal_info1 = pEis_cal_info;
+	//pEis_cal_info1 = pEis_cal_info;
 	if (ChkEisCalVar(pEis_cal_info) == false)
 	{
 		return;
@@ -1978,7 +2080,6 @@ bool proc_eis_dcoff(int ch)
 	return true;
 }
 
-
 inline bool proc_eis_dcon(int ch)
 {
 	ushort buf;
@@ -2499,6 +2600,73 @@ void Flow_monitor(int ch)
 		bWrite = true;
 	}
 	
+	if(pch->mChStatInf.TaskTimeStamp >= pch->mFlow.m_MsEndTimeLimit)
+	{
+		pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
+		if(bWrite == false)
+		{
+			if(proc_writedata(ch) == false)
+			{
+				pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+			}
+		}
+		proc_stop_test(ch, pch->mChStatInf.LastError);
+	}
+	
+}
+
+void Flow_discharger(int ch)
+{
+	ushort buf;
+	bool bWrite = false;
+	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
+	st_zim_dds_flow* pflowddssig = &m_pGlobalVar->mChVar[ch].flow_dds_sig;
+/*
+	if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_MONDELAY)
+	{
+		if(pch->mFlow.m_MsOndelayLimit <= pch->mFlow.OndelayTimeStamp)
+		{
+			pch->mFlow.m_MsFlowdelayLimit = 0; 
+			pch->mFlow.m_MsFlowdelayStamp = 0;
+			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_SAMPLE;
+			//pch->mChStatInf.RunTimeStamp = 0;
+			pch->mChStatInf.TaskTimeStamp = 0;
+			//pch->mChStatInf.CycleTimeStamp = 0;
+		}
+		else
+		{
+			proc_mon_chkslope(ch);
+		}
+		return;
+	}
+	
+	*/
+	
+
+	if(m_pGlobalVar->m_msRefreshDC > 50)
+	{
+		m_pGlobalVar->m_msRefreshDC = 0;
+
+		buf = (ushort)DDS_REG_ADDR_PHASE0 | (ushort)(pflowddssig->req.phase & 0xFFF);
+		if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+		{
+			return;
+		}
+	}
+
+	
+	if(pch->mFlow.m_MsDurLimit <= pch->mFlow.m_MsDurStamp)
+	{
+		pch->mFlow.m_MsDurStamp -= pch->mFlow.m_MsDurLimit;
+		if(proc_writedata(ch) == false)
+		{
+			pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+			proc_stop_test(ch, pch->mChStatInf.LastError);
+			return;
+		}
+		bWrite = true;
+	}
+	
 	if(pch->mChStatInf.TaskTimeStamp >= pch->mFlow.m_MsEndTimeLimit || pch->mChStatInf.Vdc <= pch->mFlow.CutoffV)
 	{
 		pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
@@ -2511,7 +2679,9 @@ void Flow_monitor(int ch)
 		}
 		proc_stop_test(ch, pch->mChStatInf.LastError);
 	}
+	
 }
+
 
 
 void proc_stop_test(int ch, int errstat)
@@ -2667,19 +2837,17 @@ void set_device_DO(int ch)
 	else
 	{
 		if(ICE_read_byte(ch, ICE_CMD_DEVICE_DO, &tmp) == _ERROR) return;
-		if(preqdo->data != tmp) pdo->data = tmp;
+		if(preqdo->data != tmp) 
+		{
+			pdo->data = tmp;
+		}
 	}
 }
 
 
 inline void proc_check_main(int ch)
 {
-	if(chkTestCondition(ch) == false )
-	{
-		m_pGlobalVar->mChVar[ch].Start = 0;
-		m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp = 0;
-		return;
-	}
+	chkTestCondition(ch);
 	if(m_pGlobalVar->mChVar[ch].Start == 0)
 	{
 		proc_default_setrange(ch);
@@ -2706,21 +2874,14 @@ void AuxProc(int ch)
 	{
 		if(m_pGlobalVar->mChVar[ch].mChStatInf.BiasOn == 1 && (m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus & 0xF) == DEF_TESTSTATUS_RUNNING)
 		{
-			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_MON)
+			st_zim_adci_rnginf mrng = m_pSysConfig->mZimCfg[ch].ranges.iac_rng[m_pGlobalVar->mChVar[ch].mChStatInf.Iac_in_rngno];
+			if((m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno % 2) == 0)
 			{
-				m_pGlobalVar->mChVar[ch].mChStatInf.Idc =  ContVal[0][m_pGlobalVar->mChVar[ch].mChStatInf.Iac_in_rngno];
+				m_pGlobalVar->mChVar[ch].mChStatInf.Idc = mrng.realmax * 0.5;
 			}
 			else
 			{
-				st_zim_adci_rnginf mrng = m_pSysConfig->mZimCfg[ch].ranges.iac_rng[m_pGlobalVar->mChVar[ch].mChStatInf.Iac_in_rngno];
-				if((m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno % 2) == 0)
-				{
-					m_pGlobalVar->mChVar[ch].mChStatInf.Idc = mrng.realmax * 0.5;
-				}
-				else
-				{
-					m_pGlobalVar->mChVar[ch].mChStatInf.Idc = mrng.realmax * mrng.controlgain * 0.5;
-				}
+				m_pGlobalVar->mChVar[ch].mChStatInf.Idc = mrng.realmax * mrng.controlgain * 0.5;
 			}
 		}
 		else
@@ -2737,10 +2898,17 @@ void AuxProc(int ch)
 
 void DefaultDeviceProc(int ch)
 {
-	set_dds_sig(ch);
-	set_dds_clk(ch);
-	proc_eis_cfg(ch); 
-	proc_adc_ac_cfg(ch);
+	if(m_pGlobalVar->mChVar[ch].bTestMode < 2)
+	{
+		set_dds_sig(ch);
+		set_dds_clk(ch);
+		proc_eis_cfg(ch); 
+		proc_adc_ac_cfg(ch);
+	}
+	else 
+	{
+		set_dds_sig_dc(ch);
+	}
 }
 
 void RefreshFPGA(int ch)

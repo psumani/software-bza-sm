@@ -8,19 +8,22 @@ extern void DHCP_timer_handler(void);
 
 inline bool checkCalib()
 {
+	bool ret = true;
 	for(int ch=0; ch < m_pGlobalVar->mStatusInf.MaxChannel; ch++)
 	{
-		if(m_pGlobalVar->mChVar[ch].bCalib == 1)
+		if(m_pGlobalVar->mChVar[ch].bCalib == 0 && m_pGlobalVar->mChVar[ch].bTestMode == 0)
 		{
-			return true;
+			ret = false;
+			break;
 		}
 	}
-	return false;
+	return ret;
 }
 
 inline bool checkCommTimer()
 {
 	if(checkCalib() == true) return false;
+	if(m_pGlobalVar->mStatusInf.mode != 1) return false;
 	if(m_SocketStatus[TCP_SOCK_NUM] != ESTABLISHED) return false;
 	if(m_pGlobalVar->mStatusInf.EnaChkTimeOut == 0) return false;
 	return true;
@@ -41,10 +44,11 @@ static void ISR_MSTimer(void)
 	m_pGlobalVar->m_msFind ++;
 	m_pGlobalVar->m_MsI2CdelayStamp ++;
 	m_pGlobalVar->m_msAux ++;
-	
+	m_pGlobalVar->m_msRefreshDC ++;
 	if(m_pGlobalVar->m_MsI2CdelayStamp > 1000000) m_pGlobalVar->m_MsI2CdelayStamp = 1000000;
 	if(m_pGlobalVar->m_msFind > 1000000) m_pGlobalVar->m_msFind = 1000000;
 	if(m_pGlobalVar->m_msAux > 1000000) m_pGlobalVar->m_msAux = 1000000;
+	if(m_pGlobalVar->m_msRefreshDC > 1000000) m_pGlobalVar->m_msRefreshDC = 1000000;
 	
 	//SPI Delay check.
 	if(m_pGlobalVar->nSPITickOn == 0 )
@@ -122,7 +126,9 @@ static void ISR_MSTimer(void)
 			if(m_pGlobalVar->mChVar[ch].Start > 0)
 			{
 				if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_WAIT
-				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_SAMPLE)  m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp ++;
+				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_SAMPLE
+				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_MONSAMPLE
+				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_DCHSAMPLE)  m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp ++;
 				else m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp = 0;
 				
 				if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_ONDELAY

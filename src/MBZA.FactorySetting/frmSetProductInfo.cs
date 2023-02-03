@@ -15,9 +15,9 @@ namespace ZiveLab.ZM.FactorySetting
         private eDeviceType mDevType;
         public stSystemConfig mSysCfg;
         public stConnCfg mConnCfg;
-        
+        public string sCode;
         public CommObj mCommZim;
-
+        public int Producttype;
         public frmSetProductInfo(ref CommObj mSetCommZim, int SetType, ref stSystemConfig mSetSysCfg, ref stConnCfg mSetConnCfg, int inch)
         {
             InitializeComponent();
@@ -33,10 +33,27 @@ namespace ZiveLab.ZM.FactorySetting
             
             this.Text = "Set up product information - ZIM Board.";
 
+            cboProductType.Items.Clear();
+            cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.UNKNOWN));
+            cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.BZA60));
+            cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.BZA100));
+            cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.BZA500));
+            cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.BZA1000));
+
 
             if (Type == 0)
             {
+                sCode = "R07---------";
+
+                cboProductType.Visible = true;
+                lblstatic.Visible = true;
+
                 this.Text = "Set up information - SIF Board.";
+
+                Producttype = (int)mConnCfg.GetProductType();
+                cboProductType.SelectedIndex = Producttype;
+
+
                 CboBdType.Items.Clear();
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.WBCS));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.SMART));
@@ -49,7 +66,11 @@ namespace ZiveLab.ZM.FactorySetting
             }
             else
             {
-                
+                sCode = "IM----------";
+
+                cboProductType.SelectedIndex = 0;
+                cboProductType.Visible = false;
+                lblstatic.Visible = false;
                 this.Text = string.Format("Set up information of ZIM Board[Channel {0}].", ich + 1);
                 CboBdType.Items.Clear();
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.UNKNOWN));
@@ -74,24 +95,25 @@ namespace ZiveLab.ZM.FactorySetting
             bFirst = false;
         }
 
+
+        public int GetBoardType(string strSerial)
+        {
+            string str = strSerial.Substring(2, 1);
+            int iret = 0;
+            if (str == "M") iret = 4;
+            else if (str == "S") iret = 3;
+            return iret;
+        }
+
         public void ViewSifInformation()
         {
             string str;
 
-            LblProductName.Text = "IF";
-
+            
             CboBdType.SelectedIndex = mSysCfg.mSIFCfg.Type;
 
-            if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.SBZA
-                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.MBZA)               
-            {
-                LblBdType.Text = "BZA Series";
-            }
-            else
-            {
-                LblBdType.Text = "Unknown";
-            }
-
+  
+            
             str  = mSysCfg.mSIFCfg.GetBoardVer();
             if (str.Length == 7)
             {
@@ -123,17 +145,30 @@ namespace ZiveLab.ZM.FactorySetting
                 numFwVer2.Value = 0;
                 numFwVer3.Value = 0;
             }
-            maskSerial.Mask = " & & & & & & & & & & ";
+
+            sCode = "R07";
+            if ((eProductType)Producttype == eProductType.BZA60) sCode += "A";
+            else if ((eProductType)Producttype == eProductType.BZA100) sCode += "B";
+            else if ((eProductType)Producttype == eProductType.BZA500) sCode += "C";
+            else if ((eProductType)Producttype == eProductType.BZA1000) sCode += "D";
+            else sCode += "-";
+
+            if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.SBZA) sCode += "S";
+            else if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.MBZA) sCode += "M";
+            else sCode += "-";
+
+            LblProductName.Text = sCode;
+            maskSerial.Mask = " & & & & & & & ";
             str = mConnCfg.GetSerialNumber();
-            if(str.Length > 2)
+            if (str.Length > 5)
             {
-                maskSerial.Text = mConnCfg.GetSerialNumber().Substring(2);
+                maskSerial.Text = str.Substring(5);
             }
             else
             {
                 maskSerial.Text = "";
             }
-            
+            sCode += str.Substring(5);
         }
 
         public void ViewZimInformation()
@@ -145,7 +180,11 @@ namespace ZiveLab.ZM.FactorySetting
             if (zimtype >= CboBdType.Items.Count || zimtype < 0) mSnID = eZimSnID.UNKNOWN;
             else mSnID = (eZimSnID)(zimtype);
 
-            LblProductName.Text = Extensions.GetEnumDescription(mSnID);
+            sCode = Extensions.GetEnumDescription(mSnID);
+            if (mSysCfg.mZimCfg[ich].info.cModel[1] < 0x30 || mSysCfg.mZimCfg[ich].info.cModel[1] > 0x39) sCode += "x";
+            else sCode += (mSysCfg.mZimCfg[ich].info.cModel[1]-0x30).ToString();
+            sCode += "000";
+            LblProductName.Text = sCode;
 
             str = mSysCfg.mZimCfg[ich].GetBoardVer();
             numBdVer0.Value = Convert.ToDecimal(str.Substring(0, 1));
@@ -158,33 +197,32 @@ namespace ZiveLab.ZM.FactorySetting
             numFwVer1.Value = Convert.ToDecimal(str.Substring(2, 1));
             numFwVer2.Value = Convert.ToDecimal(str.Substring(4, 1));
             numFwVer3.Value = Convert.ToDecimal(str.Substring(6, 1));
-            maskSerial.Mask = " & & & & & & & & & ";
-            maskSerial.Text = mSysCfg.mZimCfg[ich].GetSerialNumber().Substring(3);
+            maskSerial.Mask = " 0 0 0 0 0 ";
+            maskSerial.Text = mSysCfg.mZimCfg[ich].GetSerialNumber().Substring(7);
+            sCode += mSysCfg.mZimCfg[ich].GetSerialNumber().Substring(7);
         }
 
         public bool SetupSifInformation()
         {
+            string sTmp;
             bool bres = false;
             mSysCfg.mSIFCfg.SetBoardVer(string.Format("{0}{1}{2}{3}", numBdVer0.Value, numBdVer1.Value, numBdVer2.Value, numBdVer3.Value));
             mSysCfg.mSIFCfg.SetFirmwareVer(string.Format("{0}{1}{2}{3}", numFwVer0.Value, numFwVer1.Value, numFwVer2.Value, numFwVer3.Value));
-            mSysCfg.mSIFCfg.SetSerialNumber(maskSerial.Text);
-            mConnCfg.SetSerialNumber(maskSerial.Text);
 
-            if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.SBZA
-                || (eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.MBZA)
-            {
-                LblBdType.Text = "BZA Series";
-            }
-            else
-            {
-                LblBdType.Text = "Unknown";
-            }
+            sTmp = maskSerial.Text.Replace(" ", "");
+            sCode = sCode.Substring(0, 5);
+            sCode += sTmp;
+            mSysCfg.mSIFCfg.SetSerialNumber(sCode);
+            mConnCfg.SetSerialNumber(sCode);
 
             if (mCommZim.WriteData(ref mSysCfg) == true)
             {
                 if (mCommZim.WriteData(ref mConnCfg) == true)
                 {
-                    bres = true;
+                    if (mCommZim.CmdStoreRangesInfo(-1) == true)
+                    {
+                        bres = true;
+                    }
                 }
             }
 
@@ -248,8 +286,42 @@ namespace ZiveLab.ZM.FactorySetting
             else
             {
                 mSysCfg.mZimCfg[ich].info.cModel[0] = (byte)(CboBdType.SelectedIndex + 0x30);
+                mSysCfg.mZimCfg[ich].info.cModel[1] = 0x30;
                 ViewZimInformation();
             }
+        }
+
+        private void cboProductType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (bFirst == true) return;
+            if (Type == 0)
+            {
+                Producttype = cboProductType.SelectedIndex;
+                ViewSifInformation();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string  sTmp = maskSerial.Text.Replace(" ", "");
+            string str;
+
+            if (Type == 0)
+            {
+                str = sCode.Substring(0, 5);
+            }
+            else
+            {
+                str = sCode.Substring(0, 7);
+            }
+            str += sTmp;
+
+            Clipboard.SetText(str);
+        }
+
+        private void maskSerial_KeyDown(object sender, KeyEventArgs e)
+        {
+ 
         }
     }
 }

@@ -49,9 +49,11 @@
             this.maskSerial = new System.Windows.Forms.MaskedTextBox();
             this.btSetup = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblstatic = new System.Windows.Forms.Label();
             this.CboBdType = new System.Windows.Forms.ComboBox();
-            this.LblBdType = new System.Windows.Forms.Label();
+            this.cboProductType = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numBdVer0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBdVer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBdVer2)).BeginInit();
@@ -66,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 68);
+            this.label1.Location = new System.Drawing.Point(12, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 21);
             this.label1.TabIndex = 0;
@@ -75,7 +77,7 @@
             // numBdVer0
             // 
             this.numBdVer0.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numBdVer0.Location = new System.Drawing.Point(177, 69);
+            this.numBdVer0.Location = new System.Drawing.Point(172, 52);
             this.numBdVer0.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numBdVer0.Maximum = new decimal(new int[] {
             9,
@@ -90,7 +92,7 @@
             // numBdVer1
             // 
             this.numBdVer1.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numBdVer1.Location = new System.Drawing.Point(229, 69);
+            this.numBdVer1.Location = new System.Drawing.Point(224, 52);
             this.numBdVer1.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numBdVer1.Maximum = new decimal(new int[] {
             9,
@@ -106,7 +108,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(213, 71);
+            this.label2.Location = new System.Drawing.Point(208, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 21);
             this.label2.TabIndex = 2;
@@ -116,7 +118,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(265, 71);
+            this.label3.Location = new System.Drawing.Point(260, 54);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 21);
             this.label3.TabIndex = 4;
@@ -125,7 +127,7 @@
             // numBdVer2
             // 
             this.numBdVer2.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numBdVer2.Location = new System.Drawing.Point(281, 69);
+            this.numBdVer2.Location = new System.Drawing.Point(276, 52);
             this.numBdVer2.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numBdVer2.Maximum = new decimal(new int[] {
             9,
@@ -141,7 +143,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(318, 71);
+            this.label4.Location = new System.Drawing.Point(313, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 21);
             this.label4.TabIndex = 6;
@@ -150,7 +152,7 @@
             // numBdVer3
             // 
             this.numBdVer3.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numBdVer3.Location = new System.Drawing.Point(334, 69);
+            this.numBdVer3.Location = new System.Drawing.Point(329, 52);
             this.numBdVer3.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numBdVer3.Maximum = new decimal(new int[] {
             9,
@@ -166,7 +168,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(318, 111);
+            this.label5.Location = new System.Drawing.Point(313, 94);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(13, 21);
             this.label5.TabIndex = 14;
@@ -175,7 +177,7 @@
             // numFwVer3
             // 
             this.numFwVer3.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numFwVer3.Location = new System.Drawing.Point(334, 109);
+            this.numFwVer3.Location = new System.Drawing.Point(329, 92);
             this.numFwVer3.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numFwVer3.Maximum = new decimal(new int[] {
             9,
@@ -191,7 +193,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(265, 111);
+            this.label6.Location = new System.Drawing.Point(260, 94);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 21);
             this.label6.TabIndex = 12;
@@ -200,7 +202,7 @@
             // numFwVer2
             // 
             this.numFwVer2.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numFwVer2.Location = new System.Drawing.Point(281, 109);
+            this.numFwVer2.Location = new System.Drawing.Point(276, 92);
             this.numFwVer2.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numFwVer2.Maximum = new decimal(new int[] {
             9,
@@ -216,7 +218,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(213, 111);
+            this.label7.Location = new System.Drawing.Point(208, 94);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 21);
             this.label7.TabIndex = 10;
@@ -225,7 +227,7 @@
             // numFwVer1
             // 
             this.numFwVer1.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numFwVer1.Location = new System.Drawing.Point(229, 109);
+            this.numFwVer1.Location = new System.Drawing.Point(224, 92);
             this.numFwVer1.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numFwVer1.Maximum = new decimal(new int[] {
             9,
@@ -240,7 +242,7 @@
             // numFwVer0
             // 
             this.numFwVer0.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numFwVer0.Location = new System.Drawing.Point(177, 109);
+            this.numFwVer0.Location = new System.Drawing.Point(172, 92);
             this.numFwVer0.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.numFwVer0.Maximum = new decimal(new int[] {
             9,
@@ -256,7 +258,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(17, 108);
+            this.label8.Location = new System.Drawing.Point(12, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(160, 21);
             this.label8.TabIndex = 8;
@@ -266,7 +268,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(17, 150);
+            this.label9.Location = new System.Drawing.Point(12, 133);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(140, 21);
             this.label9.TabIndex = 15;
@@ -276,25 +278,26 @@
             // 
             this.LblProductName.AutoSize = true;
             this.LblProductName.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblProductName.Location = new System.Drawing.Point(177, 153);
+            this.LblProductName.Location = new System.Drawing.Point(167, 136);
             this.LblProductName.Name = "LblProductName";
-            this.LblProductName.Size = new System.Drawing.Size(22, 21);
+            this.LblProductName.Size = new System.Drawing.Size(57, 21);
             this.LblProductName.TabIndex = 16;
-            this.LblProductName.Text = "IF";
+            this.LblProductName.Text = "R07AS";
             // 
             // maskSerial
             // 
             this.maskSerial.Font = new System.Drawing.Font("Segoe UI Symbol", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskSerial.Location = new System.Drawing.Point(220, 150);
-            this.maskSerial.Mask = " & & & & & & & & & & ";
+            this.maskSerial.Location = new System.Drawing.Point(244, 131);
+            this.maskSerial.Mask = " & & & & & & & ";
             this.maskSerial.Name = "maskSerial";
-            this.maskSerial.Size = new System.Drawing.Size(130, 27);
+            this.maskSerial.Size = new System.Drawing.Size(103, 27);
             this.maskSerial.TabIndex = 18;
             this.maskSerial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maskSerial.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskSerial_KeyDown);
             // 
             // btSetup
             // 
-            this.btSetup.Location = new System.Drawing.Point(418, 108);
+            this.btSetup.Location = new System.Drawing.Point(429, 85);
             this.btSetup.Name = "btSetup";
             this.btSetup.Size = new System.Drawing.Size(85, 29);
             this.btSetup.TabIndex = 19;
@@ -304,7 +307,7 @@
             // 
             // btCancel
             // 
-            this.btCancel.Location = new System.Drawing.Point(418, 148);
+            this.btCancel.Location = new System.Drawing.Point(429, 125);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(85, 29);
             this.btCancel.TabIndex = 20;
@@ -312,43 +315,65 @@
             this.btCancel.UseVisualStyleBackColor = true;
             this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
-            // label10
+            // lblstatic
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(17, 31);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 21);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "1) Board type : ";
+            this.lblstatic.AutoSize = true;
+            this.lblstatic.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblstatic.Location = new System.Drawing.Point(277, 12);
+            this.lblstatic.Name = "lblstatic";
+            this.lblstatic.Size = new System.Drawing.Size(24, 21);
+            this.lblstatic.TabIndex = 21;
+            this.lblstatic.Text = " / ";
             // 
             // CboBdType
             // 
             this.CboBdType.FormattingEnabled = true;
-            this.CboBdType.Location = new System.Drawing.Point(175, 32);
+            this.CboBdType.Location = new System.Drawing.Point(171, 12);
             this.CboBdType.Name = "CboBdType";
-            this.CboBdType.Size = new System.Drawing.Size(141, 25);
+            this.CboBdType.Size = new System.Drawing.Size(102, 25);
             this.CboBdType.TabIndex = 22;
             this.CboBdType.SelectedIndexChanged += new System.EventHandler(this.CboBdType_SelectedIndexChanged);
             // 
-            // LblBdType
+            // cboProductType
             // 
-            this.LblBdType.AutoSize = true;
-            this.LblBdType.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblBdType.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.LblBdType.Location = new System.Drawing.Point(325, 34);
-            this.LblBdType.Name = "LblBdType";
-            this.LblBdType.Size = new System.Drawing.Size(0, 21);
-            this.LblBdType.TabIndex = 23;
+            this.cboProductType.FormattingEnabled = true;
+            this.cboProductType.Location = new System.Drawing.Point(305, 12);
+            this.cboProductType.Name = "cboProductType";
+            this.cboProductType.Size = new System.Drawing.Size(102, 25);
+            this.cboProductType.TabIndex = 24;
+            this.cboProductType.SelectedIndexChanged += new System.EventHandler(this.cboProductType_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(12, 12);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(114, 21);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "1) Board type : ";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(350, 131);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 27);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "CTRL+C";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmSetProductInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 190);
-            this.Controls.Add(this.LblBdType);
+            this.ClientSize = new System.Drawing.Size(530, 167);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.cboProductType);
             this.Controls.Add(this.CboBdType);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblstatic);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btSetup);
             this.Controls.Add(this.maskSerial);
@@ -412,8 +437,10 @@
         private System.Windows.Forms.MaskedTextBox maskSerial;
         private System.Windows.Forms.Button btSetup;
         private System.Windows.Forms.Button btCancel;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblstatic;
         private System.Windows.Forms.ComboBox CboBdType;
-        private System.Windows.Forms.Label LblBdType;
+        private System.Windows.Forms.ComboBox cboProductType;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button1;
     }
 }

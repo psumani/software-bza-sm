@@ -38,17 +38,14 @@ namespace ZiveLab.ZM
             if (iMode == 0)
             {
                 this.Text = "Real-time monitor.";
-                this.Icon = ZM.Properties.Resources.List1;
             }
             else if(iMode == 2)
             {
                 this.Text = string.Format("Real-time monitor of channel {0}.", ich + 1);
-                this.Icon = ZM.Properties.Resources.List1;
             }
             else
             {
                 this.Text = "Real-time monitor of the group.";
-                this.Icon = ZM.Properties.Resources.List1;
             }
 
             Properties.Settings.Default.MaxWinCh = -1;
@@ -248,17 +245,18 @@ namespace ZiveLab.ZM
         }
         private void frmRealview_Load(object sender, EventArgs e)
         {
+            
             if (iMode == 0)
             {
-                this.Icon = ZM.Properties.Resources.List1;
+                this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.Monitor);
             }
             else if (iMode == 2)
             {
-                this.Icon = ZM.Properties.Resources.List1;
+                this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.Monitor);
             }
             else
             {
-                this.Icon = ZM.Properties.Resources.List1;
+                this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.Monitor);
             }
 
             if (iMode == 1)

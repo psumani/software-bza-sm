@@ -80,7 +80,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.LnkLblRegOnly = new System.Windows.Forms.LinkLabel();
-            this.LnkLblRegApply = new System.Windows.Forms.LinkLabel();
             this.LnkLblClose = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -92,23 +91,23 @@
             // 
             // mInduct0
             // 
-            this.mInduct0.Location = new System.Drawing.Point(190, 7);
+            this.mInduct0.Location = new System.Drawing.Point(211, 7);
             this.mInduct0.Name = "mInduct0";
-            this.mInduct0.Size = new System.Drawing.Size(78, 23);
+            this.mInduct0.Size = new System.Drawing.Size(91, 23);
             this.mInduct0.TabIndex = 3;
             // 
             // mInduct1
             // 
-            this.mInduct1.Location = new System.Drawing.Point(190, 39);
+            this.mInduct1.Location = new System.Drawing.Point(211, 39);
             this.mInduct1.Name = "mInduct1";
-            this.mInduct1.Size = new System.Drawing.Size(78, 23);
+            this.mInduct1.Size = new System.Drawing.Size(91, 23);
             this.mInduct1.TabIndex = 6;
             // 
             // mInduct3
             // 
-            this.mInduct3.Location = new System.Drawing.Point(190, 106);
+            this.mInduct3.Location = new System.Drawing.Point(211, 106);
             this.mInduct3.Name = "mInduct3";
-            this.mInduct3.Size = new System.Drawing.Size(78, 23);
+            this.mInduct3.Size = new System.Drawing.Size(91, 23);
             this.mInduct3.TabIndex = 12;
             // 
             // panel1
@@ -119,7 +118,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(10, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(418, 318);
+            this.panel1.Size = new System.Drawing.Size(457, 318);
             this.panel1.TabIndex = 18;
             // 
             // panel7
@@ -130,22 +129,22 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(119, 278);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(297, 38);
+            this.panel7.Size = new System.Drawing.Size(336, 38);
             this.panel7.TabIndex = 23;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(3, 9);
+            this.label7.Location = new System.Drawing.Point(5, 9);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 22);
+            this.label7.Size = new System.Drawing.Size(77, 19);
             this.label7.TabIndex = 27;
             this.label7.Text = "All range";
             // 
             // mPower
             // 
-            this.mPower.Location = new System.Drawing.Point(75, 6);
+            this.mPower.Location = new System.Drawing.Point(83, 6);
             this.mPower.Name = "mPower";
-            this.mPower.Size = new System.Drawing.Size(78, 23);
+            this.mPower.Size = new System.Drawing.Size(91, 23);
             this.mPower.TabIndex = 10;
             // 
             // panel5
@@ -194,21 +193,21 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(119, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(297, 278);
+            this.panel5.Size = new System.Drawing.Size(336, 278);
             this.panel5.TabIndex = 21;
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(3, 180);
+            this.label10.Location = new System.Drawing.Point(5, 177);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 22);
+            this.label10.Size = new System.Drawing.Size(77, 19);
             this.label10.TabIndex = 28;
-            this.label10.Text = "6st(100Ω)";
+            this.label10.Text = "6st(100 Ω)";
             // 
             // label26
             // 
             this.label26.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label26.Location = new System.Drawing.Point(270, 243);
+            this.label26.Location = new System.Drawing.Point(305, 243);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(20, 25);
             this.label26.TabIndex = 47;
@@ -217,15 +216,15 @@
             // 
             // mResistor5
             // 
-            this.mResistor5.Location = new System.Drawing.Point(75, 174);
+            this.mResistor5.Location = new System.Drawing.Point(83, 174);
             this.mResistor5.Name = "mResistor5";
-            this.mResistor5.Size = new System.Drawing.Size(78, 23);
+            this.mResistor5.Size = new System.Drawing.Size(91, 23);
             this.mResistor5.TabIndex = 27;
             // 
             // label25
             // 
             this.label25.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label25.Location = new System.Drawing.Point(156, 243);
+            this.label25.Location = new System.Drawing.Point(177, 243);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(31, 25);
             this.label25.TabIndex = 46;
@@ -234,46 +233,45 @@
             // 
             // mInduct7
             // 
-            this.mInduct7.Location = new System.Drawing.Point(190, 243);
+            this.mInduct7.Location = new System.Drawing.Point(211, 243);
             this.mInduct7.Name = "mInduct7";
-            this.mInduct7.Size = new System.Drawing.Size(78, 23);
+            this.mInduct7.Size = new System.Drawing.Size(91, 23);
             this.mInduct7.TabIndex = 45;
             // 
             // mResistor7
             // 
-            this.mResistor7.Location = new System.Drawing.Point(75, 243);
+            this.mResistor7.Location = new System.Drawing.Point(83, 243);
             this.mResistor7.Name = "mResistor7";
-            this.mResistor7.Size = new System.Drawing.Size(78, 23);
+            this.mResistor7.Size = new System.Drawing.Size(91, 23);
             this.mResistor7.TabIndex = 44;
             // 
             // label24
             // 
-            this.label24.Image = ((System.Drawing.Image)(resources.GetObject("label24.Image")));
-            this.label24.Location = new System.Drawing.Point(3, 248);
+            this.label24.Location = new System.Drawing.Point(5, 245);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(72, 22);
+            this.label24.Size = new System.Drawing.Size(77, 19);
             this.label24.TabIndex = 43;
-            this.label24.Text = "8st(10KΩ)";
+            this.label24.Text = "8st( 10KΩ)";
             // 
             // label21
             // 
-            this.label21.Location = new System.Drawing.Point(3, 215);
+            this.label21.Location = new System.Drawing.Point(5, 212);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(72, 22);
+            this.label21.Size = new System.Drawing.Size(77, 19);
             this.label21.TabIndex = 39;
-            this.label21.Text = "7st(1KΩ)";
+            this.label21.Text = "7st(  1KΩ)";
             // 
             // mInduct6
             // 
-            this.mInduct6.Location = new System.Drawing.Point(190, 209);
+            this.mInduct6.Location = new System.Drawing.Point(211, 209);
             this.mInduct6.Name = "mInduct6";
-            this.mInduct6.Size = new System.Drawing.Size(78, 23);
+            this.mInduct6.Size = new System.Drawing.Size(91, 23);
             this.mInduct6.TabIndex = 38;
             // 
             // label22
             // 
             this.label22.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label22.Location = new System.Drawing.Point(270, 209);
+            this.label22.Location = new System.Drawing.Point(305, 209);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(20, 25);
             this.label22.TabIndex = 42;
@@ -282,15 +280,15 @@
             // 
             // mResistor6
             // 
-            this.mResistor6.Location = new System.Drawing.Point(75, 209);
+            this.mResistor6.Location = new System.Drawing.Point(83, 209);
             this.mResistor6.Name = "mResistor6";
-            this.mResistor6.Size = new System.Drawing.Size(78, 23);
+            this.mResistor6.Size = new System.Drawing.Size(91, 23);
             this.mResistor6.TabIndex = 40;
             // 
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label23.Location = new System.Drawing.Point(156, 209);
+            this.label23.Location = new System.Drawing.Point(177, 209);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(31, 25);
             this.label23.TabIndex = 41;
@@ -300,7 +298,7 @@
             // label20
             // 
             this.label20.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label20.Location = new System.Drawing.Point(270, 174);
+            this.label20.Location = new System.Drawing.Point(305, 174);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(20, 25);
             this.label20.TabIndex = 37;
@@ -310,7 +308,7 @@
             // label19
             // 
             this.label19.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label19.Location = new System.Drawing.Point(270, 140);
+            this.label19.Location = new System.Drawing.Point(305, 140);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(20, 25);
             this.label19.TabIndex = 36;
@@ -320,7 +318,7 @@
             // label18
             // 
             this.label18.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label18.Location = new System.Drawing.Point(270, 106);
+            this.label18.Location = new System.Drawing.Point(305, 106);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(20, 25);
             this.label18.TabIndex = 31;
@@ -330,7 +328,7 @@
             // label17
             // 
             this.label17.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label17.Location = new System.Drawing.Point(270, 73);
+            this.label17.Location = new System.Drawing.Point(305, 73);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(20, 25);
             this.label17.TabIndex = 35;
@@ -340,7 +338,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label6.Location = new System.Drawing.Point(270, 39);
+            this.label6.Location = new System.Drawing.Point(305, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(20, 25);
             this.label6.TabIndex = 31;
@@ -350,7 +348,7 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.Location = new System.Drawing.Point(270, 7);
+            this.label5.Location = new System.Drawing.Point(305, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 25);
             this.label5.TabIndex = 30;
@@ -359,22 +357,22 @@
             // 
             // mInduct2
             // 
-            this.mInduct2.Location = new System.Drawing.Point(190, 73);
+            this.mInduct2.Location = new System.Drawing.Point(211, 73);
             this.mInduct2.Name = "mInduct2";
-            this.mInduct2.Size = new System.Drawing.Size(78, 23);
+            this.mInduct2.Size = new System.Drawing.Size(91, 23);
             this.mInduct2.TabIndex = 10;
             // 
             // mInduct5
             // 
-            this.mInduct5.Location = new System.Drawing.Point(190, 174);
+            this.mInduct5.Location = new System.Drawing.Point(211, 174);
             this.mInduct5.Name = "mInduct5";
-            this.mInduct5.Size = new System.Drawing.Size(78, 23);
+            this.mInduct5.Size = new System.Drawing.Size(91, 23);
             this.mInduct5.TabIndex = 30;
             // 
             // label16
             // 
             this.label16.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label16.Location = new System.Drawing.Point(156, 174);
+            this.label16.Location = new System.Drawing.Point(177, 174);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(31, 25);
             this.label16.TabIndex = 34;
@@ -384,7 +382,7 @@
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label15.Location = new System.Drawing.Point(156, 140);
+            this.label15.Location = new System.Drawing.Point(177, 140);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(31, 25);
             this.label15.TabIndex = 33;
@@ -393,15 +391,15 @@
             // 
             // mInduct4
             // 
-            this.mInduct4.Location = new System.Drawing.Point(190, 140);
+            this.mInduct4.Location = new System.Drawing.Point(211, 140);
             this.mInduct4.Name = "mInduct4";
-            this.mInduct4.Size = new System.Drawing.Size(78, 23);
+            this.mInduct4.Size = new System.Drawing.Size(91, 23);
             this.mInduct4.TabIndex = 29;
             // 
             // label14
             // 
             this.label14.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label14.Location = new System.Drawing.Point(156, 106);
+            this.label14.Location = new System.Drawing.Point(177, 106);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(31, 25);
             this.label14.TabIndex = 32;
@@ -411,7 +409,7 @@
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label13.Location = new System.Drawing.Point(156, 73);
+            this.label13.Location = new System.Drawing.Point(177, 73);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(31, 25);
             this.label13.TabIndex = 31;
@@ -421,7 +419,7 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label12.Location = new System.Drawing.Point(156, 39);
+            this.label12.Location = new System.Drawing.Point(177, 39);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 25);
             this.label12.TabIndex = 30;
@@ -431,7 +429,7 @@
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label11.Location = new System.Drawing.Point(156, 7);
+            this.label11.Location = new System.Drawing.Point(177, 7);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 25);
             this.label11.TabIndex = 29;
@@ -440,77 +438,77 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(3, 145);
+            this.label9.Location = new System.Drawing.Point(5, 142);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 22);
+            this.label9.Size = new System.Drawing.Size(77, 19);
             this.label9.TabIndex = 28;
-            this.label9.Text = "5st(10Ω)";
+            this.label9.Text = "5st( 10 Ω)";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(3, 111);
+            this.label3.Location = new System.Drawing.Point(5, 108);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 22);
+            this.label3.Size = new System.Drawing.Size(77, 19);
             this.label3.TabIndex = 26;
-            this.label3.Text = "4st(1Ω)";
+            this.label3.Text = "4st(  1 Ω)";
             // 
             // mResistor4
             // 
-            this.mResistor4.Location = new System.Drawing.Point(75, 140);
+            this.mResistor4.Location = new System.Drawing.Point(83, 140);
             this.mResistor4.Name = "mResistor4";
-            this.mResistor4.Size = new System.Drawing.Size(78, 23);
+            this.mResistor4.Size = new System.Drawing.Size(91, 23);
             this.mResistor4.TabIndex = 27;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 78);
+            this.label2.Location = new System.Drawing.Point(5, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 22);
+            this.label2.Size = new System.Drawing.Size(77, 19);
             this.label2.TabIndex = 25;
             this.label2.Text = "3st(100mΩ)";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(3, 45);
+            this.label1.Location = new System.Drawing.Point(5, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 22);
+            this.label1.Size = new System.Drawing.Size(77, 19);
             this.label1.TabIndex = 24;
-            this.label1.Text = "2st(10mΩ)";
+            this.label1.Text = "2st( 10mΩ)";
             // 
             // textLabel
             // 
-            this.textLabel.Location = new System.Drawing.Point(3, 13);
+            this.textLabel.Location = new System.Drawing.Point(5, 9);
             this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(72, 22);
+            this.textLabel.Size = new System.Drawing.Size(77, 19);
             this.textLabel.TabIndex = 23;
-            this.textLabel.Text = "1st(1mΩ)";
+            this.textLabel.Text = "1st(  1mΩ)";
             // 
             // mResistor3
             // 
-            this.mResistor3.Location = new System.Drawing.Point(75, 106);
+            this.mResistor3.Location = new System.Drawing.Point(83, 106);
             this.mResistor3.Name = "mResistor3";
-            this.mResistor3.Size = new System.Drawing.Size(78, 23);
+            this.mResistor3.Size = new System.Drawing.Size(91, 23);
             this.mResistor3.TabIndex = 22;
             // 
             // mResistor0
             // 
-            this.mResistor0.Location = new System.Drawing.Point(75, 7);
+            this.mResistor0.Location = new System.Drawing.Point(83, 7);
             this.mResistor0.Name = "mResistor0";
-            this.mResistor0.Size = new System.Drawing.Size(78, 23);
+            this.mResistor0.Size = new System.Drawing.Size(91, 23);
             this.mResistor0.TabIndex = 19;
             // 
             // mResistor2
             // 
-            this.mResistor2.Location = new System.Drawing.Point(75, 73);
+            this.mResistor2.Location = new System.Drawing.Point(83, 73);
             this.mResistor2.Name = "mResistor2";
-            this.mResistor2.Size = new System.Drawing.Size(78, 23);
+            this.mResistor2.Size = new System.Drawing.Size(91, 23);
             this.mResistor2.TabIndex = 21;
             // 
             // mResistor1
             // 
-            this.mResistor1.Location = new System.Drawing.Point(75, 39);
+            this.mResistor1.Location = new System.Drawing.Point(83, 39);
             this.mResistor1.Name = "mResistor1";
-            this.mResistor1.Size = new System.Drawing.Size(78, 23);
+            this.mResistor1.Size = new System.Drawing.Size(91, 23);
             this.mResistor1.TabIndex = 20;
             // 
             // panel2
@@ -552,6 +550,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(117, 277);
             this.panel3.TabIndex = 20;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // label4
             // 
@@ -565,7 +564,7 @@
             // LnkLblRegOnly
             // 
             this.LnkLblRegOnly.AutoSize = true;
-            this.LnkLblRegOnly.Location = new System.Drawing.Point(95, 345);
+            this.LnkLblRegOnly.Location = new System.Drawing.Point(225, 351);
             this.LnkLblRegOnly.Name = "LnkLblRegOnly";
             this.LnkLblRegOnly.Size = new System.Drawing.Size(238, 15);
             this.LnkLblRegOnly.TabIndex = 19;
@@ -573,21 +572,10 @@
             this.LnkLblRegOnly.Text = "Just register in the application.";
             this.LnkLblRegOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkLblRegOnly_LinkClicked);
             // 
-            // LnkLblRegApply
-            // 
-            this.LnkLblRegApply.AutoSize = true;
-            this.LnkLblRegApply.Location = new System.Drawing.Point(95, 373);
-            this.LnkLblRegApply.Name = "LnkLblRegApply";
-            this.LnkLblRegApply.Size = new System.Drawing.Size(336, 15);
-            this.LnkLblRegApply.TabIndex = 20;
-            this.LnkLblRegApply.TabStop = true;
-            this.LnkLblRegApply.Text = "Apply to the current device after registration.";
-            this.LnkLblRegApply.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkLblRegApply_LinkClicked);
-            // 
             // LnkLblClose
             // 
             this.LnkLblClose.AutoSize = true;
-            this.LnkLblClose.Location = new System.Drawing.Point(95, 401);
+            this.LnkLblClose.Location = new System.Drawing.Point(225, 381);
             this.LnkLblClose.Name = "LnkLblClose";
             this.LnkLblClose.Size = new System.Drawing.Size(154, 15);
             this.LnkLblClose.TabIndex = 21;
@@ -599,9 +587,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 423);
+            this.ClientSize = new System.Drawing.Size(479, 411);
             this.Controls.Add(this.LnkLblClose);
-            this.Controls.Add(this.LnkLblRegApply);
             this.Controls.Add(this.LnkLblRegOnly);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -643,7 +630,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.LinkLabel LnkLblRegOnly;
-        private System.Windows.Forms.LinkLabel LnkLblRegApply;
         private System.Windows.Forms.LinkLabel LnkLblClose;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label7;

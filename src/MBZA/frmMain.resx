@@ -118,56 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="hgrid.StyleInfo" xml:space="preserve">
-    <value>Normal{Font:Consolas, 9pt;BackColor:WhiteSmoke;ForeColor:Black;Border:Flat,1,Gainsboro,Both;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:255, 255, 192;ForeColor:ControlText;}	Focus{BackColor:WhiteSmoke;}	Editor{BackColor:White;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
+    <value>Normal{Font:Consolas, 9pt;BackColor:WhiteSmoke;ForeColor:Black;Border:Flat,1,Gainsboro,Both;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:250, 250, 150;ForeColor:ControlText;}	Focus{BackColor:WhiteSmoke;}	Editor{BackColor:White;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
   </data>
   <metadata name="gtip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>552, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAACKioowY2Njvz4+Pr8/Pz+/Pz8/vz8/P79AQEC/QEBAv0BAQL9AQEC/QUFBv0FB
-        Qb9AQEC/QEBAv0FBQb9BQUG/QUFBv0JCQr9CQkK/QkJCv0JCQr9BQUG/QkJCYAAAAABQUFBASEhI/1dX
-        V/9aWlr/XFxc/11dXf9gYGD/YWFh/2NjY/9jY2P/YmJi/2hoaP9xcXH/bm5u/29vb/9xcXH/c3Nz/3R0
-        dP93d3f/eHh4/3t7e/+AgID/X19f/0BAQEA+Pj5ASEhI/3Nzc/+np6f/oaGh/6Ojo/+kpKT/paWl/6am
-        pv+Pj4//YWFh/6CgoP+lpaX/p6en/6ioqP+oqKj/p6en/6mpqf+qqqr/q6ur/62trf9+fn7/Y2Nj/0BA
-        QEA9PT1ARUVF/5CQkP/l4eX/49na/+fe3//p4uP/6+Tl/+3n6P+9vb3/b29v/9TU1P/i19j/5t3f/+jg
-        4f/p4uP/5t3f/+jg4f/r5OX/7ebn/+zn6P+MjIz/YGBg/0BAQEA7OztARUVF/5GRkf/i3uH/wrm4/7uy
-        sv++trb/v7e3/8G6uv+3t7f/bW1t/9TU1P+1w7T/rcCu/9fW0//JwcH/urGx/721tf++t7f/wLm5/93Y
-        2P+Ojo7/YWFh/z8/P0A6OjpARUVF/5CQkP/g3OD/mY+P/4N6ev+FfHz/hXx8/4iAgP+ysrL/bGxs/9fX
-        1/9YqXL/PZtb/8vd0/+mnJz/gXl5/4V8fP+FfHz/h39//8rDw/+Pj4//YmJi/z09PUA4ODhARUVF/5GR
-        kf/p5un/39bW/+DX1//h2tr/5Nzc/+Xg4P++vr7/bGxs/9jY2P/L1sr/ytnL/+rp5//g1tb/39bW/+HZ
-        2f/j3Nz/5d/f/+3o6P+QkJD/YmJi/zw8PEA3NzdARkZG/5OTk//s6u3/6uLi/+3m5v/v6en/8evr//Pu
-        7v/AwMD/a2tr/9vb2//p4eH/7eXl/+7o6P/p4eH/7eXl/+7o6P/x6+v/8+3t//Pu7v+RkZH/YmJi/zo6
-        OkA2NjZARkZG/5SUlP/s7O7/4NnZ/9/a2v/i3d3/49/f/+Xh4f/AwMD/aWlp/9zc3P/0zc3/98PD//Tf
-        4f/i2tr/39nZ/+Hc3P/j3t7/5OHh/+/r6/+SkpL/ZGRk/zk5OUA0NDRARkZG/5SUlP/n5uj/kYmJ/3Zu
-        bv94cXH/eHBw/3t0dP+0tLT/aWlp/93d3f/4Y2P/9isr//eqrP+impr/dGxs/3hxcf95cXH/enJy/8rF
-        xf+Tk5P/ZGRk/zg4OEAyMjJARkZG/5WVlf/w8fT/4tvb/+DZ2f/i3d3/497e/+Xg4P/CwsL/Z2dn/97e
-        3v/5w8P/+bGx//bc3v/k3d3/39nZ/+Lc3P/j3t7/5ODg//Hu7v+UlJT/ZGRk/zY2NkAyMjJAR0dH/5eX
-        l//09Pf/8u7u//Xx8f/39PT/+fb2//r4+P/FxcX/ZmZm/9/f3//y7e3/9fHx//fz8//y7e3/9fHx//fz
-        8//59vb/+vj4//r4+P+VlZX/ZWVl/zQ0NEAvLy9ARkZG/5eXl//29/r/+PT0//z5+f/8+/v//fz8//38
-        /P/Gxsb/ZWVl/9/f3//38/P//Pn5//z6+v/38/P//Pn5//z6+v/9/Pz//fz8//z6+v+Wlpb/ZWVl/zMz
-        M0AuLi5AR0dH/5eXl//v7u//qaSk/5ONjf+VkJD/lJCQ/5iTk/+5ubn/Y2Nj/+Dg4P+MjPf/VVX0/8bH
-        +/+3srL/kYyM/5WQkP+VkZH/lpKS/9fV1f+Xl5f/ZmZm/zIyMkAtLS1AR0dH/5iYmP/y8/P/wLu7/7Cq
-        qv+yrKz/sqys/7Svr/+8vLz/YWFh/+Dg4P/Gxvv/ra35/+Lk/f/KxcX/r6mp/7GsrP+yra3/s66u/+Hf
-        3/+YmJj/Z2dn/zExMUAsLCxAR0dH/5ubm//8/f7/+/v7//z7+//8/Pz//Pz8//z8/P/Hx8f/YWFh/+Tk
-        5P////////////3////7+vv//Pv7//z7+//8/Pz//Pz8//39/f+ampr/Z2dn/zAwMEAqKipASUlJ/4CA
-        gP+9vb3/urq6/7q6uv+6urr/urq6/7q6uv+VlZX/UVFR/6ampv++vr7/vLy8/7u7u/+6urr/urq6/7q6
-        uv+6urr/u7u7/7u7u/+IiIj/a2tr/zAwMEAoKChAUFBQ/3Jycv9tbW3/bm5u/29vb/9wcHD/cXFx/3Nz
-        c/9ycnL/cHBw/3V1df96enr/eXl5/3p6ev97e3v/fHx8/3x8fP9+fn7/gICA/4CAgP+Wlpb/b29v/y4u
-        LkAmJiZAU1NT/42Njf+QkJD/k5OT/5WVlf+Xl5f/mpqa/52dnf+goKD/oqKi/6Wlpf+pqan/q6ur/62t
-        rf+vr6//srKy/7S0tP+3t7f/urq6/7y8vP/Dw8P/dHR0/y0tLUAlJSUwPz8/32FhYf9lZWX/Z2dn/2lp
-        af9ra2v/bW1t/29vb/9xcXH/dHR0/3V1df94eHj/enp6/3x8fP9+fn7/gICA/4KCgv+EhIT/hoaG/4iI
-        iP+Li4v/WVlZ3ywsLDAAAAAAHx8fQCIiIn8kJCSAJCQkgCUlJX8lJSV/JSUlfyUlJX8mJiZ/JiYmfyYm
-        Jn8nJyeAJycngCcnJ4AoKCiAKSkpgCkpKYApKSmAKSkpgCkpKYApKSmALCwsQAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAABAP//
-        /wA=
-</value>
-  </data>
 </root>

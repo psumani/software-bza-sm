@@ -51,6 +51,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.Memu_RstWinPos = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
@@ -160,7 +162,7 @@
             // 
             // configurationToolStripMenuItem
             // 
-            this.configurationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("configurationToolStripMenuItem.Image")));
+            this.configurationToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.ConfigureComputer;
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             this.configurationToolStripMenuItem.Size = new System.Drawing.Size(305, 22);
             this.configurationToolStripMenuItem.Text = "&Configuration";
@@ -175,7 +177,7 @@
             // 
             // exitToolStripMenuItem1
             // 
-            this.exitToolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.Exit;
+            this.exitToolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.CloseSolution;
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(305, 22);
             this.exitToolStripMenuItem1.Text = "E&xit";
@@ -194,14 +196,16 @@
             this.toolStripSeparator22,
             this.toolStripMenuItem1,
             this.toolStripSeparator23,
-            this.toolStripMenuItem2});
+            this.toolStripMenuItem2,
+            this.toolStripSeparator26,
+            this.Memu_RstWinPos});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // homeMonitorToolStripMenuItem
             // 
-            this.homeMonitorToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.monitor1;
+            this.homeMonitorToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.Monitor;
             this.homeMonitorToolStripMenuItem.Name = "homeMonitorToolStripMenuItem";
             this.homeMonitorToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
             this.homeMonitorToolStripMenuItem.Text = "&Monitor of channels";
@@ -243,7 +247,7 @@
             // 
             // dataEditorToolStripMenuItem1
             // 
-            this.dataEditorToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("dataEditorToolStripMenuItem1.Image")));
+            this.dataEditorToolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.Report1;
             this.dataEditorToolStripMenuItem1.Name = "dataEditorToolStripMenuItem1";
             this.dataEditorToolStripMenuItem1.Size = new System.Drawing.Size(347, 22);
             this.dataEditorToolStripMenuItem1.Text = "Data &editor";
@@ -257,7 +261,7 @@
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.List;
+            this.toolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.Monitor;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(347, 22);
             this.toolStripMenuItem1.Text = "&Real-time monitor.";
@@ -271,12 +275,25 @@
             // 
             // toolStripMenuItem2
             // 
-            this.toolStripMenuItem2.Image = global::ZiveLab.ZM.Properties.Resources.Config;
+            this.toolStripMenuItem2.Image = global::ZiveLab.ZM.Properties.Resources.Registry;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(347, 22);
             this.toolStripMenuItem2.Text = "Real-time monitor channel registration.";
             this.toolStripMenuItem2.ToolTipText = "Set the channel displayed on the real-time monitor.";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(344, 6);
+            // 
+            // Memu_RstWinPos
+            // 
+            this.Memu_RstWinPos.Image = global::ZiveLab.ZM.Properties.Resources.RemoveGuides;
+            this.Memu_RstWinPos.Name = "Memu_RstWinPos";
+            this.Memu_RstWinPos.Size = new System.Drawing.Size(347, 22);
+            this.Memu_RstWinPos.Text = "Reset window position";
+            this.Memu_RstWinPos.Click += new System.EventHandler(this.Memu_RstWinPos_Click);
             // 
             // windowsToolStripMenuItem
             // 
@@ -289,7 +306,7 @@
             // 
             // closeAllDocumentToolStripMenuItem
             // 
-            this.closeAllDocumentToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.CalibFail;
+            this.closeAllDocumentToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.CloseAll1;
             this.closeAllDocumentToolStripMenuItem.Name = "closeAllDocumentToolStripMenuItem";
             this.closeAllDocumentToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.closeAllDocumentToolStripMenuItem.Text = "&Close all document";
@@ -364,7 +381,7 @@
             // 
             // realtimeMonitorToolStripMenuItem1
             // 
-            this.realtimeMonitorToolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.List;
+            this.realtimeMonitorToolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.Monitor;
             this.realtimeMonitorToolStripMenuItem1.Name = "realtimeMonitorToolStripMenuItem1";
             this.realtimeMonitorToolStripMenuItem1.Size = new System.Drawing.Size(246, 22);
             this.realtimeMonitorToolStripMenuItem1.Text = "&Realtime monitor";
@@ -406,7 +423,7 @@
             // 
             // dataEditorToolStripMenuItem
             // 
-            this.dataEditorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dataEditorToolStripMenuItem.Image")));
+            this.dataEditorToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.Report1;
             this.dataEditorToolStripMenuItem.Name = "dataEditorToolStripMenuItem";
             this.dataEditorToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.dataEditorToolStripMenuItem.Text = "Data &editor";
@@ -450,7 +467,7 @@
             // 
             // configurationToolStripMenuItem1
             // 
-            this.configurationToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("configurationToolStripMenuItem1.Image")));
+            this.configurationToolStripMenuItem1.Image = global::ZiveLab.ZM.Properties.Resources.ConfigureComputer;
             this.configurationToolStripMenuItem1.Name = "configurationToolStripMenuItem1";
             this.configurationToolStripMenuItem1.Size = new System.Drawing.Size(246, 22);
             this.configurationToolStripMenuItem1.Text = "&Configuration";
@@ -465,10 +482,10 @@
             // 
             // setDefaultWindowToolStripMenuItem
             // 
-            this.setDefaultWindowToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.Report1;
+            this.setDefaultWindowToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.RemoveGuides;
             this.setDefaultWindowToolStripMenuItem.Name = "setDefaultWindowToolStripMenuItem";
             this.setDefaultWindowToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
-            this.setDefaultWindowToolStripMenuItem.Text = "set default window";
+            this.setDefaultWindowToolStripMenuItem.Text = "Reset window position";
             this.setDefaultWindowToolStripMenuItem.ToolTipText = "Information about the position and size of the window is restored to its default " +
     "value.";
             this.setDefaultWindowToolStripMenuItem.Click += new System.EventHandler(this.setDefaultWindowToolStripMenuItem_Click);
@@ -480,7 +497,7 @@
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.Exit;
+            this.exitToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.CloseSolution;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
@@ -550,7 +567,7 @@
             // MonitorofchannelstoolStripButton
             // 
             this.MonitorofchannelstoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.MonitorofchannelstoolStripButton.Image = global::ZiveLab.ZM.Properties.Resources.monitor1;
+            this.MonitorofchannelstoolStripButton.Image = global::ZiveLab.ZM.Properties.Resources.ListBox;
             this.MonitorofchannelstoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MonitorofchannelstoolStripButton.Name = "MonitorofchannelstoolStripButton";
             this.MonitorofchannelstoolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -611,7 +628,7 @@
             // toolStripBtRealMon
             // 
             this.toolStripBtRealMon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBtRealMon.Image = global::ZiveLab.ZM.Properties.Resources.List;
+            this.toolStripBtRealMon.Image = global::ZiveLab.ZM.Properties.Resources.Monitor;
             this.toolStripBtRealMon.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtRealMon.Name = "toolStripBtRealMon";
             this.toolStripBtRealMon.Size = new System.Drawing.Size(23, 22);
@@ -626,7 +643,7 @@
             // toolStripRtRegCh
             // 
             this.toolStripRtRegCh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripRtRegCh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRtRegCh.Image")));
+            this.toolStripRtRegCh.Image = global::ZiveLab.ZM.Properties.Resources.Registry;
             this.toolStripRtRegCh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripRtRegCh.Name = "toolStripRtRegCh";
             this.toolStripRtRegCh.Size = new System.Drawing.Size(23, 22);
@@ -729,5 +746,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
+        private System.Windows.Forms.ToolStripMenuItem Memu_RstWinPos;
     }
 }

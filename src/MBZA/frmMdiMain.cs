@@ -15,6 +15,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
+using ZiveLab.ZM.ZIM.Utilities;
 using SMLib;
 
 namespace ZiveLab.ZM
@@ -250,6 +251,8 @@ namespace ZiveLab.ZM
         {
             if (ExecuteSplash(true) == true)
             {
+                this.Cursor = Cursors.WaitCursor;
+
                 gBZA.ConnectSifs();
                 foreach (var pair in gBZA.ChLnkLst)
                 {
@@ -269,6 +272,8 @@ namespace ZiveLab.ZM
                 }
 
                 View_MainHome();
+
+                
 
             }
             else
@@ -310,6 +315,7 @@ namespace ZiveLab.ZM
             this.timer1.Start();
             bFirst = false;
             bRefresh = true;
+            this.Cursor = Cursors.Default;
         }
 
 
@@ -460,19 +466,21 @@ namespace ZiveLab.ZM
             {
                 this.Visible = true;
                 this.WindowState = gBZA.appcfg.MainWinStatus;
-
+                
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     this.Location = gBZA.appcfg.MainLocation;
                     this.Size = gBZA.appcfg.MainSize;
                 }
-                this.Activate();
 
+                this.Activate();
+                this.ShowInTaskbar = true;
             }
             else
             {
                 this.Visible = false;
                 this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
             }
 
         }
@@ -485,8 +493,9 @@ namespace ZiveLab.ZM
             {
                 e.Cancel = true;
                 //this.Hide();
-                //               this.Visible = false;
-                  this.WindowState = FormWindowState.Minimized;
+                //this.Visible = false;
+                this.WindowState = FormWindowState.Minimized;
+                //this.ShowInTaskbar = false;
             }
             else
             {
@@ -906,17 +915,16 @@ namespace ZiveLab.ZM
                 return false;
             }
 
-
             foreach (var ch in tlst)
             {
                 sch = ch.ToString();
                 if (gBZA.ChLnkLst.ContainsKey(sch))
                 {
-                    var value = gBZA.ChLnkLst[sch];
-                    if (gBZA.SifLnkLst.ContainsKey(value.sSerial))
+                    var Value = gBZA.ChLnkLst[sch];
+                    if (gBZA.SifLnkLst.ContainsKey(Value.sSerial))
                     {
-                        if (gBZA.SifLnkLst[value.sSerial].bLinked == true
-                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
+                        if (gBZA.SifLnkLst[Value.sSerial].bLinked == true
+                            && gBZA.SifLnkLst[Value.sSerial].MBZAIF.bConnect == true)
                         {
                             count++;
                             continue;
@@ -1366,6 +1374,11 @@ namespace ZiveLab.ZM
         {
             FrmAboutBox frm = new FrmAboutBox();
             frm.ShowDialog();
+        }
+
+        private void Memu_RstWinPos_Click(object sender, EventArgs e)
+        {
+            gBZA.appcfg.InitLocationSize();
         }
     }
 }

@@ -112,7 +112,7 @@
             // 
             // btgrpmon
             // 
-            this.btgrpmon.Image = global::ZiveLab.ZM.Properties.Resources.List;
+            this.btgrpmon.Image = global::ZiveLab.ZM.Properties.Resources.Monitor;
             this.btgrpmon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btgrpmon.Location = new System.Drawing.Point(781, 6);
             this.btgrpmon.Name = "btgrpmon";
@@ -160,7 +160,6 @@
             this.Controls.Add(this.hgrid);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "Monitor of Channels .";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
