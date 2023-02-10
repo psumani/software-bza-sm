@@ -86,7 +86,7 @@ namespace ZiveLab.ZM
             imageList.Images.Add("stop", ZM.Properties.Resources.Stop);
             imageList.Images.Add("check", ZM.Properties.Resources.chevron_down);
             imageList.Images.Add("uncheck", ZM.Properties.Resources.checkbox_blank_outline);
-            imageList.Images.Add("mon", ZM.Properties.Resources.List1);
+            imageList.Images.Add("mon", ZM.Properties.Resources.Monitor);
             imageList.Images.Add("techview", ZM.Properties.Resources.Editsch);
             imageList.Images.Add("report", ZM.Properties.Resources.Report1);
 
@@ -288,7 +288,7 @@ namespace ZiveLab.ZM
             int i;
             string[] sTitle1 = new string[18] { "Channel", "Group",      "Status",      "Status", "Status","Status", "Status",     "Status", "Condition file", "Condition file", "Condition file", "Control", "Control", "Result file", "Result file", "Result file", "Result file", "Remote", };
             string[] sTitle2 = new string[18] { "Channel", "Group", "     Status", "Last error", "Elapsed(s)", "Range", "Vdc(V)", "Temp.(°C)",      "File name",          "Tools",          "Tools", "Control", "Control",   "File name",       "Tools",       "Tools",  "Data count", "Remote", };
-            int[] iwidth = new int[18]       {        60,      50,            200,          150, 80,      80,       70,           70,              150,                32,              32,        32,        32,           150,            32,            32,            90,       50, };
+            int[] iwidth = new int[18]       {        60,      50,            200,          160, 80,      80,       70,           70,              150,                32,              32,        32,        32,           150,            32,            32,            90,       50, };
 
 
             hgrid.Redraw = false;
@@ -310,7 +310,6 @@ namespace ZiveLab.ZM
             hgrid.Rows.Count = 2;
             hgrid.Rows.Fixed = 2;
             hgrid.SelectionMode = SelectionModeEnum.Row;
-            
 
 
             for (i=0; i<18; i++)
@@ -426,7 +425,7 @@ namespace ZiveLab.ZM
             enTestState stat = (enTestState)chstat.TestStatus;
             enStatError errstat = (enStatError)chstat.ErrorStatus;
 
-            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped)
+            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped || stat == enTestState.nc_Finished || stat == enTestState.Finished)
             {
                 if (errstat == enStatError.NoError) str = ((enTestState)chstat.TestStatus).GetDescription();
                 else str = ((enStatError)chstat.ErrorStatus).GetDescription();
@@ -466,15 +465,17 @@ namespace ZiveLab.ZM
                     brun = false;
                     bcalibmode = false;
                     berror = true;
+                    Value.bChkCh = false;
                 }
                 else
                 {
                     brun = gBZA.CheckStatusRun(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
                     bcalibmode = gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
                     berror = false;
+                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
+                    else Value.bChkCh = false;
                 }
-                if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
-                else Value.bChkCh = false;
+                
 
                 ch = Convert.ToInt32(key);
                 for (i = 0; i < 18; i++)
@@ -530,7 +531,8 @@ namespace ZiveLab.ZM
                     }
                     else if (i == 3)
                     {
-                        str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
+                        if (Value.bChkSIF == false || berror == true) str = enStatError.ErrCommZim.GetDescription();
+                        else str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
                         hgrid.SetData(row, i, str);
                     }
                     else if (i == 4)
@@ -783,15 +785,17 @@ namespace ZiveLab.ZM
                     brun = false;
                     bcalibmode = false;
                     berror = true;
+                    Value.bChkCh = false;
                 }
                 else
                 {
                     brun = gBZA.CheckStatusRun(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
                     bcalibmode = gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
                     berror = false;
+                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
+                    else Value.bChkCh = false;
                 }
-                if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
-                else Value.bChkCh = false;
+                
                 for (i = 2; i < 17; i++)
                 {
                     if (i == 0)
@@ -824,7 +828,8 @@ namespace ZiveLab.ZM
                     }
                     else if (i == 3)
                     {
-                        str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
+                        if (Value.bChkSIF == false || berror == true) str = enStatError.ErrCommZim.GetDescription();
+                        else str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
                         hgrid.SetData(row, i, str);
                     }
                     else if (i == 4)
@@ -1023,13 +1028,18 @@ namespace ZiveLab.ZM
                             hgrid.SetCellCheck(row, i, CheckEnum.Unchecked);
                         }
                     }
-                    CellStyle st = hgrid.GetCellStyleDisplay(row, i);
+
+                   
+                    /*
+                    CellStyle st = hgrid.GetCellStyle(row, i);
                     if (st != null)
                     {
                         if (berror == false)
                         {
                             if (i == 2)
                             {
+                                hgrid.Row = row;
+                                hgrid.ForeColor = GetTestStatusColor(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
                                 st.ForeColor = GetTestStatusColor(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
                                 hgrid.SetCellStyle(row, i, st);
                             }
@@ -1053,9 +1063,10 @@ namespace ZiveLab.ZM
                             {
                                 st.ForeColor = Color.Black;
                             }
+                            hgrid.SetCellStyle(row, i, st);
                         }
                         hgrid.SetCellStyle(row, i, st);
-                    }
+                    }*/
                 }
                 row++;
             }
@@ -1137,6 +1148,11 @@ namespace ZiveLab.ZM
             {
                 dlg.DefaultExt = "qis";
                 dlg.FilterIndex = 5;
+            }
+            else if (sext == ".DCH")
+            {
+                dlg.DefaultExt = "dch";
+                dlg.FilterIndex = 6;
             }
             else
             {
@@ -1228,14 +1244,14 @@ namespace ZiveLab.ZM
         
         private void hgrid_EnterCell(object sender, EventArgs e)
         {
-            if (hgrid.Cols[hgrid.Col].AllowEditing == true)
+    /*        if (hgrid.Cols[hgrid.Col].AllowEditing == true)
             {
                 hgrid.Styles.Focus.BackColor = Color.White;
             }
             else
             {
                 hgrid.Styles.Focus.BackColor = SystemColors.Info; //hgrid.Styles.Normal.BackColor;
-            }
+            }*/
         }
         
         public string GetZManPath()
@@ -1879,6 +1895,11 @@ namespace ZiveLab.ZM
                 dlg.DefaultExt = "qis";
                 dlg.FilterIndex = 5;
             }
+            else if (sext == ".DCH")
+            {
+                dlg.DefaultExt = "dch";
+                dlg.FilterIndex = 6;
+            }
             else
             {
                 dlg.DefaultExt = "eis";
@@ -2012,6 +2033,7 @@ namespace ZiveLab.ZM
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.MdiFormClosing) return;
             bRefresh = false;
             bClose = true;
             CloseThis?.Invoke(this, e);

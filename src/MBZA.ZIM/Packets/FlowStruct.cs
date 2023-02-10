@@ -284,13 +284,13 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             initFreq = 1000.0;
             midFreq = 0.0;
-            finalFreq = 1.0;
+            finalFreq = 0.1;
             density = 10;
             iteration = 1;
             count = 0;
             iacrng = 0; 
             ondelay = 12.0;
-            skipcycle = 1.0;
+            skipcycle = 0.0;
             expected_Z = 1.0;
             item = new st_zim_eis_cond_item[DeviceConstants.MAX_EIS_FREQ_CNT];
             for (int i = 0; i < DeviceConstants.MAX_EIS_FREQ_CNT; i++)
@@ -633,7 +633,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             freqindex = 0;
             freq = 1000.0;
             cycle = 0;
-            SkipCycle = 1;
+            SkipCycle = 0;
             cycpoint = 0;
             totaldatacnt = DeviceConstants.MAX_EIS_RAWADC_POINT;
             WorkDatacnt = 0;
@@ -760,12 +760,12 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double[] nouse;
         public stTech_EIS(int init)
         {
-            initfreq = DeviceConstants.DEFAULT_MAX_EIS_FREQUENCY;
-            finalfreq = DeviceConstants.DEFAULT_MIN_EIS_FREQUENCY;
+            initfreq = 4000.0;
+            finalfreq = 0.1;
             density = 10;
             iteration = 1;
             bias = 0.0;
-            skipcycle = 1;
+            skipcycle = 0;
             cycle = 0;
             nouse = new double[3];
             for (int i = 0; i < 3; i++)
@@ -776,11 +776,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void initialize()
         {
             initfreq = 4000.0;
-            finalfreq = 0.5;
+            finalfreq = 0.1;
             density = 10;
             iteration = 1;
             bias = 0.0;
-            skipcycle = 1;
+            skipcycle = 0;
             cycle = 0;
             for (int i = 0; i < 3; i++)
             {
@@ -868,14 +868,14 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public stTech_HFR(int init)
         {
-            freq = 100.0;
+            freq = 1000.0;
             bias = 0.0;
             interval = 60;
             totaltime = 3600;
             celloffwait = 0;
 
-            skipcycle = 1;
-            cycle = 0;
+            skipcycle = 0;
+            cycle = 2;
             inouse = 0;
 
             nouse = new double[2];
@@ -887,14 +887,14 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public void initialize()
         {
-            freq = 100.0;
+            freq = 1000.0;
             bias = 0.0;
             interval = 60;
             totaltime = 3600;
             celloffwait = 0;
 
-            skipcycle = 1;
-            cycle = 0;
+            skipcycle = 0;
+            cycle = 2;
             inouse = 0;
 
             for (int i = 0; i < 2; i++)
@@ -939,29 +939,29 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public stTech_PRR(int init)
         {
-            rsfreq = 4000.0;
+            rsfreq = 1000.0;
             rdfreq = 10.0;
             rdendfreq = 0.0;
             bias = 0.0;
             interval = 60;
             totaltime = 3600;
             celloffwait = 0;
-            skipcycle = 1;
-            cycle = 0;
+            skipcycle = 0;
+            cycle = 2;
             inouse = 0;
         }
 
         public void initialize()
         {
-            rsfreq = 4000.0;
+            rsfreq = 1000.0;
             rdfreq = 10.0;
             rdendfreq = 0.0;
             bias = 0.0;
             interval = 60;
             totaltime = 3600;
             celloffwait = 0;
-            skipcycle = 1;
-            cycle = 0;
+            skipcycle = 0;
+            cycle = 2;
             inouse = 0;
         }
         public byte[] ToByteArray()
@@ -1049,13 +1049,13 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double[] nouse;
         public stTech_QIS(int init)
         {
-            initfreq = 1000.0;
+            initfreq = 4000.0;
             finalfreq = 1.0;
             density = 4;
             iteration = 1;
             bias = 0.0;
             skipcycle = 0;
-            cycle = 1;
+            cycle = 2;
             nouse = new double[3];
             for (int i = 0; i < 3; i++)
             {
@@ -1064,13 +1064,13 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
         public void initialize()
         {
-            initfreq = 1000.0;
+            initfreq = 4000.0;
             finalfreq = 1.0;
             density = 4;
             iteration = 1;
             bias = 0.0;
             skipcycle = 0;
-            cycle = 1;
+            cycle = 2;
             for (int i = 0; i < 3; i++)
             {
                 nouse[i] = 0.0;

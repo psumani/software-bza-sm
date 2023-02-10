@@ -1634,6 +1634,8 @@
             // 
             // Grp1Plot6
             // 
+            this.Grp1Plot6.LineColor = System.Drawing.Color.Maroon;
+            this.Grp1Plot6.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.Grp1Plot6.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot6.YAxis = this.Grp1_yAxis2;
             // 
@@ -1644,6 +1646,9 @@
             // 
             // Grp1Plot7
             // 
+            this.Grp1Plot7.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot7.LineStyle = NationalInstruments.UI.LineStyle.Dot;
             this.Grp1Plot7.PointColor = System.Drawing.Color.DarkGray;
             this.Grp1Plot7.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
             this.Grp1Plot7.ProcessSpecialValues = true;
@@ -1662,14 +1667,15 @@
             this.xyCursor2});
             this.grp1.Location = new System.Drawing.Point(4, 4);
             this.grp1.Name = "grp1";
+            this.grp1.PlotAreaColor = System.Drawing.Color.White;
             this.grp1.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.Grp1Plot7,
             this.Grp1Plot1,
             this.Grp1Plot2,
             this.Grp1Plot3,
             this.Grp1Plot4,
             this.Grp1Plot5,
-            this.Grp1Plot6,
-            this.Grp1Plot7});
+            this.Grp1Plot6});
             this.grp1.Size = new System.Drawing.Size(294, 199);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
@@ -1766,6 +1772,7 @@
             // 
             // Grp2Plot4
             // 
+            this.Grp2Plot4.PointColor = System.Drawing.Color.Fuchsia;
             this.Grp2Plot4.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot4.YAxis = this.Grp2_yAxis2;
             // 
@@ -1781,6 +1788,9 @@
             // 
             // Grp2Plot5
             // 
+            this.Grp2Plot5.LineColor = System.Drawing.Color.Maroon;
+            this.Grp2Plot5.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot5.PointColor = System.Drawing.Color.Maroon;
             this.Grp2Plot5.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot5.YAxis = this.Grp2_yAxis2;
             // 
@@ -1791,6 +1801,9 @@
             // 
             // Grp2Plot6
             // 
+            this.Grp2Plot6.LineColor = System.Drawing.Color.MediumPurple;
+            this.Grp2Plot6.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot6.PointColor = System.Drawing.Color.MediumSlateBlue;
             this.Grp2Plot6.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot6.YAxis = this.Grp2_yAxis2;
             // 
@@ -1803,7 +1816,8 @@
             // 
             this.Grp2Plot7.LineColor = System.Drawing.Color.DarkGray;
             this.Grp2Plot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.Grp2Plot7.PointColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Grp2Plot7.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot7.PointColor = System.Drawing.Color.DarkGray;
             this.Grp2Plot7.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
             this.Grp2Plot7.ProcessSpecialValues = true;
             this.Grp2Plot7.XAxis = this.Grp2_xAxis1;
@@ -1816,9 +1830,10 @@
             // 
             // Grp2Plot8
             // 
-            this.Grp2Plot8.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Grp2Plot8.LineColor = System.Drawing.Color.DarkGray;
             this.Grp2Plot8.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.Grp2Plot8.PointColor = System.Drawing.Color.Silver;
+            this.Grp2Plot8.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot8.PointColor = System.Drawing.Color.DarkGray;
             this.Grp2Plot8.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
             this.Grp2Plot8.ProcessSpecialValues = true;
             this.Grp2Plot8.XAxis = this.Grp2_xAxis1;
@@ -1836,15 +1851,16 @@
             this.xyCursor1});
             this.grp2.Location = new System.Drawing.Point(4, 4);
             this.grp2.Name = "grp2";
+            this.grp2.PlotAreaColor = System.Drawing.Color.White;
             this.grp2.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.Grp2Plot7,
+            this.Grp2Plot8,
             this.Grp2Plot1,
             this.Grp2Plot2,
             this.Grp2Plot3,
             this.Grp2Plot4,
             this.Grp2Plot5,
-            this.Grp2Plot6,
-            this.Grp2Plot7,
-            this.Grp2Plot8});
+            this.Grp2Plot6});
             this.grp2.Size = new System.Drawing.Size(297, 199);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;

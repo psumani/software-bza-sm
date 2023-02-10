@@ -48,6 +48,7 @@
             this.txtMonCutoff = new System.Windows.Forms.TextBox();
             this.lblcutoff = new System.Windows.Forms.Label();
             this.lblctrlrate = new System.Windows.Forms.Label();
+            this.chkhfrcelloffwait = new System.Windows.Forms.CheckBox();
             this.txthfrtotaltime = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txthfrinterval = new System.Windows.Forms.TextBox();
@@ -87,7 +88,6 @@
             this.techtree = new System.Windows.Forms.TreeView();
             this.lbltech = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.chkhfrcelloffwait = new System.Windows.Forms.CheckBox();
             this.tabtech.SuspendLayout();
             this.tabtech1.SuspendLayout();
             this.tabtech2.SuspendLayout();
@@ -132,6 +132,7 @@
             // 
             // cboeiscyc
             // 
+            this.cboeiscyc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboeiscyc.FormattingEnabled = true;
             this.cboeiscyc.Location = new System.Drawing.Point(194, 147);
             this.cboeiscyc.Name = "cboeiscyc";
@@ -141,6 +142,7 @@
             // 
             // cboeisskipcyc
             // 
+            this.cboeisskipcyc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboeisskipcyc.FormattingEnabled = true;
             this.cboeisskipcyc.Location = new System.Drawing.Point(194, 120);
             this.cboeisskipcyc.Name = "cboeisskipcyc";
@@ -257,6 +259,7 @@
             // 
             // cbomonctrl
             // 
+            this.cbomonctrl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbomonctrl.FormattingEnabled = true;
             this.cbomonctrl.Location = new System.Drawing.Point(175, 118);
             this.cbomonctrl.Name = "cbomonctrl";
@@ -289,6 +292,17 @@
             this.lblctrlrate.Size = new System.Drawing.Size(126, 14);
             this.lblctrlrate.TabIndex = 26;
             this.lblctrlrate.Text = "Discharge current";
+            // 
+            // chkhfrcelloffwait
+            // 
+            this.chkhfrcelloffwait.AutoSize = true;
+            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 96);
+            this.chkhfrcelloffwait.Name = "chkhfrcelloffwait";
+            this.chkhfrcelloffwait.Size = new System.Drawing.Size(166, 18);
+            this.chkhfrcelloffwait.TabIndex = 25;
+            this.chkhfrcelloffwait.Text = "Load off at waiting.";
+            this.chkhfrcelloffwait.UseVisualStyleBackColor = true;
+            this.chkhfrcelloffwait.CheckedChanged += new System.EventHandler(this.chkhfrcelloffwait_CheckedChanged);
             // 
             // txthfrtotaltime
             // 
@@ -502,6 +516,7 @@
             // 
             // cboIrange
             // 
+            this.cboIrange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboIrange.FormattingEnabled = true;
             this.cboIrange.Location = new System.Drawing.Point(177, 53);
             this.cboIrange.Name = "cboIrange";
@@ -657,17 +672,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // chkhfrcelloffwait
-            // 
-            this.chkhfrcelloffwait.AutoSize = true;
-            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 96);
-            this.chkhfrcelloffwait.Name = "chkhfrcelloffwait";
-            this.chkhfrcelloffwait.Size = new System.Drawing.Size(166, 18);
-            this.chkhfrcelloffwait.TabIndex = 25;
-            this.chkhfrcelloffwait.Text = "Load off at waiting.";
-            this.chkhfrcelloffwait.UseVisualStyleBackColor = true;
-            this.chkhfrcelloffwait.CheckedChanged += new System.EventHandler(this.chkhfrcelloffwait_CheckedChanged);
             // 
             // frmTechniq
             // 

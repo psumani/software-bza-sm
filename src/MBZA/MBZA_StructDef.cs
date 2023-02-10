@@ -93,25 +93,9 @@ namespace ZiveLab.ZM
             if (!System.IO.Directory.Exists(PathRemote)) System.IO.Directory.CreateDirectory(PathRemote);
             if (!System.IO.Directory.Exists(PathSchTemp)) System.IO.Directory.CreateDirectory(PathSchTemp);
             CommTimeOut = 8000;
-            RealviewLocation = new Point(0, 0);
-            RealviewSize = new Size(0, 0);
-            RtWinStatus = FormWindowState.Maximized;
-            RegRealviewLocation = new Point(0, 0);
-            RegRealviewSize = new Size(0, 0);
-            RegRtWinStatus = FormWindowState.Maximized;
-            GroupRealviewLocation = new Point(0, 0);
-            GroupRealviewSize = new Size(0, 0);
-            GrpRtWinStatus = FormWindowState.Normal;
-            MainWinStatus = FormWindowState.Maximized;
-            MainLocation = new Point(0, 0);
-            MainSize = new Size(0, 0);
-            MainViewWinStatus = FormWindowState.Maximized;
-            MainViewLocation = new Point(0, 0);
-            MainViewSize = new Size(0, 0);
-            TechLocation = new Point(0, 0);
-            CfgLocation = new Point(0, 0);
-            CfgSize = new Size(0, 0);
-            CfgWinStatus = FormWindowState.Maximized;
+
+
+            InitLocationSize();
         }
 
         public bool Save()
@@ -139,27 +123,70 @@ namespace ZiveLab.ZM
             return true;
         }
 
-        public void InitLocationSize()
+        public void InitLocationSize(int regch = 1, int grpch = 1)
         {
-            RealviewLocation = new Point(0, 0);
-            RealviewSize = new Size(0, 0);
-            RtWinStatus = FormWindowState.Maximized;
-            RegRealviewLocation = new Point(0, 0);
-            RegRealviewSize = new Size(0, 0);
-            RegRtWinStatus = FormWindowState.Maximized;
-            GroupRealviewLocation = new Point(0, 0);
-            GroupRealviewSize = new Size(0, 0);
-            GrpRtWinStatus = FormWindowState.Normal;
             MainWinStatus = FormWindowState.Maximized;
             MainLocation = new Point(0, 0);
             MainSize = new Size(0, 0);
-            MainViewWinStatus = FormWindowState.Maximized;
-            MainViewLocation = new Point(0, 0);
-            MainViewSize = new Size(0, 0);
+
+            MainViewWinStatus = FormWindowState.Normal;
+            MainViewLocation = new Point(20, 20);
+            MainViewSize = new Size(1440, 580);
+
+            RealviewLocation = new Point(0, 0);
+            RealviewSize = new Size(513, 438);
+            RtWinStatus = FormWindowState.Normal;
+
+            RegRealviewLocation = new Point(0, 0);
+            if (regch <= 1)
+            {
+                RegRealviewSize = new Size(513, 438);
+            }
+            else if (regch == 2)
+            {
+                RegRealviewSize = new Size(1004, 438);
+            }
+            else if (regch == 3)
+            {
+                RegRealviewSize = new Size(1494, 438);
+            }
+            else if (regch == 4)
+            {
+                RegRealviewSize = new Size(1004, 839);
+            }
+            else
+            {
+                RegRealviewSize = new Size(1500, 845);
+            }
+            RegRtWinStatus = FormWindowState.Normal;
+
+            GroupRealviewLocation = new Point(50, 50);
+            if (grpch <= 1)
+            {
+                GroupRealviewSize = new Size(513, 438);
+            }
+            else if (grpch == 2)
+            {
+                GroupRealviewSize = new Size(1004, 438);
+            }
+            else if (grpch == 3)
+            {
+                GroupRealviewSize = new Size(1494, 438);
+            }
+            else if (grpch == 4)
+            {
+                GroupRealviewSize = new Size(1004, 839);
+            }
+            else
+            {
+                GroupRealviewSize = new Size(1500, 845);
+            }
+            GrpRtWinStatus = FormWindowState.Normal;
             TechLocation = new Point(0, 0);
+
             CfgLocation = new Point(0, 0);
-            CfgSize = new Size(0, 0);
-            CfgWinStatus = FormWindowState.Maximized;
+            CfgSize = new Size(1400, 580);
+            CfgWinStatus = FormWindowState.Normal;
         }
 
         public bool Load()
@@ -206,6 +233,9 @@ namespace ZiveLab.ZM
             BatLimitFile = tmp.BatLimitFile;
 
             CommTimeOut = tmp.CommTimeOut;
+            MainViewLocation = tmp.MainViewLocation;
+            MainViewSize = tmp.MainViewSize;
+            MainViewWinStatus = tmp.MainViewWinStatus;
             RealviewLocation = tmp.RealviewLocation;
             RealviewSize = tmp.RealviewSize;
             GroupRealviewLocation = tmp.GroupRealviewLocation;
@@ -329,28 +359,36 @@ namespace ZiveLab.ZM
         public List<double>[]   ly;
         public st_zim_rt_val()
         {
+            int i;
+
             Maxval = new double[3];
             Minval = new double[3];
             count = new int[3];
             freq = new List<double>[3];
             lx = new List<double>[3];
-            ly = new List<double>[3];
-            for (int i = 0; i < 3; i++)
+            ly = new List<double>[4];
+            for (i = 0; i < 3; i++)
             {
                 freq[i] = new List<double>();
                 lx[i] = new List<double>();
-                ly[i] = new List<double>();
+            
                 Maxval[i] = -9999999.9;
                 Minval[i] = 9999999.9;
                 count[i] = 0;
             }
-            
+
+            for (i = 0; i < 4; i++)
+            {
+                ly[i] = new List<double>();
+            }
+
+
         }
 
         public void Initialize()
         {
-            
-            for (int i = 0; i < 3; i++)
+            int i;
+            for (i = 0; i < 3; i++)
             {
                 freq[i].Clear();
                 lx[i].Clear();
@@ -358,6 +396,11 @@ namespace ZiveLab.ZM
                 Maxval[i] = -9999999.9;
                 Minval[i] = 9999999.9;
                 count[i] = 0;
+            }
+
+            for (i = 0; i < 4; i++)
+            {
+                ly[i] = new List<double>();
             }
         }
         
@@ -653,8 +696,13 @@ namespace ZiveLab.ZM
                         }
                         else if (findex == 2)
                         {
-                            Lastindex = rtgrp.plot[0].ly[1].Count - 1;
-                            tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
+                            //Lastindex = rtgrp.plot[0].ly[1].Count - 1;
+                            //tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
+
+                            Lastindex = rtgrp.plot[0].ly[0].Count - 1;
+                            tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
+
+
                             rtgrp.plot[0].freq[1][Lastindex] = d.fFreq;
                             rtgrp.plot[0].lx[1][Lastindex] = d.TestTime;
                             rtgrp.plot[0].ly[1][Lastindex] = tmp;
@@ -665,6 +713,7 @@ namespace ZiveLab.ZM
                             rtgrp.plot[0].lx[findex].Add(d.TestTime);
                             rtgrp.plot[0].ly[findex].Add(d.real);
                         }
+
 
                         //phase
                         //rtgrp.plot[1].freq[findex].Add(d.fFreq);

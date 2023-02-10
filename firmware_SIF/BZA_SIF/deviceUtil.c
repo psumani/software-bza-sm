@@ -1507,6 +1507,16 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 	if(m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg.iac_flt == DEF_FLT_LOWLATENCY) dConstFlt = 4.0;
 	
 	pddssig->reset = 0;
+	
+	m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 1.0;
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus == DEF_TESTSTATUS_RUNNING && m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+	{
+		if(pddssig->frequency  < 100.0)	
+		{
+			m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 0.3;
+		}
+	}
+	
 
 	if(pddssig->frequency >= DEF_FREQUENCY_SUBHAMONIC)
 	{
@@ -1525,10 +1535,18 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 		m_pGlobalVar->mChVar[ch].flow_dds_sig.req.freq = (uint)floor(pddssig->frequency * DEF_DDS_SIG_CONST_HI);
 		pddssig->frequency = m_pGlobalVar->mChVar[ch].flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_HI;
 		
-		nMaxCycle = (int)MAX(2,4.0/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 , 최대시간 4초
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,m_pGlobalVar->mChVar[ch].mFlow.SetDuration/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2
 		
-		if(retPoint == 0) cycles = 0;
-		else cycles = (int)(MAX_EIS_POINT / retPoint);
+		if(retPoint == 0) 
+		{
+			cycles = DEF_EIS_MIN_CYCLE;
+			retPoint = (int)(MAX_EIS_POINT / DEF_EIS_MIN_CYCLE);
+		}
+		else 
+		{
+			cycles = (int)(MAX_EIS_POINT / retPoint);
+		}
+
 		cycles = MIN(nMaxCycle,cycles);
 		
 		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
@@ -1536,7 +1554,7 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
 		}
 		
-		cycles = MAX(cycles,1);
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
 	}
 	else
 	{
@@ -1556,13 +1574,23 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 		osrArg = MAX(osrArg,0);
 		
 		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
-		nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 4초
+		if(retPoint == 0) 
+		{
+			cycles = DEF_EIS_MIN_CYCLE;
+			retPoint = (int)(MAX_EIS_POINT / DEF_EIS_MIN_CYCLE);
+		}
+		else 
+		{
+			cycles = (int)(MAX_EIS_POINT / retPoint);
+		}
+		
+		//nMaxCycle = MAX(DEF_EIS_MIN_CYCLE,(int)pow(2,(int)log2(pddssig->frequency * m_pGlobalVar->mChVar[ch].mFlow.SetDuration))); //최소 싸이클 2 
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)floor(pddssig->frequency * m_pGlobalVar->mChVar[ch].mFlow.SetDuration));
 		
 		
-		if(retPoint == 0) cycles = 0;
-		else cycles = (int)(MAX_EIS_POINT / retPoint);
+
 		cycles = MIN(nMaxCycle,cycles);
-		cycles = MAX(cycles,1);
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
 		
 		retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
 		
@@ -1570,7 +1598,7 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 		{
 			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
 		}
-		cycles = MAX(cycles,1);
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
 		
 		
 		//VLP Mode-FLT 10, WB2-01
@@ -1588,9 +1616,9 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 	proc_adc_ac_cfg(ch);
 }
 
-    
 
-inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cycle
+
+void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cycle
 {
 	st_zim_eis_status* pStatus = &m_pGlobalVar->mChVar[ch].mChStatInf.eis_status;
 	st_zim_dds* pddsclk = &m_pGlobalVar->mChVar[ch].mdevice.dds_clk;
@@ -1598,29 +1626,31 @@ inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cyc
 	st_zim_dds* pddssig = &m_pGlobalVar->mChVar[ch].mdevice.dds_sig;
 	
 	double  dMaxFreq = (double)MIN_EIS_CYC_POINT * 32.0 * pddssig->frequency;
-	double  dSubhFreq = DEF_FREQUENCY_SUBHAMONIC;
+	double  dConstFlt = 2.0;
 	
 	int nArg,osrArg;
 	int LB,UB;
 	int nMaxArg,osrMaxArg;
 	int retPoint,cycles,nMaxCycle;
 	int nPointSubH;
-	
 	int MinCycPoint = MIN_EIS_CYC_POINT;
-	double  dConstFlt = 2.0;
-	
-	if(m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg.iac_flt == DEF_FLT_LOWLATENCY) dConstFlt = 4.0;
 	
 	bool blow = true;
-	
-	pddssig->reset = 0;
-/*
-	if(type == DEV_BZA60HZ) 
+
+	if(m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg.iac_flt == DEF_FLT_LOWLATENCY) dConstFlt = 4.0;
+
+	m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 1.0;
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus == DEF_TESTSTATUS_RUNNING && m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
 	{
-		dSubhFreq = DEF_FREQUENCY_SUBH_HZ;
+		if(pddssig->frequency  < 100.0)	
+		{
+			m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 0.3;
+		}
 	}
-	*/
-	if(pStatus->freq >= dSubhFreq)
+
+	pddssig->reset = 0;
+
+	if(pStatus->freq >= DEF_FREQUENCY_SUBHAMONIC)
 	{
 		blow = false;
 		osrArg = 0;
@@ -1649,10 +1679,17 @@ inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cyc
 		
 		pStatus->freq = pddssig->frequency;
 
-		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,2.0/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 , 최대시간 4초
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,m_pGlobalVar->mChVar[ch].mFlow.SetDuration/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //최소 싸이클 2 
 		
-		if(retPoint == 0) cycles = 0;
-		else cycles = (int)(MAX_EIS_POINT / retPoint);
+		if(retPoint == 0) 
+		{
+			cycles = DEF_EIS_MIN_CYCLE;
+			retPoint = (int)(MAX_EIS_POINT/cycles);
+		}
+		else 
+		{
+			cycles = (int)(MAX_EIS_POINT / retPoint);
+		}
 		cycles = MIN(nMaxCycle,cycles);
 		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
 		
@@ -1660,7 +1697,7 @@ inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cyc
 		{
 			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
 		}
-		cycles = MAX(cycles,1);
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
 	}
 	else
 	{
@@ -1682,24 +1719,32 @@ inline  void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cyc
 		osrArg = MAX(osrArg,0);
 		
 		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
+		
+		
 		//nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //최소 싸이클 2 , 최대시간 6초
-		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)pow(2,(int)log2(pddssig->frequency)));
+		//nMaxCycle = (int)MAX(MinCycleCnt,(int)pow(2,pddssig->frequency * m_pGlobalVar->mChVar[ch].mFlow.SetDuration)));
 		
-		
-		if(retPoint == 0) cycles = 0;
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)floor(pStatus->freq * m_pGlobalVar->mChVar[ch].mFlow.SetDuration));
+
+		if(retPoint == 0) 
+		{
+			cycles = DEF_EIS_MIN_CYCLE;
+			retPoint = (int)(MAX_EIS_POINT/cycles);
+		}
 		else cycles = (int)(MAX_EIS_POINT / retPoint);
 		
 		cycles = MIN(nMaxCycle,cycles);
 		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
-		
-		cycles = MAX(cycles,1);
+
 		retPoint = MAX(retPoint,(int)pow(2,(int)log2(MAX_EIS_POINT/cycles)));
 		
 		if(m_pGlobalVar->mChVar[ch].mFlow.setcycle > 0)
 		{
 			cycles = MIN(cycles,m_pGlobalVar->mChVar[ch].mFlow.setcycle);
 		}
-		cycles = MAX(cycles,1);
+		
+		cycles = MAX(cycles,DEF_EIS_MIN_CYCLE);
+		
 		//VLP Mode-FLT 10, WB2-01
 		m_pGlobalVar->mChVar[ch].flow_dds_clk.req.freq = (uint)(m_pGlobalVar->mChVar[ch].flow_dds_sig.req.freq * (double)retPoint * 32.0 * pow(dConstFlt,(double)osrArg)/DEF_DDS_MCLK_RATE_LOW); //128 = 125K/16M //
 		pddsclk->frequency =   m_pGlobalVar->mChVar[ch].flow_dds_clk.req.freq / (double)DEF_DDS_CLK_CONST;
@@ -2111,7 +2156,11 @@ bool proc_writedata(int ch)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
 	stDefTestData* pdata = m_pTestData[ch] + pch->mChStatInf.eis_status.rescount;
-	
+	int ierr = 0;
+	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
+	{
+		ierr = pch->mChStatInf.RunTimeStamp % pch->mFlow.m_MsDurLimit;
+	}
 
 	if((pch->mChStatInf.eis_status.rescount+1) > SDRAM_DATA_COUNT)
 	{
@@ -2119,11 +2168,11 @@ bool proc_writedata(int ch)
 	}
 	
 	pdata->mType = 0xF;
-	pdata->TestTime = pch->mChStatInf.RunTimeStamp / 1000.0;
+	pdata->TestTime = (pch->mChStatInf.RunTimeStamp - ierr) / 1000.0;
 	pdata->nCycle = pch->mChStatInf.CycleNo;
-	pdata->CycleTime = pch->mChStatInf.CycleTimeStamp / 1000.0;
+	pdata->CycleTime = (pch->mChStatInf.CycleTimeStamp - ierr) / 1000.0;
 	pdata->nTaskNo = pch->mChStatInf.TaskNo;
-	pdata->TaskTime = pch->mChStatInf.TaskTimeStamp / 1000.0;
+	pdata->TaskTime = (pch->mChStatInf.TaskTimeStamp - ierr) / 1000.0;
 
 	pdata->RangeV = m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[pch->mChStatInf.Vdc_rngno].realmax;
 	
@@ -2144,10 +2193,18 @@ bool proc_writedata(int ch)
 	
 	pdata->Temperature = pch->mChStatInf.Temperature;
 	
-	pdata->fFreq = pch->mChStatInf.eis_status.freq;
-	pdata->Zre = pch->mChStatInf.eis_status.zdata.real;
-	pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
-
+	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
+	{
+		pdata->fFreq = 0.0;			
+		pdata->Zre = 0.0;
+		pdata->Zim = 0.0;
+	}
+	else
+	{
+		pdata->fFreq = pch->mChStatInf.eis_status.freq;
+		pdata->Zre = pch->mChStatInf.eis_status.zdata.real;
+		pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
+	}
 	pch->mChStatInf.eis_status.rescount ++;
 	return  true;
 }
@@ -2324,8 +2381,12 @@ bool proc_eis_main(int ch)
 		}
 		
 		pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_LOADON;
-		
 		pch->mFlow.m_MsFlowdelayLimit = 50; 
+		if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+		{
+			pch->mFlow.m_MsFlowdelayLimit = 0; 
+		}
+		
 		pch->mFlow.m_MsFlowdelayStamp = 0;
 	}
 	else if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_LOADON)
@@ -2337,6 +2398,10 @@ bool proc_eis_main(int ch)
 				proc_eis_LoadOn(ch, 1);
 				pch->mFlow.m_MsFlowdelayStamp = 0;
 				pch->mFlow.m_MsFlowdelayLimit = pch->mFlow.m_MsFlowdelayStamp + 100; 
+				if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+				{
+					pch->mFlow.m_MsFlowdelayLimit = 50; 
+				}
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_DCON;
 			}
 		}
@@ -2402,8 +2467,14 @@ bool proc_eis_main(int ch)
 			}
 			
 			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_RDY;
-			
-			pch->mFlow.m_MsFlowdelayLimit = MIN(2000, MAX(200,(int)(500 / pch->mdevice.dds_sig.frequency)));
+			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+			{
+				pch->mFlow.m_MsFlowdelayLimit = 200; 
+			}
+			else
+			{
+				pch->mFlow.m_MsFlowdelayLimit = MIN(2000, MAX(200,(int)(500 / pch->mdevice.dds_sig.frequency)));
+			}
 			pch->mFlow.m_MsFlowdelayStamp = 0;
 
 		}
@@ -2449,11 +2520,11 @@ bool proc_eis_main(int ch)
 			buf = 0;
 			dfreq = GetNextFreq(ch,&buf);
 			
-			
+			pch->mFlow.m_MsFlowdelayLimit = 10; 
+			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS) pch->mFlow.m_MsFlowdelayLimit = 0; 
 			if(dfreq == 0.0)
 			{				
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_EISSTOP;
-				pch->mFlow.m_MsFlowdelayLimit = 10; 
 				pch->mFlow.m_MsFlowdelayStamp = 0;
 				return true;
 			}
@@ -2466,7 +2537,6 @@ bool proc_eis_main(int ch)
 				if(pch->mChStatInf.RunTimeStamp >= pch->mFlow.m_MsEndTimeLimit)
 				{
 					pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_EISSTOP;
-					pch->mFlow.m_MsFlowdelayLimit = 10; 
 					pch->mFlow.m_MsFlowdelayStamp = 0;
 					return true;
 				}
@@ -2490,7 +2560,6 @@ bool proc_eis_main(int ch)
 			memset(&pch->meis.eis_raw_new, 0x0,sizeof(st_zim_eis_raw));
 			
 			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_EIS_INIT;
-			pch->mFlow.m_MsFlowdelayLimit = 10; 
 			pch->mFlow.m_MsFlowdelayStamp = 0;
 		}
 		else
@@ -2693,7 +2762,8 @@ void proc_stop_test(int ch, int errstat)
 	m_pGlobalVar->mChVar[ch].mChStatInf.CycleNo = 0;
 	m_pGlobalVar->mChVar[ch].mChStatInf.NextCycleNo = 0;
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status = DEF_EIS_STATUS_NONE;
-	m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_STOP;
+	if(errstat == DEF_LAST_ERROR_AUTOSTOP) m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_FINISH;
+	else m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_STOP;
 	m_pGlobalVar->mChVar[ch].mChStatInf.LastError  = errstat;
 	m_pGlobalVar->mChVar[ch].mChStatInf.ErrorStatus  = errstat;
 

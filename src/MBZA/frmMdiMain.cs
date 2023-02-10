@@ -361,8 +361,9 @@ namespace ZiveLab.ZM
                     frmRtView.WindowState = gBZA.appcfg.RtWinStatus;
                     if (frmRtView.WindowState == FormWindowState.Normal)
                     {
+                        frmRtView.StartPosition = FormStartPosition.Manual;
                         frmRtView.Location = gBZA.appcfg.RealviewLocation;
-                        frmRtView.Size = gBZA.appcfg.RealviewSize;
+                        frmRtView.Size = gBZA.appcfg.RealviewSize; 
                     }
                 }
                 frmRtView.SetChannel(ch);
@@ -959,7 +960,7 @@ namespace ZiveLab.ZM
                     {
                         frmRegRtView.StartPosition = FormStartPosition.CenterParent;
                         frmRegRtView.WindowState = FormWindowState.Normal;
-
+                        frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
                         gBZA.appcfg.RegRtWinStatus = frmRegRtView.WindowState;
                         gBZA.appcfg.Save();
                     }
@@ -1032,6 +1033,7 @@ namespace ZiveLab.ZM
                     {
                         frmGrpRtView.StartPosition = FormStartPosition.CenterParent;
                         frmGrpRtView.WindowState = FormWindowState.Normal;
+                        frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
                         gBZA.appcfg.GrpRtWinStatus = frmGrpRtView.WindowState;
                         gBZA.appcfg.Save();
                     }
@@ -1161,12 +1163,7 @@ namespace ZiveLab.ZM
 
         private void modifyTheDevicesRegistrationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
-            frmTechApply frm = new frmTechApply(fileinf, null);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-
-            }
+            RefreshDeviceRegBZA();
         }
 
         private void configurationToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1376,9 +1373,127 @@ namespace ZiveLab.ZM
             frm.ShowDialog();
         }
 
+        int GetRegRMChs()
+        {
+            int RegChCount = 0;
+            string sch;
+            string fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
+            SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
+            List<int> tlst = new List<int>();
+            List<int> chs = new List<int>();
+
+            tlst = mFile.LoadXmlToObj(fileinf, chs);
+            
+            if (tlst.Count < 1)
+            {
+                return 0;
+            }
+
+            foreach (var ch in tlst)
+            {
+                sch = ch.ToString();
+                if (gBZA.ChLnkLst.ContainsKey(sch))
+                {
+                    var value = gBZA.ChLnkLst[sch];
+                    if (gBZA.SifLnkLst.ContainsKey(value.sSerial))
+                    {
+                        if (gBZA.SifLnkLst[value.sSerial].bLinked == true
+                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
+                        {
+                            RegChCount++;
+                            continue;
+                        }
+                    }
+                }
+            }
+            return RegChCount;
+        }
+
+        int GetGrpRMChs()
+        {
+            int GrpChCount = 0;
+
+            foreach (var pair in gBZA.ChLnkLst)
+            {
+                if (pair.Value.mChInf.bSelected == true)
+                {
+                    if (gBZA.SifLnkLst.ContainsKey(pair.Value.sSerial))
+                    {
+                        if (gBZA.SifLnkLst[pair.Value.sSerial].bLinked == true
+                                && gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.bConnect == true)
+                        {
+                            GrpChCount++;
+                            continue;
+                        }
+                    }
+                }
+            }
+            return GrpChCount;
+        }
+
         private void Memu_RstWinPos_Click(object sender, EventArgs e)
         {
-            gBZA.appcfg.InitLocationSize();
+            gBZA.appcfg.InitLocationSize(GetRegRMChs(), GetGrpRMChs());
+            gBZA.appcfg.Save();
+
+
+            if (frmMainView != null)
+            {
+                frmMainView.WindowState = gBZA.appcfg.MainViewWinStatus;
+               if (frmMainView.WindowState == FormWindowState.Normal)
+                {
+                    frmMainView.Size = gBZA.appcfg.MainViewSize;
+                    frmMainView.Location = gBZA.appcfg.MainViewLocation;
+                    frmMainView.StartPosition = FormStartPosition.Manual;
+                }
+            }
+
+            if (frmRtView != null)
+            {
+                frmRtView.WindowState = gBZA.appcfg.RtWinStatus;
+                if (gBZA.appcfg.RtWinStatus == FormWindowState.Normal)
+                {
+                    frmRtView.Size = gBZA.appcfg.RealviewSize;
+                    frmRtView.StartPosition = FormStartPosition.Manual;
+                    frmRtView.Location = gBZA.appcfg.RealviewLocation;
+                }
+
+            }
+            
+            if (frmRegRtView != null)
+            {
+                frmRegRtView.WindowState = gBZA.appcfg.RegRtWinStatus;
+                if (frmRegRtView.WindowState == FormWindowState.Normal)
+                {
+                    frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
+                    frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
+                    frmRegRtView.StartPosition = FormStartPosition.Manual;
+                }
+
+            }
+
+            if (frmGrpRtView != null)
+            {
+                frmGrpRtView.WindowState = gBZA.appcfg.GrpRtWinStatus;
+                if (frmGrpRtView.WindowState == FormWindowState.Normal)
+                {
+                    frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
+                    frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
+                    frmGrpRtView.StartPosition = FormStartPosition.Manual;
+                }
+
+            }
+
+            if (frmcfg != null)
+            {
+                frmcfg.WindowState = gBZA.appcfg.RtWinStatus;
+                if (gBZA.appcfg.RtWinStatus == FormWindowState.Normal)
+                {
+                    frmcfg.Size = gBZA.appcfg.CfgSize;
+                    frmcfg.Location = gBZA.appcfg.CfgLocation;
+                    frmcfg.StartPosition = FormStartPosition.Manual;
+                }
+            }
         }
     }
 }

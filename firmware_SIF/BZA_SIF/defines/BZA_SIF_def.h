@@ -13,10 +13,10 @@
 
 #define MAX_DEV_CHANNEL  	4
 
-#define FIRMWARE_VER_MAJOR	6  //0.256
+#define FIRMWARE_VER_MAJOR	6  
 #define FIRMWARE_VER_MINOR	0
 #define FIRMWARE_VER_REV	4
-#define FIRMWARE_VER_BUILD	3
+#define FIRMWARE_VER_BUILD	8
 
 
 #define HW_ENABLE			0x1	
@@ -612,7 +612,7 @@ typedef struct
 	
 	ushort				skipcycle;
 	ushort				setcycle;
-	
+	double				SetDuration;
 	double				MaxP;
 	double				MaxI;
 	double				MaxV;

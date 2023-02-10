@@ -418,7 +418,7 @@ namespace ZiveLab.ZM
             cmd.ch = -1;
             cmd.addr = 0;
 
-            byte[] data = Encoding.ASCII.GetBytes(sfilename);
+            byte[] data = Encoding.UTF8.GetBytes(sfilename);
 
             cmd.wrlen = data.Length;
             cmd.rdlen = 0;

@@ -652,7 +652,7 @@ namespace ZiveLab.ZM
             enTestState stat = (enTestState)chstat.TestStatus;
             enStatError errstat = (enStatError)chstat.ErrorStatus;
             enEisState estat = (enEisState)chstat.eis_status.status;
-            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped)
+            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped || stat == enTestState.nc_Finished || stat == enTestState.Finished)
             {
                 if (errstat == enStatError.NoError) return Color.Black;
                 else return Color.DarkRed;
@@ -714,7 +714,7 @@ namespace ZiveLab.ZM
             enTestState stat = (enTestState)chstat.TestStatus;
             enStatError errstat = (enStatError)chstat.ErrorStatus;
 
-            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped)
+            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped || stat == enTestState.nc_Finished || stat == enTestState.Finished)
             {
                 if (errstat == enStatError.NoError) str = string.Format(" Status: {0}", ((enTestState)chstat.TestStatus).GetDescription());
                 else str = string.Format(" Status: {0}", errstat.GetDescription());

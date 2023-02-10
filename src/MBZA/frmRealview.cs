@@ -155,7 +155,7 @@ namespace ZiveLab.ZM
             List<int> tlst = new List<int>();
 
             tlst = mFile.LoadXmlToObj(fileinf, chs);
-
+            chs.Clear();
             string sch;
             if(tlst.Count < 1)
             {
@@ -182,7 +182,8 @@ namespace ZiveLab.ZM
             }
 
             chs1 = chs;
-            timer1.Interval = (int)(500 / chs.Count);
+            if (chs.Count < 1) return;
+            else timer1.Interval = (int)(500 / chs.Count);
             if (timer1.Interval < 500) timer1.Interval = 500;
 
             if (chevent != null)
@@ -305,6 +306,14 @@ namespace ZiveLab.ZM
                 if (File.Exists(fileinf))
                 {
                     LoadChannelsInfo();
+                    if (chs.Count < 1)
+                    {
+                        frmTechApply frm = new frmTechApply(fileinf);
+                        if (frm.ShowDialog() == DialogResult.OK)
+                        {
+                            LoadChannelsInfo();
+                        }
+                    }
                 }
                 else
                 {

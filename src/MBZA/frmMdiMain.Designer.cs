@@ -113,7 +113,7 @@
             this.menuStrip1.MdiWindowListItem = this.windowsToolStripMenuItem;
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(855, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1568, 24);
             this.menuStrip1.TabIndex = 5;
             // 
             // systemToolStripMenuItem
@@ -205,7 +205,7 @@
             // 
             // homeMonitorToolStripMenuItem
             // 
-            this.homeMonitorToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.Monitor;
+            this.homeMonitorToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.ListBox;
             this.homeMonitorToolStripMenuItem.Name = "homeMonitorToolStripMenuItem";
             this.homeMonitorToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
             this.homeMonitorToolStripMenuItem.Text = "&Monitor of channels";
@@ -363,7 +363,7 @@
             this.toolStripSeparator19,
             this.exitToolStripMenuItem});
             this.MainMenu.Name = "contextMenuStrip1";
-            this.MainMenu.Size = new System.Drawing.Size(247, 300);
+            this.MainMenu.Size = new System.Drawing.Size(247, 278);
             // 
             // viewHomeToolStripMenuItem
             // 
@@ -528,7 +528,7 @@
             this.toolStripRtRegCh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(855, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1568, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -655,7 +655,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 467);
+            this.ClientSize = new System.Drawing.Size(1568, 757);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

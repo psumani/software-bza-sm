@@ -99,7 +99,7 @@ namespace ZiveLab.ZM
 
             cboeiscyc.Items.Clear();
             cboeiscyc.Items.Add("auto");
-            for (i = 1; i < 10; i++)
+            for (i = 2; i < 10; i++)
             {
                 cboeiscyc.Items.Add(i.ToString());
             }
@@ -109,8 +109,8 @@ namespace ZiveLab.ZM
                 cboeiscyc.Items.Add(i.ToString());
             }
             cboeiscyc.Items.Add("128");
-            
-            cboeisskipcyc.SelectedIndex = GetCycIdxFromCycle(eis.cycle);
+
+            cboeiscyc.SelectedIndex = GetCycIdxFromCycle(eis.cycle);
 
             cboIrange.Items.Clear();
             cbomonctrl.Items.Clear();
@@ -506,7 +506,7 @@ namespace ZiveLab.ZM
 
                 qis.skipcycle = 0;
                 cboeisskipcyc.SelectedIndex = qis.skipcycle;
-                qis.cycle = 1;
+                qis.cycle = 0;
                 cboeiscyc.SelectedIndex = GetCycIdxFromCycle(qis.cycle);
                 
             }
@@ -550,7 +550,7 @@ namespace ZiveLab.ZM
             {
                 mtech.ondelaystable = 0;
                 chkondelaystable.Checked = (mtech.ondelaystable == 1) ? true : false;
-                mtech.ondelay = 2.0;
+                mtech.ondelay = 0.0;
                 txtondelay.Text = SM_Number.GetTimeString(mtech.ondelay);
                 mtech.irange = (ushort)cboIrange.SelectedIndex;
             }
@@ -577,19 +577,21 @@ namespace ZiveLab.ZM
 
             if (techtype == enTechType.TECH_HFR)
             {
-                lblhfrinterval.Text = "Interval(s)";
-                chkhfrcelloffwait.Visible = true;
-                txthfrfreq.Text = GetFreqString(ref hfr.freq);
-                txthfrinterval.Text = SM_Number.GetTimeString(hfr.interval);
-                txthfrtotaltime.Text = SM_Number.GetTimeString(hfr.totaltime);
-                chkhfrcelloffwait.Checked = (hfr.celloffwait == 0) ? false : true;
-                chkhfrcelloffwait.Text = "Load off at waiting.";
                 lblhfrfreq.Visible = true;
                 txthfrfreq.Visible = true;
                 cbomonctrl.Visible = false;
                 lblctrlrate.Visible = false;
                 lblcutoff.Visible = false;
                 txtMonCutoff.Visible = false;
+                chkhfrcelloffwait.Visible = true;
+
+                lblhfrinterval.Text = "Interval(s)";
+                
+                txthfrfreq.Text = GetFreqString(ref hfr.freq);
+                txthfrinterval.Text = SM_Number.GetTimeString(hfr.interval);
+                txthfrtotaltime.Text = SM_Number.GetTimeString(hfr.totaltime);
+                chkhfrcelloffwait.Checked = (hfr.celloffwait == 0) ? false : true;
+                chkhfrcelloffwait.Text = "Load off at waiting.";
 
                 lblondelay.Visible = true;
                 txtondelay.Visible = true;
@@ -597,8 +599,10 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_PRR)
             {
-                txtprrrsfreq.Text = GetFreqString(ref prr.rsfreq);
-                txtprrrpfreq.Text = GetFreqString(ref prr.rdfreq);
+                cbomonctrl.Visible = false;
+                lblondelay.Visible = true;
+                txtondelay.Visible = true;
+                chkondelaystable.Visible = true;
                 if (prr.rdendfreq == 0.0)
                 {
                     chkrpend.Checked = false;
@@ -609,58 +613,43 @@ namespace ZiveLab.ZM
                     chkrpend.Checked = true;
                     txtprrrpendfreq.ReadOnly = false;
                 }
+
+
+                txtprrrsfreq.Text = GetFreqString(ref prr.rsfreq);
+                txtprrrpfreq.Text = GetFreqString(ref prr.rdfreq);
+                
                 txtprrrpendfreq.Text = GetFreqString(ref prr.rdendfreq);
 
 
                 txtprrinterval.Text = SM_Number.GetTimeString(prr.interval);
                 txtprrtotaltime.Text = SM_Number.GetTimeString(prr.totaltime);
                 chkprrcelloffwait.Checked = (prr.celloffwait == 0) ? false : true;
-                cbomonctrl.Visible = false;
-                lblondelay.Visible = true;
-                txtondelay.Visible = true;
-                chkondelaystable.Visible = true;
+                
             }
             else if (techtype == enTechType.TECH_MON)
             {
                 chkhfrcelloffwait.Visible = false;
-                txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
-                txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
-               
                 cbomonctrl.Visible = false;
                 lblctrlrate.Visible = false;
                 lblcutoff.Visible = false;
                 txtMonCutoff.Visible = false;
-               
-                mtech.ondelay = 2.0;
-                mtech.ondelaystable = 0;
-
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
-                
-                lblhfrfreq.Visible = false;
-                lblhfrinterval.Text = "Sample time(s)";
-                txthfrfreq.Text = "0";
                 txthfrfreq.Visible = false;
-            }
-            else if (techtype == enTechType.TECH_QIS)
-            {
-                txteisinitfreq.Text = GetFreqString(ref qis.initfreq);
-                txteisfinalfreq.Text = GetFreqString(ref qis.finalfreq);
-
-                qis.density = 4;
-                txteisdensity.Text = qis.density.ToString();
-                qis.iteration = 1;
-                txteisrepeat.Text = qis.iteration.ToString();
-
-                qis.skipcycle = 0;
-                cboeisskipcyc.SelectedIndex = qis.skipcycle;
-                qis.cycle = 1;
-                cboeiscyc.SelectedIndex = GetCycIdxFromCycle(qis.cycle);
 
                 mtech.ondelay = 2.0;
                 mtech.ondelaystable = 0;
 
+                txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
+                txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
+
+                lblhfrfreq.Visible = false;
+                lblhfrinterval.Text = "Sample time(s)";
+                txthfrfreq.Text = "0";
+            }
+            else if (techtype == enTechType.TECH_QIS)
+            {
                 lbleisdensity.Visible = false;
                 txteisdensity.Visible = false;
                 lbleisiteration.Visible = false;
@@ -673,49 +662,57 @@ namespace ZiveLab.ZM
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
+
+                mtech.ondelay = 0.0;
+                mtech.ondelaystable = 0;
+                qis.density = 4;
+                qis.iteration = 1;
+                qis.skipcycle = 0;
+                qis.cycle = 0;
+
+                txteisinitfreq.Text = GetFreqString(ref qis.initfreq);
+                txteisfinalfreq.Text = GetFreqString(ref qis.finalfreq);
+
+                
+                txteisdensity.Text = qis.density.ToString();
+                
+                txteisrepeat.Text = qis.iteration.ToString();
+
+                
+                cboeisskipcyc.SelectedIndex = qis.skipcycle;
+                
+                cboeiscyc.SelectedIndex = GetCycIdxFromCycle(qis.cycle);
             }
             else if (techtype == enTechType.TECH_DCH)
             {
                 chkhfrcelloffwait.Visible = false;
 
-
-                txthfrinterval.Text = SM_Number.GetTimeString(dch.sampletime);
-                txthfrtotaltime.Text = SM_Number.GetTimeString(dch.totaltime);
-                
                 cbomonctrl.Visible = true;
                 lblctrlrate.Visible = true;
                 lblcutoff.Visible = true;
                 txtMonCutoff.Visible = true;
-                
-                mtech.ondelay = 2.0;
+
+                mtech.ondelay = 0.0;
                 mtech.ondelaystable = 0;
 
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
+                lblhfrfreq.Visible = false;
+                txthfrfreq.Visible = false;
+
+                txthfrinterval.Text = SM_Number.GetTimeString(dch.sampletime);
+                txthfrtotaltime.Text = SM_Number.GetTimeString(dch.totaltime);
+                
+                
 
                 txtMonCutoff.Text = string.Format(" {0,4:##0.0}", dch.CutoffV);
-
-                lblhfrfreq.Visible = false;
                 lblhfrinterval.Text = "Sample time(s)";
                 txthfrfreq.Text = "0";
-                txthfrfreq.Visible = false;
+               
             }
             else
             {
-                txteisinitfreq.Text = GetFreqString(ref eis.initfreq);
-                txteisfinalfreq.Text = GetFreqString(ref eis.finalfreq);
-
-                txteisdensity.Text = eis.density.ToString();
-                txteisrepeat.Text = eis.iteration.ToString();
-                
-                if (eis.skipcycle > 10) eis.skipcycle = 10;
-                if (eis.skipcycle < 1) eis.skipcycle = 1;
-                cboeisskipcyc.SelectedIndex = eis.skipcycle;
-                if (eis.cycle > 128) eis.cycle = 128;
-                if (eis.cycle < 0) eis.cycle = 0;
-                cboeiscyc.SelectedIndex = GetCycIdxFromCycle(eis.cycle);
-
                 lbleisdensity.Visible = true;
                 txteisdensity.Visible = true;
                 lbleisiteration.Visible = true;
@@ -728,6 +725,22 @@ namespace ZiveLab.ZM
                 lblondelay.Visible = true;
                 txtondelay.Visible = true;
                 chkondelaystable.Visible = true;
+
+                txteisinitfreq.Text = GetFreqString(ref eis.initfreq);
+                txteisfinalfreq.Text = GetFreqString(ref eis.finalfreq);
+
+                txteisdensity.Text = eis.density.ToString();
+                txteisrepeat.Text = eis.iteration.ToString();
+                
+                if (eis.skipcycle > 10) eis.skipcycle = 10;
+                if (eis.skipcycle < 0) eis.skipcycle = 0;
+                if (eis.cycle > 128) eis.cycle = 128;
+                if (eis.cycle < 0) eis.cycle = 0;
+
+                cboeisskipcyc.SelectedIndex = eis.skipcycle;
+                cboeiscyc.SelectedIndex = GetCycIdxFromCycle(eis.cycle);
+
+                
             }
             if (techtype == enTechType.TECH_MON || techtype == enTechType.TECH_DCH)
             {
@@ -752,15 +765,18 @@ namespace ZiveLab.ZM
 
         public int GetCycIdxFromCycle(int cycle)
         {
-            if (cycle <= 10) return cycle;
-            if (cycle <= 100) return 10 + (cycle/10);
-            return 21;
+            if (cycle == 0) return 0;
+            if (cycle == 1) return 1;
+            if (cycle > 1 && cycle <= 9) return cycle-1;
+            if (cycle <= 100) return 9 + (cycle/10);
+            return 20; // 128
         }
 
         public int GetCycleFromCycIdx(int index)
         {
-            if (index <= 10) return index;
-            if (index <= 100) return (index - 10) * 10;
+            if (index == 0) return 0;
+            if (index > 0  && index <= 9) return index+1;
+            if (index > 9 && index <= 100) return (index - 9) * 10;
             return 128;
         }
         public string GetFreqString(ref double freq)
@@ -873,7 +889,7 @@ namespace ZiveLab.ZM
                 }
                 else if (techtype == enTechType.TECH_QIS)
                 {
-                    if (RefreshFrequency(ref str, ref qis.finalfreq)) txteisfinalfreq.Text = GetFreqString(ref eis.finalfreq);
+                    if (RefreshFrequency(ref str, ref qis.finalfreq)) txteisfinalfreq.Text = GetFreqString(ref qis.finalfreq);
                 }
             }
             catch (Exception ex)

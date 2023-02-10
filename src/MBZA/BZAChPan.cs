@@ -462,7 +462,7 @@ namespace ZiveLab.ZM
                     }
                     else
                     {
-                        grp2.Cursors[0].Plot = grp2.Plots[nPlot-1];
+                        grp2.Cursors[0].Plot = grp2.Plots[nPlot+1]; // 0206 -1
                         grp2.Cursors[0].LabelBackColor = grp2.PlotAreaColor;
 
                         grp2.Cursors[0].Color = grp2.Cursors[0].Plot.LineColor;
@@ -506,7 +506,7 @@ namespace ZiveLab.ZM
                     }
                     else
                     {
-                        grp1.Cursors[0].Plot = grp1.Plots[nPlot-1];
+                        grp1.Cursors[0].Plot = grp1.Plots[nPlot]; //0206 nPlot-1
                         grp1.Cursors[0].LabelBackColor = grp1.PlotAreaColor;
 
                         grp1.Cursors[0].Color = grp1.Cursors[0].Plot.LineColor;
@@ -569,13 +569,13 @@ namespace ZiveLab.ZM
         {
             if (nGrp == 2)
             {
-                grp2.Plots[nPlot].LineColor = incolor;
-                grp2.Plots[nPlot].PointColor = incolor;
+                grp2.Plots[nPlot+2].LineColor = incolor; //0206 nPlot
+                grp2.Plots[nPlot+2].PointColor = incolor; //0206 nPlot
             }
             else
             {
-                grp1.Plots[nPlot].LineColor = incolor;
-                grp1.Plots[nPlot].PointColor = incolor;
+                grp1.Plots[nPlot+1].LineColor = incolor; //0206 nPlot
+                grp1.Plots[nPlot+1].PointColor = incolor; //0206 nPlot
             }
 
         }
@@ -865,59 +865,83 @@ namespace ZiveLab.ZM
             MenuPlotLine16.Checked = Properties.Settings.Default.GrpPlotLine16;
             MenuPlotPoint16.Checked = Properties.Settings.Default.GrpPlotPoint16;
 
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine11) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint11) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor11;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor11;
+            grp1.Plots[nPlot].SmoothUpdates = true;
 
-            grp1.Plots[0].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[0].HistoryCapacity = 100000;
-            grp1.Plots[1].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[1].HistoryCapacity = 100000;
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine12) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint12) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor12;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor12;
+            grp1.Plots[nPlot].SmoothUpdates = true;
 
-            grp1.Plots[2].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[2].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[2].HistoryCapacity = 100000;
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine13) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint13) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor13;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor13;
+            grp1.Plots[nPlot].SmoothUpdates = true;
 
-            grp1.Plots[3].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[3].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[3].HistoryCapacity = 100000;
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine14) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint14) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor14;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor14;
+            grp1.Plots[nPlot].SmoothUpdates = true;
 
-            grp1.Plots[4].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[4].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[4].HistoryCapacity = 100000;
 
-            grp1.Plots[5].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[5].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[5].HistoryCapacity = 100000;
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine15) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint15) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor15;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor15;
+            grp1.Plots[nPlot].SmoothUpdates = true;
 
-            grp1.Plots[6].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[6].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[6].HistoryCapacity = 100000;
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine16) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint16) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor16;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor16;
+            grp1.Plots[nPlot].SmoothUpdates = true;
 
-            if (Properties.Settings.Default.GrpPlotLine11) grp1.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine12) grp1.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine13) grp1.Plots[2].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[2].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine14) grp1.Plots[3].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[3].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine15) grp1.Plots[4].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[4].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine16) grp1.Plots[5].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[5].LineStyle = NationalInstruments.UI.LineStyle.None;
-
-            if (Properties.Settings.Default.GrpPlotPoint11) grp1.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint12) grp1.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint13) grp1.Plots[2].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[2].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint14) grp1.Plots[3].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[3].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint15) grp1.Plots[4].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[4].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint16) grp1.Plots[5].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[5].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[0].LineWidth = DeviceConstants.Linewidth; // 0206 6
+            grp1.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 6
+            grp1.Plots[0].HistoryCapacity = 100000;  // 0206 6
+            
 
             grp1.PlotAreaColor = Properties.Settings.Default.GrpBackColor1;
             grp1.PlotAreaBorder = Border.Dotted;
@@ -958,31 +982,7 @@ namespace ZiveLab.ZM
             grp1.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
             grp1.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY12;
             grp1.YAxes[1].MinorDivisions.GridVisible = false;
-
-            grp1.Plots[0].LineColor = Properties.Settings.Default.GrpPlotColor11;
-            grp1.Plots[0].PointColor = Properties.Settings.Default.GrpPlotColor11;
-            grp1.Plots[0].SmoothUpdates = true;
-
-            grp1.Plots[1].LineColor = Properties.Settings.Default.GrpPlotColor12;
-            grp1.Plots[1].PointColor = Properties.Settings.Default.GrpPlotColor12;
-            grp1.Plots[1].SmoothUpdates = true;
-
-            grp1.Plots[2].LineColor = Properties.Settings.Default.GrpPlotColor13;
-            grp1.Plots[2].PointColor = Properties.Settings.Default.GrpPlotColor13;
-            grp1.Plots[2].SmoothUpdates = true;
-
-            grp1.Plots[3].LineColor = Properties.Settings.Default.GrpPlotColor14;
-            grp1.Plots[3].PointColor = Properties.Settings.Default.GrpPlotColor14;
-            grp1.Plots[3].SmoothUpdates = true;
-
-            grp1.Plots[4].LineColor = Properties.Settings.Default.GrpPlotColor15;
-            grp1.Plots[4].PointColor = Properties.Settings.Default.GrpPlotColor15;
-            grp1.Plots[4].SmoothUpdates = true;
-
-            grp1.Plots[5].LineColor = Properties.Settings.Default.GrpPlotColor16;
-            grp1.Plots[5].PointColor = Properties.Settings.Default.GrpPlotColor16;
-            grp1.Plots[5].SmoothUpdates = true;
-
+            
             grp1.Cursors[0].LabelBackColor = Properties.Settings.Default.GrpBackColor1;
             
             legend1.Visible = Properties.Settings.Default.GrpViewLegend1;
@@ -1019,65 +1019,87 @@ namespace ZiveLab.ZM
             MenuPlotLine26.Checked = Properties.Settings.Default.GrpPlotLine26;
             MenuPlotPoint26.Checked = Properties.Settings.Default.GrpPlotPoint26;
 
+            int nPlot = 2; //0206 0
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine21) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint21) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor21;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor21;
+            grp2.Plots[nPlot].SmoothUpdates = true;
 
-            grp2.Plots[0].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[0].HistoryCapacity = 100000;
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine22) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint22) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor22;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor22;
+            grp2.Plots[nPlot].SmoothUpdates = true;
 
-            grp2.Plots[1].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[1].HistoryCapacity = 100000;
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine23) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint23) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor23;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor23;
+            grp2.Plots[nPlot].SmoothUpdates = true;
 
-            grp2.Plots[2].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[2].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[2].HistoryCapacity = 100000;
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine24) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint24) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor24;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor24;
+            grp2.Plots[nPlot].SmoothUpdates = true;
 
-            grp2.Plots[3].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[3].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[3].HistoryCapacity = 100000;
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine25) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint25) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor25;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor25;
+            grp2.Plots[nPlot].SmoothUpdates = true;
 
-            grp2.Plots[4].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[4].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[4].HistoryCapacity = 100000;
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine26) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint26) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor26;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor26;
+            grp2.Plots[nPlot].SmoothUpdates = true;
 
-            grp2.Plots[5].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[5].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[5].HistoryCapacity = 100000;
 
-            grp2.Plots[6].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[6].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[6].HistoryCapacity = 100000;
+            grp2.Plots[0].LineWidth = DeviceConstants.Linewidth; // 0206 6
+            grp2.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 6
+            grp2.Plots[0].HistoryCapacity = 100000; // 0206 6
 
-            grp2.Plots[7].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[7].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[7].HistoryCapacity = 100000;
-
-            if (Properties.Settings.Default.GrpPlotLine21) grp2.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine22) grp2.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine23) grp2.Plots[2].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[2].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine24) grp2.Plots[3].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[3].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine25) grp2.Plots[4].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[4].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotLine26) grp2.Plots[5].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[5].LineStyle = NationalInstruments.UI.LineStyle.None;
-
-            if (Properties.Settings.Default.GrpPlotPoint21) grp2.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint22) grp2.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint23) grp2.Plots[2].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[2].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint24) grp2.Plots[3].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[3].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint25) grp2.Plots[4].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[4].PointStyle = NationalInstruments.UI.PointStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint26) grp2.Plots[5].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[5].PointStyle = NationalInstruments.UI.PointStyle.None;
-
+            grp2.Plots[1].LineWidth = DeviceConstants.Linewidth; // 0206 7
+            grp2.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 7
+            grp2.Plots[1].HistoryCapacity = 100000;  // 0206 7
+            
             grp2.PlotAreaColor = Properties.Settings.Default.GrpBackColor2;
             grp2.PlotAreaBorder = Border.Dotted;
 
@@ -1117,31 +1139,7 @@ namespace ZiveLab.ZM
             grp2.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
             grp2.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY22;
             grp2.YAxes[1].MinorDivisions.GridVisible = false;
-
-            grp2.Plots[0].LineColor = Properties.Settings.Default.GrpPlotColor21;
-            grp2.Plots[0].PointColor = Properties.Settings.Default.GrpPlotColor21;
-            grp2.Plots[0].SmoothUpdates = true;
-
-            grp2.Plots[1].LineColor = Properties.Settings.Default.GrpPlotColor22;
-            grp2.Plots[1].PointColor = Properties.Settings.Default.GrpPlotColor22;
-            grp2.Plots[1].SmoothUpdates = true;
-
-            grp2.Plots[2].LineColor = Properties.Settings.Default.GrpPlotColor23;
-            grp2.Plots[2].PointColor = Properties.Settings.Default.GrpPlotColor23;
-            grp2.Plots[2].SmoothUpdates = true;
-
-            grp2.Plots[3].LineColor = Properties.Settings.Default.GrpPlotColor24;
-            grp2.Plots[3].PointColor = Properties.Settings.Default.GrpPlotColor24;
-            grp2.Plots[3].SmoothUpdates = true;
-
-            grp2.Plots[4].LineColor = Properties.Settings.Default.GrpPlotColor25;
-            grp2.Plots[4].PointColor = Properties.Settings.Default.GrpPlotColor25;
-            grp2.Plots[4].SmoothUpdates = true;
-
-            grp2.Plots[5].LineColor = Properties.Settings.Default.GrpPlotColor26;
-            grp2.Plots[5].PointColor = Properties.Settings.Default.GrpPlotColor26;
-            grp2.Plots[5].SmoothUpdates = true;
-
+            
             grp2.Cursors[0].LabelBackColor = Properties.Settings.Default.GrpBackColor2;
 
             legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
@@ -1155,6 +1153,7 @@ namespace ZiveLab.ZM
             ApplyGraphModeMenu(2);
             RefreshGraphMode(2);
         }
+        
 
         private void InitGraphType(bool brefresgraph = true)
         {
@@ -1216,11 +1215,13 @@ namespace ZiveLab.ZM
 
                 RefreshGraphMode(1);
                 RefreshGraphMode(2);
+                RefreshLegendSize();
             }
         }
 
         private void InitGraphQIS()
         {
+            int nPlot;
             TabGrpRaw.Text = "AC waveform";
             TabGrp1.Text = "Niquest plot";
 
@@ -1237,16 +1238,24 @@ namespace ZiveLab.ZM
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
 
-            grp1.Plots[0].Visible = true;
-            grp1.Plots[1].Visible = false;
-            grp1.Plots[2].Visible = false;
-            grp1.Plots[3].Visible = false;
-            grp1.Plots[4].Visible = false;
-            grp1.Plots[5].Visible = false;
-            grp1.Plots[6].Visible = true;
+            nPlot = 1; // 0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
 
-            grp1.Plots[0].XAxis = grp1.XAxes[0];
-            grp1.Plots[0].YAxis = grp1.YAxes[0];
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            grp1.Plots[0].Visible = true; // 0206 6
+
 
             legend1.Items[0].Text = "-Zimg";
             legend1.Items[0].Visible = true;
@@ -1255,6 +1264,7 @@ namespace ZiveLab.ZM
             legend1.Items[3].Visible = false;
             legend1.Items[4].Visible = false;
             legend1.Items[5].Visible = false;
+
             legend1.Items[6].Text = "-Zimg";
             legend1.Items[6].Visible = true;
 
@@ -1274,19 +1284,30 @@ namespace ZiveLab.ZM
             //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
 
-            grp2.Plots[0].XAxis = grp2.XAxes[0];
-            grp2.Plots[0].YAxis = grp2.YAxes[0];
-            grp2.Plots[1].XAxis = grp2.XAxes[0];
-            grp2.Plots[1].YAxis = grp2.YAxes[1];
+            nPlot = 2; // 0206 0
+            grp2.Plots[nPlot].Visible = true;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
 
-            grp2.Plots[0].Visible = true;
-            grp2.Plots[1].Visible = true;
-            grp2.Plots[2].Visible = false;
-            grp2.Plots[3].Visible = false;
-            grp2.Plots[4].Visible = false;
-            grp2.Plots[5].Visible = false;
-            grp2.Plots[6].Visible = true;
-            grp2.Plots[7].Visible = true;
+            nPlot++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = true; //0206 6
+            grp2.Plots[1].Visible = true; //0206 7
 
             legend2.Items[0].Text = "Zmag";
             legend2.Items[1].Text = "Zphase";
@@ -1316,19 +1337,37 @@ namespace ZiveLab.ZM
             TabGrp1.Text = "Eoc,Temp. vs t";
             grp1.YAxes[0].Caption = "Eoc(V)";
             legend1.Items[0].Text = "Eoc";
-               
-            
+
+
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
-            grp1.Plots[0].Visible = true;
-            grp1.Plots[1].Visible = true;
-            grp1.Plots[2].Visible = false;
-            grp1.Plots[3].Visible = false;
-            grp1.Plots[4].Visible = false;
-            grp1.Plots[5].Visible = false;
-            grp1.Plots[6].Visible = false;
+
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            
+            grp1.Plots[0].Visible = false; //0206 6
 
             grp1.XAxes[0].Caption = "Time";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
@@ -1341,10 +1380,8 @@ namespace ZiveLab.ZM
             grp1.YAxes[0].Visible = true;
             grp1.YAxes[1].Visible = true;
 
-            grp1.Plots[0].XAxis = grp1.XAxes[0];
-            grp1.Plots[0].YAxis = grp1.YAxes[0];
-            grp1.Plots[1].XAxis = grp1.XAxes[0];
-            grp1.Plots[1].YAxis = grp1.YAxes[1];
+            
+            
 
             
             legend1.Items[1].Text = "Temp.";
@@ -1373,19 +1410,30 @@ namespace ZiveLab.ZM
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
 
-            grp2.Plots[0].XAxis = grp2.XAxes[0];
-            grp2.Plots[0].YAxis = grp2.YAxes[0];
-            grp2.Plots[1].XAxis = grp2.XAxes[0];
-            grp2.Plots[1].YAxis = grp2.YAxes[1];
+            nPlot = 2; // 0206 0
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
 
-            grp2.Plots[0].Visible = true;
-            grp2.Plots[1].Visible = true;
-            grp2.Plots[2].Visible = false;
-            grp2.Plots[3].Visible = false;
-            grp2.Plots[4].Visible = false;
-            grp2.Plots[5].Visible = false;
-            grp2.Plots[6].Visible = false;
-            grp2.Plots[7].Visible = false;
+            nPlot ++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot ++;            
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[1].Visible = false;  //0206 7
 
             legend2.Items[0].Text = "Vdc";
             legend2.Items[1].Text = "Temp.";
@@ -1417,13 +1465,30 @@ namespace ZiveLab.ZM
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
-            grp1.Plots[0].Visible = true;
-            grp1.Plots[1].Visible = true;
-            grp1.Plots[2].Visible = false;
-            grp1.Plots[3].Visible = false;
-            grp1.Plots[4].Visible = false;
-            grp1.Plots[5].Visible = false;
-            grp1.Plots[6].Visible = false;
+
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            grp1.Plots[0].Visible = false;  //0206 6
 
             grp1.XAxes[0].Caption = "Time";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
@@ -1435,12 +1500,6 @@ namespace ZiveLab.ZM
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
             grp1.YAxes[1].Visible = true;
-
-            grp1.Plots[0].XAxis = grp1.XAxes[0];
-            grp1.Plots[0].YAxis = grp1.YAxes[0];
-            grp1.Plots[1].XAxis = grp1.XAxes[0];
-            grp1.Plots[1].YAxis = grp1.YAxes[1];
-
 
             legend1.Items[1].Text = "Temp.";
 
@@ -1468,19 +1527,30 @@ namespace ZiveLab.ZM
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
 
-            grp2.Plots[0].XAxis = grp2.XAxes[0];
-            grp2.Plots[0].YAxis = grp2.YAxes[0];
-            grp2.Plots[1].XAxis = grp2.XAxes[0];
-            grp2.Plots[1].YAxis = grp2.YAxes[1];
+            nPlot = 2; //0206 0
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
 
-            grp2.Plots[0].Visible = true;
-            grp2.Plots[1].Visible = true;
-            grp2.Plots[2].Visible = false;
-            grp2.Plots[3].Visible = false;
-            grp2.Plots[4].Visible = false;
-            grp2.Plots[5].Visible = false;
-            grp2.Plots[6].Visible = false;
-            grp2.Plots[7].Visible = false;
+            nPlot ++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[1].Visible = false;  //0206 7
 
             legend2.Items[0].Text = "Vdc";
             legend2.Items[1].Text = "Temp.";
@@ -1515,16 +1585,30 @@ namespace ZiveLab.ZM
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
 
-            grp1.Plots[0].Visible = true;
-            grp1.Plots[1].Visible = false;
-            grp1.Plots[2].Visible = false;
-            grp1.Plots[3].Visible = false;
-            grp1.Plots[4].Visible = false;
-            grp1.Plots[5].Visible = false;
-            grp1.Plots[6].Visible = true;
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
 
-            grp1.Plots[0].XAxis = grp1.XAxes[0];
-            grp1.Plots[0].YAxis = grp1.YAxes[0];
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+           
+            grp1.Plots[0].Visible = true;  //0206 6
+
+            
 
             legend1.Items[0].Text = "-Zimg";
             legend1.Items[0].Visible = true;
@@ -1551,19 +1635,30 @@ namespace ZiveLab.ZM
             //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
 
-            grp2.Plots[0].XAxis = grp2.XAxes[0];
-            grp2.Plots[0].YAxis = grp2.YAxes[0];
-            grp2.Plots[1].XAxis = grp2.XAxes[0];
-            grp2.Plots[1].YAxis = grp2.YAxes[1];
+            nPlot = 2; //0206 0
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
 
-            grp2.Plots[0].Visible = true;
-            grp2.Plots[1].Visible = true;
-            grp2.Plots[2].Visible = false;
-            grp2.Plots[3].Visible = false;
-            grp2.Plots[4].Visible = false;
-            grp2.Plots[5].Visible = false;
-            grp2.Plots[6].Visible = true;
-            grp2.Plots[7].Visible = true;
+            nPlot++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = true;  //0206 6
+            grp2.Plots[1].Visible = true;  //0206 7
 
             legend2.Items[0].Text = "Zmag";
             legend2.Items[1].Text = "Zphase";
@@ -1605,14 +1700,29 @@ namespace ZiveLab.ZM
 
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.#####");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+            grp1.Plots[nPlot].Visible = true;
 
-            grp1.Plots[0].Visible = true;
-            grp1.Plots[1].Visible = true;
-            grp1.Plots[2].Visible = false;
-            grp1.Plots[3].Visible = false;
-            grp1.Plots[4].Visible = false;
-            grp1.Plots[5].Visible = false;
-            grp1.Plots[6].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
+            grp1.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            grp1.Plots[0].Visible = false; // 0206 6
 
             grp1.XAxes[0].Caption = "Time";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
@@ -1624,15 +1734,9 @@ namespace ZiveLab.ZM
             grp1.XAxes[0].Visible = true;
             grp1.YAxes[0].Visible = true;
             grp1.YAxes[1].Visible = true;
-
-            grp1.Plots[0].XAxis = grp1.XAxes[0];
-            grp1.Plots[0].YAxis = grp1.YAxes[0];
-            grp1.Plots[1].XAxis = grp1.XAxes[0];
-            grp1.Plots[1].YAxis = grp1.YAxes[1];
-
+            
             legend1.Items[0].Text = "Zre";
             
-
             legend1.Items[0].Visible = true;
             legend1.Items[1].Visible = true;
             legend1.Items[2].Visible = false;
@@ -1655,19 +1759,30 @@ namespace ZiveLab.ZM
             grp2.YAxes[0].Visible = true;
             grp2.YAxes[1].Visible = true;
 
-            grp2.Plots[0].XAxis = grp2.XAxes[0];
-            grp2.Plots[0].YAxis = grp2.YAxes[0];
-            grp2.Plots[1].XAxis = grp2.XAxes[0];
-            grp2.Plots[1].YAxis = grp2.YAxes[1];
+            nPlot = 2;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
 
-            grp2.Plots[0].Visible = true;
-            grp2.Plots[1].Visible = true;
-            grp2.Plots[2].Visible = false;
-            grp2.Plots[3].Visible = false;
-            grp2.Plots[4].Visible = false;
-            grp2.Plots[5].Visible = false;
-            grp2.Plots[6].Visible = false;
-            grp2.Plots[7].Visible = false;
+            nPlot++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = false; //0206 6
+            grp2.Plots[1].Visible = false; //0206 7
 
             legend2.Items[0].Text = "Cs";
             legend2.Items[1].Text = "Cp";
@@ -1722,20 +1837,22 @@ namespace ZiveLab.ZM
             grp2.YAxes[1].Visible = true;
             //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
             //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            int nPlot1 = 1;
+            int nPlot2 = 2;
             for (i = 0; i < 6; i++)
             {
-                grp1.Plots[i].XAxis = grp1.XAxes[0];
-                grp2.Plots[i].XAxis = grp2.XAxes[0];
+                grp1.Plots[i+nPlot1].XAxis = grp1.XAxes[0];
+                grp2.Plots[i+nPlot2].XAxis = grp2.XAxes[0];
 
-                if(i < 3)
+                if(i < 3) 
                 {
-                    grp1.Plots[i].YAxis = grp1.YAxes[0];
-                    grp2.Plots[i].YAxis = grp2.YAxes[0];
+                    grp1.Plots[i+nPlot1].YAxis = grp1.YAxes[0];
+                    grp2.Plots[i+nPlot2].YAxis = grp2.YAxes[0];
                 }
                 else
                 {
-                    grp1.Plots[i].YAxis = grp1.YAxes[1];
-                    grp2.Plots[i].YAxis = grp2.YAxes[1];
+                    grp1.Plots[i+nPlot1].YAxis = grp1.YAxes[1];
+                    grp2.Plots[i+nPlot2].YAxis = grp2.YAxes[1];
                 }
             }
             
@@ -1743,23 +1860,21 @@ namespace ZiveLab.ZM
             {
                 if(grp.barr[i])
                 {
-                    
-                    
                     if(i == 2)
                     {
-                        grp1.Plots[i].Visible = false;
+                        grp1.Plots[i + nPlot1].Visible = false;
                         legend1.Items[i].Visible = false;
                     }
                     else
                     {
-                        grp1.Plots[i].Visible = true;
+                        grp1.Plots[i + nPlot1].Visible = true;
                         legend1.Items[i].Visible = true;
                     }
-                    grp1.Plots[i + 3].Visible = false;
+                    grp1.Plots[i + 3 + nPlot1].Visible = false;
                     legend1.Items[i+3].Visible = false;
 
-                    grp2.Plots[i].Visible = true;
-                    grp2.Plots[i+3].Visible = true;
+                    grp2.Plots[i + nPlot2].Visible = true;
+                    grp2.Plots[i+3 + nPlot2].Visible = true;
 
                     legend2.Items[i].Visible = true;
                     legend2.Items[i+3].Visible = true;
@@ -1768,33 +1883,33 @@ namespace ZiveLab.ZM
                     {
                         legend1.Items[i].Text = "Rs";
                         legend1.Items[i+3].Text = "";
-                        legend2.Items[i].Text = "Rs-Cs";
-                        legend2.Items[i+3].Text = "Rs-Cp";
+                        legend2.Items[i].Text = "R1 - Cs"; //"Rs-Cs";
+                        legend2.Items[i+3].Text = "R1 | Cp"; //"Rs-Cp";
                     }
                     else if (i == 1)
                     {
                         legend1.Items[i].Text = "P_Rp";
                         //legend1.Items[i + 3].Text = "";
-                        legend2.Items[i].Text = "Rp-Cs";
-                        legend2.Items[i + 3].Text = "Rp-Cp";
+                        legend2.Items[i].Text = "R2 - Cs"; //"Rp-Cs";
+                        legend2.Items[i + 3].Text = "R2 | Cp"; //"Rp-Cp";
                     }
                     else
                     {
                         legend1.Items[i].Text = "";
                         legend1.Items[i + 3].Text = "";
-                        legend2.Items[i].Text = "Rpe-Cs";
-                        legend2.Items[i + 3].Text = "Rpe-Cp";
+                        legend2.Items[i].Text = "R3 - Cs"; //"Rpe-Cs";
+                        legend2.Items[i + 3].Text = "R3 | Cp"; //"Rpe-Cp";
                     }
                 }
                 else
                 {
-                    grp1.Plots[i].Visible = false;
-                    grp1.Plots[i+3].Visible = false;
+                    grp1.Plots[i + nPlot1].Visible = false;
+                    grp1.Plots[i+3 + nPlot1].Visible = false;
                     legend1.Items[i].Visible = false;
                     legend1.Items[i+3].Visible = false;
 
-                    grp2.Plots[i].Visible = false;
-                    grp2.Plots[i+3].Visible = false;
+                    grp2.Plots[i + nPlot2].Visible = false;
+                    grp2.Plots[i+3 + nPlot2].Visible = false;
                     legend2.Items[i].Visible = false;
                     legend2.Items[i+3].Visible = false;
                 }
@@ -1802,9 +1917,9 @@ namespace ZiveLab.ZM
             legend1.Items[6].Visible = false;
             legend2.Items[6].Visible = false;
             legend2.Items[7].Visible = false;
-            grp1.Plots[6].Visible = false;
-            grp2.Plots[6].Visible = false;
-            grp2.Plots[7].Visible = false;
+            grp1.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[1].Visible = false;  // 0206 7
 
             GrpPlotCount1 = 2; // grp.arrcnt * 2;
             GrpPlotCount2 = grp.arrcnt * 2;
@@ -1900,7 +2015,7 @@ namespace ZiveLab.ZM
             enTestState stat = (enTestState)chstat.TestStatus;
             enStatError errstat = (enStatError)chstat.ErrorStatus;
 
-            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped)
+            if (stat == enTestState.nc_Ready || stat == enTestState.Ready || stat == enTestState.nc_Stopped || stat == enTestState.Stopped || stat == enTestState.nc_Finished || stat == enTestState.Finished)
             {
                 if (errstat == enStatError.NoError) str = string.Format(" Status: {0}", ((enTestState)chstat.TestStatus).GetDescription());
                 else str = string.Format(" Status: {0}", errstat.GetDescription());
@@ -2370,7 +2485,8 @@ namespace ZiveLab.ZM
                 }
 
             }
-            if (chstat.DispFreq == 0.0)
+
+            if (techtype == enTechType.TECH_MON || techtype == enTechType.TECH_DCH || chstat.DispFreq == 0.0)
             {
                 lblfreq.Text = "  Freq.: -------- Hz";
                 lblzreal.Text = "  Zreal: -------- Ω";
@@ -2534,14 +2650,18 @@ namespace ZiveLab.ZM
                 LastPlotPoint1 = plotcount1;
             }
 
-/*            if (plotcount0 < LastPlotPoint)
+            int nPlot1 = 1;
+            int nPlot2 = 2;
+            /*          
+
+            if (plotcount0 < LastPlotPoint)
             {
                 LastPlotPoint = 0;
                 st0 = 0;
 
-                grp1.Plots[0].ClearData();
-                grp2.Plots[0].ClearData();
-                grp2.Plots[1].ClearData();
+                grp1.Plots[0 + nPlot1].ClearData();
+                grp2.Plots[0 + nPlot2].ClearData();
+                grp2.Plots[1 + nPlot2].ClearData();
 
                 InitGraphType();
 
@@ -2558,9 +2678,9 @@ namespace ZiveLab.ZM
                 LastPlotPoint1 = 0;
                 st1 = 0;
 
-                grp1.Plots[6].ClearData();
-                grp2.Plots[6].ClearData();
-                grp2.Plots[7].ClearData();
+                grp1.Plots[0].ClearData(); // 0206 6
+                grp2.Plots[0].ClearData(); // 0206 6
+                grp2.Plots[1].ClearData(); // 0206 7
             }
             else
             {
@@ -2586,8 +2706,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[0].ly[0].ToArray();
                     Array.Copy(tx, st0, ptx0, 0, appendcount0);
                     Array.Copy(ty, st0, pty0, 0, appendcount0);
-                    grp1.Plots[0].PlotXYAppend(ptx0, pty0);
-                    //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                    grp1.Plots[0 + nPlot1].PlotXYAppend(ptx0, pty0);
+                    //grp1.Plots[0+nPlot1].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
                 }
                 if (appendcount1 > 0)
                 {
@@ -2595,10 +2715,10 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[0].ly[1].ToArray();
                     Array.Copy(tx, st1, ptx1, 0, appendcount1);
                     Array.Copy(ty, st1, pty1, 0, appendcount1);
-                    grp1.Plots[6].PlotXYAppend(ptx1, pty1);
-                    //grp1.Plots[6].PlotXY(rtgrp.plot[0].lx[1].ToArray(), rtgrp.plot[0].ly[1].ToArray());
+                    grp1.Plots[0].PlotXYAppend(ptx1, pty1); // 0206 6
+                    //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[1].ToArray(), rtgrp.plot[0].ly[1].ToArray()); // 0206 6
                 }
-                
+
                 maxval = rtgrp.plot[0].Maxval[0];
                 minval = rtgrp.plot[0].Minval[0];
                 if (maxval < rtgrp.plot[0].Maxval[1])
@@ -2660,8 +2780,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[2].ly[0].ToArray();
                     Array.Copy(tx, st0, ptx0, 0, appendcount0);
                     Array.Copy(ty, st0, pty0, 0, appendcount0);
-                    grp2.Plots[0].PlotXYAppend(ptx0, pty0);
-                    //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
+                    grp2.Plots[0+nPlot2].PlotXYAppend(ptx0, pty0);
+                    //grp2.Plots[0+nPlot2].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
                 }
                 if (appendcount1 > 0)
                 {
@@ -2669,8 +2789,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[2].ly[1].ToArray();
                     Array.Copy(tx, st1, ptx1, 0, appendcount1);
                     Array.Copy(ty, st1, pty1, 0, appendcount1);
-                    grp2.Plots[6].PlotXYAppend(ptx1, pty1);
-                    //grp2.Plots[6].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray());
+                    grp2.Plots[0].PlotXYAppend(ptx1, pty1); // 0206 6
+                    //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray()); // 0206 6
                 }
                 
                 maxval = rtgrp.plot[2].Maxval[0];
@@ -2709,8 +2829,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[3].ly[0].ToArray();
                     Array.Copy(tx, st0, ptx0, 0, appendcount0);
                     Array.Copy(ty, st0, pty0, 0, appendcount0);
-                    grp2.Plots[1].PlotXYAppend(ptx0, pty0);
-                    //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
+                    grp2.Plots[1+nPlot2].PlotXYAppend(ptx0, pty0);
+                    //grp2.Plots[1+nPlot2].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
                 }
                 if (appendcount1 > 0)
                 {
@@ -2718,8 +2838,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[3].ly[1].ToArray();
                     Array.Copy(tx, st1, ptx1, 0, appendcount1);
                     Array.Copy(ty, st1, pty1, 0, appendcount1);
-                    grp2.Plots[7].PlotXYAppend(ptx1, pty1);
-                    //grp2.Plots[7].PlotXY(rtgrp.plot[3].lx[1].ToArray(), rtgrp.plot[3].ly[1].ToArray());
+                    grp2.Plots[1].PlotXYAppend(ptx1, pty1);  // 0206 7
+                    //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[1].ToArray(), rtgrp.plot[3].ly[1].ToArray()); //0206 7
                 }
 
                 maxval = rtgrp.plot[3].Maxval[0];
@@ -2808,9 +2928,9 @@ namespace ZiveLab.ZM
             {
                 LastPlotPoint1 = 0;
                 st1 = 0;
-                grp1.Plots[6].ClearData();
-                grp2.Plots[6].ClearData();
-                grp2.Plots[7].ClearData();
+                grp1.Plots[0].ClearData(); // 0206 6
+                grp2.Plots[0].ClearData(); // 0206 6
+                grp2.Plots[1].ClearData(); // 0206 7
             }
             else
             {
@@ -2818,7 +2938,8 @@ namespace ZiveLab.ZM
                 appendcount1 = plotcount1 - LastPlotPoint1;
                 LastPlotPoint1 = plotcount1;
             }
-
+            int nPlot1 = 1;
+            int nPlot2 = 2;
             double[] tx = null;
             double[] ty = null;
             double[] ptx0 = new double[appendcount0];
@@ -2833,8 +2954,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[0].ly[0].ToArray();
                     Array.Copy(tx, st0, ptx0, 0, appendcount0);
                     Array.Copy(ty, st0, pty0, 0, appendcount0);
-                    grp1.Plots[0].PlotXYAppend(ptx0, pty0);
-                    //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                    grp1.Plots[0 + nPlot1].PlotXYAppend(ptx0, pty0);
+                    //grp1.Plots[0+nPlot1].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
                 }
                 if (appendcount1 > 0)
                 {
@@ -2842,8 +2963,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[0].ly[1].ToArray();
                     Array.Copy(tx, st1, ptx1, 0, appendcount1);
                     Array.Copy(ty, st1, pty1, 0, appendcount1);
-                    grp1.Plots[6].PlotXYAppend(ptx1, pty1);
-                    //grp1.Plots[6].PlotXY(rtgrp.plot[0].lx[1].ToArray(), rtgrp.plot[0].ly[1].ToArray());
+                    grp1.Plots[0].PlotXYAppend(ptx1, pty1); // 0206 6
+                    //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[1].ToArray(), rtgrp.plot[0].ly[1].ToArray()); // 0206 6
                 }
                 
                 maxval = rtgrp.plot[0].Maxval[0];
@@ -2909,8 +3030,9 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[2].ly[0].ToArray();
                     Array.Copy(tx, st0, ptx0, 0, appendcount0);
                     Array.Copy(ty, st0, pty0, 0, appendcount0);
-                    grp2.Plots[0].PlotXYAppend(ptx0, pty0);
-                    //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
+                    grp2.Plots[0+ nPlot2].PlotXYAppend(ptx0, pty0);
+
+                    //grp2.Plots[0 + nPlot2].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
                 }
                 if (appendcount1 > 0)
                 {
@@ -2918,8 +3040,8 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[2].ly[1].ToArray();
                     Array.Copy(tx, st1, ptx1, 0, appendcount1);
                     Array.Copy(ty, st1, pty1, 0, appendcount1);
-                    grp2.Plots[6].PlotXYAppend(ptx1, pty1);
-                    //grp2.Plots[6].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray());
+                    grp2.Plots[0].PlotXYAppend(ptx1, pty1); // 0206 6
+                    //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray()); // 0206 6
                 }
                 
                 maxval = rtgrp.plot[2].Maxval[0];
@@ -2956,15 +3078,15 @@ namespace ZiveLab.ZM
                 {
                     tx = rtgrp.plot[3].lx[0].ToArray();
                     ty = rtgrp.plot[3].ly[0].ToArray();
-                    grp2.Plots[1].PlotXYAppend(tx, ty, st0, appendcount0);
-                    //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
+                    grp2.Plots[1 + nPlot2].PlotXYAppend(tx, ty, st0, appendcount0);
+                    //grp2.Plots[1 + nPlot2].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
                 }
                 if (appendcount1 > 0)
                 {
                     tx = rtgrp.plot[3].lx[1].ToArray();
                     ty = rtgrp.plot[3].ly[1].ToArray();
-                    grp2.Plots[7].PlotXYAppend(tx, ty, st1, appendcount1);
-                    //grp2.Plots[7].PlotXY(rtgrp.plot[3].lx[1].ToArray(), rtgrp.plot[3].ly[1].ToArray());
+                    grp2.Plots[1].PlotXYAppend(tx, ty, st1, appendcount1); // 0206 7
+                    //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[1].ToArray(), rtgrp.plot[3].ly[1].ToArray());  //0206 7
                 }
                 
                 maxval = rtgrp.plot[3].Maxval[0];
@@ -3046,6 +3168,8 @@ namespace ZiveLab.ZM
                 LastPlotPoint = plotcount;
             }
 
+            int nPlot1 = 1;
+            int nPlot2 = 2;
             double[] tx = null;
             double[] ty = null;
             double[] ptx = new double[appendcount];
@@ -3059,8 +3183,8 @@ namespace ZiveLab.ZM
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
                 time0 = ptx[appendcount - 1];
-                grp1.Plots[0].PlotXYAppend(ptx, pty);
-                //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                grp1.Plots[0+nPlot1].PlotXYAppend(ptx, pty);
+                //grp1.Plots[0+nPlot1].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
 
                 cmpval = Math.Abs(rtgrp.plot[0].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[0].Minval[0]))
@@ -3081,8 +3205,8 @@ namespace ZiveLab.ZM
                 ty = rtgrp.plot[1].ly[0].ToArray();
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
-                grp1.Plots[1].PlotXYAppend(ptx, pty);
-                //grp1.Plots[1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
+                grp1.Plots[1+nPlot1].PlotXYAppend(ptx, pty);
+                //grp1.Plots[1+nPlot1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
 
                 cmpval = Math.Abs(rtgrp.plot[1].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[1].Minval[0]))
@@ -3113,8 +3237,8 @@ namespace ZiveLab.ZM
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
                 time1 = ptx[appendcount - 1];
-                grp2.Plots[0].PlotXYAppend(ptx, pty);
-                //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
+                grp2.Plots[0+ nPlot2].PlotXYAppend(ptx, pty);
+                //grp2.Plots[0+nPlot2].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
                 cmpval = Math.Abs(rtgrp.plot[2].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[2].Minval[0]))
                 {
@@ -3134,8 +3258,8 @@ namespace ZiveLab.ZM
                 ty = rtgrp.plot[3].ly[0].ToArray();
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
-                grp2.Plots[1].PlotXYAppend(ptx, pty);
-                //grp2.Plots[1].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
+                grp2.Plots[1+nPlot2].PlotXYAppend(ptx, pty);
+                //grp2.Plots[1+nPlot2].PlotXY(rtgrp.plot[3].lx[0].ToArray(), rtgrp.plot[3].ly[0].ToArray());
 
                 cmpval = Math.Abs(rtgrp.plot[3].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[3].Minval[0]))
@@ -3236,7 +3360,8 @@ namespace ZiveLab.ZM
                 appendcount = plotcount - LastPlotPoint;
                 LastPlotPoint = plotcount;
             }
-
+            int nPlot1 = 1;
+            int nPlot2 = 2;
             double[] tx = null;
             double[] ty = null;
             double[] ptx = new double[appendcount];
@@ -3254,7 +3379,7 @@ namespace ZiveLab.ZM
                         ty = rtgrp.plot[0].ly[i].ToArray();
                         Array.Copy(tx, st, ptx, 0, appendcount);
                         Array.Copy(ty, st, pty, 0, appendcount);
-                        grp1.Plots[i].PlotXYAppend(ptx, pty);
+                        grp1.Plots[i+ nPlot1].PlotXYAppend(ptx, pty);
                         time0 = ptx[appendcount - 1];
                         
                     }
@@ -3266,7 +3391,7 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[2].ly[i].ToArray();
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     Array.Copy(ty, st, pty, 0, appendcount);
-                    grp2.Plots[i].PlotXYAppend(ptx, pty);
+                    grp2.Plots[i+ nPlot2].PlotXYAppend(ptx, pty);
                     time1 = ptx[appendcount - 1];
                   
 
@@ -3274,7 +3399,7 @@ namespace ZiveLab.ZM
                     ty = rtgrp.plot[3].ly[i].ToArray();
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     Array.Copy(ty, st, pty, 0, appendcount);
-                    grp2.Plots[i + 3].PlotXYAppend(ptx, pty);
+                    grp2.Plots[i + 3 + nPlot2].PlotXYAppend(ptx, pty);
                     
                 }
             }
@@ -3309,7 +3434,8 @@ namespace ZiveLab.ZM
                 appendcount = plotcount - LastPlotPoint;
                 LastPlotPoint = plotcount;
             }
-
+            int nPlot1 = 1;
+            //int nPlot2 = 2;
             double[] tx = null;
             double[] ty = null;
             double[] ptx = new double[appendcount];
@@ -3323,9 +3449,9 @@ namespace ZiveLab.ZM
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
                 time0 = ptx[appendcount - 1];
-                grp1.Plots[0].PlotXYAppend(ptx, pty);
+                grp1.Plots[0+ nPlot1].PlotXYAppend(ptx, pty);
 
-                //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                //grp1.Plots[0+nPlot1].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
                 cmpval = Math.Abs(rtgrp.plot[0].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[0].Minval[0]))
                 {
@@ -3345,8 +3471,8 @@ namespace ZiveLab.ZM
                 ty = rtgrp.plot[1].ly[0].ToArray();
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
-                grp1.Plots[1].PlotXYAppend(ptx, pty);
-                //grp1.Plots[1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
+                grp1.Plots[1+ nPlot1].PlotXYAppend(ptx, pty);
+                //grp1.Plots[1+nPlot1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
 
                 cmpval = Math.Abs(rtgrp.plot[1].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[1].Minval[0]))
@@ -3369,12 +3495,12 @@ namespace ZiveLab.ZM
                 tx = rtgrp.plot[2].lx[0].ToArray();
                 ty = rtgrp.plot[2].ly[0].ToArray();
                 grp2.Plots[0].PlotXYAppend(tx, ty, plotcount, appendcount);
-                //grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
+                //grp2.Plots[0+nPlot2].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
 
                 tx = rtgrp.plot[3].lx[0].ToArray();
                 ty = rtgrp.plot[3].ly[0].ToArray();
-                grp2.Plots[1].PlotXYAppend(tx, ty, plotcount, appendcount);
-                //grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+                grp2.Plots[1+nPlot2].PlotXYAppend(tx, ty, plotcount, appendcount);
+                //grp2.Plots[1+nPlot2].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
             }
             */
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3 || GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)
@@ -3405,7 +3531,8 @@ namespace ZiveLab.ZM
                 appendcount = plotcount - LastPlotPoint;
                 LastPlotPoint = plotcount;
             }
-
+            int nPlot1 = 1;
+            //int nPlot2 = 2;
             double[] tx = null;
             double[] ty = null;
             double[] ptx = new double[appendcount];
@@ -3419,9 +3546,9 @@ namespace ZiveLab.ZM
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
                 time0 = ptx[appendcount - 1];
-                grp1.Plots[0].PlotXYAppend(ptx, pty);
+                grp1.Plots[0+ nPlot1].PlotXYAppend(ptx, pty);
 
-                //grp1.Plots[0].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
+                //grp1.Plots[0+nPlot1].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
                 cmpval = Math.Abs(rtgrp.plot[0].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[0].Minval[0]))
                 {
@@ -3441,8 +3568,8 @@ namespace ZiveLab.ZM
                 ty = rtgrp.plot[1].ly[0].ToArray();
                 Array.Copy(tx, st, ptx, 0, appendcount);
                 Array.Copy(ty, st, pty, 0, appendcount);
-                grp1.Plots[1].PlotXYAppend(ptx, pty);
-                //grp1.Plots[1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
+                grp1.Plots[1+ nPlot1].PlotXYAppend(ptx, pty);
+                //grp1.Plots[1+nPlot1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
 
                 cmpval = Math.Abs(rtgrp.plot[1].Maxval[0]);
                 if (cmpval < Math.Abs(rtgrp.plot[1].Minval[0]))
@@ -3464,13 +3591,13 @@ namespace ZiveLab.ZM
             {
                 tx = rtgrp.plot[2].lx[0].ToArray();
                 ty = rtgrp.plot[2].ly[0].ToArray();
-                grp2.Plots[0].PlotXYAppend(tx, ty, plotcount, appendcount);
-                //grp2.Plots[0].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
+                grp2.Plots[0+nPlot2].PlotXYAppend(tx, ty, plotcount, appendcount);
+                //grp2.Plots[0+nPlot2].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[2].ly[0].ToArray());
 
                 tx = rtgrp.plot[3].lx[0].ToArray();
                 ty = rtgrp.plot[3].ly[0].ToArray();
-                grp2.Plots[1].PlotXYAppend(tx, ty, plotcount, appendcount);
-                //grp2.Plots[1].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
+                grp2.Plots[1+nPlot2].PlotXYAppend(tx, ty, plotcount, appendcount);
+                //grp2.Plots[1+nPlot2].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].lx[0].ToArray(), gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp.plot[3].ly[0].ToArray());
             }
             */
             if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3 || GrpCtrlMode2 == 0 || GrpCtrlMode2 == 3)

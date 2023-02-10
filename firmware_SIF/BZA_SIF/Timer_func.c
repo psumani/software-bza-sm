@@ -123,8 +123,12 @@ static void ISR_MSTimer(void)
 	{
 		if(m_pSysConfig->ChkZIM[ch] == 1)
 		{
-			if(m_pGlobalVar->mChVar[ch].Start > 0)
+			if(m_pGlobalVar->mChVar[ch].Start > 0 && m_pGlobalVar->mChVar[ch].mChStatInf.TaskNo > -1)
 			{
+				m_pGlobalVar->mChVar[ch].mChStatInf.RunTimeStamp ++;
+				m_pGlobalVar->mChVar[ch].mChStatInf.TaskTimeStamp ++;
+				m_pGlobalVar->mChVar[ch].mChStatInf.CycleTimeStamp ++;
+				
 				if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_WAIT
 				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_SAMPLE
 				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_MONSAMPLE
@@ -135,10 +139,6 @@ static void ISR_MSTimer(void)
 				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_DCON
 					   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_MONDELAY )  m_pGlobalVar->mChVar[ch].mFlow.OndelayTimeStamp ++;
 				else m_pGlobalVar->mChVar[ch].mFlow.OndelayTimeStamp = 0;
-				
-				m_pGlobalVar->mChVar[ch].mChStatInf.RunTimeStamp ++;
-				m_pGlobalVar->mChVar[ch].mChStatInf.TaskTimeStamp ++;
-				m_pGlobalVar->mChVar[ch].mChStatInf.CycleTimeStamp ++;
 				
 				m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp ++;
 				if(m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp > 1000000) 
@@ -158,37 +158,16 @@ static void ISR_MSTimer(void)
 				{
 					m_pGlobalVar->mChVar[ch].m_msSlop = 0;
 				}
-				/*	
-				if(m_pGlobalVar->mChVar[ch].mChStatInf.TaskNo == m_pGlobalVar->mChVar[ch].mChStatInf.NextTaskNo
-					&& m_pGlobalVar->mChVar[ch].mChStatInf.CycleNo == m_pGlobalVar->mChVar[ch].mChStatInf.NextCycleNo)
-				{
-	
-					m_pGlobalVar->mChVar[ch].mChStatInf.RunTimeStamp ++;
-					m_pGlobalVar->mChVar[ch].mChStatInf.TaskTimeStamp ++;
-					m_pGlobalVar->mChVar[ch].mChStatInf.CycleTimeStamp ++;
-					
-					if(m_pGlobalVar->mChVar[ch].mChStatInf.TaskNo == 0)
-					{
-						m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp ++;
-						if(m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp > 1000000) 
-						{
-							m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp = 1000000;
-						}
-						
-						if(m_pGlobalVar->mChVar[ch].bChkSlope == 1)  
-						{
-							m_pGlobalVar->mChVar[ch].m_msSlop ++;
-							if(m_pGlobalVar->mChVar[ch].m_msSlop > 1000000) 
-							{
-								m_pGlobalVar->mChVar[ch].m_msSlop = 1000000;
-							}
-						}
-						else
-						{
-							m_pGlobalVar->mChVar[ch].m_msSlop = 0;
-						}
-					}
-				}*/
+			}
+			else
+			{
+				m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp = 0;
+				m_pGlobalVar->mChVar[ch].mFlow.OndelayTimeStamp = 0;
+				m_pGlobalVar->mChVar[ch].m_msSlop = 0;
+				m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp = 0;
+				m_pGlobalVar->mChVar[ch].mChStatInf.RunTimeStamp = 0;
+				m_pGlobalVar->mChVar[ch].mChStatInf.TaskTimeStamp = 0;
+				m_pGlobalVar->mChVar[ch].mChStatInf.CycleTimeStamp = 0;
 			}
 			m_pGlobalVar->mChVar[ch].OverT_Timer ++;
 			if(m_pGlobalVar->mChVar[ch].OverT_Timer > 1000000) m_pGlobalVar->mChVar[ch].OverT_Timer = 1000000;

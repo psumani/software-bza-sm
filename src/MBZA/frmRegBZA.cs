@@ -1,4 +1,5 @@
-﻿using SMLib;
+﻿using C1.Win.C1FlexGrid;
+using SMLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -1364,48 +1365,14 @@ namespace ZiveLab.ZM
 
         private void grdBZAs_MouseDown(object sender, MouseEventArgs e)
         {
-            /*    string str = "";
-                string strSerial = "";
-                string strCh = "";
-                string strLink = "";
-                string strCheck = "";
-                int ch = -1;
-
-                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Middle)
+            {
+                HitTestInfo hti = grdBZAs.HitTest(e.X, e.Y);
+                if (hti.Row > 0)
                 {
-
-                    Point m = new Point(e.X, e.Y);
-                    var pt = grdBZAs.PointToClient(m);
-                    HitTestInfo hit = grdBZAs.HitTest(e.X, e.Y);
-                    if (hit.Row > 0 && hit.Row <= grdChs.Rows)
-                    {
-                        SelectedBZARow = hit.Row;
-                        strSerial = grdBZAs.get_TextMatrix(SelectedBZARow, 0);
-                        strCh = grdBZAs.get_TextMatrix(SelectedBZARow, 3);
-                        ch = Convert.ToInt32(strCh);
-                        strLink = grdBZAs.get_TextMatrix(SelectedBZARow, 4);
-                        strCheck = grdBZAs.get_TextMatrix(SelectedBZARow, 5);
-                        str = string.Format("* Selected: {0}-{1}, Linked-{2}, detected-{3}.", strSerial, strCh, strLink, strCheck);
-                        lblSelected.Text = str;
-
-                        if (strLink == "None")
-                        {
-                            CmdBZALink.Text = "&Registration";
-                        }
-                        else
-                        {
-                            CmdBZALink.Text = "&Deregistration";
-                        }
-                        grdBZAs.ContextMenuStrip = ScanMenu;
-
-                    }
-                    else
-                    {
-                        lblSelected.Text = "* Selected: None.";
-                        grdBZAs.ContextMenuStrip = null;
-                        SelectedBZARow = -1;
-                    }
-                }*/
+                    grdBZAs.Select(hti.Row, 1);
+                }
+            }
         }
 
         
@@ -1981,7 +1948,14 @@ namespace ZiveLab.ZM
 
         private void grdChs_MouseDown(object sender, MouseEventArgs e)
         {
-       
+            if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Middle)
+            {
+                HitTestInfo hti = grdChs.HitTest(e.X, e.Y);
+                if (hti.Row > 0)
+                {
+                    grdChs.Select(hti.Row, 1);
+                }
+            }
         }
 
         private void grdBZAs_RowColChange(object sender, EventArgs e)
@@ -2020,7 +1994,10 @@ namespace ZiveLab.ZM
 
             if (bInitBzaCh == true) return;
             grdBzaCh.GetSelection(out row1, out col1, out row2, out col2);
+
             if (row1 <= 0) return;
+          
+
             grdBZAChs_SelRow(row1);
 
         }
@@ -2042,6 +2019,25 @@ namespace ZiveLab.ZM
         private void grdChs_CellChanged(object sender, C1.Win.C1FlexGrid.RowColEventArgs e)
         {
 
+        }
+
+        private void grdBzaCh_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Middle)
+            {
+                HitTestInfo hti = grdBzaCh.HitTest(e.X, e.Y);
+                if (hti.Row > 0)
+                {
+                    grdBzaCh.Select(hti.Row, 1);
+                }
+            }
+        }
+
+        private void grdBzaCh_BeforeMouseDown(object sender, C1.Win.C1FlexGrid.BeforeMouseDownEventArgs e)
+        {
+
+
+            
         }
     }
 }

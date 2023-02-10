@@ -311,8 +311,10 @@
             this.grdBzaCh.StyleInfo = resources.GetString("grdBzaCh.StyleInfo");
             this.grdBzaCh.TabIndex = 10;
             this.grdBzaCh.TreeColor = System.Drawing.Color.DarkGray;
+            this.grdBzaCh.BeforeMouseDown += new C1.Win.C1FlexGrid.BeforeMouseDownEventHandler(this.grdBzaCh_BeforeMouseDown);
             this.grdBzaCh.RowColChange += new System.EventHandler(this.grdBzaCh_RowColChange);
             this.grdBzaCh.SelChange += new System.EventHandler(this.grdBzaCh_SelChange);
+            this.grdBzaCh.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grdBzaCh_MouseDown);
             // 
             // LnkLblLoad
             // 
