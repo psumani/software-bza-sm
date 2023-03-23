@@ -133,6 +133,68 @@ namespace ZiveLab.ZM
             bThread = false;
         }
 
+        public void InitVariables()
+        {
+            string str;
+            stTech_EIS meis = new stTech_EIS(0);
+
+            for (int i = 0; i<MBZA_Constant.MAX_DEV_CHANNEL; i++ )
+            {
+                OldCycle[i] = -1;
+                mChStatInf[i].initialize();
+
+                tech[i].initialize();
+                Lnkch[i] = -1;
+                bRemote[i] = false;
+                bLoadData[i] = false;
+                bEnableLoadData[i] = true;
+                RemoteCh[i] = -1;
+                techcalib[i].initialize();
+                str = string.Format("Calibration_{0}.eis", i);
+                calcondfilename[i] = Path.Combine(gBZA.appcfg.PathSysInfo, str);
+
+                if (File.Exists(calcondfilename[i]))
+                {
+                FileCondition fc = new FileCondition();
+                fc.OpenFile(calcondfilename[i], ref techcalib[i]);
+                }
+                else
+                { 
+                techcalib[i].GetEIS(ref meis);
+                meis.bias = 0.0;
+                meis.density = 10;
+                meis.initfreq = 4000.0;
+                meis.finalfreq = 0.05;
+                meis.iteration = 1;
+                techcalib[i].SetEIS(meis);
+
+                FileCondition fc = new FileCondition();
+
+                if(fc.Save(calcondfilename[i], techcalib[i]) == false)
+                {
+                gBZA.ShowInfoBox("Failed to save condition file of calibration test.");
+                }
+                }
+
+                mChRtGrp[i] = new cls_rtdata();
+                mresfile[i] = new FileResult();
+                mHeadinf[i] = new stResHeaderInfo(0);
+
+                mdevice[i] = new st_zim_device(0);
+                resfilename[i] = "";
+                condfilename[i] = "";
+                OldCondfilename[i] = "";
+            }
+            
+            bConnect = false;
+            bThread = false;
+        }
+
+        public bool ThreadStat()
+        {
+            return this.bThread;
+        }
+
         public void Thread_Run()
         {
             this.mMapMem = new MBZA_MapMem();
@@ -166,13 +228,49 @@ namespace ZiveLab.ZM
             return false;
         }
 
-        private void RefreshConnect()
+        private int RefreshConnect()
         {
             bConnect = false;
+
+
             if (mCommZim.Connect() == true)
             {
+                
+                stFindSIFCfg mcfg = new stFindSIFCfg(0);
+                
+                if (mCommZim.ReadFindSifcfg(ref mcfg) == false)
+                {
+                    mCommZim.Dispose();
+                    return -1;
+                }
+
+                if((eDeviceType)mcfg.Type == eDeviceType.SBZA || (eDeviceType)mcfg.Type == eDeviceType.MBZA)
+                {
+                    if(serial != mcfg.GetSerialNumber())
+                    {
+                        mCommZim.Dispose();
+                        return -1;
+                    }
+                }
+                else
+                {
+                    mCommZim.Dispose();
+                    return -1;
+                }
                 bConnect = true;
-                if (mCommZim.CheckModelOfSif() == true)
+                mCommZim.ReadConnectStatus(ref mConnection);
+
+                RefreshHeadinfo();
+                RefreshTechfiles();
+                RefreshDeviceInfo();
+
+                serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
+
+                mCommZim.CmdEnableCommTimeOut(1);
+
+                RefreshDeviceStatus();
+
+                /*if (mCommZim.CheckModelOfSif() == true)
                 {
 
                     if (mCommZim.mDevType == eDeviceType.SBZA || mCommZim.mDevType == eDeviceType.MBZA)
@@ -183,20 +281,32 @@ namespace ZiveLab.ZM
                         RefreshTechfiles();
                         RefreshDeviceInfo();
                         
+
                         serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
 
                         mCommZim.CmdEnableCommTimeOut(1);
 
                         RefreshDeviceStatus();
                     }
+                    else
+                    {
+                        return -1;
+                    }
                 }
-                if(gBZA.SifLnkLst.ContainsKey(serial))
+                else
+                {
+                    return -1;
+                }
+                */
+                if (gBZA.SifLnkLst.ContainsKey(serial))
                 {
                     gBZA.SifLnkLst[serial].mDevInf.ToWritePtr(mDevInf.ToByteArray());
                 }
-                
+                return 1;
             }
+            return 0;
         }
+
         private int Connect()
         {
             bConnect = false;
@@ -575,7 +685,7 @@ namespace ZiveLab.ZM
                 if (bCalib == true)
                 {
                     stResHeader head = new stResHeader(0);
-                    head.SetTechFile(Encoding.UTF8.GetBytes(calcondfilename[ch]));
+                    head.SetTechFilename(Encoding.UTF8.GetBytes(calcondfilename[ch]));
                     head.SetMemo(Encoding.UTF8.GetBytes(""));
                     head.mInfo.Ch = gBZA.SifLnkLst[serial].iLinkCh[ch];
                     head.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
@@ -1042,11 +1152,11 @@ namespace ZiveLab.ZM
 
                 if ((enTestState)teststate == enTestState.Calibration || (enTestState)teststate == enTestState.nc_Calibration)
                 {
-                    mresfile[ch].tmphead.SetTechFile(Encoding.UTF8.GetBytes(calcondfilename[ch]));
+                    mresfile[ch].tmphead.SetTechFilename(Encoding.UTF8.GetBytes(calcondfilename[ch]));
                 }
                 else
                 {
-                    mresfile[ch].tmphead.SetTechFile(Encoding.UTF8.GetBytes(OldCondfilename[ch]));
+                    mresfile[ch].tmphead.SetTechFilename(Encoding.UTF8.GetBytes(OldCondfilename[ch]));
                 }
                 mresfile[ch].tmphead.tech = Oldtech[ch];
                 mresfile[ch].tmphead.mInfo = mHeadinf[ch];
@@ -1183,7 +1293,10 @@ namespace ZiveLab.ZM
                     if (this.bThread == false) break;
                     if (this.SimplePing(mCommZim.GetHostName()) == true)
                     {
-                        RefreshConnect();
+                        if(RefreshConnect() == -1)
+                        {
+                            bThread = false;
+                        }
                     }
                     bConnect = mCommZim.mComm.Connected;
                     Thread.Sleep(10);
@@ -1205,6 +1318,7 @@ namespace ZiveLab.ZM
                 }
                 Thread.Sleep(10);
             }
+
             this.mMapMem.mHeader.mStat.Stop = 1;
             this.mMapMem.mHeader.mStat.Result = (UInt16)enResult.FLAG_FAIL;
             this.mMapMem.mHeader.mStat.Proc = (UInt16)enProc.Finish;

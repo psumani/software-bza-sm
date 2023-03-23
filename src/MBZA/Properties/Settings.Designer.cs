@@ -1066,5 +1066,113 @@ namespace ZiveLab.ZM.Properties {
                 this["RtGrpLegendView"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\Zive data\\Zm\\data")]
+        public string Path_Searchdata {
+            get {
+                return ((string)(this["Path_Searchdata"]));
+            }
+            set {
+                this["Path_Searchdata"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Opt_SearchType1 {
+            get {
+                return ((bool)(this["Opt_SearchType1"]));
+            }
+            set {
+                this["Opt_SearchType1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Opt_SearchType2 {
+            get {
+                return ((bool)(this["Opt_SearchType2"]));
+            }
+            set {
+                this["Opt_SearchType2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Opt_SearchType3 {
+            get {
+                return ((bool)(this["Opt_SearchType3"]));
+            }
+            set {
+                this["Opt_SearchType3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Opt_SearchType4 {
+            get {
+                return ((bool)(this["Opt_SearchType4"]));
+            }
+            set {
+                this["Opt_SearchType4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Opt_SearchType5 {
+            get {
+                return ((bool)(this["Opt_SearchType5"]));
+            }
+            set {
+                this["Opt_SearchType5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Opt_SearchType6 {
+            get {
+                return ((bool)(this["Opt_SearchType6"]));
+            }
+            set {
+                this["Opt_SearchType6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Opt_SearchType7 {
+            get {
+                return ((bool)(this["Opt_SearchType7"]));
+            }
+            set {
+                this["Opt_SearchType7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Opt_SearchSubfolder {
+            get {
+                return ((bool)(this["Opt_SearchSubfolder"]));
+            }
+            set {
+                this["Opt_SearchSubfolder"] = value;
+            }
+        }
     }
 }

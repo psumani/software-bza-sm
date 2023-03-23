@@ -47,6 +47,7 @@
             this.graphToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.dataEditorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuconvPrrDataToTextFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
@@ -193,6 +194,7 @@
             this.graphToolStripMenuItem1,
             this.toolStripSeparator8,
             this.dataEditorToolStripMenuItem1,
+            this.MenuconvPrrDataToTextFile,
             this.toolStripSeparator22,
             this.toolStripMenuItem1,
             this.toolStripSeparator23,
@@ -253,6 +255,14 @@
             this.dataEditorToolStripMenuItem1.Text = "Data &editor";
             this.dataEditorToolStripMenuItem1.ToolTipText = "Open the test results file as a report to view the information.";
             this.dataEditorToolStripMenuItem1.Click += new System.EventHandler(this.dataEditorToolStripMenuItem1_Click);
+            // 
+            // MenuconvPrrDataToTextFile
+            // 
+            this.MenuconvPrrDataToTextFile.Image = global::ZiveLab.ZM.Properties.Resources.TransitioningContent;
+            this.MenuconvPrrDataToTextFile.Name = "MenuconvPrrDataToTextFile";
+            this.MenuconvPrrDataToTextFile.Size = new System.Drawing.Size(347, 22);
+            this.MenuconvPrrDataToTextFile.Text = "Tools for data files.";
+            this.MenuconvPrrDataToTextFile.Click += new System.EventHandler(this.MenuconvPrrDataToTextFile_Click);
             // 
             // toolStripSeparator22
             // 
@@ -748,5 +758,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripMenuItem Memu_RstWinPos;
+        private System.Windows.Forms.ToolStripMenuItem MenuconvPrrDataToTextFile;
     }
 }

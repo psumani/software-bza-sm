@@ -171,6 +171,14 @@ namespace ZiveLab.ZM.ZIM.Packets
             phase = 0.0;
         }
 
+        public void initialize()
+        {
+            real = 0x0;
+            img = 0x0;
+            mag = 0.0;
+            phase = 0.0;
+        }
+
         public byte[] ToByteArray()
         {
             int Size = Marshal.SizeOf(this);
@@ -646,6 +654,27 @@ namespace ZiveLab.ZM.ZIM.Packets
             }
         }
 
+        public void initialize()
+        {
+            status = DeviceConstants.EIS_STATUS_NONE;
+            rescount = 0;
+            freqcount = 0;
+            freqindex = 0;
+            freq = 1000.0;
+            cycle = 0;
+            SkipCycle = 0;
+            cycpoint = 0;
+            totaldatacnt = DeviceConstants.MAX_EIS_RAWADC_POINT;
+            WorkDatacnt = 0;
+            LoadDatacnt = 0;
+            zdata.initialize();
+           
+            for (int i = 0; i < DeviceConstants.MAX_EIS_RAWVAL_POINT; i++)
+            {
+                Real_val[i].Init();
+            }
+        }
+
         public byte[] ToByteArray()
         {
             int Size = Marshal.SizeOf(this);
@@ -935,7 +964,8 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public ushort skipcycle;
         public ushort cycle;
-        public int    inouse;
+        public ushort rpcalmode;
+        public ushort usmouse;
 
         public stTech_PRR(int init)
         {
@@ -948,7 +978,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             celloffwait = 0;
             skipcycle = 0;
             cycle = 2;
-            inouse = 0;
+            rpcalmode = 0;
+            usmouse = 0;
         }
 
         public void initialize()
@@ -962,7 +993,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             celloffwait = 0;
             skipcycle = 0;
             cycle = 2;
-            inouse = 0;
+            rpcalmode = 0;
+            usmouse = 0;
         }
         public byte[] ToByteArray()
         {
@@ -1309,10 +1341,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             NoUse = 0.0;
         }
 
-        public void initialize(enTechType techtype)
+        public void initialize(enTechType techtype = enTechType.TECH_EIS)
         {
             type = (ushort)techtype;
-            if(techtype == enTechType.TECH_MON)
+            version.initialize();
+            if (techtype == enTechType.TECH_MON)
             {
                 ondelay = 2.0;
                 ondelaystable = 0;
@@ -1544,6 +1577,44 @@ namespace ZiveLab.ZM.ZIM.Packets
             nouse1 = 0.0;
         }
 
+        public void initialize()
+        {
+            bCheck = 0;
+            bSelected = 0;
+            ZimType = 0;
+
+            TestStatus = DeviceConstants.TESTSTATUS_READY;
+            LastError = DeviceConstants.DEF_LAST_ERROR_NONE;
+            ErrorStatus = DeviceConstants.DEF_LAST_ERROR_NONE;
+            Iac_rngno = 0;
+            Iac_in_rngno = 0;
+            Vdc_rngno = 0;
+
+            RunTimeStamp = 0;
+            CycleNo = 0;
+            CycleTimeStamp = 0;
+            NextCycleNo = 0;
+            TaskNo = 0;
+            TaskTimeStamp = 0;
+            NextTaskNo = 0;
+            rtc.tick = 0;
+            Veoc = 0.0;
+            Vdc = 0.0;
+            Idc = 0.0;
+            Temperature = 0.0;
+
+            RealSkip = 0;
+            LoadOn = 0;
+            BiasOn = 0;
+            eis_status.initialize();
+
+            DispFreq = 0.0;
+            DispMag = 0.0;
+            DispPhase = 0.0;
+
+            nouse1 = 0.0;
+        }
+
         public int GetSize()
         {
             return Marshal.SizeOf(this);
@@ -1694,6 +1765,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             Array.Copy(id, batid, len);
         }
 
+        public string GetBattId()
+        {
+            return Encoding.UTF8.GetString(batid).Trim('\0');
+        }
+
         public void SetUser(byte[] name)
         {
             int len = name.Length;
@@ -1707,6 +1783,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             Array.Copy(name, user, len);
         }
 
+        public string GetUser()
+        {
+            return Encoding.UTF8.GetString(user).Trim('\0');
+        }
+
         public void SetMemo(byte[] desc)
         {
             int len = desc.Length;
@@ -1718,6 +1799,11 @@ namespace ZiveLab.ZM.ZIM.Packets
                 len = DeviceConstants.MEMOSIZE - 1;
             }
             Array.Copy(desc, memo, len);
+        }
+
+        public string GetMemo()
+        {
+            return Encoding.UTF8.GetString(memo).Trim('\0');
         }
 
         public byte[] ToByteArray()
@@ -1757,17 +1843,17 @@ namespace ZiveLab.ZM.ZIM.Packets
             tech = new stTech(0);
         }
 
-        public void SetTechFile(string name)
+        public void SetTechFilename(string name)
         {
             mInfo.SetTechFile(name);
         }
 
-        public void SetTechFile(byte[] name)
+        public void SetTechFilename(byte[] name)
         {
             mInfo.SetTechFile(name);
         }
 
-        public string GetTechFile()
+        public string GetTechFilename()
         {
             return mInfo.GetTechFile();
         }

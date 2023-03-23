@@ -56,6 +56,8 @@
             this.txthfrfreq = new System.Windows.Forms.TextBox();
             this.lblhfrfreq = new System.Windows.Forms.Label();
             this.tabtech3 = new System.Windows.Forms.TabPage();
+            this.cborpcalc = new System.Windows.Forms.ComboBox();
+            this.lblRpCalc = new System.Windows.Forms.Label();
             this.chkrpend = new System.Windows.Forms.CheckBox();
             this.chkprrcelloffwait = new System.Windows.Forms.CheckBox();
             this.txtprrtotaltime = new System.Windows.Forms.TextBox();
@@ -104,7 +106,7 @@
             this.tabtech.Location = new System.Drawing.Point(164, 8);
             this.tabtech.Name = "tabtech";
             this.tabtech.SelectedIndex = 0;
-            this.tabtech.Size = new System.Drawing.Size(423, 204);
+            this.tabtech.Size = new System.Drawing.Size(423, 230);
             this.tabtech.TabIndex = 5;
             this.tabtech.SelectedIndexChanged += new System.EventHandler(this.tbbtech_SelectedIndexChanged);
             // 
@@ -126,7 +128,7 @@
             this.tabtech1.Location = new System.Drawing.Point(4, 23);
             this.tabtech1.Name = "tabtech1";
             this.tabtech1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabtech1.Size = new System.Drawing.Size(415, 177);
+            this.tabtech1.Size = new System.Drawing.Size(415, 203);
             this.tabtech1.TabIndex = 0;
             this.tabtech1.Text = "a";
             // 
@@ -134,7 +136,7 @@
             // 
             this.cboeiscyc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboeiscyc.FormattingEnabled = true;
-            this.cboeiscyc.Location = new System.Drawing.Point(194, 147);
+            this.cboeiscyc.Location = new System.Drawing.Point(194, 151);
             this.cboeiscyc.Name = "cboeiscyc";
             this.cboeiscyc.Size = new System.Drawing.Size(86, 22);
             this.cboeiscyc.TabIndex = 24;
@@ -144,7 +146,7 @@
             // 
             this.cboeisskipcyc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboeisskipcyc.FormattingEnabled = true;
-            this.cboeisskipcyc.Location = new System.Drawing.Point(194, 120);
+            this.cboeisskipcyc.Location = new System.Drawing.Point(194, 122);
             this.cboeisskipcyc.Name = "cboeisskipcyc";
             this.cboeisskipcyc.Size = new System.Drawing.Size(86, 22);
             this.cboeisskipcyc.TabIndex = 23;
@@ -153,7 +155,7 @@
             // lbleiscycle
             // 
             this.lbleiscycle.AutoSize = true;
-            this.lbleiscycle.Location = new System.Drawing.Point(40, 152);
+            this.lbleiscycle.Location = new System.Drawing.Point(40, 156);
             this.lbleiscycle.Name = "lbleiscycle";
             this.lbleiscycle.Size = new System.Drawing.Size(84, 14);
             this.lbleiscycle.TabIndex = 22;
@@ -162,7 +164,7 @@
             // lbleisskipcycle
             // 
             this.lbleisskipcycle.AutoSize = true;
-            this.lbleisskipcycle.Location = new System.Drawing.Point(40, 125);
+            this.lbleisskipcycle.Location = new System.Drawing.Point(40, 127);
             this.lbleisskipcycle.Name = "lbleisskipcycle";
             this.lbleisskipcycle.Size = new System.Drawing.Size(77, 14);
             this.lbleisskipcycle.TabIndex = 20;
@@ -253,7 +255,7 @@
             this.tabtech2.Location = new System.Drawing.Point(4, 23);
             this.tabtech2.Name = "tabtech2";
             this.tabtech2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabtech2.Size = new System.Drawing.Size(415, 177);
+            this.tabtech2.Size = new System.Drawing.Size(415, 203);
             this.tabtech2.TabIndex = 1;
             this.tabtech2.Text = "b";
             // 
@@ -358,6 +360,8 @@
             // tabtech3
             // 
             this.tabtech3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabtech3.Controls.Add(this.cborpcalc);
+            this.tabtech3.Controls.Add(this.lblRpCalc);
             this.tabtech3.Controls.Add(this.chkrpend);
             this.tabtech3.Controls.Add(this.chkprrcelloffwait);
             this.tabtech3.Controls.Add(this.txtprrtotaltime);
@@ -371,9 +375,30 @@
             this.tabtech3.Controls.Add(this.label18);
             this.tabtech3.Location = new System.Drawing.Point(4, 23);
             this.tabtech3.Name = "tabtech3";
-            this.tabtech3.Size = new System.Drawing.Size(415, 177);
+            this.tabtech3.Size = new System.Drawing.Size(415, 203);
             this.tabtech3.TabIndex = 2;
             this.tabtech3.Text = "c";
+            // 
+            // cborpcalc
+            // 
+            this.cborpcalc.FormattingEnabled = true;
+            this.cborpcalc.Items.AddRange(new object[] {
+            "Zre(Rp end) - Zre(Rp)",
+            "Zre(Rp end) - Zre(Rs)"});
+            this.cborpcalc.Location = new System.Drawing.Point(229, 93);
+            this.cborpcalc.Name = "cborpcalc";
+            this.cborpcalc.Size = new System.Drawing.Size(179, 22);
+            this.cborpcalc.TabIndex = 32;
+            this.cborpcalc.SelectedIndexChanged += new System.EventHandler(this.cborpcalc_SelectedIndexChanged);
+            // 
+            // lblRpCalc
+            // 
+            this.lblRpCalc.AutoSize = true;
+            this.lblRpCalc.Location = new System.Drawing.Point(30, 96);
+            this.lblRpCalc.Name = "lblRpCalc";
+            this.lblRpCalc.Size = new System.Drawing.Size(154, 14);
+            this.lblRpCalc.TabIndex = 31;
+            this.lblRpCalc.Text = "Pseudo Rp calculation";
             // 
             // chkrpend
             // 
@@ -389,7 +414,7 @@
             // chkprrcelloffwait
             // 
             this.chkprrcelloffwait.AutoSize = true;
-            this.chkprrcelloffwait.Location = new System.Drawing.Point(231, 118);
+            this.chkprrcelloffwait.Location = new System.Drawing.Point(231, 145);
             this.chkprrcelloffwait.Name = "chkprrcelloffwait";
             this.chkprrcelloffwait.Size = new System.Drawing.Size(166, 18);
             this.chkprrcelloffwait.TabIndex = 29;
@@ -399,7 +424,7 @@
             // 
             // txtprrtotaltime
             // 
-            this.txtprrtotaltime.Location = new System.Drawing.Point(229, 143);
+            this.txtprrtotaltime.Location = new System.Drawing.Point(229, 170);
             this.txtprrtotaltime.Name = "txtprrtotaltime";
             this.txtprrtotaltime.Size = new System.Drawing.Size(100, 22);
             this.txtprrtotaltime.TabIndex = 28;
@@ -408,7 +433,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(28, 144);
+            this.label21.Location = new System.Drawing.Point(28, 171);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(98, 14);
             this.label21.TabIndex = 27;
@@ -416,7 +441,7 @@
             // 
             // txtprrinterval
             // 
-            this.txtprrinterval.Location = new System.Drawing.Point(229, 93);
+            this.txtprrinterval.Location = new System.Drawing.Point(229, 120);
             this.txtprrinterval.Name = "txtprrinterval";
             this.txtprrinterval.Size = new System.Drawing.Size(100, 22);
             this.txtprrinterval.TabIndex = 26;
@@ -425,7 +450,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(28, 96);
+            this.label22.Location = new System.Drawing.Point(28, 123);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(84, 14);
             this.label22.TabIndex = 25;
@@ -481,15 +506,15 @@
             this.panel1.Controls.Add(this.cboIrange);
             this.panel1.Controls.Add(this.lbliRange);
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Location = new System.Drawing.Point(164, 218);
+            this.panel1.Location = new System.Drawing.Point(165, 240);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(418, 200);
+            this.panel1.Size = new System.Drawing.Size(418, 187);
             this.panel1.TabIndex = 10;
             // 
             // chkondelaystable
             // 
             this.chkondelaystable.AutoSize = true;
-            this.chkondelaystable.Location = new System.Drawing.Point(271, 19);
+            this.chkondelaystable.Location = new System.Drawing.Point(270, 13);
             this.chkondelaystable.Name = "chkondelaystable";
             this.chkondelaystable.Size = new System.Drawing.Size(145, 18);
             this.chkondelaystable.TabIndex = 24;
@@ -499,7 +524,7 @@
             // 
             // txtondelay
             // 
-            this.txtondelay.Location = new System.Drawing.Point(177, 16);
+            this.txtondelay.Location = new System.Drawing.Point(176, 10);
             this.txtondelay.Name = "txtondelay";
             this.txtondelay.Size = new System.Drawing.Size(86, 22);
             this.txtondelay.TabIndex = 23;
@@ -508,7 +533,7 @@
             // lblondelay
             // 
             this.lblondelay.AutoSize = true;
-            this.lblondelay.Location = new System.Drawing.Point(24, 19);
+            this.lblondelay.Location = new System.Drawing.Point(23, 13);
             this.lblondelay.Name = "lblondelay";
             this.lblondelay.Size = new System.Drawing.Size(84, 14);
             this.lblondelay.TabIndex = 22;
@@ -518,7 +543,7 @@
             // 
             this.cboIrange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboIrange.FormattingEnabled = true;
-            this.cboIrange.Location = new System.Drawing.Point(177, 53);
+            this.cboIrange.Location = new System.Drawing.Point(176, 42);
             this.cboIrange.Name = "cboIrange";
             this.cboIrange.Size = new System.Drawing.Size(86, 22);
             this.cboIrange.TabIndex = 20;
@@ -527,7 +552,7 @@
             // lbliRange
             // 
             this.lbliRange.AutoSize = true;
-            this.lbliRange.Location = new System.Drawing.Point(24, 57);
+            this.lbliRange.Location = new System.Drawing.Point(23, 46);
             this.lbliRange.Name = "lbliRange";
             this.lbliRange.Size = new System.Drawing.Size(56, 14);
             this.lbliRange.TabIndex = 19;
@@ -541,7 +566,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(15, 80);
+            this.groupBox2.Location = new System.Drawing.Point(14, 69);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(388, 111);
             this.groupBox2.TabIndex = 12;
@@ -641,7 +666,7 @@
             // 
             // btclose
             // 
-            this.btclose.Location = new System.Drawing.Point(596, 392);
+            this.btclose.Location = new System.Drawing.Point(596, 400);
             this.btclose.Name = "btclose";
             this.btclose.Size = new System.Drawing.Size(73, 26);
             this.btclose.TabIndex = 15;
@@ -652,9 +677,9 @@
             // techtree
             // 
             this.techtree.HideSelection = false;
-            this.techtree.Location = new System.Drawing.Point(8, 31);
+            this.techtree.Location = new System.Drawing.Point(8, 30);
             this.techtree.Name = "techtree";
-            this.techtree.Size = new System.Drawing.Size(149, 386);
+            this.techtree.Size = new System.Drawing.Size(150, 396);
             this.techtree.TabIndex = 16;
             this.techtree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.techtree_NodeMouseClick);
             // 
@@ -677,7 +702,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 427);
+            this.ClientSize = new System.Drawing.Size(678, 431);
             this.Controls.Add(this.lbltech);
             this.Controls.Add(this.techtree);
             this.Controls.Add(this.btclose);
@@ -778,5 +803,7 @@
         private System.Windows.Forms.Label lblctrlrate;
         private System.Windows.Forms.ComboBox cbomonctrl;
         private System.Windows.Forms.CheckBox chkhfrcelloffwait;
+        private System.Windows.Forms.Label lblRpCalc;
+        private System.Windows.Forms.ComboBox cborpcalc;
     }
 }

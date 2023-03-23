@@ -469,11 +469,18 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-                    brun = gBZA.CheckStatusRun(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
-                    bcalibmode = gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
-                    berror = false;
-                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
-                    else Value.bChkCh = false;
+                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.ThreadStat() == false)
+                    {
+                        berror = true;
+                    }
+                    else
+                    {
+                        brun = gBZA.CheckStatusRun(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
+                        bcalibmode = gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
+                        berror = false;
+                        if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
+                        else Value.bChkCh = false;
+                    }
                 }
                 
 
@@ -531,7 +538,10 @@ namespace ZiveLab.ZM
                     }
                     else if (i == 3)
                     {
-                        if (Value.bChkSIF == false || berror == true) str = enStatError.ErrCommZim.GetDescription();
+                        if (Value.bChkSIF == false || berror == true)
+                        {
+                            str = enStatError.ErrCommZim.GetDescription();
+                        }
                         else str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
                         hgrid.SetData(row, i, str);
                     }
@@ -789,11 +799,18 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-                    brun = gBZA.CheckStatusRun(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
-                    bcalibmode = gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
-                    berror = false;
-                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
-                    else Value.bChkCh = false;
+                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.ThreadStat() == false)
+                    {
+                        berror = true;
+                    }
+                    else
+                    {
+                        brun = gBZA.CheckStatusRun(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
+                        bcalibmode = gBZA.CheckStatusCalibMode(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
+                        berror = false;
+                        if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.ChkZIM[Value.SifCh] == 1) Value.bChkCh = true;
+                        else Value.bChkCh = false;
+                    }
                 }
                 
                 for (i = 2; i < 17; i++)

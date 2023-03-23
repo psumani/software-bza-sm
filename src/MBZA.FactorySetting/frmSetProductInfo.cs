@@ -168,7 +168,8 @@ namespace ZiveLab.ZM.FactorySetting
             {
                 maskSerial.Text = "";
             }
-            sCode += str.Substring(5);
+            if (str.Length < 5) sCode += str;
+            else sCode += str.Substring(5);
         }
 
         public void ViewZimInformation()

@@ -115,7 +115,19 @@ namespace ZiveLab.ZM
             {
                 gBZA.SifLnkLst.Clear();
             }
-            
+            else
+            {
+                var siflist = gBZA.SifLnkLst.Keys.ToList();
+                siflist.Sort();
+
+                foreach (var key in siflist)
+                {
+                    if(gBZA.SifLnkLst[key].MBZAIF.ThreadStat() == false)
+                    {
+                        gBZA.SifLnkLst.Remove(key);
+                    }
+                }
+            }
 
             txtResult.Text = "* Scan device list\r\n" ;
 
@@ -272,7 +284,7 @@ namespace ZiveLab.ZM
                                 Value.mDevInf = gBZA.SifLnkLst[Value.sSerial].mDevInf;
                                 Value.bChkCh = true;
                                 bchk = true;
-                                if(gBZA.SifLnkLst[Value.sSerial].MBZAIF.bConnect == true)
+                                if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bConnect == true)
                                 {
                                     bconn = true;
                                 }

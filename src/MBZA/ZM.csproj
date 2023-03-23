@@ -120,6 +120,12 @@
     <Compile Include="frmConfig.designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDataTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataTools.Designer.cs">
+      <DependentUpon>frmDataTools.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDummyDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,12 @@
     </Compile>
     <Compile Include="frmTestDevice.Designer.cs">
       <DependentUpon>frmTestDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTransPrrData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTransPrrData.Designer.cs">
+      <DependentUpon>frmTransPrrData.cs</DependentUpon>
     </Compile>
     <Compile Include="InfomationGrid.cs">
       <SubType>UserControl</SubType>
@@ -301,6 +313,9 @@
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDataTools.resx">
+      <DependentUpon>frmDataTools.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDummyDlg.resx">
       <DependentUpon>frmDummyDlg.cs</DependentUpon>
     </EmbeddedResource>
@@ -312,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTestDevice.resx">
       <DependentUpon>frmTestDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTransPrrData.resx">
+      <DependentUpon>frmTransPrrData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfomationGrid.resx">
       <DependentUpon>InfomationGrid.cs</DependentUpon>
@@ -701,6 +719,7 @@
     <None Include="doc\Image6\EditInput.png" />
     <None Include="doc\Image6\StartLogging.png" />
     <None Include="doc\Image6\NetConfig.png" />
+    <None Include="doc\png\TransitioningContent.png" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />

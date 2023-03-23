@@ -254,6 +254,24 @@ namespace ZiveLab.ZM.ZIM
         TECH_DCH,
     }
 
+    public enum enTechType1
+    {
+        [Description("ERR")]
+        TECH_ERR = -1,
+        [Description("EIS")]
+        TECH_EIS = 0,
+        [Description("HFR ")]
+        TECH_HFR,
+        [Description("PRR")]
+        TECH_PRR,
+        [Description("MON")]
+        TECH_MON,
+        [Description("QIS")]
+        TECH_QIS,
+        [Description("DCH")]
+        TECH_DCH,
+    }
+
     public enum enVoltageRange
     {
         [Description("Auto")]

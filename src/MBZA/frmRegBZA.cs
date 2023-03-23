@@ -22,9 +22,12 @@ namespace ZiveLab.ZM
         bool bInitBza;
         bool bInitBzaCh;
 
+        bool chgreg;
+
         int LnkRow;
         int BzaRow;
         int BzaChRow;
+
 
 
         int ScanSIFCnt;
@@ -52,7 +55,7 @@ namespace ZiveLab.ZM
             SearchedSif = gBZA.pingHost.SearchedDevice;
 
             DoubleBuffered = true;
-
+            chgreg = false;
             rdoBZA.Text = "Available devices.";
             
             bInitLnk = false;
@@ -1674,6 +1677,8 @@ namespace ZiveLab.ZM
                 }
                 
             }*/
+
+            chgreg = true;
         }
 
         private void UploadZim_Click(object sender, EventArgs e)
@@ -1939,6 +1944,7 @@ namespace ZiveLab.ZM
 
                 RefreshAll();
                 MessageBox.Show("The selected channel has been unregistered.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                chgreg = true;
             }
             else
             {
@@ -2038,6 +2044,28 @@ namespace ZiveLab.ZM
 
 
             
+        }
+
+        private void frmRegBZA_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(chgreg == true)
+            {
+                if (MessageBox.Show("Do you want to save your registration changes?", gBZA.sMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    return;
+                }
+                else
+                {
+                    if (gBZA.SaveLinkChToXml(gBZA.FileLnkCh) == false)
+                    {
+                        MessageBox.Show("Failed to save.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Save was successful.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
         }
     }
 }

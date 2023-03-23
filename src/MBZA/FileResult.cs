@@ -64,9 +64,9 @@ namespace ZiveLab.ZM
             tmphead = head;
         }
 
-        public void WriteHead()
+        public bool WriteHead()
         {
-            WriteHead(tmphead);
+            return WriteHead(tmphead);
         }
 
         public bool ChangeMemo(string memo)
@@ -77,8 +77,8 @@ namespace ZiveLab.ZM
             if (cnt > DeviceConstants.MEMOSIZE) cnt = DeviceConstants.MEMOSIZE;
             Array.Clear(tmphead.mInfo.memo, 0, DeviceConstants.MEMOSIZE);
             Array.Copy(tbytes, tmphead.mInfo.memo, cnt);
-            WriteHead(tmphead);
-            return true;
+            
+            return WriteHead(tmphead);
         }
         public bool AppendMemo(string memo)
         {
@@ -98,27 +98,33 @@ namespace ZiveLab.ZM
                 cnt2 = cnt3;
             }
             Array.Copy(tbytes, 0, tmphead.mInfo.memo, cnt1, cnt2);
+            return WriteHead(tmphead);
+        }
 
-            WriteHead(tmphead);
+        public bool ReadHead()
+        {
+            return ReadHead(ref tmphead);
+        }
+        public bool ReadHead(ref stResHeader head)
+        {
+            if (bopen == false) return false;
+            byte[] buf = new byte[len_head];
+            fs.Seek(0, SeekOrigin.Begin);
+            if(fs.Read(buf, 0, len_head) != len_head)
+            {
+                return false;
+            }
+            head.ToWritePtr(buf);
             return true;
         }
 
-        public void ReadHead()
+        public bool WriteHead(stResHeader head)
         {
-            ReadHead(ref tmphead);
-        }
-        public void ReadHead(ref stResHeader head)
-        {
-            byte[] buf = new byte[len_head];
-            fs.Seek(0, SeekOrigin.Begin);
-            fs.Read(buf, 0, len_head);
-            head.ToWritePtr(buf);
-        }
-
-        public void WriteHead(stResHeader head)
-        {
+            if (bopen == false) return false;
+            if (bwrite == false) return false;
             fs.Seek(0, SeekOrigin.Begin);
             fs.Write(head.ToByteArray(), 0, len_head);
+            return true;
         }
 
         public bool Start(string filename, int ch, string serial, int sifch)
@@ -141,11 +147,17 @@ namespace ZiveLab.ZM
                 tmphead.mInfo.sifch = sifch;
                 datacount = 0;
                 fs.SetLength(0);
-                WriteHead();
-                
-                bStart = true;
+
                 bopen = true;
                 bwrite = true;
+
+                if(WriteHead() == false)
+                {
+                    return false;
+                }
+
+                bStart = true;
+
             }
             catch (Exception e)
             {
@@ -176,11 +188,13 @@ namespace ZiveLab.ZM
                 tmphead.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
                 tmphead.mInfo.sifch = sifch;
 
-                WriteHead();
-                
-                bStart = false;
                 bopen = true;
                 bwrite = true;
+
+                if (WriteHead() == false) return false;
+                
+                bStart = false;
+               
             }
             catch (Exception e)
             {
@@ -211,10 +225,13 @@ namespace ZiveLab.ZM
                 tmphead.mInfo.Ch = ch;
                 tmphead.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
                 tmphead.mInfo.sifch = sifch;
-                WriteHead();
-                bStart = true;
                 bopen = true;
                 bwrite = true;
+
+                if (WriteHead() == false) return false;
+
+                bStart = true;
+               
             }
             catch (Exception e)
             {
@@ -251,13 +268,14 @@ namespace ZiveLab.ZM
 
                 tmphead.mInfo.rtc_begin = rtc;
                 tmphead.mInfo.rtc_end = rtc;
-                
-                
-                WriteHead(head);
-               
-                bStart = true;
+
                 bopen = true;
                 bwrite = true;
+
+                if (WriteHead(head) == false) return false;
+               
+                bStart = true;
+                
                 sfilename = filename;
             }
             catch (Exception e)
@@ -288,11 +306,14 @@ namespace ZiveLab.ZM
 
                 tmphead = head;
 
-                WriteHead(head);
-
-                bStart = false;
                 bopen = true;
                 bwrite = true;
+
+                if (WriteHead(head) == false) return false;
+
+
+                bStart = false;
+                
                 sfilename = filename;
             }
             catch (Exception e)
@@ -310,8 +331,7 @@ namespace ZiveLab.ZM
             bStart = false;
             tmphead.mInfo.rtc_end.tick = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             tmphead.mInfo.Error = Error;
-            WriteHead();
-            return true;
+            return WriteHead();
         }
 
         public bool Stop(ushort Error)
@@ -320,7 +340,7 @@ namespace ZiveLab.ZM
             bStart = false;
             tmphead.mInfo.rtc_end.tick = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             tmphead.mInfo.Error = Error;
-            WriteHead();
+            if (WriteHead() == false) return false;
             CloseFile();
             return true;
         }
@@ -330,7 +350,7 @@ namespace ZiveLab.ZM
             if (bStart == false) return false;
             tmphead.mInfo.rtc_end = rtc;
             tmphead.mInfo.Error = Error;
-            WriteHead();
+            if (WriteHead() == false) return false;
             CloseFile();
             return true;
         }
@@ -450,10 +470,12 @@ namespace ZiveLab.ZM
                     return false;
                 }
                 datacount = this.GetDatacount();
-                ReadHead();
+
                 bStart = false;
                 bwrite = true;
                 bopen = true;
+
+                ReadHead();
             }
             catch (Exception e)
             {

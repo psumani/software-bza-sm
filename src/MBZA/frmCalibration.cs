@@ -177,17 +177,22 @@ namespace ZiveLab.ZM
                 return;
             }
             bool ChkCalib = ChkEisCalInf(rng);
+
             if (mlogfile.Open(sLogDataFile) == true)
             {
                 if (mlogfile.datacount > 0)
                 {
                     stDefTestData[] data = new stDefTestData[mlogfile.datacount];
+
                     DataCount = mlogfile.read(0, ref data, mlogfile.datacount);
                     
                     if (DataCount != mlogfile.datacount)
                     {
                         MessageBox.Show("Failed to read all data.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
+
+
                     mRtData.Initialize(mlogfile.tmphead.tech);
                     mRtData.Append(data, DataCount, ref oldcycel);
                     grdlist.Rows.Count = DataCount + 2;
@@ -412,7 +417,7 @@ namespace ZiveLab.ZM
                 Rtlegend.Items[0].Source = grprt.Plots[0];
                 Rtlegend.Items[1].Visible = true;
                 Rtlegend.Items[1].Text = "Current";
-                Rtlegend.Items[0].Source = grprt.Plots[1];
+                Rtlegend.Items[1].Source = grprt.Plots[1];
                 legSize.Height = 55;
             }
             else
@@ -422,6 +427,7 @@ namespace ZiveLab.ZM
                 Rtlegend.Items[0].Source = grprt.Plots[0];
                 Rtlegend.Items[1].Visible = false;
                 Rtlegend.Items[1].Text = "";
+                Rtlegend.Items[1].Source = null;
                 legSize.Height = 30;
             }
             Rtlegend.Size = legSize;

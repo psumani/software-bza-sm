@@ -99,6 +99,8 @@ namespace ZiveLab.ZM.ZIM.Interface
 
         public void Dispose() 
         {
+            isConnected = false;
+
             if (networkStream != null)
                 networkStream.Close(1000);
 

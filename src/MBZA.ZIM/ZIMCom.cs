@@ -1568,6 +1568,7 @@ namespace ZiveLab.ZM.ZIM
 
         protected virtual void Dispose(bool disposing)
         {
+            isConnected = false;
             if (this.disposed) return;
             if (disposing)
             {

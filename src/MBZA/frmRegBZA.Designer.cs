@@ -381,6 +381,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registration BZA";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmRegBZA_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.grdChs)).EndInit();
             this.RegMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdBZAs)).EndInit();

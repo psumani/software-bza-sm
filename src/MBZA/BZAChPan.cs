@@ -1684,7 +1684,7 @@ namespace ZiveLab.ZM
         {
 
             TabGrpRaw.Text = "AC waveform";
-
+            /*
             if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
             {
                 TabGrp1.Text = "Zre,Eoc vs t";
@@ -1697,6 +1697,10 @@ namespace ZiveLab.ZM
                 grp1.YAxes[1].Caption = "Vdc(V)";
                 legend1.Items[1].Text = "Vdc";
             }
+            */
+            TabGrp1.Text = "Zre,Vdc vs t";
+            grp1.YAxes[1].Caption = "Vdc(V)";
+            legend1.Items[1].Text = "Vdc";
 
             //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.#####");
             //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
@@ -1808,7 +1812,19 @@ namespace ZiveLab.ZM
             grp1.ClearData();
             grp2.ClearData();
             TabGrpRaw.Text = "AC waveform";
-            TabGrp1.Text = "Rs,P_Rp vs t";
+
+            if (techprr.rdendfreq != 0.0)
+            {
+                if (techprr.rpcalmode == 0)
+                    TabGrp1.Text = "Rs,P_Rp(Rp end-Rp) vs t";
+                else TabGrp1.Text = "Rs,P_Rp(Rp end-Rs) vs t";
+            }
+            else
+            {
+                TabGrp1.Text = "Rs,P_Rp(Rp-Rs) vs t";
+            }
+            
+            //TabGrp1.Text = "Rs,P_Rp vs t";
             TabGrp2.Text = "Cs,Cp vs t";
 
             grp1.XAxes[0].Caption = "Time";
@@ -2871,16 +2887,11 @@ namespace ZiveLab.ZM
                     maxval = +1.0;
                 }
                 grp2.YAxes[1].Range = new Range(minval, maxval);
-                maxval = rtgrp.plot[3].Maxval[2];
-                minval = rtgrp.plot[3].Minval[2];
 
-                cmpval = Math.Abs(maxval);
-                if (cmpval < Math.Abs(minval))
-                {
-                    cmpval = Math.Abs(minval);
-                }
-                maxval = maxval + (cmpval * GrpSpaceRate);
-                minval = minval - (cmpval * GrpSpaceRate);
+
+                maxval = rtgrp.plot[3].Maxval[2]; // frequency
+                minval = rtgrp.plot[3].Minval[2];
+                
                 if (minval == maxval)
                 {
                     minval -= minval * 0.1;
@@ -2891,7 +2902,12 @@ namespace ZiveLab.ZM
                     minval = -1.0;
                     maxval = +1.0;
                 }
-
+                else
+                {
+                    minval -= minval * GrpSpaceRate;
+                    maxval += maxval * GrpSpaceRate;
+                }
+                if (minval <= 0.045) minval = 0.045;
                 grp2.XAxes[0].Range = new Range(minval, maxval);
             }
         }
@@ -3122,13 +3138,6 @@ namespace ZiveLab.ZM
                 maxval = rtgrp.plot[3].Maxval[2];
                 minval = rtgrp.plot[3].Minval[2];
 
-                cmpval = Math.Abs(maxval);
-                if (cmpval < Math.Abs(minval))
-                {
-                    cmpval = Math.Abs(minval);
-                }
-                maxval = maxval + (cmpval * GrpSpaceRate);
-                minval = minval - (cmpval * GrpSpaceRate);
                 if (minval == maxval)
                 {
                     minval -= minval * 0.1;
@@ -3139,7 +3148,12 @@ namespace ZiveLab.ZM
                     minval = -1.0;
                     maxval = +1.0;
                 }
-
+                else
+                {
+                    minval -= minval * GrpSpaceRate;
+                    maxval += maxval * GrpSpaceRate;
+                }
+                if (minval <= 0.045) minval = 0.045;
                 grp2.XAxes[0].Range = new Range(minval, maxval);
             }
         }
@@ -3366,22 +3380,56 @@ namespace ZiveLab.ZM
             double[] ty = null;
             double[] ptx = new double[appendcount];
             double[] pty = new double[appendcount];
+            double[] ptx1 = new double[appendcount];
+            double[] pty1 = new double[appendcount];
             double time0 = -1.0;
             double time1 = -1.0;
+            int count;
 
             for (i = 0; i < gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt; i++)
             {
+                ptx.Initialize();
+                pty.Initialize();
+                ptx1.Initialize();
+                pty1.Initialize();
                 if (i < 2)
                 {
-                    if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
+                    if (i == 1)
                     {
-                        tx = rtgrp.plot[0].lx[i].ToArray();
-                        ty = rtgrp.plot[0].ly[i].ToArray();
-                        Array.Copy(tx, st, ptx, 0, appendcount);
-                        Array.Copy(ty, st, pty, 0, appendcount);
-                        grp1.Plots[i+ nPlot1].PlotXYAppend(ptx, pty);
-                        time0 = ptx[appendcount - 1];
-                        
+                        if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
+                        {
+                            tx = rtgrp.plot[0].lx[gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt-1].ToArray();
+                            ty = rtgrp.plot[0].ly[gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt-1].ToArray();
+                            count = tx.Length;
+                            if (count > appendcount) count = appendcount;
+                            if (count > 0)
+                            {
+                                Array.Copy(tx, st, ptx, 0, count);
+                                Array.Copy(ty, st, pty, 0, count);
+                                grp1.Plots[i + nPlot1].PlotXYAppend(ptx, pty);
+                                time0 = ptx[count - 1];
+                            }
+                            
+
+                        }
+                    }
+                    else
+                    {
+                        if (GrpCtrlMode1 == 0 || GrpCtrlMode1 == 3)
+                        {
+                            tx = rtgrp.plot[0].lx[i].ToArray();
+                            ty = rtgrp.plot[0].ly[i].ToArray();
+                            count = tx.Length;
+                            if (count > appendcount) count = appendcount;
+                            if (count > 0)
+                            { 
+                                Array.Copy(tx, st, ptx, 0, count);
+                                Array.Copy(ty, st, pty, 0, count);
+                                grp1.Plots[i + nPlot1].PlotXYAppend(ptx, pty);
+                                time0 = ptx[count - 1];
+                            }
+
+                        }
                     }
                 }
 

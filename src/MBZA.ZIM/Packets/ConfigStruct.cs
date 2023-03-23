@@ -26,6 +26,14 @@ namespace ZiveLab.ZM.ZIM.Packets
             Build = 0;
         }
 
+        public void initialize()
+        {
+            Major = DeviceConstants.SCH_MAJOR;
+            Minor = DeviceConstants.SCH_MINOR;
+            Revision = DeviceConstants.SCH_REVISION;
+            Build = DeviceConstants.SCH_BUILD;
+        }
+
         public bool checkversion()
         {
             if (Major == 0 && Minor == 0 && Revision == 0 && Build == 0) return false;

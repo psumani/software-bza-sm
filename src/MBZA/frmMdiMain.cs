@@ -41,6 +41,8 @@ namespace ZiveLab.ZM
 
         frmConfig frmcfg;
 
+        frmDataTools frmResTools;
+
         bool bClose;
         bool bFirst;
 
@@ -69,6 +71,7 @@ namespace ZiveLab.ZM
             frmRegRtView = null;
             frmGrpRtView = null;
             frmcfg = null;
+            frmResTools = null;
 
             this.Icon = ZM.Properties.Resources.zm1;
             this.FormClosing += this.frmMdiMain_FormClosing;
@@ -1493,6 +1496,35 @@ namespace ZiveLab.ZM
                     frmcfg.Location = gBZA.appcfg.CfgLocation;
                     frmcfg.StartPosition = FormStartPosition.Manual;
                 }
+            }
+        }
+
+        private void frmDataTools_CloseThis(object sender, EventArgs e)
+        {
+
+
+            frmResTools = null;
+
+        }
+
+        private void MenuconvPrrDataToTextFile_Click(object sender, EventArgs e)
+        {
+            if (frmResTools == null)
+            {
+                frmResTools = new frmDataTools();
+                frmResTools.ShowInTaskbar = false;
+                frmResTools.MdiParent = null;
+
+                frmResTools.StartPosition = FormStartPosition.CenterScreen;
+                frmResTools.WindowState = FormWindowState.Normal;
+
+                frmResTools.CloseThis += frmDataTools_CloseThis;
+                frmResTools.Show();
+            }
+            else
+            {
+                frmResTools.WindowState = FormWindowState.Normal;
+                frmResTools.Activate();
             }
         }
     }

@@ -163,12 +163,16 @@ int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int de
     bool isInitLog = fabs(log10(initialFrequency)) == (double)((int)fabs(log10(initialFrequency)));
     bool isFinalLog = fabs(log10(finalFrequency)) == (double)((int)fabs(log10(finalFrequency)));
     
-    int Factor = (isInitLog && isFinalLog) ? 1 : 0;
+    int Factor = 0;
+	
+	if(isInitLog) Factor ++;
+	if(isFinalLog) Factor ++;
+	
+	//Factor = (isInitLog || isFinalLog) ? 1 : 0;
     
-    //double x = 0.5 + fabs(log10(finalFrequency) - log10(initialFrequency)) * density;
 	double x = fabs(log10(finalFrequency) - log10(initialFrequency)) * density;
     
-    return Factor + (int)ceil(x); //mRounding(x,0);
+    return Factor + (int)ceil(x); 
 }
 
 double RoundToSignificantDigits(double d, int digits)
@@ -348,7 +352,9 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	{
 		dfreq = MIN(dfreq,peis->finalfreq);
 	}
+	
 	dfreq = RoundToSignificantDigits(dfreq, 6);
+
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
 	return dfreq;
 }

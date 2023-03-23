@@ -29,7 +29,7 @@ namespace ZiveLab.ZM
         public string PathRangeInfo;
         public string PathLog;
         public string PathSchTemp;
-
+        
         public string FileNameZIMFW;
         public string FileNameSIFFW;
         public string BatLimitFile;
@@ -437,6 +437,7 @@ namespace ZiveLab.ZM
         public bool loadoff;
         public ushort arrcnt;
         public bool [] barr;
+        public ushort prrrpcalcmode;
         public ushort findex;
         public st_zim_rt_raw rawdata;
         public st_zim_rt rtgrp;
@@ -451,6 +452,7 @@ namespace ZiveLab.ZM
             barr[1] = false;
             barr[2] = false;
             findex = 0;
+            prrrpcalcmode = 0;
             loadoff = false;
         }
 
@@ -497,6 +499,7 @@ namespace ZiveLab.ZM
                 barr[0] = false;
                 barr[1] = false;
                 barr[2] = false;
+                prrrpcalcmode = 0;
                 if (prr.rsfreq != 0.0)
                 {
                     barr[0] = true;
@@ -509,6 +512,7 @@ namespace ZiveLab.ZM
                 }
                 if (prr.rdendfreq != 0.0)
                 {
+                    prrrpcalcmode = prr.rpcalmode;
                     barr[2] = true;
                     arrcnt++;
                 }
@@ -626,7 +630,7 @@ namespace ZiveLab.ZM
             }
         }
 
-        public void DataAppend1(stDefTestData d, bool changecycle)
+        public void DataAppend1(stDefTestData d, bool changecycle) // not used.
         {
             double zmag = Math.Sqrt(d.real * d.real + d.img * d.img);
             double zph = Math.Atan2(d.img, d.real) * 180.0 / DeviceConstants.PI;
@@ -886,6 +890,7 @@ namespace ZiveLab.ZM
             double cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * d.img);
             double cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
             double tmp;
+
             if (techtype == enTechType.TECH_HFR)
             {
                 if (rtgrp.plot[0].Maxval[0] < d.real) rtgrp.plot[0].Maxval[0] = d.real;
@@ -949,6 +954,7 @@ namespace ZiveLab.ZM
                             {
                                 Lastindex = rtgrp.plot[0].ly[0].Count-1;
                                 tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
+
                                 rtgrp.plot[0].count[findex]++;
                                 rtgrp.plot[0].freq[findex].Add(d.fFreq);
                                 rtgrp.plot[0].lx[findex].Add(d.TestTime);
@@ -961,14 +967,22 @@ namespace ZiveLab.ZM
                         }
                         else if (findex == 2)
                         {
+
                             Lastindex = rtgrp.plot[0].ly[1].Count-1;
-                            tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
-                            
+                            if (prrrpcalcmode == 0) tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
+                            else tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
+                            //else  tmp = rtgrp.plot[0].ly[1][Lastindex] - rtgrp.plot[0].ly[0][Lastindex];
+
+                            rtgrp.plot[0].count[findex]++;
+                            rtgrp.plot[0].freq[findex].Add(d.fFreq);
+                            rtgrp.plot[0].lx[findex].Add(d.TestTime);
+                            rtgrp.plot[0].ly[findex].Add(tmp);
+
+                            /*
                             rtgrp.plot[0].freq[1][Lastindex] = d.fFreq;
                             rtgrp.plot[0].lx[1][Lastindex] = d.TestTime;
                             rtgrp.plot[0].ly[1][Lastindex] = tmp;
-                            //if (rtgrp.plot[0].Maxval[1] < tmp) rtgrp.plot[0].Maxval[1] = tmp;
-                            //if (rtgrp.plot[0].Minval[1] > tmp) rtgrp.plot[0].Minval[1] = tmp;
+                            */
                         }
                         else
                         {
@@ -2219,6 +2233,15 @@ namespace ZiveLab.ZM
 
         public void SetInformation(int tch, string tserial, int tsifch)
         {
+            channel = tch;
+            serial = tserial;
+            sifch = tsifch;
+        }
+
+        public void SetInformation(string thostname, string tsip,int tch, string tserial, int tsifch)
+        {
+            hostname = thostname;
+            sip = tsip;
             channel = tch;
             serial = tserial;
             sifch = tsifch;

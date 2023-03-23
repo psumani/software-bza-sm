@@ -300,11 +300,12 @@ namespace ZiveLab.ZM
             ushort orng = 0;
             ushort rng = 0;
             double tmp = 0.0;
+            double tmp1 = Math.Abs(current);
             while (true)
             {
                 tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.iac_rng[rng].realmax;
 
-                if (current < tmp)
+                if (tmp1 < tmp)
                 {
                     orng++;
                     tmp = tmp * 0.2;
@@ -535,7 +536,7 @@ namespace ZiveLab.ZM
                 sifch = LnkCh.SifCh;
                 minfo = lstTech[index];
                 index++;
-                head.SetTechFile(Encoding.UTF8.GetBytes(gBZA.SifLnkLst[sifid].MBZAIF.condfilename[sifch]));
+                head.SetTechFilename(Encoding.UTF8.GetBytes(gBZA.SifLnkLst[sifid].MBZAIF.condfilename[sifch]));
                 head.SetMemo(Encoding.UTF8.GetBytes(txtmemo.Text.Trim()));
                 head.mInfo.Error = 0;
                 head.tech = gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch];

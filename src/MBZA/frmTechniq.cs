@@ -183,25 +183,26 @@ namespace ZiveLab.ZM
                 techtree.Visible = false;
 
                 tabtech.Location = new Point(8, 8);
-                panel1.Location = new Point(8, 218);
+                panel1.Location = new Point(8, 247);
                 btopen.Location = new Point(440, 32);
                 btsave.Location = new Point(440, 144);
                 btsaveas.Location = new Point(440, 188);
                 btapply.Location = new Point(440, 298);
-                btclose.Location = new Point(440, 392);
-                this.Size = new Size(538, 466);
+                btclose.Location = new Point(440, 400);
+                this.Size = new Size(538, 474);
             }
             else
             {
                 
                 tabtech.Location = new Point(164, 8);
-                panel1.Location = new Point(164, 218);
+                panel1.Location = new Point(164, 247);
                 btopen.Location = new Point(596, 32);
                 btsave.Location = new Point(596, 144);
                 btsaveas.Location = new Point(596, 188);
                 btapply.Location = new Point(596, 298);
-                btclose.Location = new Point(596, 392);
-                this.Size = new Size(694, 466);
+                btclose.Location = new Point(596, 400);
+                techtree.Size = new Size(150, 396);
+                this.Size = new Size(698, 474);
 
                 lbltech.Visible = true;
                 techtree.Visible = true;
@@ -344,7 +345,7 @@ namespace ZiveLab.ZM
                 return false;
             }
 
-
+            /*
             if (mtech.version.Major != DeviceConstants.SCH_MAJOR || mtech.version.Minor != DeviceConstants.SCH_MINOR
                 || mtech.version.Revision != DeviceConstants.SCH_REVISION || mtech.version.Build != DeviceConstants.SCH_BUILD)
             {
@@ -355,7 +356,7 @@ namespace ZiveLab.ZM
                     return false;
                 }
             }
-
+            */
 
             gBZA.appcfg.PathSch = Path.GetDirectoryName(sfilename);
             gBZA.appcfg.Save();
@@ -467,10 +468,17 @@ namespace ZiveLab.ZM
 
                 if (chkrpend.Checked == true)
                 {
+                    lblRpCalc.Visible = true;
+                    cborpcalc.Visible = true;
+                    
+                    prr.rpcalmode = (ushort)cborpcalc.SelectedIndex;
                     txtprrrpendfreq.ReadOnly = false;
                 }
                 else
                 {
+                    prr.rpcalmode = 0;
+                    cborpcalc.Visible = false;
+                    lblRpCalc.Visible = false;
                     txtprrrpendfreq.ReadOnly = true;
                 }
 
@@ -603,17 +611,26 @@ namespace ZiveLab.ZM
                 lblondelay.Visible = true;
                 txtondelay.Visible = true;
                 chkondelaystable.Visible = true;
+
                 if (prr.rdendfreq == 0.0)
                 {
                     chkrpend.Checked = false;
                     txtprrrpendfreq.ReadOnly = true;
+                    prr.rpcalmode = 0;
+                    cborpcalc.SelectedIndex = 0;
+                    cborpcalc.Visible = false;
+                    lblRpCalc.Visible = false;
                 }
                 else
                 {
                     chkrpend.Checked = true;
                     txtprrrpendfreq.ReadOnly = false;
-                }
+                    lblRpCalc.Visible = true;
+                    cborpcalc.Visible = true;
 
+                    cborpcalc.SelectedIndex = prr.rpcalmode;
+                }
+                
 
                 txtprrrsfreq.Text = GetFreqString(ref prr.rsfreq);
                 txtprrrpfreq.Text = GetFreqString(ref prr.rdfreq);
@@ -920,7 +937,7 @@ namespace ZiveLab.ZM
             {
                 string str;
                 str = txteisrepeat.Text;
-                if (int.TryParse(str, out eis.iteration)) txteisdensity.Text = eis.iteration.ToString();
+                if (int.TryParse(str, out eis.iteration)) txteisrepeat.Text = eis.iteration.ToString();
             }
             catch (Exception ex)
             {
@@ -1201,7 +1218,7 @@ namespace ZiveLab.ZM
                 if (this.tabtech.TabPages.Contains(this.tabtech1) == true) this.tabtech.TabPages.Remove(this.tabtech1);
                 if (this.tabtech.TabPages.Contains(this.tabtech2) == false) this.tabtech.TabPages.Add(this.tabtech2);
                 if (this.tabtech.TabPages.Contains(this.tabtech3) == true) this.tabtech.TabPages.Remove(this.tabtech3);
-                this.tabtech2.Text = "Discharde test";
+                this.tabtech2.Text = "Discharge test";
             }
             else 
             {
@@ -1488,7 +1505,6 @@ namespace ZiveLab.ZM
 
         private void chkrpend_CheckedChanged(object sender, EventArgs e)
         {
-            
             if (chkrpend.Checked == true)
             {
                 /*if (txtprrrpendfreq.ReadOnly == true)
@@ -1497,11 +1513,17 @@ namespace ZiveLab.ZM
                 }
                 */
                 txtprrrpendfreq.ReadOnly = false;
+                lblRpCalc.Visible = true;
+                cborpcalc.Visible = true;
             }
             else
             {
                 txtprrrpendfreq.ReadOnly = true;
                 prr.rdendfreq = 0.0;
+                prr.rpcalmode = 0;
+                cborpcalc.SelectedIndex = 0;
+                lblRpCalc.Visible = false;
+                cborpcalc.Visible = false;
             }
             txtprrrpendfreq.Text = GetFreqString(ref prr.rdendfreq);
         }
@@ -1553,6 +1575,11 @@ namespace ZiveLab.ZM
         private void cboeiscyc_SelectedIndexChanged(object sender, EventArgs e)
         {
             eis.cycle = (ushort)GetCycleFromCycIdx(cboeiscyc.SelectedIndex);
+        }
+
+        private void cborpcalc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            prr.rpcalmode = (ushort)cborpcalc.SelectedIndex;
         }
     }
 }
