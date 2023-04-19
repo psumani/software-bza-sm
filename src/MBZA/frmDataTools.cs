@@ -2,6 +2,7 @@
 using NationalInstruments.UI;
 using SMLib;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +35,6 @@ namespace ZiveLab.ZM
         string sFilename;
         enTechType1 enType;
         cls_rtdata mRtData;
-        FileResult mResfile;
 
         double GrpSpaceRate;
         int GrpPlotCount;
@@ -51,6 +51,8 @@ namespace ZiveLab.ZM
         double[] prrdata;
 
         bool bInstallExcel;
+
+        int sortColumn;
         public frmDataTools()
         {
             InitializeComponent();
@@ -62,7 +64,6 @@ namespace ZiveLab.ZM
             mHead = new stResHeader(0);
 
             mRtData = new cls_rtdata();
-            mResfile = new FileResult();
             prrdata = new double[3];
             prrdata[0] = 0.0;
             prrdata[1] = 0.0;
@@ -81,10 +82,10 @@ namespace ZiveLab.ZM
 
             listView1.View = View.Details;         
             listView1.FullRowSelect = true;
-            
-            listView1.Columns.Add("File name", listView1.Width - 350 - 4, HorizontalAlignment.Center);
-            listView1.Columns.Add("Technique", 80, HorizontalAlignment.Center);
-            listView1.Columns.Add("File size", 80, HorizontalAlignment.Center);
+            listView1.Columns.Clear();
+            listView1.Columns.Add("File name", listView1.Width - 390 - 35, HorizontalAlignment.Center);
+            listView1.Columns.Add("Technique", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("File size", 100, HorizontalAlignment.Center);
             listView1.Columns.Add("Last updated", 190, HorizontalAlignment.Center);
 
             fs_ss = new FormatString(FormatStringMode.ElapsedTime, @"ss");
@@ -105,7 +106,7 @@ namespace ZiveLab.ZM
             sFilename = "";
             GrpPlotCount = 0;
             xTimemode = false;
-            
+            sortColumn = -1;
         }
 
         private bool CheckInstallExcel()
@@ -624,6 +625,7 @@ namespace ZiveLab.ZM
                 if (saveDlg.ShowDialog() == DialogResult.Cancel)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     return false;
                 }
 
@@ -637,6 +639,7 @@ namespace ZiveLab.ZM
                     }
                     catch (Exception ex)
                     {
+                        tResfile.CloseFile();
                         MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
@@ -644,10 +647,12 @@ namespace ZiveLab.ZM
 
                 Cursor = Cursors.WaitCursor;
 
-                stDefTestData[] data = new stDefTestData[mResfile.datacount];
-                int DataCount = mResfile.read(0, ref data, mResfile.datacount);
+                stDefTestData[] data = new stDefTestData[tResfile.datacount];
+                int DataCount = tResfile.read(0, ref data, tResfile.datacount);
 
-                if(tSaveResfile.Create(sCondDatafile, mResfile.tmphead) == false)
+                
+
+                if (tSaveResfile.Create(sCondDatafile, tResfile.tmphead) == false)
                 {
                     MessageBox.Show("Failed to create new file.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
@@ -759,6 +764,7 @@ namespace ZiveLab.ZM
                 if((enTechType1)tResfile.tmphead.tech.type != enTechType1.TECH_PRR)
                 {
                     Trace.WriteLine("Failed opening file.");
+                    tResfile.CloseFile();
                     Cursor = Cursors.Default;
                     return false;
                 }
@@ -773,6 +779,7 @@ namespace ZiveLab.ZM
                 if (saveDlg.ShowDialog() == DialogResult.Cancel)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     return false;
                 }
 
@@ -786,6 +793,7 @@ namespace ZiveLab.ZM
                     }
                     catch (Exception ex)
                     {
+                        tResfile.CloseFile();
                         MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
@@ -793,12 +801,12 @@ namespace ZiveLab.ZM
 
                 Cursor = Cursors.WaitCursor;
 
-                stDefTestData[] data = new stDefTestData[mResfile.datacount];
-                int DataCount = mResfile.read(0, ref data, mResfile.datacount);
+                stDefTestData[] data = new stDefTestData[tResfile.datacount];
+                int DataCount = tResfile.read(0, ref data, tResfile.datacount);
 
                 stTech_PRR prr = new stTech_PRR(0);
-              
-                mResfile.tmphead.tech.GetPRR(ref prr);
+
+                tResfile.tmphead.tech.GetPRR(ref prr);
 
                 arrcnt = 0;
                 oldcycle = -1;
@@ -832,6 +840,7 @@ namespace ZiveLab.ZM
                 catch (Exception ex)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
@@ -885,11 +894,13 @@ namespace ZiveLab.ZM
 
                 sw.Close();
                 fs.Close();
+                tResfile.CloseFile();
             }
             catch (IOException ex)
             {
                 Trace.WriteLine(ex.Message);
                 Cursor = Cursors.Default;
+                tResfile.CloseFile();
                 return false;
             }
             Cursor = Cursors.Default;
@@ -908,7 +919,7 @@ namespace ZiveLab.ZM
             FileResult tResfile = new FileResult();
             SaveFileDialog saveDlg = new SaveFileDialog();
             string scsvfile = GetSaveDatafilenameToCsvFilename(sDataFile);
-            int idx = 0;
+
             Cursor = Cursors.WaitCursor;
             try
             {
@@ -921,14 +932,15 @@ namespace ZiveLab.ZM
                 }
                 if ((enTechType1)tResfile.tmphead.tech.type != enTechType1.TECH_DCH)
                 {
+                    tResfile.CloseFile();
                     Trace.WriteLine("Failed opening file.");
                     Cursor = Cursors.Default;
                     return false;
                 }
 
-                saveDlg.Title = "Save as a HFR calculation data file.";
+                saveDlg.Title = "Save as a DCH calculation data file.";
                 saveDlg.DefaultExt = "*.csv";
-                saveDlg.Filter = "HFR calculation data file (*.csv) |*.csv";
+                saveDlg.Filter = "DCH calculation data file (*.csv) |*.csv";
                 saveDlg.OverwritePrompt = true;
                 saveDlg.InitialDirectory = Path.GetDirectoryName(scsvfile);
                 saveDlg.FileName = Path.GetFileName(scsvfile);
@@ -936,6 +948,7 @@ namespace ZiveLab.ZM
                 if (saveDlg.ShowDialog() == DialogResult.Cancel)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     return false;
                 }
 
@@ -949,6 +962,7 @@ namespace ZiveLab.ZM
                     }
                     catch (Exception ex)
                     {
+                        tResfile.CloseFile();
                         MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
@@ -956,12 +970,13 @@ namespace ZiveLab.ZM
 
                 Cursor = Cursors.WaitCursor;
 
-                stTech_HFR hfr = new stTech_HFR(0);
+                stTech_DCH dch = new stTech_DCH(0);
 
-                mResfile.tmphead.tech.GetHFR(ref hfr);
+                tResfile.tmphead.tech.GetDCH(ref dch);
 
-                stDefTestData[] data = new stDefTestData[mResfile.datacount];
-                int DataCount = mResfile.read(0, ref data, mResfile.datacount);
+                stDefTestData[] data = new stDefTestData[tResfile.datacount];
+                int DataCount = tResfile.read(0, ref data, tResfile.datacount);
+
                 
 
                 FileStream fs;
@@ -973,6 +988,7 @@ namespace ZiveLab.ZM
                 catch (Exception ex)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
@@ -980,12 +996,23 @@ namespace ZiveLab.ZM
                 StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
                 StringBuilder sb = new StringBuilder();
                 string str;
-
+                string str1;
                 str = string.Format("* Source file:{0}", sDataFile);
                 sb.AppendLine(str);
                 str = string.Format("* Technique file:{0}", tResfile.tmphead.GetTechFilename());
                 sb.AppendLine(str);
-                str = string.Format("* Test condition: Frequency({0:#0.###}Hz)", hfr.freq);
+
+                
+                int share = tResfile.tmphead.tech.irange / DeviceConstants.MAX_IAC_RNGCNT;
+                int remain = tResfile.tmphead.tech.irange % DeviceConstants.MAX_IAC_RNGCNT;
+
+                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges.iac_rng[share].realmax, "A");
+                else str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges.iac_rng[share].realmax * tResfile.tmphead.inf_sifch.ranges.iac_rng[share].controlgain, "A");
+                
+
+                if (dch.useir == 0) str = string.Format("* Test condition: Discharge current({0})", str1);
+                else str = string.Format("* Test condition: Discharge current({0})/ IR Frequency({0:#0.###}Hz)", str1,dch.frequency);
+
                 sb.AppendLine(str);
                 sw.WriteLine(sb);
 
@@ -993,7 +1020,7 @@ namespace ZiveLab.ZM
                 sw.WriteLine("");
                 sw.WriteLine("");
 
-                str = "Index,Time(s),Voltage(V),Current(A),Capacity(Ah),Temperature('C),";
+                str = "Index,Time(s),Voltage(V),Current(A),Capacity(Ah),Zreal(Ω),Zimg(Ω),Temperature('C),";
 
                 sw.WriteLine(str);
                 str = "";
@@ -1014,16 +1041,21 @@ namespace ZiveLab.ZM
                     str += string.Format("{0:G6},", data[i].Vdc);
                     str += string.Format("{0:G6},", data[i].Idc);
                     str += string.Format("{0:G6},", SumCapa);
+                    str += string.Format("{0:G6},", data[i].real);
+                    str += string.Format("{0:G6},", data[i].img);
                     str += string.Format("{0:G6},", data[i].Temperature);
                     sw.WriteLine(str);
                 }
 
                 sw.Close();
                 fs.Close();
+                tResfile.CloseFile();
+
             }
             catch (IOException ex)
             {
                 Trace.WriteLine(ex.Message);
+                tResfile.CloseFile();
                 Cursor = Cursors.Default;
                 return false;
             }
@@ -1041,7 +1073,7 @@ namespace ZiveLab.ZM
             FileResult tResfile = new FileResult();
             SaveFileDialog saveDlg = new SaveFileDialog();
             string scsvfile = GetSaveDatafilenameToCsvFilename(sDataFile);
-            int idx = 0;
+
             Cursor = Cursors.WaitCursor;
             try
             {
@@ -1055,6 +1087,7 @@ namespace ZiveLab.ZM
                 if ((enTechType1)tResfile.tmphead.tech.type != enTechType1.TECH_HFR)
                 {
                     Trace.WriteLine("Failed opening file.");
+                    tResfile.CloseFile();
                     Cursor = Cursors.Default;
                     return false;
                 }
@@ -1069,6 +1102,7 @@ namespace ZiveLab.ZM
                 if (saveDlg.ShowDialog() == DialogResult.Cancel)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     return false;
                 }
 
@@ -1082,6 +1116,7 @@ namespace ZiveLab.ZM
                     }
                     catch (Exception ex)
                     {
+                        tResfile.CloseFile();
                         MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
@@ -1089,8 +1124,8 @@ namespace ZiveLab.ZM
 
                 Cursor = Cursors.WaitCursor;
 
-                stDefTestData[] data = new stDefTestData[mResfile.datacount];
-                int DataCount = mResfile.read(0, ref data, mResfile.datacount);
+                stDefTestData[] data = new stDefTestData[tResfile.datacount];
+                int DataCount = tResfile.read(0, ref data, tResfile.datacount);
 
 
                 FileStream fs;
@@ -1159,10 +1194,12 @@ namespace ZiveLab.ZM
 
                 sw.Close();
                 fs.Close();
+                tResfile.CloseFile();
             }
             catch (IOException ex)
             {
                 Trace.WriteLine(ex.Message);
+                tResfile.CloseFile();
                 Cursor = Cursors.Default;
                 return false;
             }
@@ -1212,6 +1249,7 @@ namespace ZiveLab.ZM
                 if (saveDlg.ShowDialog() == DialogResult.Cancel)
                 {
                     Cursor = Cursors.Default;
+                    tResfile.CloseFile();
                     return false;
                 }
                 sCfgDirectory = Path.GetDirectoryName(saveDlg.FileName);
@@ -1231,10 +1269,12 @@ namespace ZiveLab.ZM
                 writer.Serialize(file, mRangeFile);
 
                 file.Close();
+                tResfile.CloseFile();
             }
             catch (IOException ex)
             {
                 Trace.WriteLine(ex.Message);
+                tResfile.CloseFile();
                 Cursor = Cursors.Default;
                 return false;
             }
@@ -1538,8 +1578,7 @@ namespace ZiveLab.ZM
         {
             string sinfo = "";
             string sTemp = "";
-            string sTemp1 = "";
-           
+  
 
             sTemp = string.Format("* Filename: {0}\r\n", sDataFile);
             sinfo += sTemp;
@@ -1732,7 +1771,9 @@ namespace ZiveLab.ZM
         private void LoadFile(string sDataFile)
         {
             int oldcycel = -1;
+            FileResult tResfile = new FileResult();
             Cursor = Cursors.WaitCursor;
+
             if (File.Exists(sDataFile) == false)
             {
                 txtFileInfor.Text = string.Format("* Filename: {0}.\r\n", sDataFile);
@@ -1748,7 +1789,7 @@ namespace ZiveLab.ZM
                 return;
             }
 
-            if (mResfile.Open(sDataFile) == false)
+            if (tResfile.Open(sDataFile) == false)
             {
                 txtFileInfor.Text = string.Format("* Filename: {0}.\r\n", sDataFile);
                 enType = enTechType1.TECH_ERR;
@@ -1763,16 +1804,16 @@ namespace ZiveLab.ZM
                 return;
             }
 
-            mHead.ToWritePtr(mResfile.tmphead.ToByteArray());
+            mHead.ToWritePtr(tResfile.tmphead.ToByteArray());
 
 
-            if (mResfile.tmphead.tech.type >= System.Enum.GetValues(typeof(enTechType1)).Length || mResfile.tmphead.tech.type < 0)
+            if (tResfile.tmphead.tech.type >= System.Enum.GetValues(typeof(enTechType1)).Length || tResfile.tmphead.tech.type < 0)
             {
                 enType = enTechType1.TECH_ERR;
             }
-            else enType = (enTechType1)mResfile.tmphead.tech.type;
+            else enType = (enTechType1)tResfile.tmphead.tech.type;
 
-            txtFileInfor.Text = GetViewInfoStr(sDataFile, mResfile.tmphead, mResfile.datacount);
+            txtFileInfor.Text = GetViewInfoStr(sDataFile, tResfile.tmphead, tResfile.datacount);
 
             if (enType == enTechType1.TECH_ERR)
             {
@@ -1810,17 +1851,17 @@ namespace ZiveLab.ZM
             }
 
 
-            stDefTestData[] data = new stDefTestData[mResfile.datacount];
-            int DataCount = mResfile.read(0, ref data, mResfile.datacount);
+            stDefTestData[] data = new stDefTestData[tResfile.datacount];
+            int DataCount = tResfile.read(0, ref data, tResfile.datacount);
 
-            mRtData.Initialize(mResfile.tmphead.tech);
+            mRtData.Initialize(tResfile.tmphead.tech);
 
             if (DataCount > 0)
             {
                 mRtData.Append(data, DataCount, ref oldcycel);
             }
             RedrawGraph();
-
+            tResfile.CloseFile();
             Cursor = Cursors.Default;
         }
 
@@ -2527,7 +2568,7 @@ namespace ZiveLab.ZM
         }
         private void RefreshGraphPRR()
         {
-            int i;
+ 
             if (mRtData.arrcnt == 0) return;
 
             int plotcount = mRtData.rtgrp.plot[0].ly[0].Count;
@@ -2789,6 +2830,79 @@ namespace ZiveLab.ZM
             chkTechType5.Checked = false;
             chkTechType6.Checked = false;
         }
+
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+
+            listView1.Columns.Add("File name", listView1.Width - 350 - 4, HorizontalAlignment.Center);
+            listView1.Columns.Add("Technique", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add("File size", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add("Last updated", 190, HorizontalAlignment.Center);
+
+            string str;
+
+            if (e.Column != sortColumn)
+            {
+                // Set the sort column to the new column.
+                sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                listView1.Sorting = SortOrder.Ascending;
+                if (sortColumn == 0) str = "File name";
+                else if (sortColumn == 1) str = "Technique";
+                else if (sortColumn == 2) str = "File size";
+                else str = "Last updated";
+                listView1.Columns[sortColumn].Text =  str + " ▲";
+            }
+            else
+            {
+                if (sortColumn == 0) str = "File name";
+                else if (sortColumn == 1) str = "Technique";
+                else if (sortColumn == 2) str = "File size";
+                else str = "Last updated";
+                if (listView1.Sorting == SortOrder.Ascending)
+                {
+                    listView1.Sorting = SortOrder.Descending;
+                    listView1.Columns[sortColumn].Text = str + " ▼";
+                }
+                else
+                {
+                    listView1.Sorting = SortOrder.Ascending;
+                    listView1.Columns[sortColumn].Text = str + " ▲";
+
+                }
+            }
+
+            listView1.Sort();
+            this.listView1.ListViewItemSorter = new MyListViewComparer(e.Column, listView1.Sorting);
+        }
+    }
+
+    class MyListViewComparer : IComparer
+    {
+        private int col;
+        private SortOrder order;
+        public MyListViewComparer()
+        {
+            col = 0;
+            order = SortOrder.Ascending;
+        }
+        public MyListViewComparer(int column, SortOrder order)
+        {
+            col = column;
+            this.order = order;
+        }
+        public int Compare(object x, object y)
+        {
+            int returnVal = -1;
+            returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text,
+                                    ((ListViewItem)y).SubItems[col].Text);
+            // Determine whether the sort order is descending.
+            if (order == SortOrder.Descending)
+                // Invert the value returned by String.Compare.
+                returnVal *= -1;
+            return returnVal;
+        }
+
     }
 
 }

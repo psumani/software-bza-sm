@@ -129,10 +129,7 @@ static void ISR_MSTimer(void)
 				m_pGlobalVar->mChVar[ch].mChStatInf.TaskTimeStamp ++;
 				m_pGlobalVar->mChVar[ch].mChStatInf.CycleTimeStamp ++;
 				
-				if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_WAIT
-				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_SAMPLE
-				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_MONSAMPLE
-				   || m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_DCHSAMPLE)  m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp ++;
+				if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_WAIT)  m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp ++;
 				else m_pGlobalVar->mChVar[ch].mFlow.m_MsDurStamp = 0;
 				
 				if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_ONDELAY
@@ -141,6 +138,7 @@ static void ISR_MSTimer(void)
 				else m_pGlobalVar->mChVar[ch].mFlow.OndelayTimeStamp = 0;
 				
 				m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp ++;
+				
 				if(m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp > 1000000) 
 				{
 					m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp = 1000000;
@@ -168,6 +166,8 @@ static void ISR_MSTimer(void)
 				m_pGlobalVar->mChVar[ch].mChStatInf.RunTimeStamp = 0;
 				m_pGlobalVar->mChVar[ch].mChStatInf.TaskTimeStamp = 0;
 				m_pGlobalVar->mChVar[ch].mChStatInf.CycleTimeStamp = 0;
+				m_pGlobalVar->mChVar[ch].mFlow.m_MsDurCount = 0;
+				m_pGlobalVar->mChVar[ch].mFlow.m_MsDurCount1 = 0;
 			}
 			m_pGlobalVar->mChVar[ch].OverT_Timer ++;
 			if(m_pGlobalVar->mChVar[ch].OverT_Timer > 1000000) m_pGlobalVar->mChVar[ch].OverT_Timer = 1000000;

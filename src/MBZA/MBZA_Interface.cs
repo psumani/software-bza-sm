@@ -1263,8 +1263,8 @@ namespace ZiveLab.ZM
             {
                 tech[ch].initialize(0);
             }
-            
-            if(condfilename[ch] == OldCondfilename[ch] || File.Exists(OldCondfilename[ch])== false)
+
+            if (condfilename[ch] == OldCondfilename[ch] || File.Exists(OldCondfilename[ch])== false)
             {
                 OldCondfilename[ch] = condfilename[ch];
                 Oldtech[ch] = tech[ch];

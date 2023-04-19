@@ -426,7 +426,6 @@ namespace ZiveLab.ZM
 
         public int read(int index, ref stDefTestData[] data, int Count)
         {
-            int total = len_data * Count;
 
             if (index >= datacount) return 0;
 

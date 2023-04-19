@@ -2,8 +2,11 @@
 
 namespace ZiveLab.ZM.ZIM
 {
-    public class MBZA_Constant
+    public static class MBZA_Constant
     {
+        public const double MIN_INTERVALTIME = 1.0;
+        public const double MIN_TOTALTIME = 1.0;
+        public const double MIN_SAMPLETIME = 1.0;
         public const int MAX_DUMMY = 8;
         public const int MAX_IRANGE = 8;
         public const int MAX_DEV_CHANNEL = 4;
@@ -13,6 +16,9 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_COM_DATA_CNT = 20;
         public const int MAX_DATA_CNT = 100000;
         public const string AppCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM.CFG";
+        public const string GrpCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_GRPSET.CFG";
+        public const string GrpExCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_GRPSETEX.CFG";
+
         public static string[] Const_LootPart = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", };
         public static string[] Const_RangePart = { "Iac","Idc", "Vac", "Vdc", "Temperature","Safety" };
         public static string[] Const_RangeIacItems = { "Calibration vars", "Compensation dummy", };

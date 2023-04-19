@@ -35,6 +35,7 @@ void apply_req_dds_clock(int ch);
 void apply_adc_ac_cfg(int ch);
 
 void ApplyCalcConfigADC(int ch);
+bool proc_eis_data_conv(int ch);
 void proc_eis_LoadOn(int ch, ushort loadon);
 void proc_eis_setrange(int ch,int setrange);
 void proc_stop_test(int ch, int status);

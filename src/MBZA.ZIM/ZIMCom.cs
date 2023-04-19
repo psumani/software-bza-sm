@@ -545,8 +545,7 @@ namespace ZiveLab.ZM.ZIM
         public bool WriteData(int nSlot, stTech data)
         {
             if (isConnected == false) return false;
-            stTech_PRR prr = new stTech_PRR(0);
-            data.GetPRR(ref prr);
+
             if (mComm.WriteToDevice(CommandSet.SET_COND_TECH, nSlot, 0, data.ToByteArray()) == false)
             {
                 mComm.Dispose();

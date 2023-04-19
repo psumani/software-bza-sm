@@ -1,4 +1,5 @@
-﻿using NationalInstruments.UI;
+﻿using DataManager.CommClass;
+using NationalInstruments.UI;
 using SMLib;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ using ZiveLab.ZM.ZIM.Utilities;
 
 namespace ZiveLab.ZM
 {
+
     public class AppConfig
     {
         public string PathZIMFW;
@@ -58,6 +60,7 @@ namespace ZiveLab.ZM
         public FormWindowState CfgWinStatus;
         public Point CfgLocation;
         public Size CfgSize;
+
         public AppConfig()
         {
             RDummy = new double[MBZA_Constant.MAX_DUMMY];
@@ -96,7 +99,9 @@ namespace ZiveLab.ZM
 
 
             InitLocationSize();
+
         }
+
 
         public bool Save()
         {
@@ -113,10 +118,9 @@ namespace ZiveLab.ZM
                     return false;
                 }
             }
-
+ 
             FileStream file = System.IO.File.Create(MBZA_Constant.AppCfgFilename);
-            XmlSerializer writer = new XmlSerializer(typeof(AppConfig));
-
+            XmlSerializer writer = new XmlSerializer(typeof(AppConfig)); 
             writer.Serialize(file, this);
             file.Close();
             
@@ -191,6 +195,9 @@ namespace ZiveLab.ZM
 
         public bool Load()
         {
+            XmlSerializer reader = null;
+            StreamReader file = null;
+            AppConfig tmp = null;
 
             if (File.Exists(MBZA_Constant.AppCfgFilename) == false)
             {
@@ -200,15 +207,28 @@ namespace ZiveLab.ZM
                 }
                 return true;
             }
+            try
+            {
+                tmp = new AppConfig();
+                reader = new XmlSerializer(typeof(AppConfig));
+                file = new StreamReader(MBZA_Constant.AppCfgFilename);
 
-            XmlSerializer reader =   new XmlSerializer(typeof(AppConfig));
-            StreamReader file = new StreamReader(MBZA_Constant.AppCfgFilename);
+                tmp = (AppConfig)reader.Deserialize(file);
 
-            AppConfig tmp = new AppConfig();
+                file.Close();
+            }
+            catch(Exception e)
+            {
+                if(file != null) file.Close();
 
-            tmp = (AppConfig)reader.Deserialize(file);
 
-            file.Close();
+                if (Save() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+            
 
             for (int i = 0; i < MBZA_Constant.MAX_DUMMY; i++)
             {
@@ -256,6 +276,8 @@ namespace ZiveLab.ZM
             if (!System.IO.Directory.Exists(PathLog)) System.IO.Directory.CreateDirectory(PathLog);
             if (!System.IO.Directory.Exists(PathRemote)) System.IO.Directory.CreateDirectory(PathRemote);
             if (!System.IO.Directory.Exists(PathSchTemp)) System.IO.Directory.CreateDirectory(PathSchTemp);
+
+
             return true;
         }
     }
@@ -970,8 +992,8 @@ namespace ZiveLab.ZM
 
                             Lastindex = rtgrp.plot[0].ly[1].Count-1;
                             if (prrrpcalcmode == 0) tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
-                            else tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
-                            //else  tmp = rtgrp.plot[0].ly[1][Lastindex] - rtgrp.plot[0].ly[0][Lastindex];
+                            else if (prrrpcalcmode == 1) tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
+                            else  tmp = rtgrp.plot[0].ly[1][Lastindex] - rtgrp.plot[0].ly[0][Lastindex];
 
                             rtgrp.plot[0].count[findex]++;
                             rtgrp.plot[0].freq[findex].Add(d.fFreq);

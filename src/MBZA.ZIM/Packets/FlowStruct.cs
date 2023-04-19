@@ -1176,20 +1176,24 @@ namespace ZiveLab.ZM.ZIM.Packets
     public struct stTech_DCH
     {
         public double sampletime;
-        public double totaltime;
+        public double totaltime; //미사용
         public double CutoffV;
-        public ushort nouse0;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public double frequency;
+        public double Interval;
+        public ushort useir;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public double[] nouse1;
 
         public stTech_DCH(int init)
         {
             sampletime = 1.0;
-            totaltime = 10800.0;
+            totaltime = 0.0;
             CutoffV = 0.0;
-            nouse0 = 0;
-            nouse1 = new double[4];
-            for (int i = 0; i < 4; i++)
+            useir = 0;
+            frequency = 1000.0;
+            Interval = 200.0;
+            nouse1 = new double[2];
+            for (int i = 0; i < 2; i++)
             {
                 nouse1[i] = 0.0;
             }
@@ -1198,10 +1202,12 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void initialize()
         {
             sampletime = 1.0;
-            totaltime = 10800.0;
+            totaltime = 0.0;
             CutoffV = 0.0;
-            nouse0 = 0;
-            for (int i = 0; i < 4; i++)
+            useir = 0;
+            frequency = 1000.0;
+            Interval = 200.0;
+            for (int i = 0; i < 2; i++)
             {
                 nouse1[i] = 0.0;
             }
@@ -1429,6 +1435,8 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public void GetDCH(ref stTech_DCH techdch)
         {
+            techdch.nouse1[0] = 0.0;
+            techdch.nouse1[1] = 0.0;
             techdch.ToWritePtr(tech);
         }
 

@@ -4,6 +4,7 @@ int GetMaxChannel(void);
 void AllChReset(bool brst);
 void SetDevChannel(int ch);
 double GetNextFreq(int ch, ushort* restart);
+bool proc_mon_dcControl(int ch);
 void proc_test_main(int ch);
 bool proc_start_test(int ch);
 int GetFreqCount(int ch);

@@ -183,26 +183,26 @@ namespace ZiveLab.ZM
                 techtree.Visible = false;
 
                 tabtech.Location = new Point(8, 8);
-                panel1.Location = new Point(8, 247);
+                panel1.Location = new Point(8, 284);
                 btopen.Location = new Point(440, 32);
                 btsave.Location = new Point(440, 144);
                 btsaveas.Location = new Point(440, 188);
                 btapply.Location = new Point(440, 298);
-                btclose.Location = new Point(440, 400);
-                this.Size = new Size(538, 474);
+                btclose.Location = new Point(440, 438);
+                this.Size = new Size(538, 515);
             }
             else
             {
                 
                 tabtech.Location = new Point(164, 8);
-                panel1.Location = new Point(164, 247);
+                panel1.Location = new Point(164, 284);
                 btopen.Location = new Point(596, 32);
                 btsave.Location = new Point(596, 144);
                 btsaveas.Location = new Point(596, 188);
                 btapply.Location = new Point(596, 298);
-                btclose.Location = new Point(596, 400);
-                techtree.Size = new Size(150, 396);
-                this.Size = new Size(698, 474);
+                btclose.Location = new Point(596, 438);
+                techtree.Size = new Size(150, 434);
+                this.Size = new Size(698, 515);
 
                 lbltech.Visible = true;
                 techtree.Visible = true;
@@ -520,11 +520,17 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_DCH)
             {
-                mon.sampletime = SM_Number.atot(txthfrinterval.Text);
-                txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
+                if (chkIr.Checked) dch.useir = 1;
+                else dch.useir = 0;
 
-                mon.totaltime = SM_Number.atot(txthfrtotaltime.Text);
-                txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
+                str = txthfrfreq.Text;
+                if (RefreshFrequency(ref str, ref dch.frequency)) txthfrfreq.Text = str;
+                
+                dch.Interval = SM_Number.atot(txthfrinterval.Text);
+                txthfrinterval.Text = SM_Number.GetTimeString(dch.Interval);
+
+                dch.sampletime = SM_Number.atot(txtdchsmpl.Text);
+                txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
 
                 dch.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
                 txtMonCutoff.Text = SM_Number.ToString(dch.CutoffV, enSM_TypeNumberToString.SIPrefix);
@@ -585,16 +591,27 @@ namespace ZiveLab.ZM
 
             if (techtype == enTechType.TECH_HFR)
             {
+                chkIr.Visible = false;
+                lbldchsmpl.Visible = false;
+                txtdchsmpl.Visible = false;
+
                 lblhfrfreq.Visible = true;
                 txthfrfreq.Visible = true;
+
+                lblhfrinterval.Visible = true;
+                txthfrinterval.Visible = true;
+
+                lblhfrtotaltime.Visible = true;
+                txthfrtotaltime.Visible = true;
+
                 cbomonctrl.Visible = false;
                 lblctrlrate.Visible = false;
+
                 lblcutoff.Visible = false;
                 txtMonCutoff.Visible = false;
+
                 chkhfrcelloffwait.Visible = true;
 
-                lblhfrinterval.Text = "Interval(s)";
-                
                 txthfrfreq.Text = GetFreqString(ref hfr.freq);
                 txthfrinterval.Text = SM_Number.GetTimeString(hfr.interval);
                 txthfrtotaltime.Text = SM_Number.GetTimeString(hfr.totaltime);
@@ -645,24 +662,39 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_MON)
             {
+                chkIr.Visible = false;
+                lbldchsmpl.Visible = true;
+                txtdchsmpl.Visible = true;
+
+                lblhfrinterval.Visible = false;
+                txthfrinterval.Visible = false;
+                txthfrinterval.Text = "0";
+     
+                lblhfrtotaltime.Visible = true;
+                txthfrtotaltime.Visible = true;
+                
                 chkhfrcelloffwait.Visible = false;
                 cbomonctrl.Visible = false;
+
                 lblctrlrate.Visible = false;
+                
+
                 lblcutoff.Visible = false;
                 txtMonCutoff.Visible = false;
+
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
+
+                lblhfrfreq.Visible = false;
                 txthfrfreq.Visible = false;
+                txthfrinterval.Visible = false;
 
                 mtech.ondelay = 2.0;
                 mtech.ondelaystable = 0;
 
-                txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
+                txtdchsmpl.Text = SM_Number.GetTimeString(mon.sampletime);
                 txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
-
-                lblhfrfreq.Visible = false;
-                lblhfrinterval.Text = "Sample time(s)";
                 txthfrfreq.Text = "0";
             }
             else if (techtype == enTechType.TECH_QIS)
@@ -702,10 +734,19 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_DCH)
             {
+                chkIr.Visible = true;
+                lbldchsmpl.Visible = true;
+                txtdchsmpl.Visible = true;
+
+                lblhfrtotaltime.Visible = false;
+                txthfrtotaltime.Visible = false;
+
                 chkhfrcelloffwait.Visible = false;
 
                 cbomonctrl.Visible = true;
+
                 lblctrlrate.Visible = true;
+
                 lblcutoff.Visible = true;
                 txtMonCutoff.Visible = true;
 
@@ -715,18 +756,31 @@ namespace ZiveLab.ZM
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
                 chkondelaystable.Visible = false;
-                lblhfrfreq.Visible = false;
-                txthfrfreq.Visible = false;
 
-                txthfrinterval.Text = SM_Number.GetTimeString(dch.sampletime);
-                txthfrtotaltime.Text = SM_Number.GetTimeString(dch.totaltime);
+                if (dch.useir == 0)
+                {
+                    lblhfrinterval.Visible = false;
+                    txthfrinterval.Visible = false;
+                    lblhfrfreq.Visible = false;
+                    txthfrfreq.Visible = false;
+                }
+                else
+                {
+                    lblhfrinterval.Visible = true;
+                    txthfrinterval.Visible = true;
+                    lblhfrfreq.Visible = true;
+                    txthfrfreq.Visible = true;
+                }
+
+                if(dch.useir == 0) chkIr.Checked = false;
+                else chkIr.Checked = true;
                 
-                
+                txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
 
                 txtMonCutoff.Text = string.Format(" {0,4:##0.0}", dch.CutoffV);
-                lblhfrinterval.Text = "Sample time(s)";
-                txthfrfreq.Text = "0";
-               
+                txthfrfreq.Text = GetFreqString(ref dch.frequency);
+                txthfrinterval.Text = SM_Number.GetTimeString(dch.Interval);
+
             }
             else
             {
@@ -951,9 +1005,19 @@ namespace ZiveLab.ZM
             try
             {
                 string str = txthfrfreq.Text;
-                if (RefreshFrequency(ref str, ref hfr.freq))
+                if (techtype == enTechType.TECH_HFR)
                 {
-                    txthfrfreq.Text = str;
+                    if (RefreshFrequency(ref str, ref hfr.freq))
+                    {
+                        txthfrfreq.Text = str;
+                    }
+                }
+                else if (techtype == enTechType.TECH_DCH)
+                {
+                    if (RefreshFrequency(ref str, ref dch.frequency))
+                    {
+                        txthfrfreq.Text = str;
+                    }
                 }
             }
             catch (Exception ex)
@@ -990,7 +1054,7 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_DCH)
             {
-                count = (int)(dch.totaltime / dch.sampletime);
+                //count = (int)(dch.totaltime / dch.sampletime);
             }
             else
             {
@@ -1006,38 +1070,25 @@ namespace ZiveLab.ZM
 
             if (techtype == enTechType.TECH_HFR)
             {
-                if (tmp < 0.1)
+                if (tmp < MBZA_Constant.MIN_INTERVALTIME)
                 {
-                    MessageBox.Show("The minimum value of the interval time is 100 ms.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    tmp = 0.1;
+                    MessageBox.Show(string.Format("The minimum value for the interval time setting is {0}second.", MBZA_Constant.MIN_INTERVALTIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = MBZA_Constant.MIN_INTERVALTIME;
                 }
-
+                
                 hfr.interval = tmp;
                 txthfrinterval.Text = SM_Number.GetTimeString(hfr.interval);
             }
-            else if (techtype == enTechType.TECH_MON)
-            {
-                if (tmp < 0.1)
-                {
-                    MessageBox.Show("The minimum value of the sampling time is 100 ms.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    tmp = 0.1;
-                }
-
-
-                mon.sampletime = tmp;
-                txthfrinterval.Text = SM_Number.GetTimeString(mon.sampletime);
-            }
             else if (techtype == enTechType.TECH_DCH)
             {
-                if (tmp < 0.1)
+                if (tmp < MBZA_Constant.MIN_INTERVALTIME)
                 {
-                    MessageBox.Show("The minimum value of the sampling time is 100 ms.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    tmp = 0.1;
+                    MessageBox.Show(string.Format("The minimum value for the interval time setting is {0}second.", MBZA_Constant.MIN_INTERVALTIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = MBZA_Constant.MIN_INTERVALTIME;
                 }
-
-
-                dch.sampletime = tmp;
-                txthfrinterval.Text = SM_Number.GetTimeString(dch.sampletime);
+                
+                dch.Interval = tmp;
+                txthfrinterval.Text = SM_Number.GetTimeString(dch.Interval);
             }
         }
 
@@ -1046,18 +1097,24 @@ namespace ZiveLab.ZM
             if (techtype == enTechType.TECH_HFR)
             {
                 hfr.totaltime = SM_Number.atot(txthfrtotaltime.Text);
+                if (hfr.totaltime < MBZA_Constant.MIN_TOTALTIME)
+                {
+                    MessageBox.Show(string.Format("The minimum value for the total time setting is {0}second.", MBZA_Constant.MIN_TOTALTIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    hfr.totaltime = MBZA_Constant.MIN_TOTALTIME;
+                }
                 txthfrtotaltime.Text = SM_Number.GetTimeString(hfr.totaltime);
             }
             else if (techtype == enTechType.TECH_MON)
             {
                 mon.totaltime = SM_Number.atot(txthfrtotaltime.Text);
+                if (mon.totaltime < MBZA_Constant.MIN_TOTALTIME)
+                {
+                    MessageBox.Show(string.Format("The minimum value for the total time setting is {0}second.", MBZA_Constant.MIN_TOTALTIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    mon.totaltime = MBZA_Constant.MIN_TOTALTIME;
+                }
                 txthfrtotaltime.Text = SM_Number.GetTimeString(mon.totaltime);
             }
-            else if (techtype == enTechType.TECH_DCH)
-            {
-                dch.totaltime = SM_Number.atot(txthfrtotaltime.Text);
-                txthfrtotaltime.Text = SM_Number.GetTimeString(dch.totaltime);
-            }
+          
         }
 
         private void txtprrrsfreq_Leave(object sender, EventArgs e)
@@ -1105,12 +1162,22 @@ namespace ZiveLab.ZM
         private void txtprrinterval_Leave(object sender, EventArgs e)
         {
             prr.interval = SM_Number.atot(txtprrinterval.Text);
+            if (prr.interval < MBZA_Constant.MIN_INTERVALTIME)
+            {
+                MessageBox.Show(string.Format("The minimum value for the interval time setting is {0}second.", MBZA_Constant.MIN_INTERVALTIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                prr.interval = MBZA_Constant.MIN_INTERVALTIME;
+            }
             txtprrinterval.Text = SM_Number.GetTimeString(prr.interval);
         }
 
         private void txtprrtotaltime_Leave(object sender, EventArgs e)
         {
             prr.totaltime = SM_Number.atot(txtprrtotaltime.Text);
+            if (prr.totaltime < MBZA_Constant.MIN_TOTALTIME)
+            {
+                MessageBox.Show(string.Format("The minimum value for the total time setting is {0}second.", MBZA_Constant.MIN_TOTALTIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                prr.totaltime = MBZA_Constant.MIN_TOTALTIME;
+            }
             txtprrtotaltime.Text = SM_Number.GetTimeString(prr.totaltime);
         }
 
@@ -1580,6 +1647,62 @@ namespace ZiveLab.ZM
         private void cborpcalc_SelectedIndexChanged(object sender, EventArgs e)
         {
             prr.rpcalmode = (ushort)cborpcalc.SelectedIndex;
+        }
+
+        private void chkIr_CheckedChanged(object sender, EventArgs e)
+        {
+            if (techtype == enTechType.TECH_DCH)
+            {
+                if (chkIr.Checked == false)
+                {
+                    dch.useir = 0;
+                    lblhfrinterval.Visible = false;
+                    txthfrinterval.Visible = false;
+                    lblhfrfreq.Visible = false;
+                    txthfrfreq.Visible = false;
+                }
+                else
+                {
+                    dch.useir = 1;
+                    lblhfrinterval.Visible = true;
+                    txthfrinterval.Visible = true;
+                    lblhfrfreq.Visible = true;
+                    txthfrfreq.Visible = true;
+                }
+            }
+        }
+
+        private void txtdchsmpl_Leave(object sender, EventArgs e)
+        {
+            double tmp = SM_Number.atot(txtdchsmpl.Text);
+            if (techtype == enTechType.TECH_MON)
+            {
+                if (tmp < MBZA_Constant.MIN_SAMPLETIME)
+                {
+                    MessageBox.Show(string.Format("The minimum value for the sampling time setting is {0}second.", MBZA_Constant.MIN_SAMPLETIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = MBZA_Constant.MIN_SAMPLETIME;
+                }
+
+                mon.sampletime = tmp;
+                txtdchsmpl.Text = SM_Number.GetTimeString(mon.sampletime);
+            }
+            else if (techtype == enTechType.TECH_DCH)
+            {
+                if (tmp < MBZA_Constant.MIN_SAMPLETIME)
+                {
+                    MessageBox.Show(string.Format("The minimum value for the sampling time setting is {0}second.", MBZA_Constant.MIN_SAMPLETIME), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmp = MBZA_Constant.MIN_SAMPLETIME;
+                }
+
+
+                dch.sampletime = tmp;
+                txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
+            }
+        }
+
+        private void txthfrtotaltime_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

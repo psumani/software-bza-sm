@@ -1,7 +1,7 @@
 create_clock -period 1000.00 -name {zim|TEST_LED} -waveform [list 0.00 500.00] [get_nets TEST_LED]
 create_clock -period 1000.00 -name {zim|VDC_CLK} -waveform [list 0.00 500.00] [get_nets VDC_CLK]
-create_clock -period 1000.00 -name {zim|clk_32MHz} -waveform [list 0.00 500.00] [get_nets clk_32MHz]
 create_clock -period 1000.00 -name {zim|clk_16MHz} -waveform [list 0.00 500.00] [get_nets clk_16MHz]
+create_clock -period 1000.00 -name {zim|clk_32MHz} -waveform [list 0.00 500.00] [get_nets clk_32MHz]
 create_clock -period 1000.00 -name {zim|clk_RTD} -waveform [list 0.00 500.00] [get_nets clk_RTD]
 create_clock -period 1000.00 -name {zim|\comm_spi/iclk} -waveform [list 0.00 500.00] [get_nets comm_spi.iclk]
 set_false_path -from [get_clocks {zim|\comm_spi/iclk}] -to [get_clocks zim|clk_32MHz]

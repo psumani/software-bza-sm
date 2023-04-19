@@ -63,6 +63,10 @@
     <Reference Include="CircularProgress">
       <HintPath>.\CircularProgress.dll</HintPath>
     </Reference>
+    <Reference Include="CommonLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DataManager\CommonLib.dll</HintPath>
+    </Reference>
     <Reference Include="DataManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DataManager\DataManager.dll</HintPath>

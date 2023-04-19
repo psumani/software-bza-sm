@@ -42,14 +42,14 @@ namespace ZiveLab.ZM
         frmConfig frmcfg;
 
         frmDataTools frmResTools;
-
+       
         bool bClose;
         bool bFirst;
 
         public frmMdiMain()
         {
             InitializeComponent();
-
+           
             DoubleBuffered = true;
             bClose = false;
             bFirst = true;
@@ -60,7 +60,11 @@ namespace ZiveLab.ZM
             gBZA.sMsgTitle = AppTitle;
 
             gBZA.appcfg = new AppConfig();
+            gBZA.mGraphSet = new GraphSet();
+            gBZA.mGraphSetEx = new GraphSetEx(2);
             gBZA.appcfg.Load();
+            gBZA.LoadGrpSetAll();
+
             //MakeAppFolder();
 
             bRefresh = false;
@@ -152,7 +156,11 @@ namespace ZiveLab.ZM
 
                 if (gBZA.appcfg.FileNameSIFFW.Length < 5) gBZA.appcfg.FileNameSIFFW = "default.sif";
 
-                if (gBZA.appcfg.PathData.Length < 5) gBZA.appcfg.PathData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
+                if (gBZA.appcfg.PathData.Length < 5)
+                {
+                    gBZA.appcfg.PathData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
+                    gBZA.mGraphSetEx.OpenPath = gBZA.appcfg.PathData;
+                }
                 if (!System.IO.Directory.Exists(gBZA.appcfg.PathData))
                 {
                     System.IO.Directory.CreateDirectory(gBZA.appcfg.PathData);
@@ -666,8 +674,8 @@ namespace ZiveLab.ZM
             deForm.MsgBoxCaption = this.Text;
             deForm.UnitC = false;
             deForm.IVManPath = GetIVManPath();
-            deForm.GraphSetEx = new GraphSetEx(type);
-            deForm.EnAlwaysOpenPath = true;
+            deForm.GraphSetEx = gBZA.mGraphSetEx;
+            deForm.EnAlwaysOpenPath = false;
             deForm.ZManPath = GetZManPath();
             deForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             //deForm.SchTempPath = gBZA.appcfg.PathSchTemp;
@@ -792,9 +800,9 @@ namespace ZiveLab.ZM
 
         private void OpenGraph(string[] filename = null)
         {
-            EisGraphForm egForm = new EisGraphForm(0, new GraphSet(), new DataManager.CommClass.GraphSetEx(2), true);
+            EisGraphForm egForm = new EisGraphForm(0, gBZA.mGraphSet, gBZA.mGraphSetEx, true);
             egForm.MsgBoxCaption = AppTitle;
-            egForm.EnAlwaysOpenPath = true;
+            egForm.EnAlwaysOpenPath = false;
             egForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             egForm.AllowTransparency = false;
             egForm.ZManPath = GetZManPath();
@@ -1367,7 +1375,7 @@ namespace ZiveLab.ZM
 
         private void frmMdiMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            gBZA.SaveGrpSetAll();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

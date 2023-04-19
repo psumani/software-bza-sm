@@ -54,15 +54,15 @@
       <maximum>1500</maximum>
       <minimum>-1500</minimum>
       <factor>0.000244140625</factor>
-      <gain>1.001092</gain>
-      <offset>1.151552</offset>
+      <gain>1.00113</gain>
+      <offset>1.226731</offset>
     </st_zim_adc_rnginf>
     <st_zim_adc_rnginf>
       <maximum>100</maximum>
       <minimum>-100</minimum>
       <factor>2.44140625E-05</factor>
-      <gain>0.919502</gain>
-      <offset>0.104812</offset>
+      <gain>0.919483</gain>
+      <offset>0.105367</offset>
     </st_zim_adc_rnginf>
   </vdc_rng>
   <rtd_rng>

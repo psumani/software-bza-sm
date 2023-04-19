@@ -264,7 +264,7 @@ architecture behav of zim is
 	
 	--rtd vars
 	signal clk_RTD				: std_logic := '0';
-	signal clk_cnt     		: std_logic_vector(3 downto 0):= x"0";
+	signal clk_cnt     		: std_logic_vector(7 downto 0):= x"00";
 	signal buf_cfgRTD 		: std_logic_vector(7 downto 0):= x"00";
 	signal buf_readRTD 		: std_logic_vector(15 downto 0);
 
@@ -387,9 +387,9 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 	process(clk_16MHz) --16MHz
 	begin
 		if rising_edge(clk_16MHz) then
-			if clk_cnt = x"3" then
+			if clk_cnt = x"1F" then --if clk_cnt = x"3" then ;; 31
 				clk_RTD <= not clk_RTD;			
-				clk_cnt <= x"0";
+				clk_cnt <= x"00";
 			else 
 				clk_cnt <= clk_cnt + "1";
 			end if;

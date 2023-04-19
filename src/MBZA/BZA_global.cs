@@ -1,4 +1,6 @@
 ﻿using C1.Win.C1FlexGrid;
+using CommonLib;
+using DataManager.CommClass;
 using SMLib;
 using System;
 using System.Collections.Generic;
@@ -95,6 +97,8 @@ namespace ZiveLab.ZM
         public static int RegOkChCount = 0;
         public static string FileLnkCh = "";
         public static AppConfig appcfg;
+        public static GraphSet mGraphSet;
+        public static GraphSetEx mGraphSetEx;
         public static PingHost pingHost;
         public static Dictionary<string, stLinkSIF> SifLnkLst { get; set; }
         public static Dictionary<string, stLinkSifCh> ChLnkLst {get; set; }
@@ -273,6 +277,128 @@ namespace ZiveLab.ZM
             return temp.ToString();
         }
         #endregion
+
+        public static void LoadGrpSetAll()
+        {
+            LoadGrpSet();
+            LoadGrpExSet();
+        }
+
+        public static void SaveGrpSetAll()
+        {
+            SaveGrpSet();
+            SaveGrpExSet();
+        }
+
+        public static bool SaveGrpSet()
+        {
+
+            if (File.Exists(MBZA_Constant.GrpCfgFilename) == true)
+            {
+                try
+                {
+                    File.Delete(MBZA_Constant.GrpCfgFilename);
+                }
+                catch
+                {
+                    MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            CoSerialize.SerializeToFile(MBZA_Constant.GrpCfgFilename, mGraphSet);
+            
+            return true;
+        }
+
+        public static bool SaveGrpExSet()
+        {
+
+            if (File.Exists(MBZA_Constant.GrpExCfgFilename) == true)
+            {
+                try
+                {
+                    File.Delete(MBZA_Constant.GrpExCfgFilename);
+                }
+                catch
+                {
+                    MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            CoSerialize.SerializeToFile(MBZA_Constant.GrpExCfgFilename, mGraphSetEx);
+            
+
+            return true;
+        }
+
+        public static bool LoadGrpSet()
+        {
+
+            if (File.Exists(MBZA_Constant.GrpCfgFilename) == false)
+            {
+                if (SaveGrpSet() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+            try
+            {
+                mGraphSet = CoSerialize.SerializeFromFile<GraphSet>(MBZA_Constant.GrpCfgFilename);
+            }
+            catch 
+            {
+                try
+                {
+                    File.Delete(MBZA_Constant.GrpCfgFilename);
+                    if (SaveGrpSet() == false)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool LoadGrpExSet()
+        {
+            if (File.Exists(MBZA_Constant.GrpExCfgFilename) == false)
+            {
+                if (SaveGrpExSet() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+            try
+            {
+                mGraphSetEx = CoSerialize.SerializeFromFile<GraphSetEx>(MBZA_Constant.GrpExCfgFilename);
+            }
+            catch
+            {
+                try
+                {
+                    File.Delete(MBZA_Constant.GrpExCfgFilename);
+                    if (SaveGrpExSet() == false)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         public static void ShowInfoBox(string snote)
         {

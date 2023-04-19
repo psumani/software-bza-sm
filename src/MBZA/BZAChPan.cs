@@ -255,6 +255,8 @@ namespace ZiveLab.ZM
 
                 lblprog.LabelText = string.Format("Channel {0:00} - Disconnected", ch + 1);
                 lblprog.Prog_Color = Color.Orange;
+                lblTestStatus.Text = " Status: disconnected.";
+                lblTestStatus.ForeColor = Color.Orange;
             }
             else
             {
@@ -1817,7 +1819,9 @@ namespace ZiveLab.ZM
             {
                 if (techprr.rpcalmode == 0)
                     TabGrp1.Text = "Rs,P_Rp(Rp end-Rp) vs t";
-                else TabGrp1.Text = "Rs,P_Rp(Rp end-Rs) vs t";
+                else if (techprr.rpcalmode == 0)
+                    TabGrp1.Text = "Rs,P_Rp(Rp end-Rs) vs t";
+                else TabGrp1.Text = "Rs,P_Rp(Rp-Rs) vs t";
             }
             else
             {
@@ -2282,16 +2286,8 @@ namespace ZiveLab.ZM
                 }
                 else if (techtype == enTechType.TECH_DCH)
                 {
-                    if ((enEisState)chstat.eis_status.status == enEisState.mondelay)
-                    {
-                        lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].ondelay) * 1000.0);
-                    }
-                    else
-                    {
-                        gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetDCH(ref techdch);
-                        lblprog.Prog_Val = (int)(((chstat.TaskTimeStamp * 0.001) / (double)techdch.totaltime) * 1000.0);
-                    }
-
+                    gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetDCH(ref techdch);
+                    lblprog.Prog_Val = (int)(((chstat.Veoc - chstat.Vdc) / (chstat.Veoc - techdch.CutoffV)) * 1000.0);
                 }
                 else
                 {
@@ -2502,7 +2498,7 @@ namespace ZiveLab.ZM
 
             }
 
-            if (techtype == enTechType.TECH_MON || techtype == enTechType.TECH_DCH || chstat.DispFreq == 0.0)
+            if (techtype == enTechType.TECH_MON || (techtype == enTechType.TECH_DCH && techdch.useir == 0) || chstat.DispFreq == 0.0)
             {
                 lblfreq.Text = "  Freq.: -------- Hz";
                 lblzreal.Text = "  Zreal: -------- Ω";
@@ -4555,9 +4551,9 @@ namespace ZiveLab.ZM
             DataEditorForm deForm = new DataEditorForm(true, true);
             deForm.MsgBoxCaption = this.Text;
             deForm.UnitC = false;
-            deForm.IVManPath = GetIVManPath();
-            deForm.GraphSetEx = new GraphSetEx(type);
-            deForm.EnAlwaysOpenPath = true;
+            deForm.IVManPath = GetIVManPath(); 
+            deForm.GraphSetEx = gBZA.mGraphSetEx;
+            deForm.EnAlwaysOpenPath = false;
             deForm.ZManPath = GetZManPath();
             deForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             //deForm.SchTempPath = gBZA.appcfg.PathSchTemp;
@@ -4723,21 +4719,18 @@ namespace ZiveLab.ZM
 
 
             SaveFileDialog saveDlg = new SaveFileDialog();
-
             
-
             saveDlg.Title = "Reload and saving result data file of ZM.";
             saveDlg.DefaultExt = "*.zmf";
             saveDlg.Filter = "Result data files of ZM (*.zmf) |*.zmf";
             saveDlg.OverwritePrompt = true;
-            saveDlg.InitialDirectory =  Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
+            saveDlg.InitialDirectory = Path.GetDirectoryName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
             saveDlg.FileName = Path.GetFileName(gBZA.SifLnkLst[serial].MBZAIF.resfilename[sifch]);
 
             if (saveDlg.ShowDialog() == DialogResult.Cancel)
             {
                 return;
             }
-
 
             gBZA.appcfg.PathData = Path.GetDirectoryName(saveDlg.FileName);
             gBZA.appcfg.Save();
@@ -4902,9 +4895,9 @@ namespace ZiveLab.ZM
         }
         private void OpenResGraph(string[] filename = null)
         {
-            EisGraphForm egForm = new EisGraphForm(0, new GraphSet(), new DataManager.CommClass.GraphSetEx(2), true);
+            EisGraphForm egForm = new EisGraphForm(0, gBZA.mGraphSet, gBZA.mGraphSetEx, true);
             egForm.MsgBoxCaption = AppTitle;
-            egForm.EnAlwaysOpenPath = true;
+            egForm.EnAlwaysOpenPath = false;
             egForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             egForm.ZManPath = GetZManPath();
             egForm.AllowTransparency = false;

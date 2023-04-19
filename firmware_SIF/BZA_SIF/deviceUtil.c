@@ -1335,7 +1335,7 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 	praw->zdata.img = (a * d + b * c);
 }
 
-inline bool proc_eis_data_conv(int ch)
+bool proc_eis_data_conv(int ch)
 {
 	ushort nCycle;
 	double dTemp;
@@ -1509,9 +1509,16 @@ inline  void ApplyCalcConfigADCForDelay(int ch) //Find OSR and number of points 
 	pddssig->reset = 0;
 	
 	m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 1.0;
-	if(m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus == DEF_TESTSTATUS_RUNNING && m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus == DEF_TESTSTATUS_RUNNING)
 	{
-		if(pddssig->frequency  < 100.0)	
+		if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+		{
+			if(pddssig->frequency  < 100.0)	
+			{
+				m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 0.3;
+			}
+		}
+		else if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
 		{
 			m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 0.3;
 		}
@@ -1625,6 +1632,8 @@ void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cycle
 	st_zim_adc_ac_cfg* preqcfg = &m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg;
 	st_zim_dds* pddssig = &m_pGlobalVar->mChVar[ch].mdevice.dds_sig;
 	
+	
+	
 	double  dMaxFreq = (double)MIN_EIS_CYC_POINT * 32.0 * pddssig->frequency;
 	double  dConstFlt = 2.0;
 	
@@ -1640,9 +1649,16 @@ void ApplyCalcConfigADC(int ch) //Find OSR and number of points in a cycle
 	if(m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg.iac_flt == DEF_FLT_LOWLATENCY) dConstFlt = 4.0;
 
 	m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 1.0;
-	if(m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus == DEF_TESTSTATUS_RUNNING && m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+	if(m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus == DEF_TESTSTATUS_RUNNING)
 	{
-		if(pddssig->frequency  < 100.0)	
+		if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+		{
+			if(pddssig->frequency  < 100.0)	
+			{
+				m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 0.3;
+			}
+		}
+		else if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
 		{
 			m_pGlobalVar->mChVar[ch].mFlow.SetDuration = 0.3;
 		}
@@ -2032,7 +2048,22 @@ inline void proc_eis_chk_ing(int ch)
 		pChStatus->eis_status.WorkDatacnt = rawdatacnt;
 		if((buf & 0x8000) == 0x8000)
 		{
-			pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
+			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
+			{
+				
+				proc_mon_dcControl(ch);
+
+				m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayLimit = 2000;
+				m_pGlobalVar->mChVar[ch].mFlow.m_MsFlowdelayStamp = 0;
+
+				proc_eis_data_conv(ch);
+				
+				m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status = DEF_EIS_STATUS_FIN;
+			}
+			else
+			{
+				pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
+			}
 			return;
 		}
 	}
@@ -2159,7 +2190,7 @@ bool proc_writedata(int ch)
 	int ierr = 0;
 	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
 	{
-		ierr = pch->mChStatInf.RunTimeStamp % pch->mFlow.m_MsDurLimit;
+		ierr = pch->mChStatInf.TaskTimeStamp % pch->mFlow.m_MsSmplLimit;
 	}
 
 	if((pch->mChStatInf.eis_status.rescount+1) > SDRAM_DATA_COUNT)
@@ -2193,7 +2224,7 @@ bool proc_writedata(int ch)
 	
 	pdata->Temperature = pch->mChStatInf.Temperature;
 	
-	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
+	if(pch->mTech.type == TECH_MON)
 	{
 		pdata->fFreq = 0.0;			
 		pdata->Zre = 0.0;
@@ -2278,6 +2309,8 @@ inline void proc_mon_chkslope(int ch)
 					//pch->mChStatInf.RunTimeStamp = 0;
 					pch->mChStatInf.TaskTimeStamp = 0;
 					//pch->mChStatInf.CycleTimeStamp = 0;
+					pch->mFlow.m_MsDurCount = 0;
+					pch->mFlow.m_MsDurCount1 = 0;
 				}
 				pch->m_msSlop = 0;
 			}
@@ -2452,8 +2485,9 @@ bool proc_eis_main(int ch)
 	else if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_EIS_INIT)
 	{
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
-		{
-			AuxProc(ch);
+		{ 
+			proc_adc_vdc_data(ch);
+			
 			proc_eis_init(ch);
 
 			pch->meis.eis_raw.freq = pch->mChStatInf.eis_status.freq;
@@ -2468,6 +2502,10 @@ bool proc_eis_main(int ch)
 			
 			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_RDY;
 			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
+			{
+				pch->mFlow.m_MsFlowdelayLimit = 200; 
+			}
+			else if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_QIS)
 			{
 				pch->mFlow.m_MsFlowdelayLimit = 200; 
 			}
@@ -2495,20 +2533,19 @@ bool proc_eis_main(int ch)
 	{
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 		{
-			proc_eis_chk_ing(ch);
 			pch->mFlow.m_MsFlowdelayLimit = 1; 
 			pch->mFlow.m_MsFlowdelayStamp = 0;
+			proc_eis_chk_ing(ch);
 		}
 	}
 	else if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_FFT)
 	{
-		
 		if(proc_eis_data_conv(ch) == false)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_FFT;
 			return false;
 		}
-		
+
 		if(proc_writedata(ch) == false)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
@@ -2619,12 +2656,35 @@ bool proc_eis_main(int ch)
 	}		
 	else if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_FIN)
 	{
+		
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 		{
-			proc_power_VAC(ch, false);
-			
-			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
-			m_pGlobalVar->mChVar[ch].mChStatInf.NextTaskNo = 1;
+			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
+			{
+				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_DCHSAMPLE;
+			}
+			else
+			{
+				proc_power_VAC(ch, false);
+				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
+				//m_pGlobalVar->mChVar[ch].mChStatInf.NextTaskNo = 1;
+			}
+		}
+		else
+		{
+			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
+			{
+				if(m_pGlobalVar->m_msRefreshDC > 50)
+				{
+					m_pGlobalVar->m_msRefreshDC = 0;
+
+					buf = (ushort)DDS_REG_ADDR_PHASE0 | (ushort)(m_pGlobalVar->mChVar[ch].flow_dds_sig.req.phase & 0xFFF);
+					if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+					{
+						return false;
+					}
+				}
+			}
 		}
 	}
 	return true;
@@ -2636,30 +2696,12 @@ void Flow_monitor(int ch)
 {
 	bool bWrite = false;
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
-/*
-	if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_MONDELAY)
-	{
-		if(pch->mFlow.m_MsOndelayLimit <= pch->mFlow.OndelayTimeStamp)
-		{
-			pch->mFlow.m_MsFlowdelayLimit = 0; 
-			pch->mFlow.m_MsFlowdelayStamp = 0;
-			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_SAMPLE;
-			//pch->mChStatInf.RunTimeStamp = 0;
-			pch->mChStatInf.TaskTimeStamp = 0;
-			//pch->mChStatInf.CycleTimeStamp = 0;
-		}
-		else
-		{
-			proc_mon_chkslope(ch);
-		}
-		return;
-	}
+	uint dur = pch->mChStatInf.TaskTimeStamp - pch->mFlow.m_MsDurCount;
 	
-	*/
-	
-	if(pch->mFlow.m_MsDurLimit <= pch->mFlow.m_MsDurStamp)
+	if(pch->mFlow.m_MsSmplLimit <= dur)
 	{
-		pch->mFlow.m_MsDurStamp -= pch->mFlow.m_MsDurLimit;
+		pch->mFlow.m_MsDurCount = pch->mChStatInf.TaskTimeStamp - (pch->mChStatInf.TaskTimeStamp % pch->mFlow.m_MsSmplLimit);
+		proc_adc_vdc_data(ch);
 		if(proc_writedata(ch) == false)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
@@ -2674,6 +2716,7 @@ void Flow_monitor(int ch)
 		pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
 		if(bWrite == false)
 		{
+			proc_adc_vdc_data(ch);
 			if(proc_writedata(ch) == false)
 			{
 				pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
@@ -2690,27 +2733,6 @@ void Flow_discharger(int ch)
 	bool bWrite = false;
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[ch];
 	st_zim_dds_flow* pflowddssig = &m_pGlobalVar->mChVar[ch].flow_dds_sig;
-/*
-	if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_MONDELAY)
-	{
-		if(pch->mFlow.m_MsOndelayLimit <= pch->mFlow.OndelayTimeStamp)
-		{
-			pch->mFlow.m_MsFlowdelayLimit = 0; 
-			pch->mFlow.m_MsFlowdelayStamp = 0;
-			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_SAMPLE;
-			//pch->mChStatInf.RunTimeStamp = 0;
-			pch->mChStatInf.TaskTimeStamp = 0;
-			//pch->mChStatInf.CycleTimeStamp = 0;
-		}
-		else
-		{
-			proc_mon_chkslope(ch);
-		}
-		return;
-	}
-	
-	*/
-	
 
 	if(m_pGlobalVar->m_msRefreshDC > 50)
 	{
@@ -2723,10 +2745,12 @@ void Flow_discharger(int ch)
 		}
 	}
 
-	
-	if(pch->mFlow.m_MsDurLimit <= pch->mFlow.m_MsDurStamp)
+
+	if(pch->mFlow.m_MsSmplLimit <= (pch->mChStatInf.TaskTimeStamp - pch->mFlow.m_MsDurCount))
 	{
-		pch->mFlow.m_MsDurStamp -= pch->mFlow.m_MsDurLimit;
+		
+		pch->mFlow.m_MsDurCount = pch->mChStatInf.TaskTimeStamp - (pch->mChStatInf.TaskTimeStamp % pch->mFlow.m_MsSmplLimit);
+		proc_adc_vdc_data(ch);
 		if(proc_writedata(ch) == false)
 		{
 			pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
@@ -2735,20 +2759,45 @@ void Flow_discharger(int ch)
 		}
 		bWrite = true;
 	}
-	
-	if(pch->mChStatInf.TaskTimeStamp >= pch->mFlow.m_MsEndTimeLimit || pch->mChStatInf.Vdc <= pch->mFlow.CutoffV)
+
+
+	if(pch->mChStatInf.Vdc <= pch->mFlow.CutoffV)
 	{
 		pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
 		if(bWrite == false)
 		{
+			proc_adc_vdc_data(ch);
 			if(proc_writedata(ch) == false)
 			{
 				pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
 			}
 		}
 		proc_stop_test(ch, pch->mChStatInf.LastError);
+		return;
 	}
 	
+	if(pch->mTech.tech.dch.useir == 1)
+	{
+		if(pch->mFlow.m_MsDurLimit <= (pch->mChStatInf.TaskTimeStamp - pch->mFlow.m_MsDurCount1))
+		{
+			pch->mFlow.m_MsDurCount1 = pch->mChStatInf.TaskTimeStamp - (pch->mChStatInf.TaskTimeStamp % pch->mFlow.m_MsDurLimit);
+			pch->mChStatInf.eis_status.freq  = GetNextFreq(ch,&buf);
+			if(pch->mChStatInf.eis_status.freq  == 0.0)
+			{
+				pch->mChStatInf.LastError = DEF_LAST_ERROR_ERRSCH;
+				proc_stop_test(ch, pch->mChStatInf.LastError);
+				return;
+			}
+			memset(pch->mChStatInf.eis_status.Real_val,0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT);
+			memcpy(&pch->meis.eis_raw, &pch->meis.eis_raw_new,sizeof(st_zim_eis_raw));
+			memset(&pch->meis.eis_raw_new, 0x0,sizeof(st_zim_eis_raw));
+			
+			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_EIS_INIT;
+			pch->mFlow.m_MsFlowdelayLimit = 0;
+			pch->mFlow.m_MsFlowdelayStamp = 0;
+		}
+	}
+
 }
 
 
@@ -2928,7 +2977,6 @@ void AuxProc(int ch)
 {
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_ING) return;
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status == DEF_EIS_STATUS_FFT) return;
-	
 	if(m_pGlobalVar->mChVar[ch].TmpResetICE > 0) return;			  
 	proc_adc_rtd(ch);
 	if(m_pGlobalVar->mChVar[ch].TmpResetICE > 0) return;

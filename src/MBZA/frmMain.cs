@@ -1685,6 +1685,7 @@ namespace ZiveLab.ZM
             string sch = ch.ToString();
             string sSerial = gBZA.ChLnkLst[sch].sSerial;
             int iSifCh = gBZA.ChLnkLst[sch].SifCh;
+
             string filename = gBZA.SifLnkLst[sSerial].MBZAIF.resfilename[iSifCh];
 
             if (gBZA.CheckStatusRun(gBZA.SifLnkLst[sSerial].MBZAIF.mChStatInf[iSifCh]))

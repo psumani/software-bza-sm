@@ -270,7 +270,7 @@ namespace ZiveLab.ZM
             int sifch;
             double tmpI = 0.0;
             ushort irng;
-
+            enTechType techtype;
             foreach (var val in lstch)
             {
                 LnkCh = gBZA.ChLnkLst[val.ToString()];
@@ -288,6 +288,68 @@ namespace ZiveLab.ZM
                 if (tech.irange < irng)
                 {
                     serrch += string.Format("   ->{0:00}::Range use error exceeding permissible power.\r\n ", val + 1);
+                }
+
+                techtype = (enTechType)tech.type;
+
+                if (techtype == enTechType.TECH_HFR)
+                {
+                    stTech_HFR hfr = new stTech_HFR(0);
+                    tech.GetHFR(ref hfr);
+
+                    if (hfr.totaltime < MBZA_Constant.MIN_TOTALTIME)
+                    {
+                        serrch += string.Format("The minimum value for the total time setting is {0}second.", MBZA_Constant.MIN_TOTALTIME);
+                    }
+                    if (hfr.interval < MBZA_Constant.MIN_INTERVALTIME)
+                    {
+                        serrch += string.Format("The minimum value for the interval time setting is {0}second.", MBZA_Constant.MIN_INTERVALTIME);
+                    }
+                    
+                }
+                else if (techtype == enTechType.TECH_MON)
+                {
+                    stTech_MON mon = new stTech_MON(0);
+                    tech.GetMON(ref mon);
+
+                    if (mon.totaltime < MBZA_Constant.MIN_TOTALTIME)
+                    {
+                        serrch += string.Format("The minimum value for the total time setting is {0}second.", MBZA_Constant.MIN_TOTALTIME);
+                    }
+                    if (mon.sampletime < MBZA_Constant.MIN_SAMPLETIME)
+                    {
+                        serrch += string.Format("The minimum value for the sampling time setting is {0}second.", MBZA_Constant.MIN_SAMPLETIME);
+                    }
+                }
+                else if (techtype == enTechType.TECH_PRR)
+                {
+                    stTech_PRR prr = new stTech_PRR(0);
+                    tech.GetPRR(ref prr);
+                    if (prr.totaltime < MBZA_Constant.MIN_TOTALTIME)
+                    {
+                        serrch += string.Format("The minimum value for the total time setting is {0}second.", MBZA_Constant.MIN_TOTALTIME);
+                    }
+                    if (prr.interval < MBZA_Constant.MIN_INTERVALTIME)
+                    {
+                        serrch += string.Format("The minimum value for the interval time setting is {0}second.", MBZA_Constant.MIN_INTERVALTIME);
+                    }
+                }
+                else if (techtype == enTechType.TECH_QIS)
+                {
+                  
+                }
+                else if (techtype == enTechType.TECH_DCH)
+                {
+                    stTech_DCH dch = new stTech_DCH(0);
+                    tech.GetDCH(ref dch);
+                    if (dch.sampletime < MBZA_Constant.MIN_SAMPLETIME)
+                    {
+                        serrch += string.Format("The minimum value for the sampling time setting is {0}second.", MBZA_Constant.MIN_SAMPLETIME);
+                    }
+                }
+                else
+                {
+                    
                 }
             }
 
@@ -424,9 +486,9 @@ namespace ZiveLab.ZM
             }
             else if (techtype == enTechType.TECH_DCH)
             {
-                stTech_DCH dch = new stTech_DCH(0);
-                tTech.GetDCH(ref dch);
-                count = (int)(dch.totaltime / dch.sampletime);
+                //stTech_DCH dch = new stTech_DCH(0);
+                //tTech.GetDCH(ref dch);
+                //count = (int)(dch.totaltime / dch.sampletime);
             }
             else
             {
@@ -449,6 +511,7 @@ namespace ZiveLab.ZM
                 LnkCh = gBZA.ChLnkLst[val.ToString()];
                 sifid = LnkCh.sSerial;
                 sifch = LnkCh.SifCh;
+
                 if(GetWillSampleCount(gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch]) > MBZA_Constant.MAX_DATA_CNT)
                 {
                     serrch += string.Format("{0:00} ", val + 1);
@@ -536,6 +599,7 @@ namespace ZiveLab.ZM
                 sifch = LnkCh.SifCh;
                 minfo = lstTech[index];
                 index++;
+
                 head.SetTechFilename(Encoding.UTF8.GetBytes(gBZA.SifLnkLst[sifid].MBZAIF.condfilename[sifch]));
                 head.SetMemo(Encoding.UTF8.GetBytes(txtmemo.Text.Trim()));
                 head.mInfo.Error = 0;
@@ -572,7 +636,10 @@ namespace ZiveLab.ZM
 
                 gBZA.ChLnkLst[val.ToString()] = LnkCh;
             }
-
+            sname = string.Format("{0}000.zmf", txtfilename.Text);
+            sfilename = Path.Combine(txtfilepath.Text, sname);
+            gBZA.appcfg.PathData = Path.GetDirectoryName(sfilename);
+            gBZA.appcfg.Save();
 
             gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
 

@@ -15,8 +15,8 @@
 
 #define FIRMWARE_VER_MAJOR	6  
 #define FIRMWARE_VER_MINOR	0
-#define FIRMWARE_VER_REV	4
-#define FIRMWARE_VER_BUILD	9
+#define FIRMWARE_VER_REV	5
+#define FIRMWARE_VER_BUILD	0
 
 
 #define HW_ENABLE			0x1	
@@ -599,7 +599,10 @@ typedef struct
 	double              CutoffV;
 	ushort				timeproc;
 	uint 				m_MsDurStamp;
+	uint 				m_MsDurCount;
+	uint 				m_MsDurCount1;
 	uint 				m_MsDurLimit;
+	uint 				m_MsSmplLimit;
 	uint 				m_MsEndTimeLimit;
 	uint 				OndelayTimeStamp;
 	int 				m_iteration;
@@ -673,18 +676,20 @@ typedef struct
 typedef struct 
 {
 		ushort nouse0;
-		double interval;
+		double sampletime;
 		double totaltime;
         double nouse1[5];
 } st_Tech_MON;
 
 typedef struct 
 {
-		double interval;
+		double sampletime;
 		double totaltime;
 		double CutoffV;
-		ushort nouse0;
-        double nouse1[4];
+		double frequency;
+		double interval;
+		ushort useir;
+        double nouse1[2];
 } st_Tech_DCH;
 
 typedef union  
@@ -709,7 +714,9 @@ typedef struct
 	ushort 				irange;
 	ushort 				vrange;
 	st_Tech_Info 		info;
-	double 				NoUse[2];
+	ushort 				usNoUse;
+    int    				iNoUse;
+    double 				NoUse;
 } st_Tech;
 
 
