@@ -1032,8 +1032,7 @@ namespace ZiveLab.ZM
         {
             int[] nodeval;
             int item;
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-
+            
             
             nodeval = NodeToInteger(node);
 
@@ -1060,9 +1059,7 @@ namespace ZiveLab.ZM
         {
             int[] nodeval;
             int item;
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-
-
+            
             nodeval = NodeToInteger(node);
 
             if (nodeval[0] < 1) return false;
@@ -1237,7 +1234,7 @@ namespace ZiveLab.ZM
             int item;
 
             if (gBZA.SifLnkLst.ContainsKey(Serial) == false) return null;
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+           
 
             nodeval = NodeToInteger(node);
 
@@ -2041,7 +2038,6 @@ namespace ZiveLab.ZM
 
             stRangeFile inf = new stRangeFile();
             string sFullPath;
-            var p = gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c];
 
             sFullPath = Path.Combine(gBZA.appcfg.PathRangeInfo, GetrangeFileName(s, c));
 
@@ -2053,7 +2049,7 @@ namespace ZiveLab.ZM
             {
                 inf = (stRangeFile)Reader.Deserialize(file);
 
-                p.ranges = inf.ranges;
+                gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ranges = inf.ranges;
 
             }
             catch (Exception ex)
@@ -2067,9 +2063,7 @@ namespace ZiveLab.ZM
         {
 
             stRangeFile inf = new stRangeFile();
-
-            var p = gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c];
-
+            
             StreamReader file = new StreamReader(sFullPath);
 
             XmlSerializer Reader = new XmlSerializer(inf.GetType());
@@ -2078,7 +2072,7 @@ namespace ZiveLab.ZM
             {
                 inf = (stRangeFile)Reader.Deserialize(file);
 
-                p.ranges = inf.ranges;
+                gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ranges = inf.ranges;
 
             }
             catch (Exception ex)
@@ -2185,8 +2179,7 @@ namespace ZiveLab.ZM
 
         private void loadChFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-
+            
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = "Load the information of the ranges";
             dlg.Multiselect = false;
@@ -2201,13 +2194,13 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.PathRangeInfo = Path.GetDirectoryName(dlg.FileName);
                 gBZA.appcfg.Save();
 
+                RefreshTreeViewStat();
+                RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
 
         private void saveChFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-            
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Title = "Saves the information of the ranges";
             dlg.DefaultExt = "xml";
@@ -2414,7 +2407,7 @@ namespace ZiveLab.ZM
                 var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
 
                 InitRangeInfo(ref p.ranges, (eZimType)(p.info.cModel[0] - 0x30));
-                gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges = p.ranges;
+                
                 RefreshTreeViewStat();
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }

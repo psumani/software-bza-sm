@@ -110,6 +110,7 @@ namespace ZiveLab.ZM
             string str;
             int ScanChCount = 0;
             int ScanSifCount = 0;
+            bool brecreate = false;
             eDeviceType mtype;
             if(bFirst)
             {
@@ -141,10 +142,12 @@ namespace ZiveLab.ZM
                 ip = pair.Key;
 
                 stLinkSIF mLinkSIF = new stLinkSIF(0);
-
+                brecreate = true;
+                str = "";
                 if (pair.Value.bBusy == 1)
                 {
-                    if(gBZA.SifLnkLst.ContainsKey(tSerial))
+                    brecreate = false;
+                    if (gBZA.SifLnkLst.ContainsKey(tSerial))
                     {
                         mLinkSIF = gBZA.SifLnkLst[tSerial];
                         mtype = (eDeviceType)mLinkSIF.mDevInf.mSysCfg.mSIFCfg.Type;
@@ -164,11 +167,13 @@ namespace ZiveLab.ZM
                         str = string.Format("   -> {0}({1}):{2}[Firmware:{3},Model:{4}]-Detected busy.\r\n", ScanSifCount + 1, mLinkSIF.sip, mLinkSIF.mFindSifCfg.GetSerialNumber(), mLinkSIF.mFindSifCfg.GetFirmwareVer(), Extensions.GetEnumDescription((eDeviceType)mLinkSIF.mFindSifCfg.Type));
                     }
                 }
-                else
+
+                if(brecreate)
                 {
 
                     if (gBZA.SifLnkLst.ContainsKey(tSerial))
                     {
+                        gBZA.SifLnkLst[tSerial].MBZAIF.StopThread();
                         gBZA.SifLnkLst.Remove(tSerial);
                     }
 
@@ -200,7 +205,7 @@ namespace ZiveLab.ZM
                         if (pair.Value.mDevInf.mSysCfg.EnaZIM[0] == 1)
                         {
                             ChannelCount++;
-                            if (pair.Value.mDevInf.mSysCfg.ChkZIM[j] == 1)
+                            if (pair.Value.mDevInf.mSysCfg.ChkZIM[0] == 1)
                             {
                                 ScanChCount++;
                             }

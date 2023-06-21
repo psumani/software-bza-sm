@@ -710,7 +710,6 @@ void proc_test_main(int ch)
 		{
 			pch->mChStatInf.TaskNo = pch->mChStatInf.NextTaskNo;
 			proc_stop_test(ch,DEF_LAST_ERROR_AUTOSTOP);
-			pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
 			return;
 		}
 		

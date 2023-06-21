@@ -437,7 +437,7 @@ namespace ZiveLab.ZM
 
                     pair.Value.MBZAIF.mDevInf.ToWritePtr(pair.Value.mDevInf.ToByteArray());
                     pair.Value.MBZAIF.ConnectBZA(pair.Value.sip);
-
+                    
                     if (pair.Value.MBZAIF.bConnect)
                     {
                         pair.Value.mDevInf.ToWritePtr(pair.Value.MBZAIF.mDevInf.ToByteArray());
@@ -448,6 +448,8 @@ namespace ZiveLab.ZM
             }
             return LinkSifErr;
         }
+
+      
 
         public static int DisonnectSifs()
         {

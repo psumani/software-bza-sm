@@ -2656,7 +2656,34 @@ bool proc_eis_main(int ch)
 	}		
 	else if(pch->mChStatInf.eis_status.status == DEF_EIS_STATUS_FIN)
 	{
+		if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
+		{
+			if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
+			{
+				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_DCHSAMPLE;
+			}
+			else
+			{
+				if(m_pGlobalVar->m_msRefreshDC > 50)
+				{
+					m_pGlobalVar->m_msRefreshDC = 0;
+
+					buf = (ushort)DDS_REG_ADDR_PHASE0 | (ushort)(m_pGlobalVar->mChVar[ch].flow_dds_sig.req.phase & 0xFFF);
+					if(ICE_write_16bits(ch, ICE_CMD_DDS_SIG,buf) == _ERROR)
+					{
+						return false;
+					}
+				}
+			}
+		}
+		else
+		{
+			proc_power_VAC(ch, false);
+			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
+			m_pGlobalVar->mChVar[ch].mChStatInf.NextTaskNo = 1;
+		}
 		
+		/*		
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 		{
 			if(m_pGlobalVar->mChVar[ch].mTech.type == TECH_DCH)
@@ -2686,6 +2713,7 @@ bool proc_eis_main(int ch)
 				}
 			}
 		}
+		*/
 	}
 	return true;
 }

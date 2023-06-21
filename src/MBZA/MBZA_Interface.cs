@@ -419,7 +419,10 @@ namespace ZiveLab.ZM
                     Thread.Sleep(1);
                 }
             }
+       
             mCommZim.Dispose();
+
+            bConnect = mCommZim.mComm.Connected;
         }
 
         public UInt16 CmdThreadProc()
@@ -1293,7 +1296,8 @@ namespace ZiveLab.ZM
                     if (this.bThread == false) break;
                     if (this.SimplePing(mCommZim.GetHostName()) == true)
                     {
-                        if(RefreshConnect() == -1)
+                        Thread.Sleep(50);
+                        if (RefreshConnect() == -1)
                         {
                             bThread = false;
                         }
