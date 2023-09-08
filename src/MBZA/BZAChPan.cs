@@ -1225,7 +1225,7 @@ namespace ZiveLab.ZM
         {
             int nPlot;
             TabGrpRaw.Text = "AC waveform";
-            TabGrp1.Text = "Niquest plot";
+            TabGrp1.Text = "Nyquist plot";
 
             grp1.XAxes[0].Caption = "Z real(Ω)";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
@@ -1572,7 +1572,7 @@ namespace ZiveLab.ZM
         private void InitGraphEIS()
         {
             TabGrpRaw.Text = "AC waveform";
-            TabGrp1.Text = "Niquest plot";
+            TabGrp1.Text = "Nyquist plot";
 
             grp1.XAxes[0].Caption = "Z real(Ω)";
             grp1.XAxes[0].ScaleType = ScaleType.Linear;
@@ -2238,6 +2238,7 @@ namespace ZiveLab.ZM
             bool bcalibMode = gBZA.CheckStatusCalibMode(chstat);
             enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
             string str;
+            int FreqCount = chstat.eis_status.freqcount;
 
             if (gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
             {
@@ -2282,7 +2283,7 @@ namespace ZiveLab.ZM
                 else if (techtype == enTechType.TECH_QIS)
                 {
                     gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetQIS(ref techqis);
-                    lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
+                    lblprog.Prog_Val = (int)(((double)(FreqCount * chstat.CycleNo + chstat.eis_status.freqindex) / (double)(FreqCount * techqis.iteration)) * 1000.0);
                 }
                 else if (techtype == enTechType.TECH_DCH)
                 {
@@ -2292,7 +2293,7 @@ namespace ZiveLab.ZM
                 else
                 {
                     gBZA.SifLnkLst[serial].MBZAIF.tech[sifch].GetEIS(ref techeis);
-                    lblprog.Prog_Val = (int)(((double)chstat.eis_status.freqindex / (double)chstat.eis_status.freqcount) * 1000.0);
+                    lblprog.Prog_Val = (int)(((double)(FreqCount * chstat.CycleNo + chstat.eis_status.freqindex) / (double)(FreqCount * techeis.iteration)) * 1000.0);
                 }
             }
 
@@ -2411,7 +2412,6 @@ namespace ZiveLab.ZM
             }
             lbldatacount.Text = string.Format("   Data: {0}({1})", gBZA.SifLnkLst[serial].MBZAIF.mresfile[sifch].datacount, chstat.eis_status.rescount);
             labelElapsedTime.Text = string.Format("Elapsed: {0,4:###0}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
-
             eZimType zimtype = (eZimType)chstat.ZimType; // (eZimType)(gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].info.cModel[0] - 0x30);
             double crngval = mrng.iac_rng[chstat.Iac_in_rngno].realmax;
 

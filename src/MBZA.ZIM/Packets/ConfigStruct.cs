@@ -433,7 +433,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             if (i < 0) i = 0;
             else if (i > 5) i = 5;
 
-            str = string.Format("{0}{1}0000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)cModel[1], UintToByteString(nSerial));
+            str = string.Format("{0}{1}000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)cModel[1], UintToByteString(nSerial));
             return str;
         }
 

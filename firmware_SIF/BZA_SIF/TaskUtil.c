@@ -149,30 +149,10 @@ void SetDevChannel(int ch)
 	}
 }
 
-
-
-
 double mRounding( double x, int digit)
 {
 	double result = floor(x * pow(10.0, (double)digit) + 0.5) / pow(10.0, (double)digit);
 	return result;
-}
-
-int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int density)
-{
-    bool isInitLog = fabs(log10(initialFrequency)) == (double)((int)fabs(log10(initialFrequency)));
-    bool isFinalLog = fabs(log10(finalFrequency)) == (double)((int)fabs(log10(finalFrequency)));
-    
-    int Factor = 0;
-	
-	if(isInitLog) Factor ++;
-	if(isFinalLog) Factor ++;
-	
-	//Factor = (isInitLog || isFinalLog) ? 1 : 0;
-    
-	double x = fabs(log10(finalFrequency) - log10(initialFrequency)) * density;
-    
-    return Factor + (int)ceil(x); 
 }
 
 double RoundToSignificantDigits(double d, int digits)
@@ -184,12 +164,61 @@ double RoundToSignificantDigits(double d, int digits)
     return scale * mRounding(d / scale, digits);
 }
 
+/*
+int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int density)
+{	
+	double dinit = log10(initialFrequency);
+	double dfinal = log10(finalFrequency);
+    int Factor = 1;
+	
+	
+	    
+	double x = fabs(dfinal - dinit) * density;
+    return Factor + (int)ceil(x); 
+}
+*/
+
+int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int density)
+{	
+	double logIncrement = 1.0 / density;
+	double dInitfreq = RoundToSignificantDigits(initialFrequency, 6);
+	double dFinalfreq = RoundToSignificantDigits(finalFrequency, 6);
+    int index = 0;
+	double dfreq;
+	
+	if(dInitfreq > dFinalfreq )
+	{
+		logIncrement *= -1.0;
+	}
+	while(true)
+	{
+		dfreq = pow(10.0, log10(dInitfreq) + (index * logIncrement));
+		if(dInitfreq > dFinalfreq)
+		{
+			if(dfreq <= dFinalfreq)
+			{
+				break;
+			}
+		}
+		else
+		{
+			if(dfreq >= dFinalfreq)
+			{
+				break;
+			}
+		}
+		index++;
+	}
+    return index; 
+}
+
+
 int GetTechEisFreqCount(int ch, void* pvoid )
 {
 	int iret = 0;
 	st_Tech_EIS* peis = (st_Tech_EIS*)pvoid;
 	int density = MAX(peis->density,0);
-	int iteration = MAX(peis->iteration,1);
+	
 
 	peis->initfreq = MAX(peis->initfreq,m_pGlobalVar->mChVar[ch].MinFrequency);
 	peis->initfreq = MIN(peis->initfreq,m_pGlobalVar->mChVar[ch].MaxFrequency);
@@ -212,7 +241,7 @@ int GetTechEisFreqCount(int ch, void* pvoid )
 			iret = GetNumberOfFrequncies(peis->initfreq, peis->finalfreq, density);
 		}
 	}
-    iret *= iteration;
+   
 	
 	return iret;
 }
@@ -257,6 +286,7 @@ int GetFreqCount(int ch)
 	
 }
 
+
 double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 {
 	st_Tech_EIS* peis = (st_Tech_EIS*)pvoid;
@@ -264,7 +294,7 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	int density = MAX(peis->density,0);
 	int aPoints;
 	double logIncrement = 1.0 / density;
-	double dfreq = RoundToSignificantDigits(peis->initfreq, 6);
+	
 	
 	*restart = 1;
 
@@ -273,7 +303,11 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	peis->finalfreq = MAX(peis->finalfreq,m_pGlobalVar->mChVar[ch].MinFrequency);
 	peis->finalfreq = MIN(peis->finalfreq,m_pGlobalVar->mChVar[ch].MaxFrequency);
 
-	if(peis->initfreq == peis->finalfreq)
+	double dInitfreq = RoundToSignificantDigits(peis->initfreq, 6);
+	double dFinalfreq = RoundToSignificantDigits(peis->finalfreq, 6);
+	double dfreq = dInitfreq;
+	
+	if(dInitfreq == dFinalfreq)
 	{
 		if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex > 0) 
 		{
@@ -321,7 +355,8 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 		return dfreq;
 	}
 
-	aPoints = GetNumberOfFrequncies(peis->initfreq, peis->finalfreq, density);
+	
+	aPoints = m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqcount; //GetNumberOfFrequncies(peis->initfreq, peis->finalfreq);
 	
 	
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex >= aPoints)
@@ -336,26 +371,27 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 		return dfreq;
 	}
 	
-	if(peis->initfreq > peis->finalfreq )
+	if(dInitfreq > dFinalfreq )
 	{
 		logIncrement *= -1.0;
 	}
 
-	dfreq = pow(10.0, log10(peis->initfreq) + (m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex * logIncrement));
+	dfreq = pow(10.0, log10(dInitfreq) + (m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex * logIncrement));
 	
 	
-	if(peis->initfreq > peis->finalfreq)
+	if(dInitfreq > dFinalfreq)
 	{
-		dfreq = MAX(dfreq,peis->finalfreq);
+		dfreq = MAX(dfreq,dFinalfreq);
 	}
 	else
 	{
-		dfreq = MIN(dfreq,peis->finalfreq);
+		dfreq = MIN(dfreq,dFinalfreq);
 	}
-	
+
 	dfreq = RoundToSignificantDigits(dfreq, 6);
 
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
+	
 	return dfreq;
 }
 

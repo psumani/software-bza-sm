@@ -513,6 +513,12 @@ namespace ZiveLab.ZM
 
             grp1.InteractionModeDefault = GraphDefaultInteractionMode.None;
 
+            if (Properties.Settings.Default.NiGrp_Plot1_Pointview) grp1.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            else grp1.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
+
+            if (Properties.Settings.Default.NiGrp_Plot2_Pointview) grp1.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            else grp1.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
+
             grp1.Cursors[0].LabelBackColor = Properties.Settings.Default.NiGrp_Backcolor;
             grp1.Cursors[0].Plot = grp1.Plots[0];
             grp1.Cursors[0].Color = grp1.Cursors[0].Plot.LineColor;
@@ -609,6 +615,16 @@ namespace ZiveLab.ZM
             grp2.Plots[3].LineColor = Properties.Settings.Default.BdGrp_Plot2_color;
             grp2.Plots[3].PointColor = Properties.Settings.Default.BdGrp_Plot2_color;
             grp2.Plots[3].SmoothUpdates = true;
+
+
+            if (Properties.Settings.Default.BdGrp_Plot1_Pointview) grp2.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            else grp2.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
+
+            if (Properties.Settings.Default.BdGrp_Plot2_Pointview) grp2.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            else grp2.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
+
+            if (Properties.Settings.Default.BdGrp_Plot3_Pointview) grp2.Plots[2].PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            else grp2.Plots[2].PointStyle = NationalInstruments.UI.PointStyle.None;
 
             grp2.InteractionModeDefault = GraphDefaultInteractionMode.None;
 
@@ -1299,20 +1315,43 @@ namespace ZiveLab.ZM
             grdlist.Redraw = true;
         }
 
+        private void ApplyInductance(ref st_zim_zPacket[] packet1, ref st_zim_zPacket[] packet2, int Count, double dLs)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                packet1[i].real = packet1[i].real;
+                packet1[i].img = packet1[i].img + (2.0 * DeviceConstants.PI * packet1[i].freq * dLs);
+                packet1[i].mag = Math.Sqrt((packet1[i].real * packet1[i].real) + (packet1[i].img * packet1[i].img));
+                packet1[i].phase = Math.Atan2(packet1[i].img, packet1[i].real) * (double)180.0 / (double)DeviceConstants.PI;//angle in degree;
+
+                packet2[i].real = packet1[i].real;
+                packet2[i].img = packet1[i].img;
+                packet2[i].mag = packet1[i].mag;
+                packet2[i].phase = packet1[i].phase;
+
+            }
+        }
 
         private void ProcFitting()
         {
             int trng = rng / 2;
-            
+
+            ranges.mDummy[rng].R = double.Parse(grdpara[1, 1].ToString());
+            ranges.mDummy[rng].Ls = double.Parse(grdpara[2, 1].ToString());
+
 
 
             items = listPacket.ToArray();
             fititems = listPacket.ToArray();
+           
             if (items == null)
             {
                 MessageBox.Show("There was a problem with the calibration.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+           // ApplyInductance(ref items, ref fititems, items.Length, 0.13847e-7);
+
 
             ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, 0.0, ranges.mDummy[rng]);
 
@@ -1337,6 +1376,50 @@ namespace ZiveLab.ZM
             ranges.mEisIRngCalInfo[otherrng].d2 = zCal.Coefficients[4];
             ranges.mEisIRngCalInfo[otherrng].d3 = zCal.Coefficients[5];
             
+        }
+
+        private void RefreshFitting()
+        {
+            int trng = rng / 2;
+            double tgain = 1.0;
+            ranges.mDummy[rng].R = double.Parse(grdpara[1, 1].ToString());
+            ranges.mDummy[rng].Ls = double.Parse(grdpara[2, 1].ToString());
+            st_zim_Eis_Cal_info mInf = new st_zim_Eis_Cal_info(0);
+
+            mInf.n1 = double.Parse(grdpara[3, 1].ToString());
+            mInf.n2 = double.Parse(grdpara[4, 1].ToString());
+            mInf.n3 = double.Parse(grdpara[5, 1].ToString());
+            mInf.d1 = double.Parse(grdpara[6, 1].ToString());
+            mInf.d2 = double.Parse(grdpara[7, 1].ToString());
+            mInf.d3 = double.Parse(grdpara[8, 1].ToString());
+            tgain = double.Parse(grdpara[9, 1].ToString());
+
+            items = listPacket.ToArray();
+            fititems = listPacket.ToArray();
+
+            if (items == null)
+            {
+                MessageBox.Show("There was a problem with the calibration.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+           // ApplyInductance(ref items, ref fititems, items.Length, 0.13847e-7);
+
+
+            ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, mInf, tgain, ranges.mDummy[rng]);
+
+            zCal.ApplyGain(ref fititems, fititems.Length, tgain);
+
+            RefreshChangeTestData(fititems);
+
+            ranges.mEisIRngCalInfo[rng].ToWritePtr(mInf.ToByteArray());
+            ranges.mEisIRngCalInfo[otherrng].ToWritePtr(mInf.ToByteArray());
+            ranges.iac_rng[trng].gain1 = tgain;
+            ranges.iac_rng[trng].gain2 = tgain;
+
+            RefreshGraphEIS();
+
+
         }
 
         private void ProcApplyFitting()
@@ -1459,12 +1542,45 @@ namespace ZiveLab.ZM
         private void lnksave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            int iacrng = (int)Math.Floor((double)(rng / 2));
+
 
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(ranges.ToByteArray());
 
             bool res = MBZA_MapUtil.Save_Range_info(Serial, sifch);
 
+            gBZA.UpdateLastCalDate(Serial);
 
+            string sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber());
+            string sTitle = string.Format("EIS-{0}", iacrng + 1);
+
+            double drepfeq = 0.0;
+            double drepmag = 0.0;
+            double drepphase = 0.0;
+            double crngval = ranges.iac_rng[iacrng].realmax;
+            if ((rng % 2) > 0)
+            {
+                crngval *= ranges.iac_rng[iacrng].controlgain;
+            }
+            if (fititems != null)
+            {
+                for (int i = 0; i < fititems.Length; i++)
+                {
+                    if(fititems[i].freq > 1.4 && fititems[i].freq < 1.6)
+                    {
+                        drepfeq = fititems[i].freq;
+                        drepmag = fititems[i].mag;
+                        drepphase = fititems[i].phase;
+                        break;
+                    }
+                }
+            }
+
+            gBZA.WriteIniDoubleData(sTitle, "Range", sFilename, crngval);
+            gBZA.WriteIniDoubleData(sTitle, "DummyR", sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.mDummy[rng].R);
+            gBZA.WriteIniDoubleData(sTitle, "Frequency", sFilename, drepfeq);
+            gBZA.WriteIniDoubleData(sTitle, "Zmag", sFilename, drepmag);
+            gBZA.WriteIniDoubleData(sTitle, "Zphase", sFilename, drepphase);
 
             if (res == false)
             {
@@ -2295,6 +2411,11 @@ namespace ZiveLab.ZM
         private void grprt_PlotDataChanged(object sender, XYPlotDataChangedEventArgs e)
         {
 
+        }
+
+        private void BtRfreshFit_Click(object sender, EventArgs e)
+        {
+            RefreshFitting();
         }
     }
 }

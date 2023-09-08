@@ -21,6 +21,7 @@ namespace ZiveLab.ZM
         private int irng;
         private int iacrng;
         private double [] dresult;
+        private double[] dOffset;
         private bool bSkipEvent;
         private string sTitle;
         private string sitem;
@@ -43,6 +44,7 @@ namespace ZiveLab.ZM
             sifch = tsifch;
             iacrng = trng;
             dresult = new double[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+            dOffset = new double[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
             if (gBZA.SifLnkLst.ContainsKey(sSerial))
             {
                 mZim = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
@@ -72,9 +74,10 @@ namespace ZiveLab.ZM
                 if (i % 2 > 0) tdouble *= mRange.iac_rng[i / 2].controlgain;
                 str = SM_Number.ToRangeString(tdouble, "A");
                 cboirange.Items.Add(str);
-                sitem = string.Format("Range{0}", i);
+                sitem = string.Format("Range{0}_Read", i+1);
                 dresult[i] = gBZA.GetIniDoubleData(sTitle, sitem, sFilename, 0.0);
-
+                sitem = string.Format("Range{0}_Offset", i+1);
+                dOffset[i] = gBZA.GetIniDoubleData(sTitle, sitem, sFilename, 0.0);
             }
             cboirange.SelectedIndex = irng;
             
@@ -85,6 +88,7 @@ namespace ZiveLab.ZM
                 mRange.Idc_rnginf.idcofs[irng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
             }
 
+            dOffset[irng] = mRange.Idc_rnginf.idcofs[irng].offset;
             textApp.Text = string.Format("{0:#0.0###}", mRange.Idc_rnginf.idcofs[irng].offset);
             numericUpDown1.Value = Convert.ToDecimal(mRange.Idc_rnginf.idcofs[irng].offset);
             numericUpDown1.Increment = Convert.ToDecimal(0.001);
@@ -250,6 +254,16 @@ namespace ZiveLab.ZM
 
         private void chkctrlon_CheckedChanged(object sender, EventArgs e)
         {
+            mdevice.dds_sig.Phase = Decimal.ToDouble(numericUpDown1.Value);
+
+            gBZA.SifLnkLst[sSerial].MBZAIF.mdevice[sifch] = mdevice;
+
+            if (MBZA_MapUtil.SetDDSsigOfZIM(sSerial, sifch) == false)
+            {
+                MessageBox.Show("failed set dds.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             SetCellon();
         }
 
@@ -257,7 +271,9 @@ namespace ZiveLab.ZM
         {
             mRange.Idc_rnginf.idcofs[irng].offset = Decimal.ToDouble(numericUpDown1.Value);
             textApp.Text = string.Format("{0:#0.0###}", mRange.Idc_rnginf.idcofs[irng].offset);
-            dresult[irng] = Convert.ToDouble(txtresult.Text);  
+
+            dresult[irng] = Convert.ToDouble(txtresult.Text);
+            dOffset[irng] = mRange.Idc_rnginf.idcofs[irng].offset;
         }
         
 
@@ -270,12 +286,22 @@ namespace ZiveLab.ZM
 
             bool res = MBZA_MapUtil.Save_Range_info(sSerial, sifch);
 
-            sitem = string.Format("Range{0}", irng);
+
+            dresult[irng] = Convert.ToDouble(txtresult.Text);
+            sitem = string.Format("Range{0}_Read", irng+1);
             gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dresult[irng]);
+
+            dOffset[irng] = Convert.ToDouble(textApp.Text);
+            sitem = string.Format("Range{0}_Offset", irng+1);
+            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dOffset[irng]);
+
+            gBZA.UpdateLastCalDate(sSerial);
             if (res == false)
             {
                 MessageBox.Show("Failed to apply range information by sending it to the device.");
             }
+
+
             this.Cursor = Cursors.Default;
         }
 

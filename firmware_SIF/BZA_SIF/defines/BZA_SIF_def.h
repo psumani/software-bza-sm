@@ -15,8 +15,8 @@
 
 #define FIRMWARE_VER_MAJOR	6  
 #define FIRMWARE_VER_MINOR	0
-#define FIRMWARE_VER_REV	6
-#define FIRMWARE_VER_BUILD	0
+#define FIRMWARE_VER_REV	7
+#define FIRMWARE_VER_BUILD	2
 
 
 #define HW_ENABLE			0x1	

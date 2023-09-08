@@ -1289,7 +1289,7 @@ inline bool ChkSysCalVars(int ch)
 inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 {
 	st_zim_Eis_Cal_info* pEis_cal_info = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
-	st_zim_Eis_Cal_info* pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE];
+	st_zim_Eis_Cal_info* pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE]; //cRng
 	
 	double f = praw->freq;
 	double fsq = f * f;
@@ -1302,18 +1302,20 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 
 	if (ChkEisCalVar(pEis_cal_info1) == false)
 	{
-		return;
+		pEis_cal_info1 = pEis_cal_info;
 	}
-	//pEis_cal_info1 = pEis_cal_info;
+	
 	if (ChkEisCalVar(pEis_cal_info) == false)
 	{
 		return;
 	}
 	
 	a = 1 + pEis_cal_info1->n3 * fsq;
-	b = (pEis_cal_info->n1 / f) + (pEis_cal_info1->n2 * f);
+	b = (pEis_cal_info->n1 / f) + (pEis_cal_info->n2 * f);
+	//b = (pEis_cal_info->n1 / f) + (pEis_cal_info1->n2 * f);
 	c = 1 + pEis_cal_info1->d3 * fsq;
-	d = (pEis_cal_info->d1 / f) + (pEis_cal_info1->d2 * f);
+	d = (pEis_cal_info->d1 / f) + (pEis_cal_info->d2 * f);
+	//d = (pEis_cal_info->d1 / f) + (pEis_cal_info1->d2 * f);
 
 	if(c == 0.0 && d == 0.0)
 	{
@@ -1422,8 +1424,8 @@ bool proc_eis_data_conv(int ch)
 	
 	if(m_pGlobalVar->mChVar[ch].bCalib == 0)
 	{
-		CompImpedanceItem(ch, praw,m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno); 
-		praw->zdata.img = praw->zdata.img + (2.0 * PI * pstatus->freq * m_pSysConfig->mZimCfg[ch].ranges.mDummy[m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno].Ls);
+		CompImpedanceItem(ch, praw, m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno); 
+		praw->zdata.img = praw->zdata.img + (2.0 * PI * pstatus->freq * m_pSysConfig->mZimCfg[ch].ranges.mDummy[m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno].Ls); //DEF_HIFREQ_CALIBRANGE
 	}
 	
 	praw->zdata.mag = sqrt((praw->zdata.real * praw->zdata.real) + (praw->zdata.img * praw->zdata.img));
@@ -2591,7 +2593,7 @@ bool proc_eis_main(int ch)
 				return true;
 			}
 
-			
+			pch->mChStatInf.CycleNo = pch->mChStatInf.NextCycleNo;
 			memset(pch->mChStatInf.eis_status.Real_val,0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT);
 			memcpy(&pch->meis.eis_raw, &pch->meis.eis_raw_new,sizeof(st_zim_eis_raw));
 			memset(&pch->meis.eis_raw_new, 0x0,sizeof(st_zim_eis_raw));
@@ -2836,8 +2838,8 @@ void proc_stop_test(int ch, int errstat)
 	m_pGlobalVar->mChVar[ch].Start = 0;
 	m_pGlobalVar->mChVar[ch].mChStatInf.TaskNo = 0;
 	m_pGlobalVar->mChVar[ch].mChStatInf.NextTaskNo = 0;
-	m_pGlobalVar->mChVar[ch].mChStatInf.CycleNo = 0;
-	m_pGlobalVar->mChVar[ch].mChStatInf.NextCycleNo = 0;
+	//m_pGlobalVar->mChVar[ch].mChStatInf.CycleNo = 0;
+	//m_pGlobalVar->mChVar[ch].mChStatInf.NextCycleNo = 0;
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status = DEF_EIS_STATUS_NONE;
 	if(errstat == DEF_LAST_ERROR_AUTOSTOP) m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_FINISH;
 	else m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_STOP;

@@ -36,7 +36,7 @@ namespace ZiveLab.ZM.ZIM.Analysis
             Coefficients[3] = minf.d1;
             Coefficients[4] = minf.d2;
             Coefficients[5] = minf.d3;
-     
+           
             ApplyBestFitted(packet, ref fitpacket, Count);
             ApplyInductance(ref fitpacket, Count, dummy.Ls);
 
@@ -270,8 +270,39 @@ namespace ZiveLab.ZM.ZIM.Analysis
             var D3 = Coefficients[5];
             double fsq = freq * freq;
 
+
+            double freq;
+            double a;
+            double b;
+            double c;
+            double d;
+            double e;
+            double f;
+
+            a = fitPack->real;
+            b = fitPack->img;
+            freq = fitPack->freq;
+
+            c = 1 + (pModel->n2 * freq * freq);
+            d = pModel->n1 * freq;
+            e = 1 + (pModel->d2 * freq * freq);
+            f = pModel->d1 * freq;
+
+            fitPack->real = (float)((a * c * e) + (a * d * f) + (b * c * f) - (b * d * e))
+               / ((e * e) + (f * f));
+
+            fitPack->img = (float)((a * d * e) + (b * c * e) + (b * d * f) - (a * c * f))
+               / ((e * e) + (f * f));
+
+            fitPack->mag = sqrt(fitPack->real * fitPack->real + fitPack->img * fitPack->img);
+            if (fitPack->real == 0.0 || fitPack->img == 0.0) fitPack->phase = 0.0;
+            else fitPack->phase = atan2(fitPack->img, fitPack->real) * 180.0f / (float)DEF_PAI;
+
+
+
             Complex numerator = new Complex(1 + N3 * fsq, N1 / freq + N2 * freq);
             Complex denominator = new Complex(1 + D3 * fsq, D1 / freq + D2 * freq);
+
             Complex zfit = source * numerator / denominator;
             return zfit;
         }

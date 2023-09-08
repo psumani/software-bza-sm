@@ -126,6 +126,25 @@ namespace ZiveLab.ZM
             }
             return sfilename;
         }
+
+        public static string GetCalibLogFileName(string SifSerial)
+        {
+            string sfilename = Path.Combine(gBZA.appcfg.PathLog, string.Format("{0}\\{0}.log", SifSerial));
+            string sFolder = Path.GetDirectoryName(sfilename);
+            if (!System.IO.Directory.Exists(sFolder))
+            {
+                System.IO.Directory.CreateDirectory(sFolder);
+            }
+            return sfilename;
+        }
+
+        public static void UpdateLastCalDate(string sSerial)
+        {
+            string sFilename;
+            sFilename = gBZA.GetCalibLogFileName(sSerial);
+            gBZA.WriteIniStrData("SIF", "TestDate", sFilename, DateTime.Now.ToString("yyyy-MM-dd"));
+        }
+
         public static void WriteIniFloatData(string Title, string Item, string IniFile, float Value)
         {
             WritePrivateProfileString(Title, Item, Value.ToString(), IniFile);

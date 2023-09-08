@@ -278,6 +278,7 @@ namespace ZiveLab.ZM
                             gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.resfilename[pair.Value.SifCh] = pair.Value.mChInf.FileResult;
                             pair.Value.mDevInf.ToWritePtr(gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.mDevInf.ToByteArray());
 
+                            RefreshLog(pair.Value);
                         }
                     }
                 }
@@ -541,6 +542,8 @@ namespace ZiveLab.ZM
                             gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.bRemote[pair.Value.SifCh] = pair.Value.mChInf.bRemote;
                             gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.RemoteCh[pair.Value.SifCh] = Convert.ToInt32(pair.Key);
                             pair.Value.mDevInf.ToWritePtr(gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.mDevInf.ToByteArray());
+
+                            RefreshLog(pair.Value);  
                         }
                     }
                 }
@@ -572,6 +575,131 @@ namespace ZiveLab.ZM
             bRefresh = true;
             notifyIcon1.Visible = true;
         }
+
+        private void RefreshLog(stLinkSifCh mSif)
+        {
+            string sFilename;
+            string sFilename1;
+            string sTitle;
+            string sitem;
+            string svalue;
+            double dvalue;
+            sFilename = gBZA.GetCalibLogFileName(mSif.sSerial);
+
+            sTitle = "SIF";
+            sitem = "ModelName";
+
+            eProductType Producttype = mSif.mDevInf.mSysCfg.mSIFCfg.GetProductType();
+            mSif.mDevInf.mSysCfg.mSIFCfg.GetType();
+            svalue = Extensions.GetEnumDescription(Producttype);
+            eDeviceType mdevtype = (eDeviceType)mSif.mDevInf.mSysCfg.mSIFCfg.Type;
+            if (mdevtype == eDeviceType.MBZA) svalue += "M";
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sitem = "ModelDesc";
+            if (Producttype == eProductType.BZA1000) svalue = "1000V";
+            else if (Producttype == eProductType.BZA500) svalue = " 500V";
+            else if (Producttype == eProductType.BZA100) svalue = " 100V";
+            else svalue = "60V";
+            svalue += "/ 2A Battery Impedance Analyzer";
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            if (Producttype == eProductType.BZA1000) dvalue = 1000.0;
+            else if (Producttype == eProductType.BZA500) dvalue = 500.0;
+            else if (Producttype == eProductType.BZA100) dvalue = 100.0;
+            else dvalue = 60.0;
+            sitem = "Voltage_H";
+            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dvalue);
+
+            if (Producttype == eProductType.BZA1000) dvalue = 100.0;
+            else if (Producttype == eProductType.BZA500) dvalue = 50.0;
+            else if (Producttype == eProductType.BZA100) dvalue = 10.0;
+            else dvalue = 6.0;
+            sitem = "Voltage_L";
+            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dvalue);
+
+            sitem = "SerialNumber";
+            svalue = mSif.mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sitem = "MacAddress";
+            svalue = mSif.mDevInf.mConnCfg.mEthernetCfg.PropMacaddr;
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sitem = "BoardVersion";
+            svalue = mSif.mDevInf.mSysCfg.mSIFCfg.GetBoardVer();
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sitem = "FirmwareVersion";
+            svalue = mSif.mDevInf.mSysCfg.mSIFCfg.GetFirmwareVer();
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sitem = "ChannelCount";
+            if (mdevtype == eDeviceType.MBZA) svalue = "4";
+            else svalue = "1";
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sTitle = "ZM";
+            sitem = "Version";
+            svalue = AppTitle;
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            for (int i=0; i<4; i++)
+            {
+                
+                sTitle = string.Format("CH{0}", i + 1);
+                sitem = "Enabled";
+                if (mdevtype == eDeviceType.MBZA || i == 0)
+                {
+                    
+
+                    gBZA.WriteIniboolData(sTitle, sitem, sFilename, true);
+
+                    sitem = "SerialNumber";
+                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetSerialNumber();
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+                    sFilename1 = gBZA.GetCalibLogFileName(mSif.sSerial, svalue);
+                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+
+                    sitem = "BoardName";
+                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardTypeString();
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+
+                    sitem = "BoardVersion";
+                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardVer();
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+
+                    sitem = "FirmareVersion";
+                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetFirmwareVer();
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                }
+                else
+                {
+                    gBZA.WriteIniboolData(sTitle, sitem, sFilename, false);
+
+                    sitem = "SerialNumber";
+                    svalue = "";
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+                    sitem = "BoardName";
+                    svalue = "";
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+                    sitem = "BoardVersion";
+                    svalue = "";
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+                    sitem = "FirmareVersion";
+                    svalue = "";
+                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                }
+            }
+        }
+  
         private void ViewRegBZA()
         {
             bRefresh = false;

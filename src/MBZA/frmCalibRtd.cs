@@ -369,9 +369,6 @@ namespace ZiveLab.ZM
             string sitem;
             string sValue;
 
-            gBZA.WriteIniStrData("Device", "SIF_Serial", sFilename, Serial);
-            gBZA.WriteIniStrData("Device", "ZIM_Serial", sFilename, mZim.GetSerialNumber());
-
             gBZA.WriteIniDoubleData("RTD", "Gain", sFilename, mZim.ranges.rtd_rng.gain);
             gBZA.WriteIniDoubleData("RTD", "Offset", sFilename, mZim.ranges.rtd_rng.offset);
             gBZA.WriteIniIntData("RTD", "Count", sFilename, ListAfter0.Items.Count);
@@ -385,6 +382,7 @@ namespace ZiveLab.ZM
                 sValue = ListAfter0.Items[row].SubItems[1].Text.Replace("\r", "").Replace("\n", "");
                 gBZA.WriteIniDoubleData("RTD", sitem, sFilename, Convert.ToDouble(sValue));
             }
+            gBZA.UpdateLastCalDate(Serial);
         }
 
         private void BtOpenFolder_Click(object sender, EventArgs e)

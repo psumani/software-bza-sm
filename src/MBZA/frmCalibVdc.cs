@@ -105,8 +105,6 @@ namespace ZiveLab.ZM
             string sitem;
             string sValue;
 
-            gBZA.WriteIniStrData("Device", "SIF_Serial", sFilename, Serial);
-            gBZA.WriteIniStrData("Device", "ZIM_Serial", sFilename, mZim.GetSerialNumber());
             gBZA.WriteIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.vdc_rng[rng].gain);
             gBZA.WriteIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.vdc_rng[rng].offset);
             gBZA.WriteIniIntData(sTitle, "Count", sFilename, ListAfter1.Items.Count);
@@ -119,6 +117,7 @@ namespace ZiveLab.ZM
                 sValue = ListAfter1.Items[row].SubItems[1].Text.Replace("\r", "").Replace("\n", "");
                 gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, Convert.ToDouble(sValue));
             }
+            gBZA.UpdateLastCalDate(Serial);
         }
         private void InitList(ref ListView mlstv)
         {

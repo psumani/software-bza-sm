@@ -219,6 +219,7 @@
             this.Controls.Add(this.cboirange);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCalibCtrlIdc";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Calibration IDC";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCalibCtrlIdc_FormClosed);
             this.Load += new System.EventHandler(this.frmCalibCtrlIdc_Load);

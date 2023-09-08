@@ -94,10 +94,20 @@
             this.BdGrpMenuGraphInitialize = new System.Windows.Forms.ToolStripMenuItem();
             this.grdpara = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.grpchstat = new System.Windows.Forms.GroupBox();
+            this.lblfreq = new System.Windows.Forms.Label();
+            this.lblprogfreq = new System.Windows.Forms.Label();
+            this.labelElapsedTime = new System.Windows.Forms.Label();
+            this.lblZphase = new System.Windows.Forms.Label();
+            this.lblZmag = new System.Windows.Forms.Label();
+            this.lblErrStatus = new System.Windows.Forms.Label();
+            this.lblTestStatus = new System.Windows.Forms.Label();
+            this.lblRange = new System.Windows.Forms.Label();
+            this.lblVdc = new System.Windows.Forms.Label();
+            this.lblTemp = new System.Windows.Forms.Label();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
             this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
-            this.lblfreq = new System.Windows.Forms.Label();
             this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.RtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.graphModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,15 +137,6 @@
             this.RTyAxis1 = new NationalInstruments.UI.YAxis();
             this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.RTyAxis2 = new NationalInstruments.UI.YAxis();
-            this.lblprogfreq = new System.Windows.Forms.Label();
-            this.labelElapsedTime = new System.Windows.Forms.Label();
-            this.lblZphase = new System.Windows.Forms.Label();
-            this.lblZmag = new System.Windows.Forms.Label();
-            this.lblErrStatus = new System.Windows.Forms.Label();
-            this.lblTestStatus = new System.Windows.Forms.Label();
-            this.lblRange = new System.Windows.Forms.Label();
-            this.lblVdc = new System.Windows.Forms.Label();
-            this.lblTemp = new System.Windows.Forms.Label();
             this.lnkstart = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -179,7 +180,7 @@
             this.tabPgList = new System.Windows.Forms.TabPage();
             this.grdlist = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.tabgrp = new System.Windows.Forms.TabControl();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
+            this.BtRfreshFit = new System.Windows.Forms.Button();
             this.menu_niquest.SuspendLayout();
             this.menu_bode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdpara)).BeginInit();
@@ -674,7 +675,7 @@
             // 
             this.grdpara.ColumnInfo = "2,1,0,0,0,95,Columns:0{Width:80;}\t1{Width:80;}\t";
             this.grdpara.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.grdpara.Location = new System.Drawing.Point(657, 13);
+            this.grdpara.Location = new System.Drawing.Point(651, 13);
             this.grdpara.Name = "grdpara";
             this.grdpara.Rows.Count = 12;
             this.grdpara.Rows.DefaultSize = 19;
@@ -703,6 +704,115 @@
             this.grpchstat.TabStop = false;
             this.grpchstat.Text = "[ Channel status ]";
             // 
+            // lblfreq
+            // 
+            this.lblfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfreq.Location = new System.Drawing.Point(10, 145);
+            this.lblfreq.Name = "lblfreq";
+            this.lblfreq.Size = new System.Drawing.Size(150, 15);
+            this.lblfreq.TabIndex = 84;
+            this.lblfreq.Text = "  Freq.: ------ Hz";
+            // 
+            // lblprogfreq
+            // 
+            this.lblprogfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprogfreq.Location = new System.Drawing.Point(10, 197);
+            this.lblprogfreq.Name = "lblprogfreq";
+            this.lblprogfreq.Size = new System.Drawing.Size(150, 15);
+            this.lblprogfreq.TabIndex = 83;
+            this.lblprogfreq.Text = "Working: ------ Hz";
+            // 
+            // labelElapsedTime
+            // 
+            this.labelElapsedTime.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelElapsedTime.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelElapsedTime.Location = new System.Drawing.Point(10, 70);
+            this.labelElapsedTime.Name = "labelElapsedTime";
+            this.labelElapsedTime.Size = new System.Drawing.Size(150, 15);
+            this.labelElapsedTime.TabIndex = 80;
+            this.labelElapsedTime.Text = "Elapsed: 000:00:00";
+            // 
+            // lblZphase
+            // 
+            this.lblZphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZphase.Location = new System.Drawing.Point(10, 180);
+            this.lblZphase.Name = "lblZphase";
+            this.lblZphase.Size = new System.Drawing.Size(150, 15);
+            this.lblZphase.TabIndex = 82;
+            this.lblZphase.Text = " Zphase: ------ °";
+            // 
+            // lblZmag
+            // 
+            this.lblZmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZmag.Location = new System.Drawing.Point(10, 163);
+            this.lblZmag.Name = "lblZmag";
+            this.lblZmag.Size = new System.Drawing.Size(150, 15);
+            this.lblZmag.TabIndex = 81;
+            this.lblZmag.Text = "   Zmag: ------ mΩ";
+            // 
+            // lblErrStatus
+            // 
+            this.lblErrStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrStatus.Location = new System.Drawing.Point(10, 51);
+            this.lblErrStatus.Name = "lblErrStatus";
+            this.lblErrStatus.Size = new System.Drawing.Size(308, 17);
+            this.lblErrStatus.TabIndex = 75;
+            this.lblErrStatus.Text = "  Error: Idle";
+            // 
+            // lblTestStatus
+            // 
+            this.lblTestStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestStatus.Location = new System.Drawing.Point(10, 34);
+            this.lblTestStatus.Name = "lblTestStatus";
+            this.lblTestStatus.Size = new System.Drawing.Size(308, 15);
+            this.lblTestStatus.TabIndex = 76;
+            this.lblTestStatus.Text = " Status: Idle";
+            // 
+            // lblRange
+            // 
+            this.lblRange.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRange.Location = new System.Drawing.Point(10, 89);
+            this.lblRange.Name = "lblRange";
+            this.lblRange.Size = new System.Drawing.Size(150, 15);
+            this.lblRange.TabIndex = 77;
+            this.lblRange.Text = "  Range: 100V/ 200mA";
+            this.lblRange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblVdc
+            // 
+            this.lblVdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVdc.Location = new System.Drawing.Point(10, 108);
+            this.lblVdc.Name = "lblVdc";
+            this.lblVdc.Size = new System.Drawing.Size(150, 15);
+            this.lblVdc.TabIndex = 78;
+            this.lblVdc.Text = "    VDC: ------ V";
+            // 
+            // lblTemp
+            // 
+            this.lblTemp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTemp.Location = new System.Drawing.Point(10, 127);
+            this.lblTemp.Name = "lblTemp";
+            this.lblTemp.Size = new System.Drawing.Size(150, 15);
+            this.lblTemp.TabIndex = 79;
+            this.lblTemp.Text = " PT-100: ------ °C";
+            // 
+            // lblprog
+            // 
+            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprog.LabelColor = System.Drawing.Color.Navy;
+            this.lblprog.LabelText = "";
+            this.lblprog.Location = new System.Drawing.Point(67, 17);
+            this.lblprog.Name = "lblprog";
+            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
+            this.lblprog.OutLine_Visible = true;
+            this.lblprog.OutLine_Width = 1;
+            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lblprog.Prog_Max = 100;
+            this.lblprog.Prog_Min = 0;
+            this.lblprog.Prog_Val = 50;
+            this.lblprog.Size = new System.Drawing.Size(248, 14);
+            this.lblprog.TabIndex = 74;
+            // 
             // Rtlegend
             // 
             this.Rtlegend.Border = NationalInstruments.UI.Border.Dotted;
@@ -723,15 +833,6 @@
             // RtlegendItem2
             // 
             this.RtlegendItem2.Text = "Current";
-            // 
-            // lblfreq
-            // 
-            this.lblfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblfreq.Location = new System.Drawing.Point(10, 145);
-            this.lblfreq.Name = "lblfreq";
-            this.lblfreq.Size = new System.Drawing.Size(150, 15);
-            this.lblfreq.TabIndex = 84;
-            this.lblfreq.Text = "  Freq.: ------ Hz";
             // 
             // grprt
             // 
@@ -981,89 +1082,6 @@
             this.RTyAxis2.MinorDivisions.TickLength = 1F;
             this.RTyAxis2.MinorDivisions.TickVisible = true;
             this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
-            // 
-            // lblprogfreq
-            // 
-            this.lblprogfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprogfreq.Location = new System.Drawing.Point(10, 197);
-            this.lblprogfreq.Name = "lblprogfreq";
-            this.lblprogfreq.Size = new System.Drawing.Size(150, 15);
-            this.lblprogfreq.TabIndex = 83;
-            this.lblprogfreq.Text = "Working: ------ Hz";
-            // 
-            // labelElapsedTime
-            // 
-            this.labelElapsedTime.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelElapsedTime.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelElapsedTime.Location = new System.Drawing.Point(10, 70);
-            this.labelElapsedTime.Name = "labelElapsedTime";
-            this.labelElapsedTime.Size = new System.Drawing.Size(150, 15);
-            this.labelElapsedTime.TabIndex = 80;
-            this.labelElapsedTime.Text = "Elapsed: 000:00:00";
-            // 
-            // lblZphase
-            // 
-            this.lblZphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZphase.Location = new System.Drawing.Point(10, 180);
-            this.lblZphase.Name = "lblZphase";
-            this.lblZphase.Size = new System.Drawing.Size(150, 15);
-            this.lblZphase.TabIndex = 82;
-            this.lblZphase.Text = " Zphase: ------ °";
-            // 
-            // lblZmag
-            // 
-            this.lblZmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZmag.Location = new System.Drawing.Point(10, 163);
-            this.lblZmag.Name = "lblZmag";
-            this.lblZmag.Size = new System.Drawing.Size(150, 15);
-            this.lblZmag.TabIndex = 81;
-            this.lblZmag.Text = "   Zmag: ------ mΩ";
-            // 
-            // lblErrStatus
-            // 
-            this.lblErrStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblErrStatus.Location = new System.Drawing.Point(10, 51);
-            this.lblErrStatus.Name = "lblErrStatus";
-            this.lblErrStatus.Size = new System.Drawing.Size(308, 17);
-            this.lblErrStatus.TabIndex = 75;
-            this.lblErrStatus.Text = "  Error: Idle";
-            // 
-            // lblTestStatus
-            // 
-            this.lblTestStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestStatus.Location = new System.Drawing.Point(10, 34);
-            this.lblTestStatus.Name = "lblTestStatus";
-            this.lblTestStatus.Size = new System.Drawing.Size(308, 15);
-            this.lblTestStatus.TabIndex = 76;
-            this.lblTestStatus.Text = " Status: Idle";
-            // 
-            // lblRange
-            // 
-            this.lblRange.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRange.Location = new System.Drawing.Point(10, 89);
-            this.lblRange.Name = "lblRange";
-            this.lblRange.Size = new System.Drawing.Size(150, 15);
-            this.lblRange.TabIndex = 77;
-            this.lblRange.Text = "  Range: 100V/ 200mA";
-            this.lblRange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblVdc
-            // 
-            this.lblVdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVdc.Location = new System.Drawing.Point(10, 108);
-            this.lblVdc.Name = "lblVdc";
-            this.lblVdc.Size = new System.Drawing.Size(150, 15);
-            this.lblVdc.TabIndex = 78;
-            this.lblVdc.Text = "    VDC: ------ V";
-            // 
-            // lblTemp
-            // 
-            this.lblTemp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemp.Location = new System.Drawing.Point(10, 127);
-            this.lblTemp.Name = "lblTemp";
-            this.lblTemp.Size = new System.Drawing.Size(150, 15);
-            this.lblTemp.TabIndex = 79;
-            this.lblTemp.Text = " PT-100: ------ °C";
             // 
             // lnkstart
             // 
@@ -1318,7 +1336,7 @@
             this.tabPgniquest.Padding = new System.Windows.Forms.Padding(3);
             this.tabPgniquest.Size = new System.Drawing.Size(848, 432);
             this.tabPgniquest.TabIndex = 1;
-            this.tabPgniquest.Text = "Niquest plot";
+            this.tabPgniquest.Text = "Nyquist plot";
             this.tabPgniquest.UseVisualStyleBackColor = true;
             // 
             // Nilegend
@@ -1446,28 +1464,22 @@
             this.tabgrp.Size = new System.Drawing.Size(856, 459);
             this.tabgrp.TabIndex = 38;
             // 
-            // lblprog
+            // BtRfreshFit
             // 
-            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprog.LabelColor = System.Drawing.Color.Navy;
-            this.lblprog.LabelText = "";
-            this.lblprog.Location = new System.Drawing.Point(67, 17);
-            this.lblprog.Name = "lblprog";
-            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
-            this.lblprog.OutLine_Visible = true;
-            this.lblprog.OutLine_Width = 1;
-            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblprog.Prog_Max = 100;
-            this.lblprog.Prog_Min = 0;
-            this.lblprog.Prog_Val = 50;
-            this.lblprog.Size = new System.Drawing.Size(248, 14);
-            this.lblprog.TabIndex = 74;
+            this.BtRfreshFit.Image = global::ZiveLab.ZM.Properties.Resources.refresh;
+            this.BtRfreshFit.Location = new System.Drawing.Point(830, 214);
+            this.BtRfreshFit.Name = "BtRfreshFit";
+            this.BtRfreshFit.Size = new System.Drawing.Size(35, 36);
+            this.BtRfreshFit.TabIndex = 96;
+            this.BtRfreshFit.UseVisualStyleBackColor = true;
+            this.BtRfreshFit.Click += new System.EventHandler(this.BtRfreshFit_Click);
             // 
             // frmCalibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 706);
+            this.Controls.Add(this.BtRfreshFit);
             this.Controls.Add(this.Rtlegend);
             this.Controls.Add(this.grprt);
             this.Controls.Add(this.numdelay);
@@ -1671,5 +1683,6 @@
         private NationalInstruments.UI.YAxis RTyAxis1;
         private NationalInstruments.UI.ScatterPlot RTPlot2;
         private NationalInstruments.UI.YAxis RTyAxis2;
+        private System.Windows.Forms.Button BtRfreshFit;
     }
 }

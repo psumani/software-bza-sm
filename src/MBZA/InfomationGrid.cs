@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System.Collections;
 using SMLib;
@@ -17,6 +18,7 @@ using ZiveLab.ZM.ZIM.Utilities;
 using ZiveLab.ZM.ZIM.Packets;
 using System.IO;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace ZiveLab.ZM
 {
@@ -915,6 +917,21 @@ namespace ZiveLab.ZM
                         item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
+
+                        if (File.Exists("C:\\ZIVE DATA\\ZM\\Infor\\ZM_Report.src") == true)
+                        {
+                            item = new ToolStripMenuItem();
+                            item.Name = "Reporting";
+                            item.Image = ZM.Properties.Resources.ExportToExcel;
+                            item.Click += new EventHandler(Reporting_Click);
+                            item.ToolTipText = "Save device information to Excel.";
+                            item.AutoToolTip = true;
+                            item.Alignment = ToolStripItemAlignment.Left;
+                            item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                            item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                            item.ImageTransparentColor = Color.Fuchsia;
+                            toolStrip.Items.Add(item);
+                        }
                     }
 
                     if (index == 11)
@@ -1766,6 +1783,230 @@ namespace ZiveLab.ZM
             gBZA.SifLnkLst[Serial].mDevInf = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf;
 
             RefreshPropertyGrid(treeView1.SelectedNode);
+        }
+
+        void Reporting_Click(object sender, EventArgs e)
+        {
+            if(File.Exists("C:\\ZIVE DATA\\ZM\\Infor\\ZM_Report.src") == false)
+            {
+                MessageBox.Show("The file \"C:\\ZIVE DATA\\ZM\\Infor\\ZM_Report.src\" cannot be found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string sexcelfile = string.Format("{0}\\RPT_{0}.xlsx", Serial);
+            sexcelfile = Path.Combine(gBZA.appcfg.PathLog, sexcelfile);
+
+            int i,j;
+            int nlist;
+            string sFilename;
+            string sFilename1;
+            string sTitle;
+            string sItem;
+            string sChCerial;
+            double dVdcx1;
+            double dVdcx10;
+            double dGain = 1.0;
+            double dOffset = 0.0;
+            string sDesc;
+
+            Excel.Application xApp = null;
+            Excel.Workbook xWB = null;
+            Excel.Worksheet xShtheader = null;
+            Excel.Worksheet[] xShtch = new Excel.Worksheet[4];
+
+            sFilename = gBZA.GetCalibLogFileName(Serial);
+
+            for (i = 0; i < 4; i++)
+            {
+                xShtch[i] = null;
+            }
+
+            if (File.Exists(sexcelfile))
+            {
+                if (MessageBox.Show("The same file already exists.\r\n Are you sure you want to overwrite the file? ", gBZA.sMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                {
+                    return;
+                }
+
+                try
+                {
+                    File.Delete(sexcelfile);
+                }
+                catch 
+                {
+                    MessageBox.Show("The change to the file failed.\r\n Check if the file is missing or already in use, and try again.");
+                    return;
+                }
+            }
+
+            if (File.Exists(sexcelfile) == false)
+            {
+                File.Copy("C:\\ZIVE DATA\\ZM\\Infor\\ZM_Report.src", sexcelfile, true);
+            }
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                xApp = new Excel.Application();
+                xApp.Visible = false;
+                
+                xWB = xApp.Workbooks.Open(sexcelfile);
+                xShtheader = xWB.Worksheets.get_Item(1) as Excel.Worksheet; //Header
+                for (i = 0; i < 4; i++)
+                {
+                    xShtch[i] = xWB.Worksheets.get_Item(i + 2) as Excel.Worksheet;
+                }
+                //xShtheader.Cells[5, 4] = sOperator;
+                //xShtheader.Cells[6, 4] = sSignature;
+                xShtheader.Cells[7, 4] = DateTime.Now.ToString("yyyy-MM-dd");
+
+                sTitle = "SIF";
+                xShtheader.Cells[10, 1] = gBZA.GetIniStrData(sTitle, "ModelName", sFilename, "");
+                xShtheader.Cells[10, 2] = gBZA.GetIniStrData(sTitle, "ModelDesc", sFilename, "");
+                xShtheader.Cells[10, 3] = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
+                xShtheader.Cells[10, 4] = gBZA.GetIniStrData(sTitle, "TestDate", sFilename, DateTime.Now.ToString("yyyy-MM-dd"));
+
+                xShtheader.Cells[14, 1] = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
+                xShtheader.Cells[14, 2] = gBZA.GetIniStrData(sTitle, "MacAddress", sFilename, "");
+                xShtheader.Cells[14, 3] = gBZA.GetIniStrData(sTitle, "BoardVersion", sFilename, "");
+                xShtheader.Cells[14, 4] = gBZA.GetIniStrData(sTitle, "FirmwareVersion", sFilename, "");
+
+                xShtheader.Cells[16, 4] = gBZA.GetIniStrData(sTitle, "ChannelCount", sFilename, "");
+                dVdcx1 = gBZA.GetIniDoubleData(sTitle, "Voltage_H", sFilename, 0.0);
+                dVdcx10 = gBZA.GetIniDoubleData(sTitle, "Voltage_L", sFilename, 0.0);
+                sTitle = "ZM";
+                xShtheader.Cells[30, 1] = gBZA.GetIniStrData(sTitle, "Version", sFilename, "");
+                xShtheader.Cells[35, 2] = dVdcx1;
+                xShtheader.Cells[36, 2] = dVdcx10;
+
+                for (i = 0; i < 4; i++)
+                {
+                    sTitle = string.Format("CH{0}", i + 1);
+                    sChCerial = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
+                    xShtheader.Cells[18+i, 2] = sChCerial;
+                    xShtheader.Cells[18+i, 3] = gBZA.GetIniStrData(sTitle, "FirmareVersion", sFilename, "");
+                    xShtheader.Cells[18+i, 4] = string.Format("{0} {1}", gBZA.GetIniStrData(sTitle, "BoardName", sFilename, ""),gBZA.GetIniStrData(sTitle, "BoardVersion", sFilename, ""));
+                    
+                    if(gBZA.GetIniboolData(sTitle,"Enabled", sFilename,false))
+                    {
+                        sFilename1 = gBZA.GetCalibLogFileName(Serial, sChCerial);
+
+                        xShtch[i].Cells[1, 1] = string.Format("S / N #{0}", sChCerial);
+
+                        sTitle = "VDC_X1";
+                        nlist =  Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4),4);
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Target{0}", j + 1);
+                            xShtch[i].Cells[j + 3, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Real{0}", j + 1);
+                            xShtch[i].Cells[j + 3, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                        }
+                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                        sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx1, dGain, dOffset);
+
+
+                        xShtch[i].Cells[7, 1] = sDesc;
+
+                        sTitle = "VDC_X10";
+                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Target{0}", j + 1);
+                            xShtch[i].Cells[j + 8, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Real{0}", j + 1);
+                            xShtch[i].Cells[j + 8, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                        }
+                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                        xShtch[i].Cells[12, 1] = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx10, dGain, dOffset);
+
+                        sTitle = "RTD";
+                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Target{0}", j + 1);
+                            xShtch[i].Cells[j + 13, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Real{0}", j + 1);
+                            xShtch[i].Cells[j + 13, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                        }
+                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                        xShtch[i].Cells[17, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
+
+                        sTitle = "IDC";
+                        nlist = 8;
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Range{0}_Offset", j+1);
+                            xShtch[i].Cells[j + 19, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Range{0}_Read", j + 1);
+                            xShtch[i].Cells[j + 19, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
+                        }
+
+                        for (j = 0; j < 4; j++)
+                        {
+                            sTitle = string.Format("EIS-{0}",j+1);
+                            xShtch[i].Cells[j + 29, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
+                            xShtch[i].Cells[j + 29, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
+                            xShtch[i].Cells[j + 29, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
+                            xShtch[i].Cells[j + 29, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
+                            xShtch[i].Cells[j + 29, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
+                        }
+
+                    }
+                    else
+                    {
+                        xApp.DisplayAlerts = false;
+                        xShtch[i].Delete();
+                        xApp.DisplayAlerts = true;
+                    }
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                xWB.Save();
+                xApp.Visible = true;
+                //              xWB.Close(true);
+                //              xApp.Quit();
+                /*for (i = 0; i < 4; i++)
+                {
+                    if (xShtch[i] != null)
+                    {
+                        ReleaseExcelObject(xShtch[i]);
+                    }
+                }
+                ReleaseExcelObject(xShtheader);
+                ReleaseExcelObject(xWB);
+                ReleaseExcelObject(xApp);*/
+
+            }
+            //           if(MessageBox.Show("An Excel file has been created successfully.\r\n Do you want to open the file to check it?", gBZA.sMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+            //           {
+            //           }
+            this.Cursor = Cursors.Default;
+        }
+        private void ReleaseExcelObject(object obj)
+        {
+            try
+            {
+                if (obj != null)
+                {
+                    Marshal.ReleaseComObject(obj);
+                    obj = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                throw ex;
+            }
+            finally
+            {
+                GC.Collect();
+            }
         }
 
         void ChangeFwSIF_Click(object sender, EventArgs e)

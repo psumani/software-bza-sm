@@ -113,7 +113,7 @@ inline void i2c_delay(int cnt)
 inline void i2c_Defaultdelay()
 {
 	int i;
-	for(i=0; i<200; i++)
+	for(i=0; i<400; i++)
 	{
 	}
 }
