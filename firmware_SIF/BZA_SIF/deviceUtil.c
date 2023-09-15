@@ -1289,7 +1289,7 @@ inline bool ChkSysCalVars(int ch)
 inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 {
 	st_zim_Eis_Cal_info* pEis_cal_info = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
-	st_zim_Eis_Cal_info* pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE]; //cRng
+	st_zim_Eis_Cal_info* pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE];
 	
 	double f = praw->freq;
 	double fsq = f * f;
@@ -1311,11 +1311,9 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 	}
 	
 	a = 1 + pEis_cal_info1->n3 * fsq;
-	b = (pEis_cal_info->n1 / f) + (pEis_cal_info->n2 * f);
-	//b = (pEis_cal_info->n1 / f) + (pEis_cal_info1->n2 * f);
+	b = (pEis_cal_info->n1 / f) + (pEis_cal_info1->n2 * f);
 	c = 1 + pEis_cal_info1->d3 * fsq;
-	d = (pEis_cal_info->d1 / f) + (pEis_cal_info->d2 * f);
-	//d = (pEis_cal_info->d1 / f) + (pEis_cal_info1->d2 * f);
+	d = (pEis_cal_info->d1 / f) + (pEis_cal_info1->d2 * f);
 
 	if(c == 0.0 && d == 0.0)
 	{
@@ -1400,7 +1398,8 @@ bool proc_eis_data_conv(int ch)
 	praw->zdata_vac.img = mCompdrift.VAC.imag;
 	praw->zdata_vac.mag = mCompdrift.VAC.Amplitude;
 	praw->zdata_vac.phase = mCompdrift.VAC.Phase;
-   
+	
+	
 	dTemp = (praw->zdata_iac.real * praw->zdata_iac.real) + (praw->zdata_iac.img * praw->zdata_iac.img);
 	if(dTemp == 0.0)
 	{

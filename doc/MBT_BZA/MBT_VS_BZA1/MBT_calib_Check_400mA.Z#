@@ -1,0 +1,40 @@
+﻿[SIF Board]
+Serial number : IF2000Z11543
+Board version : 1.1.0.0
+Firmware version : 3.1.0.0
+
+[ZIM Board]
+Serial number : IM1000011466
+Board version : 1.7.0.0
+Firmware version : 3.0.1.0
+
+[Parameters]
+Current Range(A) : 400mA
+Initial Frequency(Hz) : 10.000
+Final Frequency(Hz) : 0.050
+Density(pts/decade) : 5
+Iteration : 1
+Initial Delay Time(s) : 1.0
+Skip Cycle : 1
+Started : 2023-07-17 09:48:34
+[OCV]
+Value : 0.003V
+
+
+
+
+
+[Data]
+Frequency(Hz)	Zre(ohm)	Zimg(ohm)	
+9.99961	0.00998726	1.92283E-05	
+6.30924	0.00998725	1.20562E-05	
+3.98094	0.00998528	7.11075E-06	
+2.51178	0.00998735	3.94E-06	
+1.58465	0.00998766	1.99965E-06	
+0.999775	0.0099858	-2.2699E-07	
+0.630505	0.00998747	-1.16946E-06	
+0.397675	0.00998588	5.79137E-07	
+0.250991	0.00998683	5.41717E-07	
+0.158325	0.00998608	-3.72737E-06	
+0.0996515	0.00998632	-7.91874E-06	
+0.0628643	0.00999629	-7.48694E-06	
