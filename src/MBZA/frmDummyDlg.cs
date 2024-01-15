@@ -87,7 +87,6 @@ namespace ZiveLab.ZM
                 }
                 
                 gBZA.appcfg.Power = Powtmp;
-                gBZA.appcfg.Save();
 
                 this.DialogResult = DialogResult.Cancel;
             }

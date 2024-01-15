@@ -1765,7 +1765,8 @@ namespace ZiveLab.ZM
                 {
                     if (nodeval[2] >= 1 && nodeval[2] < 3)
                     {
-                        ChangeRangeMaxMin(ref rngs.vdc_rng[nodeval[2] - 1]);
+                        if(nodeval[2] - 1 == 0) ChangeRangeMaxMin(ref rngs.vdc_rng[nodeval[2] - 1]);
+                        else ChangeRangeMaxMin(ref rngs.vdc_rng[nodeval[2] - 1],true);
                     }
                 }
                 else if (nodeval[1] == 5)
@@ -2034,7 +2035,7 @@ namespace ZiveLab.ZM
 
                 gBZA.appcfg.PathSIFFW = Path.GetDirectoryName(dlg.FileName);
                 gBZA.appcfg.FileNameSIFFW = Path.GetFileName(dlg.FileName);
-                gBZA.appcfg.Save();
+
                 Cursor.Current = Cursors.Default;
                 gBZA.ShowInfoBox("The firmware change has been successful. \r\n\r\nPlease restart the device.");
 
@@ -2107,105 +2108,93 @@ namespace ZiveLab.ZM
                 }
  //           }
         }
-        private void ChangeRangeMaxMin(ref st_zim_adci_rnginf inf)
+        private void ChangeRangeMaxMin(ref st_zim_adci_rnginf inf, bool bInit = false)
         {
-            frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum);
+            frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum, bInit);
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
-
-                if (inf.realmax == mdlg.RealMaxVal && inf.maximum == mdlg.MaxVal && inf.minimum == mdlg.MinVal)
-                {
-                    return;
-                }
                 inf.realmax = mdlg.RealMaxVal;
                 inf.maximum = mdlg.MaxVal;
                 inf.minimum = mdlg.MinVal;
-                inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
-                inf.gain1 = 1.0;
-                inf.gain2 = 1.0;
-
+                if (mdlg.bInit == true)
+                {
+                    inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
+                    inf.gain1 = 1.0;
+                    inf.gain2 = 1.0;
+                }
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
         
-        private void ChangeRangeMaxMin(ref st_zim_adcv_rnginf inf)
+        private void ChangeRangeMaxMin(ref st_zim_adcv_rnginf inf,bool bInit = false)
         {
-            frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum);
+            frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum, bInit);
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
 
-                if (inf.realmax == mdlg.RealMaxVal &&  inf.maximum == mdlg.MaxVal && inf.minimum == mdlg.MinVal)
-                {
-                    return;
-                }
                 inf.realmax = mdlg.RealMaxVal;
                 inf.maximum = mdlg.MaxVal;
                 inf.minimum = mdlg.MinVal;
-                inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
-                inf.gain = 1.0;
-                inf.offset = 0.0;
+                if (mdlg.bInit == true)
+                {
+                    inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
+                    inf.gain = 1.0;
+                    inf.offset = 0.0;
+                }
 
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
 
-        private void ChangeRangeMaxMin(ref st_zim_vdc_rnginf inf)
+        private void ChangeRangeMaxMin(ref st_zim_vdc_rnginf inf, bool bInit = false)
         {
-            frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum);
+            frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum, bInit);
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
-
-                if (inf.realmax == mdlg.RealMaxVal && inf.maximum == mdlg.MaxVal && inf.minimum == mdlg.MinVal)
-                {
-                    return;
-                }
                 inf.realmax = mdlg.RealMaxVal;
                 inf.maximum = mdlg.MaxVal;
                 inf.minimum = mdlg.MinVal;
-                inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
-                inf.gain = 1.0;
-                inf.offset = 0.0;
-
+                if (mdlg.bInit == true)
+                {
+                    inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
+                    inf.gain = 1.0;
+                    inf.offset = 0.0;
+                }
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
 
-        private void ChangeRangeMaxMin(ref st_zim_adct_rnginf inf)
+        private void ChangeRangeMaxMin(ref st_zim_adct_rnginf inf, bool bInit = false)
         {
-            frmSetMaxRange mdlg = new frmSetMaxRange(inf.maximum, inf.minimum);
+            frmSetMaxRange mdlg = new frmSetMaxRange(inf.maximum, inf.minimum, bInit);
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
-
-                if (inf.maximum == mdlg.MaxVal && inf.minimum == mdlg.MinVal)
-                {
-                    return;
-                }
                 inf.maximum = mdlg.MaxVal;
                 inf.minimum = mdlg.MinVal;
-                inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
-                inf.gain = 1.0;
-                inf.offset = 0.0;
 
+                if (mdlg.bInit == true)
+                {
+                    inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
+                    inf.gain = 1.0;
+                    inf.offset = 0.0;
+                }
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
 
-        private void ChangeRangeMaxMin(ref st_zim_adc_rnginf inf)
+        private void ChangeRangeMaxMin(ref st_zim_adc_rnginf inf, bool bInit = false)
         {
-            frmSetMaxRange mdlg = new frmSetMaxRange(inf.maximum, inf.minimum);
+            frmSetMaxRange mdlg = new frmSetMaxRange(inf.maximum, inf.minimum, bInit);
             if (mdlg.ShowDialog() == DialogResult.OK)
             {
-
-                if (inf.maximum == mdlg.MaxVal && inf.minimum == mdlg.MinVal)
-                {
-                    return;
-                }
                 inf.maximum = mdlg.MaxVal;
                 inf.minimum = mdlg.MinVal;
-                inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
-                inf.gain = 1.0;
-                inf.offset = 0.0;
-
+                if (mdlg.bInit == true)
+                {
+                    inf.factor = (inf.maximum - inf.minimum) / 16777216.0; //24bit
+                    inf.gain = 1.0;
+                    inf.offset = 0.0;
+                }
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
@@ -2234,8 +2223,8 @@ namespace ZiveLab.ZM
 
             stRangeFile inf = new stRangeFile();
 
-            inf.parent.SetInformation(selch, s, c);
-
+            //inf.parent.SetInformation(selch, s, c);
+            inf.parent.SetInformation(gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetHostname(), gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetIPAddress(),   selch, s, c);
             inf.ranges = p.ranges;
 
             XmlSerializer writer = new XmlSerializer(inf.GetType());
@@ -2257,8 +2246,8 @@ namespace ZiveLab.ZM
 
             stRangeFile inf = new stRangeFile();
 
-            inf.parent.SetInformation(selch, s, c);
-
+            //inf.parent.SetInformation(selch, s, c);
+            inf.parent.SetInformation(gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetHostname(), gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetIPAddress(), selch, s, c);
             inf.ranges = p.ranges;
 
             XmlSerializer writer = new XmlSerializer(inf.GetType());
@@ -2433,7 +2422,6 @@ namespace ZiveLab.ZM
             {
                 LoadFromXml(Serial, sifch, dlg.FileName);
                 gBZA.appcfg.PathRangeInfo = Path.GetDirectoryName(dlg.FileName);
-                gBZA.appcfg.Save();
 
                 RefreshTreeViewStat();
                 RefreshPropertyGrid(treeView1.SelectedNode);
@@ -2454,7 +2442,6 @@ namespace ZiveLab.ZM
             {
                 SaveToXml(Serial, sifch, dlg.FileName);
                 gBZA.appcfg.PathRangeInfo = Path.GetDirectoryName(dlg.FileName);
-                gBZA.appcfg.Save();
 
             }
         }

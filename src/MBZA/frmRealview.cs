@@ -511,7 +511,6 @@ namespace ZiveLab.ZM
                     gBZA.appcfg.RegRealviewLocation = pt;
                 }
             }
-            gBZA.appcfg.Save();
         }
 
         private void pan_SizeChanged(object sender, EventArgs e)
@@ -542,7 +541,6 @@ namespace ZiveLab.ZM
                     gBZA.appcfg.RegRealviewSize = this.Size;
                 }
             }
-            gBZA.appcfg.Save();
             ResizeWindow();
         }
 

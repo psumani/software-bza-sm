@@ -4430,8 +4430,7 @@ namespace ZiveLab.ZM
             {
                 filename = dlg.FileName;
                 gBZA.appcfg.PathSch = Path.GetDirectoryName(dlg.FileName);
-                gBZA.appcfg.Save();
-
+ 
                 var Value = gBZA.ChLnkLst[sch];
                 Value.mChInf.FileCond = filename;
                 gBZA.ChLnkLst[sch] = Value;
@@ -4733,7 +4732,6 @@ namespace ZiveLab.ZM
             }
 
             gBZA.appcfg.PathData = Path.GetDirectoryName(saveDlg.FileName);
-            gBZA.appcfg.Save();
 
             var Value = gBZA.ChLnkLst[sch];
             Value.mChInf.FileResult = saveDlg.FileName;

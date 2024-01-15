@@ -122,7 +122,6 @@ namespace ZiveLab.ZM
 
                 gBZA.appcfg.PathZIMFW = Path.GetDirectoryName(dlg.FileName);
                 gBZA.appcfg.FileNameZIMFW = Path.GetFileName(dlg.FileName);
-                gBZA.appcfg.Save();
             }
         }
 

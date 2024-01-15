@@ -113,7 +113,15 @@ inline void i2c_delay(int cnt)
 inline void i2c_Defaultdelay()
 {
 	int i;
-	for(i=0; i<400; i++)
+	for(i=0; i<400; i++) //400
+	{
+	}
+}
+
+inline void i2c_Defaultdelay1()
+{
+	int i;
+	for(i=0; i<1000; i++) //400
 	{
 	}
 }
@@ -1459,6 +1467,7 @@ INT_32 EepromWriteRead(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, IN
 	INT_32 mCnt;
 	INT_32 tCnt;
 	
+	
 	status = _NO_ERROR;
 	
 	pBuffer = (UNS_8*)buffer;
@@ -1473,9 +1482,10 @@ INT_32 EepromWriteRead(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, IN
 
 	while(mCnt)
 	{
+		i2c_Defaultdelay1();
 		if(mCnt < 32) tCnt = mCnt;
 		else tCnt = 32;
-		i2c_Defaultdelay();
+		i2c_Defaultdelay1();
 		mBuffer[0] = (char)((mMemAddr >> 8) & 0xFF);
 		mBuffer[1] = (char)(mMemAddr & 0xFF);
 		
@@ -1498,7 +1508,6 @@ INT_32 EepromWriteRead(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, IN
 		m_pGlobalVar->m_MsI2CdelayStamp = 0;
 		while(1)
 		{
-			i2c_Defaultdelay();
 			if(mSetup.status & I2C_SETUP_STATUS_DONE) 
 			{
 				break;
@@ -1517,6 +1526,7 @@ INT_32 EepromWriteRead(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, IN
 		mCnt -= tCnt;
 		mMemAddr += tCnt;
 		pBuffer += tCnt;
+		
 	}
 	
 	return status;
@@ -1541,7 +1551,7 @@ INT_32 EepromWrite(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32
 	mSetup.chk_TDI = 0;
 	mSetup.tx_data = (UNS_8*)mBuffer;
 	mSetup.retransmissions_max = 2;
-	
+
 	while(mCnt > 0)
 	{
 		memset(mBuffer,0x0,35);
@@ -1608,10 +1618,10 @@ INT_32 SetupI2C(INT_32 devid,UNS_32 sAddr)
 		
 	mSetup.addr_mode = ADDR7BIT;
 	mSetup.sl_addr = sAddr;
-	mSetup.rate_option = I2C_RATE_ABSOLUTE;	
-	mSetup.rate = 1040;     // 1040;	//260
-	mSetup.low_phase = 520;    // 520;	//94
-	mSetup.high_phase = 520;    //520;  // 166
+	mSetup.rate_option = I2C_RATE_RELATIVE;	//I2C_RATE_RELATIVE //I2C_RATE_ABSOLUTE
+	mSetup.rate = 520;     // 1040;	//2000
+	mSetup.low_phase = 520;    // 520;	//1000
+	mSetup.high_phase = 520;    //520;  // 1000
 	mSetup.pins_drive = I2C_PINS_LOW_DRIVE;
 	
 	return i2c_ioctl((INT_32)&i2cdat[devid],I2C_SETUP,(INT_32)&mSetup);
@@ -2077,11 +2087,10 @@ INT_32 EepromCheckZim(INT_16 ch, INT_32 devid,UNS_32 sAddr)
 	}
 	
 	SetDevChannel(ch);
-	
+	i2c_delay(1000);
+
 	for(i=0; i<3; i++)
 	{
-		
-		i2c_Defaultdelay();
 		if(EepromWriteRead(devid,sAddr,0x0,(void*)&m_id,sizeof(st_zim_id))  == _ERROR) 
 		{
 			continue;
@@ -2105,6 +2114,62 @@ INT_32 EepromCheckZim(INT_16 ch, INT_32 devid,UNS_32 sAddr)
 
 	return _ERROR;
 }
+/*
+INT_32 VerifyCheckRngInf(INT_16 ch, INT_32 devid,UNS_32 sAddr)
+{
+	st_zim_rnginf mZimrng;
+	int i = 0;
+	int err = 0;
+	int errCnt = 0;
+	int errmax = 0;
+	int j;
+	int size = sizeof(st_zim_rnginf);
+	UNS_8* psrc = (UNS_8*)&m_pSysConfig->mZimCfg[ch].ranges;
+	UNS_8* ptgt = (UNS_8*)&mZimrng;
+	
+	while(1)
+	{
+		i++;
+
+		if(EepromWrite(devid,sAddr,EEP_ZIMRNG_ADDR,(void*)&m_pSysConfig->mZimCfg[ch].ranges,sizeof(st_zim_rnginf)) == _ERROR) 
+		{
+			err ++;
+			continue;
+		}
+		
+		i2c_delay(1000);
+		
+		if(EepromWriteRead(devid,sAddr,EEP_ZIMRNG_ADDR,(void*)&mZimrng,size)  == _ERROR) 
+		{
+			err ++;
+			continue;
+		}
+		
+		err = 0;
+		for(j=0; j <size; j++)
+		{
+			if(*(psrc+j) != *(ptgt+j))
+			{
+				err ++;
+			}
+		}
+		if(err > 0)
+		{
+			errCnt ++;
+			if(err> errmax)
+			{
+				errmax = err;
+			}
+		}
+		
+		if(i> 1000)
+		{
+			i2c_delay(20000);
+			break;
+		}
+	}
+}
+*/
 
 INT_32 EepromApplyZim(INT_16 ch, INT_32 devid,UNS_32 sAddr)
 {
@@ -2119,6 +2184,8 @@ INT_32 EepromApplyZim(INT_16 ch, INT_32 devid,UNS_32 sAddr)
 		return _ERROR;
 	}
 	
+	//VerifyCheckRngInf(ch, devid, sAddr);
+
 	if(isnan(m_pSysConfig->mZimCfg[ch].ranges.mSafety.MaxPower) 
 	   && isnan(m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[0].gain) 
 		   && isnan(m_pSysConfig->mZimCfg[ch].ranges.vdc_rng[1].gain) 

@@ -1191,7 +1191,6 @@ namespace ZiveLab.ZM
             {
                 filename = dlg.FileName;
                 gBZA.appcfg.PathSch = Path.GetDirectoryName(dlg.FileName);
-                gBZA.appcfg.Save();
                 var Value = gBZA.ChLnkLst[sch];
                 Value.mChInf.FileCond = filename;
                 gBZA.ChLnkLst[sch] = Value;
@@ -1718,7 +1717,6 @@ namespace ZiveLab.ZM
                 return;
             }
             gBZA.appcfg.PathData = Path.GetDirectoryName(saveDlg.FileName);
-            gBZA.appcfg.Save();
             filename = saveDlg.FileName;
             var Value = gBZA.ChLnkLst[sch];
             Value.mChInf.FileResult = filename;
@@ -1929,7 +1927,6 @@ namespace ZiveLab.ZM
             {
                 filename = dlg.FileName;
                 gBZA.appcfg.PathSch = Path.GetDirectoryName(dlg.FileName);
-                gBZA.appcfg.Save();
                 for (row = 2; row < hgrid.Rows.Count; row++)
                 {
                     if (hgrid.GetCellCheck(row, 1) == CheckEnum.Checked)
@@ -2067,8 +2064,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.MainViewSize = this.Size;
                 gBZA.appcfg.MainViewLocation = this.Location;
             }
-
-            gBZA.appcfg.Save();
         }
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
@@ -2081,8 +2076,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.MainViewSize = this.Size;
                 gBZA.appcfg.MainViewLocation = this.Location;
             }
-            
-            gBZA.appcfg.Save();
         }
     }
 }

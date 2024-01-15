@@ -295,6 +295,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double PropRealmax
         {
             get { return realmax; }
+            set { realmax = value; }
         }
 
         [ReadOnlyAttribute(true)]
@@ -491,6 +492,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double PropRealmaximum
         {
             get { return realmax; }
+            set { realmax = value; }
         }
 
         [ReadOnlyAttribute(true)]
@@ -1003,6 +1005,24 @@ namespace ZiveLab.ZM.ZIM.Packets
             Marshal.Copy(Ptr, arr, 0, Size);
             Marshal.FreeHGlobal(Ptr);
             return arr;
+        }
+
+        public bool CompareInfo(byte[] ChkArr)
+        {
+            byte[] Arr = ToByteArray();
+            if (ChkArr.Length != Arr.Length)
+            {
+                return false;
+            }
+            int Size = Marshal.SizeOf(this);
+            for (int i = 0; i < Size; i++)
+            {
+                if (Arr[i] != ChkArr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void ToWritePtr(byte[] Arr)

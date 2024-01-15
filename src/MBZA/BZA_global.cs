@@ -305,6 +305,7 @@ namespace ZiveLab.ZM
 
         public static void SaveGrpSetAll()
         {
+            gBZA.appcfg.Save();
             SaveGrpSet();
             SaveGrpExSet();
         }
@@ -312,7 +313,7 @@ namespace ZiveLab.ZM
         public static bool SaveGrpSet()
         {
 
-            if (File.Exists(MBZA_Constant.GrpCfgFilename) == true)
+/*            if (File.Exists(MBZA_Constant.GrpCfgFilename) == true)
             {
                 try
                 {
@@ -323,7 +324,7 @@ namespace ZiveLab.ZM
                     MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-            }
+            }*/
             CoSerialize.SerializeToFile(MBZA_Constant.GrpCfgFilename, mGraphSet);
             
             return true;
@@ -332,7 +333,7 @@ namespace ZiveLab.ZM
         public static bool SaveGrpExSet()
         {
 
-            if (File.Exists(MBZA_Constant.GrpExCfgFilename) == true)
+           /* if (File.Exists(MBZA_Constant.GrpExCfgFilename) == true)
             {
                 try
                 {
@@ -343,7 +344,7 @@ namespace ZiveLab.ZM
                     MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-            }
+            }*/
             CoSerialize.SerializeToFile(MBZA_Constant.GrpExCfgFilename, mGraphSetEx);
             
 

@@ -106,7 +106,7 @@ namespace ZiveLab.ZM
         public bool Save()
         {
 
-            if (File.Exists(MBZA_Constant.AppCfgFilename) == true)
+/*            if (File.Exists(MBZA_Constant.AppCfgFilename) == true)
             {
                 try
                 {
@@ -118,8 +118,8 @@ namespace ZiveLab.ZM
                     return false;
                 }
             }
- 
-            FileStream file = System.IO.File.Create(MBZA_Constant.AppCfgFilename);
+ */       
+            FileStream file = System.IO.File.Open(MBZA_Constant.AppCfgFilename,FileMode.Create);
             XmlSerializer writer = new XmlSerializer(typeof(AppConfig)); 
             writer.Serialize(file, this);
             file.Close();
@@ -2144,7 +2144,7 @@ namespace ZiveLab.ZM
 
             if (cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain1 == 1.0 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain1 == 0.0
                 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain2 == 1.0 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain2 == 0.0
-                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng])
+                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng]) == false
                 || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng+1]) == false)
             {
                 tmp = false;

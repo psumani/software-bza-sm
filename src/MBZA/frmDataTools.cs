@@ -1257,9 +1257,7 @@ namespace ZiveLab.ZM
 
                 sCfgFullPath = Path.Combine(sCfgDirectory, sCfgFilename);
 
-
                 mRangeFile.parent.SetInformation(tResfile.tmphead.mInfo.Ch, sSerial, tResfile.tmphead.mInfo.sifch);
-
                 mRangeFile.ranges = tResfile.tmphead.inf_sifch.ranges;
 
                 XmlSerializer writer = new XmlSerializer(mRangeFile.GetType());

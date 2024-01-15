@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -2416,6 +2417,109 @@ namespace ZiveLab.ZM
         private void BtRfreshFit_Click(object sender, EventArgs e)
         {
             RefreshFitting();
+        }
+
+        public bool SaveApplyDataFile()
+        {
+            FileResult tResfile = new FileResult();
+            FileResult tSaveResfile = new FileResult();
+            SaveFileDialog saveDlg = new SaveFileDialog();
+
+            string str = string.Format("{0}\\Cal_{1}_rng{2}_result.zmf", Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber(), rng);
+            string sAppDatafile = Path.Combine(gBZA.appcfg.PathLog, str);
+
+
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (tResfile.Open(sLogDataFile) == false)
+                {
+
+                    Trace.WriteLine("Failed opening file.");
+                    Cursor = Cursors.Default;
+                    return false;
+                }
+
+                saveDlg.Title = "Save as applied data file.";
+                saveDlg.DefaultExt = "*.zmf";
+                saveDlg.Filter = "Data files of ZM (*.zmf) |*.zmf";
+                saveDlg.OverwritePrompt = true;
+                saveDlg.InitialDirectory = Path.GetDirectoryName(sAppDatafile);
+                saveDlg.FileName = Path.GetFileName(sAppDatafile);
+
+                if (saveDlg.ShowDialog() == DialogResult.Cancel)
+                {
+                    Cursor = Cursors.Default;
+                    tResfile.CloseFile();
+                    return false;
+                }
+
+                sAppDatafile = saveDlg.FileName;
+
+                if (File.Exists(sAppDatafile) == true)
+                {
+                    try
+                    {
+                        File.Delete(sAppDatafile);
+                    }
+                    catch (Exception ex)
+                    {
+                        tResfile.CloseFile();
+                        MessageBox.Show(ex.Message, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+
+                Cursor = Cursors.WaitCursor;
+
+                stDefTestData[] data = new stDefTestData[tResfile.datacount];
+                int DataCount = tResfile.read(0, ref data, tResfile.datacount);
+
+                if (tSaveResfile.Create(sAppDatafile, tResfile.tmphead) == false)
+                {
+                    MessageBox.Show("Failed to create new file.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                for (int i = 0; i < fititems.Length; i++)
+                {
+                    if (data[i].fFreq == fititems[i].freq)
+                    {
+                        data[i].real = fititems[i].real;
+                        data[i].img = fititems[i].img;
+                    }
+                    else
+                    {
+                        if(MessageBox.Show("Data with inconsistent frequencies was found. \r\n Do you want to continue?", gBZA.sMsgTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                        {
+                            tSaveResfile.CloseFile();
+                            tResfile.CloseFile();
+                            Cursor = Cursors.Default;
+                            return false;
+                        }
+                    }
+                    tSaveResfile.AppendData(data[i]);
+                }
+                tSaveResfile.CloseFile();
+                tResfile.CloseFile();
+            }
+            catch (IOException ex)
+            {
+                Trace.WriteLine(ex.Message);
+
+                tSaveResfile.CloseFile();
+                tResfile.CloseFile();
+
+                Cursor = Cursors.Default;
+                return false;
+            }
+            Cursor = Cursors.Default;
+            return true;
+        }
+
+        private void btSaveAsApplyData_Click(object sender, EventArgs e)
+        {
+            SaveApplyDataFile();
         }
     }
 }

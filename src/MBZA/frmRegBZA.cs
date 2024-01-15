@@ -1746,7 +1746,6 @@ namespace ZiveLab.ZM
                 
                 gBZA.appcfg.PathSIFFW = Path.GetDirectoryName(dlg.FileName);
                 gBZA.appcfg.FileNameSIFFW = Path.GetFileName( dlg.FileName);
-                gBZA.appcfg.Save();
                 Cursor.Current = Cursors.Default;
                 gBZA.ShowInfoBox("The firmware change has been successful. \r\n\r\nPlease restart the device.");
 

@@ -204,8 +204,6 @@ namespace ZiveLab.ZM
                 {
                     gBZA.appcfg.BatLimitFile = "C:\\ZIVE DATA\\ZM\\Infor\\BAT.lmt";
                 }
-
-                gBZA.appcfg.Save();
             }
             catch
             {
@@ -302,7 +300,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.MainSize = this.Size;
                 this.WindowState = FormWindowState.Maximized;
                 gBZA.appcfg.MainWinStatus = this.WindowState;
-                gBZA.appcfg.Save();
             }
             else
             {
@@ -349,7 +346,6 @@ namespace ZiveLab.ZM
                     gBZA.appcfg.RtWinStatus = frmRtView.WindowState;
                     gBZA.appcfg.RealviewLocation = frmRtView.Location;
                     gBZA.appcfg.RealviewSize = frmRtView.Size;
-                    gBZA.appcfg.Save();
                 }
                 else
                 {
@@ -500,20 +496,28 @@ namespace ZiveLab.ZM
 
         private void frmMdiMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UpdateChannels();
-
+            if (this.bExit && bClose) return;
             if (this.bExit == false)
             {
-                e.Cancel = true;
-                //this.Hide();
-                //this.Visible = false;
-                this.WindowState = FormWindowState.Minimized;
-                //this.ShowInTaskbar = false;
+                if (MessageBox.Show("Are you sure you want to quit?", gBZA.sMsgTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                {
+                    this.bExit = false;
+                    bClose = false;
+                    e.Cancel = true;
+                    //this.WindowState = FormWindowState.Minimized;
+                    return;
+                }
             }
-            else
-            {
-                bClose = true;
-            }
+            this.bExit = true;
+
+            this.timer1.Stop();
+            UpdateChannels();
+            
+            gBZA.DisonnectSifs();
+            this.notifyIcon1.Visible = false;
+
+            bClose = true;
+            
         }
 
         private void RefreshDeviceRegBZA()
@@ -1016,7 +1020,8 @@ namespace ZiveLab.ZM
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            exitApp();
+            Application.Exit();
+            //exitApp();
             
         }
 
@@ -1101,7 +1106,6 @@ namespace ZiveLab.ZM
                         frmRegRtView.WindowState = FormWindowState.Normal;
                         frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
                         gBZA.appcfg.RegRtWinStatus = frmRegRtView.WindowState;
-                        gBZA.appcfg.Save();
                     }
                     else
                     {
@@ -1174,7 +1178,6 @@ namespace ZiveLab.ZM
                         frmGrpRtView.WindowState = FormWindowState.Normal;
                         frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
                         gBZA.appcfg.GrpRtWinStatus = frmGrpRtView.WindowState;
-                        gBZA.appcfg.Save();
                     }
                     else
                     {
@@ -1337,7 +1340,8 @@ namespace ZiveLab.ZM
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            exitApp();
+            //exitApp();
+            Application.Exit();
         }
 
         private void frmMdiMain_LocationChanged(object sender, EventArgs e)
@@ -1353,7 +1357,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.MainSize = this.Size;
             }
             gBZA.appcfg.MainWinStatus = this.WindowState;
-            gBZA.appcfg.Save();
         }
 
         private void frmMdiMain_SizeChanged(object sender, EventArgs e)
@@ -1369,7 +1372,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.MainSize = this.Size;
             }
             gBZA.appcfg.MainWinStatus = this.WindowState;
-            gBZA.appcfg.Save();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1573,8 +1575,6 @@ namespace ZiveLab.ZM
         private void Memu_RstWinPos_Click(object sender, EventArgs e)
         {
             gBZA.appcfg.InitLocationSize(GetRegRMChs(), GetGrpRMChs());
-            gBZA.appcfg.Save();
-
 
             if (frmMainView != null)
             {

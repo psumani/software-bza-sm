@@ -639,7 +639,6 @@ namespace ZiveLab.ZM
             sname = string.Format("{0}000.zmf", txtfilename.Text);
             sfilename = Path.Combine(txtfilepath.Text, sname);
             gBZA.appcfg.PathData = Path.GetDirectoryName(sfilename);
-            gBZA.appcfg.Save();
 
             gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
 

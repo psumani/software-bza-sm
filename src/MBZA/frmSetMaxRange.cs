@@ -18,7 +18,8 @@ namespace ZiveLab.ZM
         public double RealMaxVal;
         public double MaxVal;
         public double MinVal;
-        public frmSetMaxRange(double tRealMaxVal, double tMax, double tMin)
+        public bool bInit;
+        public frmSetMaxRange(double tRealMaxVal, double tMax, double tMin,bool tEnachkinit = false)
         {
             InitializeComponent();
             RealMaxVal = tRealMaxVal;
@@ -32,9 +33,13 @@ namespace ZiveLab.ZM
             txtreal.Text = string.Format("{0:0.0#######e+0}", RealMaxVal);
             txtValue.Text = string.Format("{0:0.0#######e+0}", MaxVal);
             txtValue1.Text = string.Format("{0:0.0#######e+0}", MinVal);
+            if(tEnachkinit == true) bInit = false;
+            else bInit = true;
+            chkinitcal.Checked = bInit;
+            chkinitcal.Enabled = tEnachkinit;
         }
 
-        public frmSetMaxRange(double tMax, double tMin)
+        public frmSetMaxRange(double tMax, double tMin, bool tEnachkinit = false)
         {
             InitializeComponent();
 
@@ -47,6 +52,10 @@ namespace ZiveLab.ZM
             label2.Visible = false;
             txtValue.Text = string.Format("{0:0.0#######e+0}", MaxVal);
             txtValue1.Text = string.Format("{0:0.0#######e+0}", MinVal);
+            if (tEnachkinit == true) bInit = false;
+            else bInit = true;
+            chkinitcal.Checked = bInit;
+            chkinitcal.Enabled = tEnachkinit;
         }
 
         private void btok_Click(object sender, EventArgs e)
@@ -69,8 +78,9 @@ namespace ZiveLab.ZM
                 MessageBox.Show("There is a problem with the input of the minimum value. \r\n Please check and try again.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            bInit = chkinitcal.Checked;
 
-            else  this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
 
         private void btcancel_Click(object sender, EventArgs e)

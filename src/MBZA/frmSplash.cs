@@ -277,7 +277,8 @@ namespace ZiveLab.ZM
                 if (gBZA.SifLnkLst.ContainsKey(Value.sSerial))
                 {
                     Value.bChkSIF = true;
-
+                    Value.sip = gBZA.SifLnkLst[Value.sSerial].sip;
+                    Value.sMac = gBZA.SifLnkLst[Value.sSerial].sMac;
                     if (gBZA.SifLnkLst[Value.sSerial].mDevInf.mSysCfg.EnaZIM[Value.SifCh] == 1)
                     {
                         try

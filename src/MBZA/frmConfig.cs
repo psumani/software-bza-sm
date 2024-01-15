@@ -115,7 +115,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.CfgLocation = this.Location;
                 gBZA.appcfg.CfgSize = this.Size;
             }
-            gBZA.appcfg.Save();
         }
 
         private void frmConfig_SizeChanged(object sender, EventArgs e)
@@ -129,7 +128,6 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.CfgLocation = this.Location;
                 gBZA.appcfg.CfgSize = this.Size;
             }
-            gBZA.appcfg.Save();
         }
     }
 }

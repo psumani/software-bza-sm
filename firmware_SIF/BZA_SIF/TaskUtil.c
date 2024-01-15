@@ -146,6 +146,7 @@ void SetDevChannel(int ch)
 		P3_OUTP_SET_bit.GPO_11 = 1;  
 		
 		m_pGlobalVar->mStatusInf.LastCh = ch;
+		
 	}
 }
 
@@ -178,6 +179,7 @@ int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int de
 }
 */
 
+#define DEF_FREQUENCY_CHECKRATE 0.2
 int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int density)
 {	
 	double logIncrement = 1.0 / density;
@@ -185,7 +187,7 @@ int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int de
 	double dFinalfreq = RoundToSignificantDigits(finalFrequency, 6);
     int index = 0;
 	double dfreq;
-	
+	double dChkExist;
 	if(dInitfreq > dFinalfreq )
 	{
 		logIncrement *= -1.0;
@@ -193,21 +195,44 @@ int GetNumberOfFrequncies(double initialFrequency, double finalFrequency, int de
 	while(true)
 	{
 		dfreq = pow(10.0, log10(dInitfreq) + (index * logIncrement));
+		index++;
+		dChkExist = pow(10.0,ceil(log10(dfreq))) * logIncrement * DEF_FREQUENCY_CHECKRATE;
 		if(dInitfreq > dFinalfreq)
 		{
 			if(dfreq <= dFinalfreq)
 			{
+				 if((dFinalfreq - dfreq) > dChkExist)
+				 {
+					 index --;
+				 }
 				break;
+			}
+			else
+			{
+				if((dfreq - dFinalfreq) < dChkExist)
+				{
+					break;
+				}
 			}
 		}
 		else
 		{
 			if(dfreq >= dFinalfreq)
 			{
+				if((dfreq - dFinalfreq) < dChkExist)
+				 {
+					 index --;
+				 }
 				break;
 			}
+			else
+			{
+				if((dFinalfreq - dfreq) < dChkExist)
+				{
+					break;
+				}
+			}
 		}
-		index++;
 	}
     return index; 
 }
@@ -218,13 +243,7 @@ int GetTechEisFreqCount(int ch, void* pvoid )
 	int iret = 0;
 	st_Tech_EIS* peis = (st_Tech_EIS*)pvoid;
 	int density = MAX(peis->density,0);
-	
 
-	peis->initfreq = MAX(peis->initfreq,m_pGlobalVar->mChVar[ch].MinFrequency);
-	peis->initfreq = MIN(peis->initfreq,m_pGlobalVar->mChVar[ch].MaxFrequency);
-	peis->finalfreq = MAX(peis->finalfreq,m_pGlobalVar->mChVar[ch].MinFrequency);
-	peis->finalfreq = MIN(peis->finalfreq,m_pGlobalVar->mChVar[ch].MaxFrequency);
-	
 	
 	if(peis->initfreq == peis->finalfreq)
 	{
@@ -294,18 +313,20 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	int density = MAX(peis->density,0);
 	int aPoints;
 	double logIncrement = 1.0 / density;
-	
-	
+
 	*restart = 1;
+
 
 	peis->initfreq = MAX(peis->initfreq,m_pGlobalVar->mChVar[ch].MinFrequency);
 	peis->initfreq = MIN(peis->initfreq,m_pGlobalVar->mChVar[ch].MaxFrequency);
 	peis->finalfreq = MAX(peis->finalfreq,m_pGlobalVar->mChVar[ch].MinFrequency);
 	peis->finalfreq = MIN(peis->finalfreq,m_pGlobalVar->mChVar[ch].MaxFrequency);
-
+	
 	double dInitfreq = RoundToSignificantDigits(peis->initfreq, 6);
 	double dFinalfreq = RoundToSignificantDigits(peis->finalfreq, 6);
+
 	double dfreq = dInitfreq;
+	double dChkExist;
 	
 	if(dInitfreq == dFinalfreq)
 	{
@@ -359,6 +380,48 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 	aPoints = m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqcount; //GetNumberOfFrequncies(peis->initfreq, peis->finalfreq);
 	
 	
+	
+	if(dInitfreq > dFinalfreq )
+	{
+		logIncrement *= -1.0;
+	}
+	
+	
+	dfreq = pow(10.0, log10(dInitfreq) + (m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex * logIncrement));
+	dChkExist = pow(10.0,ceil(log10(dfreq))) * logIncrement * DEF_FREQUENCY_CHECKRATE;
+	if(dInitfreq > dFinalfreq)
+	{
+		if(dfreq <= dFinalfreq)
+		{
+			 dfreq = dFinalfreq;
+		}
+		else
+		{
+			if((dfreq - dFinalfreq) < dChkExist)
+			{
+				dfreq = dFinalfreq;
+			}
+		}
+	}
+	else
+	{
+		if(dfreq >= dFinalfreq)
+		{
+			dfreq = dFinalfreq;
+		}
+		else
+		{
+			if((dFinalfreq - dfreq) < dChkExist)
+			{
+				dfreq = dFinalfreq;
+			}
+		}
+	}
+	
+
+	dfreq = RoundToSignificantDigits(dfreq, 6);
+	
+	
 	if(m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex >= aPoints)
 	{
 		
@@ -367,29 +430,9 @@ double GetTechEisNextFreq(int ch, ushort* restart, void* pvoid)
 		{
 			return 0.0;
 		}
-		else m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex = 1;
-		return dfreq;
+		else m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex = 0;
+		dfreq = dInitfreq;
 	}
-	
-	if(dInitfreq > dFinalfreq )
-	{
-		logIncrement *= -1.0;
-	}
-
-	dfreq = pow(10.0, log10(dInitfreq) + (m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex * logIncrement));
-	
-	
-	if(dInitfreq > dFinalfreq)
-	{
-		dfreq = MAX(dfreq,dFinalfreq);
-	}
-	else
-	{
-		dfreq = MIN(dfreq,dFinalfreq);
-	}
-
-	dfreq = RoundToSignificantDigits(dfreq, 6);
-
 	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.Freqindex ++;
 	
 	return dfreq;
@@ -972,9 +1015,7 @@ void DeviceMainProc(void)
 		SetDevChannel(ch);
 		Ch_Seldelay();
 
-		
-		
-		
+
 		if(m_pSysConfig->ChkZIM[ch] == FALSE)
 		{
 			if(bFindProc == true && m_pGlobalVar->m_FindCh == ch) 

@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtreal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkinitcal = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label4
@@ -58,7 +59,7 @@
             // 
             // btcancel
             // 
-            this.btcancel.Location = new System.Drawing.Point(176, 105);
+            this.btcancel.Location = new System.Drawing.Point(176, 129);
             this.btcancel.Name = "btcancel";
             this.btcancel.Size = new System.Drawing.Size(64, 30);
             this.btcancel.TabIndex = 19;
@@ -68,7 +69,7 @@
             // 
             // btok
             // 
-            this.btok.Location = new System.Drawing.Point(94, 105);
+            this.btok.Location = new System.Drawing.Point(94, 129);
             this.btok.Name = "btok";
             this.btok.Size = new System.Drawing.Size(64, 30);
             this.btok.TabIndex = 18;
@@ -110,12 +111,23 @@
             this.label2.Text = "Real Maximum";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chkinitcal
+            // 
+            this.chkinitcal.AutoSize = true;
+            this.chkinitcal.Location = new System.Drawing.Point(53, 105);
+            this.chkinitcal.Name = "chkinitcal";
+            this.chkinitcal.Size = new System.Drawing.Size(187, 18);
+            this.chkinitcal.TabIndex = 24;
+            this.chkinitcal.Text = "Initialize calibration.";
+            this.chkinitcal.UseVisualStyleBackColor = true;
+            // 
             // frmSetMaxRange
             // 
             this.AcceptButton = this.btok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 148);
+            this.ClientSize = new System.Drawing.Size(262, 171);
+            this.Controls.Add(this.chkinitcal);
             this.Controls.Add(this.txtreal);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtValue1);
@@ -146,5 +158,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtreal;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkinitcal;
     }
 }

@@ -218,7 +218,7 @@ namespace ZiveLab.ZM
         private void TechInitialize()
         {
             stTech ttech = new stTech(techtype);
-            ttech = mtech;
+            ttech.ToWritePtr(mtech.ToByteArray());
 
             mtech.initialize(techtype);
             if (techtype == enTechType.TECH_HFR)
@@ -254,7 +254,7 @@ namespace ZiveLab.ZM
 
             mtech.irange = ttech.irange;
             mtech.vrange = ttech.vrange;
-            mtech.info = ttech.info;
+            mtech.info.ToWritePtr(ttech.info.ToByteArray());
         }
 
         private string GetDefaultname()
@@ -359,7 +359,6 @@ namespace ZiveLab.ZM
             */
 
             gBZA.appcfg.PathSch = Path.GetDirectoryName(sfilename);
-            gBZA.appcfg.Save();
 
             if ((enTechType)mtech.type == enTechType.TECH_HFR)
             {
@@ -435,6 +434,7 @@ namespace ZiveLab.ZM
             arr = Encoding.UTF8.GetBytes(txtbattid.Text);
             len = arr.Count();
             if (len > DeviceConstants.BATIDSIZE) len = DeviceConstants.BATIDSIZE;
+            Array.Clear(mtech.info.batid, 0, DeviceConstants.BATIDSIZE);
             Array.Copy(arr, mtech.info.batid, len);
             mtech.info.Capa = Convert.ToDouble(txtcapa.Text) / 1000.0;
             txtcapa.Text = string.Format("{0:0.0##}", mtech.info.Capa);
@@ -442,6 +442,7 @@ namespace ZiveLab.ZM
             arr = Encoding.UTF8.GetBytes(txtcreator.Text);
             len = arr.Count();
             if (len > DeviceConstants.USERSIZE) len = DeviceConstants.USERSIZE;
+            Array.Clear(mtech.info.creator, 0, DeviceConstants.USERSIZE);
             Array.Copy(arr, mtech.info.creator, len);
 
 
@@ -533,7 +534,8 @@ namespace ZiveLab.ZM
                 txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
 
                 dch.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
-                txtMonCutoff.Text = SM_Number.ToString(dch.CutoffV, enSM_TypeNumberToString.SIPrefix);
+                txtMonCutoff.Text = string.Format("{0:0.0}", dch.CutoffV);
+                //txtMonCutoff.Text = SM_Number.ToString(dch.CutoffV, enSM_TypeNumberToString.SIPrefix);
             }
             else
             {
@@ -548,7 +550,7 @@ namespace ZiveLab.ZM
                 str = txteisrepeat.Text;
                 if (int.TryParse(str, out eis.iteration)) txteisrepeat.Text = eis.density.ToString();
 
-                eis.skipcycle = (ushort)GetCycleFromCycIdx(cboeisskipcyc.SelectedIndex);
+                eis.skipcycle = (ushort)cboeisskipcyc.SelectedIndex;
                 eis.cycle = (ushort)GetCycleFromCycIdx(cboeiscyc.SelectedIndex);
             }
 
@@ -777,7 +779,7 @@ namespace ZiveLab.ZM
                 
                 txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
 
-                txtMonCutoff.Text = string.Format(" {0,4:##0.0}", dch.CutoffV);
+                txtMonCutoff.Text = string.Format("{0:0.0}", dch.CutoffV);
                 txthfrfreq.Text = GetFreqString(ref dch.frequency);
                 txthfrinterval.Text = SM_Number.GetTimeString(dch.Interval);
 
@@ -901,6 +903,7 @@ namespace ZiveLab.ZM
             byte[] arr = Encoding.UTF8.GetBytes(txtbattid.Text);
             int len = arr.Count();
             if (len > DeviceConstants.BATIDSIZE) len = DeviceConstants.BATIDSIZE;
+            Array.Clear(mtech.info.batid,0, DeviceConstants.BATIDSIZE);
             Array.Copy(arr, mtech.info.batid, len);
         }
 
@@ -923,6 +926,7 @@ namespace ZiveLab.ZM
             byte[] arr = Encoding.UTF8.GetBytes(txtcreator.Text);
             int len = arr.Count();
             if (len > DeviceConstants.USERSIZE) len = DeviceConstants.USERSIZE;
+            Array.Clear(mtech.info.creator, 0, DeviceConstants.USERSIZE);
             Array.Copy(arr, mtech.info.creator, len);
         }
 
@@ -1429,7 +1433,6 @@ namespace ZiveLab.ZM
 
 
             gBZA.appcfg.PathSch = Path.GetDirectoryName(saveDlg.FileName);
-            gBZA.appcfg.Save();
 
             filefullpath = saveDlg.FileName;
             filename = Path.GetFileName(filefullpath);
@@ -1562,7 +1565,6 @@ namespace ZiveLab.ZM
             if (this.WindowState != FormWindowState.Normal) return;
             Point pt = this.Location;
             gBZA.appcfg.TechLocation = pt;
-            gBZA.appcfg.Save();
         }
 
         private void frmTechniq_SizeChanged(object sender, EventArgs e)
@@ -1624,7 +1626,7 @@ namespace ZiveLab.ZM
                 {
                     MessageBox.Show("There is a problem with the input of the value. \r\n Please check and try again.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                txtMonCutoff.Text = string.Format(" {0,4:##0.0}", dch.CutoffV);
+                txtMonCutoff.Text = string.Format("{0:0.0}", dch.CutoffV);
             }
         }
 
@@ -1635,7 +1637,7 @@ namespace ZiveLab.ZM
 
         private void cboeisskipcyc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            eis.skipcycle = (ushort)GetCycleFromCycIdx(cboeisskipcyc.SelectedIndex);
+            eis.skipcycle = (ushort)cboeisskipcyc.SelectedIndex;
             
         }
 

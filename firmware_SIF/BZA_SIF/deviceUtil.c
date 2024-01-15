@@ -787,6 +787,7 @@ int proc_read_version(int ch)
 	{
 			return _ERROR;
 	}
+
 	m_pSysConfig->mZimCfg[ch].info.ZimFWVersion = tmp;
 	
 	return _NO_ERROR;
@@ -1288,9 +1289,6 @@ inline bool ChkSysCalVars(int ch)
 
 inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 {
-	st_zim_Eis_Cal_info* pEis_cal_info = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
-	st_zim_Eis_Cal_info* pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE];
-	
 	double f = praw->freq;
 	double fsq = f * f;
 	double a;
@@ -1299,10 +1297,21 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 	double d;
 	double aa;
 	double bb;
-
-	if (ChkEisCalVar(pEis_cal_info1) == false)
+	
+	st_zim_Eis_Cal_info* pEis_cal_info = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
+	st_zim_Eis_Cal_info* pEis_cal_info1;
+	
+	if((m_pSysConfig->mSIFCfg.FirmwareVersion.Build %2) == 0)
 	{
-		pEis_cal_info1 = pEis_cal_info;
+		pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
+	}
+	else
+	{
+		pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE];
+		if (ChkEisCalVar(pEis_cal_info1) == false)
+		{
+			pEis_cal_info1 = pEis_cal_info;
+		}
 	}
 	
 	if (ChkEisCalVar(pEis_cal_info) == false)

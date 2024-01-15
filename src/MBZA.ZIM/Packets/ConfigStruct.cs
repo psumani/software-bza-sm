@@ -1569,6 +1569,23 @@ namespace ZiveLab.ZM.ZIM.Packets
             Marshal.FreeHGlobal(Ptr);
             return arr;
         }
+        public bool CompareInfo(byte[] ChkArr)
+        {
+            byte[] Arr = ToByteArray();
+            if (ChkArr.Length != Arr.Length)
+            {
+                return false;
+            }
+            int Size = Marshal.SizeOf(this);
+            for (int i = 0; i < Size; i++)
+            {
+                if (Arr[i] != ChkArr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public void ToWritePtr(byte[] Arr)
         {

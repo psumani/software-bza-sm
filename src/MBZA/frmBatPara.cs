@@ -197,7 +197,7 @@ namespace ZiveLab.ZM
             {
                 LoadListFromXml(dlg.FileName);
                 gBZA.appcfg.BatLimitFile = dlg.FileName;
-                gBZA.appcfg.Save();
+
                 listBox1.Items.Clear();
                 for (i = 0; i < itemlist.Count; i++)
                 {
@@ -237,8 +237,6 @@ namespace ZiveLab.ZM
             {
                 SaveListToXml(dlg.FileName);
                 gBZA.appcfg.BatLimitFile = dlg.FileName;
-                gBZA.appcfg.Save();
-
             }
         }
 
