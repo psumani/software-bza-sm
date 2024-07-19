@@ -18,15 +18,16 @@ namespace ZiveLab.ZM
         public CommObj mCommZim;
         private string sSerial;
         private bool bconnect;
+        private bool bAux;
         private int ich;
-        public frmBurnZIM(string tSerial,int inch,bool tconnect = false)
+        public frmBurnZIM(string tSerial,int inch,bool tconnect = false, bool tbaux = false)
         {
             InitializeComponent();
 
             sSerial = tSerial;
             ich = inch;
             bconnect = tconnect;
-            
+            bAux = tbaux;
             this.Text = string.Format("Firmware change of FPGA in channel[{0}-{1}].", sSerial, ich+1);
            
             InitProgressStatus();
@@ -111,8 +112,17 @@ namespace ZiveLab.ZM
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
-            dlg.DefaultExt = "zim";
-            dlg.Filter = "zim files (*.zim)|*.zim|All files (*.*)|*.*";
+
+            if (bAux == true)
+            {
+                dlg.DefaultExt = "zimaux";
+                dlg.Filter = "zimaux files (*.zimaux)|*.zimaux|All files (*.*)|*.*";
+            }
+            else
+            {
+                dlg.DefaultExt = "zim";
+                dlg.Filter = "zim files (*.zim)|*.zim|All files (*.*)|*.*";
+            }
 
             dlg.InitialDirectory = gBZA.appcfg.PathZIMFW;
             dlg.FileName = gBZA.appcfg.FileNameZIMFW;

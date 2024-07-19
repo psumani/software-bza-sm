@@ -1,0 +1,33 @@
+#Build: Synplify Pro L-2016.09L+ice40, Build 077R, Dec  2 2016
+#install: C:\lscc\iCEcube2.2017.08\synpbase
+#OS: Windows 8 6.2
+#Hostname: DESKTOP-0637D1U
+
+# Tue Jun 12 13:51:52 2018
+
+#Implementation: zim_Implmnt
+
+Synopsys HDL Compiler, version comp2016q3p1, Build 141R, built Dec  5 2016
+@N|Running in 64-bit mode
+Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+Synopsys VHDL Compiler, version comp2016q3p1, Build 141R, built Dec  5 2016
+@N|Running in 64-bit mode
+Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+@N: CD720 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vhd\std.vhd":123:18:123:21|Setting time resolution to ps
+@N:"F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_main.vhd":6:7:6:9|Top entity is set to zim.
+@E: CD430 :"F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_pll_inst.vhd":1:0:1:11|Expecting library unit
+@W: CD433 :"F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_pll_inst.vhd":1:0:1:11|No design units in file
+1 error parsing file F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_pll_inst.vhd
+1 error parsing file F:\SM_Git_Repositories\software-zlog-sm\firmware_ICE\zim\zim_main.vhd
+@E: Parse errors encountered - exiting
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Tue Jun 12 13:51:53 2018
+
+###########################################################]
+@END
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Tue Jun 12 13:51:53 2018
+
+###########################################################]

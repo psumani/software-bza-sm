@@ -1,0 +1,21 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+-- ADS127L01IPBSR SPI MASTER!!
+
+entity ADC_ADS127 is
+Port (
+	CLK 			: in 		std_logic; 		-- system clock : 5.12 MHz clock
+	CFG_DATA		: in 		std_logic_vector(7 downto 0); 		-- configuration data
+	READ_DATA	: out 	std_logic_vector(15 downto 0); 		-- Last read RTD value
+	SCLK 			: out 	std_logic; 		-- SPI clock : max. 5MHz   - 2.56 MHz
+	CS 			: out 	std_logic; 		-- SPI chip select, active in low
+	MOSI 			: out 	std_logic; 		-- SPI serial data from master to slave
+	MISO 			: in 		std_logic; 		-- SPI serial data from master to slave
+	DRDY 			: in 		std_logic 		-- SPI serial data from master to slave
+);
+end ADC_ADS127;
+
+architecture behav of ADC_ADS127 is

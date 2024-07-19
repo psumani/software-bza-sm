@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:31:51
 
-* File Generated:     Apr 3 2023 14:36:23
+* File Generated:     Jun 28 2024 17:11:20
 
 * Purpose:            General info of design implementation
 
@@ -17,7 +17,7 @@
 Synthesis/Placement Summary:
 ----------------------------
     Status:  Successful
-    Runtime: 2 seconds
+    Runtime: 5 seconds
 
 Device Info:
 ------------
@@ -27,10 +27,10 @@ Device Info:
 
 Design statistics:
 ------------------
-    FFs:                  735
+    FFs:                  736
     LUTs:                 1375
     RAMs:                 12
-    IOBs:                 54
+    IOBs:                 57
     GBs:                  0
     PLLs:                 1
     Warm Boots:           0
@@ -38,17 +38,17 @@ Design statistics:
 Logic Resource Utilization:
 ---------------------------
     Total Logic Cells: 1382/3520
-        Combinational Logic Cells: 647      out of   3520      18.3807%
-        Sequential Logic Cells:    735      out of   3520      20.8807%
-        Logic Tiles:               276      out of   440       62.7273%
+        Combinational Logic Cells: 646      out of   3520      18.3523%
+        Sequential Logic Cells:    736      out of   3520      20.9091%
+        Logic Tiles:               266      out of   440       60.4545%
     Registers: 
-        Logic Registers:           735      out of   3520      20.8807%
+        Logic Registers:           736      out of   3520      20.9091%
         IO Registers:              0        out of   880       0
     Block RAMs:                    12       out of   20        60%
     Warm Boots:                    0        out of   1         0%
     Pins:
-        Input Pins:                14       out of   107       13.0841%
-        Output Pins:               40       out of   107       37.3832%
+        Input Pins:                16       out of   107       14.9533%
+        Output Pins:               41       out of   107       38.3178%
         InOut Pins:                0        out of   107       0%
     Global Buffers:                0        out of   8         0%
     PLLs:                          1        out of   2         50%
@@ -76,6 +76,8 @@ Detailed I/O Info:
     73          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_SPI_SCLK  
     74          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_SPI_MOSI  
     76          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_SPI_CE0   
+    78          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_GPMO_0    
+    79          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_GPMO_1    
     80          Input      SB_LVCMOS    Yes      1        Simple Input   ICE_GPMO_2    
     139         Input      SB_LVCMOS    No       0        Simple Input   IAC_MISO      
     141         Input      SB_LVCMOS    No       0        Simple Input   IAC_DRDY      
@@ -104,6 +106,7 @@ Detailed I/O Info:
     42          Output     SB_LVCMOS    No       2        Simple Output  DDS_SCK1      
     43          Output     SB_LVCMOS    No       2        Simple Output  DDS_MOSI1     
     45          Output     SB_LVCMOS    No       2        Simple Output  STAT_COMM     
+    48          Output     SB_LVCMOS    No       2        Simple Output  OUT_SYNCCLK   
     75          Output     SB_LVCMOS    No       1        Simple Output  ICE_SPI_MISO  
     81          Output     SB_LVCMOS    No       1        Simple Output  ICE_GPMI_0    
     110         Output     SB_LVCMOS    No       0        Simple Output  DDS_CS        

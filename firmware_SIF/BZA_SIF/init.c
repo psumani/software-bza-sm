@@ -64,7 +64,7 @@ void InitConnConfig(void)
 void InitSysConfig(void)
 {
 	int i;
-
+	int j;
     m_pSysConfig->ID = ID_ZIMCONFIG;
     m_pSysConfig->BaseTick = 1;
     m_pSysConfig->DaqTick = 200;
@@ -73,32 +73,52 @@ void InitSysConfig(void)
 	
 	InitConnConfig();
 
-	for(i=0; i<MAX_DEV_CHANNEL; i++)
+	for(i=0; i<MAX_DEV_BOARD; i++)
 	{
 		m_pSysConfig->EnaZIM[i] = 0;
 		m_pSysConfig->EnaROM[i] = 0;
 		m_pSysConfig->mZimCfg[i].info.ZimBDVersion = 0000;
-		m_pSysConfig->mZimCfg[i].info.cModel[0] = 0x30 + DEV_BZA1000;  
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && i > 0)
+		{
+			m_pSysConfig->mZimCfg[i].info.cModel[0] = 0x30 + BZAAUX;  
+		}
+		else
+		{
+			m_pSysConfig->mZimCfg[i].info.cModel[0] = 0x30 + DEV_BZA1000;  
+		}
 		m_pSysConfig->mZimCfg[i].info.cModel[1] = 'x';
 		m_pSysConfig->mZimCfg[i].info.nSerial = 0;
 		m_pSysConfig->mZimCfg[i].info.ZimFWVersion = 0000;
-
-		InitRangeInf(i);
+		for(i=0; i<4; i++)
+		{
+			InitRangeInf(i,j);
+		}
 	}
 }
 
-void InitZimConfig(int ch)
+void InitZimConfig(int bd)
 {
-//	m_pSysConfig->EnaZIM[ch] = 0;
-//	m_pSysConfig->EnaROM[ch] = 0;
-	
-	m_pSysConfig->mZimCfg[ch].info.ZimBDVersion = 0000;
-	m_pSysConfig->mZimCfg[ch].info.cModel[0] = 0x30 + DEV_BZA1000;  
-	m_pSysConfig->mZimCfg[ch].info.cModel[1] = 'x';
-	m_pSysConfig->mZimCfg[ch].info.nSerial = 0;
-	m_pSysConfig->mZimCfg[ch].info.ZimFWVersion = 0000;
+	int i;
 
-	InitRangeInf(ch);
+//	m_pSysConfig->EnaZIM[bd] = 0;
+//	m_pSysConfig->EnaROM[bd] = 0;
+	
+	m_pSysConfig->mZimCfg[bd].info.ZimBDVersion = 0000;
+	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd > 0)
+	{
+		m_pSysConfig->mZimCfg[bd].info.cModel[0] = 0x30 + BZAAUX;  
+	}
+	else
+	{
+		m_pSysConfig->mZimCfg[bd].info.cModel[0] = 0x30 + DEV_BZA1000;  
+	}
+	m_pSysConfig->mZimCfg[bd].info.cModel[1] = 'x';
+	m_pSysConfig->mZimCfg[bd].info.nSerial = 0;
+	m_pSysConfig->mZimCfg[bd].info.ZimFWVersion = 0000;
+	for(i=0; i<4; i++)
+	{
+		InitRangeInf(bd,i);
+	}
 }
 
 void InitMemoryMap(void)
@@ -219,9 +239,9 @@ void InitEthernet(void)
 	}
 }
 
-double GetMaxFrequency(int ch)
+double GetMaxFrequency(int bd)
 {
-	int zimtype = m_pSysConfig->mZimCfg[ch].info.cModel[0] - 0x30;
+	int zimtype = m_pSysConfig->mZimCfg[bd].info.cModel[0] - 0x30;
 	if(zimtype == DEV_BZA500)
 	{
 		return MAX_EIS_FREQ_BZA500;
@@ -240,9 +260,9 @@ double GetMaxFrequency(int ch)
 	return MAX_EIS_FREQ_BZA1000;
 }
 
-double GetMinFrequency(int ch)
+double GetMinFrequency(int bd)
 {
-	int zimtype = m_pSysConfig->mZimCfg[ch].info.cModel[0] - 0x30;
+	int zimtype = m_pSysConfig->mZimCfg[bd].info.cModel[0] - 0x30;
 
 	if(zimtype == DEV_BZA500)
 	{
@@ -262,72 +282,120 @@ double GetMinFrequency(int ch)
 	return MIN_EIS_FREQ_BZA1000;
 }
 
-
-
-void InitDevice(int ch)
+void InitAuxDevice(int bd)
 {
-	memset(&m_pGlobalVar->mChVar[ch].mreqdevice,0x0,sizeof(st_zim_device));
-	memset(&m_pGlobalVar->mChVar[ch].flow_dds_clk,0x0,sizeof(m_pGlobalVar->mChVar[ch].flow_dds_clk));
-	memset(&m_pGlobalVar->mChVar[ch].flow_dds_sig,0x0,sizeof(m_pGlobalVar->mChVar[ch].flow_dds_sig));
-	
-	m_pGlobalVar->mChVar[ch].Start = 0;
-	m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.status = DEF_EIS_STATUS_NONE;
-	m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
+	int auxch;
+	memset(&m_pGlobalVar->mChVar[bd].mreqdevice,0x0,sizeof(st_zim_device));
+	memset(&m_pGlobalVar->mChVar[bd].flow_dds_clk,0x0,sizeof(m_pGlobalVar->mChVar[bd].flow_dds_clk));
 
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data.iac.adcval = 0x800000;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data.iac.value = 0.0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data.vac.adcval = 0x800000;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data.vac.value = 0.0;
-	
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.frequency = 1000.0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.Phase = DEF_SINECTRL_PHASE;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.reset = 0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig.pwdn = 1;
+	m_pGlobalVar->mChVar[bd].Start = 0;
+	m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.status = DEF_EIS_STATUS_NONE;
+	m_pGlobalVar->mChVar[bd].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
+
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.iac.adcval = 0x800000;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.iac.value = 0.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.vac.adcval = 0x800000;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.vac.value = 0.0;
 		
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_clk.frequency = 1024000.0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_clk.Phase = 0.0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_clk.reset = 0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.dds_clk.pwdn = 0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.frequency = 1024000.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.Phase = 0.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.reset = 0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.pwdn = 0;
 	
-	memcpy(&m_pGlobalVar->mChVar[ch].mdevice,&m_pGlobalVar->mChVar[ch].mreqdevice,sizeof(st_zim_device));
+	memcpy(&m_pGlobalVar->mChVar[bd].mdevice,&m_pGlobalVar->mChVar[bd].mreqdevice,sizeof(st_zim_device));
 
-	m_pGlobalVar->mChVar[ch].mdevice.dds_clk.frequency = 0;
-	m_pGlobalVar->mChVar[ch].mdevice.dds_clk.Phase = 0.1;
-	m_pGlobalVar->mChVar[ch].mdevice.dds_clk.reset = 1;
-	m_pGlobalVar->mChVar[ch].mdevice.dds_clk.pwdn = 1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.frequency = 0;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.Phase = 0.1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.reset = 1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.pwdn = 1;
 	
-	m_pGlobalVar->mChVar[ch].mdevice.dds_sig.frequency = 0;
-	m_pGlobalVar->mChVar[ch].mdevice.dds_sig.Phase = 0.1;
-	m_pGlobalVar->mChVar[ch].mdevice.dds_sig.reset = 1;
-	m_pGlobalVar->mChVar[ch].mdevice.dds_sig.pwdn = 0;
-	
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg.iac_flt = DEF_FLT_WIDEBAND1; 
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg.vac_flt = DEF_FLT_WIDEBAND1; //DEF_FLT_LOWLATENCY; //DEF_FLT_WIDEBAND1
-	m_pGlobalVar->mChVar[ch].flow_adc_ac.stat = 0xFF;
 
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.config.data = 0xD0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.data.fault = 0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.data.adcval = 0x4000;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.data.Rvalue = 1000.0;
-	m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.data.Tvalue = 0.0;
-	
-	m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data = DEF_DEVDO_VDC_RNG0;
-	proc_power_VAC(ch,false);
-	m_pGlobalVar->mChVar[ch].mdevice.ctrl_do.data = 0x1000;
+	for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
+	{
+		m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg.iac_flt = DEF_FLT_WIDEBAND1; 
+		m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg.vac_flt = DEF_FLT_WIDEBAND1; //DEF_FLT_LOWLATENCY; //DEF_FLT_WIDEBAND1
+	}
+	m_pGlobalVar->mChVar[bd].flow_adc_ac.stat = 0xFF;
 
-	RefreshFPGA(ch);
-	
-	m_pGlobalVar->mChVar[ch].MaxFrequency = GetMaxFrequency(ch);
-	m_pGlobalVar->mChVar[ch].MinFrequency = GetMinFrequency(ch);
+	proc_power_VAC(bd,false);
+	m_pGlobalVar->mChVar[bd].mdevice.ctrl_do.data = 0x1000;
 
-	m_pGlobalVar->mChVar[ch].mChStatInf.Iac_rngno = 0;
-	m_pGlobalVar->mChVar[ch].mChStatInf.Iac_in_rngno = 0;
-	m_pGlobalVar->mChVar[ch].mChStatInf.Vdc_rngno = 0;
+	RefreshFPGA(bd);
+	
+	m_pGlobalVar->mChVar[bd].MaxFrequency = GetMaxFrequency(bd);
+	m_pGlobalVar->mChVar[bd].MinFrequency = GetMinFrequency(bd);
 	
 	m_pGlobalVar->m_msADC = 250;
-	m_pGlobalVar->mChVar[ch].AutoVdcRange = 1;
 	
-	proc_eis_reset(ch);
+	SetModeAuxBoard(1);
+	proc_eis_reset(bd);
+}
+
+
+void InitDevice(int bd)
+{
+	memset(&m_pGlobalVar->mChVar[bd].mreqdevice,0x0,sizeof(st_zim_device));
+	memset(&m_pGlobalVar->mChVar[bd].flow_dds_clk,0x0,sizeof(m_pGlobalVar->mChVar[bd].flow_dds_clk));
+	memset(&m_pGlobalVar->mChVar[bd].flow_dds_sig,0x0,sizeof(m_pGlobalVar->mChVar[bd].flow_dds_sig));
+	
+	m_pGlobalVar->mChVar[bd].Start = 0;
+	m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.status = DEF_EIS_STATUS_NONE;
+	m_pGlobalVar->mChVar[bd].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
+
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.iac.adcval = 0x800000;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.iac.value = 0.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.vac.adcval = 0x800000;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data.vac.value = 0.0;
+	
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_sig.frequency = 1000.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_sig.Phase = DEF_SINECTRL_PHASE;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_sig.reset = 0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_sig.pwdn = 1;
+		
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.frequency = 1024000.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.Phase = 0.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.reset = 0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk.pwdn = 0;
+	
+	memcpy(&m_pGlobalVar->mChVar[bd].mdevice,&m_pGlobalVar->mChVar[bd].mreqdevice,sizeof(st_zim_device));
+
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.frequency = 0;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.Phase = 0.1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.reset = 1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_clk.pwdn = 1;
+	
+	m_pGlobalVar->mChVar[bd].mdevice.dds_sig.frequency = 0;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_sig.Phase = 0.1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_sig.reset = 1;
+	m_pGlobalVar->mChVar[bd].mdevice.dds_sig.pwdn = 0;
+	
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg.iac_flt = DEF_FLT_WIDEBAND1; 
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg.vac_flt = DEF_FLT_WIDEBAND1; //DEF_FLT_LOWLATENCY; //DEF_FLT_WIDEBAND1
+	m_pGlobalVar->mChVar[bd].flow_adc_ac.stat = 0xFF;
+
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.config.data = 0xD0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.data.fault = 0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.data.adcval = 0x4000;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.data.Rvalue = 1000.0;
+	m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.data.Tvalue = 0.0;
+	
+	m_pGlobalVar->mChVar[bd].mreqdevice.ctrl_do.data = DEF_DEVDO_VDC_RNG0;
+	proc_power_VAC(bd,false);
+	m_pGlobalVar->mChVar[bd].mdevice.ctrl_do.data = 0x1000;
+
+	RefreshFPGA(bd);
+	
+	m_pGlobalVar->mChVar[bd].MaxFrequency = GetMaxFrequency(bd);
+	m_pGlobalVar->mChVar[bd].MinFrequency = GetMinFrequency(bd);
+
+	m_pGlobalVar->mChVar[bd].mChStatInf.Iac_rngno = 0;
+	m_pGlobalVar->mChVar[bd].mChStatInf.Iac_in_rngno = 0;
+	m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
+	
+	m_pGlobalVar->m_msADC = 250;
+	m_pGlobalVar->mChVar[bd].AutoVdcRange = 1;
+	
+	proc_eis_reset(bd);
 }
 
 void InitGlobalVar(void)
@@ -344,7 +412,7 @@ void InitGlobalVar(void)
 
 	
 
-	for(ch=0; ch<MAX_DEV_CHANNEL; ch++)
+	for(ch=0; ch<MAX_DEV_BOARD; ch++)
 	{
 		m_pGlobalVar->mChVar[ch].bCalib = 0; 
 		m_pGlobalVar->mChVar[ch].Start = 0;
@@ -353,7 +421,7 @@ void InitGlobalVar(void)
 		m_pGlobalVar->mChVar[ch].ResetICE = 0;
 		m_pGlobalVar->mChVar[ch].LoadCfg = 0;
 		m_pGlobalVar->mChVar[ch].CntVdcChg = 0;
-		SetDevChannel(ch);
+		SetDeviceBoard(ch);
 		InitDevice(ch);
 	}
 }
@@ -491,73 +559,6 @@ unsigned char LoadSysCfgInfo(void)
 	
 	return true;
 }
-/*
-unsigned char LoadRangeInfo(void)
-{
-	byte buffer[NAND_MAIN_SIZE + NAND_SPARE_SIZE];
-    byte* temp = (byte*)&m_pSysConfig->mZimCfg[ch].ranges;
-    int size = DEF_SIZE_RANGE;
-	uint page = NAND_PAGE_RANGEINF;  //1 block = 64(NAND_PG_PER_BLK) page  ... 16 block   27 * 64 = 1728
-	bool bchkid = false;
-	while(1)
-    {
-        if(Nand_ReadPage(page, buffer) == FLASH_ERROR)
-        {
-            return false;
-		}
-		if(bchkid == false)
-		{
-			if(buffer[0] != (byte)ID_RANGEINFO)
-			{
-				return false;
-			}
-			bchkid = true;
-		}
-		if(size >= NAND_MAIN_SIZE)
-		{
-			memcpy(temp, buffer, NAND_MAIN_SIZE);
-			temp += NAND_MAIN_SIZE;
-			size -= NAND_MAIN_SIZE;
-		}
-		else
-		{
-			memcpy(temp, buffer, size);	
-			size -= size;
-			break;
-		}
-        page++;
-    }
-	
-	return true;
-}
-
-unsigned char SaveRangeInfo(void)
-{
-	int i;
-	byte* temp = (byte*)&m_pSysConfig->mZimCfg[ch].ranges;
-	int size = DEF_SIZE_RANGE;
-	uint page = NAND_PAGE_RANGEINF;
-	int nBlock = size / (int)NAND_BLK_SIZE + 1;
-	
-	for(i = NAND_BLOCK_RANGEINF; i<NAND_BLOCK_RANGEINF + nBlock; i++)
-    {
-        if(Nand_EraseBlock(i) == FLASH_ERROR)
-        {
-            return false;
-        }
-    }
-	
-	while(size > 0)
-	{
-		Nand_WritePage(page, temp);
-		
-		page++;
-		temp += NAND_MAIN_SIZE;
-		size -= NAND_MAIN_SIZE;
-	}
-	return true;
-}
-*/
 
 unsigned char LoadSystemInformation(void)
 {
@@ -627,7 +628,7 @@ void Initialize(void)
 	
 	//OnLed2(true);
 	
-	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_SBZA || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MBZA)
+	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_SBZA || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MBZA  || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 	{
 		ScanMainProc();
 	}		

@@ -37,19 +37,19 @@ namespace ZiveLab.ZM.FactorySetting
 
             if (mCommZim.CmdEnableCommTimeOut(0) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (mCommZim.CmdSetCmdMode(0) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_MODE].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_MODE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (mCommZim.CmdSetChannel(ich) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -119,13 +119,13 @@ namespace ZiveLab.ZM.FactorySetting
 
                 if (len != nLen)
                 {
-                    MessageBox.Show("There was a problem reading the file.");
+                    MessageBox.Show("There was a problem reading the file.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
                 if (mCommZim.CmdProgramPromOfZIM(ich, address, buff) == false)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.PROG_FPGA_PROM].");
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.PROG_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
@@ -193,7 +193,7 @@ namespace ZiveLab.ZM.FactorySetting
                 rbuff = mCommZim.CmdReadPromOfZIM(ich, address);
                 if (rbuff == null)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.READ_FPGA_PROM].");
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.READ_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
@@ -202,7 +202,7 @@ namespace ZiveLab.ZM.FactorySetting
                 {
                     if (buff[i] != rbuff[i])
                     {
-                        MessageBox.Show("The contents do not match.");
+                        MessageBox.Show("The contents do not match.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         bRet = false;
                         break;
                     }
@@ -225,7 +225,7 @@ namespace ZiveLab.ZM.FactorySetting
         {
             if (mCommZim.CmdResetFPGA(ich, breset) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -239,14 +239,14 @@ namespace ZiveLab.ZM.FactorySetting
             {
                 if (mCommZim.CmdResetFPGA(ich, true) == false)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].");
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
 
             if (mCommZim.CmdConnectPromOfZIM(ich, Addr) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.CONN_FPGA_PROM].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.CONN_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             lblBurn1.ForeColor = Color.Green;
@@ -260,7 +260,7 @@ namespace ZiveLab.ZM.FactorySetting
             this.Refresh();
             if (mCommZim.CmdEreasePromOfZIM(ich) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.EREASE_FPGA_PROM].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.EREASE_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             lblBurn2.ForeColor = Color.Green;
@@ -274,13 +274,13 @@ namespace ZiveLab.ZM.FactorySetting
             this.Refresh();
             if (mCommZim.CmdDisconnectPromOfZIM(ich) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.CLOSE_FPGA_PROM].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.CLOSE_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             if (mCommZim.CmdResetFPGA(ich,false) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_CLR_FPGA_ICE].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_CLR_FPGA_ICE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             lblBurn5.ForeColor = Color.Green;
@@ -297,8 +297,6 @@ namespace ZiveLab.ZM.FactorySetting
             InitProgressStatus();
             if (File.Exists(txtFilePath.Text))
             {
-         
-
                 if (ResetAndConnectPROM(ich) == true)
                 {
                     if (InitPROM() == true)
@@ -318,7 +316,7 @@ namespace ZiveLab.ZM.FactorySetting
             }
             else
             {
-                MessageBox.Show("I couldn't find the file.");
+                MessageBox.Show("I couldn't find the file.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             this.LnklblSelFile.Enabled = true;

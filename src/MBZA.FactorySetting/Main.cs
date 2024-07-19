@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,18 +14,16 @@ using ZiveLab.ZM.ZIM.Utilities;
 
 namespace ZiveLab.ZM.FactorySetting
 {
-
-    public partial class Main : Form
+        public partial class Main : Form
     {
         public stSystemConfig mSysCfg;
         public stWebSiteFATHeader mWebSiteFATheader;
         public stConnCfg mConnCfg;
         public CommObj mCommZim;
+        
 
+        public int idevbd;
 
-
-
-        public int idevch;
         public Main()
         {
             InitializeComponent();
@@ -35,7 +34,8 @@ namespace ZiveLab.ZM.FactorySetting
             mSysCfg = new stSystemConfig(0);
             mWebSiteFATheader = new stWebSiteFATHeader(defWebSiteInfomation.WEBSITE_ID, 0);
             mConnCfg = new stConnCfg(0);
-            idevch = 0;
+            idevbd = 0;
+
 
             if (ZM.FactorySetting.Properties.Settings.Default.Port == 2000)
             {
@@ -52,28 +52,42 @@ namespace ZiveLab.ZM.FactorySetting
 
             if (mCommZim.Connect())
             {
-                cboChannel.Enabled = true;
+                cboBoard.Enabled = true;
 
                 if (mCommZim.CmdEnableCommTimeOut(0) == false)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].");
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RefreshSifInfo();
+                    RefreshZimInfo(idevbd);
                     return;
                 }
 
                 if (mCommZim.CmdSetCmdMode(0) == false)
                 {
-                    MessageBox.Show("It may be an unsupported version or there is a communication problem.[DEFINE_COMMAND.CMD_SET_MODE].");
+                    MessageBox.Show("It may be an unsupported version or there is a communication problem.[DEFINE_COMMAND.CMD_SET_MODE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RefreshSifInfo();
+                    RefreshZimInfo(idevbd);
                     return;
                 }
 
             }
             else
             {
-                cboChannel.Enabled = false;
+                cboBoard.Enabled = false;
             }
             RefreshSifSysCfg();
             RefreshHostname();
             RefreshSifWebSiteInfo();
+        }
+
+        public void MakeAppTitle()
+        {
+            string str = Assembly.GetExecutingAssembly().GetName().ToString();
+            int i0 = str.IndexOf(',', 0);
+            int i1 = i0 + 10;
+            int i2 = str.IndexOf(',', i1);
+            gFs.AppVer = str.Substring(i1, i2 - i1).Trim();
+            gFs.AppTitle = str.Substring(0, i0) + " " + gFs.AppVer;
         }
 
         public void RefreshHostname()
@@ -85,12 +99,15 @@ namespace ZiveLab.ZM.FactorySetting
                     
                     if (mCommZim.ReadData(ref mConnCfg) == false)
                     {
-                        MessageBox.Show("Failed to read information from SIF.");
+                        MessageBox.Show("Failed to read information from SIF.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        RefreshSifInfo();
+                        RefreshZimInfo(idevbd);
+                        return;
                     }
                     lnklblchghostname.Enabled = true;
                     lnklblchghostname.Text = string.Format("> Hostname:{0}", Encoding.Default.GetString(mConnCfg.mEthernetCfg.hostname).Trim('\0'));
-                    return;
                 }
+                return;
             }
 
             lnklblchghostname.Enabled = false;
@@ -119,19 +136,18 @@ namespace ZiveLab.ZM.FactorySetting
 
                 if (mCommZim.ReadData(ref mSysCfg))
                 {
-                   
+                    lblTargetIp.Text += "--- Connected.";
+                    lblTargetIp.ForeColor = Color.Green;
+                    LnklblChgSifFW.Enabled = true;
+                    return;
                 }
                 
-                lblTargetIp.Text += "--- Connected.";
-                lblTargetIp.ForeColor = Color.Green;
-                LnklblChgSifFW.Enabled = true;
             }
-            else
-            {
-                lblTargetIp.Text += "--- Disconnected.";
-                lblTargetIp.ForeColor = Color.Red;
-                LnklblChgSifFW.Enabled = false;
-            }
+            
+            lblTargetIp.Text += "--- Disconnected.";
+            lblTargetIp.ForeColor = Color.Red;
+            LnklblChgSifFW.Enabled = false;
+            
         }
 
         public bool ReadWebSiteInfo()
@@ -172,12 +188,12 @@ namespace ZiveLab.ZM.FactorySetting
                     }
                     else
                     {
-                        MessageBox.Show("Failed to read information from SIF.");
+                        MessageBox.Show("Failed to read information from SIF.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Failed to read information from SIF.");
+                    MessageBox.Show("Failed to read information from SIF.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -185,34 +201,49 @@ namespace ZiveLab.ZM.FactorySetting
         }
         public void RefreshSifSysCfg()
         {
-            
+            string str;
             RefreshSifInfo();
 
             if (mCommZim.isConnected == false)
             {
-                    cboChannel.Items.Clear();
-                    for (int i = 0; i <4; i++)
+                    cboBoard.Items.Clear();
+                    for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
                     {
-                        cboChannel.Items.Add(i.ToString());
+                        cboBoard.Items.Add(i.ToString());
                     }
-                    cboChannel.SelectedIndex = 0;
+                    cboBoard.SelectedIndex = 0;
                     return;
             }
 
             eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
             mCommZim.mDevType = (eDeviceType)mSysCfg.mSIFCfg.Type;
-            cboChannel.Items.Clear();
 
-            if (mtype == eDeviceType.MBZA)
+            cboBoard.Items.Clear();
+
+            if (mtype == eDeviceType.MCBZA)
             {
-                for (int i = 0; i < 4; i++) cboChannel.Items.Add(i.ToString());
+                for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
+                {
+                    str = i.ToString();
+                    if (i == 0) str += " - (MAIN)";
+                    else str += " - (AUX)";
+                    cboBoard.Items.Add(str);
+                }
+            }
+            else if (mtype == eDeviceType.MBZA)
+            {
+                for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
+                {
+                    cboBoard.Items.Add(i.ToString());
+                }
             }
             else
             {
-                cboChannel.Items.Add("0");
+                cboBoard.Items.Add("0");
             }
-            cboChannel.SelectedIndex = 0;
-            idevch = 0;
+
+            cboBoard.SelectedIndex = 0;
+            idevbd = 0;
             Thread.Sleep(2000);
         }
        
@@ -226,26 +257,26 @@ namespace ZiveLab.ZM.FactorySetting
 
             LnklblSetSIFCfgToLan.Enabled = mCommZim.isConnected;
             LnklblRefSifInf.Enabled = mCommZim.isConnected;
-            
+            lnklblchghostname.Enabled = mCommZim.isConnected;
 
-            if (mtype == eDeviceType.SBZA || mtype == eDeviceType.MBZA)
+            if (mtype == eDeviceType.SBZA || mtype == eDeviceType.MBZA ||  mtype == eDeviceType.MCBZA)
             {
 //                LnklblSetSIFWebToLan.Enabled = true;
 //                LnklblRefSifWebInf.Enabled = true;
                 LnklblInitialize.Enabled = true;
                 if (mtype == eDeviceType.SBZA)
                 {
-                    cboChannel.Enabled = false;
+                    cboBoard.Enabled = false;
                 }
                 else
                 {
-                    cboChannel.Enabled = true;
+                    cboBoard.Enabled = true;
                 }
                 if (mCommZim.isConnected == true)
                 {
                     if (ReadSystemCfg() == false)
                     {
-                        MessageBox.Show("Failed to read information from board.");
+                        MessageBox.Show("Failed to read information from board.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -255,7 +286,7 @@ namespace ZiveLab.ZM.FactorySetting
 //              LnklblRefSifWebInf.Enabled = false;
                 
                 LnklblInitialize.Enabled = false;
-                cboChannel.Enabled = false;
+                cboBoard.Enabled = false;
             }
 
             str = mConnCfg.GetSerialNumber();
@@ -263,29 +294,29 @@ namespace ZiveLab.ZM.FactorySetting
 
             lblSifBdType.Text = string.Format("1) Board type : {0} / {1}", Extensions.GetEnumDescription(mtype), Extensions.GetEnumDescription(Producttype));
             lblSifBdVer.Text = string.Format("2) Board version : {0}", mSysCfg.mSIFCfg.GetBoardVer());
-            lblSifFwVer.Text = string.Format("3) Firmware version : {0}", mSysCfg.mSIFCfg.GetFirmwareVer());
+            lblSifFwVer.Text = string.Format("3) Firmware version : 0x{0:X2}({1})", mSysCfg.ID, mSysCfg.mSIFCfg.GetFirmwareVer());
             lblSifSerial.Text = string.Format("4) Serial number : {0}", mSysCfg.mSIFCfg.GetSerialNumber());
 
         }
 
-        public void ViewZimInfo(int ch)
+        public void ViewZimInfo(int bd)
         {
             if (ChkEnaCh.Checked == true)
             {
                 if (mCommZim.isConnected == true)
                 {
-                    if (mCommZim.CmdSetChannel(ch) == false)
+                    if (mCommZim.CmdSetChannel(bd) == false)
                     {
-                        MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].");
+                        MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (ChkEnaChROM.Checked == true)
                     {
-                        if (mCommZim.CheckROMofZIM(ch, true) == true) 
+                        if (mCommZim.CheckROMofZIM(bd, true) == true) 
                         {
-                            if (mCommZim.CheckFPGAofZIM(ch) == true)
+                            if (mCommZim.CheckFPGAofZIM(bd) == true)
                             {
-                                mCommZim.ReadData(ch, ref mSysCfg.mZimCfg[ch]);
+                                mCommZim.ReadData(bd, ref mSysCfg.mZimCfg[bd]);
                                 lblscanrom.Text = " ...... Checked EEPROM, Checked FPGA !";
                                 lblscanrom.ForeColor = Color.DarkGreen;
                             }
@@ -304,9 +335,9 @@ namespace ZiveLab.ZM.FactorySetting
                     else
                     {
                        
-                        if (mCommZim.CheckFPGAofZIM(ch) == true)
+                        if (mCommZim.CheckFPGAofZIM(bd) == true)
                         {
-                            mCommZim.ReadData(ch, ref mSysCfg.mZimCfg[ch]);
+                            mCommZim.ReadData(bd, ref mSysCfg.mZimCfg[bd]);
                             lblscanrom.Text = " ...... No EEPROM, Checked FPGA !";
                             lblscanrom.ForeColor = Color.DarkGreen;
                         }
@@ -329,66 +360,72 @@ namespace ZiveLab.ZM.FactorySetting
                 lblscanrom.ForeColor = Color.DarkGray;
             }
 
-            LblZimBdType.Text = string.Format("1) Board type : {0}[{1}]", Extensions.GetEnumDescription(mSysCfg.mZimCfg[ch].GetZIMType())
-                , Extensions.GetEnumDescription(mSysCfg.mZimCfg[ch].GetBoardType()));
-            lblZimBdVer.Text = string.Format("2) Board version : {0}", mSysCfg.mZimCfg[ch].GetBoardVer());
-            lblZimFwVer.Text = string.Format("3) Firmware version : {0}", mSysCfg.mZimCfg[ch].GetFirmwareVer());
-            lblZimSerial.Text = string.Format("4) Serial number : {0}", mSysCfg.mZimCfg[ch].GetSerialNumber());
+            LblZimBdType.Text = string.Format("1) Board type : {0}[{1}]", Extensions.GetEnumDescription(mSysCfg.mZimCfg[bd].GetZIMType())
+                , Extensions.GetEnumDescription(mSysCfg.mZimCfg[bd].GetBoardType()));
+            lblZimBdVer.Text = string.Format("2) Board version : {0}", mSysCfg.mZimCfg[bd].GetBoardVer());
+            lblZimFwVer.Text = string.Format("3) Firmware version : {0}", mSysCfg.mZimCfg[bd].GetFirmwareVer());
+            lblZimSerial.Text = string.Format("4) Serial number : {0}", mSysCfg.mZimCfg[bd].GetSerialNumber());
         }
 
-        public void RefreshZimInfo(int ch)
+        public void RefreshZimInfo(int bd)
         {
             eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
 
-            mSysCfg.mZimCfg[ch].info.ZimBDVersion = 0;
-            mSysCfg.mZimCfg[ch].info.ZimFWVersion = 0;
-            mSysCfg.mZimCfg[ch].info.cModel[0] = 0x30;
-            mSysCfg.mZimCfg[ch].info.cModel[1] = 0x30;
-            mSysCfg.mZimCfg[ch].info.nSerial = 0;
+            mSysCfg.mZimCfg[bd].info.ZimBDVersion = 0;
+            mSysCfg.mZimCfg[bd].info.ZimFWVersion = 0;
+            mSysCfg.mZimCfg[bd].info.cModel[0] = 0x30;
+            mSysCfg.mZimCfg[bd].info.cModel[1] = 0x30;
+            mSysCfg.mZimCfg[bd].info.nSerial = 0;
 
-            if (mtype == eDeviceType.SBZA || mtype == eDeviceType.MBZA)
+            if (mCommZim.isConnected == true)
             {
-                if (mCommZim.isConnected == true)
+                if (mtype == eDeviceType.SBZA || mtype == eDeviceType.MBZA || mtype == eDeviceType.MCBZA)
                 {
                     if (ReadSystemCfg() == false)
                     {
-                        MessageBox.Show("Failed to read information from board.");
+                        MessageBox.Show("Failed to read information from board.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //RefreshSifInfo();
+                        //RefreshZimInfo(idevbd);
                         return;
                     }
+
+
+                    ChkEnaCh.Checked = (mSysCfg.EnaZIM[bd] == 0) ? false : true;
+                    ChkEnaChROM.Checked = (mSysCfg.EnaROM[bd] == 0) ? false : true;
+
+                    ChkEnaCh.Enabled = true;
+                    ChkEnaChROM.Enabled = true;
+                    BtRefreshZIM.Enabled = true;
+                    BtInitZIM.Enabled = true;
+
+                    lnllblscanrom.Enabled = ChkEnaCh.Checked;
+                    lnklblinitrom.Enabled = (ChkEnaCh.Checked && ChkEnaChROM.Checked) ? true : false;
+                    lnkLoadROM.Enabled = (ChkEnaCh.Checked && ChkEnaChROM.Checked) ? true : false;
+                    lnkSaveROM.Enabled = (ChkEnaCh.Checked && ChkEnaChROM.Checked) ? true : false;
+                    LnklblBurnZIMToLan.Enabled = ChkEnaCh.Checked;
+                    LnklblSetZIMCfgToLan.Enabled = ChkEnaCh.Checked;
+                    LnklblInitialize.Enabled = ChkEnaCh.Checked;
+
+                    ViewZimInfo(bd);
+                    return;
                 }
-
-                ChkEnaCh.Checked = (mSysCfg.EnaZIM[ch] == 0) ? false : true;
-                ChkEnaChROM.Checked = (mSysCfg.EnaROM[ch] == 0) ? false : true;
-
-                ChkEnaCh.Enabled = true;
-                ChkEnaChROM.Enabled = true;
-                BtRefreshZIM.Enabled = true;
-                BtInitZIM.Enabled = true;
-
-
-            }
-            else
-            {
-                ChkEnaCh.Checked = false;
-                ChkEnaChROM.Checked = false;
-
-                ChkEnaCh.Enabled = false;
-                ChkEnaChROM.Enabled = false;
-                BtRefreshZIM.Enabled = false;
-                BtInitZIM.Enabled = false;
             }
 
-            lnllblscanrom.Enabled = ChkEnaCh.Checked;
-            lnklblinitrom.Enabled = (ChkEnaCh.Checked && ChkEnaChROM.Checked)? true: false ;
-            lnkLoadROM.Enabled = (ChkEnaCh.Checked && ChkEnaChROM.Checked) ? true : false;
-            lnkSaveROM.Enabled = (ChkEnaCh.Checked && ChkEnaChROM.Checked) ? true : false;
-            LnklblBurnZIMToLan.Enabled = ChkEnaCh.Checked;
-            LnklblSetZIMCfgToLan.Enabled = ChkEnaCh.Checked;
-            LnklblInitialize.Enabled = ChkEnaCh.Checked;
+            ChkEnaCh.Checked = false;
+            ChkEnaChROM.Checked = false;
 
-            ViewZimInfo(ch);
+            ChkEnaCh.Enabled = false;
+            ChkEnaChROM.Enabled = false;
+            BtRefreshZIM.Enabled = false;
+            BtInitZIM.Enabled = false;
 
-
+            lnllblscanrom.Enabled = false;
+            lnklblinitrom.Enabled = false;
+            lnkLoadROM.Enabled = false;
+            lnkSaveROM.Enabled = false;
+            LnklblBurnZIMToLan.Enabled = false;
+            LnklblSetZIMCfgToLan.Enabled = false;
+            LnklblInitialize.Enabled = false;
         }
 
 
@@ -410,7 +447,7 @@ namespace ZiveLab.ZM.FactorySetting
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -434,22 +471,26 @@ namespace ZiveLab.ZM.FactorySetting
             {
                 if (mCommZim.isConnected == true)
                 {
-                    cboChannel.Enabled = true;
+                    cboBoard.Enabled = true;
                     if (mCommZim.CmdEnableCommTimeOut(0) == false)
                     {
-                        MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].");
+                        MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        RefreshSifInfo();
+                        RefreshZimInfo(idevbd);
                         return;
                     }
 
                     if (mCommZim.CmdSetCmdMode(0) == false)
                     {
-                        MessageBox.Show("It may be an unsupported version or there is a communication problem.[DEFINE_COMMAND.CMD_SET_MODE].");
+                        MessageBox.Show("It may be an unsupported version or there is a communication problem.[DEFINE_COMMAND.CMD_SET_MODE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        RefreshSifInfo();
+                        RefreshZimInfo(idevbd);
                         return;
                     }
                 }
                 else
                 {
-                    cboChannel.Enabled = true;
+                    cboBoard.Enabled = true;
                 }
                 RefreshSifSysCfg();
                 RefreshHostname();
@@ -471,21 +512,21 @@ namespace ZiveLab.ZM.FactorySetting
         private void LnklblSetZIMCfgToLan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmSetProductInfo mfrm;
-            mfrm = new frmSetProductInfo(ref mCommZim, 1, ref mSysCfg,ref mConnCfg, idevch);
+            mfrm = new frmSetProductInfo(ref mCommZim, 1, ref mSysCfg,ref mConnCfg, idevbd);
             if (mfrm.ShowDialog() == DialogResult.OK)
             {
-                RefreshZimInfo(idevch);
+                RefreshZimInfo(idevbd);
             }
         }
 
         private void LnklblBurnZIMToLan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmBurnZIM frm;
-            eZimType mtype = (eZimType)(mSysCfg.mZimCfg[idevch].info.cModel[0] - 0x30);
-            frm = new frmBurnZIM(ref mCommZim, mtype, idevch);
+            eZimType mtype = (eZimType)(mSysCfg.mZimCfg[idevbd].info.cModel[0] - 0x30);
+            frm = new frmBurnZIM(ref mCommZim, mtype, idevbd);
             frm.ShowDialog();
 
-            ViewZimInfo(idevch);
+            ViewZimInfo(idevbd);
         }
 
         private void LnklblChgSifFW_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -498,7 +539,7 @@ namespace ZiveLab.ZM.FactorySetting
 
             if (mCommZim.isConnected == false)
             {
-                MessageBox.Show("No connection.");
+                MessageBox.Show("No connection.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -514,14 +555,16 @@ namespace ZiveLab.ZM.FactorySetting
             {
                 if (mCommZim.mComm.UploadFirmware(dlg.FileName) == false)
                 {
-                    MessageBox.Show("Firmware change failed.");
+                    MessageBox.Show("Firmware change failed.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RefreshSifInfo();
+                    RefreshZimInfo(idevbd);
                 }
                 else
                 {
                     ZM.FactorySetting.Properties.Settings.Default.FilePathSIF = dlg.FileName;
                     ZM.FactorySetting.Properties.Settings.Default.Save();
 
-                    MessageBox.Show("The firmware change has been successful. Please restart the device.");
+                    MessageBox.Show("The firmware change has been successful. Please restart the device.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -550,13 +593,15 @@ namespace ZiveLab.ZM.FactorySetting
         {
             if (MessageBox.Show("All range information on the device is initialized.\n\\n Would you like to continue?", "Factory Setting",
                     MessageBoxButtons.OKCancel,MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK) return;
-            if (mCommZim.CmdInitRangesInfo(idevch) == false)
+            if (mCommZim.CmdInitRangesInfo(idevbd) == false)
             {
-                MessageBox.Show("Failure of initialization of lange information.");
+                MessageBox.Show("Failure of initialization of lange information.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                RefreshSifInfo();
+                RefreshZimInfo(idevbd);
             }
             else
             {
-                MessageBox.Show("success of initialization of lange information.");
+                MessageBox.Show("success of initialization of lange information.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
            
         }
@@ -569,11 +614,11 @@ namespace ZiveLab.ZM.FactorySetting
                 {
                     if (mCommZim.isConnected == false)
                     {
-                        MessageBox.Show("No connection.");
+                        MessageBox.Show("No connection.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
 
-                    frmTestFpga frm = new frmTestFpga(ref mCommZim,idevch);
+                    frmTestFpga frm = new frmTestFpga(ref mCommZim,idevbd);
                     frm.ShowDialog();
                 }
             }
@@ -581,68 +626,76 @@ namespace ZiveLab.ZM.FactorySetting
 
         private void cboChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (idevch != cboChannel.SelectedIndex)
+            if (idevbd != cboBoard.SelectedIndex)
             {
-                idevch = cboChannel.SelectedIndex;
+                idevbd = cboBoard.SelectedIndex;
                 if (mCommZim.isConnected == true)
                 {
-                    if (mCommZim.CmdSetChannel(idevch) == false)
+                    if (mCommZim.CmdSetChannel(idevbd) == false)
                     {
-                        MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].");
+                        MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        RefreshSifInfo();
+                        RefreshZimInfo(idevbd);
+                        return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Not connected.");
+                    MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 
-            RefreshZimInfo(idevch);
+            RefreshZimInfo(idevbd);
         }
 
         private void BtRefreshZIM_Click(object sender, EventArgs e)
         {
             if (mCommZim.isConnected == true)
             {
-                mSysCfg.EnaZIM[idevch] = (byte)((ChkEnaCh.Checked == true) ? 1 : 0);
-                mSysCfg.EnaROM[idevch] = (byte)((ChkEnaChROM.Checked == true) ? 1 : 0);
+                mSysCfg.EnaZIM[idevbd] = (byte)((ChkEnaCh.Checked == true) ? 1 : 0);
+                mSysCfg.EnaROM[idevbd] = (byte)((ChkEnaChROM.Checked == true) ? 1 : 0);
                 if (mCommZim.WriteData(ref mSysCfg) == false)
                 {
-                    MessageBox.Show("Failed to write information from board.");
+                    MessageBox.Show("Failed to write information from board.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RefreshSifInfo();
+                    RefreshZimInfo(idevbd);
+                    return;
                 }
             }
-            RefreshZimInfo(idevch);
+            RefreshZimInfo(idevbd);
         }
 
         private void lnllblscanrom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (mCommZim.isConnected == false)
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             
-            ViewZimInfo(idevch);
+            ViewZimInfo(idevbd);
         }
 
         private void lnklblinitrom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (mCommZim.isConnected == false)
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (mCommZim.InitialZIMEEPROM(idevch) == false)
+            if (mCommZim.InitialZIMEEPROM(idevbd) == false)
             {
-                MessageBox.Show("Failed initialize EEPROM.");
+                MessageBox.Show("Failed initialize EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                RefreshSifInfo();
+                RefreshZimInfo(idevbd);
                 return;
             }
 
-            ViewZimInfo(idevch);
+            ViewZimInfo(idevbd);
 
-            MessageBox.Show("Succeed initialize EEPROM.");
+            MessageBox.Show("Succeed initialize EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
@@ -650,80 +703,101 @@ namespace ZiveLab.ZM.FactorySetting
         {
             if (mCommZim.isConnected == true)
             {
-                eZimType type = mSysCfg.mZimCfg[idevch].GetZIMType();
-                mSysCfg.EnaZIM[idevch] = 0;
-                mSysCfg.EnaROM[idevch] = 0;
-                mSysCfg.mZimCfg[idevch].info.Initialize(type);
-                mSysCfg.mZimCfg[idevch].ranges.Initialize(type);
+                int auxch;
+                eZimType type = mSysCfg.mZimCfg[idevbd].GetZIMType();
+
+                mSysCfg.EnaZIM[idevbd] = 0;
+                mSysCfg.EnaROM[idevbd] = 0;
+
+                mSysCfg.mZimCfg[idevbd].info.Initialize(type);
+
+                for (auxch = 0; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch++)
+                {
+                    mSysCfg.mZimCfg[idevbd].ranges[auxch].Initialize(type);
+                }
+                
                 if (mCommZim.WriteData(ref mSysCfg) == false)
                 {
-                    MessageBox.Show("Failed to write information from board.");
+                    MessageBox.Show("Failed to write information from board.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RefreshSifInfo();
+                    RefreshZimInfo(idevbd);
+                    return;
                 }
             }
-            RefreshZimInfo(idevch);
+            RefreshZimInfo(idevbd);
         }
 
         private void lnkLoadROM_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (mCommZim.isConnected == false)
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (mCommZim.RefreshInConfigOfZim(idevch) == false)
+            if (mCommZim.RefreshInConfigOfZim(idevbd) == false)
             {
-                MessageBox.Show("Failed Write EEPROM.");
+                MessageBox.Show("Failed Write EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            RefreshZimInfo(idevch);
-            MessageBox.Show("Succeed Load EEPROM and Apply Flash ROM.");
+            RefreshZimInfo(idevbd);
+            MessageBox.Show("Succeed Load EEPROM and Apply Flash ROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            
+
         }
 
         private void lnkSaveROM_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (mCommZim.isConnected == false)
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (mCommZim.ProgConfigOfZim(idevch, ref mSysCfg.mZimCfg[idevch]) == false)
+            if (mCommZim.ProgConfigOfZim(idevbd, ref mSysCfg.mZimCfg[idevbd]) == false)
             {
-                MessageBox.Show("Failed Write EEPROM.");
+                MessageBox.Show("Failed Write EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            MessageBox.Show("Succeed Write EEPROM.");
+            MessageBox.Show("Succeed Write EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            
+
         }
 
         private void lnkinitsifcfg_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (mCommZim.isConnected == false)
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             stSystemConfig mcfg = new stSystemConfig(0);
-           /* if(mCommZim.ReadData(ref mcfg) == false)
-            {
-                MessageBox.Show("Failed read System information.");
-            }
-            */
+            /* if(mCommZim.ReadData(ref mcfg) == false)
+             {
+                 MessageBox.Show("Failed read System information.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
+             */
             if (mCommZim.WriteData(ref mcfg) == false)
             {
-                MessageBox.Show("Failed read system information.");
+                MessageBox.Show("System information transfer failed.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                RefreshSifInfo();
+                RefreshZimInfo(idevbd);
+                return;
             }
 
-            MessageBox.Show("Succeed initialize system information.\r\n Please restart the device.");
+            MessageBox.Show("Succeed initialize system information.\r\n Please restart the device.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
-    
+
+
+    public static class gFs
+    {
+        public static string AppTitle = "App.ZM.FactorySetting";
+        public static string AppVer = "1.0.0.0";
+    }
+
 }

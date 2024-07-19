@@ -48,12 +48,12 @@ namespace ZiveLab.ZM
             if (gBZA.SifLnkLst.ContainsKey(sSerial))
             {
                 mZim = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-                mRange = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges;
+                mRange = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
             }
             else
             {
                 mZim = gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
-                mRange = gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges;
+                mRange = gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
             }
             sFilename = gBZA.GetCalibLogFileName(sSerial, mZim.GetSerialNumber());
 
@@ -281,8 +281,8 @@ namespace ZiveLab.ZM
         {
             this.Cursor = Cursors.WaitCursor;
 
-            if (gBZA.SifLnkLst.ContainsKey(sSerial)) gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(mRange.ToByteArray());
-            else gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(mRange.ToByteArray());
+            if (gBZA.SifLnkLst.ContainsKey(sSerial)) gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(mRange.ToByteArray());
+            else gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(mRange.ToByteArray());
 
             bool res = MBZA_MapUtil.Save_Range_info(sSerial, sifch);
 

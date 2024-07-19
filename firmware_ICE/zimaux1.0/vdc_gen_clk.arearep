@@ -1,0 +1,12 @@
+----------------------------------------------------------------------
+Report for cell vdc_gen_clk.TECH
+Register bits:  35 of 3520 (0.994%)
+I/O cells:      0
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY        45          100.0
+                             SB_DFF         2          100.0
+                            SB_DFFE        32          100.0
+                          SB_DFFESR         1          100.0
+                            SB_LUT4       109          100.0
+                              TOTAL       189

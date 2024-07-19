@@ -2065,15 +2065,15 @@ namespace ZiveLab.ZM
             eZimType type = (eZimType)(cfg.mZimCfg[sifch].info.cModel[0] - 0x30);
             
 
-            if (double.IsNaN(cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset) || cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset == 0.0 || cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+            if (double.IsNaN(cfg.mZimCfg[sifch].ranges[0].Idc_rnginf.idcofs[rng].offset) || cfg.mZimCfg[sifch].ranges[0].Idc_rnginf.idcofs[rng].offset == 0.0 || cfg.mZimCfg[sifch].ranges[0].Idc_rnginf.idcofs[rng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
             {
                 tmp = false;
             }
 
             bCalib = tmp;
 
-            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
-            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].controlgain, "A");
 
         }
 
@@ -2142,18 +2142,18 @@ namespace ZiveLab.ZM
             eZimType type = (eZimType)(cfg.mZimCfg[sifch].info.cModel[0] - 0x30);
 
 
-            if (cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain1 == 1.0 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain1 == 0.0
-                || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain2 == 1.0 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain2 == 0.0
-                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng]) == false
-                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng+1]) == false)
+            if (cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain1 == 1.0 || cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain1 == 0.0
+                || cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain2 == 1.0 || cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain2 == 0.0
+                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges[0].mEisIRngCalInfo[rng]) == false
+                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges[0].mEisIRngCalInfo[rng+1]) == false)
             {
                 tmp = false;
             }
 
             bCalib = tmp;
 
-            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
-            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].controlgain, "A");
            
         }
 
@@ -2204,8 +2204,8 @@ namespace ZiveLab.ZM
 
         public void SetInformation(stSystemConfig cfg, int trng, int sifch)
         {
-            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
-            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].controlgain, "A");
             nControlgain = 2;
         }
 
@@ -2270,16 +2270,35 @@ namespace ZiveLab.ZM
         }
     }
 
-    public class stRangeFile
+    public class stRangeFile_1
     {
         public string Description;
         public stDeviceParent parent;
         public st_zim_rnginf ranges;
-        public stRangeFile()
+        public stRangeFile_1()
         {
             Description = "ZM Range information v.1.0.0.0";
             parent = new stDeviceParent();
+
             ranges = new st_zim_rnginf(0);
+        }
+    }
+
+    public class stRangeFile
+    {
+        public string Description;
+        public stDeviceParent parent;
+        public st_zim_rnginf[] ranges;
+        public stRangeFile()
+        {
+            Description = "ZM Range information v.1.1.0.0";
+            parent = new stDeviceParent();
+            
+            ranges = new st_zim_rnginf[MBZA_Constant.MAX_AUX_CHANNEL];
+            for(int auxch=0; auxch< MBZA_Constant.MAX_AUX_CHANNEL;auxch++)
+            {
+                ranges[auxch] = new st_zim_rnginf(0);
+            }
         }
     }
     

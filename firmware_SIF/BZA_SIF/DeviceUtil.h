@@ -17,33 +17,38 @@ void ToggleLed2(void);
 void ToggleLed3(void);
 void ToggleLed4(void);
 
-bool chkTestCondition(int ch);
-void proc_power_VAC(int ch, bool bOn);
+bool chkTestCondition(int bd);
+void procaux_power_VAC(int bd, bool bOn);
+void proc_power_VAC(int bd, bool bOn);
 double FixedPoint(double Value,int FixPnt);
-int proc_read_version(int ch);
-int CheckThermoStat(int ch);
+int proc_read_version(int bd);
+int CheckThermoStat(int bd);
 bool proc_chk_run(void);
-bool proc_eis_dcoff(int ch);
+bool proc_eis_dcoff(int bd);
 
 void Set_IceResetB(bool on);
 bool CheckIceCfgDone(void);
 void InitDeviceControl(void);
-void proc_eis_reset(int ch);
-void apply_req_dds_dcsignal(int ch);
-void apply_req_dds_signal(int ch);
-void apply_req_dds_clock(int ch);
-void apply_adc_ac_cfg(int ch);
+void proc_eis_reset(int bd);
+void apply_req_dds_dcsignal(int bd);
+void apply_req_dds_signal(int bd);
+void apply_req_dds_clock(int bd);
 
-void ApplyCalcConfigADC(int ch);
-bool proc_eis_data_conv(int ch);
-void proc_eis_LoadOn(int ch, ushort loadon);
-void proc_eis_setrange(int ch,int setrange);
-void proc_stop_test(int ch, int status);
-void set_device_DO(int ch);
-void DefaultDeviceProc(int ch);
-void AuxProc(int ch);
-void RefreshFPGA(int ch);
-bool proc_eis_main(int ch);
-void Flow_monitor(int ch);
-void Flow_discharger(int ch);
+void applyaux_adc_ac_cfg(int auxbd);
+void apply_adc_ac_cfg(int bd);
+
+void ApplyCalcConfigADC(int bd);
+bool proc_eis_data_conv(int bd);
+void proc_eis_LoadOn(int bd, ushort loadon);
+void proc_eis_setrange(int bd,int setrange);
+void proc_stop_test(int bd, int status);
+void set_device_DO(int bd);
+void setaux_device_DO(int bd);
+
+void DefaultDeviceProc(int bd);
+void AuxProc(int bd);
+void RefreshFPGA(int bd);
+bool proc_eis_main(int bd);
+void Flow_monitor(int bd);
+void Flow_discharger(int bd);
 #endif

@@ -115,6 +115,13 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             return string.Format("{0}.{1}.{2}.{3}", FirmwareVersion.Major, FirmwareVersion.Minor, FirmwareVersion.Revision, FirmwareVersion.Build);
         }
+
+        public int GetFirmwareVerNum()
+        {
+            string str = string.Format("{0}{1}{2}{3}", FirmwareVersion.Major, FirmwareVersion.Minor, FirmwareVersion.Revision, FirmwareVersion.Build);
+            return Convert.ToInt32(str);
+        }
+
         public bool SetFirmwareVer(string str)
         {
             string stmp;
@@ -563,14 +570,13 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
     }
 
-
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct stZimCfg
+    public struct stZimCfg_1
     {
         public stZimInfo info;
         public st_zim_rnginf ranges;
-        public stZimCfg(eZimType type)
+        public stZimCfg_1(eZimType type)
         {
             info = new stZimInfo(type);
             ranges = new st_zim_rnginf(type);
@@ -580,6 +586,220 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             info.Initialize(type);
             ranges.Initialize(type);
+        }
+
+        public string UintToByteString(uint nVal)
+        {
+            int i;
+            byte tmp;
+            byte[] mChar = new byte[5];
+            Array.Clear(mChar, 0, 5);
+
+            for (i = 0; i < 5; i++)
+            {
+                tmp = (byte)((nVal >> (i * 4)) & (uint)0xf);
+                mChar[4 - i] = (byte)(0x30 + tmp);
+            }
+
+            /*
+            byte[] mChar = new byte[8];
+            Array.Clear(mChar, 0, 8);
+
+            for (i = 0; i < 8; i++)
+            {
+                tmp = (byte)((nVal >> (i*4)) & (uint)0xf);
+                mChar[7-i] = (byte)(0x30 + tmp);
+            }
+            */
+            return Encoding.Default.GetString(mChar).Trim('\0');
+        }
+
+        public string UshortToByteString(ushort nVal)
+        {
+            char[] mChar = new char[5];
+            Array.Clear(mChar, 0, 5);
+            mChar = string.Format("{0:0000}", nVal).ToCharArray();
+            return string.Format("{0}.{1}.{2}.{3}", mChar[0], mChar[1], mChar[2], mChar[3]);
+        }
+
+
+
+        public string GetSerialNumber()
+        {
+            int i = info.cModel[0] - 0x30;
+            string str;
+
+            str = string.Format("{0}{1}000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)info.cModel[1], UintToByteString(info.nSerial));
+            return str;
+        }
+
+        public string GetBoardVer()
+        {
+            return UshortToByteString(info.ZimBDVersion);
+        }
+
+        public string GetBoardTypeString()
+        {
+            eZimBoardType mtype = (eZimBoardType)(info.cModel[0] - 0x30);
+            return Extensions.GetEnumDescription(mtype);
+        }
+
+        public string GetZimTypeString()
+        {
+            eZimType mtype = (eZimType)(info.cModel[0] - 0x30);
+            return Extensions.GetEnumDescription(mtype);
+        }
+
+        public eZimBoardType GetBoardType()
+        {
+            eZimBoardType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimBoardType.UNKNOWN;
+            else mtype = (eZimBoardType)(info.cModel[0] - 0x30);
+            return mtype;
+        }
+
+        public eZimType GetZIMType()
+        {
+            eZimType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimType.UNKNOWN;
+            else mtype = (eZimType)(info.cModel[0] - 0x30);
+            return mtype;
+        }
+
+
+        public string GetFirmwareVer()
+        {
+            return UshortToByteString(info.ZimFWVersion);
+        }
+
+        public bool SetFirmwareVer(string str)
+        {
+            string sTmp;
+            if (str.Length == 7)
+            {
+                sTmp = str.Replace(".", "");
+            }
+            else
+            {
+                sTmp = str;
+            }
+
+            if (sTmp.Length == 4)
+            {
+                info.ZimFWVersion = Convert.ToUInt16(sTmp);
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetBoardVer(string str)
+        {
+            string sTmp;
+            if (str.Length == 7)
+            {
+                sTmp = str.Replace(".", "");
+            }
+            else
+            {
+                sTmp = str;
+            }
+
+            if (sTmp.Length == 4)
+            {
+                info.ZimBDVersion = Convert.ToUInt16(sTmp);
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetSerialNumber(byte type, string str)
+        {
+            string sTmp;
+            int index = 0;
+
+            uint tmp;
+            int i;
+            sTmp = str.Replace(" ", "");
+
+            if (sTmp.Length != 5 && sTmp.Length != 12) return false;
+            if (sTmp.Length == 12) index = 7;
+
+
+
+            char[] mChar = sTmp.ToCharArray();
+
+            info.cModel[0] = (byte)(type + 0x30);
+            info.cModel[1] = 0x30;
+
+            tmp = 0;
+
+            for (i = 0; i < 5; i++)
+            {
+                tmp += (uint)((mChar[index] & 0xFF) - 0x30) << ((4 - i) * 4);
+                index++;
+            }
+            info.nSerial = tmp;
+            return true;
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stZimCfg_1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stZimCfg_1));
+            pinnedArr.Free();
+        }
+    }
+
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct stZimCfg
+    {
+        public stZimInfo info;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_AUX_CHANNEL)]
+        public st_zim_rnginf[] ranges;
+        public stZimCfg(eZimType type)
+        {
+            info = new stZimInfo(type);
+            ranges = new st_zim_rnginf[MBZA_Constant.MAX_AUX_CHANNEL];
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNEL; i++)
+            {
+                ranges[i] = new st_zim_rnginf(type);
+            }
+                
+        }
+
+        public void Initilize(eZimType type)
+        {
+            info.Initialize(type);
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNEL; i++)
+            {
+                ranges[i].Initialize(type);
+            }
+        }
+
+        public void Initialize(int auxch, eZimType type)
+        {
+           ranges[auxch].Initialize(type);  
         }
 
         public string UintToByteString(uint nVal)
@@ -634,23 +854,29 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public string GetBoardTypeString()
         {
-            eZimBoardType mtype = (eZimBoardType)(info.cModel[0]-0x30);
+            eZimBoardType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimBoardType.UNKNOWN;
+            else mtype = (eZimBoardType)(info.cModel[0]-0x30);
             return Extensions.GetEnumDescription(mtype);
         }
 
         public string GetZimTypeString()
         {
-            eZimType mtype = (eZimType)(info.cModel[0] - 0x30);
+            eZimType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimType.UNKNOWN;
+            else mtype = (eZimType)(info.cModel[0] - 0x30);
             return Extensions.GetEnumDescription(mtype);
         }
 
         public eZimBoardType GetBoardType()
         {
+            if (info.cModel[0] == 0x0) return eZimBoardType.UNKNOWN;
             return (eZimBoardType)(info.cModel[0] - 0x30);
         }
         
         public eZimType GetZIMType()
         {
+            if (info.cModel[0] == 0x0) return eZimType.UNKNOWN;
             return (eZimType)(info.cModel[0] - 0x30);
         }
         
@@ -1521,6 +1747,83 @@ namespace ZiveLab.ZM.ZIM.Packets
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct stSystemConfig_1
+    {
+        public byte ID;
+        public stSIFCfg mSIFCfg;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public byte[] EnaZIM;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public byte[] EnaROM;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public byte[] ChkZIM;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public stZimCfg_1[] mZimCfg;
+        public uint BaseTick;
+        public uint DaqTick;
+
+
+        public stSystemConfig_1(byte init)
+        {
+            ID = DeviceConstants.ID_ZIMCONFIG_1;
+
+            BaseTick = 1;
+            DaqTick = 200;
+
+            mSIFCfg = new stSIFCfg(0);
+            EnaZIM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
+            ChkZIM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
+            EnaROM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
+            mZimCfg = new stZimCfg_1[MBZA_Constant.MAX_DEV_CHANNEL];
+
+            for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
+            {
+                EnaZIM[i] = 0;
+                EnaROM[i] = 0;
+                ChkZIM[i] = 0;
+                mZimCfg[i] = new stZimCfg_1(0);
+            }
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+        public bool CompareInfo(byte[] ChkArr)
+        {
+            byte[] Arr = ToByteArray();
+            if (ChkArr.Length != Arr.Length)
+            {
+                return false;
+            }
+            int Size = Marshal.SizeOf(this);
+            for (int i = 0; i < Size; i++)
+            {
+                if (Arr[i] != ChkArr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stSystemConfig_1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stSystemConfig_1));
+            pinnedArr.Free();
+        }
+    }
+
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct stSystemConfig
     {
         public byte ID;
@@ -1539,7 +1842,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public stSystemConfig(byte init)
         {
-            ID = 0xD2;
+            ID = DeviceConstants.ID_ZIMCONFIG;
             
             BaseTick = 1;
             DaqTick = 200;

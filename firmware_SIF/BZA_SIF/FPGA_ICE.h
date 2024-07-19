@@ -45,6 +45,9 @@ extern "C"
 	#define ICE_CMD_VACADC_CTRL_FLT1		0x80
 
 	
+	
+	#define ICE_CMDAUX_ADC_VAL1			0x13
+	#define ICE_CMDAUX_ADC_VAL2			0x14
 		
 	INT_32 ICE_write_cmd(INT_32 ch, UNS_8 cmd);
 	INT_32 ICE_read_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata);
@@ -53,6 +56,7 @@ extern "C"
 	INT_32 ICE_write_16bits(INT_32 ch, UNS_8 cmd, UNS_16 data);
 	INT_32 ICE_read_24bits(INT_32 ch, UNS_8 cmd,UNS_32 *pdata);
 	INT_32 ICE_read_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pidata, INT_32* pvdata);
+	INT_32 ICE_readaux_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pdata);
 	INT_32 ICE_read_adc24bit(INT_32 ch, UNS_8 cmd, INT_32* pdata);
 	INT_32 ICE_write_24bits(INT_32 ch, UNS_8 cmd, UNS_32 data);
 	INT_32 ICE_read_bytes(INT_32 ch, UNS_8 cmd, UNS_8* pdata, UNS_32 length);

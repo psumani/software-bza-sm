@@ -134,7 +134,7 @@ INT_32 ICE_write_cmd(INT_32 ch, UNS_8 cmd)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	tx_buf = cmd;
 	
 	if(CheckStart() == false)
@@ -176,7 +176,7 @@ INT_32 ICE_read_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata)
 		return _ERROR;
 	}
 	
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 
 	if(CheckStart() == false)
 	{
@@ -267,7 +267,7 @@ INT_32 ICE_write_byte(INT_32 ch, UNS_8 cmd, UNS_8 data)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 
 	tx_buf[0] = cmd;
 	tx_buf[1] = data;
@@ -311,7 +311,7 @@ INT_32 ICE_read_16bits(INT_32 ch,UNS_8 cmd, UNS_16* pdata)
 	UNS_8 rx_buf[2];
 	UNS_16 tmp = 0;
 	
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	if(m_pGlobalVar->OpenSPI == FALSE)
 	{
@@ -372,7 +372,7 @@ INT_32 ICE_Verify_16bits(INT_32 ch, UNS_8 cmd, UNS_8* pdata)
 	UNS_8 tx_buf; 
 	UNS_8 r_buf[3];
 	
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	if(m_pGlobalVar->OpenSPI == FALSE)
 	{
@@ -436,7 +436,7 @@ INT_32 ICE_write_16bits(INT_32 ch, UNS_8 cmd, UNS_16 data)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 
 	tx_buf[0] = cmd;
 	tx_buf[1] = (UNS_8)((data >> 8) & 0xFF);
@@ -487,7 +487,7 @@ INT_32 ICE_read_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pidata, INT_32* pvdata)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	tx_buf = cmd | ICE_CMD_READ;;
 
@@ -545,6 +545,77 @@ INT_32 ICE_read_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pidata, INT_32* pvdata)
 	return _NO_ERROR;
 }
 
+INT_32 ICE_readaux_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pdata)
+{
+	int i;
+	int j;
+	INT_32 len;
+	UNS_8 tx_buf; 
+	UNS_8 rx_buf[12];
+	INT_32 tmp = 0;
+
+	if(m_pGlobalVar->OpenSPI == FALSE)
+	{
+		return _ERROR;
+	}
+	
+	if(CheckIceCfgDone() == false)
+	{
+		return _ERROR;
+	}
+	SetDeviceBoard(ch);
+	
+	tx_buf = cmd | ICE_CMD_READ;;
+
+	if(CheckStart() == false)
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	
+	len = spi_write(ICE_SPI_NO, (void*)&tx_buf, 1);
+
+	if (len != 1) 
+	{
+		ICE_chip_deselect();
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+
+	len = spi_iceread(ICE_SPI_NO, (void*)rx_buf, 12);
+
+	if(CheckResult() == false)
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	
+	if (len != 12) 
+	{
+		SetErrorProc(ch);
+		return _ERROR;
+	}
+	
+	j=0;
+	
+	for(i=0; i<4; i++, j+=3)
+	{
+		tmp = (rx_buf[j] & 0xFF);
+		tmp <<= 8;
+		tmp |= (rx_buf[j+1] & 0xFF);
+		tmp <<= 8;
+		tmp |= (rx_buf[j+2] & 0xFF);
+		tmp <<= 8;
+		tmp &= 0xFFFFFF00;
+		tmp /= 256;
+		*(pdata + i) = tmp;
+	}	
+	
+	
+	return _NO_ERROR;
+}
+
+
 INT_32 ICE_read_adc24bit(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 {
 	INT_32 len;
@@ -561,7 +632,7 @@ INT_32 ICE_read_adc24bit(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	tx_buf = cmd | ICE_CMD_READ;;
 
@@ -625,7 +696,7 @@ INT_32 ICE_read_24bits(INT_32 ch, UNS_8 cmd, UNS_32* pdata)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	tx_buf = cmd | ICE_CMD_READ;;
 
@@ -680,7 +751,7 @@ INT_32 ICE_write_24bits(INT_32 ch,UNS_8 cmd, UNS_32 data)
 	{
 		return _ERROR;
 	}
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	tx_buf[0] = cmd;
 	tx_buf[1] = (UNS_8)((data >> 16) & 0xFF);
 	tx_buf[2] = (UNS_8)((data >> 8) & 0xFF);
@@ -724,7 +795,7 @@ INT_32 ICE_read_bytes(INT_32 ch, UNS_8 cmd, UNS_8* pdata, UNS_32 length)
 		return _ERROR;
 	}
 
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	tx_buf = cmd | ICE_CMD_READ;;
 
@@ -774,7 +845,7 @@ INT_32 ICE_write_bytes(INT_32 ch, UNS_8* pdata, UNS_32 length)
 		return _ERROR;
 	}
 	
-	SetDevChannel(ch);
+	SetDeviceBoard(ch);
 	
 	if(CheckStart() == false)
 	{

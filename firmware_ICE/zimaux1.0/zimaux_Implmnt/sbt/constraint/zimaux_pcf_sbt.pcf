@@ -1,0 +1,63 @@
+# ##############################################################################
+
+# iCEcube PCF
+
+# Version:            2020.12.27943
+
+# File Generated:     Jun 29 2021 09:44:37
+
+# Family & Device:    iCE40HX4K
+
+# Package:            TQ144
+
+# ##############################################################################
+
+###IOSet List 103
+set_io ICE_SYSCLK 37
+set_io TEST_LED 38
+set_io DDS_MCLK1 39
+set_io DDS_CS1 41
+set_io DDS_MOSI1 43
+set_io DDS_SCK1 42
+set_io DISP_COMM 45
+set_io EIS_SYNCCLK 47 -pullup yes
+set_io ICE_SPI_SCLK 73 -pullup yes
+set_io ICE_SPI_MOSI 74 -pullup yes
+set_io ICE_SPI_MISO 75
+set_io ICE_SPI_CE0  76 -pullup yes
+set_io ICE_GPMO_0 78 -pullup yes
+set_io ICE_GPMO_1 79 -pullup yes
+set_io ICE_GPMO_2 80 -pullup yes
+set_io ICE_GPMI_0 81
+set_io ICE_CHKCABLE 83
+set_io M_OSR0 120
+set_io M_OSR1 121
+set_io M_FLT0 122
+set_io M_FLT1 125
+set_io M_POW 130
+set_io M_DCSEL 134
+set_io M_START 135
+set_io M_CLK1 12
+set_io M_SCLK1 18
+set_io M_CS1 15
+set_io M_MOSI1 17
+set_io M_MISO1 16
+set_io M_DRDY1 11
+set_io M_CLK2 8
+set_io M_SCLK2 2
+set_io M_CS2 7
+set_io M_MOSI2 3
+set_io M_MISO2 4
+set_io M_DRDY2 9
+set_io M_CLK3 142
+set_io M_SCLK3 137
+set_io M_CS3 141
+set_io M_MOSI3 138
+set_io M_MISO3 139
+set_io M_DRDY3 143
+set_io M_CLK4 116
+set_io M_SCLK4 112
+set_io M_CS4 115
+set_io M_MOSI4 113
+set_io M_MISO4 114
+set_io M_DRDY4 117

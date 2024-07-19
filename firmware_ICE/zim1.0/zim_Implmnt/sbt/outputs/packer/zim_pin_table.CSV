@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:31:51
 
-* File Generated:     Apr 3 2023 14:36:21
+* File Generated:     Jun 28 2024 17:11:17
 
 * Purpose:            Detailed IO and package pin info
 
@@ -64,7 +64,7 @@ Pin Number, Pin Type Name, Signal Name, Direction, Global Buffer, IO Standard, P
 45, PIO, STAT_COMM, Output, , SB_LVCMOS, No Pull Up, Simple Output, bottomBank
 46, VCCIO_2, not used, , , , , , bottomBank
 47, PIO, EIS_SYNCCLK, Input, , SB_LVCMOS, Pull Up, Simple Input, bottomBank
-48, PIO, ICE_IOB_80,  , , SB_LVCMOS, Pull Up, , bottomBank
+48, PIO, OUT_SYNCCLK, Output, , SB_LVCMOS, No Pull Up, Simple Output, bottomBank
 49, PIO_GBIN, ICE_IOB_81,  , , SB_LVCMOS, No Pull Up, , bottomBank
 52, PIO_GBIN, ICE_IOB_82,  , , SB_LVCMOS, No Pull Up, , bottomBank
 53, AGND_BOT, not used, , , , , , UnknownBank
@@ -91,8 +91,8 @@ Pin Number, Pin Type Name, Signal Name, Direction, Global Buffer, IO Standard, P
 75, PIO, ICE_SPI_MISO, Output, , SB_LVCMOS, No Pull Up, Simple Output, rightBank
 76, PIO, ICE_SPI_CE0, Input, , SB_LVCMOS, Pull Up, Simple Input, rightBank
 77, TRST_B, not used, , , , , , rightBank
-78, PIO, ICE_GPMO_0,  , , SB_LVCMOS, Pull Up, , rightBank
-79, PIO, ICE_GPMO_1,  , , SB_LVCMOS, Pull Up, , rightBank
+78, PIO, ICE_GPMO_0, Input, , SB_LVCMOS, Pull Up, Simple Input, rightBank
+79, PIO, ICE_GPMO_1, Input, , SB_LVCMOS, Pull Up, Simple Input, rightBank
 80, PIO, ICE_GPMO_2, Input, , SB_LVCMOS, Pull Up, Simple Input, rightBank
 81, PIO, ICE_GPMI_0, Output, , SB_LVCMOS, No Pull Up, Simple Output, rightBank
 82, PIO, ICE_IOR_118,  , , SB_LVCMOS, Pull Up, , rightBank

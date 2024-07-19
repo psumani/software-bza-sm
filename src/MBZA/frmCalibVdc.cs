@@ -47,12 +47,12 @@ namespace ZiveLab.ZM
 
             if (trng == 0)
             {
-                this.Text = string.Format("Calibration DC Voltage[x1.0:{0}] - CH{0}[{1}-{2}].", SM_Number.ToRangeString(p.ranges.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
+                this.Text = string.Format("Calibration DC Voltage[x1.0:{0}] - CH{0}[{1}-{2}].", SM_Number.ToRangeString(p.ranges[0].vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
                 sTitle = "VDC_X1";
             }
             else
             {
-                this.Text = string.Format("Calibration DC Voltage[x0.1:{0}] - CH{0}[{1}-{2}].", SM_Number.ToRangeString(p.ranges.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
+                this.Text = string.Format("Calibration DC Voltage[x0.1:{0}] - CH{0}[{1}-{2}].", SM_Number.ToRangeString(p.ranges[0].vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
                 sTitle = "VDC_X10";
             }
             
@@ -86,8 +86,8 @@ namespace ZiveLab.ZM
             string sValue2;
 
             int count = gBZA.GetIniIntData(sTitle, "Count", sFilename, 0);
-            mZim.ranges.vdc_rng[rng].gain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.vdc_rng[rng].gain);
-            mZim.ranges.vdc_rng[rng].offset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.vdc_rng[rng].offset);
+            mZim.ranges[0].vdc_rng[rng].gain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges[0].vdc_rng[rng].gain);
+            mZim.ranges[0].vdc_rng[rng].offset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges[0].vdc_rng[rng].offset);
             for (int row = 0; row < count; row++)
             {
                 sitem = string.Format("Target{0}", row + 1);
@@ -105,8 +105,8 @@ namespace ZiveLab.ZM
             string sitem;
             string sValue;
 
-            gBZA.WriteIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.vdc_rng[rng].gain);
-            gBZA.WriteIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.vdc_rng[rng].offset);
+            gBZA.WriteIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges[0].vdc_rng[rng].gain);
+            gBZA.WriteIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges[0].vdc_rng[rng].offset);
             gBZA.WriteIniIntData(sTitle, "Count", sFilename, ListAfter1.Items.Count);
             for (int row = 0; row < ListAfter1.Items.Count; row++)
             {
@@ -155,15 +155,15 @@ namespace ZiveLab.ZM
 
             LoadLogInfo();
 
-            txtMax1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].maximum);
-            txtMin1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].minimum);
-            txtFactor1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].factor);
-            txtGain1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].gain);
-            txtOffset1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].offset);
+            txtMax1.Text = string.Format("{0:0.0#####}", mZim.ranges[0].vdc_rng[rng].maximum);
+            txtMin1.Text = string.Format("{0:0.0#####}", mZim.ranges[0].vdc_rng[rng].minimum);
+            txtFactor1.Text = string.Format("{0:0.0#####}", mZim.ranges[0].vdc_rng[rng].factor);
+            txtGain1.Text = string.Format("{0:0.0#####}", mZim.ranges[0].vdc_rng[rng].gain);
+            txtOffset1.Text = string.Format("{0:0.0#####}", mZim.ranges[0].vdc_rng[rng].offset);
             txtSquare1.Text = "1.0";
             txtResSquare1.Text = "1.0";
             chkCalib1.Checked = false;
-            txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax,"V");
+            txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax,"V");
 
             txtTarget1.Text = "0.0";
             txtReal1.Text = "0.0";
@@ -172,7 +172,7 @@ namespace ZiveLab.ZM
         private void btRefresh1_Click(object sender, EventArgs e)
         {
             double val;
-            txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax, "V");
+            txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax, "V");
             val = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc;
             try
             {
@@ -414,8 +414,8 @@ namespace ZiveLab.ZM
         
         private void btApply1_Click(object sender, EventArgs e)
         {
-            mZim.ranges.vdc_rng[rng].gain = Convert.ToDouble(txtGain1.Text);
-            mZim.ranges.vdc_rng[rng].offset = Convert.ToDouble(txtOffset1.Text);
+            mZim.ranges[0].vdc_rng[rng].gain = Convert.ToDouble(txtGain1.Text);
+            mZim.ranges[0].vdc_rng[rng].offset = Convert.ToDouble(txtOffset1.Text);
 
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch] = mZim;
             if (MBZA_MapUtil.Save_Range_info(Serial, sifch) == false)

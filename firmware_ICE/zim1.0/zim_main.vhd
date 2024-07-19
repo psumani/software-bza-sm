@@ -8,6 +8,7 @@ entity zim is
 	port (
 		ICE_SYSCLK		: in  	std_logic;
 		EIS_SYNCCLK		: in  	std_logic;
+
 		TEST_LED     	: out  	std_logic;
 		
 		DDS_MCLK1		: out  	std_logic;
@@ -102,8 +103,8 @@ entity zim is
 		ICE_IOR_118		: in  	std_logic;
 
 		-- J17 connector pins 
+		OUT_SYNCCLK		: out  	std_logic;
 		ICE_IOB_81		: in  	std_logic;
-		ICE_IOB_80		: in  	std_logic;
 		STAT_COMM		: out  	std_logic; --ICE_IOB_73
 		THERMOSTAT		: in  	std_logic; --ICE_IOB_72
 		
@@ -120,7 +121,7 @@ entity zim is
 		-- isolated in/out pins
 		ICE_GPMO_1		: in  	std_logic;
 		ICE_GPMO_2		: in  	std_logic;
-		ICE_GPMI_0	   	: out  	std_logic;
+		ICE_GPMI_0	   : out  	std_logic;
 		
 		ICE_IOR_138		: in  	std_logic;
 		ICE_IOR_137		: in  	std_logic;
@@ -290,6 +291,8 @@ architecture behav of zim is
 	signal eis_state 		: def_eis_state := s_reset;
 	
 	signal eis_clk				: std_logic := '0';
+	signal auxmode				: std_logic := '0';
+	signal tacadc_rst			: std_logic := '0';
 	signal acadc_rst			: std_logic := '0';
 	signal eis_start			: std_logic := '0';
 	signal eis_stop			: std_logic := '0';
@@ -327,47 +330,41 @@ architecture behav of zim is
 	
 begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
+	clk_spicomm 	<= clk_32MHz; 
+	clk_spislave 	<= not clk_32MHz;	
+	clk_dds0			<= clk_32MHz;	-- 32MHz 
+	clk_dds1			<= clk_32MHz;	-- 32MHz
+	eis_clk			<= not clk_32MHz;	-- 32MHz  
+	clk_IAC_ADC		<= clk_32MHz;	-- 32MHz  
+	clk_VAC_ADC		<= clk_32MHz;	-- 32MHz 
+	
+	
+	
+	OUT_SYNCCLK    <=  '0' when auxmode = '0' else EIS_SYNCCLK;
+	--acadc_trig 		<= EIS_SYNCCLK; 
+	IAC_CLK			<= EIS_SYNCCLK when auxmode = '0' else ICE_GPMO_1; --not EIS_SYNCCLK; 
+	VAC_CLK			<= EIS_SYNCCLK when auxmode = '0' else ICE_GPMO_1; --not EIS_SYNCCLK;  
+	acadc_rst		<=	tacadc_rst when auxmode = '0' else ICE_GPMO_0;
+	AC_ADC_SYNC		<= not acadc_rst; 
+	
 	TEST_LED 		<= SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
 	
 	DDS_MCLK 	<= dds0_mclk when buf_control(6) = '0' else clk_16MHz;  -- 125KHz = 16MHz / 128
 	DDS_MCLK1 		<= not clk_16MHz; 	-- 16MHz 
 	
-	--acadc_trig 		<= EIS_SYNCCLK; 
-	VAC_CLK			<= not EIS_SYNCCLK;  
-	IAC_CLK			<= not EIS_SYNCCLK; 
 	
 	
-	clk_spicomm 	<= clk_32MHz; 
-	clk_spislave 	<= not clk_32MHz;	
-	
-	clk_dds0			<= clk_32MHz;	-- 32MHz 
-	clk_dds1			<= clk_32MHz;	-- 32MHz
-	
-	eis_clk			<= not clk_32MHz;	-- 32MHz  
-
-	clk_IAC_ADC		<= clk_32MHz;	-- 32MHz  
-	clk_VAC_ADC		<= clk_32MHz;	-- 32MHz 
-
-	AC_ADC_SYNC		<= not acadc_rst; 
 	clk_VDC_ADC		<= not clk_16MHz;	-- 16MHz 
 
 	VAC_FLT1			<= buf_device_acadc(7);
 	VAC_FLT0			<= buf_device_acadc(6);
 	VAC_OSR1			<= buf_device_acadc(5);
 	VAC_OSR0			<= buf_device_acadc(4);
+	
 	IAC_FLT1			<= buf_device_acadc(3);
 	IAC_FLT0			<= buf_device_acadc(2);
 	IAC_OSR1			<= buf_device_acadc(1);
 	IAC_OSR0			<= buf_device_acadc(0);
-	
---	VAC_FLT1			<= buf_device_acadc(7);
---	VAC_FLT0			<= buf_device_acadc(6);
---	VAC_OSR1			<= buf_device_acadc(5);
---	VAC_OSR0			<= buf_device_acadc(4);
---	IAC_FLT1			<= eis_end;
---	IAC_FLT0			<= acadc_rst;
---	IAC_OSR1			<= eis_stop;
---	IAC_OSR0			<= eis_start;
 
 	AMPV_POW			<= buf_control(5);
 	VDC_RNG0			<= buf_control(4);
@@ -641,7 +638,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						
 					when "0011011" =>			--ICE_CMD_EIS_CFG 		: 0x9B
 						comm_length			<= 1;
-						comm_buf(0)			<= "00000" & acadc_rst & eis_stop & eis_start;
+						comm_buf(0)			<= "00000" & tacadc_rst & eis_stop & eis_start;
 						
 					when "0011100" =>			--ICE_CMD_EIS_SMPLS 		: 0x9C
 						comm_length			<= 2;
@@ -776,7 +773,8 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						req_data_cnt(7 downto 0)			<= comm_buf(1);	
 						
 					when "0011011" =>			--ICE_CMD_EIS CFG 		: 0x1B
-						acadc_rst			<= comm_buf(0)(2);
+						auxmode				<= comm_buf(0)(3);
+						tacadc_rst			<= comm_buf(0)(2);
 						eis_stop				<= comm_buf(0)(1);
 						eis_start			<= comm_buf(0)(0);
 
@@ -842,20 +840,6 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		DATA_VLD => comm_data_vld
 	);
 	
-	ADC_IAC : ADC_ADS127 
-	port map (
-		CLK 			=> clk_IAC_ADC, 
-		RESET			=> '0',
-		TRIG			=> acadc_trig, 
-		DTRIG			=> acadc_dtrig_i,	
-		ADC_DATA		=> buf_adcdata_iac, 		
-		SCLK 			=> IAC_SCLK, 	
-		CS 			=> IAC_CS, 	
-		MOSI 			=> IAC_MOSI, 	
-		MISO 			=> IAC_MISO, 	
-		DRDY 			=> IAC_DRDY 	
-	);
-
 	ADC_VAC : ADC_ADS127 
 	port map (
 		CLK 			=> clk_VAC_ADC, 	
@@ -870,6 +854,20 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		DRDY 			=> VAC_DRDY 	
 	);
 	
+	ADC_IAC : ADC_ADS127 
+	port map (
+		CLK 			=> clk_IAC_ADC, 
+		RESET			=> '0',
+		TRIG			=> acadc_trig, 
+		DTRIG			=> acadc_dtrig_i,	
+		ADC_DATA		=> buf_adcdata_iac, 		
+		SCLK 			=> IAC_SCLK, 	
+		CS 			=> IAC_CS, 	
+		MOSI 			=> IAC_MOSI, 	
+		MISO 			=> IAC_MISO, 	
+		DRDY 			=> IAC_DRDY 	
+	);
+
 	SIG_DDS : DDS_AD9837 
 	port map (
 			CLK 		=> clk_dds0, 	

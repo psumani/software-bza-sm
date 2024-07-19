@@ -737,6 +737,14 @@ namespace ZiveLab.ZM.ZIM.Packets
             Nouse2 = 0.0;
         }
 
+        public void setvalue(double tLs, double tR)
+        {
+            Ls = tLs;
+            R = tR;
+            Nouse1 = 0.0;
+            Nouse2 = 0.0;
+        }
+
         #region ** Properties
         [ReadOnlyAttribute(false)]
         [DisplayName("Inducance(H)"), DescriptionAttribute("Edit inductance of range.")]
@@ -874,9 +882,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             iac_rng[1] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
             iac_rng[2] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
             iac_rng[3] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
-
-            vac_rng = new st_zim_adcv_rnginf(DeviceConstants.ADC_VAC_RNG_RMAX,DeviceConstants.ADC_VAC_RNG_MAX, DeviceConstants.ADC_VAC_RNG_MIN);
-
+            vac_rng = new st_zim_adcv_rnginf(DeviceConstants.ADC_VAC_RNG_RMAX, DeviceConstants.ADC_VAC_RNG_MAX, DeviceConstants.ADC_VAC_RNG_MIN);
+            
             vdc_rng = new st_zim_adcv_rnginf[DeviceConstants.MAX_VDC_RNGCNT];
 
             if (mtype == eZimType.BZA500)
@@ -894,11 +901,17 @@ namespace ZiveLab.ZM.ZIM.Packets
                 vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG0_RMAX3, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
                 vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG1_RMAX3, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
             }
+            else if (mtype == eZimType.BZAAUX1)
+            {
+                vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+                vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+            }
             else
             {
                 vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG0_RMAX0, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
                 vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG1_RMAX0, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
             }
+
 
             rtd_rng = new st_zim_adct_rnginf(DeviceConstants.ADC_RTD_CONST_MAX, DeviceConstants.ADC_RTD_CONST_MIN);
             rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT1000;
@@ -917,8 +930,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             mDummy[3] = new st_zim_dummy(0.000000112196, 0.099952);
             mDummy[4] = new st_zim_dummy(0.000000084638, 0.997961);
             mDummy[5] = new st_zim_dummy(0.000000084638, 0.997961);
-            mDummy[6] = new st_zim_dummy(0.00000008, 9.999281);
-            mDummy[7] = new st_zim_dummy(0.00000008, 9.999281);
+            mDummy[6] = new st_zim_dummy(0.00000008, 9.999115);
+            mDummy[7] = new st_zim_dummy(0.00000008, 9.999115);
 
             nouse = new double[20];
             for (i = 0; i < 20; i++)
@@ -956,6 +969,12 @@ namespace ZiveLab.ZM.ZIM.Packets
                 vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX3, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
                 vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX3, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
             }
+            else if (mtype == eZimType.BZAAUX1)
+            {
+                mSafety.MaxPower = 0.0;
+                vdc_rng[0].Initialize(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+                vdc_rng[1].Initialize(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+            }
             else
             {
                 mSafety.MaxPower = DeviceConstants.DEFAULT_BZA1000_POWER;
@@ -970,31 +989,23 @@ namespace ZiveLab.ZM.ZIM.Packets
                 mEisIRngCalInfo[i].Initialize();
             }
             Idc_rnginf.Initialize();
-            
-            mDummy[0].Ls = 0.000000064476;
-            mDummy[1].Ls = 0.000000064476;
-            mDummy[2].Ls = 0.000000112196;
-            mDummy[3].Ls = 0.000000112196;
-            mDummy[4].Ls = 0.000000084638;
-            mDummy[5].Ls = 0.000000084638;
-            mDummy[6].Ls = 0.00000008;
-            mDummy[7].Ls = 0.00000008;
 
-            mDummy[0].R = 0.009987261;
-            mDummy[1].R = 0.009987261;
-            mDummy[2].R = 0.099952;
-            mDummy[3].R = 0.099952;
-            mDummy[4].R = 0.997961;
-            mDummy[5].R = 0.997961;
-            mDummy[6].R = 9.999115;
-            mDummy[7].R = 9.999115;
+            mDummy[0].setvalue(0.000000064476, 0.009987261);
+            mDummy[1].setvalue(0.000000064476, 0.009987261);
+            mDummy[2].setvalue(0.000000112196, 0.099952);
+            mDummy[3].setvalue(0.000000112196, 0.099952);
+            mDummy[4].setvalue(0.000000084638, 0.997961);
+            mDummy[5].setvalue(0.000000084638, 0.997961);
+            mDummy[6].setvalue(0.00000008, 9.999115);
+            mDummy[7].setvalue(0.00000008, 9.999115);
+
 
             for (i = 0; i < 20; i++)
             {
                 nouse[i] = 0.0;
             }
-
         }
+
         public byte[] ToByteArray()
         {
             int Size = Marshal.SizeOf(this);

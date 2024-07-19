@@ -2232,7 +2232,7 @@ namespace ZiveLab.ZM
         private void ViewStatus()
         {
             stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
-            var mrng = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges;
+            var mrng = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
             TimeSpan ElapsedTime = TimeSpan.FromMilliseconds(chstat.RunTimeStamp);
             bool brun = gBZA.CheckStatusRun(chstat);
             bool bcalibMode = gBZA.CheckStatusCalibMode(chstat);

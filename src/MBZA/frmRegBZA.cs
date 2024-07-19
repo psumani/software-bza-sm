@@ -32,6 +32,7 @@ namespace ZiveLab.ZM
 
         int ScanSIFCnt;
         int ScanChCnt;
+        int ScanAuxCnt;
         int RegListCnt;
 
         int SelCh;
@@ -42,14 +43,16 @@ namespace ZiveLab.ZM
 
         int ScanChCount;
         int ScanSifCount;
-        Dictionary<string, stScanBzaInf> SearchedSif { get; set; } //PhysicalAddress
+
+       Dictionary<string, stScanBzaInf> SearchedSif { get; set; } //PhysicalAddress
 
         public frmRegBZA()
         {
             InitializeComponent();
+
             
 
-            ScanChCount = gBZA.ScanChCount;
+            ScanChCount = gBZA.ScanBdCount;
             ScanSifCount = gBZA.ScanSifCount;
             SearchedSif = new Dictionary<string, stScanBzaInf>();
             SearchedSif = gBZA.pingHost.SearchedDevice;
@@ -61,6 +64,46 @@ namespace ZiveLab.ZM
             bInitLnk = false;
             bInitBza = false;
             bInitBzaCh = false;
+
+            CellStyle cs;
+
+            cs = grdBzaCh.Styles.Add("DRed");
+            cs.ForeColor = Color.DarkRed;
+
+            cs = grdBzaCh.Styles.Add("DBlue");
+            cs.ForeColor = Color.DarkBlue;
+
+            cs = grdBzaCh.Styles.Add("DGray");
+            cs.ForeColor = Color.DarkGray;
+
+            cs = grdBzaCh.Styles.Add("Black");
+            cs.ForeColor = Color.Black;
+
+
+            cs = grdBZAs.Styles.Add("DRed");
+            cs.ForeColor = Color.DarkRed;
+
+            cs = grdBZAs.Styles.Add("DBlue");
+            cs.ForeColor = Color.DarkBlue;
+
+            cs = grdBZAs.Styles.Add("DGray");
+            cs.ForeColor = Color.DarkGray;
+
+            cs = grdBZAs.Styles.Add("Black");
+            cs.ForeColor = Color.Black;
+
+
+            cs = grdChs.Styles.Add("DRed");
+            cs.ForeColor = Color.DarkRed;
+
+            cs = grdChs.Styles.Add("DBlue");
+            cs.ForeColor = Color.DarkBlue;
+
+            cs = grdChs.Styles.Add("DGray");
+            cs.ForeColor = Color.DarkGray;
+
+            cs = grdChs.Styles.Add("Black");
+            cs.ForeColor = Color.Black;
 
             
 
@@ -459,11 +502,11 @@ namespace ZiveLab.ZM
 
                         if (Value.bChkSIF == true && Value.bChkCh == true)
                         {
-                            grdChs.ForeColor = Color.DarkBlue;
+                            grdChs.SetCellStyle(row + 1, col, grdChs.Styles["DBlue"]);
                         }
                         else
                         {
-                            grdChs.ForeColor = Color.DarkRed;
+                            grdChs.SetCellStyle(row + 1, col, grdChs.Styles["DRed"]);
                         }
                     }
                 }
@@ -511,8 +554,7 @@ namespace ZiveLab.ZM
 
             grdChs.Row = LnkRow;
             grdChs.Col = 1;
-            grdChs.ForeColorSel = grdChs.ForeColor;
-            
+            grdChs.ForeColorSel = grdChs.GetCellStyle(LnkRow, 1).ForeColor;
 
             grdChs.ContextMenuStrip = RegMenu;
 
@@ -613,14 +655,13 @@ namespace ZiveLab.ZM
                     {
                         grdChs.Row = row + 1;
                         grdChs.Col = col;
-
                         if (Value.bChkSIF == true && Value.bChkCh == true)
                         {
-                            grdChs.ForeColor = Color.DarkBlue;
+                            grdChs.SetCellStyle(row + 1, col, grdChs.Styles["DBlue"]);
                         }
                         else
                         {
-                            grdChs.ForeColor = Color.DarkRed;
+                            grdChs.SetCellStyle(row + 1, col, grdChs.Styles["DRed"]);
                         }
                     }
                 }
@@ -639,6 +680,7 @@ namespace ZiveLab.ZM
                 {
                     LnkRow = RegListCnt;
                 }
+                grdChs.ForeColorSel = grdChs.GetCellStyle(LnkRow, 1).ForeColor;
                 grdChs.Select(LnkRow, 1, 1, 1, true);
                 grdChs.ContextMenuStrip = RegMenu;
             }
@@ -698,7 +740,7 @@ namespace ZiveLab.ZM
                 {
                     if (mtype != eDeviceType.MBZA && mtype != eDeviceType.SBZA) continue;
                     if (Value.MBZAIF.bConnect == false && Value.mFindSifCfg.SockStat != (byte)eSockStatus.LISTEN) continue;
-                    if (Value.ChCnt < 0) continue;
+                    if (Value.BdCnt < 0) continue;
                 }
 
                 grdBZAs.Rows ++;
@@ -740,7 +782,7 @@ namespace ZiveLab.ZM
                             }
                             break;
                         case 6:
-                            str = Value.ChCnt.ToString();
+                            str = Value.BdCnt.ToString();
                             break;
                     }
                     grdBZAs.set_TextMatrix(row + 1, col, str);
@@ -750,11 +792,11 @@ namespace ZiveLab.ZM
                         grdBZAs.Col = col;
                         if (GetChkLinkBza(key) == false)
                         {
-                            grdBZAs.ForeColor = Color.DarkRed;
+                            grdBZAs.SetCellStyle(row + 1, col, grdBZAs.Styles["DRed"]);
                         }
                         else
                         {
-                            grdBZAs.ForeColor = Color.DarkBlue;
+                            grdBZAs.SetCellStyle(row + 1, col, grdBZAs.Styles["DBlue"]);
                         }
                     }
                 }
@@ -770,7 +812,7 @@ namespace ZiveLab.ZM
             if (ScanSIFCnt > 0)
             {
                 if (Matchrow <= 0) Matchrow = 1;
-
+                grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(Matchrow, 1).ForeColor;
                 grdBZAs.Select(Matchrow, 1, 1, 1, true);
                 BzaRow = Matchrow;
             }
@@ -814,7 +856,7 @@ namespace ZiveLab.ZM
                 {
                     if (mtype != eDeviceType.MBZA && mtype != eDeviceType.SBZA) continue;
                     if (Value.MBZAIF.bConnect == false && Value.mFindSifCfg.SockStat != (byte)eSockStatus.LISTEN) continue;
-                    if (Value.ChCnt < 0) continue;
+                    if (Value.BdCnt < 0) continue;
                 }
 
                 grdBZAs.Rows++;
@@ -856,7 +898,7 @@ namespace ZiveLab.ZM
                             }
                             break;
                         case 6:
-                            str = Value.ChCnt.ToString();
+                            str = Value.BdCnt.ToString();
                             break;
                     }
                     grdBZAs.set_TextMatrix(row + 1, col, str);
@@ -864,13 +906,14 @@ namespace ZiveLab.ZM
                     {
                         grdBZAs.Row = row + 1;
                         grdBZAs.Col = col;
+
                         if (GetChkLinkBza(key) == false)
                         {
-                            grdBZAs.ForeColor = Color.DarkRed;
+                            grdBZAs.SetCellStyle(row + 1, col, grdBZAs.Styles["DRed"]);
                         }
                         else
                         {
-                            grdBZAs.ForeColor = Color.DarkBlue;
+                            grdBZAs.SetCellStyle(row + 1, col, grdBZAs.Styles["DBlue"]);
                         }
                     }
                 }
@@ -893,6 +936,7 @@ namespace ZiveLab.ZM
                 {
                     BzaRow = Matchrow;
                     BzaChRow = 0;
+                    grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(BzaRow, 1).ForeColor;
                     grdBZAs.Select(BzaRow, 1, 1, 1, true);
                 }
                 
@@ -903,6 +947,7 @@ namespace ZiveLab.ZM
                 if (ScanSIFCnt > 0)
                 {
                     BzaRow = 1;
+                    grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(BzaRow, 1).ForeColor;
                     grdBZAs.Select(BzaRow, 1, 1, 1, true);
                 }
                 else
@@ -927,7 +972,7 @@ namespace ZiveLab.ZM
 
             grdBZAs.Row = BzaRow;
             grdBZAs.Col = 1;
-            grdBZAs.ForeColorSel = grdBZAs.ForeColor;
+            grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(BzaRow, 1).ForeColor;
 
             if (sSelSerial2 == sSelSerial1)
             {
@@ -1038,13 +1083,27 @@ namespace ZiveLab.ZM
                             str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetBoardTypeString() + " " + pair.mDevInf.mSysCfg.mZimCfg[ch].GetBoardVer();
                             break;
                         case 6:
-                            if (pair.iLinkCh[ch] == -1)
+                            if (mtype == eDeviceType.MBZA && ch > 0)
                             {
-                                str = "None";
+                                if (pair.iLinkCh[0] == -1)
+                                {
+                                    str = "None";
+                                }
+                                else
+                                {
+                                    str = string.Format("{0}", pair.iLinkCh[0] + 1);
+                                }
                             }
                             else
                             {
-                                str = string.Format("{0}", pair.iLinkCh[ch]+1);
+                                if (pair.iLinkCh[ch] == -1)
+                                {
+                                    str = "None";
+                                }
+                                else
+                                {
+                                    str = string.Format("{0}", pair.iLinkCh[ch] + 1);
+                                }
                             }
                             break;
                             
@@ -1054,14 +1113,27 @@ namespace ZiveLab.ZM
                     {
                         grdBzaCh.Row = row + 1;
                         grdBzaCh.Col = col;
-
-                        if (pair.iLinkCh[ch] == -1)
+                        if (mtype == eDeviceType.MCBZA && ch > 0)
                         {
-                            grdBzaCh.ForeColor = Color.DarkRed;
+                            if (pair.iLinkCh[0] == -1)
+                            {
+                                grdBzaCh.SetCellStyle(row + 1, col, grdBzaCh.Styles["DGray"]);
+                            }
+                            else
+                            {
+                                grdBzaCh.SetCellStyle(row + 1, col, grdBzaCh.Styles["Black"]);
+                            }
                         }
                         else
                         {
-                            grdBzaCh.ForeColor = Color.DarkBlue;
+                            if (pair.iLinkCh[ch] == -1)
+                            {
+                                grdBzaCh.SetCellStyle(row + 1, col, grdBzaCh.Styles["DRed"]);
+                            }
+                            else
+                            {
+                                grdBzaCh.SetCellStyle(row + 1, col, grdBzaCh.Styles["DBlue"]);
+                            }
                         }
                     }
                 }
@@ -1080,7 +1152,7 @@ namespace ZiveLab.ZM
                 if (Matchrow <= 0) Matchrow = 1;
                 grdBzaCh.Row = Matchrow;
                 grdBzaCh.Col = 1;
-                grdBzaCh.ForeColorSel = grdBzaCh.ForeColor;
+                grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(Matchrow, 1).ForeColor;
                 grdBzaCh.Select(Matchrow, 1, 1, 1, true);
                 grdBzaCh.ContextMenuStrip = ScanMenu;
             }
@@ -1097,16 +1169,16 @@ namespace ZiveLab.ZM
         {
             bInitBzaCh = true;
 
-            int row = 0;
             int Matchrow = -1;
             int col = 0;
-            int ch = 0;
-            int Maxch = 0;
+            int bd = 0;
+            int Maxbd = 0;
             string str = "";
 
             this.CmdBZALink.ForeColor = Color.DarkGray;
 
             ScanChCnt = 0;
+            ScanAuxCnt = 0;
             if (gBZA.SifLnkLst.ContainsKey(sSelSerial2) == false)
             {
                 return;
@@ -1116,21 +1188,22 @@ namespace ZiveLab.ZM
 
             eDeviceType mtype = (eDeviceType)pair.mDevInf.mSysCfg.mSIFCfg.Type;
 
-            if (mtype != eDeviceType.SBZA && mtype != eDeviceType.MBZA)
+            if (mtype != eDeviceType.SBZA && mtype != eDeviceType.MBZA && mtype != eDeviceType.MCBZA)
             {
                 return;
             }
 
-            Maxch = 1;
-            if (mtype == eDeviceType.MBZA)
+            Maxbd = 1;
+            if (mtype == eDeviceType.MBZA || mtype == eDeviceType.MCBZA)
             {
-                Maxch = MBZA_Constant.MAX_DEV_CHANNEL;
+                Maxbd = MBZA_Constant.MAX_DEV_CHANNEL;
             }
 
             grdBzaCh.Rows = 1;
-            for (ch = 0; ch < Maxch; ch++)
+
+            for (bd = 0; bd < Maxbd; bd++)
             {
-                if (pair.mDevInf.mSysCfg.EnaZIM[ch] == 0) continue;
+                if (pair.mDevInf.mSysCfg.EnaZIM[bd] == 0) continue;
 
                 grdBzaCh.Rows++;
                 for (col = 0; col < 7; col++)
@@ -1138,63 +1211,93 @@ namespace ZiveLab.ZM
                     switch (col)
                     {
                         case 0:
-                            str = (ch + 1).ToString();
+                            str = (bd + 1).ToString();
                             break;
                         case 1:
-                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetSerialNumber();
+                            str = pair.mDevInf.mSysCfg.mZimCfg[bd].GetSerialNumber();
                             break;
                         case 2:
-                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].info.GetZimTypeString();
+                            str = pair.mDevInf.mSysCfg.mZimCfg[bd].info.GetZimTypeString();
                             break;
                         case 3:
-                            if (pair.mDevInf.mSysCfg.ChkZIM[ch] == 0) str = "No";
+                            if (pair.mDevInf.mSysCfg.ChkZIM[bd] == 0) str = "No";
                             else str = "Yes";
                             break;
                         case 4:
-                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetFirmwareVer();
+                            str = pair.mDevInf.mSysCfg.mZimCfg[bd].GetFirmwareVer();
                             break;
                         case 5:
-                            str = pair.mDevInf.mSysCfg.mZimCfg[ch].GetBoardTypeString() + " " + pair.mDevInf.mSysCfg.mZimCfg[ch].GetBoardVer();
+                            str = pair.mDevInf.mSysCfg.mZimCfg[bd].GetBoardTypeString() + " " + pair.mDevInf.mSysCfg.mZimCfg[bd].GetBoardVer();
                             break;
                         case 6:
-                            if (pair.iLinkCh[ch] == -1)
+                            if (mtype == eDeviceType.MCBZA && bd > 0)
                             {
-                                str = "None";
+                                if (pair.iLinkCh[0] == -1)
+                                {
+                                    str = "None";
+                                }
+                                else
+                                {
+                                    str = string.Format("{0}", pair.iLinkCh[0] + 1);
+                                }
                             }
                             else
                             {
-                                str = string.Format("{0}", pair.iLinkCh[ch] + 1);
+                                if (pair.iLinkCh[bd] == -1)
+                                {
+                                    str = "None";
+                                }
+                                else
+                                {
+                                    str = string.Format("{0}", pair.iLinkCh[bd] + 1);
+                                }
                             }
                             break;
 
                     }
-                    grdBzaCh.set_TextMatrix(row + 1, col, str);
-
-                    if (col > 0)
+                    grdBzaCh.set_TextMatrix(bd + 1, col, str);
+                    if (mtype == eDeviceType.MCBZA && bd > 0)
                     {
-                        grdBzaCh.Row = row + 1;
-                        grdBzaCh.Col = col;
-
-                        if (pair.iLinkCh[ch] == -1)
+                        if (pair.iLinkCh[0] == -1)
                         {
-                            grdBzaCh.ForeColor = Color.DarkRed;
+                            grdBzaCh.SetCellStyle(bd + 1, col, grdBzaCh.Styles["DGray"]);
                         }
                         else
                         {
-                            grdBzaCh.ForeColor = Color.DarkBlue;
+                            grdBzaCh.SetCellStyle(bd + 1, col, grdBzaCh.Styles["Black"]);
+                        }
+                    }
+                    else
+                    {
+                        if (pair.iLinkCh[bd] == -1)
+                        {
+                            grdBzaCh.SetCellStyle(bd + 1, col, grdBzaCh.Styles["DRed"]);
+                        }
+                        else
+                        {
+                            grdBzaCh.SetCellStyle(bd + 1, col, grdBzaCh.Styles["DBlue"]);
                         }
                     }
                 }
-
-                if (SelSifCh == ch && sSelSerial1 == sSelSerial2 && sSelSerial2 != "")
+                
+                if (SelSifCh == bd && sSelSerial1 == sSelSerial2 && sSelSerial2 != "")
                 {
-                    Matchrow = row+1;
+                    Matchrow = bd + 1;
                 }
 
-                row++;
                 ScanChCnt++;
                 
             }
+
+            if (ScanChCnt > 0)
+            {
+                if (mtype == eDeviceType.MCBZA)
+                {
+                    ScanAuxCnt = ScanChCnt - 1;
+                    ScanChCnt = 1;
+                }
+            }
+
             bInitBzaCh = false;
 
             if (Matchrow <= 0)
@@ -1219,6 +1322,7 @@ namespace ZiveLab.ZM
             {
                 if (BzaChRow != Matchrow)
                 {
+                    grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(BzaChRow, 1).ForeColor;
                     grdBzaCh.Select(BzaChRow, 1, 1, 1, true);
                     BzaChRow = Matchrow;
                 }
@@ -1229,15 +1333,22 @@ namespace ZiveLab.ZM
             {
                 grdBzaCh.Row = BzaChRow;
                 grdBzaCh.Col = 1;
-                grdBzaCh.ForeColorSel = grdBzaCh.ForeColor;
                 grdBzaCh.ContextMenuStrip = ScanMenu;
+                grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(BzaChRow, 1).ForeColor;
+            }
+            else if (BzaChRow > 0 && BzaChRow <= ScanChCnt + ScanAuxCnt)
+            {
+                grdBzaCh.Row = BzaChRow;
+                grdBzaCh.Col = 1;
+                grdBzaCh.ContextMenuStrip = ScanMenu1;
+                grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(BzaChRow, 1).ForeColor;
             }
             else
             {
                 grdBzaCh.ContextMenuStrip = null;
                 lblSelectReg.Text = "* Selected: None.";
             }
-
+            
             bInitBzaCh = false;
         }
 
@@ -1253,9 +1364,8 @@ namespace ZiveLab.ZM
 
             grdBZAs.Row = row;
             grdBZAs.Col = 1;
-            grdBZAs.ForeColorSel = grdBZAs.ForeColor;
-
-            if(sSelSerial2 == sSelSerial1)
+            grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(row, 1).ForeColor;
+            if (sSelSerial2 == sSelSerial1)
             {
                 SelSifCh = Convert.ToInt32(grdChs.get_TextMatrix(LnkRow, 2))-1;
             }
@@ -1286,11 +1396,33 @@ namespace ZiveLab.ZM
 
             strSerial = grdBzaCh.get_TextMatrix(row, 1);
             strCh = grdBzaCh.get_TextMatrix(row, 0);
+
             ch = Convert.ToInt32(strCh);
             strLink = grdBzaCh.get_TextMatrix(row, 6);
             strCheck = grdBzaCh.get_TextMatrix(row, 3);
             str = string.Format("* Selected: {0}-{1}, Linked:{2}, detected:{3}.", strSerial, strCh, strLink, strCheck);
             lblSelected.Text = str;
+
+
+            var pair = gBZA.SifLnkLst[sSelSerial2];
+            eDeviceType mtype = (eDeviceType)pair.mDevInf.mSysCfg.mSIFCfg.Type;
+
+            if(mtype == eDeviceType.MCBZA)
+            {
+                if(row > 1)
+                {
+                    grdBzaCh.Row = row;
+                    grdBzaCh.Col = 1;
+                    grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(row, 1).ForeColor;
+                    grdBzaCh.ContextMenuStrip = ScanMenu1;
+                    SelSifCh = Convert.ToInt32(strCh) - 1;
+
+                    BzaChRow = row;
+
+                    return;
+                }
+            }
+
             if (strLink == "None")
             {
                 CmdBZALink.Text = "&Registration";
@@ -1303,17 +1435,14 @@ namespace ZiveLab.ZM
                 CmdBZALink.ForeColor = Color.DarkRed;
                 CmdBZALink.ToolTipText = "Change or cancel a registered channel.";
             }
-            
-
 
             grdBzaCh.Row = row;
             grdBzaCh.Col = 1;
-            grdBzaCh.ForeColorSel = grdBzaCh.ForeColor;
-
+            grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(row, 1).ForeColor;
             grdBzaCh.ContextMenuStrip = ScanMenu;
-            SelSifCh = Convert.ToInt32(strCh)-1;
+            SelSifCh = Convert.ToInt32(strCh) - 1;
+
             BzaChRow = row;
-            
         }
 
         private void grdChs_SelRow(int row)
@@ -1332,7 +1461,7 @@ namespace ZiveLab.ZM
 
             grdChs.Row = LnkRow;
             grdChs.Col = 1;
-            grdChs.ForeColorSel = grdChs.ForeColor;
+            grdChs.ForeColorSel = grdChs.GetCellStyle(LnkRow, 1).ForeColor;
             grdChs.ContextMenuStrip = RegMenu;
 
 
@@ -1373,6 +1502,7 @@ namespace ZiveLab.ZM
                 HitTestInfo hti = grdBZAs.HitTest(e.X, e.Y);
                 if (hti.Row > 0)
                 {
+                    grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(hti.Row, 1).ForeColor;
                     grdBZAs.Select(hti.Row, 1);
                 }
             }
@@ -1457,13 +1587,13 @@ namespace ZiveLab.ZM
 
             if (BzaChRow <= 0)
             {
-                MessageBox.Show("The BZA channel is not selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The BZA board is not selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if(grdBzaCh.get_TextMatrix(BzaChRow, 3) == "No")
             {
-                if (MessageBox.Show("The channel is registered but not found.\r\n Do you want to continue?", gBZA.sMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (MessageBox.Show("The board is registered but not found.\r\n Do you want to continue?", gBZA.sMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     return;
                 }
@@ -1472,7 +1602,7 @@ namespace ZiveLab.ZM
             ItemList.Add("None");
             for (int i = 0; i < MBZA_Constant.MAX_APP_CHANNEL; i++)
             {
-                ItemList.Add(string.Format("Channel-{0}", i + 1));
+                ItemList.Add(string.Format("Board-{0}", i + 1));
             }
             sreg = grdBzaCh.get_TextMatrix(BzaChRow, 6);
 
@@ -1485,7 +1615,7 @@ namespace ZiveLab.ZM
                 ireg = Convert.ToInt32(sreg);
             }
 
-            ireg1 = dlg.ShowComboDialog("Please select the channel of the application you want to register.", ItemList.ToArray(), ireg, gBZA.sMsgTitle, 100, 500,5);
+            ireg1 = dlg.ShowComboDialog("Please select the board of the application you want to register.", ItemList.ToArray(), ireg, gBZA.sMsgTitle, 100, 500,5);
 
             if (ireg != ireg1)
             {
@@ -1683,13 +1813,16 @@ namespace ZiveLab.ZM
 
         private void UploadZim_Click(object sender, EventArgs e)
         {
+            bool bAux = false;
             if(SelSifCh < 0)
             {
-                MessageBox.Show("Not selected channel !", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not selected board !", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            frmBurnZIM frm = new frmBurnZIM(sSelSerial2, SelSifCh, gBZA.SifLnkLst[sSelSerial2].MBZAIF.bConnect);
+            var pair = gBZA.SifLnkLst[sSelSerial2];
+            eDeviceType mtype = (eDeviceType)pair.mDevInf.mSysCfg.mSIFCfg.Type;
+            if (mtype == eDeviceType.MCBZA && BzaChRow > 1) bAux = true;
+            frmBurnZIM frm = new frmBurnZIM(sSelSerial2, SelSifCh, gBZA.SifLnkLst[sSelSerial2].MBZAIF.bConnect, bAux);
             frm.ShowDialog();
 
             RefreshGrdScanBzaCh();
@@ -1764,7 +1897,7 @@ namespace ZiveLab.ZM
 
 
 
-            if (ScanChCount == gBZA.ScanChCount && ScanSifCount == gBZA.ScanSifCount && SearchedSif.Count == gBZA.pingHost.SearchedDevice.Count)
+            if (ScanChCount == gBZA.ScanBdCount && ScanSifCount == gBZA.ScanSifCount && SearchedSif.Count == gBZA.pingHost.SearchedDevice.Count)
             {
 
                 return;
@@ -1972,6 +2105,7 @@ namespace ZiveLab.ZM
             if (bInitBza == true) return;
             grdBZAs.GetSelection(out row1, out col1, out row2, out col2);
             if (row1 <= 0) return;
+            grdBZAs.ForeColorSel = grdBZAs.GetCellStyle(row1, 1).ForeColor;
             grdBZAs_SelRow(row1);
         }
 
@@ -2001,8 +2135,8 @@ namespace ZiveLab.ZM
             grdBzaCh.GetSelection(out row1, out col1, out row2, out col2);
 
             if (row1 <= 0) return;
-          
 
+            grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(row1, 1).ForeColor;
             grdBZAChs_SelRow(row1);
 
         }
@@ -2033,6 +2167,7 @@ namespace ZiveLab.ZM
                 HitTestInfo hti = grdBzaCh.HitTest(e.X, e.Y);
                 if (hti.Row > 0)
                 {
+                    grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(hti.Row, 1).ForeColor;
                     grdBzaCh.Select(hti.Row, 1);
                 }
             }

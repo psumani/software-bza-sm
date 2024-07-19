@@ -232,15 +232,32 @@ namespace ZiveLab.ZM
         void LoadFromXml(string sFilename, ref st_zim_rnginf rnginf)
         {
             stRangeFile inf = new stRangeFile();
+            stRangeFile_1 inf_1 = new stRangeFile_1();
             StreamReader file = new StreamReader(sFilename);
+            XmlSerializer Reader;
 
-            XmlSerializer Reader = new XmlSerializer(inf.GetType());
+            var file_inf = new FileInfo(sFilename);
 
             try
             {
-                inf = (stRangeFile)Reader.Deserialize(file);
+                if (file_inf.Length == MBZA_Constant.RANGE_XML_FILESIZE_1)
+                {
+                    Reader = new XmlSerializer(inf_1.GetType());
+                    inf_1 = (stRangeFile_1)Reader.Deserialize(file);
+                    rnginf = inf_1.ranges;
+                    for (int auxch = 0; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch++)
+                    {
+                        rnginf = inf_1.ranges;
+                    }
+                }
+                else
+                {
+                    Reader = new XmlSerializer(inf.GetType());
+                    inf = (stRangeFile)Reader.Deserialize(file);                    
+                    rnginf = inf.ranges[0];
+                }
 
-                rnginf = inf.ranges;
+                inf = (stRangeFile)Reader.Deserialize(file);
 
             }
             catch (Exception ex)
@@ -305,9 +322,9 @@ namespace ZiveLab.ZM
                         {
                             st_zim_rnginf rnginf = new st_zim_rnginf(mDevInf.mSysCfg.mZimCfg[i].info.GetZimType());
                             LoadFromXml(xmlfile, ref rnginf);
-                            if (mDevInf.mSysCfg.mZimCfg[i].ranges.CompareInfo(rnginf.ToByteArray()) == false)
+                            if (mDevInf.mSysCfg.mZimCfg[i].ranges[0].CompareInfo(rnginf.ToByteArray()) == false)
                             {
-                                mDevInf.mSysCfg.mZimCfg[i].ranges.ToWritePtr(rnginf.ToByteArray());
+                                mDevInf.mSysCfg.mZimCfg[i].ranges[0].ToWritePtr(rnginf.ToByteArray());
                                 bCheckInf = false;
                                 break;
                             }
@@ -395,9 +412,9 @@ namespace ZiveLab.ZM
                                 {
                                     st_zim_rnginf rnginf = new st_zim_rnginf(mDevInf.mSysCfg.mZimCfg[i].info.GetZimType());
                                     LoadFromXml(xmlfile, ref rnginf);
-                                    if (mDevInf.mSysCfg.mZimCfg[i].ranges.CompareInfo(rnginf.ToByteArray()) == false)
+                                    if (mDevInf.mSysCfg.mZimCfg[i].ranges[0].CompareInfo(rnginf.ToByteArray()) == false)
                                     {
-                                        mDevInf.mSysCfg.mZimCfg[i].ranges.ToWritePtr(rnginf.ToByteArray());
+                                        mDevInf.mSysCfg.mZimCfg[i].ranges[0].ToWritePtr(rnginf.ToByteArray());
                                         bCheckInf = false;
                                         break;
                                     }
@@ -844,7 +861,7 @@ namespace ZiveLab.ZM
             }
             else if (this.mMapMem.mHeader.mCommand.cmd == (short)enCmdZim.SaveRangeInfo)
             {
-                if (mCommZim.WriteData(this.mMapMem.mHeader.mCommand.ch, this.mDevInf.mSysCfg.mZimCfg[this.mMapMem.mHeader.mCommand.ch].ranges) == false)
+                if (mCommZim.WriteData(this.mMapMem.mHeader.mCommand.ch, this.mDevInf.mSysCfg.mZimCfg[this.mMapMem.mHeader.mCommand.ch].ranges[0]) == false)
                 {
                     res = (UInt16)enResult.FLAG_FAIL;
                 }
@@ -1044,10 +1061,10 @@ namespace ZiveLab.ZM
             TimeSpan ElapsedTime = TimeSpan.FromMilliseconds(mChStatInf[ch].RunTimeStamp);
             str = string.Format("{0:##00}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
             gBZA.WriteIniStrData("Status", "ElapsedTime", StatusFilename, str);
-            double crngval = mDevInf.mSysCfg.mZimCfg[ch].ranges.iac_rng[mChStatInf[ch].Iac_in_rngno].realmax;
+            double crngval = mDevInf.mSysCfg.mZimCfg[ch].ranges[0].iac_rng[mChStatInf[ch].Iac_in_rngno].realmax;
             if ((mChStatInf[ch].Iac_rngno % 2) > 0)
             {
-                crngval *= mDevInf.mSysCfg.mZimCfg[ch].ranges.iac_rng[mChStatInf[ch].Iac_in_rngno].controlgain;
+                crngval *= mDevInf.mSysCfg.mZimCfg[ch].ranges[0].iac_rng[mChStatInf[ch].Iac_in_rngno].controlgain;
             }
             gBZA.WriteIniDoubleData("Status", "IRange", StatusFilename, (int)crngval);
 
@@ -1448,7 +1465,8 @@ namespace ZiveLab.ZM
     public class stLinkSIF
     {
         public bool bLinked;
-        public int ChCnt;
+        public int BdCnt;
+        public int AuxBdCnt;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
         public int [] iLinkCh;
         public string sip;
@@ -1461,7 +1479,8 @@ namespace ZiveLab.ZM
             bLinked = false;
             iLinkCh = new int[MBZA_Constant.MAX_DEV_CHANNEL];
             mFindSifCfg = new stFindSIFCfg(0);
-            ChCnt = 0;
+            BdCnt = 0;
+            AuxBdCnt = 0;
             for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
             {
                 iLinkCh[i] = -1;

@@ -26,7 +26,7 @@ byte *m_PtrTemp;
 //..SMART System info .. block 16
 stSystemConfig* m_pSysConfig;
 stConnCfg*      m_pConnCfg;
-stDefTestData*  m_pTestData[MAX_DEV_CHANNEL];
+stDefTestData*  m_pTestData[MAX_DEV_BOARD];
 //..SMART HW info ..   block 17
 	
 //..SMART Device info ..block 18

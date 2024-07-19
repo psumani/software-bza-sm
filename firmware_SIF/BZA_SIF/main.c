@@ -2,9 +2,6 @@
 #include "BZA_SIF.h"
 
 
-
-
-
 int main()
 {
     bool bFlag = true;
@@ -12,7 +9,7 @@ int main()
 	Initialize();
 	
     m_pGlobalVar->m_msFind = 0;
-	m_pGlobalVar->m_FindCh = -1;
+	m_pGlobalVar->m_Findboard = -1;
 	
 	m_pGlobalVar->m_MsI2CdelayStamp = 0;
 	m_pGlobalVar->m_msRefreshDC = 0;
@@ -20,7 +17,7 @@ int main()
 	m_pGlobalVar->m_AuxCh = -1;
 	m_pGlobalVar->m_msADC = 0;
 	m_pGlobalVar->mStatusInf.mode = 1;
-	m_pGlobalVar->mStatusInf.LastCh = -1;
+	m_pGlobalVar->mStatusInf.Lastbd = -1;
 	m_pGlobalVar->LedFlowStat = 1;
 	
 	while(bFlag)
@@ -28,9 +25,9 @@ int main()
 		ICE_BzaCommStat(m_pGlobalVar->LedBusy);
 		ICE_BzaFlowStat(m_pGlobalVar->LedFlow);
 		
-		m_pGlobalVar->mStatusInf.MaxChannel = GetMaxChannel();
+		m_pGlobalVar->mStatusInf.MaxBoard = GetMaxBoard();
 		
-		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_SBZA || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MBZA)
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_SBZA || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MBZA || m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 		{
 			if(m_pGlobalVar->mStatusInf.mode == 2)
 			{
@@ -39,7 +36,14 @@ int main()
 	
 			if(m_pGlobalVar->mStatusInf.mode == 1)
 			{
-				DeviceMainProc();
+				if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA) 
+				{
+					DeviceAuxProc();
+				}
+				else 
+				{
+					DeviceMainProc();
+				}
 			}
 		}
 

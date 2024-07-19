@@ -1006,8 +1006,8 @@ namespace ZiveLab.ZM
                 int share = tResfile.tmphead.tech.irange / DeviceConstants.MAX_IAC_RNGCNT;
                 int remain = tResfile.tmphead.tech.irange % DeviceConstants.MAX_IAC_RNGCNT;
 
-                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges.iac_rng[share].realmax, "A");
-                else str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges.iac_rng[share].realmax * tResfile.tmphead.inf_sifch.ranges.iac_rng[share].controlgain, "A");
+                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges[0].iac_rng[share].realmax, "A");
+                else str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges[0].iac_rng[share].realmax * tResfile.tmphead.inf_sifch.ranges[0].iac_rng[share].controlgain, "A");
                 
 
                 if (dch.useir == 0) str = string.Format("* Test condition: Discharge current({0})", str1);

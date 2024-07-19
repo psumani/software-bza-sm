@@ -136,7 +136,8 @@ void Parsing(int s)
 {	
 	CmdHeader* pCmdHeader = (CmdHeader*)m_pRdDataBuf[s];
 	byte* pCmdData = (byte*)(pCmdHeader + 1);
-	ushort ch;
+	ushort bd;
+	ushort ch = 0;
    
     if(m_pGlobalVar->CommLed == true)
     {
@@ -250,10 +251,26 @@ void Parsing(int s)
 			
 		case DEF_CMD_GET_SYSTEM_INFO:	 
             {
-                m_PtrWrData[s] = (byte*)m_pSysConfig;
-                m_SendDataSize[s] = sizeof(stSystemConfig);
-                m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
-                m_SendFrameNo[s] = 0;
+				if(pCmdHeader->Slot == 1)
+				{
+					m_PtrWrData[s] = (byte*)m_pSysConfig;
+					m_SendDataSize[s] = sizeof(stSystemConfig);
+					m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
+				}
+				else
+				{
+					stSystemConfig_1 m_SysConfig_1;
+					
+					m_SysConfig_1.ID = m_pSysConfig->ID;
+					m_SysConfig_1.BaseTick = m_pSysConfig->BaseTick;
+					m_SysConfig_1.DaqTick = m_pSysConfig->DaqTick;
+					memcpy(&m_SysConfig_1.mSIFCfg,&m_pSysConfig->mSIFCfg,sizeof(stSIFCfg) + (3 * MAX_DEV_BOARD) + sizeof(stZimCfg_1));
+				
+					m_PtrWrData[s] = (byte*)&m_SysConfig_1;
+					m_SendDataSize[s] = sizeof(stSystemConfig_1);
+					m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
+				}
+				m_SendFrameNo[s] = 0;
                 break;
             }
 
@@ -330,57 +347,65 @@ void Parsing(int s)
 			
 		case DEF_LAN_CMD_START_DEVICE :
 			{
+				
 				if(pCmdHeader->Slot < 0)
 				{
-					for(ch = 0; ch < MAX_DEV_CHANNEL; ch++)
+					if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 					{
-						if(m_pSysConfig->ChkZIM[ch] == 1)
+						pCmdHeader->Slot = 0;
+					}
+				}
+				if(pCmdHeader->Slot < 0)
+				{
+					for(bd = 0; bd < MAX_DEV_BOARD; bd++)
+					{
+						if(m_pSysConfig->ChkZIM[bd] == 1)
 						{
 							if(pCmdHeader->Length >= sizeof(st_rtc))
 							{
-								memcpy((void*)&m_pGlobalVar->mChVar[ch].mChStatInf.rtc, pCmdData, sizeof(st_rtc));
+								memcpy((void*)&m_pGlobalVar->mChVar[bd].mChStatInf.rtc, pCmdData, sizeof(st_rtc));
 							}
 							else
 							{
-								m_pGlobalVar->mChVar[ch].mChStatInf.rtc.tick = 0;
+								m_pGlobalVar->mChVar[bd].mChStatInf.rtc.tick = 0;
 							}
 							
-							if(m_pGlobalVar->mChVar[ch].Start == 0  && m_pGlobalVar->mChVar[ch].CmdStart == 0 )
+							if(m_pGlobalVar->mChVar[bd].Start == 0  && m_pGlobalVar->mChVar[bd].CmdStart == 0 )
 							{
-								m_pGlobalVar->mChVar[ch].CmdStart = 1;
+								m_pGlobalVar->mChVar[bd].CmdStart = 1;
 							}
 						}
 					}
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
-					if(m_pSysConfig->ChkZIM[ch] == 0)
+					bd = pCmdHeader->Slot;
+					if(m_pSysConfig->ChkZIM[bd] == 0)
 					{
 						SendError(s,DEF_ERROR_NOZIM);
 						return;
 					}
 
 					
-					if(m_pGlobalVar->mChVar[ch].mChStatInf.ErrorStatus > DEF_LAST_ERROR_NONE)
+					if(m_pGlobalVar->mChVar[bd].mChStatInf.ErrorStatus > DEF_LAST_ERROR_NONE)
 					{
-						SendError(s,m_pGlobalVar->mChVar[ch].mChStatInf.ErrorStatus);
+						SendError(s,m_pGlobalVar->mChVar[bd].mChStatInf.ErrorStatus);
 						return;
 					}
 					
 					if(pCmdHeader->Length >= sizeof(st_rtc))
 					{
-						memcpy((void*)&m_pGlobalVar->mChVar[ch].mChStatInf.rtc, pCmdData, sizeof(st_rtc));
+						memcpy((void*)&m_pGlobalVar->mChVar[bd].mChStatInf.rtc, pCmdData, sizeof(st_rtc));
 					}
 					else
 					{
-						m_pGlobalVar->mChVar[ch].mChStatInf.rtc.tick = 0;
+						m_pGlobalVar->mChVar[bd].mChStatInf.rtc.tick = 0;
 					}
 					
-					if(m_pGlobalVar->mChVar[ch].Start == 0  && m_pGlobalVar->mChVar[ch].CmdStart == 0 )
+					if(m_pGlobalVar->mChVar[bd].Start == 0  && m_pGlobalVar->mChVar[bd].CmdStart == 0 )
 					{
-						m_pGlobalVar->mChVar[ch].bCalib = pCmdHeader->Address;
-						m_pGlobalVar->mChVar[ch].CmdStart = 1;
+						m_pGlobalVar->mChVar[bd].bCalib = pCmdHeader->Address;
+						m_pGlobalVar->mChVar[bd].CmdStart = 1;
 						
 					}
 					else
@@ -402,14 +427,22 @@ void Parsing(int s)
 			{
 				if(pCmdHeader->Slot < 0)
 				{
-					for(ch = 0; ch < MAX_DEV_CHANNEL; ch++)
+					if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 					{
-						if(m_pSysConfig->ChkZIM[ch] == 1)
+						pCmdHeader->Slot = 0;
+					}
+				}
+				
+				if(pCmdHeader->Slot < 0)
+				{
+					for(bd = 0; bd < MAX_DEV_BOARD; bd++)
+					{
+						if(m_pSysConfig->ChkZIM[bd] == 1)
 						{
-							m_pGlobalVar->mChVar[ch].CmdStop = 1;
+							m_pGlobalVar->mChVar[bd].CmdStop = 1;
 							if(pCmdHeader->Address > 0)
 							{
-								m_pGlobalVar->mChVar[ch].mChStatInf.LastError = pCmdHeader->Address;
+								m_pGlobalVar->mChVar[bd].mChStatInf.LastError = pCmdHeader->Address;
 								
 							}
 						}
@@ -417,21 +450,21 @@ void Parsing(int s)
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
+					bd = pCmdHeader->Slot;
 					
 					
-					if(m_pSysConfig->ChkZIM[ch] == 0)
+					if(m_pSysConfig->ChkZIM[bd] == 0)
 					{
 						SendError(s,DEF_ERROR_NOZIM);
 						return;
 					}
 					   
-					if(m_pGlobalVar->mChVar[ch].Start > 0)
+					if(m_pGlobalVar->mChVar[bd].Start > 0)
 					{
-						m_pGlobalVar->mChVar[ch].CmdStop = 1;
+						m_pGlobalVar->mChVar[bd].CmdStop = 1;
 						if(pCmdHeader->Address > 0)
 						{
-							m_pGlobalVar->mChVar[ch].mChStatInf.LastError = pCmdHeader->Address;
+							m_pGlobalVar->mChVar[bd].mChStatInf.LastError = pCmdHeader->Address;
 						}
 					}
 					else
@@ -485,9 +518,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
+				SetDeviceBoard(bd);
 				
-				SetDevChannel(ch);
 				break;
 			}
 		
@@ -498,9 +531,10 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+
+				bd = pCmdHeader->Slot;
 				
-				if(EepromCheckZim(ch,0,EEPROM_ADDR) == _ERROR)
+				if(EepromCheckZim(bd,0,EEPROM_ADDR) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
 					return;
@@ -508,7 +542,7 @@ void Parsing(int s)
 
 				if(pCmdHeader->Address == 1)
 				{
-					if(EepromApplyZim(ch,0,EEPROM_ADDR) == _ERROR)
+					if(EepromApplyZim(bd,0,EEPROM_ADDR) == _ERROR)
 					{
 						SendError(s,DEF_ERROR_NOZIM);
 						return;
@@ -525,11 +559,11 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				InitZimConfig(ch);
+				InitZimConfig(bd);
 					
-				if(EepromWriteZimCfg(ch,0,EEPROM_ADDR) == _ERROR)
+				if(EepromWriteZimCfg(bd,0,EEPROM_ADDR) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NORESP);
 					return;
@@ -543,9 +577,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				if(proc_read_version(ch) == _ERROR) 
+				if(proc_read_version(bd) == _ERROR) 
 				{
 					SendError(s,DEF_ERROR_NORESP);
 					return;
@@ -560,8 +594,8 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
-                m_PtrWrData[s] = (byte*)&m_pSysConfig->mZimCfg[ch];
+				bd = pCmdHeader->Slot;
+                m_PtrWrData[s] = (byte*)&m_pSysConfig->mZimCfg[bd];
                 m_SendDataSize[s] = DEF_SIZE_ZIMCFG;
                 m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
                 m_SendFrameNo[s] = 0;
@@ -578,7 +612,7 @@ void Parsing(int s)
 					}
 					else
 					{
-						SetDevChannel(pCmdHeader->Slot);
+						SetDeviceBoard(pCmdHeader->Slot);
 						delay(100);
 						Set_IceResetB(true);
 					}
@@ -596,7 +630,7 @@ void Parsing(int s)
 					}
 					else
 					{
-						SetDevChannel(pCmdHeader->Slot);
+						SetDeviceBoard(pCmdHeader->Slot);
 						delay(100);
 						Set_IceResetB(false);
 					}
@@ -631,9 +665,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				SetDevChannel(ch);
+				SetDeviceBoard(bd);
 				
 				if(MX25V_erase_chip() != _NO_ERROR)
 				{
@@ -650,9 +684,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				SetDevChannel(ch);
+				SetDeviceBoard(bd);
 				
 				if(MX25V_write_buffer(pCmdHeader->Address,pCmdData,pCmdHeader->Length) != _NO_ERROR)
 				{
@@ -669,9 +703,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				SetDevChannel(ch);
+				SetDeviceBoard(bd);
 				
 				if(MX25V_read_buffer(pCmdHeader->Address,_pNandBuffer,256) == _ERROR)
 				{
@@ -692,19 +726,19 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				SetDevChannel(ch);
+				SetDeviceBoard(bd);
 				
-				st_zim_rnginf   	tRanges;
+				st_zim_rnginf   	tranges[4];
 				
-				if(ReadRangeInfo(ch, 0,EEPROM_ADDR, (void*)&tRanges) == _ERROR)
+				if(ReadRangeInfo(bd, 0,EEPROM_ADDR, (void*)&tranges[0]) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
 					return;
 				}
-				m_PtrWrData[s] = (byte*)&tRanges;
-				m_SendDataSize[s] = sizeof(st_zim_rnginf);
+				m_PtrWrData[s] = (byte*)&tranges[0];
+				m_SendDataSize[s] = sizeof(st_zim_rnginf)*4;
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
 				 break;
@@ -724,26 +758,27 @@ void Parsing(int s)
 					return;
 				}
 
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pSysConfig->mZimCfg[ch],pCmdData,sizeof(stZimCfg));
+				memcpy(&m_pSysConfig->mZimCfg[bd],pCmdData,sizeof(stZimCfg));
+				
 				if(SaveSysCfgInfo() == false)
 				{
 				  	SendError(s,DEF_ERROR_STORESYSINF);
 					return;
 				}
 				
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				SetDevChannel(ch);
+				SetDeviceBoard(bd);
 				
-				if(WriteZimCfgInfo(ch, 0,EEPROM_ADDR) == _ERROR)
+				if(WriteZimCfgInfo(bd, 0,EEPROM_ADDR) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
 					return;
 				}
 				
-				if(WriteRangeInfo(ch, 0,EEPROM_ADDR) == _ERROR)
+				if(EepromWriteZimCfg(bd, 0,EEPROM_ADDR) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
 					return;
@@ -758,18 +793,16 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
+				SetDeviceBoard(bd);
 				
-				SetDevChannel(ch);
-				
-				
-				if(ReadZimCfgInfo(ch, 0,EEPROM_ADDR,&m_pSysConfig->mZimCfg[ch].info) == _ERROR)
+				if(ReadZimCfgInfo(bd, 0,EEPROM_ADDR,&m_pSysConfig->mZimCfg[bd].info) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
 					return;
 				}
 				
-				if(ReadRangeInfo(ch, 0,EEPROM_ADDR,&m_pSysConfig->mZimCfg[ch].ranges) == _ERROR)
+				if(ReadRangeInfo(bd, 0,EEPROM_ADDR,&m_pSysConfig->mZimCfg[bd].ranges[0]) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_NOZIM);
 					return;
@@ -807,30 +840,30 @@ void Parsing(int s)
 			{
 				if(pCmdHeader->Slot < 0)
 				{
-					for(ch=0; ch < MAX_DEV_CHANNEL; ch++)
+					for(bd=0; bd < MAX_DEV_BOARD; bd++)
 					{
-						m_pGlobalVar->mChVar[ch].bCalib = (pCmdHeader->Address == 0)?0:1;
-						if(m_pGlobalVar->mChVar[ch].bCalib == 1)
+						m_pGlobalVar->mChVar[bd].bCalib = (pCmdHeader->Address == 0)?0:1;
+						if(m_pGlobalVar->mChVar[bd].bCalib == 1)
 						{
-							m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_CALIBRATION;
+							m_pGlobalVar->mChVar[bd].mChStatInf.TestStatus = DEF_TESTSTATUS_CALIBRATION;
 						}
 						else
 						{
-							m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
+							m_pGlobalVar->mChVar[bd].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
 						}
 					}
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
-					m_pGlobalVar->mChVar[ch].bCalib = (pCmdHeader->Address == 0)?0:1;
-					if(m_pGlobalVar->mChVar[ch].bCalib == 1)
+					bd = pCmdHeader->Slot;
+					m_pGlobalVar->mChVar[bd].bCalib = (pCmdHeader->Address == 0)?0:1;
+					if(m_pGlobalVar->mChVar[bd].bCalib == 1)
 					{
-						m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_CALIBRATION;
+						m_pGlobalVar->mChVar[bd].mChStatInf.TestStatus = DEF_TESTSTATUS_CALIBRATION;
 					}
 					else
 					{
-						m_pGlobalVar->mChVar[ch].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
+						m_pGlobalVar->mChVar[bd].mChStatInf.TestStatus = DEF_TESTSTATUS_READY;
 					}
 				}
 				
@@ -844,10 +877,10 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				m_PtrWrData[s] = (byte*)&m_pSysConfig->mZimCfg[ch].ranges;
-				m_SendDataSize[s] = sizeof(st_zim_rnginf);
+				m_PtrWrData[s] = (byte*)&m_pSysConfig->mZimCfg[bd].ranges[0];
+				m_SendDataSize[s] = sizeof(st_zim_rnginf) * 4;
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
                 break;
@@ -860,7 +893,7 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
 				if(pCmdData[0] != ID_RANGEINFO)
 				{
@@ -868,7 +901,7 @@ void Parsing(int s)
 					return;
 				}
 
-				memcpy(&m_pSysConfig->mZimCfg[ch].ranges, pCmdData, sizeof(st_zim_rnginf));
+				memcpy(&m_pSysConfig->mZimCfg[bd].ranges[0], pCmdData, sizeof(st_zim_rnginf)*4);
                 break;
             }	
 			
@@ -889,7 +922,7 @@ void Parsing(int s)
 				
 				if(pCmdHeader->Slot >= 0 && pCmdHeader->Slot < 4)
 				{
-					ch = pCmdHeader->Slot;
+					bd = pCmdHeader->Slot;
 
 					if(SaveConnCfgInfo() == false)
 					{
@@ -903,11 +936,11 @@ void Parsing(int s)
 						return;
 					}
 					
-					if(m_pSysConfig->EnaROM[ch] == 1)
+					if(m_pSysConfig->EnaROM[bd] == 1)
 					{
-						SetDevChannel(ch);
+						SetDeviceBoard(bd);
 						
-						if(WriteRangeInfo(ch, 0,EEPROM_ADDR) == _ERROR)
+						if(WriteRangeInfo(bd, 0,EEPROM_ADDR) == _ERROR)
 						{
 							SendError(s,DEF_ERROR_STOREZIMINF);
 							return;
@@ -924,10 +957,10 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				InitRangeInf(ch);
-				if(WriteRangeInfo(ch, 0,EEPROM_ADDR) == _ERROR)
+				InitRangeInf(bd,-1);
+				if(WriteRangeInfo(bd, 0,EEPROM_ADDR) == _ERROR)
 				{
 					SendError(s,DEF_ERROR_STOREZIMINF);
 					return;
@@ -942,9 +975,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.dds_clk;
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk;
 				m_SendDataSize[s] = sizeof(st_zim_dds);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -957,17 +990,17 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				if(m_pGlobalVar->mChVar[ch].Start > 0)
+				if(m_pGlobalVar->mChVar[bd].Start > 0)
 				{
 					SendError(s,DEF_ERROR_STARTED);
 					return;
 				}
 				else
 				{
-					memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.dds_clk, pCmdData, sizeof(st_zim_dds));
-					apply_req_dds_clock(ch);
+					memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.dds_clk, pCmdData, sizeof(st_zim_dds));
+					apply_req_dds_clock(bd);
 				}
                 break;
             }
@@ -978,9 +1011,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig;
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.dds_sig;
 				m_SendDataSize[s] = sizeof(st_zim_dds);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -993,23 +1026,23 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				if(m_pGlobalVar->mChVar[ch].Start > 0)
+				if(m_pGlobalVar->mChVar[bd].Start > 0)
 				{
 					SendError(s,DEF_ERROR_STARTED);
 					return;
 				}
 				else
 				{
-					memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.dds_sig, pCmdData, sizeof(st_zim_dds));
-					if(m_pGlobalVar->mChVar[ch].bTestMode < 2)
+					memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.dds_sig, pCmdData, sizeof(st_zim_dds));
+					if(m_pGlobalVar->mChVar[bd].bTestMode < 2)
 					{
-						apply_req_dds_signal(ch);
+						apply_req_dds_signal(bd);
 					}
 					else
 					{
-						apply_req_dds_dcsignal(ch);
+						apply_req_dds_dcsignal(bd);
 					}
 				}
                 break;
@@ -1022,10 +1055,10 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.config, &m_pGlobalVar->mChVar[ch].mdevice.adc_rtd.config, sizeof(st_zim_rtd_cfg));
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.config;
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.config, &m_pGlobalVar->mChVar[bd].mdevice.adc_rtd.config, sizeof(st_zim_rtd_cfg));
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.config;
 				m_SendDataSize[s] = sizeof(st_zim_rtd_cfg);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1039,9 +1072,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.config, pCmdData, sizeof(st_zim_rtd_cfg));
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.config, pCmdData, sizeof(st_zim_rtd_cfg));
                 break;
             }
 		
@@ -1052,10 +1085,10 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.data, &m_pGlobalVar->mChVar[ch].mdevice.adc_rtd.data, sizeof(st_zim_rtd_data));
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.adc_rtd.data;
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.data, &m_pGlobalVar->mChVar[bd].mdevice.adc_rtd.data, sizeof(st_zim_rtd_data));
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.adc_rtd.data;
 				m_SendDataSize[s] = sizeof(st_zim_rtd_data);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1069,10 +1102,10 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do, &m_pGlobalVar->mChVar[ch].mdevice.ctrl_do, sizeof(st_zim_do));
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do;
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.ctrl_do, &m_pGlobalVar->mChVar[bd].mdevice.ctrl_do, sizeof(st_zim_do));
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.ctrl_do;
 				m_SendDataSize[s] = sizeof(st_zim_do);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1086,17 +1119,17 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				if(m_pGlobalVar->mChVar[ch].Start > 0)
+				if(m_pGlobalVar->mChVar[bd].Start > 0)
 				{
 					SendError(s,DEF_ERROR_STARTED);
 					return;
 				}
 				else
 				{
-					m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data &= ~0x1F;
-					m_pGlobalVar->mChVar[ch].mreqdevice.ctrl_do.data |= (*pCmdData & 0x1F);
+					m_pGlobalVar->mChVar[bd].mreqdevice.ctrl_do.data &= ~0x1F;
+					m_pGlobalVar->mChVar[bd].mreqdevice.ctrl_do.data |= (*pCmdData & 0x1F);
 				}
 				break;
             }
@@ -1108,10 +1141,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
-				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg, &m_pGlobalVar->mChVar[ch].mdevice.adc_ac.cfg, sizeof(st_zim_adc_ac_cfg));
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg;
+				bd = pCmdHeader->Slot;
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg, &m_pGlobalVar->mChVar[bd].mdevice.adc_ac.cfg, sizeof(st_zim_adc_ac_cfg));
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg;
 				m_SendDataSize[s] = sizeof(st_zim_adc_ac_cfg);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1125,17 +1157,17 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				if(m_pGlobalVar->mChVar[ch].Start > 0)
+				if(m_pGlobalVar->mChVar[bd].Start > 0)
 				{
 					SendError(s,DEF_ERROR_STARTED);
 					return;
 				}
 				else
 				{
-					memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.cfg, pCmdData, sizeof(st_zim_adc_ac_cfg));
-					apply_adc_ac_cfg(ch);
+					memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg, pCmdData, sizeof(st_zim_adc_ac_cfg));
+					apply_adc_ac_cfg(bd);
 				}
 				break;
             }
@@ -1147,9 +1179,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data, &m_pGlobalVar->mChVar[ch].mdevice.adc_ac.data, sizeof(st_zim_adc_ac_data));
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.data, &m_pGlobalVar->mChVar[bd].mdevice.adc_ac.data, sizeof(st_zim_adc_ac_data));
 				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.adc_ac.data;
 				m_SendDataSize[s] = sizeof(st_zim_adc_ac_data);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
@@ -1164,11 +1196,11 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				memcpy(&m_pGlobalVar->mChVar[ch].mreqdevice.adc_vdc, &m_pGlobalVar->mChVar[ch].mdevice.adc_vdc, sizeof(st_zim_adc_vdc));
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mreqdevice.adc_vdc;
-				m_SendDataSize[s] = sizeof(st_zim_adc_vdc);
+				memcpy(&m_pGlobalVar->mChVar[bd].mreqdevice.adc_vdc[0], &m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[0], sizeof(st_zim_adc_vdc) * 4);
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mreqdevice.adc_vdc;
+				m_SendDataSize[s] = sizeof(st_zim_adc_vdc) * 4;
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
                 break;
@@ -1180,35 +1212,35 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				m_pGlobalVar->mChVar[ch].AutoVdcRange = pCmdHeader->Address;
+				m_pGlobalVar->mChVar[bd].AutoVdcRange = pCmdHeader->Address;
 				break;
 			}
 		case CMD_SET_COND_EIS :
 			{
 				if(pCmdHeader->Slot < 0)
 				{
-					for(ch = 0; ch < MAX_DEV_CHANNEL; ch++)
+					for(bd = 0; bd < MAX_DEV_BOARD; bd++)
 					{
-						if(m_pSysConfig->ChkZIM[ch] == 1)
+						if(m_pSysConfig->ChkZIM[bd] == 1)
 						{
-							memcpy(&m_pGlobalVar->mChVar[ch].tech_cond, pCmdData, sizeof(st_zim_eis_cond));
+							memcpy(&m_pGlobalVar->mChVar[bd].tech_cond, pCmdData, sizeof(st_zim_eis_cond));
 						}
 					}
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
+					bd = pCmdHeader->Slot;
 					
-					if(m_pGlobalVar->mChVar[ch].Start > 0)
+					if(m_pGlobalVar->mChVar[bd].Start > 0)
 					{
 						SendError(s,DEF_ERROR_STARTED);
 						return;
 					}
 					else
 					{
-						memcpy(&m_pGlobalVar->mChVar[ch].tech_cond, pCmdData, sizeof(st_zim_eis_cond));
+						memcpy(&m_pGlobalVar->mChVar[bd].tech_cond, pCmdData, sizeof(st_zim_eis_cond));
 					}
 				}
 				break;
@@ -1218,7 +1250,7 @@ void Parsing(int s)
 			{
 				if(pCmdHeader->Slot < 0)
 				{
-					for(ch = 0; ch < MAX_DEV_CHANNEL; ch++)
+					for(bd = 0; bd < MAX_DEV_BOARD; bd++)
 					{
 						if(m_pSysConfig->ChkZIM[ch] == 1)
 						{
@@ -1228,16 +1260,16 @@ void Parsing(int s)
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
+					bd = pCmdHeader->Slot;
 					
-					if(m_pGlobalVar->mChVar[ch].Start > 0)
+					if(m_pGlobalVar->mChVar[bd].Start > 0)
 					{
 						SendError(s,DEF_ERROR_STARTED);
 						return;
 					}
 					else
 					{
-						memcpy(&m_pGlobalVar->mChVar[ch].mTech, pCmdData, sizeof(st_Tech));
+						memcpy(&m_pGlobalVar->mChVar[bd].mTech, pCmdData, sizeof(st_Tech));
 					}
 				}
 				break;
@@ -1250,8 +1282,8 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mHeadInf;
+				bd = pCmdHeader->Slot;
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mHeadInf;
 				m_SendDataSize[s] = sizeof(stResHeaderInfo);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1266,8 +1298,8 @@ void Parsing(int s)
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
-					memcpy(&m_pGlobalVar->mChVar[ch].mHeadInf, pCmdData, sizeof(stResHeaderInfo));
+					bd = pCmdHeader->Slot;
+					memcpy(&m_pGlobalVar->mChVar[bd].mHeadInf, pCmdData, sizeof(stResHeaderInfo));
 				}
 				break;
 			}
@@ -1275,26 +1307,26 @@ void Parsing(int s)
 			{
 				if(pCmdHeader->Slot < 0)
 				{
-					for(ch = 0; ch < MAX_DEV_CHANNEL; ch++)
+					for(bd = 0; bd < MAX_DEV_BOARD; bd++)
 					{
-						if(m_pSysConfig->ChkZIM[ch] == 1)
+						if(m_pSysConfig->ChkZIM[bd] == 1)
 						{
-							memcpy(&m_pGlobalVar->mChVar[ch].tech_calib, pCmdData, sizeof(st_Tech));
+							memcpy(&m_pGlobalVar->mChVar[bd].tech_calib, pCmdData, sizeof(st_Tech));
 						}
 					}
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
+					bd = pCmdHeader->Slot;
 					
-					if(m_pGlobalVar->mChVar[ch].Start > 0)
+					if(m_pGlobalVar->mChVar[bd].Start > 0)
 					{
 						SendError(s,DEF_ERROR_STARTED);
 						return;
 					}
 					else
 					{
-						memcpy(&m_pGlobalVar->mChVar[ch].tech_calib, pCmdData, sizeof(st_Tech));
+						memcpy(&m_pGlobalVar->mChVar[bd].tech_calib, pCmdData, sizeof(st_Tech));
 					}
 				}
 				break;
@@ -1304,18 +1336,18 @@ void Parsing(int s)
 			{
 				if(pCmdHeader->Slot < 0)
 				{
-					stChStatusInf		mChStatInf[MAX_DEV_CHANNEL];
-					memcpy(&mChStatInf[0],&m_pGlobalVar->mChVar[0].mChStatInf,sizeof(stChStatusInf));
-					memcpy(&mChStatInf[1],&m_pGlobalVar->mChVar[1].mChStatInf,sizeof(stChStatusInf));
-					memcpy(&mChStatInf[2],&m_pGlobalVar->mChVar[2].mChStatInf,sizeof(stChStatusInf));
-					memcpy(&mChStatInf[3],&m_pGlobalVar->mChVar[3].mChStatInf,sizeof(stChStatusInf));
+					stChStatusInf		mChStatInf[MAX_DEV_BOARD];
+					for(bd = 0; bd < MAX_DEV_BOARD; bd++)
+					{
+						memcpy(&mChStatInf[0],&m_pGlobalVar->mChVar[bd].mChStatInf,sizeof(stChStatusInf));
+					}
 					m_PtrWrData[s] = (byte*)&mChStatInf[0];
-					m_SendDataSize[s] = sizeof(stChStatusInf) * MAX_DEV_CHANNEL;
+					m_SendDataSize[s] = sizeof(stChStatusInf) * MAX_DEV_BOARD;
 				}
 				else
 				{
-					ch = pCmdHeader->Slot;
-					m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mChStatInf;
+					bd = pCmdHeader->Slot;
+					m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mChStatInf;
 					m_SendDataSize[s] = sizeof(stChStatusInf);
 				}
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
@@ -1325,15 +1357,15 @@ void Parsing(int s)
 		
 		case CMD_GET_RAWVAL_EIS :
 			{
-				if(pCmdHeader->Slot < 0)
+				if(pCmdHeader->Slot < 0 || pCmdHeader->Address < 0)
 				{
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
+				ch = pCmdHeader->Address;
 				
-				
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].meis.eis_raw.raw_val[0];
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].meis[ch].eis_raw.raw_val[0];
 				m_SendDataSize[s] = sizeof(st_zim_eis_raw_val) * MAX_EIS_RAW_POINT;
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1347,16 +1379,16 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				if((pCmdHeader->Address + pCmdHeader->Length) > m_pGlobalVar->mChVar[ch].mChStatInf.eis_status.rescount)
+				if((pCmdHeader->Address + pCmdHeader->Length) > m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.rescount)
 				{
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
 				else
 				{
-					m_PtrWrData[s] = (byte*)(m_pTestData[ch] + pCmdHeader->Address);
+					m_PtrWrData[s] = (byte*)(m_pTestData[bd] + pCmdHeader->Address);
 					m_SendDataSize[s] = pCmdHeader->Length * sizeof(stDefTestData); 
 					m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 					m_SendFrameNo[s] = 0;
@@ -1371,9 +1403,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].tech_cond;
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].tech_cond;
 				m_SendDataSize[s] = sizeof(st_zim_eis_cond);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1387,9 +1419,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].mTech;
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].mTech;
 				m_SendDataSize[s] = sizeof(st_Tech);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;
@@ -1403,9 +1435,9 @@ void Parsing(int s)
 					SendError(s,DEF_ERROR_CMDFAIL);
 					return;
 				}
-				ch = pCmdHeader->Slot;
+				bd = pCmdHeader->Slot;
 				
-				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[ch].tech_calib;
+				m_PtrWrData[s] = (byte*)&m_pGlobalVar->mChVar[bd].tech_calib;
 				m_SendDataSize[s] = sizeof(st_Tech);
 				m_SendFrameCount[s] = (m_SendDataSize[s] / PACKET_DATA_SIZE) + 1;
 				m_SendFrameNo[s] = 0;

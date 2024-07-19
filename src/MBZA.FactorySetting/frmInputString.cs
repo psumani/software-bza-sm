@@ -54,7 +54,7 @@ namespace ZiveLab.ZM.FactorySetting
             {
                 if (mCommZim.CmdStoreConnCfgInfo(ref mUserConnCfg) == false)
                 {
-                    MessageBox.Show("Save failed.");
+                    MessageBox.Show("Save failed.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 RefreshHostname();
@@ -62,7 +62,9 @@ namespace ZiveLab.ZM.FactorySetting
             }
             else
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
             }
         }
 

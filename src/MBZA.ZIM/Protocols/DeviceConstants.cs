@@ -10,6 +10,8 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_DUMMY = 8;
         public const int MAX_IRANGE = 8;
         public const int MAX_DEV_CHANNEL = 4;
+        public const int MAX_AUX_CHANNEL = 4;
+        public const int MAX_AUX_BOARD = 3;
         public const int MAX_APP_CHANNEL = 32;
         public const int MAX_APP_DEVICE = 8;
         public const int ChannelMapSize = 512;
@@ -33,10 +35,16 @@ namespace ZiveLab.ZM.ZIM
         public const double DEFAULT_BZA1000_POWER = 60.0;
 
         public const ushort TECHFILESIZE = 222;
+        public const int    RANGE_XML_FILESIZE_1 = 12947;
+
+        
     }
     
     public static class DeviceConstants
     {
+        public const int ID_ZIMCONFIG_1 = 0xD2;
+        public const int ID_ZIMCONFIG = 0xD3;
+
         public const float Linewidth = 1.0f;
         public const int Pointwidth = 6;
         public const int Pointheight = 6;
@@ -142,11 +150,15 @@ namespace ZiveLab.ZM.ZIM
         public const double ADC_VDC_RNG1_MIN1 = -10.24;
         public const double ADC_VDC_RNG1_FACTOR1 = ((ADC_VDC_RNG1_MAX1 - ADC_VDC_RNG1_MIN1) / 16777216.0);//24bit
 
-
         public const double ADC_RTD_CONST_MAX = 850.0;
         public const double ADC_RTD_CONST_MIN = -200.0;
         public const double ADC_RTD_CONST_PT1000 = (4000.0 / 32786.0); // 4000 - RREF
         public const double ADC_RTD_CONST_PT100 = (400.0 / 32786.0); // 400 - RREF
+
+        public const double ADC_AUX_VDC_RMAX1 = 500.0;
+        public const double ADC_AUX_VDC_MAX1 = 2048.0;
+        public const double ADC_AUX_VDC_MIN1 = -2048.0;
+        public const double ADC_AUX_VDC_FACTOR1 = ((ADC_AUX_VDC_MAX1 - ADC_AUX_VDC_MIN1) / 16777216.0);
 
         public const int DEVDO_CONT_SD = 0x1;
         public const int DEVDO_DDS_RNG0 = 0x2;

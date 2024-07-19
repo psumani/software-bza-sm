@@ -564,15 +564,15 @@ namespace ZiveLab.ZM
                         else
                         {
                             stChStatusInf chstat = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh];
-                            var mrng = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[Value.SifCh].ranges;
-                            double crngval = mrng.iac_rng[chstat.Iac_in_rngno].realmax;
+                            var p = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[Value.SifCh];
+                            double crngval = p.ranges[0].iac_rng[chstat.Iac_in_rngno].realmax;
 
                             if ((chstat.Iac_rngno % 2) > 0)
                             {
-                                crngval *= mrng.iac_rng[chstat.Iac_in_rngno].controlgain;
+                                crngval *= p.ranges[0].iac_rng[chstat.Iac_in_rngno].controlgain;
                             }
 
-                            str = string.Format("{0}/ {1}", SM_Number.ToRangeString(crngval, "A"), SM_Number.ToRangeString(mrng.vdc_rng[chstat.Vdc_rngno].realmax, "V"));
+                            str = string.Format("{0}/ {1}", SM_Number.ToRangeString(crngval, "A"), SM_Number.ToRangeString(p.ranges[0].vdc_rng[chstat.Vdc_rngno].realmax, "V"));
                         }
                         hgrid.SetData(row, i, str);
                     }
@@ -867,18 +867,18 @@ namespace ZiveLab.ZM
                         else if (Value.bChkCh == false) str = "Unknown";
                         else
                         {
-                            var mrng = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[Value.SifCh].ranges;
+                            var p = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[Value.SifCh];
                             var chstat = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh];
 
-                            tdbl = mrng.iac_rng[chstat.Iac_in_rngno].realmax;
+                            tdbl = p.ranges[0].iac_rng[chstat.Iac_in_rngno].realmax;
 
                             if ((chstat.Iac_rngno % 2) > 0)
                             {
-                                tdbl *= mrng.iac_rng[chstat.Iac_in_rngno].controlgain;
+                                tdbl *= p.ranges[0].iac_rng[chstat.Iac_in_rngno].controlgain;
                             }
 
 
-                            str = string.Format("{0}/ {1}", SM_Number.ToRangeString(tdbl, "A"), SM_Number.ToRangeString(mrng.vdc_rng[chstat.Vdc_rngno].realmax, "V"));
+                            str = string.Format("{0}/ {1}", SM_Number.ToRangeString(tdbl, "A"), SM_Number.ToRangeString(p.ranges[0].vdc_rng[chstat.Vdc_rngno].realmax, "V"));
                         }
                         hgrid.SetData(row, i, str);
                     }

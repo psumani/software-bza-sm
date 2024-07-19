@@ -1,7 +1,9 @@
 #ifndef INIT_H_
 #define INIT_H_
 
-void InitDevice(int ch);
+void InitDevice(int bd);
+void InitAuxDevice(int bd);
+
 void InitEthernet(void);
 void InitGlobalVar(void);
 void InitProc(void);
@@ -16,5 +18,5 @@ unsigned char LoadSysCfgInfo(void);
 unsigned char LoadSystemInformation(void);
 unsigned char LoadFATHeader();
 void Initialize(void);
-void InitZimConfig(int ch);
+void InitZimConfig(int bd);
 #endif

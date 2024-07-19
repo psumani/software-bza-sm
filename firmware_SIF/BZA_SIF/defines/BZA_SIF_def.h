@@ -6,17 +6,18 @@
 
 
 #define ID_CONNCONFIG		0xB6  //0xB0 - DHCP ID
-#define ID_ZIMCONFIG		0xD2
+#define ID_ZIMCONFIG_1		0xD2
+#define ID_ZIMCONFIG		0xD3
 #define ID_LENGTH 			12
 #define ID_RANGEINFO 		0x3
 
 
-#define MAX_DEV_CHANNEL  	4
+#define MAX_DEV_BOARD  		4
 
 #define FIRMWARE_VER_MAJOR	6  
-#define FIRMWARE_VER_MINOR	0
-#define FIRMWARE_VER_REV	8
-#define FIRMWARE_VER_BUILD	8
+#define FIRMWARE_VER_MINOR	2
+#define FIRMWARE_VER_REV	0
+#define FIRMWARE_VER_BUILD	0
 
 
 #define HW_ENABLE			0x1	
@@ -76,7 +77,13 @@
 #define DEF_DEVDO_CLRIRNG		0xFFF1
 #define DEF_DEVDO_MASK			0xFF37
 
-#define MAX_EIS_POINT			1024
+#define DEF_DEVAUXDO_MODE_DC	0x2
+#define DEF_DEVAUXDO_MODE_AC	0xFFFC
+#define DEF_DEVAUXDO_VAC_PWROFF	0x4
+#define DEF_DEVAUXDO_VAC_PWRON	0xFFFB
+
+#define MAX_EIS_AUX_RAW_POINT	512
+#define MAX_EIS_POINT			512  //1024
 #define MAX_EIS_RAW_POINT		MAX_EIS_POINT
 #define MAX_EIS_FFT_POINT		(MAX_EIS_POINT * 2)
 
@@ -200,12 +207,17 @@ typedef struct
 	uint            nSerial;
 } stZimInfo;
 
+typedef struct
+{
+	stZimInfo		info;
+	st_zim_rnginf   ranges[4];
+} stZimCfg;
 
 typedef struct
 {
 	stZimInfo		info;
 	st_zim_rnginf   ranges;
-} stZimCfg;
+} stZimCfg_1;
 
 typedef struct
 {
@@ -213,8 +225,6 @@ typedef struct
     byte            Serial[ID_LENGTH];
     stEthernetCfg   mEthernetCfg;	
 } stConnCfg;
-
-
 
 typedef struct
 {
@@ -225,15 +235,26 @@ typedef struct
 	byte SockStat;	
 } stFindSIFCfg;	
 
+typedef struct
+{
+    byte            ID;
+	stSIFCfg        mSIFCfg;
+	byte            EnaZIM[MAX_DEV_BOARD];
+	byte            EnaROM[MAX_DEV_BOARD];
+	byte            ChkZIM[MAX_DEV_BOARD];
+	stZimCfg_1      mZimCfg[MAX_DEV_BOARD];
+    uint            BaseTick;
+    uint            DaqTick;
+} stSystemConfig_1;
 
 typedef struct
 {
     byte            ID;
 	stSIFCfg        mSIFCfg;
-	byte            EnaZIM[MAX_DEV_CHANNEL];
-	byte            EnaROM[MAX_DEV_CHANNEL];
-	byte            ChkZIM[MAX_DEV_CHANNEL];
-	stZimCfg        mZimCfg[MAX_DEV_CHANNEL];
+	byte            EnaZIM[MAX_DEV_BOARD];
+	byte            EnaROM[MAX_DEV_BOARD];
+	byte            ChkZIM[MAX_DEV_BOARD];
+	stZimCfg        mZimCfg[MAX_DEV_BOARD];
     uint            BaseTick;
     uint            DaqTick;
 } stSystemConfig;
@@ -470,6 +491,16 @@ typedef struct
 
 typedef struct
 {	
+	st_zim_eis_raw_val 			raw_val[MAX_EIS_RAW_POINT];
+} st_zim_eis_rawvalue; 
+
+typedef struct
+{	
+	long long 			tick;
+} st_rtc;
+	
+typedef struct
+{	
 	ushort						Ns;
 	double						freq;
 	st_zim_eis_zdata			zdata_iac;
@@ -479,16 +510,6 @@ typedef struct
 	st_zim_eis_raw_val 			raw_val[MAX_EIS_RAW_POINT];
 } st_zim_eis_raw;   
 
-typedef struct
-{	
-	st_zim_eis_raw_val 			raw_val[MAX_EIS_RAW_POINT];
-} st_zim_eis_rawvalue; 
-
-typedef struct
-{	
-	long long 			tick;
-} st_rtc;
-	
 typedef struct
 {	
 	ushort          	status;
@@ -502,8 +523,8 @@ typedef struct
 	ushort          	totaldatacnt;
 	ushort          	WorkDatacnt;
 	ushort          	LoadDatacnt;
-	st_zim_eis_zdata	zdata;
-	st_zim_eis_raw_val 	Real_val[MAX_EIS_RT_RAW_POINT];
+	st_zim_eis_zdata	zdata[DEF_MAX_AUX_CHCNT];
+	st_zim_eis_raw_val 	Real_val[DEF_MAX_AUX_CHCNT][MAX_EIS_RT_RAW_POINT];
 } st_zim_eis_status;
 
 #define DEF_CFG_EIS_RESET 			0x4
@@ -527,7 +548,7 @@ typedef struct
 	st_zim_dds			dds_sig;
 	st_zim_dds			dds_clk;
 	st_zim_adc_ac  		adc_ac;
-	st_zim_adc_vdc		adc_vdc;
+	st_zim_adc_vdc		adc_vdc[DEF_MAX_AUX_CHCNT];
 	st_zim_rtd			adc_rtd;
 	st_zim_do			ctrl_do;
 	st_zim_eisdev		eis;
@@ -560,8 +581,8 @@ typedef struct
 	
 	st_rtc       		rtc;
 	
-	double 				Veoc;
-	double 				Vdc;
+	double 				Veoc[4];
+	double 				Vdc[4];
 	double 				Idc;
 	double 				Temperature;
 	
@@ -572,8 +593,8 @@ typedef struct
 	st_zim_eis_status 	eis_status;
 
 	double 				DispFreq;
-	double 				DispMag;
-	double 				DispPhase;
+	double 				DispMag[4];
+	double 				DispPhase[4];
 	
     double 				nouse2;
 } stChStatusInf;
@@ -582,9 +603,9 @@ typedef struct
 {
     bool 				ChkInitProc; 
 	ushort 				mode;
-	ushort              LastCh;
+	ushort              Lastbd;
 	int					EnaChkTimeOut;
-	ushort              MaxChannel;
+	ushort              MaxBoard;
 } stStatusInf;
 
 typedef struct 
@@ -738,8 +759,9 @@ typedef struct
 {
 	stResHeaderInfo 	mInfo;
 	stSIFCfg 			inf_sif;
-	stZimCfg 			inf_sifch;
+	stZimCfg 			inf_sifch[4];
 	st_Tech 			tech;
+	byte 				NotUsed[100];
 } stResHeader;
 
 typedef struct
@@ -778,7 +800,7 @@ typedef struct
 	double				MaxFrequency;
 	
 	stChStatusInf		mChStatInf;
-	st_zim_eis			meis;
+	st_zim_eis			meis[DEF_MAX_AUX_CHCNT];
 	st_zim_dds_flow  	flow_dds_clk;
 	st_zim_dds_flow  	flow_dds_sig;
 	st_zim_adc_flow		flow_adc_ac;
@@ -812,10 +834,12 @@ typedef struct
 	uint 				m_msAux;
 	uint 				m_msRefreshDC;
 	uint 				m_msFind;
-	short 				m_FindCh;
+
+	short 				m_Findboard;
 	int 				CommTimeOut;
 	int 				CommTimeResp;
 	ushort 				CommLed;
+	bool				bAuxChProc;
 	short 				m_AuxCh;
 
     int                 nTimeTick;      
@@ -826,7 +850,7 @@ typedef struct
 	ushort 				prevrecvsize;
 	ushort 				prevrecvsize1;
 	stStatusInf			mStatusInf;
-	stGlobalChVar       mChVar[MAX_DEV_CHANNEL];
+	stGlobalChVar       mChVar[MAX_DEV_BOARD];
 } stGlobalVar;
 
 typedef struct

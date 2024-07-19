@@ -35,18 +35,18 @@ namespace ZiveLab.ZM.FactorySetting
 
             if (mCommZim.CmdEnableCommTimeOut(0) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.ENABLE_COMM_TIMEOUT].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (mCommZim.CmdSetCmdMode(0) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_MODE].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_MODE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (mCommZim.CmdSetChannel(ich) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].");
+                MessageBox.Show("The command failed[DEFINE_COMMAND.CMD_SET_CHANNEL].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
@@ -75,14 +75,14 @@ namespace ZiveLab.ZM.FactorySetting
         {
             if (mCommZim.mComm.UploadFirmware(sfilesif) == false)
             {
-                MessageBox.Show("Firmware change failed.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Firmware change failed.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 ZM.FactorySetting.Properties.Settings.Default.FilePathSIF = sfilesif;
                 ZM.FactorySetting.Properties.Settings.Default.Save();
 
-                MessageBox.Show("The firmware change has been successful. Please restart the device.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The firmware change has been successful. Please restart the device.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -107,7 +107,7 @@ namespace ZiveLab.ZM.FactorySetting
         {
             if (mCommZim.CmdResetFPGA(ich, breset) == false)
             {
-                MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_FPGA_ICE].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             blastreset = breset;
@@ -136,7 +136,7 @@ namespace ZiveLab.ZM.FactorySetting
         {
             if (mCommZim.CmdConnectPromOfZIM(ich,0) == false)
             {
-                MessageBox.Show("Failed to connect to ROM.");
+                MessageBox.Show("Failed to connect to ROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -151,23 +151,23 @@ namespace ZiveLab.ZM.FactorySetting
                     }
                     else
                     {
-                        MessageBox.Show("Failed to verify of ROM.");
+                        MessageBox.Show("Failed to verify of ROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Failed to write to ROM.");
+                    MessageBox.Show("Failed to write to ROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Failed to erase ROM.");
+                MessageBox.Show("Failed to erase ROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
 
             if (mCommZim.CmdDisconnectPromOfZIM(ich) == false)
             {
-                MessageBox.Show("Failed to disconnect to ROM.");
+                MessageBox.Show("Failed to disconnect to ROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             
@@ -204,13 +204,13 @@ namespace ZiveLab.ZM.FactorySetting
 
                 if (len != nLen)
                 {
-                    MessageBox.Show("There was a problem reading the file.");
+                    MessageBox.Show("There was a problem reading the file.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
                 if (mCommZim.CmdProgramPromOfZIM(ich, address, buff) == false)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.PROG_FPGA_PROM].");
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.PROG_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
@@ -268,7 +268,7 @@ namespace ZiveLab.ZM.FactorySetting
                 len = fs.Read(buff, 0, nLen);
                 if (len != nLen)
                 {
-                    MessageBox.Show("There was a problem reading the file.");
+                    MessageBox.Show("There was a problem reading the file.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
@@ -276,7 +276,7 @@ namespace ZiveLab.ZM.FactorySetting
                 rbuff = mCommZim.CmdReadPromOfZIM(ich, address);
                 if (rbuff == null)
                 {
-                    MessageBox.Show("The command failed[DEFINE_COMMAND.READ_FPGA_PROM].");
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.READ_FPGA_PROM].", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bRet = false;
                     break;
                 }
@@ -285,7 +285,7 @@ namespace ZiveLab.ZM.FactorySetting
                 {
                     if (buff[i] != rbuff[i])
                     {
-                        MessageBox.Show("The contents do not match.");
+                        MessageBox.Show("The contents do not match.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         bRet = false;
                         break;
                     }

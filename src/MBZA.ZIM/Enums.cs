@@ -74,6 +74,8 @@ namespace ZiveLab.ZM.ZIM
         ZBCS,
 	    [Description("CXM")]
         CXM,
+        [Description("MCBZA")]
+        MCBZA,
     }
 
     public enum eProductType
@@ -104,6 +106,8 @@ namespace ZiveLab.ZM.ZIM
         BZA100,
         [Description("BZA60")]
         BZA60,
+        [Description("BZAAUX1")]
+        BZAAUX1,
     }
 
     public enum eZimBoardType
@@ -120,6 +124,8 @@ namespace ZiveLab.ZM.ZIM
         BZA100,
         [Description("ZIM-MB-D")]
         BZA60,
+        [Description("ZIM-AUX-A")]
+        BZAAUX,
     }
 
     public enum eZimSnID
@@ -136,6 +142,8 @@ namespace ZiveLab.ZM.ZIM
         BZA100,
         [Description("IM6")]
         BZA60,
+        [Description("IM7")]
+        BZAAUX,
     }
 
     public enum enTestState

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BtInitZIM = new System.Windows.Forms.Button();
             this.lnkinitsifcfg = new System.Windows.Forms.LinkLabel();
             this.ChkEnaChROM = new System.Windows.Forms.CheckBox();
             this.BtRefreshZIM = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@
             this.lblZimBdVer = new System.Windows.Forms.Label();
             this.LnklblSetZIMCfgToLan = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.cboChannel = new System.Windows.Forms.ComboBox();
+            this.cboBoard = new System.Windows.Forms.ComboBox();
             this.lblSifBdType = new System.Windows.Forms.Label();
             this.lnklblchghostname = new System.Windows.Forms.LinkLabel();
             this.LnklblRefSifWebInf = new System.Windows.Forms.LinkLabel();
@@ -63,7 +64,6 @@
             this.lblSifBdVer = new System.Windows.Forms.Label();
             this.LnklblBurnSifToUsb = new System.Windows.Forms.LinkLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.BtInitZIM = new System.Windows.Forms.Button();
             this.tabPage1.SuspendLayout();
             this.GrpCh.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -71,13 +71,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.BtInitZIM);
             this.tabPage1.Controls.Add(this.lnkinitsifcfg);
-            this.tabPage1.Controls.Add(this.ChkEnaChROM);
-            this.tabPage1.Controls.Add(this.BtRefreshZIM);
-            this.tabPage1.Controls.Add(this.ChkEnaCh);
             this.tabPage1.Controls.Add(this.GrpCh);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.cboChannel);
+            this.tabPage1.Controls.Add(this.cboBoard);
             this.tabPage1.Controls.Add(this.lblSifBdType);
             this.tabPage1.Controls.Add(this.lnklblchghostname);
             this.tabPage1.Controls.Add(this.LnklblRefSifWebInf);
@@ -95,10 +93,21 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(468, 567);
+            this.tabPage1.Size = new System.Drawing.Size(515, 610);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ZIM-SIF";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // BtInitZIM
+            // 
+            this.BtInitZIM.ForeColor = System.Drawing.Color.Red;
+            this.BtInitZIM.Location = new System.Drawing.Point(315, 303);
+            this.BtInitZIM.Name = "BtInitZIM";
+            this.BtInitZIM.Size = new System.Drawing.Size(160, 25);
+            this.BtInitZIM.TabIndex = 30;
+            this.BtInitZIM.Text = "Initialize information.";
+            this.BtInitZIM.UseVisualStyleBackColor = true;
+            this.BtInitZIM.Click += new System.EventHandler(this.BtInitZIM_Click);
             // 
             // lnkinitsifcfg
             // 
@@ -115,27 +124,30 @@
             // ChkEnaChROM
             // 
             this.ChkEnaChROM.AutoSize = true;
-            this.ChkEnaChROM.Location = new System.Drawing.Point(256, 309);
+            this.ChkEnaChROM.ForeColor = System.Drawing.Color.Blue;
+            this.ChkEnaChROM.Location = new System.Drawing.Point(114, 20);
             this.ChkEnaChROM.Name = "ChkEnaChROM";
-            this.ChkEnaChROM.Size = new System.Drawing.Size(76, 16);
+            this.ChkEnaChROM.Size = new System.Drawing.Size(130, 16);
             this.ChkEnaChROM.TabIndex = 30;
-            this.ChkEnaChROM.Text = "EEPROM";
+            this.ChkEnaChROM.Text = "Installing EEPROM";
             this.ChkEnaChROM.UseVisualStyleBackColor = true;
             // 
             // BtRefreshZIM
             // 
-            this.BtRefreshZIM.Location = new System.Drawing.Point(339, 303);
+            this.BtRefreshZIM.ForeColor = System.Drawing.Color.Blue;
+            this.BtRefreshZIM.Location = new System.Drawing.Point(297, 13);
             this.BtRefreshZIM.Name = "BtRefreshZIM";
-            this.BtRefreshZIM.Size = new System.Drawing.Size(45, 25);
+            this.BtRefreshZIM.Size = new System.Drawing.Size(140, 25);
             this.BtRefreshZIM.TabIndex = 29;
-            this.BtRefreshZIM.Text = "Apply";
+            this.BtRefreshZIM.Text = "Apply setting.";
             this.BtRefreshZIM.UseVisualStyleBackColor = true;
             this.BtRefreshZIM.Click += new System.EventHandler(this.BtRefreshZIM_Click);
             // 
             // ChkEnaCh
             // 
             this.ChkEnaCh.AutoSize = true;
-            this.ChkEnaCh.Location = new System.Drawing.Point(191, 309);
+            this.ChkEnaCh.ForeColor = System.Drawing.Color.Blue;
+            this.ChkEnaCh.Location = new System.Drawing.Point(21, 20);
             this.ChkEnaCh.Name = "ChkEnaCh";
             this.ChkEnaCh.Size = new System.Drawing.Size(63, 16);
             this.ChkEnaCh.TabIndex = 28;
@@ -146,8 +158,11 @@
             // 
             this.GrpCh.Controls.Add(this.lnkSaveROM);
             this.GrpCh.Controls.Add(this.lnkLoadROM);
+            this.GrpCh.Controls.Add(this.BtRefreshZIM);
+            this.GrpCh.Controls.Add(this.ChkEnaChROM);
             this.GrpCh.Controls.Add(this.lblscanrom);
             this.GrpCh.Controls.Add(this.lnllblscanrom);
+            this.GrpCh.Controls.Add(this.ChkEnaCh);
             this.GrpCh.Controls.Add(this.lnklblinitrom);
             this.GrpCh.Controls.Add(this.LblZimBdType);
             this.GrpCh.Controls.Add(this.LnklblInitialize);
@@ -156,16 +171,16 @@
             this.GrpCh.Controls.Add(this.lblZimFwVer);
             this.GrpCh.Controls.Add(this.lblZimBdVer);
             this.GrpCh.Controls.Add(this.LnklblSetZIMCfgToLan);
-            this.GrpCh.Location = new System.Drawing.Point(20, 328);
+            this.GrpCh.Location = new System.Drawing.Point(20, 334);
             this.GrpCh.Name = "GrpCh";
-            this.GrpCh.Size = new System.Drawing.Size(423, 231);
+            this.GrpCh.Size = new System.Drawing.Size(455, 263);
             this.GrpCh.TabIndex = 27;
             this.GrpCh.TabStop = false;
             // 
             // lnkSaveROM
             // 
             this.lnkSaveROM.AutoSize = true;
-            this.lnkSaveROM.Location = new System.Drawing.Point(39, 94);
+            this.lnkSaveROM.Location = new System.Drawing.Point(39, 125);
             this.lnkSaveROM.Name = "lnkSaveROM";
             this.lnkSaveROM.Size = new System.Drawing.Size(104, 12);
             this.lnkSaveROM.TabIndex = 29;
@@ -176,7 +191,7 @@
             // lnkLoadROM
             // 
             this.lnkLoadROM.AutoSize = true;
-            this.lnkLoadROM.Location = new System.Drawing.Point(39, 77);
+            this.lnkLoadROM.Location = new System.Drawing.Point(39, 108);
             this.lnkLoadROM.Name = "lnkLoadROM";
             this.lnkLoadROM.Size = new System.Drawing.Size(233, 12);
             this.lnkLoadROM.TabIndex = 28;
@@ -188,7 +203,7 @@
             // 
             this.lblscanrom.AutoSize = true;
             this.lblscanrom.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblscanrom.Location = new System.Drawing.Point(119, 41);
+            this.lblscanrom.Location = new System.Drawing.Point(119, 72);
             this.lblscanrom.Name = "lblscanrom";
             this.lblscanrom.Size = new System.Drawing.Size(86, 12);
             this.lblscanrom.TabIndex = 27;
@@ -197,7 +212,7 @@
             // lnllblscanrom
             // 
             this.lnllblscanrom.AutoSize = true;
-            this.lnllblscanrom.Location = new System.Drawing.Point(19, 41);
+            this.lnllblscanrom.Location = new System.Drawing.Point(19, 72);
             this.lnllblscanrom.Name = "lnllblscanrom";
             this.lnllblscanrom.Size = new System.Drawing.Size(99, 12);
             this.lnllblscanrom.TabIndex = 26;
@@ -209,7 +224,7 @@
             // 
             this.lnklblinitrom.AutoSize = true;
             this.lnklblinitrom.LinkColor = System.Drawing.Color.Red;
-            this.lnklblinitrom.Location = new System.Drawing.Point(39, 60);
+            this.lnklblinitrom.Location = new System.Drawing.Point(39, 91);
             this.lnklblinitrom.Name = "lnklblinitrom";
             this.lnklblinitrom.Size = new System.Drawing.Size(123, 12);
             this.lnklblinitrom.TabIndex = 25;
@@ -220,7 +235,7 @@
             // LblZimBdType
             // 
             this.LblZimBdType.AutoSize = true;
-            this.LblZimBdType.Location = new System.Drawing.Point(37, 153);
+            this.LblZimBdType.Location = new System.Drawing.Point(37, 184);
             this.LblZimBdType.Name = "LblZimBdType";
             this.LblZimBdType.Size = new System.Drawing.Size(115, 12);
             this.LblZimBdType.TabIndex = 23;
@@ -230,18 +245,18 @@
             // 
             this.LnklblInitialize.AutoSize = true;
             this.LnklblInitialize.LinkColor = System.Drawing.Color.Red;
-            this.LnklblInitialize.Location = new System.Drawing.Point(39, 133);
+            this.LnklblInitialize.Location = new System.Drawing.Point(39, 164);
             this.LnklblInitialize.Name = "LnklblInitialize";
-            this.LnklblInitialize.Size = new System.Drawing.Size(169, 12);
+            this.LnklblInitialize.Size = new System.Drawing.Size(226, 12);
             this.LnklblInitialize.TabIndex = 21;
             this.LnklblInitialize.TabStop = true;
-            this.LnklblInitialize.Text = "> Initialize range information.";
+            this.LnklblInitialize.Text = "> Initialize and store range information.";
             this.LnklblInitialize.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnklblInitialize_LinkClicked);
             // 
             // LnklblBurnZIMToLan
             // 
             this.LnklblBurnZIMToLan.AutoSize = true;
-            this.LnklblBurnZIMToLan.Location = new System.Drawing.Point(19, 19);
+            this.LnklblBurnZIMToLan.Location = new System.Drawing.Point(19, 50);
             this.LnklblBurnZIMToLan.Name = "LnklblBurnZIMToLan";
             this.LnklblBurnZIMToLan.Size = new System.Drawing.Size(276, 12);
             this.LnklblBurnZIMToLan.TabIndex = 14;
@@ -252,7 +267,7 @@
             // lblZimSerial
             // 
             this.lblZimSerial.AutoSize = true;
-            this.lblZimSerial.Location = new System.Drawing.Point(37, 208);
+            this.lblZimSerial.Location = new System.Drawing.Point(37, 239);
             this.lblZimSerial.Name = "lblZimSerial";
             this.lblZimSerial.Size = new System.Drawing.Size(195, 12);
             this.lblZimSerial.TabIndex = 13;
@@ -261,7 +276,7 @@
             // lblZimFwVer
             // 
             this.lblZimFwVer.AutoSize = true;
-            this.lblZimFwVer.Location = new System.Drawing.Point(37, 190);
+            this.lblZimFwVer.Location = new System.Drawing.Point(37, 221);
             this.lblZimFwVer.Name = "lblZimFwVer";
             this.lblZimFwVer.Size = new System.Drawing.Size(190, 12);
             this.lblZimFwVer.TabIndex = 12;
@@ -270,7 +285,7 @@
             // lblZimBdVer
             // 
             this.lblZimBdVer.AutoSize = true;
-            this.lblZimBdVer.Location = new System.Drawing.Point(37, 171);
+            this.lblZimBdVer.Location = new System.Drawing.Point(37, 202);
             this.lblZimBdVer.Name = "lblZimBdVer";
             this.lblZimBdVer.Size = new System.Drawing.Size(174, 12);
             this.lblZimBdVer.TabIndex = 11;
@@ -279,7 +294,7 @@
             // LnklblSetZIMCfgToLan
             // 
             this.LnklblSetZIMCfgToLan.AutoSize = true;
-            this.LnklblSetZIMCfgToLan.Location = new System.Drawing.Point(19, 113);
+            this.LnklblSetZIMCfgToLan.Location = new System.Drawing.Point(19, 144);
             this.LnklblSetZIMCfgToLan.Name = "LnklblSetZIMCfgToLan";
             this.LnklblSetZIMCfgToLan.Size = new System.Drawing.Size(380, 12);
             this.LnklblSetZIMCfgToLan.TabIndex = 9;
@@ -296,14 +311,14 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "3. Select channel :";
             // 
-            // cboChannel
+            // cboBoard
             // 
-            this.cboChannel.FormattingEnabled = true;
-            this.cboChannel.Location = new System.Drawing.Point(134, 305);
-            this.cboChannel.Name = "cboChannel";
-            this.cboChannel.Size = new System.Drawing.Size(47, 20);
-            this.cboChannel.TabIndex = 25;
-            this.cboChannel.SelectedIndexChanged += new System.EventHandler(this.cboChannel_SelectedIndexChanged);
+            this.cboBoard.FormattingEnabled = true;
+            this.cboBoard.Location = new System.Drawing.Point(134, 305);
+            this.cboBoard.Name = "cboBoard";
+            this.cboBoard.Size = new System.Drawing.Size(132, 20);
+            this.cboBoard.TabIndex = 25;
+            this.cboBoard.SelectedIndexChanged += new System.EventHandler(this.cboChannel_SelectedIndexChanged);
             // 
             // lblSifBdType
             // 
@@ -455,26 +470,14 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 9);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(476, 593);
+            this.tabControl1.Size = new System.Drawing.Size(523, 636);
             this.tabControl1.TabIndex = 0;
-            // 
-            // BtInitZIM
-            // 
-            this.BtInitZIM.ForeColor = System.Drawing.Color.Red;
-            this.BtInitZIM.Location = new System.Drawing.Point(415, 334);
-            this.BtInitZIM.Name = "BtInitZIM";
-            this.BtInitZIM.Size = new System.Drawing.Size(45, 25);
-            this.BtInitZIM.TabIndex = 30;
-            this.BtInitZIM.Text = "Reset";
-            this.BtInitZIM.UseVisualStyleBackColor = true;
-            this.BtInitZIM.Click += new System.EventHandler(this.BtInitZIM_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 607);
-            this.Controls.Add(this.BtInitZIM);
+            this.ClientSize = new System.Drawing.Size(548, 657);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.Name = "Main";
@@ -517,7 +520,7 @@
         private System.Windows.Forms.Label LblZimBdType;
         private System.Windows.Forms.GroupBox GrpCh;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cboChannel;
+        private System.Windows.Forms.ComboBox cboBoard;
         private System.Windows.Forms.Button BtRefreshZIM;
         private System.Windows.Forms.CheckBox ChkEnaCh;
         private System.Windows.Forms.LinkLabel lnllblscanrom;

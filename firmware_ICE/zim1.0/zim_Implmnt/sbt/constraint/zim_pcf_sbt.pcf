@@ -4,7 +4,7 @@
 
 # Version:            2020.12.27943
 
-# File Generated:     Jun 29 2021 09:44:37
+# File Generated:     Jun 28 2024 16:57:29
 
 # Family & Device:    iCE40HX4K
 
@@ -12,7 +12,7 @@
 
 # ##############################################################################
 
-###IOSet List 103
+###IOSet List 102
 set_io DDS_SCK1 42
 set_io IAC_FLT0 130
 set_io ICE_IOR_120 84 -pullup yes
@@ -70,7 +70,6 @@ set_io IAC_MISO 139
 set_io ICE_GPMI_0 81
 set_io ICE_GPMO_2 80 -pullup yes
 set_io ICE_IOB_102 62 -pullup yes
-set_io ICE_IOB_80 48 -pullup yes
 set_io ICE_IOR_141 94 -pullup yes
 set_io ICE_IOT_177 118 -pullup yes
 set_io ICE_SPI_MISO 75
@@ -101,6 +100,7 @@ set_io ICE_IOL_4B 8 -pullup yes
 set_io DDS_CS1 41
 set_io IAC_MOSI 138
 set_io VAC_OSR1 2
+set_io OUT_SYNCCLK 48
 set_io ICE_IOB_81 49
 set_io ICE_IOL_13A 19 -pullup yes
 set_io ICE_IOL_18B 26 -pullup yes

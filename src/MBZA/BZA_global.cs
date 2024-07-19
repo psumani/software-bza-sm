@@ -91,7 +91,7 @@ namespace ZiveLab.ZM
         public static string sMsgTitle;
 
         public static int LinkSifErr = 0;
-        public static int ScanChCount = 0;
+        public static int ScanBdCount = 0;
         public static int ScanSifCount = 0;
         public static int RegChCount = 0;
         public static int RegOkChCount = 0;

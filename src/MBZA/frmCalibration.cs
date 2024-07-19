@@ -1546,7 +1546,7 @@ namespace ZiveLab.ZM
             int iacrng = (int)Math.Floor((double)(rng / 2));
 
 
-            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(ranges.ToByteArray());
+            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(ranges.ToByteArray());
 
             bool res = MBZA_MapUtil.Save_Range_info(Serial, sifch);
 
@@ -1578,7 +1578,7 @@ namespace ZiveLab.ZM
             }
 
             gBZA.WriteIniDoubleData(sTitle, "Range", sFilename, crngval);
-            gBZA.WriteIniDoubleData(sTitle, "DummyR", sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.mDummy[rng].R);
+            gBZA.WriteIniDoubleData(sTitle, "DummyR", sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mDummy[rng].R);
             gBZA.WriteIniDoubleData(sTitle, "Frequency", sFilename, drepfeq);
             gBZA.WriteIniDoubleData(sTitle, "Zmag", sFilename, drepmag);
             gBZA.WriteIniDoubleData(sTitle, "Zphase", sFilename, drepphase);

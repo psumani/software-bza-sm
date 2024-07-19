@@ -6,14 +6,14 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-typedef enum { DEV_UNKNOWN, DEV_BZA1000A, DEV_BZA1000, DEV_BZA500, DEV_BZA100,DEV_BZA60} eDeviceType;
-typedef enum { SIF_WBCS, SIF_SMART, SIF_ZIM, SIF_SBZA, SIF_MBZA ,SIF_ZBCS,SIF_CXM } eSifType;
+typedef enum { DEV_UNKNOWN, DEV_BZA1000A, DEV_BZA1000, DEV_BZA500, DEV_BZA100,DEV_BZA60,BZAAUX} eDeviceType;
+typedef enum { SIF_WBCS, SIF_SMART, SIF_ZIM, SIF_SBZA, SIF_MBZA ,SIF_ZBCS,SIF_CXM,SIF_MCBZA} eSifType;
 typedef enum { TECH_EIS, TECH_HFR, TECH_PRR, TECH_MON, TECH_QIS,TECH_DCH,} eTechType;
 
 #pragma pack(1)
 #define DEF_I2C_TIMEOUT                       				1000
 #define DEF_ZIM_HEADER_VER									1
-
+#define MAX_DEV_AUXBOARD 									3
 typedef struct
 {	
   	unsigned int 				iID[4];			//127bit , hard corded unique id.
@@ -44,6 +44,9 @@ typedef struct
 #define     DEF_MAX_IAC_RNGCNT			4
 #define     MAX_IAC_CTRL_RNGCNT			8
 #define     DEF_MAX_VDC_RNGCNT			2
+
+#define     DEF_MAX_AUX_CHCNT          4
+#define     DEF_MAX_AUX_BDCNT          3
 
 #define 	DEF_ADC_IAC_RESOLUTION      16777216.0
 #define 	DEF_ADC_VAC_RESOLUTION      16777216.0 //8388608.0 //16777216.0
@@ -121,6 +124,11 @@ typedef struct
 #define 	DEF_ADC_VDC_RNG1_FACTOR1   ((DEF_ADC_VDC_RNG1_MAX1 - DEF_ADC_VDC_RNG1_MIN1) / 16777216.0) //24bit
 
 
+#define     DEF_AUXADC_VDC_RNG_MAX		2048.0
+#define     DEF_AUXADC_VDC_RNG_MIN		-2048.0
+#define 	DEF_AUXADC_VDC_RNG_FACTOR    ((DEF_AUXADC_VDC_RNG_MAX - DEF_AUXADC_VDC_RNG_MIN) / 16777216.0) //24bit
+#define     DEF_AUXADC_VDC_RNG_RMAX		500.0
+
 #define     DEF_HLIMIT_STABLE_RATE		0.88
 #define     DEF_LLIMIT_STABLE_RATE		0.78
 #define     DEF_HLIMIT_STABLE_RATEL		(1.0-DEF_HLIMIT_STABLE_RATE)
@@ -148,7 +156,6 @@ typedef struct
 	double          d2;
 	double          d3;
 } st_zim_Eis_Cal_info;
-
 
 typedef struct
 {	
@@ -229,19 +236,20 @@ typedef struct
 	double			NoUse2;
 } st_zim_dummy;
 
-typedef struct
+typedef struct   // 
 {
 	byte          			ID;
-	st_zim_Safety_inf		mSafety;
-	st_zim_adci_rnginf		iac_rng[DEF_MAX_IAC_RNGCNT];
-	st_zim_adcv_rnginf		vac_rng;
-	st_zim_vdc_rnginf		vdc_rng[DEF_MAX_VDC_RNGCNT];
-	st_zim_adc_rnginf 		rtd_rng;
-	st_zim_Eis_Cal_info		mEisIRngCalInfo[MAX_IAC_CTRL_RNGCNT];	
-	st_zim_dummy      		mDummy[MAX_IAC_CTRL_RNGCNT];
-	st_zim_Idc_rnginf		idc_rng;
+	st_zim_Safety_inf		mSafety; // 5
+	st_zim_adci_rnginf		iac_rng[DEF_MAX_IAC_RNGCNT]; //7x4 = 28
+	st_zim_adcv_rnginf		vac_rng;                     // 6
+	st_zim_vdc_rnginf		vdc_rng[DEF_MAX_VDC_RNGCNT]; // 6x2 = 12
+	st_zim_adc_rnginf 		rtd_rng;                     //5
+	st_zim_Eis_Cal_info		mEisIRngCalInfo[MAX_IAC_CTRL_RNGCNT];	//6x8 = 48 // double
+	st_zim_dummy      		mDummy[MAX_IAC_CTRL_RNGCNT]; //4x8 = 32
+	st_zim_Idc_rnginf		idc_rng;                     //1x8 = 8
 	double					NoUse[20];
-} st_zim_rnginf;
+} st_zim_rnginf; //
+
 
 #define DEF_RTD_COEF_LEN	6
 #define DEF_RTD_STANDARDTYPE_ITS90	0
@@ -279,8 +287,20 @@ typedef struct
 	double						nouse2;
 } st_zim_eis_cond;
 
+typedef struct 
+{
+	double 							Vdc;
+	double 							Veoc;
+	double 							Zre;
+	double 							Zim;
+	
+} stDefTestDataItem;
 
-		
+typedef struct 
+{
+	stDefTestDataItem 				mData[DEF_MAX_AUX_CHCNT];
+} stDefTestDataItems;
+
 typedef struct 
 {
 	ushort							mType;
@@ -298,6 +318,9 @@ typedef struct
 	double							Temperature;
 	double							RangeA;
 	double							RangeV;
+	
+	stDefTestDataItems				mData[DEF_MAX_AUX_BDCNT];
+
 } stDefTestData;
 
 #pragma pack()

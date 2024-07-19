@@ -40,7 +40,6 @@ namespace ZiveLab.ZM.FactorySetting
             cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.BZA500));
             cboProductType.Items.Add(Extensions.GetEnumDescription(eProductType.BZA1000));
 
-
             if (Type == 0)
             {
                 sCode = "R07---------";
@@ -60,6 +59,9 @@ namespace ZiveLab.ZM.FactorySetting
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.ZIM));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.SBZA));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.MBZA));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.ZBCS));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.CXM));
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eDeviceType.MCBZA));
                 CboBdType.SelectedIndex = (int)mSysCfg.mSIFCfg.Type;
 
                 ViewSifInformation();
@@ -79,7 +81,7 @@ namespace ZiveLab.ZM.FactorySetting
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA500));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA100));
                 CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZA60));
-
+                CboBdType.Items.Add(Extensions.GetEnumDescription(eZimType.BZAAUX1));
                 int zimtype = mSysCfg.mZimCfg[ich].info.cModel[0] - 0x30;
                 if (zimtype >= CboBdType.Items.Count || zimtype <= 0) CboBdType.SelectedIndex = 0;
                 else CboBdType.SelectedIndex = (int)zimtype;
@@ -102,6 +104,7 @@ namespace ZiveLab.ZM.FactorySetting
             int iret = 0;
             if (str == "M") iret = 4;
             else if (str == "S") iret = 3;
+            else if (str == "A") iret = 5;
             return iret;
         }
 
@@ -155,6 +158,7 @@ namespace ZiveLab.ZM.FactorySetting
 
             if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.SBZA) sCode += "S";
             else if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.MBZA) sCode += "M";
+            else if ((eDeviceType)mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA) sCode += "A";
             else sCode += "-";
 
             LblProductName.Text = sCode;
@@ -238,7 +242,7 @@ namespace ZiveLab.ZM.FactorySetting
             
             if (mCommZim.ProgConfigOfZim(ich, ref mSysCfg.mZimCfg[ich]) == false)
             {
-                MessageBox.Show("Failed Write EEPROM.");
+                MessageBox.Show("Failed Write EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             
@@ -251,12 +255,10 @@ namespace ZiveLab.ZM.FactorySetting
    
             if(mCommZim.isConnected == false)
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.Cancel;
                 return;
             }
-
-            
 
             if (Type == 0)
             {
@@ -278,15 +280,42 @@ namespace ZiveLab.ZM.FactorySetting
 
         private void CboBdType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            byte tb;
             if (bFirst == true) return;
+            tb = (byte)CboBdType.SelectedIndex;
+            
+
             if (Type == 0)
             {
-                mSysCfg.mSIFCfg.Type = (byte)CboBdType.SelectedIndex;
+                if ((eDeviceType)tb == eDeviceType.ZIM || (eDeviceType)tb == eDeviceType.SBZA
+                || (eDeviceType)tb == eDeviceType.MBZA || (eDeviceType)tb == eDeviceType.MCBZA)
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("You have selected an unsupported type.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb = (byte)eDeviceType.SBZA;
+                }
+
+                mSysCfg.mSIFCfg.Type = tb;
                 ViewSifInformation();
             }
             else
             {
-                mSysCfg.mZimCfg[ich].info.cModel[0] = (byte)(CboBdType.SelectedIndex + 0x30);
+                if ((eZimType)tb == eZimType.BZA100 || (eZimType)tb == eZimType.BZA1000
+                 || (eZimType)tb == eZimType.BZA1000A || (eZimType)tb == eZimType.BZA500
+                 || (eZimType)tb == eZimType.BZA60 || (eZimType)tb == eZimType.BZAAUX1)
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("You have selected an unsupported type.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb = (byte)eDeviceType.SBZA;
+                }
+
+                mSysCfg.mZimCfg[ich].info.cModel[0] = (byte)(tb + 0x30);
                 mSysCfg.mZimCfg[ich].info.cModel[1] = 0x30;
                 ViewZimInformation();
             }

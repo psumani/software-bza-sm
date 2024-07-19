@@ -1,10 +1,10 @@
 ####---- CreateClock list ----6
+create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|\comm_spi/iclk} [get_nets {comm_spi.iclk}] 
+create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_RTD} [get_nets {clk_RTD}] 
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|TEST_LED} [get_nets {TEST_LED}] 
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|VDC_CLK} [get_nets {VDC_CLK}] 
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_16MHz} [get_nets {clk_16MHz}] 
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_32MHz} [get_nets {clk_32MHz}] 
-create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_RTD} [get_nets {clk_RTD}] 
-create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|\comm_spi/iclk} [get_nets {comm_spi.iclk}] 
 
 ####---- SetFalsePath list ----30
 set_false_path  -from [get_clocks {zim|\comm_spi/iclk}]  -to [get_clocks {zim|clk_32MHz}]

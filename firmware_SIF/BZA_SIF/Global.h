@@ -25,7 +25,7 @@ extern short m_SendFrameNo[MAX_SOCKET_NUM];
 extern byte *_pNandBuffer;
 extern stSystemConfig* m_pSysConfig;
 extern stConnCfg* m_pConnCfg;
-extern stDefTestData*  m_pTestData[MAX_DEV_CHANNEL];
+extern stDefTestData*  m_pTestData[MAX_DEV_BOARD];
 extern byte * m_PtrTemp;
 extern stGlobalVar *m_pGlobalVar;
 extern st_zim_RTD_Coef*     pRTD_Coef;

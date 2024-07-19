@@ -283,7 +283,7 @@ namespace ZiveLab.ZM
                 }
                 
                 gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch] = tech;
-                tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc;
+                tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc;
                 irng = getLimitRangeI(sifid, sifch, tmpI);
                 if (tech.irange < irng)
                 {
@@ -365,7 +365,7 @@ namespace ZiveLab.ZM
             double tmp1 = Math.Abs(current);
             while (true)
             {
-                tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.iac_rng[rng].realmax;
+                tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[rng].realmax;
 
                 if (tmp1 < tmp)
                 {

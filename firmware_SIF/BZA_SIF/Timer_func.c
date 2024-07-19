@@ -9,7 +9,7 @@ extern void DHCP_timer_handler(void);
 inline bool checkCalib()
 {
 	bool ret = true;
-	for(int ch=0; ch < m_pGlobalVar->mStatusInf.MaxChannel; ch++)
+	for(int ch=0; ch < m_pGlobalVar->mStatusInf.MaxBoard; ch++)
 	{
 		if(m_pGlobalVar->mChVar[ch].bCalib == 0 && m_pGlobalVar->mChVar[ch].bTestMode == 0)
 		{
@@ -119,7 +119,7 @@ static void ISR_MSTimer(void)
 		m_pGlobalVar->LedFlowTick  = 0;
 	}
 	
-	for(ch=0; ch < MAX_DEV_CHANNEL; ch++)
+	for(ch=0; ch < MAX_DEV_BOARD; ch++)
 	{
 		if(m_pSysConfig->ChkZIM[ch] == 1)
 		{

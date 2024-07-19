@@ -1,0 +1,1414 @@
+ble_pack ADC_VAC1.bit_cnt_i0_LC_2 {ADC_VAC1.bit_cnt_i0, ADC_VAC1.add_14_2, ADC_VAC1.add_14_2_lut}
+ble_pack ADC_VAC1.bit_cnt_i1_LC_3 {ADC_VAC1.bit_cnt_i1, ADC_VAC1.add_14_3, ADC_VAC1.add_14_3_lut}
+ble_pack ADC_VAC1.bit_cnt_i2_LC_4 {ADC_VAC1.bit_cnt_i2, ADC_VAC1.add_14_4, ADC_VAC1.add_14_4_lut}
+ble_pack ADC_VAC1.bit_cnt_i3_LC_5 {ADC_VAC1.bit_cnt_i3, ADC_VAC1.add_14_5, ADC_VAC1.add_14_5_lut}
+ble_pack ADC_VAC1.bit_cnt_i4_LC_6 {ADC_VAC1.bit_cnt_i4, ADC_VAC1.add_14_6, ADC_VAC1.add_14_6_lut}
+ble_pack ADC_VAC1.bit_cnt_i5_LC_7 {ADC_VAC1.bit_cnt_i5, ADC_VAC1.add_14_7, ADC_VAC1.add_14_7_lut}
+ble_pack ADC_VAC1.bit_cnt_i6_LC_8 {ADC_VAC1.bit_cnt_i6, ADC_VAC1.add_14_8, ADC_VAC1.add_14_8_lut}
+ble_pack ADC_VAC1.bit_cnt_i7_LC_9 {ADC_VAC1.bit_cnt_i7, ADC_VAC1.add_14_9_lut}
+clb_pack PLB_0 {ADC_VAC1.bit_cnt_i0_LC_2, ADC_VAC1.bit_cnt_i1_LC_3, ADC_VAC1.bit_cnt_i2_LC_4, ADC_VAC1.bit_cnt_i3_LC_5, ADC_VAC1.bit_cnt_i4_LC_6, ADC_VAC1.bit_cnt_i5_LC_7, ADC_VAC1.bit_cnt_i6_LC_8, ADC_VAC1.bit_cnt_i7_LC_9}
+ble_pack ADC_VAC2.bit_cnt_i0_LC_47 {ADC_VAC2.bit_cnt_i0, ADC_VAC2.add_14_2, ADC_VAC2.add_14_2_lut}
+ble_pack ADC_VAC2.bit_cnt_i1_LC_48 {ADC_VAC2.bit_cnt_i1, ADC_VAC2.add_14_3, ADC_VAC2.add_14_3_lut}
+ble_pack ADC_VAC2.bit_cnt_i2_LC_49 {ADC_VAC2.bit_cnt_i2, ADC_VAC2.add_14_4, ADC_VAC2.add_14_4_lut}
+ble_pack ADC_VAC2.bit_cnt_i3_LC_50 {ADC_VAC2.bit_cnt_i3, ADC_VAC2.add_14_5, ADC_VAC2.add_14_5_lut}
+ble_pack ADC_VAC2.bit_cnt_i4_LC_51 {ADC_VAC2.bit_cnt_i4, ADC_VAC2.add_14_6, ADC_VAC2.add_14_6_lut}
+ble_pack ADC_VAC2.bit_cnt_i5_LC_52 {ADC_VAC2.bit_cnt_i5, ADC_VAC2.add_14_7, ADC_VAC2.add_14_7_lut}
+ble_pack ADC_VAC2.bit_cnt_i6_LC_53 {ADC_VAC2.bit_cnt_i6, ADC_VAC2.add_14_8, ADC_VAC2.add_14_8_lut}
+ble_pack ADC_VAC2.bit_cnt_i7_LC_54 {ADC_VAC2.bit_cnt_i7, ADC_VAC2.add_14_9_lut}
+clb_pack PLB_1 {ADC_VAC2.bit_cnt_i0_LC_47, ADC_VAC2.bit_cnt_i1_LC_48, ADC_VAC2.bit_cnt_i2_LC_49, ADC_VAC2.bit_cnt_i3_LC_50, ADC_VAC2.bit_cnt_i4_LC_51, ADC_VAC2.bit_cnt_i5_LC_52, ADC_VAC2.bit_cnt_i6_LC_53, ADC_VAC2.bit_cnt_i7_LC_54}
+ble_pack ADC_VAC3.bit_cnt_i0_LC_94 {ADC_VAC3.bit_cnt_i0, ADC_VAC3.add_14_2, ADC_VAC3.add_14_2_lut}
+ble_pack ADC_VAC3.bit_cnt_i1_LC_95 {ADC_VAC3.bit_cnt_i1, ADC_VAC3.add_14_3, ADC_VAC3.add_14_3_lut}
+ble_pack ADC_VAC3.bit_cnt_i2_LC_96 {ADC_VAC3.bit_cnt_i2, ADC_VAC3.add_14_4, ADC_VAC3.add_14_4_lut}
+ble_pack ADC_VAC3.bit_cnt_i3_LC_97 {ADC_VAC3.bit_cnt_i3, ADC_VAC3.add_14_5, ADC_VAC3.add_14_5_lut}
+ble_pack ADC_VAC3.bit_cnt_i4_LC_98 {ADC_VAC3.bit_cnt_i4, ADC_VAC3.add_14_6, ADC_VAC3.add_14_6_lut}
+ble_pack ADC_VAC3.bit_cnt_i5_LC_99 {ADC_VAC3.bit_cnt_i5, ADC_VAC3.add_14_7, ADC_VAC3.add_14_7_lut}
+ble_pack ADC_VAC3.bit_cnt_i6_LC_100 {ADC_VAC3.bit_cnt_i6, ADC_VAC3.add_14_8, ADC_VAC3.add_14_8_lut}
+ble_pack ADC_VAC3.bit_cnt_i7_LC_101 {ADC_VAC3.bit_cnt_i7, ADC_VAC3.add_14_9_lut}
+clb_pack PLB_2 {ADC_VAC3.bit_cnt_i0_LC_94, ADC_VAC3.bit_cnt_i1_LC_95, ADC_VAC3.bit_cnt_i2_LC_96, ADC_VAC3.bit_cnt_i3_LC_97, ADC_VAC3.bit_cnt_i4_LC_98, ADC_VAC3.bit_cnt_i5_LC_99, ADC_VAC3.bit_cnt_i6_LC_100, ADC_VAC3.bit_cnt_i7_LC_101}
+ble_pack ADC_VAC4.bit_cnt_i0_LC_139 {ADC_VAC4.bit_cnt_i0, ADC_VAC4.add_14_2, ADC_VAC4.add_14_2_lut}
+ble_pack ADC_VAC4.bit_cnt_i1_LC_140 {ADC_VAC4.bit_cnt_i1, ADC_VAC4.add_14_3, ADC_VAC4.add_14_3_lut}
+ble_pack ADC_VAC4.bit_cnt_i2_LC_141 {ADC_VAC4.bit_cnt_i2, ADC_VAC4.add_14_4, ADC_VAC4.add_14_4_lut}
+ble_pack ADC_VAC4.bit_cnt_i3_LC_142 {ADC_VAC4.bit_cnt_i3, ADC_VAC4.add_14_5, ADC_VAC4.add_14_5_lut}
+ble_pack ADC_VAC4.bit_cnt_i4_LC_143 {ADC_VAC4.bit_cnt_i4, ADC_VAC4.add_14_6, ADC_VAC4.add_14_6_lut}
+ble_pack ADC_VAC4.bit_cnt_i5_LC_144 {ADC_VAC4.bit_cnt_i5, ADC_VAC4.add_14_7, ADC_VAC4.add_14_7_lut}
+ble_pack ADC_VAC4.bit_cnt_i6_LC_145 {ADC_VAC4.bit_cnt_i6, ADC_VAC4.add_14_8, ADC_VAC4.add_14_8_lut}
+ble_pack ADC_VAC4.bit_cnt_i7_LC_146 {ADC_VAC4.bit_cnt_i7, ADC_VAC4.add_14_9_lut}
+clb_pack PLB_3 {ADC_VAC4.bit_cnt_i0_LC_139, ADC_VAC4.bit_cnt_i1_LC_140, ADC_VAC4.bit_cnt_i2_LC_141, ADC_VAC4.bit_cnt_i3_LC_142, ADC_VAC4.bit_cnt_i4_LC_143, ADC_VAC4.bit_cnt_i5_LC_144, ADC_VAC4.bit_cnt_i6_LC_145, ADC_VAC4.bit_cnt_i7_LC_146}
+ble_pack add_1441_2_lut_LC_217 {add_1441_2, add_1441_2_lut}
+ble_pack data_idxvec_i1_LC_218 {data_idxvec_i1, add_1441_3, add_1441_3_lut}
+ble_pack data_idxvec_i2_LC_219 {data_idxvec_i2, add_1441_4, add_1441_4_lut}
+ble_pack data_idxvec_i3_LC_220 {data_idxvec_i3, add_1441_5, add_1441_5_lut}
+ble_pack data_idxvec_i4_LC_221 {data_idxvec_i4, add_1441_6, add_1441_6_lut}
+ble_pack data_idxvec_i5_LC_222 {data_idxvec_i5, add_1441_7, add_1441_7_lut}
+ble_pack data_idxvec_i6_LC_223 {data_idxvec_i6, add_1441_8, add_1441_8_lut}
+ble_pack data_idxvec_i7_LC_224 {data_idxvec_i7, add_1441_9, add_1441_9_lut}
+clb_pack PLB_4 {add_1441_2_lut_LC_217, data_idxvec_i1_LC_218, data_idxvec_i2_LC_219, data_idxvec_i3_LC_220, data_idxvec_i4_LC_221, data_idxvec_i5_LC_222, data_idxvec_i6_LC_223, data_idxvec_i7_LC_224}
+ble_pack data_idxvec_i8_LC_209 {data_idxvec_i8, add_1441_10, add_1441_10_lut}
+ble_pack data_idxvec_i9_LC_210 {data_idxvec_i9, add_1441_11, add_1441_11_lut}
+ble_pack data_idxvec_i10_LC_211 {data_idxvec_i10, add_1441_12, add_1441_12_lut}
+ble_pack data_idxvec_i11_LC_212 {data_idxvec_i11, add_1441_13, add_1441_13_lut}
+ble_pack data_idxvec_i12_LC_213 {data_idxvec_i12, add_1441_14, add_1441_14_lut}
+ble_pack data_idxvec_i13_LC_214 {data_idxvec_i13, add_1441_15, add_1441_15_lut}
+ble_pack data_idxvec_i14_LC_215 {data_idxvec_i14, add_1441_16, add_1441_16_lut}
+ble_pack data_idxvec_i15_LC_216 {data_idxvec_i15, add_1441_17_lut}
+clb_pack PLB_5 {data_idxvec_i8_LC_209, data_idxvec_i9_LC_210, data_idxvec_i10_LC_211, data_idxvec_i11_LC_212, data_idxvec_i12_LC_213, data_idxvec_i13_LC_214, data_idxvec_i14_LC_215, data_idxvec_i15_LC_216}
+ble_pack add_1443_2_lut_LC_226 {add_1443_2, add_1443_2_lut}
+ble_pack add_1443_3_lut_LC_227 {add_1443_3, add_1443_3_lut}
+ble_pack add_1443_4_lut_LC_228 {add_1443_4, add_1443_4_lut}
+ble_pack add_1443_5_lut_LC_229 {add_1443_5, add_1443_5_lut}
+ble_pack add_1443_6_lut_LC_230 {add_1443_6, add_1443_6_lut}
+ble_pack add_1443_7_lut_LC_231 {add_1443_7, add_1443_7_lut}
+ble_pack add_1443_8_lut_LC_232 {add_1443_8, add_1443_8_lut}
+ble_pack add_1443_9_lut_LC_233 {add_1443_9, add_1443_9_lut}
+clb_pack PLB_6 {add_1443_2_lut_LC_226, add_1443_3_lut_LC_227, add_1443_4_lut_LC_228, add_1443_5_lut_LC_229, add_1443_6_lut_LC_230, add_1443_7_lut_LC_231, add_1443_8_lut_LC_232, add_1443_9_lut_LC_233}
+ble_pack add_1443_10_lut_LC_225 {add_1443_10_lut}
+clb_pack PLB_7 {add_1443_10_lut_LC_225}
+ble_pack data_count_i0_i0_LC_235 {data_count_i0_i0, add_53_2, add_53_2_lut}
+ble_pack data_count_i0_i1_LC_236 {data_count_i0_i1, add_53_3, add_53_3_lut}
+ble_pack data_count_i0_i2_LC_237 {data_count_i0_i2, add_53_4, add_53_4_lut}
+ble_pack data_count_i0_i3_LC_238 {data_count_i0_i3, add_53_5, add_53_5_lut}
+ble_pack data_count_i0_i4_LC_239 {data_count_i0_i4, add_53_6, add_53_6_lut}
+ble_pack data_count_i0_i5_LC_240 {data_count_i0_i5, add_53_7, add_53_7_lut}
+ble_pack data_count_i0_i6_LC_241 {data_count_i0_i6, add_53_8, add_53_8_lut}
+ble_pack data_count_i0_i7_LC_242 {data_count_i0_i7, add_53_9, add_53_9_lut}
+clb_pack PLB_8 {data_count_i0_i0_LC_235, data_count_i0_i1_LC_236, data_count_i0_i2_LC_237, data_count_i0_i3_LC_238, data_count_i0_i4_LC_239, data_count_i0_i5_LC_240, data_count_i0_i6_LC_241, data_count_i0_i7_LC_242}
+ble_pack data_count_i0_i8_LC_234 {data_count_i0_i8, add_53_10_lut}
+clb_pack PLB_9 {data_count_i0_i8_LC_234}
+ble_pack data_cntvec_i0_i0_LC_251 {data_cntvec_i0_i0, add_54_2, add_54_2_lut}
+ble_pack data_cntvec_i0_i1_LC_252 {data_cntvec_i0_i1, add_54_3, add_54_3_lut}
+ble_pack data_cntvec_i0_i2_LC_253 {data_cntvec_i0_i2, add_54_4, add_54_4_lut}
+ble_pack data_cntvec_i0_i3_LC_254 {data_cntvec_i0_i3, add_54_5, add_54_5_lut}
+ble_pack data_cntvec_i0_i4_LC_255 {data_cntvec_i0_i4, add_54_6, add_54_6_lut}
+ble_pack data_cntvec_i0_i5_LC_256 {data_cntvec_i0_i5, add_54_7, add_54_7_lut}
+ble_pack data_cntvec_i0_i6_LC_257 {data_cntvec_i0_i6, add_54_8, add_54_8_lut}
+ble_pack data_cntvec_i0_i7_LC_258 {data_cntvec_i0_i7, add_54_9, add_54_9_lut}
+clb_pack PLB_10 {data_cntvec_i0_i0_LC_251, data_cntvec_i0_i1_LC_252, data_cntvec_i0_i2_LC_253, data_cntvec_i0_i3_LC_254, data_cntvec_i0_i4_LC_255, data_cntvec_i0_i5_LC_256, data_cntvec_i0_i6_LC_257, data_cntvec_i0_i7_LC_258}
+ble_pack data_cntvec_i0_i8_LC_243 {data_cntvec_i0_i8, add_54_10, add_54_10_lut}
+ble_pack data_cntvec_i0_i9_LC_244 {data_cntvec_i0_i9, add_54_11, add_54_11_lut}
+ble_pack data_cntvec_i0_i10_LC_245 {data_cntvec_i0_i10, add_54_12, add_54_12_lut}
+ble_pack data_cntvec_i0_i11_LC_246 {data_cntvec_i0_i11, add_54_13, add_54_13_lut}
+ble_pack data_cntvec_i0_i12_LC_247 {data_cntvec_i0_i12, add_54_14, add_54_14_lut}
+ble_pack data_cntvec_i0_i13_LC_248 {data_cntvec_i0_i13, add_54_15, add_54_15_lut}
+ble_pack data_cntvec_i0_i14_LC_249 {data_cntvec_i0_i14, add_54_16, add_54_16_lut}
+ble_pack data_cntvec_i0_i15_LC_250 {data_cntvec_i0_i15, add_54_17_lut}
+clb_pack PLB_11 {data_cntvec_i0_i8_LC_243, data_cntvec_i0_i9_LC_244, data_cntvec_i0_i10_LC_245, data_cntvec_i0_i11_LC_246, data_cntvec_i0_i12_LC_247, data_cntvec_i0_i13_LC_248, data_cntvec_i0_i14_LC_249, data_cntvec_i0_i15_LC_250}
+ble_pack acadc_skipcnt_i0_i0_LC_267 {acadc_skipcnt_i0_i0, add_58_2, add_58_2_lut}
+ble_pack LC_1224 {add_58_2_THRU_CRY_0}
+ble_pack LC_1225 {add_58_2_THRU_CRY_1}
+ble_pack LC_1226 {add_58_2_THRU_CRY_2}
+ble_pack LC_1227 {add_58_2_THRU_CRY_3}
+ble_pack LC_1228 {add_58_2_THRU_CRY_4}
+ble_pack LC_1229 {add_58_2_THRU_CRY_5}
+ble_pack LC_1230 {add_58_2_THRU_CRY_6}
+clb_pack PLB_12 {acadc_skipcnt_i0_i0_LC_267, LC_1224, LC_1225, LC_1226, LC_1227, LC_1228, LC_1229, LC_1230}
+ble_pack acadc_skipcnt_i0_i1_LC_268 {acadc_skipcnt_i0_i1, add_58_3, add_58_3_lut}
+ble_pack acadc_skipcnt_i0_i2_LC_269 {acadc_skipcnt_i0_i2, add_58_4, add_58_4_lut}
+ble_pack acadc_skipcnt_i0_i3_LC_270 {acadc_skipcnt_i0_i3, add_58_5, add_58_5_lut}
+ble_pack acadc_skipcnt_i0_i4_LC_271 {acadc_skipcnt_i0_i4, add_58_6, add_58_6_lut}
+ble_pack acadc_skipcnt_i0_i5_LC_272 {acadc_skipcnt_i0_i5, add_58_7, add_58_7_lut}
+ble_pack acadc_skipcnt_i0_i6_LC_273 {acadc_skipcnt_i0_i6, add_58_8, add_58_8_lut}
+ble_pack acadc_skipcnt_i0_i7_LC_274 {acadc_skipcnt_i0_i7, add_58_9, add_58_9_lut}
+ble_pack acadc_skipcnt_i0_i8_LC_259 {acadc_skipcnt_i0_i8, add_58_10, add_58_10_lut}
+clb_pack PLB_13 {acadc_skipcnt_i0_i1_LC_268, acadc_skipcnt_i0_i2_LC_269, acadc_skipcnt_i0_i3_LC_270, acadc_skipcnt_i0_i4_LC_271, acadc_skipcnt_i0_i5_LC_272, acadc_skipcnt_i0_i6_LC_273, acadc_skipcnt_i0_i7_LC_274, acadc_skipcnt_i0_i8_LC_259}
+ble_pack acadc_skipcnt_i0_i9_LC_260 {acadc_skipcnt_i0_i9, add_58_11, add_58_11_lut}
+ble_pack acadc_skipcnt_i0_i10_LC_261 {acadc_skipcnt_i0_i10, add_58_12, add_58_12_lut}
+ble_pack acadc_skipcnt_i0_i11_LC_262 {acadc_skipcnt_i0_i11, add_58_13, add_58_13_lut}
+ble_pack acadc_skipcnt_i0_i12_LC_263 {acadc_skipcnt_i0_i12, add_58_14, add_58_14_lut}
+ble_pack acadc_skipcnt_i0_i13_LC_264 {acadc_skipcnt_i0_i13, add_58_15, add_58_15_lut}
+ble_pack acadc_skipcnt_i0_i14_LC_265 {acadc_skipcnt_i0_i14, add_58_16, add_58_16_lut}
+ble_pack acadc_skipcnt_i0_i15_LC_266 {acadc_skipcnt_i0_i15, add_58_17_lut}
+clb_pack PLB_14 {acadc_skipcnt_i0_i9_LC_260, acadc_skipcnt_i0_i10_LC_261, acadc_skipcnt_i0_i11_LC_262, acadc_skipcnt_i0_i12_LC_263, acadc_skipcnt_i0_i13_LC_264, acadc_skipcnt_i0_i14_LC_265, acadc_skipcnt_i0_i15_LC_266}
+ble_pack secclk_cnt_1601_1602__i1_LC_1189 {secclk_cnt_1601_1602__i1, secclk_cnt_1601_1602_add_4_2, secclk_cnt_1601_1602_add_4_2_lut}
+ble_pack secclk_cnt_1601_1602__i2_LC_1190 {secclk_cnt_1601_1602__i2, secclk_cnt_1601_1602_add_4_3, secclk_cnt_1601_1602_add_4_3_lut}
+ble_pack secclk_cnt_1601_1602__i3_LC_1191 {secclk_cnt_1601_1602__i3, secclk_cnt_1601_1602_add_4_4, secclk_cnt_1601_1602_add_4_4_lut}
+ble_pack secclk_cnt_1601_1602__i4_LC_1192 {secclk_cnt_1601_1602__i4, secclk_cnt_1601_1602_add_4_5, secclk_cnt_1601_1602_add_4_5_lut}
+ble_pack secclk_cnt_1601_1602__i5_LC_1193 {secclk_cnt_1601_1602__i5, secclk_cnt_1601_1602_add_4_6, secclk_cnt_1601_1602_add_4_6_lut}
+ble_pack secclk_cnt_1601_1602__i6_LC_1194 {secclk_cnt_1601_1602__i6, secclk_cnt_1601_1602_add_4_7, secclk_cnt_1601_1602_add_4_7_lut}
+ble_pack secclk_cnt_1601_1602__i7_LC_1195 {secclk_cnt_1601_1602__i7, secclk_cnt_1601_1602_add_4_8, secclk_cnt_1601_1602_add_4_8_lut}
+ble_pack secclk_cnt_1601_1602__i8_LC_1196 {secclk_cnt_1601_1602__i8, secclk_cnt_1601_1602_add_4_9, secclk_cnt_1601_1602_add_4_9_lut}
+clb_pack PLB_15 {secclk_cnt_1601_1602__i1_LC_1189, secclk_cnt_1601_1602__i2_LC_1190, secclk_cnt_1601_1602__i3_LC_1191, secclk_cnt_1601_1602__i4_LC_1192, secclk_cnt_1601_1602__i5_LC_1193, secclk_cnt_1601_1602__i6_LC_1194, secclk_cnt_1601_1602__i7_LC_1195, secclk_cnt_1601_1602__i8_LC_1196}
+ble_pack secclk_cnt_1601_1602__i9_LC_1174 {secclk_cnt_1601_1602__i9, secclk_cnt_1601_1602_add_4_10, secclk_cnt_1601_1602_add_4_10_lut}
+ble_pack secclk_cnt_1601_1602__i10_LC_1175 {secclk_cnt_1601_1602__i10, secclk_cnt_1601_1602_add_4_11, secclk_cnt_1601_1602_add_4_11_lut}
+ble_pack secclk_cnt_1601_1602__i11_LC_1176 {secclk_cnt_1601_1602__i11, secclk_cnt_1601_1602_add_4_12, secclk_cnt_1601_1602_add_4_12_lut}
+ble_pack secclk_cnt_1601_1602__i12_LC_1177 {secclk_cnt_1601_1602__i12, secclk_cnt_1601_1602_add_4_13, secclk_cnt_1601_1602_add_4_13_lut}
+ble_pack secclk_cnt_1601_1602__i13_LC_1178 {secclk_cnt_1601_1602__i13, secclk_cnt_1601_1602_add_4_14, secclk_cnt_1601_1602_add_4_14_lut}
+ble_pack secclk_cnt_1601_1602__i14_LC_1179 {secclk_cnt_1601_1602__i14, secclk_cnt_1601_1602_add_4_15, secclk_cnt_1601_1602_add_4_15_lut}
+ble_pack secclk_cnt_1601_1602__i15_LC_1180 {secclk_cnt_1601_1602__i15, secclk_cnt_1601_1602_add_4_16, secclk_cnt_1601_1602_add_4_16_lut}
+ble_pack secclk_cnt_1601_1602__i16_LC_1181 {secclk_cnt_1601_1602__i16, secclk_cnt_1601_1602_add_4_17, secclk_cnt_1601_1602_add_4_17_lut}
+clb_pack PLB_16 {secclk_cnt_1601_1602__i9_LC_1174, secclk_cnt_1601_1602__i10_LC_1175, secclk_cnt_1601_1602__i11_LC_1176, secclk_cnt_1601_1602__i12_LC_1177, secclk_cnt_1601_1602__i13_LC_1178, secclk_cnt_1601_1602__i14_LC_1179, secclk_cnt_1601_1602__i15_LC_1180, secclk_cnt_1601_1602__i16_LC_1181}
+ble_pack secclk_cnt_1601_1602__i17_LC_1182 {secclk_cnt_1601_1602__i17, secclk_cnt_1601_1602_add_4_18, secclk_cnt_1601_1602_add_4_18_lut}
+ble_pack secclk_cnt_1601_1602__i18_LC_1183 {secclk_cnt_1601_1602__i18, secclk_cnt_1601_1602_add_4_19, secclk_cnt_1601_1602_add_4_19_lut}
+ble_pack secclk_cnt_1601_1602__i19_LC_1184 {secclk_cnt_1601_1602__i19, secclk_cnt_1601_1602_add_4_20, secclk_cnt_1601_1602_add_4_20_lut}
+ble_pack secclk_cnt_1601_1602__i20_LC_1185 {secclk_cnt_1601_1602__i20, secclk_cnt_1601_1602_add_4_21, secclk_cnt_1601_1602_add_4_21_lut}
+ble_pack secclk_cnt_1601_1602__i21_LC_1186 {secclk_cnt_1601_1602__i21, secclk_cnt_1601_1602_add_4_22, secclk_cnt_1601_1602_add_4_22_lut}
+ble_pack secclk_cnt_1601_1602__i22_LC_1187 {secclk_cnt_1601_1602__i22, secclk_cnt_1601_1602_add_4_23, secclk_cnt_1601_1602_add_4_23_lut}
+ble_pack secclk_cnt_1601_1602__i23_LC_1188 {secclk_cnt_1601_1602__i23, secclk_cnt_1601_1602_add_4_24_lut}
+clb_pack PLB_17 {secclk_cnt_1601_1602__i17_LC_1182, secclk_cnt_1601_1602__i18_LC_1183, secclk_cnt_1601_1602__i19_LC_1184, secclk_cnt_1601_1602__i20_LC_1185, secclk_cnt_1601_1602__i21_LC_1186, secclk_cnt_1601_1602__i22_LC_1187, secclk_cnt_1601_1602__i23_LC_1188}
+ble_pack ADC_VAC1.i12131_4_lut_LC_10 {ADC_VAC1.i12131_4_lut}
+ble_pack ADC_VAC1.i12151_4_lut_LC_11 {ADC_VAC1.i12151_4_lut}
+ble_pack ADC_VAC1.i12914_4_lut_LC_12 {ADC_VAC1.i12914_4_lut}
+ble_pack ADC_VAC1.adc_state_i0_LC_0 {ADC_VAC1.adc_state_i0, ADC_VAC1.adc_state_2__I_0_43_Mux_0_i7_4_lut}
+ble_pack ADC_VAC1.i1_2_lut_LC_14 {ADC_VAC1.i1_2_lut}
+ble_pack ADC_VAC1.i1_4_lut_LC_16 {ADC_VAC1.i1_4_lut}
+ble_pack ADC_VAC1.i30_4_lut_LC_18 {ADC_VAC1.i30_4_lut}
+ble_pack ADC_VAC1.i13056_2_lut_LC_13 {ADC_VAC1.i13056_2_lut}
+clb_pack PLB_18 {ADC_VAC1.i12131_4_lut_LC_10, ADC_VAC1.i12151_4_lut_LC_11, ADC_VAC1.i12914_4_lut_LC_12, ADC_VAC1.adc_state_i0_LC_0, ADC_VAC1.i1_2_lut_LC_14, ADC_VAC1.i1_4_lut_LC_16, ADC_VAC1.i30_4_lut_LC_18, ADC_VAC1.i13056_2_lut_LC_13}
+ble_pack ADC_VAC1.i1_4_lut_adj_6_LC_17 {ADC_VAC1.i1_4_lut_adj_6}
+ble_pack ADC_VAC1.adc_state_i2_LC_1 {ADC_VAC1.adc_state_i2, ADC_VAC1.adc_state_2__I_0_43_Mux_2_i7_3_lut}
+ble_pack ADC_VAC1.adc_state_i1_LC_44 {ADC_VAC1.adc_state_i1, ADC_VAC1.i9581_3_lut}
+ble_pack i1_2_lut_adj_224_LC_741 {i1_2_lut_adj_224}
+ble_pack ADC_VAC1.i1_3_lut_LC_15 {ADC_VAC1.i1_3_lut}
+ble_pack ADC_VAC1.i7561_2_lut_LC_19 {ADC_VAC1.i7561_2_lut}
+ble_pack i1_4_lut_adj_222_LC_811 {i1_4_lut_adj_222}
+ble_pack i1_2_lut_adj_298_LC_751 {i1_2_lut_adj_298}
+clb_pack PLB_19 {ADC_VAC1.i1_4_lut_adj_6_LC_17, ADC_VAC1.adc_state_i2_LC_1, ADC_VAC1.adc_state_i1_LC_44, i1_2_lut_adj_224_LC_741, ADC_VAC1.i1_3_lut_LC_15, ADC_VAC1.i7561_2_lut_LC_19, i1_4_lut_adj_222_LC_811, i1_2_lut_adj_298_LC_751}
+ble_pack ADC_VAC2.i12780_4_lut_LC_55 {ADC_VAC2.i12780_4_lut}
+ble_pack ADC_VAC2.adc_state_i0_LC_45 {ADC_VAC2.adc_state_i0, ADC_VAC2.adc_state_2__I_0_43_Mux_0_i7_4_lut}
+ble_pack ADC_VAC2.i1_2_lut_LC_59 {ADC_VAC2.i1_2_lut}
+ble_pack ADC_VAC2.i1_4_lut_adj_5_LC_63 {ADC_VAC2.i1_4_lut_adj_5}
+ble_pack ADC_VAC2.i6_4_lut_LC_65 {ADC_VAC2.i6_4_lut}
+ble_pack ADC_VAC2.i30_4_lut_LC_64 {ADC_VAC2.i30_4_lut}
+ble_pack ADC_VAC2.i13058_2_lut_LC_57 {ADC_VAC2.i13058_2_lut}
+ble_pack ADC_VAC2.i1_4_lut_LC_62 {ADC_VAC2.i1_4_lut}
+clb_pack PLB_20 {ADC_VAC2.i12780_4_lut_LC_55, ADC_VAC2.adc_state_i0_LC_45, ADC_VAC2.i1_2_lut_LC_59, ADC_VAC2.i1_4_lut_adj_5_LC_63, ADC_VAC2.i6_4_lut_LC_65, ADC_VAC2.i30_4_lut_LC_64, ADC_VAC2.i13058_2_lut_LC_57, ADC_VAC2.i1_4_lut_LC_62}
+ble_pack ADC_VAC2.i12926_4_lut_LC_56 {ADC_VAC2.i12926_4_lut}
+ble_pack ADC_VAC3.i12127_4_lut_LC_102 {ADC_VAC3.i12127_4_lut}
+ble_pack ADC_VAC3.i12149_4_lut_LC_103 {ADC_VAC3.i12149_4_lut}
+ble_pack ADC_VAC3.i12787_4_lut_LC_104 {ADC_VAC3.i12787_4_lut}
+ble_pack ADC_VAC3.adc_state_i0_LC_92 {ADC_VAC3.adc_state_i0, ADC_VAC3.adc_state_2__I_0_43_Mux_0_i7_4_lut}
+ble_pack ADC_VAC3.i1_2_lut_LC_106 {ADC_VAC3.i1_2_lut}
+ble_pack ADC_VAC3.i1_4_lut_adj_7_LC_109 {ADC_VAC3.i1_4_lut_adj_7}
+ble_pack ADC_VAC3.i30_4_lut_LC_110 {ADC_VAC3.i30_4_lut}
+clb_pack PLB_21 {ADC_VAC2.i12926_4_lut_LC_56, ADC_VAC3.i12127_4_lut_LC_102, ADC_VAC3.i12149_4_lut_LC_103, ADC_VAC3.i12787_4_lut_LC_104, ADC_VAC3.adc_state_i0_LC_92, ADC_VAC3.i1_2_lut_LC_106, ADC_VAC3.i1_4_lut_adj_7_LC_109, ADC_VAC3.i30_4_lut_LC_110}
+ble_pack ADC_VAC3.i1_4_lut_LC_108 {ADC_VAC3.i1_4_lut}
+ble_pack ADC_VAC3.adc_state_i2_LC_93 {ADC_VAC3.adc_state_i2, ADC_VAC3.adc_state_2__I_0_43_Mux_2_i7_3_lut}
+ble_pack ADC_VAC3.i13060_2_lut_LC_105 {ADC_VAC3.i13060_2_lut}
+ble_pack ADC_VAC3.adc_state_i1_LC_136 {ADC_VAC3.adc_state_i1, ADC_VAC3.i9590_3_lut}
+ble_pack i1_4_lut_adj_200_LC_807 {i1_4_lut_adj_200}
+ble_pack i1_2_lut_adj_50_LC_755 {i1_2_lut_adj_50}
+ble_pack ADC_VAC3.i1_3_lut_LC_107 {ADC_VAC3.i1_3_lut}
+ble_pack i1_2_lut_adj_32_LC_753 {i1_2_lut_adj_32}
+clb_pack PLB_22 {ADC_VAC3.i1_4_lut_LC_108, ADC_VAC3.adc_state_i2_LC_93, ADC_VAC3.i13060_2_lut_LC_105, ADC_VAC3.adc_state_i1_LC_136, i1_4_lut_adj_200_LC_807, i1_2_lut_adj_50_LC_755, ADC_VAC3.i1_3_lut_LC_107, i1_2_lut_adj_32_LC_753}
+ble_pack ADC_VAC4.i12123_4_lut_LC_147 {ADC_VAC4.i12123_4_lut}
+ble_pack ADC_VAC4.i12146_4_lut_LC_148 {ADC_VAC4.i12146_4_lut}
+ble_pack ADC_VAC4.i12804_4_lut_LC_149 {ADC_VAC4.i12804_4_lut}
+ble_pack ADC_VAC4.adc_state_i0_LC_137 {ADC_VAC4.adc_state_i0, ADC_VAC4.adc_state_2__I_0_43_Mux_0_i7_4_lut}
+ble_pack ADC_VAC4.i1_2_lut_LC_152 {ADC_VAC4.i1_2_lut}
+ble_pack ADC_VAC4.i1_4_lut_adj_8_LC_156 {ADC_VAC4.i1_4_lut_adj_8}
+ble_pack ADC_VAC4.i30_4_lut_LC_157 {ADC_VAC4.i30_4_lut}
+ble_pack ADC_VAC4.i13062_2_lut_LC_150 {ADC_VAC4.i13062_2_lut}
+clb_pack PLB_23 {ADC_VAC4.i12123_4_lut_LC_147, ADC_VAC4.i12146_4_lut_LC_148, ADC_VAC4.i12804_4_lut_LC_149, ADC_VAC4.adc_state_i0_LC_137, ADC_VAC4.i1_2_lut_LC_152, ADC_VAC4.i1_4_lut_adj_8_LC_156, ADC_VAC4.i30_4_lut_LC_157, ADC_VAC4.i13062_2_lut_LC_150}
+ble_pack ADC_VAC4.i1_4_lut_LC_155 {ADC_VAC4.i1_4_lut}
+ble_pack ADC_VAC4.adc_state_i2_LC_138 {ADC_VAC4.adc_state_i2, ADC_VAC4.adc_state_2__I_0_43_Mux_2_i7_3_lut}
+ble_pack i1_2_lut_adj_218_LC_740 {i1_2_lut_adj_218}
+ble_pack ADC_VAC4.i1_3_lut_adj_9_LC_154 {ADC_VAC4.i1_3_lut_adj_9}
+ble_pack ADC_VAC4.i7677_2_lut_LC_159 {ADC_VAC4.i7677_2_lut}
+ble_pack ADC_VAC4.i18_3_lut_LC_151 {ADC_VAC4.i18_3_lut}
+ble_pack ADC_VAC4.i1_3_lut_LC_153 {ADC_VAC4.i1_3_lut}
+ble_pack i1_4_lut_adj_198_LC_806 {i1_4_lut_adj_198}
+clb_pack PLB_24 {ADC_VAC4.i1_4_lut_LC_155, ADC_VAC4.adc_state_i2_LC_138, i1_2_lut_adj_218_LC_740, ADC_VAC4.i1_3_lut_adj_9_LC_154, ADC_VAC4.i7677_2_lut_LC_159, ADC_VAC4.i18_3_lut_LC_151, ADC_VAC4.i1_3_lut_LC_153, i1_4_lut_adj_198_LC_806}
+ble_pack CLOCK_DDS.tmp_buf_i0_LC_184 {CLOCK_DDS.tmp_buf_i0, CLOCK_DDS.dds_state_2__I_0_34_Mux_0_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i1_LC_191 {CLOCK_DDS.tmp_buf_i1, CLOCK_DDS.dds_state_2__I_0_34_Mux_1_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i2_LC_192 {CLOCK_DDS.tmp_buf_i2, CLOCK_DDS.dds_state_2__I_0_34_Mux_2_i7_4_lut}
+ble_pack CLOCK_DDS.i1_4_lut_LC_203 {CLOCK_DDS.i1_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i3_LC_193 {CLOCK_DDS.tmp_buf_i3, CLOCK_DDS.dds_state_2__I_0_34_Mux_3_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i4_LC_194 {CLOCK_DDS.tmp_buf_i4, CLOCK_DDS.dds_state_2__I_0_34_Mux_4_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i5_LC_195 {CLOCK_DDS.tmp_buf_i5, CLOCK_DDS.dds_state_2__I_0_34_Mux_5_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i6_LC_196 {CLOCK_DDS.tmp_buf_i6, CLOCK_DDS.dds_state_2__I_0_34_Mux_6_i7_4_lut}
+clb_pack PLB_25 {CLOCK_DDS.tmp_buf_i0_LC_184, CLOCK_DDS.tmp_buf_i1_LC_191, CLOCK_DDS.tmp_buf_i2_LC_192, CLOCK_DDS.i1_4_lut_LC_203, CLOCK_DDS.tmp_buf_i3_LC_193, CLOCK_DDS.tmp_buf_i4_LC_194, CLOCK_DDS.tmp_buf_i5_LC_195, CLOCK_DDS.tmp_buf_i6_LC_196}
+ble_pack CLOCK_DDS.tmp_buf_i10_LC_185 {CLOCK_DDS.tmp_buf_i10, CLOCK_DDS.dds_state_2__I_0_34_Mux_10_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i11_LC_186 {CLOCK_DDS.tmp_buf_i11, CLOCK_DDS.dds_state_2__I_0_34_Mux_11_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i12_LC_187 {CLOCK_DDS.tmp_buf_i12, CLOCK_DDS.dds_state_2__I_0_34_Mux_12_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i13_LC_188 {CLOCK_DDS.tmp_buf_i13, CLOCK_DDS.dds_state_2__I_0_34_Mux_13_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i14_LC_189 {CLOCK_DDS.tmp_buf_i14, CLOCK_DDS.dds_state_2__I_0_34_Mux_14_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i15_LC_190 {CLOCK_DDS.tmp_buf_i15, CLOCK_DDS.dds_state_2__I_0_34_Mux_15_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i9_LC_199 {CLOCK_DDS.tmp_buf_i9, CLOCK_DDS.dds_state_2__I_0_34_Mux_9_i7_4_lut}
+ble_pack CLOCK_DDS.tmp_buf_i8_LC_198 {CLOCK_DDS.tmp_buf_i8, CLOCK_DDS.dds_state_2__I_0_34_Mux_8_i7_4_lut}
+clb_pack PLB_26 {CLOCK_DDS.tmp_buf_i10_LC_185, CLOCK_DDS.tmp_buf_i11_LC_186, CLOCK_DDS.tmp_buf_i12_LC_187, CLOCK_DDS.tmp_buf_i13_LC_188, CLOCK_DDS.tmp_buf_i14_LC_189, CLOCK_DDS.tmp_buf_i15_LC_190, CLOCK_DDS.tmp_buf_i9_LC_199, CLOCK_DDS.tmp_buf_i8_LC_198}
+ble_pack CLOCK_DDS.tmp_buf_i7_LC_197 {CLOCK_DDS.tmp_buf_i7, CLOCK_DDS.dds_state_2__I_0_34_Mux_7_i7_4_lut}
+ble_pack CLOCK_DDS.i7713_3_lut_LC_207 {CLOCK_DDS.i7713_3_lut}
+ble_pack CLOCK_DDS.i23_4_lut_LC_204 {CLOCK_DDS.i23_4_lut}
+ble_pack CLOCK_DDS.i13064_4_lut_LC_201 {CLOCK_DDS.i13064_4_lut}
+ble_pack i12766_2_lut_LC_522 {i12766_2_lut}
+ble_pack mux_1498_i8_3_lut_LC_1108 {mux_1498_i8_3_lut}
+ble_pack mux_1513_i8_4_lut_LC_1140 {mux_1513_i8_4_lut}
+ble_pack mux_1511_i8_3_lut_LC_1132 {mux_1511_i8_3_lut}
+clb_pack PLB_27 {CLOCK_DDS.tmp_buf_i7_LC_197, CLOCK_DDS.i7713_3_lut_LC_207, CLOCK_DDS.i23_4_lut_LC_204, CLOCK_DDS.i13064_4_lut_LC_201, i12766_2_lut_LC_522, mux_1498_i8_3_lut_LC_1108, mux_1513_i8_4_lut_LC_1140, mux_1511_i8_3_lut_LC_1132}
+ble_pack CLOCK_DDS.i4_4_lut_LC_205 {CLOCK_DDS.i4_4_lut}
+ble_pack CLOCK_DDS.bit_cnt_i3_LC_1045 {CLOCK_DDS.bit_cnt_i3, i9626_4_lut}
+ble_pack CLOCK_DDS.bit_cnt_i2_LC_1036 {CLOCK_DDS.bit_cnt_i2, i8932_3_lut}
+ble_pack CLOCK_DDS.bit_cnt_i1_LC_698 {CLOCK_DDS.bit_cnt_i1, i13_2_lut}
+ble_pack comm_cmd_1__bdd_4_lut_LC_276 {comm_cmd_1__bdd_4_lut}
+ble_pack n16524_bdd_4_lut_LC_1173 {n16524_bdd_4_lut}
+ble_pack i1_4_lut_adj_78_LC_842 {i1_4_lut_adj_78}
+ble_pack i1_4_lut_adj_82_LC_843 {i1_4_lut_adj_82}
+clb_pack PLB_28 {CLOCK_DDS.i4_4_lut_LC_205, CLOCK_DDS.bit_cnt_i3_LC_1045, CLOCK_DDS.bit_cnt_i2_LC_1036, CLOCK_DDS.bit_cnt_i1_LC_698, comm_cmd_1__bdd_4_lut_LC_276, n16524_bdd_4_lut_LC_1173, i1_4_lut_adj_78_LC_842, i1_4_lut_adj_82_LC_843}
+ble_pack comm_cmd_1__bdd_4_lut_13215_LC_277 {comm_cmd_1__bdd_4_lut_13215}
+ble_pack n16398_bdd_4_lut_LC_1152 {n16398_bdd_4_lut}
+ble_pack i108_4_lut_LC_438 {i108_4_lut}
+ble_pack i1_4_lut_adj_123_LC_796 {i1_4_lut_adj_123}
+ble_pack i12726_2_lut_LC_514 {i12726_2_lut}
+ble_pack i12666_2_lut_LC_501 {i12666_2_lut}
+ble_pack comm_buf_0__i5_LC_373 {comm_buf_0__i5, comm_state_3__I_0_382_Mux_5_i6_4_lut}
+clb_pack PLB_29 {comm_cmd_1__bdd_4_lut_13215_LC_277, n16398_bdd_4_lut_LC_1152, i108_4_lut_LC_438, i1_4_lut_adj_123_LC_796, i12726_2_lut_LC_514, i12666_2_lut_LC_501, comm_buf_0__i5_LC_373}
+ble_pack comm_cmd_1__bdd_4_lut_13235_LC_278 {comm_cmd_1__bdd_4_lut_13235}
+ble_pack n16434_bdd_4_lut_LC_1158 {n16434_bdd_4_lut}
+ble_pack i108_4_lut_adj_132_LC_439 {i108_4_lut_adj_132}
+ble_pack i1_4_lut_adj_136_LC_797 {i1_4_lut_adj_136}
+ble_pack i12984_2_lut_LC_540 {i12984_2_lut}
+ble_pack i12655_2_lut_LC_497 {i12655_2_lut}
+ble_pack comm_buf_0__i6_LC_374 {comm_buf_0__i6, comm_state_3__I_0_382_Mux_6_i6_4_lut}
+clb_pack PLB_30 {comm_cmd_1__bdd_4_lut_13235_LC_278, n16434_bdd_4_lut_LC_1158, i108_4_lut_adj_132_LC_439, i1_4_lut_adj_136_LC_797, i12984_2_lut_LC_540, i12655_2_lut_LC_497, comm_buf_0__i6_LC_374}
+ble_pack comm_cmd_1__bdd_4_lut_13269_LC_279 {comm_cmd_1__bdd_4_lut_13269}
+ble_pack n16458_bdd_4_lut_LC_1162 {n16458_bdd_4_lut}
+ble_pack i1_4_lut_adj_117_LC_794 {i1_4_lut_adj_117}
+ble_pack i1_4_lut_adj_118_LC_795 {i1_4_lut_adj_118}
+ble_pack i12816_2_lut_LC_529 {i12816_2_lut}
+ble_pack comm_buf_0__i4_LC_372 {comm_buf_0__i4, comm_state_3__I_0_382_Mux_4_i6_4_lut}
+ble_pack i12674_2_lut_LC_504 {i12674_2_lut}
+clb_pack PLB_31 {comm_cmd_1__bdd_4_lut_13269_LC_279, n16458_bdd_4_lut_LC_1162, i1_4_lut_adj_117_LC_794, i1_4_lut_adj_118_LC_795, i12816_2_lut_LC_529, comm_buf_0__i4_LC_372, i12674_2_lut_LC_504}
+ble_pack comm_cmd_1__bdd_4_lut_13289_LC_280 {comm_cmd_1__bdd_4_lut_13289}
+ble_pack n16500_bdd_4_lut_LC_1169 {n16500_bdd_4_lut}
+ble_pack i1_4_lut_adj_293_LC_829 {i1_4_lut_adj_293}
+ble_pack i1_4_lut_adj_295_LC_830 {i1_4_lut_adj_295}
+ble_pack i127_4_lut_adj_294_LC_527 {i127_4_lut_adj_294}
+ble_pack i130_3_lut_adj_291_LC_691 {i130_3_lut_adj_291}
+ble_pack comm_buf_0__i0_LC_368 {comm_buf_0__i0, comm_state_3__I_0_382_Mux_0_i6_4_lut}
+clb_pack PLB_32 {comm_cmd_1__bdd_4_lut_13289_LC_280, n16500_bdd_4_lut_LC_1169, i1_4_lut_adj_293_LC_829, i1_4_lut_adj_295_LC_830, i127_4_lut_adj_294_LC_527, i130_3_lut_adj_291_LC_691, comm_buf_0__i0_LC_368}
+ble_pack comm_cmd_6__I_0_407_i13_2_lut_3_lut_4_lut_LC_281 {comm_cmd_6__I_0_407_i13_2_lut_3_lut_4_lut}
+ble_pack i1_3_lut_adj_249_LC_768 {i1_3_lut_adj_249}
+ble_pack i1_2_lut_adj_246_LC_744 {i1_2_lut_adj_246}
+ble_pack i9584_3_lut_4_lut_LC_1042 {i9584_3_lut_4_lut}
+ble_pack comm_cmd_6__I_0_i9_2_lut_3_lut_LC_282 {comm_cmd_6__I_0_i9_2_lut_3_lut}
+ble_pack i1_4_lut_4_lut_adj_296_LC_785 {i1_4_lut_4_lut_adj_296}
+ble_pack equal_206_i9_2_lut_3_lut_LC_425 {equal_206_i9_2_lut_3_lut}
+ble_pack i1_4_lut_adj_39_LC_832 {i1_4_lut_adj_39}
+clb_pack PLB_33 {comm_cmd_6__I_0_407_i13_2_lut_3_lut_4_lut_LC_281, i1_3_lut_adj_249_LC_768, i1_2_lut_adj_246_LC_744, i9584_3_lut_4_lut_LC_1042, comm_cmd_6__I_0_i9_2_lut_3_lut_LC_282, i1_4_lut_4_lut_adj_296_LC_785, equal_206_i9_2_lut_3_lut_LC_425, i1_4_lut_adj_39_LC_832}
+ble_pack comm_index_0__bdd_4_lut_LC_283 {comm_index_0__bdd_4_lut}
+ble_pack n16518_bdd_4_lut_LC_1172 {n16518_bdd_4_lut}
+ble_pack comm_tx_buf_i6_LC_434 {comm_tx_buf_i6, i10403_4_lut}
+ble_pack i10400_3_lut_LC_433 {i10400_3_lut}
+ble_pack n16410_bdd_4_lut_LC_1154 {n16410_bdd_4_lut}
+ble_pack comm_index_0__bdd_4_lut_13200_LC_285 {comm_index_0__bdd_4_lut_13200}
+ble_pack n16488_bdd_4_lut_LC_1167 {n16488_bdd_4_lut}
+clb_pack PLB_34 {comm_index_0__bdd_4_lut_LC_283, n16518_bdd_4_lut_LC_1172, comm_tx_buf_i6_LC_434, i10400_3_lut_LC_433, n16410_bdd_4_lut_LC_1154, comm_index_0__bdd_4_lut_13200_LC_285, n16488_bdd_4_lut_LC_1167}
+ble_pack comm_index_0__bdd_4_lut_13195_LC_284 {comm_index_0__bdd_4_lut_13195}
+ble_pack n16404_bdd_4_lut_LC_1153 {n16404_bdd_4_lut}
+ble_pack i979126_i1_3_lut_LC_1060 {i979126_i1_3_lut}
+ble_pack comm_tx_buf_i1_LC_1063 {comm_tx_buf_i1, mux_140_Mux_1_i15_4_lut}
+ble_pack n16512_bdd_4_lut_LC_1171 {n16512_bdd_4_lut}
+ble_pack comm_index_0__bdd_4_lut_13284_LC_296 {comm_index_0__bdd_4_lut_13284}
+ble_pack n16422_bdd_4_lut_LC_1156 {n16422_bdd_4_lut}
+clb_pack PLB_35 {comm_index_0__bdd_4_lut_13195_LC_284, n16404_bdd_4_lut_LC_1153, i979126_i1_3_lut_LC_1060, comm_tx_buf_i1_LC_1063, n16512_bdd_4_lut_LC_1171, comm_index_0__bdd_4_lut_13284_LC_296, n16422_bdd_4_lut_LC_1156}
+ble_pack comm_index_0__bdd_4_lut_13205_LC_286 {comm_index_0__bdd_4_lut_13205}
+ble_pack n16416_bdd_4_lut_LC_1155 {n16416_bdd_4_lut}
+ble_pack i981538_i1_3_lut_LC_1061 {i981538_i1_3_lut}
+ble_pack comm_tx_buf_i5_LC_1067 {comm_tx_buf_i5, mux_140_Mux_5_i15_4_lut}
+ble_pack n16470_bdd_4_lut_LC_1164 {n16470_bdd_4_lut}
+ble_pack comm_index_0__bdd_4_lut_13254_LC_291 {comm_index_0__bdd_4_lut_13254}
+ble_pack n16482_bdd_4_lut_LC_1166 {n16482_bdd_4_lut}
+clb_pack PLB_36 {comm_index_0__bdd_4_lut_13205_LC_286, n16416_bdd_4_lut_LC_1155, i981538_i1_3_lut_LC_1061, comm_tx_buf_i5_LC_1067, n16470_bdd_4_lut_LC_1164, comm_index_0__bdd_4_lut_13254_LC_291, n16482_bdd_4_lut_LC_1166}
+ble_pack comm_index_0__bdd_4_lut_13210_LC_287 {comm_index_0__bdd_4_lut_13210}
+ble_pack comm_buf_10__i1_LC_392 {comm_buf_10__i1, comm_state_3__I_0_392_Mux_1_i6_3_lut}
+ble_pack i12638_2_lut_LC_491 {i12638_2_lut}
+ble_pack i34_4_lut_LC_880 {i34_4_lut}
+ble_pack i1_4_lut_4_lut_adj_243_LC_782 {i1_4_lut_4_lut_adj_243}
+ble_pack i7540_2_lut_LC_967 {i7540_2_lut}
+ble_pack i1_4_lut_adj_269_LC_819 {i1_4_lut_adj_269}
+ble_pack i1_2_lut_adj_273_LC_747 {i1_2_lut_adj_273}
+clb_pack PLB_37 {comm_index_0__bdd_4_lut_13210_LC_287, comm_buf_10__i1_LC_392, i12638_2_lut_LC_491, i34_4_lut_LC_880, i1_4_lut_4_lut_adj_243_LC_782, i7540_2_lut_LC_967, i1_4_lut_adj_269_LC_819, i1_2_lut_adj_273_LC_747}
+ble_pack comm_index_0__bdd_4_lut_13220_LC_288 {comm_index_0__bdd_4_lut_13220}
+ble_pack n16428_bdd_4_lut_LC_1157 {n16428_bdd_4_lut}
+ble_pack comm_tx_buf_i2_LC_1064 {comm_tx_buf_i2, mux_140_Mux_2_i15_4_lut}
+ble_pack n16386_bdd_4_lut_LC_1150 {n16386_bdd_4_lut}
+ble_pack comm_index_1__bdd_4_lut_13182_LC_299 {comm_index_1__bdd_4_lut_13182}
+ble_pack i12237_3_lut_LC_475 {i12237_3_lut}
+ble_pack i12238_3_lut_LC_476 {i12238_3_lut}
+ble_pack i12178_3_lut_LC_460 {i12178_3_lut}
+clb_pack PLB_38 {comm_index_0__bdd_4_lut_13220_LC_288, n16428_bdd_4_lut_LC_1157, comm_tx_buf_i2_LC_1064, n16386_bdd_4_lut_LC_1150, comm_index_1__bdd_4_lut_13182_LC_299, i12237_3_lut_LC_475, i12238_3_lut_LC_476, i12178_3_lut_LC_460}
+ble_pack comm_index_0__bdd_4_lut_13230_LC_289 {comm_index_0__bdd_4_lut_13230}
+ble_pack n16440_bdd_4_lut_LC_1159 {n16440_bdd_4_lut}
+ble_pack comm_tx_buf_i3_LC_1065 {comm_tx_buf_i3, mux_140_Mux_3_i15_4_lut}
+ble_pack n16392_bdd_4_lut_LC_1151 {n16392_bdd_4_lut}
+ble_pack comm_index_1__bdd_4_lut_13225_LC_300 {comm_index_1__bdd_4_lut_13225}
+ble_pack i12213_3_lut_LC_473 {i12213_3_lut}
+ble_pack i12214_3_lut_LC_474 {i12214_3_lut}
+ble_pack i12187_3_lut_LC_464 {i12187_3_lut}
+clb_pack PLB_39 {comm_index_0__bdd_4_lut_13230_LC_289, n16440_bdd_4_lut_LC_1159, comm_tx_buf_i3_LC_1065, n16392_bdd_4_lut_LC_1151, comm_index_1__bdd_4_lut_13225_LC_300, i12213_3_lut_LC_473, i12214_3_lut_LC_474, i12187_3_lut_LC_464}
+ble_pack comm_index_0__bdd_4_lut_13244_LC_290 {comm_index_0__bdd_4_lut_13244}
+ble_pack n16452_bdd_4_lut_LC_1161 {n16452_bdd_4_lut}
+ble_pack comm_tx_buf_i4_LC_1066 {comm_tx_buf_i4, mux_140_Mux_4_i15_4_lut}
+ble_pack n16476_bdd_4_lut_LC_1165 {n16476_bdd_4_lut}
+ble_pack comm_index_1__bdd_4_lut_LC_297 {comm_index_1__bdd_4_lut}
+ble_pack i12189_3_lut_LC_465 {i12189_3_lut}
+ble_pack i12190_3_lut_LC_466 {i12190_3_lut}
+ble_pack i12193_3_lut_LC_468 {i12193_3_lut}
+clb_pack PLB_40 {comm_index_0__bdd_4_lut_13244_LC_290, n16452_bdd_4_lut_LC_1161, comm_tx_buf_i4_LC_1066, n16476_bdd_4_lut_LC_1165, comm_index_1__bdd_4_lut_LC_297, i12189_3_lut_LC_465, i12190_3_lut_LC_466, i12193_3_lut_LC_468}
+ble_pack comm_index_0__bdd_4_lut_13259_LC_292 {comm_index_0__bdd_4_lut_13259}
+ble_pack comm_buf_10__i5_LC_396 {comm_buf_10__i5, comm_state_3__I_0_392_Mux_5_i6_3_lut}
+ble_pack equal_436_i5_2_lut_LC_429 {equal_436_i5_2_lut}
+ble_pack i36_4_lut_LC_881 {i36_4_lut}
+ble_pack i1_4_lut_adj_179_LC_802 {i1_4_lut_adj_179}
+ble_pack i1_3_lut_4_lut_adj_256_LC_764 {i1_3_lut_4_lut_adj_256}
+ble_pack i1_4_lut_adj_142_LC_799 {i1_4_lut_adj_142}
+ble_pack i7477_2_lut_LC_958 {i7477_2_lut}
+clb_pack PLB_41 {comm_index_0__bdd_4_lut_13259_LC_292, comm_buf_10__i5_LC_396, equal_436_i5_2_lut_LC_429, i36_4_lut_LC_881, i1_4_lut_adj_179_LC_802, i1_3_lut_4_lut_adj_256_LC_764, i1_4_lut_adj_142_LC_799, i7477_2_lut_LC_958}
+ble_pack comm_index_0__bdd_4_lut_13264_LC_293 {comm_index_0__bdd_4_lut_13264}
+ble_pack comm_buf_10__i6_LC_397 {comm_buf_10__i6, comm_state_3__I_0_392_Mux_6_i6_3_lut}
+ble_pack i61_2_lut_LC_896 {i61_2_lut}
+ble_pack i12761_2_lut_LC_519 {i12761_2_lut}
+ble_pack i20_4_lut_LC_846 {i20_4_lut}
+ble_pack i1_3_lut_adj_219_LC_767 {i1_3_lut_adj_219}
+ble_pack i1_3_lut_4_lut_adj_260_LC_765 {i1_3_lut_4_lut_adj_260}
+ble_pack i1_2_lut_adj_245_LC_743 {i1_2_lut_adj_245}
+clb_pack PLB_42 {comm_index_0__bdd_4_lut_13264_LC_293, comm_buf_10__i6_LC_397, i61_2_lut_LC_896, i12761_2_lut_LC_519, i20_4_lut_LC_846, i1_3_lut_adj_219_LC_767, i1_3_lut_4_lut_adj_260_LC_765, i1_2_lut_adj_245_LC_743}
+ble_pack comm_index_0__bdd_4_lut_13274_LC_294 {comm_index_0__bdd_4_lut_13274}
+ble_pack n16494_bdd_4_lut_LC_1168 {n16494_bdd_4_lut}
+ble_pack comm_tx_buf_i7_LC_1068 {comm_tx_buf_i7, mux_140_Mux_7_i15_4_lut}
+ble_pack n16380_bdd_4_lut_LC_1149 {n16380_bdd_4_lut}
+ble_pack comm_index_1__bdd_4_lut_13177_LC_298 {comm_index_1__bdd_4_lut_13177}
+ble_pack i12240_3_lut_LC_477 {i12240_3_lut}
+ble_pack i12241_3_lut_LC_478 {i12241_3_lut}
+ble_pack i12172_3_lut_LC_458 {i12172_3_lut}
+clb_pack PLB_43 {comm_index_0__bdd_4_lut_13274_LC_294, n16494_bdd_4_lut_LC_1168, comm_tx_buf_i7_LC_1068, n16380_bdd_4_lut_LC_1149, comm_index_1__bdd_4_lut_13177_LC_298, i12240_3_lut_LC_477, i12241_3_lut_LC_478, i12172_3_lut_LC_458}
+ble_pack comm_index_0__bdd_4_lut_13279_LC_295 {comm_index_0__bdd_4_lut_13279}
+ble_pack n16506_bdd_4_lut_LC_1170 {n16506_bdd_4_lut}
+ble_pack comm_tx_buf_i0_LC_431 {comm_tx_buf_i0, i10399_4_lut}
+ble_pack n16446_bdd_4_lut_LC_1160 {n16446_bdd_4_lut}
+ble_pack comm_index_1__bdd_4_lut_13249_LC_301 {comm_index_1__bdd_4_lut_13249}
+ble_pack i12201_3_lut_LC_471 {i12201_3_lut}
+ble_pack i12202_3_lut_LC_472 {i12202_3_lut}
+ble_pack i12181_3_lut_LC_462 {i12181_3_lut}
+clb_pack PLB_44 {comm_index_0__bdd_4_lut_13279_LC_295, n16506_bdd_4_lut_LC_1170, comm_tx_buf_i0_LC_431, n16446_bdd_4_lut_LC_1160, comm_index_1__bdd_4_lut_13249_LC_301, i12201_3_lut_LC_471, i12202_3_lut_LC_472, i12181_3_lut_LC_462}
+ble_pack comm_state_1__bdd_4_lut_LC_361 {comm_state_1__bdd_4_lut}
+ble_pack n16464_bdd_4_lut_LC_1163 {n16464_bdd_4_lut}
+ble_pack comm_state_3__I_0_378_Mux_1_i2_3_lut_4_lut_LC_364 {comm_state_3__I_0_378_Mux_1_i2_3_lut_4_lut}
+ble_pack i12842_2_lut_LC_532 {i12842_2_lut}
+ble_pack comm_state_i1_LC_363 {comm_state_i1, comm_state_3__I_0_378_Mux_1_i15_4_lut}
+ble_pack comm_state_3__I_0_378_Mux_1_i8_3_lut_4_lut_LC_365 {comm_state_3__I_0_378_Mux_1_i8_3_lut_4_lut}
+ble_pack i244_2_lut_LC_853 {i244_2_lut}
+ble_pack i13037_4_lut_LC_685 {i13037_4_lut}
+clb_pack PLB_45 {comm_state_1__bdd_4_lut_LC_361, n16464_bdd_4_lut_LC_1163, comm_state_3__I_0_378_Mux_1_i2_3_lut_4_lut_LC_364, i12842_2_lut_LC_532, comm_state_i1_LC_363, comm_state_3__I_0_378_Mux_1_i8_3_lut_4_lut_LC_365, i244_2_lut_LC_853, i13037_4_lut_LC_685}
+ble_pack comm_state_3__I_0_378_Mux_3_i7_4_lut_LC_367 {comm_state_3__I_0_378_Mux_3_i7_4_lut}
+ble_pack comm_state_i3_LC_366 {comm_state_i3, comm_state_3__I_0_378_Mux_3_i15_4_lut}
+ble_pack i1_2_lut_3_lut_adj_174_LC_724 {i1_2_lut_3_lut_adj_174}
+ble_pack i1_4_lut_adj_285_LC_825 {i1_4_lut_adj_285}
+ble_pack i2_4_lut_adj_277_LC_865 {i2_4_lut_adj_277}
+ble_pack i1_4_lut_adj_65_LC_837 {i1_4_lut_adj_65}
+ble_pack i1_4_lut_adj_276_LC_822 {i1_4_lut_adj_276}
+ble_pack i1_3_lut_LC_760 {i1_3_lut}
+clb_pack PLB_46 {comm_state_3__I_0_378_Mux_3_i7_4_lut_LC_367, comm_state_i3_LC_366, i1_2_lut_3_lut_adj_174_LC_724, i1_4_lut_adj_285_LC_825, i2_4_lut_adj_277_LC_865, i1_4_lut_adj_65_LC_837, i1_4_lut_adj_276_LC_822, i1_3_lut_LC_760}
+ble_pack comm_buf_0__i1_LC_369 {comm_buf_0__i1, comm_state_3__I_0_382_Mux_1_i6_4_lut}
+ble_pack i12632_2_lut_LC_488 {i12632_2_lut}
+ble_pack i1_4_lut_adj_140_LC_798 {i1_4_lut_adj_140}
+ble_pack i12650_2_lut_LC_494 {i12650_2_lut}
+ble_pack comm_buf_0__i7_LC_375 {comm_buf_0__i7, comm_state_3__I_0_382_Mux_7_i6_4_lut}
+ble_pack i1_4_lut_adj_150_LC_800 {i1_4_lut_adj_150}
+ble_pack i106_4_lut_LC_437 {i106_4_lut}
+clb_pack PLB_47 {comm_buf_0__i1_LC_369, i12632_2_lut_LC_488, i1_4_lut_adj_140_LC_798, i12650_2_lut_LC_494, comm_buf_0__i7_LC_375, i1_4_lut_adj_150_LC_800, i106_4_lut_LC_437}
+ble_pack comm_buf_0__i2_LC_370 {comm_buf_0__i2, comm_state_3__I_0_382_Mux_2_i6_4_lut}
+ble_pack i1_4_lut_adj_97_LC_845 {i1_4_lut_adj_97}
+ble_pack i124_4_lut_LC_481 {i124_4_lut}
+ble_pack i131_3_lut_LC_694 {i131_3_lut}
+ble_pack i127_4_lut_adj_96_LC_528 {i127_4_lut_adj_96}
+ble_pack i12699_2_lut_LC_508 {i12699_2_lut}
+ble_pack i1_4_lut_adj_53_LC_834 {i1_4_lut_adj_53}
+ble_pack i123_3_lut_LC_479 {i123_3_lut}
+clb_pack PLB_48 {comm_buf_0__i2_LC_370, i1_4_lut_adj_97_LC_845, i124_4_lut_LC_481, i131_3_lut_LC_694, i127_4_lut_adj_96_LC_528, i12699_2_lut_LC_508, i1_4_lut_adj_53_LC_834, i123_3_lut_LC_479}
+ble_pack comm_buf_0__i3_LC_371 {comm_buf_0__i3, comm_state_3__I_0_382_Mux_3_i6_4_lut}
+ble_pack i1_4_lut_adj_110_LC_790 {i1_4_lut_adj_110}
+ble_pack i124_4_lut_adj_108_LC_482 {i124_4_lut_adj_108}
+ble_pack i131_3_lut_adj_102_LC_695 {i131_3_lut_adj_102}
+ble_pack i127_4_lut_adj_107_LC_526 {i127_4_lut_adj_107}
+ble_pack i12691_2_lut_LC_507 {i12691_2_lut}
+ble_pack i123_3_lut_adj_105_LC_480 {i123_3_lut_adj_105}
+ble_pack i1_4_lut_adj_116_LC_793 {i1_4_lut_adj_116}
+clb_pack PLB_49 {comm_buf_0__i3_LC_371, i1_4_lut_adj_110_LC_790, i124_4_lut_adj_108_LC_482, i131_3_lut_adj_102_LC_695, i127_4_lut_adj_107_LC_526, i12691_2_lut_LC_507, i123_3_lut_adj_105_LC_480, i1_4_lut_adj_116_LC_793}
+ble_pack comm_state_3__I_0_394_Mux_0_i15_4_lut_LC_406 {comm_state_3__I_0_394_Mux_0_i15_4_lut}
+ble_pack data_index_i0_LC_1214 {data_index_i0, comm_state_3__I_0_394_Mux_0_i15_4_lut_data_index_i0_REP_LUT4_0}
+ble_pack i2356_3_lut_LC_851 {i2356_3_lut}
+ble_pack i2358_3_lut_LC_852 {i2358_3_lut}
+ble_pack i15_4_lut_adj_288_LC_704 {i15_4_lut_adj_288}
+ble_pack acadc_skipCount_i0_LC_971 {acadc_skipCount_i0, i7732_3_lut_4_lut}
+ble_pack i1_4_lut_adj_70_LC_839 {i1_4_lut_adj_70}
+ble_pack acadc_skipCount_i6_LC_997 {acadc_skipCount_i6, i7770_3_lut_4_lut}
+clb_pack PLB_50 {comm_state_3__I_0_394_Mux_0_i15_4_lut_LC_406, data_index_i0_LC_1214, i2356_3_lut_LC_851, i2358_3_lut_LC_852, i15_4_lut_adj_288_LC_704, acadc_skipCount_i0_LC_971, i1_4_lut_adj_70_LC_839, acadc_skipCount_i6_LC_997}
+ble_pack comm_state_3__I_0_394_Mux_1_i15_4_lut_LC_407 {comm_state_3__I_0_394_Mux_1_i15_4_lut}
+ble_pack data_index_i1_LC_1215 {data_index_i1, comm_state_3__I_0_394_Mux_1_i15_4_lut_data_index_i1_REP_LUT4_0}
+ble_pack i3209_3_lut_LC_878 {i3209_3_lut}
+ble_pack i2992_3_lut_4_lut_LC_855 {i2992_3_lut_4_lut}
+ble_pack i3145_3_lut_LC_870 {i3145_3_lut}
+ble_pack comm_state_3__I_0_394_Mux_8_i15_4_lut_LC_414 {comm_state_3__I_0_394_Mux_8_i15_4_lut}
+ble_pack data_index_i8_LC_1222 {data_index_i8, comm_state_3__I_0_394_Mux_8_i15_4_lut_data_index_i8_REP_LUT4_0}
+ble_pack i3157_3_lut_LC_871 {i3157_3_lut}
+clb_pack PLB_51 {comm_state_3__I_0_394_Mux_1_i15_4_lut_LC_407, data_index_i1_LC_1215, i3209_3_lut_LC_878, i2992_3_lut_4_lut_LC_855, i3145_3_lut_LC_870, comm_state_3__I_0_394_Mux_8_i15_4_lut_LC_414, data_index_i8_LC_1222, i3157_3_lut_LC_871}
+ble_pack comm_state_3__I_0_394_Mux_2_i15_4_lut_LC_408 {comm_state_3__I_0_394_Mux_2_i15_4_lut}
+ble_pack data_index_i2_LC_1216 {data_index_i2, comm_state_3__I_0_394_Mux_2_i15_4_lut_data_index_i2_REP_LUT4_0}
+ble_pack i3201_3_lut_LC_877 {i3201_3_lut}
+ble_pack acadc_skipCount_i2_LC_993 {acadc_skipCount_i2, i7766_3_lut_4_lut}
+ble_pack i6_4_lut_LC_947 {i6_4_lut}
+ble_pack acadc_skipCount_i7_LC_998 {acadc_skipCount_i7, i7771_3_lut_4_lut}
+ble_pack i14_4_lut_LC_700 {i14_4_lut}
+ble_pack i15_4_lut_LC_702 {i15_4_lut}
+clb_pack PLB_52 {comm_state_3__I_0_394_Mux_2_i15_4_lut_LC_408, data_index_i2_LC_1216, i3201_3_lut_LC_877, acadc_skipCount_i2_LC_993, i6_4_lut_LC_947, acadc_skipCount_i7_LC_998, i14_4_lut_LC_700, i15_4_lut_LC_702}
+ble_pack comm_state_3__I_0_394_Mux_3_i15_4_lut_LC_409 {comm_state_3__I_0_394_Mux_3_i15_4_lut}
+ble_pack data_index_i3_LC_1217 {data_index_i3, comm_state_3__I_0_394_Mux_3_i15_4_lut_data_index_i3_REP_LUT4_0}
+ble_pack i3193_3_lut_LC_875 {i3193_3_lut}
+ble_pack acadc_skipCount_i3_LC_994 {acadc_skipCount_i3, i7767_3_lut_4_lut}
+ble_pack i4_4_lut_LC_892 {i4_4_lut}
+ble_pack acadc_skipCount_i5_LC_996 {acadc_skipCount_i5, i7769_3_lut_4_lut}
+ble_pack i10_4_lut_LC_441 {i10_4_lut}
+ble_pack equal_46_i14_2_lut_LC_430 {equal_46_i14_2_lut}
+clb_pack PLB_53 {comm_state_3__I_0_394_Mux_3_i15_4_lut_LC_409, data_index_i3_LC_1217, i3193_3_lut_LC_875, acadc_skipCount_i3_LC_994, i4_4_lut_LC_892, acadc_skipCount_i5_LC_996, i10_4_lut_LC_441, equal_46_i14_2_lut_LC_430}
+ble_pack comm_state_3__I_0_394_Mux_4_i15_4_lut_LC_410 {comm_state_3__I_0_394_Mux_4_i15_4_lut}
+ble_pack data_index_i4_LC_1218 {data_index_i4, comm_state_3__I_0_394_Mux_4_i15_4_lut_data_index_i4_REP_LUT4_0}
+ble_pack i3181_3_lut_LC_874 {i3181_3_lut}
+ble_pack acadc_skipCount_i4_LC_995 {acadc_skipCount_i4, i7768_3_lut_4_lut}
+ble_pack i2_4_lut_adj_69_LC_867 {i2_4_lut_adj_69}
+ble_pack acadc_skipCount_i1_LC_992 {acadc_skipCount_i1, i7765_3_lut_4_lut}
+ble_pack mux_1502_i5_3_lut_LC_1113 {mux_1502_i5_3_lut}
+ble_pack mux_1511_i5_3_lut_LC_1129 {mux_1511_i5_3_lut}
+clb_pack PLB_54 {comm_state_3__I_0_394_Mux_4_i15_4_lut_LC_410, data_index_i4_LC_1218, i3181_3_lut_LC_874, acadc_skipCount_i4_LC_995, i2_4_lut_adj_69_LC_867, acadc_skipCount_i1_LC_992, mux_1502_i5_3_lut_LC_1113, mux_1511_i5_3_lut_LC_1129}
+ble_pack comm_state_3__I_0_394_Mux_5_i15_4_lut_LC_411 {comm_state_3__I_0_394_Mux_5_i15_4_lut}
+ble_pack data_index_i5_LC_1219 {data_index_i5, comm_state_3__I_0_394_Mux_5_i15_4_lut_data_index_i5_REP_LUT4_0}
+ble_pack i3173_3_lut_LC_873 {i3173_3_lut}
+ble_pack req_data_cnt_i5_LC_1011 {req_data_cnt_i5, i7784_3_lut_4_lut}
+ble_pack i4_4_lut_adj_103_LC_893 {i4_4_lut_adj_103}
+ble_pack req_data_cnt_i3_LC_1009 {req_data_cnt_i3, i7782_3_lut_4_lut}
+ble_pack i13_4_lut_LC_699 {i13_4_lut}
+ble_pack eis_end_I_3_3_lut_LC_417 {eis_end_I_3_3_lut}
+clb_pack PLB_55 {comm_state_3__I_0_394_Mux_5_i15_4_lut_LC_411, data_index_i5_LC_1219, i3173_3_lut_LC_873, req_data_cnt_i5_LC_1011, i4_4_lut_adj_103_LC_893, req_data_cnt_i3_LC_1009, i13_4_lut_LC_699, eis_end_I_3_3_lut_LC_417}
+ble_pack comm_state_3__I_0_394_Mux_6_i15_4_lut_LC_412 {comm_state_3__I_0_394_Mux_6_i15_4_lut}
+ble_pack data_index_i6_LC_1220 {data_index_i6, comm_state_3__I_0_394_Mux_6_i15_4_lut_data_index_i6_REP_LUT4_0}
+ble_pack i3165_3_lut_LC_872 {i3165_3_lut}
+ble_pack i1_4_lut_4_lut_adj_178_LC_775 {i1_4_lut_4_lut_adj_178}
+ble_pack i30_4_lut_adj_265_LC_869 {i30_4_lut_adj_265}
+ble_pack i12752_4_lut_LC_518 {i12752_4_lut}
+ble_pack i1_2_lut_3_lut_adj_196_LC_729 {i1_2_lut_3_lut_adj_196}
+ble_pack i12765_2_lut_3_lut_4_lut_LC_521 {i12765_2_lut_3_lut_4_lut}
+clb_pack PLB_56 {comm_state_3__I_0_394_Mux_6_i15_4_lut_LC_412, data_index_i6_LC_1220, i3165_3_lut_LC_872, i1_4_lut_4_lut_adj_178_LC_775, i30_4_lut_adj_265_LC_869, i12752_4_lut_LC_518, i1_2_lut_3_lut_adj_196_LC_729, i12765_2_lut_3_lut_4_lut_LC_521}
+ble_pack comm_state_3__I_0_394_Mux_7_i15_4_lut_LC_413 {comm_state_3__I_0_394_Mux_7_i15_4_lut}
+ble_pack data_index_i7_LC_1221 {data_index_i7, comm_state_3__I_0_394_Mux_7_i15_4_lut_data_index_i7_REP_LUT4_0}
+ble_pack i3754_2_lut_LC_882 {i3754_2_lut}
+ble_pack i1_4_lut_adj_28_LC_823 {i1_4_lut_adj_28}
+ble_pack buf_device_acadc_i5_LC_988 {buf_device_acadc_i5, i7761_3_lut_4_lut}
+ble_pack buf_device_acadc_i6_LC_989 {buf_device_acadc_i6, i7762_3_lut_4_lut}
+ble_pack buf_device_acadc_i7_LC_990 {buf_device_acadc_i7, i7763_3_lut_4_lut}
+ble_pack buf_device_acadc_i8_LC_991 {buf_device_acadc_i8, i7764_3_lut_4_lut}
+clb_pack PLB_57 {comm_state_3__I_0_394_Mux_7_i15_4_lut_LC_413, data_index_i7_LC_1221, i3754_2_lut_LC_882, i1_4_lut_adj_28_LC_823, buf_device_acadc_i5_LC_988, buf_device_acadc_i6_LC_989, buf_device_acadc_i7_LC_990, buf_device_acadc_i8_LC_991}
+ble_pack data_idxvec_i0_LC_415 {data_idxvec_i0, comm_state_3__I_0_395_Mux_0_i15_3_lut_4_lut}
+ble_pack mux_1494_i1_3_lut_LC_1093 {mux_1494_i1_3_lut}
+ble_pack mux_1507_i1_4_lut_LC_1117 {mux_1507_i1_4_lut}
+ble_pack mux_1511_i1_3_lut_LC_1125 {mux_1511_i1_3_lut}
+ble_pack mux_1513_i1_4_lut_LC_1133 {mux_1513_i1_4_lut}
+ble_pack i1_3_lut_4_lut_LC_762 {i1_3_lut_4_lut}
+ble_pack i37_4_lut_4_lut_LC_883 {i37_4_lut_4_lut}
+ble_pack i12654_4_lut_LC_496 {i12654_4_lut}
+clb_pack PLB_58 {data_idxvec_i0_LC_415, mux_1494_i1_3_lut_LC_1093, mux_1507_i1_4_lut_LC_1117, mux_1511_i1_3_lut_LC_1125, mux_1513_i1_4_lut_LC_1133, i1_3_lut_4_lut_LC_762, i37_4_lut_4_lut_LC_883, i12654_4_lut_LC_496}
+ble_pack comm_response_331_LC_416 {comm_response_331, comm_state_3__I_0_400_i15_4_lut_4_lut}
+ble_pack i1_3_lut_4_lut_4_lut_LC_763 {i1_3_lut_4_lut_4_lut}
+ble_pack i1_3_lut_3_lut_4_lut_LC_761 {i1_3_lut_3_lut_4_lut}
+ble_pack i1_4_lut_4_lut_4_lut_LC_773 {i1_4_lut_4_lut_4_lut}
+ble_pack i1_4_lut_3_lut_4_lut_LC_771 {i1_4_lut_3_lut_4_lut}
+ble_pack i2_2_lut_3_lut_LC_857 {i2_2_lut_3_lut}
+ble_pack i2_2_lut_3_lut_adj_226_LC_858 {i2_2_lut_3_lut_adj_226}
+ble_pack i1_2_lut_3_lut_LC_717 {i1_2_lut_3_lut}
+clb_pack PLB_59 {comm_response_331_LC_416, i1_3_lut_4_lut_4_lut_LC_763, i1_3_lut_3_lut_4_lut_LC_761, i1_4_lut_4_lut_4_lut_LC_773, i1_4_lut_3_lut_4_lut_LC_771, i2_2_lut_3_lut_LC_857, i2_2_lut_3_lut_adj_226_LC_858, i1_2_lut_3_lut_LC_717}
+ble_pack eis_state_i1_LC_419 {eis_state_i1, eis_state_2__I_0_405_Mux_1_i7_4_lut}
+ble_pack i12776_2_lut_3_lut_LC_524 {i12776_2_lut_3_lut}
+ble_pack i13047_3_lut_LC_687 {i13047_3_lut}
+ble_pack i17_4_lut_LC_711 {i17_4_lut}
+ble_pack eis_state_i2_LC_420 {eis_state_i2, eis_state_2__I_0_405_Mux_2_i7_4_lut}
+ble_pack i12862_2_lut_LC_536 {i12862_2_lut}
+ble_pack i12861_3_lut_LC_535 {i12861_3_lut}
+ble_pack eis_state_i0_LC_418 {eis_state_i0, eis_state_2__I_0_405_Mux_0_i7_4_lut}
+clb_pack PLB_60 {eis_state_i1_LC_419, i12776_2_lut_3_lut_LC_524, i13047_3_lut_LC_687, i17_4_lut_LC_711, eis_state_i2_LC_420, i12862_2_lut_LC_536, i12861_3_lut_LC_535, eis_state_i0_LC_418}
+ble_pack equal_119_i13_2_lut_3_lut_4_lut_LC_422 {equal_119_i13_2_lut_3_lut_4_lut}
+ble_pack equal_208_i13_2_lut_3_lut_4_lut_LC_426 {equal_208_i13_2_lut_3_lut_4_lut}
+ble_pack i1_2_lut_4_lut_LC_737 {i1_2_lut_4_lut}
+ble_pack i1_2_lut_adj_300_LC_752 {i1_2_lut_adj_300}
+ble_pack i12098_3_lut_4_lut_LC_455 {i12098_3_lut_4_lut}
+ble_pack i2_3_lut_4_lut_LC_861 {i2_3_lut_4_lut}
+ble_pack i3_4_lut_4_lut_LC_888 {i3_4_lut_4_lut}
+ble_pack i9546_2_lut_3_lut_3_lut_3_lut_LC_1039 {i9546_2_lut_3_lut_3_lut_3_lut}
+clb_pack PLB_61 {equal_119_i13_2_lut_3_lut_4_lut_LC_422, equal_208_i13_2_lut_3_lut_4_lut_LC_426, i1_2_lut_4_lut_LC_737, i1_2_lut_adj_300_LC_752, i12098_3_lut_4_lut_LC_455, i2_3_lut_4_lut_LC_861, i3_4_lut_4_lut_LC_888, i9546_2_lut_3_lut_3_lut_3_lut_LC_1039}
+ble_pack i103_4_lut_LC_432 {i103_4_lut}
+ble_pack i12648_4_lut_LC_493 {i12648_4_lut}
+ble_pack i1_2_lut_adj_289_LC_750 {i1_2_lut_adj_289}
+ble_pack i110_4_lut_LC_443 {i110_4_lut}
+ble_pack i12836_2_lut_3_lut_LC_531 {i12836_2_lut_3_lut}
+ble_pack i1_4_lut_adj_230_LC_812 {i1_4_lut_adj_230}
+ble_pack i31_3_lut_4_lut_3_lut_LC_876 {i31_3_lut_4_lut_3_lut}
+ble_pack i22_4_lut_adj_232_LC_850 {i22_4_lut_adj_232}
+clb_pack PLB_62 {i103_4_lut_LC_432, i12648_4_lut_LC_493, i1_2_lut_adj_289_LC_750, i110_4_lut_LC_443, i12836_2_lut_3_lut_LC_531, i1_4_lut_adj_230_LC_812, i31_3_lut_4_lut_3_lut_LC_876, i22_4_lut_adj_232_LC_850}
+ble_pack i105_4_lut_LC_435 {i105_4_lut}
+ble_pack i1_2_lut_3_lut_2_lut_LC_718 {i1_2_lut_3_lut_2_lut}
+ble_pack i1_2_lut_adj_228_LC_742 {i1_2_lut_adj_228}
+ble_pack i105_4_lut_adj_131_LC_436 {i105_4_lut_adj_131}
+ble_pack i125_4_lut_LC_483 {i125_4_lut}
+ble_pack i130_3_lut_adj_85_LC_692 {i130_3_lut_adj_85}
+ble_pack tacadc_rst_364_LC_980 {tacadc_rst_364, i7741_3_lut}
+ble_pack acadc_skipCount_i10_LC_1001 {acadc_skipCount_i10, i7774_3_lut_4_lut}
+clb_pack PLB_63 {i105_4_lut_LC_435, i1_2_lut_3_lut_2_lut_LC_718, i1_2_lut_adj_228_LC_742, i105_4_lut_adj_131_LC_436, i125_4_lut_LC_483, i130_3_lut_adj_85_LC_692, tacadc_rst_364_LC_980, acadc_skipCount_i10_LC_1001}
+ble_pack i10_4_lut_adj_190_LC_442 {i10_4_lut_adj_190}
+ble_pack i15_4_lut_adj_193_LC_703 {i15_4_lut_adj_193}
+ble_pack i7_4_lut_adj_194_LC_1023 {i7_4_lut_adj_194}
+ble_pack SecClk_321_LC_748 {SecClk_321, i1_2_lut_adj_278}
+ble_pack i9_4_lut_LC_1062 {i9_4_lut}
+ble_pack i11_4_lut_adj_191_LC_450 {i11_4_lut_adj_191}
+clb_pack PLB_64 {i10_4_lut_adj_190_LC_442, i15_4_lut_adj_193_LC_703, i7_4_lut_adj_194_LC_1023, SecClk_321_LC_748, i9_4_lut_LC_1062, i11_4_lut_adj_191_LC_450}
+ble_pack i111_4_lut_LC_444 {i111_4_lut}
+ble_pack buf_control_5__356_LC_973 {buf_control_5__356, i7734_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i21_LC_133 {ADC_VAC3.ADC_DATA_i21, ADC_VAC3.i7861_3_lut_4_lut}
+ble_pack buf_control_6__355_LC_972 {buf_control_6__355, i7733_3_lut_4_lut}
+ble_pack i111_4_lut_adj_133_LC_445 {i111_4_lut_adj_133}
+ble_pack ADC_VAC3.ADC_DATA_i22_LC_134 {ADC_VAC3.ADC_DATA_i22, ADC_VAC3.i7862_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i30_LC_621 {ADC_VAC3.cmd_rdadctmp_i30, i12_4_lut_adj_239}
+ble_pack ADC_VAC3.cmd_rdadctmp_i31_LC_617 {ADC_VAC3.cmd_rdadctmp_i31, i12_4_lut_adj_223}
+clb_pack PLB_65 {i111_4_lut_LC_444, buf_control_5__356_LC_973, ADC_VAC3.ADC_DATA_i21_LC_133, buf_control_6__355_LC_972, i111_4_lut_adj_133_LC_445, ADC_VAC3.ADC_DATA_i22_LC_134, ADC_VAC3.cmd_rdadctmp_i30_LC_621, ADC_VAC3.cmd_rdadctmp_i31_LC_617}
+ble_pack i112_4_lut_LC_446 {i112_4_lut}
+ble_pack buf_control_4__357_LC_974 {buf_control_4__357, i7735_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i20_LC_132 {ADC_VAC3.ADC_DATA_i20, ADC_VAC3.i7860_3_lut_4_lut}
+ble_pack buf_control_3__358_LC_975 {buf_control_3__358, i7736_3_lut_4_lut}
+ble_pack buf_control_0__361_LC_978 {buf_control_0__361, i7739_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i28_LC_627 {ADC_VAC3.cmd_rdadctmp_i28, i12_4_lut_adj_257}
+ble_pack ADC_VAC3.cmd_rdadctmp_i29_LC_624 {ADC_VAC3.cmd_rdadctmp_i29, i12_4_lut_adj_252}
+ble_pack ADC_VAC3.cmd_rdadctmp_i27_LC_628 {ADC_VAC3.cmd_rdadctmp_i27, i12_4_lut_adj_258}
+clb_pack PLB_66 {i112_4_lut_LC_446, buf_control_4__357_LC_974, ADC_VAC3.ADC_DATA_i20_LC_132, buf_control_3__358_LC_975, buf_control_0__361_LC_978, ADC_VAC3.cmd_rdadctmp_i28_LC_627, ADC_VAC3.cmd_rdadctmp_i29_LC_624, ADC_VAC3.cmd_rdadctmp_i27_LC_628}
+ble_pack i12103_3_lut_4_lut_LC_456 {i12103_3_lut_4_lut}
+ble_pack i1_4_lut_adj_63_LC_836 {i1_4_lut_adj_63}
+ble_pack i1_2_lut_3_lut_adj_251_LC_732 {i1_2_lut_3_lut_adj_251}
+ble_pack i13023_2_lut_3_lut_LC_680 {i13023_2_lut_3_lut}
+ble_pack i2_3_lut_LC_859 {i2_3_lut}
+ble_pack comm_cmd_i6_LC_589 {comm_cmd_i6, i12_4_lut_adj_170}
+ble_pack comm_cmd_i4_LC_447 {comm_cmd_i4, i11_4_lut}
+ble_pack comm_cmd_i5_LC_590 {comm_cmd_i5, i12_4_lut_adj_171}
+clb_pack PLB_67 {i12103_3_lut_4_lut_LC_456, i1_4_lut_adj_63_LC_836, i1_2_lut_3_lut_adj_251_LC_732, i13023_2_lut_3_lut_LC_680, i2_3_lut_LC_859, comm_cmd_i6_LC_589, comm_cmd_i4_LC_447, comm_cmd_i5_LC_590}
+ble_pack i12200_4_lut_LC_470 {i12200_4_lut}
+ble_pack comm_state_i0_LC_362 {comm_state_i0, comm_state_3__I_0_378_Mux_0_i15_3_lut}
+ble_pack i1_2_lut_3_lut_adj_299_LC_735 {i1_2_lut_3_lut_adj_299}
+ble_pack i12198_3_lut_LC_469 {i12198_3_lut}
+ble_pack i7283_2_lut_LC_955 {i7283_2_lut}
+ble_pack i12980_3_lut_LC_539 {i12980_3_lut}
+ble_pack i12728_2_lut_3_lut_LC_515 {i12728_2_lut_3_lut}
+ble_pack i22_3_lut_4_lut_LC_848 {i22_3_lut_4_lut}
+clb_pack PLB_68 {i12200_4_lut_LC_470, comm_state_i0_LC_362, i1_2_lut_3_lut_adj_299_LC_735, i12198_3_lut_LC_469, i7283_2_lut_LC_955, i12980_3_lut_LC_539, i12728_2_lut_3_lut_LC_515, i22_3_lut_4_lut_LC_848}
+ble_pack i125_4_lut_adj_99_LC_484 {i125_4_lut_adj_99}
+ble_pack i130_3_lut_adj_98_LC_693 {i130_3_lut_adj_98}
+ble_pack acadc_skipCount_i11_LC_1002 {acadc_skipCount_i11, i7775_3_lut_4_lut}
+ble_pack i7_4_lut_LC_1022 {i7_4_lut}
+ble_pack acadc_skipCount_i14_LC_1005 {acadc_skipCount_i14, i7778_3_lut_4_lut}
+ble_pack buf_device_acadc_i4_LC_987 {buf_device_acadc_i4, i7760_3_lut_4_lut}
+ble_pack i132_4_lut_adj_100_LC_697 {i132_4_lut_adj_100}
+ble_pack buf_dds_i11_LC_1029 {buf_dds_i11, i8309_4_lut_4_lut}
+clb_pack PLB_69 {i125_4_lut_adj_99_LC_484, i130_3_lut_adj_98_LC_693, acadc_skipCount_i11_LC_1002, i7_4_lut_LC_1022, acadc_skipCount_i14_LC_1005, buf_device_acadc_i4_LC_987, i132_4_lut_adj_100_LC_697, buf_dds_i11_LC_1029}
+ble_pack i12636_3_lut_4_lut_LC_489 {i12636_3_lut_4_lut}
+ble_pack i39_4_lut_LC_884 {i39_4_lut}
+ble_pack comm_length_i2_LC_862 {comm_length_i2, i2_4_lut}
+ble_pack i2_4_lut_adj_281_LC_866 {i2_4_lut_adj_281}
+ble_pack comm_length_i3_LC_838 {comm_length_i3, i1_4_lut_adj_66}
+ble_pack i39_4_lut_adj_64_LC_885 {i39_4_lut_adj_64}
+ble_pack i12637_3_lut_4_lut_LC_490 {i12637_3_lut_4_lut}
+ble_pack i3_4_lut_adj_283_LC_891 {i3_4_lut_adj_283}
+clb_pack PLB_70 {i12636_3_lut_4_lut_LC_489, i39_4_lut_LC_884, comm_length_i2_LC_862, i2_4_lut_adj_281_LC_866, comm_length_i3_LC_838, i39_4_lut_adj_64_LC_885, i12637_3_lut_4_lut_LC_490, i3_4_lut_adj_283_LC_891}
+ble_pack i12647_4_lut_LC_492 {i12647_4_lut}
+ble_pack acadc_skipCount_i15_LC_1006 {acadc_skipCount_i15, i7779_3_lut_4_lut}
+ble_pack i8_4_lut_LC_1037 {i8_4_lut}
+ble_pack acadc_skipCount_i9_LC_1000 {acadc_skipCount_i9, i7773_3_lut_4_lut}
+ble_pack i13004_2_lut_LC_676 {i13004_2_lut}
+ble_pack buf_device_acadc_i2_LC_985 {buf_device_acadc_i2, i7758_3_lut_4_lut}
+ble_pack i12629_2_lut_LC_486 {i12629_2_lut}
+ble_pack buf_device_acadc_i3_LC_986 {buf_device_acadc_i3, i7759_3_lut_4_lut}
+clb_pack PLB_71 {i12647_4_lut_LC_492, acadc_skipCount_i15_LC_1006, i8_4_lut_LC_1037, acadc_skipCount_i9_LC_1000, i13004_2_lut_LC_676, buf_device_acadc_i2_LC_985, i12629_2_lut_LC_486, buf_device_acadc_i3_LC_986}
+ble_pack i12680_4_lut_4_lut_LC_506 {i12680_4_lut_4_lut}
+ble_pack i12771_4_lut_LC_523 {i12771_4_lut}
+ble_pack i1_3_lut_4_lut_adj_271_LC_766 {i1_3_lut_4_lut_adj_271}
+ble_pack i1_4_lut_adj_115_LC_792 {i1_4_lut_adj_115}
+ble_pack i1_3_lut_adj_297_LC_769 {i1_3_lut_adj_297}
+ble_pack i1_4_lut_adj_301_LC_831 {i1_4_lut_adj_301}
+ble_pack i12762_2_lut_LC_520 {i12762_2_lut}
+ble_pack i9554_2_lut_LC_1040 {i9554_2_lut}
+clb_pack PLB_72 {i12680_4_lut_4_lut_LC_506, i12771_4_lut_LC_523, i1_3_lut_4_lut_adj_271_LC_766, i1_4_lut_adj_115_LC_792, i1_3_lut_adj_297_LC_769, i1_4_lut_adj_301_LC_831, i12762_2_lut_LC_520, i9554_2_lut_LC_1040}
+ble_pack i127_4_lut_LC_525 {i127_4_lut}
+ble_pack i130_3_lut_LC_690 {i130_3_lut}
+ble_pack equal_114_i8_2_lut_LC_421 {equal_114_i8_2_lut}
+ble_pack i9560_2_lut_LC_1041 {i9560_2_lut}
+ble_pack i1_4_lut_adj_290_LC_827 {i1_4_lut_adj_290}
+ble_pack i1_4_lut_adj_292_LC_828 {i1_4_lut_adj_292}
+ble_pack i1_4_lut_adj_77_LC_841 {i1_4_lut_adj_77}
+ble_pack i1_4_lut_adj_71_LC_840 {i1_4_lut_adj_71}
+clb_pack PLB_73 {i127_4_lut_LC_525, i130_3_lut_LC_690, equal_114_i8_2_lut_LC_421, i9560_2_lut_LC_1041, i1_4_lut_adj_290_LC_827, i1_4_lut_adj_292_LC_828, i1_4_lut_adj_77_LC_841, i1_4_lut_adj_71_LC_840}
+ble_pack i12817_4_lut_4_lut_LC_530 {i12817_4_lut_4_lut}
+ble_pack i1_4_lut_adj_41_LC_833 {i1_4_lut_adj_41}
+ble_pack i13040_2_lut_3_lut_LC_686 {i13040_2_lut_3_lut}
+ble_pack comm_state_i2_LC_847 {comm_state_i2, i21_4_lut}
+ble_pack i22_4_lut_LC_849 {i22_4_lut}
+ble_pack i12879_4_lut_LC_537 {i12879_4_lut}
+ble_pack i1_2_lut_3_lut_adj_229_LC_731 {i1_2_lut_3_lut_adj_229}
+ble_pack i1_4_lut_4_lut_LC_772 {i1_4_lut_4_lut}
+clb_pack PLB_74 {i12817_4_lut_4_lut_LC_530, i1_4_lut_adj_41_LC_833, i13040_2_lut_3_lut_LC_686, comm_state_i2_LC_847, i22_4_lut_LC_849, i12879_4_lut_LC_537, i1_2_lut_3_lut_adj_229_LC_731, i1_4_lut_4_lut_LC_772}
+ble_pack i129_4_lut_LC_541 {i129_4_lut}
+ble_pack i129_4_lut_adj_104_LC_542 {i129_4_lut_adj_104}
+ble_pack i132_4_lut_LC_696 {i132_4_lut}
+ble_pack buf_dds_i10_LC_1030 {buf_dds_i10, i8312_4_lut_4_lut}
+ble_pack buf_dds_i1_LC_777 {buf_dds_i1, i1_4_lut_4_lut_adj_235}
+ble_pack mux_1498_i2_3_lut_LC_1102 {mux_1498_i2_3_lut}
+ble_pack mux_1513_i2_4_lut_LC_1134 {mux_1513_i2_4_lut}
+ble_pack mux_1511_i2_3_lut_LC_1126 {mux_1511_i2_3_lut}
+clb_pack PLB_75 {i129_4_lut_LC_541, i129_4_lut_adj_104_LC_542, i132_4_lut_LC_696, buf_dds_i10_LC_1030, buf_dds_i1_LC_777, mux_1498_i2_3_lut_LC_1102, mux_1513_i2_4_lut_LC_1134, mux_1511_i2_3_lut_LC_1126}
+ble_pack i12_4_lut_adj_189_LC_598 {i12_4_lut_adj_189}
+ble_pack ADC_VAC4.CS_37_LC_678 {ADC_VAC4.CS_37, i13017_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i7_LC_595 {ADC_VAC4.cmd_rdadctmp_i7, i12_4_lut_adj_186}
+ble_pack ADC_VAC4.cmd_rdadctmp_i8_LC_606 {ADC_VAC4.cmd_rdadctmp_i8, i12_4_lut_adj_206}
+ble_pack ADC_VAC4.cmd_rdadctmp_i6_LC_596 {ADC_VAC4.cmd_rdadctmp_i6, i12_4_lut_adj_187}
+ble_pack ADC_VAC4.cmd_rdadctmp_i5_LC_609 {ADC_VAC4.cmd_rdadctmp_i5, i12_4_lut_adj_210}
+ble_pack ADC_VAC4.cmd_rdadctmp_i4_LC_610 {ADC_VAC4.cmd_rdadctmp_i4, i12_4_lut_adj_211}
+ble_pack ADC_VAC4.cmd_rdadctmp_i3_LC_613 {ADC_VAC4.cmd_rdadctmp_i3, i12_4_lut_adj_214}
+clb_pack PLB_76 {i12_4_lut_adj_189_LC_598, ADC_VAC4.CS_37_LC_678, ADC_VAC4.cmd_rdadctmp_i7_LC_595, ADC_VAC4.cmd_rdadctmp_i8_LC_606, ADC_VAC4.cmd_rdadctmp_i6_LC_596, ADC_VAC4.cmd_rdadctmp_i5_LC_609, ADC_VAC4.cmd_rdadctmp_i4_LC_610, ADC_VAC4.cmd_rdadctmp_i3_LC_613}
+ble_pack comm_length_i1_LC_679 {comm_length_i1, i13020_4_lut}
+ble_pack i1_4_lut_adj_55_LC_835 {i1_4_lut_adj_55}
+ble_pack equal_200_i2_2_lut_LC_423 {equal_200_i2_2_lut}
+ble_pack i1_2_lut_adj_54_LC_756 {i1_2_lut_adj_54}
+ble_pack comm_length_i0_LC_677 {comm_length_i0, i13011_4_lut}
+ble_pack i1_2_lut_3_lut_4_lut_LC_720 {i1_2_lut_3_lut_4_lut}
+ble_pack equal_209_i13_2_lut_3_lut_LC_427 {equal_209_i13_2_lut_3_lut}
+ble_pack i1_4_lut_adj_209_LC_810 {i1_4_lut_adj_209}
+clb_pack PLB_77 {comm_length_i1_LC_679, i1_4_lut_adj_55_LC_835, equal_200_i2_2_lut_LC_423, i1_2_lut_adj_54_LC_756, comm_length_i0_LC_677, i1_2_lut_3_lut_4_lut_LC_720, equal_209_i13_2_lut_3_lut_LC_427, i1_4_lut_adj_209_LC_810}
+ble_pack ADC_VAC3.CS_37_LC_681 {ADC_VAC3.CS_37, i13026_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i0_LC_603 {ADC_VAC3.cmd_rdadctmp_i0, i12_4_lut_adj_203}
+ble_pack ADC_VAC3.cmd_rdadctmp_i1_LC_655 {ADC_VAC3.cmd_rdadctmp_i1, i12_4_lut_adj_56}
+ble_pack ADC_VAC3.cmd_rdadctmp_i2_LC_647 {ADC_VAC3.cmd_rdadctmp_i2, i12_4_lut_adj_43}
+ble_pack ADC_VAC3.cmd_rdadctmp_i3_LC_646 {ADC_VAC3.cmd_rdadctmp_i3, i12_4_lut_adj_42}
+ble_pack ADC_VAC3.cmd_rdadctmp_i4_LC_651 {ADC_VAC3.cmd_rdadctmp_i4, i12_4_lut_adj_47}
+ble_pack ADC_VAC3.cmd_rdadctmp_i5_LC_650 {ADC_VAC3.cmd_rdadctmp_i5, i12_4_lut_adj_46}
+ble_pack ADC_VAC3.cmd_rdadctmp_i6_LC_649 {ADC_VAC3.cmd_rdadctmp_i6, i12_4_lut_adj_45}
+clb_pack PLB_78 {ADC_VAC3.CS_37_LC_681, ADC_VAC3.cmd_rdadctmp_i0_LC_603, ADC_VAC3.cmd_rdadctmp_i1_LC_655, ADC_VAC3.cmd_rdadctmp_i2_LC_647, ADC_VAC3.cmd_rdadctmp_i3_LC_646, ADC_VAC3.cmd_rdadctmp_i4_LC_651, ADC_VAC3.cmd_rdadctmp_i5_LC_650, ADC_VAC3.cmd_rdadctmp_i6_LC_649}
+ble_pack ADC_VAC2.CS_37_LC_683 {ADC_VAC2.CS_37, i13032_4_lut}
+ble_pack i1_4_lut_adj_207_LC_809 {i1_4_lut_adj_207}
+ble_pack i1_2_lut_adj_58_LC_757 {i1_2_lut_adj_58}
+ble_pack ADC_VAC2.i1_3_lut_adj_4_LC_61 {ADC_VAC2.i1_3_lut_adj_4}
+ble_pack ADC_VAC2.cmd_rdadctmp_i0_LC_616 {ADC_VAC2.cmd_rdadctmp_i0, i12_4_lut_adj_220}
+ble_pack ADC_VAC2.cmd_rdadctmp_i1_LC_652 {ADC_VAC2.cmd_rdadctmp_i1, i12_4_lut_adj_48}
+ble_pack ADC_VAC2.cmd_rdadctmp_i2_LC_648 {ADC_VAC2.cmd_rdadctmp_i2, i12_4_lut_adj_44}
+ble_pack ADC_VAC2.cmd_rdadctmp_i3_LC_641 {ADC_VAC2.cmd_rdadctmp_i3, i12_4_lut_adj_35}
+clb_pack PLB_79 {ADC_VAC2.CS_37_LC_683, i1_4_lut_adj_207_LC_809, i1_2_lut_adj_58_LC_757, ADC_VAC2.i1_3_lut_adj_4_LC_61, ADC_VAC2.cmd_rdadctmp_i0_LC_616, ADC_VAC2.cmd_rdadctmp_i1_LC_652, ADC_VAC2.cmd_rdadctmp_i2_LC_648, ADC_VAC2.cmd_rdadctmp_i3_LC_641}
+ble_pack ADC_VAC1.CS_37_LC_684 {ADC_VAC1.CS_37, i13035_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i0_LC_20 {ADC_VAC1.ADC_DATA_i0, ADC_VAC1.i7744_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i8_LC_567 {ADC_VAC1.cmd_rdadctmp_i8, i12_4_lut_adj_146}
+ble_pack ADC_VAC1.cmd_rdadctmp_i9_LC_566 {ADC_VAC1.cmd_rdadctmp_i9, i12_4_lut_adj_145}
+ble_pack ADC_VAC1.cmd_rdadctmp_i7_LC_568 {ADC_VAC1.cmd_rdadctmp_i7, i12_4_lut_adj_147}
+ble_pack ADC_VAC1.cmd_rdadctmp_i6_LC_569 {ADC_VAC1.cmd_rdadctmp_i6, i12_4_lut_adj_148}
+ble_pack ADC_VAC1.cmd_rdadctmp_i5_LC_570 {ADC_VAC1.cmd_rdadctmp_i5, i12_4_lut_adj_151}
+ble_pack ADC_VAC1.cmd_rdadctmp_i4_LC_571 {ADC_VAC1.cmd_rdadctmp_i4, i12_4_lut_adj_152}
+clb_pack PLB_80 {ADC_VAC1.CS_37_LC_684, ADC_VAC1.ADC_DATA_i0_LC_20, ADC_VAC1.cmd_rdadctmp_i8_LC_567, ADC_VAC1.cmd_rdadctmp_i9_LC_566, ADC_VAC1.cmd_rdadctmp_i7_LC_568, ADC_VAC1.cmd_rdadctmp_i6_LC_569, ADC_VAC1.cmd_rdadctmp_i5_LC_570, ADC_VAC1.cmd_rdadctmp_i4_LC_571}
+ble_pack i13054_3_lut_4_lut_LC_689 {i13054_3_lut_4_lut}
+ble_pack i13029_2_lut_LC_682 {i13029_2_lut}
+ble_pack i2_4_lut_4_lut_LC_863 {i2_4_lut_4_lut}
+ble_pack i7374_2_lut_LC_956 {i7374_2_lut}
+ble_pack i13050_2_lut_3_lut_LC_688 {i13050_2_lut_3_lut}
+ble_pack i17_3_lut_LC_710 {i17_3_lut}
+ble_pack acadc_trig_329_LC_625 {acadc_trig_329, i12_4_lut_adj_253}
+ble_pack ADC_VAC2.i18_3_lut_LC_58 {ADC_VAC2.i18_3_lut}
+clb_pack PLB_81 {i13054_3_lut_4_lut_LC_689, i13029_2_lut_LC_682, i2_4_lut_4_lut_LC_863, i7374_2_lut_LC_956, i13050_2_lut_3_lut_LC_688, i17_3_lut_LC_710, acadc_trig_329_LC_625, ADC_VAC2.i18_3_lut_LC_58}
+ble_pack i14_4_lut_adj_113_LC_701 {i14_4_lut_adj_113}
+ble_pack i5_4_lut_adj_94_LC_895 {i5_4_lut_adj_94}
+ble_pack i7_4_lut_adj_92_LC_1024 {i7_4_lut_adj_92}
+ble_pack i6_4_lut_adj_90_LC_949 {i6_4_lut_adj_90}
+ble_pack i8_4_lut_adj_75_LC_1038 {i8_4_lut_adj_75}
+ble_pack req_data_cnt_i10_LC_1016 {req_data_cnt_i10, i7789_3_lut}
+clb_pack PLB_82 {i14_4_lut_adj_113_LC_701, i5_4_lut_adj_94_LC_895, i7_4_lut_adj_92_LC_1024, i6_4_lut_adj_90_LC_949, i8_4_lut_adj_75_LC_1038, req_data_cnt_i10_LC_1016}
+ble_pack i1704_2_lut_3_lut_4_lut_LC_707 {i1704_2_lut_3_lut_4_lut}
+ble_pack comm_index_i2_LC_708 {comm_index_i2, i1709_2_lut}
+ble_pack comm_index_i3_LC_709 {comm_index_i3, i1716_3_lut}
+ble_pack i1_2_lut_3_lut_adj_261_LC_733 {i1_2_lut_3_lut_adj_261}
+ble_pack i12972_2_lut_LC_538 {i12972_2_lut}
+ble_pack i30_4_lut_LC_868 {i30_4_lut}
+ble_pack i12743_2_lut_LC_516 {i12743_2_lut}
+ble_pack i33_4_lut_LC_879 {i33_4_lut}
+clb_pack PLB_83 {i1704_2_lut_3_lut_4_lut_LC_707, comm_index_i2_LC_708, comm_index_i3_LC_709, i1_2_lut_3_lut_adj_261_LC_733, i12972_2_lut_LC_538, i30_4_lut_LC_868, i12743_2_lut_LC_516, i33_4_lut_LC_879}
+ble_pack i1_2_lut_3_lut_4_lut_adj_215_LC_721 {i1_2_lut_3_lut_4_lut_adj_215}
+ble_pack eis_stop_365_LC_981 {eis_stop_365, i7742_3_lut}
+ble_pack eis_start_366_LC_982 {eis_start_366, i7743_3_lut}
+ble_pack i1_2_lut_3_lut_adj_304_LC_736 {i1_2_lut_3_lut_adj_304}
+ble_pack equal_206_i13_2_lut_3_lut_LC_424 {equal_206_i13_2_lut_3_lut}
+ble_pack buf_control_1__360_LC_977 {buf_control_1__360, i7738_3_lut_4_lut}
+ble_pack buf_control_2__359_LC_976 {buf_control_2__359, i7737_3_lut_4_lut}
+ble_pack i1_2_lut_LC_716 {i1_2_lut}
+clb_pack PLB_84 {i1_2_lut_3_lut_4_lut_adj_215_LC_721, eis_stop_365_LC_981, eis_start_366_LC_982, i1_2_lut_3_lut_adj_304_LC_736, equal_206_i13_2_lut_3_lut_LC_424, buf_control_1__360_LC_977, buf_control_2__359_LC_976, i1_2_lut_LC_716}
+ble_pack i1_2_lut_3_lut_4_lut_adj_231_LC_722 {i1_2_lut_3_lut_4_lut_adj_231}
+ble_pack i1_2_lut_3_lut_4_lut_adj_234_LC_723 {i1_2_lut_3_lut_4_lut_adj_234}
+ble_pack i1_4_lut_adj_268_LC_818 {i1_4_lut_adj_268}
+ble_pack i1_4_lut_adj_255_LC_817 {i1_4_lut_adj_255}
+ble_pack i7533_2_lut_LC_966 {i7533_2_lut}
+ble_pack i7526_2_lut_LC_965 {i7526_2_lut}
+ble_pack equal_429_i6_2_lut_LC_428 {equal_429_i6_2_lut}
+ble_pack comm_buf_9__i0_LC_924 {comm_buf_9__i0, i6852_3_lut}
+clb_pack PLB_85 {i1_2_lut_3_lut_4_lut_adj_231_LC_722, i1_2_lut_3_lut_4_lut_adj_234_LC_723, i1_4_lut_adj_268_LC_818, i1_4_lut_adj_255_LC_817, i7533_2_lut_LC_966, i7526_2_lut_LC_965, equal_429_i6_2_lut_LC_428, comm_buf_9__i0_LC_924}
+ble_pack i1_4_lut_4_lut_4_lut_adj_272_LC_774 {i1_4_lut_4_lut_4_lut_adj_272}
+ble_pack i1_2_lut_3_lut_adj_177_LC_727 {i1_2_lut_3_lut_adj_177}
+ble_pack i1_4_lut_adj_287_LC_826 {i1_4_lut_adj_287}
+ble_pack i1_2_lut_adj_286_LC_749 {i1_2_lut_adj_286}
+ble_pack comm_cmd_i7_LC_588 {comm_cmd_i7, i12_4_lut_adj_169}
+ble_pack comm_cmd_i2_LC_449 {comm_cmd_i2, i11_4_lut_adj_173}
+ble_pack comm_cmd_i1_LC_451 {comm_cmd_i1, i11_4_lut_adj_221}
+ble_pack comm_cmd_i3_LC_448 {comm_cmd_i3, i11_4_lut_adj_172}
+clb_pack PLB_86 {i1_4_lut_4_lut_4_lut_adj_272_LC_774, i1_2_lut_3_lut_adj_177_LC_727, i1_4_lut_adj_287_LC_826, i1_2_lut_adj_286_LC_749, comm_cmd_i7_LC_588, comm_cmd_i2_LC_449, comm_cmd_i1_LC_451, comm_cmd_i3_LC_448}
+ble_pack eis_end_328_LC_776 {eis_end_328, i1_4_lut_4_lut_adj_183}
+ble_pack i1_4_lut_adj_280_LC_824 {i1_4_lut_adj_280}
+ble_pack i3_4_lut_adj_279_LC_890 {i3_4_lut_adj_279}
+ble_pack i109_3_lut_LC_440 {i109_3_lut}
+ble_pack i1_2_lut_adj_49_LC_754 {i1_2_lut_adj_49}
+ble_pack i12717_3_lut_LC_513 {i12717_3_lut}
+ble_pack i1_2_lut_adj_149_LC_738 {i1_2_lut_adj_149}
+ble_pack i2_3_lut_3_lut_LC_860 {i2_3_lut_3_lut}
+clb_pack PLB_87 {eis_end_328_LC_776, i1_4_lut_adj_280_LC_824, i3_4_lut_adj_279_LC_890, i109_3_lut_LC_440, i1_2_lut_adj_49_LC_754, i12717_3_lut_LC_513, i1_2_lut_adj_149_LC_738, i2_3_lut_3_lut_LC_860}
+ble_pack i1_4_lut_adj_112_LC_791 {i1_4_lut_adj_112}
+ble_pack req_data_cnt_i6_LC_1012 {req_data_cnt_i6, i7785_3_lut}
+ble_pack req_data_cnt_i0_LC_979 {req_data_cnt_i0, i7740_3_lut_4_lut}
+ble_pack mux_1502_i7_3_lut_LC_1115 {mux_1502_i7_3_lut}
+ble_pack mux_1511_i7_3_lut_LC_1131 {mux_1511_i7_3_lut}
+ble_pack mux_1507_i7_4_lut_LC_1123 {mux_1507_i7_4_lut}
+ble_pack mux_1494_i7_3_lut_LC_1099 {mux_1494_i7_3_lut}
+ble_pack mux_1513_i7_4_lut_LC_1139 {mux_1513_i7_4_lut}
+clb_pack PLB_88 {i1_4_lut_adj_112_LC_791, req_data_cnt_i6_LC_1012, req_data_cnt_i0_LC_979, mux_1502_i7_3_lut_LC_1115, mux_1511_i7_3_lut_LC_1131, mux_1507_i7_4_lut_LC_1123, mux_1494_i7_3_lut_LC_1099, mux_1513_i7_4_lut_LC_1139}
+ble_pack i1_4_lut_adj_195_LC_805 {i1_4_lut_adj_195}
+ble_pack i7484_2_lut_LC_959 {i7484_2_lut}
+ble_pack i1_4_lut_adj_201_LC_808 {i1_4_lut_adj_201}
+ble_pack i7491_2_lut_LC_960 {i7491_2_lut}
+ble_pack i1_4_lut_adj_233_LC_813 {i1_4_lut_adj_233}
+ble_pack i7505_2_lut_LC_962 {i7505_2_lut}
+ble_pack i1_2_lut_adj_270_LC_746 {i1_2_lut_adj_270}
+ble_pack i1_2_lut_3_lut_3_lut_3_lut_LC_719 {i1_2_lut_3_lut_3_lut_3_lut}
+clb_pack PLB_89 {i1_4_lut_adj_195_LC_805, i7484_2_lut_LC_959, i1_4_lut_adj_201_LC_808, i7491_2_lut_LC_960, i1_4_lut_adj_233_LC_813, i7505_2_lut_LC_962, i1_2_lut_adj_270_LC_746, i1_2_lut_3_lut_3_lut_3_lut_LC_719}
+ble_pack i1_4_lut_adj_237_LC_814 {i1_4_lut_adj_237}
+ble_pack i7512_2_lut_LC_963 {i7512_2_lut}
+ble_pack i1_4_lut_adj_247_LC_815 {i1_4_lut_adj_247}
+ble_pack i7519_2_lut_LC_964 {i7519_2_lut}
+ble_pack i1_4_lut_adj_275_LC_821 {i1_4_lut_adj_275}
+ble_pack i7547_2_lut_LC_968 {i7547_2_lut}
+ble_pack comm_buf_6__i0_LC_921 {comm_buf_6__i0, i6840_3_lut}
+ble_pack comm_buf_6__i1_LC_945 {comm_buf_6__i1, i6972_3_lut}
+clb_pack PLB_90 {i1_4_lut_adj_237_LC_814, i7512_2_lut_LC_963, i1_4_lut_adj_247_LC_815, i7519_2_lut_LC_964, i1_4_lut_adj_275_LC_821, i7547_2_lut_LC_968, comm_buf_6__i0_LC_921, comm_buf_6__i1_LC_945}
+ble_pack i1_4_lut_adj_250_LC_816 {i1_4_lut_adj_250}
+ble_pack buf_dds_i13_LC_1027 {buf_dds_i13, i8303_4_lut_4_lut}
+ble_pack buf_dds_i5_LC_1032 {buf_dds_i5, i8326_4_lut_4_lut}
+ble_pack buf_dds_i3_LC_1033 {buf_dds_i3, i8331_4_lut_4_lut}
+ble_pack buf_dds_i2_LC_778 {buf_dds_i2, i1_4_lut_4_lut_adj_236}
+ble_pack buf_dds_i0_LC_779 {buf_dds_i0, i1_4_lut_4_lut_adj_240}
+ble_pack buf_dds_i4_LC_780 {buf_dds_i4, i1_4_lut_4_lut_adj_241}
+ble_pack buf_dds_i6_LC_781 {buf_dds_i6, i1_4_lut_4_lut_adj_242}
+clb_pack PLB_91 {i1_4_lut_adj_250_LC_816, buf_dds_i13_LC_1027, buf_dds_i5_LC_1032, buf_dds_i3_LC_1033, buf_dds_i2_LC_778, buf_dds_i0_LC_779, buf_dds_i4_LC_780, buf_dds_i6_LC_781}
+ble_pack i1_4_lut_adj_274_LC_820 {i1_4_lut_adj_274}
+ble_pack i1_2_lut_adj_262_LC_745 {i1_2_lut_adj_262}
+ble_pack i2727_2_lut_LC_854 {i2727_2_lut}
+ble_pack comm_clear_330_LC_1043 {comm_clear_330, i9595_2_lut_3_lut}
+ble_pack comm_spi.i13072_4_lut_3_lut_LC_329 {comm_spi.i13072_4_lut_3_lut}
+ble_pack comm_spi.i7332_3_lut_LC_350 {comm_spi.i7332_3_lut}
+ble_pack comm_spi.i13087_4_lut_3_lut_LC_332 {comm_spi.i13087_4_lut_3_lut}
+ble_pack comm_spi.i7346_3_lut_LC_354 {comm_spi.i7346_3_lut}
+clb_pack PLB_92 {i1_4_lut_adj_274_LC_820, i1_2_lut_adj_262_LC_745, i2727_2_lut_LC_854, comm_clear_330_LC_1043, comm_spi.i13072_4_lut_3_lut_LC_329, comm_spi.i7332_3_lut_LC_350, comm_spi.i13087_4_lut_3_lut_LC_332, comm_spi.i7346_3_lut_LC_354}
+ble_pack i1_4_lut_adj_84_LC_844 {i1_4_lut_adj_84}
+ble_pack acadc_skipCount_i8_LC_999 {acadc_skipCount_i8, i7772_3_lut_4_lut}
+ble_pack acadc_skipCount_i12_LC_1003 {acadc_skipCount_i12, i7776_3_lut_4_lut}
+ble_pack i5_4_lut_LC_894 {i5_4_lut}
+ble_pack acadc_skipCount_i13_LC_1004 {acadc_skipCount_i13, i7777_3_lut_4_lut}
+ble_pack i12630_2_lut_LC_487 {i12630_2_lut}
+ble_pack i12715_2_lut_LC_512 {i12715_2_lut}
+ble_pack i12672_2_lut_LC_503 {i12672_2_lut}
+clb_pack PLB_93 {i1_4_lut_adj_84_LC_844, acadc_skipCount_i8_LC_999, acadc_skipCount_i12_LC_1003, i5_4_lut_LC_894, acadc_skipCount_i13_LC_1004, i12630_2_lut_LC_487, i12715_2_lut_LC_512, i12672_2_lut_LC_503}
+ble_pack i2_4_lut_adj_109_LC_864 {i2_4_lut_adj_109}
+ble_pack req_data_cnt_i1_LC_1007 {req_data_cnt_i1, i7780_3_lut}
+ble_pack req_data_cnt_i4_LC_1010 {req_data_cnt_i4, i7783_3_lut}
+ble_pack mux_1502_i2_3_lut_LC_1110 {mux_1502_i2_3_lut}
+ble_pack req_data_cnt_i2_LC_1008 {req_data_cnt_i2, i7781_3_lut}
+ble_pack mux_1502_i3_3_lut_LC_1111 {mux_1502_i3_3_lut}
+ble_pack mux_1511_i3_3_lut_LC_1127 {mux_1511_i3_3_lut}
+ble_pack mux_1507_i3_4_lut_LC_1119 {mux_1507_i3_4_lut}
+clb_pack PLB_94 {i2_4_lut_adj_109_LC_864, req_data_cnt_i1_LC_1007, req_data_cnt_i4_LC_1010, mux_1502_i2_3_lut_LC_1110, req_data_cnt_i2_LC_1008, mux_1502_i3_3_lut_LC_1111, mux_1511_i3_3_lut_LC_1127, mux_1507_i3_4_lut_LC_1119}
+ble_pack i3_4_lut_LC_887 {i3_4_lut}
+ble_pack req_data_cnt_i8_LC_1014 {req_data_cnt_i8, i7787_3_lut}
+ble_pack req_data_cnt_i13_LC_1019 {req_data_cnt_i13, i7792_3_lut}
+ble_pack i12710_2_lut_LC_510 {i12710_2_lut}
+ble_pack buf_device_acadc_i1_LC_970 {buf_device_acadc_i1, i7731_3_lut}
+ble_pack i12713_2_lut_LC_511 {i12713_2_lut}
+ble_pack req_data_cnt_i7_LC_1013 {req_data_cnt_i7, i7786_3_lut}
+ble_pack mux_1502_i8_3_lut_LC_1116 {mux_1502_i8_3_lut}
+clb_pack PLB_95 {i3_4_lut_LC_887, req_data_cnt_i8_LC_1014, req_data_cnt_i13_LC_1019, i12710_2_lut_LC_510, buf_device_acadc_i1_LC_970, i12713_2_lut_LC_511, req_data_cnt_i7_LC_1013, mux_1502_i8_3_lut_LC_1116}
+ble_pack i3_4_lut_adj_127_LC_889 {i3_4_lut_adj_127}
+ble_pack ADC_VAC1.DTRIG_39_LC_770 {ADC_VAC1.DTRIG_39, i1_4_lut}
+ble_pack ADC_VAC4.DTRIG_39_LC_804 {ADC_VAC4.DTRIG_39, i1_4_lut_adj_19}
+ble_pack ADC_VAC3.DTRIG_39_LC_803 {ADC_VAC3.DTRIG_39, i1_4_lut_adj_18}
+ble_pack ADC_VAC2.DTRIG_39_LC_801 {ADC_VAC2.DTRIG_39, i1_4_lut_adj_16}
+ble_pack ADC_VAC1.SCLK_35_LC_789 {ADC_VAC1.SCLK_35, i1_4_lut_4_lut_adj_306}
+ble_pack ADC_VAC4.SCLK_35_LC_786 {ADC_VAC4.SCLK_35, i1_4_lut_4_lut_adj_302}
+ble_pack ADC_VAC3.SCLK_35_LC_787 {ADC_VAC3.SCLK_35, i1_4_lut_4_lut_adj_303}
+clb_pack PLB_96 {i3_4_lut_adj_127_LC_889, ADC_VAC1.DTRIG_39_LC_770, ADC_VAC4.DTRIG_39_LC_804, ADC_VAC3.DTRIG_39_LC_803, ADC_VAC2.DTRIG_39_LC_801, ADC_VAC1.SCLK_35_LC_789, ADC_VAC4.SCLK_35_LC_786, ADC_VAC3.SCLK_35_LC_787}
+ble_pack i6_4_lut_adj_192_LC_948 {i6_4_lut_adj_192}
+ble_pack mux_1457_i1_4_lut_LC_1069 {mux_1457_i1_4_lut}
+ble_pack comm_buf_4__i0_LC_919 {comm_buf_4__i0, i6832_3_lut}
+ble_pack mux_1457_i2_4_lut_LC_1070 {mux_1457_i2_4_lut}
+ble_pack comm_buf_4__i1_LC_380 {comm_buf_4__i1, comm_state_3__I_0_386_Mux_1_i6_3_lut}
+ble_pack mux_1457_i3_4_lut_LC_1071 {mux_1457_i3_4_lut}
+ble_pack comm_buf_4__i2_LC_381 {comm_buf_4__i2, comm_state_3__I_0_386_Mux_2_i6_3_lut}
+ble_pack mux_1457_i4_4_lut_LC_1072 {mux_1457_i4_4_lut}
+clb_pack PLB_97 {i6_4_lut_adj_192_LC_948, mux_1457_i1_4_lut_LC_1069, comm_buf_4__i0_LC_919, mux_1457_i2_4_lut_LC_1070, comm_buf_4__i1_LC_380, mux_1457_i3_4_lut_LC_1071, comm_buf_4__i2_LC_381, mux_1457_i4_4_lut_LC_1072}
+ble_pack mux_1457_i5_4_lut_LC_1073 {mux_1457_i5_4_lut}
+ble_pack comm_buf_4__i4_LC_383 {comm_buf_4__i4, comm_state_3__I_0_386_Mux_4_i6_3_lut}
+ble_pack mux_1457_i6_4_lut_LC_1074 {mux_1457_i6_4_lut}
+ble_pack comm_buf_4__i5_LC_384 {comm_buf_4__i5, comm_state_3__I_0_386_Mux_5_i6_3_lut}
+ble_pack mux_1457_i7_4_lut_LC_1075 {mux_1457_i7_4_lut}
+ble_pack comm_buf_4__i6_LC_385 {comm_buf_4__i6, comm_state_3__I_0_386_Mux_6_i6_3_lut}
+ble_pack mux_1457_i8_4_lut_LC_1076 {mux_1457_i8_4_lut}
+ble_pack comm_buf_4__i7_LC_386 {comm_buf_4__i7, comm_state_3__I_0_386_Mux_7_i6_3_lut}
+clb_pack PLB_98 {mux_1457_i5_4_lut_LC_1073, comm_buf_4__i4_LC_383, mux_1457_i6_4_lut_LC_1074, comm_buf_4__i5_LC_384, mux_1457_i7_4_lut_LC_1075, comm_buf_4__i6_LC_385, mux_1457_i8_4_lut_LC_1076, comm_buf_4__i7_LC_386}
+ble_pack mux_1469_i1_4_lut_LC_1077 {mux_1469_i1_4_lut}
+ble_pack comm_buf_3__i0_LC_918 {comm_buf_3__i0, i6828_3_lut}
+ble_pack mux_1469_i2_4_lut_LC_1078 {mux_1469_i2_4_lut}
+ble_pack comm_buf_3__i1_LC_900 {comm_buf_3__i1, i6722_3_lut}
+ble_pack mux_1469_i3_4_lut_LC_1079 {mux_1469_i3_4_lut}
+ble_pack mux_1469_i4_4_lut_LC_1080 {mux_1469_i4_4_lut}
+ble_pack mux_1469_i5_4_lut_LC_1081 {mux_1469_i5_4_lut}
+ble_pack comm_buf_3__i4_LC_376 {comm_buf_3__i4, comm_state_3__I_0_385_Mux_4_i6_3_lut}
+clb_pack PLB_99 {mux_1469_i1_4_lut_LC_1077, comm_buf_3__i0_LC_918, mux_1469_i2_4_lut_LC_1078, comm_buf_3__i1_LC_900, mux_1469_i3_4_lut_LC_1079, mux_1469_i4_4_lut_LC_1080, mux_1469_i5_4_lut_LC_1081, comm_buf_3__i4_LC_376}
+ble_pack mux_1469_i6_4_lut_LC_1082 {mux_1469_i6_4_lut}
+ble_pack comm_buf_3__i5_LC_377 {comm_buf_3__i5, comm_state_3__I_0_385_Mux_5_i6_3_lut}
+ble_pack mux_1469_i7_4_lut_LC_1083 {mux_1469_i7_4_lut}
+ble_pack comm_buf_3__i6_LC_378 {comm_buf_3__i6, comm_state_3__I_0_385_Mux_6_i6_3_lut}
+ble_pack mux_1469_i8_4_lut_LC_1084 {mux_1469_i8_4_lut}
+ble_pack comm_buf_3__i7_LC_379 {comm_buf_3__i7, comm_state_3__I_0_385_Mux_7_i6_3_lut}
+ble_pack mux_1481_i1_4_lut_LC_1085 {mux_1481_i1_4_lut}
+ble_pack mux_1481_i2_4_lut_LC_1086 {mux_1481_i2_4_lut}
+clb_pack PLB_100 {mux_1469_i6_4_lut_LC_1082, comm_buf_3__i5_LC_377, mux_1469_i7_4_lut_LC_1083, comm_buf_3__i6_LC_378, mux_1469_i8_4_lut_LC_1084, comm_buf_3__i7_LC_379, mux_1481_i1_4_lut_LC_1085, mux_1481_i2_4_lut_LC_1086}
+ble_pack mux_1481_i3_4_lut_LC_1087 {mux_1481_i3_4_lut}
+ble_pack comm_buf_2__i2_LC_912 {comm_buf_2__i2, i6783_3_lut}
+ble_pack mux_1481_i4_4_lut_LC_1088 {mux_1481_i4_4_lut}
+ble_pack comm_buf_2__i3_LC_910 {comm_buf_2__i3, i6775_3_lut}
+ble_pack mux_1481_i5_4_lut_LC_1089 {mux_1481_i5_4_lut}
+ble_pack comm_buf_2__i4_LC_908 {comm_buf_2__i4, i6767_3_lut}
+ble_pack mux_1481_i6_4_lut_LC_1090 {mux_1481_i6_4_lut}
+ble_pack comm_buf_2__i5_LC_906 {comm_buf_2__i5, i6753_3_lut}
+clb_pack PLB_101 {mux_1481_i3_4_lut_LC_1087, comm_buf_2__i2_LC_912, mux_1481_i4_4_lut_LC_1088, comm_buf_2__i3_LC_910, mux_1481_i5_4_lut_LC_1089, comm_buf_2__i4_LC_908, mux_1481_i6_4_lut_LC_1090, comm_buf_2__i5_LC_906}
+ble_pack mux_1481_i7_4_lut_LC_1091 {mux_1481_i7_4_lut}
+ble_pack comm_buf_2__i6_LC_905 {comm_buf_2__i6, i6744_3_lut}
+ble_pack mux_1481_i8_4_lut_LC_1092 {mux_1481_i8_4_lut}
+ble_pack comm_buf_2__i7_LC_903 {comm_buf_2__i7, i6736_3_lut}
+ble_pack mux_1525_i1_4_lut_LC_1141 {mux_1525_i1_4_lut}
+ble_pack mux_1525_i2_4_lut_LC_1142 {mux_1525_i2_4_lut}
+ble_pack mux_1525_i3_4_lut_LC_1143 {mux_1525_i3_4_lut}
+ble_pack mux_1525_i4_4_lut_LC_1144 {mux_1525_i4_4_lut}
+clb_pack PLB_102 {mux_1481_i7_4_lut_LC_1091, comm_buf_2__i6_LC_905, mux_1481_i8_4_lut_LC_1092, comm_buf_2__i7_LC_903, mux_1525_i1_4_lut_LC_1141, mux_1525_i2_4_lut_LC_1142, mux_1525_i3_4_lut_LC_1143, mux_1525_i4_4_lut_LC_1144}
+ble_pack mux_1507_i2_4_lut_LC_1118 {mux_1507_i2_4_lut}
+ble_pack mux_1494_i2_3_lut_LC_1094 {mux_1494_i2_3_lut}
+ble_pack mux_1507_i4_4_lut_LC_1120 {mux_1507_i4_4_lut}
+ble_pack mux_1494_i4_3_lut_LC_1096 {mux_1494_i4_3_lut}
+ble_pack mux_1511_i4_3_lut_LC_1128 {mux_1511_i4_3_lut}
+ble_pack mux_1513_i4_4_lut_LC_1136 {mux_1513_i4_4_lut}
+ble_pack comm_buf_1__i3_LC_934 {comm_buf_1__i3, i6896_3_lut}
+ble_pack mux_1502_i4_3_lut_LC_1112 {mux_1502_i4_3_lut}
+clb_pack PLB_103 {mux_1507_i2_4_lut_LC_1118, mux_1494_i2_3_lut_LC_1094, mux_1507_i4_4_lut_LC_1120, mux_1494_i4_3_lut_LC_1096, mux_1511_i4_3_lut_LC_1128, mux_1513_i4_4_lut_LC_1136, comm_buf_1__i3_LC_934, mux_1502_i4_3_lut_LC_1112}
+ble_pack mux_1507_i5_4_lut_LC_1121 {mux_1507_i5_4_lut}
+ble_pack mux_1494_i5_3_lut_LC_1097 {mux_1494_i5_3_lut}
+ble_pack mux_1507_i6_4_lut_LC_1122 {mux_1507_i6_4_lut}
+ble_pack mux_1494_i6_3_lut_LC_1098 {mux_1494_i6_3_lut}
+ble_pack mux_1511_i6_3_lut_LC_1130 {mux_1511_i6_3_lut}
+ble_pack mux_1513_i6_4_lut_LC_1138 {mux_1513_i6_4_lut}
+ble_pack comm_buf_1__i5_LC_931 {comm_buf_1__i5, i6884_3_lut}
+ble_pack mux_1502_i6_3_lut_LC_1114 {mux_1502_i6_3_lut}
+clb_pack PLB_104 {mux_1507_i5_4_lut_LC_1121, mux_1494_i5_3_lut_LC_1097, mux_1507_i6_4_lut_LC_1122, mux_1494_i6_3_lut_LC_1098, mux_1511_i6_3_lut_LC_1130, mux_1513_i6_4_lut_LC_1138, comm_buf_1__i5_LC_931, mux_1502_i6_3_lut_LC_1114}
+ble_pack mux_1507_i8_4_lut_LC_1124 {mux_1507_i8_4_lut}
+ble_pack mux_1494_i8_3_lut_LC_1100 {mux_1494_i8_3_lut}
+ble_pack mux_1513_i3_4_lut_LC_1135 {mux_1513_i3_4_lut}
+ble_pack comm_buf_1__i2_LC_935 {comm_buf_1__i2, i6900_3_lut}
+ble_pack mux_1498_i3_3_lut_LC_1103 {mux_1498_i3_3_lut}
+ble_pack i9634_2_lut_3_lut_LC_1053 {i9634_2_lut_3_lut}
+ble_pack i9627_2_lut_3_lut_LC_1046 {i9627_2_lut_3_lut}
+ble_pack i9628_2_lut_3_lut_LC_1047 {i9628_2_lut_3_lut}
+clb_pack PLB_105 {mux_1507_i8_4_lut_LC_1124, mux_1494_i8_3_lut_LC_1100, mux_1513_i3_4_lut_LC_1135, comm_buf_1__i2_LC_935, mux_1498_i3_3_lut_LC_1103, i9634_2_lut_3_lut_LC_1053, i9627_2_lut_3_lut_LC_1046, i9628_2_lut_3_lut_LC_1047}
+ble_pack mux_1513_i5_4_lut_LC_1137 {mux_1513_i5_4_lut}
+ble_pack comm_buf_1__i4_LC_932 {comm_buf_1__i4, i6888_3_lut}
+ble_pack i9633_2_lut_3_lut_LC_1052 {i9633_2_lut_3_lut}
+ble_pack mux_1498_i5_3_lut_LC_1105 {mux_1498_i5_3_lut}
+ble_pack i9629_2_lut_3_lut_LC_1048 {i9629_2_lut_3_lut}
+ble_pack i9630_2_lut_3_lut_LC_1049 {i9630_2_lut_3_lut}
+ble_pack i12192_3_lut_LC_467 {i12192_3_lut}
+ble_pack i12186_3_lut_LC_463 {i12186_3_lut}
+clb_pack PLB_106 {mux_1513_i5_4_lut_LC_1137, comm_buf_1__i4_LC_932, i9633_2_lut_3_lut_LC_1052, mux_1498_i5_3_lut_LC_1105, i9629_2_lut_3_lut_LC_1048, i9630_2_lut_3_lut_LC_1049, i12192_3_lut_LC_467, i12186_3_lut_LC_463}
+ble_pack mux_1525_i5_4_lut_LC_1145 {mux_1525_i5_4_lut}
+ble_pack comm_buf_5__i4_LC_952 {comm_buf_5__i4, i7014_3_lut}
+ble_pack mux_1525_i6_4_lut_LC_1146 {mux_1525_i6_4_lut}
+ble_pack comm_buf_5__i5_LC_951 {comm_buf_5__i5, i7010_3_lut}
+ble_pack mux_1525_i7_4_lut_LC_1147 {mux_1525_i7_4_lut}
+ble_pack comm_buf_5__i6_LC_950 {comm_buf_5__i6, i7002_3_lut}
+ble_pack mux_1525_i8_4_lut_LC_1148 {mux_1525_i8_4_lut}
+ble_pack comm_buf_5__i7_LC_946 {comm_buf_5__i7, i6994_3_lut}
+clb_pack PLB_107 {mux_1525_i5_4_lut_LC_1145, comm_buf_5__i4_LC_952, mux_1525_i6_4_lut_LC_1146, comm_buf_5__i5_LC_951, mux_1525_i7_4_lut_LC_1147, comm_buf_5__i6_LC_950, mux_1525_i8_4_lut_LC_1148, comm_buf_5__i7_LC_946}
+ble_pack ADC_VAC1.ADC_DATA_i1_LC_21 {ADC_VAC1.ADC_DATA_i1, ADC_VAC1.i7795_3_lut_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i2_LC_22 {ADC_VAC1.ADC_DATA_i2, ADC_VAC1.i7796_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i10_LC_565 {ADC_VAC1.cmd_rdadctmp_i10, i12_4_lut_adj_144}
+ble_pack ADC_VAC1.cmd_rdadctmp_i11_LC_563 {ADC_VAC1.cmd_rdadctmp_i11, i12_4_lut_adj_141}
+ble_pack ADC_VAC1.cmd_rdadctmp_i12_LC_561 {ADC_VAC1.cmd_rdadctmp_i12, i12_4_lut_adj_138}
+ble_pack ADC_VAC1.ADC_DATA_i3_LC_23 {ADC_VAC1.ADC_DATA_i3, ADC_VAC1.i7797_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i13_LC_560 {ADC_VAC1.cmd_rdadctmp_i13, i12_4_lut_adj_137}
+ble_pack ADC_VAC1.ADC_DATA_i4_LC_24 {ADC_VAC1.ADC_DATA_i4, ADC_VAC1.i7798_3_lut_4_lut}
+clb_pack PLB_108 {ADC_VAC1.ADC_DATA_i1_LC_21, ADC_VAC1.ADC_DATA_i2_LC_22, ADC_VAC1.cmd_rdadctmp_i10_LC_565, ADC_VAC1.cmd_rdadctmp_i11_LC_563, ADC_VAC1.cmd_rdadctmp_i12_LC_561, ADC_VAC1.ADC_DATA_i3_LC_23, ADC_VAC1.cmd_rdadctmp_i13_LC_560, ADC_VAC1.ADC_DATA_i4_LC_24}
+ble_pack ADC_VAC1.ADC_DATA_i5_LC_25 {ADC_VAC1.ADC_DATA_i5, ADC_VAC1.i7799_3_lut_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i6_LC_26 {ADC_VAC1.ADC_DATA_i6, ADC_VAC1.i7800_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i14_LC_559 {ADC_VAC1.cmd_rdadctmp_i14, i12_4_lut_adj_135}
+ble_pack ADC_VAC1.cmd_rdadctmp_i15_LC_558 {ADC_VAC1.cmd_rdadctmp_i15, i12_4_lut_adj_134}
+ble_pack ADC_VAC1.cmd_rdadctmp_i16_LC_557 {ADC_VAC1.cmd_rdadctmp_i16, i12_4_lut_adj_130}
+ble_pack ADC_VAC1.ADC_DATA_i7_LC_27 {ADC_VAC1.ADC_DATA_i7, ADC_VAC1.i7801_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i17_LC_556 {ADC_VAC1.cmd_rdadctmp_i17, i12_4_lut_adj_129}
+ble_pack ADC_VAC1.ADC_DATA_i8_LC_28 {ADC_VAC1.ADC_DATA_i8, ADC_VAC1.i7802_3_lut_4_lut}
+clb_pack PLB_109 {ADC_VAC1.ADC_DATA_i5_LC_25, ADC_VAC1.ADC_DATA_i6_LC_26, ADC_VAC1.cmd_rdadctmp_i14_LC_559, ADC_VAC1.cmd_rdadctmp_i15_LC_558, ADC_VAC1.cmd_rdadctmp_i16_LC_557, ADC_VAC1.ADC_DATA_i7_LC_27, ADC_VAC1.cmd_rdadctmp_i17_LC_556, ADC_VAC1.ADC_DATA_i8_LC_28}
+ble_pack ADC_VAC1.ADC_DATA_i9_LC_29 {ADC_VAC1.ADC_DATA_i9, ADC_VAC1.i7803_3_lut_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i10_LC_30 {ADC_VAC1.ADC_DATA_i10, ADC_VAC1.i7804_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i18_LC_555 {ADC_VAC1.cmd_rdadctmp_i18, i12_4_lut_adj_128}
+ble_pack ADC_VAC1.cmd_rdadctmp_i19_LC_554 {ADC_VAC1.cmd_rdadctmp_i19, i12_4_lut_adj_126}
+ble_pack ADC_VAC1.cmd_rdadctmp_i20_LC_552 {ADC_VAC1.cmd_rdadctmp_i20, i12_4_lut_adj_124}
+ble_pack ADC_VAC1.ADC_DATA_i11_LC_31 {ADC_VAC1.ADC_DATA_i11, ADC_VAC1.i7805_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i21_LC_548 {ADC_VAC1.cmd_rdadctmp_i21, i12_4_lut_adj_119}
+ble_pack ADC_VAC1.ADC_DATA_i12_LC_32 {ADC_VAC1.ADC_DATA_i12, ADC_VAC1.i7806_3_lut_4_lut}
+clb_pack PLB_110 {ADC_VAC1.ADC_DATA_i9_LC_29, ADC_VAC1.ADC_DATA_i10_LC_30, ADC_VAC1.cmd_rdadctmp_i18_LC_555, ADC_VAC1.cmd_rdadctmp_i19_LC_554, ADC_VAC1.cmd_rdadctmp_i20_LC_552, ADC_VAC1.ADC_DATA_i11_LC_31, ADC_VAC1.cmd_rdadctmp_i21_LC_548, ADC_VAC1.ADC_DATA_i12_LC_32}
+ble_pack ADC_VAC1.ADC_DATA_i13_LC_33 {ADC_VAC1.ADC_DATA_i13, ADC_VAC1.i7807_3_lut_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i14_LC_34 {ADC_VAC1.ADC_DATA_i14, ADC_VAC1.i7808_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i22_LC_546 {ADC_VAC1.cmd_rdadctmp_i22, i12_4_lut_adj_111}
+ble_pack ADC_VAC1.cmd_rdadctmp_i23_LC_544 {ADC_VAC1.cmd_rdadctmp_i23, i12_4_lut_adj_101}
+ble_pack ADC_VAC1.cmd_rdadctmp_i24_LC_672 {ADC_VAC1.cmd_rdadctmp_i24, i12_4_lut_adj_89}
+ble_pack ADC_VAC1.ADC_DATA_i15_LC_35 {ADC_VAC1.ADC_DATA_i15, ADC_VAC1.i7809_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i25_LC_669 {ADC_VAC1.cmd_rdadctmp_i25, i12_4_lut_adj_86}
+ble_pack ADC_VAC1.ADC_DATA_i16_LC_36 {ADC_VAC1.ADC_DATA_i16, ADC_VAC1.i7810_3_lut_4_lut}
+clb_pack PLB_111 {ADC_VAC1.ADC_DATA_i13_LC_33, ADC_VAC1.ADC_DATA_i14_LC_34, ADC_VAC1.cmd_rdadctmp_i22_LC_546, ADC_VAC1.cmd_rdadctmp_i23_LC_544, ADC_VAC1.cmd_rdadctmp_i24_LC_672, ADC_VAC1.ADC_DATA_i15_LC_35, ADC_VAC1.cmd_rdadctmp_i25_LC_669, ADC_VAC1.ADC_DATA_i16_LC_36}
+ble_pack ADC_VAC1.ADC_DATA_i17_LC_37 {ADC_VAC1.ADC_DATA_i17, ADC_VAC1.i7811_3_lut_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i18_LC_38 {ADC_VAC1.ADC_DATA_i18, ADC_VAC1.i7812_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i26_LC_662 {ADC_VAC1.cmd_rdadctmp_i26, i12_4_lut_adj_73}
+ble_pack ADC_VAC1.cmd_rdadctmp_i27_LC_660 {ADC_VAC1.cmd_rdadctmp_i27, i12_4_lut_adj_68}
+ble_pack ADC_VAC1.cmd_rdadctmp_i28_LC_659 {ADC_VAC1.cmd_rdadctmp_i28, i12_4_lut_adj_62}
+ble_pack ADC_VAC1.ADC_DATA_i19_LC_39 {ADC_VAC1.ADC_DATA_i19, ADC_VAC1.i7813_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i29_LC_657 {ADC_VAC1.cmd_rdadctmp_i29, i12_4_lut_adj_59}
+ble_pack ADC_VAC1.ADC_DATA_i20_LC_40 {ADC_VAC1.ADC_DATA_i20, ADC_VAC1.i7814_3_lut_4_lut}
+clb_pack PLB_112 {ADC_VAC1.ADC_DATA_i17_LC_37, ADC_VAC1.ADC_DATA_i18_LC_38, ADC_VAC1.cmd_rdadctmp_i26_LC_662, ADC_VAC1.cmd_rdadctmp_i27_LC_660, ADC_VAC1.cmd_rdadctmp_i28_LC_659, ADC_VAC1.ADC_DATA_i19_LC_39, ADC_VAC1.cmd_rdadctmp_i29_LC_657, ADC_VAC1.ADC_DATA_i20_LC_40}
+ble_pack ADC_VAC1.ADC_DATA_i21_LC_41 {ADC_VAC1.ADC_DATA_i21, ADC_VAC1.i7815_3_lut_4_lut}
+ble_pack ADC_VAC1.ADC_DATA_i22_LC_42 {ADC_VAC1.ADC_DATA_i22, ADC_VAC1.i7816_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i30_LC_656 {ADC_VAC1.cmd_rdadctmp_i30, i12_4_lut_adj_57}
+ble_pack ADC_VAC1.cmd_rdadctmp_i31_LC_653 {ADC_VAC1.cmd_rdadctmp_i31, i12_4_lut_adj_51}
+ble_pack ADC_VAC1.ADC_DATA_i23_LC_43 {ADC_VAC1.ADC_DATA_i23, ADC_VAC1.i7817_3_lut_4_lut}
+ble_pack ADC_VAC1.cmd_rdadctmp_i3_LC_573 {ADC_VAC1.cmd_rdadctmp_i3, i12_4_lut_adj_154}
+ble_pack ADC_VAC1.cmd_rdadctmp_i2_LC_619 {ADC_VAC1.cmd_rdadctmp_i2, i12_4_lut_adj_227}
+ble_pack ADC_VAC1.cmd_rdadctmp_i1_LC_575 {ADC_VAC1.cmd_rdadctmp_i1, i12_4_lut_adj_156}
+clb_pack PLB_113 {ADC_VAC1.ADC_DATA_i21_LC_41, ADC_VAC1.ADC_DATA_i22_LC_42, ADC_VAC1.cmd_rdadctmp_i30_LC_656, ADC_VAC1.cmd_rdadctmp_i31_LC_653, ADC_VAC1.ADC_DATA_i23_LC_43, ADC_VAC1.cmd_rdadctmp_i3_LC_573, ADC_VAC1.cmd_rdadctmp_i2_LC_619, ADC_VAC1.cmd_rdadctmp_i1_LC_575}
+ble_pack ADC_VAC2.i1_3_lut_LC_60 {ADC_VAC2.i1_3_lut}
+ble_pack ADC_VAC2.adc_state_i1_LC_66 {ADC_VAC2.adc_state_i1, ADC_VAC2.i7315_2_lut}
+ble_pack i1_2_lut_adj_17_LC_739 {i1_2_lut_adj_17}
+ble_pack ADC_VAC2.i7600_2_lut_LC_67 {ADC_VAC2.i7600_2_lut}
+ble_pack comm_spi.i2_3_lut_LC_347 {comm_spi.i2_3_lut}
+ble_pack comm_spi.i7328_3_lut_LC_349 {comm_spi.i7328_3_lut}
+ble_pack comm_spi.i13067_4_lut_3_lut_LC_328 {comm_spi.i13067_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_90_2_lut_LC_314 {comm_spi.RESET_I_0_90_2_lut}
+clb_pack PLB_114 {ADC_VAC2.i1_3_lut_LC_60, ADC_VAC2.adc_state_i1_LC_66, i1_2_lut_adj_17_LC_739, ADC_VAC2.i7600_2_lut_LC_67, comm_spi.i2_3_lut_LC_347, comm_spi.i7328_3_lut_LC_349, comm_spi.i13067_4_lut_3_lut_LC_328, comm_spi.RESET_I_0_90_2_lut_LC_314}
+ble_pack ADC_VAC2.ADC_DATA_i0_LC_68 {ADC_VAC2.ADC_DATA_i0, ADC_VAC2.i7747_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i8_LC_622 {ADC_VAC2.cmd_rdadctmp_i8, i12_4_lut_adj_24}
+ble_pack ADC_VAC2.cmd_rdadctmp_i9_LC_543 {ADC_VAC2.cmd_rdadctmp_i9, i12_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i7_LC_635 {ADC_VAC2.cmd_rdadctmp_i7, i12_4_lut_adj_27}
+ble_pack ADC_VAC2.cmd_rdadctmp_i6_LC_636 {ADC_VAC2.cmd_rdadctmp_i6, i12_4_lut_adj_29}
+ble_pack ADC_VAC2.cmd_rdadctmp_i5_LC_638 {ADC_VAC2.cmd_rdadctmp_i5, i12_4_lut_adj_31}
+ble_pack ADC_VAC2.cmd_rdadctmp_i4_LC_640 {ADC_VAC2.cmd_rdadctmp_i4, i12_4_lut_adj_34}
+ble_pack ADC_VAC2.cmd_rdadctmp_i10_LC_601 {ADC_VAC2.cmd_rdadctmp_i10, i12_4_lut_adj_20}
+clb_pack PLB_115 {ADC_VAC2.ADC_DATA_i0_LC_68, ADC_VAC2.cmd_rdadctmp_i8_LC_622, ADC_VAC2.cmd_rdadctmp_i9_LC_543, ADC_VAC2.cmd_rdadctmp_i7_LC_635, ADC_VAC2.cmd_rdadctmp_i6_LC_636, ADC_VAC2.cmd_rdadctmp_i5_LC_638, ADC_VAC2.cmd_rdadctmp_i4_LC_640, ADC_VAC2.cmd_rdadctmp_i10_LC_601}
+ble_pack ADC_VAC2.ADC_DATA_i1_LC_69 {ADC_VAC2.ADC_DATA_i1, ADC_VAC2.i7818_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i2_LC_70 {ADC_VAC2.ADC_DATA_i2, ADC_VAC2.i7819_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i3_LC_71 {ADC_VAC2.ADC_DATA_i3, ADC_VAC2.i7820_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i11_LC_673 {ADC_VAC2.cmd_rdadctmp_i11, i12_4_lut_adj_91}
+ble_pack ADC_VAC2.cmd_rdadctmp_i12_LC_574 {ADC_VAC2.cmd_rdadctmp_i12, i12_4_lut_adj_155}
+ble_pack ADC_VAC2.cmd_rdadctmp_i13_LC_577 {ADC_VAC2.cmd_rdadctmp_i13, i12_4_lut_adj_158}
+ble_pack ADC_VAC2.ADC_DATA_i4_LC_72 {ADC_VAC2.ADC_DATA_i4, ADC_VAC2.i7821_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i14_LC_578 {ADC_VAC2.cmd_rdadctmp_i14, i12_4_lut_adj_159}
+clb_pack PLB_116 {ADC_VAC2.ADC_DATA_i1_LC_69, ADC_VAC2.ADC_DATA_i2_LC_70, ADC_VAC2.ADC_DATA_i3_LC_71, ADC_VAC2.cmd_rdadctmp_i11_LC_673, ADC_VAC2.cmd_rdadctmp_i12_LC_574, ADC_VAC2.cmd_rdadctmp_i13_LC_577, ADC_VAC2.ADC_DATA_i4_LC_72, ADC_VAC2.cmd_rdadctmp_i14_LC_578}
+ble_pack ADC_VAC2.ADC_DATA_i5_LC_73 {ADC_VAC2.ADC_DATA_i5, ADC_VAC2.i7822_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i6_LC_74 {ADC_VAC2.ADC_DATA_i6, ADC_VAC2.i7823_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i7_LC_75 {ADC_VAC2.ADC_DATA_i7, ADC_VAC2.i7824_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i15_LC_579 {ADC_VAC2.cmd_rdadctmp_i15, i12_4_lut_adj_160}
+ble_pack ADC_VAC2.cmd_rdadctmp_i16_LC_580 {ADC_VAC2.cmd_rdadctmp_i16, i12_4_lut_adj_161}
+ble_pack ADC_VAC2.cmd_rdadctmp_i17_LC_581 {ADC_VAC2.cmd_rdadctmp_i17, i12_4_lut_adj_162}
+ble_pack ADC_VAC2.ADC_DATA_i8_LC_76 {ADC_VAC2.ADC_DATA_i8, ADC_VAC2.i7825_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i18_LC_582 {ADC_VAC2.cmd_rdadctmp_i18, i12_4_lut_adj_163}
+clb_pack PLB_117 {ADC_VAC2.ADC_DATA_i5_LC_73, ADC_VAC2.ADC_DATA_i6_LC_74, ADC_VAC2.ADC_DATA_i7_LC_75, ADC_VAC2.cmd_rdadctmp_i15_LC_579, ADC_VAC2.cmd_rdadctmp_i16_LC_580, ADC_VAC2.cmd_rdadctmp_i17_LC_581, ADC_VAC2.ADC_DATA_i8_LC_76, ADC_VAC2.cmd_rdadctmp_i18_LC_582}
+ble_pack ADC_VAC2.ADC_DATA_i9_LC_77 {ADC_VAC2.ADC_DATA_i9, ADC_VAC2.i7826_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i10_LC_78 {ADC_VAC2.ADC_DATA_i10, ADC_VAC2.i7827_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i11_LC_79 {ADC_VAC2.ADC_DATA_i11, ADC_VAC2.i7828_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i19_LC_583 {ADC_VAC2.cmd_rdadctmp_i19, i12_4_lut_adj_164}
+ble_pack ADC_VAC2.cmd_rdadctmp_i20_LC_584 {ADC_VAC2.cmd_rdadctmp_i20, i12_4_lut_adj_165}
+ble_pack ADC_VAC2.cmd_rdadctmp_i21_LC_585 {ADC_VAC2.cmd_rdadctmp_i21, i12_4_lut_adj_166}
+ble_pack ADC_VAC2.ADC_DATA_i12_LC_80 {ADC_VAC2.ADC_DATA_i12, ADC_VAC2.i7829_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i22_LC_586 {ADC_VAC2.cmd_rdadctmp_i22, i12_4_lut_adj_167}
+clb_pack PLB_118 {ADC_VAC2.ADC_DATA_i9_LC_77, ADC_VAC2.ADC_DATA_i10_LC_78, ADC_VAC2.ADC_DATA_i11_LC_79, ADC_VAC2.cmd_rdadctmp_i19_LC_583, ADC_VAC2.cmd_rdadctmp_i20_LC_584, ADC_VAC2.cmd_rdadctmp_i21_LC_585, ADC_VAC2.ADC_DATA_i12_LC_80, ADC_VAC2.cmd_rdadctmp_i22_LC_586}
+ble_pack ADC_VAC2.ADC_DATA_i13_LC_81 {ADC_VAC2.ADC_DATA_i13, ADC_VAC2.i7830_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i14_LC_82 {ADC_VAC2.ADC_DATA_i14, ADC_VAC2.i7831_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i15_LC_83 {ADC_VAC2.ADC_DATA_i15, ADC_VAC2.i7832_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i23_LC_594 {ADC_VAC2.cmd_rdadctmp_i23, i12_4_lut_adj_185}
+ble_pack ADC_VAC2.cmd_rdadctmp_i24_LC_605 {ADC_VAC2.cmd_rdadctmp_i24, i12_4_lut_adj_205}
+ble_pack ADC_VAC2.cmd_rdadctmp_i25_LC_600 {ADC_VAC2.cmd_rdadctmp_i25, i12_4_lut_adj_199}
+ble_pack ADC_VAC2.ADC_DATA_i16_LC_84 {ADC_VAC2.ADC_DATA_i16, ADC_VAC2.i7833_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i26_LC_602 {ADC_VAC2.cmd_rdadctmp_i26, i12_4_lut_adj_202}
+clb_pack PLB_119 {ADC_VAC2.ADC_DATA_i13_LC_81, ADC_VAC2.ADC_DATA_i14_LC_82, ADC_VAC2.ADC_DATA_i15_LC_83, ADC_VAC2.cmd_rdadctmp_i23_LC_594, ADC_VAC2.cmd_rdadctmp_i24_LC_605, ADC_VAC2.cmd_rdadctmp_i25_LC_600, ADC_VAC2.ADC_DATA_i16_LC_84, ADC_VAC2.cmd_rdadctmp_i26_LC_602}
+ble_pack ADC_VAC2.ADC_DATA_i17_LC_85 {ADC_VAC2.ADC_DATA_i17, ADC_VAC2.i7834_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i18_LC_86 {ADC_VAC2.ADC_DATA_i18, ADC_VAC2.i7835_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i19_LC_87 {ADC_VAC2.ADC_DATA_i19, ADC_VAC2.i7836_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i27_LC_599 {ADC_VAC2.cmd_rdadctmp_i27, i12_4_lut_adj_197}
+ble_pack ADC_VAC2.cmd_rdadctmp_i28_LC_607 {ADC_VAC2.cmd_rdadctmp_i28, i12_4_lut_adj_208}
+ble_pack ADC_VAC2.cmd_rdadctmp_i29_LC_611 {ADC_VAC2.cmd_rdadctmp_i29, i12_4_lut_adj_212}
+ble_pack ADC_VAC2.ADC_DATA_i20_LC_88 {ADC_VAC2.ADC_DATA_i20, ADC_VAC2.i7837_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i30_LC_626 {ADC_VAC2.cmd_rdadctmp_i30, i12_4_lut_adj_254}
+clb_pack PLB_120 {ADC_VAC2.ADC_DATA_i17_LC_85, ADC_VAC2.ADC_DATA_i18_LC_86, ADC_VAC2.ADC_DATA_i19_LC_87, ADC_VAC2.cmd_rdadctmp_i27_LC_599, ADC_VAC2.cmd_rdadctmp_i28_LC_607, ADC_VAC2.cmd_rdadctmp_i29_LC_611, ADC_VAC2.ADC_DATA_i20_LC_88, ADC_VAC2.cmd_rdadctmp_i30_LC_626}
+ble_pack ADC_VAC2.ADC_DATA_i21_LC_89 {ADC_VAC2.ADC_DATA_i21, ADC_VAC2.i7838_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i22_LC_90 {ADC_VAC2.ADC_DATA_i22, ADC_VAC2.i7839_3_lut_4_lut}
+ble_pack ADC_VAC2.ADC_DATA_i23_LC_91 {ADC_VAC2.ADC_DATA_i23, ADC_VAC2.i7840_3_lut_4_lut}
+ble_pack ADC_VAC2.cmd_rdadctmp_i31_LC_645 {ADC_VAC2.cmd_rdadctmp_i31, i12_4_lut_adj_40}
+ble_pack ADC_VAC2.SCLK_35_LC_788 {ADC_VAC2.SCLK_35, i1_4_lut_4_lut_adj_305}
+ble_pack ADC_VAC3.ADC_DATA_i0_LC_112 {ADC_VAC3.ADC_DATA_i0, ADC_VAC3.i7750_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i8_LC_643 {ADC_VAC3.cmd_rdadctmp_i8, i12_4_lut_adj_37}
+ble_pack ADC_VAC3.cmd_rdadctmp_i9_LC_642 {ADC_VAC3.cmd_rdadctmp_i9, i12_4_lut_adj_36}
+clb_pack PLB_121 {ADC_VAC2.ADC_DATA_i21_LC_89, ADC_VAC2.ADC_DATA_i22_LC_90, ADC_VAC2.ADC_DATA_i23_LC_91, ADC_VAC2.cmd_rdadctmp_i31_LC_645, ADC_VAC2.SCLK_35_LC_788, ADC_VAC3.ADC_DATA_i0_LC_112, ADC_VAC3.cmd_rdadctmp_i8_LC_643, ADC_VAC3.cmd_rdadctmp_i9_LC_642}
+ble_pack ADC_VAC3.ADC_DATA_i1_LC_113 {ADC_VAC3.ADC_DATA_i1, ADC_VAC3.i7841_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i2_LC_114 {ADC_VAC3.ADC_DATA_i2, ADC_VAC3.i7842_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i10_LC_654 {ADC_VAC3.cmd_rdadctmp_i10, i12_4_lut_adj_52}
+ble_pack ADC_VAC3.cmd_rdadctmp_i11_LC_639 {ADC_VAC3.cmd_rdadctmp_i11, i12_4_lut_adj_33}
+ble_pack ADC_VAC3.cmd_rdadctmp_i12_LC_658 {ADC_VAC3.cmd_rdadctmp_i12, i12_4_lut_adj_61}
+ble_pack ADC_VAC3.ADC_DATA_i3_LC_115 {ADC_VAC3.ADC_DATA_i3, ADC_VAC3.i7843_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i13_LC_675 {ADC_VAC3.cmd_rdadctmp_i13, i12_4_lut_adj_95}
+ble_pack ADC_VAC3.ADC_DATA_i4_LC_116 {ADC_VAC3.ADC_DATA_i4, ADC_VAC3.i7844_3_lut_4_lut}
+clb_pack PLB_122 {ADC_VAC3.ADC_DATA_i1_LC_113, ADC_VAC3.ADC_DATA_i2_LC_114, ADC_VAC3.cmd_rdadctmp_i10_LC_654, ADC_VAC3.cmd_rdadctmp_i11_LC_639, ADC_VAC3.cmd_rdadctmp_i12_LC_658, ADC_VAC3.ADC_DATA_i3_LC_115, ADC_VAC3.cmd_rdadctmp_i13_LC_675, ADC_VAC3.ADC_DATA_i4_LC_116}
+ble_pack ADC_VAC3.ADC_DATA_i5_LC_117 {ADC_VAC3.ADC_DATA_i5, ADC_VAC3.i7845_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i6_LC_118 {ADC_VAC3.ADC_DATA_i6, ADC_VAC3.i7846_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i14_LC_667 {ADC_VAC3.cmd_rdadctmp_i14, i12_4_lut_adj_81}
+ble_pack ADC_VAC3.cmd_rdadctmp_i15_LC_666 {ADC_VAC3.cmd_rdadctmp_i15, i12_4_lut_adj_80}
+ble_pack ADC_VAC3.cmd_rdadctmp_i16_LC_637 {ADC_VAC3.cmd_rdadctmp_i16, i12_4_lut_adj_30}
+ble_pack ADC_VAC3.ADC_DATA_i7_LC_119 {ADC_VAC3.ADC_DATA_i7, ADC_VAC3.i7847_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i17_LC_630 {ADC_VAC3.cmd_rdadctmp_i17, i12_4_lut_adj_26}
+ble_pack ADC_VAC3.ADC_DATA_i8_LC_120 {ADC_VAC3.ADC_DATA_i8, ADC_VAC3.i7848_3_lut_4_lut}
+clb_pack PLB_123 {ADC_VAC3.ADC_DATA_i5_LC_117, ADC_VAC3.ADC_DATA_i6_LC_118, ADC_VAC3.cmd_rdadctmp_i14_LC_667, ADC_VAC3.cmd_rdadctmp_i15_LC_666, ADC_VAC3.cmd_rdadctmp_i16_LC_637, ADC_VAC3.ADC_DATA_i7_LC_119, ADC_VAC3.cmd_rdadctmp_i17_LC_630, ADC_VAC3.ADC_DATA_i8_LC_120}
+ble_pack ADC_VAC3.ADC_DATA_i9_LC_121 {ADC_VAC3.ADC_DATA_i9, ADC_VAC3.i7849_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i10_LC_122 {ADC_VAC3.ADC_DATA_i10, ADC_VAC3.i7850_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i18_LC_623 {ADC_VAC3.cmd_rdadctmp_i18, i12_4_lut_adj_25}
+ble_pack ADC_VAC3.cmd_rdadctmp_i19_LC_620 {ADC_VAC3.cmd_rdadctmp_i19, i12_4_lut_adj_23}
+ble_pack ADC_VAC3.cmd_rdadctmp_i20_LC_615 {ADC_VAC3.cmd_rdadctmp_i20, i12_4_lut_adj_22}
+ble_pack ADC_VAC3.ADC_DATA_i11_LC_123 {ADC_VAC3.ADC_DATA_i11, ADC_VAC3.i7851_3_lut_4_lut}
+ble_pack mux_1498_i4_3_lut_LC_1104 {mux_1498_i4_3_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i21_LC_608 {ADC_VAC3.cmd_rdadctmp_i21, i12_4_lut_adj_21}
+clb_pack PLB_124 {ADC_VAC3.ADC_DATA_i9_LC_121, ADC_VAC3.ADC_DATA_i10_LC_122, ADC_VAC3.cmd_rdadctmp_i18_LC_623, ADC_VAC3.cmd_rdadctmp_i19_LC_620, ADC_VAC3.cmd_rdadctmp_i20_LC_615, ADC_VAC3.ADC_DATA_i11_LC_123, mux_1498_i4_3_lut_LC_1104, ADC_VAC3.cmd_rdadctmp_i21_LC_608}
+ble_pack ADC_VAC3.ADC_DATA_i12_LC_124 {ADC_VAC3.ADC_DATA_i12, ADC_VAC3.i7852_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i13_LC_125 {ADC_VAC3.ADC_DATA_i13, ADC_VAC3.i7853_3_lut_4_lut}
+ble_pack mux_1498_i6_3_lut_LC_1106 {mux_1498_i6_3_lut}
+ble_pack ADC_VAC3.ADC_DATA_i14_LC_126 {ADC_VAC3.ADC_DATA_i14, ADC_VAC3.i7854_3_lut_4_lut}
+ble_pack mux_1498_i7_3_lut_LC_1107 {mux_1498_i7_3_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i22_LC_634 {ADC_VAC3.cmd_rdadctmp_i22, i12_4_lut_adj_267}
+ble_pack ADC_VAC3.cmd_rdadctmp_i23_LC_633 {ADC_VAC3.cmd_rdadctmp_i23, i12_4_lut_adj_266}
+ble_pack ADC_VAC3.cmd_rdadctmp_i24_LC_632 {ADC_VAC3.cmd_rdadctmp_i24, i12_4_lut_adj_264}
+clb_pack PLB_125 {ADC_VAC3.ADC_DATA_i12_LC_124, ADC_VAC3.ADC_DATA_i13_LC_125, mux_1498_i6_3_lut_LC_1106, ADC_VAC3.ADC_DATA_i14_LC_126, mux_1498_i7_3_lut_LC_1107, ADC_VAC3.cmd_rdadctmp_i22_LC_634, ADC_VAC3.cmd_rdadctmp_i23_LC_633, ADC_VAC3.cmd_rdadctmp_i24_LC_632}
+ble_pack ADC_VAC3.ADC_DATA_i15_LC_127 {ADC_VAC3.ADC_DATA_i15, ADC_VAC3.i7855_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i16_LC_128 {ADC_VAC3.ADC_DATA_i16, ADC_VAC3.i7856_3_lut_4_lut}
+ble_pack ADC_VAC3.ADC_DATA_i17_LC_129 {ADC_VAC3.ADC_DATA_i17, ADC_VAC3.i7857_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i25_LC_631 {ADC_VAC3.cmd_rdadctmp_i25, i12_4_lut_adj_263}
+ble_pack ADC_VAC3.cmd_rdadctmp_i26_LC_629 {ADC_VAC3.cmd_rdadctmp_i26, i12_4_lut_adj_259}
+ble_pack ADC_VAC3.ADC_DATA_i18_LC_130 {ADC_VAC3.ADC_DATA_i18, ADC_VAC3.i7858_3_lut_4_lut}
+ble_pack ADC_VAC3.cmd_rdadctmp_i7_LC_644 {ADC_VAC3.cmd_rdadctmp_i7, i12_4_lut_adj_38}
+ble_pack ADC_VAC3.ADC_DATA_i19_LC_131 {ADC_VAC3.ADC_DATA_i19, ADC_VAC3.i7859_3_lut_4_lut}
+clb_pack PLB_126 {ADC_VAC3.ADC_DATA_i15_LC_127, ADC_VAC3.ADC_DATA_i16_LC_128, ADC_VAC3.ADC_DATA_i17_LC_129, ADC_VAC3.cmd_rdadctmp_i25_LC_631, ADC_VAC3.cmd_rdadctmp_i26_LC_629, ADC_VAC3.ADC_DATA_i18_LC_130, ADC_VAC3.cmd_rdadctmp_i7_LC_644, ADC_VAC3.ADC_DATA_i19_LC_131}
+ble_pack ADC_VAC3.ADC_DATA_i23_LC_135 {ADC_VAC3.ADC_DATA_i23, ADC_VAC3.i7863_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i0_LC_160 {ADC_VAC4.ADC_DATA_i0, ADC_VAC4.i7753_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i1_LC_161 {ADC_VAC4.ADC_DATA_i1, ADC_VAC4.i7864_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i9_LC_593 {ADC_VAC4.cmd_rdadctmp_i9, i12_4_lut_adj_184}
+ble_pack ADC_VAC4.cmd_rdadctmp_i10_LC_592 {ADC_VAC4.cmd_rdadctmp_i10, i12_4_lut_adj_182}
+ble_pack ADC_VAC4.cmd_rdadctmp_i11_LC_591 {ADC_VAC4.cmd_rdadctmp_i11, i12_4_lut_adj_180}
+ble_pack ADC_VAC4.ADC_DATA_i2_LC_162 {ADC_VAC4.ADC_DATA_i2, ADC_VAC4.i7865_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i12_LC_612 {ADC_VAC4.cmd_rdadctmp_i12, i12_4_lut_adj_213}
+clb_pack PLB_127 {ADC_VAC3.ADC_DATA_i23_LC_135, ADC_VAC4.ADC_DATA_i0_LC_160, ADC_VAC4.ADC_DATA_i1_LC_161, ADC_VAC4.cmd_rdadctmp_i9_LC_593, ADC_VAC4.cmd_rdadctmp_i10_LC_592, ADC_VAC4.cmd_rdadctmp_i11_LC_591, ADC_VAC4.ADC_DATA_i2_LC_162, ADC_VAC4.cmd_rdadctmp_i12_LC_612}
+ble_pack ADC_VAC4.ADC_DATA_i3_LC_163 {ADC_VAC4.ADC_DATA_i3, ADC_VAC4.i7866_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i4_LC_164 {ADC_VAC4.ADC_DATA_i4, ADC_VAC4.i7867_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i5_LC_165 {ADC_VAC4.ADC_DATA_i5, ADC_VAC4.i7868_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i13_LC_587 {ADC_VAC4.cmd_rdadctmp_i13, i12_4_lut_adj_168}
+ble_pack ADC_VAC4.cmd_rdadctmp_i14_LC_576 {ADC_VAC4.cmd_rdadctmp_i14, i12_4_lut_adj_157}
+ble_pack ADC_VAC4.cmd_rdadctmp_i15_LC_572 {ADC_VAC4.cmd_rdadctmp_i15, i12_4_lut_adj_153}
+ble_pack ADC_VAC4.ADC_DATA_i6_LC_166 {ADC_VAC4.ADC_DATA_i6, ADC_VAC4.i7869_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i16_LC_564 {ADC_VAC4.cmd_rdadctmp_i16, i12_4_lut_adj_143}
+clb_pack PLB_128 {ADC_VAC4.ADC_DATA_i3_LC_163, ADC_VAC4.ADC_DATA_i4_LC_164, ADC_VAC4.ADC_DATA_i5_LC_165, ADC_VAC4.cmd_rdadctmp_i13_LC_587, ADC_VAC4.cmd_rdadctmp_i14_LC_576, ADC_VAC4.cmd_rdadctmp_i15_LC_572, ADC_VAC4.ADC_DATA_i6_LC_166, ADC_VAC4.cmd_rdadctmp_i16_LC_564}
+ble_pack ADC_VAC4.ADC_DATA_i7_LC_167 {ADC_VAC4.ADC_DATA_i7, ADC_VAC4.i7870_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i8_LC_168 {ADC_VAC4.ADC_DATA_i8, ADC_VAC4.i7871_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i9_LC_169 {ADC_VAC4.ADC_DATA_i9, ADC_VAC4.i7872_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i17_LC_562 {ADC_VAC4.cmd_rdadctmp_i17, i12_4_lut_adj_139}
+ble_pack ADC_VAC4.cmd_rdadctmp_i18_LC_553 {ADC_VAC4.cmd_rdadctmp_i18, i12_4_lut_adj_125}
+ble_pack ADC_VAC4.cmd_rdadctmp_i19_LC_551 {ADC_VAC4.cmd_rdadctmp_i19, i12_4_lut_adj_122}
+ble_pack ADC_VAC4.ADC_DATA_i10_LC_170 {ADC_VAC4.ADC_DATA_i10, ADC_VAC4.i7873_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i20_LC_550 {ADC_VAC4.cmd_rdadctmp_i20, i12_4_lut_adj_121}
+clb_pack PLB_129 {ADC_VAC4.ADC_DATA_i7_LC_167, ADC_VAC4.ADC_DATA_i8_LC_168, ADC_VAC4.ADC_DATA_i9_LC_169, ADC_VAC4.cmd_rdadctmp_i17_LC_562, ADC_VAC4.cmd_rdadctmp_i18_LC_553, ADC_VAC4.cmd_rdadctmp_i19_LC_551, ADC_VAC4.ADC_DATA_i10_LC_170, ADC_VAC4.cmd_rdadctmp_i20_LC_550}
+ble_pack ADC_VAC4.ADC_DATA_i11_LC_171 {ADC_VAC4.ADC_DATA_i11, ADC_VAC4.i7874_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i12_LC_172 {ADC_VAC4.ADC_DATA_i12, ADC_VAC4.i7875_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i13_LC_173 {ADC_VAC4.ADC_DATA_i13, ADC_VAC4.i7876_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i21_LC_549 {ADC_VAC4.cmd_rdadctmp_i21, i12_4_lut_adj_120}
+ble_pack ADC_VAC4.cmd_rdadctmp_i22_LC_547 {ADC_VAC4.cmd_rdadctmp_i22, i12_4_lut_adj_114}
+ble_pack ADC_VAC4.cmd_rdadctmp_i23_LC_545 {ADC_VAC4.cmd_rdadctmp_i23, i12_4_lut_adj_106}
+ble_pack ADC_VAC4.ADC_DATA_i14_LC_174 {ADC_VAC4.ADC_DATA_i14, ADC_VAC4.i7877_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i24_LC_674 {ADC_VAC4.cmd_rdadctmp_i24, i12_4_lut_adj_93}
+clb_pack PLB_130 {ADC_VAC4.ADC_DATA_i11_LC_171, ADC_VAC4.ADC_DATA_i12_LC_172, ADC_VAC4.ADC_DATA_i13_LC_173, ADC_VAC4.cmd_rdadctmp_i21_LC_549, ADC_VAC4.cmd_rdadctmp_i22_LC_547, ADC_VAC4.cmd_rdadctmp_i23_LC_545, ADC_VAC4.ADC_DATA_i14_LC_174, ADC_VAC4.cmd_rdadctmp_i24_LC_674}
+ble_pack ADC_VAC4.ADC_DATA_i15_LC_175 {ADC_VAC4.ADC_DATA_i15, ADC_VAC4.i7878_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i16_LC_176 {ADC_VAC4.ADC_DATA_i16, ADC_VAC4.i7879_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i17_LC_177 {ADC_VAC4.ADC_DATA_i17, ADC_VAC4.i7880_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i25_LC_671 {ADC_VAC4.cmd_rdadctmp_i25, i12_4_lut_adj_88}
+ble_pack ADC_VAC4.cmd_rdadctmp_i26_LC_670 {ADC_VAC4.cmd_rdadctmp_i26, i12_4_lut_adj_87}
+ble_pack ADC_VAC4.cmd_rdadctmp_i27_LC_668 {ADC_VAC4.cmd_rdadctmp_i27, i12_4_lut_adj_83}
+ble_pack ADC_VAC4.ADC_DATA_i18_LC_178 {ADC_VAC4.ADC_DATA_i18, ADC_VAC4.i7881_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i28_LC_665 {ADC_VAC4.cmd_rdadctmp_i28, i12_4_lut_adj_79}
+clb_pack PLB_131 {ADC_VAC4.ADC_DATA_i15_LC_175, ADC_VAC4.ADC_DATA_i16_LC_176, ADC_VAC4.ADC_DATA_i17_LC_177, ADC_VAC4.cmd_rdadctmp_i25_LC_671, ADC_VAC4.cmd_rdadctmp_i26_LC_670, ADC_VAC4.cmd_rdadctmp_i27_LC_668, ADC_VAC4.ADC_DATA_i18_LC_178, ADC_VAC4.cmd_rdadctmp_i28_LC_665}
+ble_pack ADC_VAC4.ADC_DATA_i19_LC_179 {ADC_VAC4.ADC_DATA_i19, ADC_VAC4.i7882_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i20_LC_180 {ADC_VAC4.ADC_DATA_i20, ADC_VAC4.i7883_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i21_LC_181 {ADC_VAC4.ADC_DATA_i21, ADC_VAC4.i7884_3_lut_4_lut}
+ble_pack ADC_VAC4.cmd_rdadctmp_i29_LC_664 {ADC_VAC4.cmd_rdadctmp_i29, i12_4_lut_adj_76}
+ble_pack ADC_VAC4.cmd_rdadctmp_i30_LC_663 {ADC_VAC4.cmd_rdadctmp_i30, i12_4_lut_adj_74}
+ble_pack ADC_VAC4.cmd_rdadctmp_i31_LC_661 {ADC_VAC4.cmd_rdadctmp_i31, i12_4_lut_adj_72}
+ble_pack ADC_VAC4.ADC_DATA_i22_LC_182 {ADC_VAC4.ADC_DATA_i22, ADC_VAC4.i7885_3_lut_4_lut}
+ble_pack ADC_VAC4.ADC_DATA_i23_LC_183 {ADC_VAC4.ADC_DATA_i23, ADC_VAC4.i7886_3_lut_4_lut}
+clb_pack PLB_132 {ADC_VAC4.ADC_DATA_i19_LC_179, ADC_VAC4.ADC_DATA_i20_LC_180, ADC_VAC4.ADC_DATA_i21_LC_181, ADC_VAC4.cmd_rdadctmp_i29_LC_664, ADC_VAC4.cmd_rdadctmp_i30_LC_663, ADC_VAC4.cmd_rdadctmp_i31_LC_661, ADC_VAC4.ADC_DATA_i22_LC_182, ADC_VAC4.ADC_DATA_i23_LC_183}
+ble_pack CLOCK_DDS.CS_28_LC_200 {CLOCK_DDS.CS_28, CLOCK_DDS.dds_state_2__I_0_i7_3_lut}
+ble_pack comm_spi.i7336_3_lut_LC_351 {comm_spi.i7336_3_lut}
+ble_pack comm_spi.i13077_4_lut_3_lut_LC_330 {comm_spi.i13077_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_100_2_lut_LC_302 {comm_spi.RESET_I_0_100_2_lut}
+ble_pack comm_spi.RESET_I_0_92_2_lut_LC_316 {comm_spi.RESET_I_0_92_2_lut}
+ble_pack comm_spi.RESET_I_0_101_2_lut_LC_303 {comm_spi.RESET_I_0_101_2_lut}
+ble_pack comm_spi.RESET_I_0_93_2_lut_LC_317 {comm_spi.RESET_I_0_93_2_lut}
+ble_pack comm_spi.i13112_4_lut_3_lut_LC_337 {comm_spi.i13112_4_lut_3_lut}
+clb_pack PLB_133 {CLOCK_DDS.CS_28_LC_200, comm_spi.i7336_3_lut_LC_351, comm_spi.i13077_4_lut_3_lut_LC_330, comm_spi.RESET_I_0_100_2_lut_LC_302, comm_spi.RESET_I_0_92_2_lut_LC_316, comm_spi.RESET_I_0_101_2_lut_LC_303, comm_spi.RESET_I_0_93_2_lut_LC_317, comm_spi.i13112_4_lut_3_lut_LC_337}
+ble_pack comm_spi.bit_cnt_1603__i3_LC_327 {comm_spi.bit_cnt_1603__i3, comm_spi.i10853_3_lut_4_lut}
+ble_pack comm_spi.bit_cnt_1603__i2_LC_326 {comm_spi.bit_cnt_1603__i2, comm_spi.i10846_2_lut_3_lut}
+ble_pack comm_spi.bit_cnt_1603__i1_LC_325 {comm_spi.bit_cnt_1603__i1, comm_spi.i10839_2_lut}
+ble_pack comm_spi.bit_cnt_1603__i0_LC_324 {comm_spi.bit_cnt_1603__i0, comm_spi.i10837_1_lut}
+ble_pack i12087_2_lut_3_lut_LC_454 {i12087_2_lut_3_lut}
+ble_pack i1_2_lut_3_lut_adj_282_LC_734 {i1_2_lut_3_lut_adj_282}
+ble_pack i1_2_lut_3_lut_adj_175_LC_725 {i1_2_lut_3_lut_adj_175}
+ble_pack i3_2_lut_3_lut_LC_886 {i3_2_lut_3_lut}
+clb_pack PLB_134 {comm_spi.bit_cnt_1603__i3_LC_327, comm_spi.bit_cnt_1603__i2_LC_326, comm_spi.bit_cnt_1603__i1_LC_325, comm_spi.bit_cnt_1603__i0_LC_324, i12087_2_lut_3_lut_LC_454, i1_2_lut_3_lut_adj_282_LC_734, i1_2_lut_3_lut_adj_175_LC_725, i3_2_lut_3_lut_LC_886}
+ble_pack comm_spi.data_rx_i7_LC_340 {comm_spi.data_rx_i7, comm_spi.i1_2_lut_3_lut}
+ble_pack comm_spi.data_rx_i6_LC_341 {comm_spi.data_rx_i6, comm_spi.i1_2_lut_3_lut_adj_10}
+ble_pack comm_spi.data_rx_i5_LC_342 {comm_spi.data_rx_i5, comm_spi.i1_2_lut_3_lut_adj_11}
+ble_pack comm_spi.data_rx_i4_LC_343 {comm_spi.data_rx_i4, comm_spi.i1_2_lut_3_lut_adj_12}
+ble_pack comm_spi.data_rx_i3_LC_344 {comm_spi.data_rx_i3, comm_spi.i1_2_lut_3_lut_adj_13}
+ble_pack comm_spi.data_rx_i2_LC_345 {comm_spi.data_rx_i2, comm_spi.i1_2_lut_3_lut_adj_14}
+ble_pack comm_spi.data_rx_i1_LC_346 {comm_spi.data_rx_i1, comm_spi.i1_2_lut_3_lut_adj_15}
+ble_pack i12171_3_lut_LC_457 {i12171_3_lut}
+clb_pack PLB_135 {comm_spi.data_rx_i7_LC_340, comm_spi.data_rx_i6_LC_341, comm_spi.data_rx_i5_LC_342, comm_spi.data_rx_i4_LC_343, comm_spi.data_rx_i3_LC_344, comm_spi.data_rx_i2_LC_345, comm_spi.data_rx_i1_LC_346, i12171_3_lut_LC_457}
+ble_pack comm_spi.data_tx_i1_7348_7349_set_LC_348 {comm_spi.data_tx_i1_7348_7349_set, comm_spi.i7324_3_lut}
+ble_pack comm_spi.i13117_4_lut_3_lut_LC_338 {comm_spi.i13117_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_98_2_lut_LC_322 {comm_spi.RESET_I_0_98_2_lut}
+ble_pack comm_spi.RESET_I_0_106_2_lut_LC_308 {comm_spi.RESET_I_0_106_2_lut}
+ble_pack comm_spi.RESET_I_0_2_lut_LC_309 {comm_spi.RESET_I_0_2_lut}
+ble_pack comm_spi.RESET_I_0_99_2_lut_LC_323 {comm_spi.RESET_I_0_99_2_lut}
+ble_pack comm_spi.i13082_4_lut_3_lut_LC_331 {comm_spi.i13082_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_102_2_lut_LC_304 {comm_spi.RESET_I_0_102_2_lut}
+clb_pack PLB_136 {comm_spi.data_tx_i1_7348_7349_set_LC_348, comm_spi.i13117_4_lut_3_lut_LC_338, comm_spi.RESET_I_0_98_2_lut_LC_322, comm_spi.RESET_I_0_106_2_lut_LC_308, comm_spi.RESET_I_0_2_lut_LC_309, comm_spi.RESET_I_0_99_2_lut_LC_323, comm_spi.i13082_4_lut_3_lut_LC_331, comm_spi.RESET_I_0_102_2_lut_LC_304}
+ble_pack comm_spi.imiso_83_7340_7341_set_LC_352 {comm_spi.imiso_83_7340_7341_set, comm_spi.i7339_3_lut}
+ble_pack i12177_3_lut_LC_459 {i12177_3_lut}
+ble_pack i12180_3_lut_LC_461 {i12180_3_lut}
+ble_pack i9624_2_lut_3_lut_LC_1044 {i9624_2_lut_3_lut}
+ble_pack i9631_2_lut_3_lut_LC_1050 {i9631_2_lut_3_lut}
+ble_pack i9632_2_lut_3_lut_LC_1051 {i9632_2_lut_3_lut}
+ble_pack i9637_2_lut_3_lut_LC_1054 {i9637_2_lut_3_lut}
+ble_pack i9641_2_lut_3_lut_LC_1056 {i9641_2_lut_3_lut}
+clb_pack PLB_137 {comm_spi.imiso_83_7340_7341_set_LC_352, i12177_3_lut_LC_459, i12180_3_lut_LC_461, i9624_2_lut_3_lut_LC_1044, i9631_2_lut_3_lut_LC_1050, i9632_2_lut_3_lut_LC_1051, i9637_2_lut_3_lut_LC_1054, i9641_2_lut_3_lut_LC_1056}
+ble_pack comm_spi.MISO_48_7334_7335_set_LC_353 {comm_spi.MISO_48_7334_7335_set, comm_spi.i7342_3_lut}
+ble_pack i12628_3_lut_LC_485 {i12628_3_lut}
+ble_pack i1_2_lut_3_lut_adj_176_LC_726 {i1_2_lut_3_lut_adj_176}
+ble_pack i1_2_lut_3_lut_adj_181_LC_728 {i1_2_lut_3_lut_adj_181}
+ble_pack i1_2_lut_3_lut_adj_216_LC_730 {i1_2_lut_3_lut_adj_216}
+ble_pack i7266_2_lut_LC_954 {i7266_2_lut}
+ble_pack i9642_2_lut_3_lut_LC_1057 {i9642_2_lut_3_lut}
+ble_pack i9697_2_lut_3_lut_LC_1058 {i9697_2_lut_3_lut}
+clb_pack PLB_138 {comm_spi.MISO_48_7334_7335_set_LC_353, i12628_3_lut_LC_485, i1_2_lut_3_lut_adj_176_LC_726, i1_2_lut_3_lut_adj_181_LC_728, i1_2_lut_3_lut_adj_216_LC_730, i7266_2_lut_LC_954, i9642_2_lut_3_lut_LC_1057, i9697_2_lut_3_lut_LC_1058}
+ble_pack comm_spi.data_tx_i2_7352_7353_set_LC_355 {comm_spi.data_tx_i2_7352_7353_set, comm_spi.i7350_3_lut}
+ble_pack i7554_3_lut_LC_969 {i7554_3_lut}
+ble_pack i7470_2_lut_LC_957 {i7470_2_lut}
+ble_pack i7498_2_lut_LC_961 {i7498_2_lut}
+ble_pack i9638_2_lut_3_lut_LC_1055 {i9638_2_lut_3_lut}
+ble_pack i9698_2_lut_3_lut_LC_1059 {i9698_2_lut_3_lut}
+ble_pack mux_1494_i3_3_lut_LC_1095 {mux_1494_i3_3_lut}
+ble_pack mux_1498_i1_3_lut_LC_1101 {mux_1498_i1_3_lut}
+clb_pack PLB_139 {comm_spi.data_tx_i2_7352_7353_set_LC_355, i7554_3_lut_LC_969, i7470_2_lut_LC_957, i7498_2_lut_LC_961, i9638_2_lut_3_lut_LC_1055, i9698_2_lut_3_lut_LC_1059, mux_1494_i3_3_lut_LC_1095, mux_1498_i1_3_lut_LC_1101}
+ble_pack comm_spi.data_tx_i3_7356_7357_set_LC_356 {comm_spi.data_tx_i3_7356_7357_set, comm_spi.i7354_3_lut}
+ble_pack comm_spi.i13092_4_lut_3_lut_LC_333 {comm_spi.i13092_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_96_2_lut_LC_320 {comm_spi.RESET_I_0_96_2_lut}
+ble_pack comm_spi.RESET_I_0_104_2_lut_LC_306 {comm_spi.RESET_I_0_104_2_lut}
+ble_pack comm_spi.RESET_I_0_105_2_lut_LC_307 {comm_spi.RESET_I_0_105_2_lut}
+ble_pack comm_spi.RESET_I_0_97_2_lut_LC_321 {comm_spi.RESET_I_0_97_2_lut}
+ble_pack comm_spi.i13097_4_lut_3_lut_LC_334 {comm_spi.i13097_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_103_2_lut_LC_305 {comm_spi.RESET_I_0_103_2_lut}
+clb_pack PLB_140 {comm_spi.data_tx_i3_7356_7357_set_LC_356, comm_spi.i13092_4_lut_3_lut_LC_333, comm_spi.RESET_I_0_96_2_lut_LC_320, comm_spi.RESET_I_0_104_2_lut_LC_306, comm_spi.RESET_I_0_105_2_lut_LC_307, comm_spi.RESET_I_0_97_2_lut_LC_321, comm_spi.i13097_4_lut_3_lut_LC_334, comm_spi.RESET_I_0_103_2_lut_LC_305}
+ble_pack comm_spi.data_tx_i4_7360_7361_set_LC_357 {comm_spi.data_tx_i4_7360_7361_set, comm_spi.i7358_3_lut}
+ble_pack mux_1502_i1_3_lut_LC_1109 {mux_1502_i1_3_lut}
+ble_pack ADC_VAC3.i7638_2_lut_LC_111 {ADC_VAC3.i7638_2_lut}
+ble_pack comm_spi.RESET_I_0_86_2_lut_LC_310 {comm_spi.RESET_I_0_86_2_lut}
+ble_pack comm_spi.RESET_I_0_95_2_lut_LC_319 {comm_spi.RESET_I_0_95_2_lut}
+ble_pack comm_spi.RESET_I_0_87_2_lut_LC_311 {comm_spi.RESET_I_0_87_2_lut}
+ble_pack comm_spi.i13102_4_lut_3_lut_LC_335 {comm_spi.i13102_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_88_2_lut_LC_312 {comm_spi.RESET_I_0_88_2_lut}
+clb_pack PLB_141 {comm_spi.data_tx_i4_7360_7361_set_LC_357, mux_1502_i1_3_lut_LC_1109, ADC_VAC3.i7638_2_lut_LC_111, comm_spi.RESET_I_0_86_2_lut_LC_310, comm_spi.RESET_I_0_95_2_lut_LC_319, comm_spi.RESET_I_0_87_2_lut_LC_311, comm_spi.i13102_4_lut_3_lut_LC_335, comm_spi.RESET_I_0_88_2_lut_LC_312}
+ble_pack comm_spi.data_tx_i5_7364_7365_set_LC_358 {comm_spi.data_tx_i5_7364_7365_set, comm_spi.i7362_3_lut}
+ble_pack comm_spi.RESET_I_0_89_2_lut_LC_313 {comm_spi.RESET_I_0_89_2_lut}
+ble_pack comm_spi.RESET_I_0_94_2_lut_LC_318 {comm_spi.RESET_I_0_94_2_lut}
+ble_pack comm_spi.i13107_4_lut_3_lut_LC_336 {comm_spi.i13107_4_lut_3_lut}
+ble_pack comm_spi.RESET_I_0_91_2_lut_LC_315 {comm_spi.RESET_I_0_91_2_lut}
+ble_pack i12653_2_lut_LC_495 {i12653_2_lut}
+ble_pack i12656_2_lut_LC_498 {i12656_2_lut}
+ble_pack i12659_2_lut_LC_499 {i12659_2_lut}
+clb_pack PLB_142 {comm_spi.data_tx_i5_7364_7365_set_LC_358, comm_spi.RESET_I_0_89_2_lut_LC_313, comm_spi.RESET_I_0_94_2_lut_LC_318, comm_spi.i13107_4_lut_3_lut_LC_336, comm_spi.RESET_I_0_91_2_lut_LC_315, i12653_2_lut_LC_495, i12656_2_lut_LC_498, i12659_2_lut_LC_499}
+ble_pack comm_spi.data_tx_i6_7368_7369_set_LC_359 {comm_spi.data_tx_i6_7368_7369_set, comm_spi.i7366_3_lut}
+ble_pack i12661_2_lut_LC_500 {i12661_2_lut}
+ble_pack i12670_2_lut_LC_502 {i12670_2_lut}
+ble_pack i12678_2_lut_LC_505 {i12678_2_lut}
+ble_pack i12701_2_lut_LC_509 {i12701_2_lut}
+ble_pack i12746_2_lut_LC_517 {i12746_2_lut}
+ble_pack i12851_2_lut_LC_533 {i12851_2_lut}
+ble_pack i12856_2_lut_LC_534 {i12856_2_lut}
+clb_pack PLB_143 {comm_spi.data_tx_i6_7368_7369_set_LC_359, i12661_2_lut_LC_500, i12670_2_lut_LC_502, i12678_2_lut_LC_505, i12701_2_lut_LC_509, i12746_2_lut_LC_517, i12851_2_lut_LC_533, i12856_2_lut_LC_534}
+ble_pack comm_spi.data_tx_i7_7337_7338_set_LC_360 {comm_spi.data_tx_i7_7337_7338_set, comm_spi.i7370_3_lut}
+ble_pack i1_2_lut_adj_60_LC_758 {i1_2_lut_adj_60}
+ble_pack i1_2_lut_adj_67_LC_759 {i1_2_lut_adj_67}
+ble_pack i2_2_lut_LC_856 {i2_2_lut}
+ble_pack ICE_GPMO_0_I_0_1_lut_LC_208 {ICE_GPMO_0_I_0_1_lut}
+ble_pack clk_16MHz_I_0_1_lut_LC_275 {clk_16MHz_I_0_1_lut}
+ble_pack LC_1223 {CONSTANT_ONE_LUT4}
+clb_pack PLB_144 {comm_spi.data_tx_i7_7337_7338_set_LC_360, i1_2_lut_adj_60_LC_758, i1_2_lut_adj_67_LC_759, i2_2_lut_LC_856, ICE_GPMO_0_I_0_1_lut_LC_208, clk_16MHz_I_0_1_lut_LC_275, LC_1223}
+ble_pack comm_buf_4__i3_LC_382 {comm_buf_4__i3, comm_state_3__I_0_386_Mux_3_i6_3_lut}
+clb_pack PLB_145 {comm_buf_4__i3_LC_382}
+ble_pack comm_buf_5__i1_LC_387 {comm_buf_5__i1, comm_state_3__I_0_387_Mux_1_i6_3_lut}
+ble_pack comm_buf_5__i2_LC_388 {comm_buf_5__i2, comm_state_3__I_0_387_Mux_2_i6_3_lut}
+ble_pack comm_buf_5__i0_LC_920 {comm_buf_5__i0, i6836_3_lut}
+ble_pack comm_buf_5__i3_LC_953 {comm_buf_5__i3, i7018_3_lut}
+clb_pack PLB_146 {comm_buf_5__i1_LC_387, comm_buf_5__i2_LC_388, comm_buf_5__i0_LC_920, comm_buf_5__i3_LC_953}
+ble_pack comm_buf_9__i5_LC_389 {comm_buf_9__i5, comm_state_3__I_0_391_Mux_5_i6_3_lut}
+ble_pack comm_buf_9__i6_LC_390 {comm_buf_9__i6, comm_state_3__I_0_391_Mux_6_i6_3_lut}
+ble_pack comm_buf_9__i7_LC_391 {comm_buf_9__i7, comm_state_3__I_0_391_Mux_7_i6_3_lut}
+ble_pack comm_buf_9__i2_LC_897 {comm_buf_9__i2, i6710_3_lut}
+ble_pack comm_buf_9__i1_LC_898 {comm_buf_9__i1, i6714_3_lut}
+clb_pack PLB_147 {comm_buf_9__i5_LC_389, comm_buf_9__i6_LC_390, comm_buf_9__i7_LC_391, comm_buf_9__i2_LC_897, comm_buf_9__i1_LC_898}
+ble_pack comm_buf_10__i2_LC_393 {comm_buf_10__i2, comm_state_3__I_0_392_Mux_2_i6_3_lut}
+ble_pack comm_buf_10__i3_LC_394 {comm_buf_10__i3, comm_state_3__I_0_392_Mux_3_i6_3_lut}
+ble_pack comm_buf_10__i4_LC_395 {comm_buf_10__i4, comm_state_3__I_0_392_Mux_4_i6_3_lut}
+ble_pack comm_buf_10__i7_LC_398 {comm_buf_10__i7, comm_state_3__I_0_392_Mux_7_i6_3_lut}
+ble_pack comm_buf_10__i0_LC_925 {comm_buf_10__i0, i6856_3_lut}
+clb_pack PLB_148 {comm_buf_10__i2_LC_393, comm_buf_10__i3_LC_394, comm_buf_10__i4_LC_395, comm_buf_10__i7_LC_398, comm_buf_10__i0_LC_925}
+ble_pack comm_buf_11__i1_LC_399 {comm_buf_11__i1, comm_state_3__I_0_393_Mux_1_i6_3_lut}
+ble_pack comm_buf_11__i2_LC_400 {comm_buf_11__i2, comm_state_3__I_0_393_Mux_2_i6_3_lut}
+ble_pack comm_buf_11__i3_LC_401 {comm_buf_11__i3, comm_state_3__I_0_393_Mux_3_i6_3_lut}
+ble_pack comm_buf_11__i4_LC_402 {comm_buf_11__i4, comm_state_3__I_0_393_Mux_4_i6_3_lut}
+ble_pack comm_buf_11__i5_LC_403 {comm_buf_11__i5, comm_state_3__I_0_393_Mux_5_i6_3_lut}
+ble_pack comm_buf_11__i6_LC_404 {comm_buf_11__i6, comm_state_3__I_0_393_Mux_6_i6_3_lut}
+ble_pack comm_buf_11__i7_LC_405 {comm_buf_11__i7, comm_state_3__I_0_393_Mux_7_i6_3_lut}
+ble_pack comm_buf_11__i0_LC_926 {comm_buf_11__i0, i6860_3_lut}
+clb_pack PLB_149 {comm_buf_11__i1_LC_399, comm_buf_11__i2_LC_400, comm_buf_11__i3_LC_401, comm_buf_11__i4_LC_402, comm_buf_11__i5_LC_403, comm_buf_11__i6_LC_404, comm_buf_11__i7_LC_405, comm_buf_11__i0_LC_926}
+ble_pack comm_cmd_i0_LC_452 {comm_cmd_i0, i11_4_lut_adj_238}
+ble_pack trig_dds_333_LC_453 {trig_dds_333, i11_4_lut_adj_284}
+ble_pack buf_dds_i7_LC_783 {buf_dds_i7, i1_4_lut_4_lut_adj_244}
+ble_pack buf_dds_i8_LC_784 {buf_dds_i8, i1_4_lut_4_lut_adj_248}
+ble_pack buf_dds_i15_LC_1025 {buf_dds_i15, i8298_4_lut_4_lut}
+ble_pack buf_dds_i14_LC_1026 {buf_dds_i14, i8301_4_lut_4_lut}
+ble_pack buf_dds_i12_LC_1028 {buf_dds_i12, i8306_4_lut_4_lut}
+ble_pack buf_dds_i9_LC_1031 {buf_dds_i9, i8315_4_lut_4_lut}
+clb_pack PLB_150 {comm_cmd_i0_LC_452, trig_dds_333_LC_453, buf_dds_i7_LC_783, buf_dds_i8_LC_784, buf_dds_i15_LC_1025, buf_dds_i14_LC_1026, buf_dds_i12_LC_1028, buf_dds_i9_LC_1031}
+ble_pack ADC_VAC4.cmd_rdadctmp_i1_LC_597 {ADC_VAC4.cmd_rdadctmp_i1, i12_4_lut_adj_188}
+ble_pack ADC_VAC4.cmd_rdadctmp_i2_LC_614 {ADC_VAC4.cmd_rdadctmp_i2, i12_4_lut_adj_217}
+ble_pack ADC_VAC4.cmd_rdadctmp_i0_LC_604 {ADC_VAC4.cmd_rdadctmp_i0, i12_4_lut_adj_204}
+ble_pack ADC_VAC1.cmd_rdadctmp_i0_LC_618 {ADC_VAC1.cmd_rdadctmp_i0, i12_4_lut_adj_225}
+ble_pack CLOCK_DDS.SCLK_27_LC_983 {CLOCK_DDS.SCLK_27, i7756_3_lut_4_lut}
+ble_pack CLOCK_DDS.dds_state_i2_LC_202 {CLOCK_DDS.dds_state_i2, CLOCK_DDS.i1_2_lut}
+ble_pack CLOCK_DDS.MOSI_31_LC_984 {CLOCK_DDS.MOSI_31, i7757_3_lut}
+ble_pack CLOCK_DDS.bit_cnt_i0_LC_1034 {CLOCK_DDS.bit_cnt_i0, i8342_3_lut}
+clb_pack PLB_151 {ADC_VAC4.cmd_rdadctmp_i1_LC_597, ADC_VAC4.cmd_rdadctmp_i2_LC_614, ADC_VAC4.cmd_rdadctmp_i0_LC_604, ADC_VAC1.cmd_rdadctmp_i0_LC_618, CLOCK_DDS.SCLK_27_LC_983, CLOCK_DDS.dds_state_i2_LC_202, CLOCK_DDS.MOSI_31_LC_984, CLOCK_DDS.bit_cnt_i0_LC_1034}
+ble_pack comm_index_i1_LC_706 {comm_index_i1, i1702_2_lut_3_lut_4_lut}
+ble_pack comm_index_i0_LC_705 {comm_index_i0, i1694_2_lut_3_lut}
+clb_pack PLB_152 {comm_index_i1_LC_706, comm_index_i0_LC_705}
+ble_pack comm_buf_3__i2_LC_712 {comm_buf_3__i2, i1885_3_lut}
+ble_pack comm_buf_3__i3_LC_714 {comm_buf_3__i3, i1905_3_lut}
+clb_pack PLB_153 {comm_buf_3__i2_LC_712, comm_buf_3__i3_LC_714}
+ble_pack comm_buf_9__i3_LC_713 {comm_buf_9__i3, i1897_3_lut}
+ble_pack comm_buf_9__i4_LC_715 {comm_buf_9__i4, i1913_3_lut}
+clb_pack PLB_154 {comm_buf_9__i3_LC_713, comm_buf_9__i4_LC_715}
+ble_pack comm_buf_8__i7_LC_899 {comm_buf_8__i7, i6718_3_lut}
+ble_pack comm_buf_8__i6_LC_901 {comm_buf_8__i6, i6728_3_lut}
+ble_pack comm_buf_8__i5_LC_902 {comm_buf_8__i5, i6732_3_lut}
+ble_pack comm_buf_8__i4_LC_904 {comm_buf_8__i4, i6740_3_lut}
+ble_pack comm_buf_8__i3_LC_907 {comm_buf_8__i3, i6763_3_lut}
+ble_pack comm_buf_8__i2_LC_909 {comm_buf_8__i2, i6771_3_lut}
+ble_pack comm_buf_8__i1_LC_911 {comm_buf_8__i1, i6779_3_lut}
+ble_pack comm_buf_8__i0_LC_923 {comm_buf_8__i0, i6848_3_lut}
+clb_pack PLB_155 {comm_buf_8__i7_LC_899, comm_buf_8__i6_LC_901, comm_buf_8__i5_LC_902, comm_buf_8__i4_LC_904, comm_buf_8__i3_LC_907, comm_buf_8__i2_LC_909, comm_buf_8__i1_LC_911, comm_buf_8__i0_LC_923}
+ble_pack comm_buf_2__i1_LC_913 {comm_buf_2__i1, i6787_3_lut}
+ble_pack comm_buf_2__i0_LC_917 {comm_buf_2__i0, i6824_3_lut}
+clb_pack PLB_156 {comm_buf_2__i1_LC_913, comm_buf_2__i0_LC_917}
+ble_pack comm_buf_7__i7_LC_914 {comm_buf_7__i7, i6791_3_lut}
+ble_pack comm_buf_7__i0_LC_922 {comm_buf_7__i0, i6844_3_lut}
+ble_pack comm_buf_7__i6_LC_927 {comm_buf_7__i6, i6868_3_lut}
+ble_pack comm_buf_7__i5_LC_928 {comm_buf_7__i5, i6872_3_lut}
+ble_pack comm_buf_7__i4_LC_929 {comm_buf_7__i4, i6876_3_lut}
+ble_pack comm_buf_7__i3_LC_933 {comm_buf_7__i3, i6892_3_lut}
+ble_pack comm_buf_7__i2_LC_937 {comm_buf_7__i2, i6908_3_lut}
+ble_pack comm_buf_7__i1_LC_938 {comm_buf_7__i1, i6912_3_lut}
+clb_pack PLB_157 {comm_buf_7__i7_LC_914, comm_buf_7__i0_LC_922, comm_buf_7__i6_LC_927, comm_buf_7__i5_LC_928, comm_buf_7__i4_LC_929, comm_buf_7__i3_LC_933, comm_buf_7__i2_LC_937, comm_buf_7__i1_LC_938}
+ble_pack comm_buf_1__i7_LC_915 {comm_buf_1__i7, i6795_3_lut}
+ble_pack comm_buf_1__i0_LC_916 {comm_buf_1__i0, i6820_3_lut}
+ble_pack comm_buf_1__i6_LC_930 {comm_buf_1__i6, i6880_3_lut}
+ble_pack comm_buf_1__i1_LC_936 {comm_buf_1__i1, i6904_3_lut}
+clb_pack PLB_158 {comm_buf_1__i7_LC_915, comm_buf_1__i0_LC_916, comm_buf_1__i6_LC_930, comm_buf_1__i1_LC_936}
+ble_pack comm_buf_6__i7_LC_939 {comm_buf_6__i7, i6916_3_lut}
+ble_pack comm_buf_6__i6_LC_940 {comm_buf_6__i6, i6920_3_lut}
+ble_pack comm_buf_6__i5_LC_941 {comm_buf_6__i5, i6924_3_lut}
+ble_pack comm_buf_6__i4_LC_942 {comm_buf_6__i4, i6938_3_lut}
+ble_pack comm_buf_6__i3_LC_943 {comm_buf_6__i3, i6952_3_lut}
+ble_pack comm_buf_6__i2_LC_944 {comm_buf_6__i2, i6956_3_lut}
+clb_pack PLB_159 {comm_buf_6__i7_LC_939, comm_buf_6__i6_LC_940, comm_buf_6__i5_LC_941, comm_buf_6__i4_LC_942, comm_buf_6__i3_LC_943, comm_buf_6__i2_LC_944}
+ble_pack CLOCK_DDS.dds_state_i0_LC_1035 {CLOCK_DDS.dds_state_i0, i8909_4_lut}
+clb_pack PLB_160 {CLOCK_DDS.dds_state_i0_LC_1035}
+ble_pack comm_spi.data_tx_i1_7348_7349_reset_LC_1199 {comm_spi.data_tx_i1_7348_7349_reset, comm_spi.i7324_3_lut_comm_spi.data_tx_i1_7348_7349_reset_REP_LUT4_0}
+clb_pack PLB_161 {comm_spi.data_tx_i1_7348_7349_reset_LC_1199}
+ble_pack comm_spi.data_rx_i0_7344_7345_reset_LC_1200 {comm_spi.data_rx_i0_7344_7345_reset, comm_spi.i7332_3_lut_comm_spi.data_rx_i0_7344_7345_reset_REP_LUT4_0}
+clb_pack PLB_162 {comm_spi.data_rx_i0_7344_7345_reset_LC_1200}
+ble_pack comm_spi.data_rx_i0_7344_7345_set_LC_1201 {comm_spi.data_rx_i0_7344_7345_set, comm_spi.i7332_3_lut_comm_spi.data_rx_i0_7344_7345_set_REP_LUT4_0}
+clb_pack PLB_163 {comm_spi.data_rx_i0_7344_7345_set_LC_1201}
+ble_pack comm_spi.imiso_83_7340_7341_reset_LC_1202 {comm_spi.imiso_83_7340_7341_reset, comm_spi.i7339_3_lut_comm_spi.imiso_83_7340_7341_reset_REP_LUT4_0}
+clb_pack PLB_164 {comm_spi.imiso_83_7340_7341_reset_LC_1202}
+ble_pack comm_spi.MISO_48_7334_7335_reset_LC_1203 {comm_spi.MISO_48_7334_7335_reset, comm_spi.i7342_3_lut_comm_spi.MISO_48_7334_7335_reset_REP_LUT4_0}
+clb_pack PLB_165 {comm_spi.MISO_48_7334_7335_reset_LC_1203}
+ble_pack comm_spi.data_tx_i2_7352_7353_reset_LC_1204 {comm_spi.data_tx_i2_7352_7353_reset, comm_spi.i7350_3_lut_comm_spi.data_tx_i2_7352_7353_reset_REP_LUT4_0}
+clb_pack PLB_166 {comm_spi.data_tx_i2_7352_7353_reset_LC_1204}
+ble_pack comm_spi.data_tx_i3_7356_7357_reset_LC_1205 {comm_spi.data_tx_i3_7356_7357_reset, comm_spi.i7354_3_lut_comm_spi.data_tx_i3_7356_7357_reset_REP_LUT4_0}
+clb_pack PLB_167 {comm_spi.data_tx_i3_7356_7357_reset_LC_1205}
+ble_pack comm_spi.data_tx_i4_7360_7361_reset_LC_1206 {comm_spi.data_tx_i4_7360_7361_reset, comm_spi.i7358_3_lut_comm_spi.data_tx_i4_7360_7361_reset_REP_LUT4_0}
+clb_pack PLB_168 {comm_spi.data_tx_i4_7360_7361_reset_LC_1206}
+ble_pack comm_spi.data_tx_i5_7364_7365_reset_LC_1207 {comm_spi.data_tx_i5_7364_7365_reset, comm_spi.i7362_3_lut_comm_spi.data_tx_i5_7364_7365_reset_REP_LUT4_0}
+clb_pack PLB_169 {comm_spi.data_tx_i5_7364_7365_reset_LC_1207}
+ble_pack comm_spi.data_tx_i6_7368_7369_reset_LC_1208 {comm_spi.data_tx_i6_7368_7369_reset, comm_spi.i7366_3_lut_comm_spi.data_tx_i6_7368_7369_reset_REP_LUT4_0}
+clb_pack PLB_170 {comm_spi.data_tx_i6_7368_7369_reset_LC_1208}
+ble_pack comm_spi.data_tx_i7_7337_7338_reset_LC_1209 {comm_spi.data_tx_i7_7337_7338_reset, comm_spi.i7370_3_lut_comm_spi.data_tx_i7_7337_7338_reset_REP_LUT4_0}
+clb_pack PLB_171 {comm_spi.data_tx_i7_7337_7338_reset_LC_1209}
+ble_pack ADC_VAC2.adc_state_i2_LC_46 {ADC_VAC2.adc_state_i2, ADC_VAC2.adc_state_2__I_0_43_Mux_2_i7_3_lut}
+clb_pack PLB_172 {ADC_VAC2.adc_state_i2_LC_46}
+ble_pack ADC_VAC4.adc_state_i1_LC_158 {ADC_VAC4.adc_state_i1, ADC_VAC4.i7317_2_lut}
+clb_pack PLB_173 {ADC_VAC4.adc_state_i1_LC_158}
+ble_pack CLOCK_DDS.dds_state_i1_LC_206 {CLOCK_DDS.dds_state_i1, CLOCK_DDS.i7235_2_lut}
+clb_pack PLB_174 {CLOCK_DDS.dds_state_i1_LC_206}
+ble_pack comm_spi.data_valid_85_LC_339 {comm_spi.data_valid_85, comm_spi.i1_2_lut}
+clb_pack PLB_175 {comm_spi.data_valid_85_LC_339}
+ble_pack req_data_cnt_i9_LC_1015 {req_data_cnt_i9, i7788_3_lut}
+ble_pack req_data_cnt_i11_LC_1017 {req_data_cnt_i11, i7790_3_lut}
+ble_pack req_data_cnt_i12_LC_1018 {req_data_cnt_i12, i7791_3_lut}
+ble_pack req_data_cnt_i14_LC_1020 {req_data_cnt_i14, i7793_3_lut}
+ble_pack req_data_cnt_i15_LC_1021 {req_data_cnt_i15, i7794_3_lut}
+clb_pack PLB_176 {req_data_cnt_i9_LC_1015, req_data_cnt_i11_LC_1017, req_data_cnt_i12_LC_1018, req_data_cnt_i14_LC_1020, req_data_cnt_i15_LC_1021}
+ble_pack comm_spi.iclk_40_7326_7327_reset_LC_1210 {comm_spi.iclk_40_7326_7327_reset, comm_spi.iclk_40_7326_7327_reset_THRU_LUT4_0}
+clb_pack PLB_177 {comm_spi.iclk_40_7326_7327_reset_LC_1210}
+ble_pack comm_spi.iclk_40_7326_7327_set_LC_1211 {comm_spi.iclk_40_7326_7327_set, comm_spi.iclk_40_7326_7327_set_THRU_LUT4_0}
+clb_pack PLB_178 {comm_spi.iclk_40_7326_7327_set_LC_1211}
+ble_pack comm_spi.imosi_44_7330_7331_reset_LC_1212 {comm_spi.imosi_44_7330_7331_reset, comm_spi.imosi_44_7330_7331_reset_THRU_LUT4_0}
+clb_pack PLB_179 {comm_spi.imosi_44_7330_7331_reset_LC_1212}
+ble_pack comm_spi.imosi_44_7330_7331_set_LC_1213 {comm_spi.imosi_44_7330_7331_set, comm_spi.imosi_44_7330_7331_set_THRU_LUT4_0}
+clb_pack PLB_180 {comm_spi.imosi_44_7330_7331_set_LC_1213}
+ble_pack comm_spi.data_tx_i0_7322_7323_reset_LC_1197 {comm_spi.data_tx_i0_7322_7323_reset, comm_spi.data_tx_i0_7322_7323_reset_THRU_LUT4_0}
+clb_pack PLB_181 {comm_spi.data_tx_i0_7322_7323_reset_LC_1197}
+ble_pack comm_spi.data_tx_i0_7322_7323_set_LC_1198 {comm_spi.data_tx_i0_7322_7323_set, comm_spi.data_tx_i0_7322_7323_set_THRU_LUT4_0}
+clb_pack PLB_182 {comm_spi.data_tx_i0_7322_7323_set_LC_1198}

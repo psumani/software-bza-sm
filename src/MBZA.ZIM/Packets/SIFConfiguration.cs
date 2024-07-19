@@ -44,6 +44,37 @@ namespace ZiveLab.ZM.ZIM.Packets
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct stDevInf_1
+    {
+        public stConnCfg mConnCfg;
+        public stSystemConfig_1 mSysCfg;
+        public stDevInf_1(byte init)
+        {
+            mSysCfg = new stSystemConfig_1(0);
+            mConnCfg = new stConnCfg(0);
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stDevInf_1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stDevInf_1));
+            pinnedArr.Free();
+        }
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct stDevInf
     {
         public stConnCfg mConnCfg;
@@ -72,6 +103,5 @@ namespace ZiveLab.ZM.ZIM.Packets
             pinnedArr.Free();
         }
     }
-
 
 }
