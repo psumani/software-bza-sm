@@ -3688,8 +3688,12 @@ namespace ZiveLab.ZM
         {
             rtmode = 0;
             RtMenuGraphMode2.Checked = false;
+            RtMenuGraphMode1.Checked = true;
+            grprt.YAxes[1].Visible = false;
             grprt.XAxes[0].Caption = "Voltage(V)";
             grprt.YAxes[0].Caption = "Current(A)";
+            grprt.YAxes[1].Visible = false;
+            
             RefreshRtView();
         }
 
@@ -3697,9 +3701,11 @@ namespace ZiveLab.ZM
         {
             rtmode = 1;
             RtMenuGraphMode1.Checked = false;
+             RtMenuGraphMode2.Checked = true;
             grprt.XAxes[0].Caption = "Time";
             grprt.YAxes[0].Caption = "Voltage(V)";
             grprt.YAxes[1].Caption = "Current(A)";
+            grprt.YAxes[1].Visible = true;
             RefreshRtView();
         }
 
