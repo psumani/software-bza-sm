@@ -1356,7 +1356,11 @@ namespace ZiveLab.ZM
 
             ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, 0.0, ranges.mDummy[rng]);
 
-            
+            if(fititems == null)
+            {
+                MessageBox.Show("Since there was no data less than 0.02 degrees between 10 Hz and 1 Hz, no average resistance value was obtained.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             ranges.iac_rng[trng].gain1 = zCal.Gain;
             ranges.iac_rng[trng].gain2 = zCal.Gain;
 
