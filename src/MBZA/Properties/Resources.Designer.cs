@@ -63,6 +63,16 @@ namespace ZiveLab.ZM.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap AboutBox {
+            get {
+                object obj = ResourceManager.GetObject("AboutBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_left_bold_box {
             get {
                 object obj = ResourceManager.GetObject("arrow_left_bold_box", resourceCulture);
@@ -411,6 +421,16 @@ namespace ZiveLab.ZM.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dictionary {
+            get {
+                object obj = ResourceManager.GetObject("Dictionary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Icon DisGate {
@@ -446,6 +466,16 @@ namespace ZiveLab.ZM.Properties {
         internal static System.Drawing.Bitmap Editsch {
             get {
                 object obj = ResourceManager.GetObject("Editsch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap en16 {
+            get {
+                object obj = ResourceManager.GetObject("en16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -516,6 +546,16 @@ namespace ZiveLab.ZM.Properties {
         internal static System.Drawing.Bitmap HambergerMenu {
             get {
                 object obj = ResourceManager.GetObject("HambergerMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap kr16 {
+            get {
+                object obj = ResourceManager.GetObject("kr16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

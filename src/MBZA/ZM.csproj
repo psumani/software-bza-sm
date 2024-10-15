@@ -142,6 +142,12 @@
     <Compile Include="frmMdiMain.Designer.cs">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSelEditTypeDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelEditTypeDlg.Designer.cs">
+      <DependentUpon>frmSelEditTypeDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSetBatPara.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -325,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMdiMain.resx">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelEditTypeDlg.resx">
+      <DependentUpon>frmSelEditTypeDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetBatPara.resx">
       <DependentUpon>frmSetBatPara.cs</DependentUpon>
@@ -752,6 +761,10 @@
     <None Include="doc\Image6\NetConfig.png" />
     <None Include="doc\png\TransitioningContent.png" />
     <None Include="doc\Image4\stock-vector-signing-report-vector-icon-86384779.jpg" />
+    <None Include="doc\Dictionary.png" />
+    <None Include="doc\AboutBox.png" />
+    <None Include="doc\en16.ico" />
+    <None Include="doc\kr16.ico" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />
@@ -794,6 +807,9 @@
     <None Include="doc\Image3\images %2818%29.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF $(ConfigurationName)==Release C:\SignTools\Signtool\SignTool.exe sign /a /v /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td SHA256 /fd sha256 "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

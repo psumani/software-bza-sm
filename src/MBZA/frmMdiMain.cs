@@ -55,7 +55,7 @@ namespace ZiveLab.ZM
             bFirst = true;
             this.MakeAppTitle();
             this.MaxAniCnt = 10;
-
+            
             this.Text = AppTitle;
             gBZA.sMsgTitle = AppTitle;
 
@@ -899,7 +899,7 @@ namespace ZiveLab.ZM
             frmTech.MdiParent = this;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
-                frmTech.StartPosition = FormStartPosition.CenterScreen;
+                frmTech.StartPosition = FormStartPosition.CenterParent;
             }
             else
             {
@@ -1661,6 +1661,76 @@ namespace ZiveLab.ZM
             {
                 frmResTools.WindowState = FormWindowState.Normal;
                 frmResTools.Activate();
+            }
+        }
+
+        private void frmMdiMain_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void frmMdiMain_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (files.Length > 0 && File.Exists(files[0]))
+            {
+                string filePath = files[0];
+                string sExt = Path.GetExtension(filePath).ToUpper();
+
+                if (sExt == ".HFR" || sExt == ".PRR" || sExt == ".VTM" || sExt == ".QIS" || sExt == ".DCH" || sExt == ".EIS" )
+                {
+                    OpenTechFile(-1, filePath);
+                }
+                else if(sExt == ".ZMF")
+                {
+                    frmSelEditTypeDlg mfrm = new frmSelEditTypeDlg();
+                    if(mfrm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        if(mfrm.bgraph)
+                        {
+                            OpenGraph(files);
+                        }
+                        else
+                        {
+                            OpenDataEditor(filePath);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Unsupported file type (extender verification).", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sfile = Application.StartupPath + "\\manual\\" + gBZA.appcfg.FileHelpEng;
+            if(File.Exists(sfile))
+            {
+                Process.Start(sfile);
+            }
+            else
+            {
+                MessageBox.Show("Help file not found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void koreanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sfile = Application.StartupPath + "\\manual\\" + gBZA.appcfg.FileHelpKor;
+            if (File.Exists(sfile))
+            {
+                Process.Start(sfile);
+            }
+            else
+            {
+                MessageBox.Show("Help file not found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

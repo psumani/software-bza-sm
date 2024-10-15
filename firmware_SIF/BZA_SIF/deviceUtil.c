@@ -1302,11 +1302,11 @@ inline void CompImpedanceItem(int ch, st_zim_eis_raw *praw, ushort cRng)
 	st_zim_Eis_Cal_info* pEis_cal_info1;
 	
 	if((m_pSysConfig->mSIFCfg.FirmwareVersion.Build %2) == 0)
-	{
+	{  //엘지솔루션 전용
 		pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[cRng];
 	}
 	else
-	{
+	{  //일반형
 		pEis_cal_info1 = &m_pSysConfig->mZimCfg[ch].ranges.mEisIRngCalInfo[DEF_HIFREQ_CALIBRANGE];
 		if (ChkEisCalVar(pEis_cal_info1) == false)
 		{

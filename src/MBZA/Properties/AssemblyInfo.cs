@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
 [assembly: AssemblyTitle("ZM")]
-[assembly: AssemblyDescription("Impedance Manager")]
+[assembly: AssemblyDescription("Impedance manager of the BZA series produced by WonATech Co.,Ltd.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("WonATech Corporation.")]
+[assembly: AssemblyCompany("WonATech Co.,Ltd.")]
 [assembly: AssemblyProduct("ZM")]
-[assembly: AssemblyCopyright("Copyrightⓒ2022 WonATech co.,ltd All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright 2022. WonATech Co.,Ltd All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

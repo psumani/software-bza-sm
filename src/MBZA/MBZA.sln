@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZM_ZIM", "..\MBZA.ZIM\ZM_ZI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZM.FactorySetting", "..\MBZA.FactorySetting\ZM.FactorySetting.csproj", "{C1F3D06B-032C-4C7A-A4E2-497709702106}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_BZA", "..\Setup_BZA\Setup_BZA.vdproj", "{6676A31B-3127-414F-B5C4-4908258D0414}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupBzaLG", "..\SetupBzaLG\SetupBzaLG.vdproj", "{F1C862ED-2F21-44EF-AF7A-6434FBCAAFC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,10 @@ Global
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6676A31B-3127-414F-B5C4-4908258D0414}.Debug|Any CPU.ActiveCfg = Debug
+		{6676A31B-3127-414F-B5C4-4908258D0414}.Release|Any CPU.ActiveCfg = Release
+		{F1C862ED-2F21-44EF-AF7A-6434FBCAAFC6}.Debug|Any CPU.ActiveCfg = Debug
+		{F1C862ED-2F21-44EF-AF7A-6434FBCAAFC6}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

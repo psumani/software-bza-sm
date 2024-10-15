@@ -59,6 +59,9 @@
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.koreanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.MainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewHomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -330,18 +333,45 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.helpHToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.zm;
+            this.aboutToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.AboutBox;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.aboutToolStripMenuItem.Text = "ZM information(&A)";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.aboutToolStripMenuItem.Text = "ZM &information";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // helpHToolStripMenuItem
+            // 
+            this.helpHToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.koreanToolStripMenuItem,
+            this.englishToolStripMenuItem});
+            this.helpHToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.Dictionary;
+            this.helpHToolStripMenuItem.Name = "helpHToolStripMenuItem";
+            this.helpHToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.helpHToolStripMenuItem.Text = "&Manual";
+            // 
+            // koreanToolStripMenuItem
+            // 
+            this.koreanToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.kr16;
+            this.koreanToolStripMenuItem.Name = "koreanToolStripMenuItem";
+            this.koreanToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.koreanToolStripMenuItem.Text = "&Korean";
+            this.koreanToolStripMenuItem.Click += new System.EventHandler(this.koreanToolStripMenuItem_Click);
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.en16;
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.englishToolStripMenuItem.Text = "&English";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
             // notifyIcon1
             // 
@@ -663,6 +693,7 @@
             // 
             // frmMdiMain
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1568, 757);
@@ -680,6 +711,8 @@
             this.MdiChildActivate += new System.EventHandler(this.frmMdiMain_MdiChildActivate);
             this.LocationChanged += new System.EventHandler(this.frmMdiMain_LocationChanged);
             this.SizeChanged += new System.EventHandler(this.frmMdiMain_SizeChanged);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmMdiMain_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmMdiMain_DragEnter);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.MainMenu.ResumeLayout(false);
@@ -759,5 +792,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripMenuItem Memu_RstWinPos;
         private System.Windows.Forms.ToolStripMenuItem MenuconvPrrDataToTextFile;
+        private System.Windows.Forms.ToolStripMenuItem helpHToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem koreanToolStripMenuItem;
     }
 }

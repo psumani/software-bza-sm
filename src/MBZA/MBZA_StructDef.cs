@@ -35,6 +35,8 @@ namespace ZiveLab.ZM
         public string FileNameZIMFW;
         public string FileNameSIFFW;
         public string BatLimitFile;
+        public string FileHelpEng;
+        public string FileHelpKor;
 
         public double[] RDummy;
         public double[] LDummy;
@@ -85,6 +87,8 @@ namespace ZiveLab.ZM
             FileNameZIMFW = "default.zim";
             FileNameSIFFW = "default.sif";
             BatLimitFile = "C:\\ZIVE DATA\\ZM\\Infor\\BAT.lmt";
+            FileHelpEng = "zm_v108_eng_manual.pdf";
+            FileHelpKor = "zm_v108_kor_manual.pdf";
 
             if (!System.IO.Directory.Exists(PathZIMFW)) System.IO.Directory.CreateDirectory(PathZIMFW);
             if (!System.IO.Directory.Exists(PathSIFFW)) System.IO.Directory.CreateDirectory(PathSIFFW);
@@ -251,6 +255,8 @@ namespace ZiveLab.ZM
             FileNameZIMFW = tmp.FileNameZIMFW;
             FileNameSIFFW = tmp.FileNameSIFFW;
             BatLimitFile = tmp.BatLimitFile;
+            FileHelpEng = tmp.FileHelpEng;
+            FileHelpKor = tmp.FileHelpKor;
 
             CommTimeOut = tmp.CommTimeOut;
             MainViewLocation = tmp.MainViewLocation;

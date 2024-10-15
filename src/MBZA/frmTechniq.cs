@@ -124,9 +124,6 @@ namespace ZiveLab.ZM
                 {
                     cboIrange.Items.Add(item.GetDescription());
                 }
-
-                
-
             }
             else
             {
