@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:31:51
 
-* File Generated:     Jun 28 2024 17:11:20
+* File Generated:     Jan 16 2025 15:12:37
 
 * Purpose:            General info of design implementation
 
@@ -17,7 +17,7 @@
 Synthesis/Placement Summary:
 ----------------------------
     Status:  Successful
-    Runtime: 5 seconds
+    Runtime: 2 seconds
 
 Device Info:
 ------------

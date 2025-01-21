@@ -632,7 +632,9 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_zim_eis_zdata zdata;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_EIS_RT_RAW_POINT)]
         public st_zim_eis_raw_val[] Real_val; // real time samples of the running frequency
-      
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_AUX_CH)]
+        public st_zim_eis_zdata []Auxzdata;
+
         public st_zim_eis_status(byte init)
         {
             status = DeviceConstants.EIS_STATUS_NONE;
@@ -651,6 +653,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             for (int i = 0; i < DeviceConstants.MAX_EIS_RAWVAL_POINT; i++)
             {
                 Real_val[i] = new st_zim_eis_raw_val(0);
+            }
+            Auxzdata = new st_zim_eis_zdata[DeviceConstants.MAX_AUX_CH];
+            for (int i = 0; i < DeviceConstants.MAX_AUX_CH; i++)
+            {
+                Auxzdata[i] = new st_zim_eis_zdata(0);
             }
         }
 
@@ -1534,6 +1541,9 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double Vdc;
         public double Idc;
 
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_AUX_CH)]
+        public double[] AuxVdc;
+
         public double Temperature;
         public ushort RealSkip;
         public ushort LoadOn;
@@ -1571,13 +1581,19 @@ namespace ZiveLab.ZM.ZIM.Packets
             Veoc = 0.0;
             Vdc = 0.0;
             Idc = 0.0;
+            AuxVdc = new double[DeviceConstants.MAX_AUX_CH];
+            for(int i=0; i< DeviceConstants.MAX_AUX_CH; i++)
+            {
+                AuxVdc[i] = 0.0;
+            }
+
             Temperature = 0.0;
 
             RealSkip = 0;
             LoadOn = 0;
             BiasOn = 0;
             eis_status = new st_zim_eis_status(0);
-
+            
             DispFreq = 0.0;
             DispMag = 0.0;
             DispPhase = 0.0;

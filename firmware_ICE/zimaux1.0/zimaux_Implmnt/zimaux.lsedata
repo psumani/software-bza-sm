@@ -1,11 +1,11 @@
 <top name = "zimaux"  library = "work"  arch = "RTL"  entry = "VHDL">
 
 <clocks>
-    <clockitem name = "pll_main/n1"  type = "net" />
     <clockitem name = "comm_spi/iclk"  type = "net" />
-    <clockitem name = "clk_32MHz"  type = "net" />
-    <clockitem name = "clk_32MHz_N_745"  type = "net" />
+    <clockitem name = "pll_main/n1"  type = "net" />
     <clockitem name = "clk_16MHz"  type = "net" />
+    <clockitem name = "clk_32MHz_N_745"  type = "net" />
+    <clockitem name = "clk_32MHz"  type = "net" />
 </clocks>
 
 <!--

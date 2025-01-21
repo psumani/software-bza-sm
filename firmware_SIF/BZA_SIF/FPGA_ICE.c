@@ -551,7 +551,7 @@ INT_32 ICE_readaux_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 	int j;
 	INT_32 len;
 	UNS_8 tx_buf; 
-	UNS_8 rx_buf[12];
+	UNS_8 rx_buf[15];
 	INT_32 tmp = 0;
 
 	if(m_pGlobalVar->OpenSPI == FALSE)
@@ -582,7 +582,7 @@ INT_32 ICE_readaux_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 		return _ERROR;
 	}
 
-	len = spi_iceread(ICE_SPI_NO, (void*)rx_buf, 12);
+	len = spi_iceread(ICE_SPI_NO, (void*)rx_buf, 15);
 
 	if(CheckResult() == false)
 	{
@@ -598,7 +598,7 @@ INT_32 ICE_readaux_adcDataSet(INT_32 ch, UNS_8 cmd, INT_32* pdata)
 	
 	j=0;
 	
-	for(i=0; i<4; i++, j+=3)
+	for(i=0; i<5; i++, j+=3)
 	{
 		tmp = (rx_buf[j] & 0xFF);
 		tmp <<= 8;

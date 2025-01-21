@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:31:51
 
-* File Generated:     Jul 1 2024 11:47:29
+* File Generated:     Jan 16 2025 13:17:28
 
 * Purpose:            General info of design implementation
 
@@ -17,7 +17,7 @@
 Synthesis/Placement Summary:
 ----------------------------
     Status:  Successful
-    Runtime: 4 seconds
+    Runtime: 2 seconds
 
 Device Info:
 ------------
@@ -122,7 +122,7 @@ Detailed I/O Info:
 Router Summary:
 ---------------
     Status:  Successful
-    Runtime: 40 seconds
+    Runtime: 28 seconds
 
 Routing Resource Utilization:
 -----------------------------

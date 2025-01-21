@@ -81,6 +81,7 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_VAC_RNGCNT = 1;
         public const int MAX_IAC_CTRL_RNGCNT = 8;
         public const int MAX_VDC_RNGCNT = 2;
+        public const int MAX_AUX_CH = 12;
 
         public const double DEF_SINECTRL_PHASE = 270.0;
 

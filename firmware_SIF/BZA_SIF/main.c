@@ -19,7 +19,7 @@ int main()
 	m_pGlobalVar->mStatusInf.mode = 1;
 	m_pGlobalVar->mStatusInf.Lastbd = -1;
 	m_pGlobalVar->LedFlowStat = 1;
-	
+
 	while(bFlag)
 	{	
 		ICE_BzaCommStat(m_pGlobalVar->LedBusy);
