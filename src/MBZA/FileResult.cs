@@ -10,20 +10,23 @@ using System.Windows.Forms;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
 
+
 namespace ZiveLab.ZM
 {
     public class FileResult
     {
         public string sfilename;
+        public string sLastVersion;
+        public string sVersion;
         public FileStream fs;
         public stResHeader tmphead;
+        public object srcHead;
         public int len_head;
         public int len_data;
         public int datacount;
         public bool bStart;
         public bool bopen;
         public bool bwrite;
-
         public FileResult()
         {
             Initialize();
@@ -36,10 +39,12 @@ namespace ZiveLab.ZM
             len_head = Marshal.SizeOf(typeof(stResHeader));
             len_data = Marshal.SizeOf(typeof(stDefTestData));
             tmphead = new stResHeader(0);
+            srcHead = null;
             bStart = false;
             bopen = false;
             bwrite = false;
             datacount = 0;
+            sLastVersion = string.Format("{0}.{1}.{2}.{3}", DeviceConstants.SCH_MAJOR, DeviceConstants.SCH_MINOR, DeviceConstants.SCH_REVISION, DeviceConstants.SCH_BUILD);
         }
 
         public void CloseFile()
@@ -103,10 +108,15 @@ namespace ZiveLab.ZM
 
         public bool ReadHead()
         {
+
+            srcHead = tmphead;
+
             return ReadHead(ref tmphead);
         }
+
         public bool ReadHead(ref stResHeader head)
         {
+
             if (bopen == false) return false;
             byte[] buf = new byte[len_head];
             fs.Seek(0, SeekOrigin.Begin);
@@ -145,6 +155,7 @@ namespace ZiveLab.ZM
                 tmphead.mInfo.Ch = ch;
                 tmphead.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
                 tmphead.mInfo.sifch = sifch;
+                sVersion = tmphead.mInfo.version.ToString();
                 datacount = 0;
                 fs.SetLength(0);
 
@@ -187,7 +198,7 @@ namespace ZiveLab.ZM
                 tmphead.mInfo.Ch = ch;
                 tmphead.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
                 tmphead.mInfo.sifch = sifch;
-
+                sVersion = tmphead.mInfo.version.ToString();
                 bopen = true;
                 bwrite = true;
 
@@ -227,7 +238,7 @@ namespace ZiveLab.ZM
                 tmphead.mInfo.sifch = sifch;
                 bopen = true;
                 bwrite = true;
-
+                sVersion = tmphead.mInfo.version.ToString();
                 if (WriteHead() == false) return false;
 
                 bStart = true;
@@ -261,6 +272,7 @@ namespace ZiveLab.ZM
                 {
                     return false;
                 }
+                sVersion = head.mInfo.version.ToString();
                 datacount = 0;
                 fs.SetLength(0);
 
@@ -301,6 +313,7 @@ namespace ZiveLab.ZM
                 {
                     return false;
                 }
+                sVersion = head.mInfo.version.ToString();
                 datacount = 0;
                 fs.SetLength(0);
 
@@ -452,6 +465,25 @@ namespace ZiveLab.ZM
             return readcount;
         }
 
+        public string GetVersion()
+        {
+            if (bopen == false) return "";
+
+            stVersion version = new stVersion(0);
+            int isize = Marshal.SizeOf(typeof(stVersion));
+            byte[] buf = new byte[isize];
+            fs.Seek(0, SeekOrigin.Begin);
+            if(fs.Read(buf, 0, isize) != isize)
+            {
+                return "";
+            }
+            version.ToWritePtr(buf);
+            return version.ToString();
+        }
+
+        
+
+
         public bool Open(string filename)
         {
             try
@@ -468,6 +500,8 @@ namespace ZiveLab.ZM
                 {
                     return false;
                 }
+                sVersion = GetVersion();
+
                 datacount = this.GetDatacount();
 
                 bStart = false;

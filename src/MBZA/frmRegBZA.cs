@@ -1322,7 +1322,17 @@ namespace ZiveLab.ZM
             {
                 if (BzaChRow != Matchrow)
                 {
-                    grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(BzaChRow, 1).ForeColor;
+                    // Test Code
+                    if (BzaChRow > 0 && BzaChRow < grdBzaCh.Rows)
+                    {
+                        grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(BzaChRow, 1).ForeColor;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Invalid BzaChRow: {BzaChRow}");
+                    }
+                    // Test Code END
+                    //grdBzaCh.ForeColorSel = grdBzaCh.GetCellStyle(BzaChRow, 1).ForeColor; // Err
                     grdBzaCh.Select(BzaChRow, 1, 1, 1, true);
                     BzaChRow = Matchrow;
                 }
@@ -2007,7 +2017,6 @@ namespace ZiveLab.ZM
                     }
                     if (bchk == true)
                     {
-                        
                         gBZA.RegOkChCount++;
                     }
                 }

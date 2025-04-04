@@ -1683,9 +1683,10 @@ inline void FixIacRangeInf(st_zim_adci_rnginf* prng,double realmax, double max, 
 	prng->controlgain = DEF_ADC_IAC_CONTROLGAIN;
 }
 
-void InitRangeInf(INT_16 bd, INT_16 auxch)
+void InitRangeInf(INT_16 bd)
 {
 	INT_16 i;
+	INT_16 j;
 	INT_16 ch = auxch;
 	ushort zimtype = BZAAUX;
 
@@ -1694,69 +1695,81 @@ void InitRangeInf(INT_16 bd, INT_16 auxch)
 	
 	if(ch < 0 || zimtype != BZAAUX) ch = 0;
 	
-	m_pSysConfig->mZimCfg[bd].ranges[ch].ID = ID_RANGEINFO;
+	m_pSysConfig->mZimCfg[bd].ranges.ID = ID_RANGEINFO;
 	
+	if(zimtype == BZAAUX)
+	{
+		for(i=0; i<4; i++)
+		{
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[i].maximum = DEF_AUXADC_VDC_RNG_MAX;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[i].minimum = DEF_AUXADC_VDC_RNG_MIN;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[i].factor = DEF_AUXADC_VDC_RNG_FACTOR;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[i].gain = 1.0;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[i].offset = 0.0;
+
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vac_rng[i].maximum = DEF_AUXADC_VAC_RNG_MAX;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vac_rng[i].minimum = DEF_AUXADC_VAC_RNG_MIN;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vac_rng[i].factor = DEF_AUXADC_VAC_RNG_FACTOR;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vac_rng[i].gain = 1.0;
+			m_pSysConfig->mZimCfg[bd].ranges.Aux.vac_rng[i].offset = 0.0;
+
+			for(j=0; j<MAX_IAC_CTRL_RNGCNT; j++)
+			{
+				InitEisCalInf(&m_pSysConfig->mZimCfg[bd].ranges.Aux.mEisIRngCalInfo[i][j]);
+			}
+		}
+		return;
+	}
+
+
 	for(i=0; i<MAX_IAC_CTRL_RNGCNT; i++)
 	{
 		InitEisCalInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].mEisIRngCalInfo[i]);
 		m_pSysConfig->mZimCfg[bd].ranges[ch].idc_rng.idcofs[i].offset = DEF_MONDCCTRL_PHASE;
 	}
-	
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[0].Ls = 0.000000064476;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[1].Ls = 0.000000064476;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[2].Ls = 0.000000112196;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[3].Ls = 0.000000112196;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[4].Ls = 0.000000084638;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[5].Ls = 0.000000084638;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[6].Ls = 0.00000008;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[7].Ls = 0.00000008;
 
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[0].R = 0.009987261;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[1].R = 0.009987261;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[2].R = 0.099952;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[3].R = 0.099952;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[4].R = 0.997961;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[5].R = 0.997961;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[6].R = 9.999115;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[7].R = 9.999115;
-	
-	//PT-1000 - 1000ohm : 0'C, RREF - 4000ohm
-	//PT-100  -  100ohm : 0'C. RREF -  400ohm
-	m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.maximum = DEF_ADC_RTD_CONST_MAX;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.minimum = DEF_ADC_RTD_CONST_MIN;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.factor = DEF_ADC_RTD_CONST_PT100;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.gain = 1.0;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.offset = 0.0;
-	
-	InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[0],DEF_IAC_RNG1_MAX,DEF_ADC_IAC_RNG1_MAX,DEF_ADC_IAC_RNG1_MIN);
-	InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[1],DEF_IAC_RNG2_MAX,DEF_ADC_IAC_RNG2_MAX,DEF_ADC_IAC_RNG2_MIN);
-	InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[2],DEF_IAC_RNG3_MAX,DEF_ADC_IAC_RNG3_MAX,DEF_ADC_IAC_RNG3_MIN);
-	InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[3],DEF_IAC_RNG4_MAX,DEF_ADC_IAC_RNG4_MAX,DEF_ADC_IAC_RNG4_MIN);
+		m_pSysConfig->mZimCfg[bd].ranges.Gen.mDummy[0].Ls = 0.000000064476;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[1].Ls = 0.000000064476;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[2].Ls = 0.000000112196;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[3].Ls = 0.000000112196;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[4].Ls = 0.000000084638;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[5].Ls = 0.000000084638;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[6].Ls = 0.00000008;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[7].Ls = 0.00000008;
 
-	m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.realmax = DEF_ADC_VAC_RNG_RMAX;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.maximum = DEF_ADC_VAC_RNG_MAX;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.minimum = DEF_ADC_VAC_RNG_MIN;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.factor = DEF_ADC_VAC_RNG_FACTOR;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.gain = 1.0;
-	m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.offset = 0.0;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[0].R = 0.009987261;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[1].R = 0.009987261;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[2].R = 0.099952;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[3].R = 0.099952;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[4].R = 0.997961;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[5].R = 0.997961;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[6].R = 9.999115;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].mDummy[7].R = 9.999115;
+		
+		//PT-1000 - 1000ohm : 0'C, RREF - 4000ohm
+		//PT-100  -  100ohm : 0'C. RREF -  400ohm
+		m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.maximum = DEF_ADC_RTD_CONST_MAX;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.minimum = DEF_ADC_RTD_CONST_MIN;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.factor = DEF_ADC_RTD_CONST_PT100;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.gain = 1.0;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].rtd_rng.offset = 0.0;
+		
+		InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[0],DEF_IAC_RNG1_MAX,DEF_ADC_IAC_RNG1_MAX,DEF_ADC_IAC_RNG1_MIN);
+		InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[1],DEF_IAC_RNG2_MAX,DEF_ADC_IAC_RNG2_MAX,DEF_ADC_IAC_RNG2_MIN);
+		InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[2],DEF_IAC_RNG3_MAX,DEF_ADC_IAC_RNG3_MAX,DEF_ADC_IAC_RNG3_MIN);
+		InitIacRangeInf(&m_pSysConfig->mZimCfg[bd].ranges[ch].iac_rng[3],DEF_IAC_RNG4_MAX,DEF_ADC_IAC_RNG4_MAX,DEF_ADC_IAC_RNG4_MIN);
 
-	if(zimtype == BZAAUX)
+		m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.realmax = DEF_ADC_VAC_RNG_RMAX;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.maximum = DEF_ADC_VAC_RNG_MAX;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.minimum = DEF_ADC_VAC_RNG_MIN;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.factor = DEF_ADC_VAC_RNG_FACTOR;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.gain = 1.0;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].vac_rng.offset = 0.0;
+
+	
+	if(zimtype == DEV_BZA100 || zimtype == DEV_BZA60)
 	{
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].maximum = DEF_AUXADC_VDC_RNG_MAX;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].minimum = DEF_AUXADC_VDC_RNG_MIN;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].factor = DEF_AUXADC_VDC_RNG_FACTOR;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].gain = 1.0;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].offset = 0.0;
-
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].maximum = DEF_AUXADC_VDC_RNG_MAX;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].minimum = DEF_AUXADC_VDC_RNG_MIN;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].factor = DEF_AUXADC_VDC_RNG_FACTOR;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].gain = 1.0;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].offset = 0.0;
-	}
-	else if(zimtype == DEV_BZA100 || zimtype == DEV_BZA60)
-	{
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].maximum = DEF_ADC_VDC_RNG0_MAX1;
+		m_pSysConfig->mZimCfg[bd].ranges[ch].Gen.vdc_rng[0].maximum = DEF_ADC_VDC_RNG0_MAX1;
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].minimum = DEF_ADC_VDC_RNG0_MIN1;
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].factor = DEF_ADC_VDC_RNG0_FACTOR1;
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].gain = 1.0;
@@ -1783,13 +1796,8 @@ void InitRangeInf(INT_16 bd, INT_16 auxch)
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].offset = 0.0;
 	}
 	
-	if(zimtype == BZAAUX)
-	{
-		m_pSysConfig->mZimCfg[bd].ranges[ch].mSafety.MaxPower = DEF_BZA500_DEFAULT_POWER;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].realmax = DEF_AUXADC_VDC_RNG_RMAX;
-		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].realmax = DEF_AUXADC_VDC_RNG_RMAX;
-	}
-	else if(zimtype == DEV_BZA500)
+
+	if(zimtype == DEV_BZA500)
 	{
 		m_pSysConfig->mZimCfg[bd].ranges[ch].mSafety.MaxPower = DEF_BZA500_DEFAULT_POWER;
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].realmax = DEF_ADC_VDC_RNG0_RMAX1;
@@ -1813,17 +1821,12 @@ void InitRangeInf(INT_16 bd, INT_16 auxch)
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[0].realmax = DEF_ADC_VDC_RNG0_RMAX0;
 		m_pSysConfig->mZimCfg[bd].ranges[ch].vdc_rng[1].realmax = DEF_ADC_VDC_RNG1_RMAX0;
 	}
+
 	for(i=0; i<4; i++)
 	{
 		m_pSysConfig->mZimCfg[bd].ranges[ch].mSafety.NoUse[i] = 0.0;
 	}
 	
-	if(auxch < 0 && zimtype == BZAAUX) 
-	{
-		memcpy(&m_pSysConfig->mZimCfg[bd].ranges[1],&m_pSysConfig->mZimCfg[bd].ranges[0],sizeof(st_zim_rnginf));
-		memcpy(&m_pSysConfig->mZimCfg[bd].ranges[2],&m_pSysConfig->mZimCfg[bd].ranges[0],sizeof(st_zim_rnginf));
-		memcpy(&m_pSysConfig->mZimCfg[bd].ranges[3],&m_pSysConfig->mZimCfg[bd].ranges[0],sizeof(st_zim_rnginf));
-	}
 }
 
 void InitFixRangeInf(INT_16 bd, INT_16 auxch)

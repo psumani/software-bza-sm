@@ -47,6 +47,7 @@
 
 #include "init.h"
 #include "DeviceUtil.h"
+#include "DeviceAuxUtil.h"
 #include "TaskUtil.h"
 
 #include "commutil.h"

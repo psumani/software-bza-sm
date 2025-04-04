@@ -523,30 +523,23 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 					when "0010010" =>		--ICE_CMD_DEV_ACADC : 0x92
 						comm_length			<= 1;
 						comm_buf(0)			<= buf_device_acadc(7 downto 0);
---						M_FLT1			<= buf_device_acadc(3);
---						M_FLT0			<= buf_device_acadc(2);
---						M_OSR1			<= buf_device_acadc(1);
---						M_OSR0			<= buf_device_acadc(0);
 					
-					when "0010011" =>		--LAST_ADC_DATA1 : 0x93
-						comm_length			<= 6;
+					when "0010101" =>		--LAST_ADC_DATA1 : 0x93
+						comm_length			<= 12;
 						comm_buf(0)			<= buf_adcdata_vdc1(23 downto 16);
 						comm_buf(1)			<= buf_adcdata_vdc1(15 downto 8);
 						comm_buf(2)			<= buf_adcdata_vdc1(7 downto 0);
 						comm_buf(3)			<= buf_adcdata_vdc2(23 downto 16);
 						comm_buf(4)			<= buf_adcdata_vdc2(15 downto 8);
 						comm_buf(5)			<= buf_adcdata_vdc2(7 downto 0);
+						comm_buf(6)			<= buf_adcdata_vdc3(23 downto 16);
+						comm_buf(7)			<= buf_adcdata_vdc3(15 downto 8);
+						comm_buf(8)			<= buf_adcdata_vdc3(7 downto 0);
+						comm_buf(9)			<= buf_adcdata_vdc4(23 downto 16);
+						comm_buf(10)		<= buf_adcdata_vdc4(15 downto 8);
+						comm_buf(11)		<= buf_adcdata_vdc4(7 downto 0);
+						
 
-						
-						
-					when "0010100" =>		--LAST_ADC_DATA2 : 0x94	
-						comm_length			<= 6;
-						comm_buf(0)			<= buf_adcdata3(23 downto 16);
-						comm_buf(1)			<= buf_adcdata3(15 downto 8);
-						comm_buf(2)			<= buf_adcdata3(7 downto 0);
-						comm_buf(3)			<= buf_adcdata4(23 downto 16);
-						comm_buf(4)			<= buf_adcdata4(15 downto 8);
-						comm_buf(5)			<= buf_adcdata4(7 downto 0);
 						
 					when "0011000" =>			--ICE_CMD_DEVICE_DO 		: 0x98
 						comm_length			<= 1;

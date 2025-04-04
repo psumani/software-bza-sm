@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZM_ZIM", "..\MBZA.ZIM\ZM_ZI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZM.FactorySetting", "..\MBZA.FactorySetting\ZM.FactorySetting.csproj", "{C1F3D06B-032C-4C7A-A4E2-497709702106}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZM.Dataview", "..\ZM.Dataview\ZM.Dataview.csproj", "{32B51393-DF04-428A-8CB1-362B6F949874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataView", "..\TestDataView\TestDataView.csproj", "{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F3D06B-032C-4C7A-A4E2-497709702106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32B51393-DF04-428A-8CB1-362B6F949874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32B51393-DF04-428A-8CB1-362B6F949874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32B51393-DF04-428A-8CB1-362B6F949874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32B51393-DF04-428A-8CB1-362B6F949874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

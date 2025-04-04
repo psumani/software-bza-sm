@@ -258,7 +258,7 @@ namespace ZiveLab.ZM
             HostName = Encoding.UTF8.GetString(gBZA.SifLnkLst[serial].MBZAIF.mConnection.hostname).Trim('\0');
             ConfigureIP = (gBZA.SifLnkLst[serial].MBZAIF.mConnection.dhcp == 1) ? "Succeed" : "No response.";
 
-            devicemodel = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.GetTypeString();
+            devicemodel = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.GetDeviceTypeString();
 
             SifSerialNumber = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
 

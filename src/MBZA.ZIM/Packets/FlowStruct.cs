@@ -629,12 +629,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public ushort totaldatacnt;
         public ushort WorkDatacnt;
         public ushort LoadDatacnt;
-        public st_zim_eis_zdata zdata;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_EIS_RT_RAW_POINT)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public st_zim_eis_zdata[] zdata;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4 * DeviceConstants.MAX_EIS_RT_RAW_POINT)]
         public st_zim_eis_raw_val[] Real_val; // real time samples of the running frequency
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_AUX_CH)]
-        public st_zim_eis_zdata []Auxzdata;
-
+      
         public st_zim_eis_status(byte init)
         {
             status = DeviceConstants.EIS_STATUS_NONE;
@@ -648,16 +647,16 @@ namespace ZiveLab.ZM.ZIM.Packets
             totaldatacnt = DeviceConstants.MAX_EIS_RAWADC_POINT;
             WorkDatacnt = 0;
             LoadDatacnt = 0;
-            zdata = new st_zim_eis_zdata(0);
-             Real_val = new st_zim_eis_raw_val[DeviceConstants.MAX_EIS_RAWVAL_POINT];
+            //zdata = new st_zim_eis_zdata(0);
+            zdata = new st_zim_eis_zdata[4];
+            for (int i = 0; i < 4; i++)
+            {
+                zdata[i] = new st_zim_eis_zdata(0);
+            }
+            Real_val = new st_zim_eis_raw_val[DeviceConstants.MAX_EIS_RAWVAL_POINT];
             for (int i = 0; i < DeviceConstants.MAX_EIS_RAWVAL_POINT; i++)
             {
                 Real_val[i] = new st_zim_eis_raw_val(0);
-            }
-            Auxzdata = new st_zim_eis_zdata[DeviceConstants.MAX_AUX_CH];
-            for (int i = 0; i < DeviceConstants.MAX_AUX_CH; i++)
-            {
-                Auxzdata[i] = new st_zim_eis_zdata(0);
             }
         }
 
@@ -674,8 +673,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             totaldatacnt = DeviceConstants.MAX_EIS_RAWADC_POINT;
             WorkDatacnt = 0;
             LoadDatacnt = 0;
-            zdata.initialize();
-           
+            //zdata.initialize();
+            for (int i = 0; i < 4; i++)
+            {
+                zdata[i].initialize();
+            }
             for (int i = 0; i < DeviceConstants.MAX_EIS_RAWVAL_POINT; i++)
             {
                 Real_val[i].Init();
@@ -761,6 +763,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             {
                 nouse[i] = 0.0;
             }
+        }
+
+        public string GetCreater()
+        {
+            return Encoding.UTF8.GetString(creator).Trim('\0');
         }
 
         public byte[] ToByteArray()
@@ -1540,9 +1547,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double Veoc;
         public double Vdc;
         public double Idc;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
+        public double[] Aux_Vdc;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_AUX_CH)]
-        public double[] AuxVdc;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
+        public double[] Impedance;
 
         public double Temperature;
         public ushort RealSkip;
@@ -1552,8 +1561,10 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_zim_eis_status eis_status;
 
         public double DispFreq;
-        public double DispMag;
-        public double DispPhase;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public double[] DispMag;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public double[] DispPhase;
         
         
         public double nouse1;
@@ -1581,10 +1592,16 @@ namespace ZiveLab.ZM.ZIM.Packets
             Veoc = 0.0;
             Vdc = 0.0;
             Idc = 0.0;
-            AuxVdc = new double[DeviceConstants.MAX_AUX_CH];
-            for(int i=0; i< DeviceConstants.MAX_AUX_CH; i++)
+            Aux_Vdc = new double[12];
+            for (int i = 0; i < Aux_Vdc.Length; i++)
             {
-                AuxVdc[i] = 0.0;
+                Aux_Vdc[i] = 0.0;
+            }
+
+            Impedance = new double[12];
+            for (int i = 0; i < Impedance.Length; i++)
+            {
+                Impedance[i] = 0.0;
             }
 
             Temperature = 0.0;
@@ -1593,11 +1610,19 @@ namespace ZiveLab.ZM.ZIM.Packets
             LoadOn = 0;
             BiasOn = 0;
             eis_status = new st_zim_eis_status(0);
-            
+
             DispFreq = 0.0;
-            DispMag = 0.0;
-            DispPhase = 0.0;
-           
+            DispMag = new double[4];
+            for (int i = 0; i < DispMag.Length; i++)
+            {
+                DispMag[i] = 0.0;
+            }
+            DispPhase = new double[4];
+            for (int i = 0; i < DispPhase.Length; i++)
+            {
+                DispPhase[i] = 0.0;
+            }
+
             nouse1 = 0.0;
         }
 
@@ -1633,8 +1658,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             eis_status.initialize();
 
             DispFreq = 0.0;
-            DispMag = 0.0;
-            DispPhase = 0.0;
+            //DispMag[0] = 0.0;
+            //DispPhase[0] = 0.0;
 
             nouse1 = 0.0;
         }
@@ -1737,6 +1762,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             {
                 Serial[i] = 0x0;
             }
+
             sifch = -1;
 
             Capa = 1.0;
@@ -1771,6 +1797,21 @@ namespace ZiveLab.ZM.ZIM.Packets
             Array.Copy(name, techfile, len);
         }
 
+        public string GetChannel()
+        {
+            return (Ch + 1).ToString();
+        }
+
+        public string GetSifBoardNo()
+        {
+            return (sifch + 1).ToString();
+        }
+
+        public string GetVersion()
+        {
+            return string.Format("{0}.{1}.{2}.{3}", version.Minor, version.Minor, version.Revision,version.Build);
+        }
+
         public string GetTechFile()
         {
             return Encoding.UTF8.GetString(techfile).Trim('\0');
@@ -1792,6 +1833,27 @@ namespace ZiveLab.ZM.ZIM.Packets
         public string GetBattId()
         {
             return Encoding.UTF8.GetString(batid).Trim('\0');
+        }
+
+        public string GetEndTimeString()
+        {
+            string result = string.Empty;
+            DateTime edt = new DateTime(rtc_end.tick * TimeSpan.TicksPerMillisecond);
+            if (edt < DateTime.MaxValue)
+                result = edt.ToString("yyyy/MM/dd HH:mm:ss");
+
+            return result;
+        }
+
+        public string GetStartTimeString()
+        {
+            DateTime sdt = new DateTime(rtc_begin.tick * TimeSpan.TicksPerMillisecond);
+            return sdt.ToString("yyyy/MM/dd HH:mm:ss");
+        }
+
+        public string GetTestDuration()
+        {
+            return string.Format("{0} ~ {1}", GetStartTimeString(), GetEndTimeString());
         }
 
         public void SetUser(byte[] name)
@@ -1853,17 +1915,13 @@ namespace ZiveLab.ZM.ZIM.Packets
     public struct stResHeader
     {
         public stResHeaderInfo mInfo;
-        public stSIFCfg inf_sif;
-        public stZimCfg inf_sifch;
+        public stSystemConfig sysInfo;
         public stTech tech;
 
         public stResHeader(int init)
         {
             mInfo = new stResHeaderInfo(0);
-
-            inf_sif = new stSIFCfg(0);
-            inf_sifch = new stZimCfg(0);
-
+            sysInfo = new stSystemConfig(0);
             tech = new stTech(0);
         }
 
@@ -1876,6 +1934,8 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             mInfo.SetTechFile(name);
         }
+
+       
 
         public string GetTechFilename()
         {
@@ -1915,7 +1975,90 @@ namespace ZiveLab.ZM.ZIM.Packets
             pinnedArr.Free();
         }
     }
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_TestDataItem
+    {
+        public double Vdc;
+        public double Zre;
+        public double Zim;
 
+        public st_zim_TestDataItem(byte init)
+        {
+            Vdc = 0.0;
+            Zre = 0.0;
+            Zim = 0.0;
+        }
+
+        public void initialize()
+        {
+            Vdc = 0.0;
+            Zre = 0.0;
+            Zim = 0.0;
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zim_TestDataItem)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_TestDataItem));
+            pinnedArr.Free();
+        }
+    }
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_TestDataItems
+    {
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public st_zim_TestDataItem[] mdata;
+
+        public st_zim_TestDataItems(byte init)
+        {
+            mdata = new st_zim_TestDataItem[4];
+            for (int i = 0; i < 4; i++)
+            {
+                mdata[i] = new st_zim_TestDataItem(0);
+            }
+        }
+
+        public void initialize()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                mdata[i].initialize();
+            }
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zim_TestDataItems)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_TestDataItems));
+            pinnedArr.Free();
+        }
+    }
     [StructLayout(LayoutKind.Sequential, Pack = 1), Serializable]
     public struct stDefTestData
     {
@@ -1934,6 +2077,9 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double Temperature;
         public double iacrng;
         public double vdcrng;
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+        public st_zim_TestDataItems[] mdata;
 
         public stDefTestData(int init)
         {
@@ -1954,6 +2100,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             fFreq = 0.0;
             real = 0.0;
             img = 0.0;
+            
+            mdata = new st_zim_TestDataItems[3];
+            for (int i = 0; i < 3; i++)
+            {
+                mdata[i] = new st_zim_TestDataItems(0);
+            }
         }
         public byte[] ToByteArray()
         {

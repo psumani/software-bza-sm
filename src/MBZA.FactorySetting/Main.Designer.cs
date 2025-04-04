@@ -31,14 +31,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.BtInitZIM = new System.Windows.Forms.Button();
             this.lnkinitsifcfg = new System.Windows.Forms.LinkLabel();
-            this.ChkEnaChROM = new System.Windows.Forms.CheckBox();
-            this.BtRefreshZIM = new System.Windows.Forms.Button();
-            this.ChkEnaCh = new System.Windows.Forms.CheckBox();
             this.GrpCh = new System.Windows.Forms.GroupBox();
             this.lnkSaveROM = new System.Windows.Forms.LinkLabel();
             this.lnkLoadROM = new System.Windows.Forms.LinkLabel();
+            this.BtRefreshZIM = new System.Windows.Forms.Button();
+            this.ChkEnaChROM = new System.Windows.Forms.CheckBox();
             this.lblscanrom = new System.Windows.Forms.Label();
             this.lnllblscanrom = new System.Windows.Forms.LinkLabel();
+            this.ChkEnaCh = new System.Windows.Forms.CheckBox();
             this.lnklblinitrom = new System.Windows.Forms.LinkLabel();
             this.LblZimBdType = new System.Windows.Forms.Label();
             this.LnklblInitialize = new System.Windows.Forms.LinkLabel();
@@ -121,39 +121,6 @@
             this.lnkinitsifcfg.Text = "> Initialize configuration information of SIF.";
             this.lnkinitsifcfg.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkinitsifcfg_LinkClicked);
             // 
-            // ChkEnaChROM
-            // 
-            this.ChkEnaChROM.AutoSize = true;
-            this.ChkEnaChROM.ForeColor = System.Drawing.Color.Blue;
-            this.ChkEnaChROM.Location = new System.Drawing.Point(114, 20);
-            this.ChkEnaChROM.Name = "ChkEnaChROM";
-            this.ChkEnaChROM.Size = new System.Drawing.Size(130, 16);
-            this.ChkEnaChROM.TabIndex = 30;
-            this.ChkEnaChROM.Text = "Installing EEPROM";
-            this.ChkEnaChROM.UseVisualStyleBackColor = true;
-            // 
-            // BtRefreshZIM
-            // 
-            this.BtRefreshZIM.ForeColor = System.Drawing.Color.Blue;
-            this.BtRefreshZIM.Location = new System.Drawing.Point(297, 13);
-            this.BtRefreshZIM.Name = "BtRefreshZIM";
-            this.BtRefreshZIM.Size = new System.Drawing.Size(140, 25);
-            this.BtRefreshZIM.TabIndex = 29;
-            this.BtRefreshZIM.Text = "Apply setting.";
-            this.BtRefreshZIM.UseVisualStyleBackColor = true;
-            this.BtRefreshZIM.Click += new System.EventHandler(this.BtRefreshZIM_Click);
-            // 
-            // ChkEnaCh
-            // 
-            this.ChkEnaCh.AutoSize = true;
-            this.ChkEnaCh.ForeColor = System.Drawing.Color.Blue;
-            this.ChkEnaCh.Location = new System.Drawing.Point(21, 20);
-            this.ChkEnaCh.Name = "ChkEnaCh";
-            this.ChkEnaCh.Size = new System.Drawing.Size(63, 16);
-            this.ChkEnaCh.TabIndex = 28;
-            this.ChkEnaCh.Text = "Enable";
-            this.ChkEnaCh.UseVisualStyleBackColor = true;
-            // 
             // GrpCh
             // 
             this.GrpCh.Controls.Add(this.lnkSaveROM);
@@ -199,6 +166,28 @@
             this.lnkLoadROM.Text = "> Load EEPROM and Apply Flash ROM.";
             this.lnkLoadROM.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLoadROM_LinkClicked);
             // 
+            // BtRefreshZIM
+            // 
+            this.BtRefreshZIM.ForeColor = System.Drawing.Color.Blue;
+            this.BtRefreshZIM.Location = new System.Drawing.Point(297, 13);
+            this.BtRefreshZIM.Name = "BtRefreshZIM";
+            this.BtRefreshZIM.Size = new System.Drawing.Size(140, 25);
+            this.BtRefreshZIM.TabIndex = 29;
+            this.BtRefreshZIM.Text = "Apply setting.";
+            this.BtRefreshZIM.UseVisualStyleBackColor = true;
+            this.BtRefreshZIM.Click += new System.EventHandler(this.BtRefreshZIM_Click);
+            // 
+            // ChkEnaChROM
+            // 
+            this.ChkEnaChROM.AutoSize = true;
+            this.ChkEnaChROM.ForeColor = System.Drawing.Color.Blue;
+            this.ChkEnaChROM.Location = new System.Drawing.Point(114, 20);
+            this.ChkEnaChROM.Name = "ChkEnaChROM";
+            this.ChkEnaChROM.Size = new System.Drawing.Size(130, 16);
+            this.ChkEnaChROM.TabIndex = 30;
+            this.ChkEnaChROM.Text = "Installing EEPROM";
+            this.ChkEnaChROM.UseVisualStyleBackColor = true;
+            // 
             // lblscanrom
             // 
             this.lblscanrom.AutoSize = true;
@@ -219,6 +208,17 @@
             this.lnllblscanrom.TabStop = true;
             this.lnllblscanrom.Text = "> Scan channel ";
             this.lnllblscanrom.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnllblscanrom_LinkClicked);
+            // 
+            // ChkEnaCh
+            // 
+            this.ChkEnaCh.AutoSize = true;
+            this.ChkEnaCh.ForeColor = System.Drawing.Color.Blue;
+            this.ChkEnaCh.Location = new System.Drawing.Point(21, 20);
+            this.ChkEnaCh.Name = "ChkEnaCh";
+            this.ChkEnaCh.Size = new System.Drawing.Size(63, 16);
+            this.ChkEnaCh.TabIndex = 28;
+            this.ChkEnaCh.Text = "Enable";
+            this.ChkEnaCh.UseVisualStyleBackColor = true;
             // 
             // lnklblinitrom
             // 

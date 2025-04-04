@@ -1,11 +1,11 @@
 <top name = "zim"  library = "work"  arch = "RTL"  entry = "VHDL">
 
 <clocks>
-    <clockitem name = "TEST_LED"  type = "net" />
     <clockitem name = "VDC_CLK"  type = "net" />
-    <clockitem name = "clk_32MHz_N_703"  type = "net" />
-    <clockitem name = "clk_32MHz"  type = "net" />
+    <clockitem name = "TEST_LED"  type = "net" />
     <clockitem name = "clk_16MHz"  type = "net" />
+    <clockitem name = "clk_32MHz"  type = "net" />
+    <clockitem name = "clk_32MHz_N_703"  type = "net" />
     <clockitem name = "clk_RTD"  type = "net" />
     <clockitem name = "pll_main/n1"  type = "net" />
     <clockitem name = "comm_spi/iclk"  type = "net" />

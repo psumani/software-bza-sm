@@ -185,7 +185,6 @@
             this.btSize = new System.Windows.Forms.Button();
             this.btTechEdit = new System.Windows.Forms.Button();
             this.btreport = new System.Windows.Forms.Button();
-            this.btabout = new System.Windows.Forms.Button();
             this.btloaddata = new System.Windows.Forms.Button();
             this.lblVeoc = new System.Windows.Forms.Label();
             this.lblzimg = new System.Windows.Forms.Label();
@@ -250,8 +249,26 @@
             this.lbldatacount = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
             this.lblTech = new System.Windows.Forms.Label();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.lblIdc = new System.Windows.Forms.Label();
+            this.channelBox = new System.Windows.Forms.ComboBox();
+            this.A2zimg = new System.Windows.Forms.Label();
+            this.A2zreal = new System.Windows.Forms.Label();
+            this.A2Vdc = new System.Windows.Forms.Label();
+            this.A2progfreq = new System.Windows.Forms.Label();
+            this.A2Zmag = new System.Windows.Forms.Label();
+            this.A3zimg = new System.Windows.Forms.Label();
+            this.A3zreal = new System.Windows.Forms.Label();
+            this.A3Vdc = new System.Windows.Forms.Label();
+            this.A3progfreq = new System.Windows.Forms.Label();
+            this.A3Zmag = new System.Windows.Forms.Label();
+            this.A4zimg = new System.Windows.Forms.Label();
+            this.A4zreal = new System.Windows.Forms.Label();
+            this.A4Vdc = new System.Windows.Forms.Label();
+            this.A4progfreq = new System.Windows.Forms.Label();
+            this.A4Zmag = new System.Windows.Forms.Label();
+            this.Auxboard = new System.Windows.Forms.Label();
+            this.btabout = new System.Windows.Forms.Button();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
@@ -1469,16 +1486,6 @@
             this.btreport.UseVisualStyleBackColor = true;
             this.btreport.Click += new System.EventHandler(this.btreport_Click);
             // 
-            // btabout
-            // 
-            this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btabout.Location = new System.Drawing.Point(286, 1);
-            this.btabout.Name = "btabout";
-            this.btabout.Size = new System.Drawing.Size(24, 24);
-            this.btabout.TabIndex = 95;
-            this.btabout.UseVisualStyleBackColor = true;
-            this.btabout.Click += new System.EventHandler(this.btabout_Click);
-            // 
             // btloaddata
             // 
             this.btloaddata.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1529,7 +1536,7 @@
             this.tabgrp.Multiline = true;
             this.tabgrp.Name = "tabgrp";
             this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(312, 233);
+            this.tabgrp.Size = new System.Drawing.Size(312, 482);
             this.tabgrp.TabIndex = 100;
             // 
             // TabGrp1
@@ -1540,7 +1547,7 @@
             this.TabGrp1.Location = new System.Drawing.Point(4, 23);
             this.TabGrp1.Name = "TabGrp1";
             this.TabGrp1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabGrp1.Size = new System.Drawing.Size(304, 206);
+            this.TabGrp1.Size = new System.Drawing.Size(304, 455);
             this.TabGrp1.TabIndex = 1;
             this.TabGrp1.Text = "tabPage2";
             this.TabGrp1.UseVisualStyleBackColor = true;
@@ -1676,7 +1683,7 @@
             this.Grp1Plot4,
             this.Grp1Plot5,
             this.Grp1Plot6});
-            this.grp1.Size = new System.Drawing.Size(294, 199);
+            this.grp1.Size = new System.Drawing.Size(294, 448);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1702,7 +1709,7 @@
             this.TabGrp2.Controls.Add(this.grp2);
             this.TabGrp2.Location = new System.Drawing.Point(4, 23);
             this.TabGrp2.Name = "TabGrp2";
-            this.TabGrp2.Size = new System.Drawing.Size(304, 206);
+            this.TabGrp2.Size = new System.Drawing.Size(304, 455);
             this.TabGrp2.TabIndex = 2;
             this.TabGrp2.Text = "tabPage3";
             this.TabGrp2.UseVisualStyleBackColor = true;
@@ -1861,7 +1868,7 @@
             this.Grp2Plot4,
             this.Grp2Plot5,
             this.Grp2Plot6});
-            this.grp2.Size = new System.Drawing.Size(297, 199);
+            this.grp2.Size = new System.Drawing.Size(297, 422);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
             this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1883,7 +1890,7 @@
             this.TabGrpRaw.Controls.Add(this.grprt);
             this.TabGrpRaw.Location = new System.Drawing.Point(4, 23);
             this.TabGrpRaw.Name = "TabGrpRaw";
-            this.TabGrpRaw.Size = new System.Drawing.Size(304, 206);
+            this.TabGrpRaw.Size = new System.Drawing.Size(304, 455);
             this.TabGrpRaw.TabIndex = 3;
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
@@ -1961,7 +1968,7 @@
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.RTPlot1,
             this.RTPlot2});
-            this.grprt.Size = new System.Drawing.Size(295, 197);
+            this.grprt.Size = new System.Drawing.Size(295, 420);
             this.grprt.TabIndex = 109;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -2003,6 +2010,181 @@
             this.lblTech.Text = " Tech. : ";
             this.lblTech.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblIdc
+            // 
+            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdc.Location = new System.Drawing.Point(5, 161);
+            this.lblIdc.Name = "lblIdc";
+            this.lblIdc.Size = new System.Drawing.Size(154, 15);
+            this.lblIdc.TabIndex = 112;
+            this.lblIdc.Text = "    Idc: -------- A";
+            // 
+            // channelBox
+            // 
+            this.channelBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.channelBox.FormattingEnabled = true;
+            this.channelBox.Location = new System.Drawing.Point(359, 28);
+            this.channelBox.Name = "channelBox";
+            this.channelBox.Size = new System.Drawing.Size(122, 22);
+            this.channelBox.TabIndex = 91;
+            this.channelBox.Text = "Not connected";
+            this.channelBox.SelectedIndexChanged += new System.EventHandler(this.channelBox_SelectedIndexChanged);
+            // 
+            // A2zimg
+            // 
+            this.A2zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2zimg.Location = new System.Drawing.Point(6, 367);
+            this.A2zimg.Name = "A2zimg";
+            this.A2zimg.Size = new System.Drawing.Size(154, 15);
+            this.A2zimg.TabIndex = 117;
+            this.A2zimg.Text = " A2Zimg: --------mΩ";
+            // 
+            // A2zreal
+            // 
+            this.A2zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2zreal.Location = new System.Drawing.Point(6, 350);
+            this.A2zreal.Name = "A2zreal";
+            this.A2zreal.Size = new System.Drawing.Size(154, 15);
+            this.A2zreal.TabIndex = 116;
+            this.A2zreal.Text = "A2Zreal: --------mΩ";
+            // 
+            // A2Vdc
+            // 
+            this.A2Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Vdc.Location = new System.Drawing.Point(6, 332);
+            this.A2Vdc.Name = "A2Vdc";
+            this.A2Vdc.Size = new System.Drawing.Size(154, 15);
+            this.A2Vdc.TabIndex = 113;
+            this.A2Vdc.Text = "  A2Vdc: -------- V";
+            // 
+            // A2progfreq
+            // 
+            this.A2progfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2progfreq.Location = new System.Drawing.Point(6, 401);
+            this.A2progfreq.Name = "A2progfreq";
+            this.A2progfreq.Size = new System.Drawing.Size(154, 15);
+            this.A2progfreq.TabIndex = 115;
+            this.A2progfreq.Text = "A2Zphase: -------- °";
+            // 
+            // A2Zmag
+            // 
+            this.A2Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Zmag.Location = new System.Drawing.Point(6, 384);
+            this.A2Zmag.Name = "A2Zmag";
+            this.A2Zmag.Size = new System.Drawing.Size(154, 15);
+            this.A2Zmag.TabIndex = 114;
+            this.A2Zmag.Text = " A2Zmag: --------mΩ";
+            // 
+            // A3zimg
+            // 
+            this.A3zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3zimg.Location = new System.Drawing.Point(6, 451);
+            this.A3zimg.Name = "A3zimg";
+            this.A3zimg.Size = new System.Drawing.Size(154, 15);
+            this.A3zimg.TabIndex = 122;
+            this.A3zimg.Text = " A3Zimg: --------mΩ";
+            // 
+            // A3zreal
+            // 
+            this.A3zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3zreal.Location = new System.Drawing.Point(6, 434);
+            this.A3zreal.Name = "A3zreal";
+            this.A3zreal.Size = new System.Drawing.Size(154, 15);
+            this.A3zreal.TabIndex = 121;
+            this.A3zreal.Text = "A3Zreal: --------mΩ";
+            // 
+            // A3Vdc
+            // 
+            this.A3Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Vdc.Location = new System.Drawing.Point(6, 416);
+            this.A3Vdc.Name = "A3Vdc";
+            this.A3Vdc.Size = new System.Drawing.Size(154, 15);
+            this.A3Vdc.TabIndex = 118;
+            this.A3Vdc.Text = "  A3Vdc: -------- V";
+            // 
+            // A3progfreq
+            // 
+            this.A3progfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3progfreq.Location = new System.Drawing.Point(6, 485);
+            this.A3progfreq.Name = "A3progfreq";
+            this.A3progfreq.Size = new System.Drawing.Size(154, 15);
+            this.A3progfreq.TabIndex = 120;
+            this.A3progfreq.Text = "A3Zphase: -------- °";
+            // 
+            // A3Zmag
+            // 
+            this.A3Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Zmag.Location = new System.Drawing.Point(6, 468);
+            this.A3Zmag.Name = "A3Zmag";
+            this.A3Zmag.Size = new System.Drawing.Size(154, 15);
+            this.A3Zmag.TabIndex = 119;
+            this.A3Zmag.Text = " A3Zmag: --------mΩ";
+            // 
+            // A4zimg
+            // 
+            this.A4zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4zimg.Location = new System.Drawing.Point(6, 535);
+            this.A4zimg.Name = "A4zimg";
+            this.A4zimg.Size = new System.Drawing.Size(154, 15);
+            this.A4zimg.TabIndex = 127;
+            this.A4zimg.Text = " A4Zimg: --------mΩ";
+            // 
+            // A4zreal
+            // 
+            this.A4zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4zreal.Location = new System.Drawing.Point(6, 518);
+            this.A4zreal.Name = "A4zreal";
+            this.A4zreal.Size = new System.Drawing.Size(154, 15);
+            this.A4zreal.TabIndex = 126;
+            this.A4zreal.Text = "A4Zreal: --------mΩ";
+            // 
+            // A4Vdc
+            // 
+            this.A4Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Vdc.Location = new System.Drawing.Point(6, 500);
+            this.A4Vdc.Name = "A4Vdc";
+            this.A4Vdc.Size = new System.Drawing.Size(154, 15);
+            this.A4Vdc.TabIndex = 123;
+            this.A4Vdc.Text = "  A4Vdc: -------- V";
+            // 
+            // A4progfreq
+            // 
+            this.A4progfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4progfreq.Location = new System.Drawing.Point(6, 569);
+            this.A4progfreq.Name = "A4progfreq";
+            this.A4progfreq.Size = new System.Drawing.Size(154, 15);
+            this.A4progfreq.TabIndex = 125;
+            this.A4progfreq.Text = "A4Zphase: -------- °";
+            // 
+            // A4Zmag
+            // 
+            this.A4Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Zmag.Location = new System.Drawing.Point(6, 552);
+            this.A4Zmag.Name = "A4Zmag";
+            this.A4Zmag.Size = new System.Drawing.Size(154, 15);
+            this.A4Zmag.TabIndex = 124;
+            this.A4Zmag.Text = " A4Zmag: --------mΩ";
+            // 
+            // Auxboard
+            // 
+            this.Auxboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Auxboard.AutoSize = true;
+            this.Auxboard.Location = new System.Drawing.Point(288, 31);
+            this.Auxboard.Name = "Auxboard";
+            this.Auxboard.Size = new System.Drawing.Size(70, 14);
+            this.Auxboard.TabIndex = 91;
+            this.Auxboard.Text = "Aux_board";
+            // 
+            // btabout
+            // 
+            this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btabout.Location = new System.Drawing.Point(286, 1);
+            this.btabout.Name = "btabout";
+            this.btabout.Size = new System.Drawing.Size(24, 24);
+            this.btabout.TabIndex = 95;
+            this.btabout.UseVisualStyleBackColor = true;
+            this.btabout.Click += new System.EventHandler(this.btabout_Click);
+            // 
             // lblprog
             // 
             this.lblprog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -2024,20 +2206,28 @@
             this.lblprog.TabIndex = 56;
             this.lblprog.Load += new System.EventHandler(this.lblprog_Load);
             // 
-            // lblIdc
-            // 
-            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdc.Location = new System.Drawing.Point(5, 161);
-            this.lblIdc.Name = "lblIdc";
-            this.lblIdc.Size = new System.Drawing.Size(154, 15);
-            this.lblIdc.TabIndex = 112;
-            this.lblIdc.Text = "    Idc: -------- A";
-            // 
             // BZAChPan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.Auxboard);
+            this.Controls.Add(this.A4zimg);
+            this.Controls.Add(this.A4zreal);
+            this.Controls.Add(this.A4Vdc);
+            this.Controls.Add(this.A4progfreq);
+            this.Controls.Add(this.A4Zmag);
+            this.Controls.Add(this.A3zimg);
+            this.Controls.Add(this.A3zreal);
+            this.Controls.Add(this.A3Vdc);
+            this.Controls.Add(this.A3progfreq);
+            this.Controls.Add(this.A3Zmag);
+            this.Controls.Add(this.A2zimg);
+            this.Controls.Add(this.A2zreal);
+            this.Controls.Add(this.A2Vdc);
+            this.Controls.Add(this.A2progfreq);
+            this.Controls.Add(this.A2Zmag);
+            this.Controls.Add(this.channelBox);
             this.Controls.Add(this.tabgrp);
             this.Controls.Add(this.lblzimg);
             this.Controls.Add(this.lblzreal);
@@ -2067,7 +2257,7 @@
             this.Controls.Add(this.lblTemp);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BZAChPan";
-            this.Size = new System.Drawing.Size(482, 336);
+            this.Size = new System.Drawing.Size(482, 585);
             this.Load += new System.EventHandler(this.BZAChPan_Load);
             this.SizeChanged += new System.EventHandler(this.BZAChPan_SizeChanged);
             this.menu_1.ResumeLayout(false);
@@ -2090,6 +2280,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grprt)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -2239,7 +2430,6 @@
         private System.Windows.Forms.Button btSize;
         private System.Windows.Forms.Button btTechEdit;
         private System.Windows.Forms.Button btreport;
-        private System.Windows.Forms.Button btabout;
         private System.Windows.Forms.Button btloaddata;
         private System.Windows.Forms.ContextMenuStrip contextMenuTech;
         private System.Windows.Forms.ToolStripMenuItem MenuTechopenFileLocation;
@@ -2317,5 +2507,23 @@
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label lblTech;
         private System.Windows.Forms.Label lblIdc;
+        private System.Windows.Forms.ComboBox channelBox;
+        private System.Windows.Forms.Label A2zimg;
+        private System.Windows.Forms.Label A2zreal;
+        private System.Windows.Forms.Label A2Vdc;
+        private System.Windows.Forms.Label A2progfreq;
+        private System.Windows.Forms.Label A2Zmag;
+        private System.Windows.Forms.Label A3zimg;
+        private System.Windows.Forms.Label A3zreal;
+        private System.Windows.Forms.Label A3Vdc;
+        private System.Windows.Forms.Label A3progfreq;
+        private System.Windows.Forms.Label A3Zmag;
+        private System.Windows.Forms.Label A4zimg;
+        private System.Windows.Forms.Label A4zreal;
+        private System.Windows.Forms.Label A4Vdc;
+        private System.Windows.Forms.Label A4progfreq;
+        private System.Windows.Forms.Label A4Zmag;
+        private System.Windows.Forms.Label Auxboard;
+        private System.Windows.Forms.Button btabout;
     }
 }

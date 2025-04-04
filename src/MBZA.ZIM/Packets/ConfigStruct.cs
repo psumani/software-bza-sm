@@ -40,6 +40,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             return true;
         }
 
+        public override  string ToString()
+        {
+            
+            return string.Format("{0}.{1}.{2}.{3}", Major, Minor, Revision, Build);
+        }
+
         public byte[] ToByteArray()
         {
             int Size = Marshal.SizeOf(this);
@@ -106,9 +112,19 @@ namespace ZiveLab.ZM.ZIM.Packets
             return iret;
         }
         
-        public string GetTypeString()
+        public string GetProductTypeString()
+        {
+            return Extensions.GetEnumDescription((eProductType)GetProductType());
+        }
+
+        public string GetDeviceTypeString()
         {
             return Extensions.GetEnumDescription((eDeviceType)Type);
+        }
+
+        public eDeviceType GetDeviceType()
+        {
+            return (eDeviceType)Type;
         }
 
         public string GetFirmwareVer()
@@ -1853,7 +1869,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             EnaROM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
             mZimCfg = new stZimCfg[MBZA_Constant.MAX_DEV_CHANNEL];
 
-            for(int i=0; i< MBZA_Constant.MAX_DEV_CHANNEL; i++)
+            for (int i=0; i< MBZA_Constant.MAX_DEV_CHANNEL; i++)
             {
                 EnaZIM[i] = 0;
                 EnaROM[i] = 0;

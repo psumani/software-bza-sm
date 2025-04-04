@@ -61,6 +61,16 @@ namespace ZiveLab.ZM.Properties {
         }
         
         /// <summary>
+        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Icon AddClause {
+            get {
+                object obj = ResourceManager.GetObject("AddClause", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Bitmap arrow_left_bold_box {
@@ -1177,6 +1187,16 @@ namespace ZiveLab.ZM.Properties {
             get {
                 object obj = ResourceManager.GetObject("Upload", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_16xMD {
+            get {
+                object obj = ResourceManager.GetObject("view_16xMD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -30,7 +30,7 @@ namespace ZiveLab.ZM.FactorySetting
             mDevType = (eDeviceType)mSysCfg.mSIFCfg.Type;
             mZimType = (eZimType)(mSysCfg.mZimCfg[ich].info.cModel[0] - 0x30);
             mCommZim = mSetCommZim;
-            
+
             this.Text = "Set up product information - ZIM Board.";
 
             cboProductType.Items.Clear();
@@ -95,8 +95,9 @@ namespace ZiveLab.ZM.FactorySetting
              numFwVer3.Enabled = false;*/
 
             bFirst = false;
-        }
 
+            //maskSerial.KeyPress += TxtIP_KeyPress;
+        }
 
         public int GetBoardType(string strSerial)
         {
@@ -187,7 +188,7 @@ namespace ZiveLab.ZM.FactorySetting
 
             sCode = Extensions.GetEnumDescription(mSnID);
             if (mSysCfg.mZimCfg[ich].info.cModel[1] < 0x30 || mSysCfg.mZimCfg[ich].info.cModel[1] > 0x39) sCode += "x";
-            else sCode += (mSysCfg.mZimCfg[ich].info.cModel[1]-0x30).ToString();
+            else sCode += (mSysCfg.mZimCfg[ich].info.cModel[1] - 0x30).ToString();
             sCode += "000";
             LblProductName.Text = sCode;
 
@@ -238,18 +239,18 @@ namespace ZiveLab.ZM.FactorySetting
         {
             mSysCfg.mZimCfg[ich].SetBoardVer(string.Format("{0}{1}{2}{3}", numBdVer0.Value, numBdVer1.Value, numBdVer2.Value, numBdVer3.Value));
             mSysCfg.mZimCfg[ich].SetFirmwareVer(string.Format("{0}{1}{2}{3}", numFwVer0.Value, numFwVer1.Value, numFwVer2.Value, numFwVer3.Value));
-            mSysCfg.mZimCfg[ich].SetSerialNumber((byte)CboBdType.SelectedIndex,maskSerial.Text);
-            
+            mSysCfg.mZimCfg[ich].SetSerialNumber((byte)CboBdType.SelectedIndex, maskSerial.Text);
+
             if (mCommZim.ProgConfigOfZim(ich, ref mSysCfg.mZimCfg[ich]) == false)
             {
                 MessageBox.Show("Failed Write EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            
+
             return true;
         }
 
-        private void btSetup_Click(object sender, EventArgs e)
+        private void btSetup_Click(object sender, EventArgs e) // Set up버튼
         {
             bool bstatus;
    
@@ -283,7 +284,6 @@ namespace ZiveLab.ZM.FactorySetting
             byte tb;
             if (bFirst == true) return;
             tb = (byte)CboBdType.SelectedIndex;
-            
 
             if (Type == 0)
             {
@@ -351,7 +351,12 @@ namespace ZiveLab.ZM.FactorySetting
 
         private void maskSerial_KeyDown(object sender, KeyEventArgs e)
         {
- 
+
+        }
+
+        private void maskSerial_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
     }
 }

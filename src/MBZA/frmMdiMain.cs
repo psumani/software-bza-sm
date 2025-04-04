@@ -17,6 +17,7 @@ using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
 using ZiveLab.ZM.ZIM.Utilities;
 using SMLib;
+using ZiveLab.ZM.Dataview;
 
 namespace ZiveLab.ZM
 {
@@ -24,6 +25,7 @@ namespace ZiveLab.ZM
     {
         public string AppTitle;
         public string AppVer;
+        public int ch;
 
         public event EventHandler evTimer;
         private int AniIdx;
@@ -60,8 +62,12 @@ namespace ZiveLab.ZM
             gBZA.sMsgTitle = AppTitle;
 
             gBZA.appcfg = new AppConfig();
-            gBZA.mGraphSet = new GraphSet();
-            gBZA.mGraphSetEx = new GraphSetEx(2);
+
+            DataviewCommon.LoadDataViewSetEx();
+            DataviewCommon.LoadDataConvSet();
+
+            gBZA.mGraphSet = new DataManager.CommClass.GraphSet();
+            gBZA.mGraphSetEx = new DataManager.CommClass.GraphSetEx(2);
             gBZA.appcfg.Load();
             gBZA.LoadGrpSetAll();
 
@@ -127,7 +133,116 @@ namespace ZiveLab.ZM
 
         }
 
-        
+
+        private void OpenAuxVdcForm()
+        {
+            // 폼 생성
+            Form miniForm = new Form();
+            miniForm.Text = "Aux.Monitoring";
+            miniForm.BackColor = SystemColors.ControlDark;
+            miniForm.Size = new System.Drawing.Size(400, 370);
+            miniForm.StartPosition = FormStartPosition.CenterScreen;
+            miniForm.MaximizeBox = true;
+            miniForm.MinimizeBox = true;
+            miniForm.FormBorderStyle = FormBorderStyle.Sizable;
+            miniForm.MdiParent = this;
+
+            Bitmap bitmap = Properties.Resources.view_16xMD;
+            IntPtr hIcon = bitmap.GetHicon();
+            miniForm.Icon = Icon.FromHandle(hIcon);
+
+            // TabControl 추가
+            TabControl tabControl = new TabControl();
+            tabControl.Dock = DockStyle.Fill;
+
+            // 채널 리스트 정렬
+            var list = gBZA.ChLnkLst.Keys.ToList();
+            list.Sort();
+
+            foreach (var key in list)
+            {
+                var Value = gBZA.ChLnkLst[key];
+                int ch = Convert.ToInt32(key);
+
+                bool berror = false;
+
+                if (!gBZA.SifLnkLst.ContainsKey(Value.sSerial))
+                {
+                    berror = true;
+                }
+                else
+                {
+                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.ThreadStat() == false)
+                    {
+                        berror = true;
+                    }
+                }
+
+                // 새 탭 생성 (채널 이름 포함)
+                TabPage tabPage = new TabPage($"Aux_{ch + 1}");
+
+                // DataGridView 생성
+                DataGridView dataGridView = new DataGridView();
+                dataGridView.Dock = DockStyle.Fill;
+                dataGridView.AllowUserToAddRows = false;
+                dataGridView.AllowUserToDeleteRows = false;
+                dataGridView.ReadOnly = true;
+                dataGridView.RowHeadersVisible = false;
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                dataGridView.AllowUserToResizeColumns = false;
+                dataGridView.AllowUserToResizeRows = false;
+                dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                dataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = dataGridView.ColumnHeadersDefaultCellStyle.BackColor;
+                dataGridView.EnableHeadersVisualStyles = false;
+
+                // 컬럼 추가
+                dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    Name = "Channel",
+                    HeaderText = "Channel",
+                    SortMode = DataGridViewColumnSortMode.NotSortable  // 정렬 기능 끄기
+                });
+
+                dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    Name = "Vdc(V)",
+                    HeaderText = "Vdc(V)",
+                    SortMode = DataGridViewColumnSortMode.NotSortable 
+                });
+
+                // 채널이 정상적으로 연결된 경우 Aux_Vdc 값 가져오기
+                for (int i = 0; i < 12; i++)
+                {
+                    string vdcValue = "Unknown";
+
+                    if (!berror && gBZA.SifLnkLst.ContainsKey(Value.sSerial))
+                    {
+                        if (Value.SifCh < gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf.Length)
+                        {
+                            vdcValue = $"{gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Aux_Vdc[i]:F3}V";
+                        }
+                    }
+
+                    int rowIndex = dataGridView.Rows.Add($"Aux_{i + 1}", vdcValue);
+
+                    dataGridView.Rows[rowIndex].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dataGridView.Rows[rowIndex].Cells[1].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+
+                // 탭 페이지에 DataGridView 추가
+                tabPage.Controls.Add(dataGridView);
+
+                // TabControl에 탭 페이지 추가
+                tabControl.TabPages.Add(tabPage);
+            }
+
+            // 부모 폼에 TabControl 추가
+            miniForm.Controls.Add(tabControl);
+
+            miniForm.Show();
+        }
+
 
         public void MakeAppFolder()
         {
@@ -412,6 +527,11 @@ namespace ZiveLab.ZM
 
         }
 
+        private void EVentVdcView(object sender, EventArgs e)
+        {
+            OpenAuxVdcForm();// Test Code
+        }
+
         private void EventOpenEditor(object sender, EventArgs e)
         {
 
@@ -432,6 +552,7 @@ namespace ZiveLab.ZM
                 frmMainView.MdiParent = this;
                 frmMainView.evGroupRtView += EventGroupRtView;
                 frmMainView.evOpenGraph += EventOpenGraph;
+                frmMainView.evVdcView += EVentVdcView;
                 frmMainView.evOpenEditor += EventOpenEditor;
                 frmMainView.evChRtView += EventChRtView;
                 frmMainView.CloseThis += frmMain_CloseThis;
@@ -586,38 +707,38 @@ namespace ZiveLab.ZM
             string sFilename1;
             string sTitle;
             string sitem;
-            string svalue;
+            string svalue = "";
             double dvalue;
             sFilename = gBZA.GetCalibLogFileName(mSif.sSerial);
 
             sTitle = "SIF";
             sitem = "ModelName";
 
-            eProductType Producttype = mSif.mDevInf.mSysCfg.mSIFCfg.GetProductType();
+            ZiveLab.ZM.ZIM.eProductType Producttype = mSif.mDevInf.mSysCfg.mSIFCfg.GetProductType();
             mSif.mDevInf.mSysCfg.mSIFCfg.GetType();
-            svalue = Extensions.GetEnumDescription(Producttype);
-            eDeviceType mdevtype = (eDeviceType)mSif.mDevInf.mSysCfg.mSIFCfg.Type;
-            if (mdevtype == eDeviceType.MBZA) svalue += "M";
+            ZiveLab.ZM.ZIM.Utilities.Extensions.GetEnumDescription(Producttype);
+            ZiveLab.ZM.ZIM.eDeviceType mdevtype = (ZiveLab.ZM.ZIM.eDeviceType)mSif.mDevInf.mSysCfg.mSIFCfg.Type;
+            if (mdevtype == ZiveLab.ZM.ZIM.eDeviceType.MBZA) svalue += "M";
             gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
             sitem = "ModelDesc";
-            if (Producttype == eProductType.BZA1000) svalue = "1000V";
-            else if (Producttype == eProductType.BZA500) svalue = " 500V";
-            else if (Producttype == eProductType.BZA100) svalue = " 100V";
+            if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA1000) svalue = "1000V";
+            else if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA500) svalue = " 500V";
+            else if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA100) svalue = " 100V";
             else svalue = "60V";
             svalue += "/ 2A Battery Impedance Analyzer";
             gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
-            if (Producttype == eProductType.BZA1000) dvalue = 1000.0;
-            else if (Producttype == eProductType.BZA500) dvalue = 500.0;
-            else if (Producttype == eProductType.BZA100) dvalue = 100.0;
+            if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA1000) dvalue = 1000.0;
+            else if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA500) dvalue = 500.0;
+            else if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA100) dvalue = 100.0;
             else dvalue = 60.0;
             sitem = "Voltage_H";
             gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dvalue);
 
-            if (Producttype == eProductType.BZA1000) dvalue = 100.0;
-            else if (Producttype == eProductType.BZA500) dvalue = 50.0;
-            else if (Producttype == eProductType.BZA100) dvalue = 10.0;
+            if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA1000) dvalue = 100.0;
+            else if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA500) dvalue = 50.0;
+            else if (Producttype == ZiveLab.ZM.ZIM.eProductType.BZA100) dvalue = 10.0;
             else dvalue = 6.0;
             sitem = "Voltage_L";
             gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dvalue);
@@ -639,7 +760,7 @@ namespace ZiveLab.ZM
             gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
             sitem = "ChannelCount";
-            if (mdevtype == eDeviceType.MBZA) svalue = "4";
+            if (mdevtype == ZiveLab.ZM.ZIM.eDeviceType.MBZA) svalue = "4";
             else svalue = "1";
             gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
@@ -653,7 +774,7 @@ namespace ZiveLab.ZM
                 
                 sTitle = string.Format("CH{0}", i + 1);
                 sitem = "Enabled";
-                if (mdevtype == eDeviceType.MBZA || i == 0)
+                if (mdevtype == ZiveLab.ZM.ZIM.eDeviceType.MBZA || i == 0)
                 {
                     
 
@@ -800,15 +921,16 @@ namespace ZiveLab.ZM
             OpenGraph(slist);
         }
 
-        private void OpenDataEditor(string filename, int type = 2) // type 0 : General, 1 : Cycle, 2 : Eis
+        private void OpenDataEditor(string filename) // type 0 : General, 1 : Cycle, 2 : Eis
         {
-            DataEditorForm deForm = new DataEditorForm(true, true);
+
+            ZiveLab.ZM.Dataview.DataEditorForm deForm = new ZiveLab.ZM.Dataview.DataEditorForm(true);
             deForm.MsgBoxCaption = this.Text;
             deForm.UnitC = false;
-            deForm.IVManPath = GetIVManPath();
-            deForm.GraphSetEx = gBZA.mGraphSetEx;
+            //Form.IVManPath = GetIVManPath();
+            deForm.DataSetEx = DataviewCommon._GrpSetEx;
             deForm.EnAlwaysOpenPath = false;
-            deForm.ZManPath = GetZManPath();
+            //deForm.ZManPath = GetZManPath();
             deForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             //deForm.SchTempPath = gBZA.appcfg.PathSchTemp;
             deForm.TimeFormat = 1;
@@ -825,7 +947,7 @@ namespace ZiveLab.ZM
             deForm.Show();
             if (filename != null)
             {
-                deForm.LoadData(filename, type);
+                deForm.LoadData(filename);
             }
 
         }
@@ -839,7 +961,7 @@ namespace ZiveLab.ZM
             OpenDataEditor(dvea.DataFileName);
         }
 
-        private bool SaveTempTechFileofResFile(string filename, ref string techfullpath, ref eZimType type)
+        private bool SaveTempTechFileofResFile(string filename, ref string techfullpath, ref ZiveLab.ZM.ZIM.eZimType type)
         {
             string str;
             string techfilename = string.Empty;
@@ -847,18 +969,18 @@ namespace ZiveLab.ZM
             if (File.Exists(filename) == false)
             {
                 techfullpath = string.Empty;
-                type = eZimType.UNKNOWN;
+                type = ZiveLab.ZM.ZIM.eZimType.UNKNOWN;
                 return false;
             }
             FileResult mfile = new FileResult();
             if (mfile.Open(filename) == true)
             {
-                stTech mtech = new stTech(0);
+                ZiveLab.ZM.ZIM.Packets.stTech mtech = new ZiveLab.ZM.ZIM.Packets.stTech(0);
                 FileCondition fc = new FileCondition();
                 str = Encoding.UTF8.GetString(mfile.tmphead.mInfo.techfile).Trim('\0');
                 techfilename = Path.GetFileName(str);
                 techfullpath = Path.Combine(gBZA.appcfg.PathSchTemp, techfilename);
-                type = (eZimType)mfile.tmphead.inf_sif.Type;
+                type = (ZiveLab.ZM.ZIM.eZimType)mfile.tmphead.sysInfo.mSIFCfg.Type;
 
                 if (File.Exists(techfullpath))
                 {
@@ -886,13 +1008,13 @@ namespace ZiveLab.ZM
             else
             {
                 techfullpath = string.Empty;
-                type = eZimType.UNKNOWN;
+                type = ZiveLab.ZM.ZIM.eZimType.UNKNOWN;
                 return false;
             }
             return true;
         }
 
-        private void OpenTechFile(int ch, string filename, eZimType type = eZimType.UNKNOWN)
+        private void OpenTechFile(int ch, string filename, ZiveLab.ZM.ZIM.eZimType type = ZiveLab.ZM.ZIM.eZimType.UNKNOWN)
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
             frmTech.ShowInTaskbar = false;
@@ -918,7 +1040,7 @@ namespace ZiveLab.ZM
         {
             DataViewerEventArgs dvea = (DataViewerEventArgs)e;
             string stechfile = "";
-            eZimType type = eZimType.UNKNOWN;
+            ZiveLab.ZM.ZIM.eZimType type = ZiveLab.ZM.ZIM.eZimType.UNKNOWN;
 
             if (SaveTempTechFileofResFile(dvea.DataFileName, ref stechfile, ref type) == false)
             {
@@ -930,7 +1052,7 @@ namespace ZiveLab.ZM
             OpenTechFile(-1, stechfile, type);
         }
 
-        private void OpenGraph(string[] filename = null)
+        private void OpenGraph(string[] filename = null) // 폼생성
         {
             EisGraphForm egForm = new EisGraphForm(0, gBZA.mGraphSet, gBZA.mGraphSetEx, true);
             egForm.MsgBoxCaption = AppTitle;
@@ -952,6 +1074,7 @@ namespace ZiveLab.ZM
                 egForm.LoadFiles(filename);
             }
         }
+
 
         private void modifyTheDevicesRegistrationToolStripMenuItem1_Click(object sender, EventArgs e)
         {

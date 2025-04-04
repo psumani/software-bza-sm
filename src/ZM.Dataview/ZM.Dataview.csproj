@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32B51393-DF04-428A-8CB1-362B6F949874}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZiveLab.ZM.Dataview</RootNamespace>
+    <AssemblyName>ZiveLab.ZM.Dataview</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.C1Excel.4, Version=4.1.20123.243, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1SplitContainer.4, Version=4.0.20123.37, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>dll\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.Common, Version=15.1.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL" />
+    <Reference Include="NationalInstruments.UI, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\National Instruments\MeasurementStudioVS2010\DotNET\Assemblies\Current\NationalInstruments.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AxisFormat.cs" />
+    <Compile Include="CoConvColumn.cs" />
+    <Compile Include="CoMath.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="ConvGraphData.cs" />
+    <Compile Include="CoPath.cs" />
+    <Compile Include="CoSys.cs" />
+    <Compile Include="CoTypeString.cs" />
+    <Compile Include="DataEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataEditorForm.designer.cs">
+      <DependentUpon>DataEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataFileExcelWriter.cs" />
+    <Compile Include="DataFileTextWriter.cs" />
+    <Compile Include="DataFileToExcel.cs" />
+    <Compile Include="DataFilter.cs" />
+    <Compile Include="DataGraph.cs" />
+    <Compile Include="DataViewSet.cs" />
+    <Compile Include="DelimiterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DelimiterForm.designer.cs">
+      <DependentUpon>DelimiterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnumDef.cs" />
+    <Compile Include="ExcelTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExcelTypeForm.designer.cs">
+      <DependentUpon>ExcelTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtAppPath.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="FileHeaderInforForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileHeaderInforForm.designer.cs">
+      <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileStructDef.cs" />
+    <Compile Include="GeneralGraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralGraphForm.designer.cs">
+      <DependentUpon>GeneralGraphForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphDataConvExcelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphDataConvExcelForm.designer.cs">
+      <DependentUpon>GraphDataConvExcelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphDataConvTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphDataConvTextForm.designer.cs">
+      <DependentUpon>GraphDataConvTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OpenXmlWriterHelper.cs" />
+    <Compile Include="PlotAdvancedSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlotAdvancedSettingForm.designer.cs">
+      <DependentUpon>PlotAdvancedSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StatusString.cs" />
+    <Compile Include="ZMF_File.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataEditorForm.ko-KR.resx">
+      <DependentUpon>DataEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataEditorForm.resx">
+      <DependentUpon>DataEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DelimiterForm.ko-KR.resx">
+      <DependentUpon>DelimiterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DelimiterForm.resx">
+      <DependentUpon>DelimiterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcelTypeForm.ko-KR.resx">
+      <DependentUpon>ExcelTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcelTypeForm.resx">
+      <DependentUpon>ExcelTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileHeaderInforForm.ko-KR.resx">
+      <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileHeaderInforForm.resx">
+      <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralGraphForm.ko-KR.resx">
+      <DependentUpon>GeneralGraphForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralGraphForm.resx">
+      <DependentUpon>GeneralGraphForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphDataConvExcelForm.ko-KR.resx">
+      <DependentUpon>GraphDataConvExcelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphDataConvExcelForm.resx">
+      <DependentUpon>GraphDataConvExcelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphDataConvTextForm.ko-KR.resx">
+      <DependentUpon>GraphDataConvTextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphDataConvTextForm.resx">
+      <DependentUpon>GraphDataConvTextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlotAdvancedSettingForm.ko-KR.resx">
+      <DependentUpon>PlotAdvancedSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlotAdvancedSettingForm.resx">
+      <DependentUpon>PlotAdvancedSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\open_folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\ivman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\ivmandiff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\ivmansolar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\ivmantafel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\pd1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\pfm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\fileinfor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\ivex.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

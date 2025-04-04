@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Win32;
 
+
 namespace ZiveLab.ZM
 {
     public partial class BZAChPan : UserControl
@@ -51,6 +52,7 @@ namespace ZiveLab.ZM
         public int rtmode2;
 
         public event EventHandler evShowmax;
+        public string sSelSerial2 = "";
 
         double GrpSpaceRate;
 
@@ -114,8 +116,6 @@ namespace ZiveLab.ZM
 
             About = new MBZA_ChannelInfo(serial, sifch);
 
-
-            
             imageList = new ImageList();
             imageList.ImageSize = new Size(16, 16);
 
@@ -238,6 +238,36 @@ namespace ZiveLab.ZM
 
         private void BZAChPan_Load(object sender, EventArgs e)
         {
+            bool isAux = CheckAuxBoardPresence();
+
+            channelBox.Items.Clear();
+
+            if (!isAux)
+            {
+                channelBox.Items.Add("Not connected");
+                //channelBox.Items.Add("CH1-Aux1");
+                //channelBox.Items.Add("CH1-Aux2");
+                //channelBox.Items.Add("CH1-Aux3");
+            }
+            else
+            {
+                //channelBox.Items.Add("Not connected");
+                channelBox.Items.Add("CH1-Aux1");
+                channelBox.Items.Add("CH1-Aux2");
+                channelBox.Items.Add("CH1-Aux3");
+            }
+
+            channelBox.SelectedIndex = 0;
+            channelBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void channelBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void channelBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
 
         void TimerProc(object sender, EventArgs e)
@@ -1996,6 +2026,7 @@ namespace ZiveLab.ZM
 
         private void RefreshGraphSize()
         {
+            bool isMCBZA = IsMCBZA(sSelSerial2);
             if (GraphSizeMode == 0)
             {
                 if (bMaxWindow == true)
@@ -2005,8 +2036,30 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
+                    //tabgrp.Location = new Point(163, 100);
+                    //tabgrp.Size = new Size(312, 500);
+                    if (isMCBZA)
+                    {
+                        tabgrp.Location = new Point(163, 100);
+                        tabgrp.Size = new Size(312, 218);
+                    }
                     tabgrp.Location = new Point(163, 100);
-                    tabgrp.Size = new Size(312, 218);
+                    tabgrp.Size = new Size(312, 500);
+                    A2Vdc.Visible = false;
+                    A2zreal.Visible = false;
+                    A2zimg.Visible = false;
+                    A2Zmag.Visible = false;
+                    A2progfreq.Visible = false;
+                    A3Vdc.Visible = false;
+                    A3zreal.Visible = false;
+                    A3zimg.Visible = false;
+                    A3Zmag.Visible = false;
+                    A3progfreq.Visible = false;
+                    A4Vdc.Visible = false;
+                    A4zreal.Visible = false;
+                    A4zimg.Visible = false;
+                    A4Zmag.Visible = false;
+                    A4progfreq.Visible = false;
                 }
                 /*grprt.Visible = true;
                 
@@ -2231,6 +2284,7 @@ namespace ZiveLab.ZM
 
         private void ViewStatus()
         {
+            bool isMCBZA = IsMCBZA(sSelSerial2);
             stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
             var mrng = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
             TimeSpan ElapsedTime = TimeSpan.FromMilliseconds(chstat.RunTimeStamp);
@@ -2506,6 +2560,33 @@ namespace ZiveLab.ZM
                 lblZmag.Text = "   Zmag: -------- Ω";
                 lblZphase.Text = " Zphase: -------- °";
             }
+            if (techtype == enTechType.TECH_MON || (techtype == enTechType.TECH_DCH && techdch.useir == 0) || chstat.DispFreq == 0.0 && channelBox.Text == "CH1-Aux1" && !isMCBZA)
+            {
+                lblIdc.Text = "    Idc: -------- A";
+                lblVdc.Text = "  A1Vdc: -------- V";
+                lblVeoc.Text = "    Eoc: -------- V";
+                lblTemp.Text = "PT-100: -------- °C";
+                lblfreq.Text = "A1Freq.: -------- Hz";
+                lblzreal.Text = "A1Zreal: --------mΩ";
+                lblzimg.Text = " A1Zimg: --------mΩ";
+                lblZmag.Text = " A1Zmag: --------mΩ";
+                lblZphase.Text = "A1Zphase: -------- °";
+                A2Vdc.Visible = true;
+                A2zreal.Visible = true;
+                A2zimg.Visible = true;
+                A2Zmag.Visible = true;
+                A2progfreq.Visible = true;
+                A3Vdc.Visible = true;
+                A3zreal.Visible = true;
+                A3zimg.Visible = true;
+                A3Zmag.Visible = true;
+                A3progfreq.Visible = true;
+                A4Vdc.Visible = true;
+                A4zreal.Visible = true;
+                A4zimg.Visible = true;
+                A4Zmag.Visible = true;
+                A4progfreq.Visible = true;
+            }
             else
             {
                 if (chstat.DispFreq >= 1000.0)
@@ -2521,14 +2602,14 @@ namespace ZiveLab.ZM
                     lblfreq.Text = string.Format("  Freq.: {0,8:###0.0##}mHz", chstat.DispFreq * 1000.0);
                 }
 
-                double DispReal = Math.Abs(chstat.DispMag) * Math.Cos(chstat.DispPhase * (double)DeviceConstants.PI / (double)180.0);
-                double Dispimg = Math.Abs(chstat.DispMag) * Math.Sin(chstat.DispPhase * (double)DeviceConstants.PI / (double)180.0);
+                double DispReal = Math.Abs(chstat.DispMag[0]) * Math.Cos(chstat.DispPhase[0] * (double)DeviceConstants.PI / (double)180.0);
+                double Dispimg = Math.Abs(chstat.DispMag[0]) * Math.Sin(chstat.DispPhase[0] * (double)DeviceConstants.PI / (double)180.0);
 
                 if (DispReal >= 1000.0)
                 {
                     lblzreal.Text = string.Format("  Zreal: {0,8:###0.0##}KΩ", DispReal / 1000.0);
                 }
-                else if (chstat.DispMag >= 1.0)
+                else if (chstat.DispMag[0] >= 1.0)
                 {
                     lblzreal.Text = string.Format("  Zreal: {0,8:###0.0##} Ω", DispReal);
                 }
@@ -2541,7 +2622,7 @@ namespace ZiveLab.ZM
                 {
                     lblzimg.Text = string.Format("   Zimg: {0,8:###0.0##}KΩ", Dispimg / 1000.0);
                 }
-                else if (chstat.DispMag >= 1.0)
+                else if (chstat.DispMag[0] >= 1.0)
                 {
                     lblzimg.Text = string.Format("   Zimg: {0,8:###0.0##} Ω", Dispimg);
                 }
@@ -2550,25 +2631,25 @@ namespace ZiveLab.ZM
                     lblzimg.Text = string.Format("   Zimg: {0,8:###0.0##}mΩ", Dispimg * 1000.0);
                 }
 
-                if (chstat.DispMag >= 1000.0)
+                if (chstat.DispMag[0] >= 1000.0)
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}KΩ", chstat.DispMag / 1000.0);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}KΩ", chstat.DispMag[0] / 1000.0);
                 }
-                else if (chstat.DispMag >= 1.0)
+                else if (chstat.DispMag[0] >= 1.0)
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##} Ω", chstat.DispMag);
-                }
-                else
-                {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}mΩ", chstat.DispMag * 1000.0);
-                }
-                if (chstat.DispPhase >= 10.0)
-                {
-                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##} Ω", chstat.DispMag[0]);
                 }
                 else
                 {
-                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}mΩ", chstat.DispMag[0] * 1000.0);
+                }
+                if (chstat.DispPhase[0] >= 10.0)
+                {
+                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase[0]);
+                }
+                else
+                {
+                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase[0]);
                 }
             }
 
@@ -2591,6 +2672,82 @@ namespace ZiveLab.ZM
             lblZmag.ForeColor = lblTestStatus.ForeColor;
             lblZphase.ForeColor = lblTestStatus.ForeColor;
             lblprogfreq.ForeColor = lblTestStatus.ForeColor;
+        }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    bool isAuxConnected = false;
+
+        //    if (gBZA.SifLnkLst.Count == 0)
+        //    {
+        //        Console.WriteLine("?? No devices found.");
+        //        Auxboard.Text = "No Aux";
+        //        return;
+        //    }
+
+        //    foreach (var pair in gBZA.SifLnkLst)
+        //    {
+        //        var device = pair.Value;
+
+        //        for (int bd = 1; bd < MBZA_Constant.MAX_DEV_CHANNEL; bd++)
+        //        {
+        //            if (device.mDevInf.mSysCfg.EnaZIM[bd] == 1 && device.mDevInf.mSysCfg.ChkZIM[bd] == 1)
+        //            {
+        //                isAuxConnected = true;
+        //                break;
+        //            }
+        //        }
+
+        //        if (isAuxConnected) break;
+        //    }
+
+        //    if (isAuxConnected)
+        //    {
+        //        Auxboard.Text = "Hi Aux";
+        //    }
+        //    else
+        //    {
+        //        Auxboard.Text = "No Aux";
+        //    }
+        //}
+
+
+        public bool CheckAuxBoardPresence()
+        {
+            if (gBZA.SifLnkLst.Count == 0)
+            {
+                return false;
+            }
+
+            foreach (var pair in gBZA.SifLnkLst)
+            {
+                var device = pair.Value;
+
+                for (int bd = 1; bd < MBZA_Constant.MAX_DEV_CHANNEL; bd++)
+                {
+                    if (device.mDevInf.mSysCfg.EnaZIM[bd] == 1 && device.mDevInf.mSysCfg.ChkZIM[bd] == 1)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool IsMCBZA(string serial)
+        {
+            if (string.IsNullOrEmpty(serial))
+            {
+                return false;
+            }
+
+            if (gBZA.SifLnkLst.ContainsKey(serial))
+            {
+                var device = gBZA.SifLnkLst[serial];
+                bool isMCBZA = (eDeviceType)device.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA;
+                return isMCBZA;
+            }
+            return false;
         }
 
         private void RefreshRtView()
@@ -4597,7 +4754,7 @@ namespace ZiveLab.ZM
                 str = Encoding.UTF8.GetString(mfile.tmphead.mInfo.techfile).Trim('\0');
                 techfilename = Path.GetFileName(str);
                 techfullpath = Path.Combine(gBZA.appcfg.PathSchTemp, techfilename);
-                type = (eZimType)mfile.tmphead.inf_sif.Type;
+                type = (eZimType)mfile.tmphead.sysInfo.mSIFCfg.Type;
 
                 if (File.Exists(techfullpath))
                 {
@@ -4688,6 +4845,7 @@ namespace ZiveLab.ZM
 
         private void btabout_Click(object sender, EventArgs e)
         {
+            //var panelControl = new PanelAboutWithTabs();
             var panelControl = new PanelAbout() { Pairs = About.ToKeyValuePairs() };
             panelControl.BorderStyle = BorderStyle.FixedSingle;
 
@@ -4700,7 +4858,6 @@ namespace ZiveLab.ZM
 
         private void btloaddata_Click(object sender, EventArgs e)
         {
-
             if (gBZA.SifLnkLst[serial].MBZAIF.bLoadData[sifch])
             {
                 if (MessageBox.Show("Are you sure you want to end the load process ?", gBZA.sMsgTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
@@ -5047,6 +5204,11 @@ namespace ZiveLab.ZM
                 lblcsfreq2.Visible = false;
                 grp2.CaptionVisible = false;
             }
+        }
+
+        private void channelBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }   
     

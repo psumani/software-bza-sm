@@ -32,6 +32,8 @@ namespace ZiveLab.ZM
         stPropConnInf propconn;
         stPropSIF propsif;
         stPropZim propzim;
+        stPropAux propaux;
+        stPropauxrange propauxrange;
         int selch;
         bool bFirst;
         private string Serial;
@@ -39,6 +41,9 @@ namespace ZiveLab.ZM
         private ToolStrip toolStrip;
         private TreeNode SelectNode;
         private int[] bStat;
+        public eDeviceType mtype;
+        public string sSelSerial = "";
+        public stSystemConfig mSysCfg;
 
         public InfomationGrid()
         {
@@ -56,6 +61,9 @@ namespace ZiveLab.ZM
             propconn = new stPropConnInf();
             propsif = new stPropSIF();
             propzim = new stPropZim();
+            propaux = new stPropAux();
+            propauxrange = new stPropauxrange();
+
 
             bStat = new int[6];
             for (int i = 0; i < 0; i++)
@@ -87,6 +95,7 @@ namespace ZiveLab.ZM
             this.imageList1.Images.Add(Properties.Resources.CalibItem);
             this.imageList1.Images.Add(Properties.Resources.CalibFail1);
             this.imageList1.Images.Add(Properties.Resources.NetConfig);
+            this.imageList1.Images.Add(Properties.Resources.AddClause);
             //this.treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.treeView1.CheckBoxes = false;
             this.treeView1.ImageList = this.imageList1;
@@ -285,8 +294,8 @@ namespace ZiveLab.ZM
             }
             return 1;
         }
-
-        int CreateNodePartIacItem(int rng, TreeNode parentnode)
+        
+        int CreateNodePartIacItem(int rng, TreeNode parentnode) 
         {
             TreeNode node;
             int tmp = 0;
@@ -420,6 +429,71 @@ namespace ZiveLab.ZM
             return 1;
         }
 
+        int CreateNodePartAuxChannels(TreeNode parentnode)//(TreeNode parentnode) // AUX 채널
+        {
+            TreeNode node;
+            int tmp = 21;
+            bool bNoCalib = false;
+            stZimCfg p;
+
+            if (gBZA.SifLnkLst.ContainsKey(Serial))
+                p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+            else
+                p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
+
+            eZimType zimtype = (eZimType)(p.info.cModel[0] - 0x30);
+
+            int[] allowedChannels = { 0, 1, 2, 4 };
+
+            foreach (int i in allowedChannels)
+            {
+                string channelName = $"Channel_{i}";
+
+                node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), channelName);
+                node.Tag = (string)parentnode.Tag + "/" + channelName;
+
+                tmp = 21;
+
+                node.ImageIndex = tmp;
+                node.SelectedImageIndex = tmp;
+                node.ToolTipText = (string)node.Tag;
+
+                AddVdcVacNodesToChannel(node, i);
+            }
+
+            if (bNoCalib)
+            {
+                return 2;
+            }
+            return 1;
+        }
+
+        int AddVdcVacNodesToChannel(TreeNode parentnode, int channelIndex)
+        {
+            TreeNode vac_node = parentnode.Nodes.Add("Aux_Vac", "Aux_Vac");
+            vac_node.ToolTipText = $"Channel {channelIndex} Vac";
+
+            TreeNode vdc_node = parentnode.Nodes.Add("Aux_Vdc", "Aux_Vdc");
+            vdc_node.ToolTipText = $"Channel {channelIndex} Vdc";
+
+            AddVdcSubNodes(vdc_node, channelIndex);
+
+            // 아이콘 설정
+            vdc_node.ImageIndex = 8;
+            vdc_node.SelectedImageIndex = 8;
+
+            return 1;
+        }
+
+        void AddVdcSubNodes(TreeNode vdcNode, int channelIndex)
+        {
+            TreeNode v500_node = vdcNode.Nodes.Add("Aux_500V");
+            TreeNode v50_node = vdcNode.Nodes.Add("Aux_50V");
+
+            v500_node.ToolTipText = $"Channel {channelIndex} Vdc/500V";
+            v50_node.ToolTipText = $"Channel {channelIndex} Vdc/50V";
+        }
+
         int CreateNodePartRange(TreeNode parentnode)
         {
             TreeNode node;
@@ -429,66 +503,138 @@ namespace ZiveLab.ZM
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
 
-
-            for (int i = 0; i < MBZA_Constant.Const_RangePart.Count(); i++)
+            if (IsMCBZA(Serial))
             {
-                node = parentnode.Nodes.Add(string.Format("{0}{1}/", parentnode.Name,i), MBZA_Constant.Const_RangePart[i]);
-                node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_RangePart[i];
+                for (int i = 0; i < MBZA_Constant.Const_MCBZARangePart.Count(); i++)
+                {
+                    node = parentnode.Nodes.Add(string.Format("{0}{1}/", parentnode.Name, i), MBZA_Constant.Const_MCBZARangePart[i]);
+                    node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_MCBZARangePart[i];
 
-                if (i == 0)
-                {
-                    tmp = CreateNodePartIac(node);
-                    tmp = 8;
-                }
-                else if (i == 1)
-                {
-                    tmp = CreateNodePartIdc(node);
-                    //tmp = 15;
-                }
-                else if (i == 2)
-                {
-                    // no calibration
-                    //if (p.ranges.vac_rng.gain == 1.0 && p.ranges.vac_rng.offset == 0.0)
-                    //{
-                    //    tmp = 2;
-                    //}
-                    //else
-                    //{
-                    //    tmp = 1;
-                    //}
-                    tmp = 13;
-                }
-                else if (i == 3)
-                {
-                    tmp = CreateNodePartVdc(node);
-                    tmp = 8;
-                }
-                else if (i == 4)
-                {
-                    if (p.ranges[0].rtd_rng.gain == 1.0 && p.ranges[0].rtd_rng.offset == 0.0)
+                    if (i == 0)
                     {
-                        tmp = 2;
+                        tmp = CreateNodePartIac(node);
+                        tmp = 8;
                     }
-                    else
+                    else if (i == 1)
                     {
-                        tmp = 1;
+                        tmp = CreateNodePartIdc(node);
+                        //tmp = 15;
                     }
-                }
-                else if (i == 5)
-                {
-                    tmp = 13;
-                }
+                    else if (i == 2)
+                    {
+                        // no calibration
+                        //if (p.ranges.vac_rng.gain == 1.0 && p.ranges.vac_rng.offset == 0.0)
+                        //{
+                        //    tmp = 2;
+                        //}
+                        //else
+                        //{
+                        //    tmp = 1;
+                        //}
+                        tmp = 13;
+                    }
+                    else if (i == 3)
+                    {
+                        tmp = CreateNodePartVdc(node);
+                        tmp = 8;
+                    }
+                    else if (i == 4)
+                    {
+                        if (p.ranges[0].rtd_rng.gain == 1.0 && p.ranges[0].rtd_rng.offset == 0.0)
+                        {
+                            tmp = 2;
+                        }
+                        else
+                        {
+                            tmp = 1;
+                        }
+                    }
+                    else if (i == 5)
+                    {
+                        tmp = 13;
+                    }
+                    else if (i == 6 || i == 7 || i == 8)
+                    {
+                        tmp = CreateNodePartAuxChannels(node);
+                        tmp = 11;
+                    }
 
-                if (node != null)
-                {
-                    node.ImageIndex = tmp;
-                    node.SelectedImageIndex = tmp;
-                    node.ToolTipText = (string)node.Tag;
-                }
+                    if (node != null)
+                    {
+                        node.ImageIndex = tmp;
+                        node.SelectedImageIndex = tmp;
+                        node.ToolTipText = (string)node.Tag;
+                    }
 
-                if (tmp == 2) bNoCalib = true;
+                    if (tmp == 2) bNoCalib = true;
+                }
             }
+            else
+            {
+                for (int i = 0; i < MBZA_Constant.Const_RangePart.Count(); i++)
+                {
+                    node = parentnode.Nodes.Add(string.Format("{0}{1}/", parentnode.Name, i), MBZA_Constant.Const_RangePart[i]);
+                    node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_RangePart[i];
 
+                    if (i == 0)
+                    {
+                        tmp = CreateNodePartIac(node);
+                        tmp = 8;
+                    }
+                    else if (i == 1)
+                    {
+                        tmp = CreateNodePartIdc(node);
+                        //tmp = 15;
+                    }
+                    else if (i == 2)
+                    {
+                        // no calibration
+                        //if (p.ranges.vac_rng.gain == 1.0 && p.ranges.vac_rng.offset == 0.0)
+                        //{
+                        //    tmp = 2;
+                        //}
+                        //else
+                        //{
+                        //    tmp = 1;
+                        //}
+                        tmp = 13;
+                    }
+                    else if (i == 3)
+                    {
+                        tmp = CreateNodePartVdc(node);
+                        tmp = 8;
+                    }
+                    else if (i == 4)
+                    {
+                        if (p.ranges[0].rtd_rng.gain == 1.0 && p.ranges[0].rtd_rng.offset == 0.0)
+                        {
+                            tmp = 2;
+                        }
+                        else
+                        {
+                            tmp = 1;
+                        }
+                    }
+                    else if (i == 5)
+                    {
+                        tmp = 13;
+                    }
+                    else if (i == 6 || i == 7 || i == 8)
+                    {
+                        tmp = CreateNodePartAuxChannels(node);
+                        tmp = 11;
+                    }
+
+                    if (node != null)
+                    {
+                        node.ImageIndex = tmp;
+                        node.SelectedImageIndex = tmp;
+                        node.ToolTipText = (string)node.Tag;
+                    }
+
+                    if (tmp == 2) bNoCalib = true;
+                }
+            }
             if (bNoCalib == true)
             {
                 return 2;
@@ -511,11 +657,8 @@ namespace ZiveLab.ZM
 
             int tmp = 0;
 
-
             for (int i = 0; i < MBZA_Constant.Const_LootPart.Count(); i++)
             {
-
-
                 node = treeView1.Nodes.Add(string.Format("{0}/", i), MBZA_Constant.Const_LootPart[i]);
                 node.Tag = MBZA_Constant.Const_LootPart[i];
                 if (i == 0)
@@ -535,7 +678,7 @@ namespace ZiveLab.ZM
                     tmp = CreateNodePartRange(node);
                     tmp = 11;
                 }
-                
+
                 if (node != null)
                 {
                     node.ImageIndex = tmp;
@@ -768,7 +911,7 @@ namespace ZiveLab.ZM
                 if (tnode == null) break;
                 nodeval = StringKeyToInteger(tnode.Name);
 
-                if(nodeval[1] == 1)
+                if (nodeval[1] == 1)
                 {
                     RefreshNodeRangeIacStat(tnode);
                 }
@@ -780,7 +923,7 @@ namespace ZiveLab.ZM
                 }
                 else if (nodeval[1] == 3)
                 {
-                    
+
                 }
                 else if (nodeval[1] == 4)
                 {
@@ -802,7 +945,6 @@ namespace ZiveLab.ZM
 
                 tnode = tnode.NextNode;
             }
-
         }
 
         public void RefreshTreeViewStat()
@@ -817,12 +959,10 @@ namespace ZiveLab.ZM
                     RefreshNodeRangeStat(node);
                 }
             }
-            
         }
 
         private void RecreatePropertyGridToolBar(int index)
         {
-            
             ToolStripItem item; 
             foreach (Control control in propertyGrid1.Controls)
             {
@@ -844,7 +984,7 @@ namespace ZiveLab.ZM
 
                     if (index < 0) return;
 
-                    if (index < 16 && index != 8 || index >= 18)
+                    if (index < 16 && index != 8 || (index >= 18 && index != 25))
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "LocalRefresh";
@@ -859,7 +999,7 @@ namespace ZiveLab.ZM
                         toolStrip.Items.Add(item);
                     }
 
-                    if (index < 8 || index == 13  || index == 15 || index >= 18)
+                    if (index < 8 || index == 13  || index == 15 || (index >= 18 && index != 25))
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "BtLocalApply";
@@ -959,7 +1099,58 @@ namespace ZiveLab.ZM
                         item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
+                    }
+                    if (index == 16)
+                    {
+                        item = new ToolStripMenuItem();
+                        item.Name = "AuxRefresh";
+                        item.Image = ZM.Properties.Resources.ViewRefresh.ToBitmap();
+                        item.Click += new EventHandler(Refresh_ZIMAux_Click);
+                        item.ToolTipText = "Refresh AUX properties.";
+                        item.AutoToolTip = true;
+                        item.Alignment = ToolStripItemAlignment.Left;
+                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                        item.ImageTransparentColor = Color.Fuchsia;
+                        toolStrip.Items.Add(item);
 
+                        item = new ToolStripMenuItem();
+                        item.Name = "ChangeFwZim";
+                        item.Image = ZM.Properties.Resources.Upload.ToBitmap();
+                        item.Click += new EventHandler(ChangeFwAux_Click);
+                        item.ToolTipText = "Change firmware for channel board.";
+                        item.AutoToolTip = true;
+                        item.Alignment = ToolStripItemAlignment.Left;
+                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                        item.ImageTransparentColor = Color.Fuchsia;
+                        toolStrip.Items.Add(item);
+
+                        item = new ToolStripMenuItem();
+                        item.Name = "BtTestZim";
+                        item.Image = ZM.Properties.Resources.DeviceTest;
+                        item.Click += new EventHandler(BtTestZim_Click);
+                        item.ToolTipText = "You can check the operation of the channel board.";
+                        item.AutoToolTip = true;
+                        item.Alignment = ToolStripItemAlignment.Left;
+                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                        item.ImageTransparentColor = Color.Fuchsia;
+                        toolStrip.Items.Add(item);
+                    }
+                    if (index == 25)
+                    {
+                        item = new ToolStripMenuItem();
+                        item.Name = "Channel_Refresh";
+                        item.Image = ZM.Properties.Resources.ViewRefresh.ToBitmap();
+                        item.Click += new EventHandler(Refresh_AuxChannel_Click);
+                        item.ToolTipText = "Refresh Channel properties.";
+                        item.AutoToolTip = true;
+                        item.Alignment = ToolStripItemAlignment.Left;
+                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                        item.ImageTransparentColor = Color.Fuchsia;
+                        toolStrip.Items.Add(item);
                     }
                     toolStrip.ResumeLayout();
                     break;
@@ -1133,7 +1324,7 @@ namespace ZiveLab.ZM
             }
             itype = nodeval[3] - 1;
 
-            
+
 
             if (nodeval[4] < 1)
             {
@@ -1148,15 +1339,15 @@ namespace ZiveLab.ZM
                     propCompdummy.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, iRng, sifch);
                     return propCompdummy;
                 }
-                
+
             }
-                
+
 
             igain = nodeval[4] - 1;
 
             iRng1 = iRng * 2 + igain;
 
-            if(itype == 0)
+            if (itype == 0)
             {
                 return p.ranges[0].mEisIRngCalInfo[iRng1];
             }
@@ -1206,6 +1397,16 @@ namespace ZiveLab.ZM
             return p.ranges[0].vdc_rng[iRng];
         }
 
+        private object GetAuxObjectProc(int[] nodeval)
+        {
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+
+            stPropAux propAux = new stPropAux();
+            propAux.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+
+            return propAux;
+        }
+
         private object GetRangeObject(int[] nodeval)
         {
             int item;
@@ -1241,8 +1442,47 @@ namespace ZiveLab.ZM
             {
                 return p.ranges[0].mSafety;
             }
-
+            else if (item == 6 || item == 7 || item == 8)
+            {
+                return GetAuxObjectProc(nodeval);
+            }
+            //else if
+            //(item == 6 || item == 7 || item == 8)
+            //    {
+            //        return GetAuxObjectProc(nodeval);
+            //    }
+            // else if (item == 7)
+            //{
+            //    propaux.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+            //    return propaux;
+            //}
+            //else if (item == 8) // 수정 필요 Aux3
+            //{
+            //    propaux.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+            //    return propaux;
+            //}
+            //else if (item == 9) // 수정 필요 Aux3
+            //{
+            //    return GetAuxObjectProc(nodeval);
+            //}
+            //}
             return null;
+        }
+
+        private bool IsMCBZA(string serial)
+        {
+            if (string.IsNullOrEmpty(serial))
+            {
+                return false;
+            }
+
+            if (gBZA.SifLnkLst.ContainsKey(serial))
+            {
+                var device = gBZA.SifLnkLst[serial];
+                bool isMCBZA = (eDeviceType)device.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA;
+                return isMCBZA;
+            }
+            return false;
         }
 
         private object GetLootObject(TreeNode node)
@@ -1282,13 +1522,11 @@ namespace ZiveLab.ZM
             {
                 return GetRangeObject(nodeval);
             }
-            
             return null;
         }
 
         private void RefreshPropertyGrid(TreeNode node = null)
         {
-
             if (node == null)
             {
                 RecreatePropertyGridToolBar(-1);
@@ -1313,7 +1551,6 @@ namespace ZiveLab.ZM
             }
 
             FormUtil.ResizePropertyGridSplitter(this.propertyGrid1, 50);
-
         }
         
         
@@ -1389,19 +1626,204 @@ namespace ZiveLab.ZM
         }
 
         #endregion ** comm function
-
-        
-       
-
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            string nodeKey = e.Node.Name;
-            this.SelectNode = e.Node;
-            if (!string.IsNullOrEmpty(nodeKey))
+            if (e.Node == null) return;
+
+            string selectedNode = e.Node.Text;
+            string parentNodeName = e.Node.Parent?.Text ?? "";
+
+            // 🔹 Vac 선택 시
+            if (selectedNode.StartsWith("Aux_Vac"))
             {
-                RefreshPropertyGrid(e.Node);
+                RecreatePropertyGridToolBar(18);
+
+                st_zim_adcv_rnginf vacRangeInfo = new st_zim_adcv_rnginf();
+                double realMax = 10.0;
+
+                vacRangeInfo.Initialize(realMax, realMax, -realMax);
+                propertyGrid1.SelectedObject = vacRangeInfo;
+            }
+            // 🔹 Vdc 선택 시
+            else if (selectedNode.StartsWith("Aux_Vdc"))
+            {
+                RecreatePropertyGridToolBar(25);
+
+                stPropauxrange auxrangeInfo = new stPropauxrange();
+                double[] rangeValues = new double[4];
+
+                for (int i = 0; i < 4; i++)
+                {
+                    rangeValues[i] = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[i].realmax;
+                }
+
+                auxrangeInfo.SetType(eZimType.BZAAUX1, rangeValues);
+                propertyGrid1.SelectedObject = auxrangeInfo;
+                //RecreatePropertyGridToolBar(25);
+
+                //st_zim_vdc_rnginf vdcRangeInfo = new st_zim_vdc_rnginf();
+                //double realMax = (selectedNode == "500V") ? 500.0 : 50.0;
+
+                //vdcRangeInfo.Initialize(realMax, realMax, -realMax);
+                //propertyGrid1.SelectedObject = vdcRangeInfo;
+            }
+            else if (selectedNode.StartsWith("Aux_500V"))
+            {
+                RecreatePropertyGridToolBar(2);
+
+                st_zim_vdc_rnginf vdcRangeInfo = new st_zim_vdc_rnginf();
+                double realMax = (selectedNode == "Aux_500V") ? 500.0 : 50.0;
+
+                vdcRangeInfo.Initialize(realMax, realMax, -realMax);
+                propertyGrid1.SelectedObject = vdcRangeInfo;
+            }
+            else if (selectedNode.StartsWith("Aux_50V"))
+            {
+                RecreatePropertyGridToolBar(2);
+
+                st_zim_vdc_rnginf vdcRangeInfo = new st_zim_vdc_rnginf();
+                double realMax = (selectedNode == "Aux_500V") ? 500.0 : 50.0;
+
+                vdcRangeInfo.Initialize(realMax, realMax, -realMax);
+                propertyGrid1.SelectedObject = vdcRangeInfo;
+            }
+            else if (selectedNode.StartsWith("Channel_"))
+            {
+                RecreatePropertyGridToolBar(25);
+
+                stPropauxrange auxrangeInfo = new stPropauxrange();
+                double[] rangeValues = new double[4];
+
+                for (int i = 0; i < 4; i++)
+                {
+                    rangeValues[i] = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[i].realmax;
+                }
+
+                auxrangeInfo.SetType(eZimType.BZAAUX1, rangeValues);
+                propertyGrid1.SelectedObject = auxrangeInfo;
+            }
+            else if (selectedNode.StartsWith("Aux"))
+            {
+                stPropAux auxInfo = new stPropAux();
+                auxInfo.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+                propertyGrid1.SelectedObject = auxInfo;
+
+                RecreatePropertyGridToolBar(16);
+            }
+            else
+            {
+                string nodeKey = e.Node.Name;
+                this.SelectNode = e.Node;
+                if (!string.IsNullOrEmpty(nodeKey))
+                {
+                    RefreshPropertyGrid(e.Node);
+                }
             }
         }
+        //private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) // 트리 선택 UI
+        //{
+        //    if (e.Node == null) return;
+
+        //    string selectedNode = e.Node.Text;
+        //    string parentNodeName = e.Node.Parent?.Text ?? "";
+
+        //    if (selectedNode.StartsWith("Aux"))
+        //    {
+        //        stPropAux auxInfo = new stPropAux();
+        //        auxInfo.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+        //        propertyGrid1.SelectedObject = auxInfo;
+
+        //        RecreatePropertyGridToolBar(16);
+        //    }
+        //    else if (selectedNode.StartsWith("Channel_"))
+        //    {
+        //        RecreatePropertyGridToolBar(25);
+
+        //        stPropauxrange auxrangeInfo = new stPropauxrange();
+        //        double[] rangeValues = new double[4];
+
+        //        for (int i = 0; i < 4; i++)
+        //        {
+        //            rangeValues[i] = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[i].realmax;
+        //        }
+
+        //        auxrangeInfo.SetType(eZimType.BZAAUX1, rangeValues);
+        //        propertyGrid1.SelectedObject = auxrangeInfo;
+        //    }
+        //    else if (selectedNode.StartsWith("Aux_Vac"))
+        //    {
+        //        RecreatePropertyGridToolBar(25);
+
+        //        st_zim_adcv_rnginf vacRangeInfo = new st_zim_adcv_rnginf();
+        //        double realMax = 10.0;
+
+        //        vacRangeInfo.Initialize(realMax, realMax, -realMax);
+        //        propertyGrid1.SelectedObject = vacRangeInfo;
+        //    }
+        //    else if (parentNodeName.StartsWith("Aux_Vdc"))
+        //    {
+        //        RecreatePropertyGridToolBar(25);
+
+        //        st_zim_vdc_rnginf vdcRangeInfo = new st_zim_vdc_rnginf();
+        //        double realMax = (selectedNode == "500V") ? 500.0 : 50.0;
+
+        //        vdcRangeInfo.Initialize(realMax, realMax, -realMax);
+        //        propertyGrid1.SelectedObject = vdcRangeInfo;
+        //    }
+        //    else
+        //    {
+        //        // 🔥 기본 동작 유지 (다른 노드 선택 시 기존 로직 적용)
+        //        string nodeKey = e.Node.Name;
+        //        this.SelectNode = e.Node;
+        //        if (!string.IsNullOrEmpty(nodeKey))
+        //        {
+        //            RefreshPropertyGrid(e.Node);
+        //        }
+        //    }
+        //}
+
+
+
+        //private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) // 트리 선택 UI
+        //{
+        //    if (e.Node == null) return;
+
+        //    string selectedNode = e.Node.Text;
+        //    string parentNodeName = e.Node.Parent?.Text ?? "";
+
+        //    if (selectedNode.StartsWith("Aux"))
+        //    {
+        //        stPropAux auxInfo = new stPropAux();
+        //        auxInfo.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+        //        propertyGrid1.SelectedObject = auxInfo;
+
+        //        RecreatePropertyGridToolBar(16);
+        //    }
+        //    else if (selectedNode.StartsWith("Channel_"))
+        //    {
+        //        RecreatePropertyGridToolBar(25);
+
+        //        stPropauxrange auxrangeInfo = new stPropauxrange();
+
+        //        double[] rangeValues = new double[4];
+        //        for (int i = 0; i < 4; i++)
+        //        {
+        //            rangeValues[i] = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[i].realmax;
+        //        }
+
+        //        auxrangeInfo.SetType(eZimType.BZAAUX1, rangeValues);
+        //        propertyGrid1.SelectedObject = auxrangeInfo;
+        //    }
+        //    else
+        //    {
+        //        string nodeKey = e.Node.Name;
+        //        this.SelectNode = e.Node;
+        //        if (!string.IsNullOrEmpty(nodeKey))
+        //        {
+        //            RefreshPropertyGrid(e.Node);
+        //        }
+        //    }
+        //}
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
@@ -1418,6 +1840,7 @@ namespace ZiveLab.ZM
             if (this.SelectNode == null) return;
             RefreshPropertyGrid(this.SelectNode);
         }
+
         void BtLocalRefresh_Click(object sender, EventArgs e)
         {
             if (this.SelectNode == null)
@@ -1674,6 +2097,10 @@ namespace ZiveLab.ZM
                     {
                         p.ranges[0].mSafety = (st_zim_Safety_inf)this.propertyGrid1.SelectedObject;
                     }
+                    else if (nodeval[1] == 7)
+                    {
+
+                    }
                 }
             }
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0] = p.ranges[0];
@@ -1765,8 +2192,8 @@ namespace ZiveLab.ZM
                 {
                     if (nodeval[2] >= 1 && nodeval[2] < 3)
                     {
-                        if(nodeval[2] - 1 == 0) ChangeRangeMaxMin(ref p.ranges[0].vdc_rng[nodeval[2] - 1]);
-                        else ChangeRangeMaxMin(ref p.ranges[0].vdc_rng[nodeval[2] - 1],true);
+                        if (nodeval[2] - 1 == 0) ChangeRangeMaxMin(ref p.ranges[0].vdc_rng[nodeval[2] - 1]);
+                        else ChangeRangeMaxMin(ref p.ranges[0].vdc_rng[nodeval[2] - 1], true);
                     }
                 }
                 else if (nodeval[1] == 5)
@@ -1777,6 +2204,10 @@ namespace ZiveLab.ZM
                 else if (nodeval[1] == 6)
                 {
                     p.ranges[0].mSafety.Initialize(zimtype); 
+                }
+                else if (nodeval[1] == 7)
+                {
+
                 }
             }
 
@@ -1974,7 +2405,7 @@ namespace ZiveLab.ZM
                 //              xApp.Quit();
                 /*for (i = 0; i < 4; i++)
                 {
-                    if (xShtch[i] != null)
+                    if (xShtch[i] != null) 
                     {
                         ReleaseExcelObject(xShtch[i]);
                     }
@@ -2047,6 +2478,90 @@ namespace ZiveLab.ZM
             frmBurnZIM frm = new frmBurnZIM(Serial, sifch, true);
             frm.ShowDialog();
         }
+
+        void ChangeFwAux_Click(object sender, EventArgs e)
+        {
+            frmBurnZIM frm = new frmBurnZIM(Serial, 1, true, true);
+            frm.ShowDialog();
+        }
+
+        void Refresh_ZIMAux_Click(object sender, EventArgs e)
+        {
+            if (this.SelectNode == null)
+            {
+                MessageBox.Show("No node is selected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            stPropAux auxInfo = new stPropAux();
+            auxInfo.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, sifch);
+
+            propertyGrid1.SelectedObject = auxInfo;
+            propertyGrid1.Refresh();
+        }
+
+        void Refresh_AuxChannel_Click(object sender, EventArgs e)
+        {
+            if (this.SelectNode == null)
+            {
+                MessageBox.Show("No node is selected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            stPropauxrange auxInfo = new stPropauxrange();
+
+            if (gBZA.SifLnkLst.ContainsKey(Serial))
+            {
+                auxInfo.SetType(eZimType.BZAAUX1, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng.Select(r => r.realmax).ToArray());
+            }
+            else
+            {
+                auxInfo.SetType(eZimType.BZAAUX1, gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng.Select(r => r.realmax).ToArray());
+            }
+
+            propertyGrid1.SelectedObject = auxInfo;
+            propertyGrid1.Refresh();
+        }
+
+        //void aux_vdc_rngin(object sender, EventArgs e)
+        //{
+        //    if (this.SelectNode == null)
+        //    {
+        //        MessageBox.Show("No node is selected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    string nodeName = this.SelectNode.Text;
+
+        //    if (!nodeName.StartsWith("Aux_Vac"))
+        //    {
+        //        MessageBox.Show("Invalid node selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+
+        //    st_zim_adci_rnginf vdc_500V = new st_zim_adci_rnginf(500.0, 1.0, 500.0, 0.0);
+        //    st_zim_adci_rnginf vdc_50V = new st_zim_adci_rnginf(50.0, 0.2, 50.0, 0.0);
+
+        //    st_zim_adci_rnginf selectedRange;
+        //    if (nodeName.Contains("500V"))
+        //    {
+        //        selectedRange = vdc_500V;
+        //    }
+        //    else if (nodeName.Contains("50V"))
+        //    {
+        //        selectedRange = vdc_50V;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Invalid Vdc range selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+
+        //    // PropertyGrid에 데이터 표시
+        //    propertyGrid1.SelectedObject = selectedRange;
+        //    propertyGrid1.Refresh();
+        //}
+
 
         void BtTestZim_Click(object sender, EventArgs e)
         {
@@ -2554,7 +3069,7 @@ namespace ZiveLab.ZM
             InitIacRangeInf(ref tRanges.iac_rng[1], DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
             InitIacRangeInf(ref tRanges.iac_rng[2], DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
             InitIacRangeInf(ref tRanges.iac_rng[3], DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG4_MIN);
-            
+
             tRanges.vac_rng.maximum = DeviceConstants.ADC_VAC_RNG_MAX;
             tRanges.vac_rng.minimum = DeviceConstants.ADC_VAC_RNG_MIN;
             tRanges.vac_rng.factor = DeviceConstants.ADC_VAC_RNG_FACTOR;

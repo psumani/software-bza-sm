@@ -939,25 +939,25 @@ namespace ZiveLab.ZM
                     lblfreq.Text = string.Format("  Freq.: {0,8:###0.0##}mHz", chstat.DispFreq * 1000.0);
                 }
 
-                if (chstat.DispMag >= 1000.0)
+                if (chstat.DispMag[0] >= 1000.0)
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}KΩ", chstat.DispMag / 1000.0);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}KΩ", chstat.DispMag[0] / 1000.0);
                 }
-                else if (chstat.DispMag >= 1.0)
+                else if (chstat.DispMag[0] >= 1.0)
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##} Ω", chstat.DispMag);
-                }
-                else
-                {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}mΩ", chstat.DispMag * 1000.0);
-                }
-                if (chstat.DispPhase >= 10.0)
-                {
-                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##} Ω", chstat.DispMag[0]);
                 }
                 else
                 {
-                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}mΩ", chstat.DispMag[0] * 1000.0);
+                }
+                if (chstat.DispPhase[0] >= 10.0)
+                {
+                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase[0]);
+                }
+                else
+                {
+                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase[0]);
                 }
             }
             lblTestStatus.ForeColor = GetTestStatusColor(chstat);

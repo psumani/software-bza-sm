@@ -23,6 +23,7 @@ namespace ZiveLab.ZM.ZIM
 
         public static string[] Const_LootPart = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", };
         public static string[] Const_RangePart = { "Iac","Idc", "Vac", "Vdc", "Temperature","Safety" };
+        public static string[] Const_MCBZARangePart = { "Iac", "Idc", "Vac", "Vdc", "Temperature", "Safety", "Aux_1", "Aux_2", "Aux_3", };
         public static string[] Const_RangeIacItems = { "Calibration vars", "Compensation dummy", };
         public static string[] Const_RangeIacGain = { "X1", "X0.2", };
         public static string[] Const_RangeIdcGain = { "X1", "X0.2", };
@@ -60,7 +61,7 @@ namespace ZiveLab.ZM.ZIM
         public const double DEFAULT_BZA500_POWER = 40.0;
         public const double DEFAULT_BZA1000_POWER = 60.0;
 
-        public const byte RES_MAJOR = 1;
+        public const byte RES_MAJOR = 2; //
         public const byte RES_MINOR = 1;
         public const byte RES_REVISION = 0;
         public const byte RES_BUILD = 0;
@@ -81,7 +82,6 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_VAC_RNGCNT = 1;
         public const int MAX_IAC_CTRL_RNGCNT = 8;
         public const int MAX_VDC_RNGCNT = 2;
-        public const int MAX_AUX_CH = 12;
 
         public const double DEF_SINECTRL_PHASE = 270.0;
 

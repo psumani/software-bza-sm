@@ -221,7 +221,7 @@
     <value>..\doc\Image0\object11.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loop0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Animation\Loop0.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\doc\Image0\Animation\Loop0.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Monitor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image6\Monitor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -245,7 +245,7 @@
     <value>..\doc\png\Play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loop5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Animation\Loop5.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\doc\Image0\Animation\Loop5.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zm1_0008" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image\zm1_0008.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -281,7 +281,7 @@
     <value>..\doc\Image0\object41.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loop3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Animation\Loop3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\doc\Image0\Animation\Loop3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Editsch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EditRelationship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -335,7 +335,7 @@
     <value>..\doc\Image\ConnGate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loop4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Animation\Loop4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\doc\Image0\Animation\Loop4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="checkbox_blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\png\checkbox-blank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -374,13 +374,13 @@
     <value>..\doc\DeviceTest_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loop2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Animation\Loop2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\doc\Image0\Animation\Loop2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="start4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image0\start4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Loop1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Animation\Loop1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\doc\Image0\Animation\Loop1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Pointer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\png\Pointer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -516,5 +516,11 @@
   </data>
   <data name="TransitioningContent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\png\TransitioningContent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view_16xMD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\view_16xMD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddClause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddClause.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

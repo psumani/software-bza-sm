@@ -35,7 +35,7 @@ namespace ZiveLab.ZM.FactorySetting
             mWebSiteFATheader = new stWebSiteFATHeader(defWebSiteInfomation.WEBSITE_ID, 0);
             mConnCfg = new stConnCfg(0);
             idevbd = 0;
-
+            cboBoard.KeyPress += CboBoardKeyPress;
 
             if (ZM.FactorySetting.Properties.Settings.Default.Port == 2000)
             {
@@ -78,6 +78,15 @@ namespace ZiveLab.ZM.FactorySetting
             RefreshSifSysCfg();
             RefreshHostname();
             RefreshSifWebSiteInfo();
+        }
+
+        private void CboBoardKeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits, backspace, and delete
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         public void MakeAppTitle()
@@ -255,7 +264,7 @@ namespace ZiveLab.ZM.FactorySetting
             
             eDeviceType mtype = (eDeviceType)mSysCfg.mSIFCfg.Type;
 
-            LnklblSetSIFCfgToLan.Enabled = mCommZim.isConnected;
+            LnklblSetSIFCfgToLan.Enabled = mCommZim.isConnected; //버튼 활성화
             LnklblRefSifInf.Enabled = mCommZim.isConnected;
             lnklblchghostname.Enabled = mCommZim.isConnected;
 
@@ -312,7 +321,7 @@ namespace ZiveLab.ZM.FactorySetting
                     }
                     if (ChkEnaChROM.Checked == true)
                     {
-                        if (mCommZim.CheckROMofZIM(bd, true) == true) 
+                        if (mCommZim.CheckROMofZIM(bd, true) == true)
                         {
                             if (mCommZim.CheckFPGAofZIM(bd) == true)
                             {
@@ -334,7 +343,7 @@ namespace ZiveLab.ZM.FactorySetting
                     }
                     else
                     {
-                       
+
                         if (mCommZim.CheckFPGAofZIM(bd) == true)
                         {
                             mCommZim.ReadData(bd, ref mSysCfg.mZimCfg[bd]);
@@ -365,6 +374,9 @@ namespace ZiveLab.ZM.FactorySetting
             lblZimBdVer.Text = string.Format("2) Board version : {0}", mSysCfg.mZimCfg[bd].GetBoardVer());
             lblZimFwVer.Text = string.Format("3) Firmware version : {0}", mSysCfg.mZimCfg[bd].GetFirmwareVer());
             lblZimSerial.Text = string.Format("4) Serial number : {0}", mSysCfg.mZimCfg[bd].GetSerialNumber());
+
+            Console.WriteLine("Board Type: " + mSysCfg.mZimCfg[bd].GetBoardType());
+            Console.WriteLine("Firmware Ver: " + mSysCfg.mZimCfg[bd].GetFirmwareVer());
         }
 
         public void RefreshZimInfo(int bd)
@@ -762,7 +774,6 @@ namespace ZiveLab.ZM.FactorySetting
             }
 
             MessageBox.Show("Succeed Write EEPROM.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
 
 
         }

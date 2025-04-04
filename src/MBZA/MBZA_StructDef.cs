@@ -217,7 +217,7 @@ namespace ZiveLab.ZM
 
                 file.Close();
             }
-            catch(Exception e)
+            catch(Exception) //e
             {
                 if(file != null) file.Close();
 
@@ -1571,7 +1571,7 @@ namespace ZiveLab.ZM
             }
         }
 
-        public void SetType(eZimType ztype, double[] Range)
+        public void SetType(eZimType ztype, double[] Range) // IAC
         {
 
             type = ztype;
@@ -1624,7 +1624,74 @@ namespace ZiveLab.ZM
         }
         #endregion //#region ** Properties
     }
-    
+
+    public class stPropauxrange // Aux Range정보
+    {
+        eZimType type;
+        public string stype;
+        public int RangeCount;
+        public string[] sRange;
+
+        public stPropauxrange()
+        {
+            sRange = new string[2];
+            SetType(eZimType.BZAAUX1);
+        }
+
+        public void SetType(eZimType ztype)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 2;
+
+            for (int i = 0; i < 2; i++)
+            {
+                sRange[i] = string.Format("{0}", ((enVoltageRange)i).GetDescription());
+            }
+        }
+
+        public void SetType(eZimType ztype, double[] Range)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 2;
+
+            for (int i = 0; i < 2; i++)
+            {
+                sRange[i] = SM_Number.ToRangeString(Range[i], "V");
+            }
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Channel type"), DescriptionAttribute("View type of channel.")]
+        public string PropStrType
+        {
+            get { return stype; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range count"), DescriptionAttribute("View count of Vdc ranges.")]
+        public string PropRangeCount
+        {
+            get { return RangeCount.ToString(); }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 1"), DescriptionAttribute("View maximum value of range 1.")]
+        public string PropRange1
+        {
+            get { return sRange[0]; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 2"), DescriptionAttribute("View maximum value of range 2.")]
+        public string PropRange2
+        {
+            get { return sRange[1]; }
+        }
+        #endregion //#region ** Properties
+    }
+
     public class stPropVdc
     {
         eZimType type;
@@ -1818,7 +1885,7 @@ namespace ZiveLab.ZM
                                                   , cfg.mSIFCfg.BoardVersion.Minor
                                                   , cfg.mSIFCfg.BoardVersion.Revision
                                                   , cfg.mSIFCfg.BoardVersion.Build);
-            stype = cfg.mSIFCfg.GetTypeString();
+            stype = cfg.mSIFCfg.GetDeviceTypeString();
             sproductmodel = Extensions.GetEnumDescription(cfg.mSIFCfg.GetProductType());
             BaseTick = cfg.BaseTick;
             DaqTick = cfg.DaqTick;
@@ -1938,7 +2005,7 @@ namespace ZiveLab.ZM
 
     }
 
-    public class stPropZim
+    public class stPropZim // Main 정보
     {
         string Serial;
         string stype;
@@ -1980,6 +2047,106 @@ namespace ZiveLab.ZM
             sBoardtype = Extensions.GetEnumDescription((eZimBoardType)model);
             EnableROM = (cfg.EnaROM[sifch] == 0) ? false : true;
             
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Serial number"), DescriptionAttribute("View serial number of ZIM board.")]
+        public string PropSerial
+        {
+            get { return Serial; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Type"), DescriptionAttribute("View type of ZIM board.")]
+        public string PropType
+        {
+            get { return stype; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Board name"), DescriptionAttribute("View board name of ZIM board.")]
+        public string PropBoardtype
+        {
+            get { return sBoardtype; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Firmware version"), DescriptionAttribute("View firmware version of ZIM board.")]
+        public string PropFirmwareVersion
+        {
+            get { return FirmwareVersion; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Board version"), DescriptionAttribute("View board version of ZIM board.")]
+        public string PropBoardVersion
+        {
+            get { return BoardVersion; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Enable ROM"), DescriptionAttribute("View status ROM of ZIM board.")]
+        public bool PropEnableROM
+        {
+            get { return EnableROM; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Model"), DescriptionAttribute("View model of ZIM board.")]
+        public eZimType PropModel
+        {
+            get { return model; }
+        }
+
+        #endregion //#region ** Properties
+
+    }
+
+    public class stPropAux // Aux 정보
+    {
+        string Serial;
+        string stype;
+        string sBoardtype;
+        string FirmwareVersion;
+        string BoardVersion;
+        bool EnableROM;
+        eZimType model;
+
+        public stPropAux()
+        {
+            Serial = "";
+            FirmwareVersion = "";
+            BoardVersion = "";
+            model = eZimType.BZAAUX1;
+            EnableROM = false;
+            stype = Extensions.GetEnumDescription(model);
+            sBoardtype = Extensions.GetEnumDescription((eZimBoardType)model);
+        }
+
+        public void SetInformation(stSystemConfig cfg, int sifch)
+        {
+            string str;
+
+            Serial = cfg.mZimCfg[1].GetSerialNumber();
+            //Serial = cfg.mZimCfg[1].info.GetSerialNumber();
+
+            str = string.Format("{0:d04}", cfg.mZimCfg[1].info.ZimFWVersion);
+            FirmwareVersion = string.Format("{0}.{1}.{2}.{3}", str.Substring(0, str.Length - 3)
+                                                        , str.Substring(str.Length - 3, 1)
+                                                        , str.Substring(str.Length - 2, 1)
+                                                        , str.Substring(str.Length - 1, 1));
+            str = string.Format("{0:d04}", cfg.mZimCfg[1].info.ZimBDVersion);
+            BoardVersion = string.Format("{0}.{1}.{2}.{3}", str.Substring(0, str.Length - 3)
+                                                        , str.Substring(str.Length - 3, 1)
+                                                        , str.Substring(str.Length - 2, 1)
+                                                        , str.Substring(str.Length - 1, 1));
+
+            model = (eZimType)(cfg.mZimCfg[1].info.cModel[0] - 0x30);
+            stype = Extensions.GetEnumDescription(model);
+            sBoardtype = Extensions.GetEnumDescription((eZimBoardType)model);
+            EnableROM = (cfg.EnaROM[1] == 0) ? false : true;
+
         }
 
         #region ** Properties

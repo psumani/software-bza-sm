@@ -260,9 +260,9 @@ namespace ZiveLab.ZM
                 inf = (stRangeFile)Reader.Deserialize(file);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
+                //ex
             }
             file.Close();
         }
@@ -791,8 +791,7 @@ namespace ZiveLab.ZM
                     head.mInfo.Error = 0;
 
                     head.tech = techcalib[ch];
-                    head.inf_sif = mDevInf.mSysCfg.mSIFCfg;
-                    head.inf_sifch = mDevInf.mSysCfg.mZimCfg[ch];
+                    head.sysInfo = mDevInf.mSysCfg;
 
                     if (mresfile[ch].Start(this.resfilename[ch], head, rtc) == false)
                     {
@@ -804,6 +803,9 @@ namespace ZiveLab.ZM
                 {
                     mresfile[ch].tmphead.tech = tech[ch];
                     mresfile[ch].tmphead.mInfo = mHeadinf[ch];
+                    mresfile[ch].tmphead.sysInfo = mDevInf.mSysCfg;
+                    /* tmp for serial */
+                    serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
                     if (mresfile[ch].Start(this.resfilename[ch], rtc, gBZA.SifLnkLst[serial].iLinkCh[ch], serial, ch) == false)
                     {
                         Debug.WriteLine(string.Format("channel {0:00} : Resfile start error.", ch + 1));
@@ -1069,8 +1071,8 @@ namespace ZiveLab.ZM
             gBZA.WriteIniDoubleData("Status", "IRange", StatusFilename, (int)crngval);
 
             gBZA.WriteIniDoubleData("LastData", "Frequency", StatusFilename, mChStatInf[ch].eis_status.freq);
-            gBZA.WriteIniDoubleData("LastData", "Zreal", StatusFilename, mChStatInf[ch].eis_status.zdata.real);
-            gBZA.WriteIniDoubleData("LastData", "Zimg", StatusFilename, mChStatInf[ch].eis_status.zdata.img);
+            gBZA.WriteIniDoubleData("LastData", "Zreal", StatusFilename, mChStatInf[ch].eis_status.zdata[0].real);
+            gBZA.WriteIniDoubleData("LastData", "Zimg", StatusFilename, mChStatInf[ch].eis_status.zdata[0].img);
             gBZA.WriteIniDoubleData("LastData", "Vdc", StatusFilename, mChStatInf[ch].Vdc);
             gBZA.WriteIniDoubleData("LastData", "Temperature", StatusFilename, mChStatInf[ch].Temperature);
         }
@@ -1175,6 +1177,7 @@ namespace ZiveLab.ZM
 
             for (int ch = 0; ch < MBZA_Constant.MAX_DEV_CHANNEL; ch++)
             {
+                if ((eDeviceType)this.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA && ch > 0) continue; //
                 if (this.bThread == false) break;
                 if (this.mDevInf.mSysCfg.EnaZIM[ch] == 0) continue;
                 if (this.mDevInf.mSysCfg.ChkZIM[ch] == 0)
@@ -1259,8 +1262,8 @@ namespace ZiveLab.ZM
                 mresfile[ch].tmphead.tech = Oldtech[ch];
                 mresfile[ch].tmphead.mInfo = mHeadinf[ch];
                 mChRtGrp[ch].Initialize(mresfile[ch].tmphead.tech);
-                mresfile[ch].tmphead.inf_sif = mDevInf.mSysCfg.mSIFCfg;
-                mresfile[ch].tmphead.inf_sifch = mDevInf.mSysCfg.mZimCfg[ch];
+                mresfile[ch].tmphead.sysInfo.mSIFCfg = mDevInf.mSysCfg.mSIFCfg;
+                mresfile[ch].tmphead.sysInfo.mZimCfg[ch] = mDevInf.mSysCfg.mZimCfg[ch];
                 
                 string sfolder = Path.GetDirectoryName(resfilename[ch]);
                 if(!Directory.Exists(sfolder))
@@ -1314,10 +1317,14 @@ namespace ZiveLab.ZM
                     else
                     {
                         mresfile[ch].tmphead.mInfo = mHeadinf[ch];
-                        mresfile[ch].tmphead.inf_sif = this.mDevInf.mSysCfg.mSIFCfg;
-                        mresfile[ch].tmphead.inf_sifch = this.mDevInf.mSysCfg.mZimCfg[ch];
+                        mresfile[ch].tmphead.sysInfo.mSIFCfg = this.mDevInf.mSysCfg.mSIFCfg;
+                        mresfile[ch].tmphead.sysInfo.mZimCfg[ch] = this.mDevInf.mSysCfg.mZimCfg[ch];
                         mresfile[ch].tmphead.tech = this.tech[ch];
                         OldCycle[ch] = -1;
+
+                        /* tmp for serial */
+                        serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
+                        bool tmp = gBZA.SifLnkLst.ContainsKey(serial); // false. serial=""
                         if (mresfile[ch].Create(resfilename[ch], gBZA.SifLnkLst[serial].iLinkCh[ch], serial, ch) == true)
                         {
                             if (brun == true)

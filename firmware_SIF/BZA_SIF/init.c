@@ -421,8 +421,8 @@ void InitGlobalVar(void)
 		m_pGlobalVar->mChVar[ch].ResetICE = 0;
 		m_pGlobalVar->mChVar[ch].LoadCfg = 0;
 		m_pGlobalVar->mChVar[ch].CntVdcChg = 0;
-		SetDeviceBoard(ch);
-		InitDevice(ch);
+		//SetDeviceBoard(ch);
+		//InitDevice(ch);
 	}
 }
 

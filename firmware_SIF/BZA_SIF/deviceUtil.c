@@ -54,7 +54,7 @@ void InitDeviceControl(void)
 	P3_OUTP_CLR_bit.GPO_03 = 1;		// J9 - DATA
 	
 	P3_OUTP_SET_bit.GPO_04 = 1;		// ICE CS0
-	P3_OUTP_SET_bit.GPO_05 = 1;		// ICE CS1 ¹Ì»ç¿ë
+	P3_OUTP_SET_bit.GPO_05 = 1;		// ICE CS1 ï¿½Ì»ï¿½ï¿½
 	P3_OUTP_CLR_bit.GPO_06 = 1;		// 
 
 	P3_OUTP_SET_bit.GPO_07 = 1;		// ICE FLASH ROM CS#
@@ -384,7 +384,7 @@ double FixedPoint(double Value,int FixPnt)
 	double y;
 	double z;
 	x = ceil(log10(Value));
-	y = pow(10.0,((double)FixPnt-x)); // À¯È¿ÀÚ¸®¼ö ¼³Á¤
+	y = pow(10.0,((double)FixPnt-x)); // ï¿½ï¿½È¿ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	z = (int)(Value * y + 0.5)/ y;
 	return z;
 }
@@ -679,7 +679,7 @@ double Polynomial(int bd, double x)
 /// Returns the temperature from the resistance of RTD     
 /// </summary>     
 /// <param name="r">The resistance of RTD.</param>     
-/// <param name="r0">The resistance of RTD at 0 ¡ÆC.</param>     
+/// <param name="r0">The resistance of RTD at 0 ï¿½ï¿½C.</param>     
 /// <param name="standard">Callendar-Van Dusen coefficients, use ptxIPTS68 or ptxITS9    
 /// <param name="poly">The Polynomial coefficients.</param>     
 /// <returns></returns>    
@@ -881,8 +881,8 @@ int CheckThermoStat(int bd)
 void applyaux_adc_ac_cfg(int auxbd)
 {
 	ushort tmp;
-	
-	tmp = m_pGlobalVar->mChVar[auxbd].mreqdevice.adc_ac.cfg.vac_flt;
+
+	tmp = ((m_pGlobalVar->mChVar[bd].mreqdevice.adc_ac.cfg.vac_flt << 2) & 0xC);
 	tmp |= (m_pGlobalVar->mChVar[auxbd].mreqdevice.adc_ac.cfg.vac_osr & 0x3);
 	m_pGlobalVar->mChVar[auxbd].flow_adc_ac.req = tmp;
 	memcpy(&m_pGlobalVar->mChVar[auxbd].mdevice.adc_ac.cfg,&m_pGlobalVar->mChVar[auxbd].mreqdevice.adc_ac.cfg,sizeof(st_zim_adc_ac_cfg));
@@ -912,28 +912,7 @@ void apply_adc_ac_cfg(int bd)
 }
 
 
-inline void procaux_adc_ac_cfg(int auxbd)
-{
-    UNS_8 tmp;
-	st_zim_adc_flow* pflow = &m_pGlobalVar->mChVar[auxbd].flow_adc_ac;
-	SetDeviceBoard(auxbd);
-	if(pflow->stat != pflow->req)
-	{
-		tmp = (pflow->req & 0xFF);
-		if(ICE_write_byte(auxbd, ICE_CMD_ACADC_DEVICE, tmp) == _ERROR)
-		{
-			return;
-		}
-		pflow->req = (ushort)tmp;	
-		pflow->stat = pflow->req;	
-	}
-	else
-	{
-		if(ICE_read_byte(auxbd, ICE_CMD_ACADC_DEVICE, &tmp) == _ERROR) return;
-		if(pflow->req != tmp) pflow->stat = tmp;
-	}
-	
-}
+
 
 inline void proc_adc_ac_cfg(int bd)
 {
@@ -1773,7 +1752,7 @@ inline  void ApplyCalcConfigADCForDelay(int bd) //Find OSR and number of points 
 		m_pGlobalVar->mChVar[bd].flow_dds_sig.req.freq = (uint)floor(pddssig->frequency * DEF_DDS_SIG_CONST_HI);
 		pddssig->frequency = m_pGlobalVar->mChVar[bd].flow_dds_sig.req.freq / DEF_DDS_SIG_CONST_HI;
 		
-		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,m_pGlobalVar->mChVar[bd].mFlow.SetDuration/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //ÃÖ¼Ò ½ÎÀÌÅ¬ 2
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,m_pGlobalVar->mChVar[bd].mFlow.SetDuration/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ 2
 		
 		if(retPoint == 0) 
 		{
@@ -1797,7 +1776,7 @@ inline  void ApplyCalcConfigADCForDelay(int bd) //Find OSR and number of points 
 	else
 	{
 		osrMaxArg = 2;
-		nMaxArg = 2; //4cycle °¡´É.
+		nMaxArg = 2; //4cycle ï¿½ï¿½ï¿½ï¿½.
 		
 	
 		m_pGlobalVar->mChVar[bd].flow_dds_sig.req.freq = (uint)(pddssig->frequency * DEF_DDS_SIG_CONST_LOW);
@@ -1822,7 +1801,7 @@ inline  void ApplyCalcConfigADCForDelay(int bd) //Find OSR and number of points 
 			cycles = (int)(MAX_EIS_POINT / retPoint);
 		}
 		
-		//nMaxCycle = MAX(DEF_EIS_MIN_CYCLE,(int)pow(2,(int)log2(pddssig->frequency * m_pGlobalVar->mChVar[bd].mFlow.SetDuration))); //ÃÖ¼Ò ½ÎÀÌÅ¬ 2 
+		//nMaxCycle = MAX(DEF_EIS_MIN_CYCLE,(int)pow(2,(int)log2(pddssig->frequency * m_pGlobalVar->mChVar[bd].mFlow.SetDuration))); //ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ 2 
 		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)floor(pddssig->frequency * m_pGlobalVar->mChVar[bd].mFlow.SetDuration));
 		
 		
@@ -1926,7 +1905,7 @@ void ApplyCalcConfigADC(int bd) //Find OSR and number of points in a cycle
 		
 		pStatus->freq = pddssig->frequency;
 
-		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,m_pGlobalVar->mChVar[bd].mFlow.SetDuration/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //ÃÖ¼Ò ½ÎÀÌÅ¬ 2 
+		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,m_pGlobalVar->mChVar[bd].mFlow.SetDuration/((1.0/pddsclk->frequency)* 32.0 * retPoint)); //ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ 2 
 		
 		if(retPoint == 0) 
 		{
@@ -1955,7 +1934,7 @@ void ApplyCalcConfigADC(int bd) //Find OSR and number of points in a cycle
 		dMaxFreq = (double)MIN_EIS_CYC_POINT * 32.0 * pddssig->frequency;
 		
 		osrMaxArg = 2;
-		nMaxArg = 2; //4cycle °¡´É.
+		nMaxArg = 2; //4cycle ï¿½ï¿½ï¿½ï¿½.
 
 		LB = (int)log2((double)MIN_EIS_ADC_MCLK / dMaxFreq);
 		UB = (int)log2((double)MAX_EIS_ADC_MCLK / dMaxFreq);
@@ -1968,7 +1947,7 @@ void ApplyCalcConfigADC(int bd) //Find OSR and number of points in a cycle
 		retPoint = 	MinCycPoint * (int)pow(2.0,(double)nArg);
 		
 		
-		//nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //ÃÖ¼Ò ½ÎÀÌÅ¬ 2 , ÃÖ´ë½Ã°£ 6ÃÊ
+		//nMaxCycle = MAX(2,(int)pow(2,(int)log2(pddssig->frequency * 6))); //ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ 2 , ï¿½Ö´ï¿½Ã°ï¿½ 6ï¿½ï¿½
 		//nMaxCycle = (int)MAX(MinCycleCnt,(int)pow(2,pddssig->frequency * m_pGlobalVar->mChVar[bd].mFlow.SetDuration)));
 		
 		nMaxCycle = (int)MAX(DEF_EIS_MIN_CYCLE,(int)floor(pStatus->freq * m_pGlobalVar->mChVar[bd].mFlow.SetDuration));

@@ -11,6 +11,9 @@ extern "C"
 	#define ICE_VERIFY_CNT				2
 	
 	#define ICE_CMD_READ				0x80
+
+
+// Main Board Command set
 	
 	#define ICE_CMD_DDS_SIG				0x10
 	#define ICE_CMD_DDS_CLK				0x11
@@ -45,10 +48,35 @@ extern "C"
 	#define ICE_CMD_VACADC_CTRL_FLT1		0x80
 
 	
+// Aux Board Command set
+
+	#define ICE_CMDAUX_DDS_CLK				0x11
 	
-	#define ICE_CMDAUX_ADC_VAL1			0x13
-	#define ICE_CMDAUX_ADC_VAL2			0x14
-		
+	#define ICE_CMDAUX_ACADC_DEVICE		0x12
+
+	#define ICE_CMDAUX_VDC_VAL			0x15
+
+	#define ICE_CMDAUX_DEVICE_DO		0x18
+
+	#define ICE_CMDAUX_EIS_SKIPCNT		0x19
+	#define ICE_CMD_EIS_SETPNTS			0x1A
+	#define ICE_CMDAUX_EIS_CFG				0x1B
+	#define ICE_CMDAUX_EIS_POINTS			0x1C
+	#define ICE_CMDAUX_EIS_IDX				0x1D
+	#define ICE_CMDAUX_EIS_DATA			0x1E	
+
+    #define ICE_CMDAUX_FWVERSION		0x1F
+
+	#define ICE_CMDAUX_DO_START			0x01
+	#define ICE_CMDAUX_DO_DCSEL			0x02
+	#define ICE_CMDAUX_DO_POW			0x04
+
+	#define ICE_CMDAUX_ADC_CTRL_OSR0		0x01
+	#define ICE_CMDAUX_ADC_CTRL_OSR1		0x02
+	#define ICE_CMDAUX_ADC_CTRL_FLT0		0x04
+	#define ICE_CMDAUX_ADC_CTRL_FLT1		0x08
+
+
 	INT_32 ICE_write_cmd(INT_32 ch, UNS_8 cmd);
 	INT_32 ICE_read_byte(INT_32 ch, UNS_8 cmd,UNS_8 *pdata);
 	INT_32 ICE_write_byte(INT_32 ch, UNS_8 cmd, UNS_8 data);

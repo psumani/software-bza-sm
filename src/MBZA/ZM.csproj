@@ -67,7 +67,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DataManager\CommonLib.dll</HintPath>
     </Reference>
-    <Reference Include="DataManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DataManager, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DataManager\DataManager.dll</HintPath>
     </Reference>
@@ -316,6 +316,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataTools.resx">
       <DependentUpon>frmDataTools.cs</DependentUpon>
@@ -325,6 +326,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMdiMain.resx">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetBatPara.resx">
       <DependentUpon>frmSetBatPara.cs</DependentUpon>
@@ -346,6 +348,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRegBZA.resx">
       <DependentUpon>frmRegBZA.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetMaxRange.resx">
       <DependentUpon>frmSetMaxRange.cs</DependentUpon>
@@ -361,6 +364,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRealview.resx">
       <DependentUpon>frmRealview.cs</DependentUpon>
@@ -403,37 +407,33 @@
       <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
       <Name>ZM_ZIM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZM.Dataview\ZM.Dataview.csproj">
+      <Project>{32b51393-df04-428a-8cb1-362b6f949874}</Project>
+      <Name>ZM.Dataview</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop0.ico" />
+    <None Include="doc\Image\List1\Animation\Loop0.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop1.ico" />
+    <None Include="doc\Image\List1\Animation\Loop1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop2.ico" />
+    <None Include="doc\Image\List1\Animation\Loop2.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop3.ico" />
+    <None Include="doc\Image\List1\Animation\Loop3.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop4.ico" />
+    <None Include="doc\Image\List1\Animation\Loop4.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop5.ico" />
+    <None Include="doc\Image\List1\Animation\Loop5.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="doc\MBZA1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxCWUIControlsLib">
-      <Guid>{D940E4E4-6079-11CE-88CB-0020AF6845F6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>6</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="CWUIControlsLib">
       <Guid>{D940E4E4-6079-11CE-88CB-0020AF6845F6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -752,6 +752,11 @@
     <None Include="doc\Image6\NetConfig.png" />
     <None Include="doc\png\TransitioningContent.png" />
     <None Include="doc\Image4\stock-vector-signing-report-vector-icon-86384779.jpg" />
+    <None Include="Resources\view_16xMD.bmp" />
+    <None Include="doc\png\view_16xMD.png" />
+    <None Include="Resources\Icon1.ico" />
+    <None Include="doc\Image0\Animation\Loop0.ico" />
+    <None Include="Resources\AddClause.ico" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />

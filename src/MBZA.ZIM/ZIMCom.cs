@@ -637,7 +637,8 @@ namespace ZiveLab.ZM.ZIM
             }
 
             minf.ToWritePtr(buf);
-
+            //int size = Marshal.SizeOf(typeof(stChStatusInf));
+            //Console.WriteLine(Marshal.OffsetOf(typeof(stChStatusInf), "Aux_Vdc"));
             return true;
         }
 
@@ -1717,7 +1718,6 @@ namespace ZiveLab.ZM.ZIM
             return true;
 
         }
- 
 
         public bool ReadData(int nSlot, int nAddr, ref st_zim_rnginf data)
         {

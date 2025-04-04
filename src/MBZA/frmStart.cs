@@ -604,8 +604,8 @@ namespace ZiveLab.ZM
                 head.SetMemo(Encoding.UTF8.GetBytes(txtmemo.Text.Trim()));
                 head.mInfo.Error = 0;
                 head.tech = gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch];
-                head.inf_sif = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mSIFCfg;
-                head.inf_sifch = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+                head.sysInfo.mSIFCfg = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mSIFCfg;
+                head.sysInfo.mZimCfg[sifch] = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
 
                 if (chkapptech.Checked == true)
                 {

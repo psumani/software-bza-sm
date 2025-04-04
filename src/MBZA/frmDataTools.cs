@@ -1006,8 +1006,8 @@ namespace ZiveLab.ZM
                 int share = tResfile.tmphead.tech.irange / DeviceConstants.MAX_IAC_RNGCNT;
                 int remain = tResfile.tmphead.tech.irange % DeviceConstants.MAX_IAC_RNGCNT;
 
-                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges[0].iac_rng[share].realmax, "A");
-                else str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges[0].iac_rng[share].realmax * tResfile.tmphead.inf_sifch.ranges[0].iac_rng[share].controlgain, "A");
+                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.sysInfo.mZimCfg[0].ranges[0].iac_rng[share].realmax, "A");
+                else str1 = SM_Number.ToRangeString(tResfile.tmphead.sysInfo.mZimCfg[0].ranges[0].iac_rng[share].realmax * tResfile.tmphead.sysInfo.mZimCfg[0].ranges[0].iac_rng[share].controlgain, "A");
                 
 
                 if (dch.useir == 0) str = string.Format("* Test condition: Discharge current({0})", str1);
@@ -1233,10 +1233,10 @@ namespace ZiveLab.ZM
                     Cursor = Cursors.Default;
                     return false;
                 }
-                sSerial = tResfile.tmphead.inf_sif.GetSerialNumber();
+                sSerial = tResfile.tmphead.sysInfo.mSIFCfg.GetSerialNumber();
 
                 sCfgDirectory = gBZA.appcfg.PathRangeInfo;
-                sCfgFilename = tResfile.tmphead.inf_sifch.GetSerialNumber() + "_Ranges.xml";
+                sCfgFilename = tResfile.tmphead.sysInfo.mZimCfg[0].GetSerialNumber() + "_Ranges.xml";
 
                 saveDlg.Title = "Save as device range information file.";
                 saveDlg.DefaultExt = "*.xml";
@@ -1258,7 +1258,7 @@ namespace ZiveLab.ZM
                 sCfgFullPath = Path.Combine(sCfgDirectory, sCfgFilename);
 
                 mRangeFile.parent.SetInformation(tResfile.tmphead.mInfo.Ch, sSerial, tResfile.tmphead.mInfo.sifch);
-                mRangeFile.ranges = tResfile.tmphead.inf_sifch.ranges;
+                mRangeFile.ranges = tResfile.tmphead.sysInfo.mZimCfg[0].ranges;
 
                 XmlSerializer writer = new XmlSerializer(mRangeFile.GetType());
 
@@ -1600,7 +1600,7 @@ namespace ZiveLab.ZM
             sTemp = string.Format("* Last status: {0}\r\n", ((enStatError)head.mInfo.Error).GetDescription());
             sinfo += sTemp;
 
-            sTemp = string.Format("* Device: ZM's Ch-{0} [SIF({1})-Ch{2}({3})]\r\n", head.mInfo.Ch+1, head.inf_sif.GetSerialNumber(), head.mInfo.sifch+1, head.inf_sifch.info.GetSerialNumber());
+            sTemp = string.Format("* Device: ZM's Ch-{0} [SIF({1})-Ch{2}({3})]\r\n", head.mInfo.Ch+1, head.sysInfo.mSIFCfg.GetSerialNumber(), head.mInfo.sifch+1, head.sysInfo.mZimCfg[0].info.GetSerialNumber());
             sinfo += sTemp;
 
             sTemp = string.Format("* Tecnnique<{0}>: {1}\r\n", Extensions.GetEnumDescription(enType), head.GetTechFilename());

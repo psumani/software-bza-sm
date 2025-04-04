@@ -207,17 +207,13 @@ typedef struct
 	uint            nSerial;
 } stZimInfo;
 
-typedef struct
-{
-	stZimInfo		info;
-	st_zim_rnginf   ranges[4];
-} stZimCfg;
+
 
 typedef struct
 {
 	stZimInfo		info;
 	st_zim_rnginf   ranges;
-} stZimCfg_1;
+} stZimCfg;
 
 typedef struct
 {
@@ -234,18 +230,6 @@ typedef struct
 	byte      Serial[ID_LENGTH];
 	byte SockStat;	
 } stFindSIFCfg;	
-
-typedef struct
-{
-    byte            ID;
-	stSIFCfg        mSIFCfg;
-	byte            EnaZIM[MAX_DEV_BOARD];
-	byte            EnaROM[MAX_DEV_BOARD];
-	byte            ChkZIM[MAX_DEV_BOARD];
-	stZimCfg_1      mZimCfg[MAX_DEV_BOARD];
-    uint            BaseTick;
-    uint            DaqTick;
-} stSystemConfig_1;
 
 typedef struct
 {
@@ -523,8 +507,11 @@ typedef struct
 	ushort          	totaldatacnt;
 	ushort          	WorkDatacnt;
 	ushort          	LoadDatacnt;
-	st_zim_eis_zdata	zdata[DEF_MAX_AUX_CHCNT];
-	st_zim_eis_raw_val 	Real_val[DEF_MAX_AUX_CHCNT][MAX_EIS_RT_RAW_POINT];
+	
+	st_zim_eis_zdata	zdata;
+	st_zim_eis_raw_val 	Real_val[MAX_EIS_RT_RAW_POINT];
+	
+	
 } st_zim_eis_status;
 
 #define DEF_CFG_EIS_RESET 			0x4
@@ -581,8 +568,9 @@ typedef struct
 	
 	st_rtc       		rtc;
 	
-	double 				Veoc[4];
-	double 				Vdc[4];
+	double 				Veoc;
+	double 				Vdc;
+	double 				auxvdc[12];
 	double 				Idc;
 	double 				Temperature;
 	

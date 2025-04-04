@@ -226,7 +226,7 @@ namespace ZiveLab.ZM.ZIM
         [Description("Measuring data")]
         ing,
         [Description("Processing FFT")]
-        fft,
+        fft, 
         [Description("Stopping")]
         stop,
         [Description("LOAD off")]

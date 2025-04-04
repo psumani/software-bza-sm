@@ -36,10 +36,8 @@ namespace ZiveLab.ZM
 
         }
 
-        public void SearchDevice()
+        public void SearchDevice() // 텍스트 활성화
         {
-            
-
             lnkRegister.Enabled = false;
             lnkSearch.Enabled = false;
             LnkContinue.Enabled = false;
@@ -60,12 +58,12 @@ namespace ZiveLab.ZM
             backgroundWorker1.RunWorkerAsync();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) //비동기 백그라운드로 실행
         {
             var success = Task.Run(async () => { await gBZA.pingHost.ScanAsync(); }).Wait(300000);
         }
 
-        private bool CheckChangeStatusBZA()
+        private bool CheckChangeStatusBZA() // 파일 탐색
         {
             string sLogFileBZA = Path.Combine(gBZA.appcfg.PathLog, "BZA_Device.inf");
             try
@@ -96,9 +94,9 @@ namespace ZiveLab.ZM
             return true;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) // 백그라운드 기능 실행
         {
-           
+            // UI 및 변수 초기화   
             CircProgress.Stop();
             txtResult.Text = "";
 
@@ -114,6 +112,8 @@ namespace ZiveLab.ZM
             int ScanSifCount = 0;
             bool brecreate = false;
             eDeviceType mtype;
+
+            // 링크 목록 업데이트
             if(bFirst)
             {
                 gBZA.SifLnkLst.Clear();
@@ -132,6 +132,7 @@ namespace ZiveLab.ZM
                 }
             }
 
+            // 스캔 및 정보 업데이트
             txtResult.Text = "* Scan device list\r\n" ;
 
             foreach (var pair in dic)
@@ -157,7 +158,7 @@ namespace ZiveLab.ZM
                         gBZA.ScanBdCount += mLinkSIF.BdCnt;
 
                         mLinkSIF.mDevInf.ToWritePtr(mLinkSIF.MBZAIF.mDevInf.ToByteArray());
-
+                        
                         if (mtype == eDeviceType.MCBZA)
                         {
                             str = string.Format("   -> {0}({1}):{2}[Firmware:{3},Model:{4},{5} boards, {6} Aux boards.]-Connected.\r\n", ScanSifCount + 1, mLinkSIF.sip, mLinkSIF.mDevInf.mConnCfg.GetSerialNumber(), mLinkSIF.mDevInf.mSysCfg.mSIFCfg.GetFirmwareVer(), Extensions.GetEnumDescription((eDeviceType)mLinkSIF.mDevInf.mSysCfg.mSIFCfg.Type), BoardCount>0?1:0, Math.Max(BoardCount - 1,0));
@@ -298,7 +299,7 @@ namespace ZiveLab.ZM
             str = string.Format("   => SIF Board:{0},Boards provided:{1}, Searched boards:{2}, AUX-Board provided:{3}, Searched AUX-boards:{4}. \r\n\r\n", ScanSifCount, BoardCount, ScanBdCount, AuxBdCount, ScanAuxBdCount);
             txtResult.Text += str;
 
-
+            // 채널 등록 정보 확인
             txtResult.Text += "* Checking registration information.\r\n";
             LblAction.Text = "Checking registration information !";
 
@@ -408,6 +409,7 @@ namespace ZiveLab.ZM
             }
             txtResult.Text += str;
                 
+            // 상태변경 및 최종 UI업데이트
             changeBZA = CheckChangeStatusBZA();
 
             if (lnkRegister.Enabled == true)
@@ -435,7 +437,7 @@ namespace ZiveLab.ZM
             LnkContinue.Enabled = true;
         }
 
-        private void AddToolTip(Control obj,string sNote, string sTitle)
+        private void AddToolTip(Control obj,string sNote, string sTitle) // UI
         {
             ToolTip myToolTip = new ToolTip();
             myToolTip.ToolTipTitle = sTitle;
@@ -445,12 +447,12 @@ namespace ZiveLab.ZM
             myToolTip.SetToolTip(obj, sNote);
         }
 
-        private void lnkSearch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkSearch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // 새로고침
         {
             SearchDevice();
         }
 
-        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // 장치 수정
         {
             frmRegBZA frm = new frmRegBZA();
             frm.ShowDialog();
@@ -458,14 +460,15 @@ namespace ZiveLab.ZM
             SearchDevice();
         }
 
-        private void LnkContinue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LnkContinue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // 실행
         {
             this.DialogResult = DialogResult.OK;
         }
 
-        private void lnkExit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkExit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // 프로그램 종료
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
     }
 }

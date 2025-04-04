@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConfig));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstch = new System.Windows.Forms.ListBox();
             this.grtinf = new System.Windows.Forms.GroupBox();
-            this.infoch = new ZiveLab.ZM.InfomationGrid();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripDummyInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.infoch = new ZiveLab.ZM.InfomationGrid();
             this.groupBox1.SuspendLayout();
             this.grtinf.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -79,17 +81,6 @@
             this.grtinf.TabStop = false;
             this.grtinf.Text = "[ Channel 0 (serial-0) ]";
             // 
-            // infoch
-            // 
-            this.infoch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.infoch.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.infoch.Location = new System.Drawing.Point(6, 21);
-            this.infoch.Name = "infoch";
-            this.infoch.Size = new System.Drawing.Size(710, 339);
-            this.infoch.TabIndex = 19;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.AllowMerge = false;
@@ -108,6 +99,22 @@
             this.ToolStripDummyInfo.Size = new System.Drawing.Size(171, 20);
             this.ToolStripDummyInfo.Text = "Edit dummy information.";
             this.ToolStripDummyInfo.Click += new System.EventHandler(this.ToolStripDummyInfo_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // infoch
+            // 
+            this.infoch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.infoch.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.infoch.Location = new System.Drawing.Point(6, 21);
+            this.infoch.Name = "infoch";
+            this.infoch.Size = new System.Drawing.Size(710, 339);
+            this.infoch.TabIndex = 19;
             // 
             // frmConfig
             // 
@@ -142,5 +149,6 @@
         private InfomationGrid infoch;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripDummyInfo;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

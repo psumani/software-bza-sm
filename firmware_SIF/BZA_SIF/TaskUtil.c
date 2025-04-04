@@ -1487,6 +1487,7 @@ void DeviceAuxProc(void)
 	
 	for(bd=1; bd<DEF_MAX_AUX_BDCNT; bd ++)
 	{
+		if(m_pSysConfig->EnaZIM[bd] == FALSE || m_pSysConfig->ChkZIM[bd] == FALSE) continue;
 		SetDeviceBoard(bd);
 		setaux_device_DO(bd);
 	}

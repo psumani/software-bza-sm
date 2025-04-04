@@ -124,10 +124,10 @@ typedef struct
 #define 	DEF_ADC_VDC_RNG1_FACTOR1   ((DEF_ADC_VDC_RNG1_MAX1 - DEF_ADC_VDC_RNG1_MIN1) / 16777216.0) //24bit
 
 
-#define     DEF_AUXADC_VDC_RNG_MAX		2048.0
-#define     DEF_AUXADC_VDC_RNG_MIN		-2048.0
+#define     DEF_AUXADC_VDC_RNG_MAX		102.4
+#define     DEF_AUXADC_VDC_RNG_MIN		-102.4
 #define 	DEF_AUXADC_VDC_RNG_FACTOR    ((DEF_AUXADC_VDC_RNG_MAX - DEF_AUXADC_VDC_RNG_MIN) / 16777216.0) //24bit
-#define     DEF_AUXADC_VDC_RNG_RMAX		500.0
+#define     DEF_AUXADC_VDC_RNG_RMAX		100.0
 
 #define     DEF_HLIMIT_STABLE_RATE		0.88
 #define     DEF_LLIMIT_STABLE_RATE		0.78
@@ -236,6 +236,16 @@ typedef struct
 	double			NoUse2;
 } st_zim_dummy;
 
+
+typedef struct   // 
+{
+	byte          			ID;
+	st_zim_vdc_rnginf		vdc_rng[4]; // 6x2 = 12          //5
+	st_zim_adcv_rnginf		vac_rng[4];                     // 6
+	st_zim_Eis_Cal_info		mEisIRngCalInfo[4][MAX_IAC_CTRL_RNGCNT];	 //DEF_MAX_IAC_RNGCNT
+} st_zimaux_rnginf; //
+
+
 typedef struct   // 
 {
 	byte          			ID;
@@ -248,8 +258,14 @@ typedef struct   //
 	st_zim_dummy      		mDummy[MAX_IAC_CTRL_RNGCNT]; //4x8 = 32
 	st_zim_Idc_rnginf		idc_rng;                     //1x8 = 8
 	double					NoUse[20];
-} st_zim_rnginf; //
+} st_zimGen_rnginf; //
 
+
+union 
+{
+	st_zimGen_rnginf Gen;
+	st_zimaux_rnginf aux;
+} st_zim_rnginf; 
 
 #define DEF_RTD_COEF_LEN	6
 #define DEF_RTD_STANDARDTYPE_ITS90	0
