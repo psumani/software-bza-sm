@@ -140,6 +140,7 @@ namespace ZiveLab.ZM
                 {
                     return false;
                 }
+
                 tmphead.mInfo.rtc_begin.tick = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
                 tmphead.mInfo.rtc_end.tick = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
                 tmphead.mInfo.Ch = ch;
@@ -357,23 +358,41 @@ namespace ZiveLab.ZM
 
         public int GetDatacount()
         {
-
             long size = fs.Length;
             size -= len_head;
             if (size < 1) return 0;
             return (int)(size / len_data);
         }
 
+        //public void AppendData(stDefTestData[] data, int len)
+        //{
+        //    fs.Seek(0, SeekOrigin.End);
+        //    for (int i = 0; i < len; i++)
+        //    {
+        //        fs.Write(data[i].ToByteArray(), 0, len_data);
+        //        datacount++;
+        //    }
+        //    fs.Flush();
+        //}
+
         public void AppendData(stDefTestData[] data, int len)
         {
+            if (fs == null)
+            {
+                return;
+            }
+
             fs.Seek(0, SeekOrigin.End);
+
             for (int i = 0; i < len; i++)
             {
                 fs.Write(data[i].ToByteArray(), 0, len_data);
                 datacount++;
             }
+
             fs.Flush();
-        }
+        } // 예외방지
+
 
         public void AppendData(stDefTestData data)
         {

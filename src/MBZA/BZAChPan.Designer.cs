@@ -185,7 +185,6 @@
             this.btSize = new System.Windows.Forms.Button();
             this.btTechEdit = new System.Windows.Forms.Button();
             this.btreport = new System.Windows.Forms.Button();
-            this.btabout = new System.Windows.Forms.Button();
             this.btloaddata = new System.Windows.Forms.Button();
             this.lblVeoc = new System.Windows.Forms.Label();
             this.lblzimg = new System.Windows.Forms.Label();
@@ -211,9 +210,83 @@
             this.Grp1Plot6 = new NationalInstruments.UI.ScatterPlot();
             this.legendItem17 = new NationalInstruments.UI.LegendItem();
             this.Grp1Plot7 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem30 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot8 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem31 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot9 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem32 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot10 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem33 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot11 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem34 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot12 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem35 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot13 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem36 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot14 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem37 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot15 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem38 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot16 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem39 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot17 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem40 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot18 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem41 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot19 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem42 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot20 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem43 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot21 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem44 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot22 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem45 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot23 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem46 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot24 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem47 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot25 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem48 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot26 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem49 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot27 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem50 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot28 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem51 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot29 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem52 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot30 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem53 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot31 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem109 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot32 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem110 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot33 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem111 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot34 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem112 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot35 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem113 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot36 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem114 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot37 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem115 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot38 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem116 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot39 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem117 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot40 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem118 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot41 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem119 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot42 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem120 = new NationalInstruments.UI.LegendItem();
+            this.Grp1Plot43 = new NationalInstruments.UI.ScatterPlot();
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor2 = new NationalInstruments.UI.XYCursor();
+            this.checkedListBox = new System.Windows.Forms.CheckedListBox();
             this.TabGrp2 = new System.Windows.Forms.TabPage();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.lblcsfreq2 = new System.Windows.Forms.Label();
             this.legend2 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem21 = new NationalInstruments.UI.LegendItem();
@@ -235,6 +308,102 @@
             this.Grp2Plot7 = new NationalInstruments.UI.ScatterPlot();
             this.legendItem28 = new NationalInstruments.UI.LegendItem();
             this.Grp2Plot8 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem60 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot9 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem61 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot10 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem62 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot11 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem63 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot12 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem64 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot13 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem65 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot14 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem66 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot15 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem67 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot16 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem68 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot17 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem69 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot18 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem70 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot19 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem71 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot20 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem72 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot21 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem73 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot22 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem74 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot23 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem75 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot24 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem76 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot25 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem77 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot26 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem78 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot27 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem79 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot28 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem80 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot29 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem81 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot30 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem82 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot31 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem83 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot32 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem84 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot33 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem85 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot34 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem86 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot35 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem87 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot36 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem88 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot37 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem89 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot38 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem90 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot39 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem91 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot40 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem92 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot41 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem93 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot42 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem94 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot43 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem95 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot44 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem96 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot45 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem97 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot46 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem98 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot47 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem99 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot48 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem100 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot49 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem101 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot50 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem102 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot51 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem103 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot52 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem104 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot53 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem105 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot54 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem106 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot55 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem107 = new NationalInstruments.UI.LegendItem();
+            this.Grp2Plot56 = new NationalInstruments.UI.ScatterPlot();
             this.grp2 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor1 = new NationalInstruments.UI.XYCursor();
             this.TabGrpRaw = new System.Windows.Forms.TabPage();
@@ -246,12 +415,189 @@
             this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
             this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.RTyAxis2 = new NationalInstruments.UI.YAxis();
+            this.RtlegendItem3 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem4 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem5 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem6 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem7 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem8 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem9 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem10 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem11 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem12 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem13 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem14 = new NationalInstruments.UI.LegendItem();
             this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.RTPlot3 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot4 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot5 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot6 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot7 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot8 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot9 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot10 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot11 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot12 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot13 = new NationalInstruments.UI.ScatterPlot();
+            this.RTPlot14 = new NationalInstruments.UI.ScatterPlot();
+            this.Raw_DataPage = new System.Windows.Forms.TabPage();
+            this.rawgrpListBox = new System.Windows.Forms.CheckedListBox();
+            this.AuxDataView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rawgrp = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot1 = new NationalInstruments.UI.ScatterPlot();
+            this.xAxis1 = new NationalInstruments.UI.XAxis();
+            this.yAxis1 = new NationalInstruments.UI.YAxis();
+            this.scatterPlot2 = new NationalInstruments.UI.ScatterPlot();
+            this.yAxis2 = new NationalInstruments.UI.YAxis();
+            this.RawRead = new System.Windows.Forms.Button();
             this.lbldatacount = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
             this.lblTech = new System.Windows.Forms.Label();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.lblIdc = new System.Windows.Forms.Label();
+            this.btabout = new System.Windows.Forms.Button();
+            this.legendItem108 = new NationalInstruments.UI.LegendItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.A1Zphase = new System.Windows.Forms.Label();
+            this.A1Zmag = new System.Windows.Forms.Label();
+            this.A1Zimg = new System.Windows.Forms.Label();
+            this.A1Zreal = new System.Windows.Forms.Label();
+            this.A1Vdc = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.A2Zphase = new System.Windows.Forms.Label();
+            this.A2Zmag = new System.Windows.Forms.Label();
+            this.A2Zimg = new System.Windows.Forms.Label();
+            this.A2Zreal = new System.Windows.Forms.Label();
+            this.A2Vdc = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.A3Zphase = new System.Windows.Forms.Label();
+            this.A3Zmag = new System.Windows.Forms.Label();
+            this.A3Zimg = new System.Windows.Forms.Label();
+            this.A3Zreal = new System.Windows.Forms.Label();
+            this.A3Vdc = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.A4Zphase = new System.Windows.Forms.Label();
+            this.A4Zmag = new System.Windows.Forms.Label();
+            this.A4Zimg = new System.Windows.Forms.Label();
+            this.A4Zreal = new System.Windows.Forms.Label();
+            this.A4Vdc = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.A5Zphase = new System.Windows.Forms.Label();
+            this.A5Zmag = new System.Windows.Forms.Label();
+            this.A5Zimg = new System.Windows.Forms.Label();
+            this.A5Zreal = new System.Windows.Forms.Label();
+            this.A5Vdc = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.A6Zphase = new System.Windows.Forms.Label();
+            this.A6Zmag = new System.Windows.Forms.Label();
+            this.A6Zimg = new System.Windows.Forms.Label();
+            this.A6Zreal = new System.Windows.Forms.Label();
+            this.A6Vdc = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.A7Zphase = new System.Windows.Forms.Label();
+            this.A7Zmag = new System.Windows.Forms.Label();
+            this.A7Zimg = new System.Windows.Forms.Label();
+            this.A7Zreal = new System.Windows.Forms.Label();
+            this.A7Vdc = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.A8Zphase = new System.Windows.Forms.Label();
+            this.A8Zmag = new System.Windows.Forms.Label();
+            this.A8Zimg = new System.Windows.Forms.Label();
+            this.A8Zreal = new System.Windows.Forms.Label();
+            this.A8Vdc = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.A9Zphase = new System.Windows.Forms.Label();
+            this.A9Zmag = new System.Windows.Forms.Label();
+            this.A9Zimg = new System.Windows.Forms.Label();
+            this.A9Zreal = new System.Windows.Forms.Label();
+            this.A9Vdc = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.A10Zphase = new System.Windows.Forms.Label();
+            this.A10Zmag = new System.Windows.Forms.Label();
+            this.A10Zimg = new System.Windows.Forms.Label();
+            this.A10Zreal = new System.Windows.Forms.Label();
+            this.A10Vdc = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.A11Zphase = new System.Windows.Forms.Label();
+            this.A11Zmag = new System.Windows.Forms.Label();
+            this.A11Zimg = new System.Windows.Forms.Label();
+            this.A11Zreal = new System.Windows.Forms.Label();
+            this.A11Vdc = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.A12Zphase = new System.Windows.Forms.Label();
+            this.A12Zmag = new System.Windows.Forms.Label();
+            this.A12Zimg = new System.Windows.Forms.Label();
+            this.A12Zreal = new System.Windows.Forms.Label();
+            this.A12Vdc = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
@@ -269,6 +615,22 @@
             this.TabGrpRaw.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grprt)).BeginInit();
+            this.Raw_DataPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            this.tabPage12.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblErrStatus
@@ -1469,16 +1831,6 @@
             this.btreport.UseVisualStyleBackColor = true;
             this.btreport.Click += new System.EventHandler(this.btreport_Click);
             // 
-            // btabout
-            // 
-            this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btabout.Location = new System.Drawing.Point(286, 1);
-            this.btabout.Name = "btabout";
-            this.btabout.Size = new System.Drawing.Size(24, 24);
-            this.btabout.TabIndex = 95;
-            this.btabout.UseVisualStyleBackColor = true;
-            this.btabout.Click += new System.EventHandler(this.btabout_Click);
-            // 
             // btloaddata
             // 
             this.btloaddata.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1524,12 +1876,13 @@
             this.tabgrp.Controls.Add(this.TabGrp1);
             this.tabgrp.Controls.Add(this.TabGrp2);
             this.tabgrp.Controls.Add(this.TabGrpRaw);
+            this.tabgrp.Controls.Add(this.Raw_DataPage);
             this.tabgrp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabgrp.Location = new System.Drawing.Point(163, 100);
             this.tabgrp.Multiline = true;
             this.tabgrp.Name = "tabgrp";
             this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(312, 233);
+            this.tabgrp.Size = new System.Drawing.Size(312, 370);
             this.tabgrp.TabIndex = 100;
             // 
             // TabGrp1
@@ -1537,10 +1890,11 @@
             this.TabGrp1.Controls.Add(this.lblcsfreq1);
             this.TabGrp1.Controls.Add(this.legend1);
             this.TabGrp1.Controls.Add(this.grp1);
+            this.TabGrp1.Controls.Add(this.checkedListBox);
             this.TabGrp1.Location = new System.Drawing.Point(4, 23);
             this.TabGrp1.Name = "TabGrp1";
             this.TabGrp1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabGrp1.Size = new System.Drawing.Size(304, 206);
+            this.TabGrp1.Size = new System.Drawing.Size(304, 343);
             this.TabGrp1.TabIndex = 1;
             this.TabGrp1.Text = "tabPage2";
             this.TabGrp1.UseVisualStyleBackColor = true;
@@ -1565,12 +1919,49 @@
             this.legendItem14,
             this.legendItem15,
             this.legendItem16,
-            this.legendItem17});
+            this.legendItem17,
+            this.legendItem30,
+            this.legendItem31,
+            this.legendItem32,
+            this.legendItem33,
+            this.legendItem34,
+            this.legendItem35,
+            this.legendItem36,
+            this.legendItem37,
+            this.legendItem38,
+            this.legendItem39,
+            this.legendItem40,
+            this.legendItem41,
+            this.legendItem42,
+            this.legendItem43,
+            this.legendItem44,
+            this.legendItem45,
+            this.legendItem46,
+            this.legendItem47,
+            this.legendItem48,
+            this.legendItem49,
+            this.legendItem50,
+            this.legendItem51,
+            this.legendItem52,
+            this.legendItem53,
+            this.legendItem109,
+            this.legendItem110,
+            this.legendItem111,
+            this.legendItem112,
+            this.legendItem113,
+            this.legendItem114,
+            this.legendItem115,
+            this.legendItem116,
+            this.legendItem117,
+            this.legendItem118,
+            this.legendItem119,
+            this.legendItem120});
             this.legend1.ItemSize = new System.Drawing.Size(24, 20);
-            this.legend1.Location = new System.Drawing.Point(212, 11);
+            this.legend1.Location = new System.Drawing.Point(129, 5);
             this.legend1.Name = "legend1";
             this.legend1.Size = new System.Drawing.Size(87, 169);
             this.legend1.TabIndex = 89;
+            this.legend1.ItemsChanged += new System.ComponentModel.CollectionChangeEventHandler(this.legend1_ItemsChanged);
             // 
             // legendItem11
             // 
@@ -1655,6 +2046,521 @@
             this.Grp1Plot7.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot7.YAxis = this.Grp1_yAxis1;
             // 
+            // legendItem30
+            // 
+            this.legendItem30.Source = this.Grp1Plot8;
+            this.legendItem30.Text = "-A1Zimg";
+            // 
+            // Grp1Plot8
+            // 
+            this.Grp1Plot8.LineColor = System.Drawing.Color.Orange;
+            this.Grp1Plot8.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot8.PointColor = System.Drawing.Color.Orange;
+            this.Grp1Plot8.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot8.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot8.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem31
+            // 
+            this.legendItem31.Source = this.Grp1Plot9;
+            this.legendItem31.Text = "-A1Zimg";
+            // 
+            // Grp1Plot9
+            // 
+            this.Grp1Plot9.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot9.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot9.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot9.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot9.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot9.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot9.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem32
+            // 
+            this.legendItem32.Source = this.Grp1Plot10;
+            this.legendItem32.Text = "-A2Zimg";
+            // 
+            // Grp1Plot10
+            // 
+            this.Grp1Plot10.LineColor = System.Drawing.Color.Green;
+            this.Grp1Plot10.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot10.PointColor = System.Drawing.Color.Green;
+            this.Grp1Plot10.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot10.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot10.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem33
+            // 
+            this.legendItem33.Source = this.Grp1Plot11;
+            this.legendItem33.Text = "-A2Zimg";
+            // 
+            // Grp1Plot11
+            // 
+            this.Grp1Plot11.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot11.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot11.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot11.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot11.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot11.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot11.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem34
+            // 
+            this.legendItem34.Source = this.Grp1Plot12;
+            this.legendItem34.Text = "-A3Zimg";
+            // 
+            // Grp1Plot12
+            // 
+            this.Grp1Plot12.LineColor = System.Drawing.Color.Magenta;
+            this.Grp1Plot12.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot12.PointColor = System.Drawing.Color.Magenta;
+            this.Grp1Plot12.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot12.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot12.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem35
+            // 
+            this.legendItem35.Source = this.Grp1Plot13;
+            this.legendItem35.Text = "-A3Zimg";
+            // 
+            // Grp1Plot13
+            // 
+            this.Grp1Plot13.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot13.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot13.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot13.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot13.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot13.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot13.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem36
+            // 
+            this.legendItem36.Source = this.Grp1Plot14;
+            this.legendItem36.Text = "-A4Zimg";
+            // 
+            // Grp1Plot14
+            // 
+            this.Grp1Plot14.LineColor = System.Drawing.Color.Cyan;
+            this.Grp1Plot14.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot14.PointColor = System.Drawing.Color.Cyan;
+            this.Grp1Plot14.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot14.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot14.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem37
+            // 
+            this.legendItem37.Source = this.Grp1Plot15;
+            this.legendItem37.Text = "-A4Zimg";
+            // 
+            // Grp1Plot15
+            // 
+            this.Grp1Plot15.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot15.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot15.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot15.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot15.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot15.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot15.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem38
+            // 
+            this.legendItem38.Source = this.Grp1Plot16;
+            this.legendItem38.Text = "-A5Zimg";
+            // 
+            // Grp1Plot16
+            // 
+            this.Grp1Plot16.LineColor = System.Drawing.Color.Teal;
+            this.Grp1Plot16.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot16.PointColor = System.Drawing.Color.Teal;
+            this.Grp1Plot16.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot16.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot16.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem39
+            // 
+            this.legendItem39.Source = this.Grp1Plot17;
+            this.legendItem39.Text = "-A5Zimg";
+            // 
+            // Grp1Plot17
+            // 
+            this.Grp1Plot17.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot17.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot17.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot17.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot17.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot17.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot17.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem40
+            // 
+            this.legendItem40.Source = this.Grp1Plot18;
+            this.legendItem40.Text = "-A6Zimg";
+            // 
+            // Grp1Plot18
+            // 
+            this.Grp1Plot18.LineColor = System.Drawing.Color.Brown;
+            this.Grp1Plot18.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot18.PointColor = System.Drawing.Color.Brown;
+            this.Grp1Plot18.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot18.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot18.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem41
+            // 
+            this.legendItem41.Source = this.Grp1Plot19;
+            this.legendItem41.Text = "-A6Zimg";
+            // 
+            // Grp1Plot19
+            // 
+            this.Grp1Plot19.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot19.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot19.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot19.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot19.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot19.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot19.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem42
+            // 
+            this.legendItem42.Source = this.Grp1Plot20;
+            this.legendItem42.Text = "-A7Zimg";
+            // 
+            // Grp1Plot20
+            // 
+            this.Grp1Plot20.LineColor = System.Drawing.Color.LimeGreen;
+            this.Grp1Plot20.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot20.PointColor = System.Drawing.Color.LimeGreen;
+            this.Grp1Plot20.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot20.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot20.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem43
+            // 
+            this.legendItem43.Source = this.Grp1Plot21;
+            this.legendItem43.Text = "-A7Zimg";
+            // 
+            // Grp1Plot21
+            // 
+            this.Grp1Plot21.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot21.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot21.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot21.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot21.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot21.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot21.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem44
+            // 
+            this.legendItem44.Source = this.Grp1Plot22;
+            this.legendItem44.Text = "-A8Zimg";
+            // 
+            // Grp1Plot22
+            // 
+            this.Grp1Plot22.LineColor = System.Drawing.Color.Gold;
+            this.Grp1Plot22.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot22.PointColor = System.Drawing.Color.Gold;
+            this.Grp1Plot22.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot22.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot22.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem45
+            // 
+            this.legendItem45.Source = this.Grp1Plot23;
+            this.legendItem45.Text = "-A8Zimg";
+            // 
+            // Grp1Plot23
+            // 
+            this.Grp1Plot23.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot23.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot23.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot23.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot23.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot23.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot23.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem46
+            // 
+            this.legendItem46.Source = this.Grp1Plot24;
+            this.legendItem46.Text = "-A9Zimg";
+            // 
+            // Grp1Plot24
+            // 
+            this.Grp1Plot24.LineColor = System.Drawing.Color.DeepPink;
+            this.Grp1Plot24.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot24.PointColor = System.Drawing.Color.DeepPink;
+            this.Grp1Plot24.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot24.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot24.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem47
+            // 
+            this.legendItem47.Source = this.Grp1Plot25;
+            this.legendItem47.Text = "-A9Zimg";
+            // 
+            // Grp1Plot25
+            // 
+            this.Grp1Plot25.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot25.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot25.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot25.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot25.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot25.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot25.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem48
+            // 
+            this.legendItem48.Source = this.Grp1Plot26;
+            this.legendItem48.Text = "-A10Zimg";
+            // 
+            // Grp1Plot26
+            // 
+            this.Grp1Plot26.LineColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp1Plot26.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot26.PointColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp1Plot26.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot26.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot26.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem49
+            // 
+            this.legendItem49.Source = this.Grp1Plot27;
+            this.legendItem49.Text = "-A10Zimg";
+            // 
+            // Grp1Plot27
+            // 
+            this.Grp1Plot27.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot27.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot27.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot27.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot27.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot27.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot27.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem50
+            // 
+            this.legendItem50.Source = this.Grp1Plot28;
+            this.legendItem50.Text = "-A11Zimg";
+            // 
+            // Grp1Plot28
+            // 
+            this.Grp1Plot28.LineColor = System.Drawing.Color.DarkViolet;
+            this.Grp1Plot28.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot28.PointColor = System.Drawing.Color.DarkViolet;
+            this.Grp1Plot28.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot28.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot28.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem51
+            // 
+            this.legendItem51.Source = this.Grp1Plot29;
+            this.legendItem51.Text = "-A11Zimg";
+            // 
+            // Grp1Plot29
+            // 
+            this.Grp1Plot29.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot29.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot29.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot29.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot29.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot29.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot29.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem52
+            // 
+            this.legendItem52.Source = this.Grp1Plot30;
+            this.legendItem52.Text = "-A12Zimg";
+            // 
+            // Grp1Plot30
+            // 
+            this.Grp1Plot30.LineColor = System.Drawing.Color.Black;
+            this.Grp1Plot30.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot30.PointColor = System.Drawing.Color.Black;
+            this.Grp1Plot30.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot30.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot30.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem53
+            // 
+            this.legendItem53.Source = this.Grp1Plot31;
+            this.legendItem53.Text = "-A12Zimg";
+            // 
+            // Grp1Plot31
+            // 
+            this.Grp1Plot31.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot31.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot31.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot31.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp1Plot31.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot31.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot31.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem109
+            // 
+            this.legendItem109.Source = this.Grp1Plot32;
+            this.legendItem109.Text = "Item31";
+            // 
+            // Grp1Plot32
+            // 
+            this.Grp1Plot32.LineColor = System.Drawing.Color.LightSkyBlue;
+            this.Grp1Plot32.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot32.PointColor = System.Drawing.Color.LightSkyBlue;
+            this.Grp1Plot32.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot32.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot32.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem110
+            // 
+            this.legendItem110.Source = this.Grp1Plot33;
+            this.legendItem110.Text = "Item32";
+            // 
+            // Grp1Plot33
+            // 
+            this.Grp1Plot33.LineColor = System.Drawing.Color.MediumPurple;
+            this.Grp1Plot33.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot33.PointColor = System.Drawing.Color.MediumPurple;
+            this.Grp1Plot33.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot33.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot33.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem111
+            // 
+            this.legendItem111.Source = this.Grp1Plot34;
+            this.legendItem111.Text = "Item33";
+            // 
+            // Grp1Plot34
+            // 
+            this.Grp1Plot34.LineToBaseColor = System.Drawing.Color.OliveDrab;
+            this.Grp1Plot34.PointColor = System.Drawing.Color.OliveDrab;
+            this.Grp1Plot34.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot34.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot34.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem112
+            // 
+            this.legendItem112.Source = this.Grp1Plot35;
+            this.legendItem112.Text = "Item34";
+            // 
+            // Grp1Plot35
+            // 
+            this.Grp1Plot35.LineColor = System.Drawing.Color.SaddleBrown;
+            this.Grp1Plot35.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot35.PointColor = System.Drawing.Color.SaddleBrown;
+            this.Grp1Plot35.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot35.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot35.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem113
+            // 
+            this.legendItem113.Source = this.Grp1Plot36;
+            this.legendItem113.Text = "Item35";
+            // 
+            // Grp1Plot36
+            // 
+            this.Grp1Plot36.LineColor = System.Drawing.Color.HotPink;
+            this.Grp1Plot36.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot36.PointColor = System.Drawing.Color.HotPink;
+            this.Grp1Plot36.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot36.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot36.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem114
+            // 
+            this.legendItem114.Source = this.Grp1Plot37;
+            this.legendItem114.Text = "Item36";
+            // 
+            // Grp1Plot37
+            // 
+            this.Grp1Plot37.LineColor = System.Drawing.Color.Lime;
+            this.Grp1Plot37.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot37.PointColor = System.Drawing.Color.Lime;
+            this.Grp1Plot37.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot37.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot37.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem115
+            // 
+            this.legendItem115.Source = this.Grp1Plot38;
+            this.legendItem115.Text = "Item37";
+            // 
+            // Grp1Plot38
+            // 
+            this.Grp1Plot38.LineColor = System.Drawing.Color.SteelBlue;
+            this.Grp1Plot38.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot38.PointColor = System.Drawing.Color.SteelBlue;
+            this.Grp1Plot38.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot38.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot38.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem116
+            // 
+            this.legendItem116.Source = this.Grp1Plot39;
+            this.legendItem116.Text = "Item38";
+            // 
+            // Grp1Plot39
+            // 
+            this.Grp1Plot39.LineColor = System.Drawing.Color.SlateBlue;
+            this.Grp1Plot39.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot39.PointColor = System.Drawing.Color.SlateBlue;
+            this.Grp1Plot39.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot39.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot39.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem117
+            // 
+            this.legendItem117.Source = this.Grp1Plot40;
+            this.legendItem117.Text = "Item39";
+            // 
+            // Grp1Plot40
+            // 
+            this.Grp1Plot40.LineColor = System.Drawing.Color.DarkCyan;
+            this.Grp1Plot40.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot40.PointColor = System.Drawing.Color.DarkCyan;
+            this.Grp1Plot40.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot40.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot40.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem118
+            // 
+            this.legendItem118.Source = this.Grp1Plot41;
+            this.legendItem118.Text = "Item40";
+            // 
+            // Grp1Plot41
+            // 
+            this.Grp1Plot41.LineColor = System.Drawing.Color.DarkOrange;
+            this.Grp1Plot41.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot41.PointColor = System.Drawing.Color.DarkOrange;
+            this.Grp1Plot41.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot41.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot41.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem119
+            // 
+            this.legendItem119.Source = this.Grp1Plot42;
+            this.legendItem119.Text = "Item41";
+            // 
+            // Grp1Plot42
+            // 
+            this.Grp1Plot42.LineColor = System.Drawing.Color.Coral;
+            this.Grp1Plot42.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot42.PointColor = System.Drawing.Color.Coral;
+            this.Grp1Plot42.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot42.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot42.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem120
+            // 
+            this.legendItem120.Source = this.Grp1Plot43;
+            this.legendItem120.Text = "Item42";
+            // 
+            // Grp1Plot43
+            // 
+            this.Grp1Plot43.LineColor = System.Drawing.Color.Gray;
+            this.Grp1Plot43.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot43.PointColor = System.Drawing.Color.Gray;
+            this.Grp1Plot43.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp1Plot43.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot43.YAxis = this.Grp1_yAxis1;
+            // 
             // grp1
             // 
             this.grp1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1675,8 +2581,44 @@
             this.Grp1Plot3,
             this.Grp1Plot4,
             this.Grp1Plot5,
-            this.Grp1Plot6});
-            this.grp1.Size = new System.Drawing.Size(294, 199);
+            this.Grp1Plot6,
+            this.Grp1Plot8,
+            this.Grp1Plot9,
+            this.Grp1Plot10,
+            this.Grp1Plot11,
+            this.Grp1Plot12,
+            this.Grp1Plot13,
+            this.Grp1Plot14,
+            this.Grp1Plot15,
+            this.Grp1Plot16,
+            this.Grp1Plot17,
+            this.Grp1Plot18,
+            this.Grp1Plot19,
+            this.Grp1Plot20,
+            this.Grp1Plot21,
+            this.Grp1Plot22,
+            this.Grp1Plot23,
+            this.Grp1Plot24,
+            this.Grp1Plot25,
+            this.Grp1Plot26,
+            this.Grp1Plot27,
+            this.Grp1Plot28,
+            this.Grp1Plot29,
+            this.Grp1Plot30,
+            this.Grp1Plot31,
+            this.Grp1Plot32,
+            this.Grp1Plot33,
+            this.Grp1Plot34,
+            this.Grp1Plot35,
+            this.Grp1Plot36,
+            this.Grp1Plot37,
+            this.Grp1Plot38,
+            this.Grp1Plot39,
+            this.Grp1Plot40,
+            this.Grp1Plot41,
+            this.Grp1Plot42,
+            this.Grp1Plot43});
+            this.grp1.Size = new System.Drawing.Size(211, 333);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1695,17 +2637,66 @@
             // 
             this.xyCursor2.Plot = this.Grp1Plot1;
             // 
+            // checkedListBox
+            // 
+            this.checkedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox.FormattingEnabled = true;
+            this.checkedListBox.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1",
+            "AUX2",
+            "AUX3",
+            "AUX4",
+            "AUX5",
+            "AUX6",
+            "AUX7",
+            "AUX8",
+            "AUX9",
+            "AUX10",
+            "AUX11",
+            "AUX12"});
+            this.checkedListBox.Location = new System.Drawing.Point(217, 4);
+            this.checkedListBox.Name = "checkedListBox";
+            this.checkedListBox.Size = new System.Drawing.Size(87, 344);
+            this.checkedListBox.TabIndex = 117;
+            // 
             // TabGrp2
             // 
+            this.TabGrp2.Controls.Add(this.checkedListBox1);
             this.TabGrp2.Controls.Add(this.lblcsfreq2);
             this.TabGrp2.Controls.Add(this.legend2);
             this.TabGrp2.Controls.Add(this.grp2);
             this.TabGrp2.Location = new System.Drawing.Point(4, 23);
             this.TabGrp2.Name = "TabGrp2";
-            this.TabGrp2.Size = new System.Drawing.Size(304, 206);
+            this.TabGrp2.Size = new System.Drawing.Size(304, 343);
             this.TabGrp2.TabIndex = 2;
             this.TabGrp2.Text = "tabPage3";
             this.TabGrp2.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1",
+            "AUX2",
+            "AUX3",
+            "AUX4",
+            "AUX5",
+            "AUX6",
+            "AUX7",
+            "AUX8",
+            "AUX9",
+            "AUX10",
+            "AUX11",
+            "AUX12"});
+            this.checkedListBox1.Location = new System.Drawing.Point(217, 4);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(87, 344);
+            this.checkedListBox1.TabIndex = 118;
             // 
             // lblcsfreq2
             // 
@@ -1728,9 +2719,57 @@
             this.legendItem25,
             this.legendItem26,
             this.legendItem27,
-            this.legendItem28});
+            this.legendItem28,
+            this.legendItem60,
+            this.legendItem61,
+            this.legendItem62,
+            this.legendItem63,
+            this.legendItem64,
+            this.legendItem65,
+            this.legendItem66,
+            this.legendItem67,
+            this.legendItem68,
+            this.legendItem69,
+            this.legendItem70,
+            this.legendItem71,
+            this.legendItem72,
+            this.legendItem73,
+            this.legendItem74,
+            this.legendItem75,
+            this.legendItem76,
+            this.legendItem77,
+            this.legendItem78,
+            this.legendItem79,
+            this.legendItem80,
+            this.legendItem81,
+            this.legendItem82,
+            this.legendItem83,
+            this.legendItem84,
+            this.legendItem85,
+            this.legendItem86,
+            this.legendItem87,
+            this.legendItem88,
+            this.legendItem89,
+            this.legendItem90,
+            this.legendItem91,
+            this.legendItem92,
+            this.legendItem93,
+            this.legendItem94,
+            this.legendItem95,
+            this.legendItem96,
+            this.legendItem97,
+            this.legendItem98,
+            this.legendItem99,
+            this.legendItem100,
+            this.legendItem101,
+            this.legendItem102,
+            this.legendItem103,
+            this.legendItem104,
+            this.legendItem105,
+            this.legendItem106,
+            this.legendItem107});
             this.legend2.ItemSize = new System.Drawing.Size(24, 20);
-            this.legend2.Location = new System.Drawing.Point(207, 8);
+            this.legend2.Location = new System.Drawing.Point(129, 2);
             this.legend2.Name = "legend2";
             this.legend2.Size = new System.Drawing.Size(82, 183);
             this.legend2.TabIndex = 90;
@@ -1742,6 +2781,8 @@
             // 
             // Grp2Plot1
             // 
+            this.Grp2Plot1.LineColor = System.Drawing.Color.Blue;
+            this.Grp2Plot1.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.Grp2Plot1.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot1.YAxis = this.Grp2_yAxis1;
             // 
@@ -1752,6 +2793,8 @@
             // 
             // Grp2Plot2
             // 
+            this.Grp2Plot2.LineColor = System.Drawing.Color.Cyan;
+            this.Grp2Plot2.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.Grp2Plot2.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot2.YAxis = this.Grp2_yAxis1;
             // 
@@ -1762,6 +2805,8 @@
             // 
             // Grp2Plot3
             // 
+            this.Grp2Plot3.LineColor = System.Drawing.Color.Yellow;
+            this.Grp2Plot3.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.Grp2Plot3.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot3.YAxis = this.Grp2_yAxis1;
             // 
@@ -1772,6 +2817,8 @@
             // 
             // Grp2Plot4
             // 
+            this.Grp2Plot4.LineColor = System.Drawing.Color.Fuchsia;
+            this.Grp2Plot4.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.Grp2Plot4.PointColor = System.Drawing.Color.Fuchsia;
             this.Grp2Plot4.XAxis = this.Grp2_xAxis1;
             this.Grp2Plot4.YAxis = this.Grp2_yAxis2;
@@ -1837,7 +2884,727 @@
             this.Grp2Plot8.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
             this.Grp2Plot8.ProcessSpecialValues = true;
             this.Grp2Plot8.XAxis = this.Grp2_xAxis1;
-            this.Grp2Plot8.YAxis = this.Grp2_yAxis2;
+            this.Grp2Plot8.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem60
+            // 
+            this.legendItem60.Source = this.Grp2Plot9;
+            this.legendItem60.Text = "A1Zmag";
+            // 
+            // Grp2Plot9
+            // 
+            this.Grp2Plot9.LineColor = System.Drawing.Color.Orange;
+            this.Grp2Plot9.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot9.PointColor = System.Drawing.Color.Orange;
+            this.Grp2Plot9.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot9.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot9.YAxis = this.Grp2_yAxis2;
+            // 
+            // legendItem61
+            // 
+            this.legendItem61.Source = this.Grp2Plot10;
+            this.legendItem61.Text = "A1Zphase";
+            // 
+            // Grp2Plot10
+            // 
+            this.Grp2Plot10.LineColor = System.Drawing.Color.LightSkyBlue;
+            this.Grp2Plot10.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot10.PointColor = System.Drawing.Color.LightSkyBlue;
+            this.Grp2Plot10.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot10.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot10.YAxis = this.Grp2_yAxis2;
+            // 
+            // legendItem62
+            // 
+            this.legendItem62.Source = this.Grp2Plot11;
+            this.legendItem62.Text = "A1Zmag";
+            // 
+            // Grp2Plot11
+            // 
+            this.Grp2Plot11.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot11.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot11.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot11.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot11.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot11.ProcessSpecialValues = true;
+            this.Grp2Plot11.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot11.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem63
+            // 
+            this.legendItem63.Source = this.Grp2Plot12;
+            this.legendItem63.Text = "A1Zphase";
+            // 
+            // Grp2Plot12
+            // 
+            this.Grp2Plot12.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot12.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot12.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot12.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot12.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot12.ProcessSpecialValues = true;
+            this.Grp2Plot12.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot12.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem64
+            // 
+            this.legendItem64.Source = this.Grp2Plot13;
+            this.legendItem64.Text = "A2Zmag";
+            // 
+            // Grp2Plot13
+            // 
+            this.Grp2Plot13.LineColor = System.Drawing.Color.Green;
+            this.Grp2Plot13.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot13.PointColor = System.Drawing.Color.Green;
+            this.Grp2Plot13.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot13.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot13.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem65
+            // 
+            this.legendItem65.Source = this.Grp2Plot14;
+            this.legendItem65.Text = "A2Zphase";
+            // 
+            // Grp2Plot14
+            // 
+            this.Grp2Plot14.LineColor = System.Drawing.Color.MediumPurple;
+            this.Grp2Plot14.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot14.PointColor = System.Drawing.Color.MediumPurple;
+            this.Grp2Plot14.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot14.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot14.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem66
+            // 
+            this.legendItem66.Source = this.Grp2Plot15;
+            this.legendItem66.Text = "A2Zmag";
+            // 
+            // Grp2Plot15
+            // 
+            this.Grp2Plot15.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot15.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot15.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot15.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot15.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot15.ProcessSpecialValues = true;
+            this.Grp2Plot15.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot15.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem67
+            // 
+            this.legendItem67.Source = this.Grp2Plot16;
+            this.legendItem67.Text = "A2Zphase";
+            // 
+            // Grp2Plot16
+            // 
+            this.Grp2Plot16.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot16.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot16.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot16.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot16.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot16.ProcessSpecialValues = true;
+            this.Grp2Plot16.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot16.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem68
+            // 
+            this.legendItem68.Source = this.Grp2Plot17;
+            this.legendItem68.Text = "A3Zmag";
+            // 
+            // Grp2Plot17
+            // 
+            this.Grp2Plot17.LineColor = System.Drawing.Color.Magenta;
+            this.Grp2Plot17.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot17.PointColor = System.Drawing.Color.Magenta;
+            this.Grp2Plot17.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot17.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot17.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem69
+            // 
+            this.legendItem69.Source = this.Grp2Plot18;
+            this.legendItem69.Text = "A3Zphase";
+            // 
+            // Grp2Plot18
+            // 
+            this.Grp2Plot18.LineColor = System.Drawing.Color.OliveDrab;
+            this.Grp2Plot18.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot18.PointColor = System.Drawing.Color.OliveDrab;
+            this.Grp2Plot18.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot18.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot18.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem70
+            // 
+            this.legendItem70.Source = this.Grp2Plot19;
+            this.legendItem70.Text = "A3Zmag";
+            // 
+            // Grp2Plot19
+            // 
+            this.Grp2Plot19.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot19.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot19.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot19.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot19.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot19.ProcessSpecialValues = true;
+            this.Grp2Plot19.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot19.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem71
+            // 
+            this.legendItem71.Source = this.Grp2Plot20;
+            this.legendItem71.Text = "A3Zphase";
+            // 
+            // Grp2Plot20
+            // 
+            this.Grp2Plot20.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot20.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot20.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot20.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot20.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot20.ProcessSpecialValues = true;
+            this.Grp2Plot20.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot20.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem72
+            // 
+            this.legendItem72.Source = this.Grp2Plot21;
+            this.legendItem72.Text = "A4Zmag";
+            // 
+            // Grp2Plot21
+            // 
+            this.Grp2Plot21.LineColor = System.Drawing.Color.Cyan;
+            this.Grp2Plot21.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot21.PointColor = System.Drawing.Color.Cyan;
+            this.Grp2Plot21.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot21.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot21.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem73
+            // 
+            this.legendItem73.Source = this.Grp2Plot22;
+            this.legendItem73.Text = "A4Zphase";
+            // 
+            // Grp2Plot22
+            // 
+            this.Grp2Plot22.LineColor = System.Drawing.Color.SaddleBrown;
+            this.Grp2Plot22.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot22.PointColor = System.Drawing.Color.SaddleBrown;
+            this.Grp2Plot22.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot22.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot22.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem74
+            // 
+            this.legendItem74.Source = this.Grp2Plot23;
+            this.legendItem74.Text = "A4Zmag";
+            // 
+            // Grp2Plot23
+            // 
+            this.Grp2Plot23.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot23.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot23.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot23.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot23.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot23.ProcessSpecialValues = true;
+            this.Grp2Plot23.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot23.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem75
+            // 
+            this.legendItem75.Source = this.Grp2Plot24;
+            this.legendItem75.Text = "A4Zphase";
+            // 
+            // Grp2Plot24
+            // 
+            this.Grp2Plot24.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot24.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot24.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot24.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot24.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot24.ProcessSpecialValues = true;
+            this.Grp2Plot24.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot24.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem76
+            // 
+            this.legendItem76.Source = this.Grp2Plot25;
+            this.legendItem76.Text = "A5Zmag";
+            // 
+            // Grp2Plot25
+            // 
+            this.Grp2Plot25.LineColor = System.Drawing.Color.Teal;
+            this.Grp2Plot25.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot25.PointColor = System.Drawing.Color.Teal;
+            this.Grp2Plot25.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot25.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot25.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem77
+            // 
+            this.legendItem77.Source = this.Grp2Plot26;
+            this.legendItem77.Text = "A5Zphase";
+            // 
+            // Grp2Plot26
+            // 
+            this.Grp2Plot26.LineColor = System.Drawing.Color.HotPink;
+            this.Grp2Plot26.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot26.PointColor = System.Drawing.Color.HotPink;
+            this.Grp2Plot26.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot26.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot26.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem78
+            // 
+            this.legendItem78.Source = this.Grp2Plot27;
+            this.legendItem78.Text = "A5Zmag";
+            // 
+            // Grp2Plot27
+            // 
+            this.Grp2Plot27.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot27.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot27.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot27.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot27.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot27.ProcessSpecialValues = true;
+            this.Grp2Plot27.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot27.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem79
+            // 
+            this.legendItem79.Source = this.Grp2Plot28;
+            this.legendItem79.Text = "A5Zphase";
+            // 
+            // Grp2Plot28
+            // 
+            this.Grp2Plot28.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot28.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot28.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot28.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot28.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot28.ProcessSpecialValues = true;
+            this.Grp2Plot28.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot28.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem80
+            // 
+            this.legendItem80.Source = this.Grp2Plot29;
+            this.legendItem80.Text = "A6Zmag";
+            // 
+            // Grp2Plot29
+            // 
+            this.Grp2Plot29.LineColor = System.Drawing.Color.Brown;
+            this.Grp2Plot29.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot29.PointColor = System.Drawing.Color.Brown;
+            this.Grp2Plot29.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot29.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot29.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem81
+            // 
+            this.legendItem81.Source = this.Grp2Plot30;
+            this.legendItem81.Text = "A6Zphase";
+            // 
+            // Grp2Plot30
+            // 
+            this.Grp2Plot30.LineColor = System.Drawing.Color.Lime;
+            this.Grp2Plot30.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot30.PointColor = System.Drawing.Color.Lime;
+            this.Grp2Plot30.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot30.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot30.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem82
+            // 
+            this.legendItem82.Source = this.Grp2Plot31;
+            this.legendItem82.Text = "A6Zmag";
+            // 
+            // Grp2Plot31
+            // 
+            this.Grp2Plot31.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot31.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot31.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot31.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot31.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot31.ProcessSpecialValues = true;
+            this.Grp2Plot31.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot31.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem83
+            // 
+            this.legendItem83.Source = this.Grp2Plot32;
+            this.legendItem83.Text = "A6Zphase";
+            // 
+            // Grp2Plot32
+            // 
+            this.Grp2Plot32.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot32.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot32.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot32.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot32.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot32.ProcessSpecialValues = true;
+            this.Grp2Plot32.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot32.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem84
+            // 
+            this.legendItem84.Source = this.Grp2Plot33;
+            this.legendItem84.Text = "A7Zmag";
+            // 
+            // Grp2Plot33
+            // 
+            this.Grp2Plot33.LineColor = System.Drawing.Color.LimeGreen;
+            this.Grp2Plot33.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot33.PointColor = System.Drawing.Color.LimeGreen;
+            this.Grp2Plot33.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot33.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot33.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem85
+            // 
+            this.legendItem85.Source = this.Grp2Plot34;
+            this.legendItem85.Text = "A7Zphase";
+            // 
+            // Grp2Plot34
+            // 
+            this.Grp2Plot34.LineColor = System.Drawing.Color.SteelBlue;
+            this.Grp2Plot34.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot34.PointColor = System.Drawing.Color.SteelBlue;
+            this.Grp2Plot34.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot34.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot34.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem86
+            // 
+            this.legendItem86.Source = this.Grp2Plot35;
+            this.legendItem86.Text = "A7Zmag";
+            // 
+            // Grp2Plot35
+            // 
+            this.Grp2Plot35.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot35.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot35.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot35.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot35.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot35.ProcessSpecialValues = true;
+            this.Grp2Plot35.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot35.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem87
+            // 
+            this.legendItem87.Source = this.Grp2Plot36;
+            this.legendItem87.Text = "A7Zphase";
+            // 
+            // Grp2Plot36
+            // 
+            this.Grp2Plot36.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot36.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot36.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot36.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot36.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot36.ProcessSpecialValues = true;
+            this.Grp2Plot36.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot36.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem88
+            // 
+            this.legendItem88.Source = this.Grp2Plot37;
+            this.legendItem88.Text = "A8Zmag";
+            // 
+            // Grp2Plot37
+            // 
+            this.Grp2Plot37.LineColor = System.Drawing.Color.Gold;
+            this.Grp2Plot37.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot37.PointColor = System.Drawing.Color.Gold;
+            this.Grp2Plot37.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot37.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot37.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem89
+            // 
+            this.legendItem89.Source = this.Grp2Plot38;
+            this.legendItem89.Text = "A8Zphase";
+            // 
+            // Grp2Plot38
+            // 
+            this.Grp2Plot38.LineColor = System.Drawing.Color.SlateBlue;
+            this.Grp2Plot38.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot38.PointColor = System.Drawing.Color.SlateBlue;
+            this.Grp2Plot38.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot38.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot38.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem90
+            // 
+            this.legendItem90.Source = this.Grp2Plot39;
+            this.legendItem90.Text = "A8Zmag";
+            // 
+            // Grp2Plot39
+            // 
+            this.Grp2Plot39.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot39.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot39.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot39.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot39.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot39.ProcessSpecialValues = true;
+            this.Grp2Plot39.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot39.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem91
+            // 
+            this.legendItem91.Source = this.Grp2Plot40;
+            this.legendItem91.Text = "A8Zphase";
+            // 
+            // Grp2Plot40
+            // 
+            this.Grp2Plot40.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot40.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot40.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot40.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot40.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot40.ProcessSpecialValues = true;
+            this.Grp2Plot40.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot40.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem92
+            // 
+            this.legendItem92.Source = this.Grp2Plot41;
+            this.legendItem92.Text = "A9Zmag";
+            // 
+            // Grp2Plot41
+            // 
+            this.Grp2Plot41.LineColor = System.Drawing.Color.DeepPink;
+            this.Grp2Plot41.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot41.PointColor = System.Drawing.Color.DeepPink;
+            this.Grp2Plot41.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot41.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot41.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem93
+            // 
+            this.legendItem93.Source = this.Grp2Plot42;
+            this.legendItem93.Text = "A9Zphase";
+            // 
+            // Grp2Plot42
+            // 
+            this.Grp2Plot42.LineColor = System.Drawing.Color.DarkCyan;
+            this.Grp2Plot42.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot42.PointColor = System.Drawing.Color.DarkCyan;
+            this.Grp2Plot42.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot42.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot42.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem94
+            // 
+            this.legendItem94.Source = this.Grp2Plot43;
+            this.legendItem94.Text = "A9Zmag";
+            // 
+            // Grp2Plot43
+            // 
+            this.Grp2Plot43.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot43.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot43.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot43.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot43.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot43.ProcessSpecialValues = true;
+            this.Grp2Plot43.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot43.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem95
+            // 
+            this.legendItem95.Source = this.Grp2Plot44;
+            this.legendItem95.Text = "A9Zphase";
+            // 
+            // Grp2Plot44
+            // 
+            this.Grp2Plot44.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot44.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot44.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot44.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot44.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot44.ProcessSpecialValues = true;
+            this.Grp2Plot44.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot44.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem96
+            // 
+            this.legendItem96.Source = this.Grp2Plot45;
+            this.legendItem96.Text = "A10Zmag";
+            // 
+            // Grp2Plot45
+            // 
+            this.Grp2Plot45.LineColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp2Plot45.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot45.PointColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp2Plot45.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot45.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot45.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem97
+            // 
+            this.legendItem97.Source = this.Grp2Plot46;
+            this.legendItem97.Text = "A10Zphase";
+            // 
+            // Grp2Plot46
+            // 
+            this.Grp2Plot46.LineColor = System.Drawing.Color.DarkOrange;
+            this.Grp2Plot46.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot46.PointColor = System.Drawing.Color.DarkOrange;
+            this.Grp2Plot46.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot46.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot46.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem98
+            // 
+            this.legendItem98.Source = this.Grp2Plot47;
+            this.legendItem98.Text = "A10Zmag";
+            // 
+            // Grp2Plot47
+            // 
+            this.Grp2Plot47.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot47.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot47.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot47.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot47.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot47.ProcessSpecialValues = true;
+            this.Grp2Plot47.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot47.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem99
+            // 
+            this.legendItem99.Source = this.Grp2Plot48;
+            this.legendItem99.Text = "A10Zphase";
+            // 
+            // Grp2Plot48
+            // 
+            this.Grp2Plot48.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot48.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot48.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot48.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot48.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot48.ProcessSpecialValues = true;
+            this.Grp2Plot48.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot48.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem100
+            // 
+            this.legendItem100.Source = this.Grp2Plot49;
+            this.legendItem100.Text = "A11Zmag";
+            // 
+            // Grp2Plot49
+            // 
+            this.Grp2Plot49.LineColor = System.Drawing.Color.DarkViolet;
+            this.Grp2Plot49.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot49.PointColor = System.Drawing.Color.DarkViolet;
+            this.Grp2Plot49.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot49.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot49.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem101
+            // 
+            this.legendItem101.Source = this.Grp2Plot50;
+            this.legendItem101.Text = "A11Zphase";
+            // 
+            // Grp2Plot50
+            // 
+            this.Grp2Plot50.LineColor = System.Drawing.Color.Coral;
+            this.Grp2Plot50.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot50.PointColor = System.Drawing.Color.Coral;
+            this.Grp2Plot50.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot50.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot50.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem102
+            // 
+            this.legendItem102.Source = this.Grp2Plot51;
+            this.legendItem102.Text = "A11Zmag";
+            // 
+            // Grp2Plot51
+            // 
+            this.Grp2Plot51.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot51.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot51.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot51.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot51.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot51.ProcessSpecialValues = true;
+            this.Grp2Plot51.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot51.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem103
+            // 
+            this.legendItem103.Source = this.Grp2Plot52;
+            this.legendItem103.Text = "A11Zphase";
+            // 
+            // Grp2Plot52
+            // 
+            this.Grp2Plot52.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot52.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot52.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot52.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot52.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot52.ProcessSpecialValues = true;
+            this.Grp2Plot52.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot52.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem104
+            // 
+            this.legendItem104.Source = this.Grp2Plot53;
+            this.legendItem104.Text = "A12Zmag";
+            // 
+            // Grp2Plot53
+            // 
+            this.Grp2Plot53.LineColor = System.Drawing.Color.Black;
+            this.Grp2Plot53.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot53.PointColor = System.Drawing.Color.Black;
+            this.Grp2Plot53.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot53.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot53.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem105
+            // 
+            this.legendItem105.Source = this.Grp2Plot54;
+            this.legendItem105.Text = "A12Zphase";
+            // 
+            // Grp2Plot54
+            // 
+            this.Grp2Plot54.LineColor = System.Drawing.Color.Gray;
+            this.Grp2Plot54.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot54.PointColor = System.Drawing.Color.Gray;
+            this.Grp2Plot54.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot54.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot54.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem106
+            // 
+            this.legendItem106.Source = this.Grp2Plot55;
+            this.legendItem106.Text = "A12Zmag";
+            // 
+            // Grp2Plot55
+            // 
+            this.Grp2Plot55.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot55.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot55.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot55.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot55.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot55.ProcessSpecialValues = true;
+            this.Grp2Plot55.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot55.YAxis = this.Grp2_yAxis1;
+            // 
+            // legendItem107
+            // 
+            this.legendItem107.Source = this.Grp2Plot56;
+            this.legendItem107.Text = "A12Zphase";
+            // 
+            // Grp2Plot56
+            // 
+            this.Grp2Plot56.LineColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot56.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot56.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot56.PointColor = System.Drawing.Color.DarkGray;
+            this.Grp2Plot56.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            this.Grp2Plot56.ProcessSpecialValues = true;
+            this.Grp2Plot56.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot56.YAxis = this.Grp2_yAxis1;
             // 
             // grp2
             // 
@@ -1860,8 +3627,56 @@
             this.Grp2Plot3,
             this.Grp2Plot4,
             this.Grp2Plot5,
-            this.Grp2Plot6});
-            this.grp2.Size = new System.Drawing.Size(297, 199);
+            this.Grp2Plot6,
+            this.Grp2Plot9,
+            this.Grp2Plot10,
+            this.Grp2Plot11,
+            this.Grp2Plot12,
+            this.Grp2Plot13,
+            this.Grp2Plot14,
+            this.Grp2Plot15,
+            this.Grp2Plot16,
+            this.Grp2Plot17,
+            this.Grp2Plot18,
+            this.Grp2Plot19,
+            this.Grp2Plot20,
+            this.Grp2Plot21,
+            this.Grp2Plot22,
+            this.Grp2Plot23,
+            this.Grp2Plot24,
+            this.Grp2Plot25,
+            this.Grp2Plot26,
+            this.Grp2Plot27,
+            this.Grp2Plot28,
+            this.Grp2Plot29,
+            this.Grp2Plot30,
+            this.Grp2Plot31,
+            this.Grp2Plot32,
+            this.Grp2Plot33,
+            this.Grp2Plot34,
+            this.Grp2Plot35,
+            this.Grp2Plot36,
+            this.Grp2Plot37,
+            this.Grp2Plot38,
+            this.Grp2Plot39,
+            this.Grp2Plot40,
+            this.Grp2Plot41,
+            this.Grp2Plot42,
+            this.Grp2Plot43,
+            this.Grp2Plot44,
+            this.Grp2Plot45,
+            this.Grp2Plot46,
+            this.Grp2Plot47,
+            this.Grp2Plot48,
+            this.Grp2Plot49,
+            this.Grp2Plot50,
+            this.Grp2Plot51,
+            this.Grp2Plot52,
+            this.Grp2Plot53,
+            this.Grp2Plot54,
+            this.Grp2Plot55,
+            this.Grp2Plot56});
+            this.grp2.Size = new System.Drawing.Size(211, 333);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
             this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1883,7 +3698,7 @@
             this.TabGrpRaw.Controls.Add(this.grprt);
             this.TabGrpRaw.Location = new System.Drawing.Point(4, 23);
             this.TabGrpRaw.Name = "TabGrpRaw";
-            this.TabGrpRaw.Size = new System.Drawing.Size(304, 206);
+            this.TabGrpRaw.Size = new System.Drawing.Size(304, 343);
             this.TabGrpRaw.TabIndex = 3;
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
@@ -1894,9 +3709,21 @@
             this.Rtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.RtlegendItem1,
-            this.RtlegendItem2});
+            this.RtlegendItem2,
+            this.RtlegendItem3,
+            this.RtlegendItem4,
+            this.RtlegendItem5,
+            this.RtlegendItem6,
+            this.RtlegendItem7,
+            this.RtlegendItem8,
+            this.RtlegendItem9,
+            this.RtlegendItem10,
+            this.RtlegendItem11,
+            this.RtlegendItem12,
+            this.RtlegendItem13,
+            this.RtlegendItem14});
             this.Rtlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Rtlegend.Location = new System.Drawing.Point(197, 16);
+            this.Rtlegend.Location = new System.Drawing.Point(219, 5);
             this.Rtlegend.Name = "Rtlegend";
             this.Rtlegend.Size = new System.Drawing.Size(82, 54);
             this.Rtlegend.TabIndex = 111;
@@ -1955,13 +3782,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grprt.ContextMenuStrip = this.RtMenuStrip;
-            this.grprt.Location = new System.Drawing.Point(4, 5);
+            this.grprt.Location = new System.Drawing.Point(4, 4);
             this.grprt.Name = "grprt";
             this.grprt.PlotAreaColor = System.Drawing.Color.White;
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.RTPlot1,
-            this.RTPlot2});
-            this.grprt.Size = new System.Drawing.Size(295, 197);
+            this.RTPlot2,
+            this.RTPlot3,
+            this.RTPlot4,
+            this.RTPlot5,
+            this.RTPlot6,
+            this.RTPlot7,
+            this.RTPlot8,
+            this.RTPlot9,
+            this.RTPlot10,
+            this.RTPlot11,
+            this.RTPlot12,
+            this.RTPlot13,
+            this.RTPlot14});
+            this.grprt.Size = new System.Drawing.Size(297, 333);
             this.grprt.TabIndex = 109;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1970,6 +3809,295 @@
             this.RTyAxis1,
             this.RTyAxis2});
             this.grprt.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grprt_MouseDoubleClick);
+            // 
+            // RTPlot3
+            // 
+            this.RTPlot3.XAxis = this.RTxAxis1;
+            this.RTPlot3.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot4
+            // 
+            this.RTPlot4.XAxis = this.RTxAxis1;
+            this.RTPlot4.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot5
+            // 
+            this.RTPlot5.XAxis = this.RTxAxis1;
+            this.RTPlot5.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot6
+            // 
+            this.RTPlot6.XAxis = this.RTxAxis1;
+            this.RTPlot6.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot7
+            // 
+            this.RTPlot7.XAxis = this.RTxAxis1;
+            this.RTPlot7.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot8
+            // 
+            this.RTPlot8.XAxis = this.RTxAxis1;
+            this.RTPlot8.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot9
+            // 
+            this.RTPlot9.XAxis = this.RTxAxis1;
+            this.RTPlot9.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot10
+            // 
+            this.RTPlot10.XAxis = this.RTxAxis1;
+            this.RTPlot10.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot11
+            // 
+            this.RTPlot11.XAxis = this.RTxAxis1;
+            this.RTPlot11.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot12
+            // 
+            this.RTPlot12.XAxis = this.RTxAxis1;
+            this.RTPlot12.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot13
+            // 
+            this.RTPlot13.XAxis = this.RTxAxis1;
+            this.RTPlot13.YAxis = this.RTyAxis1;
+            // 
+            // RTPlot14
+            // 
+            this.RTPlot14.XAxis = this.RTxAxis1;
+            this.RTPlot14.YAxis = this.RTyAxis1;
+            // 
+            // Raw_DataPage
+            // 
+            this.Raw_DataPage.Controls.Add(this.rawgrpListBox);
+            this.Raw_DataPage.Controls.Add(this.AuxDataView1);
+            this.Raw_DataPage.Controls.Add(this.rawgrp);
+            this.Raw_DataPage.Controls.Add(this.RawRead);
+            this.Raw_DataPage.Location = new System.Drawing.Point(4, 23);
+            this.Raw_DataPage.Name = "Raw_DataPage";
+            this.Raw_DataPage.Padding = new System.Windows.Forms.Padding(3);
+            this.Raw_DataPage.Size = new System.Drawing.Size(304, 343);
+            this.Raw_DataPage.TabIndex = 4;
+            this.Raw_DataPage.Text = "Raw Data";
+            this.Raw_DataPage.UseVisualStyleBackColor = true;
+            // 
+            // rawgrpListBox
+            // 
+            this.rawgrpListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rawgrpListBox.FormattingEnabled = true;
+            this.rawgrpListBox.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1",
+            "AUX2",
+            "AUX3",
+            "AUX4",
+            "AUX5",
+            "AUX6",
+            "AUX7",
+            "AUX8",
+            "AUX9",
+            "AUX10",
+            "AUX11",
+            "AUX12"});
+            this.rawgrpListBox.Location = new System.Drawing.Point(217, 27);
+            this.rawgrpListBox.Name = "rawgrpListBox";
+            this.rawgrpListBox.Size = new System.Drawing.Size(87, 310);
+            this.rawgrpListBox.TabIndex = 120;
+            // 
+            // AuxDataView1
+            // 
+            this.AuxDataView1.AllowUserToDeleteRows = false;
+            this.AuxDataView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AuxDataView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13});
+            this.AuxDataView1.Location = new System.Drawing.Point(6, 3);
+            this.AuxDataView1.Name = "AuxDataView1";
+            this.AuxDataView1.ReadOnly = true;
+            this.AuxDataView1.RowTemplate.Height = 23;
+            this.AuxDataView1.Size = new System.Drawing.Size(22, 50);
+            this.AuxDataView1.TabIndex = 117;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.dataGridViewTextBoxColumn12.Width = 64;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Width = 64;
+            // 
+            // rawgrp
+            // 
+            this.rawgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rawgrp.ContextMenuStrip = this.RtMenuStrip;
+            this.rawgrp.Location = new System.Drawing.Point(5, 4);
+            this.rawgrp.Name = "rawgrp";
+            this.rawgrp.PlotAreaColor = System.Drawing.Color.White;
+            this.rawgrp.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.scatterPlot1,
+            this.scatterPlot2});
+            this.rawgrp.Size = new System.Drawing.Size(211, 333);
+            this.rawgrp.TabIndex = 110;
+            this.rawgrp.UseColorGenerator = true;
+            this.rawgrp.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis1});
+            this.rawgrp.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis1,
+            this.yAxis2});
+            this.rawgrp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseDoubleClick);
+            this.rawgrp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseDown);
+            this.rawgrp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseMove);
+            this.rawgrp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseUp);
+            this.rawgrp.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseWheel);
+            // 
+            // scatterPlot1
+            // 
+            this.scatterPlot1.LineColor = System.Drawing.Color.Navy;
+            this.scatterPlot1.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.scatterPlot1.LineWidth = 0.6F;
+            this.scatterPlot1.PointColor = System.Drawing.Color.Navy;
+            this.scatterPlot1.PointSize = new System.Drawing.Size(6, 6);
+            this.scatterPlot1.PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            this.scatterPlot1.SmoothUpdates = true;
+            this.scatterPlot1.XAxis = this.xAxis1;
+            this.scatterPlot1.YAxis = this.yAxis1;
+            // 
+            // xAxis1
+            // 
+            this.xAxis1.MajorDivisions.LabelVisible = false;
+            this.xAxis1.MajorDivisions.TickVisible = false;
+            // 
+            // yAxis1
+            // 
+            this.yAxis1.Visible = false;
+            // 
+            // scatterPlot2
+            // 
+            this.scatterPlot2.LineWidth = 0.6F;
+            this.scatterPlot2.PointColor = System.Drawing.Color.Red;
+            this.scatterPlot2.PointSize = new System.Drawing.Size(6, 6);
+            this.scatterPlot2.PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
+            this.scatterPlot2.SmoothUpdates = true;
+            this.scatterPlot2.XAxis = this.xAxis1;
+            this.scatterPlot2.YAxis = this.yAxis2;
+            // 
+            // yAxis2
+            // 
+            this.yAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
+            this.yAxis2.CaptionVisible = false;
+            this.yAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
+            this.yAxis2.Visible = false;
+            // 
+            // RawRead
+            // 
+            this.RawRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RawRead.Location = new System.Drawing.Point(217, 3);
+            this.RawRead.Name = "RawRead";
+            this.RawRead.Size = new System.Drawing.Size(87, 22);
+            this.RawRead.TabIndex = 114;
+            this.RawRead.Text = "Read";
+            this.RawRead.UseVisualStyleBackColor = true;
+            this.RawRead.Click += new System.EventHandler(this.button1_Click);
             // 
             // lbldatacount
             // 
@@ -2003,6 +4131,1319 @@
             this.lblTech.Text = " Tech. : ";
             this.lblTech.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblIdc
+            // 
+            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdc.Location = new System.Drawing.Point(5, 161);
+            this.lblIdc.Name = "lblIdc";
+            this.lblIdc.Size = new System.Drawing.Size(154, 15);
+            this.lblIdc.TabIndex = 112;
+            this.lblIdc.Text = "    Idc: -------- A";
+            // 
+            // btabout
+            // 
+            this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btabout.Location = new System.Drawing.Point(286, 1);
+            this.btabout.Name = "btabout";
+            this.btabout.Size = new System.Drawing.Size(24, 24);
+            this.btabout.TabIndex = 95;
+            this.btabout.UseVisualStyleBackColor = true;
+            this.btabout.Click += new System.EventHandler(this.btabout_Click);
+            // 
+            // legendItem108
+            // 
+            this.legendItem108.Text = "Item 56";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Controls.Add(this.tabPage11);
+            this.tabControl1.Controls.Add(this.tabPage12);
+            this.tabControl1.Location = new System.Drawing.Point(9, 344);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(148, 125);
+            this.tabControl1.TabIndex = 116;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.A1Zphase);
+            this.tabPage1.Controls.Add(this.A1Zmag);
+            this.tabPage1.Controls.Add(this.A1Zimg);
+            this.tabPage1.Controls.Add(this.A1Zreal);
+            this.tabPage1.Controls.Add(this.A1Vdc);
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(140, 98);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = " Aux1";
+            // 
+            // A1Zphase
+            // 
+            this.A1Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A1Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A1Zphase.Name = "A1Zphase";
+            this.A1Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A1Zphase.TabIndex = 117;
+            this.A1Zphase.Text = "  Zph: -------- °";
+            // 
+            // A1Zmag
+            // 
+            this.A1Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A1Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A1Zmag.Name = "A1Zmag";
+            this.A1Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A1Zmag.TabIndex = 117;
+            this.A1Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A1Zimg
+            // 
+            this.A1Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A1Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A1Zimg.Name = "A1Zimg";
+            this.A1Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A1Zimg.TabIndex = 117;
+            this.A1Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A1Zreal
+            // 
+            this.A1Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A1Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A1Zreal.Name = "A1Zreal";
+            this.A1Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A1Zreal.TabIndex = 117;
+            this.A1Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A1Vdc
+            // 
+            this.A1Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A1Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A1Vdc.Name = "A1Vdc";
+            this.A1Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A1Vdc.TabIndex = 117;
+            this.A1Vdc.Text = "  Vdc: -------- V";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.A2Zphase);
+            this.tabPage2.Controls.Add(this.A2Zmag);
+            this.tabPage2.Controls.Add(this.A2Zimg);
+            this.tabPage2.Controls.Add(this.A2Zreal);
+            this.tabPage2.Controls.Add(this.A2Vdc);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(140, 98);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = " Aux2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // A2Zphase
+            // 
+            this.A2Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A2Zphase.Name = "A2Zphase";
+            this.A2Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A2Zphase.TabIndex = 123;
+            this.A2Zphase.Text = "  Zph: -------- °";
+            // 
+            // A2Zmag
+            // 
+            this.A2Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A2Zmag.Name = "A2Zmag";
+            this.A2Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A2Zmag.TabIndex = 124;
+            this.A2Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A2Zimg
+            // 
+            this.A2Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A2Zimg.Name = "A2Zimg";
+            this.A2Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A2Zimg.TabIndex = 125;
+            this.A2Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A2Zreal
+            // 
+            this.A2Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A2Zreal.Name = "A2Zreal";
+            this.A2Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A2Zreal.TabIndex = 126;
+            this.A2Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A2Vdc
+            // 
+            this.A2Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A2Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A2Vdc.Name = "A2Vdc";
+            this.A2Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A2Vdc.TabIndex = 127;
+            this.A2Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 15);
+            this.label1.TabIndex = 118;
+            this.label1.Text = "   Zph: -------- °";
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(3, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(134, 15);
+            this.label6.TabIndex = 119;
+            this.label6.Text = "  Zmag: --------mΩ";
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 41);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(134, 15);
+            this.label7.TabIndex = 120;
+            this.label7.Text = "  Zimg: --------mΩ";
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(3, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(134, 15);
+            this.label8.TabIndex = 121;
+            this.label8.Text = " Zreal: --------mΩ";
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 5);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(134, 15);
+            this.label9.TabIndex = 122;
+            this.label9.Text = "   Vdc: -------- V";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.A3Zphase);
+            this.tabPage3.Controls.Add(this.A3Zmag);
+            this.tabPage3.Controls.Add(this.A3Zimg);
+            this.tabPage3.Controls.Add(this.A3Zreal);
+            this.tabPage3.Controls.Add(this.A3Vdc);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Location = new System.Drawing.Point(4, 23);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(140, 98);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = " Aux3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // A3Zphase
+            // 
+            this.A3Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A3Zphase.Name = "A3Zphase";
+            this.A3Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A3Zphase.TabIndex = 123;
+            this.A3Zphase.Text = "  Zph: -------- °";
+            // 
+            // A3Zmag
+            // 
+            this.A3Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A3Zmag.Name = "A3Zmag";
+            this.A3Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A3Zmag.TabIndex = 124;
+            this.A3Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A3Zimg
+            // 
+            this.A3Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A3Zimg.Name = "A3Zimg";
+            this.A3Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A3Zimg.TabIndex = 125;
+            this.A3Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A3Zreal
+            // 
+            this.A3Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A3Zreal.Name = "A3Zreal";
+            this.A3Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A3Zreal.TabIndex = 126;
+            this.A3Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A3Vdc
+            // 
+            this.A3Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A3Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A3Vdc.Name = "A3Vdc";
+            this.A3Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A3Vdc.TabIndex = 127;
+            this.A3Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 77);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(134, 15);
+            this.label10.TabIndex = 118;
+            this.label10.Text = "   Zph: -------- °";
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(134, 15);
+            this.label11.TabIndex = 119;
+            this.label11.Text = "  Zmag: --------mΩ";
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 41);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(134, 15);
+            this.label12.TabIndex = 120;
+            this.label12.Text = "  Zimg: --------mΩ";
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 23);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(134, 15);
+            this.label13.TabIndex = 121;
+            this.label13.Text = " Zreal: --------mΩ";
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(3, 5);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(134, 15);
+            this.label14.TabIndex = 122;
+            this.label14.Text = "   Vdc: -------- V";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.A4Zphase);
+            this.tabPage4.Controls.Add(this.A4Zmag);
+            this.tabPage4.Controls.Add(this.A4Zimg);
+            this.tabPage4.Controls.Add(this.A4Zreal);
+            this.tabPage4.Controls.Add(this.A4Vdc);
+            this.tabPage4.Controls.Add(this.label15);
+            this.tabPage4.Controls.Add(this.label16);
+            this.tabPage4.Controls.Add(this.label17);
+            this.tabPage4.Controls.Add(this.label18);
+            this.tabPage4.Controls.Add(this.label19);
+            this.tabPage4.Location = new System.Drawing.Point(4, 23);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(140, 98);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = " Aux4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // A4Zphase
+            // 
+            this.A4Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A4Zphase.Name = "A4Zphase";
+            this.A4Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A4Zphase.TabIndex = 123;
+            this.A4Zphase.Text = "  Zph: -------- °";
+            // 
+            // A4Zmag
+            // 
+            this.A4Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A4Zmag.Name = "A4Zmag";
+            this.A4Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A4Zmag.TabIndex = 124;
+            this.A4Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A4Zimg
+            // 
+            this.A4Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A4Zimg.Name = "A4Zimg";
+            this.A4Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A4Zimg.TabIndex = 125;
+            this.A4Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A4Zreal
+            // 
+            this.A4Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A4Zreal.Name = "A4Zreal";
+            this.A4Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A4Zreal.TabIndex = 126;
+            this.A4Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A4Vdc
+            // 
+            this.A4Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A4Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A4Vdc.Name = "A4Vdc";
+            this.A4Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A4Vdc.TabIndex = 127;
+            this.A4Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(3, 77);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(134, 15);
+            this.label15.TabIndex = 118;
+            this.label15.Text = "   Zph: -------- °";
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(3, 59);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(134, 15);
+            this.label16.TabIndex = 119;
+            this.label16.Text = "  Zmag: --------mΩ";
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(3, 41);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(134, 15);
+            this.label17.TabIndex = 120;
+            this.label17.Text = "  Zimg: --------mΩ";
+            // 
+            // label18
+            // 
+            this.label18.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(3, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(134, 15);
+            this.label18.TabIndex = 121;
+            this.label18.Text = " Zreal: --------mΩ";
+            // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(3, 5);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(134, 15);
+            this.label19.TabIndex = 122;
+            this.label19.Text = "   Vdc: -------- V";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.A5Zphase);
+            this.tabPage5.Controls.Add(this.A5Zmag);
+            this.tabPage5.Controls.Add(this.A5Zimg);
+            this.tabPage5.Controls.Add(this.A5Zreal);
+            this.tabPage5.Controls.Add(this.A5Vdc);
+            this.tabPage5.Controls.Add(this.label20);
+            this.tabPage5.Controls.Add(this.label21);
+            this.tabPage5.Controls.Add(this.label22);
+            this.tabPage5.Controls.Add(this.label23);
+            this.tabPage5.Controls.Add(this.label24);
+            this.tabPage5.Location = new System.Drawing.Point(4, 23);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(140, 98);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = " Aux5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // A5Zphase
+            // 
+            this.A5Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A5Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A5Zphase.Name = "A5Zphase";
+            this.A5Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A5Zphase.TabIndex = 123;
+            this.A5Zphase.Text = "  Zph: -------- °";
+            // 
+            // A5Zmag
+            // 
+            this.A5Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A5Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A5Zmag.Name = "A5Zmag";
+            this.A5Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A5Zmag.TabIndex = 124;
+            this.A5Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A5Zimg
+            // 
+            this.A5Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A5Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A5Zimg.Name = "A5Zimg";
+            this.A5Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A5Zimg.TabIndex = 125;
+            this.A5Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A5Zreal
+            // 
+            this.A5Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A5Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A5Zreal.Name = "A5Zreal";
+            this.A5Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A5Zreal.TabIndex = 126;
+            this.A5Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A5Vdc
+            // 
+            this.A5Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A5Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A5Vdc.Name = "A5Vdc";
+            this.A5Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A5Vdc.TabIndex = 127;
+            this.A5Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label20
+            // 
+            this.label20.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(3, 77);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(134, 15);
+            this.label20.TabIndex = 118;
+            this.label20.Text = "   Zph: -------- °";
+            // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(3, 59);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(134, 15);
+            this.label21.TabIndex = 119;
+            this.label21.Text = "  Zmag: --------mΩ";
+            // 
+            // label22
+            // 
+            this.label22.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(3, 41);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(134, 15);
+            this.label22.TabIndex = 120;
+            this.label22.Text = "  Zimg: --------mΩ";
+            // 
+            // label23
+            // 
+            this.label23.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(3, 23);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(134, 15);
+            this.label23.TabIndex = 121;
+            this.label23.Text = " Zreal: --------mΩ";
+            // 
+            // label24
+            // 
+            this.label24.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(3, 5);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(134, 15);
+            this.label24.TabIndex = 122;
+            this.label24.Text = "   Vdc: -------- V";
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.A6Zphase);
+            this.tabPage6.Controls.Add(this.A6Zmag);
+            this.tabPage6.Controls.Add(this.A6Zimg);
+            this.tabPage6.Controls.Add(this.A6Zreal);
+            this.tabPage6.Controls.Add(this.A6Vdc);
+            this.tabPage6.Controls.Add(this.label25);
+            this.tabPage6.Controls.Add(this.label26);
+            this.tabPage6.Controls.Add(this.label27);
+            this.tabPage6.Controls.Add(this.label28);
+            this.tabPage6.Controls.Add(this.label29);
+            this.tabPage6.Location = new System.Drawing.Point(4, 23);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(140, 98);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = " Aux6";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // A6Zphase
+            // 
+            this.A6Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A6Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A6Zphase.Name = "A6Zphase";
+            this.A6Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A6Zphase.TabIndex = 123;
+            this.A6Zphase.Text = "  Zph: -------- °";
+            // 
+            // A6Zmag
+            // 
+            this.A6Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A6Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A6Zmag.Name = "A6Zmag";
+            this.A6Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A6Zmag.TabIndex = 124;
+            this.A6Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A6Zimg
+            // 
+            this.A6Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A6Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A6Zimg.Name = "A6Zimg";
+            this.A6Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A6Zimg.TabIndex = 125;
+            this.A6Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A6Zreal
+            // 
+            this.A6Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A6Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A6Zreal.Name = "A6Zreal";
+            this.A6Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A6Zreal.TabIndex = 126;
+            this.A6Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A6Vdc
+            // 
+            this.A6Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A6Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A6Vdc.Name = "A6Vdc";
+            this.A6Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A6Vdc.TabIndex = 127;
+            this.A6Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label25
+            // 
+            this.label25.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(3, 77);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(134, 15);
+            this.label25.TabIndex = 118;
+            this.label25.Text = "   Zph: -------- °";
+            // 
+            // label26
+            // 
+            this.label26.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(3, 59);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(134, 15);
+            this.label26.TabIndex = 119;
+            this.label26.Text = "  Zmag: --------mΩ";
+            // 
+            // label27
+            // 
+            this.label27.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(3, 41);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(134, 15);
+            this.label27.TabIndex = 120;
+            this.label27.Text = "  Zimg: --------mΩ";
+            // 
+            // label28
+            // 
+            this.label28.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(3, 23);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(134, 15);
+            this.label28.TabIndex = 121;
+            this.label28.Text = " Zreal: --------mΩ";
+            // 
+            // label29
+            // 
+            this.label29.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(3, 5);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(134, 15);
+            this.label29.TabIndex = 122;
+            this.label29.Text = "   Vdc: -------- V";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.A7Zphase);
+            this.tabPage7.Controls.Add(this.A7Zmag);
+            this.tabPage7.Controls.Add(this.A7Zimg);
+            this.tabPage7.Controls.Add(this.A7Zreal);
+            this.tabPage7.Controls.Add(this.A7Vdc);
+            this.tabPage7.Controls.Add(this.label30);
+            this.tabPage7.Controls.Add(this.label31);
+            this.tabPage7.Controls.Add(this.label32);
+            this.tabPage7.Controls.Add(this.label33);
+            this.tabPage7.Controls.Add(this.label34);
+            this.tabPage7.Location = new System.Drawing.Point(4, 23);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(140, 98);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = " Aux7";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // A7Zphase
+            // 
+            this.A7Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A7Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A7Zphase.Name = "A7Zphase";
+            this.A7Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A7Zphase.TabIndex = 123;
+            this.A7Zphase.Text = "  Zph: -------- °";
+            // 
+            // A7Zmag
+            // 
+            this.A7Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A7Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A7Zmag.Name = "A7Zmag";
+            this.A7Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A7Zmag.TabIndex = 124;
+            this.A7Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A7Zimg
+            // 
+            this.A7Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A7Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A7Zimg.Name = "A7Zimg";
+            this.A7Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A7Zimg.TabIndex = 125;
+            this.A7Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A7Zreal
+            // 
+            this.A7Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A7Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A7Zreal.Name = "A7Zreal";
+            this.A7Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A7Zreal.TabIndex = 126;
+            this.A7Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A7Vdc
+            // 
+            this.A7Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A7Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A7Vdc.Name = "A7Vdc";
+            this.A7Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A7Vdc.TabIndex = 127;
+            this.A7Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label30
+            // 
+            this.label30.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(3, 77);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(134, 15);
+            this.label30.TabIndex = 118;
+            this.label30.Text = "   Zph: -------- °";
+            // 
+            // label31
+            // 
+            this.label31.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(3, 59);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(134, 15);
+            this.label31.TabIndex = 119;
+            this.label31.Text = "  Zmag: --------mΩ";
+            // 
+            // label32
+            // 
+            this.label32.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(3, 41);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(134, 15);
+            this.label32.TabIndex = 120;
+            this.label32.Text = "  Zimg: --------mΩ";
+            // 
+            // label33
+            // 
+            this.label33.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(3, 23);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(134, 15);
+            this.label33.TabIndex = 121;
+            this.label33.Text = " Zreal: --------mΩ";
+            // 
+            // label34
+            // 
+            this.label34.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(3, 5);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(134, 15);
+            this.label34.TabIndex = 122;
+            this.label34.Text = "   Vdc: -------- V";
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.A8Zphase);
+            this.tabPage8.Controls.Add(this.A8Zmag);
+            this.tabPage8.Controls.Add(this.A8Zimg);
+            this.tabPage8.Controls.Add(this.A8Zreal);
+            this.tabPage8.Controls.Add(this.A8Vdc);
+            this.tabPage8.Controls.Add(this.label35);
+            this.tabPage8.Controls.Add(this.label36);
+            this.tabPage8.Controls.Add(this.label37);
+            this.tabPage8.Controls.Add(this.label38);
+            this.tabPage8.Controls.Add(this.label39);
+            this.tabPage8.Location = new System.Drawing.Point(4, 23);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(140, 98);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = " Aux8";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // A8Zphase
+            // 
+            this.A8Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A8Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A8Zphase.Name = "A8Zphase";
+            this.A8Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A8Zphase.TabIndex = 123;
+            this.A8Zphase.Text = "  Zph: -------- °";
+            // 
+            // A8Zmag
+            // 
+            this.A8Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A8Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A8Zmag.Name = "A8Zmag";
+            this.A8Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A8Zmag.TabIndex = 124;
+            this.A8Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A8Zimg
+            // 
+            this.A8Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A8Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A8Zimg.Name = "A8Zimg";
+            this.A8Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A8Zimg.TabIndex = 125;
+            this.A8Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A8Zreal
+            // 
+            this.A8Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A8Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A8Zreal.Name = "A8Zreal";
+            this.A8Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A8Zreal.TabIndex = 126;
+            this.A8Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A8Vdc
+            // 
+            this.A8Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A8Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A8Vdc.Name = "A8Vdc";
+            this.A8Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A8Vdc.TabIndex = 127;
+            this.A8Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label35
+            // 
+            this.label35.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(3, 77);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(134, 15);
+            this.label35.TabIndex = 118;
+            this.label35.Text = "   Zph: -------- °";
+            // 
+            // label36
+            // 
+            this.label36.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(3, 59);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(134, 15);
+            this.label36.TabIndex = 119;
+            this.label36.Text = "  Zmag: --------mΩ";
+            // 
+            // label37
+            // 
+            this.label37.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(3, 41);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(134, 15);
+            this.label37.TabIndex = 120;
+            this.label37.Text = "  Zimg: --------mΩ";
+            // 
+            // label38
+            // 
+            this.label38.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(3, 23);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(134, 15);
+            this.label38.TabIndex = 121;
+            this.label38.Text = " Zreal: --------mΩ";
+            // 
+            // label39
+            // 
+            this.label39.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(3, 5);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(134, 15);
+            this.label39.TabIndex = 122;
+            this.label39.Text = "   Vdc: -------- V";
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.A9Zphase);
+            this.tabPage9.Controls.Add(this.A9Zmag);
+            this.tabPage9.Controls.Add(this.A9Zimg);
+            this.tabPage9.Controls.Add(this.A9Zreal);
+            this.tabPage9.Controls.Add(this.A9Vdc);
+            this.tabPage9.Controls.Add(this.label40);
+            this.tabPage9.Controls.Add(this.label41);
+            this.tabPage9.Controls.Add(this.label42);
+            this.tabPage9.Controls.Add(this.label43);
+            this.tabPage9.Controls.Add(this.label44);
+            this.tabPage9.Location = new System.Drawing.Point(4, 23);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(140, 98);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = " Aux9";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // A9Zphase
+            // 
+            this.A9Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A9Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A9Zphase.Name = "A9Zphase";
+            this.A9Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A9Zphase.TabIndex = 123;
+            this.A9Zphase.Text = "  Zph: -------- °";
+            // 
+            // A9Zmag
+            // 
+            this.A9Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A9Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A9Zmag.Name = "A9Zmag";
+            this.A9Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A9Zmag.TabIndex = 124;
+            this.A9Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A9Zimg
+            // 
+            this.A9Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A9Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A9Zimg.Name = "A9Zimg";
+            this.A9Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A9Zimg.TabIndex = 125;
+            this.A9Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A9Zreal
+            // 
+            this.A9Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A9Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A9Zreal.Name = "A9Zreal";
+            this.A9Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A9Zreal.TabIndex = 126;
+            this.A9Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A9Vdc
+            // 
+            this.A9Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A9Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A9Vdc.Name = "A9Vdc";
+            this.A9Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A9Vdc.TabIndex = 127;
+            this.A9Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label40
+            // 
+            this.label40.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(3, 77);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(134, 15);
+            this.label40.TabIndex = 118;
+            this.label40.Text = "   Zph: -------- °";
+            // 
+            // label41
+            // 
+            this.label41.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(3, 59);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(134, 15);
+            this.label41.TabIndex = 119;
+            this.label41.Text = "  Zmag: --------mΩ";
+            // 
+            // label42
+            // 
+            this.label42.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(3, 41);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(134, 15);
+            this.label42.TabIndex = 120;
+            this.label42.Text = "  Zimg: --------mΩ";
+            // 
+            // label43
+            // 
+            this.label43.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(3, 23);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(134, 15);
+            this.label43.TabIndex = 121;
+            this.label43.Text = " Zreal: --------mΩ";
+            // 
+            // label44
+            // 
+            this.label44.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(3, 5);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(134, 15);
+            this.label44.TabIndex = 122;
+            this.label44.Text = "   Vdc: -------- V";
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.A10Zphase);
+            this.tabPage10.Controls.Add(this.A10Zmag);
+            this.tabPage10.Controls.Add(this.A10Zimg);
+            this.tabPage10.Controls.Add(this.A10Zreal);
+            this.tabPage10.Controls.Add(this.A10Vdc);
+            this.tabPage10.Controls.Add(this.label45);
+            this.tabPage10.Controls.Add(this.label46);
+            this.tabPage10.Controls.Add(this.label47);
+            this.tabPage10.Controls.Add(this.label48);
+            this.tabPage10.Controls.Add(this.label49);
+            this.tabPage10.Location = new System.Drawing.Point(4, 23);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(140, 98);
+            this.tabPage10.TabIndex = 9;
+            this.tabPage10.Text = " Aux10";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // A10Zphase
+            // 
+            this.A10Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A10Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A10Zphase.Name = "A10Zphase";
+            this.A10Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A10Zphase.TabIndex = 123;
+            this.A10Zphase.Text = "  Zph: -------- °";
+            // 
+            // A10Zmag
+            // 
+            this.A10Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A10Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A10Zmag.Name = "A10Zmag";
+            this.A10Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A10Zmag.TabIndex = 124;
+            this.A10Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A10Zimg
+            // 
+            this.A10Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A10Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A10Zimg.Name = "A10Zimg";
+            this.A10Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A10Zimg.TabIndex = 125;
+            this.A10Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A10Zreal
+            // 
+            this.A10Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A10Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A10Zreal.Name = "A10Zreal";
+            this.A10Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A10Zreal.TabIndex = 126;
+            this.A10Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A10Vdc
+            // 
+            this.A10Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A10Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A10Vdc.Name = "A10Vdc";
+            this.A10Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A10Vdc.TabIndex = 127;
+            this.A10Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label45
+            // 
+            this.label45.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(3, 77);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(134, 15);
+            this.label45.TabIndex = 118;
+            this.label45.Text = "   Zph: -------- °";
+            // 
+            // label46
+            // 
+            this.label46.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.Location = new System.Drawing.Point(3, 59);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(134, 15);
+            this.label46.TabIndex = 119;
+            this.label46.Text = "  Zmag: --------mΩ";
+            // 
+            // label47
+            // 
+            this.label47.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.Location = new System.Drawing.Point(3, 41);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(134, 15);
+            this.label47.TabIndex = 120;
+            this.label47.Text = "  Zimg: --------mΩ";
+            // 
+            // label48
+            // 
+            this.label48.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.Location = new System.Drawing.Point(3, 23);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(134, 15);
+            this.label48.TabIndex = 121;
+            this.label48.Text = " Zreal: --------mΩ";
+            // 
+            // label49
+            // 
+            this.label49.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.Location = new System.Drawing.Point(3, 5);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(134, 15);
+            this.label49.TabIndex = 122;
+            this.label49.Text = "   Vdc: -------- V";
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.A11Zphase);
+            this.tabPage11.Controls.Add(this.A11Zmag);
+            this.tabPage11.Controls.Add(this.A11Zimg);
+            this.tabPage11.Controls.Add(this.A11Zreal);
+            this.tabPage11.Controls.Add(this.A11Vdc);
+            this.tabPage11.Controls.Add(this.label50);
+            this.tabPage11.Controls.Add(this.label51);
+            this.tabPage11.Controls.Add(this.label52);
+            this.tabPage11.Controls.Add(this.label53);
+            this.tabPage11.Controls.Add(this.label54);
+            this.tabPage11.Location = new System.Drawing.Point(4, 23);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(140, 98);
+            this.tabPage11.TabIndex = 10;
+            this.tabPage11.Text = " Aux11";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // A11Zphase
+            // 
+            this.A11Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A11Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A11Zphase.Name = "A11Zphase";
+            this.A11Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A11Zphase.TabIndex = 123;
+            this.A11Zphase.Text = "  Zph: -------- °";
+            // 
+            // A11Zmag
+            // 
+            this.A11Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A11Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A11Zmag.Name = "A11Zmag";
+            this.A11Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A11Zmag.TabIndex = 124;
+            this.A11Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A11Zimg
+            // 
+            this.A11Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A11Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A11Zimg.Name = "A11Zimg";
+            this.A11Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A11Zimg.TabIndex = 125;
+            this.A11Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A11Zreal
+            // 
+            this.A11Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A11Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A11Zreal.Name = "A11Zreal";
+            this.A11Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A11Zreal.TabIndex = 126;
+            this.A11Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A11Vdc
+            // 
+            this.A11Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A11Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A11Vdc.Name = "A11Vdc";
+            this.A11Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A11Vdc.TabIndex = 127;
+            this.A11Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label50
+            // 
+            this.label50.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Location = new System.Drawing.Point(3, 77);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(134, 15);
+            this.label50.TabIndex = 118;
+            this.label50.Text = "   Zph: -------- °";
+            // 
+            // label51
+            // 
+            this.label51.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.Location = new System.Drawing.Point(3, 59);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(134, 15);
+            this.label51.TabIndex = 119;
+            this.label51.Text = "  Zmag: --------mΩ";
+            // 
+            // label52
+            // 
+            this.label52.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.Location = new System.Drawing.Point(3, 41);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(134, 15);
+            this.label52.TabIndex = 120;
+            this.label52.Text = "  Zimg: --------mΩ";
+            // 
+            // label53
+            // 
+            this.label53.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label53.Location = new System.Drawing.Point(3, 23);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(134, 15);
+            this.label53.TabIndex = 121;
+            this.label53.Text = " Zreal: --------mΩ";
+            // 
+            // label54
+            // 
+            this.label54.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label54.Location = new System.Drawing.Point(3, 5);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(134, 15);
+            this.label54.TabIndex = 122;
+            this.label54.Text = "   Vdc: -------- V";
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.A12Zphase);
+            this.tabPage12.Controls.Add(this.A12Zmag);
+            this.tabPage12.Controls.Add(this.A12Zimg);
+            this.tabPage12.Controls.Add(this.A12Zreal);
+            this.tabPage12.Controls.Add(this.A12Vdc);
+            this.tabPage12.Controls.Add(this.label55);
+            this.tabPage12.Controls.Add(this.label56);
+            this.tabPage12.Controls.Add(this.label57);
+            this.tabPage12.Controls.Add(this.label58);
+            this.tabPage12.Controls.Add(this.label59);
+            this.tabPage12.Location = new System.Drawing.Point(4, 23);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(140, 98);
+            this.tabPage12.TabIndex = 11;
+            this.tabPage12.Text = " Aux12";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // A12Zphase
+            // 
+            this.A12Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A12Zphase.Location = new System.Drawing.Point(3, 77);
+            this.A12Zphase.Name = "A12Zphase";
+            this.A12Zphase.Size = new System.Drawing.Size(134, 15);
+            this.A12Zphase.TabIndex = 123;
+            this.A12Zphase.Text = "  Zph: -------- °";
+            // 
+            // A12Zmag
+            // 
+            this.A12Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A12Zmag.Location = new System.Drawing.Point(3, 59);
+            this.A12Zmag.Name = "A12Zmag";
+            this.A12Zmag.Size = new System.Drawing.Size(134, 15);
+            this.A12Zmag.TabIndex = 124;
+            this.A12Zmag.Text = " Zmag: --------mΩ";
+            // 
+            // A12Zimg
+            // 
+            this.A12Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A12Zimg.Location = new System.Drawing.Point(3, 41);
+            this.A12Zimg.Name = "A12Zimg";
+            this.A12Zimg.Size = new System.Drawing.Size(134, 15);
+            this.A12Zimg.TabIndex = 125;
+            this.A12Zimg.Text = " Zimg: --------mΩ";
+            // 
+            // A12Zreal
+            // 
+            this.A12Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A12Zreal.Location = new System.Drawing.Point(3, 23);
+            this.A12Zreal.Name = "A12Zreal";
+            this.A12Zreal.Size = new System.Drawing.Size(134, 15);
+            this.A12Zreal.TabIndex = 126;
+            this.A12Zreal.Text = "Zreal: --------mΩ";
+            // 
+            // A12Vdc
+            // 
+            this.A12Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.A12Vdc.Location = new System.Drawing.Point(3, 5);
+            this.A12Vdc.Name = "A12Vdc";
+            this.A12Vdc.Size = new System.Drawing.Size(134, 15);
+            this.A12Vdc.TabIndex = 127;
+            this.A12Vdc.Text = "  Vdc: -------- V";
+            // 
+            // label55
+            // 
+            this.label55.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label55.Location = new System.Drawing.Point(3, 77);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(134, 15);
+            this.label55.TabIndex = 118;
+            this.label55.Text = "   Zph: -------- °";
+            // 
+            // label56
+            // 
+            this.label56.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.Location = new System.Drawing.Point(3, 59);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(134, 15);
+            this.label56.TabIndex = 119;
+            this.label56.Text = "  Zmag: --------mΩ";
+            // 
+            // label57
+            // 
+            this.label57.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.Location = new System.Drawing.Point(3, 41);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(134, 15);
+            this.label57.TabIndex = 120;
+            this.label57.Text = "  Zimg: --------mΩ";
+            // 
+            // label58
+            // 
+            this.label58.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.Location = new System.Drawing.Point(3, 23);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(134, 15);
+            this.label58.TabIndex = 121;
+            this.label58.Text = " Zreal: --------mΩ";
+            // 
+            // label59
+            // 
+            this.label59.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.Location = new System.Drawing.Point(3, 5);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(134, 15);
+            this.label59.TabIndex = 122;
+            this.label59.Text = "   Vdc: -------- V";
+            // 
             // lblprog
             // 
             this.lblprog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -2024,20 +5465,12 @@
             this.lblprog.TabIndex = 56;
             this.lblprog.Load += new System.EventHandler(this.lblprog_Load);
             // 
-            // lblIdc
-            // 
-            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdc.Location = new System.Drawing.Point(5, 161);
-            this.lblIdc.Name = "lblIdc";
-            this.lblIdc.Size = new System.Drawing.Size(154, 15);
-            this.lblIdc.TabIndex = 112;
-            this.lblIdc.Text = "    Idc: -------- A";
-            // 
             // BZAChPan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tabgrp);
             this.Controls.Add(this.lblzimg);
             this.Controls.Add(this.lblzreal);
@@ -2067,7 +5500,7 @@
             this.Controls.Add(this.lblTemp);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BZAChPan";
-            this.Size = new System.Drawing.Size(482, 336);
+            this.Size = new System.Drawing.Size(482, 473);
             this.Load += new System.EventHandler(this.BZAChPan_Load);
             this.SizeChanged += new System.EventHandler(this.BZAChPan_SizeChanged);
             this.menu_1.ResumeLayout(false);
@@ -2089,6 +5522,22 @@
             this.TabGrpRaw.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grprt)).EndInit();
+            this.Raw_DataPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2239,7 +5688,6 @@
         private System.Windows.Forms.Button btSize;
         private System.Windows.Forms.Button btTechEdit;
         private System.Windows.Forms.Button btreport;
-        private System.Windows.Forms.Button btabout;
         private System.Windows.Forms.Button btloaddata;
         private System.Windows.Forms.ContextMenuStrip contextMenuTech;
         private System.Windows.Forms.ToolStripMenuItem MenuTechopenFileLocation;
@@ -2299,9 +5747,106 @@
         private System.Windows.Forms.Label lblcsfreq1;
         private System.Windows.Forms.Label lblcsfreq2;
         private NationalInstruments.UI.ScatterPlot Grp1Plot7;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot8;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot9;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot10;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot11;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot12;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot13;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot14;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot15;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot16;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot17;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot18;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot19;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot20;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot21;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot22;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot23;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot24;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot25;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot26;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot27;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot28;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot29;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot30;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot31;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot32;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot33;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot34;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot35;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot36;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot37;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot38;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot39;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot40;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot41;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot42;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot43;
         private NationalInstruments.UI.ScatterPlot Grp2Plot7;
         private NationalInstruments.UI.ScatterPlot Grp2Plot8;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot9;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot10;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot11;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot12;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot13;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot14;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot15;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot16;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot17;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot18;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot19;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot20;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot21;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot22;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot23;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot24;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot25;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot26;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot27;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot28;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot29;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot30;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot31;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot32;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot33;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot34;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot35;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot36;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot37;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot38;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot39;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot40;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot41;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot42;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot43;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot44;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot45;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot46;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot47;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot48;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot49;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot50;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot51;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot52;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot53;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot54;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot55;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot56;
+
         private NationalInstruments.UI.LegendItem legendItem17;
+        private NationalInstruments.UI.LegendItem legendItem30;
+        private NationalInstruments.UI.LegendItem legendItem31;
+        private NationalInstruments.UI.LegendItem legendItem32;
+        private NationalInstruments.UI.LegendItem legendItem33;
+        private NationalInstruments.UI.LegendItem legendItem34;
+        private NationalInstruments.UI.LegendItem legendItem35;
+        private NationalInstruments.UI.LegendItem legendItem36;
+        private NationalInstruments.UI.LegendItem legendItem37;
+        private NationalInstruments.UI.LegendItem legendItem38;
+        private NationalInstruments.UI.LegendItem legendItem39;
+        private NationalInstruments.UI.LegendItem legendItem40;
+        private NationalInstruments.UI.LegendItem legendItem41;
         private NationalInstruments.UI.LegendItem legendItem27;
         private NationalInstruments.UI.LegendItem legendItem28;
         private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
@@ -2311,11 +5856,262 @@
         private NationalInstruments.UI.YAxis RTyAxis1;
         private NationalInstruments.UI.LegendItem RtlegendItem2;
         private NationalInstruments.UI.ScatterPlot RTPlot2;
+        private NationalInstruments.UI.ScatterPlot RTPlot3;
+        private NationalInstruments.UI.ScatterPlot RTPlot4;
+        private NationalInstruments.UI.ScatterPlot RTPlot5;
+        private NationalInstruments.UI.ScatterPlot RTPlot6;
+        private NationalInstruments.UI.ScatterPlot RTPlot7;
+        private NationalInstruments.UI.ScatterPlot RTPlot8;
+        private NationalInstruments.UI.ScatterPlot RTPlot9;
+        private NationalInstruments.UI.ScatterPlot RTPlot10;
+        private NationalInstruments.UI.ScatterPlot RTPlot11;
+        private NationalInstruments.UI.ScatterPlot RTPlot12;
+        private NationalInstruments.UI.ScatterPlot RTPlot13;
+        private NationalInstruments.UI.ScatterPlot RTPlot14;
         private NationalInstruments.UI.YAxis RTyAxis2;
         private NationalInstruments.UI.WindowsForms.ScatterGraph grprt;
         private System.Windows.Forms.Label lbldatacount;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label lblTech;
         private System.Windows.Forms.Label lblIdc;
+        private System.Windows.Forms.Button btabout;
+        private System.Windows.Forms.TabPage Raw_DataPage;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph rawgrp;
+        private NationalInstruments.UI.ScatterPlot scatterPlot1;
+        private NationalInstruments.UI.XAxis xAxis1;
+        private NationalInstruments.UI.YAxis yAxis1;
+        private NationalInstruments.UI.ScatterPlot scatterPlot2;
+        private NationalInstruments.UI.YAxis yAxis2;
+        private System.Windows.Forms.DataGridView AuxDataView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.Button RawRead;
+        private System.Windows.Forms.CheckedListBox checkedListBox;
+        private NationalInstruments.UI.LegendItem legendItem42;
+        private NationalInstruments.UI.LegendItem legendItem43;
+        private NationalInstruments.UI.LegendItem legendItem44;
+        private NationalInstruments.UI.LegendItem legendItem45;
+        private NationalInstruments.UI.LegendItem legendItem46;
+        private NationalInstruments.UI.LegendItem legendItem47;
+        private NationalInstruments.UI.LegendItem legendItem48;
+        private NationalInstruments.UI.LegendItem legendItem49;
+        private NationalInstruments.UI.LegendItem legendItem50;
+        private NationalInstruments.UI.LegendItem legendItem51;
+        private NationalInstruments.UI.LegendItem legendItem52;
+        private NationalInstruments.UI.LegendItem legendItem53;
+        private NationalInstruments.UI.LegendItem legendItem109;
+        private NationalInstruments.UI.LegendItem legendItem110;
+        private NationalInstruments.UI.LegendItem legendItem111;
+        private NationalInstruments.UI.LegendItem legendItem112;
+        private NationalInstruments.UI.LegendItem legendItem113;
+        private NationalInstruments.UI.LegendItem legendItem114;
+        private NationalInstruments.UI.LegendItem legendItem115;
+        private NationalInstruments.UI.LegendItem legendItem116;
+        private NationalInstruments.UI.LegendItem legendItem117;
+        private NationalInstruments.UI.LegendItem legendItem118;
+        private NationalInstruments.UI.LegendItem legendItem119;
+        private NationalInstruments.UI.LegendItem legendItem120;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private NationalInstruments.UI.LegendItem legendItem60;
+        private NationalInstruments.UI.LegendItem legendItem61;
+        private NationalInstruments.UI.LegendItem legendItem62;
+        private NationalInstruments.UI.LegendItem legendItem63;
+        private NationalInstruments.UI.LegendItem legendItem64;
+        private NationalInstruments.UI.LegendItem legendItem65;
+        private NationalInstruments.UI.LegendItem legendItem66;
+        private NationalInstruments.UI.LegendItem legendItem67;
+        private NationalInstruments.UI.LegendItem legendItem68;
+        private NationalInstruments.UI.LegendItem legendItem69;
+        private NationalInstruments.UI.LegendItem legendItem70;
+        private NationalInstruments.UI.LegendItem legendItem71;
+        private NationalInstruments.UI.LegendItem legendItem72;
+        private NationalInstruments.UI.LegendItem legendItem73;
+        private NationalInstruments.UI.LegendItem legendItem74;
+        private NationalInstruments.UI.LegendItem legendItem75;
+        private NationalInstruments.UI.LegendItem legendItem76;
+        private NationalInstruments.UI.LegendItem legendItem77;
+        private NationalInstruments.UI.LegendItem legendItem78;
+        private NationalInstruments.UI.LegendItem legendItem79;
+        private NationalInstruments.UI.LegendItem legendItem80;
+        private NationalInstruments.UI.LegendItem legendItem81;
+        private NationalInstruments.UI.LegendItem legendItem82;
+        private NationalInstruments.UI.LegendItem legendItem83;
+        private NationalInstruments.UI.LegendItem legendItem84;
+        private NationalInstruments.UI.LegendItem legendItem85;
+        private NationalInstruments.UI.LegendItem legendItem86;
+        private NationalInstruments.UI.LegendItem legendItem87;
+        private NationalInstruments.UI.LegendItem legendItem88;
+        private NationalInstruments.UI.LegendItem legendItem89;
+        private NationalInstruments.UI.LegendItem legendItem90;
+        private NationalInstruments.UI.LegendItem legendItem91;
+        private NationalInstruments.UI.LegendItem legendItem92;
+        private NationalInstruments.UI.LegendItem legendItem93;
+        private NationalInstruments.UI.LegendItem legendItem94;
+        private NationalInstruments.UI.LegendItem legendItem95;
+        private NationalInstruments.UI.LegendItem legendItem96;
+        private NationalInstruments.UI.LegendItem legendItem97;
+        private NationalInstruments.UI.LegendItem legendItem98;
+        private NationalInstruments.UI.LegendItem legendItem99;
+        private NationalInstruments.UI.LegendItem legendItem100;
+        private NationalInstruments.UI.LegendItem legendItem101;
+        private NationalInstruments.UI.LegendItem legendItem102;
+        private NationalInstruments.UI.LegendItem legendItem103;
+        private NationalInstruments.UI.LegendItem legendItem104;
+        private NationalInstruments.UI.LegendItem legendItem105;
+        private NationalInstruments.UI.LegendItem legendItem106;
+        private NationalInstruments.UI.LegendItem legendItem107;
+        private NationalInstruments.UI.LegendItem legendItem108;
+        private NationalInstruments.UI.LegendItem RtlegendItem3;
+        private NationalInstruments.UI.LegendItem RtlegendItem4;
+        private NationalInstruments.UI.LegendItem RtlegendItem5;
+        private NationalInstruments.UI.LegendItem RtlegendItem6;
+        private NationalInstruments.UI.LegendItem RtlegendItem7;
+        private NationalInstruments.UI.LegendItem RtlegendItem8;
+        private NationalInstruments.UI.LegendItem RtlegendItem9;
+        private NationalInstruments.UI.LegendItem RtlegendItem10;
+        private NationalInstruments.UI.LegendItem RtlegendItem11;
+        private NationalInstruments.UI.LegendItem RtlegendItem12;
+        private NationalInstruments.UI.LegendItem RtlegendItem13;
+        private NationalInstruments.UI.LegendItem RtlegendItem14;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.Label A1Vdc;
+        private System.Windows.Forms.Label A1Zphase;
+        private System.Windows.Forms.Label A1Zmag;
+        private System.Windows.Forms.Label A1Zimg;
+        private System.Windows.Forms.Label A1Zreal;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label A2Zphase;
+        private System.Windows.Forms.Label A2Zmag;
+        private System.Windows.Forms.Label A2Zimg;
+        private System.Windows.Forms.Label A2Zreal;
+        private System.Windows.Forms.Label A2Vdc;
+        private System.Windows.Forms.Label A3Zphase;
+        private System.Windows.Forms.Label A3Zmag;
+        private System.Windows.Forms.Label A3Zimg;
+        private System.Windows.Forms.Label A3Zreal;
+        private System.Windows.Forms.Label A3Vdc;
+        private System.Windows.Forms.Label A4Zphase;
+        private System.Windows.Forms.Label A4Zmag;
+        private System.Windows.Forms.Label A4Zimg;
+        private System.Windows.Forms.Label A4Zreal;
+        private System.Windows.Forms.Label A4Vdc;
+        private System.Windows.Forms.Label A5Zphase;
+        private System.Windows.Forms.Label A5Zmag;
+        private System.Windows.Forms.Label A5Zimg;
+        private System.Windows.Forms.Label A5Zreal;
+        private System.Windows.Forms.Label A5Vdc;
+        private System.Windows.Forms.Label A6Zphase;
+        private System.Windows.Forms.Label A6Zmag;
+        private System.Windows.Forms.Label A6Zimg;
+        private System.Windows.Forms.Label A6Zreal;
+        private System.Windows.Forms.Label A6Vdc;
+        private System.Windows.Forms.Label A7Zphase;
+        private System.Windows.Forms.Label A7Zmag;
+        private System.Windows.Forms.Label A7Zimg;
+        private System.Windows.Forms.Label A7Zreal;
+        private System.Windows.Forms.Label A7Vdc;
+        private System.Windows.Forms.Label A8Zphase;
+        private System.Windows.Forms.Label A8Zmag;
+        private System.Windows.Forms.Label A8Zimg;
+        private System.Windows.Forms.Label A8Zreal;
+        private System.Windows.Forms.Label A8Vdc;
+        private System.Windows.Forms.Label A9Zphase;
+        private System.Windows.Forms.Label A9Zmag;
+        private System.Windows.Forms.Label A9Zimg;
+        private System.Windows.Forms.Label A9Zreal;
+        private System.Windows.Forms.Label A9Vdc;
+        private System.Windows.Forms.Label A10Zphase;
+        private System.Windows.Forms.Label A10Zmag;
+        private System.Windows.Forms.Label A10Zimg;
+        private System.Windows.Forms.Label A10Zreal;
+        private System.Windows.Forms.Label A10Vdc;
+        private System.Windows.Forms.Label A11Zphase;
+        private System.Windows.Forms.Label A11Zmag;
+        private System.Windows.Forms.Label A11Zimg;
+        private System.Windows.Forms.Label A11Zreal;
+        private System.Windows.Forms.Label A11Vdc;
+        private System.Windows.Forms.Label A12Zphase;
+        private System.Windows.Forms.Label A12Zmag;
+        private System.Windows.Forms.Label A12Zimg;
+        private System.Windows.Forms.Label A12Zreal;
+        private System.Windows.Forms.Label A12Vdc;
+        private System.Windows.Forms.CheckedListBox rawgrpListBox;
     }
 }

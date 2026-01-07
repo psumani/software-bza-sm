@@ -37,7 +37,7 @@
             // 
             // btok
             // 
-            this.btok.Location = new System.Drawing.Point(105, 80);
+            this.btok.Location = new System.Drawing.Point(135, 80);
             this.btok.Name = "btok";
             this.btok.Size = new System.Drawing.Size(71, 21);
             this.btok.TabIndex = 0;
@@ -47,10 +47,10 @@
             // 
             // txtinput
             // 
-            this.txtinput.Location = new System.Drawing.Point(32, 38);
+            this.txtinput.Location = new System.Drawing.Point(104, 41);
             this.txtinput.MaxLength = 20;
             this.txtinput.Name = "txtinput";
-            this.txtinput.Size = new System.Drawing.Size(266, 21);
+            this.txtinput.Size = new System.Drawing.Size(194, 21);
             this.txtinput.TabIndex = 1;
             // 
             // btcancel
@@ -65,7 +65,7 @@
             // 
             // btInit
             // 
-            this.btInit.Location = new System.Drawing.Point(35, 80);
+            this.btInit.Location = new System.Drawing.Point(14, 80);
             this.btInit.Name = "btInit";
             this.btInit.Size = new System.Drawing.Size(64, 21);
             this.btInit.TabIndex = 4;
@@ -76,11 +76,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 9);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(268, 12);
+            this.label1.Size = new System.Drawing.Size(303, 12);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Default format : ZIM-{Mac[4]:X2}{Mac[5]:X2}";
+            this.label1.Text = "Default format : Board serial number(6Digit : Z12345).";
             // 
             // frmInputString
             // 

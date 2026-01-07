@@ -26,6 +26,9 @@ namespace ZiveLab.ZM
         private int ch;
         private int sifch;
         private int rng;
+        private int nAuxCh;
+        private bool bAux;
+        private bool bAuxCh;
         private stZimCfg mZim;
 
         public frmCalibVdc(int tch, string tserial, int tsifch, int trng)
@@ -35,43 +38,59 @@ namespace ZiveLab.ZM
 
             ch = tch;
             Serial = tserial;
+
+            if (gBZA.IsMCBZA(Serial)) bAux = true;
+            else bAux = false;
+            bAuxCh = false;
+            nAuxCh = -1;
+
+
             sifch = tsifch;
             rng = trng;
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            mZim = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
 
-            if (MBZA_MapUtil.SetAutoVdc(Serial, sifch, false) == false)
+            if (bAux == true && sifch > 0)
             {
-                MessageBox.Show("The command failed[SetAutoVdc].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-            if (trng == 0)
-            {
-                this.Text = string.Format("Calibration DC Voltage[x1.0:{0}] - CH{0}[{1}-{2}].", SM_Number.ToRangeString(p.ranges.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
-                sTitle = "VDC_X1";
+                bAuxCh = true;
+                nAuxCh = (sifch - 1) * 4 + rng;
+                this.Text = string.Format("Calibration DC voltage[AUXCH({2}-{3}):{0}] :: [{1}-{2}(SUBCH-{3})].", SM_Number.ToRangeString(p.mZimCfg[sifch].ranges.Aux.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1, rng + 1);
+                sTitle = string.Format("AUXCH{0}_VDC", rng + 1);
+                InitView();
+                return;
             }
             else
             {
-                this.Text = string.Format("Calibration DC Voltage[x0.1:{0}] - CH{0}[{1}-{2}].", SM_Number.ToRangeString(p.ranges.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
-                sTitle = "VDC_X10";
-            }
-            
-
-            mZim = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-
-            for (int i = 0; i < 3; i++)
-            {
-                SetVdcRng(rng);
-                Thread.Sleep(500);
-                if (gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno == rng)
+                if (MBZA_MapUtil.SetAutoVdc(Serial, sifch, false) == false)
                 {
-                    InitView();
-                    return;
+                    MessageBox.Show("The command failed[SetAutoVdc].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (trng == 0)
+                {
+                    this.Text = string.Format("Calibration DC Voltage[x1.0:{0}] :: [{1}-{2}].", SM_Number.ToRangeString(p.mZimCfg[sifch].ranges.Gen.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
+                    sTitle = "VDC_X1";
+                }
+                else
+                {
+                    this.Text = string.Format("Calibration DC Voltage[x0.1:{0}] :: [{1}-{2}].", SM_Number.ToRangeString(p.mZimCfg[sifch].ranges.Gen.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1);
+                    sTitle = "VDC_X10";
+                }
+
+                for (int i = 0; i < 3; i++)
+                {
+                    SetVdcRng(rng);
+                    Thread.Sleep(500);
+                    if (gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno == rng)
+                    {
+                        InitView();
+                        return;
+                    }
                 }
             }
+
             MessageBox.Show("Channel's VDC range is incorrect. Check it.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
+        
         private void LoadLogInfo()
         {
             string sFilename = gBZA.GetCalibLogFileName(Serial, mZim.GetSerialNumber());
@@ -80,14 +99,16 @@ namespace ZiveLab.ZM
             {
                 return;
             }
-            
+
             string sitem;
             string sValue1;
             string sValue2;
 
             int count = gBZA.GetIniIntData(sTitle, "Count", sFilename, 0);
-            mZim.ranges.vdc_rng[rng].gain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.vdc_rng[rng].gain);
-            mZim.ranges.vdc_rng[rng].offset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.vdc_rng[rng].offset);
+            //mZim.ranges[0].vdc_rng[rng].gain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges[0].vdc_rng[rng].gain);
+            //mZim.ranges[0].vdc_rng[rng].offset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges[0].vdc_rng[rng].offset);
+            mZim.ranges.Gen.vdc_rng[rng].gain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.Gen.vdc_rng[rng].gain);
+            mZim.ranges.Gen.vdc_rng[rng].offset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.Gen.vdc_rng[rng].offset); // 배열
             for (int row = 0; row < count; row++)
             {
                 sitem = string.Format("Target{0}", row + 1);
@@ -105,8 +126,10 @@ namespace ZiveLab.ZM
             string sitem;
             string sValue;
 
-            gBZA.WriteIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.vdc_rng[rng].gain);
-            gBZA.WriteIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.vdc_rng[rng].offset);
+            //gBZA.WriteIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges[0].vdc_rng[rng].gain);
+            //gBZA.WriteIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges[0].vdc_rng[rng].offset);
+            gBZA.WriteIniDoubleData(sTitle, "Gain", sFilename, mZim.ranges.Gen.vdc_rng[rng].gain);
+            gBZA.WriteIniDoubleData(sTitle, "Offset", sFilename, mZim.ranges.Gen.vdc_rng[rng].offset); // 배열
             gBZA.WriteIniIntData(sTitle, "Count", sFilename, ListAfter1.Items.Count);
             for (int row = 0; row < ListAfter1.Items.Count; row++)
             {
@@ -119,6 +142,7 @@ namespace ZiveLab.ZM
             }
             gBZA.UpdateLastCalDate(Serial);
         }
+
         private void InitList(ref ListView mlstv)
         {
             mlstv.BeginUpdate();
@@ -136,11 +160,11 @@ namespace ZiveLab.ZM
             mlstv.Columns.Clear();
             mlstv.Columns.Add("Target", 120, HorizontalAlignment.Center);
             mlstv.Columns.Add("Real", 120, HorizontalAlignment.Center);
-          
+
             mlstv.Items.Clear();
             mlstv.EndUpdate();
         }
-        
+
         private void AddList(ref ListView mlstv, string sTarget, string sReal)
         {
             ListViewItem lvItem;
@@ -154,17 +178,27 @@ namespace ZiveLab.ZM
             InitList(ref ListAfter1);
 
             LoadLogInfo();
-
-            txtMax1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].maximum);
-            txtMin1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].minimum);
-            txtFactor1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].factor);
-            txtGain1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].gain);
-            txtOffset1.Text = string.Format("{0:0.0#####}", mZim.ranges.vdc_rng[rng].offset);
+            if (bAuxCh == true)
+            {
+                txtMax1.Text = string.Format("{0:0.0#####}", mZim.ranges.Aux.vdc_rng[rng].maximum);
+                txtMin1.Text = string.Format("{0:0.0#####}", mZim.ranges.Aux.vdc_rng[rng].minimum);
+                txtFactor1.Text = string.Format("{0:0.0#####}", mZim.ranges.Aux.vdc_rng[rng].factor);
+                txtGain1.Text = string.Format("{0:0.0#####}", mZim.ranges.Aux.vdc_rng[rng].gain);
+                txtOffset1.Text = string.Format("{0:0.0#####}", mZim.ranges.Aux.vdc_rng[rng].offset);
+                txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Aux.vdc_rng[rng].realmax, "V");
+            }
+            else
+            {
+                txtMax1.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.vdc_rng[rng].maximum);
+                txtMin1.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.vdc_rng[rng].minimum);
+                txtFactor1.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.vdc_rng[rng].factor);
+                txtGain1.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.vdc_rng[rng].gain);
+                txtOffset1.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.vdc_rng[rng].offset);
+                txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax, "V");
+            }
             txtSquare1.Text = "1.0";
             txtResSquare1.Text = "1.0";
             chkCalib1.Checked = false;
-            txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax,"V");
-
             txtTarget1.Text = "0.0";
             txtReal1.Text = "0.0";
         }
@@ -172,8 +206,16 @@ namespace ZiveLab.ZM
         private void btRefresh1_Click(object sender, EventArgs e)
         {
             double val;
-            txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax, "V");
-            val = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc;
+            if (bAuxCh == true)
+            {
+                txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Aux.vdc_rng[rng].realmax, "V");
+                val = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[0].Aux_Vdc[nAuxCh];
+            }
+            else
+            {
+                txtRangeStat.Text = SM_Number.ToRangeString(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.vdc_rng[gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc_rngno].realmax, "V");
+                val = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc;
+            }
             try
             {
                 if (chkCalib1.Checked == false)
@@ -182,11 +224,12 @@ namespace ZiveLab.ZM
                 }
                 txtReal1.Text = string.Format("{0:0.0#####}", val);
             }
-            catch 
+            catch
             {
                 txtReal1.Text = "0.0";
             }
         }
+
         private void btLARem1_Click(object sender, EventArgs e)
         {
             if (ListAfter1.Items.Count == 0)
@@ -233,7 +276,16 @@ namespace ZiveLab.ZM
         {
             double val;
 
-            val =  gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc;
+            if (bAuxCh == true)
+            {
+                val = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[0].Aux_Vdc[nAuxCh];
+            }
+            else
+            {
+                val = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].Vdc;
+            }
+
+
             if (chkCalib1.Checked == false)
             {
                 val = val * Convert.ToDouble(txtGain1.Text) + Convert.ToDouble(txtOffset1.Text);
@@ -247,7 +299,7 @@ namespace ZiveLab.ZM
             {
                 MessageBox.Show("Not found items."); return;
             }
-            CalibInputOperProc(ref ListBefore1,ref txtGain1, ref txtOffset1,ref txtSquare1);
+            CalibInputOperProc(ref ListBefore1, ref txtGain1, ref txtOffset1, ref txtSquare1);
         }
 
         void CalibInputOperProc(ref ListView mlstv, ref TextBox tGain, ref TextBox tOffset, ref TextBox tSquare)
@@ -411,13 +463,21 @@ namespace ZiveLab.ZM
             }
             CheckInputOperProc(ref ListAfter1, ref txtResSquare1);
         }
-        
+
         private void btApply1_Click(object sender, EventArgs e)
         {
-            mZim.ranges.vdc_rng[rng].gain = Convert.ToDouble(txtGain1.Text);
-            mZim.ranges.vdc_rng[rng].offset = Convert.ToDouble(txtOffset1.Text);
-
+            if(bAuxCh == true)
+            {
+                mZim.ranges.Aux.vdc_rng[rng].gain = Convert.ToDouble(txtGain1.Text);
+                mZim.ranges.Aux.vdc_rng[rng].offset = Convert.ToDouble(txtOffset1.Text); 
+            }
+            else
+            {
+                mZim.ranges.Gen.vdc_rng[rng].gain = Convert.ToDouble(txtGain1.Text);
+                mZim.ranges.Gen.vdc_rng[rng].offset = Convert.ToDouble(txtOffset1.Text); 
+            }
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch] = mZim;
+
             if (MBZA_MapUtil.Save_Range_info(Serial, sifch) == false)
             {
                 MessageBox.Show("The operation failed.");
@@ -426,7 +486,7 @@ namespace ZiveLab.ZM
             SaveLogInfo();
             MessageBox.Show("The operation has been successful.");
         }
-        
+
         private void btClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -434,17 +494,30 @@ namespace ZiveLab.ZM
 
         private void frmCalibVdc_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MBZA_MapUtil.SetAutoVdc(Serial, sifch, true) == false)
+            if (bAuxCh == false)
             {
-                MessageBox.Show("The command failed[SetAutoVdc].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (MBZA_MapUtil.SetAutoVdc(Serial, sifch, true) == false)
+                {
+                    MessageBox.Show("The command failed[SetAutoVdc].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void SetCalibMode(bool bcalib = false)
         {
-            if (MBZA_MapUtil.SetCalibMode(Serial, sifch, bcalib) == false)
+            if (bAuxCh == true)
             {
-                MessageBox.Show("The command failed[SetCalibMode].");
+                if (MBZA_MapUtil.SetCalibMode(Serial, 0, bcalib) == false)
+                {
+                    MessageBox.Show("The command failed[SetCalibMode].");
+                }
+            }
+            else
+            {
+                if (MBZA_MapUtil.SetCalibMode(Serial, sifch, bcalib) == false)
+                {
+                    MessageBox.Show("The command failed[SetCalibMode].");
+                }
             }
         }
 

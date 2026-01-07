@@ -35,8 +35,6 @@ namespace ZiveLab.ZM
         public string FileNameZIMFW;
         public string FileNameSIFFW;
         public string BatLimitFile;
-        public string FileHelpEng;
-        public string FileHelpKor;
 
         public double[] RDummy;
         public double[] LDummy;
@@ -87,8 +85,6 @@ namespace ZiveLab.ZM
             FileNameZIMFW = "default.zim";
             FileNameSIFFW = "default.sif";
             BatLimitFile = "C:\\ZIVE DATA\\ZM\\Infor\\BAT.lmt";
-            FileHelpEng = "zm_v108_eng_manual.pdf";
-            FileHelpKor = "zm_v108_kor_manual.pdf";
 
             if (!System.IO.Directory.Exists(PathZIMFW)) System.IO.Directory.CreateDirectory(PathZIMFW);
             if (!System.IO.Directory.Exists(PathSIFFW)) System.IO.Directory.CreateDirectory(PathSIFFW);
@@ -221,7 +217,7 @@ namespace ZiveLab.ZM
 
                 file.Close();
             }
-            catch(Exception e)
+            catch(Exception) //e
             {
                 if(file != null) file.Close();
 
@@ -255,8 +251,6 @@ namespace ZiveLab.ZM
             FileNameZIMFW = tmp.FileNameZIMFW;
             FileNameSIFFW = tmp.FileNameSIFFW;
             BatLimitFile = tmp.BatLimitFile;
-            FileHelpEng = tmp.FileHelpEng;
-            FileHelpKor = tmp.FileHelpKor;
 
             CommTimeOut = tmp.CommTimeOut;
             MainViewLocation = tmp.MainViewLocation;
@@ -344,22 +338,49 @@ namespace ZiveLab.ZM
         }
     }
 
+    public class st_zim_rt_raw_vac
+    {
+        public double[] vac;
+        public st_zim_rt_raw_vac()
+        {
+            vac = new double[DeviceConstants.MAX_EIS_RT_RAW_POINT];
+            for (int i = 0; i < DeviceConstants.MAX_EIS_RT_RAW_POINT; i++)
+            {
+                vac[i] = 0.0;
+            }
+        }
+
+        public void Initialize()
+        {
+            for (int i = 0; i < DeviceConstants.MAX_EIS_RT_RAW_POINT; i++)
+            {
+                vac[i] = 0.0;
+            }
+        }
+
+    }
+
     public class st_zim_rt_raw
     {
         public int count;
         public double[] idx;
-        public double[] dv;
+        public st_zim_rt_raw_vac[] dv;
         public double[] di;
         public st_zim_rt_raw()
         {
             idx = new double[DeviceConstants.MAX_EIS_RT_RAW_POINT];
-            dv = new double[DeviceConstants.MAX_EIS_RT_RAW_POINT];
+            dv = new st_zim_rt_raw_vac[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             di = new double[DeviceConstants.MAX_EIS_RT_RAW_POINT];
             for (int i = 0; i < DeviceConstants.MAX_EIS_RT_RAW_POINT; i++)
             {
                 idx[i] = (double)i;
-                dv[i] = 0.0;
+              
                 di[i] = 0.0;
+            }
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                dv[i] = new st_zim_rt_raw_vac();
+                dv[i].Initialize();
             }
             count = 0;
         }
@@ -370,12 +391,16 @@ namespace ZiveLab.ZM
             for (int i = 0; i < DeviceConstants.MAX_EIS_RT_RAW_POINT; i++)
             {
                 idx[i] = (double)i;
-                dv[i] = 0.0;
                 di[i] = 0.0;
+            }
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                dv[i].Initialize();
             }
         }
         
     }
+
 
     public class st_zim_rt_val
     {
@@ -409,8 +434,6 @@ namespace ZiveLab.ZM
             {
                 ly[i] = new List<double>();
             }
-
-
         }
 
         public void Initialize()
@@ -430,18 +453,15 @@ namespace ZiveLab.ZM
             {
                 ly[i] = new List<double>();
             }
-        }
-        
+        }       
     }
 
-    public class st_zim_rt
+    public class st_zim_rt_item
     {
-        public int index;
         public st_zim_rt_val[] plot;
         
-        public st_zim_rt()
+        public st_zim_rt_item()
         {
-            index = 0;
             plot = new st_zim_rt_val[4];
             for (int i = 0; i < 4; i++)
             {
@@ -451,20 +471,50 @@ namespace ZiveLab.ZM
 
         public void Initialize()
         {
-            index = 0;
             for (int i = 0; i < 4; i++)
             {
                 plot[i].Initialize();
             }
-        }
-        
+        }        
     }
+
+    public class st_zim_rt
+    {
+        public int index;
+        public st_zim_rt_item[] item;
+
+        public st_zim_rt()
+        {
+            index = 0;
+            item = new st_zim_rt_item[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                item[i] = new st_zim_rt_item();
+            }
+        }
+
+        public void Initialize()
+        {
+            index = 0;
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                item[i].Initialize();
+            }
+        }
+
+        public void Initialize(int nItem)
+        {
+            item[nItem].Initialize();
+        }
+    }
+
     public class cls_rtdata
     {
+        public bool[] bChannel;
         public enTechType techtype;
         public bool loadoff;
         public ushort arrcnt;
-        public bool [] barr;
+        public bool[] barr;
         public ushort prrrpcalcmode;
         public ushort findex;
         public st_zim_rt_raw rawdata;
@@ -475,6 +525,13 @@ namespace ZiveLab.ZM
             arrcnt = 1;
             rawdata = new st_zim_rt_raw();
             rtgrp = new st_zim_rt();
+            bChannel = new bool[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            bChannel[0] = true;
+            for (int i = 1; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                bChannel[i] = false;
+            }
+
             barr = new bool[3];
             barr[0] = true;
             barr[1] = false;
@@ -484,6 +541,26 @@ namespace ZiveLab.ZM
             loadoff = false;
         }
 
+        public void ApplyUseChannel(stSystemConfig sys,int sifch)
+        {
+            int nAuxBd;
+            bChannel[0] = true;
+            
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+            {
+                bChannel[i + 1] = false;
+                if (sys.mSIFCfg.GetDeviceType() == eDeviceType.MCBZA)
+                {
+                    nAuxBd = i / 4;
+                    if (sys.EnaZIM[nAuxBd] == 1 && sys.ChkZIM[nAuxBd] == 1 && (eDeviceType)sys.mSIFCfg.Type == eDeviceType.MCBZA && sifch == 0) bChannel[i + 1] = true;
+                    
+                }
+            }
+        }
+        public void SetType(stTech tech)
+        {
+
+        }
         public void Initialize(stTech tech)
         {
             stTech_EIS eis = new stTech_EIS(0);
@@ -511,7 +588,7 @@ namespace ZiveLab.ZM
                 barr[0] = true;
                 barr[1] = false;
                 barr[2] = false;
-                loadoff = (hfr.celloffwait==1)?true:false;
+                loadoff = (hfr.celloffwait == 1) ? true : false;
                 arrcnt = 1;
             }
             else if (techtype == enTechType.TECH_PRR)
@@ -605,22 +682,34 @@ namespace ZiveLab.ZM
                 arrcnt = 1;
                 loadoff = false;
             }
-            
+
         }
-        public void Append(st_zim_eis_raw_val[] eisraw)
+        public void Append(st_zim_eis_status mstatus)
         {
             int i;
+            int tmp;
+
             for (i = 0; i < DeviceConstants.MAX_EIS_RT_RAW_POINT; i++)
             {
-                if(eisraw[i].vac == 0.0 && eisraw[i].iac == 0.0)
+                if (mstatus.Real_val[i].vac == 0.0 && mstatus.Real_val[i].iac == 0.0)
                 {
                     break;
                 }
                 rawdata.idx[i] = (double)i;
-                rawdata.dv[i] = eisraw[i].vac;
-                rawdata.di[i] = eisraw[i].iac;
+                rawdata.di[i] = mstatus.Real_val[i].iac;
+                rawdata.dv[0].vac[i] = mstatus.Real_val[i].vac;
+
+                for (int j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                {
+                    if (bChannel[j + 1] == false) continue;
+
+                    tmp = j * DeviceConstants.MAX_EIS_RT_RAW_POINT + i;
+                    rawdata.dv[j+1].vac[i] = mstatus.Aux_Real_val[tmp].vac;
+                }
+                
             }
-            rawdata.count = i; 
+            
+            rawdata.count = i;
 
         }
 
@@ -636,72 +725,117 @@ namespace ZiveLab.ZM
                 }
                 oldcycle = mdata.nCycle;
             }
+
             DataAppend(mdata, false);
         }
 
-        public void Append(stDefTestData[] arrd,int count, ref int oldcycle)
+        public void Append(stDefTestData[] arrd, int count, ref int oldcycle)
         {
-            for(int i=0; i<count; i++)
+            for (int i = 0; i < count; i++)
             {
-                if(oldcycle != arrd[i].nCycle)
+                if (oldcycle != arrd[i].nCycle)
                 {
-                    if(oldcycle >= 0)
+                    if (oldcycle >= 0)
                     {
                         oldcycle = arrd[i].nCycle;
-                        DataAppend(arrd[i],true);
+                        DataAppend(arrd[i], true);
                         continue;
                     }
                     oldcycle = arrd[i].nCycle;
                 }
-                DataAppend(arrd[i],false);
-
+                DataAppend(arrd[i], false);
             }
         }
 
-        public void DataAppend1(stDefTestData d, bool changecycle) // not used.
+
+        public void DataAppendHFR1(stDefTestData d, bool changecycle)
         {
-            double zmag = Math.Sqrt(d.real * d.real + d.img * d.img);
-            double zph = Math.Atan2(d.img, d.real) * 180.0 / DeviceConstants.PI;
-            double Yre = d.real / ((d.real * d.real) + (d.img * d.img));
-            double Yimg = -1.0 * d.img / ((d.real * d.real) + (d.img * d.img));
-            double Ymag = Math.Sqrt((double)(Yre * Yre + Yimg * Yimg));
-            double cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * d.img);
-            double cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double tmp;
+            double zre, zim;
+            double Yimg;
+            double cs;
+            double cp;
+
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
+            {
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
+                }
+                else
+                { 
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
+                }
+
+                Yimg = -1.0 * zim / ((zre * zre) + (zim * zim));
+                cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * zim);
+                cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
+
+                if (rtgrp.item[ch].plot[0].Maxval[0] < zre) rtgrp.item[ch].plot[0].Maxval[0] = zre;
+                if (rtgrp.item[ch].plot[0].Minval[0] > zre) rtgrp.item[ch].plot[0].Minval[0] = zre;
+                rtgrp.item[ch].plot[0].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[0].ly[0].Add(zre);
+
+                if (ch == 0) tmp = d.Vdc;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Vdc;
+
+                rtgrp.item[ch].plot[1].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[1].ly[0].Add(tmp);
+
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[2].ly[0].Add(cs);
+
+                rtgrp.item[ch].plot[3].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[3].ly[0].Add(cp);
+            }
+        }
+
+        public void DataAppendPRR1(stDefTestData d, bool changecycle)
+        {
+            if (arrcnt == 0) return;
+
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            int Lastindex;
+            double zre, zim;
+            double Yimg;
+            double cs;
+            double cp;
             double tmp;
 
-            if (techtype == enTechType.TECH_HFR)
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
             {
-                if (rtgrp.plot[0].Maxval[0] < d.real) rtgrp.plot[0].Maxval[0] = d.real;
-                if (rtgrp.plot[0].Minval[0] > d.real) rtgrp.plot[0].Minval[0] = d.real;
-                rtgrp.plot[0].freq[0].Add(d.fFreq);
-                rtgrp.plot[0].lx[0].Add(d.TestTime);
-                rtgrp.plot[0].ly[0].Add(d.real);
+                if (bChannel[ch] == false) continue;
 
-                if (loadoff)
+                if (ch == 0)
                 {
-                    tmp = d.Veoc;
+                    zre = d.real;
+                    zim = d.img;
                 }
                 else
                 {
-                    tmp = d.Vdc;
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
                 }
 
-                rtgrp.plot[1].freq[0].Add(d.fFreq);
-                rtgrp.plot[1].lx[0].Add(d.TestTime);
-                rtgrp.plot[1].ly[0].Add(tmp);
+                Yimg = -1.0 * zim / ((zre * zre) + (zim * zim));
+                cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * zim);
+                cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
 
-                rtgrp.plot[2].freq[0].Add(d.fFreq);
-                rtgrp.plot[2].lx[0].Add(d.TestTime);
-                rtgrp.plot[2].ly[0].Add(cs);
-
-                rtgrp.plot[3].freq[0].Add(d.fFreq);
-                rtgrp.plot[3].lx[0].Add(d.TestTime);
-                rtgrp.plot[3].ly[0].Add(cp);
-            }
-            else if (techtype == enTechType.TECH_PRR)
-            {
-                if (arrcnt == 0) return;
-                int Lastindex;
                 for (int i = 0; i < 3; i++)
                 {
                     if (barr[findex] == true)
@@ -712,55 +846,54 @@ namespace ZiveLab.ZM
                         {
                             if (arrcnt > 2)
                             {
-                                rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                                rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                                rtgrp.plot[0].ly[findex].Add(d.real);
+                                rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                                rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                                rtgrp.item[ch].plot[0].ly[findex].Add(zre);
                             }
                             else
                             {
-                                Lastindex = rtgrp.plot[0].ly[0].Count - 1;
-                                tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
-                                rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                                rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                                rtgrp.plot[0].ly[findex].Add(tmp);
+                                Lastindex = rtgrp.item[ch].plot[0].ly[0].Count - 1;
+                                tmp = d.real - rtgrp.item[ch].plot[0].ly[0][Lastindex];
+                                rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                                rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                                rtgrp.item[ch].plot[0].ly[findex].Add(tmp);
                             }
 
                         }
                         else if (findex == 2)
                         {
-                            //Lastindex = rtgrp.plot[0].ly[1].Count - 1;
-                            //tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
+                            //Lastindex = rtgrp.item[ch].plot[0].ly[1].Count - 1;
+                            //tmp = zre - rtgrp.item[ch].plot[0].ly[1][Lastindex];
 
-                            Lastindex = rtgrp.plot[0].ly[0].Count - 1;
-                            tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
+                            Lastindex = rtgrp.item[ch].plot[0].ly[0].Count - 1;
+                            tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex];
 
 
-                            rtgrp.plot[0].freq[1][Lastindex] = d.fFreq;
-                            rtgrp.plot[0].lx[1][Lastindex] = d.TestTime;
-                            rtgrp.plot[0].ly[1][Lastindex] = tmp;
+                            rtgrp.item[ch].plot[0].freq[1][Lastindex] = d.fFreq;
+                            rtgrp.item[ch].plot[0].lx[1][Lastindex] = d.TestTime;
+                            rtgrp.item[ch].plot[0].ly[1][Lastindex] = tmp;
                         }
                         else
                         {
-                            rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                            rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                            rtgrp.plot[0].ly[findex].Add(d.real);
+                            rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                            rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                            rtgrp.item[ch].plot[0].ly[findex].Add(zre);
                         }
 
-
                         //phase
-                        //rtgrp.plot[1].freq[findex].Add(d.fFreq);
-                        //rtgrp.plot[1].lx[findex].Add(d.TestTime);
-                        //rtgrp.plot[1].ly[findex].Add(d.Vdc);
+                        //rtgrp.item[ch].plot[1].freq[findex].Add(d.fFreq);
+                        //rtgrp.item[ch].plot[1].lx[findex].Add(d.TestTime);
+                        //rtgrp.item[ch].plot[1].ly[findex].Add(d.Vdc);
 
                         //Cs
-                        rtgrp.plot[2].freq[findex].Add(d.fFreq);
-                        rtgrp.plot[2].lx[findex].Add(d.TestTime);
-                        rtgrp.plot[2].ly[findex].Add(cs);
+                        rtgrp.item[ch].plot[2].freq[findex].Add(d.fFreq);
+                        rtgrp.item[ch].plot[2].lx[findex].Add(d.TestTime);
+                        rtgrp.item[ch].plot[2].ly[findex].Add(cs);
 
                         //Cp
-                        rtgrp.plot[3].freq[findex].Add(d.fFreq);
-                        rtgrp.plot[3].lx[findex].Add(d.TestTime);
-                        rtgrp.plot[3].ly[findex].Add(cp);
+                        rtgrp.item[ch].plot[3].freq[findex].Add(d.fFreq);
+                        rtgrp.item[ch].plot[3].lx[findex].Add(d.TestTime);
+                        rtgrp.item[ch].plot[3].ly[findex].Add(cp);
 
                         findex++;
                         if (findex >= 3) findex = 0;
@@ -772,196 +905,313 @@ namespace ZiveLab.ZM
                     }
                     if (findex >= 3) findex = 0;
                 }
-
             }
-            else if (techtype == enTechType.TECH_MON)
-            {
-                rtgrp.plot[0].freq[0].Add(0.0);
-                rtgrp.plot[0].lx[0].Add(d.TestTime);
-
-                tmp = d.Veoc;
-                rtgrp.plot[0].ly[0].Add(tmp);
-
-
-                rtgrp.plot[1].freq[0].Add(0.0);
-                rtgrp.plot[1].lx[0].Add(d.TestTime);
-                rtgrp.plot[1].ly[0].Add(d.Temperature);
-                /*
-                rtgrp.plot[2].freq[0].Add(0.0);
-                rtgrp.plot[2].lx[0].Add(d.TestTime);
-                if (loadoff)
-                {
-                    tmp = d.Veoc;
-                }
-                else
-                {
-                    tmp = d.Vdc;
-                }
-                rtgrp.plot[2].ly[0].Add(tmp);
-                
-                rtgrp.plot[3].freq[0].Add(0.0);
-                rtgrp.plot[3].lx[0].Add(d.TestTime);
-                rtgrp.plot[3].ly[0].Add(d.Temperature);
-                */
-            }
-            else if (techtype == enTechType.TECH_QIS)
-            {
-                tmp = d.img * -1.0;
-                rtgrp.plot[0].freq[0].Add(d.fFreq);
-                rtgrp.plot[0].lx[0].Add(d.real);
-                rtgrp.plot[0].ly[0].Add(tmp);
-
-                rtgrp.plot[2].freq[0].Add(d.fFreq);
-                rtgrp.plot[2].lx[0].Add(d.fFreq);
-                rtgrp.plot[2].ly[0].Add(zmag);
-
-                rtgrp.plot[3].freq[0].Add(d.fFreq);
-                rtgrp.plot[3].lx[0].Add(d.fFreq);
-                rtgrp.plot[3].ly[0].Add(zph);
-            }
-            else if (techtype == enTechType.TECH_DCH)
-            {
-                rtgrp.plot[0].freq[0].Add(0.0);
-                rtgrp.plot[0].lx[0].Add(d.TestTime);
-
-                tmp = d.Vdc;
-                rtgrp.plot[0].ly[0].Add(tmp);
-
-
-                rtgrp.plot[1].freq[0].Add(0.0);
-                rtgrp.plot[1].lx[0].Add(d.TestTime);
-                rtgrp.plot[1].ly[0].Add(d.Temperature);
-                /*
-                rtgrp.plot[2].freq[0].Add(0.0);
-                rtgrp.plot[2].lx[0].Add(d.TestTime);
-                if (loadoff)
-                {
-                    tmp = d.Veoc;
-                }
-                else
-                {
-                    tmp = d.Vdc;
-                }
-                rtgrp.plot[2].ly[0].Add(tmp);
-                
-                rtgrp.plot[3].freq[0].Add(0.0);
-                rtgrp.plot[3].lx[0].Add(d.TestTime);
-                rtgrp.plot[3].ly[0].Add(d.Temperature);
-                */
-            }
-            else
-            {
-                tmp = d.img * -1.0;
-                if (changecycle)
-                {
-                    rtgrp.plot[0].freq[0].Add(0.0);
-                    rtgrp.plot[0].lx[0].Add(double.NaN);
-                    rtgrp.plot[0].ly[0].Add(0.0);
-
-                    rtgrp.plot[2].freq[0].Add(0.0);
-                    rtgrp.plot[2].lx[0].Add(double.NaN);
-                    rtgrp.plot[2].ly[0].Add(0.0);
-
-                    rtgrp.plot[3].freq[0].Add(0.0);
-                    rtgrp.plot[3].lx[0].Add(double.NaN);
-                    rtgrp.plot[3].ly[0].Add(0.0);
-
-                    for (int i = 0; i < rtgrp.plot[0].freq[0].Count; i++)
-                    {
-                        rtgrp.plot[0].freq[1].Add(rtgrp.plot[0].freq[0][i]);
-                        rtgrp.plot[0].lx[1].Add(rtgrp.plot[0].lx[0][i]);
-                        rtgrp.plot[0].ly[1].Add(rtgrp.plot[0].ly[0][i]);
-
-                        rtgrp.plot[2].freq[1].Add(rtgrp.plot[2].freq[0][i]);
-                        rtgrp.plot[2].lx[1].Add(rtgrp.plot[2].lx[0][i]);
-                        rtgrp.plot[2].ly[1].Add(rtgrp.plot[2].ly[0][i]);
-
-                        rtgrp.plot[3].freq[1].Add(rtgrp.plot[3].freq[0][i]);
-                        rtgrp.plot[3].lx[1].Add(rtgrp.plot[3].lx[0][i]);
-                        rtgrp.plot[3].ly[1].Add(rtgrp.plot[3].ly[0][i]);
-                    }
-
-                    rtgrp.plot[0].freq[0].Clear();
-                    rtgrp.plot[0].lx[0].Clear();
-                    rtgrp.plot[0].ly[0].Clear();
-
-                    rtgrp.plot[2].freq[0].Clear();
-                    rtgrp.plot[2].lx[0].Clear();
-                    rtgrp.plot[2].ly[0].Clear();
-
-                    rtgrp.plot[3].freq[0].Clear();
-                    rtgrp.plot[3].lx[0].Clear();
-                    rtgrp.plot[3].ly[0].Clear();
-                }
-                rtgrp.plot[0].freq[0].Add(d.fFreq);
-                rtgrp.plot[0].lx[0].Add(d.real);
-                rtgrp.plot[0].ly[0].Add(tmp);
-
-                rtgrp.plot[2].freq[0].Add(d.fFreq);
-                rtgrp.plot[2].lx[0].Add(d.fFreq);
-                rtgrp.plot[2].ly[0].Add(zmag);
-
-                rtgrp.plot[3].freq[0].Add(d.fFreq);
-                rtgrp.plot[3].lx[0].Add(d.fFreq);
-                rtgrp.plot[3].ly[0].Add(zph);
-            }
-
         }
 
-        public void DataAppend(stDefTestData d, bool changecycle)
+        public void DataAppendMON1(stDefTestData d, bool changecycle)
         {
-            double zmag = Math.Sqrt(d.real * d.real + d.img * d.img);
-            double zph = Math.Atan2(d.img, d.real) * 180.0 / DeviceConstants.PI;
-            double Yre = d.real / ((d.real * d.real) + (d.img * d.img));
-            double Yimg = -1.0 * d.img / ((d.real * d.real) + (d.img * d.img));
-            double Ymag = Math.Sqrt((double)(Yre * Yre + Yimg * Yimg));
-            double cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * d.img);
-            double cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
             double tmp;
 
-            if (techtype == enTechType.TECH_HFR)
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
             {
-                if (rtgrp.plot[0].Maxval[0] < d.real) rtgrp.plot[0].Maxval[0] = d.real;
-                if (rtgrp.plot[0].Minval[0] > d.real) rtgrp.plot[0].Minval[0] = d.real;
-                rtgrp.plot[0].count[0]++;
-                rtgrp.plot[0].freq[0].Add(d.fFreq);
-                rtgrp.plot[0].lx[0].Add(d.TestTime);
-                rtgrp.plot[0].ly[0].Add(d.real);
+                if (bChannel[ch] == false) continue;
 
-                if (loadoff)
+                if (ch > 0)
                 {
-                    tmp = d.Veoc;
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                }
+                rtgrp.item[ch].plot[0].freq[0].Add(0.0);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.TestTime);
+
+                if (ch == 0) tmp = d.Vdc;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Vdc;
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+
+                if (ch == 0)
+                {
+                    rtgrp.item[ch].plot[1].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
+                    rtgrp.item[ch].plot[1].ly[0].Add(d.Temperature);
+                }
+            }
+        }
+
+        public void DataAppendQIS1(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double zre, zim;
+            double zmag, zph;
+            double tmp;
+
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
+            {
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
                 }
                 else
                 {
-                    tmp = d.Vdc;
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
                 }
-                rtgrp.plot[1].count[0]++;
-                rtgrp.plot[1].freq[0].Add(d.fFreq);
-                rtgrp.plot[1].lx[0].Add(d.TestTime);
-                rtgrp.plot[1].ly[0].Add(tmp);
-                if (rtgrp.plot[1].Maxval[0] < tmp) rtgrp.plot[1].Maxval[0] = tmp;
-                if (rtgrp.plot[1].Minval[0] > tmp) rtgrp.plot[1].Minval[0] = tmp;
 
-                rtgrp.plot[2].count[0]++;
-                rtgrp.plot[2].freq[0].Add(d.fFreq);
-                rtgrp.plot[2].lx[0].Add(d.TestTime);
-                rtgrp.plot[2].ly[0].Add(cs);
-                if (rtgrp.plot[2].Maxval[0] < cs) rtgrp.plot[2].Maxval[0] = cs;
-                if (rtgrp.plot[2].Minval[0] > cs) rtgrp.plot[2].Minval[0] = cs;
+                zmag = Math.Sqrt(zre * zre + zim * zim);
+                zph = Math.Atan2(zim, zre) * 180.0 / DeviceConstants.PI;
 
-                rtgrp.plot[3].count[0]++;
-                rtgrp.plot[3].freq[0].Add(d.fFreq);
-                rtgrp.plot[3].lx[0].Add(d.TestTime);
-                rtgrp.plot[3].ly[0].Add(cp);
-                if (rtgrp.plot[3].Maxval[0] < cp) rtgrp.plot[3].Maxval[0] = cp;
-                if (rtgrp.plot[3].Minval[0] > cp) rtgrp.plot[3].Minval[0] = cp;
+                tmp = zim * -1.0;
+                rtgrp.item[ch].plot[0].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.real);
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].ly[0].Add(zmag);
+
+                rtgrp.item[ch].plot[3].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].ly[0].Add(zph);
             }
-            else if (techtype == enTechType.TECH_PRR)
+        }
+
+        public void DataAppendDCH1(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double tmp;
+
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
             {
-                if (arrcnt == 0) return;
-                int Lastindex;
-                for(int i=0; i<3; i++)
+                if (bChannel[ch] == false) continue;
+
+                if (ch > 0)
+                {
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                }
+                rtgrp.item[ch].plot[0].freq[0].Add(0.0);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.TestTime);
+
+                if (ch == 0) tmp = d.Vdc;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Vdc;
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+
+                if (ch == 0)
+                {
+                    rtgrp.item[ch].plot[1].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
+                    rtgrp.item[ch].plot[1].ly[0].Add(d.Temperature);
+                }
+            }
+        }
+
+        public void DataAppendEIS1(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double zre, zim;
+            double zmag, zph;
+            double tmp;
+
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
+            {
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
+                }
+                else
+                {
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
+                }
+
+                zmag = Math.Sqrt(zre * zre + zim * zim);
+                zph = Math.Atan2(zim, zre) * 180.0 / DeviceConstants.PI;
+
+                tmp = zim * -1.0;
+
+                if (changecycle)
+                {
+                    rtgrp.item[ch].plot[0].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[0].lx[0].Add(double.NaN);
+                    rtgrp.item[ch].plot[0].ly[0].Add(0.0);
+
+                    rtgrp.item[ch].plot[2].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[2].lx[0].Add(double.NaN);
+                    rtgrp.item[ch].plot[2].ly[0].Add(0.0);
+
+                    rtgrp.item[ch].plot[3].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[3].lx[0].Add(double.NaN);
+                    rtgrp.item[ch].plot[3].ly[0].Add(0.0);
+
+                    for (int i = 0; i < rtgrp.item[ch].plot[0].freq[0].Count; i++)
+                    {
+                        rtgrp.item[ch].plot[0].freq[1].Add(rtgrp.item[ch].plot[0].freq[0][i]);
+                        rtgrp.item[ch].plot[0].lx[1].Add(rtgrp.item[ch].plot[0].lx[0][i]);
+                        rtgrp.item[ch].plot[0].ly[1].Add(rtgrp.item[ch].plot[0].ly[0][i]);
+
+                        rtgrp.item[ch].plot[2].freq[1].Add(rtgrp.item[ch].plot[2].freq[0][i]);
+                        rtgrp.item[ch].plot[2].lx[1].Add(rtgrp.item[ch].plot[2].lx[0][i]);
+                        rtgrp.item[ch].plot[2].ly[1].Add(rtgrp.item[ch].plot[2].ly[0][i]);
+
+                        rtgrp.item[ch].plot[3].freq[1].Add(rtgrp.item[ch].plot[3].freq[0][i]);
+                        rtgrp.item[ch].plot[3].lx[1].Add(rtgrp.item[ch].plot[3].lx[0][i]);
+                        rtgrp.item[ch].plot[3].ly[1].Add(rtgrp.item[ch].plot[3].ly[0][i]);
+                    }
+
+                    rtgrp.item[ch].plot[0].freq[0].Clear();
+                    rtgrp.item[ch].plot[0].lx[0].Clear();
+                    rtgrp.item[ch].plot[0].ly[0].Clear();
+
+                    rtgrp.item[ch].plot[2].freq[0].Clear();
+                    rtgrp.item[ch].plot[2].lx[0].Clear();
+                    rtgrp.item[ch].plot[2].ly[0].Clear();
+
+                    rtgrp.item[ch].plot[3].freq[0].Clear();
+                    rtgrp.item[ch].plot[3].lx[0].Clear();
+                    rtgrp.item[ch].plot[3].ly[0].Clear();
+                }
+                rtgrp.item[ch].plot[0].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[0].lx[0].Add(zre);
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].ly[0].Add(zmag);
+
+                rtgrp.item[ch].plot[3].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].ly[0].Add(zph);
+            }
+        }
+
+        public void DataAppend1(stDefTestData d, bool changecycle)
+        {
+            if (techtype == enTechType.TECH_HFR) DataAppendHFR1(d, false);
+            else if (techtype == enTechType.TECH_PRR) DataAppendPRR1(d, false);
+            else if (techtype == enTechType.TECH_MON) DataAppendMON1(d, false);
+            else if (techtype == enTechType.TECH_QIS) DataAppendQIS1(d, false);
+            else if (techtype == enTechType.TECH_DCH) DataAppendDCH1(d, false);
+            else DataAppendEIS1(d, false);
+        }
+
+        public void DataAppendHFR(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double tmp;
+            double zre, zim;
+            double Yimg;
+            double cs;
+            double cp;
+
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
+            {
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
+                }
+                else
+                {
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
+                }
+
+                Yimg = -1.0 * zim / ((zre * zre) + (zim * zim));
+                cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * zim);
+                cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
+
+                if (rtgrp.item[ch].plot[0].Maxval[0] < zre) rtgrp.item[ch].plot[0].Maxval[0] = zre;
+                if (rtgrp.item[ch].plot[0].Minval[0] > zre) rtgrp.item[ch].plot[0].Minval[0] = zre;
+                rtgrp.item[ch].plot[0].count[0]++;
+                rtgrp.item[ch].plot[0].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[0].ly[0].Add(zre);
+
+                if (ch == 0)
+                {
+                    if (loadoff) tmp = d.Veoc;
+                    else tmp = d.Vdc;
+                }
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Vdc;
+
+                rtgrp.item[ch].plot[1].count[0]++;
+                rtgrp.item[ch].plot[1].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[1].ly[0].Add(tmp);
+                if (rtgrp.item[ch].plot[1].Maxval[0] < tmp) rtgrp.item[ch].plot[1].Maxval[0] = tmp;
+                if (rtgrp.item[ch].plot[1].Minval[0] > tmp) rtgrp.item[ch].plot[1].Minval[0] = tmp;
+
+                rtgrp.item[ch].plot[2].count[0]++;
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[2].ly[0].Add(cs);
+                if (rtgrp.item[ch].plot[2].Maxval[0] < cs) rtgrp.item[ch].plot[2].Maxval[0] = cs;
+                if (rtgrp.item[ch].plot[2].Minval[0] > cs) rtgrp.item[ch].plot[2].Minval[0] = cs;
+
+                rtgrp.item[ch].plot[3].count[0]++;
+                rtgrp.item[ch].plot[3].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[3].ly[0].Add(cp);
+                if (rtgrp.item[ch].plot[3].Maxval[0] < cp) rtgrp.item[ch].plot[3].Maxval[0] = cp;
+                if (rtgrp.item[ch].plot[3].Minval[0] > cp) rtgrp.item[ch].plot[3].Minval[0] = cp;
+            }
+        }
+
+        public void DataAppendPRR(stDefTestData d, bool changecycle)
+        {
+            if (arrcnt == 0) return;
+
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            int Lastindex;
+            double zre, zim;
+            double Yimg;
+            double cs;
+            double cp;
+            double tmp;
+
+
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
+            {
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
+                }
+                else
+                {
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
+                }
+
+                Yimg = -1.0 * zim / ((zre * zre) + (zim * zim));
+                cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * zim);
+                cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
+
+                for (int i = 0; i < 3; i++)
                 {
                     if (barr[findex] == true)
                     {
@@ -971,77 +1221,75 @@ namespace ZiveLab.ZM
                         {
                             if (arrcnt > 2)
                             {
-                                rtgrp.plot[0].count[findex]++;
-                                rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                                rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                                rtgrp.plot[0].ly[findex].Add(d.real);
-                                //if (rtgrp.plot[0].Maxval[findex] < d.real) rtgrp.plot[0].Maxval[findex] = d.real;
-                                //if (rtgrp.plot[0].Minval[findex] > d.real) rtgrp.plot[0].Minval[findex] = d.real;
+                                rtgrp.item[ch].plot[0].count[findex]++;
+                                rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                                rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                                rtgrp.item[ch].plot[0].ly[findex].Add(zre);
+                                //if (rtgrp.item[ch].plot[0].Maxval[findex] < zre) rtgrp.item[ch].plot[0].Maxval[findex] = zre;
+                                //if (rtgrp.item[ch].plot[0].Minval[findex] > zre) rtgrp.item[ch].plot[0].Minval[findex] = zre;
                             }
                             else
                             {
-                                Lastindex = rtgrp.plot[0].ly[0].Count-1;
-                                tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
+                                Lastindex = rtgrp.item[ch].plot[0].ly[0].Count - 1;
+                                tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex];
 
-                                rtgrp.plot[0].count[findex]++;
-                                rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                                rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                                rtgrp.plot[0].ly[findex].Add(tmp);
+                                rtgrp.item[ch].plot[0].count[findex]++;
+                                rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                                rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                                rtgrp.item[ch].plot[0].ly[findex].Add(tmp);
 
-                                //if (rtgrp.plot[0].Maxval[findex] < tmp) rtgrp.plot[0].Maxval[findex] = tmp;
-                                //if (rtgrp.plot[0].Minval[findex] > tmp) rtgrp.plot[0].Minval[findex] = tmp;
+                                //if (rtgrp.item[ch].plot[0].Maxval[findex] < tmp) rtgrp.item[ch].plot[0].Maxval[findex] = tmp;
+                                //if (rtgrp.item[ch].plot[0].Minval[findex] > tmp) rtgrp.item[ch].plot[0].Minval[findex] = tmp;
                             }
-
                         }
                         else if (findex == 2)
                         {
+                            Lastindex = rtgrp.item[ch].plot[0].ly[1].Count - 1;
+                            if (prrrpcalcmode == 0) tmp = zre - rtgrp.item[ch].plot[0].ly[1][Lastindex];
+                            else if (prrrpcalcmode == 1) tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex];
+                            else tmp = rtgrp.item[ch].plot[0].ly[1][Lastindex] - rtgrp.item[ch].plot[0].ly[0][Lastindex];
 
-                            Lastindex = rtgrp.plot[0].ly[1].Count-1;
-                            if (prrrpcalcmode == 0) tmp = d.real - rtgrp.plot[0].ly[1][Lastindex];
-                            else if (prrrpcalcmode == 1) tmp = d.real - rtgrp.plot[0].ly[0][Lastindex];
-                            else  tmp = rtgrp.plot[0].ly[1][Lastindex] - rtgrp.plot[0].ly[0][Lastindex];
-
-                            rtgrp.plot[0].count[findex]++;
-                            rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                            rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                            rtgrp.plot[0].ly[findex].Add(tmp);
+                            rtgrp.item[ch].plot[0].count[findex]++;
+                            rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                            rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                            rtgrp.item[ch].plot[0].ly[findex].Add(tmp);
 
                             /*
-                            rtgrp.plot[0].freq[1][Lastindex] = d.fFreq;
-                            rtgrp.plot[0].lx[1][Lastindex] = d.TestTime;
-                            rtgrp.plot[0].ly[1][Lastindex] = tmp;
+                            rtgrp.item[ch].plot[0].freq[1][Lastindex] = d.fFreq;
+                            rtgrp.item[ch].plot[0].lx[1][Lastindex] = d.TestTime;
+                            rtgrp.item[ch].plot[0].ly[1][Lastindex] = tmp;
                             */
                         }
                         else
                         {
-                            rtgrp.plot[0].count[findex]++;
-                            rtgrp.plot[0].freq[findex].Add(d.fFreq);
-                            rtgrp.plot[0].lx[findex].Add(d.TestTime);
-                            rtgrp.plot[0].ly[findex].Add(d.real);
-                            //if (rtgrp.plot[0].Maxval[findex] < d.real) rtgrp.plot[0].Maxval[findex] = d.real;
-                            //if (rtgrp.plot[0].Minval[findex] > d.real) rtgrp.plot[0].Minval[findex] = d.real;
+                            rtgrp.item[ch].plot[0].count[findex]++;
+                            rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
+                            rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
+                            rtgrp.item[ch].plot[0].ly[findex].Add(zre);
+                            //if (rtgrp.item[ch].plot[0].Maxval[findex] < zre) rtgrp.item[ch].plot[0].Maxval[findex] = zre;
+                            //if (rtgrp.item[ch].plot[0].Minval[findex] > zre) rtgrp.item[ch].plot[0].Minval[findex] = zre;
                         }
 
                         //phase
-                        //rtgrp.plot[1].freq[findex].Add(d.fFreq);
-                        //rtgrp.plot[1].lx[findex].Add(d.TestTime);
-                        //rtgrp.plot[1].ly[findex].Add(d.Vdc);
+                        //rtgrp.item[ch].plot[1].freq[findex].Add(d.fFreq);
+                        //rtgrp.item[ch].plot[1].lx[findex].Add(d.TestTime);
+                        //rtgrp.item[ch].plot[1].ly[findex].Add(d.Vdc);
 
                         //Cs
-                        rtgrp.plot[2].count[findex]++;
-                        rtgrp.plot[2].freq[findex].Add(d.fFreq);
-                        rtgrp.plot[2].lx[findex].Add(d.TestTime);
-                        rtgrp.plot[2].ly[findex].Add(cs);
-                        //if (rtgrp.plot[2].Maxval[findex] < cs) rtgrp.plot[2].Maxval[findex] = cs;
-                        //if (rtgrp.plot[2].Minval[findex] > cs) rtgrp.plot[2].Minval[findex] = cs;
+                        rtgrp.item[ch].plot[2].count[findex]++;
+                        rtgrp.item[ch].plot[2].freq[findex].Add(d.fFreq);
+                        rtgrp.item[ch].plot[2].lx[findex].Add(d.TestTime);
+                        rtgrp.item[ch].plot[2].ly[findex].Add(cs);
+                        //if (rtgrp.item[ch].plot[2].Maxval[findex] < cs) rtgrp.item[ch].plot[2].Maxval[findex] = cs;
+                        //if (rtgrp.item[ch].plot[2].Minval[findex] > cs) rtgrp.item[ch].plot[2].Minval[findex] = cs;
 
                         //Cp
-                        rtgrp.plot[3].count[findex]++;
-                        rtgrp.plot[3].freq[findex].Add(d.fFreq);
-                        rtgrp.plot[3].lx[findex].Add(d.TestTime);
-                        rtgrp.plot[3].ly[findex].Add(cp);
-                        //if (rtgrp.plot[3].Maxval[findex] < cs) rtgrp.plot[3].Maxval[findex] = cp;
-                        //if (rtgrp.plot[3].Minval[findex] > cs) rtgrp.plot[3].Minval[findex] = cp;
+                        rtgrp.item[ch].plot[3].count[findex]++;
+                        rtgrp.item[ch].plot[3].freq[findex].Add(d.fFreq);
+                        rtgrp.item[ch].plot[3].lx[findex].Add(d.TestTime);
+                        rtgrp.item[ch].plot[3].ly[findex].Add(cp);
+                        //if (rtgrp.item[ch].plot[3].Maxval[findex] < cs) rtgrp.item[ch].plot[3].Maxval[findex] = cp;
+                        //if (rtgrp.item[ch].plot[3].Minval[findex] > cs) rtgrp.item[ch].plot[3].Minval[findex] = cp;
                         findex++;
                         if (findex >= 3) findex = 0;
                         return;
@@ -1051,213 +1299,275 @@ namespace ZiveLab.ZM
                         findex++;
                     }
                     if (findex >= 3) findex = 0;
-                }       
-                
+                }
             }
-            else if (techtype == enTechType.TECH_MON)
+        }
+
+        public void DataAppendMON(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double tmp;
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
             {
-               
-                rtgrp.plot[0].freq[0].Add(0.0);
-                rtgrp.plot[0].lx[0].Add(d.TestTime);
+                if (bChannel[ch] == false) continue;
 
-                tmp = d.Veoc;
-
-                rtgrp.plot[0].count[0]++;
-                rtgrp.plot[0].ly[0].Add(tmp);
-                if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
-                if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
-
-                rtgrp.plot[1].count[0]++;
-                rtgrp.plot[1].freq[0].Add(0.0);
-                rtgrp.plot[1].lx[0].Add(d.TestTime);
-                rtgrp.plot[1].ly[0].Add(d.Temperature);
-                if (rtgrp.plot[1].Maxval[0] < d.Temperature) rtgrp.plot[1].Maxval[0] = d.Temperature;
-                if (rtgrp.plot[1].Minval[0] > d.Temperature) rtgrp.plot[1].Minval[0] = d.Temperature;
-                /*
-                rtgrp.plot[2].freq[0].Add(0.0);
-                rtgrp.plot[2].lx[0].Add(d.TestTime);
-                if (loadoff)
+                if (ch > 0)
                 {
-                    tmp = d.Veoc;
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                }
+
+                rtgrp.item[ch].plot[0].freq[0].Add(0.0);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.TestTime);
+
+                if (ch == 0) tmp = d.Vdc;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Vdc;
+
+
+                rtgrp.item[ch].plot[0].count[0]++;
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+                if (rtgrp.item[ch].plot[0].Maxval[0] < tmp) rtgrp.item[ch].plot[0].Maxval[0] = tmp;
+                if (rtgrp.item[ch].plot[0].Minval[0] > tmp) rtgrp.item[ch].plot[0].Minval[0] = tmp;
+                if (ch == 0)
+                {
+                    rtgrp.item[ch].plot[1].count[0]++;
+                    rtgrp.item[ch].plot[1].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
+                    rtgrp.item[ch].plot[1].ly[0].Add(d.Temperature);
+                    if (rtgrp.item[ch].plot[1].Maxval[0] < d.Temperature) rtgrp.item[ch].plot[1].Maxval[0] = d.Temperature;
+                    if (rtgrp.item[ch].plot[1].Minval[0] > d.Temperature) rtgrp.item[ch].plot[1].Minval[0] = d.Temperature;
+                }
+            }
+        }
+
+        public void DataAppendQIS(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double zre, zim;
+            double zmag, zph;
+            double tmp;
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
+            {
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
                 }
                 else
                 {
-                    tmp = d.Vdc;
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
                 }
-                rtgrp.plot[2].count[0]++;
-                rtgrp.plot[2].ly[0].Add(tmp);
-                if (rtgrp.plot[2].Maxval[0] < tmp) rtgrp.plot[2].Maxval[0] = tmp;
-                if (rtgrp.plot[2].Minval[0] > tmp) rtgrp.plot[2].Minval[0] = tmp;
-                
-                rtgrp.plot[3].count[0]++;
-                rtgrp.plot[3].freq[0].Add(0.0);
-                rtgrp.plot[3].lx[0].Add(d.TestTime);
-                rtgrp.plot[3].ly[0].Add(d.Temperature);
-                if (rtgrp.plot[2].Maxval[0] < d.Temperature) rtgrp.plot[2].Maxval[0] = d.Temperature;
-                if (rtgrp.plot[2].Minval[0] > d.Temperature) rtgrp.plot[2].Minval[0] = d.Temperature;
-                */
+
+                zmag = Math.Sqrt(zre * zre + zim * zim);
+                zph = Math.Atan2(zim, zre) * 180.0 / DeviceConstants.PI;
+
+                tmp = zim * -1.0;
+
+                rtgrp.item[ch].plot[0].count[0]++;
+                rtgrp.item[ch].plot[0].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[0].lx[0].Add(zre);
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+                if (rtgrp.item[ch].plot[0].Maxval[0] < tmp) rtgrp.item[ch].plot[0].Maxval[0] = tmp;
+                if (rtgrp.item[ch].plot[0].Minval[0] > tmp) rtgrp.item[ch].plot[0].Minval[0] = tmp;
+
+                if (rtgrp.item[ch].plot[0].Maxval[2] < zre) rtgrp.item[ch].plot[0].Maxval[2] = zre;
+                if (rtgrp.item[ch].plot[0].Minval[2] > zre) rtgrp.item[ch].plot[0].Minval[2] = zre;
+
+                rtgrp.item[ch].plot[2].count[0]++;
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].ly[0].Add(zmag);
+                if (rtgrp.item[ch].plot[2].Maxval[0] < zmag) rtgrp.item[ch].plot[2].Maxval[0] = zmag;
+                if (rtgrp.item[ch].plot[2].Minval[0] > zmag) rtgrp.item[ch].plot[2].Minval[0] = zmag;
+
+                if (rtgrp.item[ch].plot[2].Maxval[2] < d.fFreq) rtgrp.item[ch].plot[2].Maxval[2] = d.fFreq;
+                if (rtgrp.item[ch].plot[2].Minval[2] > d.fFreq) rtgrp.item[ch].plot[2].Minval[2] = d.fFreq;
+
+                rtgrp.item[ch].plot[3].count[0]++;
+                rtgrp.item[ch].plot[3].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].ly[0].Add(zph);
+                if (rtgrp.item[ch].plot[3].Maxval[0] < zph) rtgrp.item[ch].plot[3].Maxval[0] = zph;
+                if (rtgrp.item[ch].plot[3].Minval[0] > zph) rtgrp.item[ch].plot[3].Minval[0] = zph;
+
+                if (rtgrp.item[ch].plot[3].Maxval[2] < d.fFreq) rtgrp.item[ch].plot[3].Maxval[2] = d.fFreq;
+                if (rtgrp.item[ch].plot[3].Minval[2] > d.fFreq) rtgrp.item[ch].plot[3].Minval[2] = d.fFreq;
             }
-            else if (techtype == enTechType.TECH_QIS)
+        }
+
+        public void DataAppendDCH(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double tmp;
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
             {
-                tmp = d.img * -1.0;
-                rtgrp.plot[0].count[0]++;
-                rtgrp.plot[0].freq[0].Add(d.fFreq);
-                rtgrp.plot[0].lx[0].Add(d.real);
-                rtgrp.plot[0].ly[0].Add(tmp);
-                if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
-                if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
+                if (bChannel[ch] == false) continue;
 
-                if (rtgrp.plot[0].Maxval[2] < d.real) rtgrp.plot[0].Maxval[2] = d.real;
-                if (rtgrp.plot[0].Minval[2] > d.real) rtgrp.plot[0].Minval[2] = d.real;
+                if (ch > 0)
+                {
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                }
 
-                rtgrp.plot[2].count[0]++;
-                rtgrp.plot[2].freq[0].Add(d.fFreq);
-                rtgrp.plot[2].lx[0].Add(d.fFreq);
-                rtgrp.plot[2].ly[0].Add(zmag);
-                if (rtgrp.plot[2].Maxval[0] < zmag) rtgrp.plot[2].Maxval[0] = zmag;
-                if (rtgrp.plot[2].Minval[0] > zmag) rtgrp.plot[2].Minval[0] = zmag;
+                rtgrp.item[ch].plot[0].freq[0].Add(0.0);
+                rtgrp.item[ch].plot[0].lx[0].Add(d.TestTime);
+                if (ch == 0) tmp = d.Vdc;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Vdc;
 
-                if (rtgrp.plot[2].Maxval[2] < d.fFreq) rtgrp.plot[2].Maxval[2] = d.fFreq;
-                if (rtgrp.plot[2].Minval[2] > d.fFreq) rtgrp.plot[2].Minval[2] = d.fFreq;
+                rtgrp.item[ch].plot[0].count[0]++;
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+                if (rtgrp.item[ch].plot[0].Maxval[0] < tmp) rtgrp.item[ch].plot[0].Maxval[0] = tmp;
+                if (rtgrp.item[ch].plot[0].Minval[0] > tmp) rtgrp.item[ch].plot[0].Minval[0] = tmp;
 
-                rtgrp.plot[3].count[0]++;
-                rtgrp.plot[3].freq[0].Add(d.fFreq);
-                rtgrp.plot[3].lx[0].Add(d.fFreq);
-                rtgrp.plot[3].ly[0].Add(zph);
-                if (rtgrp.plot[3].Maxval[0] < zph) rtgrp.plot[3].Maxval[0] = zph;
-                if (rtgrp.plot[3].Minval[0] > zph) rtgrp.plot[3].Minval[0] = zph;
-
-                if (rtgrp.plot[3].Maxval[2] < d.fFreq) rtgrp.plot[3].Maxval[2] = d.fFreq;
-                if (rtgrp.plot[3].Minval[2] > d.fFreq) rtgrp.plot[3].Minval[2] = d.fFreq;
+                if (ch == 0)
+                {
+                    rtgrp.item[ch].plot[1].count[0]++;
+                    rtgrp.item[ch].plot[1].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
+                    rtgrp.item[ch].plot[1].ly[0].Add(d.Temperature);
+                    if (rtgrp.item[ch].plot[1].Maxval[0] < d.Temperature) rtgrp.item[ch].plot[1].Maxval[0] = d.Temperature;
+                    if (rtgrp.item[ch].plot[1].Minval[0] > d.Temperature) rtgrp.item[ch].plot[1].Minval[0] = d.Temperature;
+                }
             }
-            else if (techtype == enTechType.TECH_DCH)
-            {
+        }
 
-                rtgrp.plot[0].freq[0].Add(0.0);
-                rtgrp.plot[0].lx[0].Add(d.TestTime);
-                tmp = d.Vdc;
-               
-                rtgrp.plot[0].count[0]++;
-                rtgrp.plot[0].ly[0].Add(tmp);
-                if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
-                if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
+        public void DataAppendEIS(stDefTestData d, bool changecycle)
+        {
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
+            double zre, zim;
+            double zmag, zph;
+            double tmp;
 
-                rtgrp.plot[1].count[0]++;
-                rtgrp.plot[1].freq[0].Add(0.0);
-                rtgrp.plot[1].lx[0].Add(d.TestTime);
-                rtgrp.plot[1].ly[0].Add(d.Temperature);
-                if (rtgrp.plot[1].Maxval[0] < d.Temperature) rtgrp.plot[1].Maxval[0] = d.Temperature;
-                if (rtgrp.plot[1].Minval[0] > d.Temperature) rtgrp.plot[1].Minval[0] = d.Temperature;
-                /*
-                rtgrp.plot[2].freq[0].Add(0.0);
-                rtgrp.plot[2].lx[0].Add(d.TestTime);
-                tmp = d.Vdc;
-                rtgrp.plot[2].count[0]++;
-                rtgrp.plot[2].ly[0].Add(tmp);
-                if (rtgrp.plot[2].Maxval[0] < tmp) rtgrp.plot[2].Maxval[0] = tmp;
-                if (rtgrp.plot[2].Minval[0] > tmp) rtgrp.plot[2].Minval[0] = tmp;
-                
-                rtgrp.plot[3].count[0]++;
-                rtgrp.plot[3].freq[0].Add(0.0);
-                rtgrp.plot[3].lx[0].Add(d.TestTime);
-                rtgrp.plot[3].ly[0].Add(d.Temperature);
-                if (rtgrp.plot[2].Maxval[0] < d.Temperature) rtgrp.plot[2].Maxval[0] = d.Temperature;
-                if (rtgrp.plot[2].Minval[0] > d.Temperature) rtgrp.plot[2].Minval[0] = d.Temperature;
-                */
-            }
-            else
+            for (int ch = 0; ch < MBZA_Constant.MAX_AUXTYPE_CHANNELS; ch++)
             {
-                tmp = d.img * -1.0;
+                if (bChannel[ch] == false) continue;
+
+                if (ch == 0)
+                {
+                    zre = d.real;
+                    zim = d.img;
+                }
+                else
+                {
+                    nAuxBd = (ch - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                    nAuxBdCh = (ch - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    zre = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                    zim = d.mdata[nAuxBd].mdata[nAuxBdCh].Zim;
+                }
+
+                zmag = Math.Sqrt(zre * zre + zim * zim);
+                zph = Math.Atan2(zim, zre) * 180.0 / DeviceConstants.PI;
+
+                tmp = zim * -1.0;
+
                 if (changecycle)
                 {
-                    rtgrp.plot[0].count[0]++;
-                    rtgrp.plot[0].freq[0].Add(0.0);
-                    rtgrp.plot[0].lx[0].Add(double.NaN);
-                    rtgrp.plot[0].ly[0].Add(0.0);
+                    rtgrp.item[ch].plot[0].count[0]++;
+                    rtgrp.item[ch].plot[0].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[0].lx[0].Add(double.NaN);
+                    rtgrp.item[ch].plot[0].ly[0].Add(0.0);
 
-                    rtgrp.plot[2].count[0]++;
-                    rtgrp.plot[2].freq[0].Add(0.0);
-                    rtgrp.plot[2].lx[0].Add(double.NaN);
-                    rtgrp.plot[2].ly[0].Add(0.0);
+                    rtgrp.item[ch].plot[2].count[0]++;
+                    rtgrp.item[ch].plot[2].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[2].lx[0].Add(double.NaN);
+                    rtgrp.item[ch].plot[2].ly[0].Add(0.0);
 
-                    rtgrp.plot[3].count[0]++;
-                    rtgrp.plot[3].freq[0].Add(0.0);
-                    rtgrp.plot[3].lx[0].Add(double.NaN);
-                    rtgrp.plot[3].ly[0].Add(0.0);
+                    rtgrp.item[ch].plot[3].count[0]++;
+                    rtgrp.item[ch].plot[3].freq[0].Add(0.0);
+                    rtgrp.item[ch].plot[3].lx[0].Add(double.NaN);
+                    rtgrp.item[ch].plot[3].ly[0].Add(0.0);
 
-                    for (int i=0; i< rtgrp.plot[0].freq[0].Count; i++)
+                    for (int i = 0; i < rtgrp.item[ch].plot[0].freq[0].Count; i++)
                     {
-                        rtgrp.plot[0].count[1]++;
-                        rtgrp.plot[0].freq[1].Add(rtgrp.plot[0].freq[0][i]);
-                        rtgrp.plot[0].lx[1].Add(rtgrp.plot[0].lx[0][i]);
-                        rtgrp.plot[0].ly[1].Add(rtgrp.plot[0].ly[0][i]);
-                        if (rtgrp.plot[0].Maxval[1] < rtgrp.plot[0].ly[0][i]) rtgrp.plot[0].Maxval[1] = rtgrp.plot[0].ly[0][i];
-                        if (rtgrp.plot[0].Minval[1] > rtgrp.plot[0].ly[0][i]) rtgrp.plot[0].Minval[1] = rtgrp.plot[0].ly[0][i];
+                        rtgrp.item[ch].plot[0].count[1]++;
+                        rtgrp.item[ch].plot[0].freq[1].Add(rtgrp.item[ch].plot[0].freq[0][i]);
+                        rtgrp.item[ch].plot[0].lx[1].Add(rtgrp.item[ch].plot[0].lx[0][i]);
+                        rtgrp.item[ch].plot[0].ly[1].Add(rtgrp.item[ch].plot[0].ly[0][i]);
+                        if (rtgrp.item[ch].plot[0].Maxval[1] < rtgrp.item[ch].plot[0].ly[0][i]) rtgrp.item[ch].plot[0].Maxval[1] = rtgrp.item[ch].plot[0].ly[0][i];
+                        if (rtgrp.item[ch].plot[0].Minval[1] > rtgrp.item[ch].plot[0].ly[0][i]) rtgrp.item[ch].plot[0].Minval[1] = rtgrp.item[ch].plot[0].ly[0][i];
 
-                        rtgrp.plot[2].count[1]++;
-                        rtgrp.plot[2].freq[1].Add(rtgrp.plot[2].freq[0][i]);
-                        rtgrp.plot[2].lx[1].Add(rtgrp.plot[2].lx[0][i]);
-                        rtgrp.plot[2].ly[1].Add(rtgrp.plot[2].ly[0][i]);
-                        if (rtgrp.plot[2].Maxval[1] < rtgrp.plot[2].ly[0][i]) rtgrp.plot[2].Maxval[1] = rtgrp.plot[2].ly[0][i];
-                        if (rtgrp.plot[2].Minval[1] > rtgrp.plot[2].ly[0][i]) rtgrp.plot[2].Minval[1] = rtgrp.plot[2].ly[0][i];
+                        rtgrp.item[ch].plot[2].count[1]++;
+                        rtgrp.item[ch].plot[2].freq[1].Add(rtgrp.item[ch].plot[2].freq[0][i]);
+                        rtgrp.item[ch].plot[2].lx[1].Add(rtgrp.item[ch].plot[2].lx[0][i]);
+                        rtgrp.item[ch].plot[2].ly[1].Add(rtgrp.item[ch].plot[2].ly[0][i]);
+                        if (rtgrp.item[ch].plot[2].Maxval[1] < rtgrp.item[ch].plot[2].ly[0][i]) rtgrp.item[ch].plot[2].Maxval[1] = rtgrp.item[ch].plot[2].ly[0][i];
+                        if (rtgrp.item[ch].plot[2].Minval[1] > rtgrp.item[ch].plot[2].ly[0][i]) rtgrp.item[ch].plot[2].Minval[1] = rtgrp.item[ch].plot[2].ly[0][i];
 
-                        rtgrp.plot[3].count[1]++;
-                        rtgrp.plot[3].freq[1].Add(rtgrp.plot[3].freq[0][i]);
-                        rtgrp.plot[3].lx[1].Add(rtgrp.plot[3].lx[0][i]);
-                        rtgrp.plot[3].ly[1].Add(rtgrp.plot[3].ly[0][i]);
-                        if (rtgrp.plot[3].Maxval[1] < rtgrp.plot[3].ly[0][i]) rtgrp.plot[3].Maxval[1] = rtgrp.plot[3].ly[0][i];
-                        if (rtgrp.plot[3].Minval[1] > rtgrp.plot[3].ly[0][i]) rtgrp.plot[3].Minval[1] = rtgrp.plot[3].ly[0][i];
+                        rtgrp.item[ch].plot[3].count[1]++;
+                        rtgrp.item[ch].plot[3].freq[1].Add(rtgrp.item[ch].plot[3].freq[0][i]);
+                        rtgrp.item[ch].plot[3].lx[1].Add(rtgrp.item[ch].plot[3].lx[0][i]);
+                        rtgrp.item[ch].plot[3].ly[1].Add(rtgrp.item[ch].plot[3].ly[0][i]);
+                        if (rtgrp.item[ch].plot[3].Maxval[1] < rtgrp.item[ch].plot[3].ly[0][i]) rtgrp.item[ch].plot[3].Maxval[1] = rtgrp.item[ch].plot[3].ly[0][i];
+                        if (rtgrp.item[ch].plot[3].Minval[1] > rtgrp.item[ch].plot[3].ly[0][i]) rtgrp.item[ch].plot[3].Minval[1] = rtgrp.item[ch].plot[3].ly[0][i];
                     }
-                    
-                    rtgrp.plot[0].freq[0].Clear();
-                    rtgrp.plot[0].lx[0].Clear();
-                    rtgrp.plot[0].ly[0].Clear();
-                    rtgrp.plot[0].Maxval[0] = -9999999.9;
-                    rtgrp.plot[0].Minval[0] = 9999999.9;
-                    rtgrp.plot[0].count[0] = 0;
 
-                    rtgrp.plot[2].freq[0].Clear();
-                    rtgrp.plot[2].lx[0].Clear();
-                    rtgrp.plot[2].ly[0].Clear();
-                    rtgrp.plot[2].Maxval[0] = -9999999.9;
-                    rtgrp.plot[2].Minval[0] = 9999999.9;
-                    rtgrp.plot[2].count[0] = 0;
+                    rtgrp.item[ch].plot[0].freq[0].Clear();
+                    rtgrp.item[ch].plot[0].lx[0].Clear();
+                    rtgrp.item[ch].plot[0].ly[0].Clear();
+                    rtgrp.item[ch].plot[0].Maxval[0] = -9999999.9;
+                    rtgrp.item[ch].plot[0].Minval[0] = 9999999.9;
+                    rtgrp.item[ch].plot[0].count[0] = 0;
 
-                    rtgrp.plot[3].freq[0].Clear();
-                    rtgrp.plot[3].lx[0].Clear();
-                    rtgrp.plot[3].ly[0].Clear();
-                    rtgrp.plot[3].Maxval[0] = -9999999.9;
-                    rtgrp.plot[3].Minval[0] = 9999999.9;
-                    rtgrp.plot[3].count[0] = 0;
+                    rtgrp.item[ch].plot[2].freq[0].Clear();
+                    rtgrp.item[ch].plot[2].lx[0].Clear();
+                    rtgrp.item[ch].plot[2].ly[0].Clear();
+                    rtgrp.item[ch].plot[2].Maxval[0] = -9999999.9;
+                    rtgrp.item[ch].plot[2].Minval[0] = 9999999.9;
+                    rtgrp.item[ch].plot[2].count[0] = 0;
+
+                    rtgrp.item[ch].plot[3].freq[0].Clear();
+                    rtgrp.item[ch].plot[3].lx[0].Clear();
+                    rtgrp.item[ch].plot[3].ly[0].Clear();
+                    rtgrp.item[ch].plot[3].Maxval[0] = -9999999.9;
+                    rtgrp.item[ch].plot[3].Minval[0] = 9999999.9;
+                    rtgrp.item[ch].plot[3].count[0] = 0;
                 }
-                rtgrp.plot[0].count[0]++;
-                rtgrp.plot[0].freq[0].Add(d.fFreq);
-                rtgrp.plot[0].lx[0].Add(d.real);
-                rtgrp.plot[0].ly[0].Add(tmp);
-                if (rtgrp.plot[0].Maxval[0] < tmp) rtgrp.plot[0].Maxval[0] = tmp;
-                if (rtgrp.plot[0].Minval[0] > tmp) rtgrp.plot[0].Minval[0] = tmp;
-                if (rtgrp.plot[0].Maxval[2] < d.real) rtgrp.plot[0].Maxval[2] = d.real;
-                if (rtgrp.plot[0].Minval[2] > d.real) rtgrp.plot[0].Minval[2] = d.real;
+                rtgrp.item[ch].plot[0].count[0]++;
+                rtgrp.item[ch].plot[0].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[0].lx[0].Add(zre);
+                rtgrp.item[ch].plot[0].ly[0].Add(tmp);
+                if (rtgrp.item[ch].plot[0].Maxval[0] < tmp) rtgrp.item[ch].plot[0].Maxval[0] = tmp;
+                if (rtgrp.item[ch].plot[0].Minval[0] > tmp) rtgrp.item[ch].plot[0].Minval[0] = tmp;
+                if (rtgrp.item[ch].plot[0].Maxval[2] < zre) rtgrp.item[ch].plot[0].Maxval[2] = zre;
+                if (rtgrp.item[ch].plot[0].Minval[2] > zre) rtgrp.item[ch].plot[0].Minval[2] = zre;
 
-                rtgrp.plot[2].count[0]++;
-                rtgrp.plot[2].freq[0].Add(d.fFreq);
-                rtgrp.plot[2].lx[0].Add(d.fFreq);
-                rtgrp.plot[2].ly[0].Add(zmag);
-                if (rtgrp.plot[2].Maxval[0] < zmag) rtgrp.plot[2].Maxval[0] = zmag;
-                if (rtgrp.plot[2].Minval[0] > zmag) rtgrp.plot[2].Minval[0] = zmag;
-                if (rtgrp.plot[2].Maxval[2] < d.fFreq) rtgrp.plot[2].Maxval[2] = d.fFreq;
-                if (rtgrp.plot[2].Minval[2] > d.fFreq) rtgrp.plot[2].Minval[2] = d.fFreq;
+                rtgrp.item[ch].plot[2].count[0]++;
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].ly[0].Add(zmag);
+                if (rtgrp.item[ch].plot[2].Maxval[0] < zmag) rtgrp.item[ch].plot[2].Maxval[0] = zmag;
+                if (rtgrp.item[ch].plot[2].Minval[0] > zmag) rtgrp.item[ch].plot[2].Minval[0] = zmag;
+                if (rtgrp.item[ch].plot[2].Maxval[2] < d.fFreq) rtgrp.item[ch].plot[2].Maxval[2] = d.fFreq;
+                if (rtgrp.item[ch].plot[2].Minval[2] > d.fFreq) rtgrp.item[ch].plot[2].Minval[2] = d.fFreq;
 
-                rtgrp.plot[3].count[0]++;
-                rtgrp.plot[3].freq[0].Add(d.fFreq);
-                rtgrp.plot[3].lx[0].Add(d.fFreq);
-                rtgrp.plot[3].ly[0].Add(zph);
-                if (rtgrp.plot[3].Maxval[0] < zph) rtgrp.plot[3].Maxval[0] = zph;
-                if (rtgrp.plot[3].Minval[0] > zph) rtgrp.plot[3].Minval[0] = zph;
-                if (rtgrp.plot[3].Maxval[2] < d.fFreq) rtgrp.plot[3].Maxval[2] = d.fFreq;
-                if (rtgrp.plot[3].Minval[2] > d.fFreq) rtgrp.plot[3].Minval[2] = d.fFreq;
+                rtgrp.item[ch].plot[3].count[0]++;
+                rtgrp.item[ch].plot[3].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].lx[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[3].ly[0].Add(zph);
+                if (rtgrp.item[ch].plot[3].Maxval[0] < zph) rtgrp.item[ch].plot[3].Maxval[0] = zph;
+                if (rtgrp.item[ch].plot[3].Minval[0] > zph) rtgrp.item[ch].plot[3].Minval[0] = zph;
+                if (rtgrp.item[ch].plot[3].Maxval[2] < d.fFreq) rtgrp.item[ch].plot[3].Maxval[2] = d.fFreq;
+                if (rtgrp.item[ch].plot[3].Minval[2] > d.fFreq) rtgrp.item[ch].plot[3].Minval[2] = d.fFreq;
             }
-            
+        }
+
+        public void DataAppend(stDefTestData d, bool changecycle)
+        {
+            if (techtype == enTechType.TECH_HFR) DataAppendHFR(d, false);
+            else if (techtype == enTechType.TECH_PRR) DataAppendPRR(d, false);
+            else if (techtype == enTechType.TECH_MON) DataAppendMON(d, false);
+            else if (techtype == enTechType.TECH_QIS) DataAppendQIS(d, false);
+            else if (techtype == enTechType.TECH_DCH) DataAppendDCH(d, false);
+            else DataAppendEIS(d, false);
         }
     }
 
@@ -1548,6 +1858,7 @@ namespace ZiveLab.ZM
             set { Idc_rnginf.idcofs[7].offset = value; }
         }
 
+
         #endregion //#region ** Properties
     }
 
@@ -1577,7 +1888,7 @@ namespace ZiveLab.ZM
             }
         }
 
-        public void SetType(eZimType ztype, double[] Range)
+        public void SetType(eZimType ztype, double[] Range) // IAC
         {
 
             type = ztype;
@@ -1630,7 +1941,230 @@ namespace ZiveLab.ZM
         }
         #endregion //#region ** Properties
     }
-    
+
+    public class stPropauxgain
+    {
+        private st_zimaux_iacgain _src;
+
+        public stPropauxgain()
+        {
+            _src = new st_zimaux_iacgain(eZimType.BZAAUX1);
+        }
+
+        public stPropauxgain(st_zimaux_iacgain src)
+        {
+            _src = src;
+        }
+
+        #region ** Properties
+        [ReadOnly(false)]
+        [DisplayName("Iac_gain1")]
+        [Description("Edit Aux Iac gain value 1.")]
+        public double Iac_gain1
+        {
+            get { return _src.iac_gain1; }
+            set { _src.iac_gain1 = value; }
+        }
+
+        [ReadOnly(false)]
+        [DisplayName("Iac_gain2")]
+        [Description("Edit Aux Iac gain value 2.")]
+        public double Iac_gain2
+        {
+            get { return _src.iac_gain2; }
+            set { _src.iac_gain2 = value; }
+        }
+        #endregion
+
+        public st_zimaux_iacgain ToStruct()
+        {
+            return _src;
+        }
+    }
+
+    public class stPropauxIac
+    {
+        eZimType type;
+        public string stype;
+        public int RangeCount;
+        public string[] sRange;
+
+        public stPropauxIac()
+        {
+            sRange = new string[4];
+            SetType(eZimType.BZAAUX1);
+        }
+
+        public void SetType(eZimType ztype)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 4;
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                sRange[i] = string.Format("{0}", ((enCurrentRange)(i * 2)).GetDescription());
+                sRange[i] = sRange[i].Replace("\r", "").Replace("\n", "").Trim();
+
+            }
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Channel type"), DescriptionAttribute("View type of channel.")]
+        public string PropStrType
+        {
+            get { return stype; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range count"), DescriptionAttribute("View count of Iac ranges.")]
+        public string PropRangeCount
+        {
+            get { return RangeCount.ToString(); }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 1"), DescriptionAttribute("View maximum value of range 1.")]
+        public string PropRange1
+        {
+            get { return sRange[0]; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 2"), DescriptionAttribute("View maximum value of range 2.")]
+        public string PropRange2
+        {
+            get { return sRange[1]; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 3"), DescriptionAttribute("View maximum value of range 3.")]
+        public string PropRange3
+        {
+            get { return sRange[2]; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 4"), DescriptionAttribute("View maximum value of range 4.")]
+        public string PropRange4
+        {
+            get { return sRange[3]; }
+        }
+        #endregion //#region ** Properties
+    }
+
+    public class stPropauxrange // Aux Range
+    {
+        eZimType type;
+        public string stype;
+        public int RangeCount;
+        public string[] sRange;
+
+        public stPropauxrange()
+        {
+            sRange = new string[1];
+            SetType(eZimType.BZAAUX1);
+        }
+
+        public void SetType(eZimType ztype)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 1;
+
+            sRange[0] = string.Format("{0}", ((enVoltageRange)0).GetDescription());
+        }
+
+        public void SetType(eZimType ztype, double[] Range)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 1;
+
+            for (int i = 0; i < 1; i++)
+            {
+                sRange[i] = SM_Number.ToRangeString(Range[i], "V");
+            }
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Channel type"), DescriptionAttribute("View type of channel.")]
+        public string PropStrType
+        {
+            get { return stype; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range count"), DescriptionAttribute("View count of Vdc ranges.")]
+        public string PropRangeCount
+        {
+            get { return RangeCount.ToString(); }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 1"), DescriptionAttribute("View maximum value of range 1.")]
+        public string PropRange1
+        {
+            get { return sRange[0]; }
+        }
+        #endregion //#region ** Properties
+    }
+
+    public class stPropauxvdcrange // Aux Range
+    {
+        eZimType type;
+        public string stype;
+        public int RangeCount;
+        public string[] sRange;
+
+        public stPropauxvdcrange()
+        {
+            sRange = new string[1];
+            SetType(eZimType.BZAAUX1);
+        }
+
+        public void SetType(eZimType ztype)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 1;
+
+            for (int i = 0; i < 1; i++)
+            {
+                sRange[i] = string.Format("{0}", ((enVoltageRange)i).GetDescription());
+            }
+        }
+
+        public void SetType(eZimType ztype, double[] Range)
+        {
+            type = ztype;
+            stype = type.GetDescription();
+            RangeCount = 1;
+
+            sRange[0] = SM_Number.ToRangeString(DeviceConstants.ADC_AUX_VDC_RMAX1, "V");
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Channel type"), DescriptionAttribute("View type of channel.")]
+        public string PropStrType
+        {
+            get { return stype; }
+        }
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range count"), DescriptionAttribute("View count of Vdc ranges.")]
+        public string PropRangeCount
+        {
+            get { return RangeCount.ToString(); }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Range 1"), DescriptionAttribute("View maximum value of range 1.")]
+        public string PropRange1
+        {
+            get { return sRange[0]; }
+        }
+        #endregion //#region ** Properties
+    }
+  
     public class stPropVdc
     {
         eZimType type;
@@ -1697,8 +2231,6 @@ namespace ZiveLab.ZM
         }
         #endregion //#region ** Properties
     }
-
-    
 
     public class stPropConnInf
     {
@@ -1801,7 +2333,7 @@ namespace ZiveLab.ZM
             BoardVersion = "";
             EnableChs = new bool[MBZA_Constant.MAX_DEV_CHANNEL];
             CheckChs = new bool[MBZA_Constant.MAX_DEV_CHANNEL];
-            BaseTick = 1;
+            BaseTick = 10;
             DaqTick = 200;
             stype = Extensions.GetEnumDescription(eDeviceType.SBZA);
             sproductmodel = Extensions.GetEnumDescription(eProductType.UNKNOWN);
@@ -1828,10 +2360,20 @@ namespace ZiveLab.ZM
             sproductmodel = Extensions.GetEnumDescription(cfg.mSIFCfg.GetProductType());
             BaseTick = cfg.BaseTick;
             DaqTick = cfg.DaqTick;
+
             for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
             {
                 EnableChs[i] = (cfg.EnaZIM[i] == 0)? false : true;
                 CheckChs[i] = (cfg.ChkZIM[i] == 0) ? false : true;
+            }
+        }
+
+        public void GetInformation(ref stSystemConfig cfg)
+        {
+
+            for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
+            {
+                cfg.EnaZIM[i] = (byte)(EnableChs[i] ? 1 : 0);
             }
         }
 
@@ -1885,56 +2427,60 @@ namespace ZiveLab.ZM
             get { return DaqTick; }
         }
 
-        [ReadOnlyAttribute(true)]
-        [DisplayName("Channel1 Enable"), DescriptionAttribute("View enable status of channel1.")]
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Board1 Enable"), DescriptionAttribute("View enable status of board1.")]
         public bool PropEnaCh1
         {
             get { return EnableChs[0]; }
+            set { EnableChs[0] = value; }
         }
 
         [ReadOnlyAttribute(true)]
-        [DisplayName("Channel1 exist"), DescriptionAttribute("View exist status of channel1.")]
+        [DisplayName("Board1 exist"), DescriptionAttribute("View exist status of board1.")]
         public bool PropChkCh1
         {
             get { return CheckChs[0]; }
         }
-        [ReadOnlyAttribute(true)]
-        [DisplayName("Channel2 Enable"), DescriptionAttribute("View enable status of channel2.")]
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Board2 Enable"), DescriptionAttribute("View enable status of board2.")]
         public bool PropEnaCh2
         {
             get { return EnableChs[1]; }
+            set { EnableChs[1] = value; }
         }
 
         [ReadOnlyAttribute(true)]
-        [DisplayName("Channel2 exist"), DescriptionAttribute("View exist status of channel2.")]
+        [DisplayName("Board2 exist"), DescriptionAttribute("View exist status of board2.")]
         public bool PropChkCh2
         {
             get { return CheckChs[1]; }
         }
 
-        [ReadOnlyAttribute(true)]
-        [DisplayName("Channel3 Enable"), DescriptionAttribute("View enable status of channel3.")]
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Board3 Enable"), DescriptionAttribute("View enable status of board3.")]
         public bool PropEnaCh3
         {
             get { return EnableChs[2]; }
+            set { EnableChs[2] = value; }
         }
 
         [ReadOnlyAttribute(true)]
-        [DisplayName("Channel3 exist"), DescriptionAttribute("View exist status of channel3.")]
+        [DisplayName("Board3 exist"), DescriptionAttribute("View exist status of board3.")]
         public bool PropChkCh3
         {
             get { return CheckChs[2]; }
         }
 
-        [ReadOnlyAttribute(true)]
-        [DisplayName("Channel4 Enable"), DescriptionAttribute("View enable status of channel4.")]
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Board4 Enable"), DescriptionAttribute("View enable status of board4.")]
         public bool PropEnaCh4
         {
             get { return EnableChs[3]; }
+            set { EnableChs[3] = value; }
         }
 
         [ReadOnlyAttribute(true)]
-        [DisplayName("Channel4 exist"), DescriptionAttribute("View exist status of channel4.")]
+        [DisplayName("Board4 exist"), DescriptionAttribute("View exist status of board4.")]
         public bool PropChkCh4
         {
             get { return CheckChs[3]; }
@@ -1944,7 +2490,7 @@ namespace ZiveLab.ZM
 
     }
 
-    public class stPropZim
+    public class stPropZim // Main 정보
     {
         string Serial;
         string stype;
@@ -1952,6 +2498,8 @@ namespace ZiveLab.ZM
         string FirmwareVersion;
         string BoardVersion;
         bool EnableROM;
+        bool EnableZIM;
+        bool CheckZIM;
         eZimType model;
 
         public stPropZim()
@@ -1985,10 +2533,25 @@ namespace ZiveLab.ZM
             stype = Extensions.GetEnumDescription(model);
             sBoardtype = Extensions.GetEnumDescription((eZimBoardType)model);
             EnableROM = (cfg.EnaROM[sifch] == 0) ? false : true;
-            
+            EnableZIM = (cfg.EnaZIM[sifch] == 0) ? false : true;
+            CheckZIM = (cfg.ChkZIM[sifch] == 0) ? false : true;
         }
 
         #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Enabled"), DescriptionAttribute("View status enabled ZIM board.")]
+        public bool PropEnableZIM
+        {
+            get { return EnableZIM; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Checked"), DescriptionAttribute("View status checked ZIM board.")]
+        public bool PropExistZIM
+        {
+            get { return CheckZIM; }
+        }
+
         [ReadOnlyAttribute(true)]
         [DisplayName("Serial number"), DescriptionAttribute("View serial number of ZIM board.")]
         public string PropSerial
@@ -2042,6 +2605,174 @@ namespace ZiveLab.ZM
 
     }
 
+    public class stPropAux // Aux 정보
+    {
+        string Serial;
+        string stype;
+        string sBoardtype;
+        string FirmwareVersion;
+        string BoardVersion;
+        bool EnableROM;
+        bool EnableZIM;
+        bool CheckZIM;
+        eZimType model;
+
+        public stPropAux()
+        {
+            Serial = "";
+            FirmwareVersion = "";
+            BoardVersion = "";
+            model = eZimType.BZAAUX1;
+            EnableROM = false;
+            stype = Extensions.GetEnumDescription(model);
+            sBoardtype = Extensions.GetEnumDescription((eZimBoardType)model);
+            EnableZIM = false;
+            CheckZIM = false;
+        }
+
+        public void SetInformation(stSystemConfig cfg, int nSifBoard)
+        {
+            string str;
+
+            Serial = cfg.mZimCfg[nSifBoard].GetSerialNumber();
+            //Serial = cfg.mZimCfg[1].info.GetSerialNumber();
+
+            str = string.Format("{0:d04}", cfg.mZimCfg[nSifBoard].info.ZimFWVersion);
+            FirmwareVersion = string.Format("{0}.{1}.{2}.{3}", str.Substring(0, str.Length - 3)
+                                                        , str.Substring(str.Length - 3, 1)
+                                                        , str.Substring(str.Length - 2, 1)
+                                                        , str.Substring(str.Length - 1, 1));
+            str = string.Format("{0:d04}", cfg.mZimCfg[nSifBoard].info.ZimBDVersion);
+            BoardVersion = string.Format("{0}.{1}.{2}.{3}", str.Substring(0, str.Length - 3)
+                                                        , str.Substring(str.Length - 3, 1)
+                                                        , str.Substring(str.Length - 2, 1)
+                                                        , str.Substring(str.Length - 1, 1));
+
+            model = (eZimType)(cfg.mZimCfg[nSifBoard].info.cModel[0] - 0x30);
+            stype = Extensions.GetEnumDescription(model);
+            sBoardtype = Extensions.GetEnumDescription((eZimBoardType)model);
+            EnableROM = (cfg.EnaROM[nSifBoard] == 0) ? false : true;
+            EnableZIM = (cfg.EnaZIM[nSifBoard] == 0) ? false : true;
+            CheckZIM = (cfg.ChkZIM[nSifBoard] == 0) ? false : true;
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Enabled"), DescriptionAttribute("View status enabled ZIM board.")]
+        public bool PropEnableZIM
+        {
+            get { return EnableZIM; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Checked"), DescriptionAttribute("View status checked ZIM board.")]
+        public bool PropExistZIM
+        {
+            get { return CheckZIM; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Serial number"), DescriptionAttribute("View serial number of ZIM board.")]
+        public string PropSerial
+        {
+            get { return Serial; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Type"), DescriptionAttribute("View type of ZIM board.")]
+        public string PropType
+        {
+            get { return stype; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Board name"), DescriptionAttribute("View board name of ZIM board.")]
+        public string PropBoardtype
+        {
+            get { return sBoardtype; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Firmware version"), DescriptionAttribute("View firmware version of ZIM board.")]
+        public string PropFirmwareVersion
+        {
+            get { return FirmwareVersion; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Board version"), DescriptionAttribute("View board version of ZIM board.")]
+        public string PropBoardVersion
+        {
+            get { return BoardVersion; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Enable ROM"), DescriptionAttribute("View status ROM of ZIM board.")]
+        public bool PropEnableROM
+        {
+            get { return EnableROM; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Model"), DescriptionAttribute("View model of ZIM board.")]
+        public eZimType PropModel
+        {
+            get { return model; }
+        }
+
+        #endregion //#region ** Properties
+
+    }
+
+    public class stPropAuxCh // Aux 정보
+    {
+        int AuxBoard;
+        int AuxBoardCh;
+        string sVdc;
+
+        public stPropAuxCh()
+        {
+            AuxBoard = -1;
+            AuxBoardCh = -1;
+            sVdc = "0V";
+          
+        }
+
+        public void SetInformation(stSystemConfig cfg, int nAuxBoard, int nAuxBoardCh)
+        {
+            AuxBoard = nAuxBoard;
+            AuxBoardCh = nAuxBoardCh;
+            sVdc = SM_Number.ToRangeString(cfg.mZimCfg[nAuxBoard].ranges.Aux.vdc_rng[nAuxBoardCh].realmax, "V");
+         
+        }
+
+        #region ** Properties
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Board Number"), DescriptionAttribute("View number of board.")]
+        public int PropAuxBoard
+        {
+            get { return AuxBoard; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Channel of Board"), DescriptionAttribute("View channel of board.")]
+        public int PropAuxBoardCh
+        {
+            get { return AuxBoardCh+1; }
+        }
+
+        [ReadOnlyAttribute(true)]
+        [DisplayName("Maximum Voltage"), DescriptionAttribute("View scale of DC voltage.")]
+        public string PropsVdc
+        {
+            get { return sVdc; }
+        }
+        
+
+        #endregion //#region ** Properties
+
+    }
+
     public class stPropIdcCalib
     {
         bool bCalib;
@@ -2069,17 +2800,20 @@ namespace ZiveLab.ZM
             bool tmp = true;
             int rng = trng * 2;
             eZimType type = (eZimType)(cfg.mZimCfg[sifch].info.cModel[0] - 0x30);
-            
 
-            if (double.IsNaN(cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset) || cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset == 0.0 || cfg.mZimCfg[sifch].ranges.Idc_rnginf.idcofs[rng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+
+            //if (double.IsNaN(cfg.mZimCfg[sifch].ranges[0].Idc_rnginf.idcofs[rng].offset) || cfg.mZimCfg[sifch].ranges[0].Idc_rnginf.idcofs[rng].offset == 0.0 || cfg.mZimCfg[sifch].ranges[0].Idc_rnginf.idcofs[rng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+            if (double.IsNaN(cfg.mZimCfg[sifch].ranges.Gen.Idc_rnginf.idcofs[rng].offset) || cfg.mZimCfg[sifch].ranges.Gen.Idc_rnginf.idcofs[rng].offset == 0.0 || cfg.mZimCfg[sifch].ranges.Gen.Idc_rnginf.idcofs[rng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET) // 배열
             {
                 tmp = false;
             }
 
             bCalib = tmp;
 
-            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
-            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
+            //srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax, "A");
+            //srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].controlgain, "A");
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].controlgain, "A"); // 배열
 
         }
 
@@ -2140,7 +2874,7 @@ namespace ZiveLab.ZM
 
             return true;
         }
-        
+
         public void SetInformation(stSystemConfig cfg, int trng, int sifch)
         {
             bool tmp = true;
@@ -2148,19 +2882,27 @@ namespace ZiveLab.ZM
             eZimType type = (eZimType)(cfg.mZimCfg[sifch].info.cModel[0] - 0x30);
 
 
-            if (cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain1 == 1.0 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain1 == 0.0
-                || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain2 == 1.0 || cfg.mZimCfg[sifch].ranges.iac_rng[trng].gain2 == 0.0
-                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng]) == false
-                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.mEisIRngCalInfo[rng+1]) == false)
+            //if (cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain1 == 1.0 || cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain1 == 0.0
+            //    || cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain2 == 1.0 || cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].gain2 == 0.0
+            //    || ChkEisCalInf(cfg.mZimCfg[sifch].ranges[0].mEisIRngCalInfo[rng]) == false
+            //    || ChkEisCalInf(cfg.mZimCfg[sifch].ranges[0].mEisIRngCalInfo[rng+1]) == false)
+            //{
+            //    tmp = false;
+            //}
+            if (cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].gain1 == 1.0 || cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].gain1 == 0.0
+                || cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].gain2 == 1.0 || cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].gain2 == 0.0
+                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.Gen.mEisIRngCalInfo[rng]) == false
+                || ChkEisCalInf(cfg.mZimCfg[sifch].ranges.Gen.mEisIRngCalInfo[rng + 1]) == false)
             {
                 tmp = false;
-            }
+            } // 배열
 
             bCalib = tmp;
 
-            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
-            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
-           
+            //srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax, "A");
+            //srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].controlgain, "A");
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].controlgain, "A"); // 배열
         }
 
         #region ** Properties
@@ -2210,8 +2952,10 @@ namespace ZiveLab.ZM
 
         public void SetInformation(stSystemConfig cfg, int trng, int sifch)
         {
-            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax, "A");
-            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.iac_rng[trng].controlgain, "A");
+            //srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax, "A");
+            //srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges[0].iac_rng[trng].controlgain, "A");
+            srng[0] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].realmax, "A");
+            srng[1] = SM_Number.ToRangeString(cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].realmax * cfg.mZimCfg[sifch].ranges.Gen.iac_rng[trng].controlgain, "A"); // 배열
             nControlgain = 2;
         }
 
@@ -2276,16 +3020,28 @@ namespace ZiveLab.ZM
         }
     }
 
-    public class stRangeFile
+    public class stRangeFile_1
     {
         public string Description;
         public stDeviceParent parent;
-        public st_zim_rnginf ranges;
-        public stRangeFile()
+        public st_zim_rnginf1 ranges;
+        public stRangeFile_1()
         {
             Description = "ZM Range information v.1.0.0.0";
             parent = new stDeviceParent();
-            ranges = new st_zim_rnginf(0);
+
+            ranges = new st_zim_rnginf1(0);
+        }
+    }
+
+    public class stRangeFile
+    {
+        public string Description;
+        public stZimCfg mZimCfg;
+        public stRangeFile()
+        {
+            Description = "ZM Range information v.1.1.0.0";
+            mZimCfg = new stZimCfg(0);
         }
     }
     

@@ -39,7 +39,13 @@ namespace ZiveLab.ZM
 
             this.Text = string.Format("Check the operation of the channel[{0}-{1}].", sSerial, sifch + 1);
 
-            mRanges.ToWritePtr(gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToByteArray());
+            //mRanges.ToWritePtr(gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToByteArray());
+            //mRanges.Gen.ToWritePtr(gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToByteArray()); // 배열
+            //st_zimGen_rnginf tempGen;
+            //st_zimGen_rnginf.ToWritePtr(gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToByteArray(),out tempGen);
+            //mRanges.Gen = tempGen;
+            mRanges.Gen = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen;
+
 
             if (bconnect == false)
             {

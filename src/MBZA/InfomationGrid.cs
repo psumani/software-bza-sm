@@ -19,6 +19,7 @@ using ZiveLab.ZM.ZIM.Packets;
 using System.IO;
 using System.Xml.Serialization;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ZiveLab.ZM
 {
@@ -32,6 +33,10 @@ namespace ZiveLab.ZM
         stPropConnInf propconn;
         stPropSIF propsif;
         stPropZim propzim;
+        stPropAux propaux;
+        stPropauxrange propauxrange;
+        stPropAuxCh Propauxch;
+
         int selch;
         bool bFirst;
         private string Serial;
@@ -39,6 +44,9 @@ namespace ZiveLab.ZM
         private ToolStrip toolStrip;
         private TreeNode SelectNode;
         private int[] bStat;
+        public eDeviceType mtype;
+        public string sSelSerial = "";
+        public stSystemConfig mSysCfg;
 
         public InfomationGrid()
         {
@@ -56,6 +64,9 @@ namespace ZiveLab.ZM
             propconn = new stPropConnInf();
             propsif = new stPropSIF();
             propzim = new stPropZim();
+            propaux = new stPropAux();
+            propauxrange = new stPropauxrange();
+            Propauxch = new stPropAuxCh();
 
             bStat = new int[6];
             for (int i = 0; i < 0; i++)
@@ -66,32 +77,31 @@ namespace ZiveLab.ZM
             SelectNode = null;
 
             this.imageList1.Images.Clear();
-            this.imageList1.Images.Add(Properties.Resources.object11);
+            this.imageList1.Images.Add(Properties.Resources.NetConfig);
+
             this.imageList1.Images.Add(Properties.Resources.object21);
             this.imageList1.Images.Add(Properties.Resources.object22);
-            this.imageList1.Images.Add(Properties.Resources.object31);
-            this.imageList1.Images.Add(Properties.Resources.object32);
-            this.imageList1.Images.Add(Properties.Resources.object41);
-            this.imageList1.Images.Add(Properties.Resources.object42);
-            this.imageList1.Images.Add(Properties.Resources.object12);
+
+            this.imageList1.Images.Add(Properties.Resources.greenchip1);
+            this.imageList1.Images.Add(Properties.Resources.redchip1);
+
+            this.imageList1.Images.Add(Properties.Resources.greenlink);
+            this.imageList1.Images.Add(Properties.Resources.redlink);
+
             this.imageList1.Images.Add(Properties.Resources.folder);
+
+            this.imageList1.Images.Add(Properties.Resources.deviceinfo);
             this.imageList1.Images.Add(Properties.Resources.ConnGate);
             this.imageList1.Images.Add(Properties.Resources.Device);
-            this.imageList1.Images.Add(Properties.Resources.chip1);
-            this.imageList1.Images.Add(Properties.Resources.Config);
-            this.imageList1.Images.Add(Properties.Resources.deviceinfo);
-            this.imageList1.Images.Add(Properties.Resources.object21);
-            this.imageList1.Images.Add(Properties.Resources.object22);
-            this.imageList1.Images.Add(Properties.Resources.folder);
-            this.imageList1.Images.Add(Properties.Resources.folder);
             this.imageList1.Images.Add(Properties.Resources.CalibItem);
             this.imageList1.Images.Add(Properties.Resources.CalibFail1);
-            this.imageList1.Images.Add(Properties.Resources.NetConfig);
+            this.imageList1.Images.Add(Properties.Resources.AddClause);
+            this.imageList1.Images.Add(Properties.Resources.chip1);
             //this.treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.treeView1.CheckBoxes = false;
             this.treeView1.ImageList = this.imageList1;
 
-            RecreatePropertyGridToolBar(-1);
+            RecreatePropertyGridToolBar(null);
 
          }
 
@@ -188,7 +198,7 @@ namespace ZiveLab.ZM
         int CreateNodePartIacGain(int rng, int vartype, TreeNode parentnode)
         {
             TreeNode node;
-            
+
             int tmp = 0;
             bool bNoCalib = false;
             int trng = rng * 2;
@@ -206,7 +216,8 @@ namespace ZiveLab.ZM
 
                 if (vartype == 0)
                 {
-                    if (ChkEisCalInf(p.ranges.mEisIRngCalInfo[trng]) == false)
+                    //if (ChkEisCalInf(p.ranges[0].mEisIRngCalInfo[trng]) == false)
+                    if (ChkEisCalInf(p.ranges.Gen.mEisIRngCalInfo[trng]) == false) // 배열
                     {
                         bNoCalib = true;
                         tmp = 2;
@@ -220,7 +231,8 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-                    if(ChkCompDummyInf(p.ranges.mDummy[trng]) == false)
+                    //if(ChkCompDummyInf(p.ranges[0].mDummy[trng]) == false)
+                    if (ChkCompDummyInf(p.ranges.Gen.mDummy[trng]) == false) // 배열
                     {
                         bNoCalib = true;
                         tmp = 2;
@@ -229,8 +241,8 @@ namespace ZiveLab.ZM
                     {
                         tmp = 1;
                     }
-                    node.ImageIndex = tmp+17;
-                    node.SelectedImageIndex = tmp+17;
+                    node.ImageIndex = tmp + 11;
+                    node.SelectedImageIndex = tmp + 11;
                 }
 
 
@@ -239,7 +251,7 @@ namespace ZiveLab.ZM
             if (bNoCalib == true) return 2;
             return 1;
         }
-        
+
         int CreateNodePartIdc(TreeNode parentnode)
         {
             TreeNode node;
@@ -254,15 +266,18 @@ namespace ZiveLab.ZM
 
             for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
             {
-                tdouble = p.ranges.iac_rng[i/2].realmax * 0.5;
-                if (i % 2 > 0) tdouble *= p.ranges.iac_rng[i/2].controlgain;
+                //tdouble = p.ranges[0].iac_rng[i/2].realmax * 0.5;
+                //if (i % 2 > 0) tdouble *= p.ranges[0].iac_rng[i/2].controlgain;
+                tdouble = p.ranges.Gen.iac_rng[i / 2].realmax * 0.5;
+                if (i % 2 > 0) tdouble *= p.ranges.Gen.iac_rng[i / 2].controlgain; // 배열
 
                 stext = SM_Number.ToRangeString(tdouble, "A");
 
                 node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), stext);
                 node.Tag = (string)parentnode.Tag + "/" + stext;
 
-                if (p.ranges.Idc_rnginf.idcofs[i].offset == 0.0 || p.ranges.Idc_rnginf.idcofs[i].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+                //if (p.ranges[0].Idc_rnginf.idcofs[i].offset == 0.0 || p.ranges[0].Idc_rnginf.idcofs[i].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+                if (p.ranges.Gen.Idc_rnginf.idcofs[i].offset == 0.0 || p.ranges.Gen.Idc_rnginf.idcofs[i].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET) // 배열
                 {
                     bNoCalib = true;
                     tmp = 2;
@@ -271,7 +286,7 @@ namespace ZiveLab.ZM
                 {
                     tmp = 1;
                 }
-                
+
                 node.ImageIndex = tmp;
                 node.SelectedImageIndex = tmp;
 
@@ -307,29 +322,66 @@ namespace ZiveLab.ZM
                     tmp = CreateNodePartIacGain(rng, i, node);
                     if (tmp == 1)
                     {
-                        if (p.ranges.iac_rng[rng].gain1 == 1.0 && p.ranges.iac_rng[rng].gain2 == 1.0)
+                        //if (p.ranges[0].iac_rng[rng].gain1 == 1.0 && p.ranges[0].iac_rng[rng].gain2 == 1.0)
+                        if (p.ranges.Gen.iac_rng[rng].gain1 == 1.0 && p.ranges.Gen.iac_rng[rng].gain2 == 1.0) // 배열
                         {
                             tmp = 2;
                         }
                     }
                     if (tmp == 2) bNoCalib = true;
-                    node.ImageIndex = tmp + 15;
-                    node.SelectedImageIndex = tmp + 15;
+                    node.ImageIndex = tmp;
+                    node.SelectedImageIndex = tmp;
 
                 }
                 else
                 {
                     tmp = CreateNodePartIacGain(rng, i, node);
-                    if (ChkCompDummyInf(p.ranges.mDummy[trng]) == false)
+                    //if (ChkCompDummyInf(p.ranges[0].mDummy[trng]) == false)
+                    if (ChkCompDummyInf(p.ranges.Gen.mDummy[trng]) == false) // 배열
                     {
                         bNoCalib = true;
                         tmp = 2;
                     }
 
-                    node.ImageIndex = tmp + 17;
-                    node.SelectedImageIndex = tmp + 17;
+                    node.ImageIndex = tmp + 11;
+                    node.SelectedImageIndex = tmp + 11;
                 }
 
+                node.ToolTipText = (string)node.Tag;
+
+
+            }
+            if (bNoCalib == true) return 2;
+            return 1;
+        }
+
+        int CreateNodeAuxPartIacItem( TreeNode parentnode, int nAuxBoard, int nAuxCh, int rng)
+        {
+            TreeNode node;
+            int tmp = 0;
+            int trng = rng;
+            bool bNoCalib = false;
+            stZimCfg p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+
+
+            for (int i = 0; i < MBZA_Constant.Const_RangeIacGain.Count(); i++)
+            {
+                node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), MBZA_Constant.Const_RangeIacGain[i]);
+                node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_RangeIacGain[i];
+
+                if (ChkEisCalInf(p.ranges.Aux.mEisIRngCalInfo[nAuxCh].items[rng]) == false) // 배열
+                {
+                    tmp = 2;
+                }
+                else
+                {
+                    tmp = 1;
+                }
+                if (tmp == 2) bNoCalib = true;
+                node.ImageIndex = tmp;
+                node.SelectedImageIndex = tmp;
                 node.ToolTipText = (string)node.Tag;
 
 
@@ -352,7 +404,8 @@ namespace ZiveLab.ZM
             for (int i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
             {
 
-                stext = SM_Number.ToRangeString(p.ranges.iac_rng[i].realmax, "A");
+                //stext = SM_Number.ToRangeString(p.ranges[0].iac_rng[i].realmax, "A");
+                stext = SM_Number.ToRangeString(p.ranges.Gen.iac_rng[i].realmax, "A"); // 배열
 
                 node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), stext);
                 node.Tag = (string)parentnode.Tag + "/" + stext;
@@ -365,13 +418,13 @@ namespace ZiveLab.ZM
                     bNoCalib = true;
                 }
 
-                node.ImageIndex = tmp+13;
-                node.SelectedImageIndex = tmp+13;
+                node.ImageIndex = tmp;
+                node.SelectedImageIndex = tmp;
 
                 node.ToolTipText = (string)node.Tag;
-                
+
             }
-            
+
             if (bNoCalib == true)
             {
                 return 2;
@@ -379,7 +432,57 @@ namespace ZiveLab.ZM
             return 1;
         }
 
-        
+        int CreateNodeAuxPartIac(TreeNode parentnode, int nAuxBoard, int nAuxCh)
+        {
+            TreeNode node;
+            string stext;
+            int tmp = 0;
+            bool bNoCalib = false;
+            stZimCfg p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            eZimType zimtype = (eZimType)(p.info.cModel[0] - 0x30);
+
+            for (int i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
+            {
+
+                //stext = SM_Number.ToRangeString(p.ranges[0].iac_rng[i].realmax, "A");
+                stext = SM_Number.ToRangeString(p.ranges.Gen.iac_rng[i].realmax, "A"); // 배열
+
+                node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), stext);
+                node.Tag = (string)parentnode.Tag + "/" + stext;
+
+                tmp = CreateNodeAuxPartIacItem(node, nAuxBoard, nAuxCh, i);
+
+                if(tmp == 1)
+                {
+                    if (p.ranges.Aux.iac_gain[nAuxCh].items[i].iac_gain1 == 1.0 && p.ranges.Aux.iac_gain[nAuxCh].items[i].iac_gain2 == 1.0) 
+                    {
+                        {
+                            tmp = 2;
+                        }
+                    }
+                }
+
+                if (tmp == 2)
+                {
+                    bNoCalib = true;
+                }
+
+                node.ImageIndex = tmp;
+                node.SelectedImageIndex = tmp;
+
+                node.ToolTipText = (string)node.Tag;
+
+            }
+
+            if (bNoCalib == true)
+            {
+                return 2;
+            }
+            return 1;
+        }
+
         int CreateNodePartVdc(TreeNode parentnode)
         {
             TreeNode node;
@@ -394,11 +497,13 @@ namespace ZiveLab.ZM
             for (int i = 0; i < DeviceConstants.MAX_VDC_RNGCNT; i++)
             {
 
-                stext = SM_Number.ToRangeString(p.ranges.vdc_rng[i].realmax, "V");
+                //stext = SM_Number.ToRangeString(p.ranges[0].vdc_rng[i].realmax, "V");
+                stext = SM_Number.ToRangeString(p.ranges.Gen.vdc_rng[i].realmax, "V"); // 배열
 
                 node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), stext);
                 node.Tag = (string)parentnode.Tag + "/" + stext;
-                if (p.ranges.vdc_rng[i].gain == 1.0 && p.ranges.vdc_rng[i].offset == 0.0)
+                //if (p.ranges[0].vdc_rng[i].gain == 1.0 && p.ranges[0].vdc_rng[i].offset == 0.0)
+                if (p.ranges.Gen.vdc_rng[i].gain == 1.0 && p.ranges.Gen.vdc_rng[i].offset == 0.0) // 배열
                 {
                     tmp = 2;
                 }
@@ -406,10 +511,94 @@ namespace ZiveLab.ZM
                 {
                     tmp = 1;
                 }
-                
+
                 node.ImageIndex = tmp;
                 node.SelectedImageIndex = tmp;
                 node.ToolTipText = (string)node.Tag;
+                if (tmp == 2) bNoCalib = true;
+            }
+
+            if (bNoCalib == true)
+            {
+                return 2;
+            }
+            return 1;
+        }
+
+        int CreateNodePartAuxBd(TreeNode parentnode, int nAuxboard)
+        {
+            TreeNode node;
+            string stext;
+            bool bNoCalib = false;
+            int tmp = 0;
+            stSystemConfig p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg;
+
+            eZimType zimtype = (eZimType)(p.mZimCfg[nAuxboard].info.cModel[0] - 0x30);
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNEL; i++)
+            {
+                stext = string.Format("Aux Channel {0}",i+1);
+
+                node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), stext);
+                node.Tag = (string)parentnode.Tag + "/" + stext;
+                tmp = CreateNodePartAuxRange(node, nAuxboard, i);
+
+                if (tmp == 2) bNoCalib = true;
+                tmp += 4;
+                node.ImageIndex = tmp;
+                node.SelectedImageIndex = tmp;
+                node.ToolTipText = (string)node.Tag;
+            }
+            if (bNoCalib == true)
+            {
+                return 2;
+            }
+            return 1;
+        }
+        
+        int CreateNodePartAuxRange(TreeNode parentnode, int nAuxBoard, int nAuxCh)
+        {
+            TreeNode node;
+            int tmp = 0;
+            bool bNoCalib = false;
+            stZimCfg p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            
+            for (int i = 0; i < MBZA_Constant.Const_RangePartAux.Count(); i++)
+            {
+                node = parentnode.Nodes.Add(string.Format("{0}{1}/", parentnode.Name, i), MBZA_Constant.Const_RangePartAux[i]);
+                node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_RangePartAux[i];
+
+                if (i == 0)
+                {
+                    tmp = CreateNodeAuxPartIac(node, nAuxBoard, nAuxCh);
+                }
+                else if (i == 1)
+                {
+                    tmp = 8;
+                }
+                else if (i == 2)
+                {
+                    if(p.ranges.Aux.vdc_rng[nAuxCh].gain ==1.0 && p.ranges.Aux.vdc_rng[nAuxCh].offset == 0.0)
+                    {
+                        tmp = 2;
+                    }
+                    else
+                    {
+                        tmp = 1;
+                    }
+                }
+
+                if (node != null)
+                {
+                    node.ImageIndex = tmp;
+                    node.SelectedImageIndex = tmp;
+                    node.ToolTipText = (string)node.Tag;
+                }
+
                 if (tmp == 2) bNoCalib = true;
             }
 
@@ -426,29 +615,27 @@ namespace ZiveLab.ZM
             int tmp = 0;
             bool bNoCalib = false;
             stZimCfg p;
+
+
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
-
-
             for (int i = 0; i < MBZA_Constant.Const_RangePart.Count(); i++)
             {
-                node = parentnode.Nodes.Add(string.Format("{0}{1}/", parentnode.Name,i), MBZA_Constant.Const_RangePart[i]);
+                node = parentnode.Nodes.Add(string.Format("{0}{1}/", parentnode.Name, i), MBZA_Constant.Const_RangePart[i]);
                 node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_RangePart[i];
 
                 if (i == 0)
                 {
                     tmp = CreateNodePartIac(node);
-                    tmp = 8;
                 }
                 else if (i == 1)
                 {
                     tmp = CreateNodePartIdc(node);
-                    //tmp = 15;
                 }
                 else if (i == 2)
                 {
                     // no calibration
-                    //if (p.ranges.vac_rng.gain == 1.0 && p.ranges.vac_rng.offset == 0.0)
+                    //if ((p.ranges.vac_rng.gain == 1.0 || p.ranges.vac_rng.gain == 0.0)  && p.ranges.vac_rng.offset == 0.0)
                     //{
                     //    tmp = 2;
                     //}
@@ -456,16 +643,15 @@ namespace ZiveLab.ZM
                     //{
                     //    tmp = 1;
                     //}
-                    tmp = 13;
+                    tmp = 8;
                 }
                 else if (i == 3)
                 {
                     tmp = CreateNodePartVdc(node);
-                    tmp = 8;
                 }
                 else if (i == 4)
                 {
-                    if (p.ranges.rtd_rng.gain == 1.0 && p.ranges.rtd_rng.offset == 0.0)
+                    if ((p.ranges.Gen.rtd_rng.gain == 1.0 || p.ranges.Gen.rtd_rng.gain == 0.0) && p.ranges.Gen.rtd_rng.offset == 0.0) // 배열
                     {
                         tmp = 2;
                     }
@@ -476,7 +662,7 @@ namespace ZiveLab.ZM
                 }
                 else if (i == 5)
                 {
-                    tmp = 13;
+                    tmp = 8;
                 }
 
                 if (node != null)
@@ -507,63 +693,110 @@ namespace ZiveLab.ZM
         public int RefreshTreeView(TreeNode SelectItem = null)
         {
             TreeNode node;
+            int i;
+            int tmp = 0;
+            stSystemConfig p;
+
             treeView1.Nodes.Clear();
 
-            int tmp = 0;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg;
 
-
-            for (int i = 0; i < MBZA_Constant.Const_LootPart.Count(); i++)
+            if (gBZA.IsMCBZA(Serial)) 
             {
-
-
-                node = treeView1.Nodes.Add(string.Format("{0}/", i), MBZA_Constant.Const_LootPart[i]);
-                node.Tag = MBZA_Constant.Const_LootPart[i];
-                if (i == 0)
+                for (i = 0; i < MBZA_Constant.Const_LootPartAux.Count(); i++)
                 {
-                    tmp = 9;
-                }
-                else if (i == 1)
-                {
-                    tmp = 20;
-                }
-                else if (i == 2)
-                {
-                    tmp = 10;
-                }
-                if (i == 3)
-                {
-                    tmp = CreateNodePartRange(node);
-                    tmp = 11;
-                }
-                
-                if (node != null)
-                {
-                    node.ImageIndex = tmp;
-                    node.SelectedImageIndex = tmp;
-                    node.ToolTipText = (string)node.Tag;
+                    node = treeView1.Nodes.Add(string.Format("{0}/", i), MBZA_Constant.Const_LootPartAux[i]);
+                    node.Tag = MBZA_Constant.Const_LootPartAux[i];
+                    if (i == 0)
+                    {
+                        tmp = 9;
+                    }
+                    else if (i == 1)
+                    {
+                        tmp = 0;
+                    }
+                    else if (i == 2)
+                    {
+                        tmp = 10;
+                    }
+                    else if (i == 3)
+                    {
+                        tmp = CreateNodePartRange(node);
+                        tmp += 2;
+                    }
+                    else if (i == 4 || i == 5 || i == 6)
+                    {
+                        if (p.EnaZIM[i - 3] == 0 || p.ChkZIM[i - 3] == 0)
+                        {
+                            tmp = 14;
+                        }
+                        else
+                        {
+                            tmp = CreateNodePartAuxBd(node, i - 3);
+                            tmp += 2;
+                        }
+                    }
+                    if (node != null)
+                    {
+                        node.ImageIndex = tmp;
+                        node.SelectedImageIndex = tmp;
+                        node.ToolTipText = (string)node.Tag;
+                    }
                 }
             }
+            else
+            {
+                for (i = 0; i < MBZA_Constant.Const_LootPart.Count(); i++)
+                {
+                    node = treeView1.Nodes.Add(string.Format("{0}/", i), MBZA_Constant.Const_LootPart[i]);
+                    node.Tag = MBZA_Constant.Const_LootPart[i];
+                    if (i == 0)
+                    {
+                        tmp = 9;
+                    }
+                    else if (i == 1)
+                    {
+                        tmp = 0;
+                    }
+                    else if (i == 2)
+                    {
+                        tmp = 10;
+                    }
+                    if (i == 3)
+                    {
+                        tmp = CreateNodePartRange(node);
+                        tmp += 2;
+                    }
 
+                    if (node != null)
+                    {
+                        node.ImageIndex = tmp;
+                        node.SelectedImageIndex = tmp;
+                        node.ToolTipText = (string)node.Tag;
+                    }
+                }
+            }
             if (SelectItem != null)
             {
                 treeView1.SelectedNode = SelectItem;
                 treeView1.Refresh();
-
-
             }
             else
             {
                 treeView1.SelectedNode = treeView1.Nodes[0];
+                treeView1.Select();
             }
             treeView1.HideSelection = true;
             return 0;
         }
 
-        public void RefreshNodeRangeVdcStat(TreeNode node)
+        public int RefreshNodeRangeVdcStat(TreeNode node)
         {
             TreeNode tnode;
             int tmp = 0;
             int rng;
+            bool bCalib = true;
             stZimCfg p;
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
@@ -576,9 +809,11 @@ namespace ZiveLab.ZM
                 if (tnode == null) break;
                 nodeval = StringKeyToInteger(tnode.Name);
                 rng = nodeval[2] - 1;
-                if (p.ranges.vdc_rng[rng].gain == 1.0 && p.ranges.vdc_rng[rng].offset == 0.0)
+
+                if ((p.ranges.Gen.vdc_rng[rng].gain == 1.0 || p.ranges.Gen.vdc_rng[rng].gain == 0.0) && p.ranges.Gen.vdc_rng[rng].offset == 0.0) // 배열
                 {
                     tmp = 2;
+                    bCalib = false;
                 }
                 else
                 {
@@ -589,13 +824,20 @@ namespace ZiveLab.ZM
                 tnode.SelectedImageIndex = tmp;
                 tnode = tnode.NextNode;
             }
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
         }
-        
+
         public int RefreshNodeRangeIdcStat(TreeNode node)
         {
             TreeNode tnode;
+            bool bCalib = true;
             int tmp = 0;
-            int tmp1 = 1;
             int trng = 0;
             stZimCfg p;
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
@@ -608,22 +850,27 @@ namespace ZiveLab.ZM
                 if (tnode == null) break;
                 nodeval = StringKeyToInteger(tnode.Name);
                 trng = nodeval[2] - 1;
-                if (p.ranges.Idc_rnginf.idcofs[trng].offset == 0.0 || p.ranges.Idc_rnginf.idcofs[trng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET)
+               
+                if (p.ranges.Gen.Idc_rnginf.idcofs[trng].offset == 0.0 || p.ranges.Gen.Idc_rnginf.idcofs[trng].offset == DeviceConstants.DEV_DEFAULT_IDC_OFFSET) // 배열
                 {
                     tmp = 2;
-                    tmp1 = 2;
+                    bCalib = false;
                 }
                 else
                 {
                     tmp = 1;
                 }
-                
+
                 tnode.ImageIndex = tmp;
                 tnode.SelectedImageIndex = tmp;
 
                 tnode = tnode.NextNode;
             }
-            return tmp1;
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+            return tmp;
         }
 
         public int RefreshNodeRangeIacGainStat(int rng, int vartype, TreeNode node)
@@ -646,7 +893,8 @@ namespace ZiveLab.ZM
                 trng = rng * 2 + (nodeval[4] - 1);
                 if (vartype == 0)
                 {
-                    if (ChkEisCalInf(p.ranges.mEisIRngCalInfo[trng]) == false)
+                    //if (ChkEisCalInf(p.ranges[0].mEisIRngCalInfo[trng]) == false)
+                    if (ChkEisCalInf(p.ranges.Gen.mEisIRngCalInfo[trng]) == false) // 배열
                     {
                         bNoCalib = true;
                         tmp = 2;
@@ -660,7 +908,8 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-                    if (ChkCompDummyInf(p.ranges.mDummy[trng]) == false)
+                    //if (ChkCompDummyInf(p.ranges[0].mDummy[trng]) == false)
+                    if (ChkCompDummyInf(p.ranges.Gen.mDummy[trng]) == false)
                     {
                         bNoCalib = true;
                         tmp = 2;
@@ -669,16 +918,21 @@ namespace ZiveLab.ZM
                     {
                         tmp = 1;
                     }
-                    tnode.ImageIndex = tmp + 17;
-                    tnode.SelectedImageIndex = tmp + 17;
+                    tnode.ImageIndex = tmp + 11;
+                    tnode.SelectedImageIndex = tmp + 11;
                 }
                 tnode = tnode.NextNode;
             }
-            if (bNoCalib == true) return 2;
-            return 1;
+
+            if (bNoCalib == true) tmp = 2;
+            else tmp = 1;
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
         }
 
-        public int RefreshNodeRangeIacItemStat(int rng,TreeNode node)
+        public int RefreshNodeRangeIacItemStat(int rng, TreeNode node)
         {
             TreeNode tnode;
             int tmp = 0;
@@ -706,7 +960,8 @@ namespace ZiveLab.ZM
                 else
                 {
                     tmp = RefreshNodeRangeIacGainStat(rng, nodeval[3] - 1, tnode);
-                    if (ChkCompDummyInf(p.ranges.mDummy[rng]) == false)
+                    //if (ChkCompDummyInf(p.ranges[0].mDummy[rng]) == false)
+                    if (ChkCompDummyInf(p.ranges.Gen.mDummy[rng]) == false)
                     {
                         bNoCalib = true;
                         tmp = 2;
@@ -716,22 +971,26 @@ namespace ZiveLab.ZM
                         tmp = 1;
                     }
 
-                    tnode.ImageIndex = tmp + 17;
-                    tnode.SelectedImageIndex = tmp + 17;
+                    tnode.ImageIndex = tmp + 11;
+                    tnode.SelectedImageIndex = tmp + 11;
                 }
 
                 tnode = tnode.NextNode;
             }
-            if (bNoCalib == true) return 2;
-            return 1;
-        }
-        
+            if (bNoCalib == true) tmp = 2;
+            else tmp = 1;
 
-        public void RefreshNodeRangeIacStat(TreeNode node)
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+            
+            return tmp;
+        }
+
+        public int RefreshNodeRangeIacStat(TreeNode node)
         {
             TreeNode tnode;
             int tmp = 0;
-
+            bool bCalib = true;
             stZimCfg p;
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
@@ -745,17 +1004,26 @@ namespace ZiveLab.ZM
 
                 tmp = RefreshNodeRangeIacItemStat(nodeval[2] - 1, tnode);
 
+                if (tmp == 2) bCalib = false;
                 tnode.ImageIndex = tmp;
                 tnode.SelectedImageIndex = tmp;
 
                 tnode = tnode.NextNode;
             }
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
 
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
         }
-        public void RefreshNodeRangeStat(TreeNode node)
+
+        public int RefreshNodeRangeStat(TreeNode node)
         {
             TreeNode tnode;
             int tmp = 0;
+            bool bCalib = true;
             stZimCfg p;
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
@@ -768,9 +1036,11 @@ namespace ZiveLab.ZM
                 if (tnode == null) break;
                 nodeval = StringKeyToInteger(tnode.Name);
 
-                if(nodeval[1] == 1)
+                if (nodeval[1] == 1)
                 {
-                    RefreshNodeRangeIacStat(tnode);
+                    tmp = RefreshNodeRangeIacStat(tnode);
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
                 }
                 if (nodeval[1] == 2)
                 {
@@ -778,17 +1048,15 @@ namespace ZiveLab.ZM
                     tnode.ImageIndex = tmp;
                     tnode.SelectedImageIndex = tmp;
                 }
-                else if (nodeval[1] == 3)
-                {
-                    
-                }
                 else if (nodeval[1] == 4)
                 {
-                    RefreshNodeRangeVdcStat(tnode);
+                    tmp = RefreshNodeRangeVdcStat(tnode);
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
                 }
                 else if (nodeval[1] == 5)
                 {
-                    if (p.ranges.rtd_rng.gain == 1.0 && p.ranges.rtd_rng.offset == 0.0)
+                    if ((p.ranges.Gen.rtd_rng.gain == 1.0 || p.ranges.Gen.rtd_rng.gain == 0.0) && p.ranges.Gen.rtd_rng.offset == 0.0) 
                     {
                         tmp = 2;
                     }
@@ -799,16 +1067,217 @@ namespace ZiveLab.ZM
                     tnode.ImageIndex = tmp;
                     tnode.SelectedImageIndex = tmp;
                 }
+                if (tmp == 2) bCalib = false;
+                tnode = tnode.NextNode;
+            }
+
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+
+            tmp += 2;
+
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
+        }
+
+        public int RefreshAuxNodeBoardStat(TreeNode node, int nAuxBoard)
+        {
+            TreeNode tnode;
+            int tmp = 0;
+            bool bCalib = true;
+            stZimCfg p;
+            stSystemConfig s;
+            if (gBZA.SifLnkLst.ContainsKey(Serial))
+            {
+                p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+                s = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            }
+            else
+            {
+                p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+                s = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg;
+            }
+
+            int[] nodeval;
+
+            tnode = node.FirstNode;
+            while (true)
+            {
+                if (tnode == null) break;
+                nodeval = StringKeyToInteger(tnode.Name);
+
+                if (nodeval[1] == 1 || nodeval[1] == 2 || nodeval[1] == 3 || nodeval[1] == 4)
+                {
+                    tmp = RefreshAuxNodeBdChStat(tnode, nAuxBoard, nodeval[1]-1);
+                    if (tmp == 2) bCalib = false;
+                    tmp += 4;
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
+                    
+                }
+                tnode = tnode.NextNode;
+            }
+
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+
+            tmp += 2;
+            if (s.EnaZIM[nAuxBoard] == 0 || s.ChkZIM[nAuxBoard] == 0) tmp = 14;
+
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
+        }
+
+        public int RefreshAuxNodeBdChStat(TreeNode node, int nAuxBoard, int nAuxBdCh)
+        {
+            TreeNode tnode;
+            int tmp = 0;
+            bool bCalib = true;
+            stZimCfg p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+
+            int[] nodeval;
+
+            tnode = node.FirstNode;
+            while (true)
+            {
+                if (tnode == null) break;
+                nodeval = StringKeyToInteger(tnode.Name);
+
+                if (nodeval[2] == 1)
+                {
+                    tmp = RefreshAuxNodeRangeIacStat(tnode, nAuxBoard, nAuxBdCh);
+                    if(tmp == 2) bCalib = false;
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
+                }
+                if (nodeval[2] == 3)
+                {
+                    if (p.ranges.Aux.vdc_rng[nAuxBdCh].gain == 1.0 && p.ranges.Aux.vdc_rng[nAuxBdCh].offset == 0.0)
+                    {
+                        tmp = 2;
+                        bCalib = false;
+                    }
+                    else
+                    {
+                        tmp = 1;
+                    }
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
+                }
+                
+                tnode = tnode.NextNode;
+            }
+
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
+        }
+
+        public int RefreshAuxNodeRangeIacStat(TreeNode node, int nAuxBoard, int nAuxBdCh)
+        {
+            TreeNode tnode;
+            int tmp = 0;
+            bool bCalib = true;
+            stZimCfg p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            int[] nodeval;
+
+            tnode = node.FirstNode;
+            while (true)
+            {
+                if (tnode == null) break;
+                nodeval = StringKeyToInteger(tnode.Name);
+
+                if(nodeval[3] == 1)
+                {
+                    tmp = RefreshAuxNodeRangeIacItemStat(tnode, nAuxBoard, nAuxBdCh, nodeval[3]-1);
+
+                    if (tmp == 1)
+                    {
+                        if (p.ranges.Aux.iac_gain[nAuxBdCh].items[(nodeval[3] - 1)].iac_gain1 == 1.0 && p.ranges.Aux.iac_gain[nAuxBdCh].items[(nodeval[3] - 1)].iac_gain2 == 1.0)
+                        {
+                            {
+                                tmp = 2;
+                            }
+                        }
+                    }
+
+                    if (tmp == 2) bCalib = false;
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
+                }
 
                 tnode = tnode.NextNode;
             }
 
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
+        }
+
+        public int RefreshAuxNodeRangeIacItemStat(TreeNode node, int nAuxBoard, int nAuxBdCh, int rng)
+        {
+            TreeNode tnode;
+            int tmp = 0;
+            int trng;
+            bool bCalib = true;
+
+            stZimCfg p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            int[] nodeval;
+
+            tnode = node.FirstNode;
+            while (true)
+            {
+                if (tnode == null) break;
+
+                nodeval = StringKeyToInteger(tnode.Name);
+                trng = rng * 2 + (nodeval[4] - 1);
+                if (nodeval[4] == 1 || nodeval[4] == 2)
+                {
+                    if (ChkEisCalInf(p.ranges.Aux.mEisIRngCalInfo[nAuxBdCh].items[trng]) == false)
+                    {
+                        bCalib = false;
+                        tmp = 2;
+                    }
+                    else tmp = 1;
+                    tnode.ImageIndex = tmp;
+                    tnode.SelectedImageIndex = tmp;
+                }
+
+                tnode = tnode.NextNode;
+            }
+            if (bCalib == true) tmp = 1;
+            else tmp = 2;
+
+            node.ImageIndex = tmp;
+            node.SelectedImageIndex = tmp;
+
+            return tmp;
         }
 
         public void RefreshTreeViewStat()
         {
             int[] nodeval;
-
+            stSystemConfig p;
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg;
             foreach (TreeNode node in treeView1.Nodes)
             {
                 nodeval = StringKeyToInteger(node.Name);
@@ -816,14 +1285,42 @@ namespace ZiveLab.ZM
                 {
                     RefreshNodeRangeStat(node);
                 }
+                else
+                {
+                    if (gBZA.IsMCBZA(Serial))
+                    {
+                        if (nodeval[0] == 5 || nodeval[0] == 6 || nodeval[0] == 7)
+                        {
+                            RefreshAuxNodeBoardStat(node, nodeval[0]-4);
+                        }
+                    }
+                }
             }
-            
         }
 
-        private void RecreatePropertyGridToolBar(int index)
+        private void RecreatePropertyGridToolBar(TreeNode node)
         {
-            
-            ToolStripItem item; 
+            ToolStripItem item;
+            int index;
+            string sName;
+            if (node == null)
+            {
+                index = -1;
+                sName = "";
+            }
+            else
+            {
+                index = node.ImageIndex;
+                sName = node.Name;
+                if (sName == "3/3/" || sName == "3/0/0/1/" || sName == "3/0/1/1/" || sName == "3/0/2/1/" || sName == "3/0/3/1/"
+                     || sName == "4/0/" || sName == "4/1/" || sName == "4/2/" || sName == "4/3/" || sName == "5/0/" || sName == "5/1/" || sName == "5/2/" || sName == "5/3/"
+                     || sName == "6/0/" || sName == "6/1/" || sName == "6/2/" || sName == "6/3/" || sName == "7/0/" || sName == "7/1/" || sName == "7/2/" || sName == "7/3/"
+                     )
+                {
+                    index = 100;
+                }
+            }
+
             foreach (Control control in propertyGrid1.Controls)
             {
                 toolStrip = control as ToolStrip;
@@ -844,22 +1341,20 @@ namespace ZiveLab.ZM
 
                     if (index < 0) return;
 
-                    if (index < 16 && index != 8 || index >= 18)
-                    {
-                        item = new ToolStripMenuItem();
-                        item.Name = "LocalRefresh";
-                        item.Image = ZM.Properties.Resources.ViewRefresh.ToBitmap();
-                        item.Click += new EventHandler(BtLocalRefresh_Click);
-                        item.ToolTipText = "Refresh properties.";
-                        item.AutoToolTip = true;
-                        item.Alignment = ToolStripItemAlignment.Left;
-                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
-                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
-                        item.ImageTransparentColor = Color.Fuchsia;
-                        toolStrip.Items.Add(item);
-                    }
+                    item = new ToolStripMenuItem();
+                    item.Name = "LocalRefresh";
+                    item.Image = ZM.Properties.Resources.ViewRefresh.ToBitmap();
+                    item.Click += new EventHandler(BtLocalRefresh_Click);
+                    item.ToolTipText = "Refresh properties.";
+                    item.AutoToolTip = true;
+                    item.Alignment = ToolStripItemAlignment.Left;
+                    item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                    item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                    item.ImageTransparentColor = Color.Fuchsia;
+                    toolStrip.Items.Add(item);
 
-                    if (index < 8 || index == 13  || index == 15 || index >= 18)
+                    
+                    if (index == 0  || index == 1 || index == 2 || index == 8 || index == 11 || index == 12 || index == 10 )
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "BtLocalApply";
@@ -874,7 +1369,7 @@ namespace ZiveLab.ZM
                         toolStrip.Items.Add(item);
                     }
 
-                    if (index == 1 || index == 2 || index == 13 || index == 15 || index == 17 || (20 >index && index >= 18))
+                    if (index == 1 || index == 2 || index == 8 || index == 11 || index == 12 || index == 0)
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "BtChangeRange";
@@ -934,7 +1429,7 @@ namespace ZiveLab.ZM
                         }
                     }
 
-                    if (index == 11)
+                    if (index == 3 || index == 4)
                     {
                         item = new ToolStripMenuItem();
                         item.Name = "ChangeFwZim";
@@ -947,7 +1442,7 @@ namespace ZiveLab.ZM
                         item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
-
+                        /*
                         item = new ToolStripMenuItem();
                         item.Name = "BtTestZim";
                         item.Image = ZM.Properties.Resources.DeviceTest;
@@ -958,15 +1453,15 @@ namespace ZiveLab.ZM
                         item.DisplayStyle = ToolStripItemDisplayStyle.Image;
                         item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
                         item.ImageTransparentColor = Color.Fuchsia;
-                        toolStrip.Items.Add(item);
-
+                        toolStrip.Items.Add(item);*/
                     }
+                    
                     toolStrip.ResumeLayout();
                     break;
                 }
             }
         }
-
+        
         private int[] StringKeyToInteger(string skey) // ch +1, device-ch, Vdc, temp, iac, Vac/no/ X1, X10,   
         {
             int[] nodeval = new int[6];
@@ -1120,7 +1615,8 @@ namespace ZiveLab.ZM
             {
                 for (int i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
                 {
-                    rngval[i] = p.ranges.iac_rng[i].realmax;
+                    //rngval[i] = p.ranges[0].iac_rng[i].realmax;
+                    rngval[i] = p.ranges.Gen.iac_rng[i].realmax; // 배열
                 }
                 propiac.SetType((eZimType)(p.info.cModel[0] - 0x30), rngval);
                 return propiac;
@@ -1129,11 +1625,12 @@ namespace ZiveLab.ZM
 
             if (nodeval[3] < 1)
             {
-                return p.ranges.iac_rng[iRng];
+                //return p.ranges[0].iac_rng[iRng];
+                return p.ranges.Gen.iac_rng[iRng]; // 배열
             }
             itype = nodeval[3] - 1;
 
-            
+
 
             if (nodeval[4] < 1)
             {
@@ -1148,20 +1645,22 @@ namespace ZiveLab.ZM
                     propCompdummy.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, iRng, sifch);
                     return propCompdummy;
                 }
-                
+
             }
-                
+
 
             igain = nodeval[4] - 1;
 
             iRng1 = iRng * 2 + igain;
 
-            if(itype == 0)
+            if (itype == 0)
             {
-                return p.ranges.mEisIRngCalInfo[iRng1];
+                //return p.ranges[0].mEisIRngCalInfo[iRng1];
+                return p.ranges.Gen.mEisIRngCalInfo[iRng1]; // 배열
             }
 
-            return p.ranges.mDummy[iRng1];
+            //return p.ranges[0].mDummy[iRng1];
+            return p.ranges.Gen.mDummy[iRng1]; // 배열
         }
 
         private object GetIdcObjectProc(int[] nodeval)
@@ -1175,15 +1674,19 @@ namespace ZiveLab.ZM
             {
                 for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
                 {
-                    rngval[i] = p.ranges.iac_rng[i/2].realmax * 0.5;
-                    if (i % 2 > 0) rngval[i] *= p.ranges.iac_rng[i/2].controlgain;
+                    //rngval[i] = p.ranges[0].iac_rng[i/2].realmax * 0.5;
+                    //if (i % 2 > 0) rngval[i] *= p.ranges[0].iac_rng[i/2].controlgain;
+                    rngval[i] = p.ranges.Gen.iac_rng[i / 2].realmax * 0.5;
+                    if (i % 2 > 0) rngval[i] *= p.ranges.Gen.iac_rng[i / 2].controlgain; // 배열
                 }
-                propidc.SetType((eZimType)(p.info.cModel[0] - 0x30), rngval, p.ranges.Idc_rnginf);
+                //propidc.SetType((eZimType)(p.info.cModel[0] - 0x30), rngval, p.ranges[0].Idc_rnginf);
+                propidc.SetType((eZimType)(p.info.cModel[0] - 0x30), rngval, p.ranges.Gen.Idc_rnginf); // 배열
                 return propidc;
             }
             iRng = nodeval[2] - 1;
-            
-            return p.ranges.Idc_rnginf.idcofs[iRng];
+
+            //return p.ranges[0].Idc_rnginf.idcofs[iRng];
+            return p.ranges.Gen.Idc_rnginf.idcofs[iRng]; // 배열
         }
 
         private object GetVdcObjectProc(int[] nodeval)
@@ -1196,15 +1699,20 @@ namespace ZiveLab.ZM
 
             if (nodeval[2] < 1)
             {
-                rngval[0] = p.ranges.vdc_rng[0].realmax;
-                rngval[1] = p.ranges.vdc_rng[1].realmax;
+                //rngval[0] = p.ranges[0].vdc_rng[0].realmax;
+                //rngval[1] = p.ranges[0].vdc_rng[1].realmax;
+                rngval[0] = p.ranges.Gen.vdc_rng[0].realmax;
+                rngval[1] = p.ranges.Gen.vdc_rng[1].realmax; // 배열
                 propvdc.SetType((eZimType)(p.info.cModel[0] - 0x30), rngval);
                 return propvdc;
             }
             iRng = nodeval[2] - 1;
-            if(iRng >= DeviceConstants.MAX_VDC_RNGCNT) return null;
-            return p.ranges.vdc_rng[iRng];
+            if (iRng >= DeviceConstants.MAX_VDC_RNGCNT) return null;
+            //return p.ranges[0].vdc_rng[iRng];
+            return p.ranges.Gen.vdc_rng[iRng]; // 배열
         }
+
+        
 
         private object GetRangeObject(int[] nodeval)
         {
@@ -1227,7 +1735,8 @@ namespace ZiveLab.ZM
             }
             else if (item == 2)
             {
-                return p.ranges.vac_rng;
+                //return p.ranges[0].vac_rng;
+                return p.ranges.Gen.vac_rng;
             }
             else if (item == 3)
             {
@@ -1235,23 +1744,107 @@ namespace ZiveLab.ZM
             }
             else if (item == 4)
             {
-                return p.ranges.rtd_rng;
+                //return p.ranges[0].rtd_rng;
+                return p.ranges.Gen.rtd_rng; // 배열
             }
             else if (item == 5)
             {
-                return p.ranges.mSafety;
+                //return p.ranges[0].mSafety;
+                return p.ranges.Gen.mSafety; // 배열
+            }
+            return null;
+        }
+
+        private object GetAuxBoardObject(int[] nodeval, int nAuxBoard)
+        {
+            int item;
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+
+            if (nodeval[1] < 1)
+            {
+                propaux.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, nAuxBoard);
+                return propaux;
+            }
+            item = nodeval[1] - 1;
+            if (item == 0 || item == 1 || item == 2 || item == 3)
+            {
+                return GetAuxChObject(nodeval, nAuxBoard, item);
+            }
+            
+            return null;
+        }
+
+        private object GetAuxChObject(int[] nodeval, int nAuxBoard, int nAuxCh)
+        {
+            int item;
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+
+            if (nodeval[2] < 1)
+            {
+                Propauxch.SetInformation(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg, nAuxBoard, nAuxCh);
+                return Propauxch;
+            }
+            item = nodeval[2] - 1;
+            if (item == 0)
+            {
+                return GetAuxIacObjectProc(nodeval, nAuxBoard, nAuxCh);
+            }
+            else if (item == 1)
+            {
+                return p.ranges.Aux.vac_rng[nAuxCh];
+            }
+            else if (item == 2)
+            {
+                return p.ranges.Aux.vdc_rng[nAuxCh];
+            }
+           
+            return null;
+        }
+
+        private object GetAuxIacObjectProc(int[] nodeval, int nAuxBoard, int nAuxCh)
+        {
+            int item;
+            int iRng;
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
+            double[] rngval = new double[4];
+
+            if (nodeval[3] < 1)
+            {
+                for (int i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
+                {
+                    rngval[i] = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[0].ranges.Gen.iac_rng[i].realmax; // 배열
+                }
+                propiac.SetType((eZimType)(p.info.cModel[0] - 0x30), rngval);
+                return propiac;
+            }
+
+            iRng = nodeval[3] - 1;
+            if (nodeval[4] < 1)
+            {
+                return p.ranges.Aux.iac_gain[nAuxCh].items[iRng]; // 배열
+            }
+
+            item = nodeval[4] - 1;
+
+            if(item == 0)
+            {
+                return p.ranges.Aux.mEisIRngCalInfo[nAuxCh].items[iRng * 2];
+            }
+            else if (item == 1)
+            {
+                return p.ranges.Aux.mEisIRngCalInfo[nAuxCh].items[iRng * 2 + 1];
             }
 
             return null;
         }
-
+        
         private object GetLootObject(TreeNode node)
         {
             int[] nodeval;
             int item;
 
             if (gBZA.SifLnkLst.ContainsKey(Serial) == false) return null;
-           
+            stZimCfg p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
 
             nodeval = NodeToInteger(node);
 
@@ -1282,16 +1875,23 @@ namespace ZiveLab.ZM
             {
                 return GetRangeObject(nodeval);
             }
-            
+            else if (item == 4 || item == 5 || item == 6)
+            {
+                if (gBZA.IsMCBZA(Serial))
+                {
+                    return GetAuxBoardObject(nodeval, item-3);
+                }
+            }
+                
             return null;
         }
 
+
         private void RefreshPropertyGrid(TreeNode node = null)
         {
-
             if (node == null)
             {
-                RecreatePropertyGridToolBar(-1);
+                RecreatePropertyGridToolBar(null);
                 SelectNode = null;
                 this.propertyGrid1.SelectedObject = null;
             }
@@ -1301,23 +1901,21 @@ namespace ZiveLab.ZM
 
                 if (obj == null)
                 {
-                    RecreatePropertyGridToolBar(-1);
+                    RecreatePropertyGridToolBar(null);
                     SelectNode = null;
                 }
                 else
                 {
                     SelectNode = node;
                 }
-                RecreatePropertyGridToolBar(node.ImageIndex);
+                RecreatePropertyGridToolBar(node);
                 this.propertyGrid1.SelectedObject = obj;
             }
 
             FormUtil.ResizePropertyGridSplitter(this.propertyGrid1, 50);
-
         }
         
         
-
         #region ** comm function
 
         public bool UploadChannelInformation()
@@ -1364,43 +1962,22 @@ namespace ZiveLab.ZM
             return true;
         }
 
-        public bool Refresh_RangeInformation()
-        {
-            /*
-            if (SM_MapUtilities.RefreshServer((byte)this.DeviceIndex, (byte)this.Channel, (byte)enServerComand.RefreshSystemInformation, 0)
-                 == false)
-            {
-                return false;
-            }
-
-            if (SM_MapUtilities.RefreshServer((byte)this.DeviceIndex, (byte)this.Channel, (byte)enServerComand.RefreshSystemConfiguration, 0)
-                 == false)
-            {
-                return false;
-            }
-
-            if (SM_MapUtilities.RefreshServer((byte)this.DeviceIndex, (byte)this.Channel, (byte)enServerComand.RefreshSystemRange, 0)
-                 == false)
-            {
-                return false;
-            }
-            */
-            return true;
-        }
-
         #endregion ** comm function
-
-        
-       
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) // 선택 노드
         {
+            if (e.Node == null) return;
+
             string nodeKey = e.Node.Name;
             this.SelectNode = e.Node;
             if (!string.IsNullOrEmpty(nodeKey))
             {
                 RefreshPropertyGrid(e.Node);
             }
+        }
+
+        public void auxtreenode()
+        {
+
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
@@ -1418,6 +1995,7 @@ namespace ZiveLab.ZM
             if (this.SelectNode == null) return;
             RefreshPropertyGrid(this.SelectNode);
         }
+
         void BtLocalRefresh_Click(object sender, EventArgs e)
         {
             if (this.SelectNode == null)
@@ -1430,7 +2008,6 @@ namespace ZiveLab.ZM
                 RefreshPropertyGrid(this.SelectNode);
             }
         }
-
 
         public enum enTestState
         {
@@ -1483,7 +2060,7 @@ namespace ZiveLab.ZM
             int[] nodeval;
             int item;
 
-            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
             nodeval = NodeToInteger(this.SelectNode);
             
             if (nodeval == null)
@@ -1499,9 +2076,9 @@ namespace ZiveLab.ZM
                 if (item == 0)
                 {
                     item = (nodeval[2] - 1) * 2;
-                    if(nodeval[3] == 1)
+                    if (nodeval[3] == 1)
                     {
-                        if(nodeval[4] == 2)
+                        if (nodeval[4] == 2)
                         {
                             item++;
                         }
@@ -1523,8 +2100,9 @@ namespace ZiveLab.ZM
                 }
                 else if (item == 2) //vac
                 {
+
                 }
-                else if (item == 3)
+                else if (item == 3) //vdc
                 {
                     item = nodeval[2] - 1;
                     if (item >= 0 && item < 2)
@@ -1534,7 +2112,7 @@ namespace ZiveLab.ZM
                             MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        frmCalibVdc frm = new frmCalibVdc(selch,Serial, sifch, item);
+                        frmCalibVdc frm = new frmCalibVdc(selch, Serial, sifch, item);
                         frm.ShowDialog();
                         RefreshTreeViewStat();
                         RefreshPropertyGrid(this.SelectNode);
@@ -1547,12 +2125,12 @@ namespace ZiveLab.ZM
                 }
                 else if (item == 4)
                 {
-                    if(MBZA_MapUtil.SetCalibMode(Serial, sifch, true) == false)
+                    if (MBZA_MapUtil.SetCalibMode(Serial, sifch, true) == false)
                     {
                         MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    frmCalibRtd frm = new frmCalibRtd(selch,Serial, sifch);
+                    frmCalibRtd frm = new frmCalibRtd(selch, Serial, sifch);
                     frm.ShowDialog();
                     RefreshTreeViewStat();
                     RefreshPropertyGrid(this.SelectNode);
@@ -1564,28 +2142,136 @@ namespace ZiveLab.ZM
                 }
                 else if (item == 5) //safety
                 {
+                    return;
+                }
+            }
+            else
+            {
+                int nAuxBd = 0;
+                int nAuxBdCh = 0;
+                int iRng = 0;
+                if (gBZA.IsMCBZA(Serial))
+                {
+                    if (item == 4 || item == 5 || nodeval[0] == 6)
+                    {
+                        nAuxBd = item - 3;
+                        if (p.EnaZIM[nAuxBd] == 1 && p.ChkZIM[nAuxBd] == 1)
+                        {
+                            nAuxBdCh = nodeval[1] - 1;
+                            if (nodeval[2] == 1)
+                            {
+                                iRng = (nodeval[3] - 1) * 2;
+                                if (nodeval[4] == 2)
+                                {
+                                    iRng++;
+                                }
+                                frmCalibration frm = new frmCalibration(selch, Serial, sifch, iRng);
+                                frm.ShowDialog();
+
+                                RefreshTreeViewStat();
+                                RefreshPropertyGrid(this.SelectNode);
+                                return;
+                            }
+                            else if (nodeval[2] == 2)
+                            {
+                                return;
+                            }
+                            else if (nodeval[2] == 3)
+                            {
+
+                                if (MBZA_MapUtil.SetCalibMode(Serial, 0, true) == false)
+                                {
+                                    MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                                frmCalibVdc frm = new frmCalibVdc(selch, Serial, nAuxBd, nAuxBdCh);
+                                frm.ShowDialog();
+                                RefreshTreeViewStat();
+                                RefreshPropertyGrid(this.SelectNode);
+                                if (MBZA_MapUtil.SetCalibMode(Serial, 0, false) == false)
+                                {
+                                    MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                return;
+                            }
+                        }
+                    }
 
                 }
             }
             MessageBox.Show("This feature is not supported.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        void AuxBtStartCalib_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("No node selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (selectedNode.Text != "X1" && selectedNode.Text != "X0.2")
+            {
+                MessageBox.Show("Please select X1 or X0.2 node.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (selectedNode.Parent == null ||
+                selectedNode.Parent.Parent == null ||
+                selectedNode.Parent.Parent.Parent == null ||
+                selectedNode.Parent.Parent.Parent.Text != "Aux_Iac")
+            {
+                MessageBox.Show("Invalid AUX calibration structure.", gBZA.sMsgTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            TreeNode rangeNode = selectedNode.Parent.Parent; // 2A, 200mA, 20mA, 2mA
+            TreeNode auxNode = rangeNode.Parent.Parent;
+
+            int item = -1;
+            switch (rangeNode.Text)
+            {
+                case "2A": item = (selectedNode.Text == "X1") ? 0 : 1; break;
+                case "200mA": item = (selectedNode.Text == "X1") ? 2 : 3; break;
+                case "20mA": item = (selectedNode.Text == "X1") ? 4 : 5; break;
+                case "2mA": item = (selectedNode.Text == "X1") ? 6 : 7; break;
+            }
+
+            if (item < 0)
+            {
+                MessageBox.Show("Cannot determine calibration range.", gBZA.sMsgTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            frmCalibration frm = new frmCalibration(selch, Serial, sifch, item);
+            frm.ShowDialog();
+        }
+
+
         void BtLocalApply_Click(object sender, EventArgs e)
         {
             int[] nodeval;
+            int nAuxBd;
+            int nAuxBdCh;
             int iRng;
             int itype;
             int igain;
             int iRng1;
+            stSystemConfig p;
 
-            var rngs = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges;
+
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg;
+
 
             if (treeView1.SelectedNode == null)
             {
                 MessageBox.Show("Not selected a item.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             if (this.propertyGrid1.SelectedObject != null)
             {
                 nodeval = NodeToInteger(treeView1.SelectedNode);
@@ -1597,7 +2283,7 @@ namespace ZiveLab.ZM
                 {
                     return;
                 }
-               
+
 
                 if (nodeval[0] == 1)
                 {
@@ -1609,11 +2295,13 @@ namespace ZiveLab.ZM
                 }
                 else if (nodeval[0] == 3)
                 {
+                    stPropSIF prop = (stPropSIF)this.propertyGrid1.SelectedObject;
+                    prop.GetInformation(ref gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg);
                     return;
                 }
                 else if (nodeval[0] == 4)
                 {
-
+                    
                     if (nodeval[1] == 1)
                     {
                         if (nodeval[2] < 1)
@@ -1623,7 +2311,7 @@ namespace ZiveLab.ZM
                         iRng = nodeval[2] - 1;
                         if (nodeval[3] < 1)
                         {
-                            rngs.iac_rng[iRng] = (st_zim_adci_rnginf)this.propertyGrid1.SelectedObject;
+                            p.mZimCfg[sifch].ranges.Gen.iac_rng[iRng] = (st_zim_adci_rnginf)this.propertyGrid1.SelectedObject; 
                         }
                         itype = nodeval[3] - 1;
 
@@ -1635,48 +2323,85 @@ namespace ZiveLab.ZM
                         iRng1 = iRng * 2 + igain;
                         if (itype == 0)
                         {
-                            rngs.mEisIRngCalInfo[iRng1] = (st_zim_Eis_Cal_info)this.propertyGrid1.SelectedObject;
+                            p.mZimCfg[sifch].ranges.Gen.mEisIRngCalInfo[iRng1] = (st_zim_Eis_Cal_info)this.propertyGrid1.SelectedObject; 
                         }
                         else
                         {
-                            rngs.mDummy[iRng1] = (st_zim_dummy)this.propertyGrid1.SelectedObject;
+                            p.mZimCfg[sifch].ranges.Gen.mDummy[iRng1] = (st_zim_dummy)this.propertyGrid1.SelectedObject; 
                         }
                     }
                     else if (nodeval[1] == 2)
                     {
                         if (nodeval[2] < 1)
                         {
-                            propidc.GetInformation(ref rngs.Idc_rnginf);
+                            propidc.GetInformation(ref p.mZimCfg[sifch].ranges.Gen.Idc_rnginf); 
                             return;
                         }
                         else
                         {
                             iRng = nodeval[2] - 1;
-                            rngs.Idc_rnginf.idcofs[iRng] = (st_zim_Idc_rnginf_Ofs)this.propertyGrid1.SelectedObject;
+                            p.mZimCfg[sifch].ranges.Gen.Idc_rnginf.idcofs[iRng] = (st_zim_Idc_rnginf_Ofs)this.propertyGrid1.SelectedObject; 
                         }
                     }
                     else if (nodeval[1] == 3)
                     {
-                        rngs.vac_rng = (st_zim_adcv_rnginf)this.propertyGrid1.SelectedObject;
+                        p.mZimCfg[sifch].ranges.Gen.vac_rng = (st_zim_adcv_rnginf)this.propertyGrid1.SelectedObject; 
                     }
                     else if (nodeval[1] == 4)
                     {
                         if (nodeval[2] >= 1 && nodeval[2] < 3)
                         {
-                            rngs.vdc_rng[nodeval[2] - 1] = (st_zim_adcv_rnginf)this.propertyGrid1.SelectedObject;
+                            p.mZimCfg[sifch].ranges.Gen.vdc_rng[nodeval[2] - 1] = (st_zim_adcv_rnginf)this.propertyGrid1.SelectedObject; 
                         }
                     }
                     else if (nodeval[1] == 5)
                     {
-                        rngs.rtd_rng = (st_zim_adct_rnginf)this.propertyGrid1.SelectedObject;
+                        p.mZimCfg[sifch].ranges.Gen.rtd_rng = (st_zim_adct_rnginf)this.propertyGrid1.SelectedObject; 
                     }
                     else if (nodeval[1] == 6)
                     {
-                        rngs.mSafety = (st_zim_Safety_inf)this.propertyGrid1.SelectedObject;
+                        p.mZimCfg[sifch].ranges.Gen.mSafety = (st_zim_Safety_inf)this.propertyGrid1.SelectedObject;
+                    }
+                    gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen = p.mZimCfg[sifch].ranges.Gen;
+                }
+                else
+                {
+                    if (gBZA.IsMCBZA(Serial))
+                    {
+                        if (nodeval[0] == 5 || nodeval[0] == 6 || nodeval[0] == 7)
+                        {
+                            nAuxBd = nodeval[1] - 4;
+                            if (p.EnaZIM[nAuxBd] == 1 && p.ChkZIM[nAuxBd] == 1)
+                            {
+                                nAuxBdCh = nodeval[2] - 1;
+                                if (nodeval[3] == 1)
+                                {
+                                    if (nodeval[4] == 1 || nodeval[4] == 2 || nodeval[4] == 3 || nodeval[4] == 4)
+                                    {
+                                        iRng = nodeval[4] - 1;
+                                        p.mZimCfg[nAuxBd].ranges.Aux.iac_gain[nAuxBdCh].items[iRng] = (st_zimaux_iacgain)this.propertyGrid1.SelectedObject;
+                                        if (nodeval[5] == 1 || nodeval[5] == 2)
+                                        {
+                                            igain = nodeval[5] - 1;
+                                            iRng1 = iRng * 2 + igain;
+                                            p.mZimCfg[nAuxBd].ranges.Aux.mEisIRngCalInfo[nAuxBdCh].items[iRng1] = (st_zim_Eis_Cal_info)this.propertyGrid1.SelectedObject;
+                                        }
+                                    }
+                                }
+                                else if (nodeval[3] == 2)
+                                {
+                                    return;
+                                }
+                                else if (nodeval[3] == 3)
+                                {
+                                    p.mZimCfg[nAuxBd].ranges.Aux.vdc_rng[nAuxBdCh] = (st_zim_vdc_rnginf)this.propertyGrid1.SelectedObject;
+                                }
+                            }
+                        }
+                        
                     }
                 }
             }
-            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges = rngs;
             gBZA.SifLnkLst[Serial].mDevInf = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf;
         }
 
@@ -1684,19 +2409,22 @@ namespace ZiveLab.ZM
         {
             int[] nodeval;
             int trng = 0;
+            int trng1 = 0;
+            int nAuxBd = 0;
+            int nAuxBdCh = 0;
             int DummyBase = 1;
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
 
-            var rngs = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges;
-            eZimType zimtype = (eZimType)(gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].info.cModel[0] - 0x30);
+            eZimType zimtype = (eZimType)(p.mZimCfg[sifch].info.cModel[0] - 0x30);
             if (treeView1.SelectedNode == null)
             {
-                MessageBox.Show("Not selected a item.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);;
+                MessageBox.Show("Not selected a item.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error); ;
                 return;
             }
-            
+
             nodeval = NodeToInteger(treeView1.SelectedNode);
 
-            if(nodeval[0] == 4)
+            if (nodeval[0] == 4)
             {
                 if (nodeval[1] == 1)
                 {
@@ -1704,88 +2432,146 @@ namespace ZiveLab.ZM
                     {
                         trng = (nodeval[2] - 1) * 2;
 
-                        if(nodeval[3] == 1 || nodeval[3] == 0)
+                        if (nodeval[3] == 1 || nodeval[3] == 0)
                         {
                             if (nodeval[4] == 1 || nodeval[4] == 0)
                             {
-                                rngs.iac_rng[nodeval[2] - 1].gain1 = 1.0;
-                                InitEisCalInf(ref rngs.mEisIRngCalInfo[trng]);
+                                p.mZimCfg[sifch].ranges.Gen.iac_rng[nodeval[2] - 1].gain1 = 1.0;
+                                InitEisCalInf(ref p.mZimCfg[sifch].ranges.Gen.mEisIRngCalInfo[trng]);
                             }
 
                             if (nodeval[4] == 2 || nodeval[4] == 0)
                             {
-                                rngs.iac_rng[nodeval[2] - 1].gain2 = 1.0;
-                                InitEisCalInf(ref rngs.mEisIRngCalInfo[trng+1]);
+                                p.mZimCfg[sifch].ranges.Gen.iac_rng[nodeval[2] - 1].gain2 = 1.0;
+                                InitEisCalInf(ref p.mZimCfg[sifch].ranges.Gen.mEisIRngCalInfo[trng + 1]);
                             }
                         }
                         if (nodeval[3] == 2 || nodeval[3] == 0)
                         {
                             if (nodeval[4] == 1 || nodeval[4] == 0)
                             {
-                                rngs.mDummy[trng].R = gBZA.appcfg.RDummy[(nodeval[2] - 1) + DummyBase];
-                                rngs.mDummy[trng].Ls = gBZA.appcfg.LDummy[(nodeval[2] - 1) + DummyBase];
+                                p.mZimCfg[sifch].ranges.Gen.mDummy[trng].R = gBZA.appcfg.RDummy[(nodeval[2] - 1) + DummyBase];
+                                p.mZimCfg[sifch].ranges.Gen.mDummy[trng].Ls = gBZA.appcfg.LDummy[(nodeval[2] - 1) + DummyBase];
                             }
 
                             if (nodeval[4] == 2 || nodeval[4] == 0)
                             {
-                                rngs.mDummy[trng + 1].R = gBZA.appcfg.RDummy[(nodeval[2] - 1) + DummyBase];
-                                rngs.mDummy[trng + 1].Ls = gBZA.appcfg.LDummy[(nodeval[2] - 1) + DummyBase ];
+                                p.mZimCfg[sifch].ranges.Gen.mDummy[trng + 1].R = gBZA.appcfg.RDummy[(nodeval[2] - 1) + DummyBase];
+                                p.mZimCfg[sifch].ranges.Gen.mDummy[trng + 1].Ls = gBZA.appcfg.LDummy[(nodeval[2] - 1) + DummyBase];
                             }
                         }
-                        
+
                         RefreshTreeViewStat();
                         RefreshPropertyGrid(treeView1.SelectedNode);
                     }
                 }
+                else if (nodeval[1] == 1)
+                {
+                    gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.dhcp = 1;
+                    gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.SetGateway("169.254.17.1");
+                    gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.SetIPAddress("169.254.17.2");
+                    gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.SetSubnetmask("255.255.0.0");
+                    RefreshTreeViewStat();
+                    RefreshPropertyGrid(treeView1.SelectedNode);
+                }
                 else if (nodeval[1] == 2)
                 {
-                    if (nodeval[2] < 1 )
+                    if (nodeval[2] < 1)
                     {
-                        for (int i= 0; i< DeviceConstants.MAX_IAC_RNGCNT; i++)
+                        for (int i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
                         {
-                            rngs.Idc_rnginf.idcofs[i].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+                            p.mZimCfg[sifch].ranges.Gen.Idc_rnginf.idcofs[i].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
                         }
                     }
                     else
                     {
                         trng = nodeval[2] - 1;
-                        rngs.Idc_rnginf.idcofs[trng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+                        p.mZimCfg[sifch].ranges.Gen.Idc_rnginf.idcofs[trng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
                     }
-                    
+
                     RefreshTreeViewStat();
                     RefreshPropertyGrid(treeView1.SelectedNode);
                 }
                 else if (nodeval[1] == 3)
                 {
-                    rngs.vac_rng.gain = 1.0;
-                    rngs.vac_rng.offset = 0.0;
-                    //ChangeRangeMaxMin(ref rngs.vac_rng);
+                    p.mZimCfg[sifch].ranges.Gen.vac_rng.gain = 1.0;
+                    p.mZimCfg[sifch].ranges.Gen.vac_rng.offset = 0.0;
+                    RefreshPropertyGrid(treeView1.SelectedNode);
                 }
                 else if (nodeval[1] == 4)
                 {
                     if (nodeval[2] >= 1 && nodeval[2] < 3)
                     {
-                        if(nodeval[2] - 1 == 0) ChangeRangeMaxMin(ref rngs.vdc_rng[nodeval[2] - 1]);
-                        else ChangeRangeMaxMin(ref rngs.vdc_rng[nodeval[2] - 1],true);
+                        if (nodeval[2] - 1 == 0) ChangeRangeMaxMin(ref p.mZimCfg[sifch].ranges.Gen.vdc_rng[nodeval[2] - 1]);
+                        else ChangeRangeMaxMin(ref p.mZimCfg[sifch].ranges.Gen.vdc_rng[nodeval[2] - 1], true);
                     }
+                    RefreshTreeViewStat();
+                    RefreshPropertyGrid(treeView1.SelectedNode);
                 }
                 else if (nodeval[1] == 5)
                 {
-                    rngs.rtd_rng.gain = 1.0;
-                    rngs.rtd_rng.offset = 0.0;
+                    p.mZimCfg[sifch].ranges.Gen.rtd_rng.gain = 1.0;
+                    p.mZimCfg[sifch].ranges.Gen.rtd_rng.offset = 0.0;
+                    RefreshTreeViewStat();
+                    RefreshPropertyGrid(treeView1.SelectedNode);
                 }
                 else if (nodeval[1] == 6)
                 {
-                    rngs.mSafety.Initialize(zimtype); 
+                    p.mZimCfg[sifch].ranges.Gen.mSafety.Initialize(zimtype);
+                    RefreshPropertyGrid(treeView1.SelectedNode);
                 }
             }
+            else
+            {
+                if (gBZA.IsMCBZA(Serial))
+                {
+                    if (nodeval[0] == 5 || nodeval[0] == 6 || nodeval[0] == 7)
+                    {
+                        if (nodeval[0] == 5 || nodeval[0] == 6 || nodeval[0] == 7)
+                        {
+                            nAuxBd = nodeval[1] - 4;
+                            if (p.EnaZIM[nAuxBd] == 1 && p.ChkZIM[nAuxBd] == 1)
+                            {
+                                nAuxBdCh = nodeval[2] - 1;
+                                if (nodeval[3] == 1)
+                                {
+                                    if (nodeval[4] == 1 || nodeval[4] == 2 || nodeval[4] == 3 || nodeval[4] == 4)
+                                    {
+                                        trng = nodeval[4] - 1;
+                                        if(nodeval[5] == 0)
+                                        {
+                                            p.mZimCfg[nAuxBd].ranges.Aux.iac_gain[nAuxBdCh].items[trng].iac_gain1 = 1.0;
+                                            p.mZimCfg[nAuxBd].ranges.Aux.iac_gain[nAuxBdCh].items[trng].iac_gain2 = 1.0;
+                                        }    
+                                        else if (nodeval[5] == 1 || nodeval[5] == 2)
+                                        {
+                                            trng1 = trng * 2 + (nodeval[5]-1);
+                                            InitEisCalInf(ref p.mZimCfg[nAuxBd].ranges.Aux.mEisIRngCalInfo[nAuxBdCh].items[trng1]);
+                                        }
+                                    }
 
-            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges = rngs;
+                                    RefreshTreeViewStat();
+                                    RefreshPropertyGrid(treeView1.SelectedNode);
+                                }
+                                else if (nodeval[3] == 2)
+                                {
+                                    return;
+                                }
+                                else if (nodeval[3] == 3)
+                                {
+                                    ChangeRangeMaxMin(ref p.mZimCfg[nAuxBd].ranges.Aux.vdc_rng[nAuxBdCh], true);
+                                    RefreshTreeViewStat();
+                                    RefreshPropertyGrid(treeView1.SelectedNode);
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
             gBZA.SifLnkLst[Serial].mDevInf = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf;
-
-            RefreshPropertyGrid(treeView1.SelectedNode);
         }
-
+        
         void Reporting_Click(object sender, EventArgs e)
         {
             if(File.Exists("C:\\ZIVE DATA\\ZM\\Infor\\ZM_Report.src") == false)
@@ -1796,15 +2582,17 @@ namespace ZiveLab.ZM
             string sexcelfile = string.Format("{0}\\RPT_{0}.xlsx", Serial);
             sexcelfile = Path.Combine(gBZA.appcfg.PathLog, sexcelfile);
 
-            int i,j;
+            int i,j,k,l;
             int nlist;
             string sFilename;
             string sFilename1;
             string sTitle;
             string sItem;
-            string sChCerial;
+            string sBdSerial;
+            string sBdType;
             double dVdcx1;
             double dVdcx10;
+            double dAuxChVdc;
             double dGain = 1.0;
             double dOffset = 0.0;
             string sDesc;
@@ -1860,6 +2648,8 @@ namespace ZiveLab.ZM
                 xShtheader.Cells[7, 4] = DateTime.Now.ToString("yyyy-MM-dd");
 
                 sTitle = "SIF";
+                sBdType = gBZA.GetIniStrData(sTitle, "ModelType", sFilename, "");
+
                 xShtheader.Cells[10, 1] = gBZA.GetIniStrData(sTitle, "ModelName", sFilename, "");
                 xShtheader.Cells[10, 2] = gBZA.GetIniStrData(sTitle, "ModelDesc", sFilename, "");
                 xShtheader.Cells[10, 3] = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
@@ -1873,87 +2663,133 @@ namespace ZiveLab.ZM
                 xShtheader.Cells[16, 4] = gBZA.GetIniStrData(sTitle, "ChannelCount", sFilename, "");
                 dVdcx1 = gBZA.GetIniDoubleData(sTitle, "Voltage_H", sFilename, 0.0);
                 dVdcx10 = gBZA.GetIniDoubleData(sTitle, "Voltage_L", sFilename, 0.0);
+                dAuxChVdc = gBZA.GetIniDoubleData(sTitle, "AuxCh_Voltage", sFilename, 0.0);
+                
                 sTitle = "ZM";
                 xShtheader.Cells[30, 1] = gBZA.GetIniStrData(sTitle, "Version", sFilename, "");
-                xShtheader.Cells[35, 2] = dVdcx1;
-                xShtheader.Cells[36, 2] = dVdcx10;
+                if (i == 0 || sBdType != "MCBZA")
+                {
+
+                    xShtheader.Cells[35, 2] = dVdcx1;
+                    xShtheader.Cells[36, 2] = dVdcx10;
+                }
+                else
+                {
+                    xShtheader.Cells[35, 2] = dAuxChVdc;
+                }
 
                 for (i = 0; i < 4; i++)
                 {
-                    sTitle = string.Format("CH{0}", i + 1);
-                    sChCerial = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
-                    xShtheader.Cells[18+i, 2] = sChCerial;
+                    sTitle = string.Format("BOARD{0}", i + 1);
+                    sBdSerial = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
+                    xShtheader.Cells[18+i, 2] = sBdSerial;
                     xShtheader.Cells[18+i, 3] = gBZA.GetIniStrData(sTitle, "FirmareVersion", sFilename, "");
                     xShtheader.Cells[18+i, 4] = string.Format("{0} {1}", gBZA.GetIniStrData(sTitle, "BoardName", sFilename, ""),gBZA.GetIniStrData(sTitle, "BoardVersion", sFilename, ""));
-                    
-                    if(gBZA.GetIniboolData(sTitle,"Enabled", sFilename,false))
+
+                    if(gBZA.GetIniboolData(sTitle, "Enabled", sFilename, false))
                     {
-                        sFilename1 = gBZA.GetCalibLogFileName(Serial, sChCerial);
+                        sFilename1 = gBZA.GetCalibLogFileName(Serial, sBdSerial);
 
-                        xShtch[i].Cells[1, 1] = string.Format("S / N #{0}", sChCerial);
-
-                        sTitle = "VDC_X1";
-                        nlist =  Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4),4);
-                        for (j = 0; j < nlist; j++)
+                        xShtch[i].Cells[1, 1] = string.Format("S / N #{0}", sBdSerial);
+                        if (i == 0 || sBdType != "MCBZA")
                         {
-                            sItem = string.Format("Target{0}", j + 1);
-                            xShtch[i].Cells[j + 3, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            sItem = string.Format("Real{0}", j + 1);
-                            xShtch[i].Cells[j + 3, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sTitle = "VDC_X1";
+                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                            for (j = 0; j < nlist; j++)
+                            {
+                                sItem = string.Format("Target{0}", j + 1);
+                                xShtch[i].Cells[j + 3, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                sItem = string.Format("Real{0}", j + 1);
+                                xShtch[i].Cells[j + 3, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            }
+                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                            sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx1, dGain, dOffset);
+
+
+                            xShtch[i].Cells[7, 1] = sDesc;
+
+                            sTitle = "VDC_X10";
+                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                            for (j = 0; j < nlist; j++)
+                            {
+                                sItem = string.Format("Target{0}", j + 1);
+                                xShtch[i].Cells[j + 8, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                sItem = string.Format("Real{0}", j + 1);
+                                xShtch[i].Cells[j + 8, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            }
+                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                            xShtch[i].Cells[12, 1] = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx10, dGain, dOffset);
+
+                            sTitle = "RTD";
+                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                            for (j = 0; j < nlist; j++)
+                            {
+                                sItem = string.Format("Target{0}", j + 1);
+                                xShtch[i].Cells[j + 14, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                sItem = string.Format("Real{0}", j + 1);
+                                xShtch[i].Cells[j + 14, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            }
+                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                            xShtch[i].Cells[18, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
+
+                            sTitle = "IDC";
+                            nlist = 8;
+                            for (j = 0; j < nlist; j++)
+                            {
+                                sItem = string.Format("Range{0}_Offset", j + 1);
+                                xShtch[i].Cells[j + 20, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                sItem = string.Format("Range{0}_Read", j + 1);
+                                xShtch[i].Cells[j + 20, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
+                            }
+
+                            for (j = 0; j < 4; j++)
+                            {
+                                sTitle = string.Format("EIS{0}", j + 1);
+                                xShtch[i].Cells[j + 30, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
+                                xShtch[i].Cells[j + 30, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
+                                xShtch[i].Cells[j + 30, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
+                                xShtch[i].Cells[j + 30, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
+                                xShtch[i].Cells[j + 30, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
+                            }
                         }
-                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                        sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx1, dGain, dOffset);
-
-
-                        xShtch[i].Cells[7, 1] = sDesc;
-
-                        sTitle = "VDC_X10";
-                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                        for (j = 0; j < nlist; j++)
+                        else
                         {
-                            sItem = string.Format("Target{0}", j + 1);
-                            xShtch[i].Cells[j + 8, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            sItem = string.Format("Real{0}", j + 1);
-                            xShtch[i].Cells[j + 8, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                        }
-                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                        xShtch[i].Cells[12, 1] = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx10, dGain, dOffset);
+                            l = 3;
+                            for (j = 0; j < 4; j++)
+                            {
+                                sTitle = string.Format("AUXCH{0}_VDC", j + 1);
 
-                        sTitle = "RTD";
-                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                        for (j = 0; j < nlist; j++)
-                        {
-                            sItem = string.Format("Target{0}", j + 1);
-                            xShtch[i].Cells[j + 13, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            sItem = string.Format("Real{0}", j + 1);
-                            xShtch[i].Cells[j + 13, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                        }
-                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                        xShtch[i].Cells[17, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
+                                nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                                for (j = 0; j < nlist; j++)
+                                {
+                                    sItem = string.Format("Target{0}", j + 1);
+                                    xShtch[i].Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                    sItem = string.Format("Real{0}", j + 1);
+                                    xShtch[i].Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                    l++;
+                                }
+                                dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                                dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                                sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dAuxChVdc, dGain, dOffset);
 
-                        sTitle = "IDC";
-                        nlist = 8;
-                        for (j = 0; j < nlist; j++)
-                        {
-                            sItem = string.Format("Range{0}_Offset", j+1);
-                            xShtch[i].Cells[j + 19, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            sItem = string.Format("Range{0}_Read", j + 1);
-                            xShtch[i].Cells[j + 19, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
+                                xShtch[i].Cells[l, 1] = sDesc;
+                                l++;
+                                l++;
+                                for (k = 0; k < 4; k++)
+                                {
+                                    sTitle = string.Format("AUXCH{0}_EIS{0}", k + 1);
+                                    xShtch[i].Cells[l, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
+                                    xShtch[i].Cells[l, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
+                                    xShtch[i].Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
+                                    xShtch[i].Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
+                                    xShtch[i].Cells[l, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
+                                    l++;
+                                }
+                            }
                         }
-
-                        for (j = 0; j < 4; j++)
-                        {
-                            sTitle = string.Format("EIS-{0}",j+1);
-                            xShtch[i].Cells[j + 29, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
-                            xShtch[i].Cells[j + 29, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
-                            xShtch[i].Cells[j + 29, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
-                            xShtch[i].Cells[j + 29, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
-                            xShtch[i].Cells[j + 29, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
-                        }
-
                     }
                     else
                     {
@@ -1974,7 +2810,7 @@ namespace ZiveLab.ZM
                 //              xApp.Quit();
                 /*for (i = 0; i < 4; i++)
                 {
-                    if (xShtch[i] != null)
+                    if (xShtch[i] != null) 
                     {
                         ReleaseExcelObject(xShtch[i]);
                     }
@@ -2044,13 +2880,54 @@ namespace ZiveLab.ZM
 
         void ChangeFwZIM_Click(object sender, EventArgs e)
         {
-            frmBurnZIM frm = new frmBurnZIM(Serial, sifch, true);
-            frm.ShowDialog();
-        }
+            int[] nodeval;
+            int nBoard;
+            
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("Not selected a item.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            nodeval = NodeToInteger(treeView1.SelectedNode);
+            if (nodeval == null)
+            {
+                return;
+            }
+            if (nodeval[0] < 4 && nodeval[0] > 7)
+            {
+                return;
+            }
+            nBoard = nodeval[0] - 4;
+
+            frmBurnZIM frm = new frmBurnZIM(Serial, nBoard, true);
+            frm.ShowDialog();
+
+        }
+        
         void BtTestZim_Click(object sender, EventArgs e)
         {
-            frmTestDevice frm = new frmTestDevice(Serial, sifch, true);
+            int[] nodeval;
+            int nBoard;
+
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("Not selected a item.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            nodeval = NodeToInteger(treeView1.SelectedNode);
+            if (nodeval == null)
+            {
+                return;
+            }
+            if (nodeval[0] < 4 && nodeval[0] > 7)
+            {
+                return;
+            }
+            nBoard = nodeval[0] - 4;
+
+            frmTestDevice frm = new frmTestDevice(Serial, nBoard, true);
             frm.ShowDialog();
         }
 
@@ -2145,7 +3022,7 @@ namespace ZiveLab.ZM
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }
         }
-
+        
         private void ChangeRangeMaxMin(ref st_zim_vdc_rnginf inf, bool bInit = false)
         {
             frmSetMaxRange mdlg = new frmSetMaxRange(inf.realmax, inf.maximum, inf.minimum, bInit);
@@ -2217,15 +3094,12 @@ namespace ZiveLab.ZM
         void SaveToXml(string s, int c)
         {
             string sFullPath;
-            var p = gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c];
 
             sFullPath = Path.Combine(gBZA.appcfg.PathRangeInfo, GetrangeFileName(s, c));
-
             stRangeFile inf = new stRangeFile();
 
-            //inf.parent.SetInformation(selch, s, c);
-            inf.parent.SetInformation(gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetHostname(), gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetIPAddress(),   selch, s, c);
-            inf.ranges = p.ranges;
+            inf.mZimCfg = gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c]; 
+            
 
             XmlSerializer writer = new XmlSerializer(inf.GetType());
             StreamWriter file = new StreamWriter(sFullPath);
@@ -2246,10 +3120,8 @@ namespace ZiveLab.ZM
 
             stRangeFile inf = new stRangeFile();
 
-            //inf.parent.SetInformation(selch, s, c);
-            inf.parent.SetInformation(gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetHostname(), gBZA.SifLnkLst[s].MBZAIF.mDevInf.mConnCfg.mEthernetCfg.GetIPAddress(), selch, s, c);
-            inf.ranges = p.ranges;
-
+            inf.mZimCfg = gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c];
+            
             XmlSerializer writer = new XmlSerializer(inf.GetType());
             StreamWriter file = new StreamWriter(sFullPath);
             try
@@ -2265,22 +3137,32 @@ namespace ZiveLab.ZM
 
         void LoadFromXml(string s, int c )
         {
-
+            stRangeFile_1 inf_1 = new stRangeFile_1();
             stRangeFile inf = new stRangeFile();
             string sFullPath;
+            XmlSerializer Reader;
 
             sFullPath = Path.Combine(gBZA.appcfg.PathRangeInfo, GetrangeFileName(s, c));
 
+            var file_inf = new FileInfo(sFullPath);
             StreamReader file = new StreamReader(sFullPath);
 
-            XmlSerializer Reader = new XmlSerializer(inf.GetType());
 
             try
             {
-                inf = (stRangeFile)Reader.Deserialize(file);
-
-                gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ranges = inf.ranges;
-
+                if (file_inf.Length == MBZA_Constant.RANGE_XML_FILESIZE_1)
+                {
+                    Reader = new XmlSerializer(inf_1.GetType());
+                    inf_1 = (stRangeFile_1)Reader.Deserialize(file);
+                    gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ranges.Gen.ToWritePtr(inf_1.ranges.ToByteArray());
+                }
+                else
+                {
+                    Reader = new XmlSerializer(inf.GetType());
+                    inf = (stRangeFile)Reader.Deserialize(file);
+                    gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ToWritePtr(inf.mZimCfg.ToByteArray());
+                }
+                
             }
             catch (Exception ex)
             {
@@ -2291,19 +3173,27 @@ namespace ZiveLab.ZM
 
         void LoadFromXml(string s, int c, string sFullPath)
         {
-
+            stRangeFile_1 inf_1 = new stRangeFile_1();
             stRangeFile inf = new stRangeFile();
-            
             StreamReader file = new StreamReader(sFullPath);
+            XmlSerializer Reader;
 
-            XmlSerializer Reader = new XmlSerializer(inf.GetType());
+            var file_inf = new FileInfo(sFullPath);
 
             try
             {
-                inf = (stRangeFile)Reader.Deserialize(file);
-
-                gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ranges = inf.ranges;
-
+                if (file_inf.Length == MBZA_Constant.RANGE_XML_FILESIZE_1)
+                {
+                    Reader = new XmlSerializer(inf_1.GetType());
+                    inf_1 = (stRangeFile_1)Reader.Deserialize(file);
+                    gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ranges.Gen.ToWritePtr(inf_1.ranges.ToByteArray());
+                }
+                else
+                {
+                    Reader = new XmlSerializer(inf.GetType());
+                    inf = (stRangeFile)Reader.Deserialize(file);
+                    gBZA.SifLnkLst[s].MBZAIF.mDevInf.mSysCfg.mZimCfg[c].ToWritePtr(inf.mZimCfg.ToByteArray());
+                }
             }
             catch (Exception ex)
             {
@@ -2453,20 +3343,23 @@ namespace ZiveLab.ZM
             int j = 0;
             var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
             eZimType zimtype = (eZimType)(p.info.cModel[0] - 0x30);
-            
+
             for (i = 0; i < MBZA_Constant.MAX_IRANGE; i++)
             {
                 j = i / 2;
-                p.ranges.mDummy[i].Ls = gBZA.appcfg.LDummy[j + 1];
-                p.ranges.mDummy[i].R = gBZA.appcfg.RDummy[j + 1];
+                //p.ranges[0].mDummy[i].Ls = gBZA.appcfg.LDummy[j + 1];
+                //p.ranges[0].mDummy[i].R = gBZA.appcfg.RDummy[j + 1];
+                p.ranges.Gen.mDummy[i].Ls = gBZA.appcfg.LDummy[j + 1];
+                p.ranges.Gen.mDummy[i].R = gBZA.appcfg.RDummy[j + 1]; // 배열
             }
-            
 
-            p.ranges.mSafety.MaxPower = gBZA.appcfg.Power;
+
+            //p.ranges[0].mSafety.MaxPower = gBZA.appcfg.Power;
+            p.ranges.Gen.mSafety.MaxPower = gBZA.appcfg.Power; // 배열
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch] = p;
             RefreshTreeViewStat();
             RefreshPropertyGrid(treeView1.SelectedNode);
-            
+
         }
 
         void InitIacRangeInf(ref st_zim_adci_rnginf prng, double realmax, double max, double min)
@@ -2485,91 +3378,106 @@ namespace ZiveLab.ZM
         {
             int i = 0;
             int j = 0;
-          
-            tRanges.ID = DeviceConstants.ID_RANGEINFO;
+
+            tRanges.Gen.ID = DeviceConstants.ID_RANGEINFO;
             for (i = 0; i < MBZA_Constant.MAX_IRANGE; i++)
             {
-                InitEisCalInf(ref tRanges.mEisIRngCalInfo[i]);
+                InitEisCalInf(ref tRanges.Gen.mEisIRngCalInfo[i]);
             }
-            tRanges.Idc_rnginf.Initialize();
+            tRanges.Gen.Idc_rnginf.Initialize();
             for (i = 0; i < MBZA_Constant.MAX_IRANGE; i++)
             {
                 j = i / 2;
-                tRanges.mDummy[i].Ls = gBZA.appcfg.LDummy[j+1];
-                tRanges.mDummy[i].R = gBZA.appcfg.RDummy[j+1];
-               
+                tRanges.Gen.mDummy[i].Ls = gBZA.appcfg.LDummy[j + 1];
+                tRanges.Gen.mDummy[i].R = gBZA.appcfg.RDummy[j + 1];
+
             }
 
-            
+
 
             //PT-1000 - 1000ohm : 0'C, RREF - 4000ohm
             //PT-100  -  100ohm : 0'C. RREF -  400ohm
 
-            tRanges.mSafety.MaxPower = gBZA.appcfg.Power;
+            tRanges.Gen.mSafety.MaxPower = gBZA.appcfg.Power;
 
-            tRanges.rtd_rng.maximum = DeviceConstants.ADC_RTD_CONST_MAX;
-            tRanges.rtd_rng.minimum = DeviceConstants.ADC_RTD_CONST_MIN;
-            tRanges.rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT100;
-            tRanges.rtd_rng.gain = 1.0;
-            tRanges.rtd_rng.offset = 0.0;
+            tRanges.Gen.rtd_rng.maximum = DeviceConstants.ADC_RTD_CONST_MAX;
+            tRanges.Gen.rtd_rng.minimum = DeviceConstants.ADC_RTD_CONST_MIN;
+            tRanges.Gen.rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT100;
+            tRanges.Gen.rtd_rng.gain = 1.0;
+            tRanges.Gen.rtd_rng.offset = 0.0;
 
-            InitIacRangeInf(ref tRanges.iac_rng[0], DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
-            InitIacRangeInf(ref tRanges.iac_rng[1], DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
-            InitIacRangeInf(ref tRanges.iac_rng[2], DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
-            InitIacRangeInf(ref tRanges.iac_rng[3], DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG4_MIN);
-            
-            tRanges.vac_rng.maximum = DeviceConstants.ADC_VAC_RNG_MAX;
-            tRanges.vac_rng.minimum = DeviceConstants.ADC_VAC_RNG_MIN;
-            tRanges.vac_rng.factor = DeviceConstants.ADC_VAC_RNG_FACTOR;
-            tRanges.vac_rng.gain = 1.0;
-            tRanges.vac_rng.offset = 0.0;
+            InitIacRangeInf(ref tRanges.Gen.iac_rng[0], DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
+            InitIacRangeInf(ref tRanges.Gen.iac_rng[1], DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
+            InitIacRangeInf(ref tRanges.Gen.iac_rng[2], DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
+            InitIacRangeInf(ref tRanges.Gen.iac_rng[3], DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG4_MIN);
 
-            tRanges.vac_rng.maximum = DeviceConstants.ADC_VAC_RNG_MAX;
-            tRanges.vac_rng.minimum = DeviceConstants.ADC_VAC_RNG_MIN;
-            tRanges.vac_rng.factor = DeviceConstants.ADC_VAC_RNG_FACTOR;
-            tRanges.vac_rng.gain = 1.0;
-            tRanges.vac_rng.offset = 0.0;
+            tRanges.Gen.vac_rng.maximum = DeviceConstants.ADC_VAC_RNG_MAX;
+            tRanges.Gen.vac_rng.minimum = DeviceConstants.ADC_VAC_RNG_MIN;
+            tRanges.Gen.vac_rng.factor = DeviceConstants.ADC_VAC_RNG_FACTOR;
+            tRanges.Gen.vac_rng.gain = 1.0;
+            tRanges.Gen.vac_rng.offset = 0.0;
+
+            tRanges.Gen.vac_rng.maximum = DeviceConstants.ADC_VAC_RNG_MAX;
+            tRanges.Gen.vac_rng.minimum = DeviceConstants.ADC_VAC_RNG_MIN;
+            tRanges.Gen.vac_rng.factor = DeviceConstants.ADC_VAC_RNG_FACTOR;
+            tRanges.Gen.vac_rng.gain = 1.0;
+            tRanges.Gen.vac_rng.offset = 0.0;
 
             if (zimtype == eZimType.BZA100 || zimtype == eZimType.BZA60)
             {
-                tRanges.vdc_rng[0].maximum = DeviceConstants.ADC_VDC_RNG0_MAX1;
-                tRanges.vdc_rng[0].minimum = DeviceConstants.ADC_VDC_RNG0_MIN1;
-                tRanges.vdc_rng[0].factor = DeviceConstants.ADC_VDC_RNG0_FACTOR;
+                tRanges.Gen.vdc_rng[0].maximum = DeviceConstants.ADC_VDC_RNG0_MAX1;
+                tRanges.Gen.vdc_rng[0].minimum = DeviceConstants.ADC_VDC_RNG0_MIN1;
+                tRanges.Gen.vdc_rng[0].factor = DeviceConstants.ADC_VDC_RNG0_FACTOR;
 
-                tRanges.vdc_rng[1].maximum = DeviceConstants.ADC_VDC_RNG1_MAX1;
-                tRanges.vdc_rng[1].minimum = DeviceConstants.ADC_VDC_RNG1_MIN1;
-                tRanges.vdc_rng[1].factor = DeviceConstants.ADC_VDC_RNG1_FACTOR;
+                tRanges.Gen.vdc_rng[1].maximum = DeviceConstants.ADC_VDC_RNG1_MAX1;
+                tRanges.Gen.vdc_rng[1].minimum = DeviceConstants.ADC_VDC_RNG1_MIN1;
+                tRanges.Gen.vdc_rng[1].factor = DeviceConstants.ADC_VDC_RNG1_FACTOR;
+            }
+            else if (zimtype == eZimType.BZAAUX1)
+            {
+                tRanges.Aux.vdc_rng[0].maximum = DeviceConstants.ADC_AUX_VDC_MAX1;
+                tRanges.Aux.vdc_rng[0].minimum = DeviceConstants.ADC_AUX_VDC_MIN1;
+                tRanges.Aux.vdc_rng[0].factor = DeviceConstants.ADC_AUX_VDC_FACTOR1;
+
+                tRanges.Aux.vdc_rng[1].maximum = DeviceConstants.ADC_AUX_VDC_MAX1;
+                tRanges.Aux.vdc_rng[1].minimum = DeviceConstants.ADC_AUX_VDC_MIN1;
+                tRanges.Aux.vdc_rng[1].factor = DeviceConstants.ADC_AUX_VDC_FACTOR1;
             }
             else
             {
-                tRanges.vdc_rng[0].maximum = DeviceConstants.ADC_VDC_RNG0_MAX;
-                tRanges.vdc_rng[0].minimum = DeviceConstants.ADC_VDC_RNG0_MIN;
-                tRanges.vdc_rng[0].factor = DeviceConstants.ADC_VDC_RNG0_FACTOR;
+                tRanges.Gen.vdc_rng[0].maximum = DeviceConstants.ADC_VDC_RNG0_MAX;
+                tRanges.Gen.vdc_rng[0].minimum = DeviceConstants.ADC_VDC_RNG0_MIN;
+                tRanges.Gen.vdc_rng[0].factor = DeviceConstants.ADC_VDC_RNG0_FACTOR;
 
-                tRanges.vdc_rng[1].maximum = DeviceConstants.ADC_VDC_RNG1_MAX;
-                tRanges.vdc_rng[1].minimum = DeviceConstants.ADC_VDC_RNG1_MIN;
-                tRanges.vdc_rng[1].factor = DeviceConstants.ADC_VDC_RNG1_FACTOR;
+                tRanges.Gen.vdc_rng[1].maximum = DeviceConstants.ADC_VDC_RNG1_MAX;
+                tRanges.Gen.vdc_rng[1].minimum = DeviceConstants.ADC_VDC_RNG1_MIN;
+                tRanges.Gen.vdc_rng[1].factor = DeviceConstants.ADC_VDC_RNG1_FACTOR;
             }
-            
+
             if (zimtype == eZimType.BZA500)
             {
-                tRanges.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX1;
-                tRanges.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX1;
+                tRanges.Gen.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX1;
+                tRanges.Gen.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX1;
             }
             else if (zimtype == eZimType.BZA100)
             {
-                tRanges.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX2;
-                tRanges.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX2;
+                tRanges.Gen.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX2;
+                tRanges.Gen.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX2;
             }
             else if (zimtype == eZimType.BZA60)
             {
-                tRanges.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX3;
-                tRanges.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX3;
+                tRanges.Gen.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX3;
+                tRanges.Gen.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX3;
+            }
+            else if (zimtype == eZimType.BZAAUX1)
+            {
+                tRanges.Aux.vdc_rng[0].realmax = DeviceConstants.ADC_AUX_VDC_RMAX1;
+                tRanges.Aux.vdc_rng[1].realmax = DeviceConstants.ADC_AUX_VDC_RMAX1;
             }
             else
             {
-                tRanges.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX0;
-                tRanges.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX0;
+                tRanges.Gen.vdc_rng[0].realmax = DeviceConstants.ADC_VDC_RNG0_RMAX0;
+                tRanges.Gen.vdc_rng[1].realmax = DeviceConstants.ADC_VDC_RNG1_RMAX0;
             }
 
         }
@@ -2632,10 +3540,15 @@ namespace ZiveLab.ZM
             if (MessageBox.Show("All range information on the device is initialized and writed in memory on the ZIM Board.\r\\n Would you like to continue?"
                 , "Configuration", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
+                int auxch;
                 var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+                eZimType type = (eZimType)(p.info.cModel[0] - 0x30);
+                for(auxch=0; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch ++)
+                {
+                    //InitRangeInfo(ref p.ranges[auxch], (eZimType)(p.info.cModel[0] - 0x30));
+                    InitRangeInfo(ref p.ranges, (eZimType)(p.info.cModel[0] - 0x30)); // 배열
+                }
 
-                InitRangeInfo(ref p.ranges, (eZimType)(p.info.cModel[0] - 0x30));
-                
                 RefreshTreeViewStat();
                 RefreshPropertyGrid(treeView1.SelectedNode);
             }

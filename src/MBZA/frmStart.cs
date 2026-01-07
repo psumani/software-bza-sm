@@ -283,7 +283,8 @@ namespace ZiveLab.ZM
                 }
                 
                 gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch] = tech;
-                tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc;
+                //tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc;
+                tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc; // 배열
                 irng = getLimitRangeI(sifid, sifch, tmpI);
                 if (tech.irange < irng)
                 {
@@ -357,7 +358,7 @@ namespace ZiveLab.ZM
             return serrch;
         }
 
-        private ushort getLimitRangeI(string sifid,int sifch,double current)
+        private ushort getLimitRangeI(string sifid, int sifch, double current)
         {
             ushort orng = 0;
             ushort rng = 0;
@@ -365,7 +366,8 @@ namespace ZiveLab.ZM
             double tmp1 = Math.Abs(current);
             while (true)
             {
-                tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.iac_rng[rng].realmax;
+                //tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[rng].realmax;
+                tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.iac_rng[rng].realmax; // 배열
 
                 if (tmp1 < tmp)
                 {
@@ -385,7 +387,7 @@ namespace ZiveLab.ZM
 
             return orng;
         }
-        
+
         private string UploadTechfile()
         {
             string serrch = "";
@@ -604,8 +606,7 @@ namespace ZiveLab.ZM
                 head.SetMemo(Encoding.UTF8.GetBytes(txtmemo.Text.Trim()));
                 head.mInfo.Error = 0;
                 head.tech = gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch];
-                head.inf_sif = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mSIFCfg;
-                head.inf_sifch = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
+                head.systemInfo = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg;
 
                 if (chkapptech.Checked == true)
                 {

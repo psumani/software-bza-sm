@@ -192,7 +192,7 @@ namespace ZiveLab.ZM.ZIM.Utilities
                     return false;
                 }
 
-                if (mScanBzaInf.mFindSifCfg.Type != (byte)eDeviceType.SBZA && mScanBzaInf.mFindSifCfg.Type != (byte)eDeviceType.MBZA)
+                if (mScanBzaInf.mFindSifCfg.Type != (byte)eDeviceType.SBZA && mScanBzaInf.mFindSifCfg.Type != (byte)eDeviceType.MBZA && mScanBzaInf.mFindSifCfg.Type != (byte)eDeviceType.MCBZA)
                 {
                     mScanBzaInf.bBza = 0;
                     mCommZim.Dispose();

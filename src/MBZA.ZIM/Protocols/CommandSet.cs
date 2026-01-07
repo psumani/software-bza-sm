@@ -57,6 +57,7 @@
 
         public const byte READ_DATA = 0xA0;
 
+        public const byte SET_MCBZA_RNGINFO = 0xA5;
         public const byte GET_RNGINFO = 0xA6;
         public const byte SET_RNGINFO = 0xA7;
 
@@ -91,5 +92,6 @@
         public const byte SET_COND_TECH = 0xC6;
         public const byte GET_HEADINFO = 0xC7;
         public const byte SET_HEADINFO = 0xC8;
+        public const byte SET_SIF_POINT = 0xC9;
     }
 }

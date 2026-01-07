@@ -1,0 +1,119 @@
+# ##############################################################################
+
+# iCEcube PCF
+
+# Version:            2020.12.27943
+
+# File Generated:     Jun 29 2021 09:44:37
+
+# Family & Device:    iCE40HX4K
+
+# Package:            TQ144
+
+# ##############################################################################
+
+###IOSet List 103
+set_io DDS_SCK1 42
+set_io IAC_FLT0 130
+set_io ICE_IOR_120 84 -pullup yes
+set_io ICE_IOR_138 90 -pullup yes
+set_io ICE_IOT_178 119 -pullup yes
+set_io IAC_DRDY 141
+set_io ICE_IOT_173 116 -pullup yes
+set_io ICE_IOT_198 129 -pullup yes
+set_io DDS_MCLK1 39
+set_io ICE_IOR_136 87 -pullup yes
+set_io ICE_IOR_160 101 -pullup yes
+set_io ICE_IOL_12B 18 -pullup yes
+set_io SELIRNG1 122
+set_io AC_ADC_SYNC 142
+set_io CONT_SD 120
+set_io ICE_IOB_96 61 -pullup yes
+set_io ICE_IOR_140 93 -pullup yes
+set_io ICE_IOT_174 117 -pullup yes
+set_io VDC_SDO 22
+set_io AMPV_POW 28
+set_io ICE_IOB_103 63
+set_io ICE_IOR_164 104 -pullup yes
+set_io THERMOSTAT 44 -pullup yes
+set_io VAC_SCLK 11
+set_io ICE_IOL_4A 7 -pullup yes
+set_io ICE_IOR_139 91 -pullup yes
+set_io EIS_SYNCCLK 47 -pullup yes
+set_io IAC_SCLK 137
+set_io ICE_GPMO_1 79 -pullup yes
+set_io ICE_IOR_128 85 -pullup yes
+set_io ICE_IOR_144 95 -pullup yes
+set_io VAC_FLT0 3
+set_io IAC_OSR1 125
+set_io ICE_IOR_137 88 -pullup yes
+set_io RTD_CS 33
+set_io RTD_SCLK 32
+set_io DDS_MCLK 114
+set_io ICE_IOT_197 128 -pullup yes
+set_io ICE_IOT_221 143 -pullup yes
+set_io RTD_SDI 31
+set_io SELIRNG0 121
+set_io DDS_CS 110
+set_io IAC_CLK 135
+set_io ICE_IOB_104 64
+set_io ICE_IOB_82 52
+set_io ICE_IOB_95 60 -pullup yes
+set_io ICE_IOR_161 102 -pullup yes
+set_io ICE_SYSCLK 37 -pullup yes
+set_io STAT_COMM 45
+set_io ICE_IOR_148 98 -pullup yes
+set_io TEST_LED 38
+set_io VAC_MOSI 12
+set_io VAC_OSR0 1
+set_io IAC_MISO 139
+set_io ICE_GPMI_0 81
+set_io ICE_GPMO_2 80 -pullup yes
+set_io ICE_IOB_102 62 -pullup yes
+set_io ICE_IOB_80 48 -pullup yes
+set_io ICE_IOR_141 94 -pullup yes
+set_io ICE_IOT_177 118 -pullup yes
+set_io ICE_SPI_MISO 75
+set_io RTD_DRDY 29 -pullup yes
+set_io ICE_IOL_12A 17 -pullup yes
+set_io ICE_IOR_152 99 -pullup yes
+set_io ICE_SPI_SCLK 73 -pullup yes
+set_io VDC_RNG0 25
+set_io DDS_RNG_0 115
+set_io ICE_GPMO_0 78 -pullup yes
+set_io ICE_IOB_91 55 -pullup yes
+set_io ICE_IOL_13B 20 -pullup yes
+set_io ICE_IOL_14A 21 -pullup yes
+set_io ICE_IOR_147 97 -pullup yes
+set_io ICE_IOR_165 105 -pullup yes
+set_io ICE_SPI_MOSI 74 -pullup yes
+set_io VAC_FLT1 4
+set_io VDC_SCLK 23
+set_io IAC_OSR0 124
+set_io RTD_SDO 34 -pullup yes
+set_io ICE_IOR_118 82 -pullup yes
+set_io ICE_IOR_167 107 -pullup yes
+set_io ICE_SPI_CE0 76 -pullup yes
+set_io VAC_CLK 9
+set_io VAC_CS 10
+set_io ICE_IOB_94 56 -pullup yes
+set_io ICE_IOL_4B 8 -pullup yes
+set_io DDS_CS1 41
+set_io IAC_MOSI 138
+set_io VAC_OSR1 2
+set_io ICE_IOB_81 49
+set_io ICE_IOL_13A 19 -pullup yes
+set_io ICE_IOL_18B 26 -pullup yes
+set_io IAC_CS 136
+set_io ICE_IOT_222 144 -pullup yes
+set_io VDC_CLK 24
+set_io ICE_IOR_146 96 -pullup yes
+set_io DDS_MOSI1 43
+set_io VAC_MISO 15
+set_io DDS_MOSI 113
+set_io ICE_IOR_119 83 -pullup yes
+set_io ICE_IOR_166 106 -pullup yes
+set_io DDS_SCK 112
+set_io IAC_FLT1 134
+set_io VAC_DRDY 16
+

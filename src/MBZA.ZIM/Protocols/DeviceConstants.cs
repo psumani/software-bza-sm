@@ -10,6 +10,10 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_DUMMY = 8;
         public const int MAX_IRANGE = 8;
         public const int MAX_DEV_CHANNEL = 4;
+        public const int MAX_AUX_CHANNEL = 4;
+        public const int MAX_AUX_BOARD = 3;
+        public const int MAX_AUX_CHANNELS = MAX_AUX_CHANNEL * MAX_AUX_BOARD;
+        public const int MAX_AUXTYPE_CHANNELS = MAX_AUX_CHANNELS + 1;
         public const int MAX_APP_CHANNEL = 32;
         public const int MAX_APP_DEVICE = 8;
         public const int ChannelMapSize = 512;
@@ -20,12 +24,21 @@ namespace ZiveLab.ZM.ZIM
         public const string GrpExCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_GRPSETEX.CFG";
 
         public static string[] Const_LootPart = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", };
+        public static string[] Const_LootPartAux = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", "Aux Board1", "Aux Board2", "Aux Board3" };
         public static string[] Const_RangePart = { "Iac","Idc", "Vac", "Vdc", "Temperature","Safety" };
+        public static string[] Const_RangePartAux = { "Iac", "Vac", "Vdc", };
         public static string[] Const_RangeIacItems = { "Calibration vars", "Compensation dummy", };
         public static string[] Const_RangeIacGain = { "X1", "X0.2", };
         public static string[] Const_RangeIdcGain = { "X1", "X0.2", };
         public static double[] Const_DefaultRDummy = { 0.001,0.009987261, 0.099952, 0.997961, 9.999115, 99.612, 996.9,10000.0 };
         public static double[] Const_DefaultLDummy = { 0.0, 0.000000064476, 0.000000112196, 0.000000084638, 0.00000008, 0.00000000000022, 0.000052, 0.0,};
+        // 0.01 0.1 1 10 
+        public static double[] Const_DefaultRDummy_A = { 0.010187,          0.10113,         1.005,          10.021 };
+        public static double[] Const_DefaultLDummy_A = { 0.000000070032, 0.000000074824, 0.000000102438, 0.000000088228 };
+        public static double[] Const_DefaultRDummy_B = { 0.010194, 0.101801, 1.006, 10.013 };
+        public static double[] Const_DefaultLDummy_B = { 0.000000074412, 0.00000005766, 0.000000085418, 0.000000077331 };
+        public static double[] Const_DefaultRDummy_C = { 0.010175, 0.101495, 1.006, 10.012 };
+        public static double[] Const_DefaultLDummy_C = { 0.000000082731, 0.000000064363, 0.00000009977, 0.000000092014 };
 
         public const double DEFAULT_BZA60_POWER = 20.0;
         public const double DEFAULT_BZA100_POWER = 30.0;
@@ -33,10 +46,16 @@ namespace ZiveLab.ZM.ZIM
         public const double DEFAULT_BZA1000_POWER = 60.0;
 
         public const ushort TECHFILESIZE = 222;
+        public const int    RANGE_XML_FILESIZE_1 = 12947;
+
+        
     }
     
     public static class DeviceConstants
     {
+        public const int ID_ZIMCONFIG_1 = 0xD2;
+        public const int ID_ZIMCONFIG = 0xD3;
+
         public const float Linewidth = 1.0f;
         public const int Pointwidth = 6;
         public const int Pointheight = 6;
@@ -53,7 +72,7 @@ namespace ZiveLab.ZM.ZIM
         public const double DEFAULT_BZA1000_POWER = 60.0;
 
         public const byte RES_MAJOR = 1;
-        public const byte RES_MINOR = 1;
+        public const byte RES_MINOR = 2; //
         public const byte RES_REVISION = 0;
         public const byte RES_BUILD = 0;
 
@@ -71,6 +90,7 @@ namespace ZiveLab.ZM.ZIM
         public const byte ID_RANGEINFO = 3;
         public const int MAX_IAC_RNGCNT = 4;
         public const int MAX_VAC_RNGCNT = 1;
+        public const int DEF_MAX_IAC_RNGCNT = 4;
         public const int MAX_IAC_CTRL_RNGCNT = 8;
         public const int MAX_VDC_RNGCNT = 2;
 
@@ -142,11 +162,15 @@ namespace ZiveLab.ZM.ZIM
         public const double ADC_VDC_RNG1_MIN1 = -10.24;
         public const double ADC_VDC_RNG1_FACTOR1 = ((ADC_VDC_RNG1_MAX1 - ADC_VDC_RNG1_MIN1) / 16777216.0);//24bit
 
-
         public const double ADC_RTD_CONST_MAX = 850.0;
         public const double ADC_RTD_CONST_MIN = -200.0;
         public const double ADC_RTD_CONST_PT1000 = (4000.0 / 32786.0); // 4000 - RREF
         public const double ADC_RTD_CONST_PT100 = (400.0 / 32786.0); // 400 - RREF
+
+        public const double ADC_AUX_VDC_RMAX1 = 500.0;
+        public const double ADC_AUX_VDC_MAX1 = 2048.0;
+        public const double ADC_AUX_VDC_MIN1 = -2048.0;
+        public const double ADC_AUX_VDC_FACTOR1 = ((ADC_AUX_VDC_MAX1 - ADC_AUX_VDC_MIN1) / 16777216.0);
 
         public const int DEVDO_CONT_SD = 0x1;
         public const int DEVDO_DDS_RNG0 = 0x2;
@@ -165,7 +189,7 @@ namespace ZiveLab.ZM.ZIM
         public const double MAX_EIS_FREQUENCY = 10000.0;
         public const double MIN_EIS_FREQUENCY = 0.05;
         public const int MAX_EIS_DENSITY = 20;
-        public const int MAX_EIS_POINT = 1024;
+        public const int MAX_EIS_POINT = 512;
         public const int MAX_EIS_CYC_POINT = 512;
         public const int MIN_EIS_CYC_POINT = 32;
         public const int MAX_EIS_RAWADC_POINT = MAX_EIS_POINT;

@@ -48,11 +48,13 @@ namespace ZiveLab.ZM
             if (gBZA.SifLnkLst.ContainsKey(sSerial))
             {
                 mZim = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch];
-                mRange = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges;
+                //mRange = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
+                mRange = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges; // 배열
             }
             else
             {
                 mZim = gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch];
+                //mRange = gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
                 mRange = gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges;
             }
             sFilename = gBZA.GetCalibLogFileName(sSerial, mZim.GetSerialNumber());
@@ -68,35 +70,33 @@ namespace ZiveLab.ZM
             sTitle = "IDC";
 
             cboirange.Items.Clear();
-            for(int i=0; i< DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
             {
-                tdouble = mRange.iac_rng[i/2].realmax * 0.5;
-                if (i % 2 > 0) tdouble *= mRange.iac_rng[i / 2].controlgain;
+                tdouble = mRange.Gen.iac_rng[i / 2].realmax * 0.5;
+                if (i % 2 > 0) tdouble *= mRange.Gen.iac_rng[i / 2].controlgain;
                 str = SM_Number.ToRangeString(tdouble, "A");
                 cboirange.Items.Add(str);
-                sitem = string.Format("Range{0}_Read", i+1);
+                sitem = string.Format("Range{0}_Read", i + 1);
                 dresult[i] = gBZA.GetIniDoubleData(sTitle, sitem, sFilename, 0.0);
-                sitem = string.Format("Range{0}_Offset", i+1);
+                sitem = string.Format("Range{0}_Offset", i + 1);
                 dOffset[i] = gBZA.GetIniDoubleData(sTitle, sitem, sFilename, 0.0);
             }
             cboirange.SelectedIndex = irng;
             
             txtresult.Text = dresult[irng].ToString();
-
-            if (mRange.Idc_rnginf.idcofs[irng].offset < 0.0 || mRange.Idc_rnginf.idcofs[irng].offset > 10.0)
+            if (mRange.Gen.Idc_rnginf.idcofs[irng].offset < 0.0 || mRange.Gen.Idc_rnginf.idcofs[irng].offset > 10.0)
             {
-                mRange.Idc_rnginf.idcofs[irng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+                mRange.Gen.Idc_rnginf.idcofs[irng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
             }
 
-            dOffset[irng] = mRange.Idc_rnginf.idcofs[irng].offset;
-            textApp.Text = string.Format("{0:#0.0###}", mRange.Idc_rnginf.idcofs[irng].offset);
-            numericUpDown1.Value = Convert.ToDecimal(mRange.Idc_rnginf.idcofs[irng].offset);
+            dOffset[irng] = mRange.Gen.Idc_rnginf.idcofs[irng].offset;
+            textApp.Text = string.Format("{0:#0.0###}", mRange.Gen.Idc_rnginf.idcofs[irng].offset);
             numericUpDown1.Increment = Convert.ToDecimal(0.001);
             cboIncPhase.SelectedIndex = 1;
             chkctrlon.Checked = false;
 
-            tdouble = mRange.iac_rng[iacrng].realmax * 0.5;
-            if (irng % 2 > 0) tdouble *= mRange.iac_rng[iacrng].controlgain;
+            tdouble = mRange.Gen.iac_rng[iacrng].realmax * 0.5;
+            if (irng % 2 > 0) tdouble *= mRange.Gen.iac_rng[iacrng].controlgain;
             this.Text = string.Format("Idc calibration[{0}] - CH{1}[{2}-{3}].", tdouble, ch + 1, sSerial, sifch + 1);
             /*
             if (MBZA_MapUtil.EnableCommTimeOut(sSerial, 0) == false)
@@ -138,7 +138,7 @@ namespace ZiveLab.ZM
             mdevice = gBZA.SifLnkLst[sSerial].MBZAIF.mdevice[sifch];
              
             mdevice.dds_sig.frequency = 0.000001;
-            mdevice.dds_sig.Phase = mRange.Idc_rnginf.idcofs[iacrng].offset;
+            mdevice.dds_sig.Phase = mRange.Gen.Idc_rnginf.idcofs[iacrng].offset;
             mdevice.dds_sig.reset = 0;
             mdevice.dds_sig.pwdn = 0;
             mdevice.dds_sig.Half = 0;
@@ -216,16 +216,16 @@ namespace ZiveLab.ZM
             iacrng = irng / 2;
 
             SetIRange();
-            if(mRange.Idc_rnginf.idcofs[irng].offset <0.0 || mRange.Idc_rnginf.idcofs[irng].offset > 10.0)
+            if (mRange.Gen.Idc_rnginf.idcofs[irng].offset < 0.0 || mRange.Gen.Idc_rnginf.idcofs[irng].offset > 10.0)
             {
-                mRange.Idc_rnginf.idcofs[irng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
+                mRange.Gen.Idc_rnginf.idcofs[irng].offset = DeviceConstants.DEV_DEFAULT_IDC_OFFSET;
             }
-            numericUpDown1.Value = Convert.ToDecimal(mRange.Idc_rnginf.idcofs[irng].offset);
+            numericUpDown1.Value = Convert.ToDecimal(mRange.Gen.Idc_rnginf.idcofs[irng].offset);
 
-            tdouble = mRange.iac_rng[iacrng].realmax * 0.5;
-            if (irng % 2 > 0) tdouble *= mRange.iac_rng[iacrng].controlgain;
+            tdouble = mRange.Gen.iac_rng[iacrng].realmax * 0.5;
+            if (irng % 2 > 0) tdouble *= mRange.Gen.iac_rng[iacrng].controlgain;
             this.Text = string.Format("Idc calibration[{0}] - CH{1}[{2}-{3}].", tdouble, ch + 1, sSerial, sifch + 1);
-            textApp.Text = string.Format("{0:#0.0###}", mRange.Idc_rnginf.idcofs[irng].offset);
+            textApp.Text = string.Format("{0:#0.0###}", mRange.Gen.Idc_rnginf.idcofs[irng].offset);
             txtresult.Text = dresult[irng].ToString();
         }
 
@@ -269,30 +269,31 @@ namespace ZiveLab.ZM
 
         private void btApply_Click(object sender, EventArgs e)
         {
-            mRange.Idc_rnginf.idcofs[irng].offset = Decimal.ToDouble(numericUpDown1.Value);
-            textApp.Text = string.Format("{0:#0.0###}", mRange.Idc_rnginf.idcofs[irng].offset);
+            mRange.Gen.Idc_rnginf.idcofs[irng].offset = Decimal.ToDouble(numericUpDown1.Value);
+            textApp.Text = string.Format("{0:#0.0###}", mRange.Gen.Idc_rnginf.idcofs[irng].offset);
 
             dresult[irng] = Convert.ToDouble(txtresult.Text);
-            dOffset[irng] = mRange.Idc_rnginf.idcofs[irng].offset;
+            dOffset[irng] = mRange.Gen.Idc_rnginf.idcofs[irng].offset;
         }
-        
 
         private void btSave_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
 
-            if (gBZA.SifLnkLst.ContainsKey(sSerial)) gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(mRange.ToByteArray());
-            else gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(mRange.ToByteArray());
+            //if (gBZA.SifLnkLst.ContainsKey(sSerial)) gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(mRange.ToByteArray());
+            //else gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(mRange.ToByteArray());
+            if (gBZA.SifLnkLst.ContainsKey(sSerial)) gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.ToWritePtr(mRange.ToByteArray());
+            else gBZA.ChLnkLst[ch.ToString()].mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.ToWritePtr(mRange.ToByteArray()); // 배열
 
             bool res = MBZA_MapUtil.Save_Range_info(sSerial, sifch);
 
 
             dresult[irng] = Convert.ToDouble(txtresult.Text);
-            sitem = string.Format("Range{0}_Read", irng+1);
+            sitem = string.Format("Range{0}_Read", irng + 1);
             gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dresult[irng]);
 
             dOffset[irng] = Convert.ToDouble(textApp.Text);
-            sitem = string.Format("Range{0}_Offset", irng+1);
+            sitem = string.Format("Range{0}_Offset", irng + 1);
             gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dOffset[irng]);
 
             gBZA.UpdateLastCalDate(sSerial);

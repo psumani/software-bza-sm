@@ -293,6 +293,7 @@
             this.maskSerial.Size = new System.Drawing.Size(103, 27);
             this.maskSerial.TabIndex = 18;
             this.maskSerial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maskSerial.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskSerial_MaskInputRejected);
             this.maskSerial.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskSerial_KeyDown);
             // 
             // btSetup
@@ -327,6 +328,7 @@
             // 
             // CboBdType
             // 
+            this.CboBdType.BackColor = System.Drawing.SystemColors.Window;
             this.CboBdType.FormattingEnabled = true;
             this.CboBdType.Location = new System.Drawing.Point(171, 12);
             this.CboBdType.Name = "CboBdType";

@@ -133,7 +133,6 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         #endregion //#region ** Properties
     }
-
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct st_zim_Idc_rnginf
@@ -144,11 +143,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_zim_Idc_rnginf(int init)
         {
             idcofs = new st_zim_Idc_rnginf_Ofs[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
-            for(int i=0; i< DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            for (int i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
             {
                 idcofs[i] = new st_zim_Idc_rnginf_Ofs(0);
             }
-            
+
         }
 
         public void Initialize()
@@ -291,7 +290,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         #region ** Properties
         [ReadOnlyAttribute(true)]
-        [DisplayName("Real max.(V)"), DescriptionAttribute("View real maximum value of range.")]
+        [DisplayName("RealMaximum(V)"), DescriptionAttribute("View real maximum value of range.")]
         public double PropRealmax
         {
             get { return realmax; }
@@ -737,6 +736,14 @@ namespace ZiveLab.ZM.ZIM.Packets
             Nouse2 = 0.0;
         }
 
+        public void setvalue(double tLs, double tR)
+        {
+            Ls = tLs;
+            R = tR;
+            Nouse1 = 0.0;
+            Nouse2 = 0.0;
+        }
+
         #region ** Properties
         [ReadOnlyAttribute(false)]
         [DisplayName("Inducance(H)"), DescriptionAttribute("Edit inductance of range.")]
@@ -755,7 +762,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
         #endregion //#region ** Properties
     }
-    
+
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct st_zim_Safety_inf
@@ -763,7 +770,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double MaxPower;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public double[] nouse;
-        
+
         public st_zim_Safety_inf(eZimType tType)
         {
             if (tType == eZimType.BZA500)
@@ -783,7 +790,7 @@ namespace ZiveLab.ZM.ZIM.Packets
                 MaxPower = DeviceConstants.DEFAULT_BZA1000_POWER;
             }
             nouse = new double[4];
-            for(int i=0; i<4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 nouse[i] = 0.0;
             }
@@ -835,14 +842,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             get { return MaxPower; }
             set { MaxPower = value; }
         }
-       
+
         #endregion //#region ** Properties
     }
-    
-
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct st_zim_rnginf
+    public struct st_zim_rnginf1
     {
         public byte ID;
         public st_zim_Safety_inf mSafety;
@@ -860,7 +865,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
         public double[] nouse;
 
-        public st_zim_rnginf(eZimType mtype)
+        public st_zim_rnginf1(eZimType mtype)
         {
             int i;
 
@@ -875,7 +880,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             iac_rng[2] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
             iac_rng[3] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
 
-            vac_rng = new st_zim_adcv_rnginf(DeviceConstants.ADC_VAC_RNG_RMAX,DeviceConstants.ADC_VAC_RNG_MAX, DeviceConstants.ADC_VAC_RNG_MIN);
+            vac_rng = new st_zim_adcv_rnginf(DeviceConstants.ADC_VAC_RNG_RMAX, DeviceConstants.ADC_VAC_RNG_MAX, DeviceConstants.ADC_VAC_RNG_MIN);
 
             vdc_rng = new st_zim_adcv_rnginf[DeviceConstants.MAX_VDC_RNGCNT];
 
@@ -931,7 +936,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             int i;
             ID = DeviceConstants.ID_RANGEINFO;
-            
+
             iac_rng[0].Initialize(DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
             iac_rng[1].Initialize(DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
             iac_rng[2].Initialize(DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
@@ -962,15 +967,15 @@ namespace ZiveLab.ZM.ZIM.Packets
                 vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX0, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
                 vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX0, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
             }
-            
+
             rtd_rng.Initialize(DeviceConstants.ADC_RTD_CONST_MAX, DeviceConstants.ADC_RTD_CONST_MIN);
             rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT1000;
-            for(i=0; i< DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            for (i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
             {
                 mEisIRngCalInfo[i].Initialize();
             }
             Idc_rnginf.Initialize();
-            
+
             mDummy[0].Ls = 0.000000064476;
             mDummy[1].Ls = 0.000000064476;
             mDummy[2].Ls = 0.000000112196;
@@ -1028,7 +1033,555 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void ToWritePtr(byte[] Arr)
         {
             GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zim_rnginf1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_rnginf1));
+            pinnedArr.Free();
+        }
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_rnginf
+    {
+        public st_zimGen_rnginf Gen;
+        public st_zimaux_rnginf Aux;
+
+        public st_zim_rnginf(eZimType type)
+        {
+            Gen = new st_zimGen_rnginf(type);
+            Aux = new st_zimaux_rnginf(type);
+        }
+
+        public void Initialize(eZimType type)
+        {
+            if (type == eZimType.BZAAUX1) Aux.Initialize(type);
+            else Gen.Initialize(type);
+        }
+
+        public byte[] ToByteArray()
+        {
+            int size = Marshal.SizeOf(this);
+            byte[] arr = new byte[size];
+            IntPtr ptr = Marshal.AllocHGlobal(size);
+            Marshal.StructureToPtr(this, ptr, false);
+            Marshal.Copy(ptr, arr, 0, size);
+            Marshal.FreeHGlobal(ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(arr, GCHandleType.Pinned);
             this = (st_zim_rnginf)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_rnginf));
+            pinnedArr.Free();
+        }
+    }
+
+    /* sang */
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zimaux_iacgain
+    {
+        public double iac_gain1;
+        public double iac_gain2;
+
+        public st_zimaux_iacgain(eZimType mtype)
+        {
+            iac_gain1 = 1.0;
+            iac_gain2 = 1.0;
+        }
+        public void Initialize()
+        {
+            iac_gain1 = 1.0;
+            iac_gain2 = 1.0;
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zimaux_iacgain)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zimaux_iacgain));
+            pinnedArr.Free();
+        }
+        #region ** Properties
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Gain(x1.0)"), DescriptionAttribute("Edit gain(X1.0) value of range.")]
+        public double PropN1
+        {
+            get { return iac_gain1; }
+            set { iac_gain1 = value; }
+        }
+
+        [ReadOnlyAttribute(false)]
+        [DisplayName("Gain(x0.2)"), DescriptionAttribute("Edit gain(X0.2) value of range.")]
+        public double PropN2
+        {
+            get { return iac_gain2; }
+            set { iac_gain2 = value; }
+        }
+        #endregion //#region ** Properties
+    }
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zimaux_iacgain_row
+    {
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_RNGCNT)]
+        public st_zimaux_iacgain[] items;
+
+        public st_zimaux_iacgain_row(eZimType mtype)
+        {
+            items = new st_zimaux_iacgain[DeviceConstants.MAX_IAC_RNGCNT];
+            for (int rng = 0; rng < DeviceConstants.MAX_IAC_RNGCNT; rng++)
+            {
+                items[rng] = new st_zimaux_iacgain(0);
+            }
+        }
+    }
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zim_Eis_Cal_info_row
+    {
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
+        public st_zim_Eis_Cal_info[] items;
+
+        public st_zim_Eis_Cal_info_row(eZimType mtype)
+        {
+            items = new st_zim_Eis_Cal_info[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+            for (int rng = 0; rng < DeviceConstants.MAX_IAC_CTRL_RNGCNT; rng++)
+            {
+                items[rng] = new st_zim_Eis_Cal_info(0);
+            }
+        }
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zimaux_rnginf
+    {
+        public byte ID;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public st_zim_vdc_rnginf[] vdc_rng;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] /* sang */
+        public st_zim_adcv_rnginf[] vac_rng;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public st_zimaux_iacgain_row[] iac_gain;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public st_zim_Eis_Cal_info_row[] mEisIRngCalInfo;
+
+        public st_zimaux_rnginf(eZimType mtype)
+        {
+            ID = DeviceConstants.ID_RANGEINFO;
+
+            vdc_rng = new st_zim_vdc_rnginf[4];
+            vac_rng = new st_zim_adcv_rnginf[4];
+            mEisIRngCalInfo = new st_zim_Eis_Cal_info_row[4];
+            iac_gain = new st_zimaux_iacgain_row[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                vdc_rng[i] = new st_zim_vdc_rnginf(
+                    DeviceConstants.ADC_AUX_VDC_RMAX1,
+                    DeviceConstants.ADC_AUX_VDC_MAX1,
+                    DeviceConstants.ADC_AUX_VDC_MIN1
+                );
+            }
+
+            for (int board = 0; board < 4; board++)
+            {
+                vac_rng[board] = new st_zim_adcv_rnginf(
+                    DeviceConstants.ADC_VAC_RNG_RMAX,
+                    DeviceConstants.ADC_VAC_RNG_MAX,
+                    DeviceConstants.ADC_VAC_RNG_MIN);
+                iac_gain[board] = new st_zimaux_iacgain_row(0);
+                mEisIRngCalInfo[board] = new st_zim_Eis_Cal_info_row(0);
+            }
+        }
+
+        public void Initialize(eZimType mtype)
+        {
+            ID = DeviceConstants.ID_RANGEINFO;
+
+            for (int i = 0; i < 4; i++)
+            {
+                vdc_rng[i].Initialize(
+                    DeviceConstants.ADC_AUX_VDC_RMAX1,
+                    DeviceConstants.ADC_AUX_VDC_MAX1,
+                    DeviceConstants.ADC_AUX_VDC_MIN1
+                );
+            }
+
+            for (int board = 0; board < 4; board++)
+            {
+                vac_rng[board] = new st_zim_adcv_rnginf(
+                        DeviceConstants.ADC_VAC_RNG_RMAX,
+                        DeviceConstants.ADC_VAC_RNG_MAX,
+                        DeviceConstants.ADC_VAC_RNG_MIN
+                    );
+                iac_gain[board] = new st_zimaux_iacgain_row(0);
+                mEisIRngCalInfo[board] = new st_zim_Eis_Cal_info_row(0);
+            }
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public bool CompareInfo(byte[] ChkArr)
+        {
+            byte[] Arr = ToByteArray();
+            if (ChkArr.Length != Arr.Length)
+            {
+                return false;
+            }
+            int Size = Marshal.SizeOf(this);
+            for (int i = 0; i < Size; i++)
+            {
+                if (Arr[i] != ChkArr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zimaux_rnginf)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zimaux_rnginf));
+            pinnedArr.Free();
+        }
+    }
+
+    //[Serializable]
+    //[StructLayout(LayoutKind.Sequential, Pack = 1)]
+    //public struct st_zimaux_rnginf
+    //{
+    //    public byte ID;
+
+    //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    //    public st_zim_vdc_rnginf[] vdc_rng;
+    //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    //    public st_zim_adcv_rnginf[] vac_rng;
+    //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4 * DeviceConstants.DEF_MAX_IAC_RNGCNT)]
+    //    public st_zimaux_iacgain[] iac_gain;
+    //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4 * DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
+    //    public st_zim_Eis_Cal_info[] mEisIRngCalInfo;
+
+    //    public st_zimaux_rnginf(eZimType mtype)
+    //    {
+    //        ID = DeviceConstants.ID_RANGEINFO;
+
+    //        vdc_rng = new st_zim_vdc_rnginf[4];
+    //        vac_rng = new st_zim_adcv_rnginf[4];
+    //        iac_gain = new st_zimaux_iacgain[4 * DeviceConstants.DEF_MAX_IAC_RNGCNT];
+    //        mEisIRngCalInfo = new st_zim_Eis_Cal_info[4 * DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+
+    //        for (int i = 0; i < 4; i++)
+    //        {
+    //            vdc_rng[i] = new st_zim_vdc_rnginf(
+    //                DeviceConstants.ADC_AUX_VDC_RMAX1,
+    //                DeviceConstants.ADC_AUX_VDC_MAX1,
+    //                DeviceConstants.ADC_AUX_VDC_MIN1
+    //            );
+
+    //            vac_rng[i] = new st_zim_adcv_rnginf(
+    //                DeviceConstants.ADC_VAC_RNG_RMAX,
+    //                DeviceConstants.ADC_VAC_RNG_MAX,
+    //                DeviceConstants.ADC_VAC_RNG_MIN
+    //            );
+    //        }
+
+    //        for (int board = 0; board < 4; board++)
+    //        {
+    //            for (int rng = 0; rng < DeviceConstants.DEF_MAX_IAC_RNGCNT; rng++)
+    //            {
+    //                int idx = board * DeviceConstants.DEF_MAX_IAC_RNGCNT + rng;
+    //                iac_gain[idx] = new st_zimaux_iacgain(mtype);
+    //            }
+
+    //            for (int rng = 0; rng < DeviceConstants.MAX_IAC_CTRL_RNGCNT; rng++)
+    //            {
+    //                int idx = board * DeviceConstants.MAX_IAC_CTRL_RNGCNT + rng;
+    //                mEisIRngCalInfo[idx] = new st_zim_Eis_Cal_info(0);
+    //            }
+    //        }
+    //    }
+
+    //    public void Initialize(eZimType mtype)
+    //    {
+    //        ID = DeviceConstants.ID_RANGEINFO;
+
+    //        for (int i = 0; i < 4; i++)
+    //        {
+    //            vdc_rng[i].Initialize(
+    //                DeviceConstants.ADC_AUX_VDC_RMAX1,
+    //                DeviceConstants.ADC_AUX_VDC_MAX1,
+    //                DeviceConstants.ADC_AUX_VDC_MIN1
+    //            );
+
+    //            vac_rng[i] = new st_zim_adcv_rnginf(
+    //                DeviceConstants.ADC_VAC_RNG_RMAX,
+    //                DeviceConstants.ADC_VAC_RNG_MAX,
+    //                DeviceConstants.ADC_VAC_RNG_MIN
+    //            );
+    //        }
+
+    //        for (int i = 0; i < iac_gain.Length; i++)
+    //            iac_gain[i] = new st_zimaux_iacgain(mtype);
+
+    //        for (int i = 0; i < mEisIRngCalInfo.Length; i++)
+    //            mEisIRngCalInfo[i] = new st_zim_Eis_Cal_info(0);
+    //    }
+
+    //    public byte[] ToByteArray()
+    //    {
+    //        int Size = Marshal.SizeOf(this);
+    //        byte[] arr = new byte[Size];
+    //        IntPtr Ptr = Marshal.AllocHGlobal(Size);
+    //        Marshal.StructureToPtr(this, Ptr, false);
+    //        Marshal.Copy(Ptr, arr, 0, Size);
+    //        Marshal.FreeHGlobal(Ptr);
+    //        return arr;
+    //    }
+
+    //    public bool CompareInfo(byte[] ChkArr)
+    //    {
+    //        byte[] Arr = ToByteArray();
+    //        if (ChkArr.Length != Arr.Length)
+    //            return false;
+
+    //        for (int i = 0; i < Arr.Length; i++)
+    //        {
+    //            if (Arr[i] != ChkArr[i])
+    //                return false;
+    //        }
+    //        return true;
+    //    }
+
+    //    public void ToWritePtr(byte[] Arr)
+    //    {
+    //        GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+    //        this = (st_zimaux_rnginf)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zimaux_rnginf));
+    //        pinnedArr.Free();
+    //    }
+    //}
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct st_zimGen_rnginf
+    {
+        public byte ID;
+        public st_zim_Safety_inf mSafety;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_RNGCNT)]
+        public st_zim_adci_rnginf[] iac_rng;
+        public st_zim_adcv_rnginf vac_rng;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_VDC_RNGCNT)]
+        public st_zim_adcv_rnginf[] vdc_rng;
+        public st_zim_adct_rnginf rtd_rng;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
+        public st_zim_Eis_Cal_info[] mEisIRngCalInfo; // not use
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = DeviceConstants.MAX_IAC_CTRL_RNGCNT)]
+        public st_zim_dummy[] mDummy;
+        public st_zim_Idc_rnginf Idc_rnginf;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
+        public double[] nouse;
+
+        public st_zimGen_rnginf(eZimType mtype)
+        {
+            int i;
+
+            ID = DeviceConstants.ID_RANGEINFO;
+            mSafety = new st_zim_Safety_inf(0);
+
+            Idc_rnginf = new st_zim_Idc_rnginf(0);
+
+            iac_rng = new st_zim_adci_rnginf[DeviceConstants.MAX_IAC_RNGCNT];
+            iac_rng[0] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
+            iac_rng[1] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
+            iac_rng[2] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
+            iac_rng[3] = new st_zim_adci_rnginf(DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
+            vac_rng = new st_zim_adcv_rnginf(DeviceConstants.ADC_VAC_RNG_RMAX, DeviceConstants.ADC_VAC_RNG_MAX, DeviceConstants.ADC_VAC_RNG_MIN);
+
+            vdc_rng = new st_zim_adcv_rnginf[DeviceConstants.MAX_VDC_RNGCNT];
+
+            if (mtype == eZimType.BZA500)
+            {
+                vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG0_RMAX1, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
+                vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG1_RMAX1, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
+            }
+            else if (mtype == eZimType.BZA100)
+            {
+                vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG0_RMAX2, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
+                vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG1_RMAX2, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
+            }
+            else if (mtype == eZimType.BZA60)
+            {
+                vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG0_RMAX3, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
+                vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG1_RMAX3, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
+            }
+            else if (mtype == eZimType.BZAAUX1)
+            {
+                vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+                vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+            }
+            else
+            {
+                vdc_rng[0] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG0_RMAX0, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
+                vdc_rng[1] = new st_zim_adcv_rnginf(DeviceConstants.ADC_VDC_RNG1_RMAX0, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
+            }
+
+
+            rtd_rng = new st_zim_adct_rnginf(DeviceConstants.ADC_RTD_CONST_MAX, DeviceConstants.ADC_RTD_CONST_MIN);
+            rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT1000;
+
+            mEisIRngCalInfo = new st_zim_Eis_Cal_info[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+
+            for (i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            {
+                mEisIRngCalInfo[i] = new st_zim_Eis_Cal_info(0);
+            }
+
+            mDummy = new st_zim_dummy[DeviceConstants.MAX_IAC_CTRL_RNGCNT];
+            // 0.01~10 
+            for(i=0;i< DeviceConstants.MAX_IAC_RNGCNT;i++)
+            {
+                mDummy[2*i] = new st_zim_dummy(MBZA_Constant.Const_DefaultLDummy_C[i], MBZA_Constant.Const_DefaultRDummy_C[i]);
+                mDummy[2*i+1] = new st_zim_dummy(MBZA_Constant.Const_DefaultLDummy_C[i], MBZA_Constant.Const_DefaultRDummy_C[i]);
+            }
+            /*mDummy[0] = new st_zim_dummy(0.000000064476, 0.009987261);
+            mDummy[1] = new st_zim_dummy(0.000000064476, 0.009987261);
+            mDummy[2] = new st_zim_dummy(0.000000112196, 0.099952);
+            mDummy[3] = new st_zim_dummy(0.000000112196, 0.099952);
+            mDummy[4] = new st_zim_dummy(0.000000084638, 0.997961);
+            mDummy[5] = new st_zim_dummy(0.000000084638, 0.997961);
+            mDummy[6] = new st_zim_dummy(0.00000008, 9.999115);
+            mDummy[7] = new st_zim_dummy(0.00000008, 9.999115);*/
+
+            nouse = new double[20];
+            for (i = 0; i < 20; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+
+        public void Initialize(eZimType mtype)
+        {
+            int i;
+            ID = DeviceConstants.ID_RANGEINFO;
+
+            iac_rng[0].Initialize(DeviceConstants.ADC_IAC_RNG1_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG1_MAX, DeviceConstants.ADC_IAC_RNG1_MIN);
+            iac_rng[1].Initialize(DeviceConstants.ADC_IAC_RNG2_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG2_MAX, DeviceConstants.ADC_IAC_RNG2_MIN);
+            iac_rng[2].Initialize(DeviceConstants.ADC_IAC_RNG3_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG3_MAX, DeviceConstants.ADC_IAC_RNG3_MIN);
+            iac_rng[3].Initialize(DeviceConstants.ADC_IAC_RNG4_RMAX, DeviceConstants.ADC_IAC_CONTROLGAIN0, DeviceConstants.ADC_IAC_RNG4_MAX, DeviceConstants.ADC_IAC_RNG4_MIN);
+            vac_rng.Initialize(DeviceConstants.ADC_VAC_RNG_RMAX, DeviceConstants.ADC_VAC_RNG_MAX, DeviceConstants.ADC_VAC_RNG_MIN);
+
+            if (mtype == eZimType.BZA500)
+            {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA500_POWER;
+                vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX1, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
+                vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX1, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
+            }
+            else if (mtype == eZimType.BZA100)
+            {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA100_POWER;
+                vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX2, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
+                vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX2, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
+            }
+            else if (mtype == eZimType.BZA60)
+            {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA60_POWER;
+                vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX3, DeviceConstants.ADC_VDC_RNG0_MAX1, DeviceConstants.ADC_VDC_RNG0_MIN1);
+                vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX3, DeviceConstants.ADC_VDC_RNG1_MAX1, DeviceConstants.ADC_VDC_RNG1_MIN1);
+            }
+            else if (mtype == eZimType.BZAAUX1)
+            {
+                mSafety.MaxPower = 0.0;
+                vdc_rng[0].Initialize(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+                vdc_rng[1].Initialize(DeviceConstants.ADC_AUX_VDC_RMAX1, DeviceConstants.ADC_AUX_VDC_MAX1, DeviceConstants.ADC_AUX_VDC_MIN1);
+            }
+            else
+            {
+                mSafety.MaxPower = DeviceConstants.DEFAULT_BZA1000_POWER;
+                vdc_rng[0].Initialize(DeviceConstants.ADC_VDC_RNG0_RMAX0, DeviceConstants.ADC_VDC_RNG0_MAX, DeviceConstants.ADC_VDC_RNG0_MIN);
+                vdc_rng[1].Initialize(DeviceConstants.ADC_VDC_RNG1_RMAX0, DeviceConstants.ADC_VDC_RNG1_MAX, DeviceConstants.ADC_VDC_RNG1_MIN);
+            }
+
+            rtd_rng.Initialize(DeviceConstants.ADC_RTD_CONST_MAX, DeviceConstants.ADC_RTD_CONST_MIN);
+            rtd_rng.factor = DeviceConstants.ADC_RTD_CONST_PT1000;
+            for (i = 0; i < DeviceConstants.MAX_IAC_CTRL_RNGCNT; i++)
+            {
+                mEisIRngCalInfo[i].Initialize();
+            }
+            Idc_rnginf.Initialize();
+
+            /*mDummy[0].setvalue(0.000000064476, 0.009987261);
+            mDummy[1].setvalue(0.000000064476, 0.009987261);
+            mDummy[2].setvalue(0.000000112196, 0.099952);
+            mDummy[3].setvalue(0.000000112196, 0.099952);
+            mDummy[4].setvalue(0.000000084638, 0.997961);
+            mDummy[5].setvalue(0.000000084638, 0.997961);
+            mDummy[6].setvalue(0.00000008, 9.999115);
+            mDummy[7].setvalue(0.00000008, 9.999115);*/
+            for (i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
+            {
+                mDummy[2 * i].setvalue(MBZA_Constant.Const_DefaultLDummy_C[i], MBZA_Constant.Const_DefaultRDummy_C[i]);
+                mDummy[2 * i + 1].setvalue(MBZA_Constant.Const_DefaultLDummy_C[i], MBZA_Constant.Const_DefaultRDummy_C[i]);
+            }
+
+            for (i = 0; i < 20; i++)
+            {
+                nouse[i] = 0.0;
+            }
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public bool CompareInfo(byte[] ChkArr)
+        {
+            byte[] Arr = ToByteArray();
+            if (ChkArr.Length != Arr.Length)
+            {
+                return false;
+            }
+            int Size = Marshal.SizeOf(this);
+            for (int i = 0; i < Size; i++)
+            {
+                if (Arr[i] != ChkArr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (st_zimGen_rnginf)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zimGen_rnginf));
             pinnedArr.Free();
         }
     }

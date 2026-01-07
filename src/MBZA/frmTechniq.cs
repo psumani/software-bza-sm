@@ -124,6 +124,9 @@ namespace ZiveLab.ZM
                 {
                     cboIrange.Items.Add(item.GetDescription());
                 }
+
+                
+
             }
             else
             {
@@ -131,8 +134,10 @@ namespace ZiveLab.ZM
                 zimtype = (eZimType)(zim.info.cModel[0] - 0x30);
                 for (i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
                 {
-                    cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax, "A"));
-                    cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.iac_rng[i].realmax * zim.ranges.iac_rng[i].controlgain, "A"));
+                    //cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges[0].iac_rng[i].realmax, "A"));
+                    //cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges[0].iac_rng[i].realmax * zim.ranges[0].iac_rng[i].controlgain, "A"));
+                    cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.Gen.iac_rng[i].realmax, "A"));
+                    cboIrange.Items.Add(SM_Number.ToRangeString(zim.ranges.Gen.iac_rng[i].realmax * zim.ranges.Gen.iac_rng[i].controlgain, "A")); // 배열
                 }
             }
 

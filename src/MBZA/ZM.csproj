@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9A84B15A-2155-4C27-B571-5736AA1023A5}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ZiveLab.ZM</RootNamespace>
     <AssemblyName>ZM</AssemblyName>
@@ -39,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,9 +68,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DataManager\CommonLib.dll</HintPath>
     </Reference>
-    <Reference Include="DataManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DataManager, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DataManager\DataManager.dll</HintPath>
+      <HintPath>bin\Debug\DataManager.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics">
       <HintPath>packages\MathNet.Numerics.4.7.0\lib\net40\MathNet.Numerics.dll</HintPath>
@@ -82,13 +83,15 @@
       <HintPath>packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NationalInstruments.Common, Version=15.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298">
-      <Private>True</Private>
+    <Reference Include="NationalInstruments.Common, Version=15.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\src\TestDataView\bin\Release\NationalInstruments.Common.dll</HintPath>
     </Reference>
     <Reference Include="NationalInstruments.UI, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298" />
     <Reference Include="NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,6 +114,12 @@
     </Compile>
     <Compile Include="FrmAboutBox.Designer.cs">
       <DependentUpon>FrmAboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAuxVdc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAuxVdc.Designer.cs">
+      <DependentUpon>frmAuxVdc.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCalibCtrlIdc.cs">
       <SubType>Form</SubType>
@@ -141,12 +150,6 @@
     </Compile>
     <Compile Include="frmMdiMain.Designer.cs">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmSelEditTypeDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSelEditTypeDlg.Designer.cs">
-      <DependentUpon>frmSelEditTypeDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSetBatPara.cs">
       <SubType>Form</SubType>
@@ -197,6 +200,12 @@
     </Compile>
     <Compile Include="frmCalibVdc.designer.cs">
       <DependentUpon>frmCalibVdc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetVdcReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetVdcReference.Designer.cs">
+      <DependentUpon>frmSetVdcReference.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTestDevice.cs">
       <SubType>Form</SubType>
@@ -302,6 +311,9 @@
     <EmbeddedResource Include="FrmAboutBox.resx">
       <DependentUpon>FrmAboutBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAuxVdc.resx">
+      <DependentUpon>frmAuxVdc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBatPara.resx">
       <DependentUpon>frmBatPara.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,6 +334,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataTools.resx">
       <DependentUpon>frmDataTools.cs</DependentUpon>
@@ -331,12 +344,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMdiMain.resx">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSelEditTypeDlg.resx">
-      <DependentUpon>frmSelEditTypeDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetBatPara.resx">
       <DependentUpon>frmSetBatPara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetVdcReference.resx">
+      <DependentUpon>frmSetVdcReference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTestDevice.resx">
       <DependentUpon>frmTestDevice.cs</DependentUpon>
@@ -346,6 +360,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfomationGrid.resx">
       <DependentUpon>InfomationGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInputValue.resx">
       <DependentUpon>frmInputValue.cs</DependentUpon>
@@ -355,6 +370,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRegBZA.resx">
       <DependentUpon>frmRegBZA.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetMaxRange.resx">
       <DependentUpon>frmSetMaxRange.cs</DependentUpon>
@@ -370,6 +386,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRealview.resx">
       <DependentUpon>frmRealview.cs</DependentUpon>
@@ -408,41 +425,27 @@
     <None Include="doc\MBZA.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MBZA.ZIM\ZM_ZIM.csproj">
-      <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
-      <Name>ZM_ZIM</Name>
-    </ProjectReference>
+    <None Include="doc\Image\List1\Animation\Loop0.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop0.ico" />
+    <None Include="doc\Image\List1\Animation\Loop1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop1.ico" />
+    <None Include="doc\Image\List1\Animation\Loop2.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop2.ico" />
+    <None Include="doc\Image\List1\Animation\Loop3.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop3.ico" />
+    <None Include="doc\Image\List1\Animation\Loop4.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc\Image\Animation\Loop4.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="doc\Image\Animation\Loop5.ico" />
+    <None Include="doc\Image\List1\Animation\Loop5.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="doc\MBZA1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxCWUIControlsLib">
-      <Guid>{D940E4E4-6079-11CE-88CB-0020AF6845F6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>6</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="CWUIControlsLib">
       <Guid>{D940E4E4-6079-11CE-88CB-0020AF6845F6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -761,10 +764,20 @@
     <None Include="doc\Image6\NetConfig.png" />
     <None Include="doc\png\TransitioningContent.png" />
     <None Include="doc\Image4\stock-vector-signing-report-vector-icon-86384779.jpg" />
-    <None Include="doc\Dictionary.png" />
-    <None Include="doc\AboutBox.png" />
-    <None Include="doc\en16.ico" />
-    <None Include="doc\kr16.ico" />
+    <None Include="Resources\view_16xMD.bmp" />
+    <None Include="doc\png\view_16xMD.png" />
+    <None Include="Resources\Icon1.ico" />
+    <None Include="doc\Image0\Animation\Loop0.ico" />
+    <None Include="Resources\AddClause.ico" />
+    <None Include="doc\Image4\RangeColumnChart.png" />
+    <None Include="Resources\CheckBoxChecked.png" />
+    <None Include="Resources\CheckBoxGroup.png" />
+    <None Include="Resources\CheckBoxMixed.png" />
+    <None Include="Resources\CheckBoxUnchecked.png" />
+    <None Include="doc\Image1\greenlink.ico" />
+    <None Include="doc\Image1\redlink.ico" />
+    <None Include="doc\Image1\greenchip1.ico" />
+    <None Include="doc\Image1\redchip1.ico" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />
@@ -806,10 +819,20 @@
     <None Include="doc\Image0\ViewRefresh.ico" />
     <None Include="doc\Image3\images %2818%29.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MBZA.ZIM\ZM_ZIM.csproj">
+      <Project>{1297c0e9-5170-48cd-a37a-9a23022f0013}</Project>
+      <Name>ZM_ZIM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZM.Dataview\ZM.Dataview.csproj">
+      <Project>{32b51393-df04-428a-8cb1-362b6f949874}</Project>
+      <Name>ZM.Dataview</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>IF $(ConfigurationName)==Release C:\SignTools\Signtool\SignTool.exe sign /a /v /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td SHA256 /fd sha256 "$(TargetPath)"</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

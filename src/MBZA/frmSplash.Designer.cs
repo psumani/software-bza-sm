@@ -53,7 +53,7 @@
             // 
             this.lnkSearch.AutoSize = true;
             this.lnkSearch.LinkColor = System.Drawing.Color.Blue;
-            this.lnkSearch.Location = new System.Drawing.Point(586, 170);
+            this.lnkSearch.Location = new System.Drawing.Point(671, 170);
             this.lnkSearch.Name = "lnkSearch";
             this.lnkSearch.Size = new System.Drawing.Size(182, 14);
             this.lnkSearch.TabIndex = 5;
@@ -66,7 +66,7 @@
             // 
             this.lnkRegister.AutoSize = true;
             this.lnkRegister.LinkColor = System.Drawing.Color.Blue;
-            this.lnkRegister.Location = new System.Drawing.Point(586, 234);
+            this.lnkRegister.Location = new System.Drawing.Point(671, 234);
             this.lnkRegister.Name = "lnkRegister";
             this.lnkRegister.Size = new System.Drawing.Size(238, 14);
             this.lnkRegister.TabIndex = 6;
@@ -78,7 +78,7 @@
             // 
             this.LnkContinue.AutoSize = true;
             this.LnkContinue.LinkColor = System.Drawing.Color.Blue;
-            this.LnkContinue.Location = new System.Drawing.Point(582, 367);
+            this.LnkContinue.Location = new System.Drawing.Point(667, 367);
             this.LnkContinue.Name = "LnkContinue";
             this.LnkContinue.Size = new System.Drawing.Size(147, 14);
             this.LnkContinue.TabIndex = 7;
@@ -124,14 +124,14 @@
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResult.Size = new System.Drawing.Size(570, 219);
+            this.txtResult.Size = new System.Drawing.Size(651, 219);
             this.txtResult.TabIndex = 11;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(585, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(670, 30);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(240, 93);
             this.pictureBox1.TabIndex = 12;
@@ -141,7 +141,7 @@
             // 
             this.lnkExit.AutoSize = true;
             this.lnkExit.LinkColor = System.Drawing.Color.Blue;
-            this.lnkExit.Location = new System.Drawing.Point(582, 306);
+            this.lnkExit.Location = new System.Drawing.Point(667, 306);
             this.lnkExit.Name = "lnkExit";
             this.lnkExit.Size = new System.Drawing.Size(168, 14);
             this.lnkExit.TabIndex = 13;
@@ -177,7 +177,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(831, 393);
+            this.ClientSize = new System.Drawing.Size(930, 393);
             this.Controls.Add(this.LblVer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lnkExit);

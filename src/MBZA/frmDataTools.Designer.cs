@@ -63,7 +63,48 @@
             this.legendItem16 = new NationalInstruments.UI.LegendItem();
             this.Grp1Plot6 = new NationalInstruments.UI.ScatterPlot();
             this.legendItem17 = new NationalInstruments.UI.LegendItem();
+            this.legendItem18 = new NationalInstruments.UI.LegendItem();
             this.Grp1Plot7 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot8 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot9 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot10 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot11 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot12 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot13 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot14 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot15 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot16 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot17 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot18 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot19 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot20 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot21 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot22 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot23 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot24 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot25 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot26 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot27 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot28 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot29 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot30 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot31 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot32 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot33 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot34 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot35 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot36 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot37 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot38 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot39 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot40 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot41 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot42 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot43 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot44 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot45 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot46 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot47 = new NationalInstruments.UI.ScatterPlot();
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor2 = new NationalInstruments.UI.XYCursor();
             this.btrefresh = new System.Windows.Forms.Button();
@@ -290,7 +331,8 @@
             this.legendItem14,
             this.legendItem15,
             this.legendItem16,
-            this.legendItem17});
+            this.legendItem17,
+            this.legendItem18});
             this.legend1.ItemSize = new System.Drawing.Size(24, 20);
             this.legend1.Location = new System.Drawing.Point(425, 210);
             this.legend1.Name = "legend1";
@@ -399,7 +441,47 @@
             this.Grp1Plot3,
             this.Grp1Plot4,
             this.Grp1Plot5,
-            this.Grp1Plot6});
+            this.Grp1Plot6,
+            this.Grp1Plot8,
+            this.Grp1Plot9,
+            this.Grp1Plot10,
+            this.Grp1Plot11,
+            this.Grp1Plot12,
+            this.Grp1Plot13,
+            this.Grp1Plot14,
+            this.Grp1Plot15,
+            this.Grp1Plot16,
+            this.Grp1Plot17,
+            this.Grp1Plot18,
+            this.Grp1Plot19,
+            this.Grp1Plot20,
+            this.Grp1Plot21,
+            this.Grp1Plot22,
+            this.Grp1Plot23,
+            this.Grp1Plot24,
+            this.Grp1Plot25,
+            this.Grp1Plot26,
+            this.Grp1Plot27,
+            this.Grp1Plot28,
+            this.Grp1Plot29,
+            this.Grp1Plot30,
+            this.Grp1Plot31,
+            this.Grp1Plot32,
+            this.Grp1Plot33,
+            this.Grp1Plot34,
+            this.Grp1Plot35,
+            this.Grp1Plot36,
+            this.Grp1Plot37,
+            this.Grp1Plot38,
+            this.Grp1Plot39,
+            this.Grp1Plot40,
+            this.Grp1Plot41,
+            this.Grp1Plot42,
+            this.Grp1Plot43,
+            this.Grp1Plot44,
+            this.Grp1Plot45,
+            this.Grp1Plot46,
+            this.Grp1Plot47});
             this.grp1.Size = new System.Drawing.Size(508, 443);
             this.grp1.TabIndex = 96;
             this.grp1.UseColorGenerator = true;
@@ -564,7 +646,48 @@
         private NationalInstruments.UI.LegendItem legendItem16;
         private NationalInstruments.UI.ScatterPlot Grp1Plot6;
         private NationalInstruments.UI.LegendItem legendItem17;
+        private NationalInstruments.UI.LegendItem legendItem18;
         private NationalInstruments.UI.ScatterPlot Grp1Plot7;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot8;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot9;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot10;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot11;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot12;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot13;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot14;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot15;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot16;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot17;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot18;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot19;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot20;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot21;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot22;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot23;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot24;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot25;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot26;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot27;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot28;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot29;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot30;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot31;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot32;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot33;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot34;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot35;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot36;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot37;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot38;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot39;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot40;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot41;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot42;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot43;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot44;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot45;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot46;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot47;
         private NationalInstruments.UI.WindowsForms.ScatterGraph grp1;
         private NationalInstruments.UI.XYCursor xyCursor2;
         private System.Windows.Forms.LinkLabel LnkHelp;

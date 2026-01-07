@@ -1,0 +1,9 @@
+----------------------------------------------------------------------
+Report for cell zim_pll.TECH
+Register bits:  0 of 3520 (0.000%)
+I/O cells:      0
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                   SB_PLL40_2F_CORE         1          100.0
+                        VERIFIC_PWR         1          100.0
+                              TOTAL         2

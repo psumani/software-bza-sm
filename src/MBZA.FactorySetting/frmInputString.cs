@@ -54,7 +54,7 @@ namespace ZiveLab.ZM.FactorySetting
             {
                 if (mCommZim.CmdStoreConnCfgInfo(ref mUserConnCfg) == false)
                 {
-                    MessageBox.Show("Save failed.");
+                    MessageBox.Show("Save failed.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 RefreshHostname();
@@ -62,7 +62,9 @@ namespace ZiveLab.ZM.FactorySetting
             }
             else
             {
-                MessageBox.Show("Not connected.");
+                MessageBox.Show("Not connected.", gFs.AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
             }
         }
 
@@ -78,7 +80,7 @@ namespace ZiveLab.ZM.FactorySetting
 
         private void btInit_Click(object sender, EventArgs e)
         {
-            txtinput.Text = string.Format("BZA-{0:X2}{1:X2}", mConnCfg.mEthernetCfg.Mac[4], mConnCfg.mEthernetCfg.Mac[5]);
+            txtinput.Text = "Z00000";
         }
     }
 }

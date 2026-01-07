@@ -6,9 +6,310 @@ using ZiveLab.ZM.ZIM.Utilities;
 using ZiveLab.ZM.ZIM.Interface;
 using System.ComponentModel;
 using System.Net;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace ZiveLab.ZM.ZIM.Packets
 {
+    public class ColorGenerator
+    {
+        public static List<Color> GetDistinctColors(int count)
+        {
+            var colors = new List<Color>();
+
+            // 황금비 (Golden Ratio Conjugate)
+            // 색상환에서 이 값만큼 이동하면 겹치지 않고 가장 균일하게 분포됨
+            double goldenRatioConjugate = 0.618033988749895;
+            double currentHue = new Random().NextDouble(); // 랜덤 시작점 (또는 고정값 0.5 등 사용 가능)
+
+            for (int i = 0; i < count; i++)
+            {
+                currentHue += goldenRatioConjugate;
+                currentHue %= 1.0; // 0.0 ~ 1.0 사이로 정규화
+
+                // 채도(Saturation)와 명도(Value)를 고정하거나
+                // 인덱스에 따라 약간씩 변주를 주어 가독성을 높임
+                double saturation = 0.7;
+                double value = 0.90;
+
+                // 짝수/홀수 번째에 따라 명도를 다르게 주면 인접 색상 구분이 더 쉬워짐 (선택 사항)
+                if (i % 2 == 0) value = 0.85;
+                else value = 0.60;
+
+                colors.Add(HsvToRgb(currentHue * 360, saturation, value));
+            }
+
+            return colors;
+        }
+
+        // HSV를 System.Drawing.Color로 변환하는 헬퍼 함수
+        private static Color HsvToRgb(double h, double s, double v)
+        {
+            int hi = Convert.ToInt32(Math.Floor(h / 60)) % 6;
+            double f = h / 60 - Math.Floor(h / 60);
+
+            v = v * 255;
+            int vInt = Convert.ToInt32(v);
+            int p = Convert.ToInt32(v * (1 - s));
+            int q = Convert.ToInt32(v * (1 - f * s));
+            int t = Convert.ToInt32(v * (1 - (1 - f) * s));
+
+            switch (hi)
+            {
+                case 0: return Color.FromArgb(255, vInt, t, p);
+                case 1: return Color.FromArgb(255, q, vInt, p);
+                case 2: return Color.FromArgb(255, p, vInt, t);
+                case 3: return Color.FromArgb(255, p, q, vInt);
+                case 4: return Color.FromArgb(255, t, p, vInt);
+                default: return Color.FromArgb(255, vInt, p, q);
+            }
+        }
+    }
+    public class st_graph_vars_plot
+    {
+        public bool LineVisible;
+        public bool PointVisible;
+        public st_graph_vars_plot()
+        {
+            LineVisible = true;
+            PointVisible = true;
+        }
+    }
+
+    public class st_graph_vars_ni
+    {
+        public bool ShowLegend;
+        public bool ShowGrid;
+        public Color BackColor;
+        public Color GridColor;
+        public st_graph_vars_plot[] mPlot;
+        public Color[] PlotColor;
+        public bool[] show;
+        public st_graph_vars_ni()
+        {
+            ShowLegend = false;
+            ShowGrid = true;
+            BackColor = Color.White;
+            GridColor = Color.LightGray;
+            show = new bool[2];
+            for (int i = 0; i < 2; i++)
+                show[i] = true;
+
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
+
+            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+
+            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                mPlot[i] = new st_graph_vars_plot();
+            }
+
+        }
+
+        public void LoadGefaultPlotColor()
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+        }
+        public void LoadGefaultPlotColor(int nPlot)
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
+            PlotColor[nPlot] = LstColor[nPlot];
+        }
+
+        public void SetPlotColor(int nPlot, Color nColor)
+        {
+            PlotColor[nPlot] = nColor;
+        }
+
+        public void SetValue(bool value)
+        {
+            for (int i = 0; i < 2; i++)
+                show[i] = value;
+        }
+
+        public void SetValue(int nPlot, bool value)
+        {
+            show[nPlot] = value;
+        }
+    }
+
+    public class st_graph_vars_bode
+    {
+        public bool ShowLegend;
+        public bool ShowGrid1;
+        public bool ShowGrid2;
+        public Color BackColor;
+        public Color GridColor;
+        public st_graph_vars_plot[] mPlot;
+        public Color[] PlotColor;
+        public bool[] show;
+        public st_graph_vars_bode()
+        {
+            BackColor = Color.White;
+            GridColor = Color.LightGray;
+            ShowLegend = false;
+            ShowGrid1 = true;
+            ShowGrid2 = true;
+            show = new bool[4];
+            for (int i = 0; i < 4; i++)
+                show[i] = true;
+
+
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+
+            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+
+            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4; i++)
+            {
+                mPlot[i] = new st_graph_vars_plot();
+            }
+        }
+
+        public void LoadGefaultPlotColor()
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+        }
+        public void LoadGefaultPlotColor(int nPlot)
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+            PlotColor[nPlot] = LstColor[nPlot];
+        }
+
+        public void SetValue(bool value)
+        {
+            for (int i = 0; i < 4; i++)
+                show[i] = value;
+        }
+
+        public void SetValue(int nPlot, bool value)
+        {
+            show[nPlot] = value;
+        }
+    }
+
+    public class st_graph_vars_item
+    {
+        public bool bExist;
+        public bool showni;
+        public bool showbode;
+        public int nAuxCh;
+        public st_zim_Eis_Cal_info mInfo;
+        public st_zim_dummy mDummy;
+        public double gain1;
+        public double gain2;
+        public st_graph_vars_ni ni;
+        public st_graph_vars_bode bode;
+        public st_graph_vars_item()
+        {
+            bExist = false;
+            showni = true;
+            ni = new st_graph_vars_ni();
+            showbode = true;
+            bode = new st_graph_vars_bode();
+            nAuxCh = -1;
+            mInfo = new st_zim_Eis_Cal_info();
+            mDummy = new st_zim_dummy(0.0);
+            gain1 = 1.0;
+            gain2 = 1.0;
+        }
+        public void SetValue(bool value)
+        {
+            showni = value;
+            ni.SetValue(value);
+            showbode = value;
+            bode.SetValue(value);
+        }
+
+        public void SetNiValue(bool value)
+        {
+            showni = value;
+            ni.SetValue(value);
+        }
+
+        public void SetNiValue(int nplot, bool value)
+        {
+            ni.SetValue(nplot, value);
+        }
+
+        public void SetBodeValue(bool value)
+        {
+            showbode = value;
+            bode.SetValue(value);
+        }
+
+        public void SetBodeValue(int nplot, bool value)
+        {
+            bode.SetValue(nplot, value);
+        }
+    }
+
+
+    public class st_graph_vars
+    {
+        public bool bAux;
+        public int nAuxChCount;
+        public int tRng;
+        public int CRng;
+        public int OtherRng;
+        public st_graph_vars_item[] showitems;
+        public st_graph_vars_ni ni;
+        public st_graph_vars_bode bode;
+        public st_graph_vars()
+        {
+            bAux = false;
+            nAuxChCount = 0;
+            CRng = 0;
+            OtherRng = 1;
+            showitems = new st_graph_vars_item[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                showitems[i] = new st_graph_vars_item();
+            }
+            ni = new st_graph_vars_ni();
+            bode = new st_graph_vars_bode();
+        }
+        public void SetValue(bool value)
+        {
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                showitems[i].SetValue(value);
+            }
+        }
+
+        public void SetValue(int nitem, bool value)
+        {
+            showitems[nitem].SetValue(value);
+        }
+
+        public void SetNiValue(int nitem, bool value)
+        {
+            showitems[nitem].SetNiValue(value);
+        }
+
+        public void SetBodeValue(int nitem, bool value)
+        {
+            showitems[nitem].SetBodeValue(value);
+        }
+    }
+
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct stVersion
@@ -111,10 +412,28 @@ namespace ZiveLab.ZM.ZIM.Packets
             return Extensions.GetEnumDescription((eDeviceType)Type);
         }
 
+        public string GetProductTypeString()
+        {
+            return Extensions.GetEnumDescription((eProductType)GetProductType());
+        }
+
+
+        public eDeviceType GetDeviceType()
+        {
+            return (eDeviceType)Type;
+        }
+
         public string GetFirmwareVer()
         {
             return string.Format("{0}.{1}.{2}.{3}", FirmwareVersion.Major, FirmwareVersion.Minor, FirmwareVersion.Revision, FirmwareVersion.Build);
         }
+
+        public int GetFirmwareVerNum()
+        {
+            string str = string.Format("{0}{1}{2}{3}", FirmwareVersion.Major, FirmwareVersion.Minor, FirmwareVersion.Revision, FirmwareVersion.Build);
+            return Convert.ToInt32(str);
+        }
+
         public bool SetFirmwareVer(string str)
         {
             string stmp;
@@ -563,6 +882,204 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
     }
 
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct stZimCfg_1
+    {
+        public stZimInfo info;
+        public st_zim_rnginf ranges;
+        public stZimCfg_1(eZimType type)
+        {
+            info = new stZimInfo(type);
+            ranges = new st_zim_rnginf(type);
+        }
+
+        public void Initilize(eZimType type)
+        {
+            info.Initialize(type);
+            ranges.Initialize(type);
+        }
+
+        public string UintToByteString(uint nVal)
+        {
+            int i;
+            byte tmp;
+            byte[] mChar = new byte[5];
+            Array.Clear(mChar, 0, 5);
+
+            for (i = 0; i < 5; i++)
+            {
+                tmp = (byte)((nVal >> (i * 4)) & (uint)0xf);
+                mChar[4 - i] = (byte)(0x30 + tmp);
+            }
+
+            /*
+            byte[] mChar = new byte[8];
+            Array.Clear(mChar, 0, 8);
+
+            for (i = 0; i < 8; i++)
+            {
+                tmp = (byte)((nVal >> (i*4)) & (uint)0xf);
+                mChar[7-i] = (byte)(0x30 + tmp);
+            }
+            */
+            return Encoding.Default.GetString(mChar).Trim('\0');
+        }
+
+        public string UshortToByteString(ushort nVal)
+        {
+            char[] mChar = new char[5];
+            Array.Clear(mChar, 0, 5);
+            mChar = string.Format("{0:0000}", nVal).ToCharArray();
+            return string.Format("{0}.{1}.{2}.{3}", mChar[0], mChar[1], mChar[2], mChar[3]);
+        }
+
+
+
+        public string GetSerialNumber()
+        {
+            int i = info.cModel[0] - 0x30;
+            string str;
+
+            str = string.Format("{0}{1}000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)info.cModel[1], UintToByteString(info.nSerial));
+            return str;
+        }
+
+        public string GetBoardVer()
+        {
+            return UshortToByteString(info.ZimBDVersion);
+        }
+
+        public string GetBoardTypeString()
+        {
+            eZimBoardType mtype = (eZimBoardType)(info.cModel[0] - 0x30);
+            return Extensions.GetEnumDescription(mtype);
+        }
+
+        public string GetZimTypeString()
+        {
+            eZimType mtype = (eZimType)(info.cModel[0] - 0x30);
+            return Extensions.GetEnumDescription(mtype);
+        }
+
+        public eZimBoardType GetBoardType()
+        {
+            eZimBoardType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimBoardType.UNKNOWN;
+            else mtype = (eZimBoardType)(info.cModel[0] - 0x30);
+            return mtype;
+        }
+
+        public eZimType GetZIMType()
+        {
+            eZimType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimType.UNKNOWN;
+            else mtype = (eZimType)(info.cModel[0] - 0x30);
+            return mtype;
+        }
+
+
+        public string GetFirmwareVer()
+        {
+            return UshortToByteString(info.ZimFWVersion);
+        }
+
+        public bool SetFirmwareVer(string str)
+        {
+            string sTmp;
+            if (str.Length == 7)
+            {
+                sTmp = str.Replace(".", "");
+            }
+            else
+            {
+                sTmp = str;
+            }
+
+            if (sTmp.Length == 4)
+            {
+                info.ZimFWVersion = Convert.ToUInt16(sTmp);
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetBoardVer(string str)
+        {
+            string sTmp;
+            if (str.Length == 7)
+            {
+                sTmp = str.Replace(".", "");
+            }
+            else
+            {
+                sTmp = str;
+            }
+
+            if (sTmp.Length == 4)
+            {
+                info.ZimBDVersion = Convert.ToUInt16(sTmp);
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetSerialNumber(byte type, string str)
+        {
+            string sTmp;
+            int index = 0;
+
+            uint tmp;
+            int i;
+            sTmp = str.Replace(" ", "");
+
+            if (sTmp.Length != 5 && sTmp.Length != 12) return false;
+            if (sTmp.Length == 12) index = 7;
+
+
+
+            char[] mChar = sTmp.ToCharArray();
+
+            info.cModel[0] = (byte)(type + 0x30);
+            info.cModel[1] = 0x30;
+
+            tmp = 0;
+
+            for (i = 0; i < 5; i++)
+            {
+                tmp += (uint)((mChar[index] & 0xFF) - 0x30) << ((4 - i) * 4);
+                index++;
+            }
+            info.nSerial = tmp;
+            return true;
+        }
+
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stZimCfg_1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stZimCfg_1));
+            pinnedArr.Free();
+        }
+    }
+
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -570,6 +1087,7 @@ namespace ZiveLab.ZM.ZIM.Packets
     {
         public stZimInfo info;
         public st_zim_rnginf ranges;
+
         public stZimCfg(eZimType type)
         {
             info = new stZimInfo(type);
@@ -579,6 +1097,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void Initilize(eZimType type)
         {
             info.Initialize(type);
+            ranges = new st_zim_rnginf(type);
+        }
+
+        public void Initialize(int auxch, eZimType type)
+        {
             ranges.Initialize(type);
         }
 
@@ -634,23 +1157,29 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public string GetBoardTypeString()
         {
-            eZimBoardType mtype = (eZimBoardType)(info.cModel[0]-0x30);
+            eZimBoardType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimBoardType.UNKNOWN;
+            else mtype = (eZimBoardType)(info.cModel[0]-0x30);
             return Extensions.GetEnumDescription(mtype);
         }
 
         public string GetZimTypeString()
         {
-            eZimType mtype = (eZimType)(info.cModel[0] - 0x30);
+            eZimType mtype;
+            if (info.cModel[0] == 0x0) mtype = eZimType.UNKNOWN;
+            else mtype = (eZimType)(info.cModel[0] - 0x30);
             return Extensions.GetEnumDescription(mtype);
         }
 
         public eZimBoardType GetBoardType()
         {
+            if (info.cModel[0] == 0x0) return eZimBoardType.UNKNOWN;
             return (eZimBoardType)(info.cModel[0] - 0x30);
         }
         
         public eZimType GetZIMType()
         {
+            if (info.cModel[0] == 0x0) return eZimType.UNKNOWN;
             return (eZimType)(info.cModel[0] - 0x30);
         }
         
@@ -785,7 +1314,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
             SubnetMask[0] = 255;
             SubnetMask[1] = 255;
-            SubnetMask[2] = 255;
+            SubnetMask[2] = 0;
             SubnetMask[3] = 0;
 
             IpAddress[0] = 169;
@@ -863,7 +1392,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
             SubnetMask[0] = 255;
             SubnetMask[1] = 255;
-            SubnetMask[2] = 255;
+            SubnetMask[2] = 0;
             SubnetMask[3] = 0;
 
             IpAddress[0] = 169;
@@ -873,7 +1402,7 @@ namespace ZiveLab.ZM.ZIM.Packets
 
             Port = 2000;
             hostname = new byte[20];
-            byte[] barr = Encoding.Default.GetBytes("ZIM-0000");
+            byte[] barr = Encoding.Default.GetBytes("Z00000");
             Array.Clear(hostname, 0, 20);
             Array.Copy(barr, 0, hostname, 0, barr.Length);
         }
@@ -1521,6 +2050,83 @@ namespace ZiveLab.ZM.ZIM.Packets
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct stSystemConfig_1
+    {
+        public byte ID;
+        public stSIFCfg mSIFCfg;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public byte[] EnaZIM;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public byte[] EnaROM;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public byte[] ChkZIM;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_DEV_CHANNEL)]
+        public stZimCfg_1[] mZimCfg;
+        public uint BaseTick;
+        public uint DaqTick;
+
+
+        public stSystemConfig_1(byte init)
+        {
+            ID = DeviceConstants.ID_ZIMCONFIG_1;
+
+            BaseTick = 1;
+            DaqTick = 200;
+
+            mSIFCfg = new stSIFCfg(0);
+            EnaZIM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
+            ChkZIM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
+            EnaROM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
+            mZimCfg = new stZimCfg_1[MBZA_Constant.MAX_DEV_CHANNEL];
+
+            for (int i = 0; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
+            {
+                EnaZIM[i] = 0;
+                EnaROM[i] = 0;
+                ChkZIM[i] = 0;
+                mZimCfg[i] = new stZimCfg_1(0);
+            }
+        }
+        public byte[] ToByteArray()
+        {
+            int Size = Marshal.SizeOf(this);
+            byte[] arr;
+            arr = new byte[Size];
+            IntPtr Ptr = Marshal.AllocHGlobal(Size);
+            Marshal.StructureToPtr(this, Ptr, false);
+            Marshal.Copy(Ptr, arr, 0, Size);
+            Marshal.FreeHGlobal(Ptr);
+            return arr;
+        }
+        public bool CompareInfo(byte[] ChkArr)
+        {
+            byte[] Arr = ToByteArray();
+            if (ChkArr.Length != Arr.Length)
+            {
+                return false;
+            }
+            int Size = Marshal.SizeOf(this);
+            for (int i = 0; i < Size; i++)
+            {
+                if (Arr[i] != ChkArr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void ToWritePtr(byte[] Arr)
+        {
+            GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+            this = (stSystemConfig_1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(stSystemConfig_1));
+            pinnedArr.Free();
+        }
+    }
+
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct stSystemConfig
     {
         public byte ID;
@@ -1535,11 +2141,9 @@ namespace ZiveLab.ZM.ZIM.Packets
         public stZimCfg[] mZimCfg;
         public uint BaseTick;
         public uint DaqTick;
-
-
         public stSystemConfig(byte init)
         {
-            ID = 0xD2;
+            ID = DeviceConstants.ID_ZIMCONFIG;
             
             BaseTick = 1;
             DaqTick = 200;
@@ -1550,7 +2154,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             EnaROM = new byte[MBZA_Constant.MAX_DEV_CHANNEL];
             mZimCfg = new stZimCfg[MBZA_Constant.MAX_DEV_CHANNEL];
 
-            for(int i=0; i< MBZA_Constant.MAX_DEV_CHANNEL; i++)
+            for (int i=0; i< MBZA_Constant.MAX_DEV_CHANNEL; i++)
             {
                 EnaZIM[i] = 0;
                 EnaROM[i] = 0;
@@ -1855,6 +2459,21 @@ namespace ZiveLab.ZM.ZIM.Packets
             pinnedArr.Free();
         }
     }
+    public struct stButtonElements
+    {
+        public int bd;
+        public int ch;
+        public bool isOn;
+        public bool isGraphReady;
+        public st_zim_eis_raw_data rawdata;
+        public stButtonElements(byte init)
+        {
+            bd = 0;
+            ch = 0;
+            isOn = false;
+            isGraphReady = false;
+            rawdata = new st_zim_eis_raw_data(0);
+        }
+    }
 
-    
 }

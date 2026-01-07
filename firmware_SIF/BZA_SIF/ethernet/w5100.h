@@ -7,7 +7,7 @@
 #define LSB(n) (n & 0xFF)
 
 #define MAX_SOCKET_NUM		4
-#define DEF_HOST_NAME		"ZIM"
+#define DEF_HOST_NAME		"Z" // ZIM
 #define MCU_BASE_ADDR		0xE0000000
 
 #define REG_MODE			MCU_BASE_ADDR

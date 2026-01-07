@@ -33,15 +33,9 @@
             this.menu_niquest = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NiGrpMenuGraphColor = new System.Windows.Forms.ToolStripMenuItem();
             this.NiGrpMenuGraphColorBackcolor = new System.Windows.Forms.ToolStripMenuItem();
-            this.NiGrpMenuGraphColorPlotcolor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.NiGrpMenuGraphColorGridcolor = new System.Windows.Forms.ToolStripMenuItem();
             this.NiGrpMenuGraphViewGrid = new System.Windows.Forms.ToolStripMenuItem();
-            this.NiGrpMenuGraphViewSrcLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.NiGrpMenuGraphViewSrcPoint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.NiGrpMenuGraphViewCalLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.NiGrpMenuGraphViewCalPoint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.NiGrpMenuGraphViewLegend = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,22 +53,9 @@
             this.menu_bode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.graphColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceZmagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceZphaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.gridColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphViewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceZmagnitudeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceZmagnitudePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.sourceZphaseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceZphasePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.calibrationZmagnitudeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.calibrationZmagnitudePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.calibrationZphaseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.calibrationZphasePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.BdGrpMenuGraphViewLegend = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.BdGrpMenuGraphViewGridY1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +75,8 @@
             this.BdGrpMenuGraphInitialize = new System.Windows.Forms.ToolStripMenuItem();
             this.grdpara = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.grpchstat = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblVdc = new System.Windows.Forms.LinkLabel();
             this.lblfreq = new System.Windows.Forms.Label();
             this.lblprogfreq = new System.Windows.Forms.Label();
             this.labelElapsedTime = new System.Windows.Forms.Label();
@@ -102,12 +85,8 @@
             this.lblErrStatus = new System.Windows.Forms.Label();
             this.lblTestStatus = new System.Windows.Forms.Label();
             this.lblRange = new System.Windows.Forms.Label();
-            this.lblVdc = new System.Windows.Forms.Label();
             this.lblTemp = new System.Windows.Forms.Label();
-            this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
-            this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
-            this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
-            this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.RtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.graphModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vVsIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,11 +110,6 @@
             this.plot2ColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.gridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.RTPlot1 = new NationalInstruments.UI.ScatterPlot();
-            this.RTxAxis1 = new NationalInstruments.UI.XAxis();
-            this.RTyAxis1 = new NationalInstruments.UI.YAxis();
-            this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
-            this.RTyAxis2 = new NationalInstruments.UI.YAxis();
             this.lnkstart = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -151,21 +125,111 @@
             this.numdelay = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabPgBode = new System.Windows.Forms.TabPage();
+            this.grpboxbd1 = new System.Windows.Forms.GroupBox();
+            this.chkCalBd2 = new System.Windows.Forms.CheckBox();
+            this.chkCalBd1 = new System.Windows.Forms.CheckBox();
+            this.chkSrcBd2 = new System.Windows.Forms.CheckBox();
+            this.chkSrcBd1 = new System.Windows.Forms.CheckBox();
+            this.cboItemB = new System.Windows.Forms.ComboBox();
+            this.grpboxbd2 = new System.Windows.Forms.GroupBox();
+            this.btDeselAllBdItems = new System.Windows.Forms.Button();
+            this.btSelAllBdItems = new System.Windows.Forms.Button();
+            this.chkitemB1 = new System.Windows.Forms.CheckBox();
+            this.chkitemB2 = new System.Windows.Forms.CheckBox();
+            this.chkitemB3 = new System.Windows.Forms.CheckBox();
+            this.chkitemB13 = new System.Windows.Forms.CheckBox();
+            this.chkitemB4 = new System.Windows.Forms.CheckBox();
+            this.chkitemB12 = new System.Windows.Forms.CheckBox();
+            this.chkitemB5 = new System.Windows.Forms.CheckBox();
+            this.chkitemB11 = new System.Windows.Forms.CheckBox();
+            this.chkitemB6 = new System.Windows.Forms.CheckBox();
+            this.chkitemB10 = new System.Windows.Forms.CheckBox();
+            this.chkitemB7 = new System.Windows.Forms.CheckBox();
+            this.chkitemB9 = new System.Windows.Forms.CheckBox();
+            this.chkitemB8 = new System.Windows.Forms.CheckBox();
             this.Bdlegend = new NationalInstruments.UI.WindowsForms.Legend();
-            this.BdlegendItem1 = new NationalInstruments.UI.LegendItem();
+            this.legendItem1 = new NationalInstruments.UI.LegendItem();
+            this.legendItem2 = new NationalInstruments.UI.LegendItem();
+            this.legendItem3 = new NationalInstruments.UI.LegendItem();
+            this.legendItem4 = new NationalInstruments.UI.LegendItem();
+            this.grp2 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.BdCursor1 = new NationalInstruments.UI.XYCursor();
             this.Grp2Plot1 = new NationalInstruments.UI.ScatterPlot();
             this.Grp2_xAxis1 = new NationalInstruments.UI.XAxis();
             this.Grp2_yAxis1 = new NationalInstruments.UI.YAxis();
-            this.BdlegendItem2 = new NationalInstruments.UI.LegendItem();
             this.Grp2Plot2 = new NationalInstruments.UI.ScatterPlot();
             this.Grp2_yAxis2 = new NationalInstruments.UI.YAxis();
-            this.BdlegendItem3 = new NationalInstruments.UI.LegendItem();
             this.Grp2Plot3 = new NationalInstruments.UI.ScatterPlot();
-            this.BdlegendItem4 = new NationalInstruments.UI.LegendItem();
             this.Grp2Plot4 = new NationalInstruments.UI.ScatterPlot();
-            this.grp2 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.BdCursor1 = new NationalInstruments.UI.XYCursor();
+            this.Grp2Plot5 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot6 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot7 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot8 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot9 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot10 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot11 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot12 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot13 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot14 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot15 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot16 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot17 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot18 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot19 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot20 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot21 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot22 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot23 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot24 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot25 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot26 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot27 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot28 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot29 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot30 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot31 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot32 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot33 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot34 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot35 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot36 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot37 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot38 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot39 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot40 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot41 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot42 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot43 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot44 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot45 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot46 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot47 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot48 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot49 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot50 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot51 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot52 = new NationalInstruments.UI.ScatterPlot();
             this.tabPgniquest = new System.Windows.Forms.TabPage();
+            this.grpboxni1 = new System.Windows.Forms.GroupBox();
+            this.chkCalNi = new System.Windows.Forms.CheckBox();
+            this.chkSrcNi = new System.Windows.Forms.CheckBox();
+            this.cboItemA = new System.Windows.Forms.ComboBox();
+            this.grpboxni2 = new System.Windows.Forms.GroupBox();
+            this.btDeselAllNiItems = new System.Windows.Forms.Button();
+            this.btSelAllNiItems = new System.Windows.Forms.Button();
+            this.chkitemA1 = new System.Windows.Forms.CheckBox();
+            this.chkitemA2 = new System.Windows.Forms.CheckBox();
+            this.chkitemA3 = new System.Windows.Forms.CheckBox();
+            this.chkitemA13 = new System.Windows.Forms.CheckBox();
+            this.chkitemA4 = new System.Windows.Forms.CheckBox();
+            this.chkitemA12 = new System.Windows.Forms.CheckBox();
+            this.chkitemA5 = new System.Windows.Forms.CheckBox();
+            this.chkitemA11 = new System.Windows.Forms.CheckBox();
+            this.chkitemA6 = new System.Windows.Forms.CheckBox();
+            this.chkitemA10 = new System.Windows.Forms.CheckBox();
+            this.chkitemA7 = new System.Windows.Forms.CheckBox();
+            this.chkitemA9 = new System.Windows.Forms.CheckBox();
+            this.chkitemA8 = new System.Windows.Forms.CheckBox();
             this.Nilegend = new NationalInstruments.UI.WindowsForms.Legend();
             this.NilegendItem1 = new NationalInstruments.UI.LegendItem();
             this.Grp1Plot1 = new NationalInstruments.UI.ScatterPlot();
@@ -175,33 +239,75 @@
             this.Grp1Plot2 = new NationalInstruments.UI.ScatterPlot();
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.NiCursor1 = new NationalInstruments.UI.XYCursor();
+            this.Grp1Plot3 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot4 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot5 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot6 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot7 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot8 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot9 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot10 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot11 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot12 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot13 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot14 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot15 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot16 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot17 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot18 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot19 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot20 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot21 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot22 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot23 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot24 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot25 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot26 = new NationalInstruments.UI.ScatterPlot();
             this.Grp1_yAxis2 = new NationalInstruments.UI.YAxis();
             this.tabPgList = new System.Windows.Forms.TabPage();
             this.grdlist = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.tabgrp = new System.Windows.Forms.TabControl();
             this.BtRfreshFit = new System.Windows.Forms.Button();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.btSaveAsApplyData = new System.Windows.Forms.Button();
+            this.lblitem = new System.Windows.Forms.Label();
+            this.cboItem = new System.Windows.Forms.ComboBox();
+            this.BdlegendItem4 = new NationalInstruments.UI.LegendItem();
+            this.BdlegendItem3 = new NationalInstruments.UI.LegendItem();
+            this.BdlegendItem2 = new NationalInstruments.UI.LegendItem();
+            this.BdlegendItem1 = new NationalInstruments.UI.LegendItem();
+            this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
+            this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
+            this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
+            this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.RTPlot1 = new NationalInstruments.UI.ScatterPlot();
+            this.RTxAxis1 = new NationalInstruments.UI.XAxis();
+            this.RTyAxis1 = new NationalInstruments.UI.YAxis();
+            this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
+            this.RTyAxis2 = new NationalInstruments.UI.YAxis();
             this.menu_niquest.SuspendLayout();
             this.menu_bode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdpara)).BeginInit();
             this.grpchstat.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grprt)).BeginInit();
             this.RtMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numdensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numdelay)).BeginInit();
             this.tabPgBode.SuspendLayout();
+            this.grpboxbd1.SuspendLayout();
+            this.grpboxbd2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bdlegend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BdCursor1)).BeginInit();
             this.tabPgniquest.SuspendLayout();
+            this.grpboxni1.SuspendLayout();
+            this.grpboxni2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nilegend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NiCursor1)).BeginInit();
             this.tabPgList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdlist)).BeginInit();
             this.tabgrp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grprt)).BeginInit();
             this.SuspendLayout();
             // 
             // menu_niquest
@@ -217,7 +323,7 @@
             // 
             this.NiGrpMenuGraphColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NiGrpMenuGraphColorBackcolor,
-            this.NiGrpMenuGraphColorPlotcolor,
+            this.toolStripSeparator5,
             this.NiGrpMenuGraphColorGridcolor});
             this.NiGrpMenuGraphColor.Name = "NiGrpMenuGraphColor";
             this.NiGrpMenuGraphColor.Size = new System.Drawing.Size(141, 22);
@@ -230,12 +336,10 @@
             this.NiGrpMenuGraphColorBackcolor.Text = "Back color";
             this.NiGrpMenuGraphColorBackcolor.Click += new System.EventHandler(this.NiGrpMenuGraphColorBackcolor_Click);
             // 
-            // NiGrpMenuGraphColorPlotcolor
+            // toolStripSeparator5
             // 
-            this.NiGrpMenuGraphColorPlotcolor.Name = "NiGrpMenuGraphColorPlotcolor";
-            this.NiGrpMenuGraphColorPlotcolor.Size = new System.Drawing.Size(130, 22);
-            this.NiGrpMenuGraphColorPlotcolor.Text = "Plot color";
-            this.NiGrpMenuGraphColorPlotcolor.Click += new System.EventHandler(this.NiGrpMenuGraphColorSrccolor_Click);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(127, 6);
             // 
             // NiGrpMenuGraphColorGridcolor
             // 
@@ -247,12 +351,6 @@
             // NiGrpMenuGraphViewGrid
             // 
             this.NiGrpMenuGraphViewGrid.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.NiGrpMenuGraphViewSrcLine,
-            this.NiGrpMenuGraphViewSrcPoint,
-            this.toolStripSeparator10,
-            this.NiGrpMenuGraphViewCalLine,
-            this.NiGrpMenuGraphViewCalPoint,
-            this.toolStripSeparator5,
             this.NiGrpMenuGraphViewLegend,
             this.toolStripSeparator6,
             this.gridToolStripMenuItem});
@@ -260,60 +358,22 @@
             this.NiGrpMenuGraphViewGrid.Size = new System.Drawing.Size(141, 22);
             this.NiGrpMenuGraphViewGrid.Text = "Graph view";
             // 
-            // NiGrpMenuGraphViewSrcLine
-            // 
-            this.NiGrpMenuGraphViewSrcLine.Name = "NiGrpMenuGraphViewSrcLine";
-            this.NiGrpMenuGraphViewSrcLine.Size = new System.Drawing.Size(189, 22);
-            this.NiGrpMenuGraphViewSrcLine.Text = "Source plot line";
-            this.NiGrpMenuGraphViewSrcLine.Click += new System.EventHandler(this.NiGrpMenuGraphViewSrcLine_Click);
-            // 
-            // NiGrpMenuGraphViewSrcPoint
-            // 
-            this.NiGrpMenuGraphViewSrcPoint.Name = "NiGrpMenuGraphViewSrcPoint";
-            this.NiGrpMenuGraphViewSrcPoint.Size = new System.Drawing.Size(189, 22);
-            this.NiGrpMenuGraphViewSrcPoint.Text = "Source plot point";
-            this.NiGrpMenuGraphViewSrcPoint.Click += new System.EventHandler(this.NiGrpMenuGraphViewSrcPoint_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(186, 6);
-            // 
-            // NiGrpMenuGraphViewCalLine
-            // 
-            this.NiGrpMenuGraphViewCalLine.Name = "NiGrpMenuGraphViewCalLine";
-            this.NiGrpMenuGraphViewCalLine.Size = new System.Drawing.Size(189, 22);
-            this.NiGrpMenuGraphViewCalLine.Text = "Calibration plot line";
-            this.NiGrpMenuGraphViewCalLine.Click += new System.EventHandler(this.NiGrpMenuGraphViewCalLine_Click);
-            // 
-            // NiGrpMenuGraphViewCalPoint
-            // 
-            this.NiGrpMenuGraphViewCalPoint.Name = "NiGrpMenuGraphViewCalPoint";
-            this.NiGrpMenuGraphViewCalPoint.Size = new System.Drawing.Size(189, 22);
-            this.NiGrpMenuGraphViewCalPoint.Text = "Calibration plot point";
-            this.NiGrpMenuGraphViewCalPoint.Click += new System.EventHandler(this.NiGrpMenuGraphViewCalPoint_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(186, 6);
-            // 
             // NiGrpMenuGraphViewLegend
             // 
             this.NiGrpMenuGraphViewLegend.Name = "NiGrpMenuGraphViewLegend";
-            this.NiGrpMenuGraphViewLegend.Size = new System.Drawing.Size(189, 22);
+            this.NiGrpMenuGraphViewLegend.Size = new System.Drawing.Size(113, 22);
             this.NiGrpMenuGraphViewLegend.Text = "Legend";
             this.NiGrpMenuGraphViewLegend.Click += new System.EventHandler(this.NiGrpMenuGraphViewLegend_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(110, 6);
             // 
             // gridToolStripMenuItem
             // 
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
@@ -413,8 +473,7 @@
             // 
             this.graphColorToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backColorToolStripMenuItem1,
-            this.sourceZmagToolStripMenuItem,
-            this.sourceZphaseToolStripMenuItem,
+            this.toolStripSeparator7,
             this.gridColorToolStripMenuItem});
             this.graphColorToolStripMenuItem1.Name = "graphColorToolStripMenuItem1";
             this.graphColorToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
@@ -423,46 +482,25 @@
             // backColorToolStripMenuItem1
             // 
             this.backColorToolStripMenuItem1.Name = "backColorToolStripMenuItem1";
-            this.backColorToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.backColorToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.backColorToolStripMenuItem1.Text = "Back color";
-            this.backColorToolStripMenuItem1.Click += new System.EventHandler(this.backColorToolStripMenuItem1_Click);
+            this.backColorToolStripMenuItem1.Click += new System.EventHandler(this.backColorToolStripMenuItem1_Click_1);
             // 
-            // sourceZmagToolStripMenuItem
+            // toolStripSeparator7
             // 
-            this.sourceZmagToolStripMenuItem.Name = "sourceZmagToolStripMenuItem";
-            this.sourceZmagToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.sourceZmagToolStripMenuItem.Text = "Zmagnitude color";
-            this.sourceZmagToolStripMenuItem.Click += new System.EventHandler(this.sourceZmagToolStripMenuItem_Click);
-            // 
-            // sourceZphaseToolStripMenuItem
-            // 
-            this.sourceZphaseToolStripMenuItem.Name = "sourceZphaseToolStripMenuItem";
-            this.sourceZphaseToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.sourceZphaseToolStripMenuItem.Text = "Zphase color";
-            this.sourceZphaseToolStripMenuItem.Click += new System.EventHandler(this.sourceZphaseToolStripMenuItem_Click);
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(127, 6);
             // 
             // gridColorToolStripMenuItem
             // 
             this.gridColorToolStripMenuItem.Name = "gridColorToolStripMenuItem";
-            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.gridColorToolStripMenuItem.Text = "Grid color";
-            this.gridColorToolStripMenuItem.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click);
+            this.gridColorToolStripMenuItem.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click_1);
             // 
             // graphViewToolStripMenuItem1
             // 
             this.graphViewToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sourceZmagnitudeToolStripMenuItem,
-            this.sourceZmagnitudePointToolStripMenuItem,
-            this.toolStripSeparator12,
-            this.sourceZphaseToolStripMenuItem1,
-            this.sourceZphasePointToolStripMenuItem,
-            this.toolStripSeparator7,
-            this.calibrationZmagnitudeToolStripMenuItem1,
-            this.calibrationZmagnitudePointToolStripMenuItem,
-            this.toolStripSeparator11,
-            this.calibrationZphaseToolStripMenuItem1,
-            this.calibrationZphasePointToolStripMenuItem,
-            this.toolStripSeparator8,
             this.BdGrpMenuGraphViewLegend,
             this.toolStripSeparator9,
             this.BdGrpMenuGraphViewGridY1,
@@ -471,105 +509,29 @@
             this.graphViewToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.graphViewToolStripMenuItem1.Text = "Graph view";
             // 
-            // sourceZmagnitudeToolStripMenuItem
-            // 
-            this.sourceZmagnitudeToolStripMenuItem.Name = "sourceZmagnitudeToolStripMenuItem";
-            this.sourceZmagnitudeToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.sourceZmagnitudeToolStripMenuItem.Text = "Source Zmagnitude line";
-            this.sourceZmagnitudeToolStripMenuItem.Click += new System.EventHandler(this.sourceZmagnitudeToolStripMenuItem_Click);
-            // 
-            // sourceZmagnitudePointToolStripMenuItem
-            // 
-            this.sourceZmagnitudePointToolStripMenuItem.Name = "sourceZmagnitudePointToolStripMenuItem";
-            this.sourceZmagnitudePointToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.sourceZmagnitudePointToolStripMenuItem.Text = "Source Zmagnitude point";
-            this.sourceZmagnitudePointToolStripMenuItem.Click += new System.EventHandler(this.sourceZmagnitudePointToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(230, 6);
-            // 
-            // sourceZphaseToolStripMenuItem1
-            // 
-            this.sourceZphaseToolStripMenuItem1.Name = "sourceZphaseToolStripMenuItem1";
-            this.sourceZphaseToolStripMenuItem1.Size = new System.Drawing.Size(233, 22);
-            this.sourceZphaseToolStripMenuItem1.Text = "Source Zphase line";
-            this.sourceZphaseToolStripMenuItem1.Click += new System.EventHandler(this.sourceZphaseToolStripMenuItem1_Click);
-            // 
-            // sourceZphasePointToolStripMenuItem
-            // 
-            this.sourceZphasePointToolStripMenuItem.Name = "sourceZphasePointToolStripMenuItem";
-            this.sourceZphasePointToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.sourceZphasePointToolStripMenuItem.Text = "Source Zphase point";
-            this.sourceZphasePointToolStripMenuItem.Click += new System.EventHandler(this.sourceZphasePointToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(230, 6);
-            // 
-            // calibrationZmagnitudeToolStripMenuItem1
-            // 
-            this.calibrationZmagnitudeToolStripMenuItem1.Name = "calibrationZmagnitudeToolStripMenuItem1";
-            this.calibrationZmagnitudeToolStripMenuItem1.Size = new System.Drawing.Size(233, 22);
-            this.calibrationZmagnitudeToolStripMenuItem1.Text = "Calibration Zmagnitude line";
-            this.calibrationZmagnitudeToolStripMenuItem1.Click += new System.EventHandler(this.calibrationZmagnitudeToolStripMenuItem1_Click);
-            // 
-            // calibrationZmagnitudePointToolStripMenuItem
-            // 
-            this.calibrationZmagnitudePointToolStripMenuItem.Name = "calibrationZmagnitudePointToolStripMenuItem";
-            this.calibrationZmagnitudePointToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.calibrationZmagnitudePointToolStripMenuItem.Text = "Calibration Zmagnitude point";
-            this.calibrationZmagnitudePointToolStripMenuItem.Click += new System.EventHandler(this.calibrationZmagnitudePointToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
-            // 
-            // calibrationZphaseToolStripMenuItem1
-            // 
-            this.calibrationZphaseToolStripMenuItem1.Name = "calibrationZphaseToolStripMenuItem1";
-            this.calibrationZphaseToolStripMenuItem1.Size = new System.Drawing.Size(233, 22);
-            this.calibrationZphaseToolStripMenuItem1.Text = "Calibration Zphase line";
-            this.calibrationZphaseToolStripMenuItem1.Click += new System.EventHandler(this.calibrationZphaseToolStripMenuItem1_Click);
-            // 
-            // calibrationZphasePointToolStripMenuItem
-            // 
-            this.calibrationZphasePointToolStripMenuItem.Name = "calibrationZphasePointToolStripMenuItem";
-            this.calibrationZphasePointToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.calibrationZphasePointToolStripMenuItem.Text = "Calibration Zphase point";
-            this.calibrationZphasePointToolStripMenuItem.Click += new System.EventHandler(this.calibrationZphasePointToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(230, 6);
-            // 
             // BdGrpMenuGraphViewLegend
             // 
             this.BdGrpMenuGraphViewLegend.Name = "BdGrpMenuGraphViewLegend";
-            this.BdGrpMenuGraphViewLegend.Size = new System.Drawing.Size(233, 22);
+            this.BdGrpMenuGraphViewLegend.Size = new System.Drawing.Size(137, 22);
             this.BdGrpMenuGraphViewLegend.Text = "Legend";
             this.BdGrpMenuGraphViewLegend.Click += new System.EventHandler(this.BdGrpMenuGraphViewLegend_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(134, 6);
             // 
             // BdGrpMenuGraphViewGridY1
             // 
             this.BdGrpMenuGraphViewGridY1.Name = "BdGrpMenuGraphViewGridY1";
-            this.BdGrpMenuGraphViewGridY1.Size = new System.Drawing.Size(233, 22);
+            this.BdGrpMenuGraphViewGridY1.Size = new System.Drawing.Size(137, 22);
             this.BdGrpMenuGraphViewGridY1.Text = "Grid axis y1";
             this.BdGrpMenuGraphViewGridY1.Click += new System.EventHandler(this.BdGrpMenuGraphViewGridY1_Click);
             // 
             // BdGrpMenuGraphViewGridY2
             // 
             this.BdGrpMenuGraphViewGridY2.Name = "BdGrpMenuGraphViewGridY2";
-            this.BdGrpMenuGraphViewGridY2.Size = new System.Drawing.Size(233, 22);
+            this.BdGrpMenuGraphViewGridY2.Size = new System.Drawing.Size(137, 22);
             this.BdGrpMenuGraphViewGridY2.Text = "Grid axis y2";
             this.BdGrpMenuGraphViewGridY2.Click += new System.EventHandler(this.BdGrpMenuGraphViewGridY2_Click);
             // 
@@ -674,19 +636,21 @@
             // 
             // grdpara
             // 
-            this.grdpara.ColumnInfo = "2,1,0,0,0,95,Columns:0{Width:80;}\t1{Width:80;}\t";
+            this.grdpara.ColumnInfo = "2,1,0,0,0,105,Columns:0{Width:80;}\t1{Width:80;}\t";
             this.grdpara.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.grdpara.Location = new System.Drawing.Point(651, 13);
+            this.grdpara.Location = new System.Drawing.Point(654, 10);
             this.grdpara.Name = "grdpara";
             this.grdpara.Rows.Count = 12;
-            this.grdpara.Rows.DefaultSize = 19;
+            this.grdpara.Rows.DefaultSize = 21;
             this.grdpara.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.grdpara.Size = new System.Drawing.Size(175, 239);
+            this.grdpara.Size = new System.Drawing.Size(174, 221);
             this.grdpara.StyleInfo = resources.GetString("grdpara.StyleInfo");
             this.grdpara.TabIndex = 39;
             // 
             // grpchstat
             // 
+            this.grpchstat.Controls.Add(this.label6);
+            this.grpchstat.Controls.Add(this.lblVdc);
             this.grpchstat.Controls.Add(this.lblfreq);
             this.grpchstat.Controls.Add(this.lblprogfreq);
             this.grpchstat.Controls.Add(this.labelElapsedTime);
@@ -695,66 +659,88 @@
             this.grpchstat.Controls.Add(this.lblErrStatus);
             this.grpchstat.Controls.Add(this.lblTestStatus);
             this.grpchstat.Controls.Add(this.lblRange);
-            this.grpchstat.Controls.Add(this.lblVdc);
             this.grpchstat.Controls.Add(this.lblTemp);
             this.grpchstat.Controls.Add(this.lblprog);
             this.grpchstat.Location = new System.Drawing.Point(12, 6);
             this.grpchstat.Name = "grpchstat";
-            this.grpchstat.Size = new System.Drawing.Size(328, 222);
+            this.grpchstat.Size = new System.Drawing.Size(328, 260);
             this.grpchstat.TabIndex = 62;
             this.grpchstat.TabStop = false;
             this.grpchstat.Text = "[ Channel status ]";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 14);
+            this.label6.TabIndex = 86;
+            this.label6.Text = "Progress:";
+            // 
+            // lblVdc
+            // 
+            this.lblVdc.Enabled = false;
+            this.lblVdc.Location = new System.Drawing.Point(43, 132);
+            this.lblVdc.Name = "lblVdc";
+            this.lblVdc.Size = new System.Drawing.Size(122, 17);
+            this.lblVdc.TabIndex = 85;
+            this.lblVdc.TabStop = true;
+            this.lblVdc.Text = "VDC: ------ V";
+            this.lblVdc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblVdc.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.lblVdc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblVdc_LinkClicked);
+            // 
             // lblfreq
             // 
             this.lblfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblfreq.Location = new System.Drawing.Point(10, 145);
+            this.lblfreq.Location = new System.Drawing.Point(14, 176);
             this.lblfreq.Name = "lblfreq";
-            this.lblfreq.Size = new System.Drawing.Size(150, 15);
+            this.lblfreq.Size = new System.Drawing.Size(150, 17);
             this.lblfreq.TabIndex = 84;
             this.lblfreq.Text = "  Freq.: ------ Hz";
             // 
             // lblprogfreq
             // 
             this.lblprogfreq.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprogfreq.Location = new System.Drawing.Point(10, 197);
+            this.lblprogfreq.Location = new System.Drawing.Point(15, 196);
             this.lblprogfreq.Name = "lblprogfreq";
-            this.lblprogfreq.Size = new System.Drawing.Size(150, 15);
+            this.lblprogfreq.Size = new System.Drawing.Size(150, 17);
             this.lblprogfreq.TabIndex = 83;
             this.lblprogfreq.Text = "Working: ------ Hz";
+            this.lblprogfreq.Click += new System.EventHandler(this.lblprogfreq_Click);
             // 
             // labelElapsedTime
             // 
             this.labelElapsedTime.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelElapsedTime.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelElapsedTime.Location = new System.Drawing.Point(10, 70);
+            this.labelElapsedTime.Location = new System.Drawing.Point(15, 88);
             this.labelElapsedTime.Name = "labelElapsedTime";
-            this.labelElapsedTime.Size = new System.Drawing.Size(150, 15);
+            this.labelElapsedTime.Size = new System.Drawing.Size(150, 17);
             this.labelElapsedTime.TabIndex = 80;
             this.labelElapsedTime.Text = "Elapsed: 000:00:00";
             // 
             // lblZphase
             // 
             this.lblZphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZphase.Location = new System.Drawing.Point(10, 180);
+            this.lblZphase.Location = new System.Drawing.Point(14, 236);
             this.lblZphase.Name = "lblZphase";
-            this.lblZphase.Size = new System.Drawing.Size(150, 15);
+            this.lblZphase.Size = new System.Drawing.Size(150, 17);
             this.lblZphase.TabIndex = 82;
             this.lblZphase.Text = " Zphase: ------ °";
             // 
             // lblZmag
             // 
             this.lblZmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZmag.Location = new System.Drawing.Point(10, 163);
+            this.lblZmag.Location = new System.Drawing.Point(13, 216);
             this.lblZmag.Name = "lblZmag";
-            this.lblZmag.Size = new System.Drawing.Size(150, 15);
+            this.lblZmag.Size = new System.Drawing.Size(150, 17);
             this.lblZmag.TabIndex = 81;
             this.lblZmag.Text = "   Zmag: ------ mΩ";
             // 
             // lblErrStatus
             // 
             this.lblErrStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblErrStatus.Location = new System.Drawing.Point(10, 51);
+            this.lblErrStatus.Location = new System.Drawing.Point(15, 68);
             this.lblErrStatus.Name = "lblErrStatus";
             this.lblErrStatus.Size = new System.Drawing.Size(308, 17);
             this.lblErrStatus.TabIndex = 75;
@@ -763,80 +749,47 @@
             // lblTestStatus
             // 
             this.lblTestStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestStatus.Location = new System.Drawing.Point(10, 34);
+            this.lblTestStatus.Location = new System.Drawing.Point(15, 48);
             this.lblTestStatus.Name = "lblTestStatus";
-            this.lblTestStatus.Size = new System.Drawing.Size(308, 15);
+            this.lblTestStatus.Size = new System.Drawing.Size(308, 17);
             this.lblTestStatus.TabIndex = 76;
             this.lblTestStatus.Text = " Status: Idle";
             // 
             // lblRange
             // 
             this.lblRange.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRange.Location = new System.Drawing.Point(10, 89);
+            this.lblRange.Location = new System.Drawing.Point(15, 108);
             this.lblRange.Name = "lblRange";
-            this.lblRange.Size = new System.Drawing.Size(150, 15);
+            this.lblRange.Size = new System.Drawing.Size(150, 17);
             this.lblRange.TabIndex = 77;
             this.lblRange.Text = "  Range: 100V/ 200mA";
             this.lblRange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblVdc
-            // 
-            this.lblVdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVdc.Location = new System.Drawing.Point(10, 108);
-            this.lblVdc.Name = "lblVdc";
-            this.lblVdc.Size = new System.Drawing.Size(150, 15);
-            this.lblVdc.TabIndex = 78;
-            this.lblVdc.Text = "    VDC: ------ V";
-            // 
             // lblTemp
             // 
             this.lblTemp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemp.Location = new System.Drawing.Point(10, 127);
+            this.lblTemp.Location = new System.Drawing.Point(14, 152);
             this.lblTemp.Name = "lblTemp";
-            this.lblTemp.Size = new System.Drawing.Size(150, 15);
+            this.lblTemp.Size = new System.Drawing.Size(144, 17);
             this.lblTemp.TabIndex = 79;
             this.lblTemp.Text = " PT-100: ------ °C";
             // 
-            // Rtlegend
+            // lblprog
             // 
-            this.Rtlegend.Border = NationalInstruments.UI.Border.Dotted;
-            this.Rtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Rtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
-            this.RtlegendItem1,
-            this.RtlegendItem2});
-            this.Rtlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Rtlegend.Location = new System.Drawing.Point(441, 176);
-            this.Rtlegend.Name = "Rtlegend";
-            this.Rtlegend.Size = new System.Drawing.Size(83, 59);
-            this.Rtlegend.TabIndex = 95;
-            // 
-            // RtlegendItem1
-            // 
-            this.RtlegendItem1.Text = "Voltage";
-            // 
-            // RtlegendItem2
-            // 
-            this.RtlegendItem2.Text = "Current";
-            // 
-            // grprt
-            // 
-            this.grprt.ContextMenuStrip = this.RtMenuStrip;
-            this.grprt.Location = new System.Drawing.Point(390, 164);
-            this.grprt.Name = "grprt";
-            this.grprt.PlotAreaColor = System.Drawing.Color.White;
-            this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.RTPlot1,
-            this.RTPlot2});
-            this.grprt.Size = new System.Drawing.Size(158, 144);
-            this.grprt.TabIndex = 93;
-            this.grprt.UseColorGenerator = true;
-            this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.RTxAxis1});
-            this.grprt.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.RTyAxis1,
-            this.RTyAxis2});
-            this.grprt.PlotDataChanged += new NationalInstruments.UI.XYPlotDataChangedEventHandler(this.grprt_PlotDataChanged);
-            this.grprt.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grprt_MouseDoubleClick);
+            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprog.LabelColor = System.Drawing.Color.Navy;
+            this.lblprog.LabelText = "";
+            this.lblprog.Location = new System.Drawing.Point(80, 26);
+            this.lblprog.Name = "lblprog";
+            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
+            this.lblprog.OutLine_Visible = true;
+            this.lblprog.OutLine_Width = 1;
+            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lblprog.Prog_Max = 100;
+            this.lblprog.Prog_Min = 0;
+            this.lblprog.Prog_Val = 50;
+            this.lblprog.Size = new System.Drawing.Size(242, 14);
+            this.lblprog.TabIndex = 74;
             // 
             // RtMenuStrip
             // 
@@ -1014,6 +967,1574 @@
             this.gridToolStripMenuItem2.Text = "Grid";
             this.gridToolStripMenuItem2.Click += new System.EventHandler(this.gridToolStripMenuItem2_Click);
             // 
+            // lnkstart
+            // 
+            this.lnkstart.AutoSize = true;
+            this.lnkstart.Location = new System.Drawing.Point(351, 177);
+            this.lnkstart.Name = "lnkstart";
+            this.lnkstart.Size = new System.Drawing.Size(133, 14);
+            this.lnkstart.TabIndex = 63;
+            this.lnkstart.TabStop = true;
+            this.lnkstart.Text = "Start calibration.";
+            this.lnkstart.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkstart_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(351, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.TabIndex = 64;
+            this.label1.Text = "Delay(s)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(351, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 14);
+            this.label2.TabIndex = 65;
+            this.label2.Text = "Begin frequenct(Hz)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(351, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(147, 14);
+            this.label3.TabIndex = 66;
+            this.label3.Text = "Finish frequenct(Hz)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(351, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 14);
+            this.label4.TabIndex = 67;
+            this.label4.Text = "Density";
+            // 
+            // lnkCalculate
+            // 
+            this.lnkCalculate.AutoSize = true;
+            this.lnkCalculate.Location = new System.Drawing.Point(351, 217);
+            this.lnkCalculate.Name = "lnkCalculate";
+            this.lnkCalculate.Size = new System.Drawing.Size(287, 14);
+            this.lnkCalculate.TabIndex = 68;
+            this.lnkCalculate.TabStop = true;
+            this.lnkCalculate.Text = "Create and apply calibration parameters.";
+            this.lnkCalculate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCalculate_LinkClicked);
+            // 
+            // lnksave
+            // 
+            this.lnksave.AutoSize = true;
+            this.lnksave.Location = new System.Drawing.Point(351, 251);
+            this.lnksave.Name = "lnksave";
+            this.lnksave.Size = new System.Drawing.Size(231, 14);
+            this.lnksave.TabIndex = 69;
+            this.lnksave.TabStop = true;
+            this.lnksave.Text = "Save the calibration parameters.";
+            this.lnksave.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnksave_LinkClicked);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(351, 142);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 14);
+            this.label5.TabIndex = 70;
+            this.label5.Text = "Range";
+            // 
+            // txtbeginfreq
+            // 
+            this.txtbeginfreq.Location = new System.Drawing.Point(503, 42);
+            this.txtbeginfreq.Name = "txtbeginfreq";
+            this.txtbeginfreq.Size = new System.Drawing.Size(94, 22);
+            this.txtbeginfreq.TabIndex = 73;
+            // 
+            // txtFinishfreq
+            // 
+            this.txtFinishfreq.Location = new System.Drawing.Point(503, 74);
+            this.txtFinishfreq.Name = "txtFinishfreq";
+            this.txtFinishfreq.Size = new System.Drawing.Size(94, 22);
+            this.txtFinishfreq.TabIndex = 74;
+            // 
+            // cborange
+            // 
+            this.cborange.FormattingEnabled = true;
+            this.cborange.Location = new System.Drawing.Point(503, 138);
+            this.cborange.Name = "cborange";
+            this.cborange.Size = new System.Drawing.Size(93, 22);
+            this.cborange.TabIndex = 76;
+            this.cborange.SelectedIndexChanged += new System.EventHandler(this.cborange_SelectedIndexChanged);
+            // 
+            // numdensity
+            // 
+            this.numdensity.Location = new System.Drawing.Point(503, 106);
+            this.numdensity.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numdensity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numdensity.Name = "numdensity";
+            this.numdensity.Size = new System.Drawing.Size(94, 22);
+            this.numdensity.TabIndex = 78;
+            this.numdensity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numdelay
+            // 
+            this.numdelay.Location = new System.Drawing.Point(503, 10);
+            this.numdelay.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            this.numdelay.Name = "numdelay";
+            this.numdelay.Size = new System.Drawing.Size(94, 22);
+            this.numdelay.TabIndex = 79;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // tabPgBode
+            // 
+            this.tabPgBode.Controls.Add(this.grpboxbd1);
+            this.tabPgBode.Controls.Add(this.grpboxbd2);
+            this.tabPgBode.Controls.Add(this.Bdlegend);
+            this.tabPgBode.Controls.Add(this.grp2);
+            this.tabPgBode.Location = new System.Drawing.Point(4, 23);
+            this.tabPgBode.Name = "tabPgBode";
+            this.tabPgBode.Size = new System.Drawing.Size(876, 518);
+            this.tabPgBode.TabIndex = 2;
+            this.tabPgBode.Text = "Bode plot";
+            this.tabPgBode.UseVisualStyleBackColor = true;
+            // 
+            // grpboxbd1
+            // 
+            this.grpboxbd1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpboxbd1.Controls.Add(this.chkCalBd2);
+            this.grpboxbd1.Controls.Add(this.chkCalBd1);
+            this.grpboxbd1.Controls.Add(this.chkSrcBd2);
+            this.grpboxbd1.Controls.Add(this.chkSrcBd1);
+            this.grpboxbd1.Controls.Add(this.cboItemB);
+            this.grpboxbd1.Location = new System.Drawing.Point(727, 4);
+            this.grpboxbd1.Name = "grpboxbd1";
+            this.grpboxbd1.Size = new System.Drawing.Size(141, 146);
+            this.grpboxbd1.TabIndex = 153;
+            this.grpboxbd1.TabStop = false;
+            this.grpboxbd1.Text = "[Legend item]";
+            // 
+            // chkCalBd2
+            // 
+            this.chkCalBd2.AutoSize = true;
+            this.chkCalBd2.Location = new System.Drawing.Point(6, 118);
+            this.chkCalBd2.Name = "chkCalBd2";
+            this.chkCalBd2.Size = new System.Drawing.Size(124, 18);
+            this.chkCalBd2.TabIndex = 125;
+            this.chkCalBd2.Text = "Calibrated Zph";
+            this.chkCalBd2.UseVisualStyleBackColor = true;
+            // 
+            // chkCalBd1
+            // 
+            this.chkCalBd1.AutoSize = true;
+            this.chkCalBd1.Location = new System.Drawing.Point(6, 95);
+            this.chkCalBd1.Name = "chkCalBd1";
+            this.chkCalBd1.Size = new System.Drawing.Size(131, 18);
+            this.chkCalBd1.TabIndex = 124;
+            this.chkCalBd1.Text = "Calibrated Zmag";
+            this.chkCalBd1.UseVisualStyleBackColor = true;
+            // 
+            // chkSrcBd2
+            // 
+            this.chkSrcBd2.AutoSize = true;
+            this.chkSrcBd2.Location = new System.Drawing.Point(6, 72);
+            this.chkSrcBd2.Name = "chkSrcBd2";
+            this.chkSrcBd2.Size = new System.Drawing.Size(96, 18);
+            this.chkSrcBd2.TabIndex = 123;
+            this.chkSrcBd2.Text = "Source Zph";
+            this.chkSrcBd2.UseVisualStyleBackColor = true;
+            // 
+            // chkSrcBd1
+            // 
+            this.chkSrcBd1.AutoSize = true;
+            this.chkSrcBd1.Location = new System.Drawing.Point(6, 49);
+            this.chkSrcBd1.Name = "chkSrcBd1";
+            this.chkSrcBd1.Size = new System.Drawing.Size(103, 18);
+            this.chkSrcBd1.TabIndex = 122;
+            this.chkSrcBd1.Text = "Source Zmag";
+            this.chkSrcBd1.UseVisualStyleBackColor = true;
+            // 
+            // cboItemB
+            // 
+            this.cboItemB.FormattingEnabled = true;
+            this.cboItemB.Location = new System.Drawing.Point(21, 21);
+            this.cboItemB.Name = "cboItemB";
+            this.cboItemB.Size = new System.Drawing.Size(100, 22);
+            this.cboItemB.TabIndex = 121;
+            this.cboItemB.SelectedIndexChanged += new System.EventHandler(this.cboItemB_SelectedIndexChanged);
+            // 
+            // grpboxbd2
+            // 
+            this.grpboxbd2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpboxbd2.Controls.Add(this.btDeselAllBdItems);
+            this.grpboxbd2.Controls.Add(this.btSelAllBdItems);
+            this.grpboxbd2.Controls.Add(this.chkitemB1);
+            this.grpboxbd2.Controls.Add(this.chkitemB2);
+            this.grpboxbd2.Controls.Add(this.chkitemB3);
+            this.grpboxbd2.Controls.Add(this.chkitemB13);
+            this.grpboxbd2.Controls.Add(this.chkitemB4);
+            this.grpboxbd2.Controls.Add(this.chkitemB12);
+            this.grpboxbd2.Controls.Add(this.chkitemB5);
+            this.grpboxbd2.Controls.Add(this.chkitemB11);
+            this.grpboxbd2.Controls.Add(this.chkitemB6);
+            this.grpboxbd2.Controls.Add(this.chkitemB10);
+            this.grpboxbd2.Controls.Add(this.chkitemB7);
+            this.grpboxbd2.Controls.Add(this.chkitemB9);
+            this.grpboxbd2.Controls.Add(this.chkitemB8);
+            this.grpboxbd2.Location = new System.Drawing.Point(735, 155);
+            this.grpboxbd2.Name = "grpboxbd2";
+            this.grpboxbd2.Size = new System.Drawing.Size(134, 351);
+            this.grpboxbd2.TabIndex = 152;
+            this.grpboxbd2.TabStop = false;
+            this.grpboxbd2.Text = "[ Select items ]";
+            // 
+            // btDeselAllBdItems
+            // 
+            this.btDeselAllBdItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btDeselAllBdItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.btDeselAllBdItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDeselAllBdItems.Location = new System.Drawing.Point(69, 23);
+            this.btDeselAllBdItems.Name = "btDeselAllBdItems";
+            this.btDeselAllBdItems.Size = new System.Drawing.Size(50, 22);
+            this.btDeselAllBdItems.TabIndex = 136;
+            this.btDeselAllBdItems.Text = "All";
+            this.btDeselAllBdItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDeselAllBdItems.UseVisualStyleBackColor = true;
+            this.btDeselAllBdItems.Click += new System.EventHandler(this.btDeselAllBdItems_Click);
+            // 
+            // btSelAllBdItems
+            // 
+            this.btSelAllBdItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btSelAllBdItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.btSelAllBdItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSelAllBdItems.Location = new System.Drawing.Point(13, 23);
+            this.btSelAllBdItems.Name = "btSelAllBdItems";
+            this.btSelAllBdItems.Size = new System.Drawing.Size(50, 22);
+            this.btSelAllBdItems.TabIndex = 135;
+            this.btSelAllBdItems.Text = "All";
+            this.btSelAllBdItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSelAllBdItems.UseVisualStyleBackColor = true;
+            this.btSelAllBdItems.Click += new System.EventHandler(this.btSelAllBdItems_Click);
+            // 
+            // chkitemB1
+            // 
+            this.chkitemB1.AutoSize = true;
+            this.chkitemB1.Location = new System.Drawing.Point(24, 51);
+            this.chkitemB1.Name = "chkitemB1";
+            this.chkitemB1.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB1.TabIndex = 122;
+            this.chkitemB1.Text = "checkBox1";
+            this.chkitemB1.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB2
+            // 
+            this.chkitemB2.AutoSize = true;
+            this.chkitemB2.Location = new System.Drawing.Point(24, 74);
+            this.chkitemB2.Name = "chkitemB2";
+            this.chkitemB2.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB2.TabIndex = 123;
+            this.chkitemB2.Text = "checkBox1";
+            this.chkitemB2.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB3
+            // 
+            this.chkitemB3.AutoSize = true;
+            this.chkitemB3.Location = new System.Drawing.Point(24, 97);
+            this.chkitemB3.Name = "chkitemB3";
+            this.chkitemB3.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB3.TabIndex = 124;
+            this.chkitemB3.Text = "checkBox1";
+            this.chkitemB3.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB13
+            // 
+            this.chkitemB13.AutoSize = true;
+            this.chkitemB13.Location = new System.Drawing.Point(24, 327);
+            this.chkitemB13.Name = "chkitemB13";
+            this.chkitemB13.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB13.TabIndex = 134;
+            this.chkitemB13.Text = "checkBox1";
+            this.chkitemB13.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB4
+            // 
+            this.chkitemB4.AutoSize = true;
+            this.chkitemB4.Location = new System.Drawing.Point(24, 120);
+            this.chkitemB4.Name = "chkitemB4";
+            this.chkitemB4.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB4.TabIndex = 125;
+            this.chkitemB4.Text = "checkBox1";
+            this.chkitemB4.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB12
+            // 
+            this.chkitemB12.AutoSize = true;
+            this.chkitemB12.Location = new System.Drawing.Point(24, 302);
+            this.chkitemB12.Name = "chkitemB12";
+            this.chkitemB12.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB12.TabIndex = 133;
+            this.chkitemB12.Text = "checkBox1";
+            this.chkitemB12.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB5
+            // 
+            this.chkitemB5.AutoSize = true;
+            this.chkitemB5.Location = new System.Drawing.Point(24, 143);
+            this.chkitemB5.Name = "chkitemB5";
+            this.chkitemB5.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB5.TabIndex = 126;
+            this.chkitemB5.Text = "checkBox1";
+            this.chkitemB5.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB11
+            // 
+            this.chkitemB11.AutoSize = true;
+            this.chkitemB11.Location = new System.Drawing.Point(24, 280);
+            this.chkitemB11.Name = "chkitemB11";
+            this.chkitemB11.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB11.TabIndex = 132;
+            this.chkitemB11.Text = "checkBox1";
+            this.chkitemB11.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB6
+            // 
+            this.chkitemB6.AutoSize = true;
+            this.chkitemB6.Location = new System.Drawing.Point(24, 166);
+            this.chkitemB6.Name = "chkitemB6";
+            this.chkitemB6.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB6.TabIndex = 127;
+            this.chkitemB6.Text = "checkBox1";
+            this.chkitemB6.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB10
+            // 
+            this.chkitemB10.AutoSize = true;
+            this.chkitemB10.Location = new System.Drawing.Point(24, 257);
+            this.chkitemB10.Name = "chkitemB10";
+            this.chkitemB10.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB10.TabIndex = 131;
+            this.chkitemB10.Text = "checkBox1";
+            this.chkitemB10.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB7
+            // 
+            this.chkitemB7.AutoSize = true;
+            this.chkitemB7.Location = new System.Drawing.Point(24, 189);
+            this.chkitemB7.Name = "chkitemB7";
+            this.chkitemB7.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB7.TabIndex = 128;
+            this.chkitemB7.Text = "checkBox1";
+            this.chkitemB7.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB9
+            // 
+            this.chkitemB9.AutoSize = true;
+            this.chkitemB9.Location = new System.Drawing.Point(24, 235);
+            this.chkitemB9.Name = "chkitemB9";
+            this.chkitemB9.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB9.TabIndex = 130;
+            this.chkitemB9.Text = "checkBox1";
+            this.chkitemB9.UseVisualStyleBackColor = true;
+            // 
+            // chkitemB8
+            // 
+            this.chkitemB8.AutoSize = true;
+            this.chkitemB8.Location = new System.Drawing.Point(24, 212);
+            this.chkitemB8.Name = "chkitemB8";
+            this.chkitemB8.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB8.TabIndex = 129;
+            this.chkitemB8.Text = "checkBox1";
+            this.chkitemB8.UseVisualStyleBackColor = true;
+            // 
+            // Bdlegend
+            // 
+            this.Bdlegend.Border = NationalInstruments.UI.Border.Dotted;
+            this.Bdlegend.CanShowFocus = true;
+            this.Bdlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Bdlegend.ItemLayoutMode = NationalInstruments.UI.LegendItemLayoutMode.LeftToRight;
+            this.Bdlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
+            this.legendItem1,
+            this.legendItem2,
+            this.legendItem3,
+            this.legendItem4});
+            this.Bdlegend.ItemSize = new System.Drawing.Size(24, 20);
+            this.Bdlegend.Location = new System.Drawing.Point(524, 20);
+            this.Bdlegend.Name = "Bdlegend";
+            this.Bdlegend.Size = new System.Drawing.Size(190, 248);
+            this.Bdlegend.TabIndex = 151;
+            this.Bdlegend.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
+            this.Bdlegend.Enter += new System.EventHandler(this.Bdlegend_Enter);
+            this.Bdlegend.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Bdlegend_MouseClick);
+            // 
+            // legendItem1
+            // 
+            this.legendItem1.Text = "Item 0";
+            // 
+            // legendItem2
+            // 
+            this.legendItem2.Text = "Item 1";
+            // 
+            // legendItem3
+            // 
+            this.legendItem3.Text = "Item 2";
+            // 
+            // legendItem4
+            // 
+            this.legendItem4.Text = "Item 3";
+            // 
+            // grp2
+            // 
+            this.grp2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp2.ContextMenuStrip = this.menu_bode;
+            this.grp2.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
+            this.BdCursor1});
+            this.grp2.Location = new System.Drawing.Point(13, 12);
+            this.grp2.Name = "grp2";
+            this.grp2.PlotAreaBorder = NationalInstruments.UI.Border.Dotted;
+            this.grp2.PlotAreaColor = System.Drawing.Color.White;
+            this.grp2.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.Grp2Plot1,
+            this.Grp2Plot2,
+            this.Grp2Plot3,
+            this.Grp2Plot4,
+            this.Grp2Plot5,
+            this.Grp2Plot6,
+            this.Grp2Plot7,
+            this.Grp2Plot8,
+            this.Grp2Plot9,
+            this.Grp2Plot10,
+            this.Grp2Plot11,
+            this.Grp2Plot12,
+            this.Grp2Plot13,
+            this.Grp2Plot14,
+            this.Grp2Plot15,
+            this.Grp2Plot16,
+            this.Grp2Plot17,
+            this.Grp2Plot18,
+            this.Grp2Plot19,
+            this.Grp2Plot20,
+            this.Grp2Plot21,
+            this.Grp2Plot22,
+            this.Grp2Plot23,
+            this.Grp2Plot24,
+            this.Grp2Plot25,
+            this.Grp2Plot26,
+            this.Grp2Plot27,
+            this.Grp2Plot28,
+            this.Grp2Plot29,
+            this.Grp2Plot30,
+            this.Grp2Plot31,
+            this.Grp2Plot32,
+            this.Grp2Plot33,
+            this.Grp2Plot34,
+            this.Grp2Plot35,
+            this.Grp2Plot36,
+            this.Grp2Plot37,
+            this.Grp2Plot38,
+            this.Grp2Plot39,
+            this.Grp2Plot40,
+            this.Grp2Plot41,
+            this.Grp2Plot42,
+            this.Grp2Plot43,
+            this.Grp2Plot44,
+            this.Grp2Plot45,
+            this.Grp2Plot46,
+            this.Grp2Plot47,
+            this.Grp2Plot48,
+            this.Grp2Plot49,
+            this.Grp2Plot50,
+            this.Grp2Plot51,
+            this.Grp2Plot52});
+            this.grp2.Size = new System.Drawing.Size(708, 494);
+            this.grp2.TabIndex = 150;
+            this.grp2.UseColorGenerator = true;
+            this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.Grp2_xAxis1});
+            this.grp2.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.Grp2_yAxis1,
+            this.Grp2_yAxis2});
+            // 
+            // BdCursor1
+            // 
+            this.BdCursor1.LabelBackColor = System.Drawing.Color.White;
+            this.BdCursor1.LabelForeColor = System.Drawing.Color.Blue;
+            this.BdCursor1.LabelVisible = true;
+            this.BdCursor1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.BdCursor1.Plot = this.Grp2Plot1;
+            this.BdCursor1.SnapMode = NationalInstruments.UI.CursorSnapMode.NearestPoint;
+            // 
+            // Grp2Plot1
+            // 
+            this.Grp2Plot1.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot1.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot2
+            // 
+            this.Grp2Plot2.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot2.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2_yAxis2
+            // 
+            this.Grp2_yAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
+            this.Grp2_yAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
+            // 
+            // Grp2Plot3
+            // 
+            this.Grp2Plot3.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot3.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot4
+            // 
+            this.Grp2Plot4.LineColor = System.Drawing.Color.Aqua;
+            this.Grp2Plot4.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot4.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot4.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot5
+            // 
+            this.Grp2Plot5.LineColor = System.Drawing.Color.Orange;
+            this.Grp2Plot5.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot5.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot5.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot6
+            // 
+            this.Grp2Plot6.LineColor = System.Drawing.Color.LightSkyBlue;
+            this.Grp2Plot6.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot6.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot6.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot7
+            // 
+            this.Grp2Plot7.LineColor = System.Drawing.Color.Orange;
+            this.Grp2Plot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot7.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot7.ProcessSpecialValues = true;
+            this.Grp2Plot7.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot7.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot8
+            // 
+            this.Grp2Plot8.LineColor = System.Drawing.Color.LightSkyBlue;
+            this.Grp2Plot8.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot8.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot8.ProcessSpecialValues = true;
+            this.Grp2Plot8.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot8.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot9
+            // 
+            this.Grp2Plot9.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot9.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot10
+            // 
+            this.Grp2Plot10.LineColor = System.Drawing.Color.MediumPurple;
+            this.Grp2Plot10.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot10.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot10.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot11
+            // 
+            this.Grp2Plot11.LineColor = System.Drawing.Color.Green;
+            this.Grp2Plot11.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot11.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot11.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot11.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot12
+            // 
+            this.Grp2Plot12.LineColor = System.Drawing.Color.MediumPurple;
+            this.Grp2Plot12.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot12.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot12.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot12.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot13
+            // 
+            this.Grp2Plot13.LineColor = System.Drawing.Color.Magenta;
+            this.Grp2Plot13.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot13.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot13.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot14
+            // 
+            this.Grp2Plot14.LineColor = System.Drawing.Color.OliveDrab;
+            this.Grp2Plot14.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot14.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot14.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot15
+            // 
+            this.Grp2Plot15.LineColor = System.Drawing.Color.Magenta;
+            this.Grp2Plot15.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot15.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot15.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot15.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot16
+            // 
+            this.Grp2Plot16.LineColor = System.Drawing.Color.OliveDrab;
+            this.Grp2Plot16.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot16.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot16.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot16.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot17
+            // 
+            this.Grp2Plot17.LineColor = System.Drawing.Color.Cyan;
+            this.Grp2Plot17.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot17.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot17.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot18
+            // 
+            this.Grp2Plot18.LineColor = System.Drawing.Color.SaddleBrown;
+            this.Grp2Plot18.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot18.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot18.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot19
+            // 
+            this.Grp2Plot19.LineColor = System.Drawing.Color.Cyan;
+            this.Grp2Plot19.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot19.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot19.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot19.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot20
+            // 
+            this.Grp2Plot20.LineColor = System.Drawing.Color.SaddleBrown;
+            this.Grp2Plot20.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot20.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot20.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot20.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot21
+            // 
+            this.Grp2Plot21.LineColor = System.Drawing.Color.Teal;
+            this.Grp2Plot21.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot21.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot21.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot22
+            // 
+            this.Grp2Plot22.LineColor = System.Drawing.Color.HotPink;
+            this.Grp2Plot22.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot22.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot22.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot23
+            // 
+            this.Grp2Plot23.LineColor = System.Drawing.Color.Teal;
+            this.Grp2Plot23.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot23.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot23.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot23.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot24
+            // 
+            this.Grp2Plot24.LineColor = System.Drawing.Color.HotPink;
+            this.Grp2Plot24.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot24.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot24.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot24.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot25
+            // 
+            this.Grp2Plot25.LineColor = System.Drawing.Color.Brown;
+            this.Grp2Plot25.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot25.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot25.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot26
+            // 
+            this.Grp2Plot26.LineColor = System.Drawing.Color.Lime;
+            this.Grp2Plot26.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot26.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot26.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot27
+            // 
+            this.Grp2Plot27.LineColor = System.Drawing.Color.Brown;
+            this.Grp2Plot27.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot27.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot27.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot27.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot28
+            // 
+            this.Grp2Plot28.LineColor = System.Drawing.Color.Lime;
+            this.Grp2Plot28.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot28.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot28.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot28.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot29
+            // 
+            this.Grp2Plot29.LineColor = System.Drawing.Color.LimeGreen;
+            this.Grp2Plot29.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot29.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot29.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot30
+            // 
+            this.Grp2Plot30.LineColor = System.Drawing.Color.SteelBlue;
+            this.Grp2Plot30.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot30.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot30.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot31
+            // 
+            this.Grp2Plot31.LineColor = System.Drawing.Color.LimeGreen;
+            this.Grp2Plot31.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot31.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot31.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot31.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot32
+            // 
+            this.Grp2Plot32.LineColor = System.Drawing.Color.SteelBlue;
+            this.Grp2Plot32.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot32.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot32.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot32.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot33
+            // 
+            this.Grp2Plot33.LineColor = System.Drawing.Color.Gold;
+            this.Grp2Plot33.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot33.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot33.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot34
+            // 
+            this.Grp2Plot34.LineColor = System.Drawing.Color.SlateBlue;
+            this.Grp2Plot34.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot34.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot34.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot35
+            // 
+            this.Grp2Plot35.LineColor = System.Drawing.Color.Gold;
+            this.Grp2Plot35.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot35.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot35.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot35.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot36
+            // 
+            this.Grp2Plot36.LineColor = System.Drawing.Color.SlateBlue;
+            this.Grp2Plot36.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot36.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot36.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot36.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot37
+            // 
+            this.Grp2Plot37.LineColor = System.Drawing.Color.DeepPink;
+            this.Grp2Plot37.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot37.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot37.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot38
+            // 
+            this.Grp2Plot38.LineColor = System.Drawing.Color.DarkCyan;
+            this.Grp2Plot38.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot38.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot38.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot39
+            // 
+            this.Grp2Plot39.LineColor = System.Drawing.Color.DeepPink;
+            this.Grp2Plot39.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot39.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot39.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot39.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot40
+            // 
+            this.Grp2Plot40.LineColor = System.Drawing.Color.DarkCyan;
+            this.Grp2Plot40.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot40.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot40.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot40.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot41
+            // 
+            this.Grp2Plot41.LineColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp2Plot41.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot41.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot41.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot42
+            // 
+            this.Grp2Plot42.LineColor = System.Drawing.Color.DarkOrange;
+            this.Grp2Plot42.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot42.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot42.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot43
+            // 
+            this.Grp2Plot43.LineColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp2Plot43.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot43.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot43.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot43.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot44
+            // 
+            this.Grp2Plot44.LineColor = System.Drawing.Color.DarkOrange;
+            this.Grp2Plot44.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot44.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot44.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot44.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot45
+            // 
+            this.Grp2Plot45.LineColor = System.Drawing.Color.DarkViolet;
+            this.Grp2Plot45.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot45.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot45.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot46
+            // 
+            this.Grp2Plot46.LineColor = System.Drawing.Color.Coral;
+            this.Grp2Plot46.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot46.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot46.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot47
+            // 
+            this.Grp2Plot47.LineColor = System.Drawing.Color.DarkViolet;
+            this.Grp2Plot47.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot47.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot47.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot47.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot48
+            // 
+            this.Grp2Plot48.LineColor = System.Drawing.Color.Coral;
+            this.Grp2Plot48.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot48.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot48.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot48.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot49
+            // 
+            this.Grp2Plot49.LineColor = System.Drawing.Color.Black;
+            this.Grp2Plot49.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot49.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot49.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot50
+            // 
+            this.Grp2Plot50.LineColor = System.Drawing.Color.Gray;
+            this.Grp2Plot50.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot50.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot50.YAxis = this.Grp2_yAxis2;
+            // 
+            // Grp2Plot51
+            // 
+            this.Grp2Plot51.LineColor = System.Drawing.Color.Black;
+            this.Grp2Plot51.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot51.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot51.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot51.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot52
+            // 
+            this.Grp2Plot52.LineColor = System.Drawing.Color.Gray;
+            this.Grp2Plot52.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp2Plot52.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp2Plot52.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot52.YAxis = this.Grp2_yAxis2;
+            // 
+            // tabPgniquest
+            // 
+            this.tabPgniquest.Controls.Add(this.grpboxni1);
+            this.tabPgniquest.Controls.Add(this.grpboxni2);
+            this.tabPgniquest.Controls.Add(this.Nilegend);
+            this.tabPgniquest.Controls.Add(this.grp1);
+            this.tabPgniquest.Location = new System.Drawing.Point(4, 23);
+            this.tabPgniquest.Name = "tabPgniquest";
+            this.tabPgniquest.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPgniquest.Size = new System.Drawing.Size(876, 518);
+            this.tabPgniquest.TabIndex = 1;
+            this.tabPgniquest.Text = "Nyquist plot";
+            this.tabPgniquest.UseVisualStyleBackColor = true;
+            // 
+            // grpboxni1
+            // 
+            this.grpboxni1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpboxni1.Controls.Add(this.chkCalNi);
+            this.grpboxni1.Controls.Add(this.chkSrcNi);
+            this.grpboxni1.Controls.Add(this.cboItemA);
+            this.grpboxni1.Location = new System.Drawing.Point(728, 6);
+            this.grpboxni1.Name = "grpboxni1";
+            this.grpboxni1.Size = new System.Drawing.Size(141, 108);
+            this.grpboxni1.TabIndex = 138;
+            this.grpboxni1.TabStop = false;
+            this.grpboxni1.Text = "[Legend item]";
+            // 
+            // chkCalNi
+            // 
+            this.chkCalNi.AutoSize = true;
+            this.chkCalNi.Location = new System.Drawing.Point(7, 80);
+            this.chkCalNi.Name = "chkCalNi";
+            this.chkCalNi.Size = new System.Drawing.Size(131, 18);
+            this.chkCalNi.TabIndex = 123;
+            this.chkCalNi.Text = "Calibrated Zimg";
+            this.chkCalNi.UseVisualStyleBackColor = true;
+            // 
+            // chkSrcNi
+            // 
+            this.chkSrcNi.AutoSize = true;
+            this.chkSrcNi.Location = new System.Drawing.Point(7, 55);
+            this.chkSrcNi.Name = "chkSrcNi";
+            this.chkSrcNi.Size = new System.Drawing.Size(103, 18);
+            this.chkSrcNi.TabIndex = 122;
+            this.chkSrcNi.Text = "Source Zimg";
+            this.chkSrcNi.UseVisualStyleBackColor = true;
+            // 
+            // cboItemA
+            // 
+            this.cboItemA.FormattingEnabled = true;
+            this.cboItemA.Location = new System.Drawing.Point(24, 25);
+            this.cboItemA.Name = "cboItemA";
+            this.cboItemA.Size = new System.Drawing.Size(85, 22);
+            this.cboItemA.TabIndex = 121;
+            this.cboItemA.SelectedIndexChanged += new System.EventHandler(this.cboItemA_SelectedIndexChanged);
+            // 
+            // grpboxni2
+            // 
+            this.grpboxni2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpboxni2.Controls.Add(this.btDeselAllNiItems);
+            this.grpboxni2.Controls.Add(this.btSelAllNiItems);
+            this.grpboxni2.Controls.Add(this.chkitemA1);
+            this.grpboxni2.Controls.Add(this.chkitemA2);
+            this.grpboxni2.Controls.Add(this.chkitemA3);
+            this.grpboxni2.Controls.Add(this.chkitemA13);
+            this.grpboxni2.Controls.Add(this.chkitemA4);
+            this.grpboxni2.Controls.Add(this.chkitemA12);
+            this.grpboxni2.Controls.Add(this.chkitemA5);
+            this.grpboxni2.Controls.Add(this.chkitemA11);
+            this.grpboxni2.Controls.Add(this.chkitemA6);
+            this.grpboxni2.Controls.Add(this.chkitemA10);
+            this.grpboxni2.Controls.Add(this.chkitemA7);
+            this.grpboxni2.Controls.Add(this.chkitemA9);
+            this.grpboxni2.Controls.Add(this.chkitemA8);
+            this.grpboxni2.Location = new System.Drawing.Point(728, 158);
+            this.grpboxni2.Name = "grpboxni2";
+            this.grpboxni2.Size = new System.Drawing.Size(141, 351);
+            this.grpboxni2.TabIndex = 137;
+            this.grpboxni2.TabStop = false;
+            this.grpboxni2.Text = "[ Select items ]";
+            // 
+            // btDeselAllNiItems
+            // 
+            this.btDeselAllNiItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btDeselAllNiItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.btDeselAllNiItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDeselAllNiItems.Location = new System.Drawing.Point(69, 23);
+            this.btDeselAllNiItems.Name = "btDeselAllNiItems";
+            this.btDeselAllNiItems.Size = new System.Drawing.Size(50, 22);
+            this.btDeselAllNiItems.TabIndex = 136;
+            this.btDeselAllNiItems.Text = "All";
+            this.btDeselAllNiItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDeselAllNiItems.UseVisualStyleBackColor = true;
+            this.btDeselAllNiItems.Click += new System.EventHandler(this.btDeselAllNiItems_Click);
+            // 
+            // btSelAllNiItems
+            // 
+            this.btSelAllNiItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btSelAllNiItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.btSelAllNiItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSelAllNiItems.Location = new System.Drawing.Point(13, 23);
+            this.btSelAllNiItems.Name = "btSelAllNiItems";
+            this.btSelAllNiItems.Size = new System.Drawing.Size(50, 22);
+            this.btSelAllNiItems.TabIndex = 135;
+            this.btSelAllNiItems.Text = "All";
+            this.btSelAllNiItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSelAllNiItems.UseVisualStyleBackColor = true;
+            this.btSelAllNiItems.Click += new System.EventHandler(this.btSelAllNiItems_Click);
+            // 
+            // chkitemA1
+            // 
+            this.chkitemA1.AutoSize = true;
+            this.chkitemA1.Location = new System.Drawing.Point(24, 51);
+            this.chkitemA1.Name = "chkitemA1";
+            this.chkitemA1.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA1.TabIndex = 122;
+            this.chkitemA1.Text = "checkBox1";
+            this.chkitemA1.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA2
+            // 
+            this.chkitemA2.AutoSize = true;
+            this.chkitemA2.Location = new System.Drawing.Point(24, 74);
+            this.chkitemA2.Name = "chkitemA2";
+            this.chkitemA2.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA2.TabIndex = 123;
+            this.chkitemA2.Text = "checkBox1";
+            this.chkitemA2.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA3
+            // 
+            this.chkitemA3.AutoSize = true;
+            this.chkitemA3.Location = new System.Drawing.Point(24, 97);
+            this.chkitemA3.Name = "chkitemA3";
+            this.chkitemA3.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA3.TabIndex = 124;
+            this.chkitemA3.Text = "checkBox1";
+            this.chkitemA3.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA13
+            // 
+            this.chkitemA13.AutoSize = true;
+            this.chkitemA13.Location = new System.Drawing.Point(24, 327);
+            this.chkitemA13.Name = "chkitemA13";
+            this.chkitemA13.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA13.TabIndex = 134;
+            this.chkitemA13.Text = "checkBox1";
+            this.chkitemA13.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA4
+            // 
+            this.chkitemA4.AutoSize = true;
+            this.chkitemA4.Location = new System.Drawing.Point(24, 120);
+            this.chkitemA4.Name = "chkitemA4";
+            this.chkitemA4.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA4.TabIndex = 125;
+            this.chkitemA4.Text = "checkBox1";
+            this.chkitemA4.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA12
+            // 
+            this.chkitemA12.AutoSize = true;
+            this.chkitemA12.Location = new System.Drawing.Point(24, 302);
+            this.chkitemA12.Name = "chkitemA12";
+            this.chkitemA12.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA12.TabIndex = 133;
+            this.chkitemA12.Text = "checkBox1";
+            this.chkitemA12.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA5
+            // 
+            this.chkitemA5.AutoSize = true;
+            this.chkitemA5.Location = new System.Drawing.Point(24, 143);
+            this.chkitemA5.Name = "chkitemA5";
+            this.chkitemA5.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA5.TabIndex = 126;
+            this.chkitemA5.Text = "checkBox1";
+            this.chkitemA5.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA11
+            // 
+            this.chkitemA11.AutoSize = true;
+            this.chkitemA11.Location = new System.Drawing.Point(24, 280);
+            this.chkitemA11.Name = "chkitemA11";
+            this.chkitemA11.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA11.TabIndex = 132;
+            this.chkitemA11.Text = "checkBox1";
+            this.chkitemA11.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA6
+            // 
+            this.chkitemA6.AutoSize = true;
+            this.chkitemA6.Location = new System.Drawing.Point(24, 166);
+            this.chkitemA6.Name = "chkitemA6";
+            this.chkitemA6.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA6.TabIndex = 127;
+            this.chkitemA6.Text = "checkBox1";
+            this.chkitemA6.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA10
+            // 
+            this.chkitemA10.AutoSize = true;
+            this.chkitemA10.Location = new System.Drawing.Point(24, 257);
+            this.chkitemA10.Name = "chkitemA10";
+            this.chkitemA10.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA10.TabIndex = 131;
+            this.chkitemA10.Text = "checkBox1";
+            this.chkitemA10.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA7
+            // 
+            this.chkitemA7.AutoSize = true;
+            this.chkitemA7.Location = new System.Drawing.Point(24, 189);
+            this.chkitemA7.Name = "chkitemA7";
+            this.chkitemA7.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA7.TabIndex = 128;
+            this.chkitemA7.Text = "checkBox1";
+            this.chkitemA7.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA9
+            // 
+            this.chkitemA9.AutoSize = true;
+            this.chkitemA9.Location = new System.Drawing.Point(24, 235);
+            this.chkitemA9.Name = "chkitemA9";
+            this.chkitemA9.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA9.TabIndex = 130;
+            this.chkitemA9.Text = "checkBox1";
+            this.chkitemA9.UseVisualStyleBackColor = true;
+            // 
+            // chkitemA8
+            // 
+            this.chkitemA8.AutoSize = true;
+            this.chkitemA8.Location = new System.Drawing.Point(24, 212);
+            this.chkitemA8.Name = "chkitemA8";
+            this.chkitemA8.Size = new System.Drawing.Size(89, 18);
+            this.chkitemA8.TabIndex = 129;
+            this.chkitemA8.Text = "checkBox1";
+            this.chkitemA8.UseVisualStyleBackColor = true;
+            // 
+            // Nilegend
+            // 
+            this.Nilegend.Border = NationalInstruments.UI.Border.Dotted;
+            this.Nilegend.CanShowFocus = true;
+            this.Nilegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nilegend.ItemLayoutMode = NationalInstruments.UI.LegendItemLayoutMode.LeftToRight;
+            this.Nilegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
+            this.NilegendItem1,
+            this.NilegendItem2});
+            this.Nilegend.ItemSize = new System.Drawing.Size(24, 20);
+            this.Nilegend.Location = new System.Drawing.Point(524, 20);
+            this.Nilegend.Name = "Nilegend";
+            this.Nilegend.Size = new System.Drawing.Size(190, 248);
+            this.Nilegend.TabIndex = 136;
+            this.Nilegend.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
+            // 
+            // NilegendItem1
+            // 
+            this.NilegendItem1.Source = this.Grp1Plot1;
+            this.NilegendItem1.Text = "Source Zimage";
+            // 
+            // Grp1Plot1
+            // 
+            this.Grp1Plot1.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot1.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1_xAxis1
+            // 
+            this.Grp1_xAxis1.BaseLineVisible = true;
+            // 
+            // NilegendItem2
+            // 
+            this.NilegendItem2.Source = this.Grp1Plot2;
+            this.NilegendItem2.Text = "Calibration Zimage";
+            // 
+            // Grp1Plot2
+            // 
+            this.Grp1Plot2.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot2.YAxis = this.Grp1_yAxis1;
+            // 
+            // grp1
+            // 
+            this.grp1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp1.ContextMenuStrip = this.menu_niquest;
+            this.grp1.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
+            this.NiCursor1});
+            this.grp1.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
+            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint) 
+            | NationalInstruments.UI.GraphInteractionModes.PanX) 
+            | NationalInstruments.UI.GraphInteractionModes.PanY) 
+            | NationalInstruments.UI.GraphInteractionModes.DragCursor) 
+            | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption) 
+            | NationalInstruments.UI.GraphInteractionModes.EditRange)));
+            this.grp1.Location = new System.Drawing.Point(14, 16);
+            this.grp1.Name = "grp1";
+            this.grp1.PlotAreaBorder = NationalInstruments.UI.Border.Dotted;
+            this.grp1.PlotAreaColor = System.Drawing.Color.White;
+            this.grp1.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.Grp1Plot1,
+            this.Grp1Plot2,
+            this.Grp1Plot3,
+            this.Grp1Plot4,
+            this.Grp1Plot5,
+            this.Grp1Plot6,
+            this.Grp1Plot7,
+            this.Grp1Plot8,
+            this.Grp1Plot9,
+            this.Grp1Plot10,
+            this.Grp1Plot11,
+            this.Grp1Plot12,
+            this.Grp1Plot13,
+            this.Grp1Plot14,
+            this.Grp1Plot15,
+            this.Grp1Plot16,
+            this.Grp1Plot17,
+            this.Grp1Plot18,
+            this.Grp1Plot19,
+            this.Grp1Plot20,
+            this.Grp1Plot21,
+            this.Grp1Plot22,
+            this.Grp1Plot23,
+            this.Grp1Plot24,
+            this.Grp1Plot25,
+            this.Grp1Plot26});
+            this.grp1.Size = new System.Drawing.Size(708, 494);
+            this.grp1.TabIndex = 135;
+            this.grp1.UseColorGenerator = true;
+            this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.Grp1_xAxis1});
+            this.grp1.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.Grp1_yAxis1,
+            this.Grp1_yAxis2});
+            this.grp1.ZoomAnimation = false;
+            // 
+            // NiCursor1
+            // 
+            this.NiCursor1.LabelBackColor = System.Drawing.Color.White;
+            this.NiCursor1.LabelForeColor = System.Drawing.Color.Blue;
+            this.NiCursor1.LabelVisible = true;
+            this.NiCursor1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.NiCursor1.Plot = this.Grp1Plot1;
+            this.NiCursor1.SnapMode = NationalInstruments.UI.CursorSnapMode.NearestPoint;
+            // 
+            // Grp1Plot3
+            // 
+            this.Grp1Plot3.LineColor = System.Drawing.Color.Orange;
+            this.Grp1Plot3.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot3.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot3.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot4
+            // 
+            this.Grp1Plot4.LineColor = System.Drawing.Color.Orange;
+            this.Grp1Plot4.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot4.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot4.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot4.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot5
+            // 
+            this.Grp1Plot5.LineColor = System.Drawing.Color.Green;
+            this.Grp1Plot5.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot5.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot5.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot6
+            // 
+            this.Grp1Plot6.LineColor = System.Drawing.Color.Green;
+            this.Grp1Plot6.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot6.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot6.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot6.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot7
+            // 
+            this.Grp1Plot7.LineColor = System.Drawing.Color.Magenta;
+            this.Grp1Plot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot7.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot7.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot8
+            // 
+            this.Grp1Plot8.LineColor = System.Drawing.Color.Magenta;
+            this.Grp1Plot8.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot8.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot8.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot8.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot9
+            // 
+            this.Grp1Plot9.LineColor = System.Drawing.Color.Cyan;
+            this.Grp1Plot9.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot9.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot9.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot10
+            // 
+            this.Grp1Plot10.LineColor = System.Drawing.Color.Cyan;
+            this.Grp1Plot10.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot10.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot10.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot10.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot11
+            // 
+            this.Grp1Plot11.LineColor = System.Drawing.Color.Teal;
+            this.Grp1Plot11.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot11.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot11.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot12
+            // 
+            this.Grp1Plot12.LineColor = System.Drawing.Color.Teal;
+            this.Grp1Plot12.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot12.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot12.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot12.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot13
+            // 
+            this.Grp1Plot13.LineColor = System.Drawing.Color.Brown;
+            this.Grp1Plot13.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot13.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot13.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot14
+            // 
+            this.Grp1Plot14.LineColor = System.Drawing.Color.Brown;
+            this.Grp1Plot14.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot14.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot14.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot14.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot15
+            // 
+            this.Grp1Plot15.LineColor = System.Drawing.Color.LimeGreen;
+            this.Grp1Plot15.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot15.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot15.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot16
+            // 
+            this.Grp1Plot16.LineColor = System.Drawing.Color.LimeGreen;
+            this.Grp1Plot16.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot16.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot16.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot16.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot17
+            // 
+            this.Grp1Plot17.LineColor = System.Drawing.Color.Gold;
+            this.Grp1Plot17.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot17.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot17.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot18
+            // 
+            this.Grp1Plot18.LineColor = System.Drawing.Color.Gold;
+            this.Grp1Plot18.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot18.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot18.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot18.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot19
+            // 
+            this.Grp1Plot19.LineColor = System.Drawing.Color.DeepPink;
+            this.Grp1Plot19.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot19.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot19.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot20
+            // 
+            this.Grp1Plot20.LineColor = System.Drawing.Color.DeepPink;
+            this.Grp1Plot20.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot20.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot20.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot20.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot21
+            // 
+            this.Grp1Plot21.LineColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp1Plot21.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot21.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot21.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot22
+            // 
+            this.Grp1Plot22.LineColor = System.Drawing.Color.MediumSeaGreen;
+            this.Grp1Plot22.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot22.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot22.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot22.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot23
+            // 
+            this.Grp1Plot23.LineColor = System.Drawing.Color.DarkViolet;
+            this.Grp1Plot23.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot23.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot23.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot24
+            // 
+            this.Grp1Plot24.LineColor = System.Drawing.Color.DarkViolet;
+            this.Grp1Plot24.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot24.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot24.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot24.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot25
+            // 
+            this.Grp1Plot25.LineColor = System.Drawing.Color.Black;
+            this.Grp1Plot25.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot25.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot25.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot26
+            // 
+            this.Grp1Plot26.LineColor = System.Drawing.Color.Black;
+            this.Grp1Plot26.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot26.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Grp1Plot26.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot26.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1_yAxis2
+            // 
+            this.Grp1_yAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
+            this.Grp1_yAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
+            // 
+            // tabPgList
+            // 
+            this.tabPgList.Controls.Add(this.grdlist);
+            this.tabPgList.Location = new System.Drawing.Point(4, 23);
+            this.tabPgList.Name = "tabPgList";
+            this.tabPgList.Size = new System.Drawing.Size(876, 518);
+            this.tabPgList.TabIndex = 3;
+            this.tabPgList.Text = "Data list";
+            this.tabPgList.UseVisualStyleBackColor = true;
+            // 
+            // grdlist
+            // 
+            this.grdlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdlist.ColumnInfo = "10,1,0,0,0,95,Columns:";
+            this.grdlist.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdlist.Location = new System.Drawing.Point(10, 18);
+            this.grdlist.Name = "grdlist";
+            this.grdlist.Rows.DefaultSize = 19;
+            this.grdlist.Size = new System.Drawing.Size(851, 491);
+            this.grdlist.StyleInfo = resources.GetString("grdlist.StyleInfo");
+            this.grdlist.TabIndex = 0;
+            // 
+            // tabgrp
+            // 
+            this.tabgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabgrp.Controls.Add(this.tabPgList);
+            this.tabgrp.Controls.Add(this.tabPgniquest);
+            this.tabgrp.Controls.Add(this.tabPgBode);
+            this.tabgrp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabgrp.Location = new System.Drawing.Point(12, 272);
+            this.tabgrp.Multiline = true;
+            this.tabgrp.Name = "tabgrp";
+            this.tabgrp.SelectedIndex = 0;
+            this.tabgrp.Size = new System.Drawing.Size(884, 545);
+            this.tabgrp.TabIndex = 38;
+            // 
+            // BtRfreshFit
+            // 
+            this.BtRfreshFit.Image = global::ZiveLab.ZM.Properties.Resources.refresh;
+            this.BtRfreshFit.Location = new System.Drawing.Point(855, 231);
+            this.BtRfreshFit.Name = "BtRfreshFit";
+            this.BtRfreshFit.Size = new System.Drawing.Size(35, 36);
+            this.BtRfreshFit.TabIndex = 96;
+            this.BtRfreshFit.UseVisualStyleBackColor = true;
+            this.BtRfreshFit.Click += new System.EventHandler(this.BtRfreshFit_Click);
+            // 
+            // btSaveAsApplyData
+            // 
+            this.btSaveAsApplyData.Image = global::ZiveLab.ZM.Properties.Resources.Save;
+            this.btSaveAsApplyData.Location = new System.Drawing.Point(855, 166);
+            this.btSaveAsApplyData.Name = "btSaveAsApplyData";
+            this.btSaveAsApplyData.Size = new System.Drawing.Size(35, 36);
+            this.btSaveAsApplyData.TabIndex = 97;
+            this.btSaveAsApplyData.UseVisualStyleBackColor = true;
+            this.btSaveAsApplyData.Click += new System.EventHandler(this.btSaveAsApplyData_Click);
+            // 
+            // lblitem
+            // 
+            this.lblitem.AutoSize = true;
+            this.lblitem.Location = new System.Drawing.Point(651, 249);
+            this.lblitem.Name = "lblitem";
+            this.lblitem.Size = new System.Drawing.Size(91, 14);
+            this.lblitem.TabIndex = 98;
+            this.lblitem.Text = "Select item:";
+            // 
+            // cboItem
+            // 
+            this.cboItem.FormattingEnabled = true;
+            this.cboItem.Location = new System.Drawing.Point(751, 244);
+            this.cboItem.Name = "cboItem";
+            this.cboItem.Size = new System.Drawing.Size(76, 22);
+            this.cboItem.TabIndex = 99;
+            this.cboItem.SelectedIndexChanged += new System.EventHandler(this.cboItem_SelectedIndexChanged);
+            // 
+            // BdlegendItem4
+            // 
+            this.BdlegendItem4.Text = "Calibration Zph";
+            // 
+            // BdlegendItem3
+            // 
+            this.BdlegendItem3.Text = "Calibration Zmag";
+            // 
+            // BdlegendItem2
+            // 
+            this.BdlegendItem2.Text = "Source Zph";
+            // 
+            // BdlegendItem1
+            // 
+            this.BdlegendItem1.Text = "Source Zmag";
+            // 
+            // Rtlegend
+            // 
+            this.Rtlegend.Border = NationalInstruments.UI.Border.Dotted;
+            this.Rtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Rtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
+            this.RtlegendItem1,
+            this.RtlegendItem2});
+            this.Rtlegend.ItemSize = new System.Drawing.Size(24, 20);
+            this.Rtlegend.Location = new System.Drawing.Point(375, 256);
+            this.Rtlegend.Name = "Rtlegend";
+            this.Rtlegend.Size = new System.Drawing.Size(83, 59);
+            this.Rtlegend.TabIndex = 101;
+            // 
+            // RtlegendItem1
+            // 
+            this.RtlegendItem1.Text = "Voltage";
+            // 
+            // RtlegendItem2
+            // 
+            this.RtlegendItem2.Text = "Current";
+            // 
+            // grprt
+            // 
+            this.grprt.ContextMenuStrip = this.RtMenuStrip;
+            this.grprt.Location = new System.Drawing.Point(383, 204);
+            this.grprt.Name = "grprt";
+            this.grprt.PlotAreaColor = System.Drawing.Color.White;
+            this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.RTPlot1,
+            this.RTPlot2});
+            this.grprt.Size = new System.Drawing.Size(158, 144);
+            this.grprt.TabIndex = 100;
+            this.grprt.UseColorGenerator = true;
+            this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.RTxAxis1});
+            this.grprt.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.RTyAxis1,
+            this.RTyAxis2});
+            this.grprt.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grprt_MouseDoubleClick);
+            // 
             // RTPlot1
             // 
             this.RTPlot1.LineColor = System.Drawing.Color.Blue;
@@ -1067,433 +2588,18 @@
             this.RTyAxis2.MinorDivisions.TickVisible = true;
             this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
             // 
-            // lnkstart
-            // 
-            this.lnkstart.AutoSize = true;
-            this.lnkstart.Location = new System.Drawing.Point(351, 147);
-            this.lnkstart.Name = "lnkstart";
-            this.lnkstart.Size = new System.Drawing.Size(133, 14);
-            this.lnkstart.TabIndex = 63;
-            this.lnkstart.TabStop = true;
-            this.lnkstart.Text = "Start calibration.";
-            this.lnkstart.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkstart_LinkClicked);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(351, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 14);
-            this.label1.TabIndex = 64;
-            this.label1.Text = "Delay(s)";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(351, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 14);
-            this.label2.TabIndex = 65;
-            this.label2.Text = "Begin frequenct(Hz)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(351, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 14);
-            this.label3.TabIndex = 66;
-            this.label3.Text = "Finish frequenct(Hz)";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(351, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 14);
-            this.label4.TabIndex = 67;
-            this.label4.Text = "Density";
-            // 
-            // lnkCalculate
-            // 
-            this.lnkCalculate.AutoSize = true;
-            this.lnkCalculate.Location = new System.Drawing.Point(351, 183);
-            this.lnkCalculate.Name = "lnkCalculate";
-            this.lnkCalculate.Size = new System.Drawing.Size(287, 14);
-            this.lnkCalculate.TabIndex = 68;
-            this.lnkCalculate.TabStop = true;
-            this.lnkCalculate.Text = "Create and apply calibration parameters.";
-            this.lnkCalculate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCalculate_LinkClicked);
-            // 
-            // lnksave
-            // 
-            this.lnksave.AutoSize = true;
-            this.lnksave.Location = new System.Drawing.Point(351, 211);
-            this.lnksave.Name = "lnksave";
-            this.lnksave.Size = new System.Drawing.Size(231, 14);
-            this.lnksave.TabIndex = 69;
-            this.lnksave.TabStop = true;
-            this.lnksave.Text = "Save the calibration parameters.";
-            this.lnksave.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnksave_LinkClicked);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(351, 114);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 14);
-            this.label5.TabIndex = 70;
-            this.label5.Text = "Range";
-            // 
-            // txtbeginfreq
-            // 
-            this.txtbeginfreq.Location = new System.Drawing.Point(503, 35);
-            this.txtbeginfreq.Name = "txtbeginfreq";
-            this.txtbeginfreq.Size = new System.Drawing.Size(94, 22);
-            this.txtbeginfreq.TabIndex = 73;
-            // 
-            // txtFinishfreq
-            // 
-            this.txtFinishfreq.Location = new System.Drawing.Point(503, 60);
-            this.txtFinishfreq.Name = "txtFinishfreq";
-            this.txtFinishfreq.Size = new System.Drawing.Size(94, 22);
-            this.txtFinishfreq.TabIndex = 74;
-            // 
-            // cborange
-            // 
-            this.cborange.FormattingEnabled = true;
-            this.cborange.Location = new System.Drawing.Point(503, 110);
-            this.cborange.Name = "cborange";
-            this.cborange.Size = new System.Drawing.Size(93, 22);
-            this.cborange.TabIndex = 76;
-            // 
-            // numdensity
-            // 
-            this.numdensity.Location = new System.Drawing.Point(503, 85);
-            this.numdensity.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numdensity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numdensity.Name = "numdensity";
-            this.numdensity.Size = new System.Drawing.Size(94, 22);
-            this.numdensity.TabIndex = 78;
-            this.numdensity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numdelay
-            // 
-            this.numdelay.Location = new System.Drawing.Point(503, 10);
-            this.numdelay.Maximum = new decimal(new int[] {
-            600,
-            0,
-            0,
-            0});
-            this.numdelay.Name = "numdelay";
-            this.numdelay.Size = new System.Drawing.Size(94, 22);
-            this.numdelay.TabIndex = 79;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // tabPgBode
-            // 
-            this.tabPgBode.Controls.Add(this.Bdlegend);
-            this.tabPgBode.Controls.Add(this.grp2);
-            this.tabPgBode.Location = new System.Drawing.Point(4, 23);
-            this.tabPgBode.Name = "tabPgBode";
-            this.tabPgBode.Size = new System.Drawing.Size(848, 432);
-            this.tabPgBode.TabIndex = 2;
-            this.tabPgBode.Text = "Bode plot";
-            this.tabPgBode.UseVisualStyleBackColor = true;
-            // 
-            // Bdlegend
-            // 
-            this.Bdlegend.Border = NationalInstruments.UI.Border.Dotted;
-            this.Bdlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Bdlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
-            this.BdlegendItem1,
-            this.BdlegendItem2,
-            this.BdlegendItem3,
-            this.BdlegendItem4});
-            this.Bdlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Bdlegend.Location = new System.Drawing.Point(618, 43);
-            this.Bdlegend.Name = "Bdlegend";
-            this.Bdlegend.Size = new System.Drawing.Size(154, 102);
-            this.Bdlegend.TabIndex = 89;
-            // 
-            // BdlegendItem1
-            // 
-            this.BdlegendItem1.Source = this.Grp2Plot1;
-            this.BdlegendItem1.Text = "Source Zmag";
-            // 
-            // Grp2Plot1
-            // 
-            this.Grp2Plot1.XAxis = this.Grp2_xAxis1;
-            this.Grp2Plot1.YAxis = this.Grp2_yAxis1;
-            // 
-            // BdlegendItem2
-            // 
-            this.BdlegendItem2.Source = this.Grp2Plot2;
-            this.BdlegendItem2.Text = "Source Zph";
-            // 
-            // Grp2Plot2
-            // 
-            this.Grp2Plot2.XAxis = this.Grp2_xAxis1;
-            this.Grp2Plot2.YAxis = this.Grp2_yAxis2;
-            // 
-            // Grp2_yAxis2
-            // 
-            this.Grp2_yAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
-            this.Grp2_yAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
-            // 
-            // BdlegendItem3
-            // 
-            this.BdlegendItem3.Source = this.Grp2Plot3;
-            this.BdlegendItem3.Text = "Calibration Zmag";
-            // 
-            // Grp2Plot3
-            // 
-            this.Grp2Plot3.XAxis = this.Grp2_xAxis1;
-            this.Grp2Plot3.YAxis = this.Grp2_yAxis1;
-            // 
-            // BdlegendItem4
-            // 
-            this.BdlegendItem4.Source = this.Grp2Plot4;
-            this.BdlegendItem4.Text = "Calibration Zph";
-            // 
-            // Grp2Plot4
-            // 
-            this.Grp2Plot4.XAxis = this.Grp2_xAxis1;
-            this.Grp2Plot4.YAxis = this.Grp2_yAxis2;
-            // 
-            // grp2
-            // 
-            this.grp2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grp2.ContextMenuStrip = this.menu_bode;
-            this.grp2.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
-            this.BdCursor1});
-            this.grp2.Location = new System.Drawing.Point(9, 20);
-            this.grp2.Name = "grp2";
-            this.grp2.PlotAreaBorder = NationalInstruments.UI.Border.Dotted;
-            this.grp2.PlotAreaColor = System.Drawing.Color.White;
-            this.grp2.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.Grp2Plot1,
-            this.Grp2Plot2,
-            this.Grp2Plot3,
-            this.Grp2Plot4});
-            this.grp2.Size = new System.Drawing.Size(828, 397);
-            this.grp2.TabIndex = 43;
-            this.grp2.UseColorGenerator = true;
-            this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.Grp2_xAxis1});
-            this.grp2.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.Grp2_yAxis1,
-            this.Grp2_yAxis2});
-            // 
-            // BdCursor1
-            // 
-            this.BdCursor1.LabelBackColor = System.Drawing.Color.White;
-            this.BdCursor1.LabelForeColor = System.Drawing.Color.Blue;
-            this.BdCursor1.LabelVisible = true;
-            this.BdCursor1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
-            this.BdCursor1.Plot = this.Grp2Plot1;
-            this.BdCursor1.SnapMode = NationalInstruments.UI.CursorSnapMode.NearestPoint;
-            // 
-            // tabPgniquest
-            // 
-            this.tabPgniquest.Controls.Add(this.Nilegend);
-            this.tabPgniquest.Controls.Add(this.grp1);
-            this.tabPgniquest.Location = new System.Drawing.Point(4, 23);
-            this.tabPgniquest.Name = "tabPgniquest";
-            this.tabPgniquest.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPgniquest.Size = new System.Drawing.Size(848, 432);
-            this.tabPgniquest.TabIndex = 1;
-            this.tabPgniquest.Text = "Nyquist plot";
-            this.tabPgniquest.UseVisualStyleBackColor = true;
-            // 
-            // Nilegend
-            // 
-            this.Nilegend.Border = NationalInstruments.UI.Border.Dotted;
-            this.Nilegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Nilegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
-            this.NilegendItem1,
-            this.NilegendItem2});
-            this.Nilegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Nilegend.Location = new System.Drawing.Point(644, 39);
-            this.Nilegend.Name = "Nilegend";
-            this.Nilegend.Size = new System.Drawing.Size(154, 55);
-            this.Nilegend.TabIndex = 88;
-            this.Nilegend.ItemsChanged += new System.ComponentModel.CollectionChangeEventHandler(this.Nilegend_ItemsChanged);
-            this.Nilegend.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Nilegend_MouseDoubleClick);
-            // 
-            // NilegendItem1
-            // 
-            this.NilegendItem1.Source = this.Grp1Plot1;
-            this.NilegendItem1.Text = "Source Zimage";
-            // 
-            // Grp1Plot1
-            // 
-            this.Grp1Plot1.XAxis = this.Grp1_xAxis1;
-            this.Grp1Plot1.YAxis = this.Grp1_yAxis1;
-            // 
-            // Grp1_xAxis1
-            // 
-            this.Grp1_xAxis1.BaseLineVisible = true;
-            // 
-            // NilegendItem2
-            // 
-            this.NilegendItem2.Source = this.Grp1Plot2;
-            this.NilegendItem2.Text = "Calibration Zimage";
-            // 
-            // Grp1Plot2
-            // 
-            this.Grp1Plot2.XAxis = this.Grp1_xAxis1;
-            this.Grp1Plot2.YAxis = this.Grp1_yAxis1;
-            // 
-            // grp1
-            // 
-            this.grp1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grp1.ContextMenuStrip = this.menu_niquest;
-            this.grp1.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
-            this.NiCursor1});
-            this.grp1.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
-            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint) 
-            | NationalInstruments.UI.GraphInteractionModes.PanX) 
-            | NationalInstruments.UI.GraphInteractionModes.PanY) 
-            | NationalInstruments.UI.GraphInteractionModes.DragCursor) 
-            | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption) 
-            | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.grp1.Location = new System.Drawing.Point(10, 17);
-            this.grp1.Name = "grp1";
-            this.grp1.PlotAreaBorder = NationalInstruments.UI.Border.Dotted;
-            this.grp1.PlotAreaColor = System.Drawing.Color.White;
-            this.grp1.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.Grp1Plot1,
-            this.Grp1Plot2});
-            this.grp1.Size = new System.Drawing.Size(827, 404);
-            this.grp1.TabIndex = 42;
-            this.grp1.UseColorGenerator = true;
-            this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.Grp1_xAxis1});
-            this.grp1.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.Grp1_yAxis1,
-            this.Grp1_yAxis2});
-            this.grp1.ZoomAnimation = false;
-            // 
-            // NiCursor1
-            // 
-            this.NiCursor1.LabelBackColor = System.Drawing.Color.White;
-            this.NiCursor1.LabelForeColor = System.Drawing.Color.Blue;
-            this.NiCursor1.LabelVisible = true;
-            this.NiCursor1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
-            this.NiCursor1.Plot = this.Grp1Plot1;
-            this.NiCursor1.SnapMode = NationalInstruments.UI.CursorSnapMode.NearestPoint;
-            // 
-            // Grp1_yAxis2
-            // 
-            this.Grp1_yAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
-            this.Grp1_yAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
-            // 
-            // tabPgList
-            // 
-            this.tabPgList.Controls.Add(this.grdlist);
-            this.tabPgList.Location = new System.Drawing.Point(4, 23);
-            this.tabPgList.Name = "tabPgList";
-            this.tabPgList.Size = new System.Drawing.Size(848, 432);
-            this.tabPgList.TabIndex = 3;
-            this.tabPgList.Text = "Data list";
-            this.tabPgList.UseVisualStyleBackColor = true;
-            // 
-            // grdlist
-            // 
-            this.grdlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdlist.ColumnInfo = "10,1,0,0,0,95,Columns:";
-            this.grdlist.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.grdlist.Location = new System.Drawing.Point(10, 9);
-            this.grdlist.Name = "grdlist";
-            this.grdlist.Rows.DefaultSize = 19;
-            this.grdlist.Size = new System.Drawing.Size(827, 414);
-            this.grdlist.StyleInfo = resources.GetString("grdlist.StyleInfo");
-            this.grdlist.TabIndex = 0;
-            // 
-            // tabgrp
-            // 
-            this.tabgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabgrp.Controls.Add(this.tabPgList);
-            this.tabgrp.Controls.Add(this.tabPgniquest);
-            this.tabgrp.Controls.Add(this.tabPgBode);
-            this.tabgrp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabgrp.Location = new System.Drawing.Point(12, 235);
-            this.tabgrp.Multiline = true;
-            this.tabgrp.Name = "tabgrp";
-            this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(856, 459);
-            this.tabgrp.TabIndex = 38;
-            // 
-            // BtRfreshFit
-            // 
-            this.BtRfreshFit.Image = global::ZiveLab.ZM.Properties.Resources.refresh;
-            this.BtRfreshFit.Location = new System.Drawing.Point(830, 214);
-            this.BtRfreshFit.Name = "BtRfreshFit";
-            this.BtRfreshFit.Size = new System.Drawing.Size(35, 36);
-            this.BtRfreshFit.TabIndex = 96;
-            this.BtRfreshFit.UseVisualStyleBackColor = true;
-            this.BtRfreshFit.Click += new System.EventHandler(this.BtRfreshFit_Click);
-            // 
-            // lblprog
-            // 
-            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprog.LabelColor = System.Drawing.Color.Navy;
-            this.lblprog.LabelText = "";
-            this.lblprog.Location = new System.Drawing.Point(67, 17);
-            this.lblprog.Name = "lblprog";
-            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
-            this.lblprog.OutLine_Visible = true;
-            this.lblprog.OutLine_Width = 1;
-            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblprog.Prog_Max = 100;
-            this.lblprog.Prog_Min = 0;
-            this.lblprog.Prog_Val = 50;
-            this.lblprog.Size = new System.Drawing.Size(248, 14);
-            this.lblprog.TabIndex = 74;
-            // 
-            // btSaveAsApplyData
-            // 
-            this.btSaveAsApplyData.Image = global::ZiveLab.ZM.Properties.Resources.Save;
-            this.btSaveAsApplyData.Location = new System.Drawing.Point(829, 158);
-            this.btSaveAsApplyData.Name = "btSaveAsApplyData";
-            this.btSaveAsApplyData.Size = new System.Drawing.Size(35, 36);
-            this.btSaveAsApplyData.TabIndex = 97;
-            this.btSaveAsApplyData.UseVisualStyleBackColor = true;
-            this.btSaveAsApplyData.Click += new System.EventHandler(this.btSaveAsApplyData_Click);
-            // 
             // frmCalibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 706);
-            this.Controls.Add(this.btSaveAsApplyData);
-            this.Controls.Add(this.BtRfreshFit);
+            this.ClientSize = new System.Drawing.Size(902, 820);
             this.Controls.Add(this.Rtlegend);
             this.Controls.Add(this.grprt);
+            this.Controls.Add(this.cboItem);
+            this.Controls.Add(this.lblitem);
+            this.Controls.Add(this.grdpara);
+            this.Controls.Add(this.btSaveAsApplyData);
+            this.Controls.Add(this.BtRfreshFit);
             this.Controls.Add(this.numdelay);
             this.Controls.Add(this.numdensity);
             this.Controls.Add(this.cborange);
@@ -1508,7 +2614,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lnkstart);
             this.Controls.Add(this.grpchstat);
-            this.Controls.Add(this.grdpara);
             this.Controls.Add(this.tabgrp);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1523,22 +2628,31 @@
             this.menu_bode.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdpara)).EndInit();
             this.grpchstat.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grprt)).EndInit();
+            this.grpchstat.PerformLayout();
             this.RtMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numdensity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numdelay)).EndInit();
             this.tabPgBode.ResumeLayout(false);
+            this.grpboxbd1.ResumeLayout(false);
+            this.grpboxbd1.PerformLayout();
+            this.grpboxbd2.ResumeLayout(false);
+            this.grpboxbd2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bdlegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BdCursor1)).EndInit();
             this.tabPgniquest.ResumeLayout(false);
+            this.grpboxni1.ResumeLayout(false);
+            this.grpboxni1.PerformLayout();
+            this.grpboxni2.ResumeLayout(false);
+            this.grpboxni2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nilegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NiCursor1)).EndInit();
             this.tabPgList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdlist)).EndInit();
             this.tabgrp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grprt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1580,9 +2694,7 @@
         private System.Windows.Forms.ToolStripMenuItem plot2ColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColor;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColorBackcolor;
-        private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColorPlotcolor;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewGrid;
-        private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewSrcLine;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphMode;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphModeZoom;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphModeMove;
@@ -1594,42 +2706,17 @@
         private System.Windows.Forms.Label lblErrStatus;
         private System.Windows.Forms.Label lblTestStatus;
         private System.Windows.Forms.Label lblRange;
-        private System.Windows.Forms.Label lblVdc;
         private System.Windows.Forms.Label lblTemp;
         private System.Windows.Forms.TabPage tabPgBode;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph grp2;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot1;
-        private NationalInstruments.UI.XAxis Grp2_xAxis1;
-        private NationalInstruments.UI.YAxis Grp2_yAxis1;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot2;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot3;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot4;
-        private NationalInstruments.UI.YAxis Grp2_yAxis2;
         private System.Windows.Forms.TabPage tabPgniquest;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph grp1;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot1;
-        private NationalInstruments.UI.XAxis Grp1_xAxis1;
-        private NationalInstruments.UI.YAxis Grp1_yAxis1;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot2;
-        private NationalInstruments.UI.YAxis Grp1_yAxis2;
         private System.Windows.Forms.TabPage tabPgList;
         private C1.Win.C1FlexGrid.C1FlexGrid grdlist;
         private System.Windows.Forms.TabControl tabgrp;
         private System.Windows.Forms.ToolStripMenuItem xAxisColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graphColorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem graphViewToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphMode;
-        private System.Windows.Forms.ToolStripMenuItem backColorToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem sourceZmagToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sourceZphaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sourceZmagnitudeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sourceZphaseToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem calibrationZmagnitudeToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem calibrationZphaseToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphModeZoom;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphModeMove;
-        private NationalInstruments.UI.XYCursor BdCursor1;
-        private NationalInstruments.UI.XYCursor NiCursor1;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphModeCursor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphInitialize;
@@ -1648,37 +2735,15 @@
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphModeCursorSrc2;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphModeCursorCal1;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphModeCursorCal2;
-        private NationalInstruments.UI.WindowsForms.Legend Bdlegend;
-        private NationalInstruments.UI.LegendItem BdlegendItem1;
-        private NationalInstruments.UI.LegendItem BdlegendItem2;
-        private NationalInstruments.UI.LegendItem BdlegendItem3;
-        private NationalInstruments.UI.LegendItem BdlegendItem4;
-        private NationalInstruments.UI.WindowsForms.Legend Nilegend;
-        private NationalInstruments.UI.LegendItem NilegendItem1;
-        private NationalInstruments.UI.LegendItem NilegendItem2;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewLegend;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphViewLegend;
         private System.Windows.Forms.ToolStripMenuItem legendToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColorGridcolor;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gridColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewCalLine;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphViewGridY1;
         private System.Windows.Forms.ToolStripMenuItem BdGrpMenuGraphViewGridY2;
-        private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewSrcPoint;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewCalPoint;
-        private System.Windows.Forms.ToolStripMenuItem sourceZmagnitudePointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripMenuItem sourceZphasePointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calibrationZmagnitudePointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem calibrationZphasePointToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
@@ -1686,6 +2751,159 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private System.Windows.Forms.Button BtRfreshFit;
+        private System.Windows.Forms.Button btSaveAsApplyData;
+        private System.Windows.Forms.LinkLabel lblVdc;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblitem;
+        private System.Windows.Forms.ComboBox cboItem;
+        private System.Windows.Forms.CheckBox chkitemA13;
+        private System.Windows.Forms.CheckBox chkitemA12;
+        private System.Windows.Forms.CheckBox chkitemA11;
+        private System.Windows.Forms.CheckBox chkitemA10;
+        private System.Windows.Forms.CheckBox chkitemA9;
+        private System.Windows.Forms.CheckBox chkitemA8;
+        private System.Windows.Forms.CheckBox chkitemA7;
+        private System.Windows.Forms.CheckBox chkitemA6;
+        private System.Windows.Forms.CheckBox chkitemA5;
+        private System.Windows.Forms.CheckBox chkitemA4;
+        private System.Windows.Forms.CheckBox chkitemA3;
+        private System.Windows.Forms.CheckBox chkitemA2;
+        private System.Windows.Forms.CheckBox chkitemA1;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph grp2;
+        private NationalInstruments.UI.XYCursor BdCursor1;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot1;
+        private NationalInstruments.UI.XAxis Grp2_xAxis1;
+        private NationalInstruments.UI.YAxis Grp2_yAxis1;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot2;
+        private NationalInstruments.UI.YAxis Grp2_yAxis2;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot3;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot4;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot5;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot6;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot7;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot8;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot9;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot10;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot11;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot12;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot13;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot14;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot15;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot16;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot17;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot18;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot19;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot20;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot21;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot22;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot23;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot24;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot25;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot26;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot27;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot28;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot29;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot30;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot31;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot32;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot33;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot34;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot35;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot36;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot37;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot38;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot39;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot40;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot41;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot42;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot43;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot44;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot45;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot46;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot47;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot48;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot49;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot50;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot51;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot52;
+        private NationalInstruments.UI.WindowsForms.Legend Nilegend;
+        private NationalInstruments.UI.LegendItem NilegendItem1;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot1;
+        private NationalInstruments.UI.XAxis Grp1_xAxis1;
+        private NationalInstruments.UI.YAxis Grp1_yAxis1;
+        private NationalInstruments.UI.LegendItem NilegendItem2;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot2;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph grp1;
+        private NationalInstruments.UI.XYCursor NiCursor1;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot3;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot4;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot5;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot6;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot7;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot8;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot9;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot10;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot11;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot12;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot13;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot14;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot15;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot16;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot17;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot18;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot19;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot20;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot21;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot22;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot23;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot24;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot25;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot26;
+        private NationalInstruments.UI.YAxis Grp1_yAxis2;
+        private NationalInstruments.UI.WindowsForms.Legend Bdlegend;
+        private NationalInstruments.UI.LegendItem legendItem1;
+        private NationalInstruments.UI.LegendItem legendItem2;
+        private NationalInstruments.UI.LegendItem legendItem3;
+        private NationalInstruments.UI.LegendItem legendItem4;
+        private NationalInstruments.UI.LegendItem BdlegendItem4;
+        private NationalInstruments.UI.LegendItem BdlegendItem3;
+        private NationalInstruments.UI.LegendItem BdlegendItem2;
+        private NationalInstruments.UI.LegendItem BdlegendItem1;
+        private System.Windows.Forms.GroupBox grpboxni2;
+        private System.Windows.Forms.Button btSelAllNiItems;
+        private System.Windows.Forms.Button btDeselAllNiItems;
+        private System.Windows.Forms.ComboBox cboItemA;
+        private System.Windows.Forms.GroupBox grpboxbd1;
+        private System.Windows.Forms.CheckBox chkSrcBd2;
+        private System.Windows.Forms.CheckBox chkSrcBd1;
+        private System.Windows.Forms.ComboBox cboItemB;
+        private System.Windows.Forms.GroupBox grpboxbd2;
+        private System.Windows.Forms.Button btDeselAllBdItems;
+        private System.Windows.Forms.Button btSelAllBdItems;
+        private System.Windows.Forms.CheckBox chkitemB1;
+        private System.Windows.Forms.CheckBox chkitemB2;
+        private System.Windows.Forms.CheckBox chkitemB3;
+        private System.Windows.Forms.CheckBox chkitemB13;
+        private System.Windows.Forms.CheckBox chkitemB4;
+        private System.Windows.Forms.CheckBox chkitemB12;
+        private System.Windows.Forms.CheckBox chkitemB5;
+        private System.Windows.Forms.CheckBox chkitemB11;
+        private System.Windows.Forms.CheckBox chkitemB6;
+        private System.Windows.Forms.CheckBox chkitemB10;
+        private System.Windows.Forms.CheckBox chkitemB7;
+        private System.Windows.Forms.CheckBox chkitemB9;
+        private System.Windows.Forms.CheckBox chkitemB8;
+        private System.Windows.Forms.GroupBox grpboxni1;
+        private System.Windows.Forms.CheckBox chkCalNi;
+        private System.Windows.Forms.CheckBox chkSrcNi;
+        private System.Windows.Forms.CheckBox chkCalBd2;
+        private System.Windows.Forms.CheckBox chkCalBd1;
+        private System.Windows.Forms.ToolStripMenuItem graphColorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem backColorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem gridColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
         private NationalInstruments.UI.LegendItem RtlegendItem1;
         private NationalInstruments.UI.LegendItem RtlegendItem2;
@@ -1695,7 +2913,5 @@
         private NationalInstruments.UI.YAxis RTyAxis1;
         private NationalInstruments.UI.ScatterPlot RTPlot2;
         private NationalInstruments.UI.YAxis RTyAxis2;
-        private System.Windows.Forms.Button BtRfreshFit;
-        private System.Windows.Forms.Button btSaveAsApplyData;
     }
 }

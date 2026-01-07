@@ -56,15 +56,13 @@ namespace ZiveLab.ZM
             foreach (var key in list)
             {
 
-                str = string.Format("Channel {0}",(Convert.ToInt32(key) + 1));
+                str = string.Format("Channel {0}", (Convert.ToInt32(key) + 1));
                 lstch.Items.Add(str);
             }
 
             lstch.SelectedIndex = 0;
         }
         
-        
-
         private void frmConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
             bClose = true;

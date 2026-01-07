@@ -247,26 +247,31 @@ void disable_i2c_irq_int(UNS_32);
 INT_32 EepromRead(INT_32 devid,UNS_32 sAddr, void *buffer, INT_32 n_bytes);
 INT_32 EepromWrite(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32 n_bytes);
 INT_32 EepromWriteRead(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32 n_bytes);
+INT_32 EepromWriteAndCRC(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32 n_bytes);
+INT_32 EepromWriteReadAndCRC(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32 n_bytes);
 
-INT_32 WriteZimId(INT_16 ch, INT_32 devid,UNS_32 sAddr);
-INT_32 WriteRangeInfo(INT_16 ch, INT_32 devid,UNS_32 sAddr);
-INT_32 WriteZimCfgInfo(INT_16 ch, INT_32 devid,UNS_32 sAddr);
-INT_32 ReadZimCfgInfo(INT_16 ch, INT_32 devid,UNS_32 sAddr,  void* pZimInfo);
-INT_32 ReadRangeInfo(INT_16 ch, INT_32 devid,UNS_32 sAddr, void* pRngInf);
-
-void InitRangeInf(int ch);
 unsigned short ByteToUshort(byte* pByte);
 void UshortToByte(unsigned short us, byte* pByte);
 void SetZimSerialIntToChar(uint nSerial, char* pSerialChar);
 
-void InitFixRangeInf(int ch);
-INT_32 SetupI2C(INT_32 devid,UNS_32 sAddr);
-INT_32 ScanZIM(INT_16 ch,INT_32 devid, UNS_32 sAddr);
-INT_32 Init_I2C(void);
+void InitRangeInf(INT_16 bd);
+void InitFixRangeInf(INT_16 bd, INT_16 auxch);
+INT_32 WriteZimId(INT_16 bd, INT_32 devid,UNS_32 sAddr);
 
-INT_32 EepromWriteZimCfg(INT_16 ch, INT_32 devid,UNS_32 sAddr);
-INT_32 EepromCheckZim(INT_16 ch, INT_32 devid, UNS_32 sAddr);
-INT_32 EepromApplyZim(INT_16 ch, INT_32 devid,UNS_32 sAddr);
+INT_32 WriteRangeInfo(INT_16 bd, INT_32 devid,UNS_32 sAddr);
+INT_32 ReadRangeInfo(INT_16 bd, INT_32 devid,UNS_32 sAddr, void* pRngInf);
+INT_32 ReadZimCfgInfo(INT_16 bd, INT_32 devid,UNS_32 sAddr,  void* pZimInfo);
+INT_32 WriteZimCfgInfo(INT_16 bd, INT_32 devid,UNS_32 sAddr);
+
+INT_32 EepromWriteZimCfg(INT_16 bd, INT_32 devid,UNS_32 sAddr);
+INT_32 EepromCheckZim(INT_16 bd, INT_32 devid, UNS_32 sAddr);
+INT_32 EepromApplyZim(INT_16 bd, INT_32 devid,UNS_32 sAddr);
+
+INT_32 SetupI2C(INT_32 devid,UNS_32 sAddr);
+INT_32 ScanZIM(INT_16 bd,INT_32 devid, UNS_32 sAddr);
+
+INT_32 Init_I2C(void);
+void I2C_Recover(INT_32 devid);
 #ifdef __cplusplus
 }
 #endif

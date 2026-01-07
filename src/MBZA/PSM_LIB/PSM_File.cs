@@ -4,6 +4,8 @@ using System.Linq;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using ZiveLab.ZM.ZIM.Packets;
+using ZiveLab.ZM;
 
 namespace SMLib
 {
@@ -74,38 +76,103 @@ namespace SMLib
     {
         public void SaveObjToXml(string filename, T obj)
         {
-            XmlSerializer serializer =  XmlSerializer.FromTypes(new[] { typeof(T) })[0];
-            using (TextWriter writer = new StreamWriter(filename))
+            object toSave;
+
+            if (typeof(T) == typeof(List<stRegLinkSifCh>))
             {
-                serializer.Serialize(writer, obj);
-                writer.Close();
+                var originList = obj as List<stRegLinkSifCh>;
+                var converted = originList.Select(x => new stRegLinkSifChXml(x)).ToList();
+                toSave = converted;
+
+                XmlSerializer serializer = new XmlSerializer(typeof(List<stRegLinkSifChXml>));
+                using (TextWriter writer = new StreamWriter(filename))
+                {
+                    serializer.Serialize(writer, toSave);
+                }
+            }
+            else
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                using (TextWriter writer = new StreamWriter(filename))
+                {
+                    serializer.Serialize(writer, obj);
+                }
             }
         }
 
-        public T LoadXmlToObj(string filename, T obj)
-        {
-            T ret;
 
-            if (System.IO.File.Exists(filename) == false)
+        public T LoadXmlToObj(string filename, T defaultValue)
+        {
+            if (!File.Exists(filename))
             {
-                SaveObjToXml(filename, obj);
-                return obj;
+                SaveObjToXml(filename, defaultValue);
+                return defaultValue;
             }
-            XmlSerializer deserializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
-            TextReader reader = new StreamReader(filename);
+
             try
             {
-                ret = (T)deserializer.Deserialize(reader);
-                reader.Close();
+                if (typeof(T) == typeof(List<stRegLinkSifCh>))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<stRegLinkSifChXml>));
+                    using (TextReader reader = new StreamReader(filename))
+                    {
+                        var xmlList = (List<stRegLinkSifChXml>)serializer.Deserialize(reader);
+                        var result = xmlList.Select(x => x.ToOrigin()).ToList();
+                        return (T)(object)result;
+                    }
+                }
+                else
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    using (TextReader reader = new StreamReader(filename))
+                    {
+                        return (T)serializer.Deserialize(reader);
+                    }
+                }
             }
             catch
             {
-                reader.Close();
-                return obj;
+                return defaultValue;
             }
-            return ret;
         }
     }
+
+    //public class SM_Config_File<T>
+    //{
+    //    public void SaveObjToXml(string filename, T obj)
+    //    {
+    //        XmlSerializer serializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
+    //        using (TextWriter writer = new StreamWriter(filename))
+    //        {
+    //            serializer.Serialize(writer, obj);
+    //            writer.Close();
+    //        }
+    //    }
+
+    //    public T LoadXmlToObj(string filename, T obj)
+    //    {
+    //        T ret;
+
+    //        if (System.IO.File.Exists(filename) == false)
+    //        {
+    //            SaveObjToXml(filename, obj);
+    //            return obj;
+    //        }
+    //        XmlSerializer deserializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
+    //        TextReader reader = new StreamReader(filename);
+    //        try
+    //        {
+    //            ret = (T)deserializer.Deserialize(reader);
+    //            reader.Close();
+    //        }
+    //        catch
+    //        {
+    //            reader.Close();
+    //            return obj;
+    //        }
+    //        return ret;
+    //    }
+    //}
 
     public class SM_File
     {

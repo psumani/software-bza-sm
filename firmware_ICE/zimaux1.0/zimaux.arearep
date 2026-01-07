@@ -1,0 +1,107 @@
+----------------------------------------------------------------------
+Report for cell zimaux.TECH
+Register bits:  735 of 3520 (20.881%)
+I/O cells:      0
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY        89          100.0
+                             SB_DFF       207          100.0
+                            SB_DFFE       171          100.0
+                           SB_DFFER         4          100.0
+                          SB_DFFESR       158          100.0
+                          SB_DFFESS         2          100.0
+                            SB_DFFN         3          100.0
+                           SB_DFFNE       119          100.0
+                          SB_DFFNER         6          100.0
+                         SB_DFFNESR        45          100.0
+                           SB_DFFNR         1          100.0
+                            SB_DFFR         9          100.0
+                            SB_DFFS         9          100.0
+                           SB_DFFSR         1          100.0
+                            SB_LUT4      1331          100.0
+                   SB_PLL40_2F_CORE         1          100.0
+                      SB_RAM512x8NW        12          100.0
+SUB MODULES
+                         ADC_ADS127         1
+                      ADC_ADS127_U0         1
+                      ADC_ADS127_U1         1
+                      ADC_ADS127_U2         1
+                         DDS_AD9837         1
+                          SPI_SLAVE         1
+                            zim_pll         1
+                              TOTAL      2175
+----------------------------------------------------------------------
+Report for cell SPI_SLAVE.v1
+Instance Path : comm_spi
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                             SB_DFF         3            1.4
+                            SB_DFFE         9            5.3
+                           SB_DFFER         4          100.0
+                           SB_DFFNR         1          100.0
+                            SB_DFFR         9          100.0
+                            SB_DFFS         9          100.0
+                            SB_LUT4        68            5.1
+                              TOTAL       103
+----------------------------------------------------------------------
+Report for cell ADC_ADS127_U1.v1
+Instance Path : ADC_VAC2
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY         7            7.9
+                             SB_DFF        48           23.2
+                            SB_DFFE        16            9.4
+                          SB_DFFESR        11            7.0
+                            SB_LUT4        45            3.4
+                              TOTAL       127
+----------------------------------------------------------------------
+Report for cell ADC_ADS127_U2.v1
+Instance Path : ADC_VAC1
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY         7            7.9
+                             SB_DFF        32           15.5
+                            SB_DFFE        32           18.7
+                          SB_DFFESR        11            7.0
+                            SB_LUT4        31            2.3
+                              TOTAL       113
+----------------------------------------------------------------------
+Report for cell zim_pll.v1
+Instance Path : pll_main
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                            SB_LUT4         1            0.1
+                   SB_PLL40_2F_CORE         1          100.0
+                              TOTAL         2
+----------------------------------------------------------------------
+Report for cell ADC_ADS127_U0.v1
+Instance Path : ADC_VAC3
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY         7            7.9
+                             SB_DFF        30           14.5
+                            SB_DFFE        34           19.9
+                          SB_DFFESR        11            7.0
+                            SB_LUT4        31            2.3
+                              TOTAL       113
+----------------------------------------------------------------------
+Report for cell DDS_AD9837.v1
+Instance Path : CLOCK_DDS
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                            SB_DFFN         2           66.7
+                           SB_DFFNE        20           16.8
+                         SB_DFFNESR         4            8.9
+                            SB_LUT4        27            2.0
+                              TOTAL        53
+----------------------------------------------------------------------
+Report for cell ADC_ADS127.v1
+Instance Path : ADC_VAC4
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                           SB_CARRY         7            7.9
+                             SB_DFF        30           14.5
+                            SB_DFFE        34           19.9
+                          SB_DFFESR        11            7.0
+                            SB_LUT4        31            2.3
+                              TOTAL       113

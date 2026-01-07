@@ -24,6 +24,7 @@ namespace ZiveLab.ZM
     {
         public string AppTitle;
         public string AppVer;
+        public int ch;
 
         public event EventHandler evTimer;
         private int AniIdx;
@@ -32,7 +33,7 @@ namespace ZiveLab.ZM
 
         private bool bExit;
         private bool bRefresh;
-
+        private frmAuxVdc auxForm;
 
         frmMain     frmMainView;
         frmRealview frmRtView;
@@ -55,7 +56,7 @@ namespace ZiveLab.ZM
             bFirst = true;
             this.MakeAppTitle();
             this.MaxAniCnt = 10;
-            
+
             this.Text = AppTitle;
             gBZA.sMsgTitle = AppTitle;
 
@@ -124,10 +125,23 @@ namespace ZiveLab.ZM
             {
                 gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
             }
-
         }
 
         
+        private void OpenAuxVdcForm(int ch)
+        {
+            if (auxForm == null || auxForm.IsDisposed)
+            {
+                auxForm = new frmAuxVdc(ch);
+                auxForm.MdiParent = this;
+            }
+            else
+            {
+                auxForm.SetCh(ch);
+            }
+            auxForm.Show();
+            auxForm.BringToFront();
+        }
 
         public void MakeAppFolder()
         {
@@ -412,6 +426,15 @@ namespace ZiveLab.ZM
 
         }
 
+        private void EVentVdcView(object sender, EventArgs e)
+        {
+            Button bt = (Button)sender;
+            string str = (string)bt.Tag;
+            int ch = Convert.ToInt32(str);
+
+            OpenAuxVdcForm(ch);// Test Code
+        }
+
         private void EventOpenEditor(object sender, EventArgs e)
         {
 
@@ -424,6 +447,7 @@ namespace ZiveLab.ZM
 
             OpenDataEditor(filename);
         }
+
         private void View_MainHome()
         {
             if (frmMainView == null)
@@ -432,6 +456,7 @@ namespace ZiveLab.ZM
                 frmMainView.MdiParent = this;
                 frmMainView.evGroupRtView += EventGroupRtView;
                 frmMainView.evOpenGraph += EventOpenGraph;
+                frmMainView.evVdcView += EVentVdcView;
                 frmMainView.evOpenEditor += EventOpenEditor;
                 frmMainView.evChRtView += EventChRtView;
                 frmMainView.CloseThis += frmMain_CloseThis;
@@ -598,6 +623,15 @@ namespace ZiveLab.ZM
             svalue = Extensions.GetEnumDescription(Producttype);
             eDeviceType mdevtype = (eDeviceType)mSif.mDevInf.mSysCfg.mSIFCfg.Type;
             if (mdevtype == eDeviceType.MBZA) svalue += "M";
+            else if (mdevtype == eDeviceType.MCBZA) svalue += "A";
+            else svalue += "S";
+
+            gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+
+            sitem = "ModelType";
+            if (mdevtype == eDeviceType.MBZA) svalue = "MBZA";
+            else if (mdevtype == eDeviceType.MCBZA) svalue = "MCBZA";
+            else svalue = "SBZA";
             gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
             sitem = "ModelDesc";
@@ -621,6 +655,13 @@ namespace ZiveLab.ZM
             else dvalue = 6.0;
             sitem = "Voltage_L";
             gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dvalue);
+
+            if (mdevtype == eDeviceType.MCBZA)
+            {
+                dvalue = 50.0;
+                sitem = "AuxCh_Voltage";
+                gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, dvalue);
+            }
 
             sitem = "SerialNumber";
             svalue = mSif.mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
@@ -651,35 +692,60 @@ namespace ZiveLab.ZM
             for (int i=0; i<4; i++)
             {
                 
-                sTitle = string.Format("CH{0}", i + 1);
+                sTitle = string.Format("BOARD{0}", i + 1);
                 sitem = "Enabled";
-                if (mdevtype == eDeviceType.MBZA || i == 0)
+
+                if (mdevtype == eDeviceType.MBZA || mdevtype == eDeviceType.MCBZA || i == 0)
                 {
-                    
-
                     gBZA.WriteIniboolData(sTitle, sitem, sFilename, true);
+                    if (mdevtype == eDeviceType.MCBZA && i > 0)
+                    {
+                        sitem = "SerialNumber";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetSerialNumber();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
-                    sitem = "SerialNumber";
-                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetSerialNumber();
-                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        sFilename1 = gBZA.GetCalibLogFileName(mSif.sSerial, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
 
-                    sFilename1 = gBZA.GetCalibLogFileName(mSif.sSerial, svalue);
-                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                        sitem = "BoardName";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardTypeString();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
 
-                    sitem = "BoardName";
-                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardTypeString();
-                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
-                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                        sitem = "BoardVersion";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardVer();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
 
-                    sitem = "BoardVersion";
-                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardVer();
-                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
-                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                        sitem = "FirmareVersion";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetFirmwareVer();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                    }
+                    else
+                    {
+                        sitem = "SerialNumber";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetSerialNumber();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
 
-                    sitem = "FirmareVersion";
-                    svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetFirmwareVer();
-                    gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
-                    gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                        sFilename1 = gBZA.GetCalibLogFileName(mSif.sSerial, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+
+                        sitem = "BoardName";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardTypeString();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+
+                        sitem = "BoardVersion";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetBoardVer();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+
+                        sitem = "FirmareVersion";
+                        svalue = mSif.mDevInf.mSysCfg.mZimCfg[i].info.GetFirmwareVer();
+                        gBZA.WriteIniStrData(sTitle, sitem, sFilename, svalue);
+                        gBZA.WriteIniStrData("Information", sitem, sFilename1, svalue);
+                    }
                 }
                 else
                 {
@@ -800,6 +866,26 @@ namespace ZiveLab.ZM
             OpenGraph(slist);
         }
 
+        //private void OpenDataEditor(string filename)
+        //{
+        //    var deForm = new ZiveLab.ZM.DataEditorForm(true);
+
+        //    deForm.MsgBoxCaption = this.Text;
+        //    deForm.UnitC = false;
+        //    deForm.EnAlwaysOpenPath = false;
+        //    deForm.AlwaysOpenPath = gBZA.appcfg.PathData;
+        //    deForm.TimeFormat = 1;
+
+        //    deForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
+        //    deForm.MdiParent = this.MdiParent;
+
+        //    deForm.ShowInTaskbar = false;
+        //    deForm.Initialize(0);
+
+        //    deForm.Show();
+        //    deForm.LoadData(filename);
+        //}
+
         private void OpenDataEditor(string filename, int type = 2) // type 0 : General, 1 : Cycle, 2 : Eis
         {
             DataEditorForm deForm = new DataEditorForm(true, true);
@@ -821,16 +907,13 @@ namespace ZiveLab.ZM
             deForm.MdiParent = this;
             deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
-            
+
             deForm.Show();
             if (filename != null)
             {
                 deForm.LoadData(filename, type);
             }
-
         }
-
-        
 
         private void EgForm_OpenDataEditorClick(object sender, EventArgs e)
         {
@@ -858,7 +941,7 @@ namespace ZiveLab.ZM
                 str = Encoding.UTF8.GetString(mfile.tmphead.mInfo.techfile).Trim('\0');
                 techfilename = Path.GetFileName(str);
                 techfullpath = Path.Combine(gBZA.appcfg.PathSchTemp, techfilename);
-                type = (eZimType)mfile.tmphead.inf_sif.Type;
+                type = (eZimType)mfile.tmphead.systemInfo.mSIFCfg.Type;
 
                 if (File.Exists(techfullpath))
                 {
@@ -899,7 +982,7 @@ namespace ZiveLab.ZM
             frmTech.MdiParent = this;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
-                frmTech.StartPosition = FormStartPosition.CenterParent;
+                frmTech.StartPosition = FormStartPosition.CenterScreen;
             }
             else
             {
@@ -930,7 +1013,7 @@ namespace ZiveLab.ZM
             OpenTechFile(-1, stechfile, type);
         }
 
-        private void OpenGraph(string[] filename = null)
+        private void OpenGraph(string[] filename = null) // 폼생성
         {
             EisGraphForm egForm = new EisGraphForm(0, gBZA.mGraphSet, gBZA.mGraphSetEx, true);
             egForm.MsgBoxCaption = AppTitle;
@@ -952,6 +1035,32 @@ namespace ZiveLab.ZM
                 egForm.LoadFiles(filename);
             }
         }
+
+        //private void OpenGraph(string[] filename = null) // 폼생성
+        //{
+        //    var egForm = new ZiveLab.ZM.Dataview.GeneralGraphForm(0);
+
+        //    egForm.MsgBoxCaption = AppTitle;
+        //    egForm.EnAlwaysOpenPath = false;
+        //    egForm.AlwaysOpenPath = gBZA.appcfg.PathData;
+        //    egForm.AllowTransparency = false;
+        //    //egForm.ZManPath = GetZManPath();
+        //    //egForm.SchTempPath = gBZA.appcfg.PathSchTemp;
+        //    egForm.TimeFormat = 1;
+        //    egForm.MdiParent = this.MdiParent; 
+        //    egForm.ShowInTaskbar = false;
+
+        //    egForm.OpenDataEditorClick += EgForm_OpenDataEditorClick;
+        //    egForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
+
+        //    egForm.Show();
+
+        //    if (filename != null)
+        //    {
+        //        egForm.LoadFiles(filename);
+        //    }
+        //}
+
 
         private void modifyTheDevicesRegistrationToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -1524,7 +1633,7 @@ namespace ZiveLab.ZM
             List<int> chs = new List<int>();
 
             tlst = mFile.LoadXmlToObj(fileinf, chs);
-            
+
             if (tlst.Count < 1)
             {
                 return 0;
@@ -1661,76 +1770,6 @@ namespace ZiveLab.ZM
             {
                 frmResTools.WindowState = FormWindowState.Normal;
                 frmResTools.Activate();
-            }
-        }
-
-        private void frmMdiMain_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
-
-        private void frmMdiMain_DragDrop(object sender, DragEventArgs e)
-        {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-            if (files.Length > 0 && File.Exists(files[0]))
-            {
-                string filePath = files[0];
-                string sExt = Path.GetExtension(filePath).ToUpper();
-
-                if (sExt == ".HFR" || sExt == ".PRR" || sExt == ".VTM" || sExt == ".QIS" || sExt == ".DCH" || sExt == ".EIS" )
-                {
-                    OpenTechFile(-1, filePath);
-                }
-                else if(sExt == ".ZMF")
-                {
-                    frmSelEditTypeDlg mfrm = new frmSelEditTypeDlg();
-                    if(mfrm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        if(mfrm.bgraph)
-                        {
-                            OpenGraph(files);
-                        }
-                        else
-                        {
-                            OpenDataEditor(filePath);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Unsupported file type (extender verification).", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string sfile = Application.StartupPath + "\\manual\\" + gBZA.appcfg.FileHelpEng;
-            if(File.Exists(sfile))
-            {
-                Process.Start(sfile);
-            }
-            else
-            {
-                MessageBox.Show("Help file not found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
-        }
-
-        private void koreanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string sfile = Application.StartupPath + "\\manual\\" + gBZA.appcfg.FileHelpKor;
-            if (File.Exists(sfile))
-            {
-                Process.Start(sfile);
-            }
-            else
-            {
-                MessageBox.Show("Help file not found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -18,6 +18,20 @@ namespace ZiveLab.ZM.FactorySetting
             InitializeComponent();
             this.Icon = ZM.FactorySetting.Properties.Resources.ZMFactorySetting;
             DoubleBuffered = true;
+
+            txtIP0.KeyPress += TxtIP_KeyPress;
+            txtIP1.KeyPress += TxtIP_KeyPress;
+            txtIP2.KeyPress += TxtIP_KeyPress;
+            txtIP3.KeyPress += TxtIP_KeyPress;
+        }
+
+        private void TxtIP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits, backspace, and delete
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void frmConnDlg_Load(object sender, EventArgs e)

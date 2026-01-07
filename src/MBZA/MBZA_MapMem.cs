@@ -103,6 +103,7 @@ namespace ZiveLab.ZM
         UploadCalibTech,
         UploadResHead,
         RefreshResHead,
+        SaveMCBZARangeInfo,
     }
 
 
@@ -695,7 +696,7 @@ namespace ZiveLab.ZM
             return TransCommand(sSerial, cmd, null);
         }
 
-        public static bool VheckFPGAOfZIM(string sSerial, int ch)
+        public static bool CheckFPGAOfZIM(string sSerial, int ch)
         {
             MBZA_SifCommand cmd;
 
@@ -738,7 +739,19 @@ namespace ZiveLab.ZM
             cmd.rdlen = 0;
             return TransCommand(sSerial, cmd, null);
         }
+        public static bool Save_MCBZA_Range_info(string sSerial, int ch) /* sang */
+        {
+            MBZA_SifCommand cmd;
 
+            cmd.target = (short)enTarget.Zim;
+            cmd.flag = (short)enFlag.Cmd;
+            cmd.cmd = (short)enCmdZim.SaveMCBZARangeInfo;
+            cmd.ch = ch;
+            cmd.addr = 0;
+            cmd.wrlen = 0;
+            cmd.rdlen = 0;
+            return TransCommand(sSerial, cmd, null);
+        }
         public static bool SaveDeviceinfo(string sSerial)
         {
             MBZA_SifCommand cmd;

@@ -14,11 +14,11 @@ namespace ZiveLab.ZM
         public FrmAboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("{0} Information.", AssemblyTitle);
-            this.labelProductName.Text = String.Format("{0}(Impedance Manager)", AssemblyProduct, AssemblyDescription);
+            this.Text = String.Format("{0} Inmformation.", AssemblyTitle);
+            this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = "";
+            this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
         }
 
@@ -101,10 +101,5 @@ namespace ZiveLab.ZM
             }
         }
         #endregion
-
-        private void okButton_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

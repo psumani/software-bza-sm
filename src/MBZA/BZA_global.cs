@@ -80,7 +80,9 @@ namespace ZiveLab.ZM
             return true;
         }
     }
+
     
+
     public static class gBZA
     {
         [DllImport("kernel32")]
@@ -91,7 +93,7 @@ namespace ZiveLab.ZM
         public static string sMsgTitle;
 
         public static int LinkSifErr = 0;
-        public static int ScanChCount = 0;
+        public static int ScanBdCount = 0;
         public static int ScanSifCount = 0;
         public static int RegChCount = 0;
         public static int RegOkChCount = 0;
@@ -167,6 +169,21 @@ namespace ZiveLab.ZM
             }
 
             return fret;
+        }
+
+        public static bool IsMCBZA(string serial)
+        {
+            if (string.IsNullOrEmpty(serial))
+            {
+                return false;
+            }
+
+            if (gBZA.SifLnkLst.ContainsKey(serial))
+            {
+                var device = gBZA.SifLnkLst[serial];
+                return (eDeviceType)device.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA;
+            }
+            return false;
         }
 
         public static void WriteIniboolData(string Title, string Item, string IniFile, bool Value)

@@ -77,8 +77,10 @@ namespace ZiveLab.ZM
             string sValue2;
 
             int count = gBZA.GetIniIntData("RTD", "Count", sFilename, 0);
-            mZim.ranges.rtd_rng.gain = gBZA.GetIniDoubleData("RTD", "Gain", sFilename, mZim.ranges.rtd_rng.gain);
-            mZim.ranges.rtd_rng.offset = gBZA.GetIniDoubleData("RTD", "Offset", sFilename, mZim.ranges.rtd_rng.offset);
+            //mZim.ranges[0].rtd_rng.gain = gBZA.GetIniDoubleData("RTD", "Gain", sFilename, mZim.ranges[0].rtd_rng.gain);
+            //mZim.ranges[0].rtd_rng.offset = gBZA.GetIniDoubleData("RTD", "Offset", sFilename, mZim.ranges[0].rtd_rng.offset);
+            mZim.ranges.Gen.rtd_rng.gain = gBZA.GetIniDoubleData("RTD", "Gain", sFilename, mZim.ranges.Gen.rtd_rng.gain); // 배열
+            mZim.ranges.Gen.rtd_rng.offset = gBZA.GetIniDoubleData("RTD", "Offset", sFilename, mZim.ranges.Gen.rtd_rng.offset); // 배열
             for (int row = 0; row < count; row++)
             {
                 sitem = string.Format("Target{0}", row + 1);
@@ -96,11 +98,16 @@ namespace ZiveLab.ZM
 
             LoadLogInfo();
 
-            txtMax0.Text = string.Format("{0:0.0#####}", mZim.ranges.rtd_rng.maximum);
-            txtMin0.Text = string.Format("{0:0.0#####}", mZim.ranges.rtd_rng.minimum);
-            txtFactor0.Text = string.Format("{0:0.0#####}", mZim.ranges.rtd_rng.factor);
-            txtGain0.Text = string.Format("{0:0.0#####}", mZim.ranges.rtd_rng.gain);
-            txtOffset0.Text = string.Format("{0:0.0#####}", mZim.ranges.rtd_rng.offset);
+            //txtMax0.Text = string.Format("{0:0.0#####}", mZim.ranges[0].rtd_rng.maximum);
+            //txtMin0.Text = string.Format("{0:0.0#####}", mZim.ranges[0].rtd_rng.minimum);
+            //txtFactor0.Text = string.Format("{0:0.0#####}", mZim.ranges[0].rtd_rng.factor);
+            //txtGain0.Text = string.Format("{0:0.0#####}", mZim.ranges[0].rtd_rng.gain);
+            //txtOffset0.Text = string.Format("{0:0.0#####}", mZim.ranges[0].rtd_rng.offset);
+            txtMax0.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.rtd_rng.maximum);
+            txtMin0.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.rtd_rng.minimum);
+            txtFactor0.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.rtd_rng.factor);
+            txtGain0.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.rtd_rng.gain);
+            txtOffset0.Text = string.Format("{0:0.0#####}", mZim.ranges.Gen.rtd_rng.offset); // 배열
             txtSquare0.Text = "1.0";
             txtResSquare0.Text = "1.0";
             chkCalib0.Checked = false;
@@ -113,8 +120,10 @@ namespace ZiveLab.ZM
         {
             this.Cursor = Cursors.WaitCursor;
 
-            mZim.ranges.rtd_rng.gain = Convert.ToDouble(txtGain0.Text);
-            mZim.ranges.rtd_rng.offset = Convert.ToDouble(txtOffset0.Text);
+            //mZim.ranges[0].rtd_rng.gain = Convert.ToDouble(txtGain0.Text);
+            //mZim.ranges[0].rtd_rng.offset = Convert.ToDouble(txtOffset0.Text);
+            mZim.ranges.Gen.rtd_rng.gain = Convert.ToDouble(txtGain0.Text);
+            mZim.ranges.Gen.rtd_rng.offset = Convert.ToDouble(txtOffset0.Text); // 배열
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch] = mZim;
             if (MBZA_MapUtil.Save_Range_info(Serial, sifch) == false)
             {
@@ -369,8 +378,10 @@ namespace ZiveLab.ZM
             string sitem;
             string sValue;
 
-            gBZA.WriteIniDoubleData("RTD", "Gain", sFilename, mZim.ranges.rtd_rng.gain);
-            gBZA.WriteIniDoubleData("RTD", "Offset", sFilename, mZim.ranges.rtd_rng.offset);
+            //gBZA.WriteIniDoubleData("RTD", "Gain", sFilename, mZim.ranges[0].rtd_rng.gain);
+            //gBZA.WriteIniDoubleData("RTD", "Offset", sFilename, mZim.ranges[0].rtd_rng.offset);
+            gBZA.WriteIniDoubleData("RTD", "Gain", sFilename, mZim.ranges.Gen.rtd_rng.gain);
+            gBZA.WriteIniDoubleData("RTD", "Offset", sFilename, mZim.ranges.Gen.rtd_rng.offset); // 배열
             gBZA.WriteIniIntData("RTD", "Count", sFilename, ListAfter0.Items.Count);
             
             for (int row = 0; row < ListAfter0.Items.Count; row++)

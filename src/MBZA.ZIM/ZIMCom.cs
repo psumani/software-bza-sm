@@ -25,11 +25,15 @@ namespace ZiveLab.ZM.ZIM
         public SIFCom mComm;
         public stConnTargetCfg mConnTargetCfg; // rename to NetworkEndPoint
         public eDeviceType mDevType;
+        public int Sifid;
+        public stSIFCfg mConnectSifCfg;
         public CommObj(int tTimerOut = 8000)
         {
             LimitTimerOut = tTimerOut;
             mConnTargetCfg = new stConnTargetCfg(0);
+            mConnectSifCfg = new stSIFCfg(0);
             mDevType = eDeviceType.SBZA;
+            Sifid = DeviceConstants.ID_ZIMCONFIG;
             isConnected = false;
             iEnableCommTimeout = 0;
             iSifMode = 1;
@@ -145,10 +149,16 @@ namespace ZiveLab.ZM.ZIM
             }
 
             */
-            
-
             mComm.DisconnectedDevice += DisonnectProc;
             isConnected = true;
+
+            stSystemConfig_1 m_tSysCfg = new stSystemConfig_1(0);
+            if (ReadData(ref m_tSysCfg) == false)
+            {
+                return false;
+            }
+            mDevType = (eDeviceType)m_tSysCfg.mSIFCfg.Type;
+            Sifid = m_tSysCfg.ID;
             return true;
         }
 
@@ -196,7 +206,7 @@ namespace ZiveLab.ZM.ZIM
         {
             if (mComm.WriteToDevice(CommandSet.SET_SIFMODE, -1, iMode, null) == false)
             {
-                //mComm.Dispose();
+                mComm.Dispose();
                 return false;
             }
             iSifMode = iMode;
@@ -218,7 +228,7 @@ namespace ZiveLab.ZM.ZIM
         {
             if (mComm.WriteToDevice(CommandSet.SET_CHANNEL, nCh, 0, null) == false)
             {
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             return true;
@@ -331,7 +341,7 @@ namespace ZiveLab.ZM.ZIM
 
             if (mComm.WriteToDevice(cmd, nSlot, 0, null) == false)
             {
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             return true;
@@ -342,7 +352,7 @@ namespace ZiveLab.ZM.ZIM
             if (isConnected == false) return false;
             if (mComm.WriteToDevice(CommandSet.CONN_FPGA_PROM,nSlot, Addr, null) == false)
             {
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             return true;
@@ -368,7 +378,7 @@ namespace ZiveLab.ZM.ZIM
             if (mComm.WriteToDevice(CommandSet.EREASE_FPGA_PROM, nSlot, 0, null) == false)
             {
                 mComm.SetReceiveTime(LimitTimerOut);
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             mComm.SetReceiveTime(LimitTimerOut);
@@ -381,7 +391,7 @@ namespace ZiveLab.ZM.ZIM
             if (mComm.WriteToDevice(CommandSet.PROG_FPGA_PROM, nSlot, address, buffer) == false)
             {
                 mComm.SetReceiveTime(LimitTimerOut);
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             mComm.SetReceiveTime(LimitTimerOut);
@@ -400,7 +410,7 @@ namespace ZiveLab.ZM.ZIM
             if (isConnected == false) return false;
             if (mComm.WriteToDevice(CommandSet.CLOSE_FPGA_PROM, nSlot) == false)
             {
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             return true;
@@ -474,10 +484,20 @@ namespace ZiveLab.ZM.ZIM
             }
             return true;
         }
-
+        public bool WriteData(int nSlot, stSystemConfig data) /* sang */
+        {
+            data.mZimCfg[0].ranges.Gen.ID = DeviceConstants.ID_RANGEINFO;
+            if (isConnected == false) return false;
+            if (mComm.WriteToDevice(CommandSet.SET_MCBZA_RNGINFO, nSlot, data.ToByteArray()) == false)
+            {
+                mComm.Dispose();
+                return false;
+            }
+            return true;
+        }
         public bool WriteData(int nSlot, st_zim_rnginf data)
         {
-            data.ID = DeviceConstants.ID_RANGEINFO;
+            data.Gen.ID = DeviceConstants.ID_RANGEINFO;
             if (isConnected == false) return false;
             if (mComm.WriteToDevice(CommandSet.SET_RNGINFO, nSlot, data.ToByteArray()) == false)
             {
@@ -569,7 +589,7 @@ namespace ZiveLab.ZM.ZIM
 
         #region Read
 
-        public bool ReadData(int nSlot, ref stZimCfg data)
+        public bool ReadData(int nSlot, ref stZimCfg data) // bd Data
         {
             byte[] buf;
             if (isConnected == false) return false;
@@ -584,7 +604,38 @@ namespace ZiveLab.ZM.ZIM
             data.ToWritePtr(buf);
             return true;
         }
-        
+
+        public bool WriteSIFPoint(int nSlot, stSIFCfg data)
+        {
+            if (!isConnected) return false;
+
+            byte[] buf = data.ToByteArray();
+
+            if (!mComm.WriteToDevice(CommandSet.SET_SIF_POINT, nSlot, buf))
+            {
+                mComm.Dispose();
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ReadSIFPoint(int nSlot, stSIFCfg data)
+        {
+            byte[] buf;
+            if (isConnected == false) return false;
+            buf = mComm.ReadFromDevice(CommandSet.SET_SIF_POINT, nSlot);
+
+            if (buf == null)
+            {
+                mComm.Dispose();
+                return false;
+            }
+
+            data.ToWritePtr(buf);
+            return true;
+        }
+
         public bool WriteData(int nSlot, stResHeaderInfo data)
         {
             if (isConnected == false) return false;
@@ -627,7 +678,8 @@ namespace ZiveLab.ZM.ZIM
             }
 
             minf.ToWritePtr(buf);
-
+            //int size = Marshal.SizeOf(typeof(stChStatusInf));
+            //Console.WriteLine(Marshal.OffsetOf(typeof(stChStatusInf), "Aux_Vdc"));
             return true;
         }
 
@@ -770,7 +822,6 @@ namespace ZiveLab.ZM.ZIM
             return true;
         }
 
-
         public bool ReadData(int nSlot, ref st_zim_eis_raw_data data, int index)
         {
             byte[] buf;
@@ -817,10 +868,17 @@ namespace ZiveLab.ZM.ZIM
             }
             byte[] tbuf = new byte[len];
             int pos = 0;
-            for (int i=0; i< count; i++, pos += len)
+            for (int i = 0; i < count; i++, pos += len)
             {
                 Array.Copy(buf, pos, tbuf, 0, len);
                 data[i].ToWritePtr(tbuf);
+
+                //var item = data[i]; //
+                //foreach (var field in item.GetType().GetFields())
+                //{
+                //    var value = field.GetValue(item);
+                //    Console.WriteLine($"{field.Name} = {value}");
+                //} // 
             }
             return true;
         }
@@ -909,6 +967,10 @@ namespace ZiveLab.ZM.ZIM
         {
             int ipage = 17 * 64;// block X pages od block
             int length = Marshal.SizeOf(typeof(stSystemConfig));
+            if (Sifid == DeviceConstants.ID_ZIMCONFIG_1)
+            {
+                length = Marshal.SizeOf(typeof(stSystemConfig_1));
+            }
 
             int len;
             int offset = 0;
@@ -932,7 +994,36 @@ namespace ZiveLab.ZM.ZIM
 
                 length -= len;
             }
-            data.ToWritePtr(rbuf);
+
+            if (Sifid == DeviceConstants.ID_ZIMCONFIG_1)
+            {
+                stSystemConfig_1 m_tSysCfg = new stSystemConfig_1(0);
+                m_tSysCfg.ToWritePtr(rbuf);
+
+                data.ID = m_tSysCfg.ID;
+                data.mSIFCfg.ToWritePtr(m_tSysCfg.mSIFCfg.ToByteArray());
+                for (int bd = 0; bd < MBZA_Constant.MAX_DEV_CHANNEL; bd++)
+                {
+                    data.EnaZIM[bd] = m_tSysCfg.EnaZIM[bd];
+                    data.EnaROM[bd] = m_tSysCfg.EnaROM[bd];
+                    data.ChkZIM[bd] = m_tSysCfg.ChkZIM[bd];
+                    data.mZimCfg[bd].info.ToWritePtr(m_tSysCfg.mZimCfg[bd].info.ToByteArray());
+                    //data.mZimCfg[bd].ranges[0].ToWritePtr(m_tSysCfg.mZimCfg[bd].ranges.ToByteArray());
+                    data.mZimCfg[bd].ranges.Gen.ToWritePtr(m_tSysCfg.mZimCfg[bd].ranges.ToByteArray()); // 배열
+
+                    for (int auxch = 1; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch++)
+                    {
+                        data.mZimCfg[bd].Initialize(auxch, data.mZimCfg[bd].info.GetZimType());
+                    }
+                }
+                data.BaseTick = m_tSysCfg.BaseTick;
+                data.DaqTick = m_tSysCfg.DaqTick;
+            }
+            else
+            {
+                data.ToWritePtr(rbuf);
+            }
+
             return true;
         }
 
@@ -1394,11 +1485,80 @@ namespace ZiveLab.ZM.ZIM
             return true;
         }
 
+        public bool ReadData(ref stDevInf_1 data)
+        {
+            byte[] buf;
+            if (isConnected == false) return false;
+            
+            buf = mComm.ReadFromDevice(CommandSet.GET_DEVICE_INFO, -1, (int)0);
+
+            if (buf == null)
+            {
+                mComm.Dispose();
+                return false;
+            }
+
+            data.ToWritePtr(buf);
+            return true;
+        }
+
+
         public bool ReadData(ref stDevInf data)
         {
             byte[] buf;
             if (isConnected == false) return false;
+
+            if (Sifid == DeviceConstants.ID_ZIMCONFIG_1)
+            {
+                stDevInf_1 m_devinf_1 = new stDevInf_1(0);
+                if (ReadData(ref m_devinf_1) == false)
+                {
+                    return false;
+                }
+
+                data.mConnCfg.ToWritePtr(m_devinf_1.ToByteArray());
+                data.mSysCfg.ID = m_devinf_1.mSysCfg.ID;
+                data.mSysCfg.mSIFCfg.ToWritePtr(m_devinf_1.mSysCfg.ToByteArray());
+                data.mSysCfg.BaseTick = m_devinf_1.mSysCfg.BaseTick;
+                data.mSysCfg.DaqTick = m_devinf_1.mSysCfg.DaqTick;
+                for (int bd = 0; bd < MBZA_Constant.MAX_DEV_CHANNEL; bd++)
+                { 
+                    data.mSysCfg.EnaZIM[bd] = m_devinf_1.mSysCfg.EnaZIM[bd];
+                    data.mSysCfg.EnaROM[bd] = m_devinf_1.mSysCfg.EnaROM[bd];
+                    data.mSysCfg.ChkZIM[bd] = m_devinf_1.mSysCfg.ChkZIM[bd];
+   
+                    data.mSysCfg.mZimCfg[bd].info.ToWritePtr(m_devinf_1.mSysCfg.mZimCfg[bd].info.ToByteArray());
+                    //data.mSysCfg.mZimCfg[bd].ranges[0].ToWritePtr(m_devinf_1.mSysCfg.mZimCfg[bd].ranges.ToByteArray());
+                    data.mSysCfg.mZimCfg[bd].ranges.Gen.ToWritePtr(m_devinf_1.mSysCfg.mZimCfg[bd].ranges.ToByteArray()); // 배열
+                    for (int auxch = 1; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch++)
+                    {
+                        data.mSysCfg.mZimCfg[bd].Initialize(auxch, data.mSysCfg.mZimCfg[bd].info.GetZimType());
+                    }
+                }
+                return true;
+            }
+
             buf = mComm.ReadFromDevice(CommandSet.GET_DEVICE_INFO, -1, (int)0);
+
+            if (buf == null)
+            {
+                mComm.Dispose();
+                return false;
+            }
+
+            data.ToWritePtr(buf);
+            return true;
+        }
+
+        public bool ReadData(ref stSystemConfig_1 data)
+        {
+            byte[] buf;
+            if (isConnected == false)
+            {
+                return false;
+            }
+
+            buf = mComm.ReadFromDevice(CommandSet.GET_SYSTEM_INFO, -1,(int)0);
 
             if (buf == null)
             {
@@ -1412,9 +1572,38 @@ namespace ZiveLab.ZM.ZIM
 
         public bool ReadData(ref stSystemConfig data)
         {
+
+            if(Sifid == DeviceConstants.ID_ZIMCONFIG_1)
+            {
+                stSystemConfig_1 m_tSysCfg = new stSystemConfig_1(0);
+                if (ReadData(ref m_tSysCfg) == false)
+                {
+                    return false;
+                }
+                data.ID = m_tSysCfg.ID;
+                data.mSIFCfg.ToWritePtr(m_tSysCfg.mSIFCfg.ToByteArray());
+                for(int bd=0; bd< MBZA_Constant.MAX_DEV_CHANNEL; bd++)
+                {
+                    data.EnaZIM[bd] = m_tSysCfg.EnaZIM[bd];
+                    data.EnaROM[bd] = m_tSysCfg.EnaROM[bd];
+                    data.ChkZIM[bd] = m_tSysCfg.ChkZIM[bd];
+                    data.mZimCfg[bd].info.ToWritePtr(m_tSysCfg.mZimCfg[bd].info.ToByteArray());
+                    //data.mZimCfg[bd].ranges[0].ToWritePtr(m_tSysCfg.mZimCfg[bd].ranges.ToByteArray());
+                    data.mZimCfg[bd].ranges.Gen.ToWritePtr(m_tSysCfg.mZimCfg[bd].ranges.ToByteArray()); // 배열
+                    for (int auxch = 1; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch++)
+                    {
+                        data.mZimCfg[bd].Initialize(auxch, data.mZimCfg[bd].info.GetZimType());
+                    }
+                }
+                data.BaseTick = m_tSysCfg.BaseTick;
+                data.DaqTick = m_tSysCfg.DaqTick;
+                return true;
+            }
+            
             byte[] buf;
             if (isConnected == false) return false;
-            buf = mComm.ReadFromDevice(CommandSet.GET_SYSTEM_INFO, -1,(int)0);
+
+            buf = mComm.ReadFromDevice(CommandSet.GET_SYSTEM_INFO, 1, (int)0);
 
             if (buf == null)
             {
@@ -1432,7 +1621,7 @@ namespace ZiveLab.ZM.ZIM
 
             if (mComm.WriteToDevice(CommandSet.INIT_EEPROM, nSlot) == false)
             {
-                mComm.Dispose();
+                //mComm.Dispose();
                 return false;
             }
             return true;
@@ -1453,9 +1642,42 @@ namespace ZiveLab.ZM.ZIM
             return mComm.WriteToDevice(CommandSet.CHK_FPGA, nSlot, 0);
         }
 
+        public bool WriteData(ref stSystemConfig_1 data)
+        {
+            if (isConnected == false) return false;
+            if (mComm.WriteToDevice(CommandSet.SAVE_SYSTEM_INFO, -1, data.ToByteArray()) == false)
+            {
+                mComm.Dispose();
+                return false;
+            }
+            return true;
+        }
+
         public bool WriteData(ref stSystemConfig data)
         {
             if (isConnected == false) return false;
+
+
+            if (Sifid == DeviceConstants.ID_ZIMCONFIG_1)
+            {
+                stSystemConfig_1 m_tSysCfg = new stSystemConfig_1(0);
+                
+                m_tSysCfg.ID = data.ID;
+                m_tSysCfg.mSIFCfg.ToWritePtr(data.mSIFCfg.ToByteArray());
+                for (int bd = 0; bd < MBZA_Constant.MAX_DEV_CHANNEL; bd++)
+                {
+                    m_tSysCfg.EnaZIM[bd] = data.EnaZIM[bd];
+                    m_tSysCfg.ChkZIM[bd] = data.ChkZIM[bd];
+                    m_tSysCfg.EnaROM[bd] = data.EnaROM[bd];
+                    m_tSysCfg.mZimCfg[bd].info.ToWritePtr(data.mZimCfg[bd].info.ToByteArray());
+                    //m_tSysCfg.mZimCfg[bd].ranges.ToWritePtr(data.mZimCfg[bd].ranges[0].ToByteArray());
+                    m_tSysCfg.mZimCfg[bd].ranges.Gen.ToWritePtr(data.mZimCfg[bd].ranges.ToByteArray()); // 배열
+                }
+                m_tSysCfg.BaseTick = data.BaseTick;
+                m_tSysCfg.DaqTick = data.DaqTick;
+
+                return WriteData(ref m_tSysCfg);
+            }
 
             if (mComm.WriteToDevice(CommandSet.SAVE_SYSTEM_INFO, -1, data.ToByteArray()) == false)
             {
@@ -1494,19 +1716,19 @@ namespace ZiveLab.ZM.ZIM
             return true;
         }
 
-        public bool ReadRangeInfOfZim(int nSlot, ref st_zim_rnginf data)
+        public bool ReadRangeInfOfZim(int nSlot, int nAddr, ref st_zim_rnginf data)
         {
             byte[] buf;
 
-            buf = mComm.ReadFromDevice(CommandSet.READ_ZIM_ROM, nSlot, (int)0);
+            buf = mComm.ReadFromDevice(CommandSet.READ_ZIM_ROM, nSlot, nAddr);
 
             if (buf == null)
             {
                 return false;
             }
+            data.Gen.ToWritePtr(buf);
 
-            data.ToWritePtr(buf);
-            if (data.ID != DeviceConstants.ID_RANGEINFO)
+            if (data.Gen.ID != DeviceConstants.ID_RANGEINFO)
             {
                 MessageBox.Show("No match ID of ranges information.");
             }
@@ -1527,23 +1749,34 @@ namespace ZiveLab.ZM.ZIM
 
         public bool ProgConfigOfZim(int nSlot, ref stZimCfg data)
         {
-            data.ranges.ID = DeviceConstants.ID_RANGEINFO;
+            //data.ranges[0].ID = DeviceConstants.ID_RANGEINFO;
+            data.ranges.Gen.ID = DeviceConstants.ID_RANGEINFO; // 배열
 
-            if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM, nSlot,  0, data.ToByteArray()) == false)
+            if (Sifid == DeviceConstants.ID_ZIMCONFIG_1)
             {
+                stZimCfg_1 mcfg = new stZimCfg_1(0);
+                if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM, nSlot, 0, mcfg.ToByteArray()) == false)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (mComm.WriteToDevice(CommandSet.PROG_ZIM_ROM, nSlot, 0, data.ToByteArray()) == false)
+                {
 
-                return false;
+                    return false;
+                }
             }
             return true;
 
         }
- 
 
-        public bool ReadData(int nSlot, ref st_zim_rnginf data)
+        public bool ReadData(int nSlot, int nAddr, ref st_zim_rnginf data)
         {
             byte[] buf;
             if (isConnected == false) return false;
-            buf = mComm.ReadFromDevice(CommandSet.GET_RNGINFO, nSlot, (int)0);
+            buf = mComm.ReadFromDevice(CommandSet.GET_RNGINFO, nSlot, nAddr);
 
             if (buf == null)
             {
@@ -1551,8 +1784,8 @@ namespace ZiveLab.ZM.ZIM
                 return false;
             }
 
-            data.ToWritePtr(buf);
-            if (data.ID != DeviceConstants.ID_RANGEINFO)
+            data.Gen.ToWritePtr(buf);
+            if (data.Gen.ID != DeviceConstants.ID_RANGEINFO)
             {
                 MessageBox.Show("No match ID of ranges information.");
             }

@@ -1,0 +1,1075 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbsQ_x" xml:space="preserve">
+    <value>|Q|({0})</value>
+  </data>
+  <data name="Accumulate" xml:space="preserve">
+    <value>Accumulate</value>
+  </data>
+  <data name="Accumulate_Q" xml:space="preserve">
+    <value>Accumulate Q</value>
+  </data>
+  <data name="Accumulate_Wh" xml:space="preserve">
+    <value>Accumulate Wh</value>
+  </data>
+  <data name="Acc_d_E_Wh" xml:space="preserve">
+    <value>Acc. E(Wh)</value>
+  </data>
+  <data name="Acc_d_Qx" xml:space="preserve">
+    <value>Acc. Q({0})</value>
+  </data>
+  <data name="Acc_d_Q_x" xml:space="preserve">
+    <value>Acc. Q({0})</value>
+  </data>
+  <data name="Active_Area_Unit" xml:space="preserve">
+    <value>Active Area({0})</value>
+  </data>
+  <data name="Active_Area_x" xml:space="preserve">
+    <value>Active_Area({0})</value>
+  </data>
+  <data name="ACVGraph" xml:space="preserve">
+    <value>ACV Graph</value>
+  </data>
+  <data name="Add_Data_Files" xml:space="preserve">
+    <value>Add Data Files</value>
+  </data>
+  <data name="Add_Data_Folder" xml:space="preserve">
+    <value>Add Data Folder</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="All_Files" xml:space="preserve">
+    <value>All Files</value>
+  </data>
+  <data name="Analyzing" xml:space="preserve">
+    <value>Analyzing</value>
+  </data>
+  <data name="Application_Version" xml:space="preserve">
+    <value>Application Version</value>
+  </data>
+  <data name="Ascii_File" xml:space="preserve">
+    <value>Ascii File</value>
+  </data>
+  <data name="Ascii_Files" xml:space="preserve">
+    <value>Ascii Files</value>
+  </data>
+  <data name="Ascii_txt_csv" xml:space="preserve">
+    <value>Ascii (txt , csv)</value>
+  </data>
+  <data name="Aux1" xml:space="preserve">
+    <value>Aux1</value>
+  </data>
+  <data name="Aux10" xml:space="preserve">
+    <value>Aux10</value>
+  </data>
+  <data name="Aux101" xml:space="preserve">
+    <value>Aux10</value>
+  </data>
+  <data name="Aux11" xml:space="preserve">
+    <value>Aux11</value>
+  </data>
+  <data name="Aux111" xml:space="preserve">
+    <value>Aux11</value>
+  </data>
+  <data name="Aux12" xml:space="preserve">
+    <value>Aux12</value>
+  </data>
+  <data name="Aux121" xml:space="preserve">
+    <value>Aux12</value>
+  </data>
+  <data name="Aux13" xml:space="preserve">
+    <value>Aux1</value>
+  </data>
+  <data name="Aux2" xml:space="preserve">
+    <value>Aux2</value>
+  </data>
+  <data name="Aux21" xml:space="preserve">
+    <value>Aux2</value>
+  </data>
+  <data name="Aux3" xml:space="preserve">
+    <value>Aux3</value>
+  </data>
+  <data name="Aux31" xml:space="preserve">
+    <value>Aux3</value>
+  </data>
+  <data name="Aux4" xml:space="preserve">
+    <value>Aux4</value>
+  </data>
+  <data name="Aux41" xml:space="preserve">
+    <value>Aux4</value>
+  </data>
+  <data name="Aux5" xml:space="preserve">
+    <value>Aux5</value>
+  </data>
+  <data name="Aux51" xml:space="preserve">
+    <value>Aux5</value>
+  </data>
+  <data name="Aux6" xml:space="preserve">
+    <value>Aux6</value>
+  </data>
+  <data name="Aux61" xml:space="preserve">
+    <value>Aux6</value>
+  </data>
+  <data name="Aux7" xml:space="preserve">
+    <value>Aux7</value>
+  </data>
+  <data name="Aux71" xml:space="preserve">
+    <value>Aux7</value>
+  </data>
+  <data name="Aux8" xml:space="preserve">
+    <value>Aux8</value>
+  </data>
+  <data name="Aux81" xml:space="preserve">
+    <value>Aux8</value>
+  </data>
+  <data name="Aux9" xml:space="preserve">
+    <value>Aux9</value>
+  </data>
+  <data name="Aux91" xml:space="preserve">
+    <value>Aux9</value>
+  </data>
+  <data name="Auxiliary" xml:space="preserve">
+    <value>Auxiliary</value>
+  </data>
+  <data name="Auxiliary_V" xml:space="preserve">
+    <value>Auxiliary(V)</value>
+  </data>
+  <data name="AuxX_V" xml:space="preserve">
+    <value>Aux{0}(V)</value>
+  </data>
+  <data name="Average_V_Graph" xml:space="preserve">
+    <value>Average V Graph</value>
+  </data>
+  <data name="Axis_d_X" xml:space="preserve">
+    <value>Axis-X</value>
+  </data>
+  <data name="Axis_d_Yx" xml:space="preserve">
+    <value>Axis-Y{0}</value>
+  </data>
+  <data name="Base" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="BatteryId" xml:space="preserve">
+    <value>Battery ID</value>
+  </data>
+  <data name="Bode_Graph" xml:space="preserve">
+    <value>Bode Plot</value>
+  </data>
+  <data name="BZADataFiles" xml:space="preserve">
+    <value>BZA's data files</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Capacity_Unit" xml:space="preserve">
+    <value>Capacity({0})</value>
+  </data>
+  <data name="Capacity_x" xml:space="preserve">
+    <value>Capacity({0})</value>
+  </data>
+  <data name="CellType" xml:space="preserve">
+    <value>Cell Type</value>
+  </data>
+  <data name="Change_Capacity" xml:space="preserve">
+    <value>Change capacity</value>
+  </data>
+  <data name="Charge_P" xml:space="preserve">
+    <value>Charge P</value>
+  </data>
+  <data name="Charge_Q" xml:space="preserve">
+    <value>Charge Q</value>
+  </data>
+  <data name="Charge_Wh" xml:space="preserve">
+    <value>Charge Wh</value>
+  </data>
+  <data name="Chg_d_E_Wh" xml:space="preserve">
+    <value>Chg.E(Wh)</value>
+  </data>
+  <data name="Chg_d_LastV_V" xml:space="preserve">
+    <value>Chg.LastV(V)</value>
+  </data>
+  <data name="Chg_d_Qx" xml:space="preserve">
+    <value>Chg.Q({0})</value>
+  </data>
+  <data name="Chg_d_Q_sx" xml:space="preserve">
+    <value>Chg.Q_s({0})</value>
+  </data>
+  <data name="Chg_d_Vavg" xml:space="preserve">
+    <value>Chg. Vavg</value>
+  </data>
+  <data name="Ch_Q_NQ" xml:space="preserve">
+    <value>Ch Q/NQ</value>
+  </data>
+  <data name="Ch_Q_Q1" xml:space="preserve">
+    <value>Ch Q/Q1</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>Comma</value>
+  </data>
+  <data name="Complete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Converting_ddd" xml:space="preserve">
+    <value>Converting...</value>
+  </data>
+  <data name="Convert_To_Ascii_File" xml:space="preserve">
+    <value>Convert To Ascii File</value>
+  </data>
+  <data name="Convert_To_Excel_File" xml:space="preserve">
+    <value>Convert To Excel File</value>
+  </data>
+  <data name="Copy_Graph_Image_To_Clipboard" xml:space="preserve">
+    <value>Copy Graph Image To Clipboard</value>
+  </data>
+  <data name="Coulomb_Eff_d" xml:space="preserve">
+    <value>Coulomb Eff.</value>
+  </data>
+  <data name="Coulomb_Eff_d_p" xml:space="preserve">
+    <value>Coulomb Eff.(%)</value>
+  </data>
+  <data name="Cs_Cp_vs_TimeGraph" xml:space="preserve">
+    <value>Cs/Cp vs Time Graph</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="Current_A" xml:space="preserve">
+    <value>Current(A)</value>
+  </data>
+  <data name="Current_Range" xml:space="preserve">
+    <value>Current Range</value>
+  </data>
+  <data name="Current_vs_Voltage_Graph" xml:space="preserve">
+    <value>Current vs Voltage Graph</value>
+  </data>
+  <data name="Cursor_On_s_Off" xml:space="preserve">
+    <value>Cursor On/Off</value>
+  </data>
+  <data name="Cycle" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="Cycle_Data" xml:space="preserve">
+    <value>Cycle Data</value>
+  </data>
+  <data name="Cycle_Data_Report" xml:space="preserve">
+    <value>Cycle Data Report</value>
+  </data>
+  <data name="Cycle_No_d" xml:space="preserve">
+    <value>Cycle No.</value>
+  </data>
+  <data name="Cycle_Range" xml:space="preserve">
+    <value>Cycle Range</value>
+  </data>
+  <data name="Cycle_Time_s" xml:space="preserve">
+    <value>Cycle Time(s)</value>
+  </data>
+  <data name="Cyc_Time" xml:space="preserve">
+    <value>Cycle Time</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Data_Count" xml:space="preserve">
+    <value>Data Count</value>
+  </data>
+  <data name="Data_Files" xml:space="preserve">
+    <value>Data Files</value>
+  </data>
+  <data name="Data_File_Version" xml:space="preserve">
+    <value>Data File Version</value>
+  </data>
+  <data name="Data_Type" xml:space="preserve">
+    <value>Data Type</value>
+  </data>
+  <data name="Dchg_d_Vavg" xml:space="preserve">
+    <value>Dchg. Vavg</value>
+  </data>
+  <data name="Dch_Q_NQ" xml:space="preserve">
+    <value>Dch Q/NQ</value>
+  </data>
+  <data name="Dch_Q_Q1" xml:space="preserve">
+    <value>Dch Q/Q1</value>
+  </data>
+  <data name="Delimiter" xml:space="preserve">
+    <value>Delimiter</value>
+  </data>
+  <data name="Density_Mode_a_Change_Active_Area" xml:space="preserve">
+    <value>Density Mode - Change Active Area</value>
+  </data>
+  <data name="Device_Type" xml:space="preserve">
+    <value>Device Type</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="Discharge_P" xml:space="preserve">
+    <value>Discharge P</value>
+  </data>
+  <data name="Discharge_Q" xml:space="preserve">
+    <value>Discharge Q</value>
+  </data>
+  <data name="Discharge_Wh" xml:space="preserve">
+    <value>Discharge Wh</value>
+  </data>
+  <data name="Dischg_d_E_Wh" xml:space="preserve">
+    <value>Dischg.E(Wh)</value>
+  </data>
+  <data name="Dischg_d_LastV_V" xml:space="preserve">
+    <value>Dischg.LastV(V)</value>
+  </data>
+  <data name="Dischg_d_Qx" xml:space="preserve">
+    <value>Dischg.Q({0})</value>
+  </data>
+  <data name="Dischg_d_Q_sx" xml:space="preserve">
+    <value>Dischg.Q_s({0})</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="done" xml:space="preserve">
+    <value>done</value>
+  </data>
+  <data name="EIS_Data" xml:space="preserve">
+    <value>EIS Data</value>
+  </data>
+  <data name="EIS_Data_Report" xml:space="preserve">
+    <value>EIS Data Report</value>
+  </data>
+  <data name="Elapsed_Time" xml:space="preserve">
+    <value>Elapsed Time</value>
+  </data>
+  <data name="EndRestore" xml:space="preserve">
+    <value>Restoring is over.</value>
+  </data>
+  <data name="Energy" xml:space="preserve">
+    <value>Energy</value>
+  </data>
+  <data name="Energy_Eff_d" xml:space="preserve">
+    <value>Energy Eff.</value>
+  </data>
+  <data name="Energy_Eff_d_p" xml:space="preserve">
+    <value>Energy Eff.(%)</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Eoc_Temp_vs_TimeGraph" xml:space="preserve">
+    <value>Eoc/Temperature vs Time Graph</value>
+  </data>
+  <data name="Eoc_V" xml:space="preserve">
+    <value>Eoc(V)</value>
+  </data>
+  <data name="Eref_s_I_vs_Time_Graph" xml:space="preserve">
+    <value>Eref/I vs Time Graph</value>
+  </data>
+  <data name="Eref_vs_AbsQ_Graph" xml:space="preserve">
+    <value>Eref vs |Q| Graph</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error_Code_x" xml:space="preserve">
+    <value>Error Code : {0}</value>
+  </data>
+  <data name="Error_c_Open_failed" xml:space="preserve">
+    <value>Error : Open failed</value>
+  </data>
+  <data name="Error_c_Unsupported_file_format" xml:space="preserve">
+    <value>Error : Unsupported file format</value>
+  </data>
+  <data name="Excel_Files" xml:space="preserve">
+    <value>Excel Files</value>
+  </data>
+  <data name="Excel_Old_xls" xml:space="preserve">
+    <value>Excel 97-2003 Workbook (xls)</value>
+  </data>
+  <data name="Excel_Workbook_xlsx" xml:space="preserve">
+    <value>Excel Workbook (xlsx)</value>
+  </data>
+  <data name="Failed_File_Open" xml:space="preserve">
+    <value>Failed File Open</value>
+  </data>
+  <data name="File_creation_failed" xml:space="preserve">
+    <value>File creation failed</value>
+  </data>
+  <data name="File_Index" xml:space="preserve">
+    <value>File Index</value>
+  </data>
+  <data name="File_Information" xml:space="preserve">
+    <value>Data File Information</value>
+  </data>
+  <data name="File_No_d" xml:space="preserve">
+    <value>File No.</value>
+  </data>
+  <data name="File_Time" xml:space="preserve">
+    <value>File Time</value>
+  </data>
+  <data name="File_Time_s" xml:space="preserve">
+    <value>File Time(s)</value>
+  </data>
+  <data name="FinishRestore" xml:space="preserve">
+    <value>The restore operation has been completed.</value>
+  </data>
+  <data name="Firmware_Version" xml:space="preserve">
+    <value>Firmware Version</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Frequency_Hz" xml:space="preserve">
+    <value>Frequency(Hz)</value>
+  </data>
+  <data name="GeneralGraph" xml:space="preserve">
+    <value>General Graph</value>
+  </data>
+  <data name="General_Data" xml:space="preserve">
+    <value>General Data</value>
+  </data>
+  <data name="General_Data_Report" xml:space="preserve">
+    <value>General Data Report</value>
+  </data>
+  <data name="Graph" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="Graph_Axes_and_Data_Filter_Setting" xml:space="preserve">
+    <value>Graph Axes and Data Filter Setting</value>
+  </data>
+  <data name="Grid_On_s_Off" xml:space="preserve">
+    <value>Grid On/Off</value>
+  </data>
+  <data name="Idc_A" xml:space="preserve">
+    <value>Idc(A)</value>
+  </data>
+  <data name="IDLE" xml:space="preserve">
+    <value>IDLE</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Initialize_Graph_to_Original" xml:space="preserve">
+    <value>Initialize Graph to Original</value>
+  </data>
+  <data name="Invert" xml:space="preserve">
+    <value>Invert</value>
+  </data>
+  <data name="IR" xml:space="preserve">
+    <value>IR</value>
+  </data>
+  <data name="IR_ohm" xml:space="preserve">
+    <value>IR(ohm)</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Korean" xml:space="preserve">
+    <value>Korean</value>
+  </data>
+  <data name="Legend" xml:space="preserve">
+    <value>Legend</value>
+  </data>
+  <data name="Legend_On_s_Off" xml:space="preserve">
+    <value>Legend On/Off</value>
+  </data>
+  <data name="Line_On_s_Off" xml:space="preserve">
+    <value>Line On/Off</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Loaded" xml:space="preserve">
+    <value>Loaded</value>
+  </data>
+  <data name="Loading_ddd" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Load_ohm" xml:space="preserve">
+    <value>Load(Ω)</value>
+  </data>
+  <data name="Logarithm" xml:space="preserve">
+    <value>Logarithm</value>
+  </data>
+  <data name="Log_I" xml:space="preserve">
+    <value>Log I</value>
+  </data>
+  <data name="Major_Grid" xml:space="preserve">
+    <value>Major Grid</value>
+  </data>
+  <data name="Max_d_V" xml:space="preserve">
+    <value>Max. V</value>
+  </data>
+  <data name="Max_d_V_V" xml:space="preserve">
+    <value>Max. V(V)</value>
+  </data>
+  <data name="Memo" xml:space="preserve">
+    <value>Memo</value>
+  </data>
+  <data name="Minor_Grid" xml:space="preserve">
+    <value>Minor Grid</value>
+  </data>
+  <data name="Min_d_V" xml:space="preserve">
+    <value>Min. V</value>
+  </data>
+  <data name="Model_Name" xml:space="preserve">
+    <value>Model Name</value>
+  </data>
+  <data name="MsgAddSubDir" xml:space="preserve">
+    <value>Do you also want to add files in subfolders?</value>
+  </data>
+  <data name="Msg_AsciiConvOk" xml:space="preserve">
+    <value>The Ascii file conversion is complete. Do you want to open the file?</value>
+  </data>
+  <data name="Msg_CannotOpenSchFile" xml:space="preserve">
+    <value>Cannot open schedule file!</value>
+  </data>
+  <data name="Msg_DelSelRow_Q" xml:space="preserve">
+    <value>Delete selected row(s)?</value>
+  </data>
+  <data name="Msg_ExceedsOpenFiles" xml:space="preserve">
+    <value>Exceeds the number of open files.</value>
+  </data>
+  <data name="Msg_ExcelConvOk" xml:space="preserve">
+    <value>The Excel file conversion is complete. Do you want to open the file?</value>
+  </data>
+  <data name="Msg_InConverting" xml:space="preserve">
+    <value>It is being converted. Are you sure you want to terminate?</value>
+  </data>
+  <data name="Msg_InvalidFileName" xml:space="preserve">
+    <value>It contains a character that can not use the file name.</value>
+  </data>
+  <data name="Msg_NoSchInfor" xml:space="preserve">
+    <value>Schedule information is not exist.</value>
+  </data>
+  <data name="Msg_OpenNewDataEditor" xml:space="preserve">
+    <value>Do you want to open the saved file in another Data Editor?</value>
+  </data>
+  <data name="Msg_SameFile" xml:space="preserve">
+    <value>It has the same destination file in the list. Please check.</value>
+  </data>
+  <data name="Msg_SpecifySrcFile" xml:space="preserve">
+    <value>Please specify the source file first.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="No_BatchData" xml:space="preserve">
+    <value>No Batch Data</value>
+  </data>
+  <data name="Nyquist_Graph" xml:space="preserve">
+    <value>Nyquist Plot</value>
+  </data>
+  <data name="OCP_V" xml:space="preserve">
+    <value>OCP(V)</value>
+  </data>
+  <data name="OpenSIDataFile" xml:space="preserve">
+    <value>Open SI Data file.</value>
+  </data>
+  <data name="OpenSMDataFile" xml:space="preserve">
+    <value>Open SM Data File</value>
+  </data>
+  <data name="Open_Data_Editor" xml:space="preserve">
+    <value>Open Data Editor</value>
+  </data>
+  <data name="Open_Data_File" xml:space="preserve">
+    <value>Open Data File</value>
+  </data>
+  <data name="Open_Schedule_Editor" xml:space="preserve">
+    <value>Open Schedule Editor</value>
+  </data>
+  <data name="Open_Schedule_File" xml:space="preserve">
+    <value>Open Schedule File</value>
+  </data>
+  <data name="Order_Number" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="Pan_Mode" xml:space="preserve">
+    <value>Pan Mode</value>
+  </data>
+  <data name="Plot_Area" xml:space="preserve">
+    <value>Plot Area</value>
+  </data>
+  <data name="Point_On_s_Off" xml:space="preserve">
+    <value>Point On/Off</value>
+  </data>
+  <data name="Power" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="Power_W" xml:space="preserve">
+    <value>Power(W)</value>
+  </data>
+  <data name="Print_Data" xml:space="preserve">
+    <value>Print Data</value>
+  </data>
+  <data name="Print_Graph" xml:space="preserve">
+    <value>Print Graph</value>
+  </data>
+  <data name="Product_No_d" xml:space="preserve">
+    <value>Battery ID</value>
+  </data>
+  <data name="Q" xml:space="preserve">
+    <value>Q</value>
+  </data>
+  <data name="Q_vs_CycleN_Graph" xml:space="preserve">
+    <value>Q vs CycleN Graph</value>
+  </data>
+  <data name="Reading_ddd" xml:space="preserve">
+    <value>Reading...</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="Redraw" xml:space="preserve">
+    <value>Redraw</value>
+  </data>
+  <data name="Reload_Data_File" xml:space="preserve">
+    <value>Reload Data File</value>
+  </data>
+  <data name="Reload_Graph_From_File" xml:space="preserve">
+    <value>Reload Graph From File</value>
+  </data>
+  <data name="Remove_Selected_Item" xml:space="preserve">
+    <value>Remove Selected Item</value>
+  </data>
+  <data name="Resampling_ddd" xml:space="preserve">
+    <value>Resampling...</value>
+  </data>
+  <data name="Restoring" xml:space="preserve">
+    <value>Restoring</value>
+  </data>
+  <data name="Result_File" xml:space="preserve">
+    <value>Result File</value>
+  </data>
+  <data name="RsCs_vs_Freq_Graph" xml:space="preserve">
+    <value>Rs/Cs vs Frequency Graph</value>
+  </data>
+  <data name="Run_File_Explorer" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="Run_IVMAN" xml:space="preserve">
+    <value>Run IVMAN</value>
+  </data>
+  <data name="Run_IVMAN_Differential_Analysis" xml:space="preserve">
+    <value>Run IVMAN Differential Analysis</value>
+  </data>
+  <data name="Run_IVMan_Extractor" xml:space="preserve">
+    <value>Run IVMAN Extractor</value>
+  </data>
+  <data name="Run_IVMan_Peak_Find_Module" xml:space="preserve">
+    <value>Run IVMan Peak Find Module</value>
+  </data>
+  <data name="Run_IVMAN_Photovoltaic_a_Cell_Analysis" xml:space="preserve">
+    <value>Run IVMAN Photovoltaic-Cell Analysis</value>
+  </data>
+  <data name="Run_IVMan_Tafel_Analysis" xml:space="preserve">
+    <value>Run IVMan Tafel Analysis</value>
+  </data>
+  <data name="Run_Peak_Detector" xml:space="preserve">
+    <value>Run Peak Detector...</value>
+  </data>
+  <data name="Run_ZMan" xml:space="preserve">
+    <value>Run ZMAN</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="Save_Ascii_File" xml:space="preserve">
+    <value>Save Ascii File</value>
+  </data>
+  <data name="Save_As_Data_File" xml:space="preserve">
+    <value>Save As Data File</value>
+  </data>
+  <data name="Save_Error" xml:space="preserve">
+    <value>Save Error</value>
+  </data>
+  <data name="Save_Excel_File" xml:space="preserve">
+    <value>Save Excel File</value>
+  </data>
+  <data name="Saving_ddd" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="ScaleType" xml:space="preserve">
+    <value>ScaleType</value>
+  </data>
+  <data name="Schedule_File_Name" xml:space="preserve">
+    <value>Schedule File Name</value>
+  </data>
+  <data name="SearchVatSpecificCap" xml:space="preserve">
+    <value>Search voltage value at % capacity per cycle.</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Select_All_Items" xml:space="preserve">
+    <value>Select All Items</value>
+  </data>
+  <data name="Select_Current_Density" xml:space="preserve">
+    <value>Select Current Density</value>
+  </data>
+  <data name="Select_Normal_Current" xml:space="preserve">
+    <value>Select Normal Current</value>
+  </data>
+  <data name="Select_Specific_Current" xml:space="preserve">
+    <value>Select Specific Current</value>
+  </data>
+  <data name="Serial_Number" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="SIF_Firmware" xml:space="preserve">
+    <value>SIF Firmware</value>
+  </data>
+  <data name="SIF_Serial" xml:space="preserve">
+    <value>SIF Serial</value>
+  </data>
+  <data name="SIF_Version" xml:space="preserve">
+    <value>SIF Version</value>
+  </data>
+  <data name="Source_Data_File" xml:space="preserve">
+    <value>Source Data File</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="Specific_Mode_a_Change_Weight" xml:space="preserve">
+    <value>Specific Mode - Change Weight</value>
+  </data>
+  <data name="Splitting_ddd" xml:space="preserve">
+    <value>Splitting...</value>
+  </data>
+  <data name="Start_Convert" xml:space="preserve">
+    <value>Convert</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Step</value>
+  </data>
+  <data name="Step_Count" xml:space="preserve">
+    <value>Step Count</value>
+  </data>
+  <data name="Step_No_d" xml:space="preserve">
+    <value>Step No.</value>
+  </data>
+  <data name="Step_Time" xml:space="preserve">
+    <value>Step Time</value>
+  </data>
+  <data name="Step_Time_s" xml:space="preserve">
+    <value>Step Time(s)</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Stop_Convert" xml:space="preserve">
+    <value>Stop Convert</value>
+  </data>
+  <data name="Stop_Loading" xml:space="preserve">
+    <value>Stop Loading</value>
+  </data>
+  <data name="Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="Tech_File" xml:space="preserve">
+    <value>Tech. File</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="Temp_d_C" xml:space="preserve">
+    <value>Temp.('C)</value>
+  </data>
+  <data name="Tester" xml:space="preserve">
+    <value>Tester</value>
+  </data>
+  <data name="Test_Data_File" xml:space="preserve">
+    <value>Test Data File</value>
+  </data>
+  <data name="Test_Duration" xml:space="preserve">
+    <value>Test Duration</value>
+  </data>
+  <data name="Test_LastStatus" xml:space="preserve">
+    <value>Last Status</value>
+  </data>
+  <data name="Test_Time" xml:space="preserve">
+    <value>Test Time</value>
+  </data>
+  <data name="Test_Time_s" xml:space="preserve">
+    <value>Test Time(s)</value>
+  </data>
+  <data name="Uncheck_All_Items" xml:space="preserve">
+    <value>Uncheck All Items</value>
+  </data>
+  <data name="Unload_Selected_File_on_Graph" xml:space="preserve">
+    <value>Unload Selected File on Graph</value>
+  </data>
+  <data name="Unsupported_File_Format" xml:space="preserve">
+    <value>Unsupported File Format</value>
+  </data>
+  <data name="User_Stop" xml:space="preserve">
+    <value>User Stop</value>
+  </data>
+  <data name="Vavg" xml:space="preserve">
+    <value>Vavg</value>
+  </data>
+  <data name="Vdc_Temp_vs_TimeGraph" xml:space="preserve">
+    <value>Vdc/Temperature vs Time Graph</value>
+  </data>
+  <data name="Vdc_V" xml:space="preserve">
+    <value>Vdc(V)</value>
+  </data>
+  <data name="View_Cycle_Graph" xml:space="preserve">
+    <value>View Cycle Graph</value>
+  </data>
+  <data name="View_General_Graph" xml:space="preserve">
+    <value>View General Graph</value>
+  </data>
+  <data name="View_s_Hide_REST_Data" xml:space="preserve">
+    <value>View/Hide REST Data</value>
+  </data>
+  <data name="Voltage" xml:space="preserve">
+    <value>Voltage</value>
+  </data>
+  <data name="Voltage_V" xml:space="preserve">
+    <value>Voltage(V)</value>
+  </data>
+  <data name="Voltage_vs_LogI_Graph" xml:space="preserve">
+    <value>Voltage vs LogI Graph</value>
+  </data>
+  <data name="Waiting_ddd" xml:space="preserve">
+    <value>Waiting...</value>
+  </data>
+  <data name="Weight_g_" xml:space="preserve">
+    <value>Weight(g)</value>
+  </data>
+  <data name="Write_failed" xml:space="preserve">
+    <value>Write failed</value>
+  </data>
+  <data name="X_Axis" xml:space="preserve">
+    <value>X Axis</value>
+  </data>
+  <data name="Yx_Axis" xml:space="preserve">
+    <value>Y{0} Axis</value>
+  </data>
+  <data name="ZIM_Board" xml:space="preserve">
+    <value>ZIM Board</value>
+  </data>
+  <data name="ZIM_Firmware" xml:space="preserve">
+    <value>ZIM Firmware</value>
+  </data>
+  <data name="Zim_ohm" xml:space="preserve">
+    <value>Zim(ohm)</value>
+  </data>
+  <data name="ZIM_Serial" xml:space="preserve">
+    <value>ZIM Serial</value>
+  </data>
+  <data name="Zmag_ohm" xml:space="preserve">
+    <value>Zmag(ohm)</value>
+  </data>
+  <data name="Zoom_Mode" xml:space="preserve">
+    <value>Zoom Mode</value>
+  </data>
+  <data name="ZPhase_deg" xml:space="preserve">
+    <value>ZPhase(deg)</value>
+  </data>
+  <data name="Zre_ohm" xml:space="preserve">
+    <value>Zre(ohm)</value>
+  </data>
+  <data name="Zreal" xml:space="preserve">
+    <value>Zreal</value>
+  </data>
+  <data name="Zimage" xml:space="preserve">
+    <value>-Zimage</value>
+  </data>
+  <data name="Zmag" xml:space="preserve">
+    <value>|Z|</value>
+  </data>
+  <data name="ZPhase" xml:space="preserve">
+    <value>Z-Phase</value>
+  </data>
+  <data name="LogZmag" xml:space="preserve">
+    <value>Log|Z|</value>
+  </data>
+  <data name="Zre_Vdc_vs_TimeGraph" xml:space="preserve">
+    <value>Zre/Vdc vs Time Graph</value>
+  </data>
+  <data name="AuxBoardInfo" xml:space="preserve">
+    <value>Aux Board</value>
+  </data>
+  <data name="ChInfo" xml:space="preserve">
+    <value>Channel</value>
+  </data>
+  <data name="Test_PausedTime" xml:space="preserve">
+    <value>Paused Time</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="fileinfor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\fileinfor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ivman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\ivman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ivmandiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\ivmandiff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ivmansolar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\ivmansolar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ivmantafel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\ivmantafel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="open_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\open_folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pd1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\pd1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pfm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\pfm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Data_Report" xml:space="preserve">
+    <value>Data Report</value>
+  </data>
+  <data name="ivex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\ivex.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SIFInfo" xml:space="preserve">
+    <value>SIF Board</value>
+  </data>
+  <data name="Channel" xml:space="preserve">
+    <value>Channel</value>
+  </data>
+  <data name="Device" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="Frequency" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+</root>

@@ -74,6 +74,8 @@ namespace ZiveLab.ZM.ZIM
         ZBCS,
 	    [Description("CXM")]
         CXM,
+        [Description("MCBZA")]
+        MCBZA,
     }
 
     public enum eProductType
@@ -104,6 +106,8 @@ namespace ZiveLab.ZM.ZIM
         BZA100,
         [Description("BZA60")]
         BZA60,
+        [Description("BZAAUX1")]
+        BZAAUX1,
     }
 
     public enum eZimBoardType
@@ -120,6 +124,8 @@ namespace ZiveLab.ZM.ZIM
         BZA100,
         [Description("ZIM-MB-D")]
         BZA60,
+        [Description("ZIM-AUX-A")]
+        BZAAUX,
     }
 
     public enum eZimSnID
@@ -136,6 +142,8 @@ namespace ZiveLab.ZM.ZIM
         BZA100,
         [Description("IM6")]
         BZA60,
+        [Description("IM7")]
+        BZAAUX,
     }
 
     public enum enTestState
@@ -218,7 +226,7 @@ namespace ZiveLab.ZM.ZIM
         [Description("Measuring data")]
         ing,
         [Description("Processing FFT")]
-        fft,
+        fft, 
         [Description("Stopping")]
         stop,
         [Description("LOAD off")]
@@ -334,7 +342,7 @@ namespace ZiveLab.ZM.ZIM
 
     public enum enCurrentRange
     {
-        [Description("  2 A")]
+        [Description("  2A")]
         I2A = 0,
         [Description("400mA")]
         I400mA,

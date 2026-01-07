@@ -1,0 +1,4 @@
+create_clock -period 1000.00 -name {zimaux|clk_32MHz} -waveform [list 0.00 500.00] [get_nets clk_32MHz]
+create_clock -period 1000.00 -name {zimaux|clk_16MHz} -waveform [list 0.00 500.00] [get_nets clk_16MHz]
+set_false_path -from [get_clocks zimaux|clk_16MHz] -to [get_clocks zimaux|clk_32MHz]
+set_false_path -from [get_clocks zimaux|clk_32MHz] -to [get_clocks zimaux|clk_16MHz]

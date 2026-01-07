@@ -18,15 +18,16 @@ namespace ZiveLab.ZM
         public CommObj mCommZim;
         private string sSerial;
         private bool bconnect;
+        private bool bAux;
         private int ich;
-        public frmBurnZIM(string tSerial,int inch,bool tconnect = false)
+        public frmBurnZIM(string tSerial,int inch,bool tconnect = false, bool tbaux = false)
         {
             InitializeComponent();
 
             sSerial = tSerial;
             ich = inch;
             bconnect = tconnect;
-            
+            bAux = tbaux;
             this.Text = string.Format("Firmware change of FPGA in channel[{0}-{1}].", sSerial, ich+1);
            
             InitProgressStatus();
@@ -111,8 +112,17 @@ namespace ZiveLab.ZM
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
-            dlg.DefaultExt = "zim";
-            dlg.Filter = "zim files (*.zim)|*.zim|All files (*.*)|*.*";
+
+            if (bAux == true)
+            {
+                dlg.DefaultExt = "zimaux";
+                dlg.Filter = "zimaux files (*.zimaux)|*.zimaux|All files (*.*)|*.*";
+            }
+            else
+            {
+                dlg.DefaultExt = "zim";
+                dlg.Filter = "zim files (*.zim)|*.zim|All files (*.*)|*.*";
+            }
 
             dlg.InitialDirectory = gBZA.appcfg.PathZIMFW;
             dlg.FileName = gBZA.appcfg.FileNameZIMFW;
@@ -309,7 +319,12 @@ namespace ZiveLab.ZM
             lblBurn1.ForeColor = Color.Red;
             this.Refresh();
             if (bconnect == false)
-            { 
+            {
+                if (mCommZim.CmdResetFPGA(ich, true) == false)
+                {
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_CLR_FPGA_ICE].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
                 if (mCommZim.CmdConnectPromOfZIM(ich, Addr) == false)
                 {
                     MessageBox.Show("The command failed[DEFINE_COMMAND.CONN_FPGA_PROM].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -318,6 +333,11 @@ namespace ZiveLab.ZM
             }
             else
             {
+                if (MBZA_MapUtil.ResetFPGA(sSerial,ich, true) == false)
+                {
+                    MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_CLR_FPGA_ICE].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
                 if (MBZA_MapUtil.ConnectPromOfZIM(sSerial, ich, Addr) == false)
                 {
                     MessageBox.Show("The command failed[ConnectPromOfZIM].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -372,7 +392,7 @@ namespace ZiveLab.ZM
                     MessageBox.Show("The command failed[DEFINE_COMMAND.RESET_CLR_FPGA_ICE].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(200);
 
                 if (mCommZim.CheckFPGAofZIM(ich) == false)
                 {
@@ -398,9 +418,9 @@ namespace ZiveLab.ZM
                     return false;
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(200);
 
-                if (MBZA_MapUtil.VheckFPGAOfZIM(sSerial, ich) == false)
+                if (MBZA_MapUtil.CheckFPGAOfZIM(sSerial, ich) == false)
                 {
                     MessageBox.Show("The command failed[CheckFPGA].", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;

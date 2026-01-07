@@ -64,6 +64,7 @@ namespace ZiveLab.ZM
             mHead = new stResHeader(0);
 
             mRtData = new cls_rtdata();
+            
             prrdata = new double[3];
             prrdata[0] = 0.0;
             prrdata[1] = 0.0;
@@ -209,7 +210,6 @@ namespace ZiveLab.ZM
                 }
                 techtype = (enTechType1)tResfile.tmphead.tech.type;
                 sTechFile = tResfile.tmphead.GetTechFilename();
-
                 if (bSaveAs == false)
                 {
                     if (File.Exists(sTechFile))
@@ -977,7 +977,7 @@ namespace ZiveLab.ZM
                 stDefTestData[] data = new stDefTestData[tResfile.datacount];
                 int DataCount = tResfile.read(0, ref data, tResfile.datacount);
 
-                
+
 
                 FileStream fs;
 
@@ -1002,16 +1002,17 @@ namespace ZiveLab.ZM
                 str = string.Format("* Technique file:{0}", tResfile.tmphead.GetTechFilename());
                 sb.AppendLine(str);
 
-                
+
                 int share = tResfile.tmphead.tech.irange / DeviceConstants.MAX_IAC_RNGCNT;
                 int remain = tResfile.tmphead.tech.irange % DeviceConstants.MAX_IAC_RNGCNT;
 
-                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges.iac_rng[share].realmax, "A");
-                else str1 = SM_Number.ToRangeString(tResfile.tmphead.inf_sifch.ranges.iac_rng[share].realmax * tResfile.tmphead.inf_sifch.ranges.iac_rng[share].controlgain, "A");
-                
+                //if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].ranges[0].iac_rng[share].realmax, "A");
+                //else str1 = SM_Number.ToRangeString(tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].ranges[0].iac_rng[share].realmax * tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].ranges[0].iac_rng[share].controlgain, "A");
+                if (remain == 0) str1 = SM_Number.ToRangeString(tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].ranges.Gen.iac_rng[share].realmax, "A");
+                else str1 = SM_Number.ToRangeString(tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].ranges.Gen.iac_rng[share].realmax * tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].ranges.Gen.iac_rng[share].controlgain, "A"); // 배열
 
                 if (dch.useir == 0) str = string.Format("* Test condition: Discharge current({0})", str1);
-                else str = string.Format("* Test condition: Discharge current({0})/ IR Frequency({0:#0.###}Hz)", str1,dch.frequency);
+                else str = string.Format("* Test condition: Discharge current({0})/ IR Frequency({0:#0.###}Hz)", str1, dch.frequency);
 
                 sb.AppendLine(str);
                 sw.WriteLine(sb);
@@ -1233,11 +1234,13 @@ namespace ZiveLab.ZM
                     Cursor = Cursors.Default;
                     return false;
                 }
-                sSerial = tResfile.tmphead.inf_sif.GetSerialNumber();
+                sSerial = tResfile.tmphead.systemInfo.mSIFCfg.GetSerialNumber();
 
                 sCfgDirectory = gBZA.appcfg.PathRangeInfo;
-                sCfgFilename = tResfile.tmphead.inf_sifch.GetSerialNumber() + "_Ranges.xml";
 
+
+
+                sCfgFilename = tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch].GetSerialNumber() + "_Ranges.xml";
                 saveDlg.Title = "Save as device range information file.";
                 saveDlg.DefaultExt = "*.xml";
                 saveDlg.Filter = "device range information file(*.xml) |*.xml";
@@ -1252,13 +1255,16 @@ namespace ZiveLab.ZM
                     tResfile.CloseFile();
                     return false;
                 }
+
+
                 sCfgDirectory = Path.GetDirectoryName(saveDlg.FileName);
                 sCfgFilename = Path.GetFileName(saveDlg.FileName);
 
                 sCfgFullPath = Path.Combine(sCfgDirectory, sCfgFilename);
 
-                mRangeFile.parent.SetInformation(tResfile.tmphead.mInfo.Ch, sSerial, tResfile.tmphead.mInfo.sifch);
-                mRangeFile.ranges = tResfile.tmphead.inf_sifch.ranges;
+
+
+                mRangeFile.mZimCfg = tResfile.tmphead.systemInfo.mZimCfg[tResfile.tmphead.mInfo.sifch];
 
                 XmlSerializer writer = new XmlSerializer(mRangeFile.GetType());
 
@@ -1267,7 +1273,22 @@ namespace ZiveLab.ZM
                 writer.Serialize(file, mRangeFile);
 
                 file.Close();
+
+                for (int i=0; i< MBZA_Constant.MAX_AUX_BOARD; i++)
+                {
+                    sCfgFilename = tResfile.tmphead.systemInfo.mZimCfg[i + 1].GetSerialNumber() + "_Ranges.xml";
+                    sCfgFullPath = Path.Combine(sCfgDirectory, sCfgFilename);
+
+                    mRangeFile.mZimCfg = tResfile.tmphead.systemInfo.mZimCfg[i+1];
+
+                    file = new StreamWriter(sCfgFullPath);
+                    writer.Serialize(file, mRangeFile);
+
+                    file.Close();
+                }
+
                 tResfile.CloseFile();
+
             }
             catch (IOException ex)
             {
@@ -1600,7 +1621,7 @@ namespace ZiveLab.ZM
             sTemp = string.Format("* Last status: {0}\r\n", ((enStatError)head.mInfo.Error).GetDescription());
             sinfo += sTemp;
 
-            sTemp = string.Format("* Device: ZM's Ch-{0} [SIF({1})-Ch{2}({3})]\r\n", head.mInfo.Ch+1, head.inf_sif.GetSerialNumber(), head.mInfo.sifch+1, head.inf_sifch.info.GetSerialNumber());
+            sTemp = string.Format("* Device: ZM's Ch-{0} [SIF({1})-Ch{2}({3})]\r\n", head.mInfo.Ch + 1, head.systemInfo.mSIFCfg.GetSerialNumber(), head.mInfo.sifch + 1, head.systemInfo.mZimCfg[head.mInfo.sifch].info.GetSerialNumber());
             sinfo += sTemp;
 
             sTemp = string.Format("* Tecnnique<{0}>: {1}\r\n", Extensions.GetEnumDescription(enType), head.GetTechFilename());
@@ -1651,7 +1672,6 @@ namespace ZiveLab.ZM
 
         private void InitGraph()
         {
-
             grp1.ResetZoomPan();
 
             int nPlot = 1; //0206 0
@@ -1851,6 +1871,7 @@ namespace ZiveLab.ZM
 
             stDefTestData[] data = new stDefTestData[tResfile.datacount];
             int DataCount = tResfile.read(0, ref data, tResfile.datacount);
+            mRtData.ApplyUseChannel(tResfile.tmphead.systemInfo, tResfile.tmphead.mInfo.sifch);
 
             mRtData.Initialize(tResfile.tmphead.tech);
 
@@ -2252,12 +2273,12 @@ namespace ZiveLab.ZM
 
         private void RefreshGraphEIS()
         {
-            double maxval;
+         /*   double maxval;
             double minval;
             double cmpval;
 
-            int plotcount0 = mRtData.rtgrp.plot[3].ly[0].Count;
-            int plotcount1 = mRtData.rtgrp.plot[3].ly[1].Count;
+            int plotcount0 = mRtData.rtgrp.item[0].plot[3].ly[0].Count;
+            int plotcount1 = mRtData.rtgrp.item[0].plot[3].ly[1].Count;
 
             int nPlot = 1;
 
@@ -2356,13 +2377,13 @@ namespace ZiveLab.ZM
             }
 
             grp1.XAxes[0].Range = new Range(minval, maxval);
-            
+            */
         }
 
 
         private void RefreshGraphQIS()
         {
-            double maxval;
+         /*   double maxval;
             double minval;
             double cmpval;
 
@@ -2453,12 +2474,12 @@ namespace ZiveLab.ZM
             }
 
             grp1.XAxes[0].Range = new Range(minval, maxval);
-
+            */
         }
 
         private void RefreshGraphHFR()
         {
-            double maxval;
+         /*   double maxval;
             double minval;
             double cmpval;
 
@@ -2536,7 +2557,7 @@ namespace ZiveLab.ZM
             }
             grp1.YAxes[1].Range = new Range(minval, maxval);
 
-            RefreshGraphAxisTimeView(time);
+            RefreshGraphAxisTimeView(time);*/
         }
 
         private void RefreshGraphAxisTimeView(double time)
@@ -2567,7 +2588,7 @@ namespace ZiveLab.ZM
         private void RefreshGraphPRR()
         {
  
-            if (mRtData.arrcnt == 0) return;
+          /*  if (mRtData.arrcnt == 0) return;
 
             int plotcount = mRtData.rtgrp.plot[0].ly[0].Count;
             int st = 0;
@@ -2618,12 +2639,12 @@ namespace ZiveLab.ZM
                 }
                 
                 RefreshGraphAxisTimeView(time);
-            }
+            }*/
         }
 
         private void RefreshGraphMON()
         {
-            double maxval;
+          /*  double maxval;
             double minval;
             double cmpval;
 
@@ -2686,12 +2707,12 @@ namespace ZiveLab.ZM
             }
             grp1.YAxes[1].Range = new Range(minval, maxval);
 
-            RefreshGraphAxisTimeView(time);
+            RefreshGraphAxisTimeView(time);*/
         }
 
         private void RefreshGraphDCH()
         {
-            double maxval;
+        /*    double maxval;
             double minval;
             double cmpval;
 
@@ -2754,7 +2775,7 @@ namespace ZiveLab.ZM
             }
             grp1.YAxes[1].Range = new Range(minval, maxval);
 
-            RefreshGraphAxisTimeView(time);
+            RefreshGraphAxisTimeView(time);*/
         }
 
         private void RedrawGraph()
