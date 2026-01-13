@@ -55,7 +55,7 @@ namespace ZiveLab.ZM
                 bAuxCh = true;
                 nAuxCh = (sifch - 1) * 4 + rng;
                 this.Text = string.Format("Calibration DC voltage[AUXCH({2}-{3}):{0}] :: [{1}-{2}(SUBCH-{3})].", SM_Number.ToRangeString(p.mZimCfg[sifch].ranges.Aux.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1, rng + 1);
-                sTitle = string.Format("AUXCH{0}_VDC", rng + 1);
+                sTitle = string.Format("AUXBD{0}CH{1}_VDC", sifch,rng + 1);
                 InitView();
                 return;
             }

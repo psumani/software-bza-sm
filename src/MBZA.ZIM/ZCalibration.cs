@@ -128,6 +128,7 @@ namespace ZiveLab.ZM.ZIM.Analysis
                     return;
                 }
             }
+
             SolveLinearEquations(packet, Count);
 
             ApplyBestFitted(packet, ref fitpacket, Count);
@@ -143,7 +144,7 @@ namespace ZiveLab.ZM.ZIM.Analysis
             {
                 for (int j = 0; j < grpvars.nAuxChCount+1; j++)
                 {
-                    fitpacket[i].zData[j].mag /= vars[j+1].Gain;
+                    fitpacket[i].zData[j].mag /= vars[j].Gain;
                     fitpacket[i].zData[j].real = fitpacket[i].zData[j].mag * Math.Cos(fitpacket[i].zData[j].phase * ((double)DeviceConstants.PI / 180.0));
                     fitpacket[i].zData[j].img = fitpacket[i].zData[j].mag * Math.Sin(fitpacket[i].zData[j].phase * ((double)DeviceConstants.PI / 180.0));
                 }
@@ -155,15 +156,17 @@ namespace ZiveLab.ZM.ZIM.Analysis
             double[] dtotal = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             double[] dmax = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             double[] dmin = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            int[] Cnt = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             double Avg = 0.0;
             bool bres = true;
             int i = 0;
-            int Cnt = 0;
+
             for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 dtotal[i] = 0.0;
                 dmax[i] = -99999999999.9;
                 dmin[i] = 9999999999.0;
+                Cnt[i] = 0;
             }
             
 
@@ -178,28 +181,31 @@ namespace ZiveLab.ZM.ZIM.Analysis
                             dtotal[i] += item.zData[i].mag;
                             if (dmax[i] < item.zData[i].mag) dmax[i] = item.zData[i].mag;
                             if (dmin[i] > item.zData[i].mag) dmin[i] = item.zData[i].mag;
+                            Cnt[i]++;
                         }
                     }
-                    Cnt++;
                 }
             }
 
             for (i = 0; i < grpvars.nAuxChCount + 1; i++)
             {
-                if (dtotal[i] == 0.0) Avg = 0.0;
+                if (dtotal[i] == 0.0 || Cnt[i] == 0) Avg = 0.0;
                 else
                 {
-                    if (Cnt == 1) Avg = dtotal[i];
-                    else if (Cnt == 2) Avg = dtotal[i] / 2;
+                    if (Cnt[i] == 1) Avg = dtotal[i];
+                    else if (Cnt[i] == 2) Avg = dtotal[i] / 2;
                     else
                     {
                         Avg = (dtotal[i] - dmax[i] - dmin[i]);
-                        if (Avg > 0.0) Avg = Avg / ((Cnt - 2));
+                        if (Avg > 0.0) Avg = Avg / ((Cnt[i] - 2));
                     }
                 }
-                vars[i].Rtrue = Avg;
-                vars[i].Gain = Avg / dummy.R;
                 if (Avg <= 0.0) bres = false;
+                else
+                {
+                    vars[i].Rtrue = Avg;
+                    vars[i].Gain = Avg / dummy.R;
+                }
             }
             return bres;
         }

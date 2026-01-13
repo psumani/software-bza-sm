@@ -638,12 +638,12 @@
             // 
             this.grdpara.ColumnInfo = "2,1,0,0,0,105,Columns:0{Width:80;}\t1{Width:80;}\t";
             this.grdpara.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.grdpara.Location = new System.Drawing.Point(654, 10);
+            this.grdpara.Location = new System.Drawing.Point(651, 10);
             this.grdpara.Name = "grdpara";
             this.grdpara.Rows.Count = 12;
             this.grdpara.Rows.DefaultSize = 21;
             this.grdpara.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.grdpara.Size = new System.Drawing.Size(174, 221);
+            this.grdpara.Size = new System.Drawing.Size(195, 221);
             this.grdpara.StyleInfo = resources.GetString("grdpara.StyleInfo");
             this.grdpara.TabIndex = 39;
             // 
@@ -2464,7 +2464,7 @@
             // lblitem
             // 
             this.lblitem.AutoSize = true;
-            this.lblitem.Location = new System.Drawing.Point(651, 249);
+            this.lblitem.Location = new System.Drawing.Point(668, 249);
             this.lblitem.Name = "lblitem";
             this.lblitem.Size = new System.Drawing.Size(91, 14);
             this.lblitem.TabIndex = 98;
@@ -2473,9 +2473,9 @@
             // cboItem
             // 
             this.cboItem.FormattingEnabled = true;
-            this.cboItem.Location = new System.Drawing.Point(751, 244);
+            this.cboItem.Location = new System.Drawing.Point(765, 244);
             this.cboItem.Name = "cboItem";
-            this.cboItem.Size = new System.Drawing.Size(76, 22);
+            this.cboItem.Size = new System.Drawing.Size(79, 22);
             this.cboItem.TabIndex = 99;
             this.cboItem.SelectedIndexChanged += new System.EventHandler(this.cboItem_SelectedIndexChanged);
             // 

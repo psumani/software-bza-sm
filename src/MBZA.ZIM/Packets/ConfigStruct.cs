@@ -406,7 +406,31 @@ namespace ZiveLab.ZM.ZIM.Packets
             else if (str == "D") iret = eProductType.BZA1000;
             return iret;
         }
-        
+
+        public string GetModelName()
+        {
+            string sret;
+
+            sret = GetProductTypeString();
+            if ((eDeviceType)Type == eDeviceType.MBZA) sret += "M";
+            else if((eDeviceType)Type == eDeviceType.MCBZA) sret += "MC";
+            return sret;
+        }
+
+        public string GetModelDesc()
+        {
+            string sret;
+            eProductType prodType = GetProductType();
+            if (prodType == eProductType.BZA60) sret = "Maximum 60V";
+            else if (prodType == eProductType.BZA100) sret = "Maximum 100V";
+            else if (prodType == eProductType.BZA500) sret = "Maximum 500V";
+            else sret = "Maximum 1000V";
+            if ((eDeviceType)Type == eDeviceType.MBZA) sret += "/ Multi channel.";
+            else if ((eDeviceType)Type == eDeviceType.MCBZA) sret += "Multi auxiliary channel.";
+            else sret += "Single Channel.";
+            return sret;
+        }
+
         public string GetTypeString()
         {
             return Extensions.GetEnumDescription((eDeviceType)Type);

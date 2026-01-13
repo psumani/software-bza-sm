@@ -158,9 +158,15 @@ namespace ZiveLab.ZM
             int nAuxCh = -1;
 
             nPlot = 0;
-
-            grpvars.showitems[0].SetNiValue(0, grpvars.ni.show[0]);
-            grpvars.showitems[0].SetNiValue(1, grpvars.ni.show[1]);
+            if (grpvars.showitems[0].showni == false)
+            {
+                grpvars.showitems[0].SetNiValue(false);
+            }
+            else
+            {
+                grpvars.showitems[0].SetNiValue(0, grpvars.ni.show[0]);
+                grpvars.showitems[0].SetNiValue(1, grpvars.ni.show[1]);
+            }
             
             grp1.Plots[nPlot].Visible = grpvars.showitems[0].ni.show[0];
             grp1.Plots[nPlot + 1].Visible = grpvars.showitems[0].ni.show[1];
@@ -212,11 +218,17 @@ namespace ZiveLab.ZM
             int idx = SelBdItem - 1;
             int nAuxCh = -1;
 
-
-            grpvars.showitems[0].SetBodeValue(0, grpvars.bode.show[0]);
-            grpvars.showitems[0].SetBodeValue(1, grpvars.bode.show[1]);
-            grpvars.showitems[0].SetBodeValue(2, grpvars.bode.show[2]);
-            grpvars.showitems[0].SetBodeValue(3, grpvars.bode.show[3]);
+            if (grpvars.showitems[0].showbode == false)
+            {
+                grpvars.showitems[0].SetBodeValue(false);
+            }
+            else
+            {
+                grpvars.showitems[0].SetBodeValue(0, grpvars.bode.show[0]);
+                grpvars.showitems[0].SetBodeValue(1, grpvars.bode.show[1]);
+                grpvars.showitems[0].SetBodeValue(2, grpvars.bode.show[2]);
+                grpvars.showitems[0].SetBodeValue(3, grpvars.bode.show[3]);
+            }
 
             grp2.Plots[0].Visible = grpvars.showitems[0].bode.show[0];
             grp2.Plots[1].Visible = grpvars.showitems[0].bode.show[1];
@@ -226,7 +238,7 @@ namespace ZiveLab.ZM
             for (int i = 1; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nAuxCh = grpvars.showitems[i].nAuxCh;
-                if (grpvars.nAuxChCount == 0 || grpvars.showitems[i].bExist == false || grpvars.showitems[i].showni == false || nAuxCh < 0)
+                if (grpvars.nAuxChCount == 0 || grpvars.showitems[i].bExist == false || grpvars.showitems[i].showbode == false || nAuxCh < 0)
                 {
                     grpvars.showitems[i].SetBodeValue(false);
                 }
@@ -237,7 +249,7 @@ namespace ZiveLab.ZM
                     grpvars.showitems[i].SetBodeValue(2, grpvars.bode.show[2]);
                     grpvars.showitems[i].SetBodeValue(3, grpvars.bode.show[3]);
                 }
-                nPlot = i * 2;
+                nPlot = i * 4;
                 grp2.Plots[nPlot].Visible = grpvars.showitems[i].bode.show[0];
                 grp2.Plots[nPlot + 1].Visible = grpvars.showitems[i].bode.show[1];
                 grp2.Plots[nPlot + 2].Visible = grpvars.showitems[i].bode.show[2];
@@ -266,7 +278,7 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-                    Bdlegend.Items[idx * 4].Visible = grp2.Plots[idx * 2].Visible;
+                    Bdlegend.Items[idx * 4].Visible = grp2.Plots[idx * 4].Visible;
                     Bdlegend.Items[idx * 4 + 1].Visible = grp2.Plots[idx * 4 + 1].Visible;
                     Bdlegend.Items[idx * 4 + 2].Visible = grp2.Plots[idx * 4 + 2].Visible;
                     Bdlegend.Items[idx * 4 + 3].Visible = grp2.Plots[idx * 4 + 3].Visible;
@@ -351,7 +363,7 @@ namespace ZiveLab.ZM
                 grpvars.tRng = 0;
                 bSelectRng = true;
             }
-            grpvars.CRng = grpvars.tRng / 2;
+            grpvars.CRng = grpvars.tRng/2;
             if ((grpvars.tRng % 2) > 0)
             {
                 grpvars.OtherRng = grpvars.tRng-1;
@@ -382,16 +394,14 @@ namespace ZiveLab.ZM
             
             grpvars.showitems[0].bExist = true;
             grpvars.showitems[0].SetValue(true);
+            ChkBoxNi[0].Text = "Main";
+            ChkBoxBd[0].Text = "Main";
             ChkBoxNi[0].Visible = true;
             ChkBoxNi[0].Checked = true;
             ChkBoxBd[0].Visible = true;
             ChkBoxBd[0].Checked = true;
 
-            grpvars.showitems[0].mDummy = ranges[0].Gen.mDummy[grpvars.tRng];
-            grpvars.showitems[0].mInfo = ranges[0].Gen.mEisIRngCalInfo[grpvars.tRng];
-            grpvars.showitems[0].gain1 = ranges[0].Gen.iac_rng[grpvars.CRng].gain1;
-            grpvars.showitems[0].gain2 = ranges[0].Gen.iac_rng[grpvars.CRng].gain2;
-
+            idx = 1;
             for (i = 1; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 grpvars.showitems[i].bExist = false;
@@ -404,10 +414,16 @@ namespace ZiveLab.ZM
                 ChkBoxBd[i].Visible = false;
                 ChkBoxBd[i].Checked = false;
             }
+
+            grpvars.showitems[0].mDummy = ranges[0].Gen.mDummy[grpvars.tRng];
+            grpvars.showitems[0].mInfo = ranges[0].Gen.mEisIRngCalInfo[grpvars.tRng];
+            grpvars.showitems[0].gain1 = ranges[0].Gen.iac_rng[grpvars.CRng].gain1;
+            grpvars.showitems[0].gain2 = ranges[0].Gen.iac_rng[grpvars.CRng].gain2;
+
             idx = 1;
             for (i = 1; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
-                nAuxBd = (i - 1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                nAuxBd = (i - 1) / MBZA_Constant.MAX_AUX_CHANNEL+1;
                 nAuxBdCh = (i - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
                 if (gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.EnaZIM[nAuxBd] == 1
                     && gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.ChkZIM[nAuxBd] == 1
@@ -640,8 +656,7 @@ namespace ZiveLab.ZM
         private void LoadFile()
         {
             int oldcycel = -1;
-            int auxbd;
-            int auxbdch;
+ 
             bool[] ChkCalib = new bool[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
 
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
@@ -658,6 +673,7 @@ namespace ZiveLab.ZM
 
             mRtGrp.Initialize();
             mRtData.Initialize(mlogfile.tmphead.tech);
+
             listPacket.Clear();
 
             grdlist.Redraw = false;
@@ -686,86 +702,61 @@ namespace ZiveLab.ZM
 
                 stDefTestData[] data = new stDefTestData[mlogfile.datacount];
                 DataCount = mlogfile.read(0, ref data, mlogfile.datacount);
+                mlogfile.CloseFile();
 
                 if (DataCount != mlogfile.datacount)
                 {
                     MessageBox.Show("Failed to read all data.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    usefile = false;
+                    return;
                 }
                 grdlist.Rows.Count = DataCount + 2;
-                
                 mRtData.Append(data, DataCount, ref oldcycel);
-                st_zim_zPacket mpacket = new st_zim_zPacket(0);
 
-                for (int i = 0; i < DataCount; i++)
-                {
-                    mpacket.freq = data[i].fFreq;
-                    mpacket.zData[0].real = data[i].real;
-                    mpacket.zData[0].img = data[i].img;
-                    mpacket.zData[0].mag = Math.Sqrt(mpacket.zData[0].real * mpacket.zData[0].real + mpacket.zData[0].img * mpacket.zData[0].img);
-                    mpacket.zData[0].phase = Math.Atan2(mpacket.zData[0].img, mpacket.zData[0].real) * 180.0 / DeviceConstants.PI;
-                    for (int j = 0; j < grpvars.nAuxChCount; j++)
-                    {
-                        auxbd = grpvars.showitems[j].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL;
-                        auxbdch = grpvars.showitems[j].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
-                        mpacket.zData[j+1].real = data[i].mdata[auxbd].mdata[auxbdch].Zre;
-                        mpacket.zData[j+1].img = data[i].mdata[auxbd].mdata[auxbdch].Zim;
-                        mpacket.zData[j+1].mag = Math.Sqrt(mpacket.zData[j+1].real * mpacket.zData[j+1].real + mpacket.zData[j+1].img * mpacket.zData[j+1].img);
-                        mpacket.zData[j+1].phase = Math.Atan2(mpacket.zData[j+1].img, mpacket.zData[j+1].real) * 180.0 / DeviceConstants.PI;
-                    }
-                 
-                    listPacket.Add(mpacket);
+                ProcApplyListPacket();
 
-                    grdlist[i + 2, 0] = i + 1;
-                    grdlist[i + 2, 1] = GetDataString(mpacket.freq);
+                fititems = listPacket.ToArray();
 
-                    grdlist[i + 2, 2] = GetDataString(mpacket.zData[SelItem].real);
-                    grdlist[i + 2, 3] = GetDataString(mpacket.zData[SelItem].img);
-
-                    grdlist[i + 2, 4] = GetDataString(mpacket.zData[SelItem].mag);
-                    grdlist[i + 2, 5] = GetDataString(mpacket.zData[SelItem].phase);
-
-                    if (ChkCalib[SelItem] == false)
-                    {
-                        grdlist[i + 2, 6] = GetDataString(mpacket.zData[SelItem].real);
-                        grdlist[i + 2, 7] = GetDataString(mpacket.zData[SelItem].img);
-
-                        grdlist[i + 2, 8] = GetDataString(mpacket.zData[SelItem].mag);
-                        grdlist[i + 2, 9] = GetDataString(mpacket.zData[SelItem].phase);
-                    }
-
-                    for (int j = 0; j < grpvars.nAuxChCount+1; j++)
-                    {
-                        if (ChkCalib[j] == false)
-                        {
-                            auxbd = grpvars.showitems[j].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL;
-                            auxbdch = grpvars.showitems[j].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
-
-
-
-                            mRtGrp.item[j].plot[0].lx[0].Add(mpacket.zData[j].real);
-                            mRtGrp.item[j].plot[0].ly[0].Add(mpacket.zData[j].img * -1.0);
-
-                            mRtGrp.item[j].plot[2].lx[0].Add(mpacket.freq);
-                            mRtGrp.item[j].plot[2].ly[0].Add(mpacket.zData[j].mag);
-                            mRtGrp.item[j].plot[3].lx[0].Add(mpacket.freq);
-                            mRtGrp.item[j].plot[3].ly[0].Add(mpacket.zData[j].phase);
-
-
-                            mpacket.zData[j].real = data[i].mdata[auxbd].mdata[auxbdch].Zre;
-                            mpacket.zData[j].img = data[i].mdata[auxbd].mdata[auxbdch].Zim;
-                            mpacket.zData[j].mag = Math.Sqrt(mpacket.zData[j].real * mpacket.zData[j].real + mpacket.zData[j].img * mpacket.zData[j].img);
-                            mpacket.zData[j].phase = Math.Atan2(mpacket.zData[j].img, mpacket.zData[j].real) * 180.0 / DeviceConstants.PI;
-                        }
-                    }
-                }
                 if (ChkCalib[0] == true)
                 {
                     ProcApplyFitting();
                 }
 
+                mRtGrp.Initialize();
+
+                for (int i = 0; i < DataCount; i++)
+                {
+                    for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
+                    {
+                        mRtGrp.item[j].plot[0].lx[0].Add(fititems[i].zData[j].real);
+                        mRtGrp.item[j].plot[0].ly[0].Add(fititems[i].zData[j].img * -1.0);
+                        mRtGrp.item[j].plot[2].lx[0].Add(fititems[i].freq);
+                        mRtGrp.item[j].plot[2].ly[0].Add(fititems[i].zData[j].mag);
+                        mRtGrp.item[j].plot[3].lx[0].Add(fititems[i].freq);
+                        mRtGrp.item[j].plot[3].ly[0].Add(fititems[i].zData[j].phase);
+                    }
+                }
+
+                for (int i = 0; i < DataCount; i++)
+                {
+                    grdlist[i + 2, 0] = i + 1;
+
+                    grdlist[i + 2, 1] = GetDataString(mRtData.rtgrp.item[SelItem].plot[2].lx[0][i]);
+
+                    grdlist[i + 2, 2] = GetDataString(mRtData.rtgrp.item[SelItem].plot[0].lx[0][i]);
+                    grdlist[i + 2, 3] = GetDataString(mRtData.rtgrp.item[SelItem].plot[0].ly[0][i]);
+
+                    grdlist[i + 2, 4] = GetDataString(mRtData.rtgrp.item[SelItem].plot[2].ly[0][i]);
+                    grdlist[i + 2, 5] = GetDataString(mRtData.rtgrp.item[SelItem].plot[3].ly[0][i]);
+
+                    grdlist[i + 2, 6] = GetDataString(mRtGrp.item[SelItem].plot[0].lx[0][i]);
+                    grdlist[i + 2, 7] = GetDataString(mRtGrp.item[SelItem].plot[0].ly[0][i]);
+
+                    grdlist[i + 2, 8] = GetDataString(mRtGrp.item[SelItem].plot[2].ly[0][i]);
+                    grdlist[i + 2, 9] = GetDataString(mRtGrp.item[SelItem].plot[3].ly[0][i]);
+                }
                 RefreshGraphEIS();
-                DataCount = 0;
-                mlogfile.CloseFile();
+                
             }
             else
             {
@@ -774,6 +765,45 @@ namespace ZiveLab.ZM
             grdlist.Redraw = true;
         }
 
+        private void ProcApplyListPacket()
+        {
+            int itemidx;
+            st_zim_rt rtgrp = new st_zim_rt();
+
+            if (usefile == true)
+            {
+                rtgrp = mRtData.rtgrp;
+            }
+            else
+            {
+                if ((enTechType)gBZA.SifLnkLst[Serial].MBZAIF.Oldtech[sifch].type == enTechType.TECH_EIS &&
+                      gBZA.SifLnkLst[Serial].MBZAIF.OldCondfilename[sifch] == gBZA.SifLnkLst[Serial].MBZAIF.calcondfilename[sifch])
+                {
+                    rtgrp = gBZA.SifLnkLst[Serial].MBZAIF.mChRtGrp[sifch].rtgrp;
+                }
+            }
+
+            listPacket.Clear();
+            st_zim_zPacket mpacket;
+            for (int i = 0; i < DataCount; i++)
+            {
+                mpacket = new st_zim_zPacket(0);
+                mpacket.freq = rtgrp.item[SelItem].plot[2].lx[0][i]; ;
+                mpacket.zData[0].real = rtgrp.item[0].plot[0].lx[0][i];
+                mpacket.zData[0].img = rtgrp.item[0].plot[0].ly[0][i] * -1.0;
+                mpacket.zData[0].mag = rtgrp.item[0].plot[2].ly[0][i]; //Math.Sqrt(mpacket.zData[0].real * mpacket.zData[0].real + mpacket.zData[0].img * mpacket.zData[0].img);
+                mpacket.zData[0].phase = rtgrp.item[0].plot[3].ly[0][i];//Math.Atan2(mpacket.zData[0].img, mpacket.zData[0].real) * 180.0 / DeviceConstants.PI;
+                for (int j = 0; j < grpvars.nAuxChCount; j++)
+                {
+                    itemidx = j + 1;
+                    mpacket.zData[itemidx].real = rtgrp.item[itemidx].plot[0].lx[0][i];
+                    mpacket.zData[itemidx].img = rtgrp.item[itemidx].plot[0].ly[0][i] * -1.0; 
+                    mpacket.zData[itemidx].mag = rtgrp.item[itemidx].plot[2].ly[0][i]; //Math.Sqrt(mpacket.zData[itemidx].real * mpacket.zData[itemidx].real + mpacket.zData[itemidx].img * mpacket.zData[itemidx].img);
+                    mpacket.zData[itemidx].phase = rtgrp.item[itemidx].plot[3].ly[0][i]; //Math.Atan2(mpacket.zData[itemidx].img, mpacket.zData[itemidx].real) * 180.0 / DeviceConstants.PI;
+                }
+                listPacket.Add(mpacket);
+            }
+        }
 
         private void ProcApplyFitting()
         {
@@ -789,8 +819,6 @@ namespace ZiveLab.ZM
             ZCalibration zCal = new ZCalibration(items, ref fititems, items.Length, grpvars);
 
             zCal.ApplyGain(ref fititems, fititems.Length);
-
-            RefreshChangeTestData(fititems);
         }
 
         private void ApplyInductance(ref st_zim_zPacket[] packet1, ref st_zim_zPacket[] packet2, int Count, double dLs)
@@ -814,7 +842,6 @@ namespace ZiveLab.ZM
        
         private void ProcFitting()
         {
-            int crng = grpvars.tRng / 2;
             int nAuxBd;
             int nAuxBdCh;
 
@@ -841,30 +868,28 @@ namespace ZiveLab.ZM
                 return;
             }
             zCal.ApplyGain(ref fititems, fititems.Length);
+
+
             RefreshChangeTestData(fititems);
 
-            for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
+            for (int j = 0; j < grpvars.nAuxChCount+1; j++)
             {
-                if(j == 0)
+                if (j == 0)
                 {
-                    ranges[j].Gen.iac_rng[crng].gain1 = zCal.vars[j].Gain;
-                    ranges[j].Gen.iac_rng[crng].gain2 = zCal.vars[j].Gain;
-                    zCal.vars[j].GetInformation(ref ranges[0].Gen.mEisIRngCalInfo[grpvars.CRng]);
+                    ranges[0].Gen.iac_rng[grpvars.CRng].gain1 = zCal.vars[j].Gain;
+                    ranges[0].Gen.iac_rng[grpvars.CRng].gain2 = zCal.vars[j].Gain;
+                    zCal.vars[j].GetInformation(ref ranges[0].Gen.mEisIRngCalInfo[grpvars.tRng]);
                     zCal.vars[j].GetInformation(ref ranges[0].Gen.mEisIRngCalInfo[grpvars.OtherRng]);
                 }
                 else
                 {
-
-                        nAuxBd = grpvars.showitems[j].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
-                        nAuxBdCh = grpvars.showitems[j].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
-
-                        ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[crng].iac_gain1 = zCal.vars[j].Gain;
-                        ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[crng].iac_gain2 = zCal.vars[j].Gain;
-
-                        zCal.vars[j].GetInformation(ref ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.CRng]);
-                        zCal.vars[j].GetInformation(ref ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.OtherRng]);
-                    
-                }
+                    nAuxBd = grpvars.showitems[j].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                    nAuxBdCh = grpvars.showitems[j].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
+                    ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain1 = zCal.vars[j].Gain;
+                    ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain2 = zCal.vars[j].Gain;
+                    zCal.vars[j].GetInformation(ref ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.tRng]);
+                    zCal.vars[j].GetInformation(ref ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.OtherRng]);
+                }                grpvars.showitems[j].gain1 = zCal.vars[j].Gain;
                 grpvars.showitems[j].gain1 = zCal.vars[j].Gain;
                 grpvars.showitems[j].gain2 = zCal.vars[j].Gain;
                 zCal.vars[j].GetInformation(ref grpvars.showitems[j].mInfo);
@@ -1583,9 +1608,9 @@ namespace ZiveLab.ZM
             if(ChgSelItem != SelItem)
             {
                 SelItem = ChgSelItem;
+                RefreshPara();
                 if (brun == false) RefreshRt();
                 InitDataList();
-
             }
 
 
@@ -1914,7 +1939,7 @@ namespace ZiveLab.ZM
             grdpara.Cols[0].AllowDragging = false;
 
             grdpara[0, 1] = "Value";
-            grdpara.Cols[1].Width = 80;
+            grdpara.Cols[1].Width = 100;
             grdpara.Cols[1].DataType = typeof(double);
             grdpara.Cols[1].TextAlignFixed = TextAlignEnum.CenterCenter;
             grdpara.Cols[1].AllowEditing = true;
@@ -1953,16 +1978,16 @@ namespace ZiveLab.ZM
             if (SelItem == 0)
             {
                 mInfo = ranges[0].Gen.mEisIRngCalInfo[grpvars.tRng];
-                if ((grpvars.tRng % 2) == 0) gain = ranges[0].Gen.iac_rng[grpvars.tRng / 2].gain1;
-                else gain = ranges[0].Gen.iac_rng[grpvars.tRng / 2].gain2;
+                if ((grpvars.tRng % 2) == 0) gain = ranges[0].Gen.iac_rng[grpvars.CRng].gain1;
+                else gain = ranges[0].Gen.iac_rng[grpvars.CRng].gain2;
             }
             else
             {
                 nAuxBd = (SelItem - 1) / MBZA_Constant.MAX_AUX_CHANNEL + 1;
                 nAuxBdCh = (SelItem - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
                 mInfo = ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.tRng];
-                if ((grpvars.tRng % 2) == 0) gain = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.tRng / 2].iac_gain1;
-                else gain = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.tRng / 2].iac_gain2;
+                if ((grpvars.tRng % 2) == 0) gain = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain1;
+                else gain = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain2;
             }
 
 
@@ -2066,17 +2091,16 @@ namespace ZiveLab.ZM
         private void RefreshDataList()
         {
             st_zim_rt rtgrp = new st_zim_rt();
-            st_zim_zPacket mpacket = new st_zim_zPacket(0);
             stChStatusInf chstat = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch];
             stChStatusInf[] bdstat = gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf;
-
+            bool bRefresh = false;
             if (usefile == true)
             {
                 rtgrp = mRtData.rtgrp;
                 if (rtgrp.item[0].plot[3].ly[0].Count != DataCount)
                 {
                     DataCount = rtgrp.item[0].plot[3].ly[0].Count;
-                    RefreshGraphEIS();
+                    bRefresh = true;
                 }
             }
             else
@@ -2096,53 +2120,38 @@ namespace ZiveLab.ZM
                 if (rtgrp.item[0].plot[3].ly[0].Count != DataCount)
                 {
                     DataCount = rtgrp.item[0].plot[3].ly[0].Count;
-
-                    grdlist.Redraw = false;
-
-                    int grdrowcount = grdlist.Rows.Count - 2;
-                    grdlist.Rows.Count = DataCount + 2;
-
-                    for (int row = grdrowcount; row < DataCount; row++)
-                    {
-                        if (usefile == false)
-                        {
-                            mpacket.freq = rtgrp.item[SelItem].plot[0].freq[0][row];
-                            mpacket.zData[SelItem].real = rtgrp.item[SelItem].plot[0].lx[0][row];
-                            mpacket.zData[SelItem].img = rtgrp.item[SelItem].plot[0].ly[0][row] * -1.0;
-                            mpacket.zData[SelItem].mag = rtgrp.item[SelItem].plot[2].ly[0][row];
-                            mpacket.zData[SelItem].phase = rtgrp.item[SelItem].plot[3].ly[0][row];
-
-                            mRtGrp.item[SelItem].plot[0].lx[0].Add(mpacket.zData[SelItem].real);
-                            mRtGrp.item[SelItem].plot[0].ly[0].Add(mpacket.zData[SelItem].img * -1.0);
-
-                            mRtGrp.item[SelItem].plot[2].lx[0].Add(mpacket.freq);
-                            mRtGrp.item[SelItem].plot[2].ly[0].Add(mpacket.zData[SelItem].mag);
-                            mRtGrp.item[SelItem].plot[3].lx[0].Add(mpacket.freq);
-                            mRtGrp.item[SelItem].plot[3].ly[0].Add(mpacket.zData[SelItem].phase);
-
-                            listPacket.Add(mpacket);
-                        }
-
-                        grdlist[row + 2, 0] = row + 1;
-
-                        grdlist[row + 2, 1] = GetDataString(rtgrp.item[SelItem].plot[2].lx[0][row]);
-
-                        grdlist[row + 2, 2] = GetDataString(rtgrp.item[SelItem].plot[0].lx[0][row]);
-                        grdlist[row + 2, 3] = GetDataString(rtgrp.item[SelItem].plot[0].ly[0][row]);
-
-                        grdlist[row + 2, 4] = GetDataString(rtgrp.item[SelItem].plot[2].ly[0][row]);
-                        grdlist[row + 2, 5] = GetDataString(rtgrp.item[SelItem].plot[3].ly[0][row]);
-
-                        grdlist[row + 2, 6] = GetDataString(rtgrp.item[SelItem].plot[0].lx[0][row]);
-                        grdlist[row + 2, 7] = GetDataString(rtgrp.item[SelItem].plot[0].ly[0][row]);
-
-                        grdlist[row + 2, 8] = GetDataString(rtgrp.item[SelItem].plot[2].ly[0][row]);
-                        grdlist[row + 2, 9] = GetDataString(rtgrp.item[SelItem].plot[3].ly[0][row]);
-                    }
-
-                    grdlist.Redraw = true;
-                    RefreshGraphEIS();
+                    bRefresh = true;
                 }
+            }
+
+            int grdrowcount = grdlist.Rows.Count - 2;
+
+            if (bRefresh || DataCount != grdrowcount)
+            { 
+                grdlist.Redraw = false;
+                grdlist.Rows.Count = DataCount + 2;
+
+                for (int row = grdrowcount; row < DataCount; row++)
+                {
+                    grdlist[row + 2, 0] = row + 1;
+
+                    grdlist[row + 2, 1] = GetDataString(rtgrp.item[SelItem].plot[2].lx[0][row]);
+
+                    grdlist[row + 2, 2] = GetDataString(rtgrp.item[SelItem].plot[0].lx[0][row]);
+                    grdlist[row + 2, 3] = GetDataString(rtgrp.item[SelItem].plot[0].ly[0][row]);
+
+                    grdlist[row + 2, 4] = GetDataString(rtgrp.item[SelItem].plot[2].ly[0][row]);
+                    grdlist[row + 2, 5] = GetDataString(rtgrp.item[SelItem].plot[3].ly[0][row]);
+
+                    grdlist[row + 2, 6] = GetDataString(rtgrp.item[SelItem].plot[0].lx[0][row]);
+                    grdlist[row + 2, 7] = GetDataString(rtgrp.item[SelItem].plot[0].ly[0][row]);
+
+                    grdlist[row + 2, 8] = GetDataString(rtgrp.item[SelItem].plot[2].ly[0][row]);
+                    grdlist[row + 2, 9] = GetDataString(rtgrp.item[SelItem].plot[3].ly[0][row]);
+                }
+
+                grdlist.Redraw = true;
+                RefreshGraphEIS();
             }
         }
         
@@ -2180,6 +2189,8 @@ namespace ZiveLab.ZM
         
         private void lnkCalculate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            ProcApplyListPacket();
+
             ProcFitting();
 
             RefreshPara();
@@ -2275,75 +2286,17 @@ namespace ZiveLab.ZM
         private void lnksave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            int iacrng = (int)Math.Floor((double)(grpvars.tRng / 2));
             bool res = false;
             string sitem;
             //gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(ranges.ToByteArray());
-            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.ToWritePtr(ranges[0].ToByteArray()); // 배열
-            if(grpvars.bAux == true)
-            {
-                for (int i = 0; i < MBZA_Constant.MAX_AUX_BOARD; i++)
-                    gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[i + 1].ranges.Aux.ToWritePtr(ranges[i+1].Aux.ToByteArray());
+            gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(ranges[0].ToByteArray()); // 배열
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_BOARD; i++)
+                gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[i + 1].ranges.ToWritePtr(ranges[i + 1].ToByteArray());
+
+            if (grpvars.nAuxChCount > 0)
                 res = MBZA_MapUtil.Save_MCBZA_Range_info(Serial, sifch);
-            }
-            else res = MBZA_MapUtil.Save_Range_info(Serial, sifch);
-
-            gBZA.UpdateLastCalDate(Serial);
-
-            string sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber());
-            string sTitle = string.Format("EIS-{0}", iacrng + 1);
-
-            double drepfeq = 0.0;
-            double drepmag = 0.0;
-            double drepphase = 0.0;
-            double crngval = ranges[0].Gen.iac_rng[iacrng].realmax;
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                sitem = string.Format("Range{0}",i);
-                gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, crngval);
-                //sitem = string.Format("DummyR{0}", i);
-                //gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mDummy[rng].R);
-                sitem = string.Format("Frequency{0}", i);
-                gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, drepfeq);
-                sitem = string.Format("Zmag{0}", i);
-                gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, drepmag);
-                sitem = string.Format("Zphase{0}", i);
-                gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, drepphase);
-            }
-
-            if ((grpvars.tRng % 2) > 0)
-            {
-                crngval *= ranges[0].Gen.iac_rng[iacrng].controlgain;
-            }
-            if (fititems != null)
-            {
-                for (int i = 0; i < fititems.Length; i++)
-                {
-                    if (fititems[i].freq > 1.4 && fititems[i].freq < 1.6)
-                    {
-                        for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
-                        {
-                            drepfeq = fititems[i].freq;
-                            drepmag = fititems[i].zData[j].mag;
-                            drepphase = fititems[i].zData[j].phase;
-
-                            sitem = string.Format("Range{0}", j);
-                            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, crngval);
-                            //sitem = string.Format("DummyR{0}", j);
-                            //gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mDummy[rng].R);
-                            sitem = string.Format("Frequency{0}", j);
-                            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, drepfeq);
-                            sitem = string.Format("Zmag{0}", j);
-                            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, drepmag);
-                            sitem = string.Format("Zphase{0}", j);
-                            gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, drepphase);
-                        }
-                        
-                    }
-                }
-            }
-
+            else
+                res = MBZA_MapUtil.Save_Range_info(Serial, sifch);
 
             if (res == false)
             {
@@ -2351,6 +2304,83 @@ namespace ZiveLab.ZM
                 this.Cursor = Cursors.Default;
                 return;
             }
+
+            gBZA.UpdateLastCalDate(Serial);
+
+
+
+            string sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber());
+            string sTitle;
+            int nAuxBd;
+            int nAuxBdCh;
+            double drepfeq = 0.0;
+            double drepmag = 0.0;
+            double drepphase = 0.0;
+            double crngval = ranges[0].Gen.iac_rng[grpvars.CRng].realmax;
+
+            sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber());
+            sTitle = string.Format("EIS{0}", grpvars.CRng + 1);
+            crngval = ranges[0].Gen.iac_rng[grpvars.CRng].realmax;
+            if ((grpvars.tRng % 2) > 0)
+            {
+                crngval *= ranges[0].Gen.iac_rng[grpvars.CRng].controlgain;
+            }
+            gBZA.WriteIniDoubleData(sTitle, "IRange", sFilename, crngval);
+            //sitem = string.Format("DummyR{0}", i);
+            //gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mDummy[rng].R);
+
+            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            {
+                nAuxBd = grpvars.showitems[i].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                nAuxBdCh = grpvars.showitems[i].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
+                sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBd].GetSerialNumber());
+                sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", i, nAuxBdCh + 1, grpvars.CRng + 1);
+                gBZA.WriteIniIntData(sTitle, "AuxCh", sFilename, grpvars.showitems[i].nAuxCh + 1);
+
+            }
+
+
+            if (fititems != null)
+            {
+                for (int j = 0; j < fititems.Length; j++)
+                {
+                    if (fititems[j].freq > 1.4 && fititems[j].freq < 1.6)
+                    {
+                        drepfeq = fititems[j].freq;
+                        drepmag = fititems[j].zData[0].mag;
+                        drepphase = fititems[j].zData[0].phase;
+
+                        sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber());
+                        sTitle = string.Format("EIS{0}", grpvars.CRng + 1);
+
+                        gBZA.WriteIniDoubleData(sTitle, "Range", sFilename, crngval);
+                        gBZA.WriteIniDoubleData(sTitle, "DummyR", sFilename, grpvars.showitems[0].mDummy.R);
+                        gBZA.WriteIniDoubleData(sTitle, "Frequency", sFilename, drepfeq);
+                        gBZA.WriteIniDoubleData(sTitle, "Zmag", sFilename, drepmag);
+                        gBZA.WriteIniDoubleData(sTitle, "Zphase", sFilename, drepphase);
+
+                        for (int i = 0; i < grpvars.nAuxChCount; i++)
+                        {
+                            nAuxBd = grpvars.showitems[i].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                            nAuxBdCh = grpvars.showitems[i].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
+                            sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBd].GetSerialNumber());
+                            sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", i, nAuxBdCh + 1, grpvars.CRng + 1);
+
+                            drepfeq = fititems[j].freq;
+                            drepmag = fititems[j].zData[i+1].mag;
+                            drepphase = fititems[j].zData[i+1].phase;
+
+                            gBZA.WriteIniDoubleData(sTitle, "Range", sFilename, crngval);
+                            gBZA.WriteIniDoubleData(sTitle, "DummyR", sFilename, grpvars.showitems[0].mDummy.R);
+                            gBZA.WriteIniDoubleData(sTitle, "Frequency", sFilename, drepfeq);
+                            gBZA.WriteIniDoubleData(sTitle, "Zmag", sFilename, drepmag);
+                            gBZA.WriteIniDoubleData(sTitle, "Zphase", sFilename, drepphase);
+                        }
+                    }
+                }
+            }
+
+            MessageBox.Show("Succeed to apply range information by sending it to the device.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.Cursor = Cursors.Default;
         }
@@ -3011,7 +3041,9 @@ namespace ZiveLab.ZM
 
         private void BtRfreshFit_Click(object sender, EventArgs e)
         {
+            ProcApplyListPacket();
             RefreshFitting();
+            MessageBox.Show("The set modifications have been applied.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public bool SaveApplyDataFile()
@@ -3084,11 +3116,12 @@ namespace ZiveLab.ZM
                         data[i].real = fititems[i].zData[0].real;
                         data[i].img = fititems[i].zData[0].img;
 
-                        for (int j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                        for (int j = 0; j < grpvars.nAuxChCount; j++)
                         {
-                            nAuxBd = j / MBZA_Constant.MAX_AUX_CHANNEL + 1;
-                            nAuxBdCh = j % MBZA_Constant.MAX_AUX_CHANNEL;
-                            data[i].mdata[nAuxBd].mdata[nAuxBdCh].Zre = fititems[i].zData[j+1].real;
+                            if (grpvars.showitems[j + 1].nAuxCh < 0) continue;
+                            nAuxBd = grpvars.showitems[j + 1].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                            nAuxBdCh = grpvars.showitems[j + 1].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
+                            data[i].mdata[nAuxBd].mdata[nAuxBdCh].Zre = fititems[i].zData[+1].real;
                             data[i].mdata[nAuxBd].mdata[nAuxBdCh].Zim = fititems[i].zData[j + 1].img;
                         }
                     }
@@ -3106,6 +3139,7 @@ namespace ZiveLab.ZM
                 }
                 tSaveResfile.CloseFile();
                 tResfile.CloseFile();
+                MessageBox.Show("Saving successfully.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (IOException ex)
             {
@@ -3114,6 +3148,7 @@ namespace ZiveLab.ZM
                 tSaveResfile.CloseFile();
                 tResfile.CloseFile();
 
+                MessageBox.Show("Failed to save.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Cursor = Cursors.Default;
                 return false;
             }
@@ -3250,7 +3285,7 @@ namespace ZiveLab.ZM
 
             if ((grpvars.tRng % 2) > 0)
             {
-                grpvars.OtherRng = grpvars.tRng / 2;
+                grpvars.CRng = grpvars.tRng / 2;
             }
             else
             {

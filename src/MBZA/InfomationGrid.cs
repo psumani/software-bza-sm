@@ -359,7 +359,7 @@ namespace ZiveLab.ZM
         {
             TreeNode node;
             int tmp = 0;
-            int trng = rng;
+            int trng = rng * 2;
             bool bNoCalib = false;
             stZimCfg p;
             if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
@@ -371,7 +371,7 @@ namespace ZiveLab.ZM
                 node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), MBZA_Constant.Const_RangeIacGain[i]);
                 node.Tag = (string)parentnode.Tag + "/" + MBZA_Constant.Const_RangeIacGain[i];
 
-                if (ChkEisCalInf(p.ranges.Aux.mEisIRngCalInfo[nAuxCh].items[rng]) == false) // 배열
+                if (ChkEisCalInf(p.ranges.Aux.mEisIRngCalInfo[nAuxCh].items[trng]) == false) // 배열
                 {
                     tmp = 2;
                 }
@@ -383,7 +383,7 @@ namespace ZiveLab.ZM
                 node.ImageIndex = tmp;
                 node.SelectedImageIndex = tmp;
                 node.ToolTipText = (string)node.Tag;
-
+                trng++;
 
             }
             if (bNoCalib == true) return 2;
@@ -1156,7 +1156,7 @@ namespace ZiveLab.ZM
                     tnode.ImageIndex = tmp;
                     tnode.SelectedImageIndex = tmp;
                 }
-                if (nodeval[2] == 3)
+                else if (nodeval[2] == 3)
                 {
                     if (p.ranges.Aux.vdc_rng[nAuxBdCh].gain == 1.0 && p.ranges.Aux.vdc_rng[nAuxBdCh].offset == 0.0)
                     {
@@ -1199,7 +1199,7 @@ namespace ZiveLab.ZM
                 if (tnode == null) break;
                 nodeval = StringKeyToInteger(tnode.Name);
 
-                if(nodeval[3] == 1)
+                if(nodeval[3] == 1 || nodeval[3] == 2 || nodeval[3] == 3 || nodeval[3] == 4)
                 {
                     tmp = RefreshAuxNodeRangeIacItemStat(tnode, nAuxBoard, nAuxBdCh, nodeval[3]-1);
 
@@ -2579,8 +2579,28 @@ namespace ZiveLab.ZM
                 MessageBox.Show("The file \"C:\\ZIVE DATA\\ZM\\Infor\\ZM_Report.src\" cannot be found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if(gBZA.SifLnkLst.ContainsKey(Serial) == false)
+            {
+                MessageBox.Show("There are no device selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (GetChRun((enTestState)gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].TestStatus))
+            {
+                MessageBox.Show("Calibration cannot proceed because the current channel is in use.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string sexcelfile = string.Format("{0}\\RPT_{0}.xlsx", Serial);
             sexcelfile = Path.Combine(gBZA.appcfg.PathLog, sexcelfile);
+
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf;
+            string sBdType;
+            int ChCount = 0;
+            int AuxBdCount = 0;
+            bool bBdEnable;
+            bool bAuxSht = false;
 
             int i,j,k,l;
             int nlist;
@@ -2589,7 +2609,6 @@ namespace ZiveLab.ZM
             string sTitle;
             string sItem;
             string sBdSerial;
-            string sBdType;
             double dVdcx1;
             double dVdcx10;
             double dAuxChVdc;
@@ -2600,14 +2619,15 @@ namespace ZiveLab.ZM
             Excel.Application xApp = null;
             Excel.Workbook xWB = null;
             Excel.Worksheet xShtheader = null;
-            Excel.Worksheet[] xShtch = new Excel.Worksheet[4];
-
+            Excel.Worksheet[] xShtch = new Excel.Worksheet[7];
+            Excel.Worksheet xShtItem = null;
             sFilename = gBZA.GetCalibLogFileName(Serial);
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < 7; i++)
             {
                 xShtch[i] = null;
             }
+
 
             if (File.Exists(sexcelfile))
             {
@@ -2639,14 +2659,16 @@ namespace ZiveLab.ZM
                 
                 xWB = xApp.Workbooks.Open(sexcelfile);
                 xShtheader = xWB.Worksheets.get_Item(1) as Excel.Worksheet; //Header
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < 7; i++)
                 {
                     xShtch[i] = xWB.Worksheets.get_Item(i + 2) as Excel.Worksheet;
                 }
+
+
                 //xShtheader.Cells[5, 4] = sOperator;
                 //xShtheader.Cells[6, 4] = sSignature;
                 xShtheader.Cells[7, 4] = DateTime.Now.ToString("yyyy-MM-dd");
-
+                
                 sTitle = "SIF";
                 sBdType = gBZA.GetIniStrData(sTitle, "ModelType", sFilename, "");
 
@@ -2660,142 +2682,179 @@ namespace ZiveLab.ZM
                 xShtheader.Cells[14, 3] = gBZA.GetIniStrData(sTitle, "BoardVersion", sFilename, "");
                 xShtheader.Cells[14, 4] = gBZA.GetIniStrData(sTitle, "FirmwareVersion", sFilename, "");
 
-                xShtheader.Cells[16, 4] = gBZA.GetIniStrData(sTitle, "ChannelCount", sFilename, "");
+                xShtheader.Cells[16, 4] = gBZA.GetIniStrData(sTitle, "ChannelInfo", sFilename, "");
+                ChCount = gBZA.GetIniIntData(sTitle, "ChCount", sFilename, 0);
+                AuxBdCount = gBZA.GetIniIntData(sTitle, "AuxBoardCount", sFilename, 0);
+
                 dVdcx1 = gBZA.GetIniDoubleData(sTitle, "Voltage_H", sFilename, 0.0);
                 dVdcx10 = gBZA.GetIniDoubleData(sTitle, "Voltage_L", sFilename, 0.0);
                 dAuxChVdc = gBZA.GetIniDoubleData(sTitle, "AuxCh_Voltage", sFilename, 0.0);
                 
                 sTitle = "ZM";
                 xShtheader.Cells[30, 1] = gBZA.GetIniStrData(sTitle, "Version", sFilename, "");
-                if (i == 0 || sBdType != "MCBZA")
-                {
-
-                    xShtheader.Cells[35, 2] = dVdcx1;
-                    xShtheader.Cells[36, 2] = dVdcx10;
-                }
-                else
-                {
-                    xShtheader.Cells[35, 2] = dAuxChVdc;
-                }
+                xShtheader.Cells[35, 2] = dVdcx1;
+                xShtheader.Cells[36, 2] = dVdcx10;
+             
 
                 for (i = 0; i < 4; i++)
                 {
                     sTitle = string.Format("BOARD{0}", i + 1);
-                    sBdSerial = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
-                    xShtheader.Cells[18+i, 2] = sBdSerial;
-                    xShtheader.Cells[18+i, 3] = gBZA.GetIniStrData(sTitle, "FirmareVersion", sFilename, "");
-                    xShtheader.Cells[18+i, 4] = string.Format("{0} {1}", gBZA.GetIniStrData(sTitle, "BoardName", sFilename, ""),gBZA.GetIniStrData(sTitle, "BoardVersion", sFilename, ""));
+                    bBdEnable = gBZA.GetIniboolData(sTitle, "Enabled", sFilename, false);
+                    bAuxSht = false;
 
-                    if(gBZA.GetIniboolData(sTitle, "Enabled", sFilename, false))
+                    if (bBdEnable == false)
                     {
-                        sFilename1 = gBZA.GetCalibLogFileName(Serial, sBdSerial);
-
-                        xShtch[i].Cells[1, 1] = string.Format("S / N #{0}", sBdSerial);
-                        if (i == 0 || sBdType != "MCBZA")
+                        xShtheader.Cells[18 + i, 2] = "";
+                        xShtheader.Cells[18 + i, 3] = "";
+                        xShtheader.Cells[18 + i, 4] = "";
+                        if (i == 0)
                         {
-                            sTitle = "VDC_X1";
-                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                            for (j = 0; j < nlist; j++)
-                            {
-                                sItem = string.Format("Target{0}", j + 1);
-                                xShtch[i].Cells[j + 3, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                sItem = string.Format("Real{0}", j + 1);
-                                xShtch[i].Cells[j + 3, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            }
-                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                            sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx1, dGain, dOffset);
-
-
-                            xShtch[i].Cells[7, 1] = sDesc;
-
-                            sTitle = "VDC_X10";
-                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                            for (j = 0; j < nlist; j++)
-                            {
-                                sItem = string.Format("Target{0}", j + 1);
-                                xShtch[i].Cells[j + 8, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                sItem = string.Format("Real{0}", j + 1);
-                                xShtch[i].Cells[j + 8, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            }
-                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                            xShtch[i].Cells[12, 1] = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx10, dGain, dOffset);
-
-                            sTitle = "RTD";
-                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                            for (j = 0; j < nlist; j++)
-                            {
-                                sItem = string.Format("Target{0}", j + 1);
-                                xShtch[i].Cells[j + 14, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                sItem = string.Format("Real{0}", j + 1);
-                                xShtch[i].Cells[j + 14, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                            }
-                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                            xShtch[i].Cells[18, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
-
-                            sTitle = "IDC";
-                            nlist = 8;
-                            for (j = 0; j < nlist; j++)
-                            {
-                                sItem = string.Format("Range{0}_Offset", j + 1);
-                                xShtch[i].Cells[j + 20, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                sItem = string.Format("Range{0}_Read", j + 1);
-                                xShtch[i].Cells[j + 20, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
-                            }
-
-                            for (j = 0; j < 4; j++)
-                            {
-                                sTitle = string.Format("EIS{0}", j + 1);
-                                xShtch[i].Cells[j + 30, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
-                                xShtch[i].Cells[j + 30, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
-                                xShtch[i].Cells[j + 30, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
-                                xShtch[i].Cells[j + 30, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
-                                xShtch[i].Cells[j + 30, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
-                            }
+                            xApp.DisplayAlerts = false;
+                            xShtch[i].Delete();
+                            xApp.DisplayAlerts = true;
                         }
                         else
                         {
-                            l = 3;
-                            for (j = 0; j < 4; j++)
+                            xApp.DisplayAlerts = false;
+                            xShtch[i].Delete();
+                            xShtch[i + 3].Delete();
+                            xApp.DisplayAlerts = true;
+                        }
+                        continue;
+                    }
+                    else
+                    {
+
+                        sBdSerial = gBZA.GetIniStrData(sTitle, "SerialNumber", sFilename, "");
+                        xShtheader.Cells[18 + i, 2] = sBdSerial;
+                        xShtheader.Cells[18 + i, 3] = gBZA.GetIniStrData(sTitle, "FirmareVersion", sFilename, "");
+                        xShtheader.Cells[18 + i, 4] = string.Format("{0} {1}", gBZA.GetIniStrData(sTitle, "BoardName", sFilename, ""), gBZA.GetIniStrData(sTitle, "BoardVersion", sFilename, ""));
+
+                        sFilename1 = gBZA.GetCalibLogFileName(Serial, sBdSerial);
+
+                        if (i == 0) xShtItem = xShtch[i];
+                        else
+                        {
+                            if (sBdType == "MCBZA")
                             {
-                                sTitle = string.Format("AUXCH{0}_VDC", j + 1);
-
-                                nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                                for (j = 0; j < nlist; j++)
-                                {
-                                    sItem = string.Format("Target{0}", j + 1);
-                                    xShtch[i].Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                    sItem = string.Format("Real{0}", j + 1);
-                                    xShtch[i].Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                    l++;
-                                }
-                                dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
-                                dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                                sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dAuxChVdc, dGain, dOffset);
-
-                                xShtch[i].Cells[l, 1] = sDesc;
-                                l++;
-                                l++;
-                                for (k = 0; k < 4; k++)
-                                {
-                                    sTitle = string.Format("AUXCH{0}_EIS{0}", k + 1);
-                                    xShtch[i].Cells[l, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
-                                    xShtch[i].Cells[l, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
-                                    xShtch[i].Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
-                                    xShtch[i].Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
-                                    xShtch[i].Cells[l, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
-                                    l++;
-                                }
+                                xShtItem = xShtch[i + 3];
+                                xApp.DisplayAlerts = false;
+                                xShtch[i].Delete();
+                                xApp.DisplayAlerts = true;
+                                bAuxSht = true;
                             }
+                            else
+                            {
+                                xShtItem = xShtch[i];
+                                xApp.DisplayAlerts = false;
+                                xShtch[i + 3].Delete();
+                                xApp.DisplayAlerts = true;
+                            }
+                        }
+                    }
+          
+                    xShtItem.Cells[1, 1] = string.Format("S / N #{0}", sBdSerial);
+                    nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                    if(bAuxSht == false)
+                    { 
+                        sTitle = "VDC_X1";
+                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Target{0}", j + 1);
+                            xShtItem.Cells[j + 3, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Real{0}", j + 1);
+                            xShtItem.Cells[j + 3, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                        }
+                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                        sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx1, dGain, dOffset);
+
+
+                        xShtItem.Cells[7, 1] = sDesc;
+
+                        sTitle = "VDC_X10";
+                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Target{0}", j + 1);
+                            xShtItem.Cells[j + 8, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Real{0}", j + 1);
+                            xShtItem.Cells[j + 8, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                        }
+                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                        xShtItem.Cells[12, 1] = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}).", dVdcx10, dGain, dOffset);
+
+                        sTitle = "RTD";
+                        nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Target{0}", j + 1);
+                            xShtItem.Cells[j + 14, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Real{0}", j + 1);
+                            xShtItem.Cells[j + 14, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                        }
+                        dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                        dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                        xShtItem.Cells[18, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
+
+                        sTitle = "IDC";
+                        nlist = 8;
+                        for (j = 0; j < nlist; j++)
+                        {
+                            sItem = string.Format("Range{0}_Offset", j + 1);
+                            xShtItem.Cells[j + 20, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            sItem = string.Format("Range{0}_Read", j + 1);
+                            xShtItem.Cells[j + 20, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
+                        }
+
+                        for (j = 0; j < 4; j++)
+                        {
+                            sTitle = string.Format("EIS{0}", j + 1);
+                            xShtItem.Cells[j + 30, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
+                            xShtItem.Cells[j + 30, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
+                            xShtItem.Cells[j + 30, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
+                            xShtItem.Cells[j + 30, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
+                            xShtItem.Cells[j + 30, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
                         }
                     }
                     else
                     {
-                        xApp.DisplayAlerts = false;
-                        xShtch[i].Delete();
-                        xApp.DisplayAlerts = true;
+                        l = 3;
+                        for (j = 0; j < 4; j++)
+                        {
+                            sTitle = string.Format("AUXBD{0}CH{1}_VDC", i, j + 1);
+                            nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
+                            for (j = 0; j < nlist; j++)
+                            {
+                                sItem = string.Format("Target{0}", j + 1);
+                                xShtItem.Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                sItem = string.Format("Real{0}", j + 1);
+                                xShtItem.Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                                l++;
+                            }
+
+                            dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
+                            dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
+                            sDesc = string.Format("with {0:0.0V} range(Gain:{1:0.0#####}, Offset:{2:0.0#####}) of auxiliary channel {3}.", dAuxChVdc, dGain, dOffset, j + 1);
+                            xShtItem.Cells[l, 1] = sDesc;
+                            l++;
+                        }
+                        l++;
+                        for (j = 0; j < 4; j++)
+                        {
+                            for (k = 0; k < 4; k++)
+                            {
+                                sTitle = string.Format("AUXBD{0}CH{1}_EIS", i, j + 1,k+1);
+                                xShtItem.Cells[l, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
+                                xShtItem.Cells[l, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
+                                xShtItem.Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
+                                xShtItem.Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
+                                xShtItem.Cells[l, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
+                                l++;
+                            }
+                        }
                     }
                 }
             }
