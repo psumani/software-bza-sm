@@ -1587,8 +1587,8 @@ namespace ZiveLab.ZM.ZIM
                     data.EnaZIM[bd] = m_tSysCfg.EnaZIM[bd];
                     data.EnaROM[bd] = m_tSysCfg.EnaROM[bd];
                     data.ChkZIM[bd] = m_tSysCfg.ChkZIM[bd];
+
                     data.mZimCfg[bd].info.ToWritePtr(m_tSysCfg.mZimCfg[bd].info.ToByteArray());
-                    //data.mZimCfg[bd].ranges[0].ToWritePtr(m_tSysCfg.mZimCfg[bd].ranges.ToByteArray());
                     data.mZimCfg[bd].ranges.Gen.ToWritePtr(m_tSysCfg.mZimCfg[bd].ranges.ToByteArray()); // 배열
                     for (int auxch = 1; auxch < MBZA_Constant.MAX_AUX_CHANNEL; auxch++)
                     {
@@ -1664,6 +1664,8 @@ namespace ZiveLab.ZM.ZIM
                 
                 m_tSysCfg.ID = data.ID;
                 m_tSysCfg.mSIFCfg.ToWritePtr(data.mSIFCfg.ToByteArray());
+
+
                 for (int bd = 0; bd < MBZA_Constant.MAX_DEV_CHANNEL; bd++)
                 {
                     m_tSysCfg.EnaZIM[bd] = data.EnaZIM[bd];
@@ -1671,7 +1673,7 @@ namespace ZiveLab.ZM.ZIM
                     m_tSysCfg.EnaROM[bd] = data.EnaROM[bd];
                     m_tSysCfg.mZimCfg[bd].info.ToWritePtr(data.mZimCfg[bd].info.ToByteArray());
                     //m_tSysCfg.mZimCfg[bd].ranges.ToWritePtr(data.mZimCfg[bd].ranges[0].ToByteArray());
-                    m_tSysCfg.mZimCfg[bd].ranges.Gen.ToWritePtr(data.mZimCfg[bd].ranges.ToByteArray()); // 배열
+                    m_tSysCfg.mZimCfg[bd].ranges.ToWritePtr(data.mZimCfg[bd].ranges.Gen.ToByteArray()); // 배열
                 }
                 m_tSysCfg.BaseTick = data.BaseTick;
                 m_tSysCfg.DaqTick = data.DaqTick;

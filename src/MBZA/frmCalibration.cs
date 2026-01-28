@@ -898,7 +898,6 @@ namespace ZiveLab.ZM
 
         private void RefreshFitting()
         {
-            int crng = grpvars.tRng / 2;
             int nAuxBd;
             int nAuxBdCh;
 
@@ -956,8 +955,8 @@ namespace ZiveLab.ZM
                 nAuxBd = grpvars.showitems[SelItem].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
                 nAuxBdCh = grpvars.showitems[SelItem].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
 
-                ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[crng].iac_gain1 = zCal.vars[SelItem].Gain;
-                ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[crng].iac_gain2 = zCal.vars[SelItem].Gain;
+                ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain1 = zCal.vars[SelItem].Gain;
+                ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain2 = zCal.vars[SelItem].Gain;
 
                 zCal.vars[SelItem].GetInformation(ref ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.tRng]);
                 zCal.vars[SelItem].GetInformation(ref ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.OtherRng]);
@@ -2329,12 +2328,12 @@ namespace ZiveLab.ZM
             //sitem = string.Format("DummyR{0}", i);
             //gBZA.WriteIniDoubleData(sTitle, sitem, sFilename, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mDummy[rng].R);
 
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 1; i < grpvars.nAuxChCount + 1; i++)
             {
                 nAuxBd = grpvars.showitems[i].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
                 nAuxBdCh = grpvars.showitems[i].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
                 sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBd].GetSerialNumber());
-                sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", i, nAuxBdCh + 1, grpvars.CRng + 1);
+                sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", nAuxBd, nAuxBdCh + 1, grpvars.CRng + 1);
                 gBZA.WriteIniIntData(sTitle, "AuxCh", sFilename, grpvars.showitems[i].nAuxCh + 1);
 
             }
@@ -2359,16 +2358,16 @@ namespace ZiveLab.ZM
                         gBZA.WriteIniDoubleData(sTitle, "Zmag", sFilename, drepmag);
                         gBZA.WriteIniDoubleData(sTitle, "Zphase", sFilename, drepphase);
 
-                        for (int i = 0; i < grpvars.nAuxChCount; i++)
+                        for (int i = 1; i < grpvars.nAuxChCount + 1; i++)
                         {
                             nAuxBd = grpvars.showitems[i].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
                             nAuxBdCh = grpvars.showitems[i].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
                             sFilename = gBZA.GetCalibLogFileName(Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBd].GetSerialNumber());
-                            sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", i, nAuxBdCh + 1, grpvars.CRng + 1);
+                            sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", nAuxBd, nAuxBdCh + 1, grpvars.CRng + 1);
 
                             drepfeq = fititems[j].freq;
-                            drepmag = fititems[j].zData[i+1].mag;
-                            drepphase = fititems[j].zData[i+1].phase;
+                            drepmag = fititems[j].zData[i].mag;
+                            drepphase = fititems[j].zData[i].phase;
 
                             gBZA.WriteIniDoubleData(sTitle, "Range", sFilename, crngval);
                             gBZA.WriteIniDoubleData(sTitle, "DummyR", sFilename, grpvars.showitems[0].mDummy.R);
@@ -3119,9 +3118,9 @@ namespace ZiveLab.ZM
                         for (int j = 0; j < grpvars.nAuxChCount; j++)
                         {
                             if (grpvars.showitems[j + 1].nAuxCh < 0) continue;
-                            nAuxBd = grpvars.showitems[j + 1].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                            nAuxBd = grpvars.showitems[j + 1].nAuxCh / MBZA_Constant.MAX_AUX_CHANNEL;
                             nAuxBdCh = grpvars.showitems[j + 1].nAuxCh % MBZA_Constant.MAX_AUX_CHANNEL;
-                            data[i].mdata[nAuxBd].mdata[nAuxBdCh].Zre = fititems[i].zData[+1].real;
+                            data[i].mdata[nAuxBd].mdata[nAuxBdCh].Zre = fititems[i].zData[j + 1].real;
                             data[i].mdata[nAuxBd].mdata[nAuxBdCh].Zim = fititems[i].zData[j + 1].img;
                         }
                     }

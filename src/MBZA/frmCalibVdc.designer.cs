@@ -414,7 +414,7 @@
             this.MaximizeBox = false;
             this.Name = "frmCalibVdc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Calibration DC Voltage";
+            this.Text = "Calibration DC Voltage for a single channel.";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCalibVdc_FormClosing);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

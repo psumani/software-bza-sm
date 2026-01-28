@@ -191,6 +191,13 @@
             this.lblzreal = new System.Windows.Forms.Label();
             this.tabgrp = new System.Windows.Forms.TabControl();
             this.TabGrp1 = new System.Windows.Forms.TabPage();
+            this.grpboxni1 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
+            this.cboItemA = new System.Windows.Forms.ComboBox();
+            this.grpboxni2 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.btDeselAllNiItems = new System.Windows.Forms.Button();
+            this.btSelAllNiItems = new System.Windows.Forms.Button();
             this.lblcsfreq1 = new System.Windows.Forms.Label();
             this.legend1 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem11 = new NationalInstruments.UI.LegendItem();
@@ -284,9 +291,14 @@
             this.Grp1Plot43 = new NationalInstruments.UI.ScatterPlot();
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor2 = new NationalInstruments.UI.XYCursor();
-            this.checkedListBox = new System.Windows.Forms.CheckedListBox();
             this.TabGrp2 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox4 = new System.Windows.Forms.CheckedListBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.lblcsfreq2 = new System.Windows.Forms.Label();
             this.legend2 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem21 = new NationalInstruments.UI.LegendItem();
@@ -409,11 +421,9 @@
             this.TabGrpRaw = new System.Windows.Forms.TabPage();
             this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
             this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
-            this.RTPlot1 = new NationalInstruments.UI.ScatterPlot();
             this.RTxAxis1 = new NationalInstruments.UI.XAxis();
             this.RTyAxis1 = new NationalInstruments.UI.YAxis();
             this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
-            this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.RTyAxis2 = new NationalInstruments.UI.YAxis();
             this.RtlegendItem3 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem4 = new NationalInstruments.UI.LegendItem();
@@ -428,18 +438,6 @@
             this.RtlegendItem13 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem14 = new NationalInstruments.UI.LegendItem();
             this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.RTPlot3 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot4 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot5 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot6 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot7 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot8 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot9 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot10 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot11 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot12 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot13 = new NationalInstruments.UI.ScatterPlot();
-            this.RTPlot14 = new NationalInstruments.UI.ScatterPlot();
             this.Raw_DataPage = new System.Windows.Forms.TabPage();
             this.rawgrpListBox = new System.Windows.Forms.CheckedListBox();
             this.AuxDataView1 = new System.Windows.Forms.DataGridView();
@@ -469,135 +467,19 @@
             this.lblIdc = new System.Windows.Forms.Label();
             this.btabout = new System.Windows.Forms.Button();
             this.legendItem108 = new NationalInstruments.UI.LegendItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.A1Zphase = new System.Windows.Forms.Label();
-            this.A1Zmag = new System.Windows.Forms.Label();
-            this.A1Zimg = new System.Windows.Forms.Label();
-            this.A1Zreal = new System.Windows.Forms.Label();
-            this.A1Vdc = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.A2Zphase = new System.Windows.Forms.Label();
-            this.A2Zmag = new System.Windows.Forms.Label();
-            this.A2Zimg = new System.Windows.Forms.Label();
-            this.A2Zreal = new System.Windows.Forms.Label();
-            this.A2Vdc = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.A3Zphase = new System.Windows.Forms.Label();
-            this.A3Zmag = new System.Windows.Forms.Label();
-            this.A3Zimg = new System.Windows.Forms.Label();
-            this.A3Zreal = new System.Windows.Forms.Label();
-            this.A3Vdc = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.A4Zphase = new System.Windows.Forms.Label();
-            this.A4Zmag = new System.Windows.Forms.Label();
-            this.A4Zimg = new System.Windows.Forms.Label();
-            this.A4Zreal = new System.Windows.Forms.Label();
-            this.A4Vdc = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.A5Zphase = new System.Windows.Forms.Label();
-            this.A5Zmag = new System.Windows.Forms.Label();
-            this.A5Zimg = new System.Windows.Forms.Label();
-            this.A5Zreal = new System.Windows.Forms.Label();
-            this.A5Vdc = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.A6Zphase = new System.Windows.Forms.Label();
-            this.A6Zmag = new System.Windows.Forms.Label();
-            this.A6Zimg = new System.Windows.Forms.Label();
-            this.A6Zreal = new System.Windows.Forms.Label();
-            this.A6Vdc = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.A7Zphase = new System.Windows.Forms.Label();
-            this.A7Zmag = new System.Windows.Forms.Label();
-            this.A7Zimg = new System.Windows.Forms.Label();
-            this.A7Zreal = new System.Windows.Forms.Label();
-            this.A7Vdc = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.A8Zphase = new System.Windows.Forms.Label();
-            this.A8Zmag = new System.Windows.Forms.Label();
-            this.A8Zimg = new System.Windows.Forms.Label();
-            this.A8Zreal = new System.Windows.Forms.Label();
-            this.A8Vdc = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.A9Zphase = new System.Windows.Forms.Label();
-            this.A9Zmag = new System.Windows.Forms.Label();
-            this.A9Zimg = new System.Windows.Forms.Label();
-            this.A9Zreal = new System.Windows.Forms.Label();
-            this.A9Vdc = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.A10Zphase = new System.Windows.Forms.Label();
-            this.A10Zmag = new System.Windows.Forms.Label();
-            this.A10Zimg = new System.Windows.Forms.Label();
-            this.A10Zreal = new System.Windows.Forms.Label();
-            this.A10Vdc = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.A11Zphase = new System.Windows.Forms.Label();
-            this.A11Zmag = new System.Windows.Forms.Label();
-            this.A11Zimg = new System.Windows.Forms.Label();
-            this.A11Zreal = new System.Windows.Forms.Label();
-            this.A11Vdc = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.A12Zphase = new System.Windows.Forms.Label();
-            this.A12Zmag = new System.Windows.Forms.Label();
-            this.A12Zimg = new System.Windows.Forms.Label();
-            this.A12Zreal = new System.Windows.Forms.Label();
-            this.A12Vdc = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.label57 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
             this.lblprog = new ZiveLab.ZM.LabelProgress();
+            this.grpAuxMon = new System.Windows.Forms.GroupBox();
+            this.rdoAuxMon2 = new System.Windows.Forms.RadioButton();
+            this.rdoAuxMon1 = new System.Windows.Forms.RadioButton();
+            this.listAuxMon = new System.Windows.Forms.ListView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox5 = new System.Windows.Forms.CheckedListBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox6 = new System.Windows.Forms.CheckedListBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.scatterPlot3 = new NationalInstruments.UI.ScatterPlot();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
@@ -605,10 +487,14 @@
             this.contextMenuTech.SuspendLayout();
             this.tabgrp.SuspendLayout();
             this.TabGrp1.SuspendLayout();
+            this.grpboxni1.SuspendLayout();
+            this.grpboxni2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.legend1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor2)).BeginInit();
             this.TabGrp2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.legend2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).BeginInit();
@@ -618,19 +504,9 @@
             this.Raw_DataPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.tabPage8.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.tabPage10.SuspendLayout();
-            this.tabPage11.SuspendLayout();
-            this.tabPage12.SuspendLayout();
+            this.grpAuxMon.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblErrStatus
@@ -1702,7 +1578,7 @@
             // bttech
             // 
             this.bttech.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bttech.Location = new System.Drawing.Point(311, 1);
+            this.bttech.Location = new System.Drawing.Point(779, 1);
             this.bttech.Name = "bttech";
             this.bttech.Size = new System.Drawing.Size(24, 24);
             this.bttech.TabIndex = 52;
@@ -1712,7 +1588,7 @@
             // btstart
             // 
             this.btstart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btstart.Location = new System.Drawing.Point(359, 1);
+            this.btstart.Location = new System.Drawing.Point(827, 1);
             this.btstart.Name = "btstart";
             this.btstart.Size = new System.Drawing.Size(24, 24);
             this.btstart.TabIndex = 53;
@@ -1722,7 +1598,7 @@
             // btgrp
             // 
             this.btgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btgrp.Location = new System.Drawing.Point(409, 1);
+            this.btgrp.Location = new System.Drawing.Point(877, 1);
             this.btgrp.Name = "btgrp";
             this.btgrp.Size = new System.Drawing.Size(24, 24);
             this.btgrp.TabIndex = 54;
@@ -1804,7 +1680,7 @@
             // btSize
             // 
             this.btSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSize.Location = new System.Drawing.Point(457, 1);
+            this.btSize.Location = new System.Drawing.Point(925, 1);
             this.btSize.Name = "btSize";
             this.btSize.Size = new System.Drawing.Size(24, 24);
             this.btSize.TabIndex = 92;
@@ -1814,7 +1690,7 @@
             // btTechEdit
             // 
             this.btTechEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btTechEdit.Location = new System.Drawing.Point(334, 1);
+            this.btTechEdit.Location = new System.Drawing.Point(802, 1);
             this.btTechEdit.Name = "btTechEdit";
             this.btTechEdit.Size = new System.Drawing.Size(24, 24);
             this.btTechEdit.TabIndex = 93;
@@ -1824,7 +1700,7 @@
             // btreport
             // 
             this.btreport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btreport.Location = new System.Drawing.Point(432, 1);
+            this.btreport.Location = new System.Drawing.Point(900, 1);
             this.btreport.Name = "btreport";
             this.btreport.Size = new System.Drawing.Size(24, 24);
             this.btreport.TabIndex = 94;
@@ -1834,7 +1710,7 @@
             // btloaddata
             // 
             this.btloaddata.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btloaddata.Location = new System.Drawing.Point(384, 1);
+            this.btloaddata.Location = new System.Drawing.Point(852, 1);
             this.btloaddata.Name = "btloaddata";
             this.btloaddata.Size = new System.Drawing.Size(24, 24);
             this.btloaddata.TabIndex = 96;
@@ -1878,26 +1754,124 @@
             this.tabgrp.Controls.Add(this.TabGrpRaw);
             this.tabgrp.Controls.Add(this.Raw_DataPage);
             this.tabgrp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabgrp.Location = new System.Drawing.Point(163, 100);
+            this.tabgrp.Location = new System.Drawing.Point(166, 100);
             this.tabgrp.Multiline = true;
             this.tabgrp.Name = "tabgrp";
             this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(312, 370);
+            this.tabgrp.Size = new System.Drawing.Size(777, 590);
             this.tabgrp.TabIndex = 100;
             // 
             // TabGrp1
             // 
+            this.TabGrp1.Controls.Add(this.grpboxni1);
+            this.TabGrp1.Controls.Add(this.grpboxni2);
             this.TabGrp1.Controls.Add(this.lblcsfreq1);
             this.TabGrp1.Controls.Add(this.legend1);
             this.TabGrp1.Controls.Add(this.grp1);
-            this.TabGrp1.Controls.Add(this.checkedListBox);
             this.TabGrp1.Location = new System.Drawing.Point(4, 23);
             this.TabGrp1.Name = "TabGrp1";
             this.TabGrp1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabGrp1.Size = new System.Drawing.Size(304, 343);
+            this.TabGrp1.Size = new System.Drawing.Size(769, 563);
             this.TabGrp1.TabIndex = 1;
             this.TabGrp1.Text = "tabPage2";
             this.TabGrp1.UseVisualStyleBackColor = true;
+            // 
+            // grpboxni1
+            // 
+            this.grpboxni1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpboxni1.Controls.Add(this.checkedListBox3);
+            this.grpboxni1.Controls.Add(this.cboItemA);
+            this.grpboxni1.Location = new System.Drawing.Point(657, 3);
+            this.grpboxni1.Name = "grpboxni1";
+            this.grpboxni1.Size = new System.Drawing.Size(104, 92);
+            this.grpboxni1.TabIndex = 139;
+            this.grpboxni1.TabStop = false;
+            this.grpboxni1.Text = "[Legend]";
+            // 
+            // checkedListBox3
+            // 
+            this.checkedListBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox3.FormattingEnabled = true;
+            this.checkedListBox3.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1"});
+            this.checkedListBox3.Location = new System.Drawing.Point(6, 49);
+            this.checkedListBox3.Name = "checkedListBox3";
+            this.checkedListBox3.Size = new System.Drawing.Size(91, 38);
+            this.checkedListBox3.TabIndex = 139;
+            // 
+            // cboItemA
+            // 
+            this.cboItemA.FormattingEnabled = true;
+            this.cboItemA.Location = new System.Drawing.Point(7, 21);
+            this.cboItemA.Name = "cboItemA";
+            this.cboItemA.Size = new System.Drawing.Size(81, 22);
+            this.cboItemA.TabIndex = 121;
+            // 
+            // grpboxni2
+            // 
+            this.grpboxni2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpboxni2.Controls.Add(this.checkedListBox2);
+            this.grpboxni2.Controls.Add(this.btDeselAllNiItems);
+            this.grpboxni2.Controls.Add(this.btSelAllNiItems);
+            this.grpboxni2.Location = new System.Drawing.Point(657, 100);
+            this.grpboxni2.Name = "grpboxni2";
+            this.grpboxni2.Size = new System.Drawing.Size(104, 281);
+            this.grpboxni2.TabIndex = 138;
+            this.grpboxni2.TabStop = false;
+            this.grpboxni2.Text = "[items ]";
+            // 
+            // checkedListBox2
+            // 
+            this.checkedListBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1",
+            "AUX2",
+            "AUX3",
+            "AUX4",
+            "AUX5",
+            "AUX6",
+            "AUX7",
+            "AUX8",
+            "AUX9",
+            "AUX10",
+            "AUX11",
+            "AUX12"});
+            this.checkedListBox2.Location = new System.Drawing.Point(6, 48);
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(91, 225);
+            this.checkedListBox2.TabIndex = 138;
+            // 
+            // btDeselAllNiItems
+            // 
+            this.btDeselAllNiItems.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDeselAllNiItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btDeselAllNiItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.btDeselAllNiItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDeselAllNiItems.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAllNiItems.Name = "btDeselAllNiItems";
+            this.btDeselAllNiItems.Size = new System.Drawing.Size(46, 22);
+            this.btDeselAllNiItems.TabIndex = 136;
+            this.btDeselAllNiItems.Text = "All";
+            this.btDeselAllNiItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDeselAllNiItems.UseVisualStyleBackColor = true;
+            // 
+            // btSelAllNiItems
+            // 
+            this.btSelAllNiItems.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSelAllNiItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btSelAllNiItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.btSelAllNiItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSelAllNiItems.Location = new System.Drawing.Point(2, 20);
+            this.btSelAllNiItems.Name = "btSelAllNiItems";
+            this.btSelAllNiItems.Size = new System.Drawing.Size(47, 22);
+            this.btSelAllNiItems.TabIndex = 135;
+            this.btSelAllNiItems.Text = "All";
+            this.btSelAllNiItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSelAllNiItems.UseVisualStyleBackColor = true;
             // 
             // lblcsfreq1
             // 
@@ -2571,7 +2545,7 @@
             this.grp1.ContextMenuStrip = this.menu_1;
             this.grp1.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
             this.xyCursor2});
-            this.grp1.Location = new System.Drawing.Point(4, 4);
+            this.grp1.Location = new System.Drawing.Point(4, 10);
             this.grp1.Name = "grp1";
             this.grp1.PlotAreaColor = System.Drawing.Color.White;
             this.grp1.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
@@ -2618,7 +2592,7 @@
             this.Grp1Plot41,
             this.Grp1Plot42,
             this.Grp1Plot43});
-            this.grp1.Size = new System.Drawing.Size(211, 333);
+            this.grp1.Size = new System.Drawing.Size(647, 547);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -2637,49 +2611,71 @@
             // 
             this.xyCursor2.Plot = this.Grp1Plot1;
             // 
-            // checkedListBox
-            // 
-            this.checkedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox.FormattingEnabled = true;
-            this.checkedListBox.Items.AddRange(new object[] {
-            "MAIN",
-            "AUX1",
-            "AUX2",
-            "AUX3",
-            "AUX4",
-            "AUX5",
-            "AUX6",
-            "AUX7",
-            "AUX8",
-            "AUX9",
-            "AUX10",
-            "AUX11",
-            "AUX12"});
-            this.checkedListBox.Location = new System.Drawing.Point(217, 4);
-            this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(87, 344);
-            this.checkedListBox.TabIndex = 117;
-            // 
             // TabGrp2
             // 
-            this.TabGrp2.Controls.Add(this.checkedListBox1);
+            this.TabGrp2.Controls.Add(this.groupBox1);
+            this.TabGrp2.Controls.Add(this.groupBox2);
             this.TabGrp2.Controls.Add(this.lblcsfreq2);
             this.TabGrp2.Controls.Add(this.legend2);
             this.TabGrp2.Controls.Add(this.grp2);
             this.TabGrp2.Location = new System.Drawing.Point(4, 23);
             this.TabGrp2.Name = "TabGrp2";
-            this.TabGrp2.Size = new System.Drawing.Size(304, 343);
+            this.TabGrp2.Size = new System.Drawing.Size(769, 563);
             this.TabGrp2.TabIndex = 2;
             this.TabGrp2.Text = "tabPage3";
             this.TabGrp2.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.checkedListBox1);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Location = new System.Drawing.Point(657, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(104, 92);
+            this.groupBox1.TabIndex = 141;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "[Legend]";
+            // 
             // checkedListBox1
             // 
-            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1"});
+            this.checkedListBox1.Location = new System.Drawing.Point(6, 49);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(91, 38);
+            this.checkedListBox1.TabIndex = 139;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(7, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(81, 22);
+            this.comboBox1.TabIndex = 121;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.checkedListBox4);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Location = new System.Drawing.Point(657, 100);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(104, 281);
+            this.groupBox2.TabIndex = 140;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "[items ]";
+            // 
+            // checkedListBox4
+            // 
+            this.checkedListBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox4.FormattingEnabled = true;
+            this.checkedListBox4.Items.AddRange(new object[] {
             "MAIN",
             "AUX1",
             "AUX2",
@@ -2693,10 +2689,38 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.checkedListBox1.Location = new System.Drawing.Point(217, 4);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(87, 344);
-            this.checkedListBox1.TabIndex = 118;
+            this.checkedListBox4.Location = new System.Drawing.Point(6, 48);
+            this.checkedListBox4.Name = "checkedListBox4";
+            this.checkedListBox4.Size = new System.Drawing.Size(91, 225);
+            this.checkedListBox4.TabIndex = 138;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button1.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(52, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(46, 22);
+            this.button1.TabIndex = 136;
+            this.button1.Text = "All";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button2.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(2, 20);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(47, 22);
+            this.button2.TabIndex = 135;
+            this.button2.Text = "All";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // lblcsfreq2
             // 
@@ -3616,7 +3640,7 @@
             this.grp2.ContextMenuStrip = this.menu_2;
             this.grp2.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
             this.xyCursor1});
-            this.grp2.Location = new System.Drawing.Point(4, 4);
+            this.grp2.Location = new System.Drawing.Point(4, 10);
             this.grp2.Name = "grp2";
             this.grp2.PlotAreaColor = System.Drawing.Color.White;
             this.grp2.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
@@ -3676,7 +3700,7 @@
             this.Grp2Plot54,
             this.Grp2Plot55,
             this.Grp2Plot56});
-            this.grp2.Size = new System.Drawing.Size(211, 333);
+            this.grp2.Size = new System.Drawing.Size(647, 547);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
             this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -3694,11 +3718,13 @@
             // 
             // TabGrpRaw
             // 
+            this.TabGrpRaw.Controls.Add(this.groupBox3);
+            this.TabGrpRaw.Controls.Add(this.groupBox4);
             this.TabGrpRaw.Controls.Add(this.Rtlegend);
             this.TabGrpRaw.Controls.Add(this.grprt);
             this.TabGrpRaw.Location = new System.Drawing.Point(4, 23);
             this.TabGrpRaw.Name = "TabGrpRaw";
-            this.TabGrpRaw.Size = new System.Drawing.Size(304, 343);
+            this.TabGrpRaw.Size = new System.Drawing.Size(769, 563);
             this.TabGrpRaw.TabIndex = 3;
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
@@ -3730,20 +3756,7 @@
             // 
             // RtlegendItem1
             // 
-            this.RtlegendItem1.Source = this.RTPlot1;
             this.RtlegendItem1.Text = "Voltage";
-            // 
-            // RTPlot1
-            // 
-            this.RTPlot1.LineColor = System.Drawing.Color.Navy;
-            this.RTPlot1.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.RTPlot1.LineWidth = 0.6F;
-            this.RTPlot1.PointColor = System.Drawing.Color.Navy;
-            this.RTPlot1.PointSize = new System.Drawing.Size(6, 6);
-            this.RTPlot1.PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
-            this.RTPlot1.SmoothUpdates = true;
-            this.RTPlot1.XAxis = this.RTxAxis1;
-            this.RTPlot1.YAxis = this.RTyAxis1;
             // 
             // RTxAxis1
             // 
@@ -3756,18 +3769,7 @@
             // 
             // RtlegendItem2
             // 
-            this.RtlegendItem2.Source = this.RTPlot2;
             this.RtlegendItem2.Text = "Current";
-            // 
-            // RTPlot2
-            // 
-            this.RTPlot2.LineWidth = 0.6F;
-            this.RTPlot2.PointColor = System.Drawing.Color.Red;
-            this.RTPlot2.PointSize = new System.Drawing.Size(6, 6);
-            this.RTPlot2.PointStyle = NationalInstruments.UI.PointStyle.SolidCircle;
-            this.RTPlot2.SmoothUpdates = true;
-            this.RTPlot2.XAxis = this.RTxAxis1;
-            this.RTPlot2.YAxis = this.RTyAxis2;
             // 
             // RTyAxis2
             // 
@@ -3786,21 +3788,8 @@
             this.grprt.Name = "grprt";
             this.grprt.PlotAreaColor = System.Drawing.Color.White;
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.RTPlot1,
-            this.RTPlot2,
-            this.RTPlot3,
-            this.RTPlot4,
-            this.RTPlot5,
-            this.RTPlot6,
-            this.RTPlot7,
-            this.RTPlot8,
-            this.RTPlot9,
-            this.RTPlot10,
-            this.RTPlot11,
-            this.RTPlot12,
-            this.RTPlot13,
-            this.RTPlot14});
-            this.grprt.Size = new System.Drawing.Size(297, 333);
+            this.scatterPlot3});
+            this.grprt.Size = new System.Drawing.Size(647, 555);
             this.grprt.TabIndex = 109;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -3809,66 +3798,6 @@
             this.RTyAxis1,
             this.RTyAxis2});
             this.grprt.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grprt_MouseDoubleClick);
-            // 
-            // RTPlot3
-            // 
-            this.RTPlot3.XAxis = this.RTxAxis1;
-            this.RTPlot3.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot4
-            // 
-            this.RTPlot4.XAxis = this.RTxAxis1;
-            this.RTPlot4.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot5
-            // 
-            this.RTPlot5.XAxis = this.RTxAxis1;
-            this.RTPlot5.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot6
-            // 
-            this.RTPlot6.XAxis = this.RTxAxis1;
-            this.RTPlot6.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot7
-            // 
-            this.RTPlot7.XAxis = this.RTxAxis1;
-            this.RTPlot7.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot8
-            // 
-            this.RTPlot8.XAxis = this.RTxAxis1;
-            this.RTPlot8.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot9
-            // 
-            this.RTPlot9.XAxis = this.RTxAxis1;
-            this.RTPlot9.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot10
-            // 
-            this.RTPlot10.XAxis = this.RTxAxis1;
-            this.RTPlot10.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot11
-            // 
-            this.RTPlot11.XAxis = this.RTxAxis1;
-            this.RTPlot11.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot12
-            // 
-            this.RTPlot12.XAxis = this.RTxAxis1;
-            this.RTPlot12.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot13
-            // 
-            this.RTPlot13.XAxis = this.RTxAxis1;
-            this.RTPlot13.YAxis = this.RTyAxis1;
-            // 
-            // RTPlot14
-            // 
-            this.RTPlot14.XAxis = this.RTxAxis1;
-            this.RTPlot14.YAxis = this.RTyAxis1;
             // 
             // Raw_DataPage
             // 
@@ -3879,7 +3808,7 @@
             this.Raw_DataPage.Location = new System.Drawing.Point(4, 23);
             this.Raw_DataPage.Name = "Raw_DataPage";
             this.Raw_DataPage.Padding = new System.Windows.Forms.Padding(3);
-            this.Raw_DataPage.Size = new System.Drawing.Size(304, 343);
+            this.Raw_DataPage.Size = new System.Drawing.Size(769, 563);
             this.Raw_DataPage.TabIndex = 4;
             this.Raw_DataPage.Text = "Raw Data";
             this.Raw_DataPage.UseVisualStyleBackColor = true;
@@ -3903,9 +3832,9 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.rawgrpListBox.Location = new System.Drawing.Point(217, 27);
+            this.rawgrpListBox.Location = new System.Drawing.Point(667, 34);
             this.rawgrpListBox.Name = "rawgrpListBox";
-            this.rawgrpListBox.Size = new System.Drawing.Size(87, 310);
+            this.rawgrpListBox.Size = new System.Drawing.Size(87, 225);
             this.rawgrpListBox.TabIndex = 120;
             // 
             // AuxDataView1
@@ -4030,13 +3959,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rawgrp.ContextMenuStrip = this.RtMenuStrip;
-            this.rawgrp.Location = new System.Drawing.Point(5, 4);
+            this.rawgrp.Location = new System.Drawing.Point(5, 10);
             this.rawgrp.Name = "rawgrp";
             this.rawgrp.PlotAreaColor = System.Drawing.Color.White;
             this.rawgrp.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot1,
             this.scatterPlot2});
-            this.rawgrp.Size = new System.Drawing.Size(211, 333);
+            this.rawgrp.Size = new System.Drawing.Size(651, 547);
             this.rawgrp.TabIndex = 110;
             this.rawgrp.UseColorGenerator = true;
             this.rawgrp.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4091,7 +4020,7 @@
             // RawRead
             // 
             this.RawRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RawRead.Location = new System.Drawing.Point(217, 3);
+            this.RawRead.Location = new System.Drawing.Point(667, 10);
             this.RawRead.Name = "RawRead";
             this.RawRead.Size = new System.Drawing.Size(87, 22);
             this.RawRead.TabIndex = 114;
@@ -4143,7 +4072,7 @@
             // btabout
             // 
             this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btabout.Location = new System.Drawing.Point(286, 1);
+            this.btabout.Location = new System.Drawing.Point(754, 1);
             this.btabout.Name = "btabout";
             this.btabout.Size = new System.Drawing.Size(24, 24);
             this.btabout.TabIndex = 95;
@@ -4153,1296 +4082,6 @@
             // legendItem108
             // 
             this.legendItem108.Text = "Item 56";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Controls.Add(this.tabPage10);
-            this.tabControl1.Controls.Add(this.tabPage11);
-            this.tabControl1.Controls.Add(this.tabPage12);
-            this.tabControl1.Location = new System.Drawing.Point(9, 344);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(148, 125);
-            this.tabControl1.TabIndex = 116;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.A1Zphase);
-            this.tabPage1.Controls.Add(this.A1Zmag);
-            this.tabPage1.Controls.Add(this.A1Zimg);
-            this.tabPage1.Controls.Add(this.A1Zreal);
-            this.tabPage1.Controls.Add(this.A1Vdc);
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(140, 98);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = " Aux1";
-            // 
-            // A1Zphase
-            // 
-            this.A1Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A1Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A1Zphase.Name = "A1Zphase";
-            this.A1Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A1Zphase.TabIndex = 117;
-            this.A1Zphase.Text = "  Zph: -------- °";
-            // 
-            // A1Zmag
-            // 
-            this.A1Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A1Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A1Zmag.Name = "A1Zmag";
-            this.A1Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A1Zmag.TabIndex = 117;
-            this.A1Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A1Zimg
-            // 
-            this.A1Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A1Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A1Zimg.Name = "A1Zimg";
-            this.A1Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A1Zimg.TabIndex = 117;
-            this.A1Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A1Zreal
-            // 
-            this.A1Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A1Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A1Zreal.Name = "A1Zreal";
-            this.A1Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A1Zreal.TabIndex = 117;
-            this.A1Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A1Vdc
-            // 
-            this.A1Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A1Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A1Vdc.Name = "A1Vdc";
-            this.A1Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A1Vdc.TabIndex = 117;
-            this.A1Vdc.Text = "  Vdc: -------- V";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.A2Zphase);
-            this.tabPage2.Controls.Add(this.A2Zmag);
-            this.tabPage2.Controls.Add(this.A2Zimg);
-            this.tabPage2.Controls.Add(this.A2Zreal);
-            this.tabPage2.Controls.Add(this.A2Vdc);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(140, 98);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = " Aux2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // A2Zphase
-            // 
-            this.A2Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A2Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A2Zphase.Name = "A2Zphase";
-            this.A2Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A2Zphase.TabIndex = 123;
-            this.A2Zphase.Text = "  Zph: -------- °";
-            // 
-            // A2Zmag
-            // 
-            this.A2Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A2Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A2Zmag.Name = "A2Zmag";
-            this.A2Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A2Zmag.TabIndex = 124;
-            this.A2Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A2Zimg
-            // 
-            this.A2Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A2Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A2Zimg.Name = "A2Zimg";
-            this.A2Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A2Zimg.TabIndex = 125;
-            this.A2Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A2Zreal
-            // 
-            this.A2Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A2Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A2Zreal.Name = "A2Zreal";
-            this.A2Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A2Zreal.TabIndex = 126;
-            this.A2Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A2Vdc
-            // 
-            this.A2Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A2Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A2Vdc.Name = "A2Vdc";
-            this.A2Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A2Vdc.TabIndex = 127;
-            this.A2Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 15);
-            this.label1.TabIndex = 118;
-            this.label1.Text = "   Zph: -------- °";
-            // 
-            // label6
-            // 
-            this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 59);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(134, 15);
-            this.label6.TabIndex = 119;
-            this.label6.Text = "  Zmag: --------mΩ";
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 41);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(134, 15);
-            this.label7.TabIndex = 120;
-            this.label7.Text = "  Zimg: --------mΩ";
-            // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(134, 15);
-            this.label8.TabIndex = 121;
-            this.label8.Text = " Zreal: --------mΩ";
-            // 
-            // label9
-            // 
-            this.label9.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 5);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(134, 15);
-            this.label9.TabIndex = 122;
-            this.label9.Text = "   Vdc: -------- V";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.A3Zphase);
-            this.tabPage3.Controls.Add(this.A3Zmag);
-            this.tabPage3.Controls.Add(this.A3Zimg);
-            this.tabPage3.Controls.Add(this.A3Zreal);
-            this.tabPage3.Controls.Add(this.A3Vdc);
-            this.tabPage3.Controls.Add(this.label10);
-            this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Location = new System.Drawing.Point(4, 23);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(140, 98);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = " Aux3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // A3Zphase
-            // 
-            this.A3Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A3Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A3Zphase.Name = "A3Zphase";
-            this.A3Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A3Zphase.TabIndex = 123;
-            this.A3Zphase.Text = "  Zph: -------- °";
-            // 
-            // A3Zmag
-            // 
-            this.A3Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A3Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A3Zmag.Name = "A3Zmag";
-            this.A3Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A3Zmag.TabIndex = 124;
-            this.A3Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A3Zimg
-            // 
-            this.A3Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A3Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A3Zimg.Name = "A3Zimg";
-            this.A3Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A3Zimg.TabIndex = 125;
-            this.A3Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A3Zreal
-            // 
-            this.A3Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A3Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A3Zreal.Name = "A3Zreal";
-            this.A3Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A3Zreal.TabIndex = 126;
-            this.A3Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A3Vdc
-            // 
-            this.A3Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A3Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A3Vdc.Name = "A3Vdc";
-            this.A3Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A3Vdc.TabIndex = 127;
-            this.A3Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 77);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(134, 15);
-            this.label10.TabIndex = 118;
-            this.label10.Text = "   Zph: -------- °";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 59);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(134, 15);
-            this.label11.TabIndex = 119;
-            this.label11.Text = "  Zmag: --------mΩ";
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(3, 41);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(134, 15);
-            this.label12.TabIndex = 120;
-            this.label12.Text = "  Zimg: --------mΩ";
-            // 
-            // label13
-            // 
-            this.label13.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(3, 23);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(134, 15);
-            this.label13.TabIndex = 121;
-            this.label13.Text = " Zreal: --------mΩ";
-            // 
-            // label14
-            // 
-            this.label14.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 5);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(134, 15);
-            this.label14.TabIndex = 122;
-            this.label14.Text = "   Vdc: -------- V";
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.A4Zphase);
-            this.tabPage4.Controls.Add(this.A4Zmag);
-            this.tabPage4.Controls.Add(this.A4Zimg);
-            this.tabPage4.Controls.Add(this.A4Zreal);
-            this.tabPage4.Controls.Add(this.A4Vdc);
-            this.tabPage4.Controls.Add(this.label15);
-            this.tabPage4.Controls.Add(this.label16);
-            this.tabPage4.Controls.Add(this.label17);
-            this.tabPage4.Controls.Add(this.label18);
-            this.tabPage4.Controls.Add(this.label19);
-            this.tabPage4.Location = new System.Drawing.Point(4, 23);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(140, 98);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = " Aux4";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // A4Zphase
-            // 
-            this.A4Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A4Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A4Zphase.Name = "A4Zphase";
-            this.A4Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A4Zphase.TabIndex = 123;
-            this.A4Zphase.Text = "  Zph: -------- °";
-            // 
-            // A4Zmag
-            // 
-            this.A4Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A4Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A4Zmag.Name = "A4Zmag";
-            this.A4Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A4Zmag.TabIndex = 124;
-            this.A4Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A4Zimg
-            // 
-            this.A4Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A4Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A4Zimg.Name = "A4Zimg";
-            this.A4Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A4Zimg.TabIndex = 125;
-            this.A4Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A4Zreal
-            // 
-            this.A4Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A4Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A4Zreal.Name = "A4Zreal";
-            this.A4Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A4Zreal.TabIndex = 126;
-            this.A4Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A4Vdc
-            // 
-            this.A4Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A4Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A4Vdc.Name = "A4Vdc";
-            this.A4Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A4Vdc.TabIndex = 127;
-            this.A4Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(3, 77);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(134, 15);
-            this.label15.TabIndex = 118;
-            this.label15.Text = "   Zph: -------- °";
-            // 
-            // label16
-            // 
-            this.label16.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(3, 59);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(134, 15);
-            this.label16.TabIndex = 119;
-            this.label16.Text = "  Zmag: --------mΩ";
-            // 
-            // label17
-            // 
-            this.label17.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(3, 41);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(134, 15);
-            this.label17.TabIndex = 120;
-            this.label17.Text = "  Zimg: --------mΩ";
-            // 
-            // label18
-            // 
-            this.label18.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(3, 23);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(134, 15);
-            this.label18.TabIndex = 121;
-            this.label18.Text = " Zreal: --------mΩ";
-            // 
-            // label19
-            // 
-            this.label19.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(3, 5);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(134, 15);
-            this.label19.TabIndex = 122;
-            this.label19.Text = "   Vdc: -------- V";
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.A5Zphase);
-            this.tabPage5.Controls.Add(this.A5Zmag);
-            this.tabPage5.Controls.Add(this.A5Zimg);
-            this.tabPage5.Controls.Add(this.A5Zreal);
-            this.tabPage5.Controls.Add(this.A5Vdc);
-            this.tabPage5.Controls.Add(this.label20);
-            this.tabPage5.Controls.Add(this.label21);
-            this.tabPage5.Controls.Add(this.label22);
-            this.tabPage5.Controls.Add(this.label23);
-            this.tabPage5.Controls.Add(this.label24);
-            this.tabPage5.Location = new System.Drawing.Point(4, 23);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(140, 98);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = " Aux5";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // A5Zphase
-            // 
-            this.A5Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A5Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A5Zphase.Name = "A5Zphase";
-            this.A5Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A5Zphase.TabIndex = 123;
-            this.A5Zphase.Text = "  Zph: -------- °";
-            // 
-            // A5Zmag
-            // 
-            this.A5Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A5Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A5Zmag.Name = "A5Zmag";
-            this.A5Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A5Zmag.TabIndex = 124;
-            this.A5Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A5Zimg
-            // 
-            this.A5Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A5Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A5Zimg.Name = "A5Zimg";
-            this.A5Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A5Zimg.TabIndex = 125;
-            this.A5Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A5Zreal
-            // 
-            this.A5Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A5Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A5Zreal.Name = "A5Zreal";
-            this.A5Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A5Zreal.TabIndex = 126;
-            this.A5Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A5Vdc
-            // 
-            this.A5Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A5Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A5Vdc.Name = "A5Vdc";
-            this.A5Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A5Vdc.TabIndex = 127;
-            this.A5Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label20
-            // 
-            this.label20.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(3, 77);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(134, 15);
-            this.label20.TabIndex = 118;
-            this.label20.Text = "   Zph: -------- °";
-            // 
-            // label21
-            // 
-            this.label21.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(3, 59);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(134, 15);
-            this.label21.TabIndex = 119;
-            this.label21.Text = "  Zmag: --------mΩ";
-            // 
-            // label22
-            // 
-            this.label22.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(3, 41);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(134, 15);
-            this.label22.TabIndex = 120;
-            this.label22.Text = "  Zimg: --------mΩ";
-            // 
-            // label23
-            // 
-            this.label23.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(3, 23);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(134, 15);
-            this.label23.TabIndex = 121;
-            this.label23.Text = " Zreal: --------mΩ";
-            // 
-            // label24
-            // 
-            this.label24.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(3, 5);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(134, 15);
-            this.label24.TabIndex = 122;
-            this.label24.Text = "   Vdc: -------- V";
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.A6Zphase);
-            this.tabPage6.Controls.Add(this.A6Zmag);
-            this.tabPage6.Controls.Add(this.A6Zimg);
-            this.tabPage6.Controls.Add(this.A6Zreal);
-            this.tabPage6.Controls.Add(this.A6Vdc);
-            this.tabPage6.Controls.Add(this.label25);
-            this.tabPage6.Controls.Add(this.label26);
-            this.tabPage6.Controls.Add(this.label27);
-            this.tabPage6.Controls.Add(this.label28);
-            this.tabPage6.Controls.Add(this.label29);
-            this.tabPage6.Location = new System.Drawing.Point(4, 23);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(140, 98);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = " Aux6";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // A6Zphase
-            // 
-            this.A6Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A6Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A6Zphase.Name = "A6Zphase";
-            this.A6Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A6Zphase.TabIndex = 123;
-            this.A6Zphase.Text = "  Zph: -------- °";
-            // 
-            // A6Zmag
-            // 
-            this.A6Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A6Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A6Zmag.Name = "A6Zmag";
-            this.A6Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A6Zmag.TabIndex = 124;
-            this.A6Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A6Zimg
-            // 
-            this.A6Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A6Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A6Zimg.Name = "A6Zimg";
-            this.A6Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A6Zimg.TabIndex = 125;
-            this.A6Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A6Zreal
-            // 
-            this.A6Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A6Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A6Zreal.Name = "A6Zreal";
-            this.A6Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A6Zreal.TabIndex = 126;
-            this.A6Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A6Vdc
-            // 
-            this.A6Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A6Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A6Vdc.Name = "A6Vdc";
-            this.A6Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A6Vdc.TabIndex = 127;
-            this.A6Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label25
-            // 
-            this.label25.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(3, 77);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(134, 15);
-            this.label25.TabIndex = 118;
-            this.label25.Text = "   Zph: -------- °";
-            // 
-            // label26
-            // 
-            this.label26.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(3, 59);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(134, 15);
-            this.label26.TabIndex = 119;
-            this.label26.Text = "  Zmag: --------mΩ";
-            // 
-            // label27
-            // 
-            this.label27.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(3, 41);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(134, 15);
-            this.label27.TabIndex = 120;
-            this.label27.Text = "  Zimg: --------mΩ";
-            // 
-            // label28
-            // 
-            this.label28.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(3, 23);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(134, 15);
-            this.label28.TabIndex = 121;
-            this.label28.Text = " Zreal: --------mΩ";
-            // 
-            // label29
-            // 
-            this.label29.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(3, 5);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(134, 15);
-            this.label29.TabIndex = 122;
-            this.label29.Text = "   Vdc: -------- V";
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.A7Zphase);
-            this.tabPage7.Controls.Add(this.A7Zmag);
-            this.tabPage7.Controls.Add(this.A7Zimg);
-            this.tabPage7.Controls.Add(this.A7Zreal);
-            this.tabPage7.Controls.Add(this.A7Vdc);
-            this.tabPage7.Controls.Add(this.label30);
-            this.tabPage7.Controls.Add(this.label31);
-            this.tabPage7.Controls.Add(this.label32);
-            this.tabPage7.Controls.Add(this.label33);
-            this.tabPage7.Controls.Add(this.label34);
-            this.tabPage7.Location = new System.Drawing.Point(4, 23);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(140, 98);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = " Aux7";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // A7Zphase
-            // 
-            this.A7Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A7Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A7Zphase.Name = "A7Zphase";
-            this.A7Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A7Zphase.TabIndex = 123;
-            this.A7Zphase.Text = "  Zph: -------- °";
-            // 
-            // A7Zmag
-            // 
-            this.A7Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A7Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A7Zmag.Name = "A7Zmag";
-            this.A7Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A7Zmag.TabIndex = 124;
-            this.A7Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A7Zimg
-            // 
-            this.A7Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A7Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A7Zimg.Name = "A7Zimg";
-            this.A7Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A7Zimg.TabIndex = 125;
-            this.A7Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A7Zreal
-            // 
-            this.A7Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A7Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A7Zreal.Name = "A7Zreal";
-            this.A7Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A7Zreal.TabIndex = 126;
-            this.A7Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A7Vdc
-            // 
-            this.A7Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A7Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A7Vdc.Name = "A7Vdc";
-            this.A7Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A7Vdc.TabIndex = 127;
-            this.A7Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label30
-            // 
-            this.label30.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(3, 77);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(134, 15);
-            this.label30.TabIndex = 118;
-            this.label30.Text = "   Zph: -------- °";
-            // 
-            // label31
-            // 
-            this.label31.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(3, 59);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(134, 15);
-            this.label31.TabIndex = 119;
-            this.label31.Text = "  Zmag: --------mΩ";
-            // 
-            // label32
-            // 
-            this.label32.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(3, 41);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(134, 15);
-            this.label32.TabIndex = 120;
-            this.label32.Text = "  Zimg: --------mΩ";
-            // 
-            // label33
-            // 
-            this.label33.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(3, 23);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(134, 15);
-            this.label33.TabIndex = 121;
-            this.label33.Text = " Zreal: --------mΩ";
-            // 
-            // label34
-            // 
-            this.label34.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(3, 5);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(134, 15);
-            this.label34.TabIndex = 122;
-            this.label34.Text = "   Vdc: -------- V";
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.Controls.Add(this.A8Zphase);
-            this.tabPage8.Controls.Add(this.A8Zmag);
-            this.tabPage8.Controls.Add(this.A8Zimg);
-            this.tabPage8.Controls.Add(this.A8Zreal);
-            this.tabPage8.Controls.Add(this.A8Vdc);
-            this.tabPage8.Controls.Add(this.label35);
-            this.tabPage8.Controls.Add(this.label36);
-            this.tabPage8.Controls.Add(this.label37);
-            this.tabPage8.Controls.Add(this.label38);
-            this.tabPage8.Controls.Add(this.label39);
-            this.tabPage8.Location = new System.Drawing.Point(4, 23);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(140, 98);
-            this.tabPage8.TabIndex = 7;
-            this.tabPage8.Text = " Aux8";
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // A8Zphase
-            // 
-            this.A8Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A8Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A8Zphase.Name = "A8Zphase";
-            this.A8Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A8Zphase.TabIndex = 123;
-            this.A8Zphase.Text = "  Zph: -------- °";
-            // 
-            // A8Zmag
-            // 
-            this.A8Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A8Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A8Zmag.Name = "A8Zmag";
-            this.A8Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A8Zmag.TabIndex = 124;
-            this.A8Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A8Zimg
-            // 
-            this.A8Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A8Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A8Zimg.Name = "A8Zimg";
-            this.A8Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A8Zimg.TabIndex = 125;
-            this.A8Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A8Zreal
-            // 
-            this.A8Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A8Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A8Zreal.Name = "A8Zreal";
-            this.A8Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A8Zreal.TabIndex = 126;
-            this.A8Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A8Vdc
-            // 
-            this.A8Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A8Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A8Vdc.Name = "A8Vdc";
-            this.A8Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A8Vdc.TabIndex = 127;
-            this.A8Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label35
-            // 
-            this.label35.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(3, 77);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(134, 15);
-            this.label35.TabIndex = 118;
-            this.label35.Text = "   Zph: -------- °";
-            // 
-            // label36
-            // 
-            this.label36.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(3, 59);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(134, 15);
-            this.label36.TabIndex = 119;
-            this.label36.Text = "  Zmag: --------mΩ";
-            // 
-            // label37
-            // 
-            this.label37.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(3, 41);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(134, 15);
-            this.label37.TabIndex = 120;
-            this.label37.Text = "  Zimg: --------mΩ";
-            // 
-            // label38
-            // 
-            this.label38.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(3, 23);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(134, 15);
-            this.label38.TabIndex = 121;
-            this.label38.Text = " Zreal: --------mΩ";
-            // 
-            // label39
-            // 
-            this.label39.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(3, 5);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(134, 15);
-            this.label39.TabIndex = 122;
-            this.label39.Text = "   Vdc: -------- V";
-            // 
-            // tabPage9
-            // 
-            this.tabPage9.Controls.Add(this.A9Zphase);
-            this.tabPage9.Controls.Add(this.A9Zmag);
-            this.tabPage9.Controls.Add(this.A9Zimg);
-            this.tabPage9.Controls.Add(this.A9Zreal);
-            this.tabPage9.Controls.Add(this.A9Vdc);
-            this.tabPage9.Controls.Add(this.label40);
-            this.tabPage9.Controls.Add(this.label41);
-            this.tabPage9.Controls.Add(this.label42);
-            this.tabPage9.Controls.Add(this.label43);
-            this.tabPage9.Controls.Add(this.label44);
-            this.tabPage9.Location = new System.Drawing.Point(4, 23);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(140, 98);
-            this.tabPage9.TabIndex = 8;
-            this.tabPage9.Text = " Aux9";
-            this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // A9Zphase
-            // 
-            this.A9Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A9Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A9Zphase.Name = "A9Zphase";
-            this.A9Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A9Zphase.TabIndex = 123;
-            this.A9Zphase.Text = "  Zph: -------- °";
-            // 
-            // A9Zmag
-            // 
-            this.A9Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A9Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A9Zmag.Name = "A9Zmag";
-            this.A9Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A9Zmag.TabIndex = 124;
-            this.A9Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A9Zimg
-            // 
-            this.A9Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A9Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A9Zimg.Name = "A9Zimg";
-            this.A9Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A9Zimg.TabIndex = 125;
-            this.A9Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A9Zreal
-            // 
-            this.A9Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A9Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A9Zreal.Name = "A9Zreal";
-            this.A9Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A9Zreal.TabIndex = 126;
-            this.A9Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A9Vdc
-            // 
-            this.A9Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A9Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A9Vdc.Name = "A9Vdc";
-            this.A9Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A9Vdc.TabIndex = 127;
-            this.A9Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label40
-            // 
-            this.label40.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(3, 77);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(134, 15);
-            this.label40.TabIndex = 118;
-            this.label40.Text = "   Zph: -------- °";
-            // 
-            // label41
-            // 
-            this.label41.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(3, 59);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(134, 15);
-            this.label41.TabIndex = 119;
-            this.label41.Text = "  Zmag: --------mΩ";
-            // 
-            // label42
-            // 
-            this.label42.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(3, 41);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(134, 15);
-            this.label42.TabIndex = 120;
-            this.label42.Text = "  Zimg: --------mΩ";
-            // 
-            // label43
-            // 
-            this.label43.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.Location = new System.Drawing.Point(3, 23);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(134, 15);
-            this.label43.TabIndex = 121;
-            this.label43.Text = " Zreal: --------mΩ";
-            // 
-            // label44
-            // 
-            this.label44.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(3, 5);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(134, 15);
-            this.label44.TabIndex = 122;
-            this.label44.Text = "   Vdc: -------- V";
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.Controls.Add(this.A10Zphase);
-            this.tabPage10.Controls.Add(this.A10Zmag);
-            this.tabPage10.Controls.Add(this.A10Zimg);
-            this.tabPage10.Controls.Add(this.A10Zreal);
-            this.tabPage10.Controls.Add(this.A10Vdc);
-            this.tabPage10.Controls.Add(this.label45);
-            this.tabPage10.Controls.Add(this.label46);
-            this.tabPage10.Controls.Add(this.label47);
-            this.tabPage10.Controls.Add(this.label48);
-            this.tabPage10.Controls.Add(this.label49);
-            this.tabPage10.Location = new System.Drawing.Point(4, 23);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(140, 98);
-            this.tabPage10.TabIndex = 9;
-            this.tabPage10.Text = " Aux10";
-            this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // A10Zphase
-            // 
-            this.A10Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A10Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A10Zphase.Name = "A10Zphase";
-            this.A10Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A10Zphase.TabIndex = 123;
-            this.A10Zphase.Text = "  Zph: -------- °";
-            // 
-            // A10Zmag
-            // 
-            this.A10Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A10Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A10Zmag.Name = "A10Zmag";
-            this.A10Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A10Zmag.TabIndex = 124;
-            this.A10Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A10Zimg
-            // 
-            this.A10Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A10Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A10Zimg.Name = "A10Zimg";
-            this.A10Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A10Zimg.TabIndex = 125;
-            this.A10Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A10Zreal
-            // 
-            this.A10Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A10Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A10Zreal.Name = "A10Zreal";
-            this.A10Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A10Zreal.TabIndex = 126;
-            this.A10Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A10Vdc
-            // 
-            this.A10Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A10Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A10Vdc.Name = "A10Vdc";
-            this.A10Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A10Vdc.TabIndex = 127;
-            this.A10Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label45
-            // 
-            this.label45.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.Location = new System.Drawing.Point(3, 77);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(134, 15);
-            this.label45.TabIndex = 118;
-            this.label45.Text = "   Zph: -------- °";
-            // 
-            // label46
-            // 
-            this.label46.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.Location = new System.Drawing.Point(3, 59);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(134, 15);
-            this.label46.TabIndex = 119;
-            this.label46.Text = "  Zmag: --------mΩ";
-            // 
-            // label47
-            // 
-            this.label47.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.Location = new System.Drawing.Point(3, 41);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(134, 15);
-            this.label47.TabIndex = 120;
-            this.label47.Text = "  Zimg: --------mΩ";
-            // 
-            // label48
-            // 
-            this.label48.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(3, 23);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(134, 15);
-            this.label48.TabIndex = 121;
-            this.label48.Text = " Zreal: --------mΩ";
-            // 
-            // label49
-            // 
-            this.label49.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.Location = new System.Drawing.Point(3, 5);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(134, 15);
-            this.label49.TabIndex = 122;
-            this.label49.Text = "   Vdc: -------- V";
-            // 
-            // tabPage11
-            // 
-            this.tabPage11.Controls.Add(this.A11Zphase);
-            this.tabPage11.Controls.Add(this.A11Zmag);
-            this.tabPage11.Controls.Add(this.A11Zimg);
-            this.tabPage11.Controls.Add(this.A11Zreal);
-            this.tabPage11.Controls.Add(this.A11Vdc);
-            this.tabPage11.Controls.Add(this.label50);
-            this.tabPage11.Controls.Add(this.label51);
-            this.tabPage11.Controls.Add(this.label52);
-            this.tabPage11.Controls.Add(this.label53);
-            this.tabPage11.Controls.Add(this.label54);
-            this.tabPage11.Location = new System.Drawing.Point(4, 23);
-            this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(140, 98);
-            this.tabPage11.TabIndex = 10;
-            this.tabPage11.Text = " Aux11";
-            this.tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // A11Zphase
-            // 
-            this.A11Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A11Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A11Zphase.Name = "A11Zphase";
-            this.A11Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A11Zphase.TabIndex = 123;
-            this.A11Zphase.Text = "  Zph: -------- °";
-            // 
-            // A11Zmag
-            // 
-            this.A11Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A11Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A11Zmag.Name = "A11Zmag";
-            this.A11Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A11Zmag.TabIndex = 124;
-            this.A11Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A11Zimg
-            // 
-            this.A11Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A11Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A11Zimg.Name = "A11Zimg";
-            this.A11Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A11Zimg.TabIndex = 125;
-            this.A11Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A11Zreal
-            // 
-            this.A11Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A11Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A11Zreal.Name = "A11Zreal";
-            this.A11Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A11Zreal.TabIndex = 126;
-            this.A11Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A11Vdc
-            // 
-            this.A11Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A11Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A11Vdc.Name = "A11Vdc";
-            this.A11Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A11Vdc.TabIndex = 127;
-            this.A11Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label50
-            // 
-            this.label50.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.Location = new System.Drawing.Point(3, 77);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(134, 15);
-            this.label50.TabIndex = 118;
-            this.label50.Text = "   Zph: -------- °";
-            // 
-            // label51
-            // 
-            this.label51.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.Location = new System.Drawing.Point(3, 59);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(134, 15);
-            this.label51.TabIndex = 119;
-            this.label51.Text = "  Zmag: --------mΩ";
-            // 
-            // label52
-            // 
-            this.label52.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(3, 41);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(134, 15);
-            this.label52.TabIndex = 120;
-            this.label52.Text = "  Zimg: --------mΩ";
-            // 
-            // label53
-            // 
-            this.label53.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label53.Location = new System.Drawing.Point(3, 23);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(134, 15);
-            this.label53.TabIndex = 121;
-            this.label53.Text = " Zreal: --------mΩ";
-            // 
-            // label54
-            // 
-            this.label54.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label54.Location = new System.Drawing.Point(3, 5);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(134, 15);
-            this.label54.TabIndex = 122;
-            this.label54.Text = "   Vdc: -------- V";
-            // 
-            // tabPage12
-            // 
-            this.tabPage12.Controls.Add(this.A12Zphase);
-            this.tabPage12.Controls.Add(this.A12Zmag);
-            this.tabPage12.Controls.Add(this.A12Zimg);
-            this.tabPage12.Controls.Add(this.A12Zreal);
-            this.tabPage12.Controls.Add(this.A12Vdc);
-            this.tabPage12.Controls.Add(this.label55);
-            this.tabPage12.Controls.Add(this.label56);
-            this.tabPage12.Controls.Add(this.label57);
-            this.tabPage12.Controls.Add(this.label58);
-            this.tabPage12.Controls.Add(this.label59);
-            this.tabPage12.Location = new System.Drawing.Point(4, 23);
-            this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(140, 98);
-            this.tabPage12.TabIndex = 11;
-            this.tabPage12.Text = " Aux12";
-            this.tabPage12.UseVisualStyleBackColor = true;
-            // 
-            // A12Zphase
-            // 
-            this.A12Zphase.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A12Zphase.Location = new System.Drawing.Point(3, 77);
-            this.A12Zphase.Name = "A12Zphase";
-            this.A12Zphase.Size = new System.Drawing.Size(134, 15);
-            this.A12Zphase.TabIndex = 123;
-            this.A12Zphase.Text = "  Zph: -------- °";
-            // 
-            // A12Zmag
-            // 
-            this.A12Zmag.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A12Zmag.Location = new System.Drawing.Point(3, 59);
-            this.A12Zmag.Name = "A12Zmag";
-            this.A12Zmag.Size = new System.Drawing.Size(134, 15);
-            this.A12Zmag.TabIndex = 124;
-            this.A12Zmag.Text = " Zmag: --------mΩ";
-            // 
-            // A12Zimg
-            // 
-            this.A12Zimg.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A12Zimg.Location = new System.Drawing.Point(3, 41);
-            this.A12Zimg.Name = "A12Zimg";
-            this.A12Zimg.Size = new System.Drawing.Size(134, 15);
-            this.A12Zimg.TabIndex = 125;
-            this.A12Zimg.Text = " Zimg: --------mΩ";
-            // 
-            // A12Zreal
-            // 
-            this.A12Zreal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A12Zreal.Location = new System.Drawing.Point(3, 23);
-            this.A12Zreal.Name = "A12Zreal";
-            this.A12Zreal.Size = new System.Drawing.Size(134, 15);
-            this.A12Zreal.TabIndex = 126;
-            this.A12Zreal.Text = "Zreal: --------mΩ";
-            // 
-            // A12Vdc
-            // 
-            this.A12Vdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A12Vdc.Location = new System.Drawing.Point(3, 5);
-            this.A12Vdc.Name = "A12Vdc";
-            this.A12Vdc.Size = new System.Drawing.Size(134, 15);
-            this.A12Vdc.TabIndex = 127;
-            this.A12Vdc.Text = "  Vdc: -------- V";
-            // 
-            // label55
-            // 
-            this.label55.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label55.Location = new System.Drawing.Point(3, 77);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(134, 15);
-            this.label55.TabIndex = 118;
-            this.label55.Text = "   Zph: -------- °";
-            // 
-            // label56
-            // 
-            this.label56.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.Location = new System.Drawing.Point(3, 59);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(134, 15);
-            this.label56.TabIndex = 119;
-            this.label56.Text = "  Zmag: --------mΩ";
-            // 
-            // label57
-            // 
-            this.label57.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label57.Location = new System.Drawing.Point(3, 41);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(134, 15);
-            this.label57.TabIndex = 120;
-            this.label57.Text = "  Zimg: --------mΩ";
-            // 
-            // label58
-            // 
-            this.label58.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label58.Location = new System.Drawing.Point(3, 23);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(134, 15);
-            this.label58.TabIndex = 121;
-            this.label58.Text = " Zreal: --------mΩ";
-            // 
-            // label59
-            // 
-            this.label59.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label59.Location = new System.Drawing.Point(3, 5);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(134, 15);
-            this.label59.TabIndex = 122;
-            this.label59.Text = "   Vdc: -------- V";
             // 
             // lblprog
             // 
@@ -5461,16 +4100,164 @@
             this.lblprog.Prog_Max = 100;
             this.lblprog.Prog_Min = 0;
             this.lblprog.Prog_Val = 50;
-            this.lblprog.Size = new System.Drawing.Size(284, 24);
+            this.lblprog.Size = new System.Drawing.Size(752, 24);
             this.lblprog.TabIndex = 56;
             this.lblprog.Load += new System.EventHandler(this.lblprog_Load);
+            // 
+            // grpAuxMon
+            // 
+            this.grpAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.grpAuxMon.Controls.Add(this.rdoAuxMon2);
+            this.grpAuxMon.Controls.Add(this.rdoAuxMon1);
+            this.grpAuxMon.Controls.Add(this.listAuxMon);
+            this.grpAuxMon.Location = new System.Drawing.Point(6, 338);
+            this.grpAuxMon.Name = "grpAuxMon";
+            this.grpAuxMon.Size = new System.Drawing.Size(156, 352);
+            this.grpAuxMon.TabIndex = 117;
+            this.grpAuxMon.TabStop = false;
+            this.grpAuxMon.Text = "[Auxiliary Monitor]";
+            // 
+            // rdoAuxMon2
+            // 
+            this.rdoAuxMon2.AutoSize = true;
+            this.rdoAuxMon2.Location = new System.Drawing.Point(68, 18);
+            this.rdoAuxMon2.Name = "rdoAuxMon2";
+            this.rdoAuxMon2.Size = new System.Drawing.Size(32, 18);
+            this.rdoAuxMon2.TabIndex = 2;
+            this.rdoAuxMon2.TabStop = true;
+            this.rdoAuxMon2.Text = "Z";
+            this.rdoAuxMon2.UseVisualStyleBackColor = true;
+            // 
+            // rdoAuxMon1
+            // 
+            this.rdoAuxMon1.AutoSize = true;
+            this.rdoAuxMon1.Location = new System.Drawing.Point(12, 18);
+            this.rdoAuxMon1.Name = "rdoAuxMon1";
+            this.rdoAuxMon1.Size = new System.Drawing.Size(46, 18);
+            this.rdoAuxMon1.TabIndex = 1;
+            this.rdoAuxMon1.TabStop = true;
+            this.rdoAuxMon1.Text = "Vdc";
+            this.rdoAuxMon1.UseVisualStyleBackColor = true;
+            // 
+            // listAuxMon
+            // 
+            this.listAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listAuxMon.Location = new System.Drawing.Point(7, 40);
+            this.listAuxMon.Name = "listAuxMon";
+            this.listAuxMon.Size = new System.Drawing.Size(143, 304);
+            this.listAuxMon.TabIndex = 0;
+            this.listAuxMon.UseCompatibleStateImageBehavior = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.checkedListBox5);
+            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Location = new System.Drawing.Point(657, 5);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(104, 92);
+            this.groupBox3.TabIndex = 143;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "[Legend]";
+            // 
+            // checkedListBox5
+            // 
+            this.checkedListBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox5.FormattingEnabled = true;
+            this.checkedListBox5.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1"});
+            this.checkedListBox5.Location = new System.Drawing.Point(6, 49);
+            this.checkedListBox5.Name = "checkedListBox5";
+            this.checkedListBox5.Size = new System.Drawing.Size(91, 38);
+            this.checkedListBox5.TabIndex = 139;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(7, 21);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(81, 22);
+            this.comboBox2.TabIndex = 121;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.checkedListBox6);
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.button4);
+            this.groupBox4.Location = new System.Drawing.Point(657, 102);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(104, 281);
+            this.groupBox4.TabIndex = 142;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "[items ]";
+            // 
+            // checkedListBox6
+            // 
+            this.checkedListBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBox6.FormattingEnabled = true;
+            this.checkedListBox6.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1",
+            "AUX2",
+            "AUX3",
+            "AUX4",
+            "AUX5",
+            "AUX6",
+            "AUX7",
+            "AUX8",
+            "AUX9",
+            "AUX10",
+            "AUX11",
+            "AUX12"});
+            this.checkedListBox6.Location = new System.Drawing.Point(6, 48);
+            this.checkedListBox6.Name = "checkedListBox6";
+            this.checkedListBox6.Size = new System.Drawing.Size(91, 225);
+            this.checkedListBox6.TabIndex = 138;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button3.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(52, 20);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(46, 22);
+            this.button3.TabIndex = 136;
+            this.button3.Text = "All";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.button4.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(2, 20);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(47, 22);
+            this.button4.TabIndex = 135;
+            this.button4.Text = "All";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // scatterPlot3
+            // 
+            this.scatterPlot3.XAxis = this.RTxAxis1;
+            this.scatterPlot3.YAxis = this.RTyAxis1;
             // 
             // BZAChPan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.grpAuxMon);
             this.Controls.Add(this.tabgrp);
             this.Controls.Add(this.lblzimg);
             this.Controls.Add(this.lblzreal);
@@ -5500,7 +4287,7 @@
             this.Controls.Add(this.lblTemp);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BZAChPan";
-            this.Size = new System.Drawing.Size(482, 473);
+            this.Size = new System.Drawing.Size(950, 693);
             this.Load += new System.EventHandler(this.BZAChPan_Load);
             this.SizeChanged += new System.EventHandler(this.BZAChPan_SizeChanged);
             this.menu_1.ResumeLayout(false);
@@ -5511,11 +4298,15 @@
             this.tabgrp.ResumeLayout(false);
             this.TabGrp1.ResumeLayout(false);
             this.TabGrp1.PerformLayout();
+            this.grpboxni1.ResumeLayout(false);
+            this.grpboxni2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.legend1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor2)).EndInit();
             this.TabGrp2.ResumeLayout(false);
             this.TabGrp2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.legend2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grp2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).EndInit();
@@ -5525,19 +4316,10 @@
             this.Raw_DataPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage9.ResumeLayout(false);
-            this.tabPage10.ResumeLayout(false);
-            this.tabPage11.ResumeLayout(false);
-            this.tabPage12.ResumeLayout(false);
+            this.grpAuxMon.ResumeLayout(false);
+            this.grpAuxMon.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -5851,23 +4633,9 @@
         private NationalInstruments.UI.LegendItem legendItem28;
         private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
         private NationalInstruments.UI.LegendItem RtlegendItem1;
-        private NationalInstruments.UI.ScatterPlot RTPlot1;
         private NationalInstruments.UI.XAxis RTxAxis1;
         private NationalInstruments.UI.YAxis RTyAxis1;
         private NationalInstruments.UI.LegendItem RtlegendItem2;
-        private NationalInstruments.UI.ScatterPlot RTPlot2;
-        private NationalInstruments.UI.ScatterPlot RTPlot3;
-        private NationalInstruments.UI.ScatterPlot RTPlot4;
-        private NationalInstruments.UI.ScatterPlot RTPlot5;
-        private NationalInstruments.UI.ScatterPlot RTPlot6;
-        private NationalInstruments.UI.ScatterPlot RTPlot7;
-        private NationalInstruments.UI.ScatterPlot RTPlot8;
-        private NationalInstruments.UI.ScatterPlot RTPlot9;
-        private NationalInstruments.UI.ScatterPlot RTPlot10;
-        private NationalInstruments.UI.ScatterPlot RTPlot11;
-        private NationalInstruments.UI.ScatterPlot RTPlot12;
-        private NationalInstruments.UI.ScatterPlot RTPlot13;
-        private NationalInstruments.UI.ScatterPlot RTPlot14;
         private NationalInstruments.UI.YAxis RTyAxis2;
         private NationalInstruments.UI.WindowsForms.ScatterGraph grprt;
         private System.Windows.Forms.Label lbldatacount;
@@ -5897,7 +4665,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.Button RawRead;
-        private System.Windows.Forms.CheckedListBox checkedListBox;
         private NationalInstruments.UI.LegendItem legendItem42;
         private NationalInstruments.UI.LegendItem legendItem43;
         private NationalInstruments.UI.LegendItem legendItem44;
@@ -5922,7 +4689,6 @@
         private NationalInstruments.UI.LegendItem legendItem118;
         private NationalInstruments.UI.LegendItem legendItem119;
         private NationalInstruments.UI.LegendItem legendItem120;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private NationalInstruments.UI.LegendItem legendItem60;
         private NationalInstruments.UI.LegendItem legendItem61;
         private NationalInstruments.UI.LegendItem legendItem62;
@@ -5984,134 +4750,32 @@
         private NationalInstruments.UI.LegendItem RtlegendItem12;
         private NationalInstruments.UI.LegendItem RtlegendItem13;
         private NationalInstruments.UI.LegendItem RtlegendItem14;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.TabPage tabPage9;
-        private System.Windows.Forms.TabPage tabPage10;
-        private System.Windows.Forms.TabPage tabPage11;
-        private System.Windows.Forms.TabPage tabPage12;
-        private System.Windows.Forms.Label A1Vdc;
-        private System.Windows.Forms.Label A1Zphase;
-        private System.Windows.Forms.Label A1Zmag;
-        private System.Windows.Forms.Label A1Zimg;
-        private System.Windows.Forms.Label A1Zreal;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.Label A2Zphase;
-        private System.Windows.Forms.Label A2Zmag;
-        private System.Windows.Forms.Label A2Zimg;
-        private System.Windows.Forms.Label A2Zreal;
-        private System.Windows.Forms.Label A2Vdc;
-        private System.Windows.Forms.Label A3Zphase;
-        private System.Windows.Forms.Label A3Zmag;
-        private System.Windows.Forms.Label A3Zimg;
-        private System.Windows.Forms.Label A3Zreal;
-        private System.Windows.Forms.Label A3Vdc;
-        private System.Windows.Forms.Label A4Zphase;
-        private System.Windows.Forms.Label A4Zmag;
-        private System.Windows.Forms.Label A4Zimg;
-        private System.Windows.Forms.Label A4Zreal;
-        private System.Windows.Forms.Label A4Vdc;
-        private System.Windows.Forms.Label A5Zphase;
-        private System.Windows.Forms.Label A5Zmag;
-        private System.Windows.Forms.Label A5Zimg;
-        private System.Windows.Forms.Label A5Zreal;
-        private System.Windows.Forms.Label A5Vdc;
-        private System.Windows.Forms.Label A6Zphase;
-        private System.Windows.Forms.Label A6Zmag;
-        private System.Windows.Forms.Label A6Zimg;
-        private System.Windows.Forms.Label A6Zreal;
-        private System.Windows.Forms.Label A6Vdc;
-        private System.Windows.Forms.Label A7Zphase;
-        private System.Windows.Forms.Label A7Zmag;
-        private System.Windows.Forms.Label A7Zimg;
-        private System.Windows.Forms.Label A7Zreal;
-        private System.Windows.Forms.Label A7Vdc;
-        private System.Windows.Forms.Label A8Zphase;
-        private System.Windows.Forms.Label A8Zmag;
-        private System.Windows.Forms.Label A8Zimg;
-        private System.Windows.Forms.Label A8Zreal;
-        private System.Windows.Forms.Label A8Vdc;
-        private System.Windows.Forms.Label A9Zphase;
-        private System.Windows.Forms.Label A9Zmag;
-        private System.Windows.Forms.Label A9Zimg;
-        private System.Windows.Forms.Label A9Zreal;
-        private System.Windows.Forms.Label A9Vdc;
-        private System.Windows.Forms.Label A10Zphase;
-        private System.Windows.Forms.Label A10Zmag;
-        private System.Windows.Forms.Label A10Zimg;
-        private System.Windows.Forms.Label A10Zreal;
-        private System.Windows.Forms.Label A10Vdc;
-        private System.Windows.Forms.Label A11Zphase;
-        private System.Windows.Forms.Label A11Zmag;
-        private System.Windows.Forms.Label A11Zimg;
-        private System.Windows.Forms.Label A11Zreal;
-        private System.Windows.Forms.Label A11Vdc;
-        private System.Windows.Forms.Label A12Zphase;
-        private System.Windows.Forms.Label A12Zmag;
-        private System.Windows.Forms.Label A12Zimg;
-        private System.Windows.Forms.Label A12Zreal;
-        private System.Windows.Forms.Label A12Vdc;
         private System.Windows.Forms.CheckedListBox rawgrpListBox;
+        private System.Windows.Forms.GroupBox grpAuxMon;
+        private System.Windows.Forms.GroupBox grpboxni2;
+        private System.Windows.Forms.Button btDeselAllNiItems;
+        private System.Windows.Forms.Button btSelAllNiItems;
+        private System.Windows.Forms.GroupBox grpboxni1;
+        private System.Windows.Forms.CheckedListBox checkedListBox3;
+        private System.Windows.Forms.ComboBox cboItemA;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.RadioButton rdoAuxMon2;
+        private System.Windows.Forms.RadioButton rdoAuxMon1;
+        private System.Windows.Forms.ListView listAuxMon;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckedListBox checkedListBox4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckedListBox checkedListBox5;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckedListBox checkedListBox6;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private NationalInstruments.UI.ScatterPlot scatterPlot3;
     }
 }

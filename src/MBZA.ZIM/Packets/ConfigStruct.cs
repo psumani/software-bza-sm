@@ -773,8 +773,8 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             int i = cModel[0] - 0x30;
             string str;
-            if (i < 0) i = 0;
-            else if (i > 5) i = 5;
+            /*if (i < 0) i = 0;
+            else if (i > 5) i = 5;*/
 
             str = string.Format("{0}{1}000{2}", Extensions.GetEnumDescription((eZimSnID)i), (char)cModel[1], UintToByteString(nSerial));
             return str;
@@ -911,11 +911,11 @@ namespace ZiveLab.ZM.ZIM.Packets
     public struct stZimCfg_1
     {
         public stZimInfo info;
-        public st_zim_rnginf ranges;
+        public st_zim_rnginf_1 ranges;
         public stZimCfg_1(eZimType type)
         {
             info = new stZimInfo(type);
-            ranges = new st_zim_rnginf(type);
+            ranges = new st_zim_rnginf_1(type);
         }
 
         public void Initilize(eZimType type)

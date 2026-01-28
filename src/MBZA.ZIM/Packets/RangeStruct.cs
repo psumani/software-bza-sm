@@ -847,7 +847,7 @@ namespace ZiveLab.ZM.ZIM.Packets
     }
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct st_zim_rnginf1
+    public struct st_zim_rnginf_1
     {
         public byte ID;
         public st_zim_Safety_inf mSafety;
@@ -865,7 +865,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
         public double[] nouse;
 
-        public st_zim_rnginf1(eZimType mtype)
+        public st_zim_rnginf_1(eZimType mtype)
         {
             int i;
 
@@ -1033,7 +1033,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void ToWritePtr(byte[] Arr)
         {
             GCHandle pinnedArr = GCHandle.Alloc(Arr, GCHandleType.Pinned);
-            this = (st_zim_rnginf1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_rnginf1));
+            this = (st_zim_rnginf_1)Marshal.PtrToStructure(pinnedArr.AddrOfPinnedObject(), typeof(st_zim_rnginf_1));
             pinnedArr.Free();
         }
     }
@@ -1399,7 +1399,6 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_zim_Idc_rnginf Idc_rnginf;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
         public double[] nouse;
-
         public st_zimGen_rnginf(eZimType mtype)
         {
             int i;

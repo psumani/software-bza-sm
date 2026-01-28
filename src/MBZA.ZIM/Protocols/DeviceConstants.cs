@@ -17,6 +17,8 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_APP_CHANNEL = 32;
         public const int MAX_APP_DEVICE = 8;
         public const int ChannelMapSize = 512;
+        public const int MAX_GRAPH_YAXES = 2;
+        public const int MAX_TECHNIQUE = 6;
         public const int MAX_COM_DATA_CNT = 20;
         public const int MAX_DATA_CNT = 100000;
         public const string AppCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM.CFG";

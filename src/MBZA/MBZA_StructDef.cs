@@ -3024,13 +3024,13 @@ namespace ZiveLab.ZM
     {
         public string Description;
         public stDeviceParent parent;
-        public st_zim_rnginf1 ranges;
+        public st_zim_rnginf_1 ranges;
         public stRangeFile_1()
         {
             Description = "ZM Range information v.1.0.0.0";
             parent = new stDeviceParent();
 
-            ranges = new st_zim_rnginf1(0);
+            ranges = new st_zim_rnginf_1(0);
         }
     }
 

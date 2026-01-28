@@ -121,6 +121,12 @@
     <Compile Include="frmAuxVdc.Designer.cs">
       <DependentUpon>frmAuxVdc.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCalibAuxsVdc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCalibAuxsVdc.Designer.cs">
+      <DependentUpon>FrmCalibAuxsVdc.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCalibCtrlIdc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBurnZIM.resx">
       <DependentUpon>frmBurnZIM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCalibAuxsVdc.resx">
+      <DependentUpon>FrmCalibAuxsVdc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCalibCtrlIdc.resx">
       <DependentUpon>frmCalibCtrlIdc.cs</DependentUpon>

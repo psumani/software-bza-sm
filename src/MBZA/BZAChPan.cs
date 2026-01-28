@@ -31,48 +31,18 @@ namespace ZiveLab.ZM
         public stLinkSifCh lnkch;
         public string serial;
         public int sifch;
-        public int nSelItem;
-        public int OldTechType;
-        public int GrpCtrlMode1;
-        public int GrpCtrlMode2;
 
-        public int GrpPlotCount1;
-        public int GrpPlotCount2;
-
-        public int GraphSizeMode;
-        public bool bMaxWindow;
-
-        string AppTitle;
-        string AppVer;
-
-        bool bRtGrpPause;
-
-        public Form MdiParent;
-        public int rtmode;
-        public int rtmode1;
-        public int rtmode2;
-
-        public event EventHandler evShowmax;
-        public string sSelSerial2 = "";
-        //private bool resizing = false;
-        //private int resizeStartY;
-        //private System.Windows.Forms.Timer refreshTimer;
-
-        double GrpSpaceRate;
-
-        bool LegendMove0;
-        bool LegendMove1;
-        bool LegendMove2;
-
-        Point LegendPointS0;
-        Point LegendPointS1;
-        Point LegendPointS2;
-
-        Point LegendPointE0;
-        Point LegendPointE1;
-        Point LegendPointE2;
+        public st_GrpCh_vars grpvars;
 
         MBZA_ChannelInfo About;
+
+        ToolTip toolTip;
+        bool xTimemode0;
+        bool xTimemode1;
+        FormatString fs_ss;
+        FormatString fs_mm;
+        FormatString fs_hh;
+        FormatString fs_dd;
 
         ImageList imageList;
         stTech_EIS techeis;
@@ -82,128 +52,26 @@ namespace ZiveLab.ZM
         stTech_QIS techqis;
         stTech_DCH techdch;
 
-        ToolTip toolTip;
-        bool xTimemode0;
-        bool xTimemode1;
-        FormatString fs_ss;
-        FormatString fs_mm;
-        FormatString fs_hh;
-        FormatString fs_dd;
-        int oldcursorindex1;
-        int oldcursorindex2;
-        int LastPlotPoint;
-        int auxLastPlotPoint0;
-        int auxLastPlotPoint;
-        int auxLastPlotPoint1;
-        int auxLastPlotPoint2;
-        int auxLastPlotPoint3;
-        int auxLastPlotPoint4;
-        int auxLastPlotPoint5;
-        int auxLastPlotPoint6;
-        int auxLastPlotPoint7;
-        int auxLastPlotPoint8;
-        int auxLastPlotPoint9;
-        int auxLastPlotPoint10;
-        int auxLastPlotPoint11;
-        int auxLastPlotPoint12;
-        int auxLastPlotPoint13;
-        int auxLastPlotPoint14;
-        int auxLastPlotPoint15;
-        int auxLastPlotPoint16;
-        int auxLastPlotPoint17;
-        int auxLastPlotPoint18;
-        int auxLastPlotPoint19;
-        int auxLastPlotPoint20;
-        int auxLastPlotPoint21;
-        int auxLastPlotPoint22;
-        int auxLastPlotPoint23;
-        int auxLastPlotPoint24;
-        int auxLastPlotPoint25;
+        public int GraphSizeMode;
+        public bool bMaxWindow;
 
-        //int auxLastPlotPoint4;
-        int LastPlotPoint1;
-        int LastPlotPoint2;
-        int LastPlotPoint3;
-        int LastPlotPoint4;
-        int LastPlotPoint5;
-        int LastPlotPoint6;
-        int LastPlotPoint7;
-        int LastPlotPoint8;
-        int LastPlotPoint9;
-        int LastPlotPoint10;
-        int LastPlotPoint11;
-        int LastPlotPoint12;
-        int LastPlotPoint13;
-        int LastPlotPoint14;
-        int LastPlotPoint15;
-        int LastPlotPoint16;
-        int LastPlotPoint17;
-        int LastPlotPoint18;
-        int LastPlotPoint19;
-        int LastPlotPoint20;
-        int LastPlotPoint21;
-        int LastPlotPoint22;
-        int LastPlotPoint23;
-        int LastPlotPoint24;
-        int LastPlotPoint25;
+        string AppTitle;
+        string AppVer;
 
-        int bodePlotPoint0;
-        int bodePlotPoint1;
-        int bodePlotPoint2;
-        int bodePlotPoint3;
-        int bodePlotPoint4;
-        int bodePlotPoint5;
-        int bodePlotPoint6;
-        int bodePlotPoint7;
-        int bodePlotPoint8;
-        int bodePlotPoint9;
-        int bodePlotPoint10;
-        int bodePlotPoint11;
-        int bodePlotPoint12;
-        int bodePlotPoint13;
-        int bodePlotPoint14;
-        int bodePlotPoint15;
-        int bodePlotPoint16;
-        int bodePlotPoint17;
-        int bodePlotPoint18;
-        int bodePlotPoint19;
-        int bodePlotPoint20;
-        int bodePlotPoint21;
-        int bodePlotPoint22;
-        int bodePlotPoint23;
-        int bodePlotPoint24;
-        int bodePlotPoint25;
-        int bodePlotPoint26;
-        int bodePlotPoint27;
-        int bodePlotPoint28;
-        int bodePlotPoint29;
-        int bodePlotPoint30;
-        int bodePlotPoint31;
-        int bodePlotPoint32;
-        int bodePlotPoint33;
-        int bodePlotPoint34;
-        int bodePlotPoint35;
-        int bodePlotPoint36;
-        int bodePlotPoint37;
-        int bodePlotPoint38;
-        int bodePlotPoint39;
-        int bodePlotPoint40;
-        int bodePlotPoint41;
-        int bodePlotPoint42;
-        int bodePlotPoint43;
-        int bodePlotPoint44;
-        int bodePlotPoint45;
-        int bodePlotPoint46;
-        int bodePlotPoint47;
+        public Form MdiParent;
 
+        public event EventHandler evShowmax;
+
+        public int OldTechType;
+
+        
         public BZAChPan(int ich, ref EventHandler evtimer, EventHandler evshowmax, Form tMdiparent)
         {
             InitializeComponent();
             DoubleBuffered = true;
             AuxDataView1.Visible = false;
             tabgrp.TabPages.Remove(Raw_DataPage);
-
-            GrpSpaceRate = 0.01;
+            
             MdiParent = tMdiparent;
             fs_ss = new FormatString(FormatStringMode.ElapsedTime, @"ss");
             fs_mm = new FormatString(FormatStringMode.ElapsedTime, @"m\:ss");
@@ -222,7 +90,6 @@ namespace ZiveLab.ZM
             lnkch = gBZA.ChLnkLst[sch];
             serial = lnkch.sSerial;
             sifch = lnkch.SifCh;
-            nSelItem = 0;
 
             About = new MBZA_ChannelInfo(serial, sifch);
 
@@ -241,7 +108,6 @@ namespace ZiveLab.ZM
             imageList.Images.Add("graph", ZM.Properties.Resources.AutoscaleXY);
             imageList.Images.Add("report", ZM.Properties.Resources.Report1);
             imageList.Images.Add("about", ZM.Properties.Resources.DescriptionViewer);
-
 
             imageList.Images.Add("save", ZM.Properties.Resources.Save);
 
@@ -296,31 +162,46 @@ namespace ZiveLab.ZM
             toolTip.ShowAlways = true;
             toolTip.IsBalloon = true;
 
-            bRtGrpPause = false;
-            rtmode = 0;
-            rtmode1 = 0;
-            rtmode2 = 0;
 
-            oldcursorindex1 = -1;
-            oldcursorindex2 = -1;
+            grpvars = new st_GrpCh_vars();
 
-            LegendMove0 = false;
-            LegendMove1 = false;
-            LegendMove2 = false;
+
+            bool isMCBZA = gBZA.IsMCBZA(serial);
+
+            if (isMCBZA)
+            {
+                grpvars.bAux = true;
+                grpvars.nAuxChCount = 0;
+
+                int idx = 0;
+                int nAuxBd, nAuxBdCh;
+                grpvars.GrpObjs[idx].bExist = true;
+                grpvars.GrpObjs[idx].nAuxCh = -1;
+                idx++;
+                for (int i = 1; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                {
+                    nAuxBd = (i - 1) / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                    nAuxBdCh = (i - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+                    if (gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.EnaZIM[nAuxBd] == 1
+                        && gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.ChkZIM[nAuxBd] == 1)
+                    {
+                        grpvars.GrpObjs[idx].bExist = true;
+                        grpvars.GrpObjs[idx].nAuxCh = i - 1;
+                        grpvars.nAuxChCount++;
+                        idx++;
+                    }
+                }
+            }
+
+
             GraphSizeMode = 0;
             xTimemode0 = false;
             xTimemode1 = false;
-            GrpPlotCount1 = 1;
-            GrpPlotCount2 = 2;
-
-           
-
-            lblprog.LabelText = string.Format("Channel {0:00}", ch + 1);
 
             evtimer += new EventHandler(TimerProc);
             evShowmax += evshowmax;
 
-
+            lblprog.LabelText = string.Format("Channel {0:00}", ch + 1);
             lblprog.Prog_Max = 1000;
             lblprog.Prog_Min = 0;
             lblprog.Prog_Val = 0;
@@ -330,119 +211,7 @@ namespace ZiveLab.ZM
             RawRtGraph();
             InitGraph1();
             InitGraph2();
-
-
-            LastPlotPoint = 0;
-            auxLastPlotPoint0 = 0;
-            auxLastPlotPoint1 = 0;
-            auxLastPlotPoint2 = 0;
-            auxLastPlotPoint4 = 0;
-            auxLastPlotPoint5 = 0;
-            auxLastPlotPoint6 = 0;
-            auxLastPlotPoint7 = 0;
-            auxLastPlotPoint8 = 0;
-            auxLastPlotPoint9 = 0;
-            auxLastPlotPoint10 = 0;
-            auxLastPlotPoint11 = 0;
-            auxLastPlotPoint12 = 0;
-            auxLastPlotPoint13 = 0;
-            auxLastPlotPoint14 = 0;
-            auxLastPlotPoint15 = 0;
-            auxLastPlotPoint16 = 0;
-            auxLastPlotPoint17 = 0;
-            auxLastPlotPoint18 = 0;
-            auxLastPlotPoint19 = 0;
-            auxLastPlotPoint20 = 0;
-            auxLastPlotPoint21 = 0;
-            auxLastPlotPoint22 = 0;
-            auxLastPlotPoint23 = 0;
-            auxLastPlotPoint24 = 0;
-            auxLastPlotPoint25 = 0;
-
-            LastPlotPoint1 = 0;
-            LastPlotPoint2 = 0;
-            LastPlotPoint3 = 0;
-            LastPlotPoint4 = 0;
-            LastPlotPoint5 = 0;
-            LastPlotPoint6 = 0;
-            LastPlotPoint7 = 0;
-            LastPlotPoint8 = 0;
-            LastPlotPoint9 = 0;
-            LastPlotPoint10 = 0;
-            LastPlotPoint11 = 0;
-            LastPlotPoint12 = 0;
-            LastPlotPoint13 = 0;
-            LastPlotPoint14 = 0;
-            LastPlotPoint15 = 0;
-            LastPlotPoint16 = 0;
-            LastPlotPoint17 = 0;
-            LastPlotPoint18 = 0;
-            LastPlotPoint19 = 0;
-            LastPlotPoint20 = 0;
-            LastPlotPoint21 = 0;
-            LastPlotPoint22 = 0;
-            LastPlotPoint23 = 0;
-            LastPlotPoint24 = 0;
-            LastPlotPoint25 = 0;
-
-            bodePlotPoint0 = 0;
-            bodePlotPoint1 = 0;
-            bodePlotPoint2 = 0;
-            bodePlotPoint3 = 0;
-            bodePlotPoint4 = 0;
-            bodePlotPoint5 = 0;
-            bodePlotPoint6 = 0;
-            bodePlotPoint7 = 0;
-            bodePlotPoint8 = 0;
-            bodePlotPoint9 = 0;
-            bodePlotPoint10 = 0;
-            bodePlotPoint11 = 0;
-            bodePlotPoint12 = 0;
-            bodePlotPoint13 = 0;
-            bodePlotPoint14 = 0;
-            bodePlotPoint15 = 0;
-            bodePlotPoint16 = 0;
-            bodePlotPoint17 = 0;
-            bodePlotPoint18 = 0;
-            bodePlotPoint19 = 0;
-            bodePlotPoint20 = 0;
-            bodePlotPoint21 = 0;
-            bodePlotPoint22 = 0;
-            bodePlotPoint23 = 0;
-            bodePlotPoint24 = 0;
-            bodePlotPoint25 = 0;
-            bodePlotPoint26 = 0;
-            bodePlotPoint27 = 0;
-            bodePlotPoint28 = 0;
-            bodePlotPoint29 = 0;
-            bodePlotPoint30 = 0;
-            bodePlotPoint31 = 0;
-            bodePlotPoint32 = 0;
-            bodePlotPoint33 = 0;
-            bodePlotPoint34 = 0;
-            bodePlotPoint35 = 0;
-            bodePlotPoint36 = 0;
-            bodePlotPoint37 = 0;
-            bodePlotPoint38 = 0;
-            bodePlotPoint39 = 0;
-            bodePlotPoint40 = 0;
-            bodePlotPoint41 = 0;
-            bodePlotPoint42 = 0;
-            bodePlotPoint43 = 0;
-            bodePlotPoint44 = 0;
-            bodePlotPoint45 = 0;
-            bodePlotPoint46 = 0;
-            bodePlotPoint47 = 0;
-
-            bool isMCBZA = gBZA.IsMCBZA(sSelSerial2);
-            if (isMCBZA)
-            {
-                tabControl1.Visible = true;
-            }
-            else
-            {
-                tabControl1.Visible = false;
-            }
+            
 
             MakeAppTitle();
 
@@ -450,25 +219,1873 @@ namespace ZiveLab.ZM
             InitGraphType();
             RefreshGraphSize();
             RefreshTestInformation();
-
-            this.Layout += FrmCalibration_Layout;
-            tabgrp.SelectedIndexChanged += (s, e) =>
-            {
-                FrmCalibration_Layout(this, EventArgs.Empty);
-            };
         }
+
+
+        #region Grpinit
+        private void InitRtGraph()
+        {
+            grpvars.GrpItemsRT.Type = 0;
+            grpvars.GrpItemsRT.PlotCount = 1;
+            grprt.ClearData();
+            grprt.Plots.Clear();
+
+            grprt.XAxes[0].Caption = "Voltage(V)";
+            grprt.XAxes[0].CaptionVisible = true;
+            grprt.XAxes[0].CaptionForeColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.XAxes[0].MajorDivisions.TickColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.XAxes[0].MajorDivisions.LabelForeColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.XAxes[0].MajorDivisions.LabelVisible = true;
+            grprt.XAxes[0].MajorDivisions.GridColor = grpvars.GrpItemsRT.GridColor;
+            grprt.XAxes[0].MajorDivisions.GridVisible = grpvars.GrpItemsRT.ShowGrid;
+            grprt.XAxes[0].MajorDivisions.TickVisible = true;
+            grprt.XAxes[0].MinorDivisions.TickColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.XAxes[0].MinorDivisions.GridColor = grpvars.GrpItemsRT.GridColor;
+            grprt.XAxes[0].MinorDivisions.TickVisible = false;
+            grprt.XAxes[0].MinorDivisions.GridVisible = false;
+            grprt.YAxes[0].AutoSpacing = true;
+
+
+            grprt.YAxes[0].Caption = "Current(A)";
+            grprt.YAxes[0].CaptionVisible = true;
+            grprt.YAxes[0].CaptionForeColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.YAxes[0].MajorDivisions.TickColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.YAxes[0].MajorDivisions.LabelForeColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.YAxes[0].MajorDivisions.LabelVisible = true;
+            grprt.YAxes[0].MajorDivisions.GridColor = grpvars.GrpItemsRT.GridColor;
+            grprt.YAxes[0].MajorDivisions.TickVisible = true;
+            grprt.YAxes[0].MajorDivisions.GridVisible = grpvars.GrpItemsRT.ShowGrid;
+            grprt.YAxes[0].MinorDivisions.TickColor = grpvars.GrpItemsRT.Axis_Color;
+            grprt.YAxes[0].MinorDivisions.GridColor = grpvars.GrpItemsRT.GridColor;
+            grprt.YAxes[0].MinorDivisions.TickVisible = false;
+            grprt.YAxes[0].MinorDivisions.GridVisible = false;
+            grprt.YAxes[0].AutoSpacing = true;
+
+            grprt.YAxes[1].Caption = "";
+            grprt.YAxes[1].CaptionVisible = true;
+            grprt.YAxes[1].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            grprt.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            grprt.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            grprt.YAxes[1].MajorDivisions.LabelVisible = true;
+            grprt.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            grprt.YAxes[1].MajorDivisions.TickVisible = true;
+            grprt.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            grprt.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            grprt.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            grprt.YAxes[1].MinorDivisions.GridVisible = false;
+            grprt.YAxes[1].MinorDivisions.TickVisible = false;
+            grprt.YAxes[1].AutoSpacing = true;
+
+            grprt.PlotAreaColor = grpvars.GrpItemsRT.BackColor;
+            grprt.PlotAreaBorder = Border.Dotted;
+
+            ScatterPlot tPlot;
+            for(int i=0; i< grpvars.nAuxChCount + 1; i++)
+            {
+                tPlot = new ScatterPlot(grprt.XAxes[0], grprt.YAxes[0]);
+                tPlot.LineColor = grpvars.GrpItemsRT.PlotColor[i*2];
+                tPlot.PointColor = grpvars.GrpItemsRT.PlotColor[i * 2];
+                tPlot.SmoothUpdates = true;
+                grprt.Plots.Add(tPlot);
+
+                tPlot = new ScatterPlot(grprt.XAxes[0], grprt.YAxes[1]);
+                tPlot.LineColor = grpvars.GrpItemsRT.PlotColor[i * 2+1];
+                tPlot.PointColor = grpvars.GrpItemsRT.PlotColor[i * 2+1];
+                tPlot.SmoothUpdates = true;
+                grprt.Plots.Add(tPlot);
+            }
+
+        
+
+            
+
+            
+
+
+            RtMenuGraphLine.Checked = Properties.Settings.Default.RtGrp_Plot_ViewLine;
+            RtMenuGraphPoint.Checked = Properties.Settings.Default.RtGrp_Plot_ViewPoint;
+            RtMenuGraphGrid.Checked = Properties.Settings.Default.RtGrp_GridView;
+            RtMenuGraphLegend.Checked = Properties.Settings.Default.RtGrpLegendView;
+            Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
+            Properties.Settings.Default.RtGrpLegendView = MenuPlotLegend1.Checked;
+
+            grprt.Plots[0].LineWidth = DeviceConstants.Linewidth;
+            grprt.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+
+            grprt.Plots[1].LineWidth = DeviceConstants.Linewidth;
+            grprt.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+
+            if (Properties.Settings.Default.RtGrp_Plot_ViewLine)
+            {
+                grprt.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+                grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            }
+            else
+            {
+                grprt.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
+                grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
+            }
+
+            if (Properties.Settings.Default.RtGrp_Plot_ViewPoint)
+            {
+                grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+                grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            }
+            else
+            {
+                grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
+                grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
+            }
+            grprt.YAxes[0].Visible = true;
+            if (rtmode == 0)
+            {
+                RtMenuGraphMode1.Checked = true;
+                grprt.YAxes[1].Visible = false;
+                RtMenuGraphMode2.Checked = false;
+            }
+            else
+            {
+                RtMenuGraphMode1.Checked = false;
+                grprt.YAxes[1].Visible = true;
+                RtMenuGraphMode2.Checked = true;
+            }
+            RefreshRtView();
+            Rtlegend.Width = 82;
+
+            RefreshRt();
+        }
+
+        private void RawRtGraph() // Raw Data Test code
+        {
+            rtmode = 0;
+
+            rawgrp.PlotAreaColor = Properties.Settings.Default.RtGrp_BackColor;
+            rawgrp.PlotAreaBorder = Border.Dotted;
+
+            rawgrp.Plots[0].LineColor = Properties.Settings.Default.RtGrp_Plot1_Color;
+            rawgrp.Plots[0].PointColor = Properties.Settings.Default.RtGrp_Plot1_Color;
+            rawgrp.Plots[0].SmoothUpdates = true;
+            rawgrp.Plots[1].LineColor = Properties.Settings.Default.RtGrp_Plot2_Color;
+            rawgrp.Plots[1].PointColor = Properties.Settings.Default.RtGrp_Plot2_Color;
+            rawgrp.Plots[1].SmoothUpdates = true;
+
+            rawgrp.XAxes[0].Caption = "Voltage(V)";
+            rawgrp.XAxes[0].CaptionVisible = true;
+            rawgrp.XAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.XAxes[0].MajorDivisions.LabelVisible = true;
+            rawgrp.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            rawgrp.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            rawgrp.XAxes[0].MajorDivisions.TickVisible = true;
+            rawgrp.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            rawgrp.XAxes[0].MinorDivisions.TickVisible = false;
+            rawgrp.XAxes[0].MinorDivisions.GridVisible = false;
+            rawgrp.YAxes[0].AutoSpacing = true;
+
+            rawgrp.YAxes[0].Caption = "Current(A)";
+            rawgrp.YAxes[0].CaptionVisible = true;
+            rawgrp.YAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[0].MajorDivisions.LabelVisible = true;
+            rawgrp.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            rawgrp.YAxes[0].MajorDivisions.TickVisible = true;
+            rawgrp.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            rawgrp.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            rawgrp.YAxes[0].MinorDivisions.TickVisible = false;
+            rawgrp.YAxes[0].MinorDivisions.GridVisible = false;
+            rawgrp.YAxes[0].AutoSpacing = true;
+
+            rawgrp.YAxes[1].Caption = "";
+            rawgrp.YAxes[1].CaptionVisible = true;
+            rawgrp.YAxes[1].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[1].MajorDivisions.LabelVisible = true;
+            rawgrp.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            rawgrp.YAxes[1].MajorDivisions.TickVisible = true;
+
+            rawgrp.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            rawgrp.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            rawgrp.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            rawgrp.YAxes[1].MinorDivisions.GridVisible = false;
+            rawgrp.YAxes[1].MinorDivisions.TickVisible = false;
+            rawgrp.YAxes[1].AutoSpacing = true;
+
+            RtMenuGraphLine.Checked = Properties.Settings.Default.RtGrp_Plot_ViewLine;
+            RtMenuGraphPoint.Checked = Properties.Settings.Default.RtGrp_Plot_ViewPoint;
+            RtMenuGraphGrid.Checked = Properties.Settings.Default.RtGrp_GridView;
+            RtMenuGraphLegend.Checked = Properties.Settings.Default.RtGrpLegendView;
+            Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
+            Properties.Settings.Default.RtGrpLegendView = MenuPlotLegend1.Checked;
+
+            rawgrp.Plots[0].LineWidth = DeviceConstants.Linewidth;
+            rawgrp.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+
+            rawgrp.Plots[1].LineWidth = DeviceConstants.Linewidth;
+            rawgrp.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+
+            if (Properties.Settings.Default.RtGrp_Plot_ViewLine)
+            {
+                rawgrp.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+                rawgrp.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            }
+            else
+            {
+                rawgrp.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
+                rawgrp.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
+            }
+
+            if (Properties.Settings.Default.RtGrp_Plot_ViewPoint)
+            {
+                rawgrp.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+                rawgrp.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            }
+            else
+            {
+                rawgrp.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
+                rawgrp.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
+            }
+            rawgrp.YAxes[0].Visible = true;
+            if (rtmode == 0)
+            {
+                RtMenuGraphMode1.Checked = true;
+                rawgrp.YAxes[1].Visible = false;
+                RtMenuGraphMode2.Checked = false;
+            }
+            else
+            {
+                RtMenuGraphMode1.Checked = false;
+                rawgrp.YAxes[1].Visible = true;
+                RtMenuGraphMode2.Checked = true;
+            }
+            Rtlegend.Width = 82;
+        }
+
+        private Point lastMousePos;
+        private bool isDragging = false;
+        private void rawgrp_MouseWheel(object sender, MouseEventArgs e) // 확대 및 축소
+        {
+            double zoomFactor = (e.Delta > 0) ? 0.9 : 1.1;
+
+            var xAxis = rawgrp.XAxes[0];
+            var yAxis = rawgrp.YAxes[0];
+
+            double xMin = xAxis.Range.Minimum;
+            double xMax = xAxis.Range.Maximum;
+            double yMin = yAxis.Range.Minimum;
+            double yMax = yAxis.Range.Maximum;
+
+            double xMid = (xMin + xMax) / 2.0;
+            double yMid = (yMin + yMax) / 2.0;
+
+            double newHalfX = (xMax - xMin) * zoomFactor / 2.0;
+            double newHalfY = (yMax - yMin) * zoomFactor / 2.0;
+
+            double newXMin = xMid - newHalfX;
+            double newXMax = xMid + newHalfX;
+            double newYMin = yMid - newHalfY;
+            double newYMax = yMid + newHalfY;
+
+            const double MIN_X_RANGE = 0.001;
+            const double MIN_Y_RANGE = 0.001;
+
+            if ((newXMax - newXMin) > MIN_X_RANGE)
+                xAxis.Range = new Range(newXMin, newXMax);
+
+            if ((newYMax - newYMin) > MIN_Y_RANGE)
+                yAxis.Range = new Range(newYMin, newYMax);
+        }
+        private void rawgrp_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                lastMousePos = e.Location;
+                isDragging = true;
+            }
+        }
+
+        private void rawgrp_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                var xAxis = rawgrp.XAxes[0];
+                var yAxis = rawgrp.YAxes[0];
+
+                double dx = rawgrp.PlotAreaBounds.Width != 0 ?
+                    (e.X - lastMousePos.X) * (xAxis.Range.Maximum - xAxis.Range.Minimum) / rawgrp.PlotAreaBounds.Width : 0;
+
+                double dy = rawgrp.PlotAreaBounds.Height != 0 ?
+                    (e.Y - lastMousePos.Y) * (yAxis.Range.Maximum - yAxis.Range.Minimum) / rawgrp.PlotAreaBounds.Height : 0;
+
+                xAxis.Range = new Range(xAxis.Range.Minimum - dx, xAxis.Range.Maximum - dx);
+                yAxis.Range = new Range(yAxis.Range.Minimum + dy, yAxis.Range.Maximum + dy);
+
+                lastMousePos = e.Location;
+            }
+        }
+
+        private void rawgrp_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isDragging = false;
+            }
+        }
+
+        private void InitGraph1()
+        {
+
+            grp1.ResetZoomPan();
+
+            MenuPlotLine11.Checked = Properties.Settings.Default.GrpPlotLine11;
+            MenuPlotPoint11.Checked = Properties.Settings.Default.GrpPlotPoint11;
+            MenuPlotLine12.Checked = Properties.Settings.Default.GrpPlotLine12;
+            MenuPlotPoint12.Checked = Properties.Settings.Default.GrpPlotPoint12;
+            MenuPlotLine13.Checked = Properties.Settings.Default.GrpPlotLine13;
+            MenuPlotPoint13.Checked = Properties.Settings.Default.GrpPlotPoint13;
+            MenuPlotLine14.Checked = Properties.Settings.Default.GrpPlotLine14;
+            MenuPlotPoint14.Checked = Properties.Settings.Default.GrpPlotPoint14;
+            MenuPlotLine15.Checked = Properties.Settings.Default.GrpPlotLine15;
+            MenuPlotPoint15.Checked = Properties.Settings.Default.GrpPlotPoint15;
+            MenuPlotLine16.Checked = Properties.Settings.Default.GrpPlotLine16;
+            MenuPlotPoint16.Checked = Properties.Settings.Default.GrpPlotPoint16;
+
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine11) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint11) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor11;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor11;
+            grp1.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine12) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint12) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor12;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor12;
+            grp1.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine13) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint13) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor13;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor13;
+            grp1.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine14) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint14) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor14;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor14;
+            grp1.Plots[nPlot].SmoothUpdates = true;
+
+
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine15) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint15) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor15;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor15;
+            grp1.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp1.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine16) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint16) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor16;
+            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor16;
+            grp1.Plots[nPlot].SmoothUpdates = true;
+
+            grp1.Plots[0].LineWidth = DeviceConstants.Linewidth; // 0206 6
+            grp1.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 6
+            grp1.Plots[0].HistoryCapacity = 100000;  // 0206 6
+
+
+            grp1.PlotAreaColor = Properties.Settings.Default.GrpBackColor1;
+            grp1.PlotAreaBorder = Border.Dotted;
+
+            MenuPlotGridX1.Checked = Properties.Settings.Default.GrpAxisGridX1;
+            MenuPlotGridY11.Checked = Properties.Settings.Default.GrpAxisGridY11;
+            MenuPlotGridY12.Checked = Properties.Settings.Default.GrpAxisGridY12;
+
+            grp1.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.XAxes[0].MinorDivisions.TickVisible = false;
+            grp1.XAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor1;
+
+            grp1.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor1;
+            grp1.XAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            grp1.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridX1;
+            grp1.YAxes[0].MinorDivisions.GridVisible = false;
+
+            grp1.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.YAxes[0].MinorDivisions.TickVisible = false;
+            grp1.YAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor1;
+
+            grp1.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor1;
+            grp1.YAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            grp1.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY11;
+            grp1.YAxes[0].MinorDivisions.GridVisible = false;
+
+            grp1.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
+            grp1.YAxes[1].MinorDivisions.TickVisible = false;
+            grp1.YAxes[1].CaptionForeColor = Properties.Settings.Default.GrpAxisColor1;
+
+            grp1.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor1;
+            grp1.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            grp1.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY12;
+            grp1.YAxes[1].MinorDivisions.GridVisible = false;
+
+            grp1.Cursors[0].LabelBackColor = Properties.Settings.Default.GrpBackColor1;
+
+            legend1.Visible = Properties.Settings.Default.GrpViewLegend1;
+            MenuPlotLegend1.Checked = Properties.Settings.Default.GrpViewLegend1;
+
+            GrpCtrlMode1 = 0;
+            lblcsfreq1.Visible = false;
+            grp1.CaptionVisible = false;
+
+            grp1.ClearData();
+
+
+            ApplyGraphModeMenu(1);
+            RefreshGraphMode(1);
+
+        }
+
+
+        private void InitGraph2()
+        {
+            grp2.ResetZoomPan();
+
+            MenuPlotLine21.Checked = Properties.Settings.Default.GrpPlotLine21;
+            MenuPlotPoint21.Checked = Properties.Settings.Default.GrpPlotPoint21;
+            MenuPlotLine22.Checked = Properties.Settings.Default.GrpPlotLine22;
+            MenuPlotPoint22.Checked = Properties.Settings.Default.GrpPlotPoint22;
+            MenuPlotLine23.Checked = Properties.Settings.Default.GrpPlotLine23;
+            MenuPlotPoint23.Checked = Properties.Settings.Default.GrpPlotPoint23;
+            MenuPlotLine24.Checked = Properties.Settings.Default.GrpPlotLine24;
+            MenuPlotPoint24.Checked = Properties.Settings.Default.GrpPlotPoint24;
+            MenuPlotLine25.Checked = Properties.Settings.Default.GrpPlotLine25;
+            MenuPlotPoint25.Checked = Properties.Settings.Default.GrpPlotPoint25;
+            MenuPlotLine26.Checked = Properties.Settings.Default.GrpPlotLine26;
+            MenuPlotPoint26.Checked = Properties.Settings.Default.GrpPlotPoint26;
+
+            int nPlot = 2; //0206 0
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine21) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint21) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor21;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor21;
+            grp2.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine22) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint22) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor22;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor22;
+            grp2.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine23) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint23) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor23;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor23;
+            grp2.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine24) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint24) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor24;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor24;
+            grp2.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine25) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint25) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor25;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor25;
+            grp2.Plots[nPlot].SmoothUpdates = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
+            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
+            grp2.Plots[nPlot].HistoryCapacity = 100000;
+            if (Properties.Settings.Default.GrpPlotLine26) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
+            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
+            if (Properties.Settings.Default.GrpPlotPoint26) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
+            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
+            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor26;
+            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor26;
+            grp2.Plots[nPlot].SmoothUpdates = true;
+
+
+            grp2.Plots[0].LineWidth = DeviceConstants.Linewidth; // 0206 6
+            grp2.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 6
+            grp2.Plots[0].HistoryCapacity = 100000; // 0206 6
+
+            grp2.Plots[1].LineWidth = DeviceConstants.Linewidth; // 0206 7
+            grp2.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 7
+            grp2.Plots[1].HistoryCapacity = 100000;  // 0206 7
+
+            grp2.PlotAreaColor = Properties.Settings.Default.GrpBackColor2;
+            grp2.PlotAreaBorder = Border.Dotted;
+
+            MenuPlotGridX2.Checked = Properties.Settings.Default.GrpAxisGridX2;
+            MenuPlotGridY21.Checked = Properties.Settings.Default.GrpAxisGridY21;
+            MenuPlotGridY22.Checked = Properties.Settings.Default.GrpAxisGridY22;
+
+            grp2.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.XAxes[0].MinorDivisions.TickVisible = false;
+            grp2.XAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor2;
+
+            grp2.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor2;
+            grp2.XAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            grp2.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridX2;
+            grp2.YAxes[0].MinorDivisions.GridVisible = false;
+
+            grp2.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.YAxes[0].MinorDivisions.TickVisible = false;
+            grp2.YAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor2;
+
+            grp2.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor2;
+            grp2.YAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            grp2.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY21;
+            grp2.YAxes[0].MinorDivisions.GridVisible = false;
+
+            grp2.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
+            grp2.YAxes[1].MinorDivisions.TickVisible = false;
+            grp2.YAxes[1].CaptionForeColor = Properties.Settings.Default.GrpAxisColor2;
+
+            grp2.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor2;
+            grp2.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            grp2.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY22;
+            grp2.YAxes[1].MinorDivisions.GridVisible = false;
+
+            grp2.Cursors[0].LabelBackColor = Properties.Settings.Default.GrpBackColor2;
+
+            legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
+            MenuPlotLegend2.Checked = Properties.Settings.Default.GrpViewLegend2;
+
+            grp2.ClearData();
+
+            GrpCtrlMode2 = 0;
+            lblcsfreq2.Visible = false;
+            grp2.CaptionVisible = false;
+            ApplyGraphModeMenu(2);
+            RefreshGraphMode(2);
+        }
+
+
+        private void InitGraphType(bool brefresgraph = true)
+        {
+            if (gBZA.SifLnkLst.ContainsKey(serial) == false)
+            {
+                return;
+            }
+            if (OldTechType != gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type || brefresgraph == true)
+            {
+                OldTechType = gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
+                if ((enTechType)OldTechType == enTechType.TECH_MON || (enTechType)OldTechType == enTechType.TECH_DCH)
+                {
+                    if (this.tabgrp.TabPages.Contains(this.TabGrp2) == true) this.tabgrp.TabPages.Remove(this.TabGrp2);
+                    legend2.Visible = false;
+                    if (this.tabgrp.TabPages.Contains(this.TabGrpRaw) == true) this.tabgrp.TabPages.Remove(this.TabGrpRaw);
+                    Rtlegend.Visible = false;
+                }
+                else
+                {
+                    if (this.tabgrp.TabPages.Contains(this.TabGrp2) == false) this.tabgrp.TabPages.Add(this.TabGrp2);
+                    legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
+                    if (this.tabgrp.TabPages.Contains(this.TabGrpRaw) == false) this.tabgrp.TabPages.Add(this.TabGrpRaw);
+                    Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
+                }
+                if ((enTechType)OldTechType == enTechType.TECH_HFR)
+                {
+                    InitGraphHFR();
+                }
+                else if ((enTechType)OldTechType == enTechType.TECH_PRR)
+                {
+                    InitGraphPRR();
+                }
+                else if ((enTechType)OldTechType == enTechType.TECH_MON)
+                {
+                    InitGraphMON();
+                }
+                else if ((enTechType)OldTechType == enTechType.TECH_QIS)
+                {
+                    InitGraphQIS();
+                }
+                else if ((enTechType)OldTechType == enTechType.TECH_DCH)
+                {
+                    InitGraphDCH();
+                }
+                else
+                {
+                    InitGraphEIS();
+                }
+
+                LastPlotPoint = 0;
+                auxLastPlotPoint0 = 0;
+                auxLastPlotPoint1 = 0;
+                auxLastPlotPoint2 = 0;
+                //auxLastPlotPoint3 = 0;
+                //auxLastPlotPoint4 = 0;
+                LastPlotPoint1 = 0;
+                LastPlotPoint2 = 0;
+                LastPlotPoint3 = 0;
+                LastPlotPoint4 = 0;
+                LastPlotPoint5 = 0;
+                LastPlotPoint6 = 0;
+                LastPlotPoint7 = 0;
+                LastPlotPoint8 = 0;
+                LastPlotPoint9 = 0;
+                LastPlotPoint10 = 0;
+                LastPlotPoint11 = 0;
+                LastPlotPoint12 = 0;
+                LastPlotPoint13 = 0;
+                LastPlotPoint14 = 0;
+                LastPlotPoint15 = 0;
+                LastPlotPoint16 = 0;
+                LastPlotPoint17 = 0;
+                LastPlotPoint18 = 0;
+                LastPlotPoint19 = 0;
+                LastPlotPoint20 = 0;
+                LastPlotPoint21 = 0;
+                LastPlotPoint22 = 0;
+                LastPlotPoint23 = 0;
+                LastPlotPoint24 = 0;
+                LastPlotPoint25 = 0;
+
+                bodePlotPoint0 = 0;
+                bodePlotPoint1 = 0;
+                bodePlotPoint2 = 0;
+                bodePlotPoint3 = 0;
+                bodePlotPoint4 = 0;
+                bodePlotPoint5 = 0;
+                bodePlotPoint6 = 0;
+                bodePlotPoint7 = 0;
+                bodePlotPoint8 = 0;
+                bodePlotPoint9 = 0;
+                bodePlotPoint10 = 0;
+                bodePlotPoint11 = 0;
+                bodePlotPoint12 = 0;
+                bodePlotPoint13 = 0;
+                bodePlotPoint14 = 0;
+                bodePlotPoint15 = 0;
+                bodePlotPoint16 = 0;
+                bodePlotPoint17 = 0;
+                bodePlotPoint18 = 0;
+                bodePlotPoint19 = 0;
+                bodePlotPoint20 = 0;
+                bodePlotPoint21 = 0;
+                bodePlotPoint22 = 0;
+                bodePlotPoint23 = 0;
+                bodePlotPoint24 = 0;
+                bodePlotPoint25 = 0;
+                bodePlotPoint26 = 0;
+                bodePlotPoint27 = 0;
+                bodePlotPoint28 = 0;
+                bodePlotPoint29 = 0;
+                bodePlotPoint30 = 0;
+                bodePlotPoint31 = 0;
+                bodePlotPoint32 = 0;
+                bodePlotPoint33 = 0;
+                bodePlotPoint34 = 0;
+                bodePlotPoint35 = 0;
+                bodePlotPoint36 = 0;
+                bodePlotPoint37 = 0;
+                bodePlotPoint38 = 0;
+                bodePlotPoint39 = 0;
+                bodePlotPoint40 = 0;
+                bodePlotPoint41 = 0;
+                bodePlotPoint42 = 0;
+                bodePlotPoint43 = 0;
+                bodePlotPoint44 = 0;
+                bodePlotPoint45 = 0;
+                bodePlotPoint46 = 0;
+                bodePlotPoint47 = 0;
+
+                grp1.ClearData();
+                grp2.ClearData();
+
+                GrpCtrlMode1 = 0;
+                GrpCtrlMode2 = 0;
+                ApplyMenuGraphMode(1, GrpCtrlMode1);
+                ApplyMenuGraphMode(2, GrpCtrlMode2);
+
+                RefreshGraphMode(1);
+                RefreshGraphMode(2);
+                RefreshLegendSize();
+            }
+        }
+
+        private void InitGraphQIS()
+        {
+            int nPlot;
+            TabGrpRaw.Text = "AC waveform";
+            TabGrp1.Text = "Nyquist plot";
+
+            grp1.XAxes[0].Caption = "Z real(Ω)";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode0 = false;
+
+            grp1.YAxes[0].Caption = "-Z image(Ω)";
+            grp1.YAxes[1].Caption = "";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = false;
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+
+            nPlot = 1; // 0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            grp1.Plots[0].Visible = true; // 0206 6
+
+            legend1.Items[0].Text = "-Zimg";
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = false;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+
+            legend1.Items[6].Text = "-Zimg";
+            legend1.Items[6].Visible = true;
+
+            legend1.Items[7].Text = "-A1Zimg";
+            legend1.Items[8].Text = "-A1Zimg";
+            legend1.Items[9].Text = "-A2Zimg";
+            legend1.Items[10].Text = "-A2Zimg";
+            legend1.Items[11].Text = "-A3Zimg";
+            legend1.Items[12].Text = "-A3Zimg";
+            legend1.Items[13].Text = "-A4Zimg";
+            legend1.Items[14].Text = "-A4Zimg";
+            legend1.Items[15].Text = "-A5Zimg";
+            legend1.Items[16].Text = "-A5Zimg";
+            legend1.Items[17].Text = "-A6Zimg";
+            legend1.Items[18].Text = "-A6Zimg";
+            legend1.Items[19].Text = "-A7Zimg";
+            legend1.Items[20].Text = "-A7Zimg";
+            legend1.Items[21].Text = "-A8Zimg";
+            legend1.Items[22].Text = "-A8Zimg";
+            legend1.Items[23].Text = "-A9Zimg";
+            legend1.Items[24].Text = "-A9Zimg";
+            legend1.Items[25].Text = "-A10Zimg";
+            legend1.Items[26].Text = "-A10Zimg";
+            legend1.Items[27].Text = "-A11Zimg";
+            legend1.Items[28].Text = "-A11Zimg";
+            legend1.Items[29].Text = "-A12Zimg";
+            legend1.Items[30].Text = "-A12Zimg";
+
+            TabGrp2.Text = "Bode plot";
+
+            grp2.XAxes[0].Caption = "Frequency(Hz)";
+            grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode1 = false;
+
+            grp2.YAxes[0].Caption = "Zmag(Ω)";
+            grp2.YAxes[1].Caption = "Zphase(°C)";
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
+
+            nPlot = 2; // 0206 0
+            grp2.Plots[nPlot].Visible = true;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+
+            nPlot++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = true; //0206 6
+            grp2.Plots[1].Visible = true; //0206 7
+
+            legend2.Items[0].Text = "Zmag";
+            legend2.Items[1].Text = "Zphase";
+            legend2.Items[6].Text = "Zmag";
+            legend2.Items[7].Text = "Zphase";
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
+
+            legend2.Items[8].Text = "A1Zmag";
+            legend2.Items[9].Text = "A1Zphase";
+            legend2.Items[10].Text = "A1Zmag";
+            legend2.Items[11].Text = "A1Zphase";
+            legend2.Items[12].Text = "A2Zmag";
+            legend2.Items[13].Text = "A2Zphase";
+            legend2.Items[14].Text = "A2Zmag";
+            legend2.Items[15].Text = "A2Zphase";
+            legend2.Items[16].Text = "A3Zmag";
+            legend2.Items[17].Text = "A3Zphase";
+            legend2.Items[18].Text = "A3Zmag";
+            legend2.Items[19].Text = "A3Zphase";
+            legend2.Items[20].Text = "A4Zmag";
+            legend2.Items[21].Text = "A4Zphase";
+            legend2.Items[22].Text = "A4Zmag";
+            legend2.Items[23].Text = "A4Zphase";
+            legend2.Items[24].Text = "A5Zmag";
+            legend2.Items[25].Text = "A5Zphase";
+            legend2.Items[26].Text = "A5Zmag";
+            legend2.Items[27].Text = "A5Zphase";
+            legend2.Items[28].Text = "A6Zmag";
+            legend2.Items[29].Text = "A6Zphase";
+            legend2.Items[30].Text = "A6Zmag";
+            legend2.Items[31].Text = "A6Zphase";
+            legend2.Items[32].Text = "A7Zmag";
+            legend2.Items[33].Text = "A7Zphase";
+            legend2.Items[34].Text = "A7Zmag";
+            legend2.Items[35].Text = "A7Zphase";
+            legend2.Items[36].Text = "A8Zmag";
+            legend2.Items[37].Text = "A8Zphase";
+            legend2.Items[38].Text = "A8Zmag";
+            legend2.Items[39].Text = "A8Zphase";
+            legend2.Items[40].Text = "A9Zmag";
+            legend2.Items[41].Text = "A9Zphase";
+            legend2.Items[42].Text = "A9Zmag";
+            legend2.Items[43].Text = "A9Zphase";
+            legend2.Items[44].Text = "A10Zmag";
+            legend2.Items[45].Text = "A10Zphase";
+            legend2.Items[46].Text = "A10Zmag";
+            legend2.Items[47].Text = "A10Zphase";
+            legend2.Items[48].Text = "A11Zmag";
+            legend2.Items[49].Text = "A11Zphase";
+            legend2.Items[50].Text = "A11Zmag";
+            legend2.Items[51].Text = "A11Zphase";
+            legend2.Items[52].Text = "A12Zmag";
+            legend2.Items[53].Text = "A12Zphase";
+            legend2.Items[54].Text = "A12Zmag";
+            legend2.Items[55].Text = "A12Zphase";
+
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 4;
+        }
+
+        private void InitGraphMON()
+        {
+            TabGrpRaw.Text = "AC waveform";
+
+            TabGrp1.Text = "Eoc,Temp. vs t";
+            grp1.YAxes[0].Caption = "Eoc(V)";
+            legend1.Items[0].Text = "Eoc";
+
+            legend1.Items[7].Text = "A1Eoc";
+            legend1.Items[9].Text = "A2Eoc";
+            legend1.Items[11].Text = "A3Eoc";
+            legend1.Items[13].Text = "A4Eoc";
+            legend1.Items[15].Text = "A5Eoc";
+            legend1.Items[17].Text = "A6Eoc";
+            legend1.Items[19].Text = "A7Eoc";
+            legend1.Items[21].Text = "A8Eoc";
+            legend1.Items[23].Text = "A9Eoc";
+            legend1.Items[25].Text = "A10Eoc";
+            legend1.Items[27].Text = "A11Eoc";
+            legend1.Items[29].Text = "A12Eoc";
+
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
+
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+
+            grp1.Plots[0].Visible = false; //0206 6
+
+            grp1.XAxes[0].Caption = "Time";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            xTimemode0 = true;
+
+
+            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            grp1.YAxes[1].Caption = "Temp.(°C)";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = true;
+
+
+            legend1.Items[1].Text = "Temp.";
+            legend1.Items[8].Text = "A1Temp.";
+            legend1.Items[10].Text = "A2Temp.";
+            legend1.Items[12].Text = "A3Temp.";
+            legend1.Items[14].Text = "A4Temp.";
+            legend1.Items[16].Text = "A5Temp.";
+            legend1.Items[18].Text = "A6Temp.";
+            legend1.Items[20].Text = "A7Temp.";
+            legend1.Items[22].Text = "A8Temp.";
+            legend1.Items[24].Text = "A9Temp.";
+            legend1.Items[26].Text = "A10Temp.";
+            legend1.Items[28].Text = "A11Temp.";
+            legend1.Items[30].Text = "A12Temp.";
+
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = true;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+            legend1.Items[6].Visible = false;
+
+            xTimemode1 = false;
+            /*
+            TabGrp2.Text = "Vdc,Temp. vs t";
+
+            grp2.XAxes[0].Caption = "Time";
+            grp2.XAxes[0].ScaleType = ScaleType.Linear;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
+
+            grp2.YAxes[0].Caption = "Vdc(V)";
+            grp2.YAxes[1].Caption = "Temp.(°C)";
+
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+
+            nPlot = 2; // 0206 0
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot ++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot ++;            
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[1].Visible = false;  //0206 7
+
+            legend2.Items[0].Text = "Vdc";
+            legend2.Items[1].Text = "Temp.";
+
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
+            */
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 0;
+        }
+
+        private void InitGraphDCH()
+        {
+            TabGrpRaw.Text = "AC waveform";
+
+            TabGrp1.Text = "Vdc,Temp. vs t";
+            grp1.YAxes[0].Caption = "Vdc(V)";
+            legend1.Items[0].Text = "Vdc";
+            legend1.Items[7].Text = "A1Vdc";
+            legend1.Items[9].Text = "A2Vdc";
+            legend1.Items[11].Text = "A3Vdc";
+            legend1.Items[13].Text = "A4Vdc";
+            legend1.Items[15].Text = "A5Vdc";
+            legend1.Items[17].Text = "A6Vdc";
+            legend1.Items[19].Text = "A7Vdc";
+            legend1.Items[21].Text = "A8Vdc";
+            legend1.Items[23].Text = "A9Vdc";
+            legend1.Items[25].Text = "A10Vdc";
+            legend1.Items[27].Text = "A11Vdc";
+            legend1.Items[29].Text = "A12Vdc";
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
+
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            grp1.Plots[0].Visible = false;  //0206 6
+
+            grp1.XAxes[0].Caption = "Time";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            xTimemode0 = true;
+
+
+            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            grp1.YAxes[1].Caption = "Temp.(°C)";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = true;
+
+            legend1.Items[1].Text = "Temp.";
+            legend1.Items[8].Text = "A1Temp.";
+            legend1.Items[10].Text = "A2Temp.";
+            legend1.Items[12].Text = "A3Temp.";
+            legend1.Items[14].Text = "A4Temp.";
+            legend1.Items[16].Text = "A5Temp.";
+            legend1.Items[18].Text = "A6Temp.";
+            legend1.Items[20].Text = "A7Temp.";
+            legend1.Items[22].Text = "A8Temp.";
+            legend1.Items[24].Text = "A9Temp.";
+            legend1.Items[26].Text = "A10Temp.";
+            legend1.Items[28].Text = "A11Temp.";
+            legend1.Items[30].Text = "A12Temp.";
+
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = true;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+            legend1.Items[6].Visible = false;
+
+            xTimemode1 = false;
+            /*
+            TabGrp2.Text = "Vdc,Temp. vs t";
+
+            grp2.XAxes[0].Caption = "Time";
+            grp2.XAxes[0].ScaleType = ScaleType.Linear;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
+
+            grp2.YAxes[0].Caption = "Vdc(V)";
+            grp2.YAxes[1].Caption = "Temp.(°C)";
+
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+
+            nPlot = 2; //0206 0
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot ++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot ++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[1].Visible = false;  //0206 7
+
+            legend2.Items[0].Text = "Vdc";
+            legend2.Items[1].Text = "Temp.";
+
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
+            */
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 0;
+        }
+
+        private void InitGraphEIS()
+        {
+            TabGrpRaw.Text = "AC waveform";
+            TabGrp1.Text = "Nyquist plot";
+
+            grp1.XAxes[0].Caption = "Z real(Ω)";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode0 = false;
+            grp1.YAxes[0].Caption = "-Z image(Ω)";
+            grp1.YAxes[1].Caption = "";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = false;
+
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].Visible = true;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+
+            grp1.Plots[0].Visible = true;  //0206 6
+
+            legend1.Items[0].Text = "-Zimg";
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = false;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+            legend1.Items[6].Text = "-Zimg";
+            legend1.Items[6].Visible = true;
+
+            legend1.Items[7].Text = "-A1Zimg";
+            legend1.Items[8].Text = "-A1Zimg";
+            legend1.Items[9].Text = "-A2Zimg";
+            legend1.Items[10].Text = "-A2Zimg";
+            legend1.Items[11].Text = "-A3Zimg";
+            legend1.Items[12].Text = "-A3Zimg";
+            legend1.Items[13].Text = "-A4Zimg";
+            legend1.Items[14].Text = "-A4Zimg";
+            legend1.Items[15].Text = "-A5Zimg";
+            legend1.Items[16].Text = "-A5Zimg";
+            legend1.Items[17].Text = "-A6Zimg";
+            legend1.Items[18].Text = "-A6Zimg";
+            legend1.Items[19].Text = "-A7Zimg";
+            legend1.Items[20].Text = "-A7Zimg";
+            legend1.Items[21].Text = "-A8Zimg";
+            legend1.Items[22].Text = "-A8Zimg";
+            legend1.Items[23].Text = "-A9Zimg";
+            legend1.Items[24].Text = "-A9Zimg";
+            legend1.Items[25].Text = "-A10Zimg";
+            legend1.Items[26].Text = "-A10Zimg";
+            legend1.Items[27].Text = "-A11Zimg";
+            legend1.Items[28].Text = "-A11Zimg";
+            legend1.Items[29].Text = "-A12Zimg";
+            legend1.Items[30].Text = "-A12Zimg";
+
+            legend1.Items[31].Visible = false; //
+            legend1.Items[32].Visible = false;
+            legend1.Items[33].Visible = false;
+            legend1.Items[34].Visible = false;
+            legend1.Items[35].Visible = false;
+            legend1.Items[36].Visible = false;
+            legend1.Items[37].Visible = false;
+            legend1.Items[38].Visible = false;
+            legend1.Items[39].Visible = false;
+            legend1.Items[40].Visible = false;
+            legend1.Items[41].Visible = false;
+            legend1.Items[42].Visible = false;
+
+            TabGrp2.Text = "Bode plot";
+
+            grp2.XAxes[0].Caption = "Frequency(Hz)";
+            grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
+            xTimemode1 = false;
+            grp2.YAxes[0].Caption = "Zmag(Ω)";
+            grp2.YAxes[1].Caption = "Zphase(°C)";
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
+
+            nPlot = 2; //0206 0
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = true;  //0206 6
+            grp2.Plots[1].Visible = true;  //0206 7
+
+            legend2.Items[0].Text = "Zmag";
+            legend2.Items[1].Text = "Zphase";
+            legend2.Items[6].Text = "Zmag";
+            legend2.Items[7].Text = "Zphase";
+
+            legend2.Items[8].Text = "A1Zmag";
+            legend2.Items[9].Text = "A1Zphase";
+            legend2.Items[10].Text = "A1Zmag";
+            legend2.Items[11].Text = "A1Zphase";
+            legend2.Items[12].Text = "A2Zmag";
+            legend2.Items[13].Text = "A2Zphase";
+            legend2.Items[14].Text = "A2Zmag";
+            legend2.Items[15].Text = "A2Zphase";
+            legend2.Items[16].Text = "A3Zmag";
+            legend2.Items[17].Text = "A3Zphase";
+            legend2.Items[18].Text = "A3Zmag";
+            legend2.Items[19].Text = "A3Zphase";
+            legend2.Items[20].Text = "A4Zmag";
+            legend2.Items[21].Text = "A4Zphase";
+            legend2.Items[22].Text = "A4Zmag";
+            legend2.Items[23].Text = "A4Zphase";
+            legend2.Items[24].Text = "A5Zmag";
+            legend2.Items[25].Text = "A5Zphase";
+            legend2.Items[26].Text = "A5Zmag";
+            legend2.Items[27].Text = "A5Zphase";
+            legend2.Items[28].Text = "A6Zmag";
+            legend2.Items[29].Text = "A6Zphase";
+            legend2.Items[30].Text = "A6Zmag";
+            legend2.Items[31].Text = "A6Zphase";
+            legend2.Items[32].Text = "A7Zmag";
+            legend2.Items[33].Text = "A7Zphase";
+            legend2.Items[34].Text = "A7Zmag";
+            legend2.Items[35].Text = "A7Zphase";
+            legend2.Items[36].Text = "A8Zmag";
+            legend2.Items[37].Text = "A8Zphase";
+            legend2.Items[38].Text = "A8Zmag";
+            legend2.Items[39].Text = "A8Zphase";
+            legend2.Items[40].Text = "A9Zmag";
+            legend2.Items[41].Text = "A9Zphase";
+            legend2.Items[42].Text = "A9Zmag";
+            legend2.Items[43].Text = "A9Zphase";
+            legend2.Items[44].Text = "A10Zmag";
+            legend2.Items[45].Text = "A10Zphase";
+            legend2.Items[46].Text = "A10Zmag";
+            legend2.Items[47].Text = "A10Zphase";
+            legend2.Items[48].Text = "A11Zmag";
+            legend2.Items[49].Text = "A11Zphase";
+            legend2.Items[50].Text = "A11Zmag";
+            legend2.Items[51].Text = "A11Zphase";
+            legend2.Items[52].Text = "A12Zmag";
+            legend2.Items[53].Text = "A12Zphase";
+            legend2.Items[54].Text = "A12Zmag";
+            legend2.Items[55].Text = "A12Zphase";
+
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = true;
+            legend2.Items[7].Visible = true;
+
+            for (int i = 8; i < 56; i++)
+            {
+                legend2.Items[i].Visible = false;
+            }
+
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 4;
+        }
+
+        private void InitGraphHFR()
+        {
+
+            TabGrpRaw.Text = "AC waveform";
+            /*
+            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
+            {
+                TabGrp1.Text = "Zre,Eoc vs t";
+                grp1.YAxes[1].Caption = "Eoc(V)";
+                legend1.Items[1].Text = "Eoc";
+            }
+            else
+            {
+                TabGrp1.Text = "Zre,Vdc vs t";
+                grp1.YAxes[1].Caption = "Vdc(V)";
+                legend1.Items[1].Text = "Vdc";
+            }
+            */
+            TabGrp1.Text = "Zre,Vdc vs t";
+            grp1.YAxes[1].Caption = "Vdc(V)";
+
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.#####");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            int nPlot = 1; //0206 0
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
+            grp1.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
+            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
+            grp1.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp1.Plots[nPlot].Visible = false;
+
+            grp1.Plots[0].Visible = false; // 0206 6
+
+            grp1.XAxes[0].Caption = "Time";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            xTimemode0 = true;
+
+            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            grp1.YAxes[0].Caption = "Zre(Ω)";
+
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+            grp1.YAxes[1].Visible = true;
+
+            legend1.Items[0].Text = "Zre";
+            legend1.Items[1].Text = "Vdc";
+
+            legend1.Items[7].Text = "A1Zre";
+            legend1.Items[9].Text = "A2Zre";
+            legend1.Items[11].Text = "A3Zre";
+            legend1.Items[13].Text = "A4Zre";
+            legend1.Items[15].Text = "A5Zre";
+            legend1.Items[17].Text = "A6Zre";
+            legend1.Items[19].Text = "A7Zre";
+            legend1.Items[21].Text = "A8Zre";
+            legend1.Items[23].Text = "A9Zre";
+            legend1.Items[25].Text = "A10Zre";
+            legend1.Items[27].Text = "A11Zre";
+            legend1.Items[29].Text = "A12Zre";
+
+            legend1.Items[8].Text = "A1Vdc";
+            legend1.Items[10].Text = "A2Vdc";
+            legend1.Items[12].Text = "A3Vdc";
+            legend1.Items[14].Text = "A4Vdc";
+            legend1.Items[16].Text = "A5Vdc";
+            legend1.Items[18].Text = "A6Vdc";
+            legend1.Items[20].Text = "A7Vdc";
+            legend1.Items[22].Text = "A8Vdc";
+            legend1.Items[24].Text = "A9Vdc";
+            legend1.Items[26].Text = "A10Vdc";
+            legend1.Items[28].Text = "A11Vdc";
+            legend1.Items[30].Text = "A12Vdc";
+
+            legend1.Items[0].Visible = true;
+            legend1.Items[1].Visible = true;
+            legend1.Items[2].Visible = false;
+            legend1.Items[3].Visible = false;
+            legend1.Items[4].Visible = false;
+            legend1.Items[5].Visible = false;
+            legend1.Items[6].Visible = false;
+
+            legend1.Items[8].Visible = false; //
+            legend1.Items[10].Visible = false;
+            legend1.Items[12].Visible = false;
+            legend1.Items[14].Visible = false;
+            legend1.Items[16].Visible = false;
+            legend1.Items[18].Visible = false;
+            legend1.Items[20].Visible = false;
+            legend1.Items[22].Visible = false;
+            legend1.Items[24].Visible = false;
+            legend1.Items[26].Visible = false;
+            legend1.Items[28].Visible = false;
+            legend1.Items[30].Visible = false;
+
+            TabGrp2.Text = "Cs,Cp vs t";
+
+            grp2.XAxes[0].Caption = "Time";
+            grp2.XAxes[0].ScaleType = ScaleType.Linear;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
+            grp2.YAxes[0].Caption = "Cs(uF)";
+            grp2.YAxes[1].Caption = "Cp(uF)";
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+
+            nPlot = 2;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
+            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
+            grp2.Plots[nPlot].Visible = true;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            nPlot++;
+            grp2.Plots[nPlot].Visible = false;
+
+            grp2.Plots[0].Visible = false; //0206 6
+            grp2.Plots[1].Visible = false; //0206 7
+
+            legend2.Items[0].Text = "Cs";
+            legend2.Items[1].Text = "Cp";
+            legend2.Items[8].Text = "A1Cs";
+            legend2.Items[9].Text = "A1Cp";
+            legend2.Items[12].Text = "A2Cs";
+            legend2.Items[13].Text = "A2Cp";
+            legend2.Items[16].Text = "A3Cs";
+            legend2.Items[17].Text = "A3Cp";
+            legend2.Items[20].Text = "A4Cs";
+            legend2.Items[21].Text = "A4Cp";
+            legend2.Items[24].Text = "A5Cs";
+            legend2.Items[25].Text = "A5Cp";
+            legend2.Items[28].Text = "A6Cs";
+            legend2.Items[29].Text = "A6Cp";
+            legend2.Items[32].Text = "A7Cs";
+            legend2.Items[33].Text = "A7Cp";
+            legend2.Items[36].Text = "A8Cs";
+            legend2.Items[37].Text = "A8Cs";
+            legend2.Items[40].Text = "A9Cs";
+            legend2.Items[41].Text = "A9Cp";
+            legend2.Items[44].Text = "A10Cs";
+            legend2.Items[45].Text = "A10Cp";
+            legend2.Items[48].Text = "A11Cs";
+            legend2.Items[49].Text = "A11Cp";
+            legend2.Items[52].Text = "A12Cp";
+            legend2.Items[53].Text = "A12Cp";
+
+            legend2.Items[0].Visible = true;
+            legend2.Items[1].Visible = true;
+            legend2.Items[2].Visible = false;
+            legend2.Items[3].Visible = false;
+            legend2.Items[4].Visible = false;
+            legend2.Items[5].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
+
+            legend2.Items[10].Visible = false; //
+            legend2.Items[11].Visible = false; //
+            legend2.Items[14].Visible = false; //
+            legend2.Items[15].Visible = false; //
+            legend2.Items[18].Visible = false; //
+            legend2.Items[19].Visible = false; //
+            legend2.Items[22].Visible = false; //
+            legend2.Items[23].Visible = false; //
+            legend2.Items[26].Visible = false; //
+            legend2.Items[27].Visible = false; //
+            legend2.Items[30].Visible = false; //
+            legend2.Items[31].Visible = false; //
+            legend2.Items[34].Visible = false; //
+            legend2.Items[35].Visible = false; //
+            legend2.Items[38].Visible = false; //
+            legend2.Items[39].Visible = false; //
+            legend2.Items[42].Visible = false; //
+            legend2.Items[43].Visible = false; //
+            legend2.Items[46].Visible = false; //
+            legend2.Items[47].Visible = false; //
+            legend2.Items[50].Visible = false; //
+            legend2.Items[51].Visible = false; //
+            legend2.Items[54].Visible = false; //
+            legend2.Items[55].Visible = false; //
+
+            // for (int i = 8; i <= 55; i++)
+            //for (int i = 4; i <= 56; i++)
+            //{
+            //    if (legend2.Items.Count > i)
+            //        legend2.Items[i].Visible = false;
+            //}
+
+            GrpPlotCount1 = 2;
+            GrpPlotCount2 = 2;
+        }
+
+        private void InitGraphPRR()
+        {
+            int i;
+            var grp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch];
+
+            grp1.ClearData();
+            grp2.ClearData();
+            TabGrpRaw.Text = "AC waveform";
+
+            if (techprr.rdendfreq != 0.0)
+            {
+                if (techprr.rpcalmode == 0)
+                    TabGrp1.Text = "Rs,P_Rp(Rp end-Rp) vs t";
+                else if (techprr.rpcalmode == 0)
+                    TabGrp1.Text = "Rs,P_Rp(Rp end-Rs) vs t";
+                else TabGrp1.Text = "Rs,P_Rp(Rp-Rs) vs t";
+            }
+            else
+            {
+                TabGrp1.Text = "Rs,P_Rp(Rp-Rs) vs t";
+            }
+
+            //TabGrp1.Text = "Rs,P_Rp vs t";
+            TabGrp2.Text = "Cs,Cp vs t";
+
+            grp1.XAxes[0].Caption = "Time";
+            grp1.XAxes[0].ScaleType = ScaleType.Linear;
+            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode0 = true;
+
+            grp1.YAxes[0].Caption = "R(Ω)";
+            grp1.XAxes[0].Visible = true;
+            grp1.YAxes[0].Visible = true;
+
+            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+
+            grp1.YAxes[1].Caption = "";
+            grp1.YAxes[1].Visible = false;
+
+            grp2.XAxes[0].Caption = "Time";
+            grp2.XAxes[0].ScaleType = ScaleType.Linear;
+            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
+            xTimemode1 = true;
+            grp2.YAxes[0].Caption = "Cs(uF)";
+            grp2.YAxes[1].Caption = "Cp(uF)";
+            grp2.XAxes[0].Visible = true;
+            grp2.YAxes[0].Visible = true;
+            grp2.YAxes[1].Visible = true;
+            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
+            int nPlot1 = 1;
+            int nPlot2 = 2;
+            for (i = 0; i < 6; i++)
+            {
+                grp1.Plots[i + nPlot1].XAxis = grp1.XAxes[0];
+                grp2.Plots[i + nPlot2].XAxis = grp2.XAxes[0];
+
+                if (i < 3)
+                {
+                    grp1.Plots[i + nPlot1].YAxis = grp1.YAxes[0];
+                    grp2.Plots[i + nPlot2].YAxis = grp2.YAxes[0];
+                }
+                else
+                {
+                    grp1.Plots[i + nPlot1].YAxis = grp1.YAxes[1];
+                    grp2.Plots[i + nPlot2].YAxis = grp2.YAxes[1];
+                }
+            }
+
+            for (i = 0; i < 3; i++)
+            {
+                if (grp.barr[i])
+                {
+                    if (i == 2)
+                    {
+                        grp1.Plots[i + nPlot1].Visible = false;
+                        legend1.Items[i].Visible = false;
+                    }
+                    else
+                    {
+                        grp1.Plots[i + nPlot1].Visible = true;
+                        legend1.Items[i].Visible = true;
+                    }
+                    grp1.Plots[i + 3 + nPlot1].Visible = false;
+                    legend1.Items[i + 3].Visible = false;
+
+                    grp2.Plots[i + nPlot2].Visible = true;
+                    grp2.Plots[i + 3 + nPlot2].Visible = true;
+
+                    legend2.Items[i].Visible = true;
+                    legend2.Items[i + 3].Visible = true;
+
+                    if (i == 0)
+                    {
+                        legend1.Items[i].Text = "Rs";
+                        legend1.Items[i + 3].Text = "";
+                        legend2.Items[i].Text = "R1 - Cs"; //"Rs-Cs";
+                        legend2.Items[i + 3].Text = "R1 | Cp"; //"Rs-Cp";
+
+                        legend2.Items[8].Text = "A1R1 - Cs";
+                        legend2.Items[10].Text = "A1R1 | Cp";
+                        legend2.Items[12].Text = "A2R1 - Cs";
+                        legend2.Items[14].Text = "A2R1 | Cp";
+                        legend2.Items[16].Text = "A3R1 - Cs";
+                        legend2.Items[18].Text = "A3R1 | Cp";
+                        legend2.Items[20].Text = "A4R1 - Cs";
+                        legend2.Items[22].Text = "A4R1 | Cp";
+                        legend2.Items[24].Text = "A5R1 - Cs";
+                        legend2.Items[26].Text = "A5R1 | Cp";
+                        legend2.Items[28].Text = "A6R1 - Cs";
+                        legend2.Items[30].Text = "A6R1 | Cp";
+                        legend2.Items[32].Text = "A7R1 - Cs";
+                        legend2.Items[34].Text = "A7R1 | Cp";
+                        legend2.Items[36].Text = "A8R1 - Cs";
+                        legend2.Items[38].Text = "A8R1 | Cp";
+                        legend2.Items[40].Text = "A9R1 - Cs";
+                        legend2.Items[42].Text = "A9R1 | Cp";
+                        legend2.Items[44].Text = "A10R1 - Cs";
+                        legend2.Items[46].Text = "A10R1 | Cp";
+                        legend2.Items[48].Text = "A11R1 - Cs";
+                        legend2.Items[50].Text = "A11R1 | Cp";
+                        legend2.Items[52].Text = "A12R1 - Cs";
+                        legend2.Items[54].Text = "A12R1 | Cp";
+
+                        legend1.Items[7].Text = "A1Rs";
+                        legend1.Items[9].Text = "A2Rs";
+                        legend1.Items[11].Text = "A3Rs";
+                        legend1.Items[13].Text = "A4Rs";
+                        legend1.Items[15].Text = "A5Rs";
+                        legend1.Items[17].Text = "A6Rs";
+                        legend1.Items[19].Text = "A7Rs";
+                        legend1.Items[21].Text = "A8Rs";
+                        legend1.Items[23].Text = "A9Rs";
+                        legend1.Items[25].Text = "A10Rs";
+                        legend1.Items[27].Text = "A11Rs";
+                        legend1.Items[29].Text = "A12Rs";
+                    }
+                    else if (i == 1)
+                    {
+                        legend1.Items[i].Text = "P_Rp";
+                        //legend1.Items[i + 3].Text = "";
+                        legend2.Items[i].Text = "R2 - Cs"; //"Rp-Cs";
+                        legend2.Items[i + 3].Text = "R2 | Cp"; //"Rp-Cp";
+
+                        legend2.Items[9].Text = "A1R2 - Cs";
+                        legend2.Items[11].Text = "A1R2 | Cp";
+                        legend2.Items[13].Text = "A2R2 - Cs";
+                        legend2.Items[15].Text = "A2R2 | Cp";
+                        legend2.Items[17].Text = "A3R2 - Cs";
+                        legend2.Items[19].Text = "A3R2 | Cp";
+                        legend2.Items[21].Text = "A4R2 - Cs";
+                        legend2.Items[23].Text = "A4R2 | Cp";
+                        legend2.Items[25].Text = "A5R2 - Cs";
+                        legend2.Items[27].Text = "A5R2 | Cp";
+                        legend2.Items[29].Text = "A6R2 - Cs";
+                        legend2.Items[31].Text = "A6R2 | Cp";
+                        legend2.Items[33].Text = "A7R2 - Cs";
+                        legend2.Items[35].Text = "A7R2 | Cp";
+                        legend2.Items[37].Text = "A8R2 - Cs";
+                        legend2.Items[39].Text = "A8R2 | Cp";
+                        legend2.Items[41].Text = "A9R2 - Cs";
+                        legend2.Items[43].Text = "A9R2 | Cp";
+                        legend2.Items[45].Text = "A10R2 - Cs";
+                        legend2.Items[47].Text = "A10R2 | Cp";
+                        legend2.Items[49].Text = "A11R2 - Cs";
+                        legend2.Items[51].Text = "A11R2 | Cp";
+                        legend2.Items[53].Text = "A12R2 - Cs";
+                        legend2.Items[55].Text = "A12R2 | Cp";
+
+                        legend1.Items[8].Text = "A1P_Rp";
+                        legend1.Items[10].Text = "A2P_Rp";
+                        legend1.Items[12].Text = "A3P_Rp";
+                        legend1.Items[14].Text = "A4P_Rp";
+                        legend1.Items[16].Text = "A5P_Rp";
+                        legend1.Items[18].Text = "A6P_Rp";
+                        legend1.Items[20].Text = "A7P_Rp";
+                        legend1.Items[22].Text = "A8P_Rp";
+                        legend1.Items[24].Text = "A9P_Rp";
+                        legend1.Items[26].Text = "A10P_Rp";
+                        legend1.Items[28].Text = "A11P_Rp";
+                        legend1.Items[30].Text = "A12P_Rp";
+                    }
+                    else
+                    {
+                        legend1.Items[i].Text = "";
+                        legend1.Items[i + 3].Text = "";
+                        legend2.Items[i].Text = "R3 - Cs"; //"Rpe-Cs";
+                        legend2.Items[i + 3].Text = "R3 | Cp"; //"Rpe-Cp";
+                    }
+                }
+                else
+                {
+                    grp1.Plots[i + nPlot1].Visible = false;
+                    grp1.Plots[i + 3 + nPlot1].Visible = false;
+                    legend1.Items[i].Visible = false;
+                    legend1.Items[i + 3].Visible = false;
+
+                    grp2.Plots[i + nPlot2].Visible = false;
+                    grp2.Plots[i + 3 + nPlot2].Visible = false;
+                    legend2.Items[i].Visible = false;
+                    legend2.Items[i + 3].Visible = false;
+                }
+            }
+            legend1.Items[6].Visible = false;
+            legend2.Items[6].Visible = false;
+            legend2.Items[7].Visible = false;
+            grp1.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[0].Visible = false;  //0206 6
+            grp2.Plots[1].Visible = false;  // 0206 7
+
+            GrpPlotCount1 = 2; // grp.arrcnt * 2;
+            GrpPlotCount2 = grp.arrcnt * 2;
+        }
+
+        #endregion Grpinit
 
         public void SetbtSize(bool bEnable)
         {
             btSize.Enabled = bEnable; 
         }
-
-        private void FrmCalibration_Layout(object sender, EventArgs e)
-        {
-            grp1.Height = checkedListBox.Bottom - grp1.Top;
-            grp2.Height = checkedListBox1.Bottom - grp2.Top;
-            rawgrp.Height = rawgrpListBox.Bottom - rawgrp.Top;
-        }
+        
 
         private void BZAChPan_Load(object sender, EventArgs e)
         {
@@ -1197,1846 +2814,6 @@ namespace ZiveLab.ZM
 
         # endregion GrpUtil
 
-        #region Grpinit
-        private void InitRtGraph()
-        {
-            rtmode = 0;
-
-            grprt.PlotAreaColor = Properties.Settings.Default.RtGrp_BackColor;
-            grprt.PlotAreaBorder = Border.Dotted;
-
-            grprt.Plots[0].LineColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-            grprt.Plots[0].PointColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-            grprt.Plots[0].SmoothUpdates = true;
-            grprt.Plots[1].LineColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-            grprt.Plots[1].PointColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-            grprt.Plots[1].SmoothUpdates = true;
-
-            grprt.XAxes[0].Caption = "Voltage(V)";
-            grprt.XAxes[0].CaptionVisible = true;
-            grprt.XAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MajorDivisions.LabelVisible = true;
-            grprt.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            grprt.XAxes[0].MajorDivisions.TickVisible = true;
-            grprt.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.XAxes[0].MinorDivisions.TickVisible = false;
-            grprt.XAxes[0].MinorDivisions.GridVisible = false;
-            grprt.YAxes[0].AutoSpacing = true;
-
-            grprt.YAxes[0].Caption = "Current(A)";
-            grprt.YAxes[0].CaptionVisible = true;
-            grprt.YAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MajorDivisions.LabelVisible = true;
-            grprt.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.YAxes[0].MajorDivisions.TickVisible = true;
-            grprt.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            grprt.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.YAxes[0].MinorDivisions.TickVisible = false;
-            grprt.YAxes[0].MinorDivisions.GridVisible = false;
-            grprt.YAxes[0].AutoSpacing = true;
-
-            grprt.YAxes[1].Caption = "";
-            grprt.YAxes[1].CaptionVisible = true;
-            grprt.YAxes[1].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MajorDivisions.LabelVisible = true;
-            grprt.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.YAxes[1].MajorDivisions.TickVisible = true;
-
-            grprt.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            grprt.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.YAxes[1].MinorDivisions.GridVisible = false;
-            grprt.YAxes[1].MinorDivisions.TickVisible = false;
-            grprt.YAxes[1].AutoSpacing = true;
-            
-
-            RtMenuGraphLine.Checked = Properties.Settings.Default.RtGrp_Plot_ViewLine;
-            RtMenuGraphPoint.Checked = Properties.Settings.Default.RtGrp_Plot_ViewPoint;
-            RtMenuGraphGrid.Checked = Properties.Settings.Default.RtGrp_GridView;
-            RtMenuGraphLegend.Checked = Properties.Settings.Default.RtGrpLegendView;
-            Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
-            Properties.Settings.Default.RtGrpLegendView = MenuPlotLegend1.Checked;
-
-            grprt.Plots[0].LineWidth = DeviceConstants.Linewidth;
-            grprt.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-
-            grprt.Plots[1].LineWidth = DeviceConstants.Linewidth;
-            grprt.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-
-            if (Properties.Settings.Default.RtGrp_Plot_ViewLine)
-            {
-                grprt.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-                grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            }
-            else
-            {
-                grprt.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
-                grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
-            }
-
-            if (Properties.Settings.Default.RtGrp_Plot_ViewPoint)
-            {
-                grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-                grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            }
-            else
-            {
-                grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
-                grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
-            }
-            grprt.YAxes[0].Visible = true;
-            if (rtmode == 0)
-            {
-                RtMenuGraphMode1.Checked = true;
-                grprt.YAxes[1].Visible = false;
-                RtMenuGraphMode2.Checked = false;
-            }
-            else
-            {
-                RtMenuGraphMode1.Checked = false;
-                grprt.YAxes[1].Visible = true;
-                RtMenuGraphMode2.Checked = true;
-            }
-            RefreshRtView();
-            Rtlegend.Width = 82;
-
-            RefreshRt();
-        }
-
-        private void RawRtGraph() // Raw Data Test code
-        {
-            rtmode = 0;
-
-            rawgrp.PlotAreaColor = Properties.Settings.Default.RtGrp_BackColor;
-            rawgrp.PlotAreaBorder = Border.Dotted;
-
-            rawgrp.Plots[0].LineColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-            rawgrp.Plots[0].PointColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-            rawgrp.Plots[0].SmoothUpdates = true;
-            rawgrp.Plots[1].LineColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-            rawgrp.Plots[1].PointColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-            rawgrp.Plots[1].SmoothUpdates = true;
-
-            rawgrp.XAxes[0].Caption = "Voltage(V)";
-            rawgrp.XAxes[0].CaptionVisible = true;
-            rawgrp.XAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.XAxes[0].MajorDivisions.LabelVisible = true;
-            rawgrp.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            rawgrp.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            rawgrp.XAxes[0].MajorDivisions.TickVisible = true;
-            rawgrp.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            rawgrp.XAxes[0].MinorDivisions.TickVisible = false;
-            rawgrp.XAxes[0].MinorDivisions.GridVisible = false;
-            rawgrp.YAxes[0].AutoSpacing = true;
-
-            rawgrp.YAxes[0].Caption = "Current(A)";
-            rawgrp.YAxes[0].CaptionVisible = true;
-            rawgrp.YAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[0].MajorDivisions.LabelVisible = true;
-            rawgrp.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            rawgrp.YAxes[0].MajorDivisions.TickVisible = true;
-            rawgrp.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            rawgrp.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            rawgrp.YAxes[0].MinorDivisions.TickVisible = false;
-            rawgrp.YAxes[0].MinorDivisions.GridVisible = false;
-            rawgrp.YAxes[0].AutoSpacing = true;
-
-            rawgrp.YAxes[1].Caption = "";
-            rawgrp.YAxes[1].CaptionVisible = true;
-            rawgrp.YAxes[1].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[1].MajorDivisions.LabelVisible = true;
-            rawgrp.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            rawgrp.YAxes[1].MajorDivisions.TickVisible = true;
-
-            rawgrp.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            rawgrp.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            rawgrp.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            rawgrp.YAxes[1].MinorDivisions.GridVisible = false;
-            rawgrp.YAxes[1].MinorDivisions.TickVisible = false;
-            rawgrp.YAxes[1].AutoSpacing = true;
-
-            RtMenuGraphLine.Checked = Properties.Settings.Default.RtGrp_Plot_ViewLine;
-            RtMenuGraphPoint.Checked = Properties.Settings.Default.RtGrp_Plot_ViewPoint;
-            RtMenuGraphGrid.Checked = Properties.Settings.Default.RtGrp_GridView;
-            RtMenuGraphLegend.Checked = Properties.Settings.Default.RtGrpLegendView;
-            Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
-            Properties.Settings.Default.RtGrpLegendView = MenuPlotLegend1.Checked;
-
-            rawgrp.Plots[0].LineWidth = DeviceConstants.Linewidth;
-            rawgrp.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-
-            rawgrp.Plots[1].LineWidth = DeviceConstants.Linewidth;
-            rawgrp.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-
-            if (Properties.Settings.Default.RtGrp_Plot_ViewLine)
-            {
-                rawgrp.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-                rawgrp.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            }
-            else
-            {
-                rawgrp.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.None;
-                rawgrp.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
-            }
-
-            if (Properties.Settings.Default.RtGrp_Plot_ViewPoint)
-            {
-                rawgrp.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-                rawgrp.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            }
-            else
-            {
-                rawgrp.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.None;
-                rawgrp.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
-            }
-            rawgrp.YAxes[0].Visible = true;
-            if (rtmode == 0)
-            {
-                RtMenuGraphMode1.Checked = true;
-                rawgrp.YAxes[1].Visible = false;
-                RtMenuGraphMode2.Checked = false;
-            }
-            else
-            {
-                RtMenuGraphMode1.Checked = false;
-                rawgrp.YAxes[1].Visible = true;
-                RtMenuGraphMode2.Checked = true;
-            }
-            Rtlegend.Width = 82;
-        }
-
-        private Point lastMousePos;
-        private bool isDragging = false;
-        private void rawgrp_MouseWheel(object sender, MouseEventArgs e) // 확대 및 축소
-        {
-            double zoomFactor = (e.Delta > 0) ? 0.9 : 1.1;
-
-            var xAxis = rawgrp.XAxes[0];
-            var yAxis = rawgrp.YAxes[0];
-
-            double xMin = xAxis.Range.Minimum;
-            double xMax = xAxis.Range.Maximum;
-            double yMin = yAxis.Range.Minimum;
-            double yMax = yAxis.Range.Maximum;
-
-            double xMid = (xMin + xMax) / 2.0;
-            double yMid = (yMin + yMax) / 2.0;
-
-            double newHalfX = (xMax - xMin) * zoomFactor / 2.0;
-            double newHalfY = (yMax - yMin) * zoomFactor / 2.0;
-
-            double newXMin = xMid - newHalfX;
-            double newXMax = xMid + newHalfX;
-            double newYMin = yMid - newHalfY;
-            double newYMax = yMid + newHalfY;
-
-            const double MIN_X_RANGE = 0.001;
-            const double MIN_Y_RANGE = 0.001;
-
-            if ((newXMax - newXMin) > MIN_X_RANGE)
-                xAxis.Range = new Range(newXMin, newXMax);
-
-            if ((newYMax - newYMin) > MIN_Y_RANGE)
-                yAxis.Range = new Range(newYMin, newYMax);
-        }
-        private void rawgrp_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                lastMousePos = e.Location;
-                isDragging = true;
-            }
-        }
-
-        private void rawgrp_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDragging)
-            {
-                var xAxis = rawgrp.XAxes[0];
-                var yAxis = rawgrp.YAxes[0];
-
-                double dx = rawgrp.PlotAreaBounds.Width != 0 ?
-                    (e.X - lastMousePos.X) * (xAxis.Range.Maximum - xAxis.Range.Minimum) / rawgrp.PlotAreaBounds.Width : 0;
-
-                double dy = rawgrp.PlotAreaBounds.Height != 0 ?
-                    (e.Y - lastMousePos.Y) * (yAxis.Range.Maximum - yAxis.Range.Minimum) / rawgrp.PlotAreaBounds.Height : 0;
-
-                xAxis.Range = new Range(xAxis.Range.Minimum - dx, xAxis.Range.Maximum - dx);
-                yAxis.Range = new Range(yAxis.Range.Minimum + dy, yAxis.Range.Maximum + dy);
-
-                lastMousePos = e.Location;
-            }
-        }
-
-        private void rawgrp_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                isDragging = false;
-            }
-        }
-
-        private void InitGraph1()
-        {
-
-            grp1.ResetZoomPan();
-            
-            MenuPlotLine11.Checked = Properties.Settings.Default.GrpPlotLine11;
-            MenuPlotPoint11.Checked = Properties.Settings.Default.GrpPlotPoint11;
-            MenuPlotLine12.Checked = Properties.Settings.Default.GrpPlotLine12;
-            MenuPlotPoint12.Checked = Properties.Settings.Default.GrpPlotPoint12;
-            MenuPlotLine13.Checked = Properties.Settings.Default.GrpPlotLine13;
-            MenuPlotPoint13.Checked = Properties.Settings.Default.GrpPlotPoint13;
-            MenuPlotLine14.Checked = Properties.Settings.Default.GrpPlotLine14;
-            MenuPlotPoint14.Checked = Properties.Settings.Default.GrpPlotPoint14;
-            MenuPlotLine15.Checked = Properties.Settings.Default.GrpPlotLine15;
-            MenuPlotPoint15.Checked = Properties.Settings.Default.GrpPlotPoint15;
-            MenuPlotLine16.Checked = Properties.Settings.Default.GrpPlotLine16;
-            MenuPlotPoint16.Checked = Properties.Settings.Default.GrpPlotPoint16;
-
-            int nPlot = 1; //0206 0
-            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine11) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint11) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor11;
-            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor11;
-            grp1.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine12) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint12) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor12;
-            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor12;
-            grp1.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine13) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint13) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor13;
-            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor13;
-            grp1.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine14) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint14) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor14;
-            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor14;
-            grp1.Plots[nPlot].SmoothUpdates = true;
-
-
-            nPlot++;
-            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine15) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint15) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor15;
-            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor15;
-            grp1.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp1.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp1.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp1.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine16) grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp1.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint16) grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp1.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp1.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor16;
-            grp1.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor16;
-            grp1.Plots[nPlot].SmoothUpdates = true;
-
-            grp1.Plots[0].LineWidth = DeviceConstants.Linewidth; // 0206 6
-            grp1.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 6
-            grp1.Plots[0].HistoryCapacity = 100000;  // 0206 6
-            
-
-            grp1.PlotAreaColor = Properties.Settings.Default.GrpBackColor1;
-            grp1.PlotAreaBorder = Border.Dotted;
-
-            MenuPlotGridX1.Checked = Properties.Settings.Default.GrpAxisGridX1;
-            MenuPlotGridY11.Checked = Properties.Settings.Default.GrpAxisGridY11;
-            MenuPlotGridY12.Checked = Properties.Settings.Default.GrpAxisGridY12;
-
-            grp1.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.XAxes[0].MinorDivisions.TickVisible = false;
-            grp1.XAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor1;
-
-            grp1.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor1;
-            grp1.XAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp1.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridX1;
-            grp1.YAxes[0].MinorDivisions.GridVisible = false;
-
-            grp1.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.YAxes[0].MinorDivisions.TickVisible = false;
-            grp1.YAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor1;
-
-            grp1.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor1;
-            grp1.YAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp1.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY11;
-            grp1.YAxes[0].MinorDivisions.GridVisible = false;
-
-            grp1.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor1;
-            grp1.YAxes[1].MinorDivisions.TickVisible = false;
-            grp1.YAxes[1].CaptionForeColor = Properties.Settings.Default.GrpAxisColor1;
-
-            grp1.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor1;
-            grp1.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp1.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY12;
-            grp1.YAxes[1].MinorDivisions.GridVisible = false;
-            
-            grp1.Cursors[0].LabelBackColor = Properties.Settings.Default.GrpBackColor1;
-            
-            legend1.Visible = Properties.Settings.Default.GrpViewLegend1;
-            MenuPlotLegend1.Checked = Properties.Settings.Default.GrpViewLegend1;
-
-            GrpCtrlMode1 = 0;
-            lblcsfreq1.Visible = false;
-            grp1.CaptionVisible = false;
-
-            grp1.ClearData();
-            
-
-            ApplyGraphModeMenu(1);
-            RefreshGraphMode(1);
-            
-        }
-
-
-        private void InitGraph2()
-        {
-            grp2.ResetZoomPan();
-
-            MenuPlotLine21.Checked = Properties.Settings.Default.GrpPlotLine21;
-            MenuPlotPoint21.Checked = Properties.Settings.Default.GrpPlotPoint21;
-            MenuPlotLine22.Checked = Properties.Settings.Default.GrpPlotLine22;
-            MenuPlotPoint22.Checked = Properties.Settings.Default.GrpPlotPoint22;
-            MenuPlotLine23.Checked = Properties.Settings.Default.GrpPlotLine23;
-            MenuPlotPoint23.Checked = Properties.Settings.Default.GrpPlotPoint23;
-            MenuPlotLine24.Checked = Properties.Settings.Default.GrpPlotLine24;
-            MenuPlotPoint24.Checked = Properties.Settings.Default.GrpPlotPoint24;
-            MenuPlotLine25.Checked = Properties.Settings.Default.GrpPlotLine25;
-            MenuPlotPoint25.Checked = Properties.Settings.Default.GrpPlotPoint25;
-            MenuPlotLine26.Checked = Properties.Settings.Default.GrpPlotLine26;
-            MenuPlotPoint26.Checked = Properties.Settings.Default.GrpPlotPoint26;
-
-            int nPlot = 2; //0206 0
-            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine21) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint21) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor21;
-            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor21;
-            grp2.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine22) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint22) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor22;
-            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor22;
-            grp2.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine23) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint23) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor23;
-            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor23;
-            grp2.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine24) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint24) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor24;
-            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor24;
-            grp2.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine25) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint25) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor25;
-            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor25;
-            grp2.Plots[nPlot].SmoothUpdates = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].LineWidth = DeviceConstants.Linewidth;
-            grp2.Plots[nPlot].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            grp2.Plots[nPlot].HistoryCapacity = 100000;
-            if (Properties.Settings.Default.GrpPlotLine26) grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.Solid;
-            else grp2.Plots[nPlot].LineStyle = NationalInstruments.UI.LineStyle.None;
-            if (Properties.Settings.Default.GrpPlotPoint26) grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
-            else grp2.Plots[nPlot].PointStyle = NationalInstruments.UI.PointStyle.None;
-            grp2.Plots[nPlot].LineColor = Properties.Settings.Default.GrpPlotColor26;
-            grp2.Plots[nPlot].PointColor = Properties.Settings.Default.GrpPlotColor26;
-            grp2.Plots[nPlot].SmoothUpdates = true;
-
-
-            grp2.Plots[0].LineWidth = DeviceConstants.Linewidth; // 0206 6
-            grp2.Plots[0].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 6
-            grp2.Plots[0].HistoryCapacity = 100000; // 0206 6
-
-            grp2.Plots[1].LineWidth = DeviceConstants.Linewidth; // 0206 7
-            grp2.Plots[1].PointSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight); // 0206 7
-            grp2.Plots[1].HistoryCapacity = 100000;  // 0206 7
-            
-            grp2.PlotAreaColor = Properties.Settings.Default.GrpBackColor2;
-            grp2.PlotAreaBorder = Border.Dotted;
-
-            MenuPlotGridX2.Checked = Properties.Settings.Default.GrpAxisGridX2;
-            MenuPlotGridY21.Checked = Properties.Settings.Default.GrpAxisGridY21;
-            MenuPlotGridY22.Checked = Properties.Settings.Default.GrpAxisGridY22;
-
-            grp2.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.XAxes[0].MinorDivisions.TickVisible = false;
-            grp2.XAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor2;
-
-            grp2.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor2;
-            grp2.XAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridX2;
-            grp2.YAxes[0].MinorDivisions.GridVisible = false;
-
-            grp2.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.YAxes[0].MinorDivisions.TickVisible = false;
-            grp2.YAxes[0].CaptionForeColor = Properties.Settings.Default.GrpAxisColor2;
-
-            grp2.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor2;
-            grp2.YAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY21;
-            grp2.YAxes[0].MinorDivisions.GridVisible = false;
-
-            grp2.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.GrpAxisColor2;
-            grp2.YAxes[1].MinorDivisions.TickVisible = false;
-            grp2.YAxes[1].CaptionForeColor = Properties.Settings.Default.GrpAxisColor2;
-
-            grp2.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.GrpGridColor2;
-            grp2.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.GrpAxisGridY22;
-            grp2.YAxes[1].MinorDivisions.GridVisible = false;
-            
-            grp2.Cursors[0].LabelBackColor = Properties.Settings.Default.GrpBackColor2;
-
-            legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
-            MenuPlotLegend2.Checked = Properties.Settings.Default.GrpViewLegend2;
-
-            grp2.ClearData();
-
-            GrpCtrlMode2 = 0;
-            lblcsfreq2.Visible = false;
-            grp2.CaptionVisible = false;
-            ApplyGraphModeMenu(2);
-            RefreshGraphMode(2);
-        }
-
-
-        private void InitGraphType(bool brefresgraph = true)
-        {
-            if(gBZA.SifLnkLst.ContainsKey(serial) ==false)
-            {
-                return;
-            }
-            if (OldTechType != gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type || brefresgraph == true)
-            {
-                OldTechType = gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
-                if ((enTechType)OldTechType == enTechType.TECH_MON || (enTechType)OldTechType == enTechType.TECH_DCH)
-                {
-                    if (this.tabgrp.TabPages.Contains(this.TabGrp2) == true) this.tabgrp.TabPages.Remove(this.TabGrp2);
-                    legend2.Visible = false;
-                    if (this.tabgrp.TabPages.Contains(this.TabGrpRaw) == true) this.tabgrp.TabPages.Remove(this.TabGrpRaw);
-                    Rtlegend.Visible = false;
-                }
-                else
-                {
-                    if (this.tabgrp.TabPages.Contains(this.TabGrp2) == false) this.tabgrp.TabPages.Add(this.TabGrp2);
-                    legend2.Visible = Properties.Settings.Default.GrpViewLegend2;
-                    if (this.tabgrp.TabPages.Contains(this.TabGrpRaw) == false) this.tabgrp.TabPages.Add(this.TabGrpRaw);
-                    Rtlegend.Visible = Properties.Settings.Default.RtGrpLegendView;
-                }
-                if ((enTechType)OldTechType == enTechType.TECH_HFR) 
-                {
-                    InitGraphHFR();
-                }
-                else if ((enTechType)OldTechType == enTechType.TECH_PRR)
-                {
-                    InitGraphPRR();
-                }
-                else if ((enTechType)OldTechType == enTechType.TECH_MON)
-                {
-                    InitGraphMON();
-                }
-                else if ((enTechType)OldTechType == enTechType.TECH_QIS)
-                {
-                    InitGraphQIS();
-                }
-                else if ((enTechType)OldTechType == enTechType.TECH_DCH)
-                {
-                    InitGraphDCH();
-                }
-                else
-                {
-                    InitGraphEIS();
-                }
-
-                LastPlotPoint = 0;
-                auxLastPlotPoint0 = 0;
-                auxLastPlotPoint1 = 0;
-                auxLastPlotPoint2 = 0;
-                //auxLastPlotPoint3 = 0;
-                //auxLastPlotPoint4 = 0;
-                LastPlotPoint1 = 0;
-                LastPlotPoint2 = 0;
-                LastPlotPoint3 = 0;
-                LastPlotPoint4 = 0;
-                LastPlotPoint5 = 0;
-                LastPlotPoint6 = 0;
-                LastPlotPoint7 = 0;
-                LastPlotPoint8 = 0;
-                LastPlotPoint9 = 0;
-                LastPlotPoint10 = 0;
-                LastPlotPoint11 = 0;
-                LastPlotPoint12 = 0;
-                LastPlotPoint13 = 0;
-                LastPlotPoint14 = 0;
-                LastPlotPoint15 = 0;
-                LastPlotPoint16 = 0;
-                LastPlotPoint17 = 0;
-                LastPlotPoint18 = 0;
-                LastPlotPoint19 = 0;
-                LastPlotPoint20 = 0;
-                LastPlotPoint21 = 0;
-                LastPlotPoint22 = 0;
-                LastPlotPoint23 = 0;
-                LastPlotPoint24 = 0;
-                LastPlotPoint25 = 0;
-
-                bodePlotPoint0 = 0;
-                bodePlotPoint1 = 0;
-                bodePlotPoint2 = 0;
-                bodePlotPoint3 = 0;
-                bodePlotPoint4 = 0;
-                bodePlotPoint5 = 0;
-                bodePlotPoint6 = 0;
-                bodePlotPoint7 = 0;
-                bodePlotPoint8 = 0;
-                bodePlotPoint9 = 0;
-                bodePlotPoint10 = 0;
-                bodePlotPoint11 = 0;
-                bodePlotPoint12 = 0;
-                bodePlotPoint13 = 0;
-                bodePlotPoint14 = 0;
-                bodePlotPoint15 = 0;
-                bodePlotPoint16 = 0;
-                bodePlotPoint17 = 0;
-                bodePlotPoint18 = 0;
-                bodePlotPoint19 = 0;
-                bodePlotPoint20 = 0;
-                bodePlotPoint21 = 0;
-                bodePlotPoint22 = 0;
-                bodePlotPoint23 = 0;
-                bodePlotPoint24 = 0;
-                bodePlotPoint25 = 0;
-                bodePlotPoint26 = 0;
-                bodePlotPoint27 = 0;
-                bodePlotPoint28 = 0;
-                bodePlotPoint29 = 0;
-                bodePlotPoint30 = 0;
-                bodePlotPoint31 = 0;
-                bodePlotPoint32 = 0;
-                bodePlotPoint33 = 0;
-                bodePlotPoint34 = 0;
-                bodePlotPoint35 = 0;
-                bodePlotPoint36 = 0;
-                bodePlotPoint37 = 0;
-                bodePlotPoint38 = 0;
-                bodePlotPoint39 = 0;
-                bodePlotPoint40 = 0;
-                bodePlotPoint41 = 0;
-                bodePlotPoint42 = 0;
-                bodePlotPoint43 = 0;
-                bodePlotPoint44 = 0;
-                bodePlotPoint45 = 0;
-                bodePlotPoint46 = 0;
-                bodePlotPoint47 = 0;
-
-                grp1.ClearData();
-                grp2.ClearData();
-
-                GrpCtrlMode1 = 0;
-                GrpCtrlMode2 = 0;
-                ApplyMenuGraphMode(1, GrpCtrlMode1);
-                ApplyMenuGraphMode(2, GrpCtrlMode2);
-
-                RefreshGraphMode(1);
-                RefreshGraphMode(2);
-                RefreshLegendSize();
-            }
-        }
-
-        private void InitGraphQIS()
-        {
-            int nPlot;
-            TabGrpRaw.Text = "AC waveform";
-            TabGrp1.Text = "Nyquist plot";
-
-            grp1.XAxes[0].Caption = "Z real(Ω)";
-            grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
-            xTimemode0 = false;
-
-            grp1.YAxes[0].Caption = "-Z image(Ω)";
-            grp1.YAxes[1].Caption = "";
-            grp1.XAxes[0].Visible = true;
-            grp1.YAxes[0].Visible = true;
-            grp1.YAxes[1].Visible = false;
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-
-            nPlot = 1; // 0206 0
-            grp1.Plots[nPlot].Visible = true;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            grp1.Plots[0].Visible = true; // 0206 6
-
-            legend1.Items[0].Text = "-Zimg";
-            legend1.Items[0].Visible = true;
-            legend1.Items[1].Visible = false;
-            legend1.Items[2].Visible = false;
-            legend1.Items[3].Visible = false;
-            legend1.Items[4].Visible = false;
-            legend1.Items[5].Visible = false;
-
-            legend1.Items[6].Text = "-Zimg";
-            legend1.Items[6].Visible = true;
-
-            legend1.Items[7].Text = "-A1Zimg";
-            legend1.Items[8].Text = "-A1Zimg";
-            legend1.Items[9].Text = "-A2Zimg";
-            legend1.Items[10].Text = "-A2Zimg";
-            legend1.Items[11].Text = "-A3Zimg";
-            legend1.Items[12].Text = "-A3Zimg";
-            legend1.Items[13].Text = "-A4Zimg";
-            legend1.Items[14].Text = "-A4Zimg";
-            legend1.Items[15].Text = "-A5Zimg";
-            legend1.Items[16].Text = "-A5Zimg";
-            legend1.Items[17].Text = "-A6Zimg";
-            legend1.Items[18].Text = "-A6Zimg";
-            legend1.Items[19].Text = "-A7Zimg";
-            legend1.Items[20].Text = "-A7Zimg";
-            legend1.Items[21].Text = "-A8Zimg";
-            legend1.Items[22].Text = "-A8Zimg";
-            legend1.Items[23].Text = "-A9Zimg";
-            legend1.Items[24].Text = "-A9Zimg";
-            legend1.Items[25].Text = "-A10Zimg";
-            legend1.Items[26].Text = "-A10Zimg";
-            legend1.Items[27].Text = "-A11Zimg";
-            legend1.Items[28].Text = "-A11Zimg";
-            legend1.Items[29].Text = "-A12Zimg";
-            legend1.Items[30].Text = "-A12Zimg";
-
-            TabGrp2.Text = "Bode plot";
-
-            grp2.XAxes[0].Caption = "Frequency(Hz)";
-            grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
-            grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
-            xTimemode1 = false;
-
-            grp2.YAxes[0].Caption = "Zmag(Ω)";
-            grp2.YAxes[1].Caption = "Zphase(°C)";
-            grp2.XAxes[0].Visible = true;
-            grp2.YAxes[0].Visible = true;
-            grp2.YAxes[1].Visible = true;
-            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
-
-            nPlot = 2; // 0206 0
-            grp2.Plots[nPlot].Visible = true;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
-
-            nPlot++;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            grp2.Plots[0].Visible = true; //0206 6
-            grp2.Plots[1].Visible = true; //0206 7
-
-            legend2.Items[0].Text = "Zmag";
-            legend2.Items[1].Text = "Zphase";
-            legend2.Items[6].Text = "Zmag";
-            legend2.Items[7].Text = "Zphase";
-            legend2.Items[0].Visible = true;
-            legend2.Items[1].Visible = true;
-            legend2.Items[2].Visible = false;
-            legend2.Items[3].Visible = false;
-            legend2.Items[4].Visible = false;
-            legend2.Items[5].Visible = false;
-            legend2.Items[6].Visible = false;
-            legend2.Items[7].Visible = false;
-
-            legend2.Items[8].Text = "A1Zmag";
-            legend2.Items[9].Text = "A1Zphase";
-            legend2.Items[10].Text = "A1Zmag";
-            legend2.Items[11].Text = "A1Zphase";
-            legend2.Items[12].Text = "A2Zmag";
-            legend2.Items[13].Text = "A2Zphase";
-            legend2.Items[14].Text = "A2Zmag";
-            legend2.Items[15].Text = "A2Zphase";
-            legend2.Items[16].Text = "A3Zmag";
-            legend2.Items[17].Text = "A3Zphase";
-            legend2.Items[18].Text = "A3Zmag";
-            legend2.Items[19].Text = "A3Zphase";
-            legend2.Items[20].Text = "A4Zmag";
-            legend2.Items[21].Text = "A4Zphase";
-            legend2.Items[22].Text = "A4Zmag";
-            legend2.Items[23].Text = "A4Zphase";
-            legend2.Items[24].Text = "A5Zmag";
-            legend2.Items[25].Text = "A5Zphase";
-            legend2.Items[26].Text = "A5Zmag";
-            legend2.Items[27].Text = "A5Zphase";
-            legend2.Items[28].Text = "A6Zmag";
-            legend2.Items[29].Text = "A6Zphase";
-            legend2.Items[30].Text = "A6Zmag";
-            legend2.Items[31].Text = "A6Zphase";
-            legend2.Items[32].Text = "A7Zmag";
-            legend2.Items[33].Text = "A7Zphase";
-            legend2.Items[34].Text = "A7Zmag";
-            legend2.Items[35].Text = "A7Zphase";
-            legend2.Items[36].Text = "A8Zmag";
-            legend2.Items[37].Text = "A8Zphase";
-            legend2.Items[38].Text = "A8Zmag";
-            legend2.Items[39].Text = "A8Zphase";
-            legend2.Items[40].Text = "A9Zmag";
-            legend2.Items[41].Text = "A9Zphase";
-            legend2.Items[42].Text = "A9Zmag";
-            legend2.Items[43].Text = "A9Zphase";
-            legend2.Items[44].Text = "A10Zmag";
-            legend2.Items[45].Text = "A10Zphase";
-            legend2.Items[46].Text = "A10Zmag";
-            legend2.Items[47].Text = "A10Zphase";
-            legend2.Items[48].Text = "A11Zmag";
-            legend2.Items[49].Text = "A11Zphase";
-            legend2.Items[50].Text = "A11Zmag";
-            legend2.Items[51].Text = "A11Zphase";
-            legend2.Items[52].Text = "A12Zmag";
-            legend2.Items[53].Text = "A12Zphase";
-            legend2.Items[54].Text = "A12Zmag";
-            legend2.Items[55].Text = "A12Zphase";
-
-            GrpPlotCount1 = 2;
-            GrpPlotCount2 = 4;
-        }
-
-        private void InitGraphMON()
-        {
-            TabGrpRaw.Text = "AC waveform";
-            
-            TabGrp1.Text = "Eoc,Temp. vs t";
-            grp1.YAxes[0].Caption = "Eoc(V)";
-            legend1.Items[0].Text = "Eoc";
-
-            legend1.Items[7].Text = "A1Eoc";
-            legend1.Items[9].Text = "A2Eoc";
-            legend1.Items[11].Text = "A3Eoc";
-            legend1.Items[13].Text = "A4Eoc";
-            legend1.Items[15].Text = "A5Eoc";
-            legend1.Items[17].Text = "A6Eoc";
-            legend1.Items[19].Text = "A7Eoc";
-            legend1.Items[21].Text = "A8Eoc";
-            legend1.Items[23].Text = "A9Eoc";
-            legend1.Items[25].Text = "A10Eoc";
-            legend1.Items[27].Text = "A11Eoc";
-            legend1.Items[29].Text = "A12Eoc";
-
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
-
-            int nPlot = 1; //0206 0
-            grp1.Plots[nPlot].Visible = true;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = true;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            
-            grp1.Plots[0].Visible = false; //0206 6
-
-            grp1.XAxes[0].Caption = "Time";
-            grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            xTimemode0 = true;
-            
-
-            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            grp1.YAxes[1].Caption = "Temp.(°C)";
-            grp1.XAxes[0].Visible = true;
-            grp1.YAxes[0].Visible = true;
-            grp1.YAxes[1].Visible = true;
-
-            
-            legend1.Items[1].Text = "Temp.";
-            legend1.Items[8].Text = "A1Temp.";
-            legend1.Items[10].Text = "A2Temp.";
-            legend1.Items[12].Text = "A3Temp.";
-            legend1.Items[14].Text = "A4Temp.";
-            legend1.Items[16].Text = "A5Temp.";
-            legend1.Items[18].Text = "A6Temp.";
-            legend1.Items[20].Text = "A7Temp.";
-            legend1.Items[22].Text = "A8Temp.";
-            legend1.Items[24].Text = "A9Temp.";
-            legend1.Items[26].Text = "A10Temp.";
-            legend1.Items[28].Text = "A11Temp.";
-            legend1.Items[30].Text = "A12Temp.";
-
-            legend1.Items[0].Visible = true;
-            legend1.Items[1].Visible = true;
-            legend1.Items[2].Visible = false;
-            legend1.Items[3].Visible = false;
-            legend1.Items[4].Visible = false;
-            legend1.Items[5].Visible = false;
-            legend1.Items[6].Visible = false;
-
-            xTimemode1 = false;
-            /*
-            TabGrp2.Text = "Vdc,Temp. vs t";
-
-            grp2.XAxes[0].Caption = "Time";
-            grp2.XAxes[0].ScaleType = ScaleType.Linear;
-            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            xTimemode1 = true;
-
-            grp2.YAxes[0].Caption = "Vdc(V)";
-            grp2.YAxes[1].Caption = "Temp.(°C)";
-
-            grp2.XAxes[0].Visible = true;
-            grp2.YAxes[0].Visible = true;
-            grp2.YAxes[1].Visible = true;
-
-            nPlot = 2; // 0206 0
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot ++;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot ++;            
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            grp2.Plots[0].Visible = false;  //0206 6
-            grp2.Plots[1].Visible = false;  //0206 7
-
-            legend2.Items[0].Text = "Vdc";
-            legend2.Items[1].Text = "Temp.";
-
-            legend2.Items[0].Visible = true;
-            legend2.Items[1].Visible = true;
-            legend2.Items[2].Visible = false;
-            legend2.Items[3].Visible = false;
-            legend2.Items[4].Visible = false;
-            legend2.Items[5].Visible = false;
-            legend2.Items[6].Visible = false;
-            legend2.Items[7].Visible = false;
-            */
-            GrpPlotCount1 = 2;
-            GrpPlotCount2 = 0;
-        }
-
-        private void InitGraphDCH()
-        {
-            TabGrpRaw.Text = "AC waveform";
-          
-            TabGrp1.Text = "Vdc,Temp. vs t";
-            grp1.YAxes[0].Caption = "Vdc(V)";
-            legend1.Items[0].Text = "Vdc";
-            legend1.Items[7].Text = "A1Vdc";
-            legend1.Items[9].Text = "A2Vdc";
-            legend1.Items[11].Text = "A3Vdc";
-            legend1.Items[13].Text = "A4Vdc";
-            legend1.Items[15].Text = "A5Vdc";
-            legend1.Items[17].Text = "A6Vdc";
-            legend1.Items[19].Text = "A7Vdc";
-            legend1.Items[21].Text = "A8Vdc";
-            legend1.Items[23].Text = "A9Vdc";
-            legend1.Items[25].Text = "A10Vdc";
-            legend1.Items[27].Text = "A11Vdc";
-            legend1.Items[29].Text = "A12Vdc";
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.######");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.###");
-
-            int nPlot = 1; //0206 0
-            grp1.Plots[nPlot].Visible = true;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = true;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            grp1.Plots[0].Visible = false;  //0206 6
-
-            grp1.XAxes[0].Caption = "Time";
-            grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            xTimemode0 = true;
-
-
-            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            grp1.YAxes[1].Caption = "Temp.(°C)";
-            grp1.XAxes[0].Visible = true;
-            grp1.YAxes[0].Visible = true;
-            grp1.YAxes[1].Visible = true;
-
-            legend1.Items[1].Text = "Temp.";
-            legend1.Items[8].Text = "A1Temp.";
-            legend1.Items[10].Text = "A2Temp.";
-            legend1.Items[12].Text = "A3Temp.";
-            legend1.Items[14].Text = "A4Temp.";
-            legend1.Items[16].Text = "A5Temp.";
-            legend1.Items[18].Text = "A6Temp.";
-            legend1.Items[20].Text = "A7Temp.";
-            legend1.Items[22].Text = "A8Temp.";
-            legend1.Items[24].Text = "A9Temp.";
-            legend1.Items[26].Text = "A10Temp.";
-            legend1.Items[28].Text = "A11Temp.";
-            legend1.Items[30].Text = "A12Temp.";
-
-            legend1.Items[0].Visible = true;
-            legend1.Items[1].Visible = true;
-            legend1.Items[2].Visible = false;
-            legend1.Items[3].Visible = false;
-            legend1.Items[4].Visible = false;
-            legend1.Items[5].Visible = false;
-            legend1.Items[6].Visible = false;
-
-            xTimemode1 = false;
-            /*
-            TabGrp2.Text = "Vdc,Temp. vs t";
-
-            grp2.XAxes[0].Caption = "Time";
-            grp2.XAxes[0].ScaleType = ScaleType.Linear;
-            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            xTimemode1 = true;
-
-            grp2.YAxes[0].Caption = "Vdc(V)";
-            grp2.YAxes[1].Caption = "Temp.(°C)";
-
-            grp2.XAxes[0].Visible = true;
-            grp2.YAxes[0].Visible = true;
-            grp2.YAxes[1].Visible = true;
-
-            nPlot = 2; //0206 0
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot ++;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot ++;
-            grp2.Plots[nPlot].Visible = false;
-
-            grp2.Plots[0].Visible = false;  //0206 6
-            grp2.Plots[1].Visible = false;  //0206 7
-
-            legend2.Items[0].Text = "Vdc";
-            legend2.Items[1].Text = "Temp.";
-
-            legend2.Items[0].Visible = true;
-            legend2.Items[1].Visible = true;
-            legend2.Items[2].Visible = false;
-            legend2.Items[3].Visible = false;
-            legend2.Items[4].Visible = false;
-            legend2.Items[5].Visible = false;
-            legend2.Items[6].Visible = false;
-            legend2.Items[7].Visible = false;
-            */
-            GrpPlotCount1 = 2;
-            GrpPlotCount2 = 0;
-        }
-
-        private void InitGraphEIS()
-        {
-            TabGrpRaw.Text = "AC waveform";
-            TabGrp1.Text = "Nyquist plot";
-
-            grp1.XAxes[0].Caption = "Z real(Ω)";
-            grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            grp1.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
-            xTimemode0 = false;
-            grp1.YAxes[0].Caption = "-Z image(Ω)";
-            grp1.YAxes[1].Caption = "";
-            grp1.XAxes[0].Visible = true;
-            grp1.YAxes[0].Visible = true;
-            grp1.YAxes[1].Visible = false;
-
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-
-            int nPlot = 1; //0206 0
-            grp1.Plots[nPlot].Visible = true;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-           
-            grp1.Plots[0].Visible = true;  //0206 6
-
-            legend1.Items[0].Text = "-Zimg";
-            legend1.Items[0].Visible = true;
-            legend1.Items[1].Visible = false;
-            legend1.Items[2].Visible = false;
-            legend1.Items[3].Visible = false;
-            legend1.Items[4].Visible = false;
-            legend1.Items[5].Visible = false;
-            legend1.Items[6].Text = "-Zimg";
-            legend1.Items[6].Visible = true;
-
-            legend1.Items[7].Text = "-A1Zimg";
-            legend1.Items[8].Text = "-A1Zimg";
-            legend1.Items[9].Text = "-A2Zimg";
-            legend1.Items[10].Text = "-A2Zimg";
-            legend1.Items[11].Text = "-A3Zimg";
-            legend1.Items[12].Text = "-A3Zimg";
-            legend1.Items[13].Text = "-A4Zimg";
-            legend1.Items[14].Text = "-A4Zimg";
-            legend1.Items[15].Text = "-A5Zimg";
-            legend1.Items[16].Text = "-A5Zimg";
-            legend1.Items[17].Text = "-A6Zimg";
-            legend1.Items[18].Text = "-A6Zimg";
-            legend1.Items[19].Text = "-A7Zimg";
-            legend1.Items[20].Text = "-A7Zimg";
-            legend1.Items[21].Text = "-A8Zimg";
-            legend1.Items[22].Text = "-A8Zimg";
-            legend1.Items[23].Text = "-A9Zimg";
-            legend1.Items[24].Text = "-A9Zimg";
-            legend1.Items[25].Text = "-A10Zimg";
-            legend1.Items[26].Text = "-A10Zimg";
-            legend1.Items[27].Text = "-A11Zimg";
-            legend1.Items[28].Text = "-A11Zimg";
-            legend1.Items[29].Text = "-A12Zimg";
-            legend1.Items[30].Text = "-A12Zimg";
-
-            legend1.Items[31].Visible = false; //
-            legend1.Items[32].Visible = false;
-            legend1.Items[33].Visible = false;
-            legend1.Items[34].Visible = false;
-            legend1.Items[35].Visible = false;
-            legend1.Items[36].Visible = false;
-            legend1.Items[37].Visible = false;
-            legend1.Items[38].Visible = false;
-            legend1.Items[39].Visible = false;
-            legend1.Items[40].Visible = false;
-            legend1.Items[41].Visible = false;
-            legend1.Items[42].Visible = false;
-
-            TabGrp2.Text = "Bode plot";
-
-            grp2.XAxes[0].Caption = "Frequency(Hz)";
-            grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
-            grp2.XAxes[0].MajorDivisions.LabelFormat = new FormatString(FormatStringMode.Numeric, "G5");
-            xTimemode1 = false;
-            grp2.YAxes[0].Caption = "Zmag(Ω)";
-            grp2.YAxes[1].Caption = "Zphase(°C)";
-            grp2.XAxes[0].Visible = true;
-            grp2.YAxes[0].Visible = true;
-            grp2.YAxes[1].Visible = true;
-            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.##");
-
-            nPlot = 2; //0206 0
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            grp2.Plots[0].Visible = true;  //0206 6
-            grp2.Plots[1].Visible = true;  //0206 7
-
-            legend2.Items[0].Text = "Zmag";
-            legend2.Items[1].Text = "Zphase";
-            legend2.Items[6].Text = "Zmag";
-            legend2.Items[7].Text = "Zphase";
-
-            legend2.Items[8].Text = "A1Zmag";
-            legend2.Items[9].Text = "A1Zphase";
-            legend2.Items[10].Text = "A1Zmag";
-            legend2.Items[11].Text = "A1Zphase";
-            legend2.Items[12].Text = "A2Zmag";
-            legend2.Items[13].Text = "A2Zphase";
-            legend2.Items[14].Text = "A2Zmag";
-            legend2.Items[15].Text = "A2Zphase";
-            legend2.Items[16].Text = "A3Zmag";
-            legend2.Items[17].Text = "A3Zphase";
-            legend2.Items[18].Text = "A3Zmag";
-            legend2.Items[19].Text = "A3Zphase";
-            legend2.Items[20].Text = "A4Zmag";
-            legend2.Items[21].Text = "A4Zphase";
-            legend2.Items[22].Text = "A4Zmag";
-            legend2.Items[23].Text = "A4Zphase";
-            legend2.Items[24].Text = "A5Zmag";
-            legend2.Items[25].Text = "A5Zphase";
-            legend2.Items[26].Text = "A5Zmag";
-            legend2.Items[27].Text = "A5Zphase";
-            legend2.Items[28].Text = "A6Zmag";
-            legend2.Items[29].Text = "A6Zphase";
-            legend2.Items[30].Text = "A6Zmag";
-            legend2.Items[31].Text = "A6Zphase";
-            legend2.Items[32].Text = "A7Zmag";
-            legend2.Items[33].Text = "A7Zphase";
-            legend2.Items[34].Text = "A7Zmag";
-            legend2.Items[35].Text = "A7Zphase";
-            legend2.Items[36].Text = "A8Zmag";
-            legend2.Items[37].Text = "A8Zphase";
-            legend2.Items[38].Text = "A8Zmag";
-            legend2.Items[39].Text = "A8Zphase";
-            legend2.Items[40].Text = "A9Zmag";
-            legend2.Items[41].Text = "A9Zphase";
-            legend2.Items[42].Text = "A9Zmag";
-            legend2.Items[43].Text = "A9Zphase";
-            legend2.Items[44].Text = "A10Zmag";
-            legend2.Items[45].Text = "A10Zphase";
-            legend2.Items[46].Text = "A10Zmag";
-            legend2.Items[47].Text = "A10Zphase";
-            legend2.Items[48].Text = "A11Zmag";
-            legend2.Items[49].Text = "A11Zphase";
-            legend2.Items[50].Text = "A11Zmag";
-            legend2.Items[51].Text = "A11Zphase";
-            legend2.Items[52].Text = "A12Zmag";
-            legend2.Items[53].Text = "A12Zphase";
-            legend2.Items[54].Text = "A12Zmag";
-            legend2.Items[55].Text = "A12Zphase";
-
-            legend2.Items[0].Visible = true;
-            legend2.Items[1].Visible = true;
-            legend2.Items[2].Visible = false;
-            legend2.Items[3].Visible = false;
-            legend2.Items[4].Visible = false;
-            legend2.Items[5].Visible = false;
-            legend2.Items[6].Visible = true;
-            legend2.Items[7].Visible = true;
-
-            for (int i = 8; i < 56; i++)
-            {
-                legend2.Items[i].Visible = false;
-            }
-
-            GrpPlotCount1 = 2;
-            GrpPlotCount2 = 4;
-        }
-
-        private void InitGraphHFR()
-        {
-
-            TabGrpRaw.Text = "AC waveform";
-            /*
-            if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
-            {
-                TabGrp1.Text = "Zre,Eoc vs t";
-                grp1.YAxes[1].Caption = "Eoc(V)";
-                legend1.Items[1].Text = "Eoc";
-            }
-            else
-            {
-                TabGrp1.Text = "Zre,Vdc vs t";
-                grp1.YAxes[1].Caption = "Vdc(V)";
-                legend1.Items[1].Text = "Vdc";
-            }
-            */
-            TabGrp1.Text = "Zre,Vdc vs t";
-            grp1.YAxes[1].Caption = "Vdc(V)";
-
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("0.#####");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            int nPlot = 1; //0206 0
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[0];
-            grp1.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp1.Plots[nPlot].XAxis = grp1.XAxes[0];
-            grp1.Plots[nPlot].YAxis = grp1.YAxes[1];
-            grp1.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp1.Plots[nPlot].Visible = false;
-
-            grp1.Plots[0].Visible = false; // 0206 6
-
-            grp1.XAxes[0].Caption = "Time";
-            grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            xTimemode0 = true;
-
-            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            grp1.YAxes[0].Caption = "Zre(Ω)";
-            
-            grp1.XAxes[0].Visible = true;
-            grp1.YAxes[0].Visible = true;
-            grp1.YAxes[1].Visible = true;
-            
-            legend1.Items[0].Text = "Zre";
-            legend1.Items[1].Text = "Vdc";
-
-            legend1.Items[7].Text = "A1Zre";
-            legend1.Items[9].Text = "A2Zre";
-            legend1.Items[11].Text = "A3Zre";
-            legend1.Items[13].Text = "A4Zre";
-            legend1.Items[15].Text = "A5Zre";
-            legend1.Items[17].Text = "A6Zre";
-            legend1.Items[19].Text = "A7Zre";
-            legend1.Items[21].Text = "A8Zre";
-            legend1.Items[23].Text = "A9Zre";
-            legend1.Items[25].Text = "A10Zre";
-            legend1.Items[27].Text = "A11Zre";
-            legend1.Items[29].Text = "A12Zre";
-
-            legend1.Items[8].Text = "A1Vdc";
-            legend1.Items[10].Text = "A2Vdc";
-            legend1.Items[12].Text = "A3Vdc";
-            legend1.Items[14].Text = "A4Vdc";
-            legend1.Items[16].Text = "A5Vdc";
-            legend1.Items[18].Text = "A6Vdc";
-            legend1.Items[20].Text = "A7Vdc";
-            legend1.Items[22].Text = "A8Vdc";
-            legend1.Items[24].Text = "A9Vdc";
-            legend1.Items[26].Text = "A10Vdc";
-            legend1.Items[28].Text = "A11Vdc";
-            legend1.Items[30].Text = "A12Vdc";
-
-            legend1.Items[0].Visible = true;
-            legend1.Items[1].Visible = true;
-            legend1.Items[2].Visible = false;
-            legend1.Items[3].Visible = false;
-            legend1.Items[4].Visible = false;
-            legend1.Items[5].Visible = false;
-            legend1.Items[6].Visible = false;
-
-            legend1.Items[8].Visible = false; //
-            legend1.Items[10].Visible = false;
-            legend1.Items[12].Visible = false;
-            legend1.Items[14].Visible = false;
-            legend1.Items[16].Visible = false;
-            legend1.Items[18].Visible = false;
-            legend1.Items[20].Visible = false;
-            legend1.Items[22].Visible = false;
-            legend1.Items[24].Visible = false;
-            legend1.Items[26].Visible = false;
-            legend1.Items[28].Visible = false;
-            legend1.Items[30].Visible = false;
-
-            TabGrp2.Text = "Cs,Cp vs t";
-
-            grp2.XAxes[0].Caption = "Time";
-            grp2.XAxes[0].ScaleType = ScaleType.Linear;
-            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            xTimemode1 = true;
-            grp2.YAxes[0].Caption = "Cs(uF)";
-            grp2.YAxes[1].Caption = "Cp(uF)";
-            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            grp2.XAxes[0].Visible = true;
-            grp2.YAxes[0].Visible = true;
-            grp2.YAxes[1].Visible = true;
-
-            nPlot = 2;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[0];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].XAxis = grp2.XAxes[0];
-            grp2.Plots[nPlot].YAxis = grp2.YAxes[1];
-            grp2.Plots[nPlot].Visible = true;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            nPlot++;
-            grp2.Plots[nPlot].Visible = false;
-
-            grp2.Plots[0].Visible = false; //0206 6
-            grp2.Plots[1].Visible = false; //0206 7
-
-            legend2.Items[0].Text = "Cs";
-            legend2.Items[1].Text = "Cp";
-            legend2.Items[8].Text = "A1Cs";
-            legend2.Items[9].Text = "A1Cp";
-            legend2.Items[12].Text = "A2Cs";
-            legend2.Items[13].Text = "A2Cp";
-            legend2.Items[16].Text = "A3Cs";
-            legend2.Items[17].Text = "A3Cp";
-            legend2.Items[20].Text = "A4Cs";
-            legend2.Items[21].Text = "A4Cp";
-            legend2.Items[24].Text = "A5Cs";
-            legend2.Items[25].Text = "A5Cp";
-            legend2.Items[28].Text = "A6Cs";
-            legend2.Items[29].Text = "A6Cp";
-            legend2.Items[32].Text = "A7Cs";
-            legend2.Items[33].Text = "A7Cp";
-            legend2.Items[36].Text = "A8Cs";
-            legend2.Items[37].Text = "A8Cs";
-            legend2.Items[40].Text = "A9Cs";
-            legend2.Items[41].Text = "A9Cp";
-            legend2.Items[44].Text = "A10Cs";
-            legend2.Items[45].Text = "A10Cp";
-            legend2.Items[48].Text = "A11Cs";
-            legend2.Items[49].Text = "A11Cp";
-            legend2.Items[52].Text = "A12Cp";
-            legend2.Items[53].Text = "A12Cp";
-
-            legend2.Items[0].Visible = true;
-            legend2.Items[1].Visible = true;
-            legend2.Items[2].Visible = false;
-            legend2.Items[3].Visible = false;
-            legend2.Items[4].Visible = false;
-            legend2.Items[5].Visible = false;
-            legend2.Items[6].Visible = false;
-            legend2.Items[7].Visible = false;
-
-            legend2.Items[10].Visible = false; //
-            legend2.Items[11].Visible = false; //
-            legend2.Items[14].Visible = false; //
-            legend2.Items[15].Visible = false; //
-            legend2.Items[18].Visible = false; //
-            legend2.Items[19].Visible = false; //
-            legend2.Items[22].Visible = false; //
-            legend2.Items[23].Visible = false; //
-            legend2.Items[26].Visible = false; //
-            legend2.Items[27].Visible = false; //
-            legend2.Items[30].Visible = false; //
-            legend2.Items[31].Visible = false; //
-            legend2.Items[34].Visible = false; //
-            legend2.Items[35].Visible = false; //
-            legend2.Items[38].Visible = false; //
-            legend2.Items[39].Visible = false; //
-            legend2.Items[42].Visible = false; //
-            legend2.Items[43].Visible = false; //
-            legend2.Items[46].Visible = false; //
-            legend2.Items[47].Visible = false; //
-            legend2.Items[50].Visible = false; //
-            legend2.Items[51].Visible = false; //
-            legend2.Items[54].Visible = false; //
-            legend2.Items[55].Visible = false; //
-
-            // for (int i = 8; i <= 55; i++)
-            //for (int i = 4; i <= 56; i++)
-            //{
-            //    if (legend2.Items.Count > i)
-            //        legend2.Items[i].Visible = false;
-            //}
-
-            GrpPlotCount1 = 2;
-            GrpPlotCount2 = 2;
-        }
-
-        private void InitGraphPRR()
-        {
-            int i;
-            var grp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch];
-
-            grp1.ClearData();
-            grp2.ClearData();
-            TabGrpRaw.Text = "AC waveform";
-
-            if (techprr.rdendfreq != 0.0)
-            {
-                if (techprr.rpcalmode == 0)
-                    TabGrp1.Text = "Rs,P_Rp(Rp end-Rp) vs t";
-                else if (techprr.rpcalmode == 0)
-                    TabGrp1.Text = "Rs,P_Rp(Rp end-Rs) vs t";
-                else TabGrp1.Text = "Rs,P_Rp(Rp-Rs) vs t";
-            }
-            else
-            {
-                TabGrp1.Text = "Rs,P_Rp(Rp-Rs) vs t";
-            }
-            
-            //TabGrp1.Text = "Rs,P_Rp vs t";
-            TabGrp2.Text = "Cs,Cp vs t";
-
-            grp1.XAxes[0].Caption = "Time";
-            grp1.XAxes[0].ScaleType = ScaleType.Linear;
-            grp1.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            xTimemode0 = true;
-
-            grp1.YAxes[0].Caption = "R(Ω)";
-            grp1.XAxes[0].Visible = true;
-            grp1.YAxes[0].Visible = true;
-
-            //grp1.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp1.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-
-            grp1.YAxes[1].Caption = "";
-            grp1.YAxes[1].Visible = false;
-
-            grp2.XAxes[0].Caption = "Time";
-            grp2.XAxes[0].ScaleType = ScaleType.Linear;
-            grp2.XAxes[0].MajorDivisions.LabelFormat = fs_ss;
-            xTimemode1 = true;
-            grp2.YAxes[0].Caption = "Cs(uF)";
-            grp2.YAxes[1].Caption = "Cp(uF)";
-            grp2.XAxes[0].Visible = true;
-            grp2.YAxes[0].Visible = true;
-            grp2.YAxes[1].Visible = true;
-            //grp2.YAxes[0].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            //grp2.YAxes[1].EditRangeNumericFormatMode = NumericFormatMode.CreateGenericMode("G5");
-            int nPlot1 = 1;
-            int nPlot2 = 2;
-            for (i = 0; i < 6; i++)
-            {
-                grp1.Plots[i+nPlot1].XAxis = grp1.XAxes[0];
-                grp2.Plots[i+nPlot2].XAxis = grp2.XAxes[0];
-
-                if(i < 3) 
-                {
-                    grp1.Plots[i+nPlot1].YAxis = grp1.YAxes[0];
-                    grp2.Plots[i+nPlot2].YAxis = grp2.YAxes[0];
-                }
-                else
-                {
-                    grp1.Plots[i+nPlot1].YAxis = grp1.YAxes[1];
-                    grp2.Plots[i+nPlot2].YAxis = grp2.YAxes[1];
-                }
-            }
-            
-            for (i = 0; i < 3; i++)
-            {
-                if(grp.barr[i])
-                {
-                    if(i == 2)
-                    {
-                        grp1.Plots[i + nPlot1].Visible = false;
-                        legend1.Items[i].Visible = false;
-                    }
-                    else
-                    {
-                        grp1.Plots[i + nPlot1].Visible = true;
-                        legend1.Items[i].Visible = true;
-                    }
-                    grp1.Plots[i + 3 + nPlot1].Visible = false;
-                    legend1.Items[i+3].Visible = false;
-
-                    grp2.Plots[i + nPlot2].Visible = true;
-                    grp2.Plots[i+3 + nPlot2].Visible = true;
-
-                    legend2.Items[i].Visible = true;
-                    legend2.Items[i+3].Visible = true;
-
-                    if (i == 0)
-                    {
-                        legend1.Items[i].Text = "Rs";
-                        legend1.Items[i+3].Text = "";
-                        legend2.Items[i].Text = "R1 - Cs"; //"Rs-Cs";
-                        legend2.Items[i+3].Text = "R1 | Cp"; //"Rs-Cp";
-
-                        legend2.Items[8].Text = "A1R1 - Cs";
-                        legend2.Items[10].Text = "A1R1 | Cp";
-                        legend2.Items[12].Text = "A2R1 - Cs";
-                        legend2.Items[14].Text = "A2R1 | Cp";
-                        legend2.Items[16].Text = "A3R1 - Cs";
-                        legend2.Items[18].Text = "A3R1 | Cp";
-                        legend2.Items[20].Text = "A4R1 - Cs";
-                        legend2.Items[22].Text = "A4R1 | Cp";
-                        legend2.Items[24].Text = "A5R1 - Cs";
-                        legend2.Items[26].Text = "A5R1 | Cp";
-                        legend2.Items[28].Text = "A6R1 - Cs";
-                        legend2.Items[30].Text = "A6R1 | Cp";
-                        legend2.Items[32].Text = "A7R1 - Cs";
-                        legend2.Items[34].Text = "A7R1 | Cp";
-                        legend2.Items[36].Text = "A8R1 - Cs";
-                        legend2.Items[38].Text = "A8R1 | Cp";
-                        legend2.Items[40].Text = "A9R1 - Cs";
-                        legend2.Items[42].Text = "A9R1 | Cp";
-                        legend2.Items[44].Text = "A10R1 - Cs";
-                        legend2.Items[46].Text = "A10R1 | Cp";
-                        legend2.Items[48].Text = "A11R1 - Cs";
-                        legend2.Items[50].Text = "A11R1 | Cp";
-                        legend2.Items[52].Text = "A12R1 - Cs";
-                        legend2.Items[54].Text = "A12R1 | Cp";
-
-                        legend1.Items[7].Text = "A1Rs";
-                        legend1.Items[9].Text = "A2Rs";
-                        legend1.Items[11].Text = "A3Rs";
-                        legend1.Items[13].Text = "A4Rs";
-                        legend1.Items[15].Text = "A5Rs";
-                        legend1.Items[17].Text = "A6Rs";
-                        legend1.Items[19].Text = "A7Rs";
-                        legend1.Items[21].Text = "A8Rs";
-                        legend1.Items[23].Text = "A9Rs";
-                        legend1.Items[25].Text = "A10Rs";
-                        legend1.Items[27].Text = "A11Rs";
-                        legend1.Items[29].Text = "A12Rs";
-                    }
-                    else if (i == 1)
-                    {
-                        legend1.Items[i].Text = "P_Rp";
-                        //legend1.Items[i + 3].Text = "";
-                        legend2.Items[i].Text = "R2 - Cs"; //"Rp-Cs";
-                        legend2.Items[i + 3].Text = "R2 | Cp"; //"Rp-Cp";
-
-                        legend2.Items[9].Text = "A1R2 - Cs";
-                        legend2.Items[11].Text = "A1R2 | Cp";
-                        legend2.Items[13].Text = "A2R2 - Cs";
-                        legend2.Items[15].Text = "A2R2 | Cp";
-                        legend2.Items[17].Text = "A3R2 - Cs";
-                        legend2.Items[19].Text = "A3R2 | Cp";
-                        legend2.Items[21].Text = "A4R2 - Cs";
-                        legend2.Items[23].Text = "A4R2 | Cp";
-                        legend2.Items[25].Text = "A5R2 - Cs";
-                        legend2.Items[27].Text = "A5R2 | Cp";
-                        legend2.Items[29].Text = "A6R2 - Cs";
-                        legend2.Items[31].Text = "A6R2 | Cp";
-                        legend2.Items[33].Text = "A7R2 - Cs";
-                        legend2.Items[35].Text = "A7R2 | Cp";
-                        legend2.Items[37].Text = "A8R2 - Cs";
-                        legend2.Items[39].Text = "A8R2 | Cp";
-                        legend2.Items[41].Text = "A9R2 - Cs";
-                        legend2.Items[43].Text = "A9R2 | Cp";
-                        legend2.Items[45].Text = "A10R2 - Cs";
-                        legend2.Items[47].Text = "A10R2 | Cp";
-                        legend2.Items[49].Text = "A11R2 - Cs";
-                        legend2.Items[51].Text = "A11R2 | Cp";
-                        legend2.Items[53].Text = "A12R2 - Cs";
-                        legend2.Items[55].Text = "A12R2 | Cp";
-
-                        legend1.Items[8].Text = "A1P_Rp";
-                        legend1.Items[10].Text = "A2P_Rp";
-                        legend1.Items[12].Text = "A3P_Rp";
-                        legend1.Items[14].Text = "A4P_Rp";
-                        legend1.Items[16].Text = "A5P_Rp";
-                        legend1.Items[18].Text = "A6P_Rp";
-                        legend1.Items[20].Text = "A7P_Rp";
-                        legend1.Items[22].Text = "A8P_Rp";
-                        legend1.Items[24].Text = "A9P_Rp";
-                        legend1.Items[26].Text = "A10P_Rp";
-                        legend1.Items[28].Text = "A11P_Rp";
-                        legend1.Items[30].Text = "A12P_Rp";
-                    }
-                    else
-                    {
-                        legend1.Items[i].Text = "";
-                        legend1.Items[i + 3].Text = "";
-                        legend2.Items[i].Text = "R3 - Cs"; //"Rpe-Cs";
-                        legend2.Items[i + 3].Text = "R3 | Cp"; //"Rpe-Cp";
-                    }
-                }
-                else
-                {
-                    grp1.Plots[i + nPlot1].Visible = false;
-                    grp1.Plots[i+3 + nPlot1].Visible = false;
-                    legend1.Items[i].Visible = false;
-                    legend1.Items[i+3].Visible = false;
-
-                    grp2.Plots[i + nPlot2].Visible = false;
-                    grp2.Plots[i+3 + nPlot2].Visible = false;
-                    legend2.Items[i].Visible = false;
-                    legend2.Items[i+3].Visible = false;
-                }
-            }
-            legend1.Items[6].Visible = false;
-            legend2.Items[6].Visible = false;
-            legend2.Items[7].Visible = false;
-            grp1.Plots[0].Visible = false;  //0206 6
-            grp2.Plots[0].Visible = false;  //0206 6
-            grp2.Plots[1].Visible = false;  // 0206 7
-
-            GrpPlotCount1 = 2; // grp.arrcnt * 2;
-            GrpPlotCount2 = grp.arrcnt * 2;
-        }
-
-        #endregion Grpinit
 
         #region GrpRefresh
                 

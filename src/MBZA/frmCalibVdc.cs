@@ -54,8 +54,9 @@ namespace ZiveLab.ZM
             {
                 bAuxCh = true;
                 nAuxCh = (sifch - 1) * 4 + rng;
-                this.Text = string.Format("Calibration DC voltage[AUXCH({2}-{3}):{0}] :: [{1}-{2}(SUBCH-{3})].", SM_Number.ToRangeString(p.mZimCfg[sifch].ranges.Aux.vdc_rng[rng].realmax, "V"), ch + 1, Serial, sifch + 1, rng + 1);
+                this.Text = string.Format("Calibration DC voltage[AUXCH({2}-{3}):{0}].", SM_Number.ToRangeString(p.mZimCfg[sifch].ranges.Aux.vdc_rng[rng].realmax, "V"));
                 sTitle = string.Format("AUXBD{0}CH{1}_VDC", sifch,rng + 1);
+
                 InitView();
                 return;
             }
@@ -527,7 +528,7 @@ namespace ZiveLab.ZM
 
             p.ctrl_do.data &= 0xFFEE; // LOAD Off
 
-            if (rng == 0) p.ctrl_do.data |= DeviceConstants.DEVDO_VDC_RNG0;
+            if (rng == 1) p.ctrl_do.data |= DeviceConstants.DEVDO_VDC_RNG0;
             if(bload == true) p.ctrl_do.data |= DeviceConstants.DEVDO_CONT_SD;
 
             gBZA.SifLnkLst[Serial].MBZAIF.mdevice[sifch].ctrl_do.data = p.ctrl_do.data;

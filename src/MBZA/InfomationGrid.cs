@@ -1384,21 +1384,6 @@ namespace ZiveLab.ZM
                         toolStrip.Items.Add(item);
                     }
 
-                    if (index == 1 || index == 2 )
-                    { 
-                        item = new ToolStripMenuItem();
-                        item.Name = "BtStartCalib";
-                        item.Image =ZM.Properties.Resources.object41.ToBitmap();
-                        item.Click += new EventHandler(BtStartCalib_Click);
-                        item.ToolTipText = "Calibration this item.";
-                        item.AutoToolTip = true;
-                        item.Alignment = ToolStripItemAlignment.Left;
-                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
-                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
-                        item.ImageTransparentColor = Color.Fuchsia;
-                        toolStrip.Items.Add(item);
-                    }
-
                     if (index == 10)
                     {
                         item = new ToolStripMenuItem();
@@ -1442,6 +1427,7 @@ namespace ZiveLab.ZM
                         item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);
+
                         /*
                         item = new ToolStripMenuItem();
                         item.Name = "BtTestZim";
@@ -1455,7 +1441,45 @@ namespace ZiveLab.ZM
                         item.ImageTransparentColor = Color.Fuchsia;
                         toolStrip.Items.Add(item);*/
                     }
-                    
+                    if (index == 1 || index == 2 || index == 3 || index == 4)
+                    {
+                        item = new ToolStripMenuItem();
+                        item.Name = "BtStartCalib";
+                        item.Image = ZM.Properties.Resources.object41.ToBitmap();
+                        item.Click += new EventHandler(BtStartCalib_Click);
+
+                        if (index == 3 || index == 4)
+                        {
+                            item.ToolTipText = "Support for EIS calibration of channels.";
+                        }
+                        else item.ToolTipText = "Calibration this item.";
+                        item.AutoToolTip = true;
+                        item.Alignment = ToolStripItemAlignment.Left;
+                        item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                        item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                        item.ImageTransparentColor = Color.Fuchsia;
+                        toolStrip.Items.Add(item);
+                    }
+
+
+                    if (index == 3 || index == 4)
+                    {
+                        if (sName == "4/" || sName == "5/" || sName == "6/")
+                        {
+                            item = new ToolStripMenuItem();
+                            item.Name = "BtAuxVdcStartCalib";
+                            item.Image = ZM.Properties.Resources.Tester.ToBitmap();
+                            item.Click += new EventHandler(BtAuxVdcStartCalib_Click);
+                            item.ToolTipText = "Support for DC voltage calibration of auxiliary board channels.";
+                            item.AutoToolTip = true;
+                            item.Alignment = ToolStripItemAlignment.Left;
+                            item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+                            item.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+                            item.ImageTransparentColor = Color.Fuchsia;
+                            toolStrip.Items.Add(item);
+                        }
+                    }
+
                     toolStrip.ResumeLayout();
                     break;
                 }
@@ -2043,6 +2067,66 @@ namespace ZiveLab.ZM
             return false;
         }
 
+
+
+
+        void BtAuxVdcStartCalib_Click(object sender, EventArgs e)
+        {
+            if (this.SelectNode == null)
+            {
+                MessageBox.Show("There are no items selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (GetChRun((enTestState)gBZA.SifLnkLst[Serial].MBZAIF.mChStatInf[sifch].TestStatus))
+            {
+                MessageBox.Show("Calibration cannot proceed because the current channel is in use.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int[] nodeval;
+            int item;
+
+            var p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            nodeval = NodeToInteger(this.SelectNode);
+
+            if (nodeval == null)
+            {
+                MessageBox.Show("This feature is not supported.");
+                return;
+            }
+            item = nodeval[0] - 1;
+            
+            int nAuxBd = 0;
+
+            if (gBZA.IsMCBZA(Serial))
+            {
+                if (item == 4 || item == 5 || item == 6)
+                {
+                    nAuxBd = item - 3;
+                    if (MBZA_MapUtil.SetCalibMode(Serial, 0, true) == false)
+                    {
+                        string str = string.Format("Failed to set calibration mode for secondary board {1}.", nAuxBd);
+                        MessageBox.Show(str, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    FrmCalibAuxsVdc frm = new FrmCalibAuxsVdc(Serial);
+                    frm.ShowDialog();
+                    RefreshTreeViewStat();
+                    RefreshPropertyGrid(this.SelectNode);
+
+                    if (MBZA_MapUtil.SetCalibMode(Serial, 0, false) == false)
+                    {
+                        string str = string.Format("Failed to set calibration mode for secondary board {1}.", nAuxBd);
+                        MessageBox.Show(str, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    return;
+                }
+            }
+            MessageBox.Show("This feature is not supported.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         void BtStartCalib_Click(object sender, EventArgs e)
         {
             if (this.SelectNode == null)
@@ -2073,7 +2157,7 @@ namespace ZiveLab.ZM
             if (item == 3)
             {
                 item = nodeval[1] - 1;
-                if (item == 0)
+                if (item <= 0)
                 {
                     item = (nodeval[2] - 1) * 2;
                     if (nodeval[3] == 1)
@@ -2083,6 +2167,7 @@ namespace ZiveLab.ZM
                             item++;
                         }
                     }
+
                     frmCalibration frm = new frmCalibration(selch, Serial, sifch, item);
                     frm.ShowDialog();
                     RefreshTreeViewStat();
@@ -2109,7 +2194,7 @@ namespace ZiveLab.ZM
                     {
                         if (MBZA_MapUtil.SetCalibMode(Serial, sifch, true) == false)
                         {
-                            MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Failed to set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         frmCalibVdc frm = new frmCalibVdc(selch, Serial, sifch, item);
@@ -2118,7 +2203,7 @@ namespace ZiveLab.ZM
                         RefreshPropertyGrid(this.SelectNode);
                         if (MBZA_MapUtil.SetCalibMode(Serial, sifch, false) == false)
                         {
-                            MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Failed to release calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     return;
@@ -2127,7 +2212,7 @@ namespace ZiveLab.ZM
                 {
                     if (MBZA_MapUtil.SetCalibMode(Serial, sifch, true) == false)
                     {
-                        MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Failed to set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     frmCalibRtd frm = new frmCalibRtd(selch, Serial, sifch);
@@ -2136,7 +2221,7 @@ namespace ZiveLab.ZM
                     RefreshPropertyGrid(this.SelectNode);
                     if (MBZA_MapUtil.SetCalibMode(Serial, sifch, false) == false)
                     {
-                        MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Failed to release calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     return;
                 }
@@ -2152,13 +2237,13 @@ namespace ZiveLab.ZM
                 int iRng = 0;
                 if (gBZA.IsMCBZA(Serial))
                 {
-                    if (item == 4 || item == 5 || nodeval[0] == 6)
+                    if (item == 4 || item == 5 || item == 6)
                     {
                         nAuxBd = item - 3;
                         if (p.EnaZIM[nAuxBd] == 1 && p.ChkZIM[nAuxBd] == 1)
                         {
                             nAuxBdCh = nodeval[1] - 1;
-                            if (nodeval[2] == 1)
+                            if (nodeval[1] == 0 || nodeval[2] == 0 || nodeval[2] == 1)
                             {
                                 iRng = (nodeval[3] - 1) * 2;
                                 if (nodeval[4] == 2)
@@ -2179,77 +2264,31 @@ namespace ZiveLab.ZM
                             else if (nodeval[2] == 3)
                             {
 
-                                if (MBZA_MapUtil.SetCalibMode(Serial, 0, true) == false)
+                                nAuxBdCh = nodeval[1] - 1;
+                                if (MBZA_MapUtil.SetCalibMode(Serial, nAuxBd, true) == false)
                                 {
-                                    MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Failed to set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     return;
                                 }
+
                                 frmCalibVdc frm = new frmCalibVdc(selch, Serial, nAuxBd, nAuxBdCh);
+
                                 frm.ShowDialog();
                                 RefreshTreeViewStat();
                                 RefreshPropertyGrid(this.SelectNode);
-                                if (MBZA_MapUtil.SetCalibMode(Serial, 0, false) == false)
+                                if (MBZA_MapUtil.SetCalibMode(Serial, nAuxBd, false) == false)
                                 {
-                                    MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Failed to release calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
                         }
                     }
-
                 }
             }
             MessageBox.Show("This feature is not supported.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
-        void AuxBtStartCalib_Click(object sender, EventArgs e)
-        {
-            TreeNode selectedNode = treeView1.SelectedNode;
-            if (selectedNode == null)
-            {
-                MessageBox.Show("No node selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (selectedNode.Text != "X1" && selectedNode.Text != "X0.2")
-            {
-                MessageBox.Show("Please select X1 or X0.2 node.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (selectedNode.Parent == null ||
-                selectedNode.Parent.Parent == null ||
-                selectedNode.Parent.Parent.Parent == null ||
-                selectedNode.Parent.Parent.Parent.Text != "Aux_Iac")
-            {
-                MessageBox.Show("Invalid AUX calibration structure.", gBZA.sMsgTitle,
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            TreeNode rangeNode = selectedNode.Parent.Parent; // 2A, 200mA, 20mA, 2mA
-            TreeNode auxNode = rangeNode.Parent.Parent;
-
-            int item = -1;
-            switch (rangeNode.Text)
-            {
-                case "2A": item = (selectedNode.Text == "X1") ? 0 : 1; break;
-                case "200mA": item = (selectedNode.Text == "X1") ? 2 : 3; break;
-                case "20mA": item = (selectedNode.Text == "X1") ? 4 : 5; break;
-                case "2mA": item = (selectedNode.Text == "X1") ? 6 : 7; break;
-            }
-
-            if (item < 0)
-            {
-                MessageBox.Show("Cannot determine calibration range.", gBZA.sMsgTitle,
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            frmCalibration frm = new frmCalibration(selch, Serial, sifch, item);
-            frm.ShowDialog();
-        }
-
-
+        
         void BtLocalApply_Click(object sender, EventArgs e)
         {
             int[] nodeval;
@@ -2791,32 +2830,32 @@ namespace ZiveLab.ZM
                         for (j = 0; j < nlist; j++)
                         {
                             sItem = string.Format("Target{0}", j + 1);
-                            xShtItem.Cells[j + 14, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            xShtItem.Cells[j + 13, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
                             sItem = string.Format("Real{0}", j + 1);
-                            xShtItem.Cells[j + 14, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            xShtItem.Cells[j + 13, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
                         }
                         dGain = gBZA.GetIniDoubleData(sTitle, "Gain", sFilename1, 0.0);
                         dOffset = gBZA.GetIniDoubleData(sTitle, "Offset", sFilename1, 0.0);
-                        xShtItem.Cells[18, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
+                        xShtItem.Cells[17, 1] = string.Format("with PT100 sensor(Gain:{0:0.0#####}, Offset:{1:0.0#####}).", dGain, dOffset);
 
                         sTitle = "IDC";
                         nlist = 8;
                         for (j = 0; j < nlist; j++)
                         {
                             sItem = string.Format("Range{0}_Offset", j + 1);
-                            xShtItem.Cells[j + 20, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
+                            xShtItem.Cells[j + 19, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
                             sItem = string.Format("Range{0}_Read", j + 1);
-                            xShtItem.Cells[j + 20, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
+                            xShtItem.Cells[j + 19, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0) * 1000;
                         }
 
                         for (j = 0; j < 4; j++)
                         {
                             sTitle = string.Format("EIS{0}", j + 1);
-                            xShtItem.Cells[j + 30, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
-                            xShtItem.Cells[j + 30, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
-                            xShtItem.Cells[j + 30, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
-                            xShtItem.Cells[j + 30, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
-                            xShtItem.Cells[j + 30, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
+                            xShtItem.Cells[j + 29, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
+                            xShtItem.Cells[j + 29, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
+                            xShtItem.Cells[j + 29, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
+                            xShtItem.Cells[j + 29, 4] = gBZA.GetIniDoubleData(sTitle, "Zmag", sFilename1, 0.0);
+                            xShtItem.Cells[j + 29, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
                         }
                     }
                     else
@@ -2826,11 +2865,11 @@ namespace ZiveLab.ZM
                         {
                             sTitle = string.Format("AUXBD{0}CH{1}_VDC", i, j + 1);
                             nlist = Math.Min(gBZA.GetIniIntData(sTitle, "Count", sFilename1, 4), 4);
-                            for (j = 0; j < nlist; j++)
+                            for (k = 0; k < nlist; k++)
                             {
-                                sItem = string.Format("Target{0}", j + 1);
+                                sItem = string.Format("Target{0}", k + 1);
                                 xShtItem.Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
-                                sItem = string.Format("Real{0}", j + 1);
+                                sItem = string.Format("Real{0}", k + 1);
                                 xShtItem.Cells[l, 4] = gBZA.GetIniDoubleData(sTitle, sItem, sFilename1, 0.0);
                                 l++;
                             }
@@ -2846,7 +2885,7 @@ namespace ZiveLab.ZM
                         {
                             for (k = 0; k < 4; k++)
                             {
-                                sTitle = string.Format("AUXBD{0}CH{1}_EIS", i, j + 1,k+1);
+                                sTitle = string.Format("AUXBD{0}CH{1}_EIS{2}", i, j + 1,k+1);
                                 xShtItem.Cells[l, 1] = gBZA.GetIniDoubleData(sTitle, "Range", sFilename1, 0.0) * 1000;
                                 xShtItem.Cells[l, 2] = gBZA.GetIniDoubleData(sTitle, "DummyR", sFilename1, 0.0);
                                 xShtItem.Cells[l, 3] = gBZA.GetIniDoubleData(sTitle, "Frequency", sFilename1, 0.0);
@@ -2854,6 +2893,7 @@ namespace ZiveLab.ZM
                                 xShtItem.Cells[l, 5] = gBZA.GetIniDoubleData(sTitle, "Zphase", sFilename1, 0.0);
                                 l++;
                             }
+                            l++;
                         }
                     }
                 }
