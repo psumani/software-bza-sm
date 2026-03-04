@@ -121,8 +121,18 @@
     <value>[ 축 ]</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="group_DataCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 100</value>
+  </data>
+  <data name="group_DataCondition.Text" xml:space="preserve">
+    <value>[ 데이터 필터 ]</value>
+  </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>110, 100</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label8.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>110, 75</value>
@@ -138,6 +148,9 @@
   </data>
   <data name="text_StepNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 95</value>
+  </data>
+  <data name="text_StepNumber.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="text_FileNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 45</value>
@@ -157,6 +170,9 @@
   <data name="checkboxStepNo.Text" xml:space="preserve">
     <value>단계 번호</value>
   </data>
+  <data name="checkboxStepNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
   </data>
@@ -172,11 +188,8 @@
   <data name="combo_item.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 21</value>
   </data>
-  <data name="group_DataCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 125</value>
-  </data>
-  <data name="group_DataCondition.Text" xml:space="preserve">
-    <value>[ 데이터 필터 ]</value>
+  <data name="check_StepNumber.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>취소</value>

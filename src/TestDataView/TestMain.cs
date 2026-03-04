@@ -42,7 +42,7 @@ namespace TestDataView
         {
             DataEditorForm deForm = new DataEditorForm();
             deForm.MsgBoxCaption = this.Text;
-            deForm.UnitC = false;
+            //deForm.UnitC = false;
             //deForm.IVManPath = GetIVManPath();
             //deForm.GraphSetEx = gBZA.mGraphSetEx;
             //deForm.EnAlwaysOpenPath = false;

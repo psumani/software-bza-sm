@@ -54,6 +54,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
             this.Memu_RstWinPos = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
@@ -91,8 +92,8 @@
             this.toolStripbtTech = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtGraph = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtReport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtRealMon = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
@@ -200,7 +201,8 @@
             this.toolStripSeparator23,
             this.toolStripMenuItem2,
             this.toolStripSeparator26,
-            this.Memu_RstWinPos});
+            this.Memu_RstWinPos,
+            this.optionToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -304,6 +306,14 @@
             this.Memu_RstWinPos.Size = new System.Drawing.Size(347, 22);
             this.Memu_RstWinPos.Text = "Reset window position";
             this.Memu_RstWinPos.Click += new System.EventHandler(this.Memu_RstWinPos_Click);
+            // 
+            // optionToolStripMenuItem
+            // 
+            this.optionToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.SettingsFile;
+            this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
+            this.optionToolStripMenuItem.Text = "Option";
+            this.optionToolStripMenuItem.Click += new System.EventHandler(this.optionToolStripMenuItem_Click);
             // 
             // windowsToolStripMenuItem
             // 
@@ -529,8 +539,8 @@
             this.toolStripSeparator25,
             this.toolStripbtTech,
             this.toolStripSeparator16,
-            this.toolStripBtReport,
             this.toolStripBtGraph,
+            this.toolStripBtReport,
             this.toolStripSeparator17,
             this.toolStripSeparator18,
             this.toolStripBtRealMon,
@@ -615,11 +625,6 @@
             this.toolStripBtGraph.ToolTipText = "Open the test result file as a graph to see the information.";
             this.toolStripBtGraph.Click += new System.EventHandler(this.toolStripBtGraph_Click);
             // 
-            // toolStripSeparator17
-            // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripBtReport
             // 
             this.toolStripBtReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -629,6 +634,11 @@
             this.toolStripBtReport.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtReport.ToolTipText = "Open the test results file as a report to view the information.";
             this.toolStripBtReport.Click += new System.EventHandler(this.toolStripBtReport_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripSeparator18
             // 
@@ -759,5 +769,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripMenuItem Memu_RstWinPos;
         private System.Windows.Forms.ToolStripMenuItem MenuconvPrrDataToTextFile;
+        private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;
     }
 }

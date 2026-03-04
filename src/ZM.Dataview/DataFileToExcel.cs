@@ -27,6 +27,17 @@ namespace ZiveLab.ZM.Dataview
 
         private List<UnitToExcelDataInfor> _unitDataInforList;
         
+        public DataFileToExcel(DataConvSet dataConvSet, DataHeaderValues _dhv, List<object> dataList, int MaxAuxCount)
+        {
+            tDataConvSet = dataConvSet;
+            _DataHeaderValues = _dhv;
+
+            _dataList = dataList;
+
+            CreateInforArray();
+            DataGenerate(MaxAuxCount);
+        }
+
         public DataFileToExcel(DataConvSet dataConvSet, DataHeaderValues _dhv, List<object> dataList)
         {
             tDataConvSet = dataConvSet;
@@ -42,9 +53,214 @@ namespace ZiveLab.ZM.Dataview
         {
             tDataConvSet = dataConvSet;
             _unitDataInforList = udiList;
-
             //CreateInforArray();
             //DataGenerate();
+        }
+
+        private void DataGenerate(int MaxAuxCount)
+        {
+            int row = 0;
+            int colbase = 0;
+            int zidx = 0;
+            int itype = 0;
+            int auxidx = 0;
+            int bd = 0;
+            int bdch = 0;
+
+            _enColItemList = new List<DataColItem>();
+            for (int i = 0; i < tDataConvSet.DataColList.Count; i++)
+            {
+                if (i >= 10 && i <= 21)
+                {
+                    auxidx = i - 10;
+                    if (auxidx >= MaxAuxCount) continue;
+                }
+                else
+                {
+                    if (i >= 25 && i <= 48)
+                    {
+                        auxidx = i - 25;
+                        auxidx = auxidx / 2;
+                        if (auxidx >= MaxAuxCount) continue;
+
+                    }
+                }
+                if (tDataConvSet.DataColList[i].Enable == false) continue;
+
+                _enColItemList.Add(tDataConvSet.DataColList[i]);
+            }
+
+            //_enColItemList = tDataConvSet.DataColList.Where(x => x.Enable == true).ToList();
+
+            List<UnitReportData> urgdList = _dataList.Select(x => (UnitReportData)x).ToList();
+            Dictionary<int, List<UnitReportData>> urgdListDict = GetByCycle(urgdList);
+
+            _cycleCount = urgdListDict.Count;
+
+            if (tDataConvSet.CycleColumnArrange)
+            {
+                int maxrow = CoCollection.GetMaxListCount<UnitReportData>(urgdListDict);  //리스트의 크기가 가장 큰 값을 찾음.
+
+                _rowcolData = new string[maxrow, _enColItemList.Count * urgdListDict.Count];
+            }
+            else
+            {
+                _rowcolData = new string[urgdList.Count, _enColItemList.Count];
+            }
+
+            
+
+            foreach (List<UnitReportData> urgdlistbyCycle in urgdListDict.Values)
+            {
+                foreach (UnitReportData urgd in urgdlistbyCycle)
+                {
+                    int col = colbase * _enColItemList.Count;
+
+                    foreach (DataColItem dci in tDataConvSet.DataColList)
+                    {
+                        if (dci.Enable)
+                        {
+                            switch (dci.ColumnID)
+                            {
+                                case DataColItem.eColumnId.INDEX:
+                                    _rowcolData[row, col++] = (row + 1).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.TESTTIME:
+                                    _rowcolData[row, col++] = ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TestTime), tDataConvSet.TimeFormat);
+                                    break;
+
+                                case DataColItem.eColumnId.CYCNO:
+                                    _rowcolData[row, col++] = (urgd.mRawData.nCycle + 1).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.CYCTIME:
+                                    _rowcolData[row, col++] = ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), tDataConvSet.TimeFormat);
+                                    break;
+
+                                case DataColItem.eColumnId.AMPS:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.Idc, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.VOLT:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.Vdc, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.POWER:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.Power, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.LOAD:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.Load, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.CAPACITY:
+                                    double chgq = tDataConvSet.UnitC ? urgd.Capacity * 3600 : urgd.Capacity;
+                                    _rowcolData[row, col++] = CoMath.UnitConv(chgq, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.ENERGY:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.Energy, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.TEMP:
+                                    _rowcolData[row, col++] = urgd.mRawData.Temperature.ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.AUX1:
+                                case DataColItem.eColumnId.AUX2:
+                                case DataColItem.eColumnId.AUX3:
+                                case DataColItem.eColumnId.AUX4:
+                                case DataColItem.eColumnId.AUX5:
+                                case DataColItem.eColumnId.AUX6:
+                                case DataColItem.eColumnId.AUX7:
+                                case DataColItem.eColumnId.AUX8:
+                                case DataColItem.eColumnId.AUX9:
+                                case DataColItem.eColumnId.AUX10:
+                                case DataColItem.eColumnId.AUX11:
+                                case DataColItem.eColumnId.AUX12:
+                                    auxidx = dci.ColumnID - DataColItem.eColumnId.AUX1;
+                                    if (auxidx >= MaxAuxCount) continue;
+                                    bd = auxidx / 4;
+                                    bdch = auxidx % 4;
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Vdc, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.EOC:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.Veoc, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.IRNG:
+                                    _rowcolData[row, col++] = urgd.Range;
+                                    break;
+
+                                case DataColItem.eColumnId.FREQ:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.fFreq, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.ZRE:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.real, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.ZIM:
+                                    _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.img, dci.SIUnit).ToString();
+                                    break;
+
+                                case DataColItem.eColumnId.AUX01_ZRE:
+                                case DataColItem.eColumnId.AUX01_ZIM:
+                                case DataColItem.eColumnId.AUX02_ZRE:
+                                case DataColItem.eColumnId.AUX02_ZIM:
+                                case DataColItem.eColumnId.AUX03_ZRE:
+                                case DataColItem.eColumnId.AUX03_ZIM:
+                                case DataColItem.eColumnId.AUX04_ZRE:
+                                case DataColItem.eColumnId.AUX04_ZIM:
+                                case DataColItem.eColumnId.AUX05_ZRE:
+                                case DataColItem.eColumnId.AUX05_ZIM:
+                                case DataColItem.eColumnId.AUX06_ZRE:
+                                case DataColItem.eColumnId.AUX06_ZIM:
+                                case DataColItem.eColumnId.AUX07_ZRE:
+                                case DataColItem.eColumnId.AUX07_ZIM:
+                                case DataColItem.eColumnId.AUX08_ZRE:
+                                case DataColItem.eColumnId.AUX08_ZIM:
+                                case DataColItem.eColumnId.AUX09_ZRE:
+                                case DataColItem.eColumnId.AUX09_ZIM:
+                                case DataColItem.eColumnId.AUX10_ZRE:
+                                case DataColItem.eColumnId.AUX10_ZIM:
+                                case DataColItem.eColumnId.AUX11_ZRE:
+                                case DataColItem.eColumnId.AUX11_ZIM:
+                                case DataColItem.eColumnId.AUX12_ZRE:
+                                case DataColItem.eColumnId.AUX12_ZIM:
+                                    zidx = dci.ColumnID - DataColItem.eColumnId.AUX01_ZRE;
+                                    itype = zidx % 2;
+                                    auxidx = zidx / 2;
+                                    if (auxidx >= MaxAuxCount) continue;
+                                    bd = auxidx / 4;
+                                    bdch = auxidx % 4;
+
+                                    if (zidx == 0)
+                                    {
+                                        _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit).ToString();
+                                    }
+                                    else
+                                    {
+                                        _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Zim, dci.SIUnit).ToString();
+                                    }
+
+                                    break;
+                            }
+                        }
+                    }
+
+                    row++;
+                }
+
+                if (tDataConvSet.CycleColumnArrange)
+                {
+                    row = 0;
+                    colbase++;
+                }
+            }
+
         }
 
         private void DataGenerate()
@@ -102,14 +318,6 @@ namespace ZiveLab.ZM.Dataview
 
                                 case DataColItem.eColumnId.CYCTIME:
                                     _rowcolData[row, col++] = ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), tDataConvSet.TimeFormat);
-                                    break;
-
-                                case DataColItem.eColumnId.STEPNO:
-                                    _rowcolData[row, col++] = (urgd.mRawData.nTaskNo + 1).ToString();
-                                    break;
-
-                                case DataColItem.eColumnId.STEPTIME:
-                                    _rowcolData[row, col++] = ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TaskTime), tDataConvSet.TimeFormat);
                                     break;
 
                                 case DataColItem.eColumnId.AMPS:
@@ -289,7 +497,7 @@ namespace ZiveLab.ZM.Dataview
                 {
                     if (_DataHeaderValues._ResHead.systemInfo.ChkZIM[i] == 1)
                     {
-                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}/ SIF(v{1}):{3}-{4}", _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
+                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}", _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
                     }
                 }
             }
@@ -918,7 +1126,7 @@ namespace ZiveLab.ZM.Dataview
                 {
                     if (_ResHead.systemInfo.ChkZIM[i] == 1)
                     {
-                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}/ SIF(v{1}):{3}-{4}", _ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), _ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
+                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}", _ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), _ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
                     }
                 }
             }
@@ -950,11 +1158,54 @@ namespace ZiveLab.ZM.Dataview
 
             return urgdListDict;
         }
-        
+        public int GetAuxCount(stResHeader _ResHead)
+        {
+            int cnt = 0;
+            if ((eDeviceType)_ResHead.systemInfo.mSIFCfg.Type == eDeviceType.MCBZA)
+            {
+                cnt = (_ResHead.systemInfo.ChkZIM[1] == 0) ? cnt : 4;
+                cnt = (_ResHead.systemInfo.ChkZIM[2] == 0) ? cnt : 8;
+                cnt = (_ResHead.systemInfo.ChkZIM[3] == 0) ? cnt : 12;
+
+            }
+            return cnt;
+        }
+
         public void GenerateData(DataConvSet dataConvSet)
         {
+            int MaxAuxCount = GetAuxCount(_ResHead);
+            int row = 0;
+            int colbase = 0;
+            int zidx = 0;
+            int itype = 0;
+            int auxidx = 0;
+            int bd = 0;
+            int bdch = 0;
+            EnColItemList = new List<DataColItem>();
 
-            EnColItemList = dataConvSet.DataColList.Where(x => x.Enable == true).ToList();
+            for (int i = 0; i < dataConvSet.DataColList.Count; i++)
+            {
+                if (i >= 10 && i <= 21)
+                {
+                    auxidx = i - 10;
+                    if (auxidx >= MaxAuxCount) continue;
+                }
+                else
+                {
+                    if (i >= 25 && i <= 48)
+                    {
+                        auxidx = i - 25;
+                        auxidx = auxidx / 2;
+                        if (auxidx >= MaxAuxCount) continue;
+
+                    }
+                }
+                if (dataConvSet.DataColList[i].Enable == false) continue;
+
+                EnColItemList.Add(dataConvSet.DataColList[i]);
+            }
+
+            //EnColItemList = dataConvSet.DataColList.Where(x => x.Enable == true).ToList();
             List<UnitReportData> urgdList = DataList.Select(x => (UnitReportData)x).ToList();
             Dictionary<int, List<UnitReportData>> urgdListDict = GetByCycle(urgdList);
 
@@ -971,13 +1222,7 @@ namespace ZiveLab.ZM.Dataview
                 RowcolData = new string[urgdList.Count, EnColItemList.Count];
             }
 
-            int row = 0;
-            int colbase = 0;
-            int zidx = 0;
-            int itype = 0;
-            int auxidx = 0;
-            int bd = 0;
-            int bdch = 0;
+            
 
             foreach (List<UnitReportData> urgdlistbyCycle in urgdListDict.Values)
             {
@@ -1005,14 +1250,6 @@ namespace ZiveLab.ZM.Dataview
 
                                 case DataColItem.eColumnId.CYCTIME:
                                     RowcolData[row, col++] = ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), dataConvSet.TimeFormat);
-                                    break;
-
-                                case DataColItem.eColumnId.STEPNO:
-                                    RowcolData[row, col++] = (urgd.mRawData.nTaskNo + 1).ToString();
-                                    break;
-
-                                case DataColItem.eColumnId.STEPTIME:
-                                    RowcolData[row, col++] = ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TaskTime), dataConvSet.TimeFormat);
                                     break;
 
                                 case DataColItem.eColumnId.AMPS:
@@ -1057,6 +1294,7 @@ namespace ZiveLab.ZM.Dataview
                                 case DataColItem.eColumnId.AUX11:
                                 case DataColItem.eColumnId.AUX12:
                                     auxidx = dci.ColumnID - DataColItem.eColumnId.AUX1;
+                                    if (auxidx >= MaxAuxCount) continue;
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
                                     RowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Vdc, dci.SIUnit).ToString();
@@ -1109,6 +1347,7 @@ namespace ZiveLab.ZM.Dataview
                                     zidx = dci.ColumnID - DataColItem.eColumnId.AUX01_ZRE;
                                     itype = zidx % 2;
                                     auxidx = zidx / 2;
+                                    if (auxidx >= MaxAuxCount) continue;
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
 

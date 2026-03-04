@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using ZiveLab.ZM.ZIM;
 
 namespace ZiveLab.ZM.Dataview 
 {
-    public class DataGraph
-    {
-        
-    }
-
+   
     public class GraphDataFormat
     {
         public uint Step { get; set; }
@@ -30,21 +27,21 @@ namespace ZiveLab.ZM.Dataview
         {
             int i;
 
-            XData = new double[12];
-            XDataStr = new string[12];
-            XDataObj = new object[12];
-            YData = new double[12];
-            YDataStr = new string[12];
-            YDataObj = new object[12];
+            XData = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            XDataStr = new string[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            XDataObj = new object[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            YData = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            YDataStr = new string[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            YDataObj = new object[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
 
-            EnableAuxbd = new bool[3];
-            for (i = 0; i < 3; i++)
+            EnableAuxbd = new bool[MBZA_Constant.MAX_AUX_BOARD];
+            for (i = 0; i < MBZA_Constant.MAX_AUX_BOARD; i++)
             {
                 EnableAuxbd[i] = false;
 
             }
             MaxAuxCh = 0;
-            for (i=0; i<12; i++)
+            for (i=0; i< MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 XData[i] = 0.0;
                 XDataStr[i] = "0.0";
@@ -66,10 +63,10 @@ namespace ZiveLab.ZM.Dataview
         public object []DataObj { get; set; }
         public GraphDataFormatX()
         {
-            Data = new double[12];
-            DataStr = new string[12];
-            DataObj = new object[12];
-            for (int i = 0; i < 12; i++)
+            Data = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            DataStr = new string[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            DataObj = new object[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 Data[i] = 0.0;
                 DataStr[i] = "0.0";
@@ -87,10 +84,10 @@ namespace ZiveLab.ZM.Dataview
 
         public GraphDataFormatY()
         {
-            Data = new double[12];
-            DataStr = new string[12];
-            DataObj = new object[12];
-            for (int i = 0; i < 12; i++)
+            Data = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            DataStr = new string[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            DataObj = new object[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 Data[i] = 0.0;
                 DataStr[i] = "0.0";
@@ -146,15 +143,15 @@ namespace ZiveLab.ZM.Dataview
 
                 gdf.Step = DataX.DataList[i].Step;
                 gdf.Cycle = DataX.DataList[i].Cycle;
-                for (int j = 0; j < 12; j++)
+                for (int j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                 {
-                    gdf.XData = DataX.DataList[i].Data;
-                    gdf.XDataStr = DataX.DataList[i].DataStr;
-                    gdf.XDataObj = DataX.DataList[i].DataObj;
+                    gdf.XData[j] = DataX.DataList[i].Data[j];
+                    gdf.XDataStr[j] = DataX.DataList[i].DataStr[j];
+                    gdf.XDataObj[j] = DataX.DataList[i].DataObj[j];
 
-                    gdf.YData = DataYList[idx].DataList[i].Data;
-                    gdf.YDataStr = DataYList[idx].DataList[i].DataStr;
-                    gdf.YDataObj = DataYList[idx].DataList[i].DataObj;
+                    gdf.YData[j] = DataYList[idx].DataList[i].Data[j];
+                    gdf.YDataStr[j] = DataYList[idx].DataList[i].DataStr[j];
+                    gdf.YDataObj[j] = DataYList[idx].DataList[i].DataObj[j];
                 }
                 gdList.Add(gdf);
             }

@@ -86,7 +86,6 @@
             this.lblTestStatus = new System.Windows.Forms.Label();
             this.lblRange = new System.Windows.Forms.Label();
             this.lblTemp = new System.Windows.Forms.Label();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.RtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.graphModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vVsIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,7 +129,6 @@
             this.chkCalBd1 = new System.Windows.Forms.CheckBox();
             this.chkSrcBd2 = new System.Windows.Forms.CheckBox();
             this.chkSrcBd1 = new System.Windows.Forms.CheckBox();
-            this.cboItemB = new System.Windows.Forms.ComboBox();
             this.grpboxbd2 = new System.Windows.Forms.GroupBox();
             this.btDeselAllBdItems = new System.Windows.Forms.Button();
             this.btSelAllBdItems = new System.Windows.Forms.Button();
@@ -213,7 +211,6 @@
             this.grpboxni1 = new System.Windows.Forms.GroupBox();
             this.chkCalNi = new System.Windows.Forms.CheckBox();
             this.chkSrcNi = new System.Windows.Forms.CheckBox();
-            this.cboItemA = new System.Windows.Forms.ComboBox();
             this.grpboxni2 = new System.Windows.Forms.GroupBox();
             this.btDeselAllNiItems = new System.Windows.Forms.Button();
             this.btSelAllNiItems = new System.Windows.Forms.Button();
@@ -284,6 +281,7 @@
             this.RTyAxis1 = new NationalInstruments.UI.YAxis();
             this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.RTyAxis2 = new NationalInstruments.UI.YAxis();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.menu_niquest.SuspendLayout();
             this.menu_bode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdpara)).BeginInit();
@@ -774,23 +772,6 @@
             this.lblTemp.TabIndex = 79;
             this.lblTemp.Text = " PT-100: ------ °C";
             // 
-            // lblprog
-            // 
-            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprog.LabelColor = System.Drawing.Color.Navy;
-            this.lblprog.LabelText = "";
-            this.lblprog.Location = new System.Drawing.Point(80, 26);
-            this.lblprog.Name = "lblprog";
-            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
-            this.lblprog.OutLine_Visible = true;
-            this.lblprog.OutLine_Width = 1;
-            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblprog.Prog_Max = 100;
-            this.lblprog.Prog_Min = 0;
-            this.lblprog.Prog_Val = 50;
-            this.lblprog.Size = new System.Drawing.Size(242, 14);
-            this.lblprog.TabIndex = 74;
-            // 
             // RtMenuStrip
             // 
             this.RtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1126,10 +1107,9 @@
             this.grpboxbd1.Controls.Add(this.chkCalBd1);
             this.grpboxbd1.Controls.Add(this.chkSrcBd2);
             this.grpboxbd1.Controls.Add(this.chkSrcBd1);
-            this.grpboxbd1.Controls.Add(this.cboItemB);
-            this.grpboxbd1.Location = new System.Drawing.Point(727, 4);
+            this.grpboxbd1.Location = new System.Drawing.Point(727, 12);
             this.grpboxbd1.Name = "grpboxbd1";
-            this.grpboxbd1.Size = new System.Drawing.Size(141, 146);
+            this.grpboxbd1.Size = new System.Drawing.Size(141, 117);
             this.grpboxbd1.TabIndex = 153;
             this.grpboxbd1.TabStop = false;
             this.grpboxbd1.Text = "[Legend item]";
@@ -1137,7 +1117,7 @@
             // chkCalBd2
             // 
             this.chkCalBd2.AutoSize = true;
-            this.chkCalBd2.Location = new System.Drawing.Point(6, 118);
+            this.chkCalBd2.Location = new System.Drawing.Point(8, 91);
             this.chkCalBd2.Name = "chkCalBd2";
             this.chkCalBd2.Size = new System.Drawing.Size(124, 18);
             this.chkCalBd2.TabIndex = 125;
@@ -1147,7 +1127,7 @@
             // chkCalBd1
             // 
             this.chkCalBd1.AutoSize = true;
-            this.chkCalBd1.Location = new System.Drawing.Point(6, 95);
+            this.chkCalBd1.Location = new System.Drawing.Point(8, 68);
             this.chkCalBd1.Name = "chkCalBd1";
             this.chkCalBd1.Size = new System.Drawing.Size(131, 18);
             this.chkCalBd1.TabIndex = 124;
@@ -1157,7 +1137,7 @@
             // chkSrcBd2
             // 
             this.chkSrcBd2.AutoSize = true;
-            this.chkSrcBd2.Location = new System.Drawing.Point(6, 72);
+            this.chkSrcBd2.Location = new System.Drawing.Point(8, 45);
             this.chkSrcBd2.Name = "chkSrcBd2";
             this.chkSrcBd2.Size = new System.Drawing.Size(96, 18);
             this.chkSrcBd2.TabIndex = 123;
@@ -1167,21 +1147,12 @@
             // chkSrcBd1
             // 
             this.chkSrcBd1.AutoSize = true;
-            this.chkSrcBd1.Location = new System.Drawing.Point(6, 49);
+            this.chkSrcBd1.Location = new System.Drawing.Point(8, 22);
             this.chkSrcBd1.Name = "chkSrcBd1";
             this.chkSrcBd1.Size = new System.Drawing.Size(103, 18);
             this.chkSrcBd1.TabIndex = 122;
             this.chkSrcBd1.Text = "Source Zmag";
             this.chkSrcBd1.UseVisualStyleBackColor = true;
-            // 
-            // cboItemB
-            // 
-            this.cboItemB.FormattingEnabled = true;
-            this.cboItemB.Location = new System.Drawing.Point(21, 21);
-            this.cboItemB.Name = "cboItemB";
-            this.cboItemB.Size = new System.Drawing.Size(100, 22);
-            this.cboItemB.TabIndex = 121;
-            this.cboItemB.SelectedIndexChanged += new System.EventHandler(this.cboItemB_SelectedIndexChanged);
             // 
             // grpboxbd2
             // 
@@ -1201,7 +1172,7 @@
             this.grpboxbd2.Controls.Add(this.chkitemB7);
             this.grpboxbd2.Controls.Add(this.chkitemB9);
             this.grpboxbd2.Controls.Add(this.chkitemB8);
-            this.grpboxbd2.Location = new System.Drawing.Point(735, 155);
+            this.grpboxbd2.Location = new System.Drawing.Point(732, 155);
             this.grpboxbd2.Name = "grpboxbd2";
             this.grpboxbd2.Size = new System.Drawing.Size(134, 351);
             this.grpboxbd2.TabIndex = 152;
@@ -1891,10 +1862,9 @@
             this.grpboxni1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grpboxni1.Controls.Add(this.chkCalNi);
             this.grpboxni1.Controls.Add(this.chkSrcNi);
-            this.grpboxni1.Controls.Add(this.cboItemA);
-            this.grpboxni1.Location = new System.Drawing.Point(728, 6);
+            this.grpboxni1.Location = new System.Drawing.Point(728, 16);
             this.grpboxni1.Name = "grpboxni1";
-            this.grpboxni1.Size = new System.Drawing.Size(141, 108);
+            this.grpboxni1.Size = new System.Drawing.Size(141, 76);
             this.grpboxni1.TabIndex = 138;
             this.grpboxni1.TabStop = false;
             this.grpboxni1.Text = "[Legend item]";
@@ -1902,7 +1872,7 @@
             // chkCalNi
             // 
             this.chkCalNi.AutoSize = true;
-            this.chkCalNi.Location = new System.Drawing.Point(7, 80);
+            this.chkCalNi.Location = new System.Drawing.Point(6, 49);
             this.chkCalNi.Name = "chkCalNi";
             this.chkCalNi.Size = new System.Drawing.Size(131, 18);
             this.chkCalNi.TabIndex = 123;
@@ -1912,21 +1882,12 @@
             // chkSrcNi
             // 
             this.chkSrcNi.AutoSize = true;
-            this.chkSrcNi.Location = new System.Drawing.Point(7, 55);
+            this.chkSrcNi.Location = new System.Drawing.Point(6, 24);
             this.chkSrcNi.Name = "chkSrcNi";
             this.chkSrcNi.Size = new System.Drawing.Size(103, 18);
             this.chkSrcNi.TabIndex = 122;
             this.chkSrcNi.Text = "Source Zimg";
             this.chkSrcNi.UseVisualStyleBackColor = true;
-            // 
-            // cboItemA
-            // 
-            this.cboItemA.FormattingEnabled = true;
-            this.cboItemA.Location = new System.Drawing.Point(24, 25);
-            this.cboItemA.Name = "cboItemA";
-            this.cboItemA.Size = new System.Drawing.Size(85, 22);
-            this.cboItemA.TabIndex = 121;
-            this.cboItemA.SelectedIndexChanged += new System.EventHandler(this.cboItemA_SelectedIndexChanged);
             // 
             // grpboxni2
             // 
@@ -1946,7 +1907,7 @@
             this.grpboxni2.Controls.Add(this.chkitemA7);
             this.grpboxni2.Controls.Add(this.chkitemA9);
             this.grpboxni2.Controls.Add(this.chkitemA8);
-            this.grpboxni2.Location = new System.Drawing.Point(728, 158);
+            this.grpboxni2.Location = new System.Drawing.Point(729, 159);
             this.grpboxni2.Name = "grpboxni2";
             this.grpboxni2.Size = new System.Drawing.Size(141, 351);
             this.grpboxni2.TabIndex = 137;
@@ -2588,6 +2549,23 @@
             this.RTyAxis2.MinorDivisions.TickVisible = true;
             this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
             // 
+            // lblprog
+            // 
+            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprog.LabelColor = System.Drawing.Color.Navy;
+            this.lblprog.LabelText = "";
+            this.lblprog.Location = new System.Drawing.Point(80, 26);
+            this.lblprog.Name = "lblprog";
+            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
+            this.lblprog.OutLine_Visible = true;
+            this.lblprog.OutLine_Width = 1;
+            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lblprog.Prog_Max = 100;
+            this.lblprog.Prog_Min = 0;
+            this.lblprog.Prog_Val = 50;
+            this.lblprog.Size = new System.Drawing.Size(242, 14);
+            this.lblprog.TabIndex = 74;
+            // 
             // frmCalibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2873,11 +2851,9 @@
         private System.Windows.Forms.GroupBox grpboxni2;
         private System.Windows.Forms.Button btSelAllNiItems;
         private System.Windows.Forms.Button btDeselAllNiItems;
-        private System.Windows.Forms.ComboBox cboItemA;
         private System.Windows.Forms.GroupBox grpboxbd1;
         private System.Windows.Forms.CheckBox chkSrcBd2;
         private System.Windows.Forms.CheckBox chkSrcBd1;
-        private System.Windows.Forms.ComboBox cboItemB;
         private System.Windows.Forms.GroupBox grpboxbd2;
         private System.Windows.Forms.Button btDeselAllBdItems;
         private System.Windows.Forms.Button btSelAllBdItems;

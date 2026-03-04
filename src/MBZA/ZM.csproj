@@ -64,14 +64,6 @@
     <Reference Include="CircularProgress">
       <HintPath>.\CircularProgress.dll</HintPath>
     </Reference>
-    <Reference Include="CommonLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DataManager\CommonLib.dll</HintPath>
-    </Reference>
-    <Reference Include="DataManager, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DataManager.dll</HintPath>
-    </Reference>
     <Reference Include="MathNet.Numerics">
       <HintPath>packages\MathNet.Numerics.4.7.0\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
@@ -206,6 +198,18 @@
     </Compile>
     <Compile Include="frmCalibVdc.designer.cs">
       <DependentUpon>frmCalibVdc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetOption.Designer.cs">
+      <DependentUpon>frmSetOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetPlotsColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetPlotsColor.Designer.cs">
+      <DependentUpon>frmSetPlotsColor.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSetVdcReference.cs">
       <SubType>Form</SubType>
@@ -357,6 +361,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetBatPara.resx">
       <DependentUpon>frmSetBatPara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetOption.resx">
+      <DependentUpon>frmSetOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetPlotsColor.resx">
+      <DependentUpon>frmSetPlotsColor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetVdcReference.resx">
       <DependentUpon>frmSetVdcReference.cs</DependentUpon>
@@ -787,6 +797,7 @@
     <None Include="doc\Image1\redlink.ico" />
     <None Include="doc\Image1\greenchip1.ico" />
     <None Include="doc\Image1\redchip1.ico" />
+    <None Include="Resources\SettingsFile.png" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />
@@ -842,6 +853,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF $(ConfigurationName)==Release C:\SignTools\SignTool\SignTool.exe sign /a /v /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td SHA256 /fd sha256 "$(TargetPath)"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

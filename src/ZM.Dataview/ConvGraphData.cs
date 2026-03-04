@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using NationalInstruments;
+using ZiveLab.ZM.ZIM;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -26,7 +27,7 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = urgd.mRawData.TestTime;
                     gdf.XDataStr[i] = urgd.mRawData.TestTime.ToString();
@@ -49,7 +50,7 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
                     gdf.XData[i] = urgd.mRawData.Vdc;
                     gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
@@ -60,29 +61,7 @@ namespace ZiveLab.ZM.Dataview
 
             return gdList;
         }
-        static private GraphDataList CalcAuxVdc(List<UnitReportData> list)                                                      // 완료
-        {
-            GraphDataList gdList = new GraphDataList();
-            IEnumerator ie = list.GetEnumerator();
-
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-                GraphDataFormat gdf = new GraphDataFormat();
-                gdf.Step = (uint)urgd.mRawData.nTaskNo;
-                gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
-                {
-                    gdf.XData[i] = urgd.AuxVdc[i];
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.AuxVdc[i]);
-                    gdf.XDataObj[i] = urgd.AuxVdc[i];
-                }
-                gdList.Add(gdf);
-            }
-            
-            return gdList;
-        }
+       
         static private GraphDataList CalcI(List<UnitReportData> list, double denominator = 1)                                 // 완료
         {
             GraphDataList gdList = new GraphDataList();
@@ -96,7 +75,7 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = (denominator == 0) ? 0 : urgd.mRawData.Idc / denominator;
                     gdf.XDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.mRawData.Idc / denominator);
@@ -119,7 +98,7 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = urgd.mRawData.Temperature;
                     gdf.XDataStr[i] = string.Format("{0:F2}", urgd.mRawData.Temperature);
@@ -144,41 +123,24 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                
-                for (int i = 0; i < 12; i++)
+
+                gdf.XData[0] = load;
+                gdf.XDataStr[0] = CoTypeString.DoubleToString(load);
+                gdf.XDataObj[0] = load;
+
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdf.XData[i] = load;
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(load);
-                    gdf.XDataObj[i] = load;
+                    load = (denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator;
+                    gdf.XData[i+1] = load;
+                    gdf.XDataStr[i+1] = CoTypeString.DoubleToString(load);
+                    gdf.XDataObj[i+1] = load;
                 }
                 gdList.Add(gdf);
             }
 
             return gdList;
         }
-        static private GraphDataList CalcAuxLoad(List<UnitReportData> list)                                                      // 완료
-        {
-            GraphDataList gdList = new GraphDataList();
-            IEnumerator ie = list.GetEnumerator();
-
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-                GraphDataFormat gdf = new GraphDataFormat();
-                gdf.Step = (uint)urgd.mRawData.nTaskNo;
-                gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
-                {
-                    gdf.XData[i] = urgd.AuxLoad[i];
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.AuxLoad[i]);
-                    gdf.XDataObj[i] = urgd.AuxLoad[i];
-                }
-                gdList.Add(gdf);
-            }
-
-            return gdList;
-        }
+        
         static private GraphDataList CalcPower(List<UnitReportData> list, double denominator = 1)                        // 완료
         {
             GraphDataList gdList = new GraphDataList();
@@ -191,34 +153,16 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
+
+                gdf.XData[0] = (denominator == 0) ? 0 : urgd.Power / denominator;
+                gdf.XDataStr[0] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Power / denominator);
+                gdf.XDataObj[0] = (double)((denominator == 0) ? 0 : urgd.Power / denominator);
+
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdf.XData[i] = (denominator == 0) ? 0 : urgd.Power / denominator;
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Power / denominator);
-                    gdf.XDataObj[i] = (double)((denominator == 0) ? 0 : urgd.Power / denominator);
-                }
-                gdList.Add(gdf);
-            }
-
-            return gdList;
-        }
-        static private GraphDataList CalcAuxPower(List<UnitReportData> list)                                                      // 완료
-        {
-            GraphDataList gdList = new GraphDataList();
-            IEnumerator ie = list.GetEnumerator();
-
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-                GraphDataFormat gdf = new GraphDataFormat();
-                gdf.Step = (uint)urgd.mRawData.nTaskNo;
-                gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
-                {
-                    gdf.XData[i] = urgd.AuxPower[i];
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.AuxPower[i]);
-                    gdf.XDataObj[i] = urgd.AuxPower[i];
+                    gdf.XData[i+1] = (denominator == 0) ? 0 : urgd.AuxPower[i] / denominator;
+                    gdf.XDataStr[i+1] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxPower[i] / denominator);
+                    gdf.XDataObj[i+1] = (double)((denominator == 0) ? 0 : urgd.AuxPower[i] / denominator);
                 }
                 gdList.Add(gdf);
             }
@@ -239,7 +183,7 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = (denominator == 0) ? 0 : urgd.Capacity / denominator;
                     gdf.XDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Capacity / denominator);
@@ -262,35 +206,16 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                
-                for (int i = 0; i < 12; i++)
+
+                gdf.XData[0] = (denominator == 0) ? 0 : urgd.Energy / denominator;
+                gdf.XDataStr[0] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Energy / denominator);
+                gdf.XDataObj[0] = (double)((denominator == 0) ? 0 : urgd.Energy / denominator);
+
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdf.XData[i] = (denominator == 0) ? 0 : urgd.Energy / denominator;
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Energy / denominator);
-                    gdf.XDataObj[i] = (double)((denominator == 0) ? 0 : urgd.Energy / denominator);
-                }
-                gdList.Add(gdf);
-            }
-
-            return gdList;
-        }
-        static private GraphDataList CalcAuxEnergy(List<UnitReportData> list)                                                      // 완료
-        {
-            GraphDataList gdList = new GraphDataList();
-            IEnumerator ie = list.GetEnumerator();
-
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-                GraphDataFormat gdf = new GraphDataFormat();
-                gdf.Step = (uint)urgd.mRawData.nTaskNo;
-                gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                for (int i = 0; i < 12; i++)
-                {
-                    gdf.XData[i] = urgd.AuxEnergy[i];
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.AuxEnergy[i]);
-                    gdf.XDataObj[i] = urgd.AuxEnergy[i];
+                    gdf.XData[i+1] = (denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator;
+                    gdf.XDataStr[i+1] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator);
+                    gdf.XDataObj[i+1] = (double)((denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator);
                 }
                 gdList.Add(gdf);
             }
@@ -311,7 +236,7 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = urgd.mRawData.CycleTime;
                     gdf.XDataStr[i] = urgd.mRawData.CycleTime.ToString();
@@ -335,7 +260,7 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = urgd.mRawData.TaskTime;
                     gdf.XDataStr[i] = urgd.mRawData.TaskTime.ToString();
@@ -359,7 +284,7 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = (urgd.mRawData.Idc == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.mRawData.Idc / denominator);
                     gdf.XDataStr[i] = CoTypeString.DoubleToString((urgd.mRawData.Idc == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.mRawData.Idc / denominator));
@@ -383,7 +308,7 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = (urgd.mRawData.fFreq == 0) ? double.NaN : Math.Abs(urgd.mRawData.fFreq);
                     gdf.XDataStr[i] = CoTypeString.DoubleToString((urgd.mRawData.fFreq == 0) ? double.NaN : Math.Abs(urgd.mRawData.fFreq));
@@ -406,19 +331,22 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                
-                for (int i = 0; i < 12; i++)
+
+                gdf.XData[0] = urgd.MainZ.Zre;
+                gdf.XDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
+                gdf.XDataObj[0] = urgd.MainZ.Zre;
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdf.XData[i] = urgd.MainZ.Zre;
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
-                    gdf.XDataObj[i] = urgd.MainZ.Zre;
+                    gdf.XData[i+1] = urgd.AuxZ[i].Zre;
+                    gdf.XDataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zre);
+                    gdf.XDataObj[i+1] = urgd.AuxZ[i].Zre;
                 }
                 gdList.Add(gdf);
             }
 
             return gdList;
         }
-        static private GraphDataList CalcAuxZreal(List<UnitReportData> list)                                                      // 완료
+        static private GraphDataList CalcYreal(List<UnitReportData> list)                                                      // 완료
         {
             GraphDataList gdList = new GraphDataList();
 
@@ -430,12 +358,15 @@ namespace ZiveLab.ZM.Dataview
                 GraphDataFormat gdf = new GraphDataFormat();
                 gdf.Step = (uint)urgd.mRawData.nTaskNo;
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
-                
-                for (int i = 0; i < 12; i++)
+
+                gdf.XData[0] = urgd.MainZ.Yre;
+                gdf.XDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Yre);
+                gdf.XDataObj[0] = urgd.MainZ.Yre;
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdf.XData[i] = urgd.AuxZ[i].Zre;
-                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zre);
-                    gdf.XDataObj[i] = urgd.AuxZ[i].Zre;
+                    gdf.XData[i + 1] = urgd.AuxZ[i].Yre;
+                    gdf.XDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Yre);
+                    gdf.XDataObj[i + 1] = urgd.AuxZ[i].Yre;
                 }
                 gdList.Add(gdf);
             }
@@ -456,13 +387,38 @@ namespace ZiveLab.ZM.Dataview
                 gdf.Cycle = (uint)urgd.mRawData.nCycle;
                 
 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdf.XData[i] = urgd.mRawData.fFreq;
                     gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.mRawData.fFreq);
                     gdf.XDataObj[i] = urgd.mRawData.fFreq;
                 }
 
+                gdList.Add(gdf);
+            }
+
+            return gdList;
+        }
+
+        static private GraphDataList CalcEoc(List<UnitReportData> list)                                                      // 완료
+        {
+            GraphDataList gdList = new GraphDataList();
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                GraphDataFormat gdf = new GraphDataFormat();
+                gdf.Step = (uint)urgd.mRawData.nTaskNo;
+                gdf.Cycle = (uint)urgd.mRawData.nCycle;
+
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                {
+                    gdf.XData[i] = urgd.mRawData.Veoc;
+                    gdf.XDataStr[i] = CoTypeString.DoubleToString(urgd.mRawData.Veoc); 
+                    gdf.XDataObj[i] = urgd.mRawData.Veoc;
+                }
                 gdList.Add(gdf);
             }
 
@@ -480,29 +436,15 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-                for (int i = 0; i < 12; i++)
-                {
-                    gdList[index].YData[i] = urgd.mRawData.Vdc;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
-                    gdList[index].YDataObj[i] = urgd.mRawData.Vdc;
-                }
-                index++;
-            }
-        }
-        static private void CalcAuxVdc(GraphDataList gdList, List<UnitReportData> list)                                         // 완료
-        {
-            int index = 0;
+                gdList[index].YData[0] = urgd.mRawData.Vdc;
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
+                gdList[index].YDataObj[0] = urgd.mRawData.Vdc;
 
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YData[i] = urgd.AuxVdc[i];
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.AuxVdc[i]);
-                    gdList[index].YDataObj[i] = urgd.AuxVdc[i];
+                    gdList[index].YData[i+1] = urgd.AuxVdc[i];
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxVdc[i]);
+                    gdList[index].YDataObj[i+1] = urgd.AuxVdc[i];
                 }
                 index++;
             }
@@ -515,7 +457,7 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.mRawData.Idc / denominator;
                     gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.mRawData.Idc / denominator);
@@ -532,7 +474,7 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdList[index].YData[i] = urgd.mRawData.Temperature;
                     gdList[index].YDataStr[i] = string.Format("{0:F2}", urgd.mRawData.Temperature);
@@ -549,28 +491,16 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (i = 0; i < 12; i++)
+
+                gdList[index].YData[0] = (denominator == 0) ? 0 : urgd.Load / denominator;
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Load / denominator);
+                gdList[index].YDataObj[0] = (double)((denominator == 0) ? 0 : urgd.Load / denominator);
+
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.Load / denominator;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Load / denominator);
-                    gdList[index].YDataObj[i] = (double)((denominator == 0) ? 0 : urgd.Load / denominator);
-                }
-                index++;
-            }
-        }
-        static private void CalcAuxLoad(GraphDataList gdList, List<UnitReportData> list, double denominator = 1)                 // 완료
-        {
-            int index = 0;
-            int i;
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-                for (i = 0; i < 12; i++)
-                {
-                    gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator);
-                    gdList[index].YDataObj[i] = (double)((denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator);
+                    gdList[index].YData[i+1] = (denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator);
+                    gdList[index].YDataObj[i+1] = (double)((denominator == 0) ? 0 : urgd.AuxLoad[i] / denominator);
                 }
                 index++;
             }
@@ -584,29 +514,14 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (i = 0; i < 12; i++)
+                gdList[index].YData[0] = (denominator == 0) ? 0 : urgd.Power / denominator;
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Power / denominator);
+                gdList[index].YDataObj[0] = (double)((denominator == 0) ? 0 : urgd.Power / denominator);
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.Power / denominator;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Power / denominator);
-                    gdList[index].YDataObj[i] = (double)((denominator == 0) ? 0 : urgd.Power / denominator);
-                }
-                index++;
-            }
-        }
-        static private void CalcAuxPower(GraphDataList gdList, List<UnitReportData> list, double denominator = 1)              // 완료
-        {
-            int index = 0;
-            int i;
-
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-                for (i = 0; i < 12; i++)
-                {
-                    gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.AuxPower[i] / denominator;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxPower[i] / denominator);
-                    gdList[index].YDataObj[i] = (double)((denominator == 0) ? 0 : urgd.AuxPower[i] / denominator);
+                    gdList[index].YData[i+1] = (denominator == 0) ? 0 : urgd.AuxPower[i] / denominator;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxPower[i] / denominator);
+                    gdList[index].YDataObj[i+1] = (double)((denominator == 0) ? 0 : urgd.AuxPower[i] / denominator);
                 }
                 index++;
             }
@@ -619,7 +534,7 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdList[index++].YData[i] = (denominator == 0) ? 0 : urgd.Capacity / denominator;
                     gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Capacity / denominator);
@@ -637,33 +552,19 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-               
-                for (int i = 0; i < 12; i++)
+                gdList[index].YData[0] = (denominator == 0) ? 0 : urgd.Energy / denominator;
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Energy / denominator);
+                gdList[index].YDataObj[0] = (double)((denominator == 0) ? 0 : urgd.Energy / denominator);
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.Energy / denominator;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.Energy / denominator);
-                    gdList[index].YDataObj[i] = (double)((denominator == 0) ? 0 : urgd.Energy / denominator);
+                    gdList[index].YData[i+1] = (denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator);
+                    gdList[index].YDataObj[i+1] = (double)((denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator);
                 }
                 index++;
             }
         }
-        static private void CalcAuxEnergy(GraphDataList gdList, List<UnitReportData> list, double denominator = 1)           // 완료
-        {
-            int index = 0;
-
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
-                {
-                    gdList[index].YData[i] = (denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator;
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator);
-                    gdList[index].YDataObj[i] = (double)((denominator == 0) ? 0 : urgd.AuxEnergy[i] / denominator);
-                }
-                index++;
-            }
-        }
+        
         static private void CalcLogI(GraphDataList gdList, List<UnitReportData> list, double denominator = 1)                 // 완료
         {
             int index = 0;
@@ -672,7 +573,7 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdList[index].YData[i] = (urgd.mRawData.Idc == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.mRawData.Idc / denominator);
                     gdList[index].YDataStr[i] = CoTypeString.DoubleToString((urgd.mRawData.Idc == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.mRawData.Idc / denominator));
@@ -689,7 +590,7 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     gdList[index++].YData[i] = urgd.mRawData.Veoc;
                     gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.mRawData.Veoc);
@@ -708,32 +609,14 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-                
-                for (i = 0; i < 12; i++)
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
+                gdList[index].YDataObj[0] = urgd.MainZ.Zre;
+                gdList[index].YData[0] = urgd.MainZ.Zre;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
-                    gdList[index].YDataObj[i] = urgd.MainZ.Zre;
-                    gdList[index].YData[i] = urgd.MainZ.Zre;
-                }
-                index++;
-            }
-        }
-        static private void CalcAuxZreal(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
-        {
-            int index = 0;
-            int i;
-
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-
-                for (i = 0; i < 12; i++)
-                {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zre);
-                    gdList[index].YDataObj[i] = urgd.AuxZ[i].Zre;
-                    gdList[index].YData[i] = urgd.AuxZ[i].Zre;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zre);
+                    gdList[index].YDataObj[i+1] = urgd.AuxZ[i].Zre;
+                    gdList[index].YData[i+1] = urgd.AuxZ[i].Zre;
                 }
                 index++;
             }
@@ -748,32 +631,14 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-
-                for (i = 0; i < 12; i++)
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zim);
+                gdList[index].YDataObj[0] = urgd.MainZ.Zim;
+                gdList[index].YData[0] = urgd.MainZ.Zim;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Zim);
-                    gdList[index].YDataObj[i] = urgd.MainZ.Zim;
-                    gdList[index].YData[i] = urgd.MainZ.Zim;
-                }
-                index++;
-            }
-        }
-        static private void CalcAuxZimg(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
-        {
-            int index = 0;
-            int i;
-
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-
-                for (i = 0; i < 12; i++)
-                {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zim);
-                    gdList[index].YDataObj[i] = urgd.AuxZ[i].Zim;
-                    gdList[index].YData[i] = urgd.AuxZ[i].Zim;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zim);
+                    gdList[index].YDataObj[i+1] = urgd.AuxZ[i].Zim;
+                    gdList[index].YData[i+1] = urgd.AuxZ[i].Zim;
                 }
                 index++;
             }
@@ -788,32 +653,14 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-
-                for (i = 0; i < 12; i++)
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zmag);
+                gdList[index].YDataObj[0] = urgd.MainZ.Zmag;
+                gdList[index].YData[0] = urgd.MainZ.Zmag;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Zmag);
-                    gdList[index].YDataObj[i] = urgd.MainZ.Zmag;
-                    gdList[index].YData[i] = urgd.MainZ.Zmag;
-                }
-                index++;
-            }
-        }
-        static private void CalcAuxZmag(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
-        {
-            int index = 0;
-            int i;
-
-            IEnumerator ie = list.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                UnitReportData urgd = (UnitReportData)ie.Current;
-
-
-                for (i = 0; i < 12; i++)
-                {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zmag);
-                    gdList[index].YDataObj[i] = urgd.AuxZ[i].Zmag;
-                    gdList[index].YData[i] = urgd.AuxZ[i].Zmag;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zmag);
+                    gdList[index].YDataObj[i+1] = urgd.AuxZ[i].Zmag;
+                    gdList[index].YData[i+1] = urgd.AuxZ[i].Zmag;
                 }
                 index++;
             }
@@ -826,11 +673,14 @@ namespace ZiveLab.ZM.Dataview
             while (ie.MoveNext())
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
-                for (int i = 0; i < 12; i++)
+                gdList[index].YData[0] = (urgd.MainZ.Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Zmag / denominator);
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString((urgd.MainZ.Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Zmag / denominator));
+                gdList[index].YDataObj[0] = (urgd.MainZ.Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Zmag / denominator);
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YData[i] = (urgd.MainZ.Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Zmag / denominator);
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString((urgd.MainZ.Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Zmag / denominator));
-                    gdList[index].YDataObj[i] = (urgd.MainZ.Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Zmag / denominator);
+                    gdList[index].YData[i+1] = (urgd.AuxZ[i].Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.AuxZ[i].Zmag / denominator);
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString((urgd.AuxZ[i].Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.AuxZ[i].Zmag / denominator));
+                    gdList[index].YDataObj[i+1] = (urgd.AuxZ[i].Zmag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.AuxZ[i].Zmag / denominator);
                 }
                 index++;
             }
@@ -845,17 +695,19 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-
-                for (i = 0; i < 12; i++)
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.ZPhase);
+                gdList[index].YDataObj[0] = urgd.MainZ.ZPhase;
+                gdList[index].YData[0] = urgd.MainZ.ZPhase;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.ZPhase);
-                    gdList[index].YDataObj[i] = urgd.MainZ.ZPhase;
-                    gdList[index].YData[i] = urgd.MainZ.ZPhase;
+                    gdList[index].YDataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].ZPhase);
+                    gdList[index].YDataObj[i+1] = urgd.AuxZ[i].ZPhase;
+                    gdList[index].YData[i+1] = urgd.AuxZ[i].ZPhase;
                 }
                 index++;
             }
         }
-        static private void CalcAuxZphase(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        static private void CalcYreal(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
         {
             int index = 0;
             int i;
@@ -865,12 +717,254 @@ namespace ZiveLab.ZM.Dataview
             {
                 UnitReportData urgd = (UnitReportData)ie.Current;
 
-
-                for (i = 0; i < 12; i++)
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Yre);
+                gdList[index].YDataObj[0] = urgd.MainZ.Yre;
+                gdList[index].YData[0] = urgd.MainZ.Yre;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
-                    gdList[index].YDataStr[i] = CoTypeString.DoubleToString(urgd.AuxZ[i].ZPhase);
-                    gdList[index].YDataObj[i] = urgd.AuxZ[i].ZPhase;
-                    gdList[index].YData[i] = urgd.AuxZ[i].ZPhase;
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Yre);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Yre;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Yre;
+                }
+                index++;
+            }
+        }
+        static private void CalcYimg(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Yim);
+                gdList[index].YDataObj[0] = urgd.MainZ.Yim;
+                gdList[index].YData[0] = urgd.MainZ.Yim;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Yim);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Yim;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Yim;
+                }
+                index++;
+            }
+        }
+        static private void CalcYmag(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Ymag);
+                gdList[index].YDataObj[0] = urgd.MainZ.Ymag;
+                gdList[index].YData[0] = urgd.MainZ.Ymag;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Ymag);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Ymag;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Ymag;
+                }
+                index++;
+            }
+        }
+        static private void CalcLogYmag(GraphDataList gdList, List<UnitReportData> list, double denominator = 1)                 // 완료Zmag
+        {
+            int index = 0;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+                gdList[index].YData[0] = (urgd.MainZ.Ymag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Ymag / denominator);
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString((urgd.MainZ.Ymag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Ymag / denominator));
+                gdList[index].YDataObj[0] = (urgd.MainZ.Ymag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.MainZ.Ymag / denominator);
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YData[i + 1] = (urgd.AuxZ[i].Ymag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.AuxZ[i].Ymag / denominator);
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString((urgd.AuxZ[i].Ymag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.AuxZ[i].Ymag / denominator));
+                    gdList[index].YDataObj[i + 1] = (urgd.AuxZ[i].Ymag == 0 || denominator == 0) ? double.NaN : Math.Abs(urgd.AuxZ[i].Ymag / denominator);
+                }
+                index++;
+            }
+        }
+        static private void CalcYphase(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.YPhase);
+                gdList[index].YDataObj[0] = urgd.MainZ.YPhase;
+                gdList[index].YData[0] = urgd.MainZ.YPhase;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].YPhase);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].YPhase;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].YPhase;
+                }
+                index++;
+            }
+        }
+        static private void CalcRsRC(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rs_RC);
+                gdList[index].YDataObj[0] = urgd.MainZ.Rs_RC;
+                gdList[index].YData[0] = urgd.MainZ.Rs_RC;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rs_RC);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Rs_RC;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Rs_RC;
+                }
+                index++;
+            }
+        }
+        static private void CalcCsRC(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Cs_RC);
+                gdList[index].YDataObj[0] = urgd.MainZ.Cs_RC;
+                gdList[index].YData[0] = urgd.MainZ.Cs_RC;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Cs_RC);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Cs_RC;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Cs_RC;
+                }
+                index++;
+            }
+        }
+        static private void CalcRpRC(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rp_RC);
+                gdList[index].YDataObj[0] = urgd.MainZ.Rp_RC;
+                gdList[index].YData[0] = urgd.MainZ.Rp_RC;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rp_RC);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Rp_RC;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Rp_RC;
+                }
+                index++;
+            }
+        }
+        static private void CalcRsRL(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rs_RL);
+                gdList[index].YDataObj[0] = urgd.MainZ.Rs_RL;
+                gdList[index].YData[0] = urgd.MainZ.Rs_RL;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rs_RL);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Rs_RL;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Rs_RL;
+                }
+                index++;
+            }
+        }
+        static private void CalcLsRL(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Ls_RL);
+                gdList[index].YDataObj[0] = urgd.MainZ.Ls_RL;
+                gdList[index].YData[0] = urgd.MainZ.Ls_RL;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Ls_RL);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Ls_RL;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Ls_RL;
+                }
+                index++;
+            }
+        }
+        static private void CalcAbsQRL(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.AbsQ_RL);
+                gdList[index].YDataObj[0] = urgd.MainZ.AbsQ_RL;
+                gdList[index].YData[0] = urgd.MainZ.AbsQ_RL;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].AbsQ_RL);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].AbsQ_RL;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].AbsQ_RL;
+                }
+                index++;
+            }
+        }
+        static private void CalcCpRC(GraphDataList gdList, List<UnitReportData> list)                                          // 완료
+        {
+            int index = 0;
+            int i;
+
+            IEnumerator ie = list.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                UnitReportData urgd = (UnitReportData)ie.Current;
+
+                gdList[index].YDataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Cp_RC);
+                gdList[index].YDataObj[0] = urgd.MainZ.Cp_RC;
+                gdList[index].YData[0] = urgd.MainZ.Cp_RC;
+                for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                {
+                    gdList[index].YDataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Cp_RC);
+                    gdList[index].YDataObj[i + 1] = urgd.AuxZ[i].Cp_RC;
+                    gdList[index].YData[i + 1] = urgd.AuxZ[i].Cp_RC;
                 }
                 index++;
             }
@@ -897,7 +991,7 @@ namespace ZiveLab.ZM.Dataview
                     oldCycle = gdf.Cycle;
 
                     GraphDataFormat gdfNone = new GraphDataFormat();
-                    for (int i = 0; i < 12; i++)
+                    for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfNone.XData[i] = gdf.XData[i];
                         gdfNone.YData[i] = gdf.YData[i];
@@ -922,27 +1016,139 @@ namespace ZiveLab.ZM.Dataview
             }
 
             GraphDataList gdList = null;
-
+           
             switch (x)
             {
-                case "Test time":
-                    gdList = CalcTestTime(filteredList);                    
-                    break;
                 case "Log(Frequency)":
                     gdList = CalcLogFreq(filteredList);
                     break;
                 case "Zreal":
                     gdList = CalcZreal(filteredList);
                     break;
-                case "AuxZre":
-                    gdList = CalcAuxZreal(filteredList);
+                case "Yreal":
+                    gdList = CalcYreal(filteredList);
                     break;
+                case "Z-Phase":
+                case "Zphase":
+                    CalcZphase(gdList, filteredList);
+                    break;
+                case "Y-Phase":
+                case "Yphase":
+                    CalcYphase(gdList, filteredList);
+                    break;
+                case "Rs(R-C)":
+                    CalcRsRC(gdList, filteredList);
+                    break;
+                case "Cs(R-C)":
+                    CalcCsRC(gdList, filteredList);
+                    break;
+                case "Rp(R|C)":
+                    CalcRpRC(gdList, filteredList);
+                    break;
+                case "Cp(R|C)":
+                    CalcRpRC(gdList, filteredList);
+                    break;
+                case "Rs(R-L)":
+                    CalcRsRL(gdList, filteredList);
+                    break;
+                case "Ls(R-L)":
+                    CalcLsRL(gdList, filteredList);
+                    break;
+                case "|Q(R-L)|":
+                    CalcAbsQRL(gdList, filteredList);
+                    break;
+                case "Test time":
+                    gdList = CalcTestTime(filteredList);                    
+                    break;
+                case "Vdc":
+                case "Voltage":
                 case "Eref":
                     gdList = CalcEref(filteredList);
                     break;
-                case "AuxVdc":
-                    gdList = CalcAuxVdc(filteredList);
+                case "Idc":
+                case "Current":
+                case "I":
+                    gdList = CalcI(filteredList, denominator);
                     break;
+                case "Temperature":
+                    gdList = CalcTemperature(filteredList);
+                    break;
+                case "Frequency":
+                    gdList = CalcFreq(filteredList);
+                    break;
+                case "OCP":
+                case "Eoc":
+                    gdList = CalcFreq(filteredList);
+                    break;
+                case "Capacity":
+                    gdList = CalcCapacity(filteredList, denominator);
+                    break;
+            }
+            
+            switch (y)
+            {
+                case "Zreal":
+                    CalcZreal(gdList, filteredList);
+                    break;
+                case "-Zim":
+                case "-Zimg":
+                    CalcZimg(gdList, filteredList);
+                    break;
+                case "|Z|":
+                    CalcZmag(gdList, filteredList);
+                    break;
+                case "Z-Phase":
+                case "Zphase":
+                    CalcZphase(gdList, filteredList);
+                    break;
+                case "Yreal":
+                    CalcYreal(gdList, filteredList);
+                    break;
+                case "-Yim":
+                case "-Yimg":
+                    CalcYimg(gdList, filteredList);
+                    break;
+                case "|Y|":
+                    CalcYmag(gdList, filteredList);
+                    break;
+                case "Y-Phase":
+                case "Yphase":
+                    CalcYphase(gdList, filteredList);
+                    break;
+                case "Log|Z|":
+                    CalcLogZmag(gdList, filteredList);
+                    break;
+                case "Log|Y|":
+                    CalcLogYmag(gdList, filteredList);
+                    break;
+                case "Rs(R-C)":
+                    CalcRsRC(gdList, filteredList);
+                    break;
+                case "Cs(R-C)":
+                    CalcCsRC(gdList, filteredList);
+                    break;
+                case "Rp(R|C)":
+                    CalcRpRC(gdList, filteredList);
+                    break;
+                case "Cp(R|C)":
+                    CalcRpRC(gdList, filteredList);
+                    break;
+                case "Rs(R-L)":
+                    CalcRsRL(gdList, filteredList);
+                    break;
+                case "Ls(R-L)":
+                    CalcLsRL(gdList, filteredList);
+                    break;
+                case "|Q(R-L)|":
+                    CalcAbsQRL(gdList, filteredList);
+                    break;
+                case "Vdc":
+                case "Voltage":
+                case "Eref":
+                    gdList = CalcEref(filteredList);
+                    break;
+                case "Idc":
+                case "Current":
                 case "I":
                     gdList = CalcI(filteredList, denominator);
                     break;
@@ -952,119 +1158,54 @@ namespace ZiveLab.ZM.Dataview
                 case "Load":
                     gdList = CalcLoad(filteredList, denominator);
                     break;
-                case "AuxLoad":
-                    gdList = CalcAuxLoad(filteredList);
-                    break;
                 case "Power":
                     gdList = CalcPower(filteredList, denominator);
-                    break;
-                case "AuxPower":
-                    gdList = CalcAuxPower(filteredList);
                     break;
                 case "Capacity":
                     gdList = CalcCapacity(filteredList, denominator);
                     break;
                 case "Energy":
-                    gdList = CalcEnergy(filteredList, denominator);
-                    break;
-                case "AuxEnergy":
-                    gdList = CalcAuxEnergy(filteredList);
-                    break;
-                case "Cycle time":
-                    gdList = CalcCycleTime(filteredList);
-                    break;
-                case "Step time":
-                    gdList = CalcStepTime(filteredList);
-                    break;
-                case "LogI":
-                    gdList = CalcLogI(filteredList, denominator);
-                    break;
-                case "Frequency":
-                    gdList = CalcFreq(filteredList);
-                    break;
-            }
-
-            switch (y)
-            {
-                case "Zreal":
-                    CalcZreal(gdList, filteredList);
-                    break;
-                case "AuxZreal":
-                    CalcAuxZreal(gdList, filteredList);
-                    break;
-                case "-Zim":
-                    CalcZimg(gdList, filteredList);
-                    break;
-                case "-AuxZim":
-                    CalcAuxZimg(gdList, filteredList);
-                    break;
-                case "|Z|":
-                    CalcZmag(gdList, filteredList);
-                    break;
-                case "|AuxZ|":
-                    CalcAuxZmag(gdList, filteredList);
-                    break;
-                case "Z-Phase":
-                    CalcZphase(gdList, filteredList);
-                    break;
-                case "AuxZ-Phase":
-                    CalcAuxZphase(gdList, filteredList);
-                    break;
-                case "Log|Z|":
-                    CalcLogZmag(gdList, filteredList);
-                    break;
-                case "Eref":
-                    CalcEref(gdList, filteredList);
-                    break;
-
-                case "AuxVdc":
-                    CalcAuxVdc(gdList, filteredList);
-                    break;
-
-                case "I":
-                    CalcI(gdList, filteredList, denominator);
-                    break;
-
-                case "Temperature":
-                    CalcTemperature(gdList, filteredList);
-                    break;
-
-                case "Load":
-                    CalcLoad(gdList, filteredList, denominator);
-                    break;
-                case "AuxLoad":
-                    CalcAuxLoad(gdList, filteredList, denominator);
-                    break;
-
-                case "Power":
-                    CalcPower(gdList, filteredList, denominator);
-                    break;
-                case "AuxPower":
-                    CalcAuxPower(gdList, filteredList, denominator);
-                    break;
-                case "Capacity":
-                    CalcCapacity(gdList, filteredList, denominator);
-                    gdList = GenGraphDataByCycle(gdList);
-                    break;
-                case "Energy":
                     CalcEnergy(gdList, filteredList, denominator);
                     gdList = GenGraphDataByCycle(gdList);
                     break;
-                case "AuxEnergy":
-                    CalcAuxEnergy(gdList, filteredList, denominator);
-                    gdList = GenGraphDataByCycle(gdList);
-                    break;
-                case "LogI":
-                    CalcLogI(gdList, filteredList, denominator);
-                    break;
                 case "Eoc":
+                case "OCP":
                     CalcEoc(gdList, filteredList);
                     break;
             }
 
             return gdList;
         }
-        
+
+        static public Dictionary<uint, GraphDataList> GetDataByAux(GraphDataList list, int MaxCount)
+        {
+            Dictionary<uint, GraphDataList> resultDict = new Dictionary<uint, GraphDataList>();
+
+            IEnumerator ie = list.GetEnumerator();
+            for (int i=0; i< MaxCount + 1; i++)
+            {
+                GraphDataFormat gdf = (GraphDataFormat)ie.Current;
+            }
+
+            
+
+            while (ie.MoveNext())
+            {
+                GraphDataFormat gdf = (GraphDataFormat)ie.Current;
+
+                if (!resultDict.ContainsKey((uint)gdf.Cycle))
+                {
+                    GraphDataList gdfList = new GraphDataList();
+
+                    resultDict.Add((uint)gdf.Cycle, gdfList);
+                }
+
+                resultDict[(uint)gdf.Cycle].Add(gdf);
+            }
+
+            return resultDict;
+        }
+
         static public Dictionary<uint, GraphDataList> GetDataByCycle(GraphDataList list)
         {
             Dictionary<uint, GraphDataList> resultDict = new Dictionary<uint, GraphDataList>();
@@ -1111,7 +1252,7 @@ namespace ZiveLab.ZM.Dataview
                 if (oldStep != gdf.Step)
                 {
                     GraphDataFormat nulldata = new GraphDataFormat();
-                    for(int i=0; i<12; i++)
+                    for(int i=0; i< MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         nulldata.XData[i] = double.NaN;
                         nulldata.YData[i] = gdf.YData[i];
@@ -1175,12 +1316,6 @@ namespace ZiveLab.ZM.Dataview
                     return false;
             }
 
-            if (filter.StepNoEnable)
-            {
-                if (!filter.GetStepNoList().Contains((uint)urgd.mRawData.nTaskNo))
-                    return false;
-            }
-
             return true;
         }
         static private GraphDataList GenGraphDataByStep(GraphDataList gdList)
@@ -1208,7 +1343,7 @@ namespace ZiveLab.ZM.Dataview
 
                     gdfNone.Step = oldStep;
                     gdfNone.Cycle = oldCycle;
-                    for(int i = 0; i<12; i++)
+                    for(int i = 0; i< MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfNone.XData[i] = double.NaN;
                         gdfNone.YData[i] = gdf.YData[i];
@@ -1404,7 +1539,7 @@ namespace ZiveLab.ZM.Dataview
             {
                 for(int i = 0; i < gdf.Count; i++)
                 {
-                    for (int j = 0; i < 12; j++)
+                    for (int j = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                     {
                         if (gdf[i].XData[j] == 0)
                         {
@@ -1420,7 +1555,7 @@ namespace ZiveLab.ZM.Dataview
             {
                 for (int i = 0; i < gdf.Count; i++)
                 {
-                    for (int j = 0; i < 12; j++)
+                    for (int j = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                     {
                         if (gdf[i].YData[j] == 0)
                         {
@@ -1459,7 +1594,7 @@ namespace ZiveLab.ZM.Dataview
                     oldCycle = gdf.Cycle;
 
                     GraphDataFormat gdfNone = new GraphDataFormat();
-                    for (int i = 0; i < 12; i++)
+                    for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfNone.XData[i] = double.NaN;
                         gdfNone.YData[i] = gdf.YData[i];
@@ -1498,7 +1633,7 @@ namespace ZiveLab.ZM.Dataview
 
                     gdfNone.Step = oldStep;
                     gdfNone.Cycle = oldCycle;
-                    for (int i = 0; i < 12; i++)
+                    for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfNone.XData[i] = double.NaN;
                         gdfNone.YData[i] = gdf.YData[i];
@@ -1546,11 +1681,6 @@ namespace ZiveLab.ZM.Dataview
             return stepList;
         }
 
-
-        private int _prevStep = -1;
-        private List<double> _vData = new List<double>();
-
-
         public bool SetGraphData(UnitReportData urgd, GraphDataXY gdxy)
         {
             int i;
@@ -1562,48 +1692,146 @@ namespace ZiveLab.ZM.Dataview
 
             gdfx.Step = (uint)urgd.mRawData.nTaskNo;
             gdfx.Cycle = (uint)urgd.mRawData.nCycle;
-            
-            if(_prevStep != urgd.mRawData.nTaskNo)
-            {
-                _prevStep = urgd.mRawData.nTaskNo;
-            }          
-
+         
             switch (gdxy.DataX.AxisName)
             {
                 case "Log(Frequency)":
-                    for (i = 0; i < 12; i++)
+                    gdfx.Data[0] = urgd.MainZ.Frequency;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Frequency);
+                    gdfx.DataObj[0] = urgd.MainZ.Frequency;
+
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = urgd.MainZ.Frequency;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Frequency);
-                        gdfx.DataObj[i] = urgd.MainZ.Frequency;
+                        gdfx.Data[i+1] = urgd.AuxZ[i].Frequency;
+                        gdfx.DataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Frequency);
+                        gdfx.DataObj[i+1] = urgd.AuxZ[i].Frequency;
                     }
                     break;
                 case "Zreal":
-                    for (i = 0; i < 12; i++)
+                    gdfx.Data[0] = urgd.MainZ.Zre;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
+                    gdfx.DataObj[0] = urgd.MainZ.Zre;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = urgd.MainZ.Zre;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
-                        gdfx.DataObj[i] = urgd.MainZ.Zre;
+                        gdfx.Data[i+1] = urgd.AuxZ[i].Zre;
+                        gdfx.DataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zre);
+                        gdfx.DataObj[i+1] = urgd.AuxZ[i].Zre;
                     }
                     break;
-                case "AuxZre":
-                    for (i = 0; i < 12; i++)
+                case "Yreal":
+                    gdfx.Data[0] = urgd.MainZ.Yre;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Yre);
+                    gdfx.DataObj[0] = urgd.MainZ.Yre;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = urgd.AuxZ[i].Zre;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString(urgd.AuxZ[i].Zre);
-                        gdfx.DataObj[i] = urgd.AuxZ[i].Zre;
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Yre;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Yre);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Yre;
                     }
                     break;
-                case "Frequency":
-                    for (i = 0; i < 12; i++)
+                case "Zphase":
+                case "Z-Phase":
+                    gdfx.Data[0] = urgd.MainZ.ZPhase;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.ZPhase);
+                    gdfx.DataObj[0] = urgd.MainZ.ZPhase;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = urgd.MainZ.Frequency;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString(urgd.MainZ.Frequency);
-                        gdfx.DataObj[i] = urgd.MainZ.Frequency;
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].ZPhase;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].ZPhase);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].ZPhase;
+                    }
+                    break;
+                case "Yphase":
+                case "Y-Phase":
+                    gdfx.Data[0] = urgd.MainZ.YPhase;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.YPhase);
+                    gdfx.DataObj[0] = urgd.MainZ.YPhase;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].YPhase;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].YPhase);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].YPhase;
+                    }
+                    break;
+                case "Rs(R-C)":
+                    gdfx.Data[0] = urgd.MainZ.Rs_RC;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rs_RC);
+                    gdfx.DataObj[0] = urgd.MainZ.Rs_RC;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Rs_RC;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rs_RC);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Rs_RC;
+                    }
+                    break;
+                case "Cs(R-C)":
+                    gdfx.Data[0] = urgd.MainZ.Cs_RC;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Cs_RC);
+                    gdfx.DataObj[0] = urgd.MainZ.Cs_RC;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Cs_RC;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Cs_RC);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Cs_RC;
+                    }
+                    break;
+                case "Rp(R|C)":
+                    gdfx.Data[0] = urgd.MainZ.Rp_RC;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rp_RC);
+                    gdfx.DataObj[0] = urgd.MainZ.Rp_RC;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Rp_RC;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rp_RC);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Rp_RC;
+                    }
+                    break;
+                case "Cp(R|C)":
+                    gdfx.Data[0] = urgd.MainZ.Cp_RC;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Cp_RC);
+                    gdfx.DataObj[0] = urgd.MainZ.Cp_RC;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Cp_RC;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Cp_RC);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Cp_RC;
+                    }
+                    break;
+                case "Rs(R-L)":
+                    gdfx.Data[0] = urgd.MainZ.Rs_RL;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rs_RL);
+                    gdfx.DataObj[0] = urgd.MainZ.Rs_RL;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Rs_RL;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rs_RL);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Rs_RL;
+                    }
+                    break;
+                case "Ls(R-L)":
+                    gdfx.Data[0] = urgd.MainZ.Ls_RL;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Ls_RL);
+                    gdfx.DataObj[0] = urgd.MainZ.Ls_RL;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Ls_RL;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Ls_RL);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Ls_RL;
+                    }
+                    break;
+                case "|Q(R-L)|":
+                    gdfx.Data[0] = urgd.MainZ.AbsQ_RL;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.AbsQ_RL);
+                    gdfx.DataObj[0] = urgd.MainZ.AbsQ_RL;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].AbsQ_RL;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].AbsQ_RL);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].AbsQ_RL;
                     }
                     break;
                 case "Test time":
-                    for (i = 0; i < 12; i++)
+                    for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfx.Data[i] = (double)DataConverter.Convert(urgd.TestTime, typeof(double));
                         gdfx.DataStr[i] = ZMF_File.GetTimeSpanString(urgd.TestTime, _TimeFormat);
@@ -1611,23 +1839,22 @@ namespace ZiveLab.ZM.Dataview
                     }
                     break;
                 case "Eref":
-                    for (i = 0; i < 12; i++)
+                case "Voltage":
+                case "Vdc":
+                    gdfx.Data[0] = urgd.mRawData.Vdc;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
+                    gdfx.DataObj[0] = urgd.mRawData.Vdc;
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = urgd.mRawData.Vdc;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
-                        gdfx.DataObj[i] = urgd.mRawData.Vdc;
-                    }
-                    break;
-                case "AuxVdc":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = urgd.AuxVdc[i];
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString(urgd.AuxVdc[i]);
-                        gdfx.DataObj[i] = urgd.AuxVdc[i];
+                        gdfx.Data[i + 1] = urgd.AuxVdc[i];
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxVdc[i]);
+                        gdfx.DataObj[i + 1] = urgd.AuxVdc[i];
                     }
                     break;
                 case "I":
-                    for (i = 0; i < 12; i++)
+                case "Current":
+                case "Idc":
+                    for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.mRawData.Idc / _Denominator;
                         gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.mRawData.Idc / _Denominator);
@@ -1635,91 +1862,42 @@ namespace ZiveLab.ZM.Dataview
                     }
                     break;
                 case "Temperature":
-                    for (i = 0; i < 12; i++)
+                    for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfx.Data[i] = urgd.mRawData.Temperature;
                         gdfx.DataStr[i] = string.Format("{0:F2}", urgd.mRawData.Temperature);
                         gdfx.DataObj[i] = string.Format("{0:F2}", urgd.mRawData.Temperature);
                     }
                     break;
-                case "Load":
-                    for (i = 0; i < 12; i++)
+                case "Frequency":
+                    gdfx.Data[0] = urgd.MainZ.Frequency;
+                    gdfx.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Frequency);
+                    gdfx.DataObj[0] = urgd.MainZ.Frequency;
+
+                    for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.Load / _Denominator;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.Load / _Denominator);
-                        gdfx.DataObj[i] = urgd.Load;
+                        gdfx.Data[i + 1] = urgd.AuxZ[i].Frequency;
+                        gdfx.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Frequency);
+                        gdfx.DataObj[i + 1] = urgd.AuxZ[i].Frequency;
                     }
                     break;
-                case "AuxLoad":
-                    for (i = 0; i < 12; i++)
+                case "Veoc":
+                case "Eoc":
+                case "OCP":
+                    for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.AuxLoad[i] / _Denominator;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.AuxLoad[i] / _Denominator);
-                        gdfx.DataObj[i] = urgd.AuxLoad[i];
+                        gdfx.Data[i] = urgd.mRawData.Veoc;
+                        gdfx.DataStr[i] = string.Format("{0:F2}", urgd.mRawData.Temperature);
+                        gdfx.DataObj[i] = string.Format("{0:F2}", urgd.mRawData.Temperature);
                     }
                     break;
-                case "Power":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.Power / _Denominator;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.Power / _Denominator);
-                        gdfx.DataObj[i] = (double)((_Denominator == 0) ? 0 : urgd.Power / _Denominator);
-                    }
-                    break;
-                case "AuxPower":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.AuxPower[i] / _Denominator;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.AuxPower[i] / _Denominator);
-                        gdfx.DataObj[i] = (double)((_Denominator == 0) ? 0 : urgd.AuxPower[i] / _Denominator);
-                    }
-                    break;
+                    
                 case "Capacity":
-                    for (i = 0; i < 12; i++)
+                    for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                     {
                         gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.Capacity / _Denominator;
                         gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.Capacity / _Denominator);
                         gdfx.DataObj[i] = (double)((_Denominator == 0) ? 0 : urgd.Capacity / _Denominator);
-                    }
-                    break;
-                case "Energy":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.Energy / _Denominator;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.Energy / _Denominator);
-                        gdfx.DataObj[i] = (double)((_Denominator == 0) ? 0 : urgd.Energy / _Denominator);
-                    }
-                    break;
-                case "AuxEnergy":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : urgd.AuxEnergy[i] / _Denominator;
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : urgd.AuxEnergy[i] / _Denominator);
-                        gdfx.DataObj[i] = (double)((_Denominator == 0) ? 0 : urgd.AuxEnergy[i] / _Denominator);
-                    }
-                    break;
-                case "Cycle time":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (double)DataConverter.Convert(urgd.CycleTime, typeof(double));
-                        gdfx.DataStr[i] = ZMF_File.GetTimeSpanString(urgd.CycleTime, _TimeFormat);
-                        gdfx.DataObj[i] = urgd.CycleTime;
-                    }
-                    break;
-                case "Step time":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (double)DataConverter.Convert(urgd.StepTime, typeof(double));
-                        gdfx.DataStr[i] = ZMF_File.GetTimeSpanString(urgd.StepTime, _TimeFormat);
-                        gdfx.DataObj[i] = urgd.StepTime;
-                    }
-                    break;
-                case "LogI":
-                    for (i = 0; i < 12; i++)
-                    {
-                        gdfx.Data[i] = (_Denominator == 0) ? 0 : Math.Abs(urgd.mRawData.Idc / _Denominator);
-                        gdfx.DataStr[i] = CoTypeString.DoubleToString((_Denominator == 0) ? 0 : Math.Abs(urgd.mRawData.Idc / _Denominator));
-                        gdfx.DataObj[i] = (double)((_Denominator == 0) ? 0 : Math.Abs(urgd.mRawData.Idc / _Denominator));
                     }
                     break;
                
@@ -1730,100 +1908,218 @@ namespace ZiveLab.ZM.Dataview
             for (i = 0; i < gdxy.DataYList.Count; i++)
             {
                 GraphDataFormatY gdfy = new GraphDataFormatY();
-
+                
                 gdfy.Valid = true;
                 switch (gdxy.DataYList[i].AxisName)
                 {
                     case "Zreal":
-                        for(j=0; j<12; j++)
+                        gdfy.Data[0] = urgd.MainZ.Zre;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
+                        gdfy.DataObj[0] = urgd.MainZ.Zre;
+                        for (j=0; j< MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.MainZ.Zre;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.MainZ.Zre);
-                            gdfy.DataObj[j] = urgd.MainZ.Zre;
-                        }
-                        break;
-                    case "AuxZreal":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxZ[j].Zre;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zre);
-                            gdfy.DataObj[j] = urgd.AuxZ[j].Zre;
+                            gdfy.Data[j+1] = urgd.AuxZ[j].Zre;
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zre);
+                            gdfy.DataObj[j+1] = urgd.AuxZ[j].Zre;
                         }
                         break;
                     case "-Zim":
-                        for (j = 0; j < 12; j++)
+                    case "-Zimg":
+                        gdfy.Data[0] = urgd.MainZ.Zim;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zim);
+                        gdfy.DataObj[0] = urgd.MainZ.Zim;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.MainZ.Zim;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.MainZ.Zim);
-                            gdfy.DataObj[j] = urgd.MainZ.Zim;
-                        }
-                        break;
-                    case "-AuxZim":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxZ[j].Zim;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zim);
-                            gdfy.DataObj[j] = urgd.AuxZ[j].Zim;
+                            gdfy.Data[j+1] = urgd.AuxZ[j].Zim;
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zim);
+                            gdfy.DataObj[j+1] = urgd.AuxZ[j].Zim;
                         }
                         break;
                     case "|Z|":
-                        for (j = 0; j < 12; j++)
+                        gdfy.Data[0] = urgd.MainZ.Zmag;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zmag);
+                        gdfy.DataObj[0] = urgd.MainZ.Zmag;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.MainZ.Zmag;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.MainZ.Zmag);
-                            gdfy.DataObj[j] = urgd.MainZ.Zmag;
-                        }
-                        break;
-                    case "|AuxZ|":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxZ[j].Zmag;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zmag);
-                            gdfy.DataObj[j] = urgd.AuxZ[j].Zmag;
+                            gdfy.Data[j+1] = urgd.AuxZ[j].Zmag;
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zmag);
+                            gdfy.DataObj[j+1] = urgd.AuxZ[j].Zmag;
                         }
                         break;
                     case "Z-Phase":
-                        for (j = 0; j < 12; j++)
+                    case "Zphase":
+                        gdfy.Data[0] = urgd.MainZ.ZPhase;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.ZPhase);
+                        gdfy.DataObj[0] = urgd.MainZ.ZPhase;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.MainZ.ZPhase;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.MainZ.ZPhase);
-                            gdfy.DataObj[j] = urgd.MainZ.ZPhase;
+                            gdfy.Data[j+1] = urgd.AuxZ[j].ZPhase;
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxZ[j].ZPhase);
+                            gdfy.DataObj[j+1] = urgd.AuxZ[j].ZPhase;
                         }
                         break;
-                    case "AuxZ-Phase":
-                        for (j = 0; j < 12; j++)
+                    case "Yreal":
+                        gdfy.Data[0] = urgd.MainZ.Yre;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Yre);
+                        gdfy.DataObj[0] = urgd.MainZ.Yre;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.AuxZ[j].ZPhase;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxZ[j].ZPhase);
-                            gdfy.DataObj[j] = urgd.AuxZ[j].ZPhase;
+                            gdfy.Data[j + 1] = urgd.AuxZ[j].Yre;
+                            gdfy.DataStr[j + 1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Yre);
+                            gdfy.DataObj[j + 1] = urgd.AuxZ[j].Yre;
+                        }
+                        break;
+                    case "-Yim":
+                    case "-Yimg":
+                        gdfy.Data[0] = urgd.MainZ.Yim;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Yim);
+                        gdfy.DataObj[0] = urgd.MainZ.Yim;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                        {
+                            gdfy.Data[j + 1] = urgd.AuxZ[j].Yim;
+                            gdfy.DataStr[j + 1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Yim);
+                            gdfy.DataObj[j + 1] = urgd.AuxZ[j].Yim;
+                        }
+                        break;
+                    case "|Y|":
+                        gdfy.Data[0] = urgd.MainZ.Ymag;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Ymag);
+                        gdfy.DataObj[0] = urgd.MainZ.Ymag;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                        {
+                            gdfy.Data[j + 1] = urgd.AuxZ[j].Ymag;
+                            gdfy.DataStr[j + 1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Ymag);
+                            gdfy.DataObj[j + 1] = urgd.AuxZ[j].Ymag;
+                        }
+                        break;
+                    case "Y-Phase":
+                    case "Yphase":
+                        gdfy.Data[0] = urgd.MainZ.YPhase;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.YPhase);
+                        gdfy.DataObj[0] = urgd.MainZ.YPhase;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                        {
+                            gdfy.Data[j + 1] = urgd.AuxZ[j].YPhase;
+                            gdfy.DataStr[j + 1] = CoTypeString.DoubleToString(urgd.AuxZ[j].YPhase);
+                            gdfy.DataObj[j + 1] = urgd.AuxZ[j].YPhase;
                         }
                         break;
                     case "Log|Z|":
-                        for (j = 0; j < 12; j++)
+                        gdfy.Data[0] = urgd.MainZ.Zmag;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Zmag);
+                        gdfy.DataObj[0] = urgd.MainZ.Zmag;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.MainZ.Zmag;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.MainZ.Zmag);
-                            gdfy.DataObj[j] = urgd.MainZ.Zmag;
+                            gdfy.Data[j + 1] = urgd.AuxZ[j].Zmag;
+                            gdfy.DataStr[j + 1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Zmag);
+                            gdfy.DataObj[j + 1] = urgd.AuxZ[j].Zmag;
+                        }
+                        break;
+                    case "Log|Y|":
+                        gdfy.Data[0] = urgd.MainZ.Ymag;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Ymag);
+                        gdfy.DataObj[0] = urgd.MainZ.Ymag;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                        {
+                            gdfy.Data[j + 1] = urgd.AuxZ[j].Ymag;
+                            gdfy.DataStr[j + 1] = CoTypeString.DoubleToString(urgd.AuxZ[j].Ymag);
+                            gdfy.DataObj[j + 1] = urgd.AuxZ[j].Ymag;
+                        }
+                        break;
+                    case "Rs(R-C)":
+                        gdfy.Data[0] = urgd.MainZ.Rs_RC;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rs_RC);
+                        gdfy.DataObj[0] = urgd.MainZ.Rs_RC;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].Rs_RC;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rs_RC);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].Rs_RC;
+                        }
+                        break;
+                    case "Cs(R-C)":
+                        gdfy.Data[0] = urgd.MainZ.Cs_RC;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Cs_RC);
+                        gdfy.DataObj[0] = urgd.MainZ.Cs_RC;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].Cs_RC;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Cs_RC);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].Cs_RC;
+                        }
+                        break;
+                    case "Rp(R|C)":
+                        gdfy.Data[0] = urgd.MainZ.Rp_RC;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rp_RC);
+                        gdfy.DataObj[0] = urgd.MainZ.Rp_RC;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].Rp_RC;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rp_RC);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].Rp_RC;
+                        }
+                        break;
+                    case "Cp(R|C)":
+                        gdfy.Data[0] = urgd.MainZ.Cp_RC;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Cp_RC);
+                        gdfy.DataObj[0] = urgd.MainZ.Cp_RC;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].Cp_RC;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Cp_RC);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].Cp_RC;
+                        }
+                        break;
+                    case "Rs(R-L)":
+                        gdfy.Data[0] = urgd.MainZ.Rs_RL;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Rs_RL);
+                        gdfy.DataObj[0] = urgd.MainZ.Rs_RL;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].Rs_RL;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Rs_RL);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].Rs_RL;
+                        }
+                        break;
+                    case "Ls(R-L)":
+                        gdfy.Data[0] = urgd.MainZ.Ls_RL;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.Ls_RL);
+                        gdfy.DataObj[0] = urgd.MainZ.Ls_RL;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].Ls_RL;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Ls_RL);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].Ls_RL;
+                        }
+                        break;
+                    case "|Q(R-L)|":
+                        gdfy.Data[0] = urgd.MainZ.AbsQ_RL;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.MainZ.AbsQ_RL);
+                        gdfy.DataObj[0] = urgd.MainZ.AbsQ_RL;
+                        for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                        {
+                            gdfy.Data[i + 1] = urgd.AuxZ[i].AbsQ_RL;
+                            gdfy.DataStr[i + 1] = CoTypeString.DoubleToString(urgd.AuxZ[i].AbsQ_RL);
+                            gdfy.DataObj[i + 1] = urgd.AuxZ[i].AbsQ_RL;
                         }
                         break;
                     case "Eref":
-                        for (j = 0; j < 12; j++)
+                    case "Voltage":
+                    case "Vdc":
+                        gdfy.Data[0] = urgd.mRawData.Vdc;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
+                        gdfy.DataObj[0] = urgd.mRawData.Vdc;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.mRawData.Vdc;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.mRawData.Vdc);
-                            gdfy.DataObj[j] = urgd.mRawData.Vdc;
-                        }
-                        break;
-                    case "AuxVdc":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxVdc[j];
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxVdc[j]);
-                            gdfy.DataObj[j] = urgd.AuxVdc[j];
+                            gdfy.Data[j+1] = urgd.AuxVdc[j];
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxVdc[j]);
+                            gdfy.DataObj[j+1] = urgd.AuxVdc[j];
                         }
                         break;
                     case "I":
-                        for (j = 0; j < 12; j++)
+                    case "Current":
+                    case "Idc":
+                        for (j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
                             gdfy.Data[j] = urgd.mRawData.Idc;
                             gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.mRawData.Idc);
@@ -1831,47 +2127,38 @@ namespace ZiveLab.ZM.Dataview
                         }
                         break;
                     case "Temperature":
-                        for (j = 0; j < 12; j++)
+                        for (j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
                             gdfy.Data[j] = urgd.mRawData.Temperature;
                             gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.mRawData.Temperature);
                             gdfy.DataObj[j] = urgd.mRawData.Temperature;
                         }
                         break;
+                        
                     case "Load":
-                        for (j = 0; j < 12; j++)
+                        gdfy.Data[0] = urgd.Load;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.Load);
+                        gdfy.DataObj[0] = urgd.Load;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.Load;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.Load);
-                            gdfy.DataObj[j] = urgd.Load;
-                        }
-                        break;
-                    case "AuxLoad":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxLoad[j];
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxLoad[j]);
-                            gdfy.DataObj[j] = urgd.AuxLoad[j];
+                            gdfy.Data[j+1] = urgd.AuxLoad[j];
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxLoad[j]);
+                            gdfy.DataObj[j+1] = urgd.AuxLoad[j];
                         }
                         break;
                     case "Power":
-                        for (j = 0; j < 12; j++)
+                        gdfy.Data[0] = urgd.Power;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.Power);
+                        gdfy.DataObj[0] = urgd.Power;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.Power;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.Power);
-                            gdfy.DataObj[j] = urgd.Power;
-                        }
-                        break;
-                    case "AuxPower":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxPower[j];
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxPower[j]);
-                            gdfy.DataObj[j] = urgd.AuxPower[j];
+                            gdfy.Data[j+1] = urgd.AuxPower[j];
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxPower[j]);
+                            gdfy.DataObj[j+1] = urgd.AuxPower[j];
                         }
                         break;
                     case "Capacity":
-                        for (j = 0; j < 12; j++)
+                        for (j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
                             gdfy.Data[j] = urgd.Capacity;
                             gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.Capacity);
@@ -1879,36 +2166,35 @@ namespace ZiveLab.ZM.Dataview
                         }
                         break;
                     case "Energy":
-                        for (j = 0; j < 12; j++)
+                        gdfy.Data[0] = urgd.Energy;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.Energy);
+                        gdfy.DataObj[0] = urgd.Energy;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
                         {
-                            gdfy.Data[j] = urgd.Energy;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.Energy);
-                            gdfy.DataObj[j] = urgd.Energy;
+                            gdfy.Data[j+1] = urgd.AuxEnergy[j];
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxEnergy[j]);
+                            gdfy.DataObj[j+1] = urgd.AuxEnergy[j];
                         }
                         break;
-                    case "AuxEnergy":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.AuxEnergy[j];
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.AuxEnergy[j]);
-                            gdfy.DataObj[j] = urgd.AuxEnergy[j];
-                        }
-                        break;
-                    case "LogI":
-                        for (j = 0; j < 12; j++)
-                        {
-                            gdfy.Data[j] = urgd.mRawData.Idc;
-                            gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.mRawData.Idc);
-                            gdfy.DataObj[j] = urgd.mRawData.Idc;
-                        }
-                        break;
+                    case "Veoc":
                     case "Eoc":
-                        for (j = 0; j < 12; j++)
+                    case "OCP":
+                        for (j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
                             gdfy.Data[j] = urgd.mRawData.Veoc;
                             gdfy.DataStr[j] = CoTypeString.DoubleToString(urgd.mRawData.Veoc);
                             gdfy.DataObj[j] = urgd.mRawData.Veoc;
                         }
+                        /*
+                        gdfy.Data[0] = urgd.mRawData.Veoc;
+                        gdfy.DataStr[0] = CoTypeString.DoubleToString(urgd.mRawData.Veoc);
+                        gdfy.DataObj[0] = urgd.mRawData.Veoc;
+                        for (j = 0; j < MBZA_Constant.MAX_AUX_CHANNELS; j++)
+                        {
+                            gdfy.Data[j+1] = urgd.AuxVeoc[j];
+                            gdfy.DataStr[j+1] = CoTypeString.DoubleToString(urgd.AuxVeoc[j]);
+                            gdfy.DataObj[j+1] = urgd.AuxVeoc[j];
+                        }*/
                         break;
                 }
        
@@ -1938,11 +2224,6 @@ namespace ZiveLab.ZM.Dataview
                         if (_DataFilter.StartTime > urgd.CycleTime || _DataFilter.EndTime < urgd.CycleTime)
                             return false;
                         break;
-                    case "Step Time":
-                    case "단계 시간":
-                        if (_DataFilter.StartTime > urgd.StepTime || _DataFilter.EndTime < urgd.StepTime)
-                            return false;
-                        break;
                 }
             }
 
@@ -1961,6 +2242,52 @@ namespace ZiveLab.ZM.Dataview
             return true;
         }
         
+        public string[] GetLineData(int idx, int MaxAuxCnt, bool[] bAuxCh)
+        {
+            int i;
+            int j;
+            List<string> strList = new List<string>();
+            if (bxtime == true && bChgTimeFormat == true)
+            {
+                _GraphDataXY.DataX.DataList[idx].DataStr[0] = ZMF_File.GetTimeSpanString((TimeSpan)_GraphDataXY.DataX.DataList[idx].DataObj[0], _TimeFormat);
+            }
+            strList.Add(string.Format("{0}", idx + 1));
+
+            strList.Add(_GraphDataXY.DataX.DataList[idx].DataStr[0]);
+            for (i = 0; i < _GraphDataXY.DataYList.Count; i++)
+            {
+                if (_GraphDataXY.DataYList[i].DataList[idx].Valid)
+                    strList.Add(_GraphDataXY.DataYList[i].DataList[idx].DataStr[0]);
+                else
+                    strList.Add(string.Empty);
+            }
+
+            if(MaxAuxCnt > 0)
+            {
+                for (i = 0; i < MaxAuxCnt; i++)
+                {
+                    if (bAuxCh[i])
+                    {
+                        if (bxtime == true && bChgTimeFormat == true)
+                        {
+                            _GraphDataXY.DataX.DataList[idx].DataStr[i+1] = ZMF_File.GetTimeSpanString((TimeSpan)_GraphDataXY.DataX.DataList[idx].DataObj[i+1], _TimeFormat);
+                        }
+
+                        strList.Add(_GraphDataXY.DataX.DataList[idx].DataStr[i+1]);
+                        for (j = 0; j < _GraphDataXY.DataYList.Count; j++)
+                        {
+                            if (_GraphDataXY.DataYList[j].DataList[idx].Valid)
+                                strList.Add(_GraphDataXY.DataYList[j].DataList[idx].DataStr[i + 1]);
+                            else
+                                strList.Add(string.Empty);
+                        }
+                    }
+                }
+            }
+
+            return strList.ToArray();
+        }
+
         public string[] GetLineData(int idx, int dataidx = 0)
         {
             int i;
@@ -1983,6 +2310,65 @@ namespace ZiveLab.ZM.Dataview
             return strList.ToArray();
         }
 
+        public List<DataTypeString> GetTypeStringLineData(int idx, int MaxAuxCnt, bool[] bAuxCh)
+        {
+            List<DataTypeString> strList = new List<DataTypeString>();
+
+            strList.Add(new DataTypeString(eDataStringType.Number, string.Format("{0}", idx + 1)));
+
+            eDataStringType tType = eDataStringType.Number;
+            if (_TimeFormat == 0) tType = eDataStringType.Time;
+            else if (_TimeFormat == 2) tType = eDataStringType.Exponent;
+
+            switch (_GraphDataXY.DataX.AxisName)
+            {
+                case "Test time": case "시험 시간": case "Cycle time": case "사이클 시간": 
+                    strList.Add(new DataTypeString(tType, ZMF_File.GetTimeSpanString((TimeSpan)_GraphDataXY.DataX.DataList[idx].DataObj[0], _TimeFormat)));
+                    break;
+                default:
+                    strList.Add(new DataTypeString(eDataStringType.Number, _GraphDataXY.DataX.DataList[idx].DataStr[0]));
+                    break;
+            }
+
+            for (int i = 0; i < _GraphDataXY.DataYList.Count; i++)
+            {
+                if (_GraphDataXY.DataYList[i].DataList[idx].Valid)
+                    strList.Add(new DataTypeString(eDataStringType.Number, _GraphDataXY.DataYList[i].DataList[idx].DataStr[0]));
+                else
+                    strList.Add(new DataTypeString(eDataStringType.Number, string.Empty));
+            }
+
+            if(MaxAuxCnt > 0)
+            {
+                for (int i = 0; i < MaxAuxCnt; i++)
+                {
+                    if(bAuxCh[i])
+                    {
+                        switch (_GraphDataXY.DataX.AxisName)
+                        {
+                            case "Test time":
+                            case "시험 시간":
+                            case "Cycle time":
+                            case "사이클 시간":
+                                strList.Add(new DataTypeString(tType, ZMF_File.GetTimeSpanString((TimeSpan)_GraphDataXY.DataX.DataList[idx].DataObj[i+1], _TimeFormat)));
+                                break;
+                            default:
+                                strList.Add(new DataTypeString(eDataStringType.Number, _GraphDataXY.DataX.DataList[idx].DataStr[i+1]));
+                                break;
+                        }
+                        for (int j = 0; j < _GraphDataXY.DataYList.Count; j++)
+                        {
+                            if (_GraphDataXY.DataYList[j].DataList[idx].Valid)
+                                strList.Add(new DataTypeString(eDataStringType.Number, _GraphDataXY.DataYList[j].DataList[idx].DataStr[i+1]));
+                            else
+                                strList.Add(new DataTypeString(eDataStringType.Number, string.Empty));
+                        }
+                    }
+                }
+            }
+            return strList;
+        }
+
         public List<DataTypeString> GetTypeStringLineData(int idx, int dataidx = 0)
         {
             List<DataTypeString> strList = new List<DataTypeString>();
@@ -1998,10 +2384,6 @@ namespace ZiveLab.ZM.Dataview
                 case "시험 시간":
                 case "Cycle time":
                 case "사이클 시간":
-                case "File time":
-                case "파일 시간":
-                case "Step time":
-                case "단계 시간":
                     strList.Add(new DataTypeString(tType, ZMF_File.GetTimeSpanString((TimeSpan)_GraphDataXY.DataX.DataList[idx].DataObj[dataidx], _TimeFormat)));
                     break;
                 default:
@@ -2030,10 +2412,6 @@ namespace ZiveLab.ZM.Dataview
                 case "시험 시간":
                 case "사이클 시간":
                 case "Cycle time":
-                case "파일 시간":
-                case "File time":
-                case "단계 시간":
-                case "Step time":
                     bret = true;
                     break;
             }

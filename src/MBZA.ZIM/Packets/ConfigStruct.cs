@@ -74,6 +74,12 @@ namespace ZiveLab.ZM.ZIM.Packets
             LineVisible = true;
             PointVisible = true;
         }
+
+        public void Initialize()
+        {
+            LineVisible = true;
+            PointVisible = true;
+        }
     }
 
     public class st_graph_vars_ni
@@ -309,6 +315,357 @@ namespace ZiveLab.ZM.ZIM.Packets
             showitems[nitem].SetBodeValue(value);
         }
     }
+
+
+    public class st_GrpCh_Vars_Obj
+    {
+        public bool bExist;
+        public int nAuxCh;
+        public bool[] showItems;
+        public st_GrpCh_Vars_Obj()
+        {
+            bExist = false;
+            nAuxCh = -1;
+            showItems = new bool[MBZA_Constant.MAX_TECHNIQUE];
+            for (int i = 0; i < MBZA_Constant.MAX_TECHNIQUE; i++)
+            {
+                showItems[i] = true;
+            }
+        }
+
+        public void Initialize()
+        {
+            bExist = false;
+            nAuxCh = -1;
+            for (int i = 0; i < MBZA_Constant.MAX_TECHNIQUE; i++)
+            {
+                showItems[i] = true;
+            }
+        }
+
+    }
+
+    public class st_GrpCh_Vars_Item
+    {
+        public int GrpCtrlMode;
+        public int GrpPlotCount;
+        public int PlotCount;
+        public int SelItem;
+        public bool xTimemode;
+        public bool ShowGridX;
+        public bool ShowGridY1;
+        public bool ShowGridY2;
+        public Color Axis_Color;
+        public Color BackColor;
+        public Color GridColor;
+
+        public int LastPlotPoint;
+        public int LastPlotPoint1;
+        public int LastCursorIndex;
+        public int SelPlotNo;
+        public int Type;
+        public bool bStopRefresh;
+        public bool ShowLegend;
+        
+        public bool ShowLine;
+        public bool ShowPoint;
+        public bool LegendMove;
+        public Point LegendPointS;
+        public Point LegendPointE;
+       
+        public st_graph_vars_plot[] mPlot;
+        public Color[] PlotColor;
+        public int[] PlotPointer;
+        public bool[] show;
+
+        public st_GrpCh_Vars_Item()
+        {
+            GrpCtrlMode = 0;
+            SelItem = 0;
+            xTimemode = false;
+            LastCursorIndex = -1;
+            LastPlotPoint = 0;
+            LastPlotPoint1 = 0;
+            PlotCount = 1;
+            GrpPlotCount = 0;
+            SelPlotNo = 0;
+            Type = 0;
+            bStopRefresh = false;
+            LegendMove = false;
+            ShowLegend = false;
+            ShowGridX = true;
+            ShowGridY1 = true;
+            ShowGridY2 = true;
+            ShowLine = true;
+            ShowPoint = true;
+            Axis_Color = Color.Navy;
+            BackColor = Color.White;
+            GridColor = Color.LightGray;
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS);
+            show = new bool[MBZA_Constant.MAX_GRAPH_YAXES];
+            for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
+            {
+                show[i] = true;
+            }
+
+            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+
+            PlotPointer = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS; i++)
+            {
+                PlotPointer[i] = 0;
+            }
+
+            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS; i++)
+            {
+                mPlot[i] = new st_graph_vars_plot();
+            }
+        }
+
+        public void Initialize()
+        {
+            GrpCtrlMode = 0;
+            LastCursorIndex = -1;
+            LastPlotPoint = 0;
+            PlotCount = 1;
+            SelPlotNo = 0;
+            Type = 0;
+            bStopRefresh = false;
+            ShowLegend = false;
+            ShowGridX = true;
+            ShowGridY1 = true;
+            ShowGridY2 = true;
+            BackColor = Color.White;
+            GridColor = Color.LightGray;
+
+            for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
+            {
+                show[i] = true;
+            }
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                PlotColor[i] = LstColor[i];
+                PlotPointer[i] = 0;
+            }
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4; i++)
+            {
+                mPlot[i].Initialize();
+            }
+
+        }
+
+        public void LoadGefaultPlotColor()
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+        }
+        public void LoadGefaultPlotColor(int nPlot)
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
+            PlotColor[nPlot] = LstColor[nPlot];
+        }
+
+        public void SetPlotColor(int nPlot, Color nColor)
+        {
+            PlotColor[nPlot] = nColor;
+        }
+
+        public void SetValue(bool value)
+        {
+            for (int i = 0; i < 2; i++)
+                show[i] = value;
+        }
+
+        public void SetValue(int nPlot, bool value)
+        {
+            show[nPlot] = value;
+        }
+    }
+
+    public class st_GrpRt_Vars_Item
+    {
+        public int GrpCtrlMode;
+        public int LastPlotPoint;
+        public int PlotCount;
+        public int LastCursorIndex;
+        public int SelPlotNo;
+        public int Type;
+        public bool bStopRefresh;
+        public bool ShowLegend;
+        public bool ShowGrid;
+        public bool ShowLine;
+        public bool ShowPoint;
+        public bool LegendMove;
+        public Point LegendPointS;
+        public Point LegendPointE;
+        public Color Axis_Color;
+        public Color BackColor;
+        public Color GridColor;
+        public st_graph_vars_plot[] mPlot;
+        public Color[] PlotColor;
+        public int[] PlotPointer;
+        public bool[] show;
+
+        public st_GrpRt_Vars_Item()
+        {
+            GrpCtrlMode = 0;
+            LastCursorIndex = -1;
+            LastPlotPoint = 0;
+            PlotCount = 1;
+            SelPlotNo = 0;
+            Type = 0;
+            bStopRefresh = false;
+            LegendMove = false;
+            ShowLegend = false;
+            ShowGrid = true;
+            ShowLine = true;
+            ShowPoint = true;
+            Axis_Color = Color.Navy;
+            BackColor = Color.White;
+            GridColor = Color.LightGray;
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+            show = new bool[MBZA_Constant.MAX_GRAPH_YAXES];
+            for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
+            {
+                show[i] = true;
+            }
+
+            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+
+            PlotPointer = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                PlotPointer[i] = 0;
+            }
+
+            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                mPlot[i] = new st_graph_vars_plot();
+            }
+        }
+
+        public void Initialize()
+        {
+            GrpCtrlMode = 0;
+            LastCursorIndex = -1;
+            LastPlotPoint = 0;
+            PlotCount = 1;
+            SelPlotNo = 0;
+            Type = 0;
+            bStopRefresh = false;
+            ShowLegend = false;
+            ShowGrid = true;
+            BackColor = Color.White;
+            GridColor = Color.LightGray;
+
+            for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
+            {
+                show[i] = true;
+            }
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                PlotColor[i] = LstColor[i];
+                PlotPointer[i] = 0;
+            }
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                mPlot[i].Initialize();
+            }
+
+        }
+
+        public void LoadGefaultPlotColor()
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                PlotColor[i] = LstColor[i];
+            }
+        }
+        public void LoadGefaultPlotColor(int nPlot)
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
+            PlotColor[nPlot] = LstColor[nPlot];
+        }
+
+        public void SetPlotColor(int nPlot, Color nColor)
+        {
+            PlotColor[nPlot] = nColor;
+        }
+
+        public void SetValue(bool value)
+        {
+            for (int i = 0; i < 2; i++)
+                show[i] = value;
+        }
+
+        public void SetValue(int nPlot, bool value)
+        {
+            show[nPlot] = value;
+        }
+    }
+    public class st_GrpCh_vars
+    {
+        public bool bAux;
+        public int nAuxChCount;
+        public double GrpSpaceRate;
+        public st_GrpCh_Vars_Obj[] GrpObjs;
+        public st_GrpCh_Vars_Item GrpItems1;
+        public st_GrpCh_Vars_Item GrpItems2;
+        public st_GrpRt_Vars_Item GrpItemsRT;
+        public st_GrpRt_Vars_Item GrpItemsRaw;
+        public st_GrpCh_vars()
+        {
+            bAux = false;
+            nAuxChCount = 0;
+            GrpSpaceRate = 0.01;
+            GrpObjs = new st_GrpCh_Vars_Obj[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                GrpObjs[i] = new st_GrpCh_Vars_Obj();
+            }
+            GrpItems1 = new st_GrpCh_Vars_Item();
+            GrpItems2 = new st_GrpCh_Vars_Item();
+           
+            GrpItemsRT = new st_GrpRt_Vars_Item();
+            GrpItemsRaw = new st_GrpRt_Vars_Item();
+        }
+
+        public void Initialize()
+        {
+            bAux = false;
+            nAuxChCount = 0;
+            GrpSpaceRate = 0.01;
+            for (int i = 0; i < MBZA_Constant.MAX_TECHNIQUE; i++)
+            {
+                GrpObjs[i].Initialize();
+            }
+
+            GrpItems1.Initialize();
+            GrpItems2.Initialize();
+            GrpItemsRT.Initialize();
+            GrpItemsRaw.Initialize();
+        }
+    }
+
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

@@ -33,11 +33,6 @@
             this.menu_1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuGraphColor1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotColor11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor13 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor14 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor15 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor16 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuAxisColor1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -45,24 +40,9 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuBackColor1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuGraphView1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotLine11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep11 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep12 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine13 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint13 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep13 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine14 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint14 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep14 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine15 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint15 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep15 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine16 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint16 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep16 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuGraphLine1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuGraphPoint1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuPlotGridX1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY11 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY12 = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,11 +67,6 @@
             this.menu_2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuGraphColor2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotColor21 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor22 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor23 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor24 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor25 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotColor26 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuAxisColor2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -99,24 +74,9 @@
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuBackColor2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuGraphView2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotLine21 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint21 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep21 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine22 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint22 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep22 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine23 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint23 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep23 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine24 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint24 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep24 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine25 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint25 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep25 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLine26 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPlotPoint26 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSep26 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuGraphLine2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuGraphPoint2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuPlotGridX2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY21 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY22 = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,7 +122,6 @@
             this.RtMenuGraphGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.RtMenuGraphColor = new System.Windows.Forms.ToolStripMenuItem();
             this.RtMenuGraphPlotColor1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.RtMenuGraphPlotColor2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.RtMenuGraphAxisColor = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
@@ -192,12 +151,11 @@
             this.tabgrp = new System.Windows.Forms.TabControl();
             this.TabGrp1 = new System.Windows.Forms.TabPage();
             this.grpboxni1 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
-            this.cboItemA = new System.Windows.Forms.ComboBox();
+            this.ChkListLegend1 = new System.Windows.Forms.CheckedListBox();
             this.grpboxni2 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            this.btDeselAllNiItems = new System.Windows.Forms.Button();
-            this.btSelAllNiItems = new System.Windows.Forms.Button();
+            this.ChkListItem1 = new System.Windows.Forms.CheckedListBox();
+            this.btDeselAll1 = new System.Windows.Forms.Button();
+            this.btSelAll1 = new System.Windows.Forms.Button();
             this.lblcsfreq1 = new System.Windows.Forms.Label();
             this.legend1 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem11 = new NationalInstruments.UI.LegendItem();
@@ -291,14 +249,75 @@
             this.Grp1Plot43 = new NationalInstruments.UI.ScatterPlot();
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor2 = new NationalInstruments.UI.XYCursor();
+            this.Grp1Plot44 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot45 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot46 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot47 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot48 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot49 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot50 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot51 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot52 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot53 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot54 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot55 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot56 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot57 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot58 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot59 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot60 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot61 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot62 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot63 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot64 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot65 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot66 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot67 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot68 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot69 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot70 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot71 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot72 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot73 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot74 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot75 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot76 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot77 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot78 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot79 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot80 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot81 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot82 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot83 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot84 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot85 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot86 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot87 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot88 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp1Plot89 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot4 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot5 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot6 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot7 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot8 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot9 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot10 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot11 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot12 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot13 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot14 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot15 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot16 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot17 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot18 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot19 = new NationalInstruments.UI.ScatterPlot();
             this.TabGrp2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ChkListLegend2 = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox4 = new System.Windows.Forms.CheckedListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ChkListItem2 = new System.Windows.Forms.CheckedListBox();
+            this.btDeselAll2 = new System.Windows.Forms.Button();
+            this.btSelAll2 = new System.Windows.Forms.Button();
             this.lblcsfreq2 = new System.Windows.Forms.Label();
             this.legend2 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem21 = new NationalInstruments.UI.LegendItem();
@@ -418,13 +437,65 @@
             this.Grp2Plot56 = new NationalInstruments.UI.ScatterPlot();
             this.grp2 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor1 = new NationalInstruments.UI.XYCursor();
+            this.Grp2Plot57 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot58 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot59 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot60 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot61 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot62 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot63 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot64 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot65 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot66 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot67 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot68 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot69 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot70 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot71 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot72 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot73 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot74 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot75 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot76 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot77 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot78 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot79 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot80 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot81 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot82 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot83 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot84 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot85 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot86 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot87 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot88 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot89 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot90 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot91 = new NationalInstruments.UI.ScatterPlot();
+            this.Grp2Plot92 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot20 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot21 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot22 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot23 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot24 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot25 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot26 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot27 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot28 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot29 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot30 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot31 = new NationalInstruments.UI.ScatterPlot();
+            this.scatterPlot32 = new NationalInstruments.UI.ScatterPlot();
             this.TabGrpRaw = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ChkListLegend3 = new System.Windows.Forms.CheckedListBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ChkListItem3 = new System.Windows.Forms.CheckedListBox();
+            this.btDeselAll3 = new System.Windows.Forms.Button();
+            this.btSelAll3 = new System.Windows.Forms.Button();
             this.Rtlegend = new NationalInstruments.UI.WindowsForms.Legend();
             this.RtlegendItem1 = new NationalInstruments.UI.LegendItem();
-            this.RTxAxis1 = new NationalInstruments.UI.XAxis();
-            this.RTyAxis1 = new NationalInstruments.UI.YAxis();
             this.RtlegendItem2 = new NationalInstruments.UI.LegendItem();
-            this.RTyAxis2 = new NationalInstruments.UI.YAxis();
             this.RtlegendItem3 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem4 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem5 = new NationalInstruments.UI.LegendItem();
@@ -438,8 +509,42 @@
             this.RtlegendItem13 = new NationalInstruments.UI.LegendItem();
             this.RtlegendItem14 = new NationalInstruments.UI.LegendItem();
             this.grprt = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot3 = new NationalInstruments.UI.ScatterPlot();
+            this.RTxAxis1 = new NationalInstruments.UI.XAxis();
+            this.RTyAxis1 = new NationalInstruments.UI.YAxis();
+            this.RTyAxis2 = new NationalInstruments.UI.YAxis();
             this.Raw_DataPage = new System.Windows.Forms.TabPage();
-            this.rawgrpListBox = new System.Windows.Forms.CheckedListBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.radioButton0 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.ChkListLegend4 = new System.Windows.Forms.CheckedListBox();
+            this.RawRtlegend = new NationalInstruments.UI.WindowsForms.Legend();
+            this.legendItem1 = new NationalInstruments.UI.LegendItem();
+            this.legendItem2 = new NationalInstruments.UI.LegendItem();
+            this.legendItem3 = new NationalInstruments.UI.LegendItem();
+            this.legendItem4 = new NationalInstruments.UI.LegendItem();
+            this.legendItem5 = new NationalInstruments.UI.LegendItem();
+            this.legendItem6 = new NationalInstruments.UI.LegendItem();
+            this.legendItem7 = new NationalInstruments.UI.LegendItem();
+            this.legendItem8 = new NationalInstruments.UI.LegendItem();
+            this.legendItem9 = new NationalInstruments.UI.LegendItem();
+            this.legendItem10 = new NationalInstruments.UI.LegendItem();
+            this.legendItem18 = new NationalInstruments.UI.LegendItem();
+            this.legendItem19 = new NationalInstruments.UI.LegendItem();
+            this.legendItem20 = new NationalInstruments.UI.LegendItem();
+            this.legendItem29 = new NationalInstruments.UI.LegendItem();
             this.AuxDataView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -455,6 +560,27 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rawgrp = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.RawRtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.RawRtMenuGraphMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphMode1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphMode2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawpauseRefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphView = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphPoint = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphLegend = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphGrid = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphPlotColor1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphAxisColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphGridColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphBackColor = new System.Windows.Forms.ToolStripMenuItem();
             this.scatterPlot1 = new NationalInstruments.UI.ScatterPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
             this.yAxis1 = new NationalInstruments.UI.YAxis();
@@ -467,19 +593,11 @@
             this.lblIdc = new System.Windows.Forms.Label();
             this.btabout = new System.Windows.Forms.Button();
             this.legendItem108 = new NationalInstruments.UI.LegendItem();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.grpAuxMon = new System.Windows.Forms.GroupBox();
             this.rdoAuxMon2 = new System.Windows.Forms.RadioButton();
             this.rdoAuxMon1 = new System.Windows.Forms.RadioButton();
             this.listAuxMon = new System.Windows.Forms.ListView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox5 = new System.Windows.Forms.CheckedListBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox6 = new System.Windows.Forms.CheckedListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.scatterPlot3 = new NationalInstruments.UI.ScatterPlot();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
@@ -499,14 +617,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.grp2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).BeginInit();
             this.TabGrpRaw.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grprt)).BeginInit();
             this.Raw_DataPage.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RawRtlegend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).BeginInit();
+            this.RawRtMenuStrip.SuspendLayout();
             this.grpAuxMon.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblErrStatus
@@ -531,11 +653,6 @@
             // 
             this.MenuGraphColor1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuPlotColor11,
-            this.MenuPlotColor12,
-            this.MenuPlotColor13,
-            this.MenuPlotColor14,
-            this.MenuPlotColor15,
-            this.MenuPlotColor16,
             this.toolStripSeparator8,
             this.MenuAxisColor1,
             this.toolStripSeparator7,
@@ -549,102 +666,52 @@
             // MenuPlotColor11
             // 
             this.MenuPlotColor11.Name = "MenuPlotColor11";
-            this.MenuPlotColor11.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor11.Text = "Plot-1 color";
-            this.MenuPlotColor11.Click += new System.EventHandler(this.MenuPlotColor11_Click);
-            // 
-            // MenuPlotColor12
-            // 
-            this.MenuPlotColor12.Name = "MenuPlotColor12";
-            this.MenuPlotColor12.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor12.Text = "Plot-2 color";
-            this.MenuPlotColor12.Click += new System.EventHandler(this.MenuPlotColor12_Click);
-            // 
-            // MenuPlotColor13
-            // 
-            this.MenuPlotColor13.Name = "MenuPlotColor13";
-            this.MenuPlotColor13.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor13.Text = "Plot-3 color";
-            this.MenuPlotColor13.Click += new System.EventHandler(this.MenuPlotColor13_Click);
-            // 
-            // MenuPlotColor14
-            // 
-            this.MenuPlotColor14.Name = "MenuPlotColor14";
-            this.MenuPlotColor14.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor14.Text = "Plot-4 color";
-            this.MenuPlotColor14.Click += new System.EventHandler(this.MenuPlotColor14_Click);
-            // 
-            // MenuPlotColor15
-            // 
-            this.MenuPlotColor15.Name = "MenuPlotColor15";
-            this.MenuPlotColor15.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor15.Text = "Plot-5 color";
-            this.MenuPlotColor15.Click += new System.EventHandler(this.MenuPlotColor15_Click);
-            // 
-            // MenuPlotColor16
-            // 
-            this.MenuPlotColor16.Name = "MenuPlotColor16";
-            this.MenuPlotColor16.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor16.Text = "Plot-6 color";
-            this.MenuPlotColor16.Click += new System.EventHandler(this.MenuPlotColor16_Click);
+            this.MenuPlotColor11.Size = new System.Drawing.Size(100, 22);
+            this.MenuPlotColor11.Text = "Plots";
+            this.MenuPlotColor11.Click += new System.EventHandler(this.MenuGraphPlotColor1_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(97, 6);
             // 
             // MenuAxisColor1
             // 
             this.MenuAxisColor1.Name = "MenuAxisColor1";
-            this.MenuAxisColor1.Size = new System.Drawing.Size(138, 22);
-            this.MenuAxisColor1.Text = "Axis color";
+            this.MenuAxisColor1.Size = new System.Drawing.Size(100, 22);
+            this.MenuAxisColor1.Text = "Axis";
             this.MenuAxisColor1.Click += new System.EventHandler(this.MenuAxisColor1_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(97, 6);
             // 
             // MenuGridColor1
             // 
             this.MenuGridColor1.Name = "MenuGridColor1";
-            this.MenuGridColor1.Size = new System.Drawing.Size(138, 22);
-            this.MenuGridColor1.Text = "Grid color";
+            this.MenuGridColor1.Size = new System.Drawing.Size(100, 22);
+            this.MenuGridColor1.Text = "Grid";
             this.MenuGridColor1.Click += new System.EventHandler(this.MenuGridColor1_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(97, 6);
             // 
             // MenuBackColor1
             // 
             this.MenuBackColor1.Name = "MenuBackColor1";
-            this.MenuBackColor1.Size = new System.Drawing.Size(138, 22);
-            this.MenuBackColor1.Text = "Back color";
+            this.MenuBackColor1.Size = new System.Drawing.Size(100, 22);
+            this.MenuBackColor1.Text = "Back";
             this.MenuBackColor1.Click += new System.EventHandler(this.MenuBackColor1_Click);
             // 
             // MenuGraphView1
             // 
             this.MenuGraphView1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuPlotLine11,
-            this.MenuPlotPoint11,
-            this.MenuSep11,
-            this.MenuPlotLine12,
-            this.MenuPlotPoint12,
-            this.MenuSep12,
-            this.MenuPlotLine13,
-            this.MenuPlotPoint13,
-            this.MenuSep13,
-            this.MenuPlotLine14,
-            this.MenuPlotPoint14,
-            this.MenuSep14,
-            this.MenuPlotLine15,
-            this.MenuPlotPoint15,
-            this.MenuSep15,
-            this.MenuPlotLine16,
-            this.MenuPlotPoint16,
-            this.MenuSep16,
+            this.MenuGraphLine1,
+            this.MenuGraphPoint1,
+            this.toolStripSeparator29,
             this.MenuPlotGridX1,
             this.MenuPlotGridY11,
             this.MenuPlotGridY12,
@@ -654,150 +721,53 @@
             this.MenuGraphView1.Size = new System.Drawing.Size(141, 22);
             this.MenuGraphView1.Text = "Graph view";
             // 
-            // MenuPlotLine11
+            // MenuGraphLine1
             // 
-            this.MenuPlotLine11.Name = "MenuPlotLine11";
-            this.MenuPlotLine11.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine11.Text = "Plot-1 line";
-            this.MenuPlotLine11.Click += new System.EventHandler(this.MenuPlotLine11_Click);
+            this.MenuGraphLine1.Name = "MenuGraphLine1";
+            this.MenuGraphLine1.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphLine1.Text = "Line";
             // 
-            // MenuPlotPoint11
+            // MenuGraphPoint1
             // 
-            this.MenuPlotPoint11.Name = "MenuPlotPoint11";
-            this.MenuPlotPoint11.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint11.Text = "Plot-1 point";
-            this.MenuPlotPoint11.Click += new System.EventHandler(this.MenuPlotPoint11_Click);
+            this.MenuGraphPoint1.Name = "MenuGraphPoint1";
+            this.MenuGraphPoint1.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphPoint1.Text = "Point";
             // 
-            // MenuSep11
+            // toolStripSeparator29
             // 
-            this.MenuSep11.Name = "MenuSep11";
-            this.MenuSep11.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine12
-            // 
-            this.MenuPlotLine12.Name = "MenuPlotLine12";
-            this.MenuPlotLine12.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine12.Text = "Plot-2 line";
-            this.MenuPlotLine12.Click += new System.EventHandler(this.MenuPlotLine12_Click);
-            // 
-            // MenuPlotPoint12
-            // 
-            this.MenuPlotPoint12.Name = "MenuPlotPoint12";
-            this.MenuPlotPoint12.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint12.Text = "Plot-2 point";
-            this.MenuPlotPoint12.Click += new System.EventHandler(this.MenuPlotPoint12_Click);
-            // 
-            // MenuSep12
-            // 
-            this.MenuSep12.Name = "MenuSep12";
-            this.MenuSep12.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine13
-            // 
-            this.MenuPlotLine13.Name = "MenuPlotLine13";
-            this.MenuPlotLine13.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine13.Text = "Plot-3 line";
-            this.MenuPlotLine13.Click += new System.EventHandler(this.MenuPlotLine13_Click);
-            // 
-            // MenuPlotPoint13
-            // 
-            this.MenuPlotPoint13.Name = "MenuPlotPoint13";
-            this.MenuPlotPoint13.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint13.Text = "Plot-3 point";
-            this.MenuPlotPoint13.Click += new System.EventHandler(this.MenuPlotPoint13_Click);
-            // 
-            // MenuSep13
-            // 
-            this.MenuSep13.Name = "MenuSep13";
-            this.MenuSep13.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine14
-            // 
-            this.MenuPlotLine14.Name = "MenuPlotLine14";
-            this.MenuPlotLine14.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine14.Text = "Plot-4 line";
-            this.MenuPlotLine14.Click += new System.EventHandler(this.MenuPlotLine14_Click);
-            // 
-            // MenuPlotPoint14
-            // 
-            this.MenuPlotPoint14.Name = "MenuPlotPoint14";
-            this.MenuPlotPoint14.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint14.Text = "Plot-4 point";
-            this.MenuPlotPoint14.Click += new System.EventHandler(this.MenuPlotPoint14_Click);
-            // 
-            // MenuSep14
-            // 
-            this.MenuSep14.Name = "MenuSep14";
-            this.MenuSep14.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine15
-            // 
-            this.MenuPlotLine15.Name = "MenuPlotLine15";
-            this.MenuPlotLine15.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine15.Text = "Plot-5 line";
-            this.MenuPlotLine15.Click += new System.EventHandler(this.MenuPlotLine15_Click);
-            // 
-            // MenuPlotPoint15
-            // 
-            this.MenuPlotPoint15.Name = "MenuPlotPoint15";
-            this.MenuPlotPoint15.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint15.Text = "Plot-5 point";
-            this.MenuPlotPoint15.Click += new System.EventHandler(this.MenuPlotPoint15_Click);
-            // 
-            // MenuSep15
-            // 
-            this.MenuSep15.Name = "MenuSep15";
-            this.MenuSep15.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine16
-            // 
-            this.MenuPlotLine16.Name = "MenuPlotLine16";
-            this.MenuPlotLine16.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine16.Text = "Plot-6 line";
-            this.MenuPlotLine16.Click += new System.EventHandler(this.MenuPlotLine16_Click);
-            // 
-            // MenuPlotPoint16
-            // 
-            this.MenuPlotPoint16.Name = "MenuPlotPoint16";
-            this.MenuPlotPoint16.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint16.Text = "Plot-6 point";
-            this.MenuPlotPoint16.Click += new System.EventHandler(this.MenuPlotPoint16_Click);
-            // 
-            // MenuSep16
-            // 
-            this.MenuSep16.Name = "MenuSep16";
-            this.MenuSep16.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator29.Name = "toolStripSeparator29";
+            this.toolStripSeparator29.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuPlotGridX1
             // 
             this.MenuPlotGridX1.Name = "MenuPlotGridX1";
-            this.MenuPlotGridX1.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotGridX1.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridX1.Text = "Grid axis x";
             this.MenuPlotGridX1.Click += new System.EventHandler(this.MenuPlotGridX1_Click);
             // 
             // MenuPlotGridY11
             // 
             this.MenuPlotGridY11.Name = "MenuPlotGridY11";
-            this.MenuPlotGridY11.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotGridY11.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY11.Text = "Grid axis y1";
             this.MenuPlotGridY11.Click += new System.EventHandler(this.MenuPlotGridY11_Click);
             // 
             // MenuPlotGridY12
             // 
             this.MenuPlotGridY12.Name = "MenuPlotGridY12";
-            this.MenuPlotGridY12.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotGridY12.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY12.Text = "Grid axis y2";
             this.MenuPlotGridY12.Click += new System.EventHandler(this.MenuPlotGridY12_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuPlotLegend1
             // 
             this.MenuPlotLegend1.Name = "MenuPlotLegend1";
-            this.MenuPlotLegend1.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotLegend1.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotLegend1.Text = "Legend";
             this.MenuPlotLegend1.Click += new System.EventHandler(this.MenuPlotLegend1_Click);
             // 
@@ -935,11 +905,6 @@
             // 
             this.MenuGraphColor2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuPlotColor21,
-            this.MenuPlotColor22,
-            this.MenuPlotColor23,
-            this.MenuPlotColor24,
-            this.MenuPlotColor25,
-            this.MenuPlotColor26,
             this.toolStripSeparator20,
             this.MenuAxisColor2,
             this.toolStripSeparator18,
@@ -953,102 +918,52 @@
             // MenuPlotColor21
             // 
             this.MenuPlotColor21.Name = "MenuPlotColor21";
-            this.MenuPlotColor21.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor21.Text = "Plot-1 color";
-            this.MenuPlotColor21.Click += new System.EventHandler(this.MenuPlotColor21_Click);
-            // 
-            // MenuPlotColor22
-            // 
-            this.MenuPlotColor22.Name = "MenuPlotColor22";
-            this.MenuPlotColor22.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor22.Text = "Plot-2 color";
-            this.MenuPlotColor22.Click += new System.EventHandler(this.MenuPlotColor22_Click);
-            // 
-            // MenuPlotColor23
-            // 
-            this.MenuPlotColor23.Name = "MenuPlotColor23";
-            this.MenuPlotColor23.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor23.Text = "Plot-3 color";
-            this.MenuPlotColor23.Click += new System.EventHandler(this.MenuPlotColor23_Click);
-            // 
-            // MenuPlotColor24
-            // 
-            this.MenuPlotColor24.Name = "MenuPlotColor24";
-            this.MenuPlotColor24.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor24.Text = "Plot-4 color";
-            this.MenuPlotColor24.Click += new System.EventHandler(this.MenuPlotColor24_Click);
-            // 
-            // MenuPlotColor25
-            // 
-            this.MenuPlotColor25.Name = "MenuPlotColor25";
-            this.MenuPlotColor25.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor25.Text = "Plot-5 color";
-            this.MenuPlotColor25.Click += new System.EventHandler(this.MenuPlotColor25_Click);
-            // 
-            // MenuPlotColor26
-            // 
-            this.MenuPlotColor26.Name = "MenuPlotColor26";
-            this.MenuPlotColor26.Size = new System.Drawing.Size(138, 22);
-            this.MenuPlotColor26.Text = "Plot-6 color";
-            this.MenuPlotColor26.Click += new System.EventHandler(this.MenuPlotColor26_Click);
+            this.MenuPlotColor21.Size = new System.Drawing.Size(100, 22);
+            this.MenuPlotColor21.Text = "Plots";
+            this.MenuPlotColor21.Click += new System.EventHandler(this.MenuGraphPlotColor2_Click);
             // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(97, 6);
             // 
             // MenuAxisColor2
             // 
             this.MenuAxisColor2.Name = "MenuAxisColor2";
-            this.MenuAxisColor2.Size = new System.Drawing.Size(138, 22);
-            this.MenuAxisColor2.Text = "Axis color";
+            this.MenuAxisColor2.Size = new System.Drawing.Size(100, 22);
+            this.MenuAxisColor2.Text = "Axis";
             this.MenuAxisColor2.Click += new System.EventHandler(this.MenuAxisColor2_Click);
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(97, 6);
             // 
             // MenuGridColor2
             // 
             this.MenuGridColor2.Name = "MenuGridColor2";
-            this.MenuGridColor2.Size = new System.Drawing.Size(138, 22);
-            this.MenuGridColor2.Text = "Grid color";
+            this.MenuGridColor2.Size = new System.Drawing.Size(100, 22);
+            this.MenuGridColor2.Text = "Grid";
             this.MenuGridColor2.Click += new System.EventHandler(this.MenuGridColor2_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(97, 6);
             // 
             // MenuBackColor2
             // 
             this.MenuBackColor2.Name = "MenuBackColor2";
-            this.MenuBackColor2.Size = new System.Drawing.Size(138, 22);
-            this.MenuBackColor2.Text = "Back color";
+            this.MenuBackColor2.Size = new System.Drawing.Size(100, 22);
+            this.MenuBackColor2.Text = "Back";
             this.MenuBackColor2.Click += new System.EventHandler(this.MenuBackColor2_Click);
             // 
             // MenuGraphView2
             // 
             this.MenuGraphView2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuPlotLine21,
-            this.MenuPlotPoint21,
-            this.MenuSep21,
-            this.MenuPlotLine22,
-            this.MenuPlotPoint22,
-            this.MenuSep22,
-            this.MenuPlotLine23,
-            this.MenuPlotPoint23,
-            this.MenuSep23,
-            this.MenuPlotLine24,
-            this.MenuPlotPoint24,
-            this.MenuSep24,
-            this.MenuPlotLine25,
-            this.MenuPlotPoint25,
-            this.MenuSep25,
-            this.MenuPlotLine26,
-            this.MenuPlotPoint26,
-            this.MenuSep26,
+            this.MenuGraphLine2,
+            this.MenuGraphPoint2,
+            this.toolStripSeparator30,
             this.MenuPlotGridX2,
             this.MenuPlotGridY21,
             this.MenuPlotGridY22,
@@ -1058,150 +973,53 @@
             this.MenuGraphView2.Size = new System.Drawing.Size(141, 22);
             this.MenuGraphView2.Text = "Graph view";
             // 
-            // MenuPlotLine21
+            // MenuGraphLine2
             // 
-            this.MenuPlotLine21.Name = "MenuPlotLine21";
-            this.MenuPlotLine21.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine21.Text = "Plot-1 line";
-            this.MenuPlotLine21.Click += new System.EventHandler(this.MenuPlotLine21_Click);
+            this.MenuGraphLine2.Name = "MenuGraphLine2";
+            this.MenuGraphLine2.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphLine2.Text = "Line";
             // 
-            // MenuPlotPoint21
+            // MenuGraphPoint2
             // 
-            this.MenuPlotPoint21.Name = "MenuPlotPoint21";
-            this.MenuPlotPoint21.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint21.Text = "Plot-1 point";
-            this.MenuPlotPoint21.Click += new System.EventHandler(this.MenuPlotPoint21_Click);
+            this.MenuGraphPoint2.Name = "MenuGraphPoint2";
+            this.MenuGraphPoint2.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphPoint2.Text = "Point";
             // 
-            // MenuSep21
+            // toolStripSeparator30
             // 
-            this.MenuSep21.Name = "MenuSep21";
-            this.MenuSep21.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine22
-            // 
-            this.MenuPlotLine22.Name = "MenuPlotLine22";
-            this.MenuPlotLine22.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine22.Text = "Plot-2 line";
-            this.MenuPlotLine22.Click += new System.EventHandler(this.MenuPlotLine22_Click);
-            // 
-            // MenuPlotPoint22
-            // 
-            this.MenuPlotPoint22.Name = "MenuPlotPoint22";
-            this.MenuPlotPoint22.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint22.Text = "Plot-2 point";
-            this.MenuPlotPoint22.Click += new System.EventHandler(this.MenuPlotPoint22_Click);
-            // 
-            // MenuSep22
-            // 
-            this.MenuSep22.Name = "MenuSep22";
-            this.MenuSep22.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine23
-            // 
-            this.MenuPlotLine23.Name = "MenuPlotLine23";
-            this.MenuPlotLine23.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine23.Text = "Plot-3 line";
-            this.MenuPlotLine23.Click += new System.EventHandler(this.MenuPlotLine23_Click);
-            // 
-            // MenuPlotPoint23
-            // 
-            this.MenuPlotPoint23.Name = "MenuPlotPoint23";
-            this.MenuPlotPoint23.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint23.Text = "Plot-3 point";
-            this.MenuPlotPoint23.Click += new System.EventHandler(this.MenuPlotPoint23_Click);
-            // 
-            // MenuSep23
-            // 
-            this.MenuSep23.Name = "MenuSep23";
-            this.MenuSep23.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine24
-            // 
-            this.MenuPlotLine24.Name = "MenuPlotLine24";
-            this.MenuPlotLine24.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine24.Text = "Plot-4 line";
-            this.MenuPlotLine24.Click += new System.EventHandler(this.MenuPlotLine24_Click);
-            // 
-            // MenuPlotPoint24
-            // 
-            this.MenuPlotPoint24.Name = "MenuPlotPoint24";
-            this.MenuPlotPoint24.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint24.Text = "Plot-4 point";
-            this.MenuPlotPoint24.Click += new System.EventHandler(this.MenuPlotPoint24_Click);
-            // 
-            // MenuSep24
-            // 
-            this.MenuSep24.Name = "MenuSep24";
-            this.MenuSep24.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine25
-            // 
-            this.MenuPlotLine25.Name = "MenuPlotLine25";
-            this.MenuPlotLine25.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine25.Text = "Plot-5 line";
-            this.MenuPlotLine25.Click += new System.EventHandler(this.MenuPlotLine25_Click);
-            // 
-            // MenuPlotPoint25
-            // 
-            this.MenuPlotPoint25.Name = "MenuPlotPoint25";
-            this.MenuPlotPoint25.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint25.Text = "Plot-5 point";
-            this.MenuPlotPoint25.Click += new System.EventHandler(this.MenuPlotPoint25_Click);
-            // 
-            // MenuSep25
-            // 
-            this.MenuSep25.Name = "MenuSep25";
-            this.MenuSep25.Size = new System.Drawing.Size(136, 6);
-            // 
-            // MenuPlotLine26
-            // 
-            this.MenuPlotLine26.Name = "MenuPlotLine26";
-            this.MenuPlotLine26.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotLine26.Text = "Plot-6 line";
-            this.MenuPlotLine26.Click += new System.EventHandler(this.MenuPlotLine26_Click);
-            // 
-            // MenuPlotPoint26
-            // 
-            this.MenuPlotPoint26.Name = "MenuPlotPoint26";
-            this.MenuPlotPoint26.Size = new System.Drawing.Size(139, 22);
-            this.MenuPlotPoint26.Text = "Plot-6 point";
-            this.MenuPlotPoint26.Click += new System.EventHandler(this.MenuPlotPoint26_Click);
-            // 
-            // MenuSep26
-            // 
-            this.MenuSep26.Name = "MenuSep26";
-            this.MenuSep26.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator30.Name = "toolStripSeparator30";
+            this.toolStripSeparator30.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuPlotGridX2
             // 
             this.MenuPlotGridX2.Name = "MenuPlotGridX2";
-            this.MenuPlotGridX2.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotGridX2.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridX2.Text = "Grid axis x";
             this.MenuPlotGridX2.Click += new System.EventHandler(this.MenuPlotGridX2_Click);
             // 
             // MenuPlotGridY21
             // 
             this.MenuPlotGridY21.Name = "MenuPlotGridY21";
-            this.MenuPlotGridY21.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotGridY21.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY21.Text = "Grid axis y1";
             this.MenuPlotGridY21.Click += new System.EventHandler(this.MenuPlotGridY21_Click);
             // 
             // MenuPlotGridY22
             // 
             this.MenuPlotGridY22.Name = "MenuPlotGridY22";
-            this.MenuPlotGridY22.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotGridY22.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY22.Text = "Grid axis y2";
             this.MenuPlotGridY22.Click += new System.EventHandler(this.MenuPlotGridY22_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuPlotLegend2
             // 
             this.MenuPlotLegend2.Name = "MenuPlotLegend2";
-            this.MenuPlotLegend2.Size = new System.Drawing.Size(139, 22);
+            this.MenuPlotLegend2.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotLegend2.Text = "Legend";
             this.MenuPlotLegend2.Click += new System.EventHandler(this.MenuPlotLegend2_Click);
             // 
@@ -1514,7 +1332,6 @@
             // 
             this.RtMenuGraphColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RtMenuGraphPlotColor1,
-            this.RtMenuGraphPlotColor2,
             this.toolStripSeparator15,
             this.RtMenuGraphAxisColor,
             this.toolStripSeparator16,
@@ -1528,57 +1345,50 @@
             // RtMenuGraphPlotColor1
             // 
             this.RtMenuGraphPlotColor1.Name = "RtMenuGraphPlotColor1";
-            this.RtMenuGraphPlotColor1.Size = new System.Drawing.Size(133, 22);
-            this.RtMenuGraphPlotColor1.Text = "Plot1 color";
+            this.RtMenuGraphPlotColor1.Size = new System.Drawing.Size(100, 22);
+            this.RtMenuGraphPlotColor1.Text = "Plots";
             this.RtMenuGraphPlotColor1.Click += new System.EventHandler(this.RtMenuGraphPlotColor1_Click);
-            // 
-            // RtMenuGraphPlotColor2
-            // 
-            this.RtMenuGraphPlotColor2.Name = "RtMenuGraphPlotColor2";
-            this.RtMenuGraphPlotColor2.Size = new System.Drawing.Size(133, 22);
-            this.RtMenuGraphPlotColor2.Text = "Plot2 color";
-            this.RtMenuGraphPlotColor2.Click += new System.EventHandler(this.RtMenuGraphPlotColor2_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(97, 6);
             // 
             // RtMenuGraphAxisColor
             // 
             this.RtMenuGraphAxisColor.Name = "RtMenuGraphAxisColor";
-            this.RtMenuGraphAxisColor.Size = new System.Drawing.Size(133, 22);
-            this.RtMenuGraphAxisColor.Text = "Axis color";
+            this.RtMenuGraphAxisColor.Size = new System.Drawing.Size(100, 22);
+            this.RtMenuGraphAxisColor.Text = "Axis";
             this.RtMenuGraphAxisColor.Click += new System.EventHandler(this.RtMenuGraphAxisColor_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(97, 6);
             // 
             // RtMenuGraphGridColor
             // 
             this.RtMenuGraphGridColor.Name = "RtMenuGraphGridColor";
-            this.RtMenuGraphGridColor.Size = new System.Drawing.Size(133, 22);
+            this.RtMenuGraphGridColor.Size = new System.Drawing.Size(100, 22);
             this.RtMenuGraphGridColor.Text = "Grid";
             this.RtMenuGraphGridColor.Click += new System.EventHandler(this.RtMenuGraphGridColor_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(97, 6);
             // 
             // RtMenuGraphBackColor
             // 
             this.RtMenuGraphBackColor.Name = "RtMenuGraphBackColor";
-            this.RtMenuGraphBackColor.Size = new System.Drawing.Size(133, 22);
-            this.RtMenuGraphBackColor.Text = "Back color";
+            this.RtMenuGraphBackColor.Size = new System.Drawing.Size(100, 22);
+            this.RtMenuGraphBackColor.Text = "Back";
             this.RtMenuGraphBackColor.Click += new System.EventHandler(this.RtMenuGraphBackColor_Click);
             // 
             // bttech
             // 
             this.bttech.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bttech.Location = new System.Drawing.Point(779, 1);
+            this.bttech.Location = new System.Drawing.Point(429, 1);
             this.bttech.Name = "bttech";
             this.bttech.Size = new System.Drawing.Size(24, 24);
             this.bttech.TabIndex = 52;
@@ -1588,7 +1398,7 @@
             // btstart
             // 
             this.btstart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btstart.Location = new System.Drawing.Point(827, 1);
+            this.btstart.Location = new System.Drawing.Point(477, 1);
             this.btstart.Name = "btstart";
             this.btstart.Size = new System.Drawing.Size(24, 24);
             this.btstart.TabIndex = 53;
@@ -1598,7 +1408,7 @@
             // btgrp
             // 
             this.btgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btgrp.Location = new System.Drawing.Point(877, 1);
+            this.btgrp.Location = new System.Drawing.Point(527, 1);
             this.btgrp.Name = "btgrp";
             this.btgrp.Size = new System.Drawing.Size(24, 24);
             this.btgrp.TabIndex = 54;
@@ -1680,7 +1490,7 @@
             // btSize
             // 
             this.btSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSize.Location = new System.Drawing.Point(925, 1);
+            this.btSize.Location = new System.Drawing.Point(575, 1);
             this.btSize.Name = "btSize";
             this.btSize.Size = new System.Drawing.Size(24, 24);
             this.btSize.TabIndex = 92;
@@ -1690,7 +1500,7 @@
             // btTechEdit
             // 
             this.btTechEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btTechEdit.Location = new System.Drawing.Point(802, 1);
+            this.btTechEdit.Location = new System.Drawing.Point(452, 1);
             this.btTechEdit.Name = "btTechEdit";
             this.btTechEdit.Size = new System.Drawing.Size(24, 24);
             this.btTechEdit.TabIndex = 93;
@@ -1700,7 +1510,7 @@
             // btreport
             // 
             this.btreport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btreport.Location = new System.Drawing.Point(900, 1);
+            this.btreport.Location = new System.Drawing.Point(550, 1);
             this.btreport.Name = "btreport";
             this.btreport.Size = new System.Drawing.Size(24, 24);
             this.btreport.TabIndex = 94;
@@ -1710,7 +1520,7 @@
             // btloaddata
             // 
             this.btloaddata.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btloaddata.Location = new System.Drawing.Point(852, 1);
+            this.btloaddata.Location = new System.Drawing.Point(502, 1);
             this.btloaddata.Name = "btloaddata";
             this.btloaddata.Size = new System.Drawing.Size(24, 24);
             this.btloaddata.TabIndex = 96;
@@ -1758,7 +1568,7 @@
             this.tabgrp.Multiline = true;
             this.tabgrp.Name = "tabgrp";
             this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(777, 590);
+            this.tabgrp.Size = new System.Drawing.Size(427, 397);
             this.tabgrp.TabIndex = 100;
             // 
             // TabGrp1
@@ -1771,7 +1581,7 @@
             this.TabGrp1.Location = new System.Drawing.Point(4, 23);
             this.TabGrp1.Name = "TabGrp1";
             this.TabGrp1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabGrp1.Size = new System.Drawing.Size(769, 563);
+            this.TabGrp1.Size = new System.Drawing.Size(419, 370);
             this.TabGrp1.TabIndex = 1;
             this.TabGrp1.Text = "tabPage2";
             this.TabGrp1.UseVisualStyleBackColor = true;
@@ -1779,54 +1589,48 @@
             // grpboxni1
             // 
             this.grpboxni1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpboxni1.Controls.Add(this.checkedListBox3);
-            this.grpboxni1.Controls.Add(this.cboItemA);
-            this.grpboxni1.Location = new System.Drawing.Point(657, 3);
+            this.grpboxni1.Controls.Add(this.ChkListLegend1);
+            this.grpboxni1.Location = new System.Drawing.Point(307, 10);
             this.grpboxni1.Name = "grpboxni1";
-            this.grpboxni1.Size = new System.Drawing.Size(104, 92);
+            this.grpboxni1.Size = new System.Drawing.Size(104, 67);
             this.grpboxni1.TabIndex = 139;
             this.grpboxni1.TabStop = false;
             this.grpboxni1.Text = "[Legend]";
             // 
-            // checkedListBox3
+            // ChkListLegend1
             // 
-            this.checkedListBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox3.FormattingEnabled = true;
-            this.checkedListBox3.Items.AddRange(new object[] {
+            this.ChkListLegend1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend1.CheckOnClick = true;
+            this.ChkListLegend1.FormattingEnabled = true;
+            this.ChkListLegend1.Items.AddRange(new object[] {
             "MAIN",
             "AUX1"});
-            this.checkedListBox3.Location = new System.Drawing.Point(6, 49);
-            this.checkedListBox3.Name = "checkedListBox3";
-            this.checkedListBox3.Size = new System.Drawing.Size(91, 38);
-            this.checkedListBox3.TabIndex = 139;
-            // 
-            // cboItemA
-            // 
-            this.cboItemA.FormattingEnabled = true;
-            this.cboItemA.Location = new System.Drawing.Point(7, 21);
-            this.cboItemA.Name = "cboItemA";
-            this.cboItemA.Size = new System.Drawing.Size(81, 22);
-            this.cboItemA.TabIndex = 121;
+            this.ChkListLegend1.Location = new System.Drawing.Point(6, 21);
+            this.ChkListLegend1.Name = "ChkListLegend1";
+            this.ChkListLegend1.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend1.TabIndex = 139;
+            this.ChkListLegend1.SelectedIndexChanged += new System.EventHandler(this.ChkListLegend1_SelectedIndexChanged);
             // 
             // grpboxni2
             // 
             this.grpboxni2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpboxni2.Controls.Add(this.checkedListBox2);
-            this.grpboxni2.Controls.Add(this.btDeselAllNiItems);
-            this.grpboxni2.Controls.Add(this.btSelAllNiItems);
-            this.grpboxni2.Location = new System.Drawing.Point(657, 100);
+            this.grpboxni2.Controls.Add(this.ChkListItem1);
+            this.grpboxni2.Controls.Add(this.btDeselAll1);
+            this.grpboxni2.Controls.Add(this.btSelAll1);
+            this.grpboxni2.Location = new System.Drawing.Point(307, 83);
             this.grpboxni2.Name = "grpboxni2";
             this.grpboxni2.Size = new System.Drawing.Size(104, 281);
             this.grpboxni2.TabIndex = 138;
             this.grpboxni2.TabStop = false;
             this.grpboxni2.Text = "[items ]";
             // 
-            // checkedListBox2
+            // ChkListItem1
             // 
-            this.checkedListBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ChkListItem1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Items.AddRange(new object[] {
+            this.ChkListItem1.CheckOnClick = true;
+            this.ChkListItem1.FormattingEnabled = true;
+            this.ChkListItem1.Items.AddRange(new object[] {
             "MAIN",
             "AUX1",
             "AUX2",
@@ -1840,38 +1644,41 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.checkedListBox2.Location = new System.Drawing.Point(6, 48);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(91, 225);
-            this.checkedListBox2.TabIndex = 138;
+            this.ChkListItem1.Location = new System.Drawing.Point(6, 48);
+            this.ChkListItem1.Name = "ChkListItem1";
+            this.ChkListItem1.Size = new System.Drawing.Size(91, 225);
+            this.ChkListItem1.TabIndex = 138;
+            this.ChkListItem1.SelectedIndexChanged += new System.EventHandler(this.ChkListItem1_SelectedIndexChanged);
             // 
-            // btDeselAllNiItems
+            // btDeselAll1
             // 
-            this.btDeselAllNiItems.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btDeselAllNiItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btDeselAllNiItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
-            this.btDeselAllNiItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btDeselAllNiItems.Location = new System.Drawing.Point(52, 20);
-            this.btDeselAllNiItems.Name = "btDeselAllNiItems";
-            this.btDeselAllNiItems.Size = new System.Drawing.Size(46, 22);
-            this.btDeselAllNiItems.TabIndex = 136;
-            this.btDeselAllNiItems.Text = "All";
-            this.btDeselAllNiItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btDeselAllNiItems.UseVisualStyleBackColor = true;
+            this.btDeselAll1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDeselAll1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btDeselAll1.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.btDeselAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDeselAll1.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAll1.Name = "btDeselAll1";
+            this.btDeselAll1.Size = new System.Drawing.Size(46, 22);
+            this.btDeselAll1.TabIndex = 136;
+            this.btDeselAll1.Text = "All";
+            this.btDeselAll1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDeselAll1.UseVisualStyleBackColor = true;
+            this.btDeselAll1.Click += new System.EventHandler(this.btDeselAll1_Click);
             // 
-            // btSelAllNiItems
+            // btSelAll1
             // 
-            this.btSelAllNiItems.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btSelAllNiItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btSelAllNiItems.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
-            this.btSelAllNiItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSelAllNiItems.Location = new System.Drawing.Point(2, 20);
-            this.btSelAllNiItems.Name = "btSelAllNiItems";
-            this.btSelAllNiItems.Size = new System.Drawing.Size(47, 22);
-            this.btSelAllNiItems.TabIndex = 135;
-            this.btSelAllNiItems.Text = "All";
-            this.btSelAllNiItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btSelAllNiItems.UseVisualStyleBackColor = true;
+            this.btSelAll1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSelAll1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btSelAll1.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.btSelAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSelAll1.Location = new System.Drawing.Point(2, 20);
+            this.btSelAll1.Name = "btSelAll1";
+            this.btSelAll1.Size = new System.Drawing.Size(47, 22);
+            this.btSelAll1.TabIndex = 135;
+            this.btSelAll1.Text = "All";
+            this.btSelAll1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSelAll1.UseVisualStyleBackColor = true;
+            this.btSelAll1.Click += new System.EventHandler(this.btSelAll1_Click);
             // 
             // lblcsfreq1
             // 
@@ -1884,8 +1691,11 @@
             // 
             // legend1
             // 
+            this.legend1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.legend1.Border = NationalInstruments.UI.Border.Dotted;
             this.legend1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.legend1.HorizontalScrollMode = NationalInstruments.UI.ScrollMode.Auto;
             this.legend1.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.legendItem11,
             this.legendItem12,
@@ -1931,9 +1741,9 @@
             this.legendItem119,
             this.legendItem120});
             this.legend1.ItemSize = new System.Drawing.Size(24, 20);
-            this.legend1.Location = new System.Drawing.Point(129, 5);
+            this.legend1.Location = new System.Drawing.Point(307, 362);
             this.legend1.Name = "legend1";
-            this.legend1.Size = new System.Drawing.Size(87, 169);
+            this.legend1.Size = new System.Drawing.Size(106, 4);
             this.legend1.TabIndex = 89;
             this.legend1.ItemsChanged += new System.ComponentModel.CollectionChangeEventHandler(this.legend1_ItemsChanged);
             // 
@@ -2591,8 +2401,70 @@
             this.Grp1Plot40,
             this.Grp1Plot41,
             this.Grp1Plot42,
-            this.Grp1Plot43});
-            this.grp1.Size = new System.Drawing.Size(647, 547);
+            this.Grp1Plot43,
+            this.Grp1Plot44,
+            this.Grp1Plot45,
+            this.Grp1Plot46,
+            this.Grp1Plot47,
+            this.Grp1Plot48,
+            this.Grp1Plot49,
+            this.Grp1Plot50,
+            this.Grp1Plot51,
+            this.Grp1Plot52,
+            this.Grp1Plot53,
+            this.Grp1Plot54,
+            this.Grp1Plot55,
+            this.Grp1Plot56,
+            this.Grp1Plot57,
+            this.Grp1Plot58,
+            this.Grp1Plot59,
+            this.Grp1Plot60,
+            this.Grp1Plot61,
+            this.Grp1Plot62,
+            this.Grp1Plot63,
+            this.Grp1Plot64,
+            this.Grp1Plot65,
+            this.Grp1Plot66,
+            this.Grp1Plot67,
+            this.Grp1Plot68,
+            this.Grp1Plot69,
+            this.Grp1Plot70,
+            this.Grp1Plot71,
+            this.Grp1Plot72,
+            this.Grp1Plot73,
+            this.Grp1Plot74,
+            this.Grp1Plot75,
+            this.Grp1Plot76,
+            this.Grp1Plot77,
+            this.Grp1Plot78,
+            this.Grp1Plot79,
+            this.Grp1Plot80,
+            this.Grp1Plot81,
+            this.Grp1Plot82,
+            this.Grp1Plot83,
+            this.Grp1Plot84,
+            this.Grp1Plot85,
+            this.Grp1Plot86,
+            this.Grp1Plot87,
+            this.Grp1Plot88,
+            this.Grp1Plot89,
+            this.scatterPlot4,
+            this.scatterPlot5,
+            this.scatterPlot6,
+            this.scatterPlot7,
+            this.scatterPlot8,
+            this.scatterPlot9,
+            this.scatterPlot10,
+            this.scatterPlot11,
+            this.scatterPlot12,
+            this.scatterPlot13,
+            this.scatterPlot14,
+            this.scatterPlot15,
+            this.scatterPlot16,
+            this.scatterPlot17,
+            this.scatterPlot18,
+            this.scatterPlot19});
+            this.grp1.Size = new System.Drawing.Size(297, 354);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -2611,6 +2483,316 @@
             // 
             this.xyCursor2.Plot = this.Grp1Plot1;
             // 
+            // Grp1Plot44
+            // 
+            this.Grp1Plot44.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot44.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot45
+            // 
+            this.Grp1Plot45.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot45.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot46
+            // 
+            this.Grp1Plot46.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot46.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot47
+            // 
+            this.Grp1Plot47.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot47.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot48
+            // 
+            this.Grp1Plot48.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot48.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot49
+            // 
+            this.Grp1Plot49.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot49.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot50
+            // 
+            this.Grp1Plot50.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot50.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot51
+            // 
+            this.Grp1Plot51.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot51.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot52
+            // 
+            this.Grp1Plot52.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot52.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot53
+            // 
+            this.Grp1Plot53.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot53.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot54
+            // 
+            this.Grp1Plot54.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot54.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot55
+            // 
+            this.Grp1Plot55.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot55.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot56
+            // 
+            this.Grp1Plot56.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot56.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot57
+            // 
+            this.Grp1Plot57.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot57.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot58
+            // 
+            this.Grp1Plot58.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot58.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot59
+            // 
+            this.Grp1Plot59.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot59.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot60
+            // 
+            this.Grp1Plot60.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot60.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot61
+            // 
+            this.Grp1Plot61.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot61.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot62
+            // 
+            this.Grp1Plot62.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot62.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot63
+            // 
+            this.Grp1Plot63.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot63.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot64
+            // 
+            this.Grp1Plot64.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot64.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot65
+            // 
+            this.Grp1Plot65.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot65.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot66
+            // 
+            this.Grp1Plot66.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot66.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot67
+            // 
+            this.Grp1Plot67.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot67.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot68
+            // 
+            this.Grp1Plot68.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot68.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot69
+            // 
+            this.Grp1Plot69.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot69.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot70
+            // 
+            this.Grp1Plot70.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot70.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot71
+            // 
+            this.Grp1Plot71.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot71.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot72
+            // 
+            this.Grp1Plot72.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot72.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot73
+            // 
+            this.Grp1Plot73.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot73.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot74
+            // 
+            this.Grp1Plot74.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot74.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot75
+            // 
+            this.Grp1Plot75.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot75.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot76
+            // 
+            this.Grp1Plot76.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot76.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot77
+            // 
+            this.Grp1Plot77.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot77.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot78
+            // 
+            this.Grp1Plot78.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot78.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot79
+            // 
+            this.Grp1Plot79.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot79.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot80
+            // 
+            this.Grp1Plot80.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot80.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot81
+            // 
+            this.Grp1Plot81.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot81.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot82
+            // 
+            this.Grp1Plot82.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot82.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot83
+            // 
+            this.Grp1Plot83.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot83.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot84
+            // 
+            this.Grp1Plot84.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot84.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot85
+            // 
+            this.Grp1Plot85.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot85.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot86
+            // 
+            this.Grp1Plot86.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot86.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot87
+            // 
+            this.Grp1Plot87.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot87.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot88
+            // 
+            this.Grp1Plot88.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot88.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1Plot89
+            // 
+            this.Grp1Plot89.XAxis = this.Grp1_xAxis1;
+            this.Grp1Plot89.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot4
+            // 
+            this.scatterPlot4.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot4.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot5
+            // 
+            this.scatterPlot5.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot5.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot6
+            // 
+            this.scatterPlot6.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot6.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot7
+            // 
+            this.scatterPlot7.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot7.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot8
+            // 
+            this.scatterPlot8.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot8.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot9
+            // 
+            this.scatterPlot9.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot9.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot10
+            // 
+            this.scatterPlot10.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot10.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot11
+            // 
+            this.scatterPlot11.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot11.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot12
+            // 
+            this.scatterPlot12.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot12.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot13
+            // 
+            this.scatterPlot13.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot13.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot14
+            // 
+            this.scatterPlot14.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot14.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot15
+            // 
+            this.scatterPlot15.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot15.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot16
+            // 
+            this.scatterPlot16.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot16.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot17
+            // 
+            this.scatterPlot17.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot17.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot18
+            // 
+            this.scatterPlot18.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot18.YAxis = this.Grp1_yAxis1;
+            // 
+            // scatterPlot19
+            // 
+            this.scatterPlot19.XAxis = this.Grp1_xAxis1;
+            this.scatterPlot19.YAxis = this.Grp1_yAxis1;
+            // 
             // TabGrp2
             // 
             this.TabGrp2.Controls.Add(this.groupBox1);
@@ -2628,54 +2810,48 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.checkedListBox1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(657, 3);
+            this.groupBox1.Controls.Add(this.ChkListLegend2);
+            this.groupBox1.Location = new System.Drawing.Point(657, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(104, 92);
+            this.groupBox1.Size = new System.Drawing.Size(104, 67);
             this.groupBox1.TabIndex = 141;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "[Legend]";
             // 
-            // checkedListBox1
+            // ChkListLegend2
             // 
-            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.ChkListLegend2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend2.CheckOnClick = true;
+            this.ChkListLegend2.FormattingEnabled = true;
+            this.ChkListLegend2.Items.AddRange(new object[] {
             "MAIN",
             "AUX1"});
-            this.checkedListBox1.Location = new System.Drawing.Point(6, 49);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(91, 38);
-            this.checkedListBox1.TabIndex = 139;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(81, 22);
-            this.comboBox1.TabIndex = 121;
+            this.ChkListLegend2.Location = new System.Drawing.Point(6, 21);
+            this.ChkListLegend2.Name = "ChkListLegend2";
+            this.ChkListLegend2.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend2.TabIndex = 139;
+            this.ChkListLegend2.SelectedIndexChanged += new System.EventHandler(this.ChkListLegend2_SelectedIndexChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.checkedListBox4);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Location = new System.Drawing.Point(657, 100);
+            this.groupBox2.Controls.Add(this.ChkListItem2);
+            this.groupBox2.Controls.Add(this.btDeselAll2);
+            this.groupBox2.Controls.Add(this.btSelAll2);
+            this.groupBox2.Location = new System.Drawing.Point(657, 75);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(104, 281);
             this.groupBox2.TabIndex = 140;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "[items ]";
             // 
-            // checkedListBox4
+            // ChkListItem2
             // 
-            this.checkedListBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ChkListItem2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox4.FormattingEnabled = true;
-            this.checkedListBox4.Items.AddRange(new object[] {
+            this.ChkListItem2.CheckOnClick = true;
+            this.ChkListItem2.FormattingEnabled = true;
+            this.ChkListItem2.Items.AddRange(new object[] {
             "MAIN",
             "AUX1",
             "AUX2",
@@ -2689,38 +2865,41 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.checkedListBox4.Location = new System.Drawing.Point(6, 48);
-            this.checkedListBox4.Name = "checkedListBox4";
-            this.checkedListBox4.Size = new System.Drawing.Size(91, 225);
-            this.checkedListBox4.TabIndex = 138;
+            this.ChkListItem2.Location = new System.Drawing.Point(6, 48);
+            this.ChkListItem2.Name = "ChkListItem2";
+            this.ChkListItem2.Size = new System.Drawing.Size(91, 225);
+            this.ChkListItem2.TabIndex = 138;
+            this.ChkListItem2.SelectedIndexChanged += new System.EventHandler(this.ChkListItem2_SelectedIndexChanged);
             // 
-            // button1
+            // btDeselAll2
             // 
-            this.button1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button1.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(52, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 22);
-            this.button1.TabIndex = 136;
-            this.button1.Text = "All";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btDeselAll2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDeselAll2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btDeselAll2.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.btDeselAll2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDeselAll2.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAll2.Name = "btDeselAll2";
+            this.btDeselAll2.Size = new System.Drawing.Size(46, 22);
+            this.btDeselAll2.TabIndex = 136;
+            this.btDeselAll2.Text = "All";
+            this.btDeselAll2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDeselAll2.UseVisualStyleBackColor = true;
+            this.btDeselAll2.Click += new System.EventHandler(this.btDeselAll2_Click);
             // 
-            // button2
+            // btSelAll2
             // 
-            this.button2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button2.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(2, 20);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(47, 22);
-            this.button2.TabIndex = 135;
-            this.button2.Text = "All";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = true;
+            this.btSelAll2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSelAll2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btSelAll2.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.btSelAll2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSelAll2.Location = new System.Drawing.Point(2, 20);
+            this.btSelAll2.Name = "btSelAll2";
+            this.btSelAll2.Size = new System.Drawing.Size(47, 22);
+            this.btSelAll2.TabIndex = 135;
+            this.btSelAll2.Text = "All";
+            this.btSelAll2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSelAll2.UseVisualStyleBackColor = true;
+            this.btSelAll2.Click += new System.EventHandler(this.btSelAll2_Click);
             // 
             // lblcsfreq2
             // 
@@ -2733,8 +2912,11 @@
             // 
             // legend2
             // 
+            this.legend2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.legend2.Border = NationalInstruments.UI.Border.Dotted;
             this.legend2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.legend2.HorizontalScrollMode = NationalInstruments.UI.ScrollMode.Auto;
             this.legend2.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.legendItem21,
             this.legendItem22,
@@ -2793,9 +2975,9 @@
             this.legendItem106,
             this.legendItem107});
             this.legend2.ItemSize = new System.Drawing.Size(24, 20);
-            this.legend2.Location = new System.Drawing.Point(129, 2);
+            this.legend2.Location = new System.Drawing.Point(658, 354);
             this.legend2.Name = "legend2";
-            this.legend2.Size = new System.Drawing.Size(82, 183);
+            this.legend2.Size = new System.Drawing.Size(108, 209);
             this.legend2.TabIndex = 90;
             // 
             // legendItem21
@@ -3699,7 +3881,56 @@
             this.Grp2Plot53,
             this.Grp2Plot54,
             this.Grp2Plot55,
-            this.Grp2Plot56});
+            this.Grp2Plot56,
+            this.Grp2Plot57,
+            this.Grp2Plot58,
+            this.Grp2Plot59,
+            this.Grp2Plot60,
+            this.Grp2Plot61,
+            this.Grp2Plot62,
+            this.Grp2Plot63,
+            this.Grp2Plot64,
+            this.Grp2Plot65,
+            this.Grp2Plot66,
+            this.Grp2Plot67,
+            this.Grp2Plot68,
+            this.Grp2Plot69,
+            this.Grp2Plot70,
+            this.Grp2Plot71,
+            this.Grp2Plot72,
+            this.Grp2Plot73,
+            this.Grp2Plot74,
+            this.Grp2Plot75,
+            this.Grp2Plot76,
+            this.Grp2Plot77,
+            this.Grp2Plot78,
+            this.Grp2Plot79,
+            this.Grp2Plot80,
+            this.Grp2Plot81,
+            this.Grp2Plot82,
+            this.Grp2Plot83,
+            this.Grp2Plot84,
+            this.Grp2Plot85,
+            this.Grp2Plot86,
+            this.Grp2Plot87,
+            this.Grp2Plot88,
+            this.Grp2Plot89,
+            this.Grp2Plot90,
+            this.Grp2Plot91,
+            this.Grp2Plot92,
+            this.scatterPlot20,
+            this.scatterPlot21,
+            this.scatterPlot22,
+            this.scatterPlot23,
+            this.scatterPlot24,
+            this.scatterPlot25,
+            this.scatterPlot26,
+            this.scatterPlot27,
+            this.scatterPlot28,
+            this.scatterPlot29,
+            this.scatterPlot30,
+            this.scatterPlot31,
+            this.scatterPlot32});
             this.grp2.Size = new System.Drawing.Size(647, 547);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
@@ -3716,6 +3947,251 @@
             // 
             this.xyCursor1.Plot = this.Grp2Plot1;
             // 
+            // Grp2Plot57
+            // 
+            this.Grp2Plot57.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot57.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot58
+            // 
+            this.Grp2Plot58.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot58.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot59
+            // 
+            this.Grp2Plot59.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot59.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot60
+            // 
+            this.Grp2Plot60.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot60.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot61
+            // 
+            this.Grp2Plot61.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot61.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot62
+            // 
+            this.Grp2Plot62.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot62.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot63
+            // 
+            this.Grp2Plot63.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot63.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot64
+            // 
+            this.Grp2Plot64.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot64.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot65
+            // 
+            this.Grp2Plot65.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot65.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot66
+            // 
+            this.Grp2Plot66.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot66.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot67
+            // 
+            this.Grp2Plot67.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot67.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot68
+            // 
+            this.Grp2Plot68.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot68.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot69
+            // 
+            this.Grp2Plot69.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot69.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot70
+            // 
+            this.Grp2Plot70.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot70.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot71
+            // 
+            this.Grp2Plot71.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot71.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot72
+            // 
+            this.Grp2Plot72.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot72.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot73
+            // 
+            this.Grp2Plot73.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot73.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot74
+            // 
+            this.Grp2Plot74.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot74.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot75
+            // 
+            this.Grp2Plot75.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot75.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot76
+            // 
+            this.Grp2Plot76.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot76.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot77
+            // 
+            this.Grp2Plot77.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot77.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot78
+            // 
+            this.Grp2Plot78.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot78.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot79
+            // 
+            this.Grp2Plot79.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot79.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot80
+            // 
+            this.Grp2Plot80.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot80.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot81
+            // 
+            this.Grp2Plot81.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot81.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot82
+            // 
+            this.Grp2Plot82.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot82.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot83
+            // 
+            this.Grp2Plot83.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot83.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot84
+            // 
+            this.Grp2Plot84.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot84.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot85
+            // 
+            this.Grp2Plot85.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot85.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot86
+            // 
+            this.Grp2Plot86.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot86.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot87
+            // 
+            this.Grp2Plot87.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot87.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot88
+            // 
+            this.Grp2Plot88.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot88.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot89
+            // 
+            this.Grp2Plot89.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot89.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot90
+            // 
+            this.Grp2Plot90.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot90.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot91
+            // 
+            this.Grp2Plot91.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot91.YAxis = this.Grp2_yAxis1;
+            // 
+            // Grp2Plot92
+            // 
+            this.Grp2Plot92.XAxis = this.Grp2_xAxis1;
+            this.Grp2Plot92.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot20
+            // 
+            this.scatterPlot20.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot20.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot21
+            // 
+            this.scatterPlot21.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot21.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot22
+            // 
+            this.scatterPlot22.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot22.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot23
+            // 
+            this.scatterPlot23.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot23.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot24
+            // 
+            this.scatterPlot24.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot24.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot25
+            // 
+            this.scatterPlot25.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot25.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot26
+            // 
+            this.scatterPlot26.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot26.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot27
+            // 
+            this.scatterPlot27.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot27.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot28
+            // 
+            this.scatterPlot28.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot28.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot29
+            // 
+            this.scatterPlot29.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot29.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot30
+            // 
+            this.scatterPlot30.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot30.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot31
+            // 
+            this.scatterPlot31.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot31.YAxis = this.Grp2_yAxis1;
+            // 
+            // scatterPlot32
+            // 
+            this.scatterPlot32.XAxis = this.Grp2_xAxis1;
+            this.scatterPlot32.YAxis = this.Grp2_yAxis1;
+            // 
             // TabGrpRaw
             // 
             this.TabGrpRaw.Controls.Add(this.groupBox3);
@@ -3729,10 +4205,107 @@
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.ChkListLegend3);
+            this.groupBox3.Location = new System.Drawing.Point(657, 10);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(104, 65);
+            this.groupBox3.TabIndex = 143;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "[Legend]";
+            // 
+            // ChkListLegend3
+            // 
+            this.ChkListLegend3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend3.CheckOnClick = true;
+            this.ChkListLegend3.FormattingEnabled = true;
+            this.ChkListLegend3.Items.AddRange(new object[] {
+            "Current",
+            "Voltage"});
+            this.ChkListLegend3.Location = new System.Drawing.Point(6, 22);
+            this.ChkListLegend3.Name = "ChkListLegend3";
+            this.ChkListLegend3.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend3.TabIndex = 139;
+            this.ChkListLegend3.SelectedIndexChanged += new System.EventHandler(this.ChkListLegend3_SelectedIndexChanged);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.ChkListItem3);
+            this.groupBox4.Controls.Add(this.btDeselAll3);
+            this.groupBox4.Controls.Add(this.btSelAll3);
+            this.groupBox4.Location = new System.Drawing.Point(657, 102);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(104, 281);
+            this.groupBox4.TabIndex = 142;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "[items ]";
+            // 
+            // ChkListItem3
+            // 
+            this.ChkListItem3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListItem3.CheckOnClick = true;
+            this.ChkListItem3.FormattingEnabled = true;
+            this.ChkListItem3.Items.AddRange(new object[] {
+            "MAIN",
+            "AUX1",
+            "AUX2",
+            "AUX3",
+            "AUX4",
+            "AUX5",
+            "AUX6",
+            "AUX7",
+            "AUX8",
+            "AUX9",
+            "AUX10",
+            "AUX11",
+            "AUX12"});
+            this.ChkListItem3.Location = new System.Drawing.Point(6, 48);
+            this.ChkListItem3.Name = "ChkListItem3";
+            this.ChkListItem3.Size = new System.Drawing.Size(91, 225);
+            this.ChkListItem3.TabIndex = 138;
+            this.ChkListItem3.SelectedIndexChanged += new System.EventHandler(this.ChkListItem3_SelectedIndexChanged);
+            // 
+            // btDeselAll3
+            // 
+            this.btDeselAll3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDeselAll3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btDeselAll3.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
+            this.btDeselAll3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDeselAll3.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAll3.Name = "btDeselAll3";
+            this.btDeselAll3.Size = new System.Drawing.Size(46, 22);
+            this.btDeselAll3.TabIndex = 136;
+            this.btDeselAll3.Text = "All";
+            this.btDeselAll3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDeselAll3.UseVisualStyleBackColor = true;
+            this.btDeselAll3.Click += new System.EventHandler(this.btDeselAll3_Click);
+            // 
+            // btSelAll3
+            // 
+            this.btSelAll3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSelAll3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btSelAll3.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
+            this.btSelAll3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSelAll3.Location = new System.Drawing.Point(2, 20);
+            this.btSelAll3.Name = "btSelAll3";
+            this.btSelAll3.Size = new System.Drawing.Size(47, 22);
+            this.btSelAll3.TabIndex = 135;
+            this.btSelAll3.Text = "All";
+            this.btSelAll3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSelAll3.UseVisualStyleBackColor = true;
+            this.btSelAll3.Click += new System.EventHandler(this.btSelAll3_Click);
+            // 
             // Rtlegend
             // 
+            this.Rtlegend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Rtlegend.Border = NationalInstruments.UI.Border.Dotted;
             this.Rtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Rtlegend.HorizontalScrollMode = NationalInstruments.UI.ScrollMode.Auto;
             this.Rtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.RtlegendItem1,
             this.RtlegendItem2,
@@ -3749,34 +4322,18 @@
             this.RtlegendItem13,
             this.RtlegendItem14});
             this.Rtlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Rtlegend.Location = new System.Drawing.Point(219, 5);
+            this.Rtlegend.Location = new System.Drawing.Point(657, 389);
             this.Rtlegend.Name = "Rtlegend";
-            this.Rtlegend.Size = new System.Drawing.Size(82, 54);
+            this.Rtlegend.Size = new System.Drawing.Size(103, 170);
             this.Rtlegend.TabIndex = 111;
             // 
             // RtlegendItem1
             // 
             this.RtlegendItem1.Text = "Voltage";
             // 
-            // RTxAxis1
-            // 
-            this.RTxAxis1.MajorDivisions.LabelVisible = false;
-            this.RTxAxis1.MajorDivisions.TickVisible = false;
-            // 
-            // RTyAxis1
-            // 
-            this.RTyAxis1.Visible = false;
-            // 
             // RtlegendItem2
             // 
             this.RtlegendItem2.Text = "Current";
-            // 
-            // RTyAxis2
-            // 
-            this.RTyAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
-            this.RTyAxis2.CaptionVisible = false;
-            this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
-            this.RTyAxis2.Visible = false;
             // 
             // grprt
             // 
@@ -3799,9 +4356,32 @@
             this.RTyAxis2});
             this.grprt.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grprt_MouseDoubleClick);
             // 
+            // scatterPlot3
+            // 
+            this.scatterPlot3.XAxis = this.RTxAxis1;
+            this.scatterPlot3.YAxis = this.RTyAxis1;
+            // 
+            // RTxAxis1
+            // 
+            this.RTxAxis1.MajorDivisions.LabelVisible = false;
+            this.RTxAxis1.MajorDivisions.TickVisible = false;
+            // 
+            // RTyAxis1
+            // 
+            this.RTyAxis1.Visible = false;
+            // 
+            // RTyAxis2
+            // 
+            this.RTyAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
+            this.RTyAxis2.CaptionVisible = false;
+            this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
+            this.RTyAxis2.Visible = false;
+            // 
             // Raw_DataPage
             // 
-            this.Raw_DataPage.Controls.Add(this.rawgrpListBox);
+            this.Raw_DataPage.Controls.Add(this.groupBox6);
+            this.Raw_DataPage.Controls.Add(this.groupBox5);
+            this.Raw_DataPage.Controls.Add(this.RawRtlegend);
             this.Raw_DataPage.Controls.Add(this.AuxDataView1);
             this.Raw_DataPage.Controls.Add(this.rawgrp);
             this.Raw_DataPage.Controls.Add(this.RawRead);
@@ -3813,29 +4393,233 @@
             this.Raw_DataPage.Text = "Raw Data";
             this.Raw_DataPage.UseVisualStyleBackColor = true;
             // 
-            // rawgrpListBox
+            // groupBox6
             // 
-            this.rawgrpListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rawgrpListBox.FormattingEnabled = true;
-            this.rawgrpListBox.Items.AddRange(new object[] {
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.radioButton0);
+            this.groupBox6.Controls.Add(this.radioButton12);
+            this.groupBox6.Controls.Add(this.radioButton11);
+            this.groupBox6.Controls.Add(this.radioButton10);
+            this.groupBox6.Controls.Add(this.radioButton9);
+            this.groupBox6.Controls.Add(this.radioButton8);
+            this.groupBox6.Controls.Add(this.radioButton7);
+            this.groupBox6.Controls.Add(this.radioButton6);
+            this.groupBox6.Controls.Add(this.radioButton5);
+            this.groupBox6.Controls.Add(this.radioButton4);
+            this.groupBox6.Controls.Add(this.radioButton3);
+            this.groupBox6.Controls.Add(this.radioButton2);
+            this.groupBox6.Controls.Add(this.radioButton1);
+            this.groupBox6.Location = new System.Drawing.Point(659, 215);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(103, 340);
+            this.groupBox6.TabIndex = 145;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "[items ]";
+            // 
+            // radioButton0
+            // 
+            this.radioButton0.AutoSize = true;
+            this.radioButton0.Location = new System.Drawing.Point(5, 21);
+            this.radioButton0.Name = "radioButton0";
+            this.radioButton0.Size = new System.Drawing.Size(53, 18);
+            this.radioButton0.TabIndex = 12;
+            this.radioButton0.TabStop = true;
+            this.radioButton0.Text = "main";
+            this.radioButton0.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(5, 316);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(116, 18);
+            this.radioButton12.TabIndex = 11;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "radioButton12";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(5, 298);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(116, 18);
+            this.radioButton11.TabIndex = 10;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "radioButton11";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Location = new System.Drawing.Point(5, 274);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(116, 18);
+            this.radioButton10.TabIndex = 9;
+            this.radioButton10.TabStop = true;
+            this.radioButton10.Text = "radioButton10";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Location = new System.Drawing.Point(5, 250);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(109, 18);
+            this.radioButton9.TabIndex = 8;
+            this.radioButton9.TabStop = true;
+            this.radioButton9.Text = "radioButton9";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Location = new System.Drawing.Point(5, 218);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(109, 18);
+            this.radioButton8.TabIndex = 7;
+            this.radioButton8.TabStop = true;
+            this.radioButton8.Text = "radioButton8";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(5, 194);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(109, 18);
+            this.radioButton7.TabIndex = 6;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "radioButton7";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(5, 170);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(109, 18);
+            this.radioButton6.TabIndex = 5;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "radioButton6";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(5, 146);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(109, 18);
+            this.radioButton5.TabIndex = 4;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "radioButton5";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(5, 117);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(109, 18);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "radioButton4";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(5, 93);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(109, 18);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "radioButton3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(5, 69);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(109, 18);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "radioButton2";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(5, 45);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(53, 18);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Aux1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.ChkListLegend4);
+            this.groupBox5.Location = new System.Drawing.Point(659, 72);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(104, 66);
+            this.groupBox5.TabIndex = 144;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "[Legend]";
+            // 
+            // ChkListLegend4
+            // 
+            this.ChkListLegend4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend4.CheckOnClick = true;
+            this.ChkListLegend4.FormattingEnabled = true;
+            this.ChkListLegend4.Items.AddRange(new object[] {
             "MAIN",
-            "AUX1",
-            "AUX2",
-            "AUX3",
-            "AUX4",
-            "AUX5",
-            "AUX6",
-            "AUX7",
-            "AUX8",
-            "AUX9",
-            "AUX10",
-            "AUX11",
-            "AUX12"});
-            this.rawgrpListBox.Location = new System.Drawing.Point(667, 34);
-            this.rawgrpListBox.Name = "rawgrpListBox";
-            this.rawgrpListBox.Size = new System.Drawing.Size(87, 225);
-            this.rawgrpListBox.TabIndex = 120;
+            "AUX1"});
+            this.ChkListLegend4.Location = new System.Drawing.Point(6, 21);
+            this.ChkListLegend4.Name = "ChkListLegend4";
+            this.ChkListLegend4.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend4.TabIndex = 139;
+            this.ChkListLegend4.Visible = false;
+            // 
+            // RawRtlegend
+            // 
+            this.RawRtlegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RawRtlegend.Border = NationalInstruments.UI.Border.Dotted;
+            this.RawRtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RawRtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
+            this.legendItem1,
+            this.legendItem2,
+            this.legendItem3,
+            this.legendItem4,
+            this.legendItem5,
+            this.legendItem6,
+            this.legendItem7,
+            this.legendItem8,
+            this.legendItem9,
+            this.legendItem10,
+            this.legendItem18,
+            this.legendItem19,
+            this.legendItem20,
+            this.legendItem29});
+            this.RawRtlegend.ItemSize = new System.Drawing.Size(24, 20);
+            this.RawRtlegend.Location = new System.Drawing.Point(569, 19);
+            this.RawRtlegend.Name = "RawRtlegend";
+            this.RawRtlegend.Size = new System.Drawing.Size(82, 54);
+            this.RawRtlegend.TabIndex = 121;
+            this.RawRtlegend.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseDown);
+            this.RawRtlegend.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseMove);
+            this.RawRtlegend.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseUp);
+            // 
+            // legendItem1
+            // 
+            this.legendItem1.Text = "Voltage";
+            // 
+            // legendItem2
+            // 
+            this.legendItem2.Text = "Current";
             // 
             // AuxDataView1
             // 
@@ -3958,7 +4742,7 @@
             this.rawgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rawgrp.ContextMenuStrip = this.RtMenuStrip;
+            this.rawgrp.ContextMenuStrip = this.RawRtMenuStrip;
             this.rawgrp.Location = new System.Drawing.Point(5, 10);
             this.rawgrp.Name = "rawgrp";
             this.rawgrp.PlotAreaColor = System.Drawing.Color.White;
@@ -3978,6 +4762,155 @@
             this.rawgrp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseMove);
             this.rawgrp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseUp);
             this.rawgrp.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseWheel);
+            // 
+            // RawRtMenuStrip
+            // 
+            this.RawRtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphMode,
+            this.RawRtMenuGraphView,
+            this.RawRtMenuGraphColor});
+            this.RawRtMenuStrip.Name = "RtMenuStrip";
+            this.RawRtMenuStrip.Size = new System.Drawing.Size(142, 70);
+            // 
+            // RawRtMenuGraphMode
+            // 
+            this.RawRtMenuGraphMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphMode1,
+            this.RawRtMenuGraphMode2,
+            this.toolStripSeparator23,
+            this.RawpauseRefreshToolStripMenuItem});
+            this.RawRtMenuGraphMode.Name = "RawRtMenuGraphMode";
+            this.RawRtMenuGraphMode.Size = new System.Drawing.Size(141, 22);
+            this.RawRtMenuGraphMode.Text = "Graph mode";
+            // 
+            // RawRtMenuGraphMode1
+            // 
+            this.RawRtMenuGraphMode1.CheckOnClick = true;
+            this.RawRtMenuGraphMode1.Name = "RawRtMenuGraphMode1";
+            this.RawRtMenuGraphMode1.Size = new System.Drawing.Size(145, 22);
+            this.RawRtMenuGraphMode1.Text = "V vs I";
+            this.RawRtMenuGraphMode1.Click += new System.EventHandler(this.RawRtMenuGraphMode_Click);
+            // 
+            // RawRtMenuGraphMode2
+            // 
+            this.RawRtMenuGraphMode2.CheckOnClick = true;
+            this.RawRtMenuGraphMode2.Name = "RawRtMenuGraphMode2";
+            this.RawRtMenuGraphMode2.Size = new System.Drawing.Size(145, 22);
+            this.RawRtMenuGraphMode2.Text = "I,V vs t";
+            this.RawRtMenuGraphMode2.Click += new System.EventHandler(this.RawRtMenuGraphMode_Click);
+            // 
+            // toolStripSeparator23
+            // 
+            this.toolStripSeparator23.Name = "toolStripSeparator23";
+            this.toolStripSeparator23.Size = new System.Drawing.Size(142, 6);
+            // 
+            // RawpauseRefreshToolStripMenuItem
+            // 
+            this.RawpauseRefreshToolStripMenuItem.Name = "RawpauseRefreshToolStripMenuItem";
+            this.RawpauseRefreshToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.RawpauseRefreshToolStripMenuItem.Text = "Pause refresh";
+            // 
+            // RawRtMenuGraphView
+            // 
+            this.RawRtMenuGraphView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphLine,
+            this.RawRtMenuGraphPoint,
+            this.toolStripSeparator24,
+            this.RawRtMenuGraphLegend,
+            this.toolStripSeparator25,
+            this.RawRtMenuGraphGrid});
+            this.RawRtMenuGraphView.Name = "RawRtMenuGraphView";
+            this.RawRtMenuGraphView.Size = new System.Drawing.Size(141, 22);
+            this.RawRtMenuGraphView.Text = "Graph view";
+            // 
+            // RawRtMenuGraphLine
+            // 
+            this.RawRtMenuGraphLine.CheckOnClick = true;
+            this.RawRtMenuGraphLine.Name = "RawRtMenuGraphLine";
+            this.RawRtMenuGraphLine.Size = new System.Drawing.Size(113, 22);
+            this.RawRtMenuGraphLine.Text = "Line";
+            // 
+            // RawRtMenuGraphPoint
+            // 
+            this.RawRtMenuGraphPoint.CheckOnClick = true;
+            this.RawRtMenuGraphPoint.Name = "RawRtMenuGraphPoint";
+            this.RawRtMenuGraphPoint.Size = new System.Drawing.Size(113, 22);
+            this.RawRtMenuGraphPoint.Text = "Point";
+            // 
+            // toolStripSeparator24
+            // 
+            this.toolStripSeparator24.Name = "toolStripSeparator24";
+            this.toolStripSeparator24.Size = new System.Drawing.Size(110, 6);
+            // 
+            // RawRtMenuGraphLegend
+            // 
+            this.RawRtMenuGraphLegend.Name = "RawRtMenuGraphLegend";
+            this.RawRtMenuGraphLegend.Size = new System.Drawing.Size(113, 22);
+            this.RawRtMenuGraphLegend.Text = "Legend";
+            // 
+            // toolStripSeparator25
+            // 
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            this.toolStripSeparator25.Size = new System.Drawing.Size(110, 6);
+            // 
+            // RawRtMenuGraphGrid
+            // 
+            this.RawRtMenuGraphGrid.Name = "RawRtMenuGraphGrid";
+            this.RawRtMenuGraphGrid.Size = new System.Drawing.Size(113, 22);
+            this.RawRtMenuGraphGrid.Text = "Grid";
+            // 
+            // RawRtMenuGraphColor
+            // 
+            this.RawRtMenuGraphColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphPlotColor1,
+            this.toolStripSeparator26,
+            this.RawRtMenuGraphAxisColor,
+            this.toolStripSeparator27,
+            this.RawRtMenuGraphGridColor,
+            this.toolStripSeparator28,
+            this.RawRtMenuGraphBackColor});
+            this.RawRtMenuGraphColor.Name = "RawRtMenuGraphColor";
+            this.RawRtMenuGraphColor.Size = new System.Drawing.Size(141, 22);
+            this.RawRtMenuGraphColor.Text = "Graph color";
+            // 
+            // RawRtMenuGraphPlotColor1
+            // 
+            this.RawRtMenuGraphPlotColor1.Name = "RawRtMenuGraphPlotColor1";
+            this.RawRtMenuGraphPlotColor1.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphPlotColor1.Text = "Plots";
+            // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(97, 6);
+            // 
+            // RawRtMenuGraphAxisColor
+            // 
+            this.RawRtMenuGraphAxisColor.Name = "RawRtMenuGraphAxisColor";
+            this.RawRtMenuGraphAxisColor.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphAxisColor.Text = "Axis";
+            // 
+            // toolStripSeparator27
+            // 
+            this.toolStripSeparator27.Name = "toolStripSeparator27";
+            this.toolStripSeparator27.Size = new System.Drawing.Size(97, 6);
+            // 
+            // RawRtMenuGraphGridColor
+            // 
+            this.RawRtMenuGraphGridColor.Name = "RawRtMenuGraphGridColor";
+            this.RawRtMenuGraphGridColor.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphGridColor.Text = "Grid";
+            // 
+            // toolStripSeparator28
+            // 
+            this.toolStripSeparator28.Name = "toolStripSeparator28";
+            this.toolStripSeparator28.Size = new System.Drawing.Size(97, 6);
+            // 
+            // RawRtMenuGraphBackColor
+            // 
+            this.RawRtMenuGraphBackColor.Name = "RawRtMenuGraphBackColor";
+            this.RawRtMenuGraphBackColor.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphBackColor.Text = "Back";
             // 
             // scatterPlot1
             // 
@@ -4020,7 +4953,7 @@
             // RawRead
             // 
             this.RawRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RawRead.Location = new System.Drawing.Point(667, 10);
+            this.RawRead.Location = new System.Drawing.Point(667, 34);
             this.RawRead.Name = "RawRead";
             this.RawRead.Size = new System.Drawing.Size(87, 22);
             this.RawRead.TabIndex = 114;
@@ -4072,7 +5005,7 @@
             // btabout
             // 
             this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btabout.Location = new System.Drawing.Point(754, 1);
+            this.btabout.Location = new System.Drawing.Point(404, 1);
             this.btabout.Name = "btabout";
             this.btabout.Size = new System.Drawing.Size(24, 24);
             this.btabout.TabIndex = 95;
@@ -4082,6 +5015,54 @@
             // legendItem108
             // 
             this.legendItem108.Text = "Item 56";
+            // 
+            // grpAuxMon
+            // 
+            this.grpAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.grpAuxMon.Controls.Add(this.rdoAuxMon2);
+            this.grpAuxMon.Controls.Add(this.rdoAuxMon1);
+            this.grpAuxMon.Controls.Add(this.listAuxMon);
+            this.grpAuxMon.Location = new System.Drawing.Point(6, 338);
+            this.grpAuxMon.Name = "grpAuxMon";
+            this.grpAuxMon.Size = new System.Drawing.Size(156, 159);
+            this.grpAuxMon.TabIndex = 117;
+            this.grpAuxMon.TabStop = false;
+            this.grpAuxMon.Text = "[Auxiliary Monitor]";
+            // 
+            // rdoAuxMon2
+            // 
+            this.rdoAuxMon2.AutoSize = true;
+            this.rdoAuxMon2.Location = new System.Drawing.Point(68, 18);
+            this.rdoAuxMon2.Name = "rdoAuxMon2";
+            this.rdoAuxMon2.Size = new System.Drawing.Size(32, 18);
+            this.rdoAuxMon2.TabIndex = 2;
+            this.rdoAuxMon2.TabStop = true;
+            this.rdoAuxMon2.Text = "Z";
+            this.rdoAuxMon2.UseVisualStyleBackColor = true;
+            this.rdoAuxMon2.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
+            // 
+            // rdoAuxMon1
+            // 
+            this.rdoAuxMon1.AutoSize = true;
+            this.rdoAuxMon1.Location = new System.Drawing.Point(12, 18);
+            this.rdoAuxMon1.Name = "rdoAuxMon1";
+            this.rdoAuxMon1.Size = new System.Drawing.Size(46, 18);
+            this.rdoAuxMon1.TabIndex = 1;
+            this.rdoAuxMon1.TabStop = true;
+            this.rdoAuxMon1.Text = "Vdc";
+            this.rdoAuxMon1.UseVisualStyleBackColor = true;
+            this.rdoAuxMon1.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
+            // 
+            // listAuxMon
+            // 
+            this.listAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listAuxMon.Location = new System.Drawing.Point(7, 40);
+            this.listAuxMon.Name = "listAuxMon";
+            this.listAuxMon.Size = new System.Drawing.Size(143, 111);
+            this.listAuxMon.TabIndex = 0;
+            this.listAuxMon.UseCompatibleStateImageBehavior = false;
             // 
             // lblprog
             // 
@@ -4100,157 +5081,9 @@
             this.lblprog.Prog_Max = 100;
             this.lblprog.Prog_Min = 0;
             this.lblprog.Prog_Val = 50;
-            this.lblprog.Size = new System.Drawing.Size(752, 24);
+            this.lblprog.Size = new System.Drawing.Size(402, 24);
             this.lblprog.TabIndex = 56;
             this.lblprog.Load += new System.EventHandler(this.lblprog_Load);
-            // 
-            // grpAuxMon
-            // 
-            this.grpAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.grpAuxMon.Controls.Add(this.rdoAuxMon2);
-            this.grpAuxMon.Controls.Add(this.rdoAuxMon1);
-            this.grpAuxMon.Controls.Add(this.listAuxMon);
-            this.grpAuxMon.Location = new System.Drawing.Point(6, 338);
-            this.grpAuxMon.Name = "grpAuxMon";
-            this.grpAuxMon.Size = new System.Drawing.Size(156, 352);
-            this.grpAuxMon.TabIndex = 117;
-            this.grpAuxMon.TabStop = false;
-            this.grpAuxMon.Text = "[Auxiliary Monitor]";
-            // 
-            // rdoAuxMon2
-            // 
-            this.rdoAuxMon2.AutoSize = true;
-            this.rdoAuxMon2.Location = new System.Drawing.Point(68, 18);
-            this.rdoAuxMon2.Name = "rdoAuxMon2";
-            this.rdoAuxMon2.Size = new System.Drawing.Size(32, 18);
-            this.rdoAuxMon2.TabIndex = 2;
-            this.rdoAuxMon2.TabStop = true;
-            this.rdoAuxMon2.Text = "Z";
-            this.rdoAuxMon2.UseVisualStyleBackColor = true;
-            // 
-            // rdoAuxMon1
-            // 
-            this.rdoAuxMon1.AutoSize = true;
-            this.rdoAuxMon1.Location = new System.Drawing.Point(12, 18);
-            this.rdoAuxMon1.Name = "rdoAuxMon1";
-            this.rdoAuxMon1.Size = new System.Drawing.Size(46, 18);
-            this.rdoAuxMon1.TabIndex = 1;
-            this.rdoAuxMon1.TabStop = true;
-            this.rdoAuxMon1.Text = "Vdc";
-            this.rdoAuxMon1.UseVisualStyleBackColor = true;
-            // 
-            // listAuxMon
-            // 
-            this.listAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listAuxMon.Location = new System.Drawing.Point(7, 40);
-            this.listAuxMon.Name = "listAuxMon";
-            this.listAuxMon.Size = new System.Drawing.Size(143, 304);
-            this.listAuxMon.TabIndex = 0;
-            this.listAuxMon.UseCompatibleStateImageBehavior = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.checkedListBox5);
-            this.groupBox3.Controls.Add(this.comboBox2);
-            this.groupBox3.Location = new System.Drawing.Point(657, 5);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(104, 92);
-            this.groupBox3.TabIndex = 143;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "[Legend]";
-            // 
-            // checkedListBox5
-            // 
-            this.checkedListBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox5.FormattingEnabled = true;
-            this.checkedListBox5.Items.AddRange(new object[] {
-            "MAIN",
-            "AUX1"});
-            this.checkedListBox5.Location = new System.Drawing.Point(6, 49);
-            this.checkedListBox5.Name = "checkedListBox5";
-            this.checkedListBox5.Size = new System.Drawing.Size(91, 38);
-            this.checkedListBox5.TabIndex = 139;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(7, 21);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(81, 22);
-            this.comboBox2.TabIndex = 121;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.checkedListBox6);
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.button4);
-            this.groupBox4.Location = new System.Drawing.Point(657, 102);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(104, 281);
-            this.groupBox4.TabIndex = 142;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "[items ]";
-            // 
-            // checkedListBox6
-            // 
-            this.checkedListBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListBox6.FormattingEnabled = true;
-            this.checkedListBox6.Items.AddRange(new object[] {
-            "MAIN",
-            "AUX1",
-            "AUX2",
-            "AUX3",
-            "AUX4",
-            "AUX5",
-            "AUX6",
-            "AUX7",
-            "AUX8",
-            "AUX9",
-            "AUX10",
-            "AUX11",
-            "AUX12"});
-            this.checkedListBox6.Location = new System.Drawing.Point(6, 48);
-            this.checkedListBox6.Name = "checkedListBox6";
-            this.checkedListBox6.Size = new System.Drawing.Size(91, 225);
-            this.checkedListBox6.TabIndex = 138;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button3.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(52, 20);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(46, 22);
-            this.button3.TabIndex = 136;
-            this.button3.Text = "All";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button4.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(2, 20);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(47, 22);
-            this.button4.TabIndex = 135;
-            this.button4.Text = "All";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // scatterPlot3
-            // 
-            this.scatterPlot3.XAxis = this.RTxAxis1;
-            this.scatterPlot3.YAxis = this.RTyAxis1;
             // 
             // BZAChPan
             // 
@@ -4287,7 +5120,7 @@
             this.Controls.Add(this.lblTemp);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BZAChPan";
-            this.Size = new System.Drawing.Size(950, 693);
+            this.Size = new System.Drawing.Size(600, 500);
             this.Load += new System.EventHandler(this.BZAChPan_Load);
             this.SizeChanged += new System.EventHandler(this.BZAChPan_SizeChanged);
             this.menu_1.ResumeLayout(false);
@@ -4311,15 +5144,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.grp2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).EndInit();
             this.TabGrpRaw.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Rtlegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grprt)).EndInit();
             this.Raw_DataPage.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.RawRtlegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).EndInit();
+            this.RawRtMenuStrip.ResumeLayout(false);
             this.grpAuxMon.ResumeLayout(false);
             this.grpAuxMon.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -4345,12 +5183,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuPlotColor11;
         private System.Windows.Forms.ToolStripMenuItem MenuGridColor1;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphView1;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine11;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint11;
-        private System.Windows.Forms.ToolStripSeparator MenuSep11;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine12;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint12;
-        private System.Windows.Forms.ToolStripSeparator MenuSep12;
         private System.Windows.Forms.ToolStripMenuItem MenuPlotLegend1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphMode1;
@@ -4367,21 +5199,8 @@
         private System.Windows.Forms.ToolStripMenuItem MenuGraphColor2;
         private System.Windows.Forms.ToolStripMenuItem MenuBackColor2;
         private System.Windows.Forms.ToolStripMenuItem MenuPlotColor21;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor22;
         private System.Windows.Forms.ToolStripMenuItem MenuGridColor2;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphView2;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine21;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint21;
-        private System.Windows.Forms.ToolStripSeparator MenuSep21;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine22;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint22;
-        private System.Windows.Forms.ToolStripSeparator MenuSep22;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine23;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint23;
-        private System.Windows.Forms.ToolStripSeparator MenuSep23;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine24;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint24;
-        private System.Windows.Forms.ToolStripSeparator MenuSep24;
         private System.Windows.Forms.ToolStripMenuItem MenuPlotLegend2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem MenuPlotGridY21;
@@ -4413,7 +5232,6 @@
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphBackColor;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphAxisColor;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphPlotColor1;
-        private System.Windows.Forms.ToolStripMenuItem RtMenuGraphPlotColor2;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphGridColor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
@@ -4422,35 +5240,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private System.Windows.Forms.ToolStripMenuItem MenuAxisColor2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor23;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor24;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor25;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor26;
-        private System.Windows.Forms.ToolStripSeparator MenuSep25;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine25;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint25;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine26;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint26;
-        private System.Windows.Forms.ToolStripSeparator MenuSep26;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor12;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor13;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor14;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor15;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotColor16;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine13;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine14;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine15;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLine16;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint13;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint14;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint15;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotPoint16;
-        private System.Windows.Forms.ToolStripSeparator MenuSep13;
-        private System.Windows.Forms.ToolStripSeparator MenuSep14;
-        private System.Windows.Forms.ToolStripSeparator MenuSep15;
-        private System.Windows.Forms.ToolStripSeparator MenuSep16;
         private System.Windows.Forms.ToolStripMenuItem MenuModeCursor13;
         private System.Windows.Forms.ToolStripMenuItem MenuModeCursor14;
         private System.Windows.Forms.ToolStripMenuItem MenuModeCursor15;
@@ -4750,32 +5541,197 @@
         private NationalInstruments.UI.LegendItem RtlegendItem12;
         private NationalInstruments.UI.LegendItem RtlegendItem13;
         private NationalInstruments.UI.LegendItem RtlegendItem14;
-        private System.Windows.Forms.CheckedListBox rawgrpListBox;
         private System.Windows.Forms.GroupBox grpAuxMon;
         private System.Windows.Forms.GroupBox grpboxni2;
-        private System.Windows.Forms.Button btDeselAllNiItems;
-        private System.Windows.Forms.Button btSelAllNiItems;
+        private System.Windows.Forms.Button btDeselAll1;
+        private System.Windows.Forms.Button btSelAll1;
         private System.Windows.Forms.GroupBox grpboxni1;
-        private System.Windows.Forms.CheckedListBox checkedListBox3;
-        private System.Windows.Forms.ComboBox cboItemA;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.CheckedListBox ChkListLegend1;
+        private System.Windows.Forms.CheckedListBox ChkListItem1;
         private System.Windows.Forms.RadioButton rdoAuxMon2;
         private System.Windows.Forms.RadioButton rdoAuxMon1;
         private System.Windows.Forms.ListView listAuxMon;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckedListBox ChkListLegend2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckedListBox checkedListBox4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckedListBox ChkListItem2;
+        private System.Windows.Forms.Button btDeselAll2;
+        private System.Windows.Forms.Button btSelAll2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckedListBox checkedListBox5;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.CheckedListBox ChkListLegend3;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckedListBox checkedListBox6;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckedListBox ChkListItem3;
+        private System.Windows.Forms.Button btDeselAll3;
+        private System.Windows.Forms.Button btSelAll3;
         private NationalInstruments.UI.ScatterPlot scatterPlot3;
+        private NationalInstruments.UI.WindowsForms.Legend RawRtlegend;
+        private NationalInstruments.UI.LegendItem legendItem1;
+        private NationalInstruments.UI.LegendItem legendItem2;
+        private NationalInstruments.UI.LegendItem legendItem3;
+        private NationalInstruments.UI.LegendItem legendItem4;
+        private NationalInstruments.UI.LegendItem legendItem5;
+        private NationalInstruments.UI.LegendItem legendItem6;
+        private NationalInstruments.UI.LegendItem legendItem7;
+        private NationalInstruments.UI.LegendItem legendItem8;
+        private NationalInstruments.UI.LegendItem legendItem9;
+        private NationalInstruments.UI.LegendItem legendItem10;
+        private NationalInstruments.UI.LegendItem legendItem18;
+        private NationalInstruments.UI.LegendItem legendItem19;
+        private NationalInstruments.UI.LegendItem legendItem20;
+        private NationalInstruments.UI.LegendItem legendItem29;
+        private System.Windows.Forms.ContextMenuStrip RawRtMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphMode;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphMode1;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphMode2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
+        private System.Windows.Forms.ToolStripMenuItem RawpauseRefreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphView;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphLine;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphPoint;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphLegend;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphGrid;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphColor;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphPlotColor1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphAxisColor;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphGridColor;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
+        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphBackColor;
+        private System.Windows.Forms.ToolStripMenuItem MenuGraphLine1;
+        private System.Windows.Forms.ToolStripMenuItem MenuGraphPoint1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
+        private System.Windows.Forms.ToolStripMenuItem MenuGraphLine2;
+        private System.Windows.Forms.ToolStripMenuItem MenuGraphPoint2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckedListBox ChkListLegend4;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton radioButton0;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot57;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot58;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot59;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot60;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot61;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot62;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot63;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot64;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot65;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot66;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot67;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot68;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot69;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot70;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot71;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot72;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot73;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot74;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot75;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot76;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot77;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot78;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot79;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot80;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot81;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot82;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot83;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot84;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot85;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot86;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot87;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot44;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot45;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot46;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot47;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot48;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot49;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot50;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot51;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot52;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot53;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot54;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot55;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot56;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot57;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot58;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot59;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot60;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot61;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot62;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot63;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot64;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot65;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot66;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot67;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot68;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot69;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot70;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot71;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot72;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot73;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot74;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot75;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot76;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot77;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot78;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot79;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot80;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot81;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot82;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot83;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot84;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot85;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot86;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot87;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot88;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot89;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot88;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot89;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot90;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot91;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot92;
+        private NationalInstruments.UI.ScatterPlot scatterPlot4;
+        private NationalInstruments.UI.ScatterPlot scatterPlot5;
+        private NationalInstruments.UI.ScatterPlot scatterPlot6;
+        private NationalInstruments.UI.ScatterPlot scatterPlot7;
+        private NationalInstruments.UI.ScatterPlot scatterPlot8;
+        private NationalInstruments.UI.ScatterPlot scatterPlot9;
+        private NationalInstruments.UI.ScatterPlot scatterPlot10;
+        private NationalInstruments.UI.ScatterPlot scatterPlot11;
+        private NationalInstruments.UI.ScatterPlot scatterPlot12;
+        private NationalInstruments.UI.ScatterPlot scatterPlot13;
+        private NationalInstruments.UI.ScatterPlot scatterPlot14;
+        private NationalInstruments.UI.ScatterPlot scatterPlot15;
+        private NationalInstruments.UI.ScatterPlot scatterPlot16;
+        private NationalInstruments.UI.ScatterPlot scatterPlot17;
+        private NationalInstruments.UI.ScatterPlot scatterPlot18;
+        private NationalInstruments.UI.ScatterPlot scatterPlot19;
+        private NationalInstruments.UI.ScatterPlot scatterPlot20;
+        private NationalInstruments.UI.ScatterPlot scatterPlot21;
+        private NationalInstruments.UI.ScatterPlot scatterPlot22;
+        private NationalInstruments.UI.ScatterPlot scatterPlot23;
+        private NationalInstruments.UI.ScatterPlot scatterPlot24;
+        private NationalInstruments.UI.ScatterPlot scatterPlot25;
+        private NationalInstruments.UI.ScatterPlot scatterPlot26;
+        private NationalInstruments.UI.ScatterPlot scatterPlot27;
+        private NationalInstruments.UI.ScatterPlot scatterPlot28;
+        private NationalInstruments.UI.ScatterPlot scatterPlot29;
+        private NationalInstruments.UI.ScatterPlot scatterPlot30;
+        private NationalInstruments.UI.ScatterPlot scatterPlot31;
+        private NationalInstruments.UI.ScatterPlot scatterPlot32;
     }
 }

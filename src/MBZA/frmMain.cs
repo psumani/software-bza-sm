@@ -1,6 +1,4 @@
 ﻿using C1.Win.C1FlexGrid;
-using DataManager;
-using DataManager.CommClass;
 using Microsoft.Win32;
 using SMLib;
 using System;

@@ -29,6 +29,7 @@ namespace ZiveLab.ZM.Dataview
         double _PrevPow = 0.0;
         double _prevCapa = 0.0;
         double _prevEner = 0.0;
+
         double[] _PrevAuxPow;
         double[] _prevAuxEner;
         int _PrevCycNo = -1;
@@ -96,7 +97,7 @@ namespace ZiveLab.ZM.Dataview
                 _PrevCycTime = new TimeSpan(0);
                 _PrevCycNo = rawdata.nCycle;
 
-                for (i= 0; i< 12; i++)
+                for (i= 0; i< MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
                     _PrevAuxPow[i] = 0.0;
                     _prevAuxEner[i] = 0.0;
@@ -105,14 +106,14 @@ namespace ZiveLab.ZM.Dataview
             urd = new UnitReportData(rawdata);
             urd.Power = rawdata.Vdc * rawdata.Idc;
             urd.Load = (rawdata.Idc == 0) ? 0 : rawdata.Vdc / rawdata.Idc;
-
             double ener = (_PrevPow + urd.Power) / 2 * (TimeSpan.FromTicks((long)(rawdata.CycleTime * 10000000)) - _PrevCycTime).TotalHours;
             double capa = (_PrevCurr + rawdata.Idc) / 2 * (TimeSpan.FromTicks((long)(rawdata.CycleTime * 10000000))  - _PrevCycTime).TotalHours;
-            double[] AuxEner = new double[12];
+
+            double[] AuxEner = new double[MBZA_Constant.MAX_AUX_CHANNELS];
 
             _prevCapa = _prevCapa + Math.Abs(capa);
             _prevEner = _prevEner + Math.Abs(ener);
-            for (i = 0; i < 12; i++)
+            for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
                 bd = i / 4;
                 bdch = i % 4;
@@ -155,10 +156,10 @@ namespace ZiveLab.ZM.Dataview
             _prevEner = 0.0;
             _PrevCycNo = -1;
             _PrevCycTime = new TimeSpan(0);
-            _PrevAuxPow = new double[12];
-            _prevAuxEner = new double[12];
+            _PrevAuxPow = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            _prevAuxEner = new double[MBZA_Constant.MAX_AUX_CHANNELS];
 
-            for(int i=0; i<12; i++)
+            for(int i=0; i< MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
                 _PrevAuxPow[i] = 0.0;
                 _prevAuxEner[i] = 0.0;
@@ -374,7 +375,7 @@ namespace ZiveLab.ZM.Dataview
                 {
                     return false;
                 }
-                sVersion = head.mInfo.version.ToString();
+                sVersion = head.mInfo.GetVersion();
                 datacount = 0;
                 fs.SetLength(0);
 
@@ -722,7 +723,7 @@ namespace ZiveLab.ZM.Dataview
                 return "";
             }
             version.ToWritePtr(buf);
-            return version.ToString();
+            return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Revision, version.Build);
         }
 
         public bool Open(string filename)

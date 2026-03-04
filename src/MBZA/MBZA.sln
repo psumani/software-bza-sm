@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZM.Dataview", "..\ZM.Datavi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataView", "..\TestDataView\TestDataView.csproj", "{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_BZA", "..\Setup_BZA\Setup_BZA.vdproj", "{1F83DC4E-BC72-4300-BDD1-58553B2B527E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3A1AAF1-A1C1-4635-B91F-FBDED55CEF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F83DC4E-BC72-4300-BDD1-58553B2B527E}.Debug|Any CPU.ActiveCfg = Debug
+		{1F83DC4E-BC72-4300-BDD1-58553B2B527E}.Debug|Any CPU.Build.0 = Debug
+		{1F83DC4E-BC72-4300-BDD1-58553B2B527E}.Release|Any CPU.ActiveCfg = Release
+		{1F83DC4E-BC72-4300-BDD1-58553B2B527E}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

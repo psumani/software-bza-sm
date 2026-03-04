@@ -1,6 +1,4 @@
 ﻿using C1.Win.C1FlexGrid;
-using CommonLib;
-using DataManager.CommClass;
 using SMLib;
 using System;
 using System.Collections.Generic;
@@ -16,6 +14,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using ZiveLab.ZM;
+using ZiveLab.ZM.Dataview;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Interface;
 using ZiveLab.ZM.ZIM.Packets;
@@ -81,8 +80,8 @@ namespace ZiveLab.ZM
         }
     }
 
-    
 
+    
     public static class gBZA
     {
         [DllImport("kernel32")]
@@ -90,17 +89,17 @@ namespace ZiveLab.ZM
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
-        public static string sMsgTitle;
-
+        public static string sMsgTitle = "";
         public static int LinkSifErr = 0;
         public static int ScanBdCount = 0;
         public static int ScanSifCount = 0;
         public static int RegChCount = 0;
         public static int RegOkChCount = 0;
+        public static string FileGrpVars = "";
         public static string FileLnkCh = "";
+        public static ExtAppProc _ExtAppPath;
         public static AppConfig appcfg;
-        public static GraphSet mGraphSet;
-        public static GraphSetEx mGraphSetEx;
+        public static DataViewSet mDataViewSet;
         public static PingHost pingHost;
         public static Dictionary<string, stLinkSIF> SifLnkLst { get; set; }
         public static Dictionary<string, stLinkSifCh> ChLnkLst {get; set; }
@@ -314,66 +313,23 @@ namespace ZiveLab.ZM
         }
         #endregion
 
-        public static void LoadGrpSetAll()
+         public static bool SaveDataViewSet()
         {
-            LoadGrpSet();
-            LoadGrpExSet();
+            return CoSerialize.SerializeToFile(MBZA_Constant.DataViewSetFilename, mDataViewSet);
         }
 
         public static void SaveGrpSetAll()
         {
             gBZA.appcfg.Save();
-            SaveGrpSet();
-            SaveGrpExSet();
+            SaveDataViewSet();
         }
-
-        public static bool SaveGrpSet()
+        
+        public static bool LoadDataViewSet()
         {
 
-/*            if (File.Exists(MBZA_Constant.GrpCfgFilename) == true)
+            if (File.Exists(MBZA_Constant.DataViewSetFilename) == false)
             {
-                try
-                {
-                    File.Delete(MBZA_Constant.GrpCfgFilename);
-                }
-                catch
-                {
-                    MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }*/
-            CoSerialize.SerializeToFile(MBZA_Constant.GrpCfgFilename, mGraphSet);
-            
-            return true;
-        }
-
-        public static bool SaveGrpExSet()
-        {
-
-           /* if (File.Exists(MBZA_Constant.GrpExCfgFilename) == true)
-            {
-                try
-                {
-                    File.Delete(MBZA_Constant.GrpExCfgFilename);
-                }
-                catch
-                {
-                    MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }*/
-            CoSerialize.SerializeToFile(MBZA_Constant.GrpExCfgFilename, mGraphSetEx);
-            
-
-            return true;
-        }
-
-        public static bool LoadGrpSet()
-        {
-
-            if (File.Exists(MBZA_Constant.GrpCfgFilename) == false)
-            {
-                if (SaveGrpSet() == false)
+                if (SaveDataViewSet() == false)
                 {
                     return false;
                 }
@@ -381,14 +337,14 @@ namespace ZiveLab.ZM
             }
             try
             {
-                mGraphSet = CoSerialize.SerializeFromFile<GraphSet>(MBZA_Constant.GrpCfgFilename);
+                mDataViewSet = CoSerialize.SerializeFromFile<DataViewSet>(MBZA_Constant.DataViewSetFilename);
             }
             catch 
             {
                 try
                 {
-                    File.Delete(MBZA_Constant.GrpCfgFilename);
-                    if (SaveGrpSet() == false)
+                    File.Delete(MBZA_Constant.DataViewSetFilename);
+                    if (SaveDataViewSet() == false)
                     {
                         return false;
                     }
@@ -402,41 +358,7 @@ namespace ZiveLab.ZM
 
             return true;
         }
-
-        public static bool LoadGrpExSet()
-        {
-            if (File.Exists(MBZA_Constant.GrpExCfgFilename) == false)
-            {
-                if (SaveGrpExSet() == false)
-                {
-                    return false;
-                }
-                return true;
-            }
-            try
-            {
-                mGraphSetEx = CoSerialize.SerializeFromFile<GraphSetEx>(MBZA_Constant.GrpExCfgFilename);
-            }
-            catch
-            {
-                try
-                {
-                    File.Delete(MBZA_Constant.GrpExCfgFilename);
-                    if (SaveGrpExSet() == false)
-                    {
-                        return false;
-                    }
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
+        
         public static void ShowInfoBox(string snote)
         {
             MessageBox.Show(snote,sMsgTitle,MessageBoxButtons.OK,MessageBoxIcon.Information);

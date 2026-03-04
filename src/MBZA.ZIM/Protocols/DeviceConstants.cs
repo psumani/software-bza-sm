@@ -18,12 +18,12 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_APP_DEVICE = 8;
         public const int ChannelMapSize = 512;
         public const int MAX_GRAPH_YAXES = 2;
+        public const int MAX_GRAPH_PLOTS = 8;
         public const int MAX_TECHNIQUE = 6;
         public const int MAX_COM_DATA_CNT = 20;
         public const int MAX_DATA_CNT = 100000;
         public const string AppCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM.CFG";
-        public const string GrpCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_GRPSET.CFG";
-        public const string GrpExCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_GRPSETEX.CFG";
+        public const string DataViewSetFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_DATAVIEW.SET";
 
         public static string[] Const_LootPart = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", };
         public static string[] Const_LootPartAux = { "Connection", "Ethernet", "SIF Board", "ZIM(Channel) Board", "Aux Board1", "Aux Board2", "Aux Board3" };

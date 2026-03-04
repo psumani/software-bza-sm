@@ -375,8 +375,6 @@ namespace ZiveLab.ZM
             }
 
             cboItem.Items.Clear();
-            cboItemA.Items.Clear();
-            cboItemB.Items.Clear();
 
 
             grpvars.nAuxChCount = 0;
@@ -447,15 +445,7 @@ namespace ZiveLab.ZM
                 }
             }
             
-
-            if (grpvars.nAuxChCount > 0)
-            {
-                cboItemA.Items.Add("All");
-                cboItemB.Items.Add("All");
-            }
             cboItem.Items.Add("Main");
-            cboItemA.Items.Add("Main");
-            cboItemB.Items.Add("Main");
 
             if (grpvars.nAuxChCount > 0)
             {
@@ -463,8 +453,6 @@ namespace ZiveLab.ZM
                 {
                     str = string.Format("Aux{0}", grpvars.showitems[i].nAuxCh + 1);
                     cboItem.Items.Add(str);
-                    cboItemA.Items.Add(str);
-                    cboItemB.Items.Add(str);
 
                     ChkBoxNi[i+1].Text = str;
                     ChkBoxBd[i+1].Text = str;
@@ -474,14 +462,9 @@ namespace ZiveLab.ZM
                     ChkBoxBd[i+1].Checked = grpvars.showitems[i+1].showbode;
                 }
                 cboItem.Enabled = true;
-                cboItemA.Enabled = true;
-                cboItemB.Enabled = true;
 
                 lblitem.Visible = true;
                 cboItem.Visible = true;
-
-                cboItemA.Visible = true;
-                cboItemB.Visible = true;
 
                 grpboxni2.Visible = true;
                 grpboxbd2.Visible = true;
@@ -492,14 +475,9 @@ namespace ZiveLab.ZM
             else
             {
                 cboItem.Enabled = false;
-                cboItemA.Enabled = false;
-                cboItemB.Enabled = false;
 
                 lblitem.Visible = false;
                 cboItem.Visible = false;
-
-                cboItemA.Visible = true;
-                cboItemB.Visible = true;
 
                 grpboxni2.Visible = false;
                 grpboxbd2.Visible = false;
@@ -509,8 +487,6 @@ namespace ZiveLab.ZM
             }
             SelItem = Math.Min(SelItem, grpvars.nAuxChCount);
             cboItem.SelectedIndex = SelItem;
-            cboItemA.SelectedIndex = 0;
-            cboItemB.SelectedIndex = 0;
 
 
 
@@ -2286,7 +2262,6 @@ namespace ZiveLab.ZM
         {
             this.Cursor = Cursors.WaitCursor;
             bool res = false;
-            string sitem;
             //gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].ToWritePtr(ranges.ToByteArray());
             gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.ToWritePtr(ranges[0].ToByteArray()); // 배열
             for (int i = 0; i < MBZA_Constant.MAX_AUX_BOARD; i++)

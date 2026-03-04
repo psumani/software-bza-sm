@@ -55,7 +55,7 @@ namespace ZiveLab.ZM
             chs = new List<int>();
             chs1 = new List<int>();
 
-            OriginalSize = new Size(484, 393);
+            OriginalSize = new Size(720, 640);  //Size(484, 393);
 
             timer1.Stop();
 
@@ -86,7 +86,6 @@ namespace ZiveLab.ZM
     
             BZAChPan chpan = new BZAChPan(ich, ref chevent, new EventHandler(ShowMaxChild), this.MdiParent);
             chpan.SetbtSize(false);
-
             pan.Controls.Add(chpan);
 
             chpan.MaxWindowsProc(true);
@@ -260,7 +259,7 @@ namespace ZiveLab.ZM
                 this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.Monitor);
             }
 
-            if (iMode == 1)
+            /*if (iMode == 1)
             {
                 if (gBZA.appcfg.GroupRealviewSize == new Size(0, 0) || gBZA.appcfg.GroupRealviewLocation == new Point(0, 0))
                 {
@@ -300,7 +299,7 @@ namespace ZiveLab.ZM
                     this.StartPosition = FormStartPosition.Manual;
                 }
             }
-
+            */
             if (iMode == 0)
             {
                 if (File.Exists(fileinf))

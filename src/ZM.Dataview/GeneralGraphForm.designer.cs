@@ -32,80 +32,56 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralGraphForm));
             this.imageList_Treeview = new System.Windows.Forms.ImageList(this.components);
-            this.contextMenuFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiRunIVMan = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRunIVManDA = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRunIVManPA = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRunIVManTA = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRunIVManPF = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRunIVManEX = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiRunPD = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.fileInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip_Top = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralOpenDataFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralUnloadData = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnIvsVGraph = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel28 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnVvsLogIGraph = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel29 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnErefDivIvsTimeGraph = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel30 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnErefvsAbsQGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnBodeGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnNyquistGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnRsCsFreqGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnZreVdcvsTimeGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnCsCpvsTimeGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnVdcTempvsTime = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnEocTempvsTime = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnRsRpvsTime = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnZTvsVdc = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel31 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtnErefDivIvsTimeGraph = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnErefvsAbsQGraph = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel30 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralViewHideRestData = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel27 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralPlotAdvSetting = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel33 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralUpdatingGraph = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel32 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralInitGraphSize = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralSetZoomMode = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel14 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralSetMoveMode = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel37 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnCursorOnOff = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel23 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel15 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralLineOnOff = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel16 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralPointOnOff = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel17 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralGridOnOff = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel18 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralLegendOnOff = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel24 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralViewScheduleInfor = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel19 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralDataEditor = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel20 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtnRunZMan = new System.Windows.Forms.ToolStripButton();
             this.tsbtnGeneralSaveAsTextFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel21 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel25 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtnFileHeaderInfor = new System.Windows.Forms.ToolStripButton();
             this.tsbtnGeneralCopyGraphToClipboard = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel22 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnGeneralPrintGraph = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel44 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnFileHeaderInfor = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnRunIVMan = new System.Windows.Forms.ToolStripButton();
-            this.tsbtnRunIVManDA = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel26 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnRunIVManPA = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel38 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnRunIVManTA = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnRunIVManEX = new System.Windows.Forms.ToolStripButton();
-            this.tsbtnRunIVManPF = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel43 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel45 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnOpenPeakDetector = new System.Windows.Forms.ToolStripButton();
             this.printDocGraph = new System.Drawing.Printing.PrintDocument();
             this.toolStrip_Bottom = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
@@ -124,10 +100,6 @@
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.tscbY4Axis = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnSelectNormalCurrent = new System.Windows.Forms.ToolStripButton();
-            this.tsbtnSelectSpecificCurrent = new System.Windows.Forms.ToolStripButton();
-            this.tsbtnSelectCurrentDensity = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel34 = new System.Windows.Forms.ToolStripLabel();
             this.tslblDivision = new System.Windows.Forms.ToolStripLabel();
             this.tscbDivision = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel35 = new System.Windows.Forms.ToolStripLabel();
@@ -153,7 +125,23 @@
             this.checkAnEvenNumber246ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.check11121ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipFilePath = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuFolder.SuspendLayout();
+            this.contextMenuAux = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.AuxMenuChannelsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.AuxMenuChannel1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AuxMenuChannel12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lnlAuxMenu = new System.Windows.Forms.Label();
+            this.toolStripMenuAuxAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip_Top.SuspendLayout();
             this.toolStrip_Bottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c1SplitContainer1)).BeginInit();
@@ -165,6 +153,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1StatusBar1)).BeginInit();
             this.contextMenuCheckItem.SuspendLayout();
+            this.contextMenuAux.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList_Treeview
@@ -172,86 +161,6 @@
             this.imageList_Treeview.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_Treeview.ImageStream")));
             this.imageList_Treeview.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList_Treeview.Images.SetKeyName(0, "078483-blue-jelly-icon-business-computer-server1.png");
-            // 
-            // contextMenuFolder
-            // 
-            this.contextMenuFolder.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRunIVMan,
-            this.tsmiRunIVManDA,
-            this.tsmiRunIVManPA,
-            this.tsmiRunIVManTA,
-            this.tsmiRunIVManPF,
-            this.tsmiRunIVManEX,
-            this.toolStripSeparator1,
-            this.tsmiRunPD,
-            this.toolStripSeparator2,
-            this.fileInformationToolStripMenuItem});
-            this.contextMenuFolder.Name = "contextMenuFolder";
-            resources.ApplyResources(this.contextMenuFolder, "contextMenuFolder");
-            this.contextMenuFolder.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuFolder_Opening);
-            // 
-            // tsmiRunIVMan
-            // 
-            this.tsmiRunIVMan.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivman;
-            this.tsmiRunIVMan.Name = "tsmiRunIVMan";
-            resources.ApplyResources(this.tsmiRunIVMan, "tsmiRunIVMan");
-            this.tsmiRunIVMan.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsmiRunIVManDA
-            // 
-            this.tsmiRunIVManDA.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivmandiff;
-            this.tsmiRunIVManDA.Name = "tsmiRunIVManDA";
-            resources.ApplyResources(this.tsmiRunIVManDA, "tsmiRunIVManDA");
-            this.tsmiRunIVManDA.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsmiRunIVManPA
-            // 
-            this.tsmiRunIVManPA.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivmansolar;
-            this.tsmiRunIVManPA.Name = "tsmiRunIVManPA";
-            resources.ApplyResources(this.tsmiRunIVManPA, "tsmiRunIVManPA");
-            this.tsmiRunIVManPA.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsmiRunIVManTA
-            // 
-            this.tsmiRunIVManTA.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivmantafel;
-            this.tsmiRunIVManTA.Name = "tsmiRunIVManTA";
-            resources.ApplyResources(this.tsmiRunIVManTA, "tsmiRunIVManTA");
-            this.tsmiRunIVManTA.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsmiRunIVManPF
-            // 
-            this.tsmiRunIVManPF.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.pfm;
-            this.tsmiRunIVManPF.Name = "tsmiRunIVManPF";
-            resources.ApplyResources(this.tsmiRunIVManPF, "tsmiRunIVManPF");
-            this.tsmiRunIVManPF.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsmiRunIVManEX
-            // 
-            this.tsmiRunIVManEX.Name = "tsmiRunIVManEX";
-            resources.ApplyResources(this.tsmiRunIVManEX, "tsmiRunIVManEX");
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // tsmiRunPD
-            // 
-            this.tsmiRunPD.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.pd1;
-            this.tsmiRunPD.Name = "tsmiRunPD";
-            resources.ApplyResources(this.tsmiRunPD, "tsmiRunPD");
-            this.tsmiRunPD.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // fileInformationToolStripMenuItem
-            // 
-            this.fileInformationToolStripMenuItem.Name = "fileInformationToolStripMenuItem";
-            resources.ApplyResources(this.fileInformationToolStripMenuItem, "fileInformationToolStripMenuItem");
-            this.fileInformationToolStripMenuItem.Click += new System.EventHandler(this.fileInformationToolStripMenuItem_Click);
             // 
             // toolStrip_Top
             // 
@@ -265,63 +174,50 @@
             this.toolStripLabel11,
             this.tsbtnGeneralUnloadData,
             this.toolStripLabel12,
-            this.tsbtnIvsVGraph,
-            this.toolStripLabel28,
-            this.tsbtnVvsLogIGraph,
-            this.toolStripLabel29,
-            this.tsbtnErefDivIvsTimeGraph,
-            this.toolStripLabel30,
-            this.tsbtnErefvsAbsQGraph,
+            this.tsbtnBodeGraph,
+            this.tsbtnNyquistGraph,
+            this.tsbtnRsCsFreqGraph,
+            this.tsbtnZreVdcvsTimeGraph,
+            this.tsbtnCsCpvsTimeGraph,
+            this.tsbtnVdcTempvsTime,
+            this.tsbtnEocTempvsTime,
+            this.tsbtnRsRpvsTime,
+            this.tsbtnZTvsVdc,
             this.toolStripLabel31,
+            this.tsbtnErefDivIvsTimeGraph,
+            this.tsbtnErefvsAbsQGraph,
+            this.toolStripLabel30,
             this.tsbtnGeneralViewHideRestData,
-            this.toolStripLabel27,
             this.tsbtnGeneralPlotAdvSetting,
-            this.toolStripLabel33,
             this.tsbtnGeneralUpdatingGraph,
             this.toolStripLabel32,
             this.tsbtnGeneralInitGraphSize,
-            this.toolStripLabel13,
             this.tsbtnGeneralSetZoomMode,
-            this.toolStripLabel14,
             this.tsbtnGeneralSetMoveMode,
-            this.toolStripLabel37,
             this.tsbtnCursorOnOff,
             this.toolStripLabel23,
-            this.toolStripLabel15,
             this.tsbtnGeneralLineOnOff,
             this.toolStripLabel16,
             this.tsbtnGeneralPointOnOff,
             this.toolStripLabel17,
             this.tsbtnGeneralGridOnOff,
-            this.toolStripLabel18,
             this.tsbtnGeneralLegendOnOff,
             this.toolStripLabel24,
             this.tsbtnGeneralViewScheduleInfor,
-            this.toolStripLabel19,
             this.tsbtnGeneralDataEditor,
-            this.toolStripLabel20,
+            this.tsbtnRunZMan,
             this.tsbtnGeneralSaveAsTextFile,
             this.toolStripLabel21,
             this.tsbtnGeneralExportToExcel,
-            this.toolStripLabel25,
+            this.tsbtnFileHeaderInfor,
             this.tsbtnGeneralCopyGraphToClipboard,
-            this.toolStripLabel22,
             this.tsbtnGeneralPrintGraph,
             this.toolStripLabel44,
-            this.tsbtnFileHeaderInfor,
-            this.toolStripLabel1,
-            this.tsbtnRunIVMan,
-            this.tsbtnRunIVManDA,
             this.toolStripLabel26,
-            this.tsbtnRunIVManPA,
             this.toolStripLabel38,
-            this.tsbtnRunIVManTA,
             this.toolStripLabel10,
-            this.tsbtnRunIVManPF,
-            this.tsbtnRunIVManEX,
             this.toolStripLabel43,
-            this.toolStripLabel45,
-            this.tsbtnOpenPeakDetector});
+            this.toolStripLabel45});
             this.toolStrip_Top.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip_Top.Name = "toolStrip_Top";
             this.toolStrip_Top.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -356,53 +252,103 @@
             resources.ApplyResources(this.toolStripLabel12, "toolStripLabel12");
             this.toolStripLabel12.Name = "toolStripLabel12";
             // 
-            // tsbtnIvsVGraph
+            // tsbtnBodeGraph
             // 
-            this.tsbtnIvsVGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnIvsVGraph, "tsbtnIvsVGraph");
-            this.tsbtnIvsVGraph.Name = "tsbtnIvsVGraph";
-            this.tsbtnIvsVGraph.Click += new System.EventHandler(this.tsbtnIvsVGraph_Click);
+            this.tsbtnBodeGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnBodeGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.Grpbode;
+            this.tsbtnBodeGraph.Name = "tsbtnBodeGraph";
+            resources.ApplyResources(this.tsbtnBodeGraph, "tsbtnBodeGraph");
+            this.tsbtnBodeGraph.Click += new System.EventHandler(this.tsbtnBodeGraph_Click);
             // 
-            // toolStripLabel28
+            // tsbtnNyquistGraph
             // 
-            resources.ApplyResources(this.toolStripLabel28, "toolStripLabel28");
-            this.toolStripLabel28.Name = "toolStripLabel28";
+            this.tsbtnNyquistGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnNyquistGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.grpnyquist;
+            this.tsbtnNyquistGraph.Name = "tsbtnNyquistGraph";
+            resources.ApplyResources(this.tsbtnNyquistGraph, "tsbtnNyquistGraph");
+            this.tsbtnNyquistGraph.Click += new System.EventHandler(this.tsbtnNyquistGraph_Click);
             // 
-            // tsbtnVvsLogIGraph
+            // tsbtnRsCsFreqGraph
             // 
-            this.tsbtnVvsLogIGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnVvsLogIGraph, "tsbtnVvsLogIGraph");
-            this.tsbtnVvsLogIGraph.Name = "tsbtnVvsLogIGraph";
-            this.tsbtnVvsLogIGraph.Click += new System.EventHandler(this.tsbtnVvsLogIGraph_Click);
+            this.tsbtnRsCsFreqGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnRsCsFreqGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.rctime;
+            this.tsbtnRsCsFreqGraph.Name = "tsbtnRsCsFreqGraph";
+            resources.ApplyResources(this.tsbtnRsCsFreqGraph, "tsbtnRsCsFreqGraph");
+            this.tsbtnRsCsFreqGraph.Click += new System.EventHandler(this.tsbtnRsCsFreqGraph_Click);
             // 
-            // toolStripLabel29
+            // tsbtnZreVdcvsTimeGraph
             // 
-            resources.ApplyResources(this.toolStripLabel29, "toolStripLabel29");
-            this.toolStripLabel29.Name = "toolStripLabel29";
+            this.tsbtnZreVdcvsTimeGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnZreVdcvsTimeGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.z;
+            this.tsbtnZreVdcvsTimeGraph.Name = "tsbtnZreVdcvsTimeGraph";
+            resources.ApplyResources(this.tsbtnZreVdcvsTimeGraph, "tsbtnZreVdcvsTimeGraph");
+            this.tsbtnZreVdcvsTimeGraph.Click += new System.EventHandler(this.tsbtnZreVdcvsTimeGraph_Click);
             // 
-            // tsbtnErefDivIvsTimeGraph
+            // tsbtnCsCpvsTimeGraph
             // 
-            this.tsbtnErefDivIvsTimeGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnErefDivIvsTimeGraph, "tsbtnErefDivIvsTimeGraph");
-            this.tsbtnErefDivIvsTimeGraph.Name = "tsbtnErefDivIvsTimeGraph";
-            this.tsbtnErefDivIvsTimeGraph.Click += new System.EventHandler(this.tsbtnErefDivIvsTimeGraph_Click);
+            this.tsbtnCsCpvsTimeGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnCsCpvsTimeGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.c;
+            this.tsbtnCsCpvsTimeGraph.Name = "tsbtnCsCpvsTimeGraph";
+            resources.ApplyResources(this.tsbtnCsCpvsTimeGraph, "tsbtnCsCpvsTimeGraph");
+            this.tsbtnCsCpvsTimeGraph.Click += new System.EventHandler(this.tsbtnCsCpvsTimeGraph_Click);
             // 
-            // toolStripLabel30
+            // tsbtnVdcTempvsTime
             // 
-            resources.ApplyResources(this.toolStripLabel30, "toolStripLabel30");
-            this.toolStripLabel30.Name = "toolStripLabel30";
+            this.tsbtnVdcTempvsTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnVdcTempvsTime.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.v;
+            this.tsbtnVdcTempvsTime.Name = "tsbtnVdcTempvsTime";
+            resources.ApplyResources(this.tsbtnVdcTempvsTime, "tsbtnVdcTempvsTime");
+            this.tsbtnVdcTempvsTime.Click += new System.EventHandler(this.tsbtnVdcTempvsTime_Click);
             // 
-            // tsbtnErefvsAbsQGraph
+            // tsbtnEocTempvsTime
             // 
-            this.tsbtnErefvsAbsQGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnErefvsAbsQGraph, "tsbtnErefvsAbsQGraph");
-            this.tsbtnErefvsAbsQGraph.Name = "tsbtnErefvsAbsQGraph";
-            this.tsbtnErefvsAbsQGraph.Click += new System.EventHandler(this.tsbtnErefvsAbsQGraph_Click);
+            this.tsbtnEocTempvsTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnEocTempvsTime.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.e;
+            this.tsbtnEocTempvsTime.Name = "tsbtnEocTempvsTime";
+            resources.ApplyResources(this.tsbtnEocTempvsTime, "tsbtnEocTempvsTime");
+            this.tsbtnEocTempvsTime.Click += new System.EventHandler(this.tsbtnEocTempvsTime_Click);
+            // 
+            // tsbtnRsRpvsTime
+            // 
+            this.tsbtnRsRpvsTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnRsRpvsTime.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.rsrptime;
+            this.tsbtnRsRpvsTime.Name = "tsbtnRsRpvsTime";
+            resources.ApplyResources(this.tsbtnRsRpvsTime, "tsbtnRsRpvsTime");
+            this.tsbtnRsRpvsTime.Click += new System.EventHandler(this.tsbtnRsRpvsTime_Click);
+            // 
+            // tsbtnZTvsVdc
+            // 
+            this.tsbtnZTvsVdc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnZTvsVdc.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.tzv;
+            this.tsbtnZTvsVdc.Name = "tsbtnZTvsVdc";
+            resources.ApplyResources(this.tsbtnZTvsVdc, "tsbtnZTvsVdc");
+            this.tsbtnZTvsVdc.Click += new System.EventHandler(this.tsbtnZTvsVdc_Click);
             // 
             // toolStripLabel31
             // 
             resources.ApplyResources(this.toolStripLabel31, "toolStripLabel31");
             this.toolStripLabel31.Name = "toolStripLabel31";
+            // 
+            // tsbtnErefDivIvsTimeGraph
+            // 
+            this.tsbtnErefDivIvsTimeGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnErefDivIvsTimeGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivt1;
+            resources.ApplyResources(this.tsbtnErefDivIvsTimeGraph, "tsbtnErefDivIvsTimeGraph");
+            this.tsbtnErefDivIvsTimeGraph.Name = "tsbtnErefDivIvsTimeGraph";
+            this.tsbtnErefDivIvsTimeGraph.Click += new System.EventHandler(this.tsbtnErefDivIvsTimeGraph_Click);
+            // 
+            // tsbtnErefvsAbsQGraph
+            // 
+            this.tsbtnErefvsAbsQGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnErefvsAbsQGraph.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.qvsv;
+            resources.ApplyResources(this.tsbtnErefvsAbsQGraph, "tsbtnErefvsAbsQGraph");
+            this.tsbtnErefvsAbsQGraph.Name = "tsbtnErefvsAbsQGraph";
+            this.tsbtnErefvsAbsQGraph.Click += new System.EventHandler(this.tsbtnErefvsAbsQGraph_Click);
+            // 
+            // toolStripLabel30
+            // 
+            resources.ApplyResources(this.toolStripLabel30, "toolStripLabel30");
+            this.toolStripLabel30.Name = "toolStripLabel30";
             // 
             // tsbtnGeneralViewHideRestData
             // 
@@ -413,22 +359,12 @@
             this.tsbtnGeneralViewHideRestData.CheckedChanged += new System.EventHandler(this.tsbtnGeneralViewHideRestData_CheckedChanged);
             this.tsbtnGeneralViewHideRestData.Click += new System.EventHandler(this.tsbtnGeneralViewHideRestData_Click);
             // 
-            // toolStripLabel27
-            // 
-            resources.ApplyResources(this.toolStripLabel27, "toolStripLabel27");
-            this.toolStripLabel27.Name = "toolStripLabel27";
-            // 
             // tsbtnGeneralPlotAdvSetting
             // 
             this.tsbtnGeneralPlotAdvSetting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.tsbtnGeneralPlotAdvSetting, "tsbtnGeneralPlotAdvSetting");
             this.tsbtnGeneralPlotAdvSetting.Name = "tsbtnGeneralPlotAdvSetting";
             this.tsbtnGeneralPlotAdvSetting.Click += new System.EventHandler(this.tsbtnPlotAdvSetting_Click);
-            // 
-            // toolStripLabel33
-            // 
-            resources.ApplyResources(this.toolStripLabel33, "toolStripLabel33");
-            this.toolStripLabel33.Name = "toolStripLabel33";
             // 
             // tsbtnGeneralUpdatingGraph
             // 
@@ -449,11 +385,6 @@
             this.tsbtnGeneralInitGraphSize.Name = "tsbtnGeneralInitGraphSize";
             this.tsbtnGeneralInitGraphSize.Click += new System.EventHandler(this.tsbtnInitGraphSize_Click);
             // 
-            // toolStripLabel13
-            // 
-            resources.ApplyResources(this.toolStripLabel13, "toolStripLabel13");
-            this.toolStripLabel13.Name = "toolStripLabel13";
-            // 
             // tsbtnGeneralSetZoomMode
             // 
             this.tsbtnGeneralSetZoomMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -461,22 +392,12 @@
             this.tsbtnGeneralSetZoomMode.Name = "tsbtnGeneralSetZoomMode";
             this.tsbtnGeneralSetZoomMode.Click += new System.EventHandler(this.tsbtnSetZoomMode_Click);
             // 
-            // toolStripLabel14
-            // 
-            resources.ApplyResources(this.toolStripLabel14, "toolStripLabel14");
-            this.toolStripLabel14.Name = "toolStripLabel14";
-            // 
             // tsbtnGeneralSetMoveMode
             // 
             this.tsbtnGeneralSetMoveMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.tsbtnGeneralSetMoveMode, "tsbtnGeneralSetMoveMode");
             this.tsbtnGeneralSetMoveMode.Name = "tsbtnGeneralSetMoveMode";
             this.tsbtnGeneralSetMoveMode.Click += new System.EventHandler(this.tsbtnSetMoveMode_Click);
-            // 
-            // toolStripLabel37
-            // 
-            resources.ApplyResources(this.toolStripLabel37, "toolStripLabel37");
-            this.toolStripLabel37.Name = "toolStripLabel37";
             // 
             // tsbtnCursorOnOff
             // 
@@ -490,11 +411,6 @@
             // 
             resources.ApplyResources(this.toolStripLabel23, "toolStripLabel23");
             this.toolStripLabel23.Name = "toolStripLabel23";
-            // 
-            // toolStripLabel15
-            // 
-            resources.ApplyResources(this.toolStripLabel15, "toolStripLabel15");
-            this.toolStripLabel15.Name = "toolStripLabel15";
             // 
             // tsbtnGeneralLineOnOff
             // 
@@ -530,11 +446,6 @@
             this.tsbtnGeneralGridOnOff.CheckedChanged += new System.EventHandler(this.tsbtnGridOnOff_CheckedChanged);
             this.tsbtnGeneralGridOnOff.Click += new System.EventHandler(this.tsbtnGeneralGridOnOff_Click);
             // 
-            // toolStripLabel18
-            // 
-            resources.ApplyResources(this.toolStripLabel18, "toolStripLabel18");
-            this.toolStripLabel18.Name = "toolStripLabel18";
-            // 
             // tsbtnGeneralLegendOnOff
             // 
             this.tsbtnGeneralLegendOnOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -554,11 +465,6 @@
             this.tsbtnGeneralViewScheduleInfor.Name = "tsbtnGeneralViewScheduleInfor";
             this.tsbtnGeneralViewScheduleInfor.Click += new System.EventHandler(this.tsbtnOpenSchDatas_Click);
             // 
-            // toolStripLabel19
-            // 
-            resources.ApplyResources(this.toolStripLabel19, "toolStripLabel19");
-            this.toolStripLabel19.Name = "toolStripLabel19";
-            // 
             // tsbtnGeneralDataEditor
             // 
             this.tsbtnGeneralDataEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -566,10 +472,13 @@
             this.tsbtnGeneralDataEditor.Name = "tsbtnGeneralDataEditor";
             this.tsbtnGeneralDataEditor.Click += new System.EventHandler(this.tsbtnDataEditor_Click);
             // 
-            // toolStripLabel20
+            // tsbtnRunZMan
             // 
-            resources.ApplyResources(this.toolStripLabel20, "toolStripLabel20");
-            this.toolStripLabel20.Name = "toolStripLabel20";
+            this.tsbtnRunZMan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnRunZMan.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.zman24;
+            this.tsbtnRunZMan.Name = "tsbtnRunZMan";
+            resources.ApplyResources(this.tsbtnRunZMan, "tsbtnRunZMan");
+            this.tsbtnRunZMan.Click += new System.EventHandler(this.tsbtnRunZMan_Click);
             // 
             // tsbtnGeneralSaveAsTextFile
             // 
@@ -590,10 +499,13 @@
             this.tsbtnGeneralExportToExcel.Name = "tsbtnGeneralExportToExcel";
             this.tsbtnGeneralExportToExcel.Click += new System.EventHandler(this.tsbtnExportToExcel_Click);
             // 
-            // toolStripLabel25
+            // tsbtnFileHeaderInfor
             // 
-            resources.ApplyResources(this.toolStripLabel25, "toolStripLabel25");
-            this.toolStripLabel25.Name = "toolStripLabel25";
+            this.tsbtnFileHeaderInfor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnFileHeaderInfor.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.fileinfor;
+            resources.ApplyResources(this.tsbtnFileHeaderInfor, "tsbtnFileHeaderInfor");
+            this.tsbtnFileHeaderInfor.Name = "tsbtnFileHeaderInfor";
+            this.tsbtnFileHeaderInfor.Click += new System.EventHandler(this.tsbtnFileHeaderInfor_Click);
             // 
             // tsbtnGeneralCopyGraphToClipboard
             // 
@@ -601,11 +513,6 @@
             resources.ApplyResources(this.tsbtnGeneralCopyGraphToClipboard, "tsbtnGeneralCopyGraphToClipboard");
             this.tsbtnGeneralCopyGraphToClipboard.Name = "tsbtnGeneralCopyGraphToClipboard";
             this.tsbtnGeneralCopyGraphToClipboard.Click += new System.EventHandler(this.tsbtnCopyGraphToClipboard_Click);
-            // 
-            // toolStripLabel22
-            // 
-            resources.ApplyResources(this.toolStripLabel22, "toolStripLabel22");
-            this.toolStripLabel22.Name = "toolStripLabel22";
             // 
             // tsbtnGeneralPrintGraph
             // 
@@ -619,79 +526,20 @@
             this.toolStripLabel44.Name = "toolStripLabel44";
             resources.ApplyResources(this.toolStripLabel44, "toolStripLabel44");
             // 
-            // tsbtnFileHeaderInfor
-            // 
-            this.tsbtnFileHeaderInfor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnFileHeaderInfor.Name = "tsbtnFileHeaderInfor";
-            resources.ApplyResources(this.tsbtnFileHeaderInfor, "tsbtnFileHeaderInfor");
-            this.tsbtnFileHeaderInfor.Click += new System.EventHandler(this.tsbtnFileHeaderInfor_Click);
-            // 
-            // toolStripLabel1
-            // 
-            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            // 
-            // tsbtnRunIVMan
-            // 
-            this.tsbtnRunIVMan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnRunIVMan, "tsbtnRunIVMan");
-            this.tsbtnRunIVMan.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivman;
-            this.tsbtnRunIVMan.Name = "tsbtnRunIVMan";
-            this.tsbtnRunIVMan.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsbtnRunIVManDA
-            // 
-            this.tsbtnRunIVManDA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnRunIVManDA, "tsbtnRunIVManDA");
-            this.tsbtnRunIVManDA.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivmandiff;
-            this.tsbtnRunIVManDA.Name = "tsbtnRunIVManDA";
-            this.tsbtnRunIVManDA.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
             // toolStripLabel26
             // 
             resources.ApplyResources(this.toolStripLabel26, "toolStripLabel26");
             this.toolStripLabel26.Name = "toolStripLabel26";
-            // 
-            // tsbtnRunIVManPA
-            // 
-            this.tsbtnRunIVManPA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnRunIVManPA, "tsbtnRunIVManPA");
-            this.tsbtnRunIVManPA.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivmansolar;
-            this.tsbtnRunIVManPA.Name = "tsbtnRunIVManPA";
-            this.tsbtnRunIVManPA.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
             // 
             // toolStripLabel38
             // 
             resources.ApplyResources(this.toolStripLabel38, "toolStripLabel38");
             this.toolStripLabel38.Name = "toolStripLabel38";
             // 
-            // tsbtnRunIVManTA
-            // 
-            this.tsbtnRunIVManTA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnRunIVManTA, "tsbtnRunIVManTA");
-            this.tsbtnRunIVManTA.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.ivmantafel;
-            this.tsbtnRunIVManTA.Name = "tsbtnRunIVManTA";
-            this.tsbtnRunIVManTA.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
             // toolStripLabel10
             // 
             this.toolStripLabel10.Name = "toolStripLabel10";
             resources.ApplyResources(this.toolStripLabel10, "toolStripLabel10");
-            // 
-            // tsbtnRunIVManEX
-            // 
-            this.tsbtnRunIVManEX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnRunIVManEX, "tsbtnRunIVManEX");
-            this.tsbtnRunIVManEX.Name = "tsbtnRunIVManEX";
-            this.tsbtnRunIVManEX.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
-            // 
-            // tsbtnRunIVManPF
-            // 
-            this.tsbtnRunIVManPF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnRunIVManPF, "tsbtnRunIVManPF");
-            this.tsbtnRunIVManPF.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.pfm;
-            this.tsbtnRunIVManPF.Name = "tsbtnRunIVManPF";
-            this.tsbtnRunIVManPF.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
             // 
             // toolStripLabel43
             // 
@@ -702,14 +550,6 @@
             // 
             resources.ApplyResources(this.toolStripLabel45, "toolStripLabel45");
             this.toolStripLabel45.Name = "toolStripLabel45";
-            // 
-            // tsbtnOpenPeakDetector
-            // 
-            this.tsbtnOpenPeakDetector.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnOpenPeakDetector, "tsbtnOpenPeakDetector");
-            this.tsbtnOpenPeakDetector.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.pd1;
-            this.tsbtnOpenPeakDetector.Name = "tsbtnOpenPeakDetector";
-            this.tsbtnOpenPeakDetector.Click += new System.EventHandler(this.tsbtnAnalysisRun_Click);
             // 
             // printDocGraph
             // 
@@ -739,10 +579,6 @@
             this.toolStripLabel8,
             this.tscbY4Axis,
             this.toolStripLabel9,
-            this.tsbtnSelectNormalCurrent,
-            this.tsbtnSelectSpecificCurrent,
-            this.tsbtnSelectCurrentDensity,
-            this.toolStripLabel34,
             this.tslblDivision,
             this.tscbDivision,
             this.toolStripLabel35,
@@ -768,6 +604,7 @@
             this.tscbXAxis.BackColor = System.Drawing.SystemColors.Window;
             this.tscbXAxis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbXAxis.Name = "tscbXAxis";
+            this.tscbXAxis.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
             // toolStripLabel39
             // 
@@ -784,6 +621,7 @@
             resources.ApplyResources(this.tscbY1Axis, "tscbY1Axis");
             this.tscbY1Axis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbY1Axis.Name = "tscbY1Axis";
+            this.tscbY1Axis.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
             // toolStripLabel40
             // 
@@ -800,6 +638,7 @@
             resources.ApplyResources(this.tscbY2Axis, "tscbY2Axis");
             this.tscbY2Axis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbY2Axis.Name = "tscbY2Axis";
+            this.tscbY2Axis.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
             // toolStripLabel41
             // 
@@ -816,6 +655,7 @@
             resources.ApplyResources(this.tscbY3Axis, "tscbY3Axis");
             this.tscbY3Axis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbY3Axis.Name = "tscbY3Axis";
+            this.tscbY3Axis.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
             // toolStripLabel42
             // 
@@ -832,37 +672,12 @@
             resources.ApplyResources(this.tscbY4Axis, "tscbY4Axis");
             this.tscbY4Axis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbY4Axis.Name = "tscbY4Axis";
+            this.tscbY4Axis.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
             // toolStripLabel9
             // 
             resources.ApplyResources(this.toolStripLabel9, "toolStripLabel9");
             this.toolStripLabel9.Name = "toolStripLabel9";
-            // 
-            // tsbtnSelectNormalCurrent
-            // 
-            this.tsbtnSelectNormalCurrent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnSelectNormalCurrent, "tsbtnSelectNormalCurrent");
-            this.tsbtnSelectNormalCurrent.Name = "tsbtnSelectNormalCurrent";
-            this.tsbtnSelectNormalCurrent.Click += new System.EventHandler(this.tsbtnSelectCurrent_Click);
-            // 
-            // tsbtnSelectSpecificCurrent
-            // 
-            this.tsbtnSelectSpecificCurrent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnSelectSpecificCurrent, "tsbtnSelectSpecificCurrent");
-            this.tsbtnSelectSpecificCurrent.Name = "tsbtnSelectSpecificCurrent";
-            this.tsbtnSelectSpecificCurrent.Click += new System.EventHandler(this.tsbtnSelectCurrent_Click);
-            // 
-            // tsbtnSelectCurrentDensity
-            // 
-            this.tsbtnSelectCurrentDensity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnSelectCurrentDensity, "tsbtnSelectCurrentDensity");
-            this.tsbtnSelectCurrentDensity.Name = "tsbtnSelectCurrentDensity";
-            this.tsbtnSelectCurrentDensity.Click += new System.EventHandler(this.tsbtnSelectCurrent_Click);
-            // 
-            // toolStripLabel34
-            // 
-            resources.ApplyResources(this.toolStripLabel34, "toolStripLabel34");
-            this.toolStripLabel34.Name = "toolStripLabel34";
             // 
             // tslblDivision
             // 
@@ -919,7 +734,6 @@
             this.c1FlexGridLegend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.c1FlexGridLegend.BorderStyle = C1.Win.C1FlexGrid.Util.BaseControls.BorderStyleEnum.FixedSingle;
             resources.ApplyResources(this.c1FlexGridLegend, "c1FlexGridLegend");
-            this.c1FlexGridLegend.ContextMenuStrip = this.contextMenuFolder;
             this.c1FlexGridLegend.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
             this.c1FlexGridLegend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.c1FlexGridLegend.Name = "c1FlexGridLegend";
@@ -1070,11 +884,155 @@
             resources.ApplyResources(this.check11121ToolStripMenuItem, "check11121ToolStripMenuItem");
             this.check11121ToolStripMenuItem.Click += new System.EventHandler(this.check11121ToolStripMenuItem_Click);
             // 
+            // contextMenuAux
+            // 
+            this.contextMenuAux.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AuxMenuChannelsAll,
+            this.toolStripSeparator3,
+            this.AuxMenuChannel1,
+            this.AuxMenuChannel2,
+            this.AuxMenuChannel3,
+            this.AuxMenuChannel4,
+            this.AuxMenuChannel5,
+            this.AuxMenuChannel6,
+            this.AuxMenuChannel7,
+            this.AuxMenuChannel8,
+            this.AuxMenuChannel9,
+            this.AuxMenuChannel10,
+            this.AuxMenuChannel11,
+            this.AuxMenuChannel12});
+            this.contextMenuAux.Name = "contextMenuAux";
+            resources.ApplyResources(this.contextMenuAux, "contextMenuAux");
+            // 
+            // AuxMenuChannelsAll
+            // 
+            this.AuxMenuChannelsAll.Checked = true;
+            this.AuxMenuChannelsAll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannelsAll.Name = "AuxMenuChannelsAll";
+            resources.ApplyResources(this.AuxMenuChannelsAll, "AuxMenuChannelsAll");
+            this.AuxMenuChannelsAll.Click += new System.EventHandler(this.AuxMenuChannelsAll_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // AuxMenuChannel1
+            // 
+            this.AuxMenuChannel1.Checked = true;
+            this.AuxMenuChannel1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel1.Name = "AuxMenuChannel1";
+            resources.ApplyResources(this.AuxMenuChannel1, "AuxMenuChannel1");
+            this.AuxMenuChannel1.Click += new System.EventHandler(this.AuxMenuChannel1_Click);
+            // 
+            // AuxMenuChannel2
+            // 
+            this.AuxMenuChannel2.Checked = true;
+            this.AuxMenuChannel2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel2.Name = "AuxMenuChannel2";
+            resources.ApplyResources(this.AuxMenuChannel2, "AuxMenuChannel2");
+            this.AuxMenuChannel2.Click += new System.EventHandler(this.AuxMenuChannel2_Click);
+            // 
+            // AuxMenuChannel3
+            // 
+            this.AuxMenuChannel3.Checked = true;
+            this.AuxMenuChannel3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel3.Name = "AuxMenuChannel3";
+            resources.ApplyResources(this.AuxMenuChannel3, "AuxMenuChannel3");
+            this.AuxMenuChannel3.Click += new System.EventHandler(this.AuxMenuChannel3_Click);
+            // 
+            // AuxMenuChannel4
+            // 
+            this.AuxMenuChannel4.Checked = true;
+            this.AuxMenuChannel4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel4.Name = "AuxMenuChannel4";
+            resources.ApplyResources(this.AuxMenuChannel4, "AuxMenuChannel4");
+            this.AuxMenuChannel4.Click += new System.EventHandler(this.AuxMenuChannel4_Click);
+            // 
+            // AuxMenuChannel5
+            // 
+            this.AuxMenuChannel5.Checked = true;
+            this.AuxMenuChannel5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel5.Name = "AuxMenuChannel5";
+            resources.ApplyResources(this.AuxMenuChannel5, "AuxMenuChannel5");
+            this.AuxMenuChannel5.Click += new System.EventHandler(this.AuxMenuChannel5_Click);
+            // 
+            // AuxMenuChannel6
+            // 
+            this.AuxMenuChannel6.Checked = true;
+            this.AuxMenuChannel6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel6.Name = "AuxMenuChannel6";
+            resources.ApplyResources(this.AuxMenuChannel6, "AuxMenuChannel6");
+            this.AuxMenuChannel6.Click += new System.EventHandler(this.AuxMenuChannel6_Click);
+            // 
+            // AuxMenuChannel7
+            // 
+            this.AuxMenuChannel7.Checked = true;
+            this.AuxMenuChannel7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel7.Name = "AuxMenuChannel7";
+            resources.ApplyResources(this.AuxMenuChannel7, "AuxMenuChannel7");
+            this.AuxMenuChannel7.Click += new System.EventHandler(this.AuxMenuChannel7_Click);
+            // 
+            // AuxMenuChannel8
+            // 
+            this.AuxMenuChannel8.Checked = true;
+            this.AuxMenuChannel8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel8.Name = "AuxMenuChannel8";
+            resources.ApplyResources(this.AuxMenuChannel8, "AuxMenuChannel8");
+            this.AuxMenuChannel8.Click += new System.EventHandler(this.AuxMenuChannel8_Click);
+            // 
+            // AuxMenuChannel9
+            // 
+            this.AuxMenuChannel9.Checked = true;
+            this.AuxMenuChannel9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel9.Name = "AuxMenuChannel9";
+            resources.ApplyResources(this.AuxMenuChannel9, "AuxMenuChannel9");
+            this.AuxMenuChannel9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
+            // 
+            // AuxMenuChannel10
+            // 
+            this.AuxMenuChannel10.Checked = true;
+            this.AuxMenuChannel10.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel10.Name = "AuxMenuChannel10";
+            resources.ApplyResources(this.AuxMenuChannel10, "AuxMenuChannel10");
+            this.AuxMenuChannel10.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
+            // 
+            // AuxMenuChannel11
+            // 
+            this.AuxMenuChannel11.Checked = true;
+            this.AuxMenuChannel11.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel11.Name = "AuxMenuChannel11";
+            resources.ApplyResources(this.AuxMenuChannel11, "AuxMenuChannel11");
+            this.AuxMenuChannel11.Click += new System.EventHandler(this.AuxMenuChannel11_Click);
+            // 
+            // AuxMenuChannel12
+            // 
+            this.AuxMenuChannel12.Checked = true;
+            this.AuxMenuChannel12.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AuxMenuChannel12.Name = "AuxMenuChannel12";
+            resources.ApplyResources(this.AuxMenuChannel12, "AuxMenuChannel12");
+            this.AuxMenuChannel12.Click += new System.EventHandler(this.AuxMenuChannel12_Click);
+            // 
+            // lnlAuxMenu
+            // 
+            resources.ApplyResources(this.lnlAuxMenu, "lnlAuxMenu");
+            this.lnlAuxMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lnlAuxMenu.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lnlAuxMenu.Name = "lnlAuxMenu";
+            this.lnlAuxMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lnlAuxMenu_MouseDown);
+            this.lnlAuxMenu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lnlAuxMenu_MouseUp);
+            // 
+            // toolStripMenuAuxAll
+            // 
+            this.toolStripMenuAuxAll.Name = "toolStripMenuAuxAll";
+            resources.ApplyResources(this.toolStripMenuAuxAll, "toolStripMenuAuxAll");
+            // 
             // GeneralGraphForm
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.lnlAuxMenu);
             this.Controls.Add(this.c1SplitContainer1);
             this.Controls.Add(this.toolStrip_Bottom);
             this.Controls.Add(this.toolStrip_Top);
@@ -1087,7 +1045,6 @@
             this.Load += new System.EventHandler(this.FormGeneralGraph_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form_GeneralGraph_DragDrop);
             this.DragOver += new System.Windows.Forms.DragEventHandler(this.Form_GeneralGraph_DragOver);
-            this.contextMenuFolder.ResumeLayout(false);
             this.toolStrip_Top.ResumeLayout(false);
             this.toolStrip_Top.PerformLayout();
             this.toolStrip_Bottom.ResumeLayout(false);
@@ -1101,6 +1058,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1StatusBar1)).EndInit();
             this.contextMenuCheckItem.ResumeLayout(false);
+            this.contextMenuAux.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1111,9 +1069,6 @@
         private System.Windows.Forms.ImageList imageList_Treeview;
         private System.Windows.Forms.ToolStrip toolStrip_Top;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralOpenDataFile;
-        private System.Windows.Forms.ContextMenuStrip contextMenuFolder;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunIVMan;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunIVManDA;
         private System.Drawing.Printing.PrintDocument printDocGraph;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralUnloadData;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralInitGraphSize;
@@ -1129,40 +1084,24 @@
         private System.Windows.Forms.ToolStripButton tsbtnGeneralSaveAsTextFile;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralExportToExcel;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralCopyGraphToClipboard;
-        private System.Windows.Forms.ToolStripButton tsbtnRunIVManDA;
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripLabel toolStripLabel11;
         private System.Windows.Forms.ToolStripLabel toolStripLabel12;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel13;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel14;
         private System.Windows.Forms.ToolStripLabel toolStripLabel23;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel15;
         private System.Windows.Forms.ToolStripLabel toolStripLabel16;
         private System.Windows.Forms.ToolStripLabel toolStripLabel17;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel18;
         private System.Windows.Forms.ToolStripLabel toolStripLabel24;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel19;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel20;
         private System.Windows.Forms.ToolStripLabel toolStripLabel21;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel25;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel22;
-        private System.Windows.Forms.ToolStripButton tsbtnIvsVGraph;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel28;
-        private System.Windows.Forms.ToolStripButton tsbtnVvsLogIGraph;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel29;
-        private System.Windows.Forms.ToolStripButton tsbtnErefDivIvsTimeGraph;
+        private System.Windows.Forms.ToolStripButton tsbtnNyquistGraph;
+        private System.Windows.Forms.ToolStripButton tsbtnBodeGraph;
+        private System.Windows.Forms.ToolStripButton tsbtnRsCsFreqGraph;
         private System.Windows.Forms.ToolStripLabel toolStripLabel30;
-        private System.Windows.Forms.ToolStripButton tsbtnErefvsAbsQGraph;
+        private System.Windows.Forms.ToolStripButton tsbtnZreVdcvsTimeGraph;
         private System.Windows.Forms.ToolStripLabel toolStripLabel31;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralViewHideRestData;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel27;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralPlotAdvSetting;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel33;
         private System.Windows.Forms.ToolStripButton tsbtnGeneralUpdatingGraph;
         private System.Windows.Forms.ToolStripLabel toolStripLabel32;
-        //private NationalInstruments.UI.WindowsForms.ScatterGraph scGraph;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel37;
         private System.Windows.Forms.ToolStrip toolStrip_Bottom;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
@@ -1176,10 +1115,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
         private System.Windows.Forms.ToolStripComboBox tscbY4Axis;
         private System.Windows.Forms.ToolStripLabel toolStripLabel9;
-        private System.Windows.Forms.ToolStripButton tsbtnSelectNormalCurrent;
-        private System.Windows.Forms.ToolStripButton tsbtnSelectSpecificCurrent;
-        private System.Windows.Forms.ToolStripButton tsbtnSelectCurrentDensity;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel34;
         private System.Windows.Forms.ToolStripButton tsbtnRedraw;
         private System.Windows.Forms.ToolStripLabel toolStripLabel35;
         private System.Windows.Forms.ToolStripLabel toolStripLabel36;
@@ -1200,11 +1135,9 @@
         private C1.Win.C1Ribbon.RibbonLabel ribbonLabel1;
         private C1.Win.C1Ribbon.RibbonProgressBar ribbonProgressBar1;
         private C1.Win.C1Ribbon.RibbonLabel ribbonLabel2;
-        private System.Windows.Forms.ToolStripButton tsbtnRunIVManPA;
-        private System.Windows.Forms.ToolStripButton tsbtnRunIVManTA;
         private System.Windows.Forms.ToolStripLabel toolStripLabel26;
         private System.Windows.Forms.ToolStripLabel toolStripLabel38;
-        private System.Windows.Forms.ToolStripButton tsbtnRunIVMan;
+        private System.Windows.Forms.ToolStripButton tsbtnRunZMan;
         private System.Windows.Forms.ToolStripLabel toolStripLabel39;
         private System.Windows.Forms.ToolStripLabel toolStripLabel40;
         private System.Windows.Forms.ToolStripLabel toolStripLabel41;
@@ -1216,21 +1149,34 @@
         private System.Windows.Forms.ToolStripMenuItem check11121ToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipFilePath;
         private System.Windows.Forms.ToolStripLabel toolStripLabel10;
-        private System.Windows.Forms.ToolStripButton tsbtnRunIVManPF;
         private System.Windows.Forms.ToolStripLabel toolStripLabel43;
-        private System.Windows.Forms.ToolStripButton tsbtnOpenPeakDetector;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunIVManPA;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunIVManTA;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunIVManPF;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunPD;
         private System.Windows.Forms.ToolStripLabel toolStripLabel44;
         private System.Windows.Forms.ToolStripButton tsbtnFileHeaderInfor;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem fileInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel toolStripLabel45;
-        private System.Windows.Forms.ToolStripButton tsbtnRunIVManEX;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRunIVManEX;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuAuxAll;
+        private System.Windows.Forms.ContextMenuStrip contextMenuAux;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannelsAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel1;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel2;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel3;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel4;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel5;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel6;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel7;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel8;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel9;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel10;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel11;
+        private System.Windows.Forms.ToolStripMenuItem AuxMenuChannel12;
+        private System.Windows.Forms.Label lnlAuxMenu;
+        private System.Windows.Forms.ToolStripButton tsbtnCsCpvsTimeGraph;
+        private System.Windows.Forms.ToolStripButton tsbtnVdcTempvsTime;
+        private System.Windows.Forms.ToolStripButton tsbtnEocTempvsTime;
+        private System.Windows.Forms.ToolStripButton tsbtnRsRpvsTime;
+        private System.Windows.Forms.ToolStripButton tsbtnZTvsVdc;
+        private System.Windows.Forms.ToolStripButton tsbtnErefDivIvsTimeGraph;
+        private System.Windows.Forms.ToolStripButton tsbtnErefvsAbsQGraph;
     }
 }
 

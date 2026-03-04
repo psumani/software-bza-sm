@@ -1602,7 +1602,7 @@ namespace ZiveLab.ZM
         private void frmTechniq_FormClosing(object sender, FormClosingEventArgs e)
         {
             bClose = true;
-            
+            gBZA.appcfg.Save();
         }
 
         private void techtree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

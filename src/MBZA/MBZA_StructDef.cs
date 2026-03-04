@@ -1,5 +1,4 @@
-﻿using DataManager.CommClass;
-using NationalInstruments.UI;
+﻿using NationalInstruments.UI;
 using SMLib;
 using System;
 using System.Collections.Generic;
@@ -41,6 +40,9 @@ namespace ZiveLab.ZM
         public double Power;
 
         public int CommTimeOut;
+        public FormWindowState DTWinStatus;
+        public Point DataToolLocation;
+        public Size DataToolSize;
         public FormWindowState RtWinStatus;
         public Point RealviewLocation;
         public Size RealviewSize;
@@ -60,7 +62,10 @@ namespace ZiveLab.ZM
         public FormWindowState CfgWinStatus;
         public Point CfgLocation;
         public Size CfgSize;
-
+        public FormWindowState AuxVdcWinStatus;
+        public Point AuxVdcLocation;
+        public Size AuxVdcSize;
+        
         public AppConfig()
         {
             RDummy = new double[MBZA_Constant.MAX_DUMMY];
@@ -106,24 +111,32 @@ namespace ZiveLab.ZM
         public bool Save()
         {
 
-/*            if (File.Exists(MBZA_Constant.AppCfgFilename) == true)
+            /*            if (File.Exists(MBZA_Constant.AppCfgFilename) == true)
+                        {
+                            try
+                            {
+                                File.Delete(MBZA_Constant.AppCfgFilename);
+                            }
+                            catch 
+                            {
+                                MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return false;
+                            }
+                        }
+             */
+            try
             {
-                try
+                XmlSerializer serializer = new XmlSerializer(typeof(AppConfig));
+                using (StreamWriter writer = new StreamWriter(MBZA_Constant.AppCfgFilename))
                 {
-                    File.Delete(MBZA_Constant.AppCfgFilename);
-                }
-                catch 
-                {
-                    MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
+                    serializer.Serialize(writer, this);
                 }
             }
- */       
-            FileStream file = System.IO.File.Open(MBZA_Constant.AppCfgFilename,FileMode.Create);
-            XmlSerializer writer = new XmlSerializer(typeof(AppConfig)); 
-            writer.Serialize(file, this);
-            file.Close();
-            
+            catch (Exception) //e
+            {
+                    return false;
+            }
+
             return true;
         }
 
@@ -138,52 +151,52 @@ namespace ZiveLab.ZM
             MainViewSize = new Size(1440, 580);
 
             RealviewLocation = new Point(0, 0);
-            RealviewSize = new Size(513, 438);
+            RealviewSize = new Size(600, 500);
             RtWinStatus = FormWindowState.Normal;
 
             RegRealviewLocation = new Point(0, 0);
             if (regch <= 1)
             {
-                RegRealviewSize = new Size(513, 438);
+                RegRealviewSize = new Size(600, 500);
             }
             else if (regch == 2)
             {
-                RegRealviewSize = new Size(1004, 438);
+                RegRealviewSize = new Size(1200, 500);
             }
             else if (regch == 3)
             {
-                RegRealviewSize = new Size(1494, 438);
+                RegRealviewSize = new Size(1800, 500);
             }
             else if (regch == 4)
             {
-                RegRealviewSize = new Size(1004, 839);
+                RegRealviewSize = new Size(1200, 1000);
             }
             else
             {
-                RegRealviewSize = new Size(1500, 845);
+                RegRealviewSize = new Size(1800, 1000);
             }
             RegRtWinStatus = FormWindowState.Normal;
 
             GroupRealviewLocation = new Point(50, 50);
             if (grpch <= 1)
             {
-                GroupRealviewSize = new Size(513, 438);
+                GroupRealviewSize = new Size(600, 500);
             }
             else if (grpch == 2)
             {
-                GroupRealviewSize = new Size(1004, 438);
+                GroupRealviewSize = new Size(1200, 500);
             }
             else if (grpch == 3)
             {
-                GroupRealviewSize = new Size(1494, 438);
+                GroupRealviewSize = new Size(1800, 500);
             }
             else if (grpch == 4)
             {
-                GroupRealviewSize = new Size(1004, 839);
+                GroupRealviewSize = new Size(1200, 1000);
             }
             else
             {
-                GroupRealviewSize = new Size(1500, 845);
+                GroupRealviewSize = new Size(1800, 1000);
             }
             GrpRtWinStatus = FormWindowState.Normal;
             TechLocation = new Point(0, 0);
@@ -191,12 +204,14 @@ namespace ZiveLab.ZM
             CfgLocation = new Point(0, 0);
             CfgSize = new Size(1400, 580);
             CfgWinStatus = FormWindowState.Normal;
+
+            DataToolLocation = new Point(0, 0);
+            DataToolSize = new Size(1350, 887);
+            DTWinStatus = FormWindowState.Normal;
         }
 
         public bool Load()
         {
-            XmlSerializer reader = null;
-            StreamReader file = null;
             AppConfig tmp = null;
 
             if (File.Exists(MBZA_Constant.AppCfgFilename) == false)
@@ -207,20 +222,19 @@ namespace ZiveLab.ZM
                 }
                 return true;
             }
+
+
             try
             {
-                tmp = new AppConfig();
-                reader = new XmlSerializer(typeof(AppConfig));
-                file = new StreamReader(MBZA_Constant.AppCfgFilename);
+                XmlSerializer serializer = new XmlSerializer(typeof(AppConfig));
+                using (StreamReader reader = new StreamReader(MBZA_Constant.AppCfgFilename))
+                {
+                    tmp = (AppConfig)serializer.Deserialize(reader);
+                }
 
-                tmp = (AppConfig)reader.Deserialize(file);
-
-                file.Close();
             }
             catch(Exception) //e
             {
-                if(file != null) file.Close();
-
 
                 if (Save() == false)
                 {
@@ -552,8 +566,7 @@ namespace ZiveLab.ZM
                 if (sys.mSIFCfg.GetDeviceType() == eDeviceType.MCBZA)
                 {
                     nAuxBd = i / 4;
-                    if (sys.EnaZIM[nAuxBd] == 1 && sys.ChkZIM[nAuxBd] == 1 && (eDeviceType)sys.mSIFCfg.Type == eDeviceType.MCBZA && sifch == 0) bChannel[i + 1] = true;
-                    
+                    if (sys.EnaZIM[nAuxBd + 1] == 1 && sys.ChkZIM[nAuxBd + 1] == 1 && (eDeviceType)sys.mSIFCfg.Type == eDeviceType.MCBZA && sifch == 0) bChannel[i + 1] = true;
                 }
             }
         }
@@ -1211,38 +1224,12 @@ namespace ZiveLab.ZM
                 cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * zim);
                 cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
 
-                for (int i = 0; i < 3; i++)
+                //for (int i = 0; i < 3; i++)
                 {
                     if (barr[findex] == true)
                     {
                         //mag
-
-                        if (findex == 1)
-                        {
-                            if (arrcnt > 2)
-                            {
-                                rtgrp.item[ch].plot[0].count[findex]++;
-                                rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
-                                rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
-                                rtgrp.item[ch].plot[0].ly[findex].Add(zre);
-                                //if (rtgrp.item[ch].plot[0].Maxval[findex] < zre) rtgrp.item[ch].plot[0].Maxval[findex] = zre;
-                                //if (rtgrp.item[ch].plot[0].Minval[findex] > zre) rtgrp.item[ch].plot[0].Minval[findex] = zre;
-                            }
-                            else
-                            {
-                                Lastindex = rtgrp.item[ch].plot[0].ly[0].Count - 1;
-                                tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex];
-
-                                rtgrp.item[ch].plot[0].count[findex]++;
-                                rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
-                                rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
-                                rtgrp.item[ch].plot[0].ly[findex].Add(tmp);
-
-                                //if (rtgrp.item[ch].plot[0].Maxval[findex] < tmp) rtgrp.item[ch].plot[0].Maxval[findex] = tmp;
-                                //if (rtgrp.item[ch].plot[0].Minval[findex] > tmp) rtgrp.item[ch].plot[0].Minval[findex] = tmp;
-                            }
-                        }
-                        else if (findex == 2)
+                        if (findex == 2 && rtgrp.item[ch].plot[0].ly[1].Count > 0)
                         {
                             Lastindex = rtgrp.item[ch].plot[0].ly[1].Count - 1;
                             if (prrrpcalcmode == 0) tmp = zre - rtgrp.item[ch].plot[0].ly[1][Lastindex];
@@ -1253,21 +1240,13 @@ namespace ZiveLab.ZM
                             rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
                             rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
                             rtgrp.item[ch].plot[0].ly[findex].Add(tmp);
-
-                            /*
-                            rtgrp.item[ch].plot[0].freq[1][Lastindex] = d.fFreq;
-                            rtgrp.item[ch].plot[0].lx[1][Lastindex] = d.TestTime;
-                            rtgrp.item[ch].plot[0].ly[1][Lastindex] = tmp;
-                            */
                         }
-                        else
+                        else // findex = 0, 1
                         {
                             rtgrp.item[ch].plot[0].count[findex]++;
                             rtgrp.item[ch].plot[0].freq[findex].Add(d.fFreq);
                             rtgrp.item[ch].plot[0].lx[findex].Add(d.TestTime);
                             rtgrp.item[ch].plot[0].ly[findex].Add(zre);
-                            //if (rtgrp.item[ch].plot[0].Maxval[findex] < zre) rtgrp.item[ch].plot[0].Maxval[findex] = zre;
-                            //if (rtgrp.item[ch].plot[0].Minval[findex] > zre) rtgrp.item[ch].plot[0].Minval[findex] = zre;
                         }
 
                         //phase
@@ -1280,19 +1259,16 @@ namespace ZiveLab.ZM
                         rtgrp.item[ch].plot[2].freq[findex].Add(d.fFreq);
                         rtgrp.item[ch].plot[2].lx[findex].Add(d.TestTime);
                         rtgrp.item[ch].plot[2].ly[findex].Add(cs);
-                        //if (rtgrp.item[ch].plot[2].Maxval[findex] < cs) rtgrp.item[ch].plot[2].Maxval[findex] = cs;
-                        //if (rtgrp.item[ch].plot[2].Minval[findex] > cs) rtgrp.item[ch].plot[2].Minval[findex] = cs;
 
                         //Cp
                         rtgrp.item[ch].plot[3].count[findex]++;
                         rtgrp.item[ch].plot[3].freq[findex].Add(d.fFreq);
                         rtgrp.item[ch].plot[3].lx[findex].Add(d.TestTime);
                         rtgrp.item[ch].plot[3].ly[findex].Add(cp);
-                        //if (rtgrp.item[ch].plot[3].Maxval[findex] < cs) rtgrp.item[ch].plot[3].Maxval[findex] = cp;
-                        //if (rtgrp.item[ch].plot[3].Minval[findex] > cs) rtgrp.item[ch].plot[3].Minval[findex] = cp;
+
                         findex++;
-                        if (findex >= 3) findex = 0;
-                        return;
+                        if (arrcnt == findex) findex = 0;
+                        //return;
                     }
                     else
                     {
@@ -1567,7 +1543,7 @@ namespace ZiveLab.ZM
             else if (techtype == enTechType.TECH_MON) DataAppendMON(d, false);
             else if (techtype == enTechType.TECH_QIS) DataAppendQIS(d, false);
             else if (techtype == enTechType.TECH_DCH) DataAppendDCH(d, false);
-            else DataAppendEIS(d, false);
+            else DataAppendEIS(d, changecycle);
         }
     }
 

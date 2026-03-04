@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlotAdvancedSettingForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlotAdvancedSettingForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -72,14 +72,13 @@
             // 
             // group_SetAxes
             // 
-            resources.ApplyResources(this.group_SetAxes, "group_SetAxes");
             this.group_SetAxes.Controls.Add(this.dataGridViewSetAxes);
+            resources.ApplyResources(this.group_SetAxes, "group_SetAxes");
             this.group_SetAxes.Name = "group_SetAxes";
             this.group_SetAxes.TabStop = false;
             // 
             // dataGridViewSetAxes
             // 
-            resources.ApplyResources(this.dataGridViewSetAxes, "dataGridViewSetAxes");
             this.dataGridViewSetAxes.AllowUserToAddRows = false;
             this.dataGridViewSetAxes.AllowUserToDeleteRows = false;
             this.dataGridViewSetAxes.AllowUserToResizeColumns = false;
@@ -108,6 +107,7 @@
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewSetAxes.DefaultCellStyle = dataGridViewCellStyle7;
+            resources.ApplyResources(this.dataGridViewSetAxes, "dataGridViewSetAxes");
             this.dataGridViewSetAxes.MultiSelect = false;
             this.dataGridViewSetAxes.Name = "dataGridViewSetAxes";
             this.dataGridViewSetAxes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -170,7 +170,6 @@
             // 
             // group_DataCondition
             // 
-            resources.ApplyResources(this.group_DataCondition, "group_DataCondition");
             this.group_DataCondition.Controls.Add(this.label8);
             this.group_DataCondition.Controls.Add(this.label7);
             this.group_DataCondition.Controls.Add(this.label6);
@@ -189,6 +188,7 @@
             this.group_DataCondition.Controls.Add(this.check_StepNumber);
             this.group_DataCondition.Controls.Add(this.checkboxTime);
             this.group_DataCondition.Controls.Add(this.checkboxFileNo);
+            resources.ApplyResources(this.group_DataCondition, "group_DataCondition");
             this.group_DataCondition.Name = "group_DataCondition";
             this.group_DataCondition.TabStop = false;
             // 
@@ -259,8 +259,8 @@
             // 
             // combo_item
             // 
-            resources.ApplyResources(this.combo_item, "combo_item");
             this.combo_item.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.combo_item, "combo_item");
             this.combo_item.FormattingEnabled = true;
             this.combo_item.Name = "combo_item";
             // 
@@ -294,16 +294,16 @@
             // 
             // btn_cancel
             // 
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // btn_refresh
             // 
-            resources.ApplyResources(this.btn_refresh, "btn_refresh");
             this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.btn_refresh, "btn_refresh");
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);

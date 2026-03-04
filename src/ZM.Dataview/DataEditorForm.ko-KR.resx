@@ -198,45 +198,17 @@
         FfnHJCaY6EE8iGCoVP8HjdwMdxX6eHwAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="tsbtnOpenSchedule.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbtnViewGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        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
+        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
+        SUVORK5CYII=
 </value>
   </data>
   <data name="tsbtnSaveText.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -285,105 +257,6 @@
         msaJdFV6Xg3kt0pxNasUlzNK8HtqMeL+LMZ5+WP8cq0I0Zcf4UT8X4i4VIhDFwsQev4hgmLy4XcmHz6S
         PHhH5cLrVC6On7vS7ES6ys3N7YOIiMiPjh2L/Pjo0ROfHDly/NOwwz99FiaO2Hbg0NHPw8TiL/aJxe4h
         YeLtQeE/egbtF38ZHBr+VcC+g1/77w//JmBf+Lf+QWG7/AIPeP0NEMwWcTQz6KkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="tsbtnSearchVvsCp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASrSURBVEhLpZRpTFRXFMcnttr2Qz90S5smTU2bpo0f2kZr
-        jDZtatIGUxXTUK0KgpGqaE1J7BIiI1qiI+CCNlAFFQUZXEBQBB22QRSQDktFVJZBdmGAmWFWkJnBX+97
-        LJJmtNiel//czM0753fOefcexWTbl3mVvRkl7DlbjOqMFpVYo4Siz4n99KuEp2iJSNUSejyXgP2nWbA1
-        kTHXqZkEaO81y+o2W2nuNFKj7+BaXQtXqhpRl9QQl1MpkihjY1wGC8MTng4Sna6Vg4/bQ/E4nA/oMTlp
-        7DJSWd9GTlUTWaX1qM5flwHhyYViTZoaZDLA43Jhdw3SaxmmzeCgocPATX0nRTdb0NQ0E5utk6soudlA
-        aELu1CBS3ycAHg8et4tB9whmu5P7hn4aWg1U1fdQfruDJE2NDOgy22g3mNl8JOffIbvUhTKgQNfF/O/P
-        MT84XawZzAs+y9ygNOYEnGL26hRZ7/jsISy5SE5GghSJqn4+rnkyJDJtFCCZxzOES7TJLapweVxYhx/Q
-        bXXQ0W+lq08kUa2fAFisdhlSXtckQ2aFHPQO2Z5aMAkwLAMk2SwWCvJK2aY8RsT2E4QpjxKlSmF/ci7x
-        l8qISitFqdbKWrQzlffXH/AO+CVJM6lFGXKLloScYtPW43yrLCHoUCNhmSYiCwZRXenlJ5WG5ct38NGK
-        Y8xaFi9XFZtZwsx1e70Dfoy7OFGBW3xko8XGhh8Os/agnuj8PtS1ZrLv9hOf18YfxT1c7IeIozdQhsVS
-        VN1MlThl8Zdv8FZgjHfA+gPqRy0ST15+GSuU14nJN5J3f5DmEci7Z6W43UFaRS+Zt0xUinfXbYolu1BH
-        W/cA6uJa3lwT5R2wSnVyokXzRHv8/XeyMaGLFF0/rTIWrunFiWm3o7O4KO8dpkXsnS6/w4c+kfSZnVzW
-        NfG6/x7vAN/txyYqMDqGCAyK4bdcO6eqDBSIzKs7nWQ1WOh3wx2rh9tWFwYJ2tjJwfh02a+0roPXVu32
-        DpDO8DjAJC6X33Il+8ogubSTtMo+susH6HFBq9ON3u6m0zkiGgm19a3sjz0r+/2lv88r3+16MkCt0fPp
-        +gw+W7iF6MIh4vK6SC7rRtc3TK3dw12bm37PiLjlckyKr1Xzgc/vOMRGZVMnL694DECajJMruJBVQGBY
-        JrlGSMxvI6/VTp3I/J7NhdH1UH5PskX+JzCK/kv2p2jXS1MFmGxOvv4qmIjT9dSIvXIHNIq1R35j1PzW
-        JrByQyoDh2fK/58IkK745BaN6+13fVkTmsiFFgMVIvNbtmEqKm7xxbIIAoMPQdZSXLunowudgW4qAMnG
-        KxhXdo6WzZsj+cYvlMWLQ0hMOk+PzYF255dQsVJ4iD7GPMuVVc9MHWAWgf+pASGTOMJ9Did9Ngsmcdvz
-        VyvAlS287sC+6ah9p3kHvOq3QwZIF21ukJpPHqPZAcliZAv5i9EtRvicgFQSP58BIxoBEV8rWkHsQsXQ
-        WNhHNg74rxa/YJr4lUZ4HZx8gyM+CvtY6FF70XebPNf/j1Qfi0rEhGq6tAXlLEXmWOhRkwCSnl+qFAp/
-        Kj23RPj5/CorbO4LhLynSFcoFIq/AZZ3Y+b/pJtYAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="tsbtnSearchVvsCp.Text" xml:space="preserve">
-    <value>Search voltage value at % capacity per cycle</value>
-  </data>
-  <data name="tsbtnViewDCGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANISURBVFhHxZf7SxRRFMcH+huKktR8tLr5YFGxLAk0tQe2
-        pAtZJJQl9kAjUkLLKCUh6odKWQQz8xHlq611d3VF96GGyISCtElJ/dDr1170S/1ymnPrTjNzp2u7sNvA
-        h3vvnnO/53vPLjOzgt/vh/+FgJdeIFLIBlyeUcjtNoOpqyDsYB2spzJQPVwPQnsMrLoXF3aE1ihofnQd
-        vD7vHwNHBmpA6IyGitkGGHnnDRuojwZq+y/CfdcAa6Bsphp6Xg2GDdSnBvpcD1gDe/1VcON5J4N1+Q60
-        LXfAzWWrbvxfQX2ugfzJQ9CwcE3FpcBVuCwhpUJj4ApcCDQxOci5QKNMXaAezgZqmRzU5xrIHS2BE9L3
-        pKRmvo4Up5yaP8PkIFXzUnsVeccWKpkc1OcayHQWQ+n0cRUHxKMEFC0TK2C/eJjJQSxiOaFUPEgoES1M
-        DupzDRjt+ZDnLlOxa8oC5jmzDK6LpvYxFEyZfzG9h7BjeiejhfpcA3G2XDDZd6vImSgkpw+WbM82Rgv1
-        uQbWDmVD1MMtKtL8GTKJY1mEhN8wc3cGpMwYIfVJMqTNJDJaqM81sGYgiyF+LJOcKNZhgtX9Gbo5FIxv
-        cKWS/HiXQTeHa0CvABZGQcNkKpkzo8dIiib5ksiIJ1ca0GoG3QGlAb0RCyvHFL90v5fGkDqACVrH0Y50
-        +cQ4xzHGmSafONlnkMc41ybJQCwpnuCI19ULugMIilAhraAevJygO0D5l8Ja9PaE1AHKRlseQS+G8GKU
-        kDvQutQN9Pr0/QvY307IBQvGy2Hx4xKJvfn2AWqftjD7KSF3gBrAohbfSdkExj7/+ErmWU4zVM7WQ/Ni
-        K7OfwjXA+56VBnDd+9pG1qfFJjJiYe0eLai/Ygfwdqlk3fBmMlpf9pJCxpFCsm570UPW1EDV3HlVvhL6
-        GepzDWCS9v5NURrAVytsu+O9h8ToPMdtIUZanlmZ/Qga4RrApFhbji7UAF5Y0CkVTHcUkVixt0L1I8S3
-        H+1+ZEUD64e2kkfm38AXCvpY1QPjep9TUJ9rIFpymPg4P2ygvq6BSP8xYQwMjg+Tv0yGju1hx3S7EG7Z
-        2tUGKHcdfdBh74oIeGjGADI26Y4IWEsQBOEn6UM909+hxk4AAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="tsbtnViewCycleGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
-  <data name="tsbtnViewEisGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAP3SURBVFhH1Zd/TNRlHMefA/8qq63EZKccgqOwKVaaMYF+
-        TGILIh3kXCfrwFq0ywEVc+x0U9cf1Y2tyz+inAarYXBa1jyJHwldK0AB9c4ftVj+k/+knHAHEuL27vN5
-        zu/tHu7rd4N1uNhe+zzf5z68P6977suNr+jp6cHdRAp42n5CziuDWFM4FHd4Ds9TBN7e1Qdh+R1i+ZX4
-        s8KPffU/4+TJKAHbO/0QqX/CuvMKjg0Mxw3OZ4F393rR7O6KFdi04yoOdQ/HDc7XBL5q0RHItwXgbB3W
-        5WPPOdR7BuH09ONDTx8+8PTq9hnB+YYC2aWjqN1/OQZHow91TWcghAiTKFDb2If3mnp1++8E5xsKrC0d
-        QcXevxQqXT6JEAlYIEx4wzUEE61ZZLvrNCqY273lrlOwufrx2n6vkqHB+YYCmfmjeLEyoLDZ8ZscLkwC
-        LzsuERdR7Lggr1niJYdf9hVRLXL4SFKgcE9vTA7D+YYCltwgsrdcU3jOfoHesaB6Hs8SvPeM3Sf3WCzP
-        fk6SS4SlFiC35peYHIbzDQWSHg/ikY0BhezqbqIHT1PV9rKs5wl/+KOgoaut9BFR5eu1da1Yt+cQst7q
-        UHIYzjcUuC9zDA+sUjEXXJJHzTV6P7ngIsGnk3D7NASSC88g3f61lFm2tUPpZzjfUODezJEYFm/0y8BU
-        axetfVQ7kUTVYu2ApawNGTVfIoXqo3WfIq3yMNKrDkoh89bvdfPmIMB/AUIONJFIClUWSrG2y3vAUvGd
-        HLj8zRZ5GmnVn1NfIsyvHtHNm4MA3VwULAfL+gPd6YlYVuahQSYa3CoF03Z8gQQSW1HrktdLtzXr5s1a
-        IIkEGB68iGvZCSwuGETq9m/wcNGvSKfBS4q9SK9pwJKSDmQ49sFsdWOp7aBu3qwF/mv+nwIbSkYjPJZ/
-        XdnTeszrA8rrd2LWAhz697VbEU6dvQn77lDkmgdaq4JKz0cNN3SzmDkLzNxvPf4PHM5xuebXC8vH5Fo7
-        iejeaAwFFmYFsHClSk7pmPLu+AR43+1hgYnImvcPHJ6k0xlXfl+B8g0F7lkZlF+X0eSUhI+bK7MqPyT3
-        3censMs5GenbVjUBZ8MkTp+dRqf3ZmQ/Gs43FOCmmd/feVvCAjP3j5yYwu76SbnmatkQlOvi18fxx+Vp
-        pVeD8w0F7ifDRU+NKTxfFsLVkVsRBvzTqH7/RuT6yU0hHG2fUnrKd07E5DCcbyjw4OrrSM4ejeEFWyjC
-        +pKgsqf18H70tR6cbyjw0DpqfIIGxAnO1xWY7weTGIGWo175yJSRNxR31hQM4JPPulQBjcbmThxomh/c
-        3/4YK8DPa23t3fOCNpP+d7ibP0L8CwamuhAxkKDdAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsbtnRunZMan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -459,26 +332,8 @@
         gg==
 </value>
   </data>
-  <data name="dcDataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
-  </data>
-  <data name="cycDataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
-  </data>
-  <data name="eisDataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
-  </data>
-  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 17</value>
-  </data>
-  <data name="btnSearch.Text" xml:space="preserve">
-    <value>검색</value>
-  </data>
-  <data name="tbStepNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 17</value>
-  </data>
   <data name="btnUndo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>977, 17</value>
+    <value>102, 20</value>
   </data>
   <data name="btnUndo.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 23</value>
@@ -487,7 +342,7 @@
     <value>되돌리기</value>
   </data>
   <data name="btnDeleteData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>891, 17</value>
+    <value>16, 21</value>
   </data>
   <data name="btnDeleteData.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 23</value>
@@ -495,59 +350,44 @@
   <data name="btnDeleteData.Text" xml:space="preserve">
     <value>데이터 삭제</value>
   </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1459, 183</value>
+  </data>
+  <data name="ChkDCAux.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 20</value>
+  </data>
+  <data name="ChkDC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 20</value>
+  </data>
+  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림, 9pt</value>
+  </data>
+  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 18</value>
+  </data>
+  <data name="btnSearch.Text" xml:space="preserve">
+    <value>검색</value>
+  </data>
   <data name="chkCycleNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 17</value>
   </data>
   <data name="chkCycleNo.Text" xml:space="preserve">
     <value>사이클 번호</value>
   </data>
-  <data name="chkHideRest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 20</value>
-  </data>
-  <data name="chkHideRest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 17</value>
-  </data>
-  <data name="chkHideRest.Text" xml:space="preserve">
-    <value>Rest 데이터 숨기기</value>
-  </data>
   <data name="tbCycleNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 17</value>
   </data>
-  <data name="chkStepNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 20</value>
-  </data>
-  <data name="chkStepNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
-  </data>
-  <data name="chkStepNo.Text" xml:space="preserve">
-    <value>단계 번호</value>
-  </data>
-  <data name="txtPausedTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 75</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>555, 81</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>일시정지시간</value>
-  </data>
-  <data name="txtLastStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 75</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>마지막시험상태</value>
+  <data name="groupBoxFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 55</value>
   </data>
   <data name="tbCellType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>929, 140</value>
+    <value>104, 74</value>
+  </data>
+  <data name="lblCellType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 77</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>651, 145</value>
+    <value>645, 79</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -555,50 +395,94 @@
   <data name="label4.Text" xml:space="preserve">
     <value>조건파일 작성자</value>
   </data>
-  <data name="tbProductNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>507, 140</value>
+  <data name="tbWriterName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>738, 74</value>
   </data>
-  <data name="tbProductNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+  <data name="tbWriterName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
+  <assembly alias="C1.Win.C1Input.4" name="C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a" />
+  <data name="textFileName.DisplayFormat.Inherit" type="C1.Win.C1Input.FormatInfoInheritFlags, C1.Win.C1Input.4">
+    <value>All</value>
+  </data>
+  <data name="textFileName.EditFormat.Inherit" type="C1.Win.C1Input.FormatInfoInheritFlags, C1.Win.C1Input.4">
+    <value>All</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="textFileName.ErrorInfo.BeepOnError" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="textFileName.ErrorInfo.ErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textFileName.ErrorInfo.ErrorMessageCaption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textFileName.ErrorInfo.ShowErrorMessage" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textFileName.MaskInfo.AutoTabWhenFilled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="textFileName.MaskInfo.CopyWithLiterals" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textFileName.MaskInfo.Inherit" type="C1.Win.C1Input.MaskInfoInheritFlags, C1.Win.C1Input.4">
+    <value>All</value>
+  </data>
+  <data name="textFileName.MaskInfo.PromptChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>_</value>
+  </data>
+  <data name="textFileName.MaskInfo.ShowLiterals" type="C1.Win.C1Input.ShowLiteralsEnum, C1.Win.C1Input.4">
+    <value>ShowAlways</value>
+  </data>
+  <data name="textFileName.MaskInfo.StoredEmptyChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>_</value>
+  </data>
+  <data name="textFileName.ParseInfo.DateTimeStyle" type="C1.Win.C1Input.DateTimeStyleFlags, C1.Win.C1Input.4">
+    <value>AllowWhiteSpaces</value>
+  </data>
+  <data name="textFileName.ParseInfo.Inherit" type="C1.Win.C1Input.ParseInfoInheritFlags, C1.Win.C1Input.4">
+    <value>All</value>
+  </data>
+  <data name="textFileName.ParseInfo.NumberStyle" type="C1.Win.C1Input.NumberStyleFlags, C1.Win.C1Input.4">
+    <value>Any</value>
+  </data>
+  <data name="textFileName.PostValidation.Inherit" type="C1.Win.C1Input.PostValidationInheritFlags, C1.Win.C1Input.4">
+    <value>All</value>
+  </data>
+  <data name="textFileName.PostValidation.Validation" type="C1.Win.C1Input.PostValidationTypeEnum, C1.Win.C1Input.4">
+    <value>ValuesAndIntervals</value>
+  </data>
+  <data name="textFileName.PreValidation.Inherit" type="C1.Win.C1Input.PreValidationInheritFlags, C1.Win.C1Input.4">
+    <value>All</value>
+  </data>
+  <data name="textFileName.PreValidation.ItemSeparator" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="textFileName.PreValidation.PatternString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textFileName.PreValidation.RegexOptions" type="C1.Win.C1Input.RegexOptionFlags, C1.Win.C1Input.4">
+    <value>None</value>
+  </data>
+  <data name="textFileName.PreValidation.Validation" type="C1.Win.C1Input.PreValidationTypeEnum, C1.Win.C1Input.4">
+    <value>ExactList</value>
   </data>
   <data name="textUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 140</value>
+    <value>738, 104</value>
+  </data>
+  <data name="textDataCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 22</value>
   </data>
   <data name="textScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>104, 44</value>
   </data>
-  <data name="tbStartStepNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 109</value>
-  </data>
   <data name="tbDataCapacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 109</value>
-  </data>
-  <data name="tbDataActiveArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 109</value>
-  </data>
-  <data name="tbDataWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 109</value>
-  </data>
-  <data name="label_StepCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>934, 112</value>
-  </data>
-  <data name="label_StepCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="label_StepCount.Text" xml:space="preserve">
-    <value>단계 개수</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 145</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>상품 번호</value>
+    <value>514, 74</value>
   </data>
   <data name="label_User.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 145</value>
+    <value>667, 109</value>
   </data>
   <data name="label_User.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -613,7 +497,7 @@
     <value>메모</value>
   </data>
   <data name="label_ScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 47</value>
+    <value>38, 47</value>
   </data>
   <data name="label_ScheduleFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -627,32 +511,8 @@
   <data name="label_DataCount.Text" xml:space="preserve">
     <value>데이터 개수</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>781, 114</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>시작 단계 번호</value>
-  </data>
   <data name="lblCapacity1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>409, 114</value>
-  </data>
-  <data name="lblActiveArea1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 114</value>
-  </data>
-  <data name="lblActiveArea1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
-  </data>
-  <data name="lblActiveArea1.Text" xml:space="preserve">
-    <value>전극 면적()</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>전극 중량(g)</value>
+    <value>425, 79</value>
   </data>
   <data name="label_TestTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -665,65 +525,6 @@
   </data>
   <data name="label_FileName.Text" xml:space="preserve">
     <value>데이터 파일</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAICAAAAEAGACoDAAAFgAAACgAAAAgAAAAQAAAAAEAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAABAACVIDGW4BAi0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUsFVOQjqf8sgtYCATAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAACIBLr0Tjv9D1/9Ox/ICAkcAAAAAAAAAAAAAAAAAAAEAAAcAAAkAAAgAAAcA
-        AAUAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAMAAAQAE4oMd/sxuv9T
-        4f0VOJsAAA0AAAAAAAAAAAAAAAAAADsHB3MNDYUNDYQJCXwHCHIGBWoDA2ECAlcBAUsAAD4AADQAAC0A
-        ABwAAB0AACsAADcCAkkFBV4NDW4UE3wGA4UEVuYfov9P6v9Fj98ZEbEAADkAAAAAAAAAAAAAAAAEBIUY
-        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
-        AAfwAAAP8AAAf////////////////w==
-</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>데이터 편집</value>

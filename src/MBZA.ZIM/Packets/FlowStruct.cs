@@ -1821,14 +1821,28 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public string GetVersion()
         {
-            return string.Format("{0}.{1}.{2}.{3}", version.Minor, version.Minor, version.Revision, version.Build);
+            return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Revision, version.Build);
         }
 
         public string GetTechFile()
         {
             return Encoding.UTF8.GetString(techfile).Trim('\0');
         }
-        
+
+        public void SetBattId(string sid)
+        {
+            byte[] id = Encoding.UTF8.GetBytes(sid);
+            int len = id.Length;
+            
+            Array.Clear(batid, 0, DeviceConstants.BATIDSIZE);
+
+            if (len > (DeviceConstants.BATIDSIZE - 1))
+            {
+                len = DeviceConstants.BATIDSIZE - 1;
+            }
+            Array.Copy(id, batid, len);
+        }
+
         public void SetBattId(byte[] id)
         {
             int len = id.Length;
@@ -1881,6 +1895,20 @@ namespace ZiveLab.ZM.ZIM.Packets
             Array.Copy(name, user, len);
         }
 
+        public void SetUser(string sname)
+        {
+            byte[] name = Encoding.UTF8.GetBytes(sname);
+            int len = name.Length;
+
+            Array.Clear(user, 0, DeviceConstants.USERSIZE);
+
+            if (len > (DeviceConstants.USERSIZE - 1))
+            {
+                len = DeviceConstants.USERSIZE - 1;
+            }
+            Array.Copy(name, user, len);
+        }
+
         public string GetUser()
         {
             return Encoding.UTF8.GetString(user).Trim('\0');
@@ -1888,6 +1916,20 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public void SetMemo(byte[] desc)
         {
+            int len = desc.Length;
+
+            Array.Clear(memo, 0, DeviceConstants.MEMOSIZE);
+
+            if (len > (DeviceConstants.MEMOSIZE - 1))
+            {
+                len = DeviceConstants.MEMOSIZE - 1;
+            }
+            Array.Copy(desc, memo, len);
+        }
+
+        public void SetMemo(string sdesc)
+        {
+            byte[] desc = Encoding.UTF8.GetBytes(sdesc);
             int len = desc.Length;
 
             Array.Clear(memo, 0, DeviceConstants.MEMOSIZE);

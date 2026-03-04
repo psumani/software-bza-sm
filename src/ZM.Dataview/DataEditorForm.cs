@@ -10,7 +10,7 @@ using System.Drawing.Printing;
 using System.Diagnostics;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
-
+using System.Drawing;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -20,7 +20,7 @@ namespace ZiveLab.ZM.Dataview
         public event EventHandler OpenGraphClick;
         public event EventHandler OpenDataEditorEvent;
 
-
+        public int MaxAuxCount;
         private ZMF_File mResFile;
         private DataHeaderValues _DataHeaderValues;
         private Hashtable _BgWorkerTable = new Hashtable();
@@ -28,22 +28,22 @@ namespace ZiveLab.ZM.Dataview
         private Stack<Stack<DeleteUndo>> _UndoItemStack;
 
         private int _LangIdx = 0;
-
-        private bool _UnitC = false;
+        public int _Pad = 14;
         private bool _EnAlwaysOpenPath;
         private string _AlwaysOpenPath;
         private string _SchTempPath;
         private string _MsgBoxCaption;
         private int _TimeFormat;
 
-
+        public bool bFileOpened;
+        public int ZSharpTarget;
+        
         private DataViewSet _dataviewset;
 
         // 외부 프로그램
         private ExtAppProc _extAppPath;
 
         public string MsgBoxCaption { set { _MsgBoxCaption = value; } }
-        public bool UnitC { set { _UnitC = value; } }
         public bool EnAlwaysOpenPath { set { _EnAlwaysOpenPath = value; } }
         public string AlwaysOpenPath { set { _AlwaysOpenPath = value; } }
         public string SchTempPath { set { _SchTempPath = value; } }
@@ -55,9 +55,15 @@ namespace ZiveLab.ZM.Dataview
         {
             InitializeComponent();
 
+            this.Icon = Util.BitmapToIcon(Properties.Resources.Report);
+            bFileOpened = false;
+            ZSharpTarget = -1;
+            MaxAuxCount = 0;
             mResFile = new ZMF_File();
+
             _DataHeaderValues = new DataHeaderValues();
             _dataviewset = DataviewCommon.LoadFromSetFile();
+
             _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
             tsbtnOpenSchedule.Visible = viewOpenSch;
             _EnAlwaysOpenPath = false;
@@ -82,6 +88,7 @@ namespace ZiveLab.ZM.Dataview
             ChkEISAux.Enabled = false;
         }
 
+        
         public void Initialize(int langidx)
         {
             SetLanguage(langidx);
@@ -133,9 +140,9 @@ namespace ZiveLab.ZM.Dataview
 
         private void InitLabel()
         {
-            string unitQ1 = _UnitC ? "C" : "mAh";
-            string unitQ2 = _UnitC ? "C" : "Ah";
-            string unitQ3 = _UnitC ? "C/g" : "Ah/g";
+            string unitQ1 = _dataviewset._dataConvSet.UnitC ? "C" : "mAh";
+            string unitQ2 = _dataviewset._dataConvSet.UnitC ? "C" : "Ah";
+            string unitQ3 = _dataviewset._dataConvSet.UnitC ? "C/g" : "Ah/g";
 
             lblCapacity1.Text = string.Format(Properties.Resources.Capacity_x, unitQ1);
         }
@@ -163,7 +170,6 @@ namespace ZiveLab.ZM.Dataview
 
                 switch (dci.ColumnID)
                 {
-                    case DataColItem.eColumnId.STEPTIME:
                     case DataColItem.eColumnId.CYCTIME:
                     case DataColItem.eColumnId.TESTTIME:
                         flexgrid[0, col] = dci.GetColName(false);
@@ -208,6 +214,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void InitGridColumn(C1FlexGrid flexgrid, List<DataColItem> dciList)
         {
+            int auxidx;
             flexgrid.Clear(ClearFlags.All);
 
             flexgrid.Cols.Count = dciList.Count;
@@ -216,8 +223,54 @@ namespace ZiveLab.ZM.Dataview
 
             foreach (DataColItem dci in dciList)
             {
-                flexgrid[0, col] = dci.ToString();
 
+                switch (dci.ColumnID)
+                {
+                    case DataColItem.eColumnId.AUX1:
+                    case DataColItem.eColumnId.AUX2:
+                    case DataColItem.eColumnId.AUX3:
+                    case DataColItem.eColumnId.AUX4:
+                    case DataColItem.eColumnId.AUX5:
+                    case DataColItem.eColumnId.AUX6:
+                    case DataColItem.eColumnId.AUX7:
+                    case DataColItem.eColumnId.AUX8:
+                    case DataColItem.eColumnId.AUX9:
+                    case DataColItem.eColumnId.AUX10:
+                    case DataColItem.eColumnId.AUX11:
+                    case DataColItem.eColumnId.AUX12:
+                        auxidx = dci.ColumnID - DataColItem.eColumnId.AUX1;
+                        if (auxidx >= MaxAuxCount) continue;
+                        break;
+                    case DataColItem.eColumnId.AUX01_ZRE:
+                    case DataColItem.eColumnId.AUX01_ZIM:
+                    case DataColItem.eColumnId.AUX02_ZRE:
+                    case DataColItem.eColumnId.AUX02_ZIM:
+                    case DataColItem.eColumnId.AUX03_ZRE:
+                    case DataColItem.eColumnId.AUX03_ZIM:
+                    case DataColItem.eColumnId.AUX04_ZRE:
+                    case DataColItem.eColumnId.AUX04_ZIM:
+                    case DataColItem.eColumnId.AUX05_ZRE:
+                    case DataColItem.eColumnId.AUX05_ZIM:
+                    case DataColItem.eColumnId.AUX06_ZRE:
+                    case DataColItem.eColumnId.AUX06_ZIM:
+                    case DataColItem.eColumnId.AUX07_ZRE:
+                    case DataColItem.eColumnId.AUX07_ZIM:
+                    case DataColItem.eColumnId.AUX08_ZRE:
+                    case DataColItem.eColumnId.AUX08_ZIM:
+                    case DataColItem.eColumnId.AUX09_ZRE:
+                    case DataColItem.eColumnId.AUX09_ZIM:
+                    case DataColItem.eColumnId.AUX10_ZRE:
+                    case DataColItem.eColumnId.AUX10_ZIM:
+                    case DataColItem.eColumnId.AUX11_ZRE:
+                    case DataColItem.eColumnId.AUX11_ZIM:
+                    case DataColItem.eColumnId.AUX12_ZRE:
+                    case DataColItem.eColumnId.AUX12_ZIM:
+                        auxidx = dci.ColumnID - DataColItem.eColumnId.AUX01_ZRE;
+                        auxidx = auxidx / 2;
+                        if (auxidx >= MaxAuxCount) continue;
+                        break;
+                }
+                flexgrid[0, col] = dci.ToString();
                 flexgrid.Cols[col].TextAlignFixed = TextAlignEnum.CenterCenter;
                 flexgrid.Cols[col].TextAlign = TextAlignEnum.CenterCenter;
                 flexgrid.Cols[col].Width = (int)dci.ColumnWidth * 6;
@@ -231,7 +284,6 @@ namespace ZiveLab.ZM.Dataview
 
                 switch (dci.ColumnID)
                 {
-                    case DataColItem.eColumnId.STEPTIME:
                     case DataColItem.eColumnId.CYCTIME:
                     case DataColItem.eColumnId.TESTTIME:
                          flexgrid[0, col] = dci.GetColName(false);
@@ -261,7 +313,7 @@ namespace ZiveLab.ZM.Dataview
 
                 col++;
             }
-
+            flexgrid.Cols.Count = col;
             flexgrid.Rows[0].Height = 25;
         }
        
@@ -397,7 +449,7 @@ namespace ZiveLab.ZM.Dataview
             }            
         }
 
-        private void ConvertToTextProc(string filename, eDelimiter ed)
+        private void ConvertToTextProc(string filename, eDelimiter ed, int Target = -1)
         {
             if (!backgroundWorkerText.IsBusy)
             {
@@ -423,7 +475,7 @@ namespace ZiveLab.ZM.Dataview
                 ribbonLabel2.Visible = true;
 
                 _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
-                object[] param = new object[] { filename, ed };
+                object[] param = new object[] { filename, ed, Target };
 
                 this.Cursor = Cursors.AppStarting;
 
@@ -486,7 +538,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void tsbtnOpenSchedule_Click(object sender, EventArgs e)
         {
-            if (mResFile.bopen == false)
+            if (bFileOpened == false)
             {
                 MessageBox.Show("The data file has not been opened.");
                 return;
@@ -499,7 +551,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void tsbtnSaveText_Click(object sender, EventArgs e)
         {
-            if (mResFile.bopen == false)
+            if (bFileOpened == false)
             {
                 MessageBox.Show("The data file has not been opened.");
                 return;
@@ -534,7 +586,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void tsbtnExportExcel_Click(object sender, EventArgs e)
         {
-            if (mResFile.bopen == false)
+            if (bFileOpened == false)
             {
                 MessageBox.Show("The data file has not been opened.");
                 return;
@@ -581,7 +633,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void tsbtnPrint_Click(object sender, EventArgs e)
         {
-            if (mResFile.bopen == false)
+            if (bFileOpened == false)
             {
                 MessageBox.Show("The data file has not been opened.");
                 return;
@@ -880,10 +932,6 @@ namespace ZiveLab.ZM.Dataview
             string fileName = (string)e.Argument;
             int oldPercent = -1;
 
-            if (mResFile.bopen)
-            {
-                mResFile.CloseFile();
-            }
             if (mResFile.Open(fileName) == false)
             {
                 e.Result = new object[] { Properties.Resources.Error_c_Open_failed };
@@ -893,6 +941,7 @@ namespace ZiveLab.ZM.Dataview
             bgWorker.ReportProgress(mResFile.Percent, new object[] { Properties.Resources.Loading_ddd, mResFile.PercentDouble });
 
             _DataHeaderValues = mResFile.dhv;
+            MaxAuxCount = _DataHeaderValues.MaxAuxCh;
 
             while (true)
             {
@@ -984,9 +1033,6 @@ namespace ZiveLab.ZM.Dataview
 
         private void UpdateHeader()
         {
-            if (mResFile.bopen == false)
-                return;
-
             SetFileName(_DataHeaderValues._FileName, System.Drawing.Color.Black);
             SetText(textTestTime, mResFile.GetTestDuration());
             SetText(textScheduleFile, mResFile.tmphead.mInfo.GetTechFile());
@@ -1024,7 +1070,7 @@ namespace ZiveLab.ZM.Dataview
 
                 tsbtnRunZMan.Enabled = _extAppPath == null ? false : File.Exists(_extAppPath.ZMan);            
                 textDataCount.Text = mResFile.GetDatacount().ToString();
-            }
+             }
             _DataHeaderValues.RefreshInfo();
             ChkDC.Checked = true;
             ChkDC.Enabled = true;
@@ -1112,6 +1158,7 @@ namespace ZiveLab.ZM.Dataview
 
             mResFile.CloseFile();
             RefreshCoulmn();
+            bFileOpened = true;
             Cursor = Cursors.Default;
         }
 
@@ -1140,10 +1187,10 @@ namespace ZiveLab.ZM.Dataview
 
             string filename = (string)param[0];
             eDelimiter delimiter = (eDelimiter)param[1];
-
+            ZSharpTarget = (int)param[2];
             string errmsg;
 
-            DataFileTextWriter dftw = new DataFileTextWriter(_UnitC);
+            DataFileTextWriter dftw = new DataFileTextWriter(_dataviewset._dataConvSet.UnitC);
             if (dftw.Create(filename, delimiter, out errmsg) == false)
             {
                 string message = string.Format("{0} : {1}", Properties.Resources.Error, errmsg);
@@ -1154,8 +1201,8 @@ namespace ZiveLab.ZM.Dataview
             _OldPercent = -1;
   
             worker.ReportProgress(1);
-
-            dftw.ColLanguage(_UnitC, _LangIdx);
+            if (ZSharpTarget >= 0) dftw.ColZSharp(ZSharpTarget);
+            else dftw.ColLanguage(_dataviewset._dataConvSet.UnitC, _LangIdx);
 
             int errcode = dftw.WriteHeader(_DataHeaderValues);
 
@@ -1175,7 +1222,8 @@ namespace ZiveLab.ZM.Dataview
             length = DataFlexGrid.Rows.Count;
             count = 0;
             index = 0;
-            dftw.WriteColumn(_dataviewset._dataConvSet);
+            if (ZSharpTarget >= 0) dftw.WriteColumnZSharp(_dataviewset._dataConvSet, _Pad, ZSharpTarget);
+            else    dftw.WriteColumn(_dataviewset._dataConvSet,_Pad, MaxAuxCount);
 
             for (int i = 1; i < length; i++)
             {
@@ -1191,9 +1239,8 @@ namespace ZiveLab.ZM.Dataview
                     {
                         GridRowFlag grf = DataFlexGrid.Rows[i].UserData as GridRowFlag;
                         UnitReportData urgd = (UnitReportData)grf.Data;
-
-                        //dftw.WriteData(DataFile.GetGeneralUnitTextArray(index++, urgd, delimiter, null, _TimeFormat));
-                        errcode = dftw.WriteData(index++, urgd, _dataviewset._dataConvSet, delimiter, null);
+                        if (ZSharpTarget >= 0) errcode = dftw.ZSharpWriteData(index++, urgd, delimiter, _Pad, null, ZSharpTarget);
+                        else errcode = dftw.WriteData(index++, urgd, _dataviewset._dataConvSet, delimiter, _Pad, null, MaxAuxCount);
                     }
 
                     count++;
@@ -1237,7 +1284,7 @@ namespace ZiveLab.ZM.Dataview
 
             tsbtnViewGraph.Enabled = true;
 
-            tsbtnRunZMan.Enabled = _extAppPath == null ? false : File.Exists(_extAppPath.ZMan);
+            
             groupBoxFilter.Enabled = true;
             groupBoxViewOpt.Enabled = true;
             tsbtnPrint.Enabled = true;
@@ -1256,12 +1303,46 @@ namespace ZiveLab.ZM.Dataview
             if (File.Exists(filename) == false)
                 return;
 
-            string message = Properties.Resources.Msg_AsciiConvOk;
-
-            if (MessageBox.Show(message, _MsgBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (ZSharpTarget >= 0)
             {
-                Process.Start(filename);
+
+                if (_extAppPath != null && File.Exists(_extAppPath.ZMan))
+                {
+                    if (File.Exists(filename))
+                    {
+                        ProcessStartInfo psi = new ProcessStartInfo
+                        {
+                            FileName = _extAppPath.ZMan,
+                            Arguments = $"\"{filename}\"", // 문서 경로를 인자로 전달
+                            UseShellExecute = false
+                        };
+                        Process.Start(psi);
+                    }
+                    else
+                        Process.Start(_extAppPath.ZMan);
+                }
+                else
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo
+                    {
+                        FileName = "notepad.exe",
+                        Arguments = $"\"{filename}\"", // 문서 경로를 인자로 전달
+                        UseShellExecute = false
+                    };
+                    Process.Start(psi);
+                }
             }
+            else
+            {
+                string message = Properties.Resources.Msg_AsciiConvOk;
+
+                if (MessageBox.Show(message, _MsgBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Process.Start(filename);
+                }
+            }
+            tsbtnRunZMan.Enabled = _extAppPath == null ? false : File.Exists(_extAppPath.ZMan);
+            ZSharpTarget = -1;
         }
 
         private void btnDeleteData_Click(object sender, EventArgs e)
@@ -1388,7 +1469,6 @@ namespace ZiveLab.ZM.Dataview
                     switch(dci.ColumnID)
                     {
                         case DataColItem.eColumnId.TESTTIME:
-                        case DataColItem.eColumnId.STEPTIME:
                         case DataColItem.eColumnId.CYCTIME:
                             switch (dci.DataFormat)
                             {
@@ -1503,14 +1583,6 @@ namespace ZiveLab.ZM.Dataview
                             row[ri] = CoTypeString.TimeToStringII(TimeSpan.FromSeconds(urgd.mRawData.CycleTime));
                             break;
 
-                        case DataColItem.eColumnId.STEPNO:
-                            row[ri] = urgd.mRawData.nTaskNo + 1;
-                            break;
-
-                        case DataColItem.eColumnId.STEPTIME:
-                            row[ri] = CoTypeString.TimeToStringII(TimeSpan.FromSeconds(urgd.mRawData.TaskTime));
-                            break;
-
                         case DataColItem.eColumnId.AMPS:
                             row[ri] = ApplyFormat(dci, urgd.mRawData.Idc, false);
                             break;
@@ -1546,6 +1618,7 @@ namespace ZiveLab.ZM.Dataview
                         case DataColItem.eColumnId.AUX11:
                         case DataColItem.eColumnId.AUX12:
                             auxidx = dci.ColumnID - DataColItem.eColumnId.AUX1;
+                            if (auxidx >= MaxAuxCount) continue;
                             bd = auxidx / 4;
                             bdch = auxidx % 4;
                             row[ri] = ApplyFormat(dci, urgd.mRawData.mdata[bd].mdata[bdch].Vdc, false);
@@ -1590,6 +1663,7 @@ namespace ZiveLab.ZM.Dataview
                             zidx = dci.ColumnID - DataColItem.eColumnId.AUX01_ZRE;
                             itype = zidx % 2;
                             auxidx = zidx/2;
+                            if (auxidx >= MaxAuxCount) continue;
                             bd = auxidx / 4;
                             bdch = auxidx % 4;
 
@@ -1930,7 +2004,7 @@ namespace ZiveLab.ZM.Dataview
             eExcelFormat excelFormat = (eExcelFormat)param[1];
 
             //수정
-            DataFileExcelWriter excelWriter = new DataFileExcelWriter(_UnitC, _LangIdx);
+            DataFileExcelWriter excelWriter = new DataFileExcelWriter(_dataviewset._dataConvSet, _LangIdx);
 
             if (excelWriter.Create(filename, excelFormat) == false)
             {
@@ -1974,7 +2048,7 @@ namespace ZiveLab.ZM.Dataview
                         UnitReportData urgd = (UnitReportData)grf.Data;
                         //UnitReportGeneralData urgd = new UnitReportGeneralData(GetGridGenRowData(dcDataFlexGrid.Rows[i]));
 
-                        excelWriter.WriteData(index++, urgd, _TimeFormat);
+                        excelWriter.WriteData(index++, urgd, _TimeFormat,MaxAuxCount);
                     }
 
                     count++;
@@ -2077,8 +2151,6 @@ namespace ZiveLab.ZM.Dataview
             row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TestTime), _TimeFormat));
             row.Append(ConstructCell((urgd.mRawData.nCycle + 1).ToString(), CellValues.Number));
             row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), _TimeFormat));
-            row.Append(ConstructCell((urgd.mRawData.nTaskNo + 1).ToString(), CellValues.Number));
-            row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TaskTime), _TimeFormat));
             row.Append(ConstructCell(urgd.mRawData.Idc.ToString(), CellValues.Number));
             row.Append(ConstructCell(urgd.mRawData.Vdc.ToString(), CellValues.Number));
             row.Append(ConstructCell(urgd.Power.ToString(), CellValues.Number));
@@ -2374,7 +2446,7 @@ namespace ZiveLab.ZM.Dataview
             return ss;
         }
         
-        private List<object> GetDcDataList()
+        private List<object> GetDataList()
         {
             List<object> urgdList = new List<object>();
 
@@ -2404,8 +2476,8 @@ namespace ZiveLab.ZM.Dataview
 
                 DataFileToExcel toExcel = null;
   
-                List<object> urgdList = GetDcDataList();
-                toExcel = new DataFileToExcel(_dataviewset._dataConvSet, _DataHeaderValues, urgdList);
+                List<object> urgdList = GetDataList();
+                toExcel = new DataFileToExcel(_dataviewset._dataConvSet, _DataHeaderValues, urgdList,MaxAuxCount);
 
                 if (toExcel != null)
                     toExcel.Run(filename, worker);
@@ -2469,6 +2541,7 @@ namespace ZiveLab.ZM.Dataview
             tsbtnViewGraph.Enabled = true;
             groupBoxFilter.Enabled = true;
             groupBoxViewOpt.Enabled = true;
+            tsbtnFileHeaderInfor.Enabled = true;
             tsbtnRunZMan.Enabled = _extAppPath == null ? false : File.Exists(_extAppPath.ZMan);
             
             tsbtnPrint.Enabled = true;
@@ -2592,12 +2665,35 @@ namespace ZiveLab.ZM.Dataview
         {
             try
             {
-                if (_extAppPath != null && File.Exists(_extAppPath.ZMan))
+                
+                if (bFileOpened == false)
                 {
-                    if (File.Exists(_DataHeaderValues._FileName))
-                        Process.Start(_extAppPath.ZMan, _DataHeaderValues._FileName);
-                    else
-                        Process.Start(_extAppPath.ZMan);
+                    MessageBox.Show("The data file has not been opened.");
+                    return;
+                }
+                if (mResFile.datacount < 1)
+                {
+                    MessageBox.Show("There is no data.");
+                    return;
+                }
+
+                frmSelTarget dlg = new frmSelTarget(_LangIdx,MaxAuxCount);
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    SaveFileDialog savedlg = new SaveFileDialog();
+                    savedlg.Title = Properties.Resources.Save_Ascii_File;
+                    savedlg.InitialDirectory = Path.GetDirectoryName(_DataHeaderValues._FileName);
+
+                    if (dlg.TargetIdx <= 0) savedlg.FileName = Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName);
+                    else savedlg.FileName = string.Format("{0}_AUX{1}", Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName),dlg.TargetIdx);
+
+                    savedlg.Filter = "Z# data files(*.Z#)|*.Z#";
+                    savedlg.DefaultExt = "Z#";
+
+                    if (savedlg.ShowDialog() == DialogResult.OK)
+                    {
+                        ConvertToTextProc(savedlg.FileName, dlg.Delimiter,dlg.TargetIdx);
+                    }
                 }
             }
             catch (Exception)

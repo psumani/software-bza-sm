@@ -132,7 +132,7 @@ namespace ZiveLab.ZM.Dataview
             ViewCursor = false;
 
             XAxisFormat = "Zreal";
-            YAxesFormat = new string[] { "-Zim", "None", "None", "None" };
+            YAxesFormat = new string[] { "-Zimg", "None", "None", "None" };
 
             OpenPath = "C:\\ZIVE DATA\\ZM\\Data\\"; 
         }
@@ -187,15 +187,13 @@ namespace ZiveLab.ZM.Dataview
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.TESTTIME, DataColItem.eDataFormat.STRING, DataColItem.eUnit.second, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.CYCNO, DataColItem.eDataFormat.NUMBER, DataColItem.eUnit.none, CoMath.eSiUnit.NONE, 10));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.CYCTIME, DataColItem.eDataFormat.STRING, DataColItem.eUnit.second, CoMath.eSiUnit.NONE, 14));
-            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.STEPNO, DataColItem.eDataFormat.NUMBER, DataColItem.eUnit.none, CoMath.eSiUnit.NONE, 10));
-            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.STEPTIME, DataColItem.eDataFormat.STRING, DataColItem.eUnit.second, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AMPS, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ampere, CoMath.eSiUnit.NONE, 14, true));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.VOLT, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.POWER, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.watt, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.LOAD, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.CAPACITY, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ampere_hour, CoMath.eSiUnit.NONE, 17));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.ENERGY, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.watt_hour, CoMath.eSiUnit.NONE, 17)); 
-            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX1, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
+            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX1, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true)); //10
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX2, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX3, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX4, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
@@ -206,11 +204,11 @@ namespace ZiveLab.ZM.Dataview
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX9, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX10, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX11, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
-            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX12, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true));
+            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX12, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.volt, CoMath.eSiUnit.NONE, 14, true)); //21
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.FREQ, DataColItem.eDataFormat.F3TYPE, DataColItem.eUnit.Hertz, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.ZRE, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.ZIM, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
-            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX01_ZRE, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
+            DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX01_ZRE, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14)); //25
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX01_ZIM, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX02_ZRE, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
             DataColList.Add(new DataColItem(true, DataColItem.eColumnId.AUX02_ZIM, DataColItem.eDataFormat.EXPONENTIAL, DataColItem.eUnit.ohm, CoMath.eSiUnit.NONE, 14));
@@ -247,21 +245,15 @@ namespace ZiveLab.ZM.Dataview
             return DataColList.Where(x => x.Enable == true).ToList();
         }
 
-        public List<DataColItem> GetEnabledDCDataColList()
-        {
-            return DataColList.Where(x => x.Enable = true).ToList();
-        }
-
         public string[] GetEnabledDataColArr()
         {
             return DataColList.Where(x => x.Enable == true).Select(y => y.ToString()).ToArray();
         }
 
-        public DataColItem.eColumnId[] GetAllDataColIDArr()
+        public string[] GetDataColArr()
         {
-            return DataColList.Select(y => y.ColumnID).ToArray();
+            return DataColList.Select(y => y.ToString()).ToArray();
         }
-
     }
 
     [Serializable]
@@ -269,7 +261,7 @@ namespace ZiveLab.ZM.Dataview
     {
         public enum eColumnId
         {
-            INDEX, TESTTIME, CYCNO, CYCTIME, STEPNO, STEPTIME, AMPS, VOLT, POWER, LOAD,
+            INDEX, TESTTIME, CYCNO, CYCTIME, AMPS, VOLT, POWER, LOAD,
             CAPACITY, ENERGY,  
             AUX1, AUX2, AUX3, AUX4, AUX5, AUX6, AUX7, AUX8, AUX9, AUX10, AUX11, AUX12, 
             FREQ, ZRE, ZIM, 
@@ -284,7 +276,6 @@ namespace ZiveLab.ZM.Dataview
         public enum eUnit { none, second, volt, ampere, celsius, fahrenheit, ampere_hour, ohm, coulomb, ampere_hour_per_gram, coulomb_per_gram, Hertz, percent, watt, watt_hour, degree };
         public string[] strUnit = { "", "s", "V", "A", CoStringSymbol.GetSpecialSymbol("'C"), CoStringSymbol.GetSpecialSymbol("'F"), "Ah", CoStringSymbol.GetSpecialSymbol("ohm"), "C", "Ah/g", "C/g", "Hz", "%", "W", "Wh", "deg" };
     
-        public enum eType { GENERAL, CYCLE, EIS };
         public enum eDataFormat { STRING, NUMBER, EXPONENTIAL, F2TYPE, F3TYPE, F4TYPE, F5TYPE };
 
         private eColumnId _colId;

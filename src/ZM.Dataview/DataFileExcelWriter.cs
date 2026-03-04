@@ -11,234 +11,228 @@ namespace ZiveLab.ZM.Dataview
     {
         static public string[] _ColArray = new string[]
         {
-            "Index           ",
-            "Test_Time(s)    ",
-            "Cycle_No.       ",
-            "Cycle_Time(s)   ",
-            "Step_No.        ",
-            "Step_Time(s)    ",
-            "Current(A)      ",
-            "Voltage(V)      ",
-            "Power(W)        ",
-            "Load(Ohm)       ",
-            "SumQ(Ah)        ",
-            "SumE(Wh)        ",
-            "Temp.('C)       ",
-            "AuxV1(V)        ",
-            "AuxV2(V)        ",
-            "AuxV3(V)        ",
-            "AuxV4(V)        ",
-            "AuxV5(V)        ",
-            "AuxV6(V)        ",
-            "AuxV7(V)        ",
-            "AuxV8(V)        ",
-            "AuxV9(V)        ",
-            "AuxV10(V)       ",
-            "AuxV11(V)       ",
-            "AuxV12(V)       ",
-            "OCP(V)          ",
-            "Range           ",
-            "Frequency(Hz)    ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "Aux1_Zre(ohm)    ",
-            "Aux1_Zim(ohm)    ",
-            "Aux2_Zre(ohm)    ",
-            "Aux2_Zim(ohm)    ",
-            "Aux3_Zre(ohm)    ",
-            "Aux3_Zim(ohm)    ",
-            "Aux4_Zre(ohm)    ",
-            "Aux4_Zim(ohm)    ",
-            "Aux5_Zre(ohm)    ",
-            "Aux5_Zim(ohm)    ",
-            "Aux6_Zre(ohm)    ",
-            "Aux6_Zim(ohm)    ",
-            "Aux7_Zre(ohm)    ",
-            "Aux7_Zim(ohm)    ",
-            "Aux8_Zre(ohm)    ",
-            "Aux8_Zim(ohm)    ",
-            "Aux9_Zre(ohm)    ",
-            "Aux9_Zim(ohm)    ",
-            "Aux10_Zre(ohm)   ",
-            "Aux10_Zim(ohm)   ",
-            "Aux11_Zre(ohm)   ",
-            "Aux11_Zim(ohm)   ",
-            "Aux12_Zre(ohm)   ",
-            "Aux12_Zim(ohm)   "
+            "Index         ",
+            "Test_Time(s)  ",
+            "Cycle_No.     ",
+            "Cycle_Time(s) ",
+            "Current(A)    ",
+            "Voltage(V)    ",
+            "Power(W)      ",
+            "Load(Ohm)     ",
+            "Capacity(Ah)      ",
+            "Energy(Wh)      ",
+            "A01_V(V)      ", //10
+            "A02_V(V)      ",
+            "A03_V(V)      ",
+            "A04_V(V)      ",
+            "A05_V(V)      ",
+            "A06_V(V)      ",
+            "A07_V(V)      ",
+            "A08_V(V)      ",
+            "A09_V(V)      ",
+            "A10_V(V)      ",
+            "A11_V(V)      ",
+            "A12_V(V)      ", //21
+            "Frequency(Hz) ",
+            "Zre(ohm)      ",
+            "Zim(ohm)      ",
+            "A01_Zre(ohm)  ",//25
+            "A01_Zim(ohm)  ",
+            "A02_Zre(ohm)  ",
+            "A02_Zim(ohm)  ",
+            "A03_Zre(ohm)  ",
+            "A03_Zim(ohm)  ",
+            "A04_Zre(ohm)  ",
+            "A04_Zim(ohm)  ",
+            "A05_Zre(ohm)  ",
+            "A05_Zim(ohm)  ",
+            "A06_Zre(ohm)  ",
+            "A06_Zim(ohm)  ",
+            "A07_Zre(ohm)  ",
+            "A07_Zim(ohm)  ",
+            "A08_Zre(ohm)  ",
+            "A08_Zim(ohm)  ",
+            "A09_Zre(ohm)  ",
+            "A09_Zim(ohm)  ",
+            "A10_Zre(ohm)  ",
+            "A10_Zim(ohm)  ",
+            "A11_Zre(ohm)  ",
+            "A11_Zim(ohm)  ",
+            "A12_Zre(ohm)  ",
+            "A12_Zim(ohm)  ",//48
+            "Temp.('C)     ",
+            "OCP(V)        ",
+            "Range         ",
         };
 
         static public string[] _ColArray_Kor = new string[]
         {
-            "인덱스           ",
-            "시험_시간(s)     ",
-            "사이클_번호      ",
-            "사이클_시간(s)   ",
-            "단계_번호        ",
-            "단계_시간(s)     ",
-            "전류(A)          ",
-            "전압(V)          ",
-            "파워(W)          ",
-            "부하(Ohm)        ",
-            "누적_용량(Ah)    ",
-            "누적_에너지(Wh)  ",
-            "온도('C)         ",
-            "보조전압1(V)     ",
-            "보조전압2(V)     ",
-            "보조전압3(V)     ",
-            "보조전압4(V)     ",
-            "보조전압5(V)     ",
-            "보조전압6(V)     ",
-            "보조전압7(V)     ",
-            "보조전압8(V)     ",
-            "보조전압9(V)     ",
-            "보조전압10(V)    ",
-            "보조전압11(V)    ",
-            "보조전압12(V)    ",
-            "OCP(V)           ",
-            "전류_범위        ",
-            "주파수(Hz)       ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "보조1_Zre(ohm)   ",
-            "보조1_Zim(ohm)   ",
-            "보조2_Zre(ohm)   ",
-            "보조2_Zim(ohm)   ",
-            "보조3_Zre(ohm)   ",
-            "보조3_Zim(ohm)   ",
-            "보조4_Zre(ohm)   ",
-            "보조4_Zim(ohm)   ",
-            "보조5_Zre(ohm)   ",
-            "보조5_Zim(ohm)   ",
-            "보조6_Zre(ohm)   ",
-            "보조6_Zim(ohm)   ",
-            "보조7_Zre(ohm)   ",
-            "보조7_Zim(ohm)   ",
-            "보조8_Zre(ohm)   ",
-            "보조8_Zim(ohm)   ",
-            "보조9_Zre(ohm)   ",
-            "보조9_Zim(ohm)   ",
-            "보조10_Zre(ohm)  ",
-            "보조10_Zim(ohm)  ",
-            "보조11_Zre(ohm)  ",
-            "보조11_Zim(ohm)  ",
-            "보조12_Zre(ohm)  ",
-            "보조12_Zim(ohm)  "
+            "인덱스          ",
+            "시험_시간(s)    ",
+            "사이클_번호     ",
+            "사이클_시간(s)  ",
+            "전류(A)         ",
+            "전압(V)         ",
+            "파워(W)         ",
+            "부하(Ohm)       ",
+            "누적_용량(Ah)   ",
+            "누적_에너지(Wh) ",
+            "A01_전압(V)     ",
+            "A02_전압(V)     ",
+            "A03_전압(V)     ",
+            "A04_전압(V)     ",
+            "A05_전압(V)     ",
+            "A06_전압(V)     ",
+            "A07_전압(V)     ",
+            "A08_전압(V)     ",
+            "A09_전압(V)     ",
+            "A10_전압(V)     ",
+            "A11_전압(V)     ",
+            "A12_전압(V)     ",
+            "주파수(Hz)      ",
+            "Zre(ohm)        ",
+            "Zim(ohm)        ",
+            "A01_Zre(ohm)    ",
+            "A01_Zim(ohm)    ",
+            "A02_Zre(ohm)    ",
+            "A02_Zim(ohm)    ",
+            "A03_Zre(ohm)    ",
+            "A03_Zim(ohm)    ",
+            "A04_Zre(ohm)    ",
+            "A04_Zim(ohm)    ",
+            "A05_Zre(ohm)    ",
+            "A05_Zim(ohm)    ",
+            "A06_Zre(ohm)    ",
+            "A06_Zim(ohm)    ",
+            "A07_Zre(ohm)    ",
+            "A07_Zim(ohm)    ",
+            "A08_Zre(ohm)    ",
+            "A08_Zim(ohm)    ",
+            "A09_Zre(ohm)    ",
+            "A09_Zim(ohm)    ",
+            "A10_Zre(ohm)    ",
+            "A10_Zim(ohm)    ",
+            "A11_Zre(ohm)    ",
+            "A11_Zim(ohm)    ",
+            "A12_Zre(ohm)    ",
+            "A12_Zim(ohm)    ",
+            "온도('C)        ",
+            "OCP(V)          ",
+            "전류_범위       ",
         };
 
         static public string[] _ColArrayEx = new string[]
         {
-            "Index           ",
-            "Test_Time(s)    ",
-            "Cycle_No.       ",
-            "Cycle_Time(s)   ",
-            "Step_No.        ",
-            "Step_Time(s)    ",
-            "Current(A)      ",
-            "Voltage(V)      ",
-            "Power(W)        ",
-            "Load(Ohm)       ",
-            "SumQ(C)        ",
-            "SumE(Wh)        ",
-            "Temp.('C)       ",
-            "AuxV1(V)        ",
-            "AuxV2(V)        ",
-            "AuxV3(V)        ",
-            "AuxV4(V)        ",
-            "AuxV5(V)        ",
-            "AuxV6(V)        ",
-            "AuxV7(V)        ",
-            "AuxV8(V)        ",
-            "AuxV9(V)        ",
-            "AuxV10(V)       ",
-            "AuxV11(V)       ",
-            "AuxV12(V)       ",
-            "OCP(V)          ",
-            "Range           ",
-            "Frequency(Hz)    ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "Aux1_Zre(ohm)    ",
-            "Aux1_Zim(ohm)    ",
-            "Aux2_Zre(ohm)    ",
-            "Aux2_Zim(ohm)    ",
-            "Aux3_Zre(ohm)    ",
-            "Aux3_Zim(ohm)    ",
-            "Aux4_Zre(ohm)    ",
-            "Aux4_Zim(ohm)    ",
-            "Aux5_Zre(ohm)    ",
-            "Aux5_Zim(ohm)    ",
-            "Aux6_Zre(ohm)    ",
-            "Aux6_Zim(ohm)    ",
-            "Aux7_Zre(ohm)    ",
-            "Aux7_Zim(ohm)    ",
-            "Aux8_Zre(ohm)    ",
-            "Aux8_Zim(ohm)    ",
-            "Aux9_Zre(ohm)    ",
-            "Aux9_Zim(ohm)    ",
-            "Aux10_Zre(ohm)   ",
-            "Aux10_Zim(ohm)   ",
-            "Aux11_Zre(ohm)   ",
-            "Aux11_Zim(ohm)   ",
-            "Aux12_Zre(ohm)   ",
-            "Aux12_Zim(ohm)   "
+            "Index         ",
+            "Test_Time(s)  ",
+            "Cycle_No.     ",
+            "Cycle_Time(s) ",
+            "Current(A)    ",
+            "Voltage(V)    ",
+            "Power(W)      ",
+            "Load(Ohm)     ",
+            "Capacity(C)       ",
+            "Energy(Wh)      ",
+            "A01_V(V)      ",
+            "A02_V(V)      ",
+            "A03_V(V)      ",
+            "A04_V(V)      ",
+            "A05_V(V)      ",
+            "A06_V(V)      ",
+            "A07_V(V)      ",
+            "A08_V(V)      ",
+            "A09_V(V)      ",
+            "A10_V(V)      ",
+            "A11_V(V)      ",
+            "A12_V(V)      ",
+            "Frequency(Hz) ",
+            "Zre(ohm)      ",
+            "Zim(ohm)      ",
+            "A01_Zre(ohm)  ",
+            "A01_Zim(ohm)  ",
+            "A02_Zre(ohm)  ",
+            "A02_Zim(ohm)  ",
+            "A03_Zre(ohm)  ",
+            "A03_Zim(ohm)  ",
+            "A04_Zre(ohm)  ",
+            "A04_Zim(ohm)  ",
+            "A05_Zre(ohm)  ",
+            "A05_Zim(ohm)  ",
+            "A06_Zre(ohm)  ",
+            "A06_Zim(ohm)  ",
+            "A07_Zre(ohm)  ",
+            "A07_Zim(ohm)  ",
+            "A08_Zre(ohm)  ",
+            "A08_Zim(ohm)  ",
+            "A09_Zre(ohm)  ",
+            "A09_Zim(ohm)  ",
+            "A10_Zre(ohm)  ",
+            "A10_Zim(ohm)  ",
+            "A11_Zre(ohm)  ",
+            "A11_Zim(ohm)  ",
+            "A12_Zre(ohm)  ",
+            "A12_Zim(ohm)  ",
+            "Temp.('C)     ",
+            "OCP(V)        ",
+            "Range         ",
         };
 
         static public string[] _ColArrayEx_Kor = new string[]
         {
-            "인덱스           ",
-            "시험_시간(s)     ",
-            "사이클_번호      ",
-            "사이클_시간(s)   ",
-            "단계_번호        ",
-            "단계_시간(s)     ",
-            "전류(A)          ",
-            "전압(V)          ",
-            "파워(W)          ",
-            "부하(Ohm)        ",
+            "인덱스          ",
+            "시험_시간(s)    ",
+            "사이클_번호     ",
+            "사이클_시간(s)  ",
+            "전류(A)         ",
+            "전압(V)         ",
+            "파워(W)         ",
+            "부하(Ohm)       ",
             "누적_용량(C)    ",
-            "누적_에너지(Wh)  ",
-            "온도('C)         ",
-            "보조전압1(V)     ",
-            "보조전압2(V)     ",
-            "보조전압3(V)     ",
-            "보조전압4(V)     ",
-            "보조전압5(V)     ",
-            "보조전압6(V)     ",
-            "보조전압7(V)     ",
-            "보조전압8(V)     ",
-            "보조전압9(V)     ",
-            "보조전압10(V)    ",
-            "보조전압11(V)    ",
-            "보조전압12(V)    ",
-            "OCP(V)           ",
-            "전류_범위        ",
-            "주파수(Hz)       ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "보조1_Zre(ohm)   ",
-            "보조1_Zim(ohm)   ",
-            "보조2_Zre(ohm)   ",
-            "보조2_Zim(ohm)   ",
-            "보조3_Zre(ohm)   ",
-            "보조3_Zim(ohm)   ",
-            "보조4_Zre(ohm)   ",
-            "보조4_Zim(ohm)   ",
-            "보조5_Zre(ohm)   ",
-            "보조5_Zim(ohm)   ",
-            "보조6_Zre(ohm)   ",
-            "보조6_Zim(ohm)   ",
-            "보조7_Zre(ohm)   ",
-            "보조7_Zim(ohm)   ",
-            "보조8_Zre(ohm)   ",
-            "보조8_Zim(ohm)   ",
-            "보조9_Zre(ohm)   ",
-            "보조9_Zim(ohm)   ",
-            "보조10_Zre(ohm)  ",
-            "보조10_Zim(ohm)  ",
-            "보조11_Zre(ohm)  ",
-            "보조11_Zim(ohm)  ",
-            "보조12_Zre(ohm)  ",
-            "보조12_Zim(ohm)  "
+            "누적_에너지(Wh) ",
+            "A01_전압(V)     ",
+            "A02_전압(V)     ",
+            "A03_전압(V)     ",
+            "A04_전압(V)     ",
+            "A05_전압(V)     ",
+            "A06_전압(V)     ",
+            "A07_전압(V)     ",
+            "A08_전압(V)     ",
+            "A09_전압(V)     ",
+            "A10_전압(V)     ",
+            "A11_전압(V)     ",
+            "A12_전압(V)     ",
+            "주파수(Hz)      ",
+            "Zre(ohm)        ",
+            "Zim(ohm)        ",
+            "Zre(ohm)        ",
+            "Zim(ohm)        ",
+            "A01_Zre(ohm)    ",
+            "A01_Zim(ohm)    ",
+            "A02_Zre(ohm)    ",
+            "A02_Zim(ohm)    ",
+            "A03_Zre(ohm)    ",
+            "A03_Zim(ohm)    ",
+            "A04_Zre(ohm)    ",
+            "A04_Zim(ohm)    ",
+            "A05_Zre(ohm)    ",
+            "A05_Zim(ohm)    ",
+            "A06_Zre(ohm)    ",
+            "A06_Zim(ohm)    ",
+            "A07_Zre(ohm)    ",
+            "A07_Zim(ohm)    ",
+            "A08_Zre(ohm)    ",
+            "A08_Zim(ohm)    ",
+            "A09_Zre(ohm)    ",
+            "A09_Zim(ohm)    ",
+            "A10_Zre(ohm)    ",
+            "A10_Zim(ohm)    ",
+            "A11_Zre(ohm)    ",
+            "A11_Zim(ohm)    ",
+            "A12_Zre(ohm)    ",
+            "A12_Zim(ohm)    ",
+            "온도('C)        ",
+            "OCP(V)          ",
+            "전류_범위       ",
         };
 
         private string _FileName;
@@ -250,20 +244,22 @@ namespace ZiveLab.ZM.Dataview
         private XLSheet _XLDataSheet;
         private int _SheetIndex;
         private int _DataRowIndex;
-
+        private DataConvSet mDataConvSet;
         private int _Sheet;        
 
         private List<string> _ColList = new List<string>();
 
         public bool NewSheet { get { return _newSheet; } }
 
-        public DataFileExcelWriter()
+        public DataFileExcelWriter(DataConvSet tDataConvSet)
         {
+            mDataConvSet = tDataConvSet;
         }
 
-        public DataFileExcelWriter(bool unitC, int langidx)
+        public DataFileExcelWriter(DataConvSet tDataConvSet, int langidx)
         {
-            SetLanguage(unitC, langidx);
+            mDataConvSet = tDataConvSet;
+            SetLanguage(mDataConvSet.UnitC, langidx);
         }
 
         private void SetLanguage(bool unitC, int langidx)
@@ -377,7 +373,7 @@ namespace ZiveLab.ZM.Dataview
                     {
                         if (_DataHeaderValues._ResHead.systemInfo.ChkZIM[i] == 1)
                         {
-                            xlSheet[rowidx++, 0].Value = string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}/ SIF(v{1}):{3}-{4}",
+                            xlSheet[rowidx++, 0].Value = string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}",
                                 _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetSerialNumber()));
                         }
                     }
@@ -490,7 +486,6 @@ namespace ZiveLab.ZM.Dataview
             _XLDataSheet.DefaultColumnWidth = 1500;
             _XLDataSheet.Name = string.Format("{0}_{1}", Properties.Resources.Data, _XLBook.Sheets.Count);
         }
-
         public bool WriteData(object[] dataArray, int timeformat)
         {
             try
@@ -563,6 +558,123 @@ namespace ZiveLab.ZM.Dataview
 
                     _XLDataSheet[_DataRowIndex, i].Value = dataArray[i];
                 }
+
+                _DataRowIndex++;
+
+                if (_ExcelFormat == eExcelFormat.Excel2003)
+                {
+                    if (_DataRowIndex > 60000)
+                    {
+                        _newSheet = true;
+                        _SheetIndex++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public bool WriteData(object[] dataArray, int timeformat,int MaxAuxCount)
+        {
+            int auxidx = 0;
+            int icol = 0;
+            try
+            {
+                if (_newSheet)
+                {
+                    _DataRowIndex = 0;
+                    if (_XLBook.Sheets.Count > _SheetIndex)
+                    {
+                        _XLDataSheet = _XLBook.Sheets[_SheetIndex];
+                    }
+                    else
+                    {
+                        _XLDataSheet = _XLBook.Sheets.Add();
+                    }
+
+                    _XLDataSheet.DefaultColumnWidth = 1500;
+                    _XLDataSheet.Name = string.Format("{1}_{0}", _SheetIndex, Properties.Resources.Data);
+                    icol = 0;
+                    for (int i = 0; i < _ColList.Count; i++)
+                    {
+                        if(i >= 11 && i >= 22)
+                        {
+                            auxidx = i - 11;
+                            if (auxidx >= MaxAuxCount) continue;
+                        }
+                        else if (i >= 26 && i >= 49)
+                        {
+                            auxidx = i - 26;
+                            auxidx = auxidx / 2;
+                            if (auxidx >= MaxAuxCount) continue;
+                        }
+                        _XLDataSheet[_DataRowIndex, icol].Value = _ColList[i];
+                        icol++;
+                    }
+
+                    _DataRowIndex++;
+
+                    _newSheet = false;
+                }
+
+                string data = string.Empty;
+                icol = 0;
+                for (int i = 0; i < dataArray.Length; i++)
+                {
+                    if (i >= 11 && i >= 22)
+                    {
+                        auxidx = i - 11;
+                        if (auxidx >= MaxAuxCount) continue;
+                    }
+                    else if (i >= 26 && i >= 49)
+                    {
+                        auxidx = i - 26;
+                        auxidx = auxidx / 2;
+                        if (auxidx >= MaxAuxCount) continue;
+                    }
+
+                    if (dataArray[i] is double)
+                    {
+                        if (i != 9)
+                        {
+                            _XLDataSheet[_DataRowIndex, icol].Style = new XLStyle(_XLBook);
+                            _XLDataSheet[_DataRowIndex, icol].Style.Format = "0.0000E+0";
+                        }
+                        else
+                        {
+                            _XLDataSheet[_DataRowIndex, icol].Style = new XLStyle(_XLBook);
+                            _XLDataSheet[_DataRowIndex, icol].Style.Format = "0.00";
+                        }
+                    }
+
+                    if (dataArray[i] is TimeSpan)
+                    {
+                        TimeSpan ts = (TimeSpan)dataArray[i];
+
+                        _XLDataSheet[_DataRowIndex, icol].Style = new XLStyle(_XLBook);
+
+                        switch (timeformat)
+                        {
+                            case 0:
+                                _XLDataSheet[_DataRowIndex, icol].Style.Format = "@";
+                                dataArray[i] = CoTypeString.TimeToStringII(ts);
+                                break;
+                            case 1:
+                                _XLDataSheet[_DataRowIndex, icol].Style.Format = "0.####";
+                                dataArray[i] = ts.TotalSeconds;
+                                break;
+                            case 2:
+                                _XLDataSheet[_DataRowIndex, icol].Style.Format = "0.000E+0";
+                                dataArray[i] = ts.TotalSeconds;
+                                break;
+                        }
+                    }
+
+                    _XLDataSheet[_DataRowIndex, icol].Value = dataArray[i];
+                }
                 
                 _DataRowIndex++;
 
@@ -619,8 +731,6 @@ namespace ZiveLab.ZM.Dataview
                 SetTimeValue(_XLDataSheet[_DataRowIndex, col++], TimeSpan.FromSeconds(urgd.mRawData.TestTime), timeformat);
                 _XLDataSheet[_DataRowIndex, col++].Value = urgd.mRawData.nCycle + 1;
                 SetTimeValue(_XLDataSheet[_DataRowIndex, col++], TimeSpan.FromSeconds(urgd.mRawData.CycleTime), timeformat);
-                _XLDataSheet[_DataRowIndex, col++].Value = urgd.mRawData.nTaskNo + 1;
-                SetTimeValue(_XLDataSheet[_DataRowIndex, col++], TimeSpan.FromSeconds(urgd.mRawData.TaskTime), timeformat);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Idc, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Vdc, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.Power, true);
@@ -640,8 +750,6 @@ namespace ZiveLab.ZM.Dataview
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[1].Vdc, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[2].Vdc, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[3].Vdc, true);
-                SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Veoc, true);
-                _XLDataSheet[_DataRowIndex, col].Value = urgd.Range;
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.fFreq, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.real, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.img, true);
@@ -669,7 +777,8 @@ namespace ZiveLab.ZM.Dataview
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[2].Zim, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[3].Zre, true);
                 SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[3].Zim, true);
-
+                SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Veoc, true);
+                _XLDataSheet[_DataRowIndex, col].Value = urgd.Range;
                 _DataRowIndex++;
 
                 if (_ExcelFormat == eExcelFormat.Excel2003)
@@ -682,6 +791,131 @@ namespace ZiveLab.ZM.Dataview
                 }
 
                 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool WriteData(int index, UnitReportData urgd, int timeformat,int MaxAuxCount)
+        {
+            int auxidx = 0;
+            int col = 0;
+            try
+            {
+                if (_newSheet)
+                {
+                    _DataRowIndex = 0;
+                    if (_XLBook.Sheets.Count > _SheetIndex)
+                    {
+                        _XLDataSheet = _XLBook.Sheets[_SheetIndex];
+                    }
+                    else
+                    {
+                        _XLDataSheet = _XLBook.Sheets.Add();
+                    }
+
+                    _XLDataSheet.DefaultColumnWidth = 1500;
+                    _XLDataSheet.Name = string.Format("{1}_{0}", _SheetIndex, Properties.Resources.Data);
+                    col = 0;
+                    for (int i = 0; i < _ColList.Count; i++)
+                    {
+                        if (i >= 10 && i <= 21)
+                        {
+                            auxidx = i - 10;
+                            if (auxidx >= MaxAuxCount) continue;
+                        }
+                        else
+                        {
+                            if (i >= 25 && i <= 48)
+                            {
+                                auxidx = i - 25;
+                                auxidx = auxidx / 2;
+                                if (auxidx >= MaxAuxCount) continue;
+
+                            }
+                        }
+                        if (mDataConvSet.DataColList[i].Enable == false) continue;
+
+                        _XLDataSheet[_DataRowIndex, col].Value = _ColList[i];
+                        col++;
+                    }
+
+                    _DataRowIndex++;
+
+                    _newSheet = false;
+                }
+
+                string data = string.Empty;
+                col = 0;
+
+                if (mDataConvSet.DataColList[0].Enable) _XLDataSheet[_DataRowIndex, col++].Value = index + 1;
+                if (mDataConvSet.DataColList[1].Enable) SetTimeValue(_XLDataSheet[_DataRowIndex, col++], TimeSpan.FromSeconds(urgd.mRawData.TestTime), timeformat);
+                if (mDataConvSet.DataColList[2].Enable) _XLDataSheet[_DataRowIndex, col++].Value = urgd.mRawData.nCycle + 1;
+                if (mDataConvSet.DataColList[3].Enable) SetTimeValue(_XLDataSheet[_DataRowIndex, col++], TimeSpan.FromSeconds(urgd.mRawData.CycleTime), timeformat);
+                if (mDataConvSet.DataColList[4].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Idc, true);
+                if (mDataConvSet.DataColList[5].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Vdc, true);
+                if (mDataConvSet.DataColList[6].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.Power, true);
+                if (mDataConvSet.DataColList[7].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.Load, true);
+                if (mDataConvSet.DataColList[8].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.Capacity, true);
+                if (mDataConvSet.DataColList[9].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.Energy, true);
+                if (mDataConvSet.DataColList[10].Enable && MaxAuxCount > 0) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[0].Vdc, true);
+                if (mDataConvSet.DataColList[11].Enable && MaxAuxCount > 1) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[1].Vdc, true);
+                if (mDataConvSet.DataColList[12].Enable && MaxAuxCount > 2) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[2].Vdc, true);
+                if (mDataConvSet.DataColList[13].Enable && MaxAuxCount > 3) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[3].Vdc, true);
+                if (mDataConvSet.DataColList[14].Enable && MaxAuxCount > 4) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[0].Vdc, true);
+                if (mDataConvSet.DataColList[15].Enable && MaxAuxCount > 5) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[1].Vdc, true);
+                if (mDataConvSet.DataColList[16].Enable && MaxAuxCount > 6) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[2].Vdc, true);
+                if (mDataConvSet.DataColList[17].Enable && MaxAuxCount > 7) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[3].Vdc, true);
+                if (mDataConvSet.DataColList[18].Enable && MaxAuxCount > 8) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[0].Vdc, true);
+                if (mDataConvSet.DataColList[19].Enable && MaxAuxCount > 9) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[1].Vdc, true);
+                if (mDataConvSet.DataColList[20].Enable && MaxAuxCount > 10) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[2].Vdc, true);
+                if (mDataConvSet.DataColList[21].Enable && MaxAuxCount > 11) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[3].Vdc, true);
+                if(mDataConvSet.DataColList[22].Enable)SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.fFreq, true);
+                if(mDataConvSet.DataColList[23].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.real, true);
+                if(mDataConvSet.DataColList[24].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.img, true);
+                if (mDataConvSet.DataColList[25].Enable && MaxAuxCount > 0) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[0].Zre, true);
+                if (mDataConvSet.DataColList[26].Enable && MaxAuxCount > 0) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[0].Zim, true);
+                if (mDataConvSet.DataColList[27].Enable && MaxAuxCount > 1) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[1].Zre, true);
+                if (mDataConvSet.DataColList[28].Enable && MaxAuxCount > 1) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[1].Zim, true);
+                if (mDataConvSet.DataColList[29].Enable && MaxAuxCount > 2) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[2].Zre, true);
+                if (mDataConvSet.DataColList[30].Enable && MaxAuxCount > 2) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[2].Zim, true);
+                if (mDataConvSet.DataColList[31].Enable && MaxAuxCount > 3) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[3].Zre, true);
+                if (mDataConvSet.DataColList[32].Enable && MaxAuxCount > 3) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[0].mdata[3].Zim, true);
+                if (mDataConvSet.DataColList[33].Enable && MaxAuxCount > 4) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[0].Zre, true);
+                if (mDataConvSet.DataColList[34].Enable && MaxAuxCount > 4) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[0].Zim, true);
+                if (mDataConvSet.DataColList[35].Enable && MaxAuxCount > 5) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[1].Zre, true);
+                if (mDataConvSet.DataColList[36].Enable && MaxAuxCount > 5) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[1].Zim, true);
+                if (mDataConvSet.DataColList[37].Enable && MaxAuxCount > 6) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[2].Zre, true);
+                if (mDataConvSet.DataColList[38].Enable && MaxAuxCount > 6) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[2].Zim, true);
+                if (mDataConvSet.DataColList[39].Enable && MaxAuxCount > 7) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[3].Zre, true);
+                if (mDataConvSet.DataColList[40].Enable && MaxAuxCount > 7) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[1].mdata[3].Zim, true);
+                if (mDataConvSet.DataColList[41].Enable && MaxAuxCount > 8) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[0].Zre, true);
+                if (mDataConvSet.DataColList[42].Enable && MaxAuxCount > 8) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[0].Zim, true);
+                if (mDataConvSet.DataColList[43].Enable && MaxAuxCount > 9) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[1].Zre, true);
+                if (mDataConvSet.DataColList[44].Enable && MaxAuxCount > 9) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[1].Zim, true);
+                if (mDataConvSet.DataColList[45].Enable && MaxAuxCount > 10) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[2].Zre, true);
+                if (mDataConvSet.DataColList[46].Enable && MaxAuxCount > 10) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[2].Zim, true);
+                if (mDataConvSet.DataColList[47].Enable && MaxAuxCount > 11) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[3].Zre, true);
+                if (mDataConvSet.DataColList[48].Enable && MaxAuxCount > 11) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.mdata[2].mdata[3].Zim, true);
+                if (mDataConvSet.DataColList[49].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Temperature, false);
+                if(mDataConvSet.DataColList[50].Enable) SetDoubleValue(_XLDataSheet[_DataRowIndex, col++], urgd.mRawData.Veoc, true);
+                if(mDataConvSet.DataColList[51].Enable)_XLDataSheet[_DataRowIndex, col].Value = urgd.Range;
+                _DataRowIndex++;
+
+                if (_ExcelFormat == eExcelFormat.Excel2003)
+                {
+                    if (_DataRowIndex > 60000)
+                    {
+                        _newSheet = true;
+                        _SheetIndex++;
+                    }
+                }
+
+
             }
             catch (Exception)
             {

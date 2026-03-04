@@ -193,6 +193,12 @@
   <data name="tsbtnReload.Text" xml:space="preserve">
     <value>Reload test data</value>
   </data>
+  <data name="gap6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="gap6.Text" xml:space="preserve">
+    <value> </value>
+  </data>
   <data name="tsbtnStop.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -277,47 +283,6 @@
   <data name="tsbtnOpenSchedule.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="tsbtnOpenSchedule.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
   <data name="tsbtnOpenSchedule.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -331,6 +296,40 @@
     <value>10, 28</value>
   </data>
   <data name="gap5.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="tsbtnViewGraph.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbtnViewGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF9SURBVDhPlVOxSsNgEM4TiI/gI/QRSrq1GQQhEKLgIzhk
+        c3HIEqeQTXCwIGQTSZfqYBx1sDRQUKE0YqAKqaSGJB1/7/tJSoySth8cf+6/u+8ud/cLQJIk9/0nn+Hk
+        F5tgsVg0n99DJuyds4/ZnJG+k5vWQ5qmF/vmHSc4vnxk0HPTekDWrYMuJ8CZZRmLomg7N3PQrzXo/ppk
+        DjuEKj3kxtOrAQ8u5OxmhCqOuJEAxyAIvg3D6Hc6nVtRFBnE93nPGkLBiOAqOxzCMGTtdvtVVdWB4zgj
+        6PChJCc8A1AmyK84MBVN0x4URRmTbU5Bu9Xf4/iPAFV4njdttVrxZDKJSW/mpr+oEiBLHMdvsiy/6Lo+
+        XDmZKgECXNcdUrOmaCBlr9+NMgGk1+v5KN227VkxEfwSvmt7YJomH5EkSWPLsj7LpcMHI8aJ+19VFQQ4
+        6wQ+WDZsLBZw+XYK46aCB1gQfEFZJQhCBXg7eIDLCtAYzLlOUCXWHqXnPaC9EIQfRSP6rUR8898AAAAA
+        SUVORK5CYII=
+</value>
+  </data>
+  <data name="tsbtnViewGraph.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbtnViewGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="tsbtnViewGraph.Text" xml:space="preserve">
+    <value>View EIS graph</value>
+  </data>
+  <data name="tsbtnViewGraph.ToolTipText" xml:space="preserve">
+    <value>View EIS graph</value>
+  </data>
+  <data name="toolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="toolStripLabel2.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="tsbtnSaveText.Enabled" type="System.Boolean, mscorlib">
@@ -363,6 +362,12 @@
   </data>
   <data name="tsbtnSaveText.Text" xml:space="preserve">
     <value>Save as text file</value>
+  </data>
+  <data name="toolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="toolStripLabel3.Text" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="tsbtnExportExcel.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -404,53 +409,6 @@
   </data>
   <data name="tsbtnExportExcel.Text" xml:space="preserve">
     <value>Export to excel</value>
-  </data>
-  <data name="gap6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="gap6.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="tsbtnViewGraph.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbtnViewGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAP3SURBVFhH1Zd/TNRlHMefA/8qq63EZKccgqOwKVaaMYF+
-        TGILIh3kXCfrwFq0ywEVc+x0U9cf1Y2tyz+inAarYXBa1jyJHwldK0AB9c4ftVj+k/+knHAHEuL27vN5
-        zu/tHu7rd4N1uNhe+zzf5z68P6977suNr+jp6cHdRAp42n5CziuDWFM4FHd4Ds9TBN7e1Qdh+R1i+ZX4
-        s8KPffU/4+TJKAHbO/0QqX/CuvMKjg0Mxw3OZ4F393rR7O6KFdi04yoOdQ/HDc7XBL5q0RHItwXgbB3W
-        5WPPOdR7BuH09ONDTx8+8PTq9hnB+YYC2aWjqN1/OQZHow91TWcghAiTKFDb2If3mnp1++8E5xsKrC0d
-        QcXevxQqXT6JEAlYIEx4wzUEE61ZZLvrNCqY273lrlOwufrx2n6vkqHB+YYCmfmjeLEyoLDZ8ZscLkwC
-        LzsuERdR7Lggr1niJYdf9hVRLXL4SFKgcE9vTA7D+YYCltwgsrdcU3jOfoHesaB6Hs8SvPeM3Sf3WCzP
-        fk6SS4SlFiC35peYHIbzDQWSHg/ikY0BhezqbqIHT1PV9rKs5wl/+KOgoaut9BFR5eu1da1Yt+cQst7q
-        UHIYzjcUuC9zDA+sUjEXXJJHzTV6P7ngIsGnk3D7NASSC88g3f61lFm2tUPpZzjfUODezJEYFm/0y8BU
-        axetfVQ7kUTVYu2ApawNGTVfIoXqo3WfIq3yMNKrDkoh89bvdfPmIMB/AUIONJFIClUWSrG2y3vAUvGd
-        HLj8zRZ5GmnVn1NfIsyvHtHNm4MA3VwULAfL+gPd6YlYVuahQSYa3CoF03Z8gQQSW1HrktdLtzXr5s1a
-        IIkEGB68iGvZCSwuGETq9m/wcNGvSKfBS4q9SK9pwJKSDmQ49sFsdWOp7aBu3qwF/mv+nwIbSkYjPJZ/
-        XdnTeszrA8rrd2LWAhz697VbEU6dvQn77lDkmgdaq4JKz0cNN3SzmDkLzNxvPf4PHM5xuebXC8vH5Fo7
-        iejeaAwFFmYFsHClSk7pmPLu+AR43+1hgYnImvcPHJ6k0xlXfl+B8g0F7lkZlF+X0eSUhI+bK7MqPyT3
-        3censMs5GenbVjUBZ8MkTp+dRqf3ZmQ/Gs43FOCmmd/feVvCAjP3j5yYwu76SbnmatkQlOvi18fxx+Vp
-        pVeD8w0F7ifDRU+NKTxfFsLVkVsRBvzTqH7/RuT6yU0hHG2fUnrKd07E5DCcbyjw4OrrSM4ejeEFWyjC
-        +pKgsqf18H70tR6cbyjw0DpqfIIGxAnO1xWY7weTGIGWo175yJSRNxR31hQM4JPPulQBjcbmThxomh/c
-        3/4YK8DPa23t3fOCNpP+d7ibP0L8CwamuhAxkKDdAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="tsbtnViewGraph.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbtnViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="tsbtnViewGraph.Text" xml:space="preserve">
-    <value>View EIS Graph</value>
-  </data>
-  <data name="toolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="toolStripLabel2.Text" xml:space="preserve">
-    <value> </value>
   </data>
   <data name="gap7.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
@@ -576,12 +534,6 @@
   <data name="toolStripLabel4.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="toolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="toolStripLabel3.Text" xml:space="preserve">
-    <value> </value>
-  </data>
   <data name="tsbtnFileHeaderInfor.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -611,7 +563,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="toolStripMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1659, 35</value>
+    <value>880, 35</value>
   </data>
   <data name="toolStripMain.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -630,6 +582,78 @@
   </data>
   <data name="&gt;&gt;toolStripMain.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <metadata name="backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>114, 17</value>
+  </metadata>
+  <metadata name="backgroundWorkerText.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>585, 17</value>
+  </metadata>
+  <metadata name="backgroundWorkerSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>400, 17</value>
+  </metadata>
+  <metadata name="backgroundWorkerExcel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
+  <metadata name="timerBgChecker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>204, 56</value>
+  </metadata>
+  <data name="legend1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 809</value>
+  </data>
+  <data name="legend1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="legend1.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;legend1.Name" xml:space="preserve">
+    <value>legend1</value>
+  </data>
+  <data name="&gt;&gt;legend1.Type" xml:space="preserve">
+    <value>NationalInstruments.UI.WindowsForms.Legend, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
+  </data>
+  <data name="&gt;&gt;legend1.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;legend1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="panelMain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="DataFlexGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="DataFlexGrid.ColumnInfo" xml:space="preserve">
+    <value>0,0,0,0,0,105,Columns:</value>
+  </data>
+  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림, 9pt</value>
+  </data>
+  <data name="DataFlexGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 245</value>
+  </data>
+  <data name="DataFlexGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>856, 402</value>
+  </data>
+  <data name="DataFlexGrid.StyleInfo" xml:space="preserve">
+    <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
+  </data>
+  <data name="DataFlexGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.Name" xml:space="preserve">
+    <value>DataFlexGrid</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.Type" xml:space="preserve">
+    <value>C1.Win.C1FlexGrid.C1FlexGrid, C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -698,7 +722,7 @@
     <value>1</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1459, 184</value>
+    <value>680, 184</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 54</value>
@@ -716,7 +740,7 @@
     <value>panelMain</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ChkEISAux.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -860,46 +884,13 @@
     <value>panelMain</value>
   </data>
   <data name="&gt;&gt;groupBoxViewOpt.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DataFlexGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="DataFlexGrid.ColumnInfo" xml:space="preserve">
-    <value>0,0,0,0,0,105,Columns:</value>
-  </data>
-  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
-  </data>
-  <data name="DataFlexGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 261</value>
-  </data>
-  <data name="DataFlexGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1635, 547</value>
-  </data>
-  <data name="DataFlexGrid.StyleInfo" xml:space="preserve">
-    <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
-  </data>
-  <data name="DataFlexGrid.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.Name" xml:space="preserve">
-    <value>DataFlexGrid</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.Type" xml:space="preserve">
-    <value>C1.Win.C1FlexGrid.C1FlexGrid, C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBoxFilter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="btnSearch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 21</value>
+    <value>199, 21</value>
   </data>
   <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -924,6 +915,9 @@
   </data>
   <data name="chkCycleNo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkCycleNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkCycleNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 24</value>
@@ -974,7 +968,7 @@
     <value>385, 184</value>
   </data>
   <data name="groupBoxFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 55</value>
+    <value>283, 55</value>
   </data>
   <data name="groupBoxFilter.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -1014,27 +1008,6 @@
   </data>
   <data name="&gt;&gt;c1StatusBar1.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="legend1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 809</value>
-  </data>
-  <data name="legend1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="legend1.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;legend1.Name" xml:space="preserve">
-    <value>legend1</value>
-  </data>
-  <data name="&gt;&gt;legend1.Type" xml:space="preserve">
-    <value>NationalInstruments.UI.WindowsForms.Legend, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
-  </data>
-  <data name="&gt;&gt;legend1.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;legend1.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1103,7 +1076,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 79</value>
+    <value>390, 79</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
@@ -1127,7 +1100,7 @@
     <value>2</value>
   </data>
   <data name="tbWriterName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 76</value>
+    <value>502, 76</value>
   </data>
   <data name="tbWriterName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1160,7 +1133,7 @@
     <value>104, 17</value>
   </data>
   <data name="textFileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1523, 22</value>
+    <value>744, 22</value>
   </data>
   <data name="textFileName.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1190,7 +1163,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="textDataMemo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1520, 22</value>
+    <value>741, 22</value>
   </data>
   <data name="textDataMemo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1208,7 +1181,7 @@
     <value>5</value>
   </data>
   <data name="textUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>726, 104</value>
+    <value>707, 104</value>
   </data>
   <data name="textUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1235,7 +1208,7 @@
     <value>6</value>
   </data>
   <data name="textDataCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 104</value>
+    <value>502, 104</value>
   </data>
   <data name="textDataCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1271,7 +1244,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="textScheduleFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1523, 22</value>
+    <value>744, 22</value>
   </data>
   <data name="textScheduleFile.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1345,8 +1318,11 @@
   <data name="label_User.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label_User.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label_User.Location" type="System.Drawing.Point, System.Drawing">
-    <value>690, 109</value>
+    <value>671, 109</value>
   </data>
   <data name="label_User.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
@@ -1371,6 +1347,9 @@
   </data>
   <data name="label_Memo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label_Memo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label_Memo.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 139</value>
@@ -1399,6 +1378,9 @@
   <data name="label_ScheduleFile.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label_ScheduleFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label_ScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 50</value>
   </data>
@@ -1426,8 +1408,11 @@
   <data name="label_DataCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label_DataCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label_DataCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>432, 109</value>
+    <value>420, 109</value>
   </data>
   <data name="label_DataCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
@@ -1452,6 +1437,9 @@
   </data>
   <data name="lblCapacity1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblCapacity1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblCapacity1.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 81</value>
@@ -1480,6 +1468,9 @@
   <data name="label_TestTime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label_TestTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label_TestTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>38, 109</value>
   </data>
@@ -1506,6 +1497,9 @@
   </data>
   <data name="label_FileName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label_FileName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label_FileName.Location" type="System.Drawing.Point, System.Drawing">
     <value>38, 20</value>
@@ -1541,7 +1535,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1637, 169</value>
+    <value>858, 169</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1558,14 +1552,11 @@
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="panelMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="panelMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 35</value>
+    <value>0, 38</value>
   </data>
   <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1659, 836</value>
+    <value>880, 675</value>
   </data>
   <data name="panelMain.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -1582,21 +1573,6 @@
   <data name="&gt;&gt;panelMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>114, 17</value>
-  </metadata>
-  <metadata name="backgroundWorkerText.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>585, 17</value>
-  </metadata>
-  <metadata name="backgroundWorkerSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>400, 17</value>
-  </metadata>
-  <metadata name="backgroundWorkerExcel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
-  <metadata name="timerBgChecker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>204, 56</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1607,69 +1583,10 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1659, 871</value>
+    <value>880, 715</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Symbol, 8.25pt</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAICAAAAEAGACoDAAAFgAAACgAAAAgAAAAQAAAAAEAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAABAACVIDGW4BAi0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUsFVOQjqf8sgtYCATAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAACIBLr0Tjv9D1/9Ox/ICAkcAAAAAAAAAAAAAAAAAAAEAAAcAAAkAAAgAAAcA
-        AAUAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAMAAAQAE4oMd/sxuv9T
-        4f0VOJsAAA0AAAAAAAAAAAAAAAAAADsHB3MNDYUNDYQJCXwHCHIGBWoDA2ECAlcBAUsAAD4AADQAAC0A
-        ABwAAB0AACsAADcCAkkFBV4NDW4UE3wGA4UEVuYfov9P6v9Fj98ZEbEAADkAAAAAAAAAAAAAAAAEBIUY
-        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
-        AAfwAAAP8AAAf////////////////w==
-</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>753, 754</value>
@@ -1700,6 +1617,12 @@
   </data>
   <data name="&gt;&gt;tsbtnReload.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gap6.Name" xml:space="preserve">
+    <value>gap6</value>
+  </data>
+  <data name="&gt;&gt;gap6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsbtnStop.Name" xml:space="preserve">
     <value>tsbtnStop</value>
@@ -1737,24 +1660,6 @@
   <data name="&gt;&gt;gap5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsbtnSaveText.Name" xml:space="preserve">
-    <value>tsbtnSaveText</value>
-  </data>
-  <data name="&gt;&gt;tsbtnSaveText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnExportExcel.Name" xml:space="preserve">
-    <value>tsbtnExportExcel</value>
-  </data>
-  <data name="&gt;&gt;tsbtnExportExcel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gap6.Name" xml:space="preserve">
-    <value>gap6</value>
-  </data>
-  <data name="&gt;&gt;gap6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tsbtnViewGraph.Name" xml:space="preserve">
     <value>tsbtnViewGraph</value>
   </data>
@@ -1766,6 +1671,24 @@
   </data>
   <data name="&gt;&gt;toolStripLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbtnSaveText.Name" xml:space="preserve">
+    <value>tsbtnSaveText</value>
+  </data>
+  <data name="&gt;&gt;tsbtnSaveText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel3.Name" xml:space="preserve">
+    <value>toolStripLabel3</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbtnExportExcel.Name" xml:space="preserve">
+    <value>tsbtnExportExcel</value>
+  </data>
+  <data name="&gt;&gt;tsbtnExportExcel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gap7.Name" xml:space="preserve">
     <value>gap7</value>
@@ -1803,12 +1726,6 @@
   <data name="&gt;&gt;toolStripLabel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel3.Name" xml:space="preserve">
-    <value>toolStripLabel3</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tsbtnFileHeaderInfor.Name" xml:space="preserve">
     <value>tsbtnFileHeaderInfor</value>
   </data>
@@ -1820,30 +1737,6 @@
   </data>
   <data name="&gt;&gt;toolStripLabel7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel1.Name" xml:space="preserve">
-    <value>ribbonLabel1</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel1.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;ribbonProgressBar1.Name" xml:space="preserve">
-    <value>ribbonProgressBar1</value>
-  </data>
-  <data name="&gt;&gt;ribbonProgressBar1.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.RibbonProgressBar, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel2.Name" xml:space="preserve">
-    <value>ribbonLabel2</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel2.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;legendItem1.Name" xml:space="preserve">
-    <value>legendItem1</value>
-  </data>
-  <data name="&gt;&gt;legendItem1.Type" xml:space="preserve">
-    <value>NationalInstruments.UI.LegendItem, NationalInstruments.UI, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
   </data>
   <data name="&gt;&gt;backgroundWorker.Name" xml:space="preserve">
     <value>backgroundWorker</value>
@@ -1874,6 +1767,30 @@
   </data>
   <data name="&gt;&gt;timerBgChecker.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;legendItem1.Name" xml:space="preserve">
+    <value>legendItem1</value>
+  </data>
+  <data name="&gt;&gt;legendItem1.Type" xml:space="preserve">
+    <value>NationalInstruments.UI.LegendItem, NationalInstruments.UI, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel1.Name" xml:space="preserve">
+    <value>ribbonLabel1</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel1.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="&gt;&gt;ribbonProgressBar1.Name" xml:space="preserve">
+    <value>ribbonProgressBar1</value>
+  </data>
+  <data name="&gt;&gt;ribbonProgressBar1.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.RibbonProgressBar, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel2.Name" xml:space="preserve">
+    <value>ribbonLabel2</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel2.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DataEditorForm</value>

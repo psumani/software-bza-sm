@@ -84,4 +84,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'" />
   </Choose>
+  <PropertyGroup>
+    <PostBuildEvent>IF $(ConfigurationName)==Release C:\SignTools\SignTool\SignTool.exe sign /a /v /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td SHA256 /fd sha256 "$(TargetPath)"
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

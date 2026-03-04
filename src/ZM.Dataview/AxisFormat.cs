@@ -221,6 +221,27 @@ namespace ZiveLab.ZM.Dataview
                     _PlotVisible = true;
                     MinorGridVisible = false;
                     break;
+                case "Vdc":
+                    _FullName = name;
+                    DataType = typeof(double);
+                    ColTextFormat = "{0, -25}{1}";
+                    RowTextFormat = "{0, -25:e5}{1}";
+                    RowExcelFormat = "0.00000E+000";
+                    _Name[0] = _Name[1] = _Name[2] = name;
+                    _Unit[0] = _Unit[1] = _Unit[2] = "V";
+                    _Caption[0] = _Caption[1] = _Caption[2] = string.Format("{0}({1})", name, _Unit[0]);
+                    _GraphFormatStringMode = FormatStringMode.Engineering;
+                    _GraphFormatString = GRAPH_FORMATT_STRING;
+                    _FormatString = "e5";
+                    _ScaleType = ScaleType.Linear;
+                    _AxisMode = AxisMode.Fixed;
+                    _RangeMax = 10;
+                    _RangeMin = 0;
+                    _Inverted = false;
+                    _Color = Color.Black;
+                    _PlotVisible = true;
+                    MinorGridVisible = false;
+                    break;
                 case "Current":
                 case "I":
                     _FullName = "Current";
@@ -440,6 +461,7 @@ namespace ZiveLab.ZM.Dataview
                     MinorGridVisible = false;
                     break;
                 case "-Zim":
+                case "-Zimg":
                     _FullName = name;
                     DataType = typeof(double);
                     ColTextFormat = "{0, -25}{1}";
@@ -482,6 +504,7 @@ namespace ZiveLab.ZM.Dataview
                     MinorGridVisible = false;
                     break;
                 case "Z-Phase":
+                case "Zphase":
                     _FullName = name;
                     DataType = typeof(double);
                     ColTextFormat = "{0, -25}{1}";
@@ -496,6 +519,92 @@ namespace ZiveLab.ZM.Dataview
                     _ScaleType = ScaleType.Linear;
                     //_AxisMode = AxisMode.Fixed;
                     _AxisMode = AxisMode.AutoScaleLoose;
+                    _RangeMax = 1;
+                    _RangeMin = 0;
+                    _Inverted = false;
+                    _Color = Color.Black;
+                    _PlotVisible = true;
+                    MinorGridVisible = false;
+                    break;
+                case "Yreal":
+                    _FullName = name;
+                    DataType = typeof(double);
+                    ColTextFormat = "{0, -25}{1}";
+                    RowTextFormat = "{0, -25:e5}{1}";
+                    RowExcelFormat = "0.00000E+000";
+                    _Name[0] = _Name[1] = _Name[2] = name;
+                    _Unit[0] = _Unit[1] = _Unit[2] = "S";
+                    _Caption[0] = _Caption[1] = _Caption[2] = string.Format("{0}({1})", name, _Unit[0]);
+                    _GraphFormatStringMode = FormatStringMode.Engineering;
+                    _GraphFormatString = GRAPH_FORMATT_STRING;
+                    _FormatString = "e5";
+                    _ScaleType = ScaleType.Linear;
+                    _AxisMode = AxisMode.Fixed;
+                    _RangeMax = 1;
+                    _RangeMin = 0;
+                    _Inverted = false;
+                    _Color = Color.Black;
+                    _PlotVisible = true;
+                    MinorGridVisible = false;
+                    break;
+                case "-Yim":
+                case "-Yimg":
+                    _FullName = name;
+                    DataType = typeof(double);
+                    ColTextFormat = "{0, -25}{1}";
+                    RowTextFormat = "{0, -25:e5}{1}";
+                    RowExcelFormat = "0.00000E+000";
+                    _Name[0] = _Name[1] = _Name[2] = name;
+                    _Unit[0] = _Unit[1] = _Unit[2] = "s";
+                    _Caption[0] = _Caption[1] = _Caption[2] = string.Format("{0}({1})", name, _Unit[0]);
+                    _GraphFormatStringMode = FormatStringMode.Engineering;
+                    _GraphFormatString = GRAPH_FORMATT_STRING;
+                    _FormatString = "e5";
+                    _ScaleType = ScaleType.Linear;
+                    _AxisMode = AxisMode.Fixed;
+                    _RangeMax = 1;
+                    _RangeMin = 0;
+                    _Inverted = false;
+                    _Color = Color.Black;
+                    _PlotVisible = true;
+                    MinorGridVisible = false;
+                    break;
+                case "|Y|":
+                    _FullName = name;
+                    DataType = typeof(double);
+                    ColTextFormat = "{0, -25}{1}";
+                    RowTextFormat = "{0, -25:e5}{1}";
+                    RowExcelFormat = "0.00000E+000";
+                    _Name[0] = _Name[1] = _Name[2] = name;
+                    _Unit[0] = _Unit[1] = _Unit[2] = "S";
+                    _Caption[0] = _Caption[1] = _Caption[2] = string.Format("{0}({1})", name, _Unit[0]);
+                    _GraphFormatStringMode = FormatStringMode.Engineering;
+                    _GraphFormatString = GRAPH_FORMATT_STRING;
+                    _FormatString = "e5";
+                    _ScaleType = ScaleType.Linear;
+                    _AxisMode = AxisMode.Fixed;
+                    _RangeMax = 1;
+                    _RangeMin = 0;
+                    _Inverted = false;
+                    _Color = Color.Black;
+                    _PlotVisible = true;
+                    MinorGridVisible = false;
+                    break;
+                case "Y-Phase":
+                case "Yphase":
+                    _FullName = name;
+                    DataType = typeof(double);
+                    ColTextFormat = "{0, -25}{1}";
+                    RowTextFormat = "{0, -25:e5}{1}";
+                    RowExcelFormat = "0.00000E+000";
+                    _Name[0] = _Name[1] = _Name[2] = name;
+                    _Unit[0] = _Unit[1] = _Unit[2] = "deg";
+                    _Caption[0] = _Caption[1] = _Caption[2] = string.Format("{0}({1})", name, _Unit[0]);
+                    _GraphFormatStringMode = FormatStringMode.Engineering;
+                    _GraphFormatString = GRAPH_FORMATT_STRING;
+                    _FormatString = "e5";
+                    _ScaleType = ScaleType.Linear;
+                    _AxisMode = AxisMode.Fixed;
                     _RangeMax = 1;
                     _RangeMin = 0;
                     _Inverted = false;
@@ -724,7 +833,8 @@ namespace ZiveLab.ZM.Dataview
                     MinorGridVisible = false;
                     break;
                 case "Eoc":
-                    _FullName = "Eoc";
+                case "OCP":
+                    _FullName = name;
                     DataType = typeof(double);
                     ColTextFormat = "{0, -25}{1}";
                     RowTextFormat = "{0, -25:e5}{1}";
@@ -830,7 +940,6 @@ namespace ZiveLab.ZM.Dataview
         private string GetNameString(string name)
         {
             string result = name;
-
             switch (_Name[0])
             {
                 case "None":
@@ -863,6 +972,7 @@ namespace ZiveLab.ZM.Dataview
                     result = result.Replace(_Name[0], Properties.Resources.Zreal);
                     break;
                 case "-Zim":
+                case "-Zimg":
                     result = result.Replace(_Name[0], Properties.Resources.Zimage);
                     break;
                 case "Log|Z|":
@@ -872,6 +982,7 @@ namespace ZiveLab.ZM.Dataview
                     result = result.Replace(_Name[0], Properties.Resources.Zmag);
                     break;
                 case "Z-Phase":
+                case "Zphase":
                     result = result.Replace(_Name[0], Properties.Resources.ZPhase);
                     break;
                 case "Load":
@@ -889,6 +1000,7 @@ namespace ZiveLab.ZM.Dataview
                 case "Cycle No.":
                     result = result.Replace(_Name[0], Properties.Resources.Cycle_No_d);
                     break;
+                case "Log(Frequency)":
                 case "Frequency":
                     result = result.Replace(_Name[0], Properties.Resources.Frequency);
                     break;

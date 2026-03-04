@@ -5,6 +5,7 @@ using System.IO;
 using System.Globalization;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Utilities;
+using static ZiveLab.ZM.Dataview.DataColItem;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -33,241 +34,263 @@ namespace ZiveLab.ZM.Dataview
             "----------------",
             "----------------",
             "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
+            "----------------",
             "----------------"
         };
 
         static public string[] _ColArray = new string[]
         { 
-            "Index           ", 
-            "Test_Time(s)    ",
-            "Cycle_No.       ",
-            "Cycle_Time(s)   ",
-            "Step_No.        ",
-            "Step_Time(s)    ",
-            "Current(A)      ",
-            "Voltage(V)      ",
-            "Power(W)        ",
-            "Load(Ohm)       ",
-            "SumQ(Ah)        ",
-            "SumE(Wh)        ",
-            "Temp.('C)       ",
-            "AuxV1(V)        ",
-            "AuxV2(V)        ",
-            "AuxV3(V)        ",
-            "AuxV4(V)        ",
-            "AuxV5(V)        ",
-            "AuxV6(V)        ",
-            "AuxV7(V)        ",
-            "AuxV8(V)        ",
-            "AuxV9(V)        ",
-            "AuxV10(V)       ",
-            "AuxV11(V)       ",
-            "AuxV12(V)       ",
-            "OCP(V)          ",
-            "Range           ",
-            "Frequency(Hz)    ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "Aux1_Zre(ohm)    ",
-            "Aux1_Zim(ohm)    ",
-            "Aux2_Zre(ohm)    ",
-            "Aux2_Zim(ohm)    ",
-            "Aux3_Zre(ohm)    ",
-            "Aux3_Zim(ohm)    ",
-            "Aux4_Zre(ohm)    ",
-            "Aux4_Zim(ohm)    ",
-            "Aux5_Zre(ohm)    ",
-            "Aux5_Zim(ohm)    ",
-            "Aux6_Zre(ohm)    ",
-            "Aux6_Zim(ohm)    ",
-            "Aux7_Zre(ohm)    ",
-            "Aux7_Zim(ohm)    ",
-            "Aux8_Zre(ohm)    ",
-            "Aux8_Zim(ohm)    ",
-            "Aux9_Zre(ohm)    ",
-            "Aux9_Zim(ohm)    ",
-            "Aux10_Zre(ohm)   ",
-            "Aux10_Zim(ohm)   ",
-            "Aux11_Zre(ohm)   ",
-            "Aux11_Zim(ohm)   ",
-            "Aux12_Zre(ohm)   ",
-            "Aux12_Zim(ohm)   "
+            "Index         ", 
+            "Test_Time(s)  ",
+            "Cycle_No.     ",
+            "Cycle_Time(s) ",
+            "Current(A)    ",
+            "Voltage(V)    ",
+            "Power(W)      ",
+            "Load(Ohm)     ",
+            "SumQ(Ah)      ",
+            "SumE(Wh)      ",
+            "A01_V(V)      ",
+            "A02_V(V)      ",
+            "A03_V(V)      ",
+            "A04_V(V)      " ,
+            "A05_V(V)      ",
+            "A06_V(V)      " ,
+            "A07_V(V)      ",
+            "A08_V(V)      ",
+            "A09_V(V)      ",
+            "A10_V(V)      ",
+            "A11_V(V)      ",
+            "A12_V(V)      ",
+            "Frequency(Hz) ",
+            "Zre(ohm)      ",
+            "Zim(ohm)      ",
+            "A01_Zre(ohm)  ",
+            "A01_Zim(ohm)  ",
+            "A02_Zre(ohm)  ",
+            "A02_Zim(ohm)  ",
+            "A03_Zre(ohm)  ",
+            "A03_Zim(ohm)  ",
+            "A04_Zre(ohm)  ",
+            "A04_Zim(ohm)  ",
+            "A05_Zre(ohm)  ",
+            "A05_Zim(ohm)  ",
+            "A06_Zre(ohm)  ",
+            "A06_Zim(ohm)  ",
+            "A07_Zre(ohm)  ",
+            "A07_Zim(ohm)  ",
+            "A08_Zre(ohm)  ",
+            "A08_Zim(ohm)  ",
+            "A09_Zre(ohm)  ",
+            "A09_Zim(ohm)  ",
+            "A10_Zre(ohm)  ",
+            "A10_Zim(ohm)  ",
+            "A11_Zre(ohm)  ",
+            "A11_Zim(ohm)  ",
+            "A12_Zre(ohm)  ",
+            "A12_Zim(ohm)  ",
+            "Temp.('C)     ",
+            "OCP(V)        ",
+            "Range         ",
         };
 
         static public string[] _ColArray_Kor = new string[]
         { 
-            "인덱스           ", 
-            "시험_시간(s)     ",
-            "사이클_번호      ",
-            "사이클_시간(s)   ",
-            "단계_번호        ",
-            "단계_시간(s)     ",
-            "전류(A)          ",
-            "전압(V)          ",
-            "파워(W)          ",
-            "부하(Ohm)        ",
-            "누적_용량(Ah)    ",
-            "누적_에너지(Wh)  ",
-            "온도('C)         ",
-            "보조전압1(V)     ",
-            "보조전압2(V)     ",
-            "보조전압3(V)     ",
-            "보조전압4(V)     ",
-            "보조전압5(V)     ",
-            "보조전압6(V)     ",
-            "보조전압7(V)     ",
-            "보조전압8(V)     ",
-            "보조전압9(V)     ",
-            "보조전압10(V)    ",
-            "보조전압11(V)    ",
-            "보조전압12(V)    ",
-            "OCP(V)           ",
-            "전류_범위        ",
-            "주파수(Hz)       ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "보조1_Zre(ohm)   ",
-            "보조1_Zim(ohm)   ",
-            "보조2_Zre(ohm)   ",
-            "보조2_Zim(ohm)   ",
-            "보조3_Zre(ohm)   ",
-            "보조3_Zim(ohm)   ",
-            "보조4_Zre(ohm)   ",
-            "보조4_Zim(ohm)   ",
-            "보조5_Zre(ohm)   ",
-            "보조5_Zim(ohm)   ",
-            "보조6_Zre(ohm)   ",
-            "보조6_Zim(ohm)   ",
-            "보조7_Zre(ohm)   ",
-            "보조7_Zim(ohm)   ",
-            "보조8_Zre(ohm)   ",
-            "보조8_Zim(ohm)   ",
-            "보조9_Zre(ohm)   ",
-            "보조9_Zim(ohm)   ",
-            "보조10_Zre(ohm)  ",
-            "보조10_Zim(ohm)  ",
-            "보조11_Zre(ohm)  ",
-            "보조11_Zim(ohm)  ",
-            "보조12_Zre(ohm)  ",
-            "보조12_Zim(ohm)  "
+            "인덱스          ", 
+            "시험_시간(s)    ",
+            "사이클_번호     ",
+            "사이클_시간(s)  ",
+            "전류(A)         ",
+            "전압(V)         ",
+            "파워(W)         ",
+            "부하(Ohm)       ",
+            "누적_용량(Ah)   ",
+            "누적_에너지(Wh) ",
+            "A01_전압(V)     ",
+            "A02_전압(V)     ",
+            "A03_전압(V)     ",
+            "A04_전압(V)     ",
+            "A05_전압(V)     ",
+            "A06_전압(V)     ",
+            "A07_전압(V)     ",
+            "A08_전압(V)     ",
+            "A09_전압(V)     ",
+            "A10_전압(V)     ",
+            "A11_전압(V)     ",
+            "A12_전압(V)     ",
+            "주파수(Hz)      ",
+            "Zre(ohm)        ",
+            "Zim(ohm)        ",
+            "A01_Zre(ohm)    ",
+            "A01_Zim(ohm)    ",
+            "A02_Zre(ohm)    ",
+            "A02_Zim(ohm)    ",
+            "A03_Zre(ohm)    ",
+            "A03_Zim(ohm)    ",
+            "A04_Zre(ohm)    ",
+            "A04_Zim(ohm)    ",
+            "A05_Zre(ohm)    ",
+            "A05_Zim(ohm)    ",
+            "A06_Zre(ohm)    ",
+            "A06_Zim(ohm)    ",
+            "A07_Zre(ohm)    ",
+            "A07_Zim(ohm)    ",
+            "A08_Zre(ohm)    ",
+            "A08_Zim(ohm)    ",
+            "A09_Zre(ohm)    ",
+            "A09_Zim(ohm)    ",
+            "A10_Zre(ohm)    ",
+            "A10_Zim(ohm)    ",
+            "A11_Zre(ohm)    ",
+            "A11_Zim(ohm)    ",
+            "A12_Zre(ohm)    ",
+            "A12_Zim(ohm)    ",
+            "온도('C)        ",
+            "OCP(V)          ",
+            "전류_범위       ",
         };
 
         static public string[] _ColArrayEx = new string[]
         {
-            "Index           ",
-            "Test_Time(s)    ",
-            "Cycle_No.       ",
-            "Cycle_Time(s)   ",
-            "Step_No.        ",
-            "Step_Time(s)    ",
-            "Current(A)      ",
-            "Voltage(V)      ",
-            "Power(W)        ",
-            "Load(Ohm)       ",
-            "SumQ(C)        ",
-            "SumE(Wh)        ",
-            "Temp.('C)       ",
-            "AuxV1(V)        ",
-            "AuxV2(V)        ",
-            "AuxV3(V)        ",
-            "AuxV4(V)        ",
-            "AuxV5(V)        ",
-            "AuxV6(V)        ",
-            "AuxV7(V)        ",
-            "AuxV8(V)        ",
-            "AuxV9(V)        ",
-            "AuxV10(V)       ",
-            "AuxV11(V)       ",
-            "AuxV12(V)       ",
-            "OCP(V)          ",
-            "Range           ",
-            "Frequency(Hz)    ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "Aux1_Zre(ohm)    ",
-            "Aux1_Zim(ohm)    ",
-            "Aux2_Zre(ohm)    ",
-            "Aux2_Zim(ohm)    ",
-            "Aux3_Zre(ohm)    ",
-            "Aux3_Zim(ohm)    ",
-            "Aux4_Zre(ohm)    ",
-            "Aux4_Zim(ohm)    ",
-            "Aux5_Zre(ohm)    ",
-            "Aux5_Zim(ohm)    ",
-            "Aux6_Zre(ohm)    ",
-            "Aux6_Zim(ohm)    ",
-            "Aux7_Zre(ohm)    ",
-            "Aux7_Zim(ohm)    ",
-            "Aux8_Zre(ohm)    ",
-            "Aux8_Zim(ohm)    ",
-            "Aux9_Zre(ohm)    ",
-            "Aux9_Zim(ohm)    ",
-            "Aux10_Zre(ohm)   ",
-            "Aux10_Zim(ohm)   ",
-            "Aux11_Zre(ohm)   ",
-            "Aux11_Zim(ohm)   ",
-            "Aux12_Zre(ohm)   ",
-            "Aux12_Zim(ohm)   "
+            "Index         ",
+            "Test_Time(s)  ",
+            "Cycle_No.     ",
+            "Cycle_Time(s) ",
+            "Current(A)    ",
+            "Voltage(V)    ",
+            "Power(W)      ",
+            "Load(Ohm)     ",
+            "SumQ(C)       ",
+            "SumE(Wh)      ",
+            "A01_V(V)      ",
+            "A02_V(V)      ",
+            "A03_V(V)      ",
+            "A04_V(V)      " ,
+            "A05_V(V)      ",
+            "A06_V(V)      " ,
+            "A07_V(V)      ",
+            "A08_V(V)      ",
+            "A09_V(V)      ",
+            "A10_V(V)      ",
+            "A11_V(V)      ",
+            "A12_V(V)      ",
+            "Frequency(Hz) ",
+            "Zre(ohm)      ",
+            "Zim(ohm)      ",
+            "A01_Zre(ohm)  ",
+            "A01_Zim(ohm)  ",
+            "A02_Zre(ohm)  ",
+            "A02_Zim(ohm)  ",
+            "A03_Zre(ohm)  ",
+            "A03_Zim(ohm)  ",
+            "A04_Zre(ohm)  ",
+            "A04_Zim(ohm)  ",
+            "A05_Zre(ohm)  ",
+            "A05_Zim(ohm)  ",
+            "A06_Zre(ohm)  ",
+            "A06_Zim(ohm)  ",
+            "A07_Zre(ohm)  ",
+            "A07_Zim(ohm)  ",
+            "A08_Zre(ohm)  ",
+            "A08_Zim(ohm)  ",
+            "A09_Zre(ohm)  ",
+            "A09_Zim(ohm)  ",
+            "A10_Zre(ohm)  ",
+            "A10_Zim(ohm)  ",
+            "A11_Zre(ohm)  ",
+            "A11_Zim(ohm)  ",
+            "A12_Zre(ohm)  ",
+            "A12_Zim(ohm)  ",
+            "Temp.('C)     ",
+            "OCP(V)        ",
+            "Range         ",
         };
 
         static public string[] _ColArrayEx_Kor = new string[]
         {
-            "인덱스           ",
-            "시험_시간(s)     ",
-            "사이클_번호      ",
-            "사이클_시간(s)   ",
-            "단계_번호        ",
-            "단계_시간(s)     ",
-            "전류(A)          ",
-            "전압(V)          ",
-            "파워(W)          ",
-            "부하(Ohm)        ",
+            "인덱스          ",
+            "시험_시간(s)    ",
+            "사이클_번호     ",
+            "사이클_시간(s)  ",
+            "전류(A)         ",
+            "전압(V)         ",
+            "파워(W)         ",
+            "부하(Ohm)       ",
             "누적_용량(C)    ",
-            "누적_에너지(Wh)  ",
-            "온도('C)         ",
-            "보조전압1(V)     ",
-            "보조전압2(V)     ",
-            "보조전압3(V)     ",
-            "보조전압4(V)     ",
-            "보조전압5(V)     ",
-            "보조전압6(V)     ",
-            "보조전압7(V)     ",
-            "보조전압8(V)     ",
-            "보조전압9(V)     ",
-            "보조전압10(V)    ",
-            "보조전압11(V)    ",
-            "보조전압12(V)    ",
-            "OCP(V)           ",
-            "전류_범위        ",
-            "주파수(Hz)       ",
-            "Zre(ohm)         ",
-            "Zim(ohm)         ",
-            "보조1_Zre(ohm)   ",
-            "보조1_Zim(ohm)   ",
-            "보조2_Zre(ohm)   ",
-            "보조2_Zim(ohm)   ",
-            "보조3_Zre(ohm)   ",
-            "보조3_Zim(ohm)   ",
-            "보조4_Zre(ohm)   ",
-            "보조4_Zim(ohm)   ",
-            "보조5_Zre(ohm)   ",
-            "보조5_Zim(ohm)   ",
-            "보조6_Zre(ohm)   ",
-            "보조6_Zim(ohm)   ",
-            "보조7_Zre(ohm)   ",
-            "보조7_Zim(ohm)   ",
-            "보조8_Zre(ohm)   ",
-            "보조8_Zim(ohm)   ",
-            "보조9_Zre(ohm)   ",
-            "보조9_Zim(ohm)   ",
-            "보조10_Zre(ohm)  ",
-            "보조10_Zim(ohm)  ",
-            "보조11_Zre(ohm)  ",
-            "보조11_Zim(ohm)  ",
-            "보조12_Zre(ohm)  ",
-            "보조12_Zim(ohm)  "
+            "누적_에너지(Wh) ",
+            "A01_전압(V)     ",
+            "A02_전압(V)     ",
+            "A03_전압(V)     ",
+            "A04_전압(V)     ",
+            "A05_전압(V)     ",
+            "A06_전압(V)     ",
+            "A07_전압(V)     ",
+            "A08_전압(V)     ",
+            "A09_전압(V)     ",
+            "A10_전압(V)     ",
+            "A11_전압(V)     ",
+            "A12_전압(V)     ",
+            "주파수(Hz)      ",
+            "Zre(ohm)        ",
+            "Zim(ohm)        ",
+            "A01_Zre(ohm)    ",
+            "A01_Zim(ohm)    ",
+            "A02_Zre(ohm)    ",
+            "A02_Zim(ohm)    ",
+            "A03_Zre(ohm)    ",
+            "A03_Zim(ohm)    ",
+            "A04_Zre(ohm)    ",
+            "A04_Zim(ohm)    ",
+            "A05_Zre(ohm)    ",
+            "A05_Zim(ohm)    ",
+            "A06_Zre(ohm)    ",
+            "A06_Zim(ohm)    ",
+            "A07_Zre(ohm)    ",
+            "A07_Zim(ohm)    ",
+            "A08_Zre(ohm)    ",
+            "A08_Zim(ohm)    ",
+            "A09_Zre(ohm)    ",
+            "A09_Zim(ohm)    ",
+            "A10_Zre(ohm)    ",
+            "A10_Zim(ohm)    ",
+            "A11_Zre(ohm)    ",
+            "A11_Zim(ohm)    ",
+            "A12_Zre(ohm)    ",
+            "A12_Zim(ohm)    ",
+            "온도('C)        ",
+            "OCP(V)          ",
+            "전류_범위       ",
         };
-        
+                
         public string[] _DelimiterArray = new string[]
         {
             "\t",
@@ -388,7 +411,10 @@ namespace ZiveLab.ZM.Dataview
                 {
                     if (_DataHeaderValues._ResHead.systemInfo.ChkZIM[i] == 1)
                     {
-                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}/ SIF(v{1}):{3}-{4}", _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
+                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, 
+                            string.Format("{0}(v{1})/ {2}", 
+                            _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(),
+                            _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
                     }
                 }
             }
@@ -526,7 +552,44 @@ namespace ZiveLab.ZM.Dataview
             return Define.NO_ERROR;
         }
 
-        public int WriteColumn(DataConvSet dcs)
+        public int WriteColumn(int pad)
+        {
+            try
+            {
+
+                string sColumn = string.Empty;
+                string temp;
+                int totalWidth = pad;
+               
+                string colline = string.Empty;
+                string line = string.Empty;
+                line = line.PadRight(totalWidth, '-');
+
+                for (int i = 0; i < _Column.Length; i++)
+                {
+                    int ofslength = Math.Abs(CoTypeString.GetStringByteLength(_Column[i]) - _Column[i].Length);
+                    temp = _Delimeter == "," ? _Column[i] : _Column[i].PadRight(totalWidth - ofslength);
+                    sColumn += string.Format("{0}{1}", temp, _Delimeter);
+                    colline += string.Format("{0}{1}", line, _Delimeter);
+                }
+
+
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+                _StreamWriter.WriteLine(sColumn);
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+
+
+            }
+            catch (Exception)
+            {
+                return Define.ERR_TXTFILEWRITER_WRCOLUMN;
+            }
+
+            return Define.NO_ERROR;
+        }
+        public int WriteColumnZSharp(DataConvSet dcs, int pad)
         {
             try
             {
@@ -535,7 +598,190 @@ namespace ZiveLab.ZM.Dataview
                 string temp;
 
                 string[] genColArr = dcs.GetEnabledDataColArr();
-                int totalWidth = 14;
+                int totalWidth = pad;
+                string line = string.Empty;
+                line = line.PadRight(totalWidth, '-');
+
+                for (int i = 0; i < genColArr.Length; i++)
+                {
+                    if (i == (int)eColumnId.TESTTIME || i == (int)eColumnId.CYCTIME || i == (int)eColumnId.AMPS || i == (int)eColumnId.VOLT ||
+                        i == (int)eColumnId.POWER || i == (int)eColumnId.LOAD || i == (int)eColumnId.CAPACITY || i == (int)eColumnId.ENERGY ||
+                        i == (int)eColumnId.TEMP || i == (int)eColumnId.EOC || i == (int)eColumnId.IRNG) continue;
+
+                    if (i < genColArr.Length - 1)
+                    {
+                        int ofslength = Math.Abs(CoTypeString.GetStringByteLength(genColArr[i]) - genColArr[i].Length);
+                        temp = _Delimeter == "," ? genColArr[i] : genColArr[i].PadRight(totalWidth - ofslength);
+
+                        column += string.Format("{0}{1}", temp, _Delimeter);
+                        colline += string.Format("{0}{1}", line, _Delimeter);
+                    }
+                    else
+                    {
+                        int ofslength = Math.Abs(CoTypeString.GetStringByteLength(genColArr[i]) - genColArr[i].Length);
+                        temp = _Delimeter == "," ? genColArr[i] : genColArr[i].PadRight(totalWidth - ofslength);
+
+                        column += string.Format("{0}", temp);
+                        colline += string.Format("{0}", line);
+                    }
+                }
+
+
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+                _StreamWriter.WriteLine(column);
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+
+
+            }
+            catch (Exception)
+            {
+                return Define.ERR_TXTFILEWRITER_WRCOLUMN;
+            }
+
+            return Define.NO_ERROR;
+        }
+
+        public int WriteColumnZSharp(DataConvSet dcs, int pad,int Target)
+        {
+            try
+            {
+                string column = string.Empty;
+                string colline = string.Empty;
+                string temp;
+
+                string[] genColArr = dcs.GetEnabledDataColArr();
+                int totalWidth = pad;
+                string line = string.Empty;
+                line = line.PadRight(totalWidth, '-');
+
+                for (int i = 0; i < genColArr.Length; i++)
+                {
+                    if (i == (int)eColumnId.FREQ ||
+                        (Target == 0 && (i == (int)eColumnId.ZRE || i == (int)eColumnId.ZIM)) ||
+                        (Target == 1 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 2 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 3 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 4 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 5 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 6 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 7 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 8 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 9 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 10 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 11 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
+                        (Target == 12 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)))
+                    {
+
+                        if (i < genColArr.Length - 1)
+                        {
+                            int ofslength = Math.Abs(CoTypeString.GetStringByteLength(genColArr[i]) - genColArr[i].Length);
+                            temp = _Delimeter == "," ? genColArr[i] : genColArr[i].PadRight(totalWidth - ofslength);
+
+                            column += string.Format("{0}{1}", temp, _Delimeter);
+                            colline += string.Format("{0}{1}", line, _Delimeter);
+                        }
+                        else
+                        {
+                            int ofslength = Math.Abs(CoTypeString.GetStringByteLength(genColArr[i]) - genColArr[i].Length);
+                            temp = _Delimeter == "," ? genColArr[i] : genColArr[i].PadRight(totalWidth - ofslength);
+
+                            column += string.Format("{0}", temp);
+                            colline += string.Format("{0}", line);
+                        }
+                    }
+                }
+
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+                _StreamWriter.WriteLine(column);
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+
+
+            }
+            catch (Exception)
+            {
+                return Define.ERR_TXTFILEWRITER_WRCOLUMN;
+            }
+
+            return Define.NO_ERROR;
+        }
+
+        public int WriteColumn(DataConvSet dcs, int pad, int MaxAuxCount)
+        {
+            int auxidx = 0;
+            try
+            {
+                string column = string.Empty;
+                string colline = string.Empty;
+                string temp;
+
+                string[] genColArr = dcs.GetDataColArr();
+                int totalWidth = pad;
+                string line = string.Empty;
+                line = line.PadRight(totalWidth, '-');
+
+                for (int i = 0; i < genColArr.Length; i++)
+                {
+                    if((int)eColumnId.AUX1 <= i && i<= (int)eColumnId.AUX12) 
+                    {
+                        auxidx = i - (int)eColumnId.AUX1;
+                        if (auxidx >= MaxAuxCount) continue;
+                    }
+                    if ((int)eColumnId.AUX01_ZRE <= i && i <= (int)eColumnId.AUX12_ZIM)
+                    {
+                        auxidx = i - (int)eColumnId.AUX01_ZRE;
+                        auxidx = auxidx / 2;
+                        if (auxidx >= MaxAuxCount) continue;
+                    }
+                    if (dcs.DataColList[i].Enable == false) continue;
+                    if (i < genColArr.Length - 1)
+                    {
+                        int ofslength = Math.Abs(CoTypeString.GetStringByteLength(genColArr[i]) - genColArr[i].Length);
+                        temp = _Delimeter == "," ? genColArr[i] : genColArr[i].PadRight(totalWidth - ofslength);
+
+                        column += string.Format("{0}{1}", temp, _Delimeter);
+                        colline += string.Format("{0}{1}", line, _Delimeter);
+                    }
+                    else
+                    {
+                        int ofslength = Math.Abs(CoTypeString.GetStringByteLength(genColArr[i]) - genColArr[i].Length);
+                        temp = _Delimeter == "," ? genColArr[i] : genColArr[i].PadRight(totalWidth - ofslength);
+
+                        column += string.Format("{0}", temp);
+                        colline += string.Format("{0}", line);
+                    }
+                }
+
+
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+                _StreamWriter.WriteLine(column);
+                if (_Delimeter != ",")
+                    _StreamWriter.WriteLine(colline);
+
+
+            }
+            catch (Exception)
+            {
+                return Define.ERR_TXTFILEWRITER_WRCOLUMN;
+            }
+
+            return Define.NO_ERROR;
+        }
+
+        public int WriteColumn(DataConvSet dcs, int pad)
+        {
+            try
+            {
+                string column = string.Empty;
+                string colline = string.Empty;
+                string temp;
+
+                string[] genColArr = dcs.GetEnabledDataColArr();
+                int totalWidth = pad;
                 string line = string.Empty;
                 line = line.PadRight(totalWidth, '-');
 
@@ -558,7 +804,7 @@ namespace ZiveLab.ZM.Dataview
                         colline += string.Format("{0}", line);
                     }
                 }
-             
+
 
                 if (_Delimeter != ",")
                     _StreamWriter.WriteLine(colline);
@@ -575,7 +821,7 @@ namespace ZiveLab.ZM.Dataview
 
             return Define.NO_ERROR;
         }
-
+        
         static private List<double> _vData = new List<double>();
 
         private string DoubleToString(double val, CoMath.eSiUnit unit, DataColItem.eDataFormat format, bool unitC = false)
@@ -652,7 +898,113 @@ namespace ZiveLab.ZM.Dataview
             return result;
         }
 
-        public int WriteData(int dataidx, object unitData, DataConvSet dataConvSet, eDelimiter delimiter, Dictionary<int, object> irstep)
+        public int ZSharpWriteData(int dataidx, object unitData, eDelimiter delimiter, int pad, Dictionary<int, object> irstep)
+        {
+            try
+            {
+                string data = string.Empty;
+                string unit = string.Empty;
+
+                if (unitData is UnitReportData)
+                {
+                    UnitReportData urgd = (UnitReportData)unitData;
+
+                    List<string> list = new List<string>();
+
+                    list.Add((dataidx + 1).ToString(CultureInfo.InvariantCulture));
+                    list.Add((urgd.mRawData.nCycle + 1).ToString(CultureInfo.InvariantCulture));
+                    list.Add(DoubleToString(urgd.mRawData.fFreq, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                    list.Add(DoubleToString(urgd.mRawData.real, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                    list.Add(DoubleToString(urgd.mRawData.img, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                    for(int bd = 0; bd<MBZA_Constant.MAX_AUX_BOARD; bd++)
+                    {
+                        for (int bdch = 0; bdch < MBZA_Constant.MAX_AUX_CHANNEL; bdch++)
+                        {
+                            list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zre, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                            list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zim, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                        }
+                    }
+                    
+                    int totalWidth = pad;
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        unit = delimiter == eDelimiter.Comma ? list[i] : list[i].PadRight(totalWidth);
+                        if (i < list.Count - 1)
+                            data += string.Format("{0}{1}", unit, _Delimeter);
+                        else
+                            data += string.Format("{0}", unit);
+                    }
+                }
+
+                _StreamWriter.WriteLine(data);
+            }
+            catch (Exception ex)
+            {
+                LastErrorMessage = ex.Message;
+
+                return Define.ERR_TXTFILEWRITER_WRDATA;
+            }
+
+            return Define.NO_ERROR;
+        }
+
+        public int ZSharpWriteData(int dataidx, object unitData, eDelimiter delimiter, int pad, Dictionary<int, object> irstep,int Target)
+        {
+            int bd;
+            int bdch;
+            try
+            {
+                string data = string.Empty;
+                string unit = string.Empty;
+
+                if (unitData is UnitReportData)
+                {
+                    UnitReportData urgd = (UnitReportData)unitData;
+
+                    List<string> list = new List<string>();
+                    
+                    list.Add(DoubleToString(urgd.mRawData.fFreq, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                    if (Target <= 0)
+                    {
+                        list.Add(DoubleToString(urgd.mRawData.real, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                        list.Add(DoubleToString(urgd.mRawData.img, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                    }
+                    else
+                    {
+                        bd = (Target-1) / MBZA_Constant.MAX_AUX_CHANNEL;
+                        bdch = (Target-1) % MBZA_Constant.MAX_AUX_CHANNEL;
+
+                        list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zre, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                        list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zim, CoMath.eSiUnit.NONE, DataColItem.eDataFormat.EXPONENTIAL));
+                    }
+
+                    int totalWidth = pad;
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        unit = delimiter == eDelimiter.Comma ? list[i] : list[i].PadRight(totalWidth);
+                        if (i < list.Count - 1)
+                            data += string.Format("{0}{1}", unit, _Delimeter);
+                        else
+                            data += string.Format("{0}", unit);
+                    }
+                }
+
+                _StreamWriter.WriteLine(data);
+            }
+            catch (Exception ex)
+            {
+                LastErrorMessage = ex.Message;
+
+                return Define.ERR_TXTFILEWRITER_WRDATA;
+            }
+
+            return Define.NO_ERROR;
+        }
+
+
+        public int WriteData(int dataidx, object unitData, DataConvSet dataConvSet, eDelimiter delimiter, int pad, Dictionary<int, object> irstep)
         {
             int zidx = 0;
             int itype = 0;
@@ -690,14 +1042,6 @@ namespace ZiveLab.ZM.Dataview
 
                                 case DataColItem.eColumnId.CYCTIME:
                                     list.Add(ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), dataConvSet.TimeFormat));
-                                    break;
-
-                                case DataColItem.eColumnId.STEPNO:
-                                    list.Add((urgd.mRawData.nTaskNo + 1).ToString(CultureInfo.InvariantCulture));
-                                    break;
-
-                                case DataColItem.eColumnId.STEPTIME:
-                                    list.Add(ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TaskTime), dataConvSet.TimeFormat));
                                     break;
 
                                 case DataColItem.eColumnId.AMPS:
@@ -805,7 +1149,178 @@ namespace ZiveLab.ZM.Dataview
                         }
                     }                                        
                     
-                    int totalWidth = 14;
+                    int totalWidth = pad;
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        unit = delimiter == eDelimiter.Comma ? list[i] : list[i].PadRight(totalWidth);
+                        if (i < list.Count - 1)
+                            data += string.Format("{0}{1}", unit, _Delimeter);
+                        else
+                            data += string.Format("{0}", unit);
+                    }
+                }
+
+                _StreamWriter.WriteLine(data);
+            }
+            catch (Exception ex)
+            {
+                LastErrorMessage = ex.Message;
+
+                return Define.ERR_TXTFILEWRITER_WRDATA;
+            }
+
+            return Define.NO_ERROR;
+        }
+
+        public int WriteData(int dataidx, object unitData, DataConvSet dataConvSet, eDelimiter delimiter, int pad, Dictionary<int, object> irstep, int MaxAuxCount)
+        {
+            int zidx = 0;
+            int itype = 0;
+            int auxidx = 0;
+            int bd = 0;
+            int bdch = 0;
+            try
+            {
+                string data = string.Empty;
+                string unit = string.Empty;
+
+                if (unitData is UnitReportData)
+                {
+                    UnitReportData urgd = (UnitReportData)unitData;
+
+                    List<string> list = new List<string>();
+
+                    foreach (DataColItem dci in dataConvSet.DataColList)
+                    {
+                        if (dci.Enable)
+                        {
+                            switch (dci.ColumnID)
+                            {
+                                case DataColItem.eColumnId.INDEX:
+                                    list.Add((dataidx + 1).ToString(CultureInfo.InvariantCulture));
+                                    break;
+
+                                case DataColItem.eColumnId.TESTTIME:
+                                    list.Add(ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TestTime), dataConvSet.TimeFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.CYCNO:
+                                    list.Add((urgd.mRawData.nCycle + 1).ToString(CultureInfo.InvariantCulture));
+                                    break;
+
+                                case DataColItem.eColumnId.CYCTIME:
+                                    list.Add(ZMF_File.GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), dataConvSet.TimeFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.AMPS:
+                                    list.Add(DoubleToString(urgd.mRawData.Idc, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.VOLT:
+                                    list.Add(DoubleToString(urgd.mRawData.Vdc, dci.SIUnit, dci.DataFormat));
+                                    break;
+                                case DataColItem.eColumnId.POWER:
+                                    list.Add(DoubleToString(urgd.Power, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.LOAD:
+                                    list.Add(DoubleToString(urgd.Load, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.CAPACITY:
+                                    list.Add(DoubleToString(urgd.Capacity, dci.SIUnit, dci.DataFormat, dataConvSet.UnitC));
+                                    break;
+
+                                case DataColItem.eColumnId.ENERGY:
+                                    list.Add(DoubleToString(urgd.Energy, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.TEMP:
+                                    list.Add(DoubleToString(urgd.mRawData.Temperature, dci.SIUnit, dci.DataFormat));
+                                    break;
+                                case DataColItem.eColumnId.AUX1:
+                                case DataColItem.eColumnId.AUX2:
+                                case DataColItem.eColumnId.AUX3:
+                                case DataColItem.eColumnId.AUX4:
+                                case DataColItem.eColumnId.AUX5:
+                                case DataColItem.eColumnId.AUX6:
+                                case DataColItem.eColumnId.AUX7:
+                                case DataColItem.eColumnId.AUX8:
+                                case DataColItem.eColumnId.AUX9:
+                                case DataColItem.eColumnId.AUX10:
+                                case DataColItem.eColumnId.AUX11:
+                                case DataColItem.eColumnId.AUX12:
+                                    auxidx = dci.ColumnID - DataColItem.eColumnId.AUX1;
+                                    if (auxidx >= MaxAuxCount) continue;
+                                    bd = auxidx / 4;
+                                    bdch = auxidx % 4;
+                                    list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Vdc, dci.SIUnit, dci.DataFormat));
+                                    break;
+                                case DataColItem.eColumnId.EOC:
+                                    list.Add(DoubleToString(urgd.mRawData.Veoc, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.IRNG:
+                                    list.Add(urgd.Range);
+                                    break;
+                                case DataColItem.eColumnId.FREQ:
+                                    list.Add(DoubleToString(urgd.mRawData.fFreq, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.ZRE:
+                                    list.Add(DoubleToString(urgd.mRawData.real, dci.SIUnit, dci.DataFormat));
+                                    break;
+
+                                case DataColItem.eColumnId.ZIM:
+                                    list.Add(DoubleToString(urgd.mRawData.img, dci.SIUnit, dci.DataFormat));
+                                    break;
+                                case DataColItem.eColumnId.AUX01_ZRE:
+                                case DataColItem.eColumnId.AUX01_ZIM:
+                                case DataColItem.eColumnId.AUX02_ZRE:
+                                case DataColItem.eColumnId.AUX02_ZIM:
+                                case DataColItem.eColumnId.AUX03_ZRE:
+                                case DataColItem.eColumnId.AUX03_ZIM:
+                                case DataColItem.eColumnId.AUX04_ZRE:
+                                case DataColItem.eColumnId.AUX04_ZIM:
+                                case DataColItem.eColumnId.AUX05_ZRE:
+                                case DataColItem.eColumnId.AUX05_ZIM:
+                                case DataColItem.eColumnId.AUX06_ZRE:
+                                case DataColItem.eColumnId.AUX06_ZIM:
+                                case DataColItem.eColumnId.AUX07_ZRE:
+                                case DataColItem.eColumnId.AUX07_ZIM:
+                                case DataColItem.eColumnId.AUX08_ZRE:
+                                case DataColItem.eColumnId.AUX08_ZIM:
+                                case DataColItem.eColumnId.AUX09_ZRE:
+                                case DataColItem.eColumnId.AUX09_ZIM:
+                                case DataColItem.eColumnId.AUX10_ZRE:
+                                case DataColItem.eColumnId.AUX10_ZIM:
+                                case DataColItem.eColumnId.AUX11_ZRE:
+                                case DataColItem.eColumnId.AUX11_ZIM:
+                                case DataColItem.eColumnId.AUX12_ZRE:
+                                case DataColItem.eColumnId.AUX12_ZIM:
+                                    zidx = dci.ColumnID - DataColItem.eColumnId.AUX01_ZRE;
+                                    itype = zidx % 2;
+                                    auxidx = zidx / 2;
+                                    if (auxidx >= MaxAuxCount) continue;
+                                    bd = auxidx / 4;
+                                    bdch = auxidx % 4;
+
+                                    if (zidx == 0)
+                                    {
+                                        list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit, dci.DataFormat));
+                                    }
+                                    else
+                                    {
+                                        list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zim, dci.SIUnit, dci.DataFormat));
+                                    }
+
+                                    break;
+                            }
+                        }
+                    }
+
+                    int totalWidth = pad;
 
                     for (int i = 0; i < list.Count; i++)
                     {
@@ -854,9 +1369,26 @@ namespace ZiveLab.ZM.Dataview
                     break;
             }
         }
+
+        public void ColZSharp(int Target)
+        {
+            _Column = new string[3];
+
+            _Column[0] = "Frequency(Hz) ";
+            if(Target == 0)
+            {
+                _Column[1] = "Zre(ohm)      ";
+                _Column[2] = "Zim(ohm)      ";
+            }
+            else
+            {
+                _Column[1] = string.Format("A{0:00}_Zre(ohm)      ", Target);
+                _Column[2] = string.Format("A{0:00}_Zim(ohm)      ", Target);
+            }
+        }
         
 
-        public bool WriteData(string[] dataArray)
+        public bool WriteData(string[] dataArray,int pad)
         {
             try
             {
@@ -864,9 +1396,9 @@ namespace ZiveLab.ZM.Dataview
 
                 for (int i = 0; i < dataArray.Length; i++)
                 {
-                    string[] colArr = _UnitC ? _ColArrayEx : _ColArray;                        
+                    //string[] colArr = _UnitC ? _ColArrayEx : _ColArray;
 
-                    string unit = SubStringWidthPad(dataArray[i], colArr[i].Length);
+                    string unit = SubStringWidthPad(dataArray[i], pad); // colArr[i].Length);
                     if (i < dataArray.Length - 1)
                         data += string.Format("{0}{1}", unit, _Delimeter);
                     else

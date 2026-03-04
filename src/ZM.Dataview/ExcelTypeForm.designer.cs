@@ -34,12 +34,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbXls = new System.Windows.Forms.RadioButton();
             this.rbXlsx = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rbEIS = new System.Windows.Forms.RadioButton();
-            this.rbCycle = new System.Windows.Forms.RadioButton();
-            this.rbGeneral = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -79,41 +74,11 @@
             this.rbXlsx.TabStop = true;
             this.rbXlsx.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
-            // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Controls.Add(this.rbEIS);
-            this.groupBox3.Controls.Add(this.rbCycle);
-            this.groupBox3.Controls.Add(this.rbGeneral);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // rbEIS
-            // 
-            resources.ApplyResources(this.rbEIS, "rbEIS");
-            this.rbEIS.Name = "rbEIS";
-            this.rbEIS.UseVisualStyleBackColor = true;
-            // 
-            // rbCycle
-            // 
-            resources.ApplyResources(this.rbCycle, "rbCycle");
-            this.rbCycle.Name = "rbCycle";
-            this.rbCycle.UseVisualStyleBackColor = true;
-            // 
-            // rbGeneral
-            // 
-            resources.ApplyResources(this.rbGeneral, "rbGeneral");
-            this.rbGeneral.Checked = true;
-            this.rbGeneral.Name = "rbGeneral";
-            this.rbGeneral.TabStop = true;
-            this.rbGeneral.UseVisualStyleBackColor = true;
-            // 
             // ExcelTypeForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnCancel;
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.groupBox1);
@@ -123,8 +88,6 @@
             this.Name = "ExcelTypeForm";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -136,9 +99,5 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbXls;
         private System.Windows.Forms.RadioButton rbXlsx;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton rbCycle;
-        private System.Windows.Forms.RadioButton rbGeneral;
-        private System.Windows.Forms.RadioButton rbEIS;
     }
 }

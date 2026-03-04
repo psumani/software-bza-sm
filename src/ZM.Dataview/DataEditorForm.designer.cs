@@ -36,26 +36,33 @@
             this.tsbtnOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnReload = new System.Windows.Forms.ToolStripButton();
+            this.gap6 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnStop = new System.Windows.Forms.ToolStripButton();
             this.gap3 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnSave = new System.Windows.Forms.ToolStripButton();
             this.gap4 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnOpenSchedule = new System.Windows.Forms.ToolStripButton();
             this.gap5 = new System.Windows.Forms.ToolStripLabel();
-            this.tsbtnSaveText = new System.Windows.Forms.ToolStripButton();
-            this.tsbtnExportExcel = new System.Windows.Forms.ToolStripButton();
-            this.gap6 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnViewGraph = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtnSaveText = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtnExportExcel = new System.Windows.Forms.ToolStripButton();
             this.gap7 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnRunZMan = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.tsbtnFileHeaderInfor = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerText = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerSave = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerExcel = new System.ComponentModel.BackgroundWorker();
+            this.timerBgChecker = new System.Windows.Forms.Timer(this.components);
+            this.legend1 = new NationalInstruments.UI.WindowsForms.Legend();
+            this.legendItem1 = new NationalInstruments.UI.LegendItem();
             this.panelMain = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnUndo = new System.Windows.Forms.Button();
@@ -65,7 +72,6 @@
             this.ChkEIS = new System.Windows.Forms.CheckBox();
             this.ChkDCAux = new System.Windows.Forms.CheckBox();
             this.ChkDC = new System.Windows.Forms.CheckBox();
-            this.DataFlexGrid = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.chkCycleNo = new System.Windows.Forms.CheckBox();
@@ -74,8 +80,6 @@
             this.ribbonLabel1 = new C1.Win.C1Ribbon.RibbonLabel();
             this.ribbonProgressBar1 = new C1.Win.C1Ribbon.RibbonProgressBar();
             this.ribbonLabel2 = new C1.Win.C1Ribbon.RibbonLabel();
-            this.legend1 = new NationalInstruments.UI.WindowsForms.Legend();
-            this.legendItem1 = new NationalInstruments.UI.LegendItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbCellType = new System.Windows.Forms.TextBox();
             this.lblCellType = new System.Windows.Forms.Label();
@@ -95,21 +99,17 @@
             this.lblCapacity1 = new System.Windows.Forms.Label();
             this.label_TestTime = new System.Windows.Forms.Label();
             this.label_FileName = new System.Windows.Forms.Label();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorkerText = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorkerSave = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorkerExcel = new System.ComponentModel.BackgroundWorker();
-            this.timerBgChecker = new System.Windows.Forms.Timer(this.components);
+            this.DataFlexGrid = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.toolStripMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.legend1)).BeginInit();
             this.panelMain.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBoxViewOpt.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).BeginInit();
             this.groupBoxFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c1StatusBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.legend1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textFileName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMain
@@ -122,24 +122,24 @@
             this.tsbtnOpen,
             this.toolStripLabel1,
             this.tsbtnReload,
+            this.gap6,
             this.tsbtnStop,
             this.gap3,
             this.tsbtnSave,
             this.gap4,
             this.tsbtnOpenSchedule,
             this.gap5,
-            this.tsbtnSaveText,
-            this.tsbtnExportExcel,
-            this.gap6,
             this.tsbtnViewGraph,
             this.toolStripLabel2,
+            this.tsbtnSaveText,
+            this.toolStripLabel3,
+            this.tsbtnExportExcel,
             this.gap7,
             this.tsbtnRunZMan,
             this.toolStripLabel6,
             this.toolStripLabel5,
             this.tsbtnPrint,
             this.toolStripLabel4,
-            this.toolStripLabel3,
             this.tsbtnFileHeaderInfor,
             this.toolStripLabel7});
             this.toolStripMain.Name = "toolStripMain";
@@ -169,6 +169,11 @@
             this.tsbtnReload.Name = "tsbtnReload";
             this.tsbtnReload.Click += new System.EventHandler(this.tsbtnReload_Click);
             // 
+            // gap6
+            // 
+            this.gap6.Name = "gap6";
+            resources.ApplyResources(this.gap6, "gap6");
+            // 
             // tsbtnStop
             // 
             this.tsbtnStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -197,6 +202,7 @@
             // 
             this.tsbtnOpenSchedule.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.tsbtnOpenSchedule, "tsbtnOpenSchedule");
+            this.tsbtnOpenSchedule.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.DeviceTest;
             this.tsbtnOpenSchedule.Name = "tsbtnOpenSchedule";
             this.tsbtnOpenSchedule.Click += new System.EventHandler(this.tsbtnOpenSchedule_Click);
             // 
@@ -204,25 +210,6 @@
             // 
             this.gap5.Name = "gap5";
             resources.ApplyResources(this.gap5, "gap5");
-            // 
-            // tsbtnSaveText
-            // 
-            this.tsbtnSaveText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnSaveText, "tsbtnSaveText");
-            this.tsbtnSaveText.Name = "tsbtnSaveText";
-            this.tsbtnSaveText.Click += new System.EventHandler(this.tsbtnSaveText_Click);
-            // 
-            // tsbtnExportExcel
-            // 
-            this.tsbtnExportExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.tsbtnExportExcel, "tsbtnExportExcel");
-            this.tsbtnExportExcel.Name = "tsbtnExportExcel";
-            this.tsbtnExportExcel.Click += new System.EventHandler(this.tsbtnExportExcel_Click);
-            // 
-            // gap6
-            // 
-            this.gap6.Name = "gap6";
-            resources.ApplyResources(this.gap6, "gap6");
             // 
             // tsbtnViewGraph
             // 
@@ -235,6 +222,25 @@
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
             resources.ApplyResources(this.toolStripLabel2, "toolStripLabel2");
+            // 
+            // tsbtnSaveText
+            // 
+            this.tsbtnSaveText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnSaveText, "tsbtnSaveText");
+            this.tsbtnSaveText.Name = "tsbtnSaveText";
+            this.tsbtnSaveText.Click += new System.EventHandler(this.tsbtnSaveText_Click);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            resources.ApplyResources(this.toolStripLabel3, "toolStripLabel3");
+            // 
+            // tsbtnExportExcel
+            // 
+            this.tsbtnExportExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnExportExcel, "tsbtnExportExcel");
+            this.tsbtnExportExcel.Name = "tsbtnExportExcel";
+            this.tsbtnExportExcel.Click += new System.EventHandler(this.tsbtnExportExcel_Click);
             // 
             // gap7
             // 
@@ -270,11 +276,6 @@
             this.toolStripLabel4.Name = "toolStripLabel4";
             resources.ApplyResources(this.toolStripLabel4, "toolStripLabel4");
             // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            resources.ApplyResources(this.toolStripLabel3, "toolStripLabel3");
-            // 
             // tsbtnFileHeaderInfor
             // 
             this.tsbtnFileHeaderInfor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -288,16 +289,63 @@
             this.toolStripLabel7.Name = "toolStripLabel7";
             resources.ApplyResources(this.toolStripLabel7, "toolStripLabel7");
             // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // backgroundWorkerText
+            // 
+            this.backgroundWorkerText.WorkerReportsProgress = true;
+            this.backgroundWorkerText.WorkerSupportsCancellation = true;
+            this.backgroundWorkerText.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerText_DoWork);
+            this.backgroundWorkerText.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerText_ProgressChanged);
+            this.backgroundWorkerText.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerText_RunWorkerCompleted);
+            // 
+            // backgroundWorkerSave
+            // 
+            this.backgroundWorkerSave.WorkerReportsProgress = true;
+            this.backgroundWorkerSave.WorkerSupportsCancellation = true;
+            this.backgroundWorkerSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerSave_DoWork);
+            this.backgroundWorkerSave.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerSave_ProgressChanged);
+            this.backgroundWorkerSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerSave_RunWorkerCompleted);
+            // 
+            // backgroundWorkerExcel
+            // 
+            this.backgroundWorkerExcel.WorkerReportsProgress = true;
+            this.backgroundWorkerExcel.WorkerSupportsCancellation = true;
+            this.backgroundWorkerExcel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerExcel_DoWork);
+            this.backgroundWorkerExcel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerExcel_ProgressChanged);
+            this.backgroundWorkerExcel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerExcel_RunWorkerCompleted);
+            // 
+            // timerBgChecker
+            // 
+            this.timerBgChecker.Tick += new System.EventHandler(this.timerBgChecker_Tick);
+            // 
+            // legend1
+            // 
+            this.legend1.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
+            this.legendItem1});
+            resources.ApplyResources(this.legend1, "legend1");
+            this.legend1.Name = "legend1";
+            // 
+            // legendItem1
+            // 
+            this.legendItem1.Text = "Item 0";
+            // 
             // panelMain
             // 
+            resources.ApplyResources(this.panelMain, "panelMain");
+            this.panelMain.Controls.Add(this.DataFlexGrid);
             this.panelMain.Controls.Add(this.groupBox3);
             this.panelMain.Controls.Add(this.groupBoxViewOpt);
-            this.panelMain.Controls.Add(this.DataFlexGrid);
             this.panelMain.Controls.Add(this.groupBoxFilter);
             this.panelMain.Controls.Add(this.c1StatusBar1);
             this.panelMain.Controls.Add(this.legend1);
             this.panelMain.Controls.Add(this.groupBox1);
-            resources.ApplyResources(this.panelMain, "panelMain");
             this.panelMain.Name = "panelMain";
             // 
             // groupBox3
@@ -359,28 +407,12 @@
             this.ChkDC.UseVisualStyleBackColor = true;
             this.ChkDC.CheckedChanged += new System.EventHandler(this.ChkDC_CheckedChanged);
             // 
-            // DataFlexGrid
-            // 
-            this.DataFlexGrid.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
-            this.DataFlexGrid.AllowFiltering = true;
-            this.DataFlexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
-            resources.ApplyResources(this.DataFlexGrid, "DataFlexGrid");
-            this.DataFlexGrid.AutoClipboard = true;
-            this.DataFlexGrid.Name = "DataFlexGrid";
-            this.DataFlexGrid.Rows.Count = 1;
-            this.DataFlexGrid.Rows.DefaultSize = 20;
-            this.DataFlexGrid.Rows.GlyphRow = 0;
-            this.DataFlexGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.RowRange;
-            this.DataFlexGrid.ShowCellLabels = true;
-            this.DataFlexGrid.StyleInfo = resources.GetString("DataFlexGrid.StyleInfo");
-            this.DataFlexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
-            // 
             // groupBoxFilter
             // 
-            resources.ApplyResources(this.groupBoxFilter, "groupBoxFilter");
             this.groupBoxFilter.Controls.Add(this.btnSearch);
             this.groupBoxFilter.Controls.Add(this.chkCycleNo);
             this.groupBoxFilter.Controls.Add(this.tbCycleNo);
+            resources.ApplyResources(this.groupBoxFilter, "groupBoxFilter");
             this.groupBoxFilter.Name = "groupBoxFilter";
             this.groupBoxFilter.TabStop = false;
             // 
@@ -408,10 +440,10 @@
             this.c1StatusBar1.LeftPaneItems.Add(this.ribbonLabel1);
             this.c1StatusBar1.LeftPaneItems.Add(this.ribbonProgressBar1);
             this.c1StatusBar1.LeftPaneItems.Add(this.ribbonLabel2);
-            this.c1StatusBar1.Location = new System.Drawing.Point(0, 814);
+            this.c1StatusBar1.Location = new System.Drawing.Point(0, 653);
             this.c1StatusBar1.Name = "c1StatusBar1";
             resources.ApplyResources(this.c1StatusBar1, "c1StatusBar1");
-            this.c1StatusBar1.Size = new System.Drawing.Size(1659, 22);
+            this.c1StatusBar1.Size = new System.Drawing.Size(880, 22);
             // 
             // ribbonLabel1
             // 
@@ -429,17 +461,6 @@
             this.ribbonLabel2.Name = "ribbonLabel2";
             resources.ApplyResources(this.ribbonLabel2, "ribbonLabel2");
             this.ribbonLabel2.Visible = false;
-            // 
-            // legend1
-            // 
-            this.legend1.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
-            this.legendItem1});
-            resources.ApplyResources(this.legend1, "legend1");
-            this.legend1.Name = "legend1";
-            // 
-            // legendItem1
-            // 
-            this.legendItem1.Text = "Item 0";
             // 
             // groupBox1
             // 
@@ -564,41 +585,21 @@
             resources.ApplyResources(this.label_FileName, "label_FileName");
             this.label_FileName.Name = "label_FileName";
             // 
-            // backgroundWorker
+            // DataFlexGrid
             // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            // 
-            // backgroundWorkerText
-            // 
-            this.backgroundWorkerText.WorkerReportsProgress = true;
-            this.backgroundWorkerText.WorkerSupportsCancellation = true;
-            this.backgroundWorkerText.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerText_DoWork);
-            this.backgroundWorkerText.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerText_ProgressChanged);
-            this.backgroundWorkerText.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerText_RunWorkerCompleted);
-            // 
-            // backgroundWorkerSave
-            // 
-            this.backgroundWorkerSave.WorkerReportsProgress = true;
-            this.backgroundWorkerSave.WorkerSupportsCancellation = true;
-            this.backgroundWorkerSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerSave_DoWork);
-            this.backgroundWorkerSave.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerSave_ProgressChanged);
-            this.backgroundWorkerSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerSave_RunWorkerCompleted);
-            // 
-            // backgroundWorkerExcel
-            // 
-            this.backgroundWorkerExcel.WorkerReportsProgress = true;
-            this.backgroundWorkerExcel.WorkerSupportsCancellation = true;
-            this.backgroundWorkerExcel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerExcel_DoWork);
-            this.backgroundWorkerExcel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerExcel_ProgressChanged);
-            this.backgroundWorkerExcel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerExcel_RunWorkerCompleted);
-            // 
-            // timerBgChecker
-            // 
-            this.timerBgChecker.Tick += new System.EventHandler(this.timerBgChecker_Tick);
+            this.DataFlexGrid.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.DataFlexGrid.AllowFiltering = true;
+            this.DataFlexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            resources.ApplyResources(this.DataFlexGrid, "DataFlexGrid");
+            this.DataFlexGrid.AutoClipboard = true;
+            this.DataFlexGrid.Name = "DataFlexGrid";
+            this.DataFlexGrid.Rows.Count = 1;
+            this.DataFlexGrid.Rows.DefaultSize = 20;
+            this.DataFlexGrid.Rows.GlyphRow = 0;
+            this.DataFlexGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.RowRange;
+            this.DataFlexGrid.ShowCellLabels = true;
+            this.DataFlexGrid.StyleInfo = resources.GetString("DataFlexGrid.StyleInfo");
+            this.DataFlexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
             // 
             // DataEditorForm
             // 
@@ -615,19 +616,19 @@
             this.DragOver += new System.Windows.Forms.DragEventHandler(this.FormDataEditor_DragOver);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.legend1)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBoxViewOpt.ResumeLayout(false);
             this.groupBoxViewOpt.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).EndInit();
             this.groupBoxFilter.ResumeLayout(false);
             this.groupBoxFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c1StatusBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.legend1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textFileName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -651,51 +652,23 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel gap7;
         private System.Windows.Forms.ToolStripButton tsbtnPrint;
-        private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textDataMemo;
-        private System.Windows.Forms.TextBox textUser;
-        private System.Windows.Forms.TextBox textDataCount;
-        private System.Windows.Forms.TextBox textTestTime;
-        private System.Windows.Forms.Label label_User;
-        private System.Windows.Forms.Label label_Memo;
-        private System.Windows.Forms.Label label_DataCount;
-        private System.Windows.Forms.Label label_TestTime;
-        private System.Windows.Forms.Label label_FileName;
-        private System.Windows.Forms.TextBox textScheduleFile;
-        private System.Windows.Forms.Label label_ScheduleFile;
         private System.Windows.Forms.ToolStripButton tsbtnStop;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private NationalInstruments.UI.WindowsForms.Legend legend1;
-        private NationalInstruments.UI.LegendItem legendItem1;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.ComponentModel.BackgroundWorker backgroundWorkerText;
-        private System.Windows.Forms.TextBox tbCycleNo;
-        private System.Windows.Forms.CheckBox chkCycleNo;
-        private System.Windows.Forms.Button btnSearch;
-        private C1.Win.C1Ribbon.C1StatusBar c1StatusBar1;
-        private C1.Win.C1Ribbon.RibbonProgressBar ribbonProgressBar1;
-        private C1.Win.C1Ribbon.RibbonLabel ribbonLabel1;
-        private C1.Win.C1Ribbon.RibbonLabel ribbonLabel2;
         private System.ComponentModel.BackgroundWorker backgroundWorkerSave;
-        private C1.Win.C1Input.C1TextBox textFileName;
         private System.ComponentModel.BackgroundWorker backgroundWorkerExcel;
-        private System.Windows.Forms.GroupBox groupBoxFilter;
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.TextBox tbDataCapacity;
-        private System.Windows.Forms.Label lblCapacity1;
         private System.Windows.Forms.Timer timerBgChecker;
         private System.Windows.Forms.ToolStripButton tsbtnFileHeaderInfor;
         private System.Windows.Forms.ToolStripButton tsbtnViewGraph;
-        private System.Windows.Forms.TextBox tbWriterName;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblCellType;
-        private System.Windows.Forms.TextBox tbCellType;
         private System.Windows.Forms.ToolStripButton tsbtnRunZMan;
         private System.Windows.Forms.ToolStripLabel toolStripLabel7;
-        private C1.Win.C1FlexGrid.C1FlexGrid DataFlexGrid;
+        private NationalInstruments.UI.WindowsForms.Legend legend1;
+        private NationalInstruments.UI.LegendItem legendItem1;
+        private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.Button btnDeleteData;
@@ -704,6 +677,34 @@
         private System.Windows.Forms.CheckBox ChkEIS;
         private System.Windows.Forms.CheckBox ChkDCAux;
         private System.Windows.Forms.CheckBox ChkDC;
+        private System.Windows.Forms.GroupBox groupBoxFilter;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.CheckBox chkCycleNo;
+        private System.Windows.Forms.TextBox tbCycleNo;
+        private C1.Win.C1Ribbon.C1StatusBar c1StatusBar1;
+        private C1.Win.C1Ribbon.RibbonLabel ribbonLabel1;
+        private C1.Win.C1Ribbon.RibbonProgressBar ribbonProgressBar1;
+        private C1.Win.C1Ribbon.RibbonLabel ribbonLabel2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox tbCellType;
+        private System.Windows.Forms.Label lblCellType;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbWriterName;
+        private C1.Win.C1Input.C1TextBox textFileName;
+        private System.Windows.Forms.TextBox textDataMemo;
+        private System.Windows.Forms.TextBox textUser;
+        private System.Windows.Forms.TextBox textDataCount;
+        private System.Windows.Forms.TextBox textScheduleFile;
+        private System.Windows.Forms.TextBox tbDataCapacity;
+        private System.Windows.Forms.TextBox textTestTime;
+        private System.Windows.Forms.Label label_User;
+        private System.Windows.Forms.Label label_Memo;
+        private System.Windows.Forms.Label label_ScheduleFile;
+        private System.Windows.Forms.Label label_DataCount;
+        private System.Windows.Forms.Label lblCapacity1;
+        private System.Windows.Forms.Label label_TestTime;
+        private System.Windows.Forms.Label label_FileName;
+        private C1.Win.C1FlexGrid.C1FlexGrid DataFlexGrid;
     }
 }
 

@@ -118,239 +118,98 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ViewRefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\ViewRefresh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1_0005" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0005.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1_about" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_about.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DeviceTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DeviceTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CalibCmds" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\CalibCmds.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wonatech" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\wonatech.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExportToExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\ExportToExcel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1_0000" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0000.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DeviceTest_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\DeviceTest_inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MBZA1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\MBZA1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CloseAll1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\CloseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="List1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\List.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1_0007" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0007.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="start3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\start3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Upload" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\List1\Upload.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DisGate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\DisGate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ViewNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\View.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LogRefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\LogRefresh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Refresh2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\제목 없음.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tool1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\Tool1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="refresh1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\List1\refresh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="write" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\List1\write.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object42" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object42.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ZoomIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\ZoomIn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="burn1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\List1\burn1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="reports" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image4\reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="arrow_left_bold_box" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\arrow-left-bold-box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object11.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loop0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Animation\Loop0.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Monitor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\Monitor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object12.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="checkbox_blank_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\checkbox-blank-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ViewMax" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ViewBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\Config.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\PanY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loop5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Animation\Loop5.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="redlink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\redlink.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zm1_0008" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image\zm1_0008.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ZoomPoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\ZoomPoint.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MatchScale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\MatchScale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PanX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\PanX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="realtimenew2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\realtimenew2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="start2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\start2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zm1_0002" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0002.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="realtimenew_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\realtimenew_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Loop2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Animation\Loop2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CopyToClipboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\CopyToClipboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="chevron_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\chevron-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AutoscaleX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\AutoscaleX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="object22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object22.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play_circle_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\play-circle-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="List1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\List.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Desc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Desc.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object41" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object41.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loop3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Animation\Loop3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Editsch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EditRelationship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CalibFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\CalibFail.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ZoomOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\ZoomOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ListBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\ListBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sine1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image3\images (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tester" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image4\Untitled - 40.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanningY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\PanningY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FileSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\List1\FileSelect.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="newdoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image3\images (7).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HambergerMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\HambergerMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AutoscaleY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\AutoscaleY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanningXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\PanningXY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="checkbox_blank_circle_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\checkbox-blank-circle-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AutoscaleXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\AutoscaleXY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object31" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object31.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\Monitor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="zm1_0000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0000.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ConnGate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image\ConnGate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Loop4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Animation\Loop4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddClause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddClause.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="checkbox_blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\checkbox-blank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="object11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object11.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Exit.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBoxUnchecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxUnchecked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Research" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image4\Research.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DisGate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\DisGate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zm1_0006" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0006.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CalibCmds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\CalibCmds.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Registry" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\Registry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="List" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\List.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RangeColumnChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image4\RangeColumnChart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view_16xMD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\view_16xMD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loop5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Animation\Loop5.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\settings-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\EditLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CalibFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\CalibFail.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play_circle_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\play-circle-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\List1\refresh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CloseAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\CloseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sine1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image3\images (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chip1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\chip1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="schedule" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image1\schedule.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -358,196 +217,340 @@
   <data name="Tool3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image1\Tool3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow_right_bold_box_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\arrow-right-bold-box-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanningX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\PanningX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\PanXY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DeviceTest_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\DeviceTest_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loop2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Animation\Loop2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="start4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\start4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loop1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\Animation\Loop1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Pointer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Pointer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="deviceinfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\List1\deviceinfo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chip1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\chip1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExportData" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\ExportData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DescriptionViewer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DescriptionViewer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chevron_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\chevron-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1_0003" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0003.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Device" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\Device.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CloseAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\CloseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Report1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Report.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chevron_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\chevron-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExportImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\ExportImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Print" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\Print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="checkbox_blank_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\checkbox-blank-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MatchScale" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\MatchScale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="List" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\List.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object32.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="start1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\start1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="arrow_left_bold_box_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\arrow-left-bold-box-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CalibFail1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\CalibFail.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="start2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\start2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MultiMeter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image2\images (12).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RemoveGuides" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\RemoveGuides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ConfigureComputer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\ConfigureComputer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="zm1_0009" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image\zm1_0009.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow_right_bold_box" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\arrow-right-bold-box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Registry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\Registry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image4\report.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="start3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\start3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="object22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object22.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow_left_bold_box" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\arrow-left-bold-box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zm1_0004" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0004.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="object21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\object21.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zm1_0001" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image\zm1_0001.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TestSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\TestSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CalibItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\CalibItem.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tool2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\Tool2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="start5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image0\start5.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="settings_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\settings-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CloseSolution" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\CloseSolution.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Link" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\Link.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EditInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\EditInput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EditLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\EditLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NetConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image6\NetConfig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Monitor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\Monitor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StartLogging" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image6\StartLogging.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TransitioningContent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\TransitioningContent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_16xMD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\png\view_16xMD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AddClause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddClause.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RangeColumnChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image4\RangeColumnChart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CheckBoxChecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxChecked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CheckBoxGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxGroup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Upload" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\List1\Upload.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxMixed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxMixed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CheckBoxUnchecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxUnchecked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="start1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\start1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="greenchip1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\greenchip1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="object41" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object41.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Report1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Report.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CheckBoxChecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxChecked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="object31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object31.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chevron_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\chevron-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tool2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\Tool2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CalibFail1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\CalibFail.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AutoscaleX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\AutoscaleX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reports" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image4\reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="checkbox_blank_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\checkbox-blank-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanningXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\PanningXY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="checkbox_blank_circle_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\checkbox-blank-circle-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Editsch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditRelationship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Research" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image4\Research.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wonatech" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\wonatech.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MultiMeter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image2\images (12).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TestSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\TestSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loop3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Animation\Loop3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loop0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Animation\Loop0.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Refresh2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\제목 없음.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeviceTest_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\DeviceTest_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\EditInput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeviceTest_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\DeviceTest_inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Link" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\Link.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_0002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0002.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RemoveGuides" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\RemoveGuides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ListBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\ListBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tester" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image4\Untitled - 40.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="object32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object32.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\Config.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AutoscaleY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\AutoscaleY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Device" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\Device.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="greenlink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image1\greenlink.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="checkbox_blank_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\checkbox-blank-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_left_bold_box_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\arrow-left-bold-box-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CloseSolution" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\CloseSolution.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CheckBoxGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxGroup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="object42" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object42.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\PanX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Print" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tool1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\Tool1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LogRefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\LogRefresh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\PanY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="start4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\start4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_0001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0001.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\Exit.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoomOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\ZoomOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="write" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\List1\write.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeviceTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DeviceTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_right_bold_box" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\arrow-right-bold-box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanningY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\PanningY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deviceinfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\List1\deviceinfo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TransitioningContent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\TransitioningContent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pointer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Pointer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_0003" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0003.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="checkbox_blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\checkbox-blank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Desc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Desc.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CalibItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\CalibItem.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loop4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Animation\Loop4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\Monitor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ViewRefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\ViewRefresh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CloseAll1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\CloseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CopyToClipboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\CopyToClipboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="redchip1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\doc\Image1\redchip1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="redlink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\doc\Image1\redlink.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="zm1_0005" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0005.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\Pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DescriptionViewer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DescriptionViewer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loop1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\Animation\Loop1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoomIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\ZoomIn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="object12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object12.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HambergerMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\HambergerMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="object21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\object21.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AutoscaleXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\AutoscaleXY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newdoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image3\images (7).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExportImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\ExportImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_0007" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0007.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="start5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image0\start5.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FileSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\List1\FileSelect.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ViewMax" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ViewBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="greenchip1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image1\greenchip1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanningX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\PanningX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="burn1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\List1\burn1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MBZA1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\MBZA1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExportData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\ExportData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_0004" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0004.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ViewNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\View.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="realtimenew2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\realtimenew2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\PanXY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_right_bold_box_outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\arrow-right-bold-box-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NetConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\NetConfig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image4\report.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_0006" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_0006.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="realtimenew_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\realtimenew_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoomPoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\ZoomPoint.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConfigureComputer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image6\ConfigureComputer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExportToExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\png\ExportToExcel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zm1_about" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\doc\Image\zm1_about.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

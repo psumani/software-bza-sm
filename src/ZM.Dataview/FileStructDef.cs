@@ -942,13 +942,13 @@ namespace ZiveLab.ZM.Dataview
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct st_zim_TestDataItems
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_AUX_CHANNEL)]
         public st_zim_TestDataItem[] mdata;
 
         public st_zim_TestDataItems(byte init)
         {
-            mdata = new st_zim_TestDataItem[4];
-            for (int i = 0; i < 4; i++)
+            mdata = new st_zim_TestDataItem[MBZA_Constant.MAX_AUX_CHANNEL];
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNEL; i++)
             {
                 mdata[i] = new st_zim_TestDataItem(0);
             }
@@ -956,7 +956,7 @@ namespace ZiveLab.ZM.Dataview
 
         public void initialize()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNEL; i++)
             {
                 mdata[i].initialize();
             }
@@ -1001,7 +1001,7 @@ namespace ZiveLab.ZM.Dataview
         public double iacrng;
         public double vdcrng;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_AUX_BOARD)]
         public st_zim_TestDataItems[] mdata;
 
         public stDefTestData(int init)
@@ -1024,8 +1024,8 @@ namespace ZiveLab.ZM.Dataview
             real = 0.0;
             img = 0.0;
 
-            mdata = new st_zim_TestDataItems[3];
-            for (int i = 0; i < 3; i++)
+            mdata = new st_zim_TestDataItems[MBZA_Constant.MAX_AUX_BOARD];
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_BOARD; i++)
             {
                 mdata[i] = new st_zim_TestDataItems(0);
             }
@@ -1219,6 +1219,7 @@ namespace ZiveLab.ZM.Dataview
 
         public UnitReportData()
         {
+            Enable = true;
             mRawData = new stDefTestData(0);
             TestTime = TimeSpan.Zero;
             CycleTime = TimeSpan.Zero;
@@ -1228,12 +1229,12 @@ namespace ZiveLab.ZM.Dataview
             Capacity = 0.0;
             Energy = 0.0;
             MainZ = new stItemZ(0);
-            AuxZ = new stItemZ[12];
-            AuxPower = new double[12];
-            AuxLoad = new double[12];
-            AuxVdc = new double[12];
-            AuxEnergy = new double[12];
-            for (int i=0; i<12; i++)
+            AuxZ = new stItemZ[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxPower = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxLoad = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxVdc = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxEnergy = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            for (int i=0; i< MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
                 AuxZ[i] = new stItemZ(0);
                 AuxPower[i] = 0.0;
@@ -1246,7 +1247,7 @@ namespace ZiveLab.ZM.Dataview
         public UnitReportData(stDefTestData rawdata)
         {
             mRawData = new stDefTestData(0);
-
+            Enable = true;
             mRawData = rawdata;
             TestTime = TimeSpan.FromSeconds(mRawData.TestTime);
             CycleTime = TimeSpan.FromSeconds(mRawData.CycleTime);
@@ -1257,12 +1258,12 @@ namespace ZiveLab.ZM.Dataview
             Capacity = 0.0;
             Energy = 0.0;
             MainZ = new stItemZ(0);
-            AuxZ = new stItemZ[12];
-            AuxPower = new double[12];
-            AuxLoad = new double[12];
-            AuxVdc = new double[12];
-            AuxEnergy = new double[12];
-            for (int i = 0; i < 12; i++)
+            AuxZ = new stItemZ[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxPower = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxLoad = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxVdc = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxEnergy = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
                 AuxZ[i] = new stItemZ(0);
                 AuxPower[i] = 0.0;
@@ -1295,8 +1296,9 @@ namespace ZiveLab.ZM.Dataview
 
             Power = mRawData.Vdc * mRawData.Idc;
             Load = (mRawData.Idc == 0.0) ? 0.0 : mRawData.Vdc / mRawData.Idc;
+
             MainZ.initialize(mRawData.fFreq, mRawData.real, mRawData.img);    
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
                 bd = i / 4;
                 bdch = i % 4;
@@ -1312,7 +1314,7 @@ namespace ZiveLab.ZM.Dataview
             int bd, bdch;
 
             MainZ.initialize(mRawData.fFreq, mRawData.real, mRawData.img);
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
                 bd = i / 4;
                 bdch = i % 4;
@@ -1450,6 +1452,7 @@ namespace ZiveLab.ZM.Dataview
                 _CheckAuxBoard[0] = (_ResHead.systemInfo.ChkZIM[1] == 0) ? false : true;
                 _CheckAuxBoard[1] = (_ResHead.systemInfo.ChkZIM[2] == 0) ? false : true;
                 _CheckAuxBoard[2] = (_ResHead.systemInfo.ChkZIM[3] == 0) ? false : true;
+
                 if (_CheckAuxBoard[2]) MaxAuxCh = 12;
                 else if (_CheckAuxBoard[1]) MaxAuxCh = 8;
                 else if (_CheckAuxBoard[0]) MaxAuxCh = 4;

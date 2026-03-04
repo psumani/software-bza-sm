@@ -232,6 +232,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap AutoscaleXY {
+            get {
+                object obj = ResourceManager.GetObject("AutoscaleXY", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Aux1과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Aux1 {
@@ -543,6 +553,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static string BZADataFiles {
             get {
                 return ResourceManager.GetString("BZADataFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap c {
+            get {
+                object obj = ResourceManager.GetObject("c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1015,6 +1035,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap DeviceTest {
+            get {
+                object obj = ResourceManager.GetObject("DeviceTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Direction과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Direction {
@@ -1101,6 +1131,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static string done {
             get {
                 return ResourceManager.GetString("done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap e {
+            get {
+                object obj = ResourceManager.GetObject("e", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1448,6 +1488,26 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grpbode {
+            get {
+                object obj = ResourceManager.GetObject("Grpbode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap grpnyquist {
+            get {
+                object obj = ResourceManager.GetObject("grpnyquist", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Idc(A)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Idc_A {
@@ -1574,6 +1634,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static System.Drawing.Bitmap ivmantafel {
             get {
                 object obj = ResourceManager.GetObject("ivmantafel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ivt1 {
+            get {
+                object obj = ResourceManager.GetObject("ivt1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2077,6 +2147,26 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap qvsv {
+            get {
+                object obj = ResourceManager.GetObject("qvsv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap rctime {
+            get {
+                object obj = ResourceManager.GetObject("rctime", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Reading...과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Reading_ddd {
@@ -2131,6 +2221,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Report {
+            get {
+                object obj = ResourceManager.GetObject("Report", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Resampling...과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Resampling_ddd {
@@ -2163,6 +2263,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static string RsCs_vs_Freq_Graph {
             get {
                 return ResourceManager.GetString("RsCs_vs_Freq_Graph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap rsrptime {
+            get {
+                object obj = ResourceManager.GetObject("rsrptime", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -2243,7 +2353,7 @@ namespace ZiveLab.ZM.Dataview.Properties {
         /// </summary>
         internal static string Run_ZMan {
             get {
-                return ResourceManager.GetString("Run_ZMan", resourceCulture);
+                return ResourceManager.GetString("Create a Z# file and run ZMAN.", resourceCulture);
             }
         }
         
@@ -2370,6 +2480,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static string Select_Specific_Current {
             get {
                 return ResourceManager.GetString("Select_Specific_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap SelectCell {
+            get {
+                object obj = ResourceManager.GetObject("SelectCell", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -2653,6 +2773,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap tzv {
+            get {
+                object obj = ResourceManager.GetObject("tzv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Uncheck All Items과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Uncheck_All_Items {
@@ -2685,6 +2815,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static string User_Stop {
             get {
                 return ResourceManager.GetString("User_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap v {
+            get {
+                object obj = ResourceManager.GetObject("v", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -2815,6 +2955,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap z {
+            get {
+                object obj = ResourceManager.GetObject("z", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   ZIM Board과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string ZIM_Board {
@@ -2874,6 +3024,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         internal static string Zmag_ohm {
             get {
                 return ResourceManager.GetString("Zmag_ohm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap zman24 {
+            get {
+                object obj = ResourceManager.GetObject("zman24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

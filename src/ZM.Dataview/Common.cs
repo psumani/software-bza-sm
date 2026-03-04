@@ -187,8 +187,6 @@ namespace ZiveLab.ZM.Dataview
             cl.Add(ConstructCell(urgd.TestTime.TotalSeconds.ToString(), CellValues.Number));
             cl.Add(ConstructCell((urgd.mRawData.nCycle + 1).ToString(), CellValues.Number));
             cl.Add(ConstructCell(urgd.CycleTime.TotalSeconds.ToString(), CellValues.Number));
-            cl.Add(ConstructCell((urgd.mRawData.nTaskNo + 1).ToString(), CellValues.Number));
-            cl.Add(ConstructCell(urgd.StepTime.TotalSeconds.ToString(), CellValues.Number));
             cl.Add(ConstructCell(urgd.mRawData.Idc.ToString(), CellValues.Number));
             cl.Add(ConstructCell(urgd.mRawData.Vdc.ToString(), CellValues.Number));
             cl.Add(ConstructCell(urgd.mRawData.Temperature.ToString(), CellValues.Number));
@@ -733,7 +731,7 @@ namespace ZiveLab.ZM.Dataview
     }
     public class DataviewCommon
     {
-        public static DataViewSet LoadFromSetFile(string filename = "C:\\ZIVE DATA\\ZM\\Infor\\DataView.Set")
+        public static DataViewSet LoadFromSetFile(string filename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_DATAVIEW.SET")
         {
             DataViewSet setinfo = null;
 
@@ -759,7 +757,7 @@ namespace ZiveLab.ZM.Dataview
 
             return setinfo;
         }
-        public static void SaveToSetFile(DataViewSet setinfo, string filename = "C:\\ZIVE DATA\\ZM\\Infor\\DataView.Set")
+        public static void SaveToSetFile(DataViewSet setinfo, string filename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_DATAVIEW.SET")
         {
             
             try
@@ -1098,7 +1096,7 @@ namespace ZiveLab.ZM.Dataview
                 {
                     if (dhv._ResHead.systemInfo.ChkZIM[i] == 1)
                     {
-                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}/ SIF(v{1}):{3}-{4}", dhv._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), dhv._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), dhv._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
+                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}", dhv._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), dhv._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(), dhv._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
                     }
                 }
             }
@@ -1112,6 +1110,16 @@ namespace ZiveLab.ZM.Dataview
             list.Add("");
 
             return list.ToArray();
+        }
+    }
+
+    public class Util
+    {
+        public static  Icon BitmapToIcon(Bitmap bmp)
+        {
+            IntPtr Hicon = bmp.GetHicon();
+            Icon tIcon = Icon.FromHandle(Hicon);
+            return tIcon;
         }
     }
 

@@ -827,18 +827,20 @@ namespace ZiveLab.ZM
 
                 if (bCalib == true)
                 {
+
                     stResHeader head = new stResHeader(0);
                     head.SetTechFilename(Encoding.UTF8.GetBytes(calcondfilename[ch]));
-                    head.SetMemo(Encoding.UTF8.GetBytes(""));
+                    head.SetMemo(Encoding.UTF8.GetBytes("Calibration"));
+                    head.SetBattId(Encoding.UTF8.GetBytes("Dummy"));
+                    head.SetUser(Encoding.UTF8.GetBytes("ZiveLab"));
+                    head.mInfo.Capa = 1.0;
+                    head.mInfo.Ch = gBZA.SifLnkLst[serial].iLinkCh[ch];
+                    head.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
+                    head.mInfo.sifch = ch;
+                    head.mInfo.Error = 0;
 
-                    //head.mInfo.Ch = gBZA.SifLnkLst[serial].iLinkCh[ch];
-                    //head.mInfo.Serial = Encoding.UTF8.GetBytes(serial);
-                    //head.mInfo.sifch = ch;
-                    //head.mInfo.Error = 0;
-                    //head.tech = techcalib[ch];
-                    //head.systemInfo.mSIFCfg = mDevInf.mSysCfg.mSIFCfg;
-                    //head.systemInfo.mZimCfg[ch] = mDevInf.mSysCfg.mZimCfg[ch];
-                    //head.systemInfo = mDevInf.mSysCfg; // Tick
+                    head.tech = techcalib[ch];
+                    head.systemInfo = mDevInf.mSysCfg;
 
                     if (mresfile[ch].Start(this.resfilename[ch], head, rtc) == false)
                     {
@@ -850,7 +852,7 @@ namespace ZiveLab.ZM
                 {
                     mresfile[ch].tmphead.tech = tech[ch];
                     mresfile[ch].tmphead.mInfo = mHeadinf[ch];
-                    //mresfile[ch].tmphead.systemInfo = mDevInf.mSysCfg; // test
+                    mresfile[ch].tmphead.systemInfo = mDevInf.mSysCfg; // test
 
                     /* tmp for serial */
                     serial = mDevInf.mSysCfg.mSIFCfg.GetSerialNumber();
@@ -1361,8 +1363,7 @@ namespace ZiveLab.ZM
                 mresfile[ch].tmphead.tech = Oldtech[ch];
                 mresfile[ch].tmphead.mInfo = mHeadinf[ch];
                 mChRtGrp[ch].Initialize(mresfile[ch].tmphead.tech);
-                mresfile[ch].tmphead.systemInfo.mSIFCfg = mDevInf.mSysCfg.mSIFCfg;
-                mresfile[ch].tmphead.systemInfo.mZimCfg[ch] = mDevInf.mSysCfg.mZimCfg[ch];
+                mresfile[ch].tmphead.systemInfo = mDevInf.mSysCfg;
 
                 string sfolder = Path.GetDirectoryName(resfilename[ch]);
                 if(!Directory.Exists(sfolder))

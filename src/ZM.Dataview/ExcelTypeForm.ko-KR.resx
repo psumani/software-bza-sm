@@ -139,27 +139,6 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>형식</value>
   </data>
-  <data name="rbEIS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 21</value>
-  </data>
-  <data name="rbCycle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 21</value>
-  </data>
-  <data name="rbCycle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
-  </data>
-  <data name="rbCycle.Text" xml:space="preserve">
-    <value>사이클</value>
-  </data>
-  <data name="rbGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 17</value>
-  </data>
-  <data name="rbGeneral.Text" xml:space="preserve">
-    <value>일반</value>
-  </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>종류</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

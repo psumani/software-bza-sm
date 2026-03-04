@@ -101,6 +101,12 @@
       <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileStructDef.cs" />
+    <Compile Include="frmSelTarget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelTarget.Designer.cs">
+      <DependentUpon>frmSelTarget.cs</DependentUpon>
+    </Compile>
     <Compile Include="GeneralGraphForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FileHeaderInforForm.resx">
       <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelTarget.resx">
+      <DependentUpon>frmSelTarget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralGraphForm.ko-KR.resx">
       <DependentUpon>GeneralGraphForm.cs</DependentUpon>
@@ -224,7 +233,59 @@
       <Name>ZM_ZIM</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\AutoscaleXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\DeviceTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\zman24.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\grpnyquist.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Grpbode.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\rctime.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\e.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\v.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\rsrptime.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\tzv.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\ivt1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\qvsv.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\SelectCell.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF $(ConfigurationName)==Release C:\SignTools\SignTool\SignTool.exe sign /a /v /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td SHA256 /fd sha256 "$(TargetPath)"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
