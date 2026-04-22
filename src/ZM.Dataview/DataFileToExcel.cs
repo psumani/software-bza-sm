@@ -237,7 +237,7 @@ namespace ZiveLab.ZM.Dataview
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
 
-                                    if (zidx == 0)
+                                    if (itype == 0)
                                     {
                                         _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit).ToString();
                                     }
@@ -417,7 +417,7 @@ namespace ZiveLab.ZM.Dataview
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
 
-                                    if (zidx == 0)
+                                    if (itype == 0)
                                     {
                                         _rowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit).ToString();
                                     }
@@ -1351,7 +1351,7 @@ namespace ZiveLab.ZM.Dataview
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
 
-                                    if (zidx == 0)
+                                    if (itype == 0)
                                     {
                                         RowcolData[row, col++] = CoMath.UnitConv(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit).ToString();
                                     }

@@ -368,9 +368,9 @@
             this.chkitemB1.AutoSize = true;
             this.chkitemB1.Location = new System.Drawing.Point(13, 70);
             this.chkitemB1.Name = "chkitemB1";
-            this.chkitemB1.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB1.Size = new System.Drawing.Size(61, 18);
             this.chkitemB1.TabIndex = 123;
-            this.chkitemB1.Text = "checkBox1";
+            this.chkitemB1.Text = "Aux 1";
             this.chkitemB1.UseVisualStyleBackColor = true;
             this.chkitemB1.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -379,9 +379,9 @@
             this.chkitemB2.AutoSize = true;
             this.chkitemB2.Location = new System.Drawing.Point(13, 94);
             this.chkitemB2.Name = "chkitemB2";
-            this.chkitemB2.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB2.Size = new System.Drawing.Size(61, 18);
             this.chkitemB2.TabIndex = 124;
-            this.chkitemB2.Text = "checkBox1";
+            this.chkitemB2.Text = "Aux 2";
             this.chkitemB2.UseVisualStyleBackColor = true;
             this.chkitemB2.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -390,9 +390,9 @@
             this.chkitemB12.AutoSize = true;
             this.chkitemB12.Location = new System.Drawing.Point(13, 415);
             this.chkitemB12.Name = "chkitemB12";
-            this.chkitemB12.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB12.Size = new System.Drawing.Size(68, 18);
             this.chkitemB12.TabIndex = 134;
-            this.chkitemB12.Text = "checkBox1";
+            this.chkitemB12.Text = "Aux 12";
             this.chkitemB12.UseVisualStyleBackColor = true;
             this.chkitemB12.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -401,9 +401,9 @@
             this.chkitemB3.AutoSize = true;
             this.chkitemB3.Location = new System.Drawing.Point(13, 118);
             this.chkitemB3.Name = "chkitemB3";
-            this.chkitemB3.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB3.Size = new System.Drawing.Size(61, 18);
             this.chkitemB3.TabIndex = 125;
-            this.chkitemB3.Text = "checkBox1";
+            this.chkitemB3.Text = "Aux 3";
             this.chkitemB3.UseVisualStyleBackColor = true;
             this.chkitemB3.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -412,9 +412,9 @@
             this.chkitemB11.AutoSize = true;
             this.chkitemB11.Location = new System.Drawing.Point(13, 391);
             this.chkitemB11.Name = "chkitemB11";
-            this.chkitemB11.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB11.Size = new System.Drawing.Size(68, 18);
             this.chkitemB11.TabIndex = 133;
-            this.chkitemB11.Text = "checkBox1";
+            this.chkitemB11.Text = "Aux 11";
             this.chkitemB11.UseVisualStyleBackColor = true;
             this.chkitemB11.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -423,9 +423,9 @@
             this.chkitemB4.AutoSize = true;
             this.chkitemB4.Location = new System.Drawing.Point(13, 142);
             this.chkitemB4.Name = "chkitemB4";
-            this.chkitemB4.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB4.Size = new System.Drawing.Size(61, 18);
             this.chkitemB4.TabIndex = 126;
-            this.chkitemB4.Text = "checkBox1";
+            this.chkitemB4.Text = "Aux 4";
             this.chkitemB4.UseVisualStyleBackColor = true;
             this.chkitemB4.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -434,9 +434,9 @@
             this.chkitemB10.AutoSize = true;
             this.chkitemB10.Location = new System.Drawing.Point(13, 367);
             this.chkitemB10.Name = "chkitemB10";
-            this.chkitemB10.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB10.Size = new System.Drawing.Size(68, 18);
             this.chkitemB10.TabIndex = 132;
-            this.chkitemB10.Text = "checkBox1";
+            this.chkitemB10.Text = "Aux 10";
             this.chkitemB10.UseVisualStyleBackColor = true;
             this.chkitemB10.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -445,9 +445,9 @@
             this.chkitemB5.AutoSize = true;
             this.chkitemB5.Location = new System.Drawing.Point(13, 203);
             this.chkitemB5.Name = "chkitemB5";
-            this.chkitemB5.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB5.Size = new System.Drawing.Size(61, 18);
             this.chkitemB5.TabIndex = 127;
-            this.chkitemB5.Text = "checkBox1";
+            this.chkitemB5.Text = "Aux 5";
             this.chkitemB5.UseVisualStyleBackColor = true;
             this.chkitemB5.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -456,9 +456,9 @@
             this.chkitemB9.AutoSize = true;
             this.chkitemB9.Location = new System.Drawing.Point(13, 343);
             this.chkitemB9.Name = "chkitemB9";
-            this.chkitemB9.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB9.Size = new System.Drawing.Size(61, 18);
             this.chkitemB9.TabIndex = 131;
-            this.chkitemB9.Text = "checkBox1";
+            this.chkitemB9.Text = "Aux 9";
             this.chkitemB9.UseVisualStyleBackColor = true;
             this.chkitemB9.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -467,9 +467,9 @@
             this.chkitemB6.AutoSize = true;
             this.chkitemB6.Location = new System.Drawing.Point(13, 227);
             this.chkitemB6.Name = "chkitemB6";
-            this.chkitemB6.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB6.Size = new System.Drawing.Size(61, 18);
             this.chkitemB6.TabIndex = 128;
-            this.chkitemB6.Text = "checkBox1";
+            this.chkitemB6.Text = "Aux 6";
             this.chkitemB6.UseVisualStyleBackColor = true;
             this.chkitemB6.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -478,9 +478,9 @@
             this.chkitemB8.AutoSize = true;
             this.chkitemB8.Location = new System.Drawing.Point(13, 275);
             this.chkitemB8.Name = "chkitemB8";
-            this.chkitemB8.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB8.Size = new System.Drawing.Size(61, 18);
             this.chkitemB8.TabIndex = 130;
-            this.chkitemB8.Text = "checkBox1";
+            this.chkitemB8.Text = "Aux 8";
             this.chkitemB8.UseVisualStyleBackColor = true;
             this.chkitemB8.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 
@@ -489,9 +489,9 @@
             this.chkitemB7.AutoSize = true;
             this.chkitemB7.Location = new System.Drawing.Point(13, 251);
             this.chkitemB7.Name = "chkitemB7";
-            this.chkitemB7.Size = new System.Drawing.Size(89, 18);
+            this.chkitemB7.Size = new System.Drawing.Size(61, 18);
             this.chkitemB7.TabIndex = 129;
-            this.chkitemB7.Text = "checkBox1";
+            this.chkitemB7.Text = "Aux 7";
             this.chkitemB7.UseVisualStyleBackColor = true;
             this.chkitemB7.CheckedChanged += new System.EventHandler(this.CheckBoxCh_CheckedChanged);
             // 

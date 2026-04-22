@@ -892,11 +892,14 @@ void applyaux_adc_ac_cfg(int auxbd)
 
 void apply_adc_ac_cfg(int bd)
 {
+	//int    auxbd;
 	ushort tmp;
 	
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd > 0)
 	{
-		if(m_pSysConfig->EnaZIM[bd] == TRUE) // && m_pSysConfig->ChkZIM[bd] == TRUE)
+		if(m_pSysConfig->EnaZIM[bd] == FALSE) // || m_pSysConfig->ChkZIM[bd] == FALSE)
+                  ;
+		else
                   applyaux_adc_ac_cfg(bd);
 	}
 	else
@@ -945,10 +948,14 @@ inline void procaux_adc_ac_cfg(int auxbd)
 
 inline void proc_adc_ac_cfg(int bd)
 {
+	//int auxbd;
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA  && bd > 0) //
 	{
-		if(m_pSysConfig->EnaZIM[bd] == TRUE) // && m_pSysConfig->ChkZIM[bd] == TRUE) 
-          procaux_adc_ac_cfg(bd);
+		//for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++)
+		if(m_pSysConfig->EnaZIM[bd] == FALSE) // || m_pSysConfig->ChkZIM[bd] == FALSE) 
+                  ;
+                else
+                  procaux_adc_ac_cfg(bd);
 	}
 	else
 	{
@@ -1554,8 +1561,8 @@ inline void proc_init_eis_data(int bd)
 			pstatus->Aux_zdata[AuxCh+(bd-1)*4].mag = 0.0;
 			pstatus->Aux_zdata[AuxCh+(bd-1)*4].phase = 0.0;
 		
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->Aux_zdata[AuxCh+(bd-1)*4].mag;
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->Aux_zdata[AuxCh+(bd-1)*4].phase;
+			m_pGlobalVar->mChVar[0].mChStatInf.DispMag[AuxCh+(bd-1)*4] = pstatus->Aux_zdata[AuxCh+(bd-1)*4].mag;
+			m_pGlobalVar->mChVar[0].mChStatInf.DispPhase[AuxCh+(bd-1)*4] = pstatus->Aux_zdata[AuxCh+(bd-1)*4].phase;
 		}
 	}
 }
@@ -1577,7 +1584,7 @@ bool proc_eis_data_conv_bd(int bd, int AuxCh)
 	dTemp = 0.0;
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd > 0) // AUX board
 	{
-		if (AuxCh == 0) // 
+		//if (AuxCh == 0) // 
 		{
 			nCycle = m_pGlobalVar->mChVar[0].mChStatInf.eis_status.cycle;
 			pstatus->cycle	=  nCycle;
@@ -1617,8 +1624,8 @@ bool proc_eis_data_conv_bd(int bd, int AuxCh)
 			pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag = 0.0;
 			pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase = 0.0;
 
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag;
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase;
+			m_pGlobalVar->mChVar[0].mChStatInf.DispMag[(bd-1)*4+AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag;
+			m_pGlobalVar->mChVar[0].mChStatInf.DispPhase[(bd-1)*4+AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase;
 		}
 		else
 		{
@@ -1627,8 +1634,8 @@ bool proc_eis_data_conv_bd(int bd, int AuxCh)
 			pstatus->zdata.mag = 0.0;
 			pstatus->zdata.phase = 0.0;
 
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->zdata.mag;
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->zdata.phase;
+			//m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->zdata.mag;
+			//m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->zdata.phase;
 		}
 		m_pGlobalVar->mChVar[bd].mChStatInf.DispFreq = pstatus->freq;
 		return false;
@@ -1657,15 +1664,15 @@ bool proc_eis_data_conv_bd(int bd, int AuxCh)
 		{
 			memcpy(&pstatus_main->Aux_zdata[(bd-1)*4+AuxCh],&praw->zdata,sizeof(st_zim_eis_zdata));
 
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag;
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase;
+			m_pGlobalVar->mChVar[0].mChStatInf.DispMag[(bd-1)*4+AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag;
+			m_pGlobalVar->mChVar[0].mChStatInf.DispPhase[(bd-1)*4+AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase;
 		}
 		else
 		{
 			memcpy(&pstatus->zdata,&praw->zdata,sizeof(st_zim_eis_zdata));
 
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->zdata.mag;
-			m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->zdata.phase;
+			//m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->zdata.mag;
+			//m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->zdata.phase;
 		}
 		m_pGlobalVar->mChVar[bd].mChStatInf.DispFreq = pstatus->freq;
 		bret = false;
@@ -1724,15 +1731,15 @@ bool proc_eis_data_conv_bd(int bd, int AuxCh)
 	{
 		memcpy(&pstatus_main->Aux_zdata[(bd-1)*4+AuxCh],&praw->zdata,sizeof(st_zim_eis_zdata));
 
-		m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag;
-		m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase;
+		m_pGlobalVar->mChVar[0].mChStatInf.DispMag[(bd-1)*4+AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].mag;
+		m_pGlobalVar->mChVar[0].mChStatInf.DispPhase[(bd-1)*4+AuxCh] = pstatus_main->Aux_zdata[(bd-1)*4+AuxCh].phase;
 	}
 	else
 	{
 		memcpy(&pstatus->zdata,&praw->zdata,sizeof(st_zim_eis_zdata));
 
-		m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->zdata.mag;
-		m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->zdata.phase;
+		//m_pGlobalVar->mChVar[bd].mChStatInf.DispMag[AuxCh] = pstatus->zdata.mag;
+		//m_pGlobalVar->mChVar[bd].mChStatInf.DispPhase[AuxCh] = pstatus->zdata.phase;
 	}
 	m_pGlobalVar->mChVar[bd].mChStatInf.DispFreq = pstatus->freq;
 	
@@ -1770,7 +1777,7 @@ bool proc_eis_data_conv(int bd) // if MCBZA, bd is 0
 		for(Auxbd=1; Auxbd<MAX_DEV_BOARD; Auxbd ++) //Auxbd=1; //
 		{
 			if(bret == false) break;
-			if(m_pSysConfig->EnaZIM[Auxbd] == FALSE || m_pSysConfig->ChkZIM[Auxbd] == FALSE || m_pSysConfig->ConnCBL[Auxbd] == 1)
+			if(m_pSysConfig->EnaZIM[Auxbd] == FALSE || m_pSysConfig->ChkZIM[Auxbd] == FALSE || m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[Auxbd-1] == 0)
                 continue;
 			for (int ch = 0; ch < 4; ch++)
 			{
@@ -2380,11 +2387,11 @@ inline bool proc_eis_start(int bd) // when MCBZA, bd=0
 	pChStatus->Vdc = m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[0].value;
 	pChStatus->Temperature = m_pGlobalVar->mChVar[bd].mdevice.adc_rtd.data.Tvalue;
 	
-    SetDeviceBoard(bd);
+        SetDeviceBoard(bd);
 	m_pGlobalVar->mChVar[bd].mdevice.eis.config = DEF_CFG_EIS_START;
-	for(int b=0; b < MAX_DEV_BOARD; b++)
+	for(int b=0; b < DEF_MAX_AUX_BDCNT; b++)
 	{
-        m_pSysConfig->ConnCBL[b] = 0;
+        m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[b] = 1;
     }
 	if(ICE_write_byte(bd, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[bd].mdevice.eis.config) == _ERROR)
 	{
@@ -2410,8 +2417,9 @@ inline bool proc_eis_start(int bd) // when MCBZA, bd=0
 				return false;
 			}
 		}
+		
+		return true;
 	}	
-	return true;
 }
 
 void proc_eis_reset(int bd) // any bd any BZA type
@@ -2445,6 +2453,8 @@ inline void proc_eis_stop(int bd) // when MCBZA bd=0
 	int auxbd = 0;
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 	{
+		 
+		
 		m_pGlobalVar->mChVar[bd].mdevice.eis.config = DEF_CFG_EIS_STOP | DEF_CFG_EIS_START;
 		if(ICE_write_byte(bd, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[bd].mdevice.eis.config) == _ERROR)
 		{
@@ -2520,7 +2530,7 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 	int tmp[4];
 	int AuxCh = 0, bd_index = 0;
 	ushort rawdatacnt[4];
-	//int data_fin = 0;
+	int data_fin = 0;
 	
 	stChStatusInf* pChStatus = &m_pGlobalVar->mChVar[bd].mChStatInf;
 	stChStatusInf* pChStatus_bd;
@@ -2550,7 +2560,26 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 					}
 				//}				
 			}
-			
+			if(m_pGlobalVar->mChVar[0].mTech.type == TECH_DCH)
+			{
+				proc_mon_dcControl(0);
+	
+				m_pGlobalVar->mChVar[0].mFlow.m_MsFlowdelayLimit = 2000;
+				m_pGlobalVar->mChVar[0].mFlow.m_MsFlowdelayStamp = 0;
+
+				proc_eis_data_conv(0);
+				m_pGlobalVar->mChVar[0].mChStatInf.eis_status.status = DEF_EIS_STATUS_FIN;
+				if(proc_writedata(0) == false)
+				{
+					m_pGlobalVar->mChVar[0].mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+				}
+
+				m_pGlobalVar->mChVar[0].eis_got_all_point = FALSE;
+				m_pGlobalVar->mChVar[1].eis_got_all_point = FALSE;
+				m_pGlobalVar->mChVar[2].eis_got_all_point = FALSE; 
+				m_pGlobalVar->mChVar[3].eis_got_all_point = FALSE;
+                return;
+			}
 			pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
 			m_pGlobalVar->mChVar[0].eis_got_all_point = FALSE;
 			m_pGlobalVar->mChVar[1].eis_got_all_point = FALSE;
@@ -2586,22 +2615,59 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 			{
 				if (buf[0] == 0x8000)
 				{
-                   //data_fin = 1;
+                                  data_fin = 1;
                     pChStatus->eis_status.status = DEF_EIS_STATUS_EIS_INIT;
 					return;
 				}
 				
 				if(m_pGlobalVar->mChVar[bd_index].mTech.type == TECH_DCH)
 				{
-					
-					proc_mon_dcControl(bd_index);
+					if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
+					{
+						m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true; 
+						if (m_pGlobalVar->mChVar[0].eis_got_all_point == true && m_pGlobalVar->mChVar[1].eis_got_all_point == true &&
+							m_pGlobalVar->mChVar[2].eis_got_all_point == true && m_pGlobalVar->mChVar[3].eis_got_all_point == true)
+						{
+							for(bd_index=1; bd_index<MAX_DEV_BOARD; bd_index++)
+							{
+								if(m_pSysConfig->EnaZIM[bd_index] == FALSE || m_pSysConfig->ChkZIM[bd_index] == FALSE) continue;
+								for(i=0; i<pChStatus->eis_status.WorkDatacnt; i++)
+								{
+									m_pGlobalVar->mChVar[bd_index].meis[3].eis_raw_new.raw_adc[i].iac = m_pGlobalVar->mChVar[bd_index].meis[2].eis_raw_new.raw_adc[i].iac = m_pGlobalVar->mChVar[bd_index].meis[1].eis_raw_new.raw_adc[i].iac = m_pGlobalVar->mChVar[bd_index].meis[0].eis_raw_new.raw_adc[i].iac = m_pGlobalVar->mChVar[0].meis[0].eis_raw_new.raw_adc[i].iac;
+									m_pGlobalVar->mChVar[bd_index].meis[3].eis_raw_new.raw_val[i].iac = m_pGlobalVar->mChVar[bd_index].meis[2].eis_raw_new.raw_val[i].iac = m_pGlobalVar->mChVar[bd_index].meis[1].eis_raw_new.raw_val[i].iac = m_pGlobalVar->mChVar[bd_index].meis[0].eis_raw_new.raw_val[i].iac = m_pGlobalVar->mChVar[0].meis[0].eis_raw_new.raw_val[i].iac;
+											
+								}				
+							}
+							proc_mon_dcControl(0);
 	
-					m_pGlobalVar->mChVar[bd_index].mFlow.m_MsFlowdelayLimit = 2000;
-					m_pGlobalVar->mChVar[bd_index].mFlow.m_MsFlowdelayStamp = 0;
-	
-					proc_eis_data_conv(bd_index);
-					
-					m_pGlobalVar->mChVar[bd_index].mChStatInf.eis_status.status = DEF_EIS_STATUS_FIN;
+							m_pGlobalVar->mChVar[0].mFlow.m_MsFlowdelayLimit = 2000;
+							m_pGlobalVar->mChVar[0].mFlow.m_MsFlowdelayStamp = 0;
+			
+							proc_eis_data_conv(0);
+							
+							m_pGlobalVar->mChVar[0].mChStatInf.eis_status.status = DEF_EIS_STATUS_FIN;
+							if(proc_writedata(0) == false)
+							{
+								m_pGlobalVar->mChVar[0].mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+							}
+							m_pGlobalVar->mChVar[0].eis_got_all_point = FALSE;
+							m_pGlobalVar->mChVar[1].eis_got_all_point = FALSE;
+							m_pGlobalVar->mChVar[2].eis_got_all_point = FALSE; 
+							m_pGlobalVar->mChVar[3].eis_got_all_point = FALSE;
+							return;
+						}
+					}
+					else
+					{
+						proc_mon_dcControl(bd_index);
+		
+						m_pGlobalVar->mChVar[bd_index].mFlow.m_MsFlowdelayLimit = 2000;
+						m_pGlobalVar->mChVar[bd_index].mFlow.m_MsFlowdelayStamp = 0;
+		
+						proc_eis_data_conv(bd_index);
+						
+						m_pGlobalVar->mChVar[bd_index].mChStatInf.eis_status.status = DEF_EIS_STATUS_FIN;
+					}
 				}
 				else
 				{
@@ -2678,27 +2744,7 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 				
 				if((buf[bd_index] & 0x8000) == 0x8000)
 				{
-					if(m_pGlobalVar->mChVar[0].mTech.type == TECH_DCH)
-					{
-						if(bd == 0)
-						{
-							proc_mon_dcControl(bd);
-		
-							m_pGlobalVar->mChVar[bd].mFlow.m_MsFlowdelayLimit = 2000;
-							m_pGlobalVar->mChVar[bd].mFlow.m_MsFlowdelayStamp = 0;
-			
-							proc_eis_data_conv(bd);
-							
-							m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.status = DEF_EIS_STATUS_FIN;
-							return;
-						}
-					}
-					else
-					{
-						m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true;  //data_fin += (1 << bd_index);
-						
-					}
-					
+					m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true;  
 				}
 			}
 		}
@@ -2847,7 +2893,7 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 
 	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
 	{
-		ierr = pch->mChStatInf.TaskTimeStamp % pch->mFlow.m_MsSmplLimit;
+		ierr = pch->mChStatInf.TaskTimeStamp / pch->mFlow.m_MsSmplLimit;
 	}
 
 	if((pch->mChStatInf.eis_status.rescount+1) > SDRAM_DATA_COUNT)
@@ -2896,7 +2942,7 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 			{
 				for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
 				{
-					//pdata->mData[AuxBd].mData[AuxCh].Veoc = 0.0;
+					pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
 					pdata->mData[AuxBd].mData[AuxCh].Vdc = pch->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh];
 					pdata->mData[AuxBd].mData[AuxCh].Zre = 0.0;
 					pdata->mData[AuxBd].mData[AuxCh].Zim = 0.0;
@@ -2912,7 +2958,7 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 			{
 				for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
 				{
-					//pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch+AuxBd)->mChStatInf.Veoc; //[AuxCh];
+					pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
 					pdata->mData[AuxBd].mData[AuxCh].Vdc = (pch)->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh]; //Vdc; //[AuxCh]; //(pch+AuxBd+1)
 					pdata->mData[AuxBd].mData[AuxCh].Zre = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].real; //(pch+AuxBd+1)
 					pdata->mData[AuxBd].mData[AuxCh].Zim = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].img; //(pch+AuxBd+1)
@@ -3041,8 +3087,8 @@ bool proc_eis_begin(int bd) // when MCBZA, bd=0
 		
 			for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++) // 
 			{
-				m_pGlobalVar->mChVar[auxbd].mChStatInf.DispMag[auxch] = 0.0;
-				m_pGlobalVar->mChVar[auxbd].mChStatInf.DispPhase[auxch] = 0.0;
+				m_pGlobalVar->mChVar[0].mChStatInf.DispMag[auxch+(auxbd-1)*4] = 0.0;
+				m_pGlobalVar->mChVar[0].mChStatInf.DispPhase[auxch+(auxbd-1)*4] = 0.0;
 				
 				memset(&m_pGlobalVar->mChVar[0].mChStatInf.eis_status.Aux_Real_val[auxch+(auxbd-1)*4][0],0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT);
 				memset(&m_pGlobalVar->mChVar[0].mChStatInf.eis_status.Aux_Real_val[auxch+(auxbd-1)*4][0],0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT); //
@@ -3053,7 +3099,7 @@ bool proc_eis_begin(int bd) // when MCBZA, bd=0
 				m_pGlobalVar->mChVar[auxbd].meis[auxch].eis_raw.Ns = m_pGlobalVar->mChVar[0].mChStatInf.eis_status.totaldatacnt;	
 			}
 			m_pGlobalVar->mChVar[auxbd].bChkSlope = 0;
-			m_pGlobalVar->mChVar[auxbd].mFlow.m_MsFlowdelayLimit = 0; 
+			m_pGlobalVar->mChVar[auxbd].mFlow.m_MsFlowdelayLimit = 50; 
 		}
 	}
 	SetDeviceBoard(bd);
@@ -3159,7 +3205,22 @@ bool proc_eis_FFT(int bd) // when MCBZA, bd=0
 				m_pGlobalVar->mChVar[auxbd].mChStatInf.eis_status.freq = dfreq;
 			}			
 		}
-		
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0 && (m_pGlobalVar->mChVar[bd].mTech.type == TECH_HFR))
+		{
+			for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
+			{
+				if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+					continue;
+				procaux_power_VAC(auxbd, false); 
+				SetDeviceBoard(auxbd);
+				setaux_device_DO(auxbd);
+				if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, (UNS_8)0) == _ERROR)
+				{
+					m_pGlobalVar->mChVar[auxbd].mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
+					return false;
+				}
+			}
+		}
 		if(pch->mFlow.timeproc == 1 && buf == 1) // not EIS, QIS
 		{
 			if(pch->mChStatInf.RunTimeStamp >= pch->mFlow.m_MsEndTimeLimit)
@@ -3177,7 +3238,7 @@ bool proc_eis_FFT(int bd) // when MCBZA, bd=0
 			{
 				proc_eis_dcon(bd);
 			}
-
+			
 			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_WAIT;
 			return true;
 		}
@@ -3345,6 +3406,7 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 			pch->mFlow.m_MsFlowdelayLimit = 0; 
 			pch->mFlow.m_MsFlowdelayStamp = 0;
 			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_EIS_INIT;
+			pch->mFlow.m_MsOndelayLimit = 0;
 		}
 		else
 		{
@@ -3356,12 +3418,22 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 		{ 
 			proc_adc_vdc_data(bd);
-
+			if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0 && m_pGlobalVar->mChVar[bd].mTech.type == TECH_HFR)
+			{
+				for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
+				{
+					if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+						continue;
+					procaux_power_VAC(auxbd, true); 
+					SetDeviceBoard(auxbd);
+					setaux_device_DO(auxbd);
+				}
+			}
 			if(proc_eis_init(bd))
 			{
 				pch->meis[0].eis_raw.freq = pch->mChStatInf.eis_status.freq;
 				pch->meis[0].eis_raw.Ns = pch->mChStatInf.eis_status.totaldatacnt;
-				 pch->mdevice.eis.config = 0;
+				 pch->mdevice.eis.config = DEF_CFG_EIS_RESET; //0;
 				
 				if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0) //
 				{
@@ -3369,11 +3441,11 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 					{
 						if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE) continue;
 						SetDeviceBoard(auxbd);
-						m_pGlobalVar->mChVar[auxbd].mdevice.eis.config = 0;
+						m_pGlobalVar->mChVar[auxbd].mdevice.eis.config = DEF_CFG_EIS_RESET;
 						if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, (UNS_8)m_pGlobalVar->mChVar[auxbd].mdevice.eis.config) == _ERROR)
 						{
 							pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
-							return false;
+							return false; // can be the problem when boards are removed during eis
 						}					
 					}
 				}
@@ -3410,7 +3482,7 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 			if(proc_eis_start(bd))
 			{
 				pch->mFlow.m_MsDurStamp = 0;
-				pch->mFlow.m_MsFlowdelayLimit = 1; 
+				pch->mFlow.m_MsFlowdelayLimit = 50; 
 				pch->mFlow.m_MsFlowdelayStamp = 0;
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_ING;				
 			}
@@ -3460,6 +3532,33 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 			if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 			{
 				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_DCHSAMPLE;
+				if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
+				{
+					for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
+					{
+						if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+							continue;
+						procaux_power_VAC(auxbd, false);
+						m_pGlobalVar->mChVar[auxbd].mdevice.eis.config = DEF_CFG_EIS_RESET;
+						if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, (UNS_8)m_pGlobalVar->mChVar[auxbd].mdevice.eis.config) == _ERROR)
+						{
+							pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
+							return false; // 
+						}
+					}
+					for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
+					{
+						if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+							continue;
+						m_pGlobalVar->mChVar[auxbd].mdevice.eis.config = 0;
+						if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, (UNS_8)m_pGlobalVar->mChVar[auxbd].mdevice.eis.config) == _ERROR)
+						{
+							pch->mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
+							return false; //
+						}
+						m_pGlobalVar->m_msTmp = 0;
+					}
+				}
 			}
 			else
 			{
@@ -3478,14 +3577,17 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 		else
 		{
 			proc_power_VAC(bd, false);
-			for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
+			if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 			{
-				if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
-					continue;
-				procaux_power_VAC(auxbd, false);
+				for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
+				{
+					if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+						continue;
+					procaux_power_VAC(auxbd, false);
+				}
+				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
+				m_pGlobalVar->mChVar[bd].mChStatInf.NextTaskNo = 1;
 			}
-			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
-			m_pGlobalVar->mChVar[bd].mChStatInf.NextTaskNo = 1;
 		}
 		
 		/*		
@@ -3581,7 +3683,7 @@ void Flow_discharger(int bd) // if MCBZA, bd=0
 	}
 
 
-	if(pch->mFlow.m_MsSmplLimit <= (pch->mChStatInf.TaskTimeStamp - pch->mFlow.m_MsDurCount))
+	if(pch->mFlow.m_MsSmplLimit <= (pch->mChStatInf.TaskTimeStamp - pch->mFlow.m_MsDurCount) && m_pGlobalVar->m_msTmp > 50)
 	{
 		
 		pch->mFlow.m_MsDurCount = pch->mChStatInf.TaskTimeStamp - (pch->mChStatInf.TaskTimeStamp % pch->mFlow.m_MsSmplLimit);
@@ -3650,7 +3752,7 @@ void Flow_discharger(int bd) // if MCBZA, bd=0
 				}
 			}
 			
-			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_EIS_INIT;
+			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_BEGIN; //DEF_EIS_STATUS_EIS_INIT;
 			pch->mFlow.m_MsFlowdelayLimit = 0;
 			pch->mFlow.m_MsFlowdelayStamp = 0;
 		}
@@ -3682,6 +3784,9 @@ void proc_stop_test(int bd, int errstat)
 	proc_eis_stop(bd);
 	proc_eis_LoadOn(bd,0);
 	proc_power_VAC(bd, false);
+
+	// remove z data
+
 }
 
 
@@ -3785,8 +3890,10 @@ void set_device_DO(int bd)
 		{
 			return;
 		}
-		m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
-	
+		if(preqdo->data & 0x10)
+			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 1;
+		else
+			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_rngno = (preqdo->data >> 1 & 0x7);
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_in_rngno = (preqdo->data >> 2 & 0x3);
 		
@@ -3823,7 +3930,10 @@ void setaux_device_DO(int bd)
 		{
 			return;
 		}
-		m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
+		if(preqdo->data & 0x10)
+			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 1;
+		else
+			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
 	
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_rngno = m_pGlobalVar->mChVar[0].mChStatInf.Iac_rngno; // not measure Iac 
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_in_rngno = m_pGlobalVar->mChVar[0].mChStatInf.Iac_in_rngno;
@@ -3858,10 +3968,31 @@ inline void proc_check_main(int bd)
 	}
 }
 
+void clear_impedance(int bd)
+{
+	stGlobalChVar* pch = &m_pGlobalVar->mChVar[bd];
+	pch->mChStatInf.eis_status.zdata.real = 0; // for main board
+	pch->mChStatInf.eis_status.zdata.img = 0;
+
+	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
+	{
+		for(int auxbd=0; auxbd<DEF_MAX_AUX_BDCNT; auxbd++) 
+		{
+			if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+                continue;
+			for(int auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++) // 
+			{
+				(pch)->mChStatInf.eis_status.Aux_zdata[auxch+auxbd*4].real = 0; 
+				(pch)->mChStatInf.eis_status.Aux_zdata[auxch+auxbd*4].img = 0; 
+			}
+		}
+	}
+}
+
 void AuxProc(int bd)
 {
-//	int auxbd;
-//	int auxch;
+	//int auxbd;
+	//int auxch;
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd > 0)
 	{
 		return;
@@ -3869,6 +4000,7 @@ void AuxProc(int bd)
 	
 	if(m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.status == DEF_EIS_STATUS_ING) return;
 	if(m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.status == DEF_EIS_STATUS_FFT) return;
+	//if(m_pGlobalVar->mChVar[bd].mChStatInf.eis_status.status == DEF_EIS_STATUS_FIN) clear_impedance(bd);
 	
 	if(m_pGlobalVar->mChVar[bd].TmpResetICE > 0) return;			  
 	proc_adc_rtd(bd);
@@ -3884,16 +4016,16 @@ void AuxProc(int bd)
 			m_pGlobalVar->mChVar[bd].mChStatInf.Veoc= m_pGlobalVar->mChVar[bd].mChStatInf.Vdc; //[auxch]
 		}
 		
-		/*if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0)
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0)
 		{
-			for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++)
+			for(int auxbd=0; auxbd<DEF_MAX_AUX_BDCNT; auxbd++)
 			{
-				for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
+				for(int auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
 				{
-					m_pGlobalVar->mChVar[auxbd].mChStatInf.Veoc[auxch]= m_pGlobalVar->mChVar[auxbd].mChStatInf.Vdc[auxch];
+					m_pGlobalVar->mChVar[0].mChStatInf.Aux_Veoc[auxch+4*auxbd]= m_pGlobalVar->mChVar[0].mChStatInf.Aux_Vdc[auxch+4*auxbd];
 				}
 			}
-		}*/
+		}
 		
 		
 	}

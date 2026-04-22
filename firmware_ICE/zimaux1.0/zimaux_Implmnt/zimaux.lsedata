@@ -1,9 +1,9 @@
 <top name = "zimaux"  library = "work"  arch = "RTL"  entry = "VHDL">
 
 <clocks>
-    <clockitem name = "pll_main/n1"  type = "net" />
     <clockitem name = "clk_16MHz"  type = "net" />
     <clockitem name = "clk_32MHz"  type = "net" />
+    <clockitem name = "pll_main/n1"  type = "net" />
 </clocks>
 
 <!--

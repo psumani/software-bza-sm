@@ -64,6 +64,7 @@
             this.legend1 = new NationalInstruments.UI.WindowsForms.Legend();
             this.legendItem1 = new NationalInstruments.UI.LegendItem();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.DataFlexGrid = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnUndo = new System.Windows.Forms.Button();
             this.btnDeleteData = new System.Windows.Forms.Button();
@@ -99,17 +100,16 @@
             this.lblCapacity1 = new System.Windows.Forms.Label();
             this.label_TestTime = new System.Windows.Forms.Label();
             this.label_FileName = new System.Windows.Forms.Label();
-            this.DataFlexGrid = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.legend1)).BeginInit();
             this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBoxViewOpt.SuspendLayout();
             this.groupBoxFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c1StatusBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textFileName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMain
@@ -348,6 +348,22 @@
             this.panelMain.Controls.Add(this.groupBox1);
             this.panelMain.Name = "panelMain";
             // 
+            // DataFlexGrid
+            // 
+            this.DataFlexGrid.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.DataFlexGrid.AllowFiltering = true;
+            this.DataFlexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            resources.ApplyResources(this.DataFlexGrid, "DataFlexGrid");
+            this.DataFlexGrid.AutoClipboard = true;
+            this.DataFlexGrid.Name = "DataFlexGrid";
+            this.DataFlexGrid.Rows.Count = 1;
+            this.DataFlexGrid.Rows.DefaultSize = 20;
+            this.DataFlexGrid.Rows.GlyphRow = 0;
+            this.DataFlexGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.RowRange;
+            this.DataFlexGrid.ShowCellLabels = true;
+            this.DataFlexGrid.StyleInfo = resources.GetString("DataFlexGrid.StyleInfo");
+            this.DataFlexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
+            // 
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
@@ -368,6 +384,7 @@
             resources.ApplyResources(this.btnDeleteData, "btnDeleteData");
             this.btnDeleteData.Name = "btnDeleteData";
             this.btnDeleteData.UseVisualStyleBackColor = true;
+            this.btnDeleteData.Click += new System.EventHandler(this.btnDeleteData_Click);
             // 
             // groupBoxViewOpt
             // 
@@ -585,22 +602,6 @@
             resources.ApplyResources(this.label_FileName, "label_FileName");
             this.label_FileName.Name = "label_FileName";
             // 
-            // DataFlexGrid
-            // 
-            this.DataFlexGrid.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
-            this.DataFlexGrid.AllowFiltering = true;
-            this.DataFlexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
-            resources.ApplyResources(this.DataFlexGrid, "DataFlexGrid");
-            this.DataFlexGrid.AutoClipboard = true;
-            this.DataFlexGrid.Name = "DataFlexGrid";
-            this.DataFlexGrid.Rows.Count = 1;
-            this.DataFlexGrid.Rows.DefaultSize = 20;
-            this.DataFlexGrid.Rows.GlyphRow = 0;
-            this.DataFlexGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.RowRange;
-            this.DataFlexGrid.ShowCellLabels = true;
-            this.DataFlexGrid.StyleInfo = resources.GetString("DataFlexGrid.StyleInfo");
-            this.DataFlexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
-            // 
             // DataEditorForm
             // 
             this.AllowDrop = true;
@@ -619,6 +620,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.legend1)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBoxViewOpt.ResumeLayout(false);
             this.groupBoxViewOpt.PerformLayout();
@@ -628,7 +630,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textFileName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataFlexGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

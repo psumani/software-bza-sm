@@ -1688,7 +1688,11 @@ namespace ZiveLab.ZM
             sTemp = string.Format("* Last status: {0}\r\n", ((enStatError)head.mInfo.Error).GetDescription());
             sinfo += sTemp;
 
-            sTemp = string.Format("* Device: ZM's Ch-{0} [SIF({1})-Ch{2}({3})]\r\n", head.mInfo.Ch + 1, head.systemInfo.mSIFCfg.GetSerialNumber(), head.mInfo.sifch + 1, head.systemInfo.mZimCfg[head.mInfo.sifch].info.GetSerialNumber());
+            int sifch = head.mInfo.sifch;
+            string zimSerial = (sifch >= 0 && sifch < head.systemInfo.mZimCfg.Length)
+                ? head.systemInfo.mZimCfg[sifch].info.GetSerialNumber()
+                : "Unknown";
+            sTemp = string.Format("* Device: ZM's Ch-{0} [SIF({1})-Ch{2}({3})]\r\n", head.mInfo.Ch + 1, head.systemInfo.mSIFCfg.GetSerialNumber(), head.mInfo.sifch + 1, zimSerial);
             sinfo += sTemp;
 
             sTemp = string.Format("* Tecnnique<{0}>: {1}\r\n", Extensions.GetEnumDescription(enType), head.GetTechFilename());

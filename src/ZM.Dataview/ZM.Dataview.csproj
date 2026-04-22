@@ -169,6 +169,9 @@
     <EmbeddedResource Include="frmSelTarget.resx">
       <DependentUpon>frmSelTarget.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GeneralGraphForm.en-US.resx">
+      <DependentUpon>GeneralGraphForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GeneralGraphForm.ko-KR.resx">
       <DependentUpon>GeneralGraphForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -2657,7 +2657,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>D:\workspace\software-bza-sm\firmware_SIF\BZA_SIF\config\LPC3000_xRAM_tmp.icf</state>
+          <state>F:\SM_Git_Repositories\software-bza-sm\firmware_SIF\BZA_SIF\config\LPC3000_xRAM_tmp.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>

@@ -321,10 +321,10 @@
     <value>28, 28</value>
   </data>
   <data name="tsbtnViewGraph.Text" xml:space="preserve">
-    <value>View EIS graph</value>
+    <value>View graph</value>
   </data>
   <data name="tsbtnViewGraph.ToolTipText" xml:space="preserve">
-    <value>View EIS graph</value>
+    <value>View graph</value>
   </data>
   <data name="toolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
@@ -629,7 +629,7 @@
     <value>0,0,0,0,0,105,Columns:</value>
   </data>
   <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
+    <value>Consolas, 9pt</value>
   </data>
   <data name="DataFlexGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 245</value>

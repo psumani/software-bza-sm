@@ -661,17 +661,17 @@ namespace ZiveLab.ZM.Dataview
                     if (i == (int)eColumnId.FREQ ||
                         (Target == 0 && (i == (int)eColumnId.ZRE || i == (int)eColumnId.ZIM)) ||
                         (Target == 1 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 2 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 3 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 4 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 5 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 6 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 7 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 8 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 9 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 10 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 11 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)) ||
-                        (Target == 12 && (i == (int)eColumnId.AUX01_ZRE || i == (int)eColumnId.AUX01_ZIM)))
+                        (Target == 2 && (i == (int)eColumnId.AUX02_ZRE || i == (int)eColumnId.AUX02_ZIM)) ||
+                        (Target == 3 && (i == (int)eColumnId.AUX03_ZRE || i == (int)eColumnId.AUX03_ZIM)) ||
+                        (Target == 4 && (i == (int)eColumnId.AUX04_ZRE || i == (int)eColumnId.AUX04_ZIM)) ||
+                        (Target == 5 && (i == (int)eColumnId.AUX05_ZRE || i == (int)eColumnId.AUX05_ZIM)) ||
+                        (Target == 6 && (i == (int)eColumnId.AUX06_ZRE || i == (int)eColumnId.AUX06_ZIM)) ||
+                        (Target == 7 && (i == (int)eColumnId.AUX07_ZRE || i == (int)eColumnId.AUX07_ZIM)) ||
+                        (Target == 8 && (i == (int)eColumnId.AUX08_ZRE || i == (int)eColumnId.AUX08_ZIM)) ||
+                        (Target == 9 && (i == (int)eColumnId.AUX09_ZRE || i == (int)eColumnId.AUX09_ZIM)) ||
+                        (Target == 10 && (i == (int)eColumnId.AUX10_ZRE || i == (int)eColumnId.AUX10_ZIM)) ||
+                        (Target == 11 && (i == (int)eColumnId.AUX11_ZRE || i == (int)eColumnId.AUX11_ZIM)) ||
+                        (Target == 12 && (i == (int)eColumnId.AUX12_ZRE || i == (int)eColumnId.AUX12_ZIM)))
                     {
 
                         if (i < genColArr.Length - 1)
@@ -1135,7 +1135,7 @@ namespace ZiveLab.ZM.Dataview
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
 
-                                    if (zidx == 0)
+                                    if (itype == 0)
                                     {
                                         list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit, dci.DataFormat));
                                     }
@@ -1306,7 +1306,7 @@ namespace ZiveLab.ZM.Dataview
                                     bd = auxidx / 4;
                                     bdch = auxidx % 4;
 
-                                    if (zidx == 0)
+                                    if (itype == 0)
                                     {
                                         list.Add(DoubleToString(urgd.mRawData.mdata[bd].mdata[bdch].Zre, dci.SIUnit, dci.DataFormat));
                                     }

@@ -135,7 +135,7 @@ namespace ZiveLab.ZM
             {
                 auxForm = new frmAuxVdc(ch);
 
-                //auxForm.MdiParent = this;
+                auxForm.MdiParent = this;
 
                 if (gBZA.appcfg.AuxVdcLocation == new Point(0, 0))
                 {
@@ -905,7 +905,7 @@ namespace ZiveLab.ZM
             deForm.OpenGraphClick += DeForm_OpensGraphClick;
             
             deForm.ExtAppPath = gBZA._ExtAppPath;
-            deForm.MdiParent = this.MdiParent;
+            deForm.MdiParent = this;//.MdiParent;
 
             deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
@@ -975,7 +975,7 @@ namespace ZiveLab.ZM
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
             frmTech.ShowInTaskbar = false;
-            //frmTech.MdiParent = this;
+            frmTech.MdiParent = this;
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
             {
                 frmTech.StartPosition = FormStartPosition.CenterScreen;
@@ -1034,7 +1034,7 @@ namespace ZiveLab.ZM
             ggForm.SchTempPath = gBZA.appcfg.PathSchTemp;
             //ggForm.UnitC = false;
             ggForm.TimeFormat = 1;
-            //ggForm.MdiParent = this;
+            ggForm.MdiParent = this;
             ggForm.ShowInTaskbar = false;
             ggForm.Show();
             
@@ -1189,7 +1189,7 @@ namespace ZiveLab.ZM
                 {
                     frmRegRtView = new frmRealview(0);
                     frmRegRtView.ShowInTaskbar = false;
-                    //frmRegRtView.MdiParent = this;
+                    frmRegRtView.MdiParent = this;
 
                     if (gBZA.appcfg.RegRealviewLocation == new Point(0, 0))
                     {
@@ -1258,7 +1258,7 @@ namespace ZiveLab.ZM
                 {
                     frmGrpRtView = new frmRealview(1);
                     frmGrpRtView.ShowInTaskbar = false;
-                    //frmGrpRtView.MdiParent = this;
+                    frmGrpRtView.MdiParent = this;
                     if (gBZA.appcfg.GroupRealviewLocation == new Point(0, 0) )
                     {
                         frmGrpRtView.StartPosition = FormStartPosition.CenterParent;
@@ -1757,7 +1757,7 @@ namespace ZiveLab.ZM
             if (frmResTools == null)
             {
                 frmResTools = new frmDataTools();
-                //frmResTools.MdiParent = this;
+                frmResTools.MdiParent = this;
                 frmResTools.CloseThis += frmDataTools_CloseThis;
                 if (gBZA.appcfg.DataToolLocation == new Point(0, 0))
                 {

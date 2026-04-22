@@ -206,13 +206,13 @@ typedef struct
   UNS_32          sl_addr;
   UNS_8*          tx_data;
   UNS_32          tx_length;
-  UNS_32          tx_count;
+  volatile UNS_32          tx_count;
   UNS_8*          rx_data;
   UNS_32          rx_length;
-  UNS_32          rx_count;
+  volatile UNS_32          rx_count;
   UNS_32          retransmissions_max;
-  UNS_32          retransmissions_count;
-  UNS_32          status;
+  volatile UNS_32          retransmissions_count;
+  volatile UNS_32          status;
 } I2C_MTXRX_SETUP_T;
 
 /***********************************************************************

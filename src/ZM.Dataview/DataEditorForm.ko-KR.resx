@@ -360,7 +360,7 @@
     <value>17, 20</value>
   </data>
   <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
+    <value>Consolas, 9pt</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>229, 18</value>

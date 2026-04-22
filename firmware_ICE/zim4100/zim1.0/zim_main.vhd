@@ -341,6 +341,9 @@ architecture behav of zim is
 	signal dummy : std_logic := '0';		-- for test
 begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
+	ICE_IOB_95		<= eis_start_cmd; -- output of eis start signal from SPI cmd
+	AC_ADC_SYNC		<= ICE_IOB_96;   -- MSTART
+	eis_start		<= ICE_IOB_96;  -- eis start from sync
 	TEST_LED 		<= dummy; --SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
 	
 	DDS_MCLK 		<= dds0_mclk when buf_control(6) = '0' else clk_16MHz;  -- 125KHz = 16MHz / 128
@@ -362,40 +365,13 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 	clk_IAC_ADC		<= clk_32MHz;	-- 32MHz  
 	clk_VAC_ADC		<= clk_32MHz;	-- 32MHz 
 
-	acadc_rst		<= tacadc_rst; -- not 
-	AC_ADC_SYNC		<= ICE_IOB_96;   -- MSTART
-	ICE_IOB_95		<= eis_start_cmd; -- output of eis start signal from SPI cmd
-	eis_start		<= ICE_IOB_96;  -- eis start from sync
 	clk_VDC_ADC		<= not clk_16MHz;	-- 16MHz 
 
-	VAC_FLT1			<= buf_device_acadc(7);
-	VAC_FLT0			<= buf_device_acadc(6);
-	VAC_OSR1			<= buf_device_acadc(5);
-	VAC_OSR0			<= buf_device_acadc(4);
-	IAC_FLT1			<= buf_device_acadc(3);
-	IAC_FLT0			<= buf_device_acadc(2);
-	IAC_OSR1			<= buf_device_acadc(1);
-	IAC_OSR0			<= buf_device_acadc(0);
-	
---	VAC_FLT1			<= buf_device_acadc(7);
---	VAC_FLT0			<= buf_device_acadc(6);
---	VAC_OSR1			<= buf_device_acadc(5);
---	VAC_OSR0			<= buf_device_acadc(4);
+
 --	IAC_FLT1			<= eis_end;
 --	IAC_FLT0			<= acadc_rst;
 --	IAC_OSR1			<= eis_stop;
 --	IAC_OSR0			<= eis_start;
-
-	AMPV_POW			<= buf_control(5);
-	VDC_RNG0			<= not buf_control(4);
-	SELIRNG1			<= buf_control(3);
-	SELIRNG0			<= buf_control(2);
-	DDS_RNG_0		<= buf_control(1);
---	CONT_SD			<= buf_control(0);
-	CONT_SD <= buf_control(0) when wdtick_flag = '0' else '0';
-	
-	buf_data_iac 	<=  iac_raw_buf(data_index);
-	buf_data_vac 	<=  vac_raw_buf(data_index);
 
 	STAT_COMM		<= ICE_GPMO_2; 
 	--STAT_COMM		<= not comm_response;
@@ -439,7 +415,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			end if;
 		end if;
 	end process;
-	
+
 
 --	process(clk_32MHz) --32MHz / 256 = 125KHz , 128 = 0x80
 --	begin
@@ -546,6 +522,26 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		end if;
 	end process;
 	
+	buf_data_iac 	<=  iac_raw_buf(data_index);
+	buf_data_vac 	<=  vac_raw_buf(data_index);
+
+	AMPV_POW			<= buf_control(5);
+	VDC_RNG0			<= not buf_control(4);
+	SELIRNG1			<= buf_control(3);
+	SELIRNG0			<= buf_control(2);
+	DDS_RNG_0		<= buf_control(1);
+	CONT_SD <= buf_control(0) when wdtick_flag = '0' else '0';
+
+	acadc_rst		<= tacadc_rst; -- not 	
+
+	VAC_FLT1			<= buf_device_acadc(7);
+	VAC_FLT0			<= buf_device_acadc(6);
+	VAC_OSR1			<= buf_device_acadc(5);
+	VAC_OSR0			<= buf_device_acadc(4);
+	IAC_FLT1			<= buf_device_acadc(3);
+	IAC_FLT0			<= buf_device_acadc(2);
+	IAC_OSR1			<= buf_device_acadc(1);
+	IAC_OSR0			<= buf_device_acadc(0);
 
 	-- RESET masking
 	process(clk_spicomm)

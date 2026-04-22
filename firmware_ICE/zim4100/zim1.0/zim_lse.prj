@@ -1,5 +1,5 @@
 #-- Lattice, Inc.
-#-- Project file D:\workspace\software-bza-sm\firmware_ICE\zim4100\zim1.0\zim_lse.prj
+#-- Project file F:\SM_Git_Repositories\software-bza-sm\firmware_ICE\zim4100\zim1.0\zim_lse.prj
 
 #device
 -a SBTiCE40
@@ -35,7 +35,7 @@
 -lib work -vhd "ADC_ADS1252u.vhd" 
 -lib work -vhd "vdc_gen_clk.vhd" 
 -lib work -vhd "zim_pll.vhd" 
--p "D:/workspace/software-bza-sm/firmware_ICE/zim4100/zim1.0"
+-p "F:/SM_Git_Repositories/software-bza-sm/firmware_ICE/zim4100/zim1.0"
 
 #set result format/file last
 -output_edif zim_Implmnt/zim.edf

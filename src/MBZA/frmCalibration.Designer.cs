@@ -635,7 +635,7 @@
             // grdpara
             // 
             this.grdpara.ColumnInfo = "2,1,0,0,0,105,Columns:0{Width:80;}\t1{Width:80;}\t";
-            this.grdpara.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdpara.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdpara.Location = new System.Drawing.Point(651, 10);
             this.grdpara.Name = "grdpara";
             this.grdpara.Rows.Count = 12;
@@ -2378,7 +2378,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdlist.ColumnInfo = "10,1,0,0,0,95,Columns:";
-            this.grdlist.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdlist.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdlist.Location = new System.Drawing.Point(10, 18);
             this.grdlist.Name = "grdlist";
             this.grdlist.Rows.DefaultSize = 19;

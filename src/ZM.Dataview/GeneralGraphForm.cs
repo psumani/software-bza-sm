@@ -17,6 +17,8 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using ZiveLab.ZM.ZIM;
+using ZiveLab.ZM.ZIM.Packets;
+using System.Runtime.InteropServices;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -35,17 +37,17 @@ namespace ZiveLab.ZM.Dataview
         
         private static string[] XAxesString = new string[]
        {
-           "Log(Frequency)","Zreal","Yreal","Zphase","Yphase","Rs(R-C)","Cs(R-C)","Rp(R|C)","Cp(R|C)","Rs(R-L)","Ls(R-L)","|Q(R-L)|","Test time","Vdc","Idc","Temperature","Frequency","Eoc","Capacity",
+           "Log(Frequency)","Zreal","Yreal","Zphase","Yphase","Rs(R-C)","Cs(R-C)","Rp(R|C)","Cp(R|C)","Rs(R-L)","Ls(R-L)","Q(R-L)","Test time","Vdc","Idc","Temperature","Frequency","Eoc","Capacity",
        };
 
         private static string[] Y1AxesString = new string[]
         {
-           "Zreal","-Zimg","|Z|","Zphase","Yreal","-Yimg","|Y|","Yphase","Log|Z|","Log|Y|","Rs(R-C)","Cs(R-C)","Rp(R|C)","Cp(R|C)","Rs(R-L)","Ls(R-L)","|Q(R-L)|","Vdc","Idc","Temperature","Load","Power","Capacity","Energy","Eoc",
+           "Zreal","-Zimg","|Z|","Zphase","Yreal","-Yimg","|Y|","Yphase","Log|Z|","Log|Y|","Rs(R-C)","Cs(R-C)","Rp(R|C)","Cp(R|C)","Rs(R-L)","Ls(R-L)","Q(R-L)","Vdc","Idc","Temperature","Load","Power","Capacity","Energy","Eoc",
         };
 
         private static string[] YOtherAxesString = new string[]
         {
-           "None","Zreal","-Zimg","|Z|","Zphase","Yreal","-Yimg","|Y|","Yphase","Log|Z|","Log|Y|","Rs(R-C)","Cs(R-C)","Rp(R|C)","Cp(R|C)","Rs(R-L)","Ls(R-L)","|Q(R-L)|","Vdc","Idc","Temperature","Load","Power","Capacity","Energy","Eoc",
+           "None","Zreal","-Zimg","|Z|","Zphase","Yreal","-Yimg","|Y|","Yphase","Log|Z|","Log|Y|","Rs(R-C)","Cs(R-C)","Rp(R|C)","Cp(R|C)","Rs(R-L)","Ls(R-L)","Q(R-L)","Vdc","Idc","Temperature","Load","Power","Capacity","Energy","Eoc",
         };
 
 
@@ -98,6 +100,8 @@ namespace ZiveLab.ZM.Dataview
         private string _MsgBoxCaption;
 
         private Node _selNode;              // FlexGridLegend Selection Node
+        private int[] _selNodeIndex = { -1, -1, -1 };
+        private Dictionary<int, Dictionary<int, Dictionary<int, CheckEnum>>> _savedCheckState;
 
         private string[] _xAxisStrings = XAxesString;
         private string[] _yAxisStrings = Y1AxesString;
@@ -506,7 +510,9 @@ namespace ZiveLab.ZM.Dataview
             while (ide.MoveNext())
             {
                 AxisFormat af = (AxisFormat)ide.Value;
-                tscbXAxis.Items.Add(ide.Value);
+                System.Diagnostics.Debug.WriteLine($"x '{ide.Value}' → ToString='{ide.Value.ToString()}'");
+                if (ide.Value != null && !string.IsNullOrEmpty(ide.Value.ToString()))
+                    tscbXAxis.Items.Add(ide.Value);
             }
 
             for (int i = 0; i < _TscbYAxes.Length; i++)
@@ -516,7 +522,9 @@ namespace ZiveLab.ZM.Dataview
                 while (ide.MoveNext())
                 {
                     AxisFormat af = (AxisFormat)ide.Value;
-                    _TscbYAxes[i].Items.Add(ide.Value);
+                    System.Diagnostics.Debug.WriteLine($"y '{ide.Value}' → ToString='{ide.Value.ToString()}'");
+                    if (ide.Value != null && !string.IsNullOrEmpty(ide.Value.ToString()))
+                        _TscbYAxes[i].Items.Add(ide.Value);
                 }
             }
 
@@ -624,6 +632,7 @@ namespace ZiveLab.ZM.Dataview
                         node.Data = new StatusString(0, "");
                         node.Checked = CheckEnum.Checked;
                         _selNode = node;                        
+                        //
 
                         BackgroundWorker bgWorkerLoadFile = new BackgroundWorker();
                         bgWorkerLoadFile.WorkerReportsProgress = true;
@@ -651,6 +660,8 @@ namespace ZiveLab.ZM.Dataview
 
             for(int i = 0; i < _TscbYAxes.Length; i++)
             {
+                if (_TscbYAxes[i].SelectedItem == null) continue;
+
                 result.Add(((AxisFormat)_TscbYAxes[i].SelectedItem).Name[0]);
             }
 
@@ -671,12 +682,73 @@ namespace ZiveLab.ZM.Dataview
 
             return invalidFileList;
         }
+        private void SaveCheckState()
+        {
+            _savedCheckState = new Dictionary<int, Dictionary<int, Dictionary<int, CheckEnum>>>();
 
+            for (int fi = 0; fi < c1FlexGridLegend.Nodes.Length; fi++)
+            {
+                _savedCheckState[fi] = new Dictionary<int, Dictionary<int, CheckEnum>>();
+                Node fileNode = c1FlexGridLegend.Nodes[fi];
+                
+                _savedCheckState[fi][0] = new Dictionary<int, CheckEnum>(); //
+                _savedCheckState[fi][0][0] = fileNode.Checked;
+
+                for (int ti = 0; ti < fileNode.Nodes.Length; ti++)
+                {
+                    _savedCheckState[fi][ti + 1] = new Dictionary<int, CheckEnum>();
+                    Node typeNode = fileNode.Nodes[ti];
+                    
+                    _savedCheckState[fi][ti + 1][0] = typeNode.Checked;
+
+                    for (int ci = 0; ci < typeNode.Nodes.Length; ci++)
+                    {
+                        _savedCheckState[fi][ti + 1][ci + 1] = typeNode.Nodes[ci].Checked;
+                    }
+                }
+            }
+        }
+
+        private void RestoreCheckState()
+        {
+            if (_savedCheckState == null) return;
+
+            for (int fi = 0; fi < c1FlexGridLegend.Nodes.Length; fi++)
+            {
+                if (!_savedCheckState.ContainsKey(fi)) continue;
+                Node fileNode = c1FlexGridLegend.Nodes[fi];
+
+                if (_savedCheckState[fi].ContainsKey(0) &&
+                    _savedCheckState[fi][0].ContainsKey(0))
+                    fileNode.Checked = _savedCheckState[fi][0][0];
+
+                for (int ti = 0; ti < fileNode.Nodes.Length; ti++)
+                {
+                    if (!_savedCheckState[fi].ContainsKey(ti + 1)) continue; // ← ti+1
+                    Node typeNode = fileNode.Nodes[ti];
+
+                    if (_savedCheckState[fi][ti + 1].ContainsKey(0))
+                        typeNode.Checked = _savedCheckState[fi][ti + 1][0];
+
+                    for (int ci = 0; ci < typeNode.Nodes.Length; ci++)
+                    {
+                        if (!_savedCheckState[fi][ti + 1].ContainsKey(ci + 1)) continue; // ← ci+1
+                        typeNode.Nodes[ci].Checked = _savedCheckState[fi][ti + 1][ci + 1];
+                        Node chNode = typeNode.Nodes[ci];
+                        if (chNode.Row.UserData is ScatterPlot && chNode.Row.Visible)
+                        {
+                            ((ScatterPlot)chNode.Row.UserData).Visible = (chNode.Checked == CheckEnum.Checked);
+                        }
+                    }
+                }
+            }
+            AutoRange();
+        }
         public void ReLoadFiles(bool refresh = false)
         {
             if (c1FlexGridLegend.Nodes.Length == 0)
                 return;
-
+            SaveCheckState();
             // Disable ToolStrip
             toolStrip_Top.Enabled = false;
             toolStrip_Bottom.Enabled = false;
@@ -698,6 +770,12 @@ namespace ZiveLab.ZM.Dataview
 
                 _BgHashtable.Add(bgWorkerLoadFile, node);
 
+                if (tscbXAxis.SelectedItem == null)
+                {
+                    MessageBox.Show("X축 항목을 선택해주세요.", "경고",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 bgWorkerLoadFile.RunWorkerAsync(new object[] { filename, node, GetXAxisComboName(), GetYAxisComboName(), refresh });                
             }
         }
@@ -737,7 +815,7 @@ namespace ZiveLab.ZM.Dataview
                 if (dCapacity <= 0.0) dCapacity = 1.0;
 
                 MakeGraphData mgd = new MakeGraphData( xAxisName, yAxisNames, _DataFilter, dCapacity, _TimeFormat);
-
+                fzmf.Clear_rdList();
                 while (true)
                 {
                     if (bgWorker.CancellationPending)
@@ -872,7 +950,7 @@ namespace ZiveLab.ZM.Dataview
 
             if (MaxAuxCount > 0)
             {
-                lnlAuxMenu.Visible = true;
+                lnlAuxMenu.Visible = false; // true;
                 for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
                     if (i >= MaxAuxCount)
@@ -893,7 +971,8 @@ namespace ZiveLab.ZM.Dataview
             if (_BgHashtable.Count == 0)
             {
                 DrawGraph();
-
+                RestoreCheckState();
+                
                 toolStrip_Top.Enabled = true;
                 toolStrip_Bottom.Enabled = true;
 
@@ -1238,6 +1317,7 @@ namespace ZiveLab.ZM.Dataview
 
             for (int i = 0; i < _TscbYAxes.Length; i++)
             {
+                if (_TscbYAxes[i].SelectedItem == null) continue;
                 AxisFormat af = (AxisFormat)_TscbYAxes[i].SelectedItem;
 
                 if (af.ToString() == name1)
@@ -1260,6 +1340,7 @@ namespace ZiveLab.ZM.Dataview
 
             for (int i = 0; i < _TscbYAxes.Length; i++)
             {
+                if (_TscbYAxes[i].SelectedItem == null) continue;
                 AxisFormat af = (AxisFormat)_TscbYAxes[i].SelectedItem;
 
                 if (af.ToString() == name1)
@@ -1656,6 +1737,7 @@ namespace ZiveLab.ZM.Dataview
             _dataviewset._GraphSetEx.XAxisFormat = xaf.Name[0];
             for (int i = 0; i < _TscbYAxes.Length; i++)
             {
+                if (_TscbYAxes[i].SelectedItem == null) continue;
                 AxisFormat yaf = (AxisFormat)_TscbYAxes[i].SelectedItem;
                 ApplyYAxis(yaf, i);
                 _dataviewset._GraphSetEx.YAxesFormat[i] = yaf.Name[0];
@@ -1994,6 +2076,8 @@ namespace ZiveLab.ZM.Dataview
                 }
                 else
                 {
+                    if (nodeList[i].Row.UserData == null)
+                        return;
                     FileNodeInfor fni = (FileNodeInfor)nodeList[i].Row.UserData;
 
                     string filename = fni.FileName;
@@ -2077,6 +2161,7 @@ namespace ZiveLab.ZM.Dataview
                                 return;
                             }
                         }
+                        fzmf.Clear_rdList();
                         while (true)
                         {
                             if(bgWorker.CancellationPending)
@@ -2830,7 +2915,7 @@ namespace ZiveLab.ZM.Dataview
                             e.Result = new object[] { percent, Properties.Resources.Error_c_Open_failed, dstfile };
                             return;
                         }
-
+                        fzmf.Clear_rdList();
                         while (true)
                         {
                             if ((bgWorker.CancellationPending))
@@ -2967,7 +3052,7 @@ namespace ZiveLab.ZM.Dataview
                         e.Result = new object[] { percent, Properties.Resources.Error_c_Open_failed, dstfile };
                         return;
                     }
-
+                    fzmf.Clear_rdList();
                     while (true)
                     {
                         if (bgWorker.CancellationPending)
@@ -3108,7 +3193,7 @@ namespace ZiveLab.ZM.Dataview
             }
         }
 
-        private string[] GetColumns(bool idx = false, int pad = 0)
+        private string[] GetColumns(bool idx = false, int pad = 0, int ch = -1)
         {
             List<string> cols = new List<string>();
             string sCaption;
@@ -3121,31 +3206,49 @@ namespace ZiveLab.ZM.Dataview
 
             for (int i = 0; i < _TscbYAxes.Length; i++)
             {
+                if (_TscbYAxes[i].SelectedItem == null) continue;
                 if (((AxisFormat)_TscbYAxes[i].SelectedItem).Name[0] != "None")
                 {
                     cols.Add(((AxisFormat)_TscbYAxes[i].SelectedItem).GetCaption().PadRight(pad));
                 }
             }
-
-            if (MaxAuxCount > 0)
+            if(ch == -1)
             {
-                
-                for (int i = 0; i < MaxAuxCount; i++)
+                if (MaxAuxCount > 0)
                 {
-                    if (MenuAuxCh[i].Checked)
+
+                    for (int i = 0; i < MaxAuxCount; i++)
                     {
-                        sCaption = ((AxisFormat)tscbXAxis.SelectedItem).GetCaption();
-                        str = string.Format("A{0}_{1}", i + 1, sCaption);
-                        cols.Add(str.PadRight(pad));
-                        for (int j = 0; j < _TscbYAxes.Length; j++)
+                        if (MenuAuxCh[i].Checked)
                         {
-                            if (((AxisFormat)_TscbYAxes[j].SelectedItem).Name[0] != "None")
+                            sCaption = ((AxisFormat)tscbXAxis.SelectedItem).GetCaption();
+                            str = string.Format("A{0}_{1}", i + 1, sCaption);
+                            cols.Add(str.PadRight(pad));
+                            for (int j = 0; j < _TscbYAxes.Length; j++)
                             {
-                                sCaption = ((AxisFormat)_TscbYAxes[j].SelectedItem).GetCaption();
-                                str = string.Format("A{0}_{1}", i + 1, sCaption);
-                                cols.Add(str.PadRight(pad));
+                                if (((AxisFormat)_TscbYAxes[j].SelectedItem).Name[0] != "None")
+                                {
+                                    sCaption = ((AxisFormat)_TscbYAxes[j].SelectedItem).GetCaption();
+                                    str = string.Format("A{0}_{1}", i + 1, sCaption);
+                                    cols.Add(str.PadRight(pad));
+                                }
                             }
                         }
+                    }
+                }
+            }
+            else
+            {
+                sCaption = ((AxisFormat)tscbXAxis.SelectedItem).GetCaption();
+                str = string.Format("A{0}_{1}", ch + 1, sCaption);
+                cols.Add(str.PadRight(pad));
+                for (int j = 0; j < _TscbYAxes.Length; j++)
+                {
+                    if (((AxisFormat)_TscbYAxes[j].SelectedItem).Name[0] != "None")
+                    {
+                        sCaption = ((AxisFormat)_TscbYAxes[j].SelectedItem).GetCaption();
+                        str = string.Format("A{0}_{1}", ch + 1, sCaption);
+                        cols.Add(str.PadRight(pad));
                     }
                 }
             }
@@ -3284,6 +3387,17 @@ namespace ZiveLab.ZM.Dataview
                         //e.Style = c1FlexGridLegend.Styles.Highlight;
                         e.Style.BackColor = System.Drawing.Color.LightSkyBlue;
                         e.Style.ForeColor = value.ForeColor;
+
+                        Node currentNode = c1FlexGridLegend.Rows[e.Row].Node;
+                        if (currentNode != null && currentNode.Level==2)
+                        {
+                            int file_index = currentNode.Parent.Parent.Index;
+                            int graph_index = currentNode.Parent.Index;
+                            int index = currentNode.Index;
+                            _selNodeIndex[0] = file_index;
+                            _selNodeIndex[1] = graph_index;
+                            _selNodeIndex[2] = index;
+                        }
                     }
                     else
                     {
@@ -3354,7 +3468,7 @@ namespace ZiveLab.ZM.Dataview
                 string filename;
                 if (c1FlexGridLegend.RowSel >= 0)
                 {
-                    if (c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node.Level == 0)
+                    /*if (c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node.Level == 0)
                     {
                         FileNodeInfor fni = (FileNodeInfor)c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].UserData;
 
@@ -3370,50 +3484,46 @@ namespace ZiveLab.ZM.Dataview
                     {
                         MessageBox.Show("The file is not selected.");
                         return;
-                    }
-
+                    }*/
+                    FileNodeInfor fni = (FileNodeInfor)c1FlexGridLegend.Rows[_selNodeIndex[0]].UserData;
+                    filename = fni.FileName;
                     if (File.Exists(filename) == false)
                     {
                         MessageBox.Show("File not found.");
                         return;
                     }
 
-                    frmSelTarget dlg = new frmSelTarget(_LangIdx, MaxAuxCount);
-                    if (dlg.ShowDialog() == DialogResult.OK)
+                    SaveFileDialog savedlg = new SaveFileDialog();
+                    savedlg.Title = Properties.Resources.Save_Ascii_File;
+                    savedlg.InitialDirectory = Path.GetDirectoryName(filename);
+
+                    savedlg.FileName = _selNodeIndex[2] == 0 ? 
+                        string.Format("{0}_MAIN", Path.GetFileNameWithoutExtension(filename)) : string.Format("{0}_AUX{1}", Path.GetFileNameWithoutExtension(filename), (_selNodeIndex[2] == -1 ? 1 : _selNodeIndex[2]));
+
+                    savedlg.Filter = "Z# data files(*.Z#)|*.Z#";
+                    savedlg.DefaultExt = "Z#";
+
+                    if (savedlg.ShowDialog() == DialogResult.OK)
                     {
+                        toolStrip_Top.Enabled = false;
+                        toolStrip_Bottom.Enabled = false;
 
-                        SaveFileDialog savedlg = new SaveFileDialog();
-                        savedlg.Title = Properties.Resources.Save_Ascii_File;
-                        savedlg.InitialDirectory = Path.GetDirectoryName(filename);
+                        ribbonLabel2.Visible = true;
+                        ribbonProgressBar1.Visible = true;
 
-                        if (dlg.TargetIdx <= 0) savedlg.FileName = Path.GetFileNameWithoutExtension(filename);
-                        else savedlg.FileName = string.Format("{0}_AUX{1}", Path.GetFileNameWithoutExtension(filename), dlg.TargetIdx);
+                        BackgroundWorker bgWorkerConvText = new BackgroundWorker();
+                        bgWorkerConvText.WorkerReportsProgress = true;
+                        bgWorkerConvText.WorkerSupportsCancellation = true;
+                        bgWorkerConvText.DoWork += new DoWorkEventHandler(bgWorkerConvText_DoWork);
+                        bgWorkerConvText.ProgressChanged += new ProgressChangedEventHandler(bgWorkerConvText_ProgressChanged);
+                        bgWorkerConvText.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorkerConvText_RunWorkerCompleted);
+                        ZSharpTarget = _selNodeIndex[2];
 
-                        savedlg.Filter = "Z# data files(*.Z#)|*.Z#";
-                        savedlg.DefaultExt = "Z#";
+                        List<Node> CheckedNodeList = new List<Node>();
+                        CheckedNodeList.Add((Node)c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node.Parent.Parent);
 
-                        if (savedlg.ShowDialog() == DialogResult.OK)
-                        {
-                            toolStrip_Top.Enabled = false;
-                            toolStrip_Bottom.Enabled = false;
-
-                            ribbonLabel2.Visible = true;
-                            ribbonProgressBar1.Visible = true;
-
-                            BackgroundWorker bgWorkerConvText = new BackgroundWorker();
-                            bgWorkerConvText.WorkerReportsProgress = true;
-                            bgWorkerConvText.WorkerSupportsCancellation = true;
-                            bgWorkerConvText.DoWork += new DoWorkEventHandler(bgWorkerConvText_DoWork);
-                            bgWorkerConvText.ProgressChanged += new ProgressChangedEventHandler(bgWorkerConvText_ProgressChanged);
-                            bgWorkerConvText.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorkerConvText_RunWorkerCompleted);
-                            ZSharpTarget = dlg.TargetIdx;
-
-                            List<Node> CheckedNodeList = new List<Node>();
-                            CheckedNodeList.Add((Node)c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node);
-
-                            bgWorkerConvText.RunWorkerAsync(new object[] { false, CheckedNodeList, dlg.Delimiter, savedlg.FileName, GetColumns(true, _Pad) });
+                        bgWorkerConvText.RunWorkerAsync(new object[] { false, CheckedNodeList, eDelimiter.Tab, savedlg.FileName, GetColumns(true, _Pad, _selNodeIndex[2]) });
                             
-                        }
                     }
                 }
             }
@@ -3471,13 +3581,13 @@ namespace ZiveLab.ZM.Dataview
                 SetCursor(xyPlot, true);
             }            
 
-            if(selNode != null && selNode.Row.UserData is FileNodeInfor)
+            //if(selNode != null && selNode.Row.UserData is FileNodeInfor)
             {
                 tsbtnFileHeaderInfor.Enabled = true;
             }
-            else
+            //else
             {
-                tsbtnFileHeaderInfor.Enabled = false;
+            //    tsbtnFileHeaderInfor.Enabled = false;
             }
         }
 
@@ -3960,7 +4070,14 @@ namespace ZiveLab.ZM.Dataview
                     {
                         fni = (FileNodeInfor)c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node.Parent.Row.UserData;
                     }
-                }                            
+                }
+                else if (nodelevel == 2)
+                {
+                    if (c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node.Parent.Parent.Row.UserData is FileNodeInfor)
+                    {
+                        fni = (FileNodeInfor)c1FlexGridLegend.Rows[c1FlexGridLegend.RowSel].Node.Parent.Parent.Row.UserData;
+                    }
+                }
             }
 
             if (fni != null)
@@ -4298,7 +4415,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void tsbtnErefvsAbsQGraph_Click(object sender, EventArgs e)
         {
-            int x = GetAxisItemIndex(_xAxisStrings, "|Q|");
+            int x = GetAxisItemIndex(_xAxisStrings, "Capacity"); //|Q|
             int y1 = GetAxisItemIndex(_yAxisStrings, "Vdc");
             int y2 = GetAxisItemIndex(_ynAxisStrings, "None");
             int y3 = GetAxisItemIndex(_ynAxisStrings, "None");

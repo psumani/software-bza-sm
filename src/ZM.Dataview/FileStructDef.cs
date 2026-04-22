@@ -1206,6 +1206,7 @@ namespace ZiveLab.ZM.Dataview
         public double Energy;
 
         public double[] AuxVdc;
+        public double[] AuxVeoc;
         public double []AuxPower;
         public double []AuxLoad;
         public double []AuxEnergy;
@@ -1233,6 +1234,7 @@ namespace ZiveLab.ZM.Dataview
             AuxPower = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             AuxLoad = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             AuxVdc = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxVeoc = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             AuxEnergy = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             for (int i=0; i< MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
@@ -1241,6 +1243,7 @@ namespace ZiveLab.ZM.Dataview
                 AuxLoad[i] = 0.0;
                 AuxEnergy[i] = 0.0;
                 AuxVdc[i] = 0.0;
+                AuxVeoc[i] = 0.0;
             }
         }
 
@@ -1262,6 +1265,7 @@ namespace ZiveLab.ZM.Dataview
             AuxPower = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             AuxLoad = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             AuxVdc = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            AuxVeoc = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             AuxEnergy = new double[MBZA_Constant.MAX_AUX_CHANNELS];
             for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
@@ -1270,6 +1274,7 @@ namespace ZiveLab.ZM.Dataview
                 AuxLoad[i] = 0.0;
                 AuxEnergy[i] = 0.0;
                 AuxVdc[i] = 0.0;
+                AuxVeoc[i] = 0.0;
             }
 
             RefreshDataProc();
@@ -1303,6 +1308,7 @@ namespace ZiveLab.ZM.Dataview
                 bd = i / 4;
                 bdch = i % 4;
                 AuxVdc[i] = mRawData.mdata[bd].mdata[bdch].Vdc;
+                AuxVeoc[i] = mRawData.mdata[bd].mdata[bdch].Veoc;
                 AuxPower[i] = mRawData.mdata[bd].mdata[bdch].Vdc * mRawData.Idc;
                 AuxLoad[i] = (mRawData.Idc == 0.0) ? 0.0 : mRawData.mdata[bd].mdata[bdch].Vdc / mRawData.Idc;
                 AuxZ[i].initialize(mRawData.fFreq, mRawData.mdata[bd].mdata[bdch].Zre, mRawData.mdata[bd].mdata[bdch].Zim);
@@ -1462,7 +1468,7 @@ namespace ZiveLab.ZM.Dataview
             {
                 MaxAuxCh = 0;
             }
-            if ((enTechType1)_ResHead.tech.type == enTechType1.TECH_DCH || (enTechType1)_ResHead.tech.type == enTechType1.TECH_MON)
+            if ((enTechType1)_ResHead.tech.type == enTechType1.TECH_MON) // TECH_DCH
             {
                 bDCOnly = true;
             }

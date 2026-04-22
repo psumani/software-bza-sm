@@ -74,8 +74,7 @@ extern "C"
 	INT_32 ICE_write_24bits(INT_32 ch, UNS_8 cmd, UNS_32 data);
 	INT_32 ICE_read_bytes(INT_32 ch, UNS_8 cmd, UNS_8* pdata, UNS_32 length);
 	INT_32 ICE_write_bytes(INT_32 ch, UNS_8* pdata, UNS_32 length);
-	bool CheckStart();	
-	bool CheckResult(void);
+	
 	INT_32 ICE_spi_open(void);
 	void ICE_spi_close(void);
 

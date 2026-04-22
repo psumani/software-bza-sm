@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAG
-        CAAAAk1TRnQBSQFMAwEBAAHwARUB8AEVARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        CAAAAk1TRnQBSQFMAwEBAAH4ARUB+AEVARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
         AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
         AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
         AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
@@ -169,7 +169,28 @@
   <data name="toolStrip_Top.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Symbol, 9pt</value>
   </data>
+  <data name="toolStrip_Top.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="toolStrip_Top.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1039, 42</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="toolStrip_Top.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Top.Name" xml:space="preserve">
+    <value>toolStrip_Top</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Top.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Top.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Top.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="toolStripLabel6.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -255,6 +276,9 @@
   </data>
   <data name="tsbtnBodeGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 39</value>
+  </data>
+  <data name="tsbtnBodeGraph.ToolTipText" xml:space="preserve">
+    <value>Bode Plot</value>
   </data>
   <data name="tsbtnNyquistGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 39</value>
@@ -882,10 +906,10 @@
   <data name="tsbtnGeneralViewScheduleInfor.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADFSURBVDhPtY5BDoIwEEUncevKlSRQ2i13cWsh7kwAD+KB
-        jHHjaYRLsMWZpGNgOhIX8pOXpjP//xZWkXOuQ8YFumDVRSZjTPIN2gerLlmg3YNV199/IFm/gKWFiaiA
-        BhKaa2GC9zPRUC5lkPmpQIamRAU4xJkbwpJOl6bpjgOSqMBa+0CutKQTDU8cb/I835OZ0Qsa76EtR4Vj
-        URRbDk2ZF5x9D011gPqUfKD7pXrhD+z0B0yWZX1Io1p/V14foS5vwbEggDd9K4fLdTi6XgAAAABJRU5E
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADFSURBVDhPtY4xDsIwDEUtsTIxUalNk7V3YSWtmBjachAO
+        hBALp6G9RNdiSzFqHVMx0C89RbH//wmsIudch4wLdMGqi0zGmOQbtA9WXbJAuwerrr//QLJ+AUsLE1EB
+        DSQ018IE72eioVzKIPNTgQxNiQpwiDM3hCWdLk3THQckUYG19oFcaUknGp443uR5viczoxc03kNbjgrH
+        oii2HJoyLzj7HprqAPUp+UD3S/XCH9jpD5gsy/qQRrX+rrw+Ql3egmNBAG98q4fKQbRANwAAAABJRU5E
         rkJggg==
 </value>
   </data>
@@ -901,9 +925,9 @@
   <data name="tsbtnGeneralDataEditor.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACLSURBVDhPrZNBCoAgEEW9RiCKniS6/yGkG7RpWw3M6GjN
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACLSURBVDhPrZNBCoAgEEW9RgiKniS6/yGkG7RpWw3M6GjN
         oNWHR2Lzn7bI/JYQQro4JKy1m/d+xvF7YMg5N0mgaI8xLlip0ymQJSRgg5l2Hz4HayU02APMYq2EBHSK
-        JlQFPagCeAqyFXl3Ay4eEVSnDgvaEl9jrYReNuQb8PWI4BFJoP5MDQlrX2PMCW67kL4ZQAlMAAAAAElF
+        JlQFPagCeAqyFXl3Ay4eEVSnDgvaEl9jrYReNuQb8PWI4BFJoP5MDQlrX2PMCVtKkLhOy7QSAAAAAElF
         TkSuQmCC
 </value>
   </data>
@@ -1125,27 +1149,6 @@
   <data name="toolStripLabel45.Size" type="System.Drawing.Size, System.Drawing">
     <value>2, 39</value>
   </data>
-  <data name="toolStrip_Top.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="toolStrip_Top.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1039, 42</value>
-  </data>
-  <data name="toolStrip_Top.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Top.Name" xml:space="preserve">
-    <value>toolStrip_Top</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Top.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Top.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Top.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <metadata name="printDocGraph.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>462, 17</value>
   </metadata>
@@ -1154,6 +1157,27 @@
   </metadata>
   <data name="toolStrip_Bottom.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Symbol, 9pt</value>
+  </data>
+  <data name="toolStrip_Bottom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 42</value>
+  </data>
+  <data name="toolStrip_Bottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1039, 42</value>
+  </data>
+  <data name="toolStrip_Bottom.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Bottom.Name" xml:space="preserve">
+    <value>toolStrip_Bottom</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Bottom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Bottom.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip_Bottom.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="toolStripLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1341,27 +1365,6 @@
   <data name="toolStripLabel36.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 39</value>
   </data>
-  <data name="toolStrip_Bottom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 42</value>
-  </data>
-  <data name="toolStrip_Bottom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1039, 42</value>
-  </data>
-  <data name="toolStrip_Bottom.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Bottom.Name" xml:space="preserve">
-    <value>toolStrip_Bottom</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Bottom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Bottom.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip_Bottom.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="c1SplitContainer1.CollapsingCueColor" type="System.Drawing.Color, System.Drawing">
     <value>133, 133, 150</value>
   </data>
@@ -1381,7 +1384,7 @@
     <value>Fill</value>
   </data>
   <data name="c1FlexGridLegend.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt</value>
+    <value>Consolas, 9pt</value>
   </data>
   <data name="c1FlexGridLegend.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1433,21 +1436,6 @@
     <value>c1SplitContainer1</value>
   </data>
   <data name="&gt;&gt;c1SplitterPanel2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="scGraph.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="scGraph.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="scGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="scGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>790, 474</value>
-  </data>
-  <data name="scGraph.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;scGraph.Name" xml:space="preserve">
@@ -1506,6 +1494,33 @@
   </data>
   <data name="&gt;&gt;c1SplitContainer1.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="scGraph.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="scGraph.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="scGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="scGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>790, 474</value>
+  </data>
+  <data name="scGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;scGraph.Name" xml:space="preserve">
+    <value>scGraph</value>
+  </data>
+  <data name="&gt;&gt;scGraph.Type" xml:space="preserve">
+    <value>NationalInstruments.UI.WindowsForms.ScatterGraph, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
+  </data>
+  <data name="&gt;&gt;scGraph.Parent" xml:space="preserve">
+    <value>c1SplitterPanel1</value>
+  </data>
+  <data name="&gt;&gt;scGraph.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="graphPrintPreviewDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>596, 17</value>
@@ -1704,12 +1719,6 @@
   <data name="&gt;&gt;graphPrintPreviewDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.PrintPreviewDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ribbonLabel1.Text" xml:space="preserve">
-    <value>Idle</value>
-  </data>
-  <data name="ribbonLabel2.Text" xml:space="preserve">
-    <value>0%</value>
-  </data>
   <data name="c1StatusBar1.RightPaneWidth" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -1725,12 +1734,27 @@
   <data name="&gt;&gt;c1StatusBar1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ribbonLabel1.Text" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="ribbonLabel2.Text" xml:space="preserve">
+    <value>0%</value>
+  </data>
   <metadata name="timerCheckBgWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>931, 17</value>
   </metadata>
   <metadata name="contextMenuCheckItem.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>
+  <data name="contextMenuCheckItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 70</value>
+  </data>
+  <data name="&gt;&gt;contextMenuCheckItem.Name" xml:space="preserve">
+    <value>contextMenuCheckItem</value>
+  </data>
+  <data name="&gt;&gt;contextMenuCheckItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="checkAnOddNumber135ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 22</value>
   </data>
@@ -1749,21 +1773,21 @@
   <data name="check11121ToolStripMenuItem.Text" xml:space="preserve">
     <value>Check 1, 11, 21, ...</value>
   </data>
-  <data name="contextMenuCheckItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 70</value>
-  </data>
-  <data name="&gt;&gt;contextMenuCheckItem.Name" xml:space="preserve">
-    <value>contextMenuCheckItem</value>
-  </data>
-  <data name="&gt;&gt;contextMenuCheckItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <metadata name="toolTipFilePath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>201, 56</value>
   </metadata>
   <metadata name="contextMenuAux.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>335, 56</value>
   </metadata>
+  <data name="contextMenuAux.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 296</value>
+  </data>
+  <data name="&gt;&gt;contextMenuAux.Name" xml:space="preserve">
+    <value>contextMenuAux</value>
+  </data>
+  <data name="&gt;&gt;contextMenuAux.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="AuxMenuChannelsAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 22</value>
   </data>
@@ -1844,15 +1868,6 @@
   </data>
   <data name="AuxMenuChannel12.Text" xml:space="preserve">
     <value>Auxiliary channel 12.</value>
-  </data>
-  <data name="contextMenuAux.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 318</value>
-  </data>
-  <data name="&gt;&gt;contextMenuAux.Name" xml:space="preserve">
-    <value>contextMenuAux</value>
-  </data>
-  <data name="&gt;&gt;contextMenuAux.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lnlAuxMenu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>

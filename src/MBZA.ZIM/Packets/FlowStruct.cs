@@ -1565,6 +1565,8 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double Idc;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
         public double[] Aux_Vdc;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
+        public double[] Aux_Veoc;
 
         public double Temperature;
         public ushort RealSkip;
@@ -1574,9 +1576,9 @@ namespace ZiveLab.ZM.ZIM.Packets
         public st_zim_eis_status eis_status;
 
         public double DispFreq;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
         public double[] DispMag;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
         public double[] DispPhase;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MBZA_Constant.MAX_AUX_BOARD)]
         public ushort[] ConnCBL;
@@ -1608,9 +1610,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             Vdc = 0.0;
             Idc = 0.0;
             Aux_Vdc = new double[12];
+            Aux_Veoc = new double[12];
             for (int i = 0; i < Aux_Vdc.Length; i++)
             {
                 Aux_Vdc[i] = 0.0;
+                Aux_Veoc[i] = 0.0;
             }
 
             Temperature = 0.0;
@@ -2032,14 +2036,14 @@ namespace ZiveLab.ZM.ZIM.Packets
     public struct st_zim_TestDataItem
     {
         public double Vdc;
-        //public double Veoc;
+        public double Veoc;
         public double Zre;
         public double Zim;
 
         public st_zim_TestDataItem(byte init)
         {
             Vdc = 0.0;
-            //Veoc = 0.0;
+            Veoc = 0.0;
             Zre = 0.0;
             Zim = 0.0;
         }
@@ -2047,7 +2051,7 @@ namespace ZiveLab.ZM.ZIM.Packets
         public void initialize()
         {
             Vdc = 0.0;
-            //Veoc = 0.0;
+            Veoc = 0.0;
             Zre = 0.0;
             Zim = 0.0;
         }

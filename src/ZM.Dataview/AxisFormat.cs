@@ -116,6 +116,8 @@ namespace ZiveLab.ZM.Dataview
             _Caption = new string[3];
             _Unit = new string[3];
             _UnitC = unitC;
+            if (name == null)
+                name = "None";
 
             switch (name)
             {
@@ -738,7 +740,7 @@ namespace ZiveLab.ZM.Dataview
                     _PlotVisible = true;
                     MinorGridVisible = false;
                     break;
-                case "|Q(R-L)|":
+                case "Q(R-L)":
                     _FullName = name;
                     DataType = typeof(double);
                     ColTextFormat = "{0, -25}{1}";

@@ -71,7 +71,7 @@
             this.grdChs.BackColorSel = System.Drawing.Color.LemonChiffon;
             this.grdChs.ColumnInfo = "10,1,0,0,0,95,Columns:";
             this.grdChs.ContextMenuStrip = this.RegMenu;
-            this.grdChs.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdChs.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdChs.ForeColorSel = System.Drawing.SystemColors.ControlText;
             this.grdChs.GridColor = System.Drawing.Color.Silver;
             this.grdChs.GridColorFixed = System.Drawing.SystemColors.ControlDark;
@@ -115,7 +115,7 @@
             this.grdBZAs.BackColorSel = System.Drawing.Color.LemonChiffon;
             this.grdBZAs.ColumnInfo = "10,1,0,0,0,95,Columns:";
             this.grdBZAs.ContextMenuStrip = this.ScanMenu1;
-            this.grdBZAs.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdBZAs.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdBZAs.GridColor = System.Drawing.Color.Silver;
             this.grdBZAs.GridColorFixed = System.Drawing.SystemColors.ControlDark;
             this.grdBZAs.Location = new System.Drawing.Point(15, 85);
@@ -295,7 +295,7 @@
             this.grdBzaCh.BackColorSel = System.Drawing.Color.LemonChiffon;
             this.grdBzaCh.ColumnInfo = "10,1,0,0,0,95,Columns:";
             this.grdBzaCh.EditOptions = ((C1.Win.C1FlexGrid.EditFlags)((C1.Win.C1FlexGrid.EditFlags.ExitOnLeftRightKeys | C1.Win.C1FlexGrid.EditFlags.EditOnRequest)));
-            this.grdBzaCh.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdBzaCh.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdBzaCh.ForeColorSel = System.Drawing.SystemColors.ControlText;
             this.grdBzaCh.GridColor = System.Drawing.Color.Silver;
             this.grdBzaCh.GridColorFixed = System.Drawing.SystemColors.ControlDark;

@@ -30,6 +30,15 @@ signal drdy_sync1, drdy_sync2, drdy_prev : std_logic := '1';
 signal drdy_falling : std_logic := '0';
 
 begin
+	process(CLK)
+	begin
+		if rising_edge(CLK) then
+			drdy_sync1 <= DRDY;
+			drdy_sync2 <= drdy_sync1;
+			drdy_prev  <= drdy_sync2;
+			drdy_falling <= drdy_prev and not drdy_sync2;
+		end if;
+	end process;
 
 	process(CLK, RESET, TRIG, adc_state, MISO, DRDY)
 	begin
@@ -91,15 +100,6 @@ begin
 		end if;
 	end process;
 	
-	process(CLK)
-	begin
-		if rising_edge(CLK) then
-			drdy_sync1 <= DRDY;
-			drdy_sync2 <= drdy_sync1;
-			drdy_prev  <= drdy_sync2;
-			drdy_falling <= drdy_prev and not drdy_sync2;
-		end if;
-	end process;
 --	process(CLK, RESET, TRIG, adc_state, MISO, DRDY)
 --	begin
 --		if RESET = '1' then

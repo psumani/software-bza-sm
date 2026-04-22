@@ -20,6 +20,7 @@ using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using ZiveLab.ZM.Dataview;
 using System.Xml.Serialization;
+using System.Text.RegularExpressions;
 
 namespace ZiveLab.ZM
 {
@@ -107,7 +108,7 @@ namespace ZiveLab.ZM
             About = new MBZA_ChannelInfo(serial, sifch);
 
             InitializeRadioButtons();
-            rdoAuxMon = 0; // 0: vdc 1: Z
+            rdoAuxMon = 0; // 0: vdc 1: Z'/Z" 2: |Z|/Zph
             imageList = new ImageList();
             imageList.ImageSize = new Size(16, 16);
 
@@ -204,8 +205,12 @@ namespace ZiveLab.ZM
                         grpvars.GrpObjs[idx].bExist = true;
                         grpvars.GrpObjs[idx].nAuxCh = i - 1;
                         grpvars.nAuxChCount++;
-                        idx++;
                     }
+                    else
+                    {
+                        grpvars.GrpObjs[idx].bExist = false;
+                    }
+                    idx++;
                 }
             }
 
@@ -228,7 +233,8 @@ namespace ZiveLab.ZM
             InitGraphRawRt();
             InitGraph1();
             InitGraph2();
-            InitAuxMonitorList();
+            
+            InitAuxMonitorList_Load();
 
             MakeAppTitle();
 
@@ -328,8 +334,9 @@ namespace ZiveLab.ZM
 
         private void RefreshRt(int ch = 0)
         {
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
+                if (grpvars.GrpObjs[i].bExist != true) continue;
                 if (grpvars.GrpItemsRT.GrpCtrlMode == 0)
                 {
                     grprt.Plots[i * 2].PlotXY(gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.dv[i].vac, gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.di, 0, gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rawdata.count);
@@ -365,7 +372,7 @@ namespace ZiveLab.ZM
 
             ScatterPlot tPlot;
             Size nPntSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            for (int i=0; i< grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 tPlot = new ScatterPlot(grprt.XAxes[0], grprt.YAxes[0]);
                 tPlot.LineColor = grpvars.GrpItemsRT.PlotColor[i*2];
@@ -801,8 +808,9 @@ namespace ZiveLab.ZM
             ChkListItem2.Items.Clear();
             
             ChkListItem3.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
+                if (grpvars.GrpObjs[i].bExist != true) continue;
                 if (i == 0)
                 {
                     //CboLegendItem1.Items.Add("Main");
@@ -870,7 +878,7 @@ namespace ZiveLab.ZM
 
             ScatterPlot tPlot;
             Size nPntSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++) //grpvars.nAuxChCount + 1
             {
                 for (int j = 0; j < MBZA_Constant.MAX_GRAPH_PLOTS; j++)
                 {
@@ -958,7 +966,7 @@ namespace ZiveLab.ZM
 
             ScatterPlot tPlot;
             Size nPntSize = new Size(DeviceConstants.Pointwidth, DeviceConstants.Pointheight);
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 for (int j = 0; j < MBZA_Constant.MAX_GRAPH_PLOTS; j++)
                 {
@@ -1089,7 +1097,7 @@ namespace ZiveLab.ZM
             grp1.YAxes[1].Visible = false;
 
             legend1.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++) //grpvars.nAuxChCount + 1
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS; ;
                 grp1.Plots[nPlot].Visible = true;
@@ -1136,7 +1144,7 @@ namespace ZiveLab.ZM
             ChkListLegend2.Items.Add("Zphase", true);
 
             legend2.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 grp2.Plots[nPlot].Visible = true;
@@ -1200,7 +1208,7 @@ namespace ZiveLab.ZM
             ChkListLegend1.Items.Add("Temp.", true);
 
             legend1.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 grp1.Plots[nPlot].Visible = true;
@@ -1272,7 +1280,7 @@ namespace ZiveLab.ZM
             ChkListLegend1.Items.Add("Temp.", true);
 
             legend1.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++) //grpvars.nAuxChCount + 1
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 grp1.Plots[nPlot].Visible = true;
@@ -1342,7 +1350,7 @@ namespace ZiveLab.ZM
             grp1.YAxes[1].Visible = false;
 
             legend1.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS; ;
                 grp1.Plots[nPlot].Visible = true;
@@ -1392,7 +1400,7 @@ namespace ZiveLab.ZM
             ChkListLegend2.Items.Add("ZPhase", true);
 
             legend2.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 grp2.Plots[nPlot].Visible = true;
@@ -1455,7 +1463,7 @@ namespace ZiveLab.ZM
 
             legend1.Items.Clear();
             legend2.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 grp1.Plots[nPlot].Visible = true;
@@ -1515,7 +1523,7 @@ namespace ZiveLab.ZM
             ChkListLegend2.Items.Add("Cp", true);
 
             legend2.Items.Clear();
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 grp2.Plots[nPlot].Visible = true;
@@ -1655,7 +1663,7 @@ namespace ZiveLab.ZM
             legend1.Items.Clear();
             legend2.Items.Clear();
 
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                 nLegend = i * 6;
@@ -2873,43 +2881,83 @@ namespace ZiveLab.ZM
                 }
             }
         }
+        private string FormatWithMilliPrefix(double value, int decimals = 3)
+        {
+            string fmt = $"F{decimals}";
 
+            if (value == 0.0)
+                return $"0.{"0".PadRight(decimals, '0')}".Trim();
+            double absVal = Math.Abs(value);
+
+            if (absVal < 1.0 && absVal >= 0.001)
+            {
+                // milli 범위 (0.001 ~ 0.999...)
+                if(absVal >= 0.01)
+                    fmt = $"F2";
+                return $"{(value * 1000).ToString(fmt)} m";
+            }
+            else if (absVal < 0.001)
+            {
+                // micro 범위 
+                return $"{(value * 1000).ToString(fmt)} m";
+                //return $"{(value * 1000000).ToString(fmt)} µ";
+            }
+            else
+            {
+                return $"{value.ToString(fmt)}".Trim();
+            }
+        }
+        private void UpdateListViewData()
+        {
+            listAuxMon.BeginUpdate();
+            stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
+            int idx = 0;
+            if (rdoAuxMon == 0)
+            {
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++) //chstat.Aux_Vdc.Length
+                {
+                    if (grpvars.GrpObjs[i+1].bExist != true) continue;
+                    double vdcValue = chstat.Aux_Vdc[i];
+                    listAuxMon.Items[idx].SubItems[1].Text = FormatWithMilliPrefix(vdcValue,5);
+                    idx++;
+                }
+            }
+            else if (rdoAuxMon == 1)
+            {
+
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++) //
+                {
+                    if (grpvars.GrpObjs[i + 1].bExist != true) continue;
+                    st_zim_eis_zdata zData = chstat.eis_status.Aux_zdata[i];
+                    double zValue = zData.real;
+                    listAuxMon.Items[idx].SubItems[1].Text = FormatWithMilliPrefix(zValue);
+                    zValue = zData.img;
+                    listAuxMon.Items[idx].SubItems[2].Text = FormatWithMilliPrefix(zValue);
+                    idx++;
+                }
+            }
+            else if (rdoAuxMon == 2)
+            {
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++) //
+                {
+                    if (grpvars.GrpObjs[i + 1].bExist != true) continue;
+                    double zValue = chstat.DispMag[i];
+                    listAuxMon.Items[idx].SubItems[1].Text = FormatWithMilliPrefix(zValue);
+                    zValue = chstat.DispPhase[i];
+                    listAuxMon.Items[idx].SubItems[2].Text = FormatWithMilliPrefix(zValue);
+                    idx++;
+                }
+            }
+            listAuxMon.EndUpdate();
+        }
         private void ViewStatus()
         {
             bool isMCBZA = gBZA.IsMCBZA(serial);
             stChStatusInf chstat = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch];
             enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
             st_zim_rt rtgrp = gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].rtgrp;
-            if (rdoAuxMon == 0)
-            {
-                for (int i = 0; i < grpvars.nAuxChCount && i < 12; i++) //chstat.Aux_Vdc.Length
-                {
-                    double vdcValue = chstat.Aux_Vdc[i];
-                    string formattedValue = $"{vdcValue:0.000} V";
-                    listAuxMon.Items[i].SubItems[1].Text = formattedValue;
-                }
-            }
-            else if(rdoAuxMon == 1)
-            {
-                
-                for (int i = 0; i < grpvars.nAuxChCount && i < 12; i++) //
-                {
-                    double zValue = gBZA.SifLnkLst[serial].MBZAIF.mChStatInf[sifch].DispMag[i];
-                    /*if(rtgrp.item[ch].plot[2].ly[0].Count>0)
-                    {
-                        switch (techtype)
-                        {
-                            //case enTechType.TECH_HFR:
-                            case enTechType.TECH_EIS:
-                            case enTechType.TECH_QIS:
-                                zValue = rtgrp.item[ch].plot[2].ly[0][rtgrp.item[ch].plot[2].ly[0].Count - 1];
-                                break;
-                        }
-                    }*/
-                    string formattedValue = $"{zValue:0.00000} Ω";
-                    listAuxMon.Items[i].SubItems[1].Text = formattedValue;
-                }
-            }
+
+            UpdateListViewData();
 
             //var mrng = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0];
             var mrng = gBZA.SifLnkLst[serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges; // 배열
@@ -3239,21 +3287,14 @@ namespace ZiveLab.ZM
                 {
                     lblfreq.Text = string.Format("  Freq.: {0,8:###0.0##}mHz", chstat.DispFreq * 1000.0);
                 }
-                double DispReal = Math.Abs(chstat.DispMag[0]) * Math.Cos(chstat.DispPhase[0] * (double)DeviceConstants.PI / (double)180.0);
-                double Dispimg = Math.Abs(chstat.DispMag[0]) * Math.Sin(chstat.DispPhase[0] * (double)DeviceConstants.PI / (double)180.0);
-                // Aux
-                //double auxZreal = chstat.eis_status.Aux_zdata[0].real;
-                //double auxZimg = chstat.eis_status.Aux_zdata[0].img;
-                //double auxMag = Math.Abs(chstat.eis_status.Aux_zdata[0].mag);
-                //double auxPhase = chstat.eis_status.Aux_zdata[0].phase;
-                //double auxDispReal = auxMag * Math.Cos(auxPhase * Math.PI / 180.0);
-                //double auxDispImg = auxMag * Math.Sin(auxPhase * Math.PI / 180.0);
-
+                double DispReal = Math.Abs(chstat.eis_status.zdata.mag) * Math.Cos(chstat.eis_status.zdata.phase * (double)DeviceConstants.PI / (double)180.0);
+                double Dispimg = Math.Abs(chstat.eis_status.zdata.mag) * Math.Sin(chstat.eis_status.zdata.phase * (double)DeviceConstants.PI / (double)180.0);
+                //chstat.DispMag[0]
                 if (DispReal >= 1000.0)
                 {
                     lblzreal.Text = string.Format("  Zreal: {0,8:###0.0##}KΩ", DispReal / 1000.0);
                 }
-                else if (chstat.DispMag[0] >= 1.0)
+                else if (chstat.eis_status.zdata.mag >= 1.0)
                 {
                     lblzreal.Text = string.Format("  Zreal: {0,8:###0.0##} Ω", DispReal);
                 }
@@ -3286,7 +3327,7 @@ namespace ZiveLab.ZM
                 {
                     lblzimg.Text = string.Format("   Zimg: {0,8:###0.0##}KΩ", Dispimg / 1000.0);
                 }
-                else if (chstat.DispMag[0] >= 1.0)
+                else if (chstat.eis_status.zdata.mag >= 1.0)
                 {
                     lblzimg.Text = string.Format("   Zimg: {0,8:###0.0##} Ω", Dispimg);
                 }
@@ -3316,17 +3357,17 @@ namespace ZiveLab.ZM
                 }
 
 
-                if (chstat.DispMag[0] >= 1000.0)
+                if (chstat.eis_status.zdata.mag >= 1000.0)
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}KΩ", chstat.DispMag[0] / 1000.0);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}KΩ", chstat.eis_status.zdata.mag / 1000.0);
                 }
-                else if (chstat.DispMag[0] >= 1.0)
+                else if (chstat.eis_status.zdata.mag >= 1.0)
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##} Ω", chstat.DispMag[0]);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##} Ω", chstat.eis_status.zdata.mag);
                 }
                 else
                 {
-                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}mΩ", chstat.DispMag[0] * 1000.0);
+                    lblZmag.Text = string.Format("   Zmag: {0,8:###0.0##}mΩ", chstat.eis_status.zdata.mag * 1000.0);
                 }
 
                 for (int i = 0; i < 12; i++)
@@ -3349,13 +3390,13 @@ namespace ZiveLab.ZM
                     }
                 }
 
-                if (chstat.DispPhase[0] >= 10.0)
+                if (chstat.eis_status.zdata.phase >= 10.0)
                 {
-                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase[0]);
+                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.eis_status.zdata.phase);
                 }
                 else
                 {
-                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.DispPhase[0]);
+                    lblZphase.Text = string.Format(" Zphase: {0,8:###0.0##} °", chstat.eis_status.zdata.phase);
                 }
 
                 for (int i = 0; i < 12; i++)
@@ -4024,21 +4065,24 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                     tx = rtgrp.item[i].plot[0].lx[0].ToArray();
                     ty = rtgrp.item[i].plot[0].ly[0].ToArray();
-
+                    if (!(tx.Length > 0 && ty.Length > 0)) continue;
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     if(i == 0) time0 = ptx[appendcount - 1];
                     Array.Copy(ty, st, pty, 0, appendcount);
 
                     grp1.Plots[nPlot].PlotXYAppend(ptx, pty);
-
-                    if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
-                    if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                    if (grp1.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
+                        if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                    }
                 }
 
                 cmpval = Math.Abs(maxval);
@@ -4049,7 +4093,7 @@ namespace ZiveLab.ZM
 
                 maxval = maxval + (cmpval * GrpSpaceRate);
                 minval = minval - (cmpval * GrpSpaceRate);
-                if (minval == maxval && maxval == 0.0)
+                if ((minval == maxval && maxval == 0.0) || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4058,20 +4102,23 @@ namespace ZiveLab.ZM
 
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                     tx = rtgrp.item[i].plot[1].lx[0].ToArray();
                     ty = rtgrp.item[i].plot[1].ly[0].ToArray();
-
+                    if (!(tx.Length > 0 && ty.Length > 0)) continue;
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     Array.Copy(ty, st, pty, 0, appendcount);
 
                     grp1.Plots[nPlot+1].PlotXYAppend(ptx, pty);
-
-                    if (maxval < rtgrp.item[i].plot[1].Maxval[0]) maxval = rtgrp.item[i].plot[1].Maxval[0];
-                    if (minval > rtgrp.item[i].plot[1].Minval[0]) minval = rtgrp.item[i].plot[1].Minval[0];
+                    if (grp1.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS + 1].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[1].Maxval[0]) maxval = rtgrp.item[i].plot[1].Maxval[0];
+                        if (minval > rtgrp.item[i].plot[1].Minval[0]) minval = rtgrp.item[i].plot[1].Minval[0];
+                    }
                 }
                 cmpval = Math.Abs(maxval);
                 if (cmpval < minval)
@@ -4086,7 +4133,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4100,21 +4147,24 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                     tx = rtgrp.item[i].plot[2].lx[0].ToArray();
                     ty = rtgrp.item[i].plot[2].ly[0].ToArray();
-
+                    if (!(tx.Length > 0 && ty.Length > 0)) continue;
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     if (i == 0) time1 = ptx[appendcount - 1];
                     Array.Copy(ty, st, pty, 0, appendcount);
 
                     grp2.Plots[nPlot].PlotXYAppend(ptx, pty);
-
-                    if (maxval < rtgrp.item[i].plot[2].Maxval[0]) maxval = rtgrp.item[i].plot[2].Maxval[0];
-                    if (minval > rtgrp.item[i].plot[2].Minval[0]) minval = rtgrp.item[i].plot[2].Minval[0];
+                    if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[2].Maxval[0]) maxval = rtgrp.item[i].plot[2].Maxval[0];
+                        if (minval > rtgrp.item[i].plot[2].Minval[0]) minval = rtgrp.item[i].plot[2].Minval[0];
+                    }
                 }
 
 
@@ -4126,7 +4176,7 @@ namespace ZiveLab.ZM
 
                 maxval = maxval + (cmpval * GrpSpaceRate);
                 minval = minval - (cmpval * GrpSpaceRate);
-                if (minval == maxval && maxval == 0.0)
+                if ((minval == maxval && maxval == 0.0) || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4135,20 +4185,23 @@ namespace ZiveLab.ZM
 
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                     tx = rtgrp.item[i].plot[3].lx[0].ToArray();
                     ty = rtgrp.item[i].plot[3].ly[0].ToArray();
-
+                    if (!(tx.Length > 0 && ty.Length > 0)) continue;
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     Array.Copy(ty, st, pty, 0, appendcount);
 
                     grp2.Plots[nPlot + 1].PlotXYAppend(ptx, pty);
-
-                    if (maxval < rtgrp.item[i].plot[3].Maxval[0]) maxval = rtgrp.item[i].plot[3].Maxval[0];
-                    if (minval > rtgrp.item[i].plot[3].Minval[0]) minval = rtgrp.item[i].plot[3].Minval[0];
+                    if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS + 1].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[3].Maxval[0]) maxval = rtgrp.item[i].plot[3].Maxval[0];
+                        if (minval > rtgrp.item[i].plot[3].Minval[0]) minval = rtgrp.item[i].plot[3].Minval[0];
+                    }
                 }
                 cmpval = Math.Abs(maxval);
                 if (cmpval < minval)
@@ -4163,7 +4216,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4224,19 +4277,24 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     if (appendcount0 > 0)
                     {
                         tx = rtgrp.item[i].plot[0].lx[0].ToArray();
                         ty = rtgrp.item[i].plot[0].ly[0].ToArray();
+                        if (!(tx.Length > 0 && ty.Length > 0)) continue;
                         Array.Copy(tx, st0, ptx0, 0, appendcount0);
                         Array.Copy(ty, st0, pty0, 0, appendcount0);
                         grp1.Plots[nPlot].PlotXYAppend(ptx0, pty0);
                         //grp1.Plots[0+nPlot1].PlotXY(rtgrp.plot[0].lx[0].ToArray(), rtgrp.plot[0].ly[0].ToArray());
-                        if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
-                        if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                        if(grp1.Plots[nPlot].Visible)
+                        {
+                            if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
+                            if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                        }
                     }
                 }
 
@@ -4252,7 +4310,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4263,8 +4321,11 @@ namespace ZiveLab.ZM
                 minval = 99999.0;
                 for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
                 {
-                    if (maxval < rtgrp.item[i].plot[0].Maxval[2]) maxval = rtgrp.item[i].plot[0].Maxval[2];
-                    if (minval > rtgrp.item[i].plot[0].Minval[2]) minval = rtgrp.item[i].plot[0].Minval[2];
+                    if (grp1.Plots[i* MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[0].Maxval[2]) maxval = rtgrp.item[i].plot[0].Maxval[2];
+                        if (minval > rtgrp.item[i].plot[0].Minval[2]) minval = rtgrp.item[i].plot[0].Minval[2];
+                    }
                 }
 
                 cmpval = Math.Abs(maxval);
@@ -4279,7 +4340,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4292,19 +4353,23 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     if (appendcount0 > 0) // mag
                     {
                         tx = rtgrp.item[i].plot[2].lx[0].ToArray();
                         ty = rtgrp.item[i].plot[2].ly[0].ToArray();
+                        if (!(tx.Length > 0 && ty.Length > 0)) continue;
                         Array.Copy(tx, st0, ptx0, 0, appendcount0);
                         Array.Copy(ty, st0, pty0, 0, appendcount0);
                         grp2.Plots[nPlot].PlotXYAppend(ptx0, pty0);
-                        //grp2.Plots[0+nPlot2].PlotXY(rtgrp.plot[2].lx[0].ToArray(), rtgrp.plot[2].ly[0].ToArray());
-                        if (maxval < rtgrp.item[i].plot[2].Maxval[0]) maxval = rtgrp.item[i].plot[2].Maxval[0];
-                        if (minval > rtgrp.item[i].plot[2].Minval[0]) minval = rtgrp.item[i].plot[2].Minval[0];
+                        if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                        {
+                            if (maxval < rtgrp.item[i].plot[2].Maxval[0]) maxval = rtgrp.item[i].plot[2].Maxval[0];
+                            if (minval > rtgrp.item[i].plot[2].Minval[0]) minval = rtgrp.item[i].plot[2].Minval[0];
+                        }
                     }
 
                 }
@@ -4320,7 +4385,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4329,19 +4394,23 @@ namespace ZiveLab.ZM
 
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     if (appendcount1 > 0) // phase
                     {
                         tx = rtgrp.item[i].plot[3].lx[0].ToArray();
                         ty = rtgrp.item[i].plot[3].ly[0].ToArray();
+                        if (!(tx.Length > 0 && ty.Length > 0)) continue;
                         Array.Copy(tx, st1, ptx1, 0, appendcount1);
                         Array.Copy(ty, st1, pty1, 0, appendcount1);
                         grp2.Plots[nPlot + 1].PlotXYAppend(ptx1, pty1); // 0206 6
-                        //grp2.Plots[0].PlotXY(rtgrp.plot[2].lx[1].ToArray(), rtgrp.plot[2].ly[1].ToArray()); // 0206 6
-                        if (maxval < rtgrp.item[i].plot[3].Maxval[0]) maxval = rtgrp.item[i].plot[3].Maxval[0];
-                        if (minval > rtgrp.item[i].plot[3].Minval[0]) minval = rtgrp.item[i].plot[3].Minval[0];
+                        if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS + 1].Visible)
+                        {
+                            if (maxval < rtgrp.item[i].plot[3].Maxval[0]) maxval = rtgrp.item[i].plot[3].Maxval[0];
+                            if (minval > rtgrp.item[i].plot[3].Minval[0]) minval = rtgrp.item[i].plot[3].Minval[0];
+                        }
                     }
                 }
 
@@ -4357,7 +4426,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4367,12 +4436,15 @@ namespace ZiveLab.ZM
           
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
-
-                    if (maxval < rtgrp.item[i].plot[3].Maxval[2]) maxval = rtgrp.item[i].plot[3].Maxval[2]; // frequency
-                    if (minval > rtgrp.item[i].plot[3].Minval[2]) minval = rtgrp.item[i].plot[3].Minval[2];
+                    if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS +1].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[3].Maxval[2]) maxval = rtgrp.item[i].plot[3].Maxval[2]; // frequency
+                        if (minval > rtgrp.item[i].plot[3].Minval[2]) minval = rtgrp.item[i].plot[3].Minval[2];
+                    }
                 }
 
                 if (minval == maxval)
@@ -4380,7 +4452,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4430,7 +4502,7 @@ namespace ZiveLab.ZM
             {
                 grpvars.GrpItems1.LastPlotPoint1 = 0;
                 st1 = 0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     for(int j = 0; j< MBZA_Constant.MAX_GRAPH_PLOTS; j++)
@@ -4456,18 +4528,23 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     if (appendcount0 > 0)
                     {
                         tx = rtgrp.item[i].plot[0].lx[0].ToArray();
                         ty = rtgrp.item[i].plot[0].ly[0].ToArray();
+                        if (!(tx.Length > 0 && ty.Length > 0)) continue;
                         Array.Copy(tx, st0, ptx0, 0, appendcount0);
                         Array.Copy(ty, st0, pty0, 0, appendcount0);
                         grp1.Plots[nPlot].PlotXYAppend(ptx0, pty0);
-                        if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
-                        if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                        if (grp1.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                        {
+                            if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
+                            if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                        }
                     }
                     /*if (appendcount1 > 0)
                     {
@@ -4493,7 +4570,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4502,10 +4579,14 @@ namespace ZiveLab.ZM
 
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
-                    if (maxval < rtgrp.item[i].plot[0].Maxval[2]) maxval = rtgrp.item[i].plot[0].Maxval[2];
-                    if (minval > rtgrp.item[i].plot[0].Minval[2]) minval = rtgrp.item[i].plot[0].Minval[2];
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
+                    if (grp1.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[0].Maxval[2]) maxval = rtgrp.item[i].plot[0].Maxval[2];
+                        if (minval > rtgrp.item[i].plot[0].Minval[2]) minval = rtgrp.item[i].plot[0].Minval[2];
+                    }
                 }
                 cmpval = Math.Abs(maxval);
                 if (cmpval < Math.Abs(minval))
@@ -4519,7 +4600,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4532,18 +4613,23 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     if (appendcount0 > 0)
                     {
                         tx = rtgrp.item[i].plot[2].lx[0].ToArray();
                         ty = rtgrp.item[i].plot[2].ly[0].ToArray();
+                        if (!(tx.Length > 0 && ty.Length > 0)) continue;
                         Array.Copy(tx, st0, ptx0, 0, appendcount0);
                         Array.Copy(ty, st0, pty0, 0, appendcount0);
                         grp2.Plots[nPlot].PlotXYAppend(ptx0, pty0);
-                        if (maxval < rtgrp.item[i].plot[2].Maxval[0]) maxval = rtgrp.item[i].plot[2].Maxval[0];
-                        if (minval > rtgrp.item[i].plot[2].Minval[0]) minval = rtgrp.item[i].plot[2].Minval[0];
+                        if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                        {
+                            if (maxval < rtgrp.item[i].plot[2].Maxval[0]) maxval = rtgrp.item[i].plot[2].Maxval[0];
+                            if (minval > rtgrp.item[i].plot[2].Minval[0]) minval = rtgrp.item[i].plot[2].Minval[0];
+                        }
                     }
                     /*if (appendcount1 > 0)
                     {
@@ -4568,7 +4654,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4577,16 +4663,21 @@ namespace ZiveLab.ZM
 
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     if (appendcount0 > 0)
                     {
                         tx = rtgrp.item[i].plot[3].lx[0].ToArray();
                         ty = rtgrp.item[i].plot[3].ly[0].ToArray();
+                        if (!(tx.Length > 0 && ty.Length > 0)) continue;
                         grp2.Plots[nPlot + 1].PlotXYAppend(tx, ty, st0, appendcount0);
-                        if (maxval < rtgrp.item[i].plot[3].Maxval[0]) maxval = rtgrp.item[i].plot[3].Maxval[0];
-                        if (minval > rtgrp.item[i].plot[3].Minval[0]) minval = rtgrp.item[i].plot[3].Minval[0];
+                        if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS + 1].Visible)
+                        {
+                            if (maxval < rtgrp.item[i].plot[3].Maxval[0]) maxval = rtgrp.item[i].plot[3].Maxval[0];
+                            if (minval > rtgrp.item[i].plot[3].Minval[0]) minval = rtgrp.item[i].plot[3].Minval[0];
+                        }
                     }
                     /*if (appendcount1 > 0)
                     {
@@ -4610,7 +4701,7 @@ namespace ZiveLab.ZM
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4619,18 +4710,21 @@ namespace ZiveLab.ZM
 
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
-                    nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
-                    if (maxval < rtgrp.item[i].plot[3].Maxval[2]) maxval = rtgrp.item[i].plot[3].Maxval[2];
-                    if (minval > rtgrp.item[i].plot[3].Maxval[2]) minval = rtgrp.item[i].plot[3].Minval[2];
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
+                    if (grp2.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS + 1].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[3].Maxval[2]) maxval = rtgrp.item[i].plot[3].Maxval[2];
+                        if (minval > rtgrp.item[i].plot[3].Maxval[2]) minval = rtgrp.item[i].plot[3].Minval[2];
+                    }
                 }
                 if (minval == maxval)
                 {
                     minval -= minval * 0.1;
                     maxval += maxval * 0.1;
                 }
-                else if (maxval == 0.0)
+                else if (maxval == 0.0 || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4740,8 +4834,9 @@ namespace ZiveLab.ZM
                 {
                     if (i == 1)
                     {
-                        for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
+                        for (int j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
+                            if (grpvars.GrpObjs[j].bExist != true) continue;
                             nPlot = j * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                             tx = rtgrp.item[j].plot[0].lx[gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].arrcnt - 1].ToArray();
@@ -4758,9 +4853,10 @@ namespace ZiveLab.ZM
                         }
                     }
                     else if (i == 0)
-                    { 
-                        for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
+                    {
+                        for (int j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
+                            if (grpvars.GrpObjs[j].bExist != true) continue;
                             nPlot = j * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                             tx = rtgrp.item[j].plot[0].lx[i].ToArray();
@@ -4778,8 +4874,9 @@ namespace ZiveLab.ZM
                     }
                     else if(i == 2)
                     {
-                        for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
+                        for (int j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                         {
+                            if (grpvars.GrpObjs[j].bExist != true) continue;
                             nPlot = j * MBZA_Constant.MAX_GRAPH_PLOTS;
 
                             tx = rtgrp.item[j].plot[0].lx[i].ToArray();
@@ -4799,8 +4896,9 @@ namespace ZiveLab.ZM
 
                 if (grpvars.GrpItems2.GrpCtrlMode == 0 || grpvars.GrpItems2.GrpCtrlMode == 3)
                 {
-                    for (int j = 0; j < grpvars.nAuxChCount + 1; j++)
+                    for (int j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)
                     {
+                        if (grpvars.GrpObjs[j].bExist != true) continue;
                         nPlot = j * MBZA_Constant.MAX_GRAPH_PLOTS;
                         tx = rtgrp.item[j].plot[2].lx[i].ToArray();
                         ty = rtgrp.item[j].plot[2].ly[i].ToArray();
@@ -4864,8 +4962,9 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     tx = rtgrp.item[i].plot[0].lx[0].ToArray();
                     ty = rtgrp.item[i].plot[0].ly[0].ToArray();
@@ -4873,9 +4972,11 @@ namespace ZiveLab.ZM
                     Array.Copy(ty, st, pty, 0, appendcount);
                     time0 = ptx[appendcount - 1];
                     grp1.Plots[nPlot].PlotXYAppend(ptx, pty);
-
-                    if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
-                    if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                    if (grp1.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
+                        if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                    }
                 }
                 cmpval = Math.Abs(maxval);
                 if (cmpval < Math.Abs(minval))
@@ -4884,7 +4985,7 @@ namespace ZiveLab.ZM
                 }
                 maxval = maxval + (cmpval * GrpSpaceRate);
                 minval = minval - (cmpval * GrpSpaceRate);
-                if (minval == maxval && maxval == 0.0)
+                if ((minval == maxval && maxval == 0.0) || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4912,7 +5013,7 @@ namespace ZiveLab.ZM
                 }
                 maxval = maxval + (cmpval * GrpSpaceRate);
                 minval = minval - (cmpval * GrpSpaceRate);
-                if (minval == maxval && maxval == 0.0)
+                if ((minval == maxval && maxval == 0.0) || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -4960,17 +5061,22 @@ namespace ZiveLab.ZM
             {
                 maxval = -99999.0;
                 minval = 99999.0;
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
                 {
+                    if (grpvars.GrpObjs[i].bExist != true) continue;
                     nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS;
                     tx = rtgrp.item[i].plot[0].lx[0].ToArray();
                     ty = rtgrp.item[i].plot[0].ly[0].ToArray();
+                    if (!(tx.Length > 0 && ty.Length > 0)) continue;
                     Array.Copy(tx, st, ptx, 0, appendcount);
                     Array.Copy(ty, st, pty, 0, appendcount);
                     time0 = ptx[appendcount - 1];
                     grp1.Plots[nPlot].PlotXYAppend(ptx, pty);
-                    if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
-                    if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                    if (grp1.Plots[i * MBZA_Constant.MAX_GRAPH_PLOTS].Visible)
+                    {
+                        if (maxval < rtgrp.item[i].plot[0].Maxval[0]) maxval = rtgrp.item[i].plot[0].Maxval[0];
+                        if (minval > rtgrp.item[i].plot[0].Minval[0]) minval = rtgrp.item[i].plot[0].Minval[0];
+                    }
                 }
                 cmpval = Math.Abs(maxval);
                 if (cmpval < Math.Abs(minval))
@@ -4979,7 +5085,7 @@ namespace ZiveLab.ZM
                 }
                 maxval = maxval + (cmpval * GrpSpaceRate);
                 minval = minval - (cmpval * GrpSpaceRate);
-                if (minval == maxval && maxval == 0.0)
+                if ((minval == maxval && maxval == 0.0) || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -5007,7 +5113,7 @@ namespace ZiveLab.ZM
                 }
                 maxval = maxval + (cmpval * GrpSpaceRate);
                 minval = minval - (cmpval * GrpSpaceRate);
-                if (minval == maxval && maxval == 0.0)
+                if ((minval == maxval && maxval == 0.0) || (maxval < -99 && minval > 99))
                 {
                     minval = -1.0;
                     maxval = +1.0;
@@ -5109,7 +5215,8 @@ namespace ZiveLab.ZM
             frmSetPlotsColor spc = new frmSetPlotsColor(ch, grpvars, grptype);
             if (spc.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                    //for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
@@ -5141,7 +5248,8 @@ namespace ZiveLab.ZM
             frmSetPlotsColor spc = new frmSetPlotsColor(ch, grpvars, grptype);
             if (spc.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                    //for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
                 {
                     for (int j = 0; j < MBZA_Constant.MAX_GRAPH_PLOTS; j++)
                     {
@@ -5163,7 +5271,8 @@ namespace ZiveLab.ZM
             frmSetPlotsColor spc = new frmSetPlotsColor(ch, grpvars, grptype);
             if (spc.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                    //for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
                 {
                     for (int j = 0; j < MBZA_Constant.MAX_GRAPH_PLOTS; j++)
                     {
@@ -5796,7 +5905,7 @@ namespace ZiveLab.ZM
             deForm.OpenGraphClick += DeForm_OpensGraphClick;
 
             deForm.ExtAppPath = gBZA._ExtAppPath;
-            //deForm.MdiParent = this.MdiParent;
+            deForm.MdiParent = this.MdiParent;
 
             deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
@@ -5870,7 +5979,7 @@ namespace ZiveLab.ZM
         {
             frmTechniq frmTech = new frmTechniq(ch, filename, type);
             frmTech.ShowInTaskbar = false;
-            //frmTech.MdiParent = this.MdiParent;
+            frmTech.MdiParent = this.MdiParent;
 
             
             if (gBZA.appcfg.TechLocation == new Point(0, 0))
@@ -6140,7 +6249,7 @@ namespace ZiveLab.ZM
             ggForm.SchTempPath = gBZA.appcfg.PathSchTemp;
             //ggForm.UnitC = false;
             ggForm.TimeFormat = 1;
-            //ggForm.MdiParent = this.MdiParent;
+            ggForm.MdiParent = this.MdiParent;
             ggForm.ShowInTaskbar = false;
             ggForm.Show();
             
@@ -6302,7 +6411,8 @@ namespace ZiveLab.ZM
             enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
             if (begindlg)
                 return;
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                //for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS; 
                 switch (techtype)
@@ -6331,7 +6441,15 @@ namespace ZiveLab.ZM
             }
             foreach (int index in ChkListItem1.CheckedIndices)
             {
-                nPlot = index * MBZA_Constant.MAX_GRAPH_PLOTS;
+                if (index > 0)
+                {
+                    string itemstr = ChkListItem1.Items[index].ToString();
+                    int channel = -1;
+                    int.TryParse(itemstr.Substring(3), out channel);
+                    nPlot = channel * MBZA_Constant.MAX_GRAPH_PLOTS;
+                }
+                else if (index == 0)
+                    nPlot = 0;
                 switch (techtype)
                 {
                     case enTechType.TECH_DCH:
@@ -6376,7 +6494,8 @@ namespace ZiveLab.ZM
             enTechType techtype = (enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type;
             if (begindlg)
                 return;
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                //for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
             {
                 nPlot = i * MBZA_Constant.MAX_GRAPH_PLOTS; 
                 switch (techtype)
@@ -6403,7 +6522,15 @@ namespace ZiveLab.ZM
             }
             foreach (int index in ChkListItem2.CheckedIndices)
             {
-                nPlot = index * MBZA_Constant.MAX_GRAPH_PLOTS;
+                if (index > 0)
+                {
+                    string itemstr = ChkListItem2.Items[index].ToString();
+                    int channel = -1;
+                    int.TryParse(itemstr.Substring(3), out channel);
+                    nPlot = channel * MBZA_Constant.MAX_GRAPH_PLOTS;
+                }
+                else if (index == 0)
+                    nPlot = 0;
                 switch (techtype)
                 {
                     case enTechType.TECH_PRR:
@@ -6449,7 +6576,15 @@ namespace ZiveLab.ZM
             // items depend on technique
             foreach (int index in ChkListItem1.CheckedIndices)
             {
-                nPlot = index * MBZA_Constant.MAX_GRAPH_PLOTS;
+                if (index > 0)
+                {
+                    string itemstr = ChkListItem1.Items[index].ToString();
+                    int channel = -1;
+                    int.TryParse(itemstr.Substring(3), out channel);
+                    nPlot = channel * MBZA_Constant.MAX_GRAPH_PLOTS;
+                }
+                else if (index == 0)
+                    nPlot = 0;
                 switch (techtype)
                 {
                     case enTechType.TECH_DCH:
@@ -6498,7 +6633,15 @@ namespace ZiveLab.ZM
             // 
             foreach (int index in ChkListItem2.CheckedIndices)
             {
-                nPlot = index * MBZA_Constant.MAX_GRAPH_PLOTS; 
+                if (index > 0)
+                {
+                    string itemstr = ChkListItem2.Items[index].ToString();
+                    int channel = -1;
+                    int.TryParse(itemstr.Substring(3), out channel);
+                    nPlot = channel * MBZA_Constant.MAX_GRAPH_PLOTS;
+                }
+                else if (index == 0)
+                    nPlot = 0;
                 switch (techtype)
                 {
                     case enTechType.TECH_HFR:
@@ -6540,7 +6683,8 @@ namespace ZiveLab.ZM
             if (begindlg)
                 return;
             // 
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+                //for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
             {
                 grprt.Plots[i * 2].Visible = false;
                 grprt.Plots[i * 2 + 1].Visible = false;
@@ -6550,7 +6694,16 @@ namespace ZiveLab.ZM
             }
             foreach (int index in ChkListItem3.CheckedIndices)
             {
-                nPlot = index * 2; // 
+                if (index > 0)
+                {
+                    string itemstr = ChkListItem3.Items[index].ToString();
+                    int channel = -1;
+                    int.TryParse(itemstr.Substring(3), out channel);
+                    nPlot = channel * 2; //
+                }
+                else if (index == 0)
+                    nPlot = 0;
+
                 foreach (int plottype in ChkListLegend3.CheckedIndices)
                 {
                     grprt.Plots[nPlot + plottype].Visible = true;
@@ -6588,7 +6741,15 @@ namespace ZiveLab.ZM
             // 
             foreach (int index in ChkListItem3.CheckedIndices)
             {
-                nPlot = index * 2;
+                if (index > 0)
+                {
+                    string itemstr = ChkListItem3.Items[index].ToString();
+                    int channel = -1;
+                    int.TryParse(itemstr.Substring(3), out channel);
+                    nPlot = channel * 2;
+                }
+                else if (index == 0)
+                    nPlot = 0;
                 grprt.Plots[nPlot].Visible = false;
                 grprt.Plots[nPlot + 1].Visible = false;
                 Rtlegend.Items[nPlot].Visible = false;
@@ -6621,12 +6782,8 @@ namespace ZiveLab.ZM
             }
             SetGraphRawRtAxes();
         }
-
-        private void InitAuxMonitorList()
+        private void InitAuxMonitorList_Load()
         {
-            listAuxMon.BeginUpdate();
-            listAuxMon.Clear();
-
             listAuxMon.View = View.Details;
             listAuxMon.GridLines = true;
             listAuxMon.FullRowSelect = true;
@@ -6635,23 +6792,53 @@ namespace ZiveLab.ZM
             listAuxMon.LabelEdit = false;
             listAuxMon.LabelWrap = false;
 
-            listAuxMon.Columns.Clear();
-            listAuxMon.Columns.Add("Aux", 45, HorizontalAlignment.Center);
-            listAuxMon.Columns.Add("Value", 90, HorizontalAlignment.Center);
+            rdoAuxMon1.Checked = true;
+            InitAuxMonitorList();
+        }
+        private void InitAuxMonitorList()
+        {
+            listAuxMon.BeginUpdate();
+            listAuxMon.Clear();
 
+
+            listAuxMon.Columns.Clear();
             listAuxMon.Items.Clear();
+
+            listAuxMon.Columns.Add("Aux", 45, HorizontalAlignment.Center);
+            switch (rdoAuxMon)
+            {
+                case 0: // Vdc 1열
+                    listAuxMon.Columns.Add("Vdc (V)", 90, HorizontalAlignment.Center);
+                    break;
+                case 1: // Zre, Zimg 2열
+                    listAuxMon.Columns.Add("Zre (Ω)", 90, HorizontalAlignment.Center);
+                    listAuxMon.Columns.Add("Zimg (Ω)", 90, HorizontalAlignment.Center);
+                    break;
+                case 2: // Zmag, Zph 2열
+                    listAuxMon.Columns.Add("Zmag (Ω)", 90, HorizontalAlignment.Center);
+                    listAuxMon.Columns.Add("Zph (°)", 90, HorizontalAlignment.Center);
+                    break;
+            }
             for (int i = 1; i < grpvars.nAuxChCount + 1; i++)
             {
-                AddAuxMonitorItem(i - 1, 0.0);
+                AddAuxMonitorItem(i, 0.0);
             }
             listAuxMon.EndUpdate();
-
-            rdoAuxMon1.Checked = true;
         }
         private void AddAuxMonitorItem(int nCh, double value)
         {
             ListViewItem lvItem;
-            lvItem = new ListViewItem(new string[] { string.Format("{0}", nCh + 1), string.Format("{0:0.0#####}", value) });
+            lvItem = new ListViewItem(nCh.ToString());
+            lvItem.SubItems.Add("-");
+            switch (rdoAuxMon)
+            {
+                case 0: // 
+                    break;
+                case 1:
+                case 2:
+                    lvItem.SubItems.Add("-");
+                    break;
+            }
             listAuxMon.Items.Add(lvItem);
         }
 
@@ -6668,10 +6855,15 @@ namespace ZiveLab.ZM
             {
                 rdoAuxMon = 0; 
             }
-            else if (rb.Name == "rdoAuxMon2") // z
+            else if (rb.Name == "rdoAuxMon2") // z'/z" real img
             {
                 rdoAuxMon = 1;
             }
+            else if (rb.Name == "rdoAuxMon3") // |z|/zph 
+            {
+                rdoAuxMon = 2;
+            }
+            InitAuxMonitorList();
         }
     }
 }

@@ -1,7 +1,7 @@
 ####---- CreateClock list ----4
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|VDC_CLK} [get_nets {VDC_CLK}] 
-create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_32MHz} [get_nets {clk_32MHz}] 
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_16MHz} [get_nets {clk_16MHz}] 
+create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_32MHz} [get_nets {clk_32MHz}] 
 create_clock  -period 1000.00 -waveform {0.00 500.00} -name {zim|clk_RTD} [get_nets {clk_RTD}] 
 
 ####---- SetFalsePath list ----12

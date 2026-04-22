@@ -989,6 +989,14 @@ namespace ZiveLab.ZM
             int loadcount;
             bool brun = gBZA.CheckStatusRun(mChStatInf[ch]);
             bool bcalibMode = gBZA.CheckStatusCalibMode(mChStatInf[ch]);
+            enTechType techtype = (enTechType)mresfile[ch].tmphead.tech.type;
+            if (techtype == enTechType.TECH_EIS || techtype == enTechType.TECH_QIS)
+            {
+                for (int i = 0; i < testdata.Length; i++)
+                {
+                    testdata[i] = new stDefTestData(0);
+                }
+            }
 
             RefreshResfile(ch, brun);
 
@@ -1014,6 +1022,21 @@ namespace ZiveLab.ZM
 
                         if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
                         {
+                            if (techtype == enTechType.TECH_EIS || techtype == enTechType.TECH_QIS)
+                            {
+                                for (int i = 0; i < testdata.Length; i++)
+                                {
+                                    testdata[i].Vdc = 0;
+                                    for (int j = 0; j < MBZA_Constant.MAX_AUX_BOARD; j++)
+                                    {
+
+                                        for (int k = 0; k < MBZA_Constant.MAX_AUX_CHANNEL; k++)
+                                        {
+                                            testdata[i].mdata[j].mdata[k].Vdc = 0;
+                                        }
+                                    }
+                                }
+                            }
                             mresfile[ch].AppendData(testdata, loadcount);
                             mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
                         }
@@ -1070,6 +1093,21 @@ namespace ZiveLab.ZM
 
                         if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
                         {
+                            if (techtype == enTechType.TECH_EIS || techtype == enTechType.TECH_QIS)
+                            {
+                                for (int i = 0; i < testdata.Length; i++)
+                                {
+                                    testdata[i].Vdc = 0;
+                                    for (int j = 0; j < MBZA_Constant.MAX_AUX_BOARD; j++)
+                                    {
+
+                                        for (int k = 0; k < MBZA_Constant.MAX_AUX_CHANNEL; k++)
+                                        {
+                                            testdata[i].mdata[j].mdata[k].Vdc = 0;
+                                        }
+                                    }
+                                }
+                            }
                             mresfile[ch].AppendData(testdata, loadcount);
                             mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
                         }

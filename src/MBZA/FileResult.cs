@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZiveLab.ZM.Dataview;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
 
@@ -23,6 +24,7 @@ namespace ZiveLab.ZM
         public bool bStart;
         public bool bopen;
         public bool bwrite;
+        public string sVersion;
 
         public FileResult()
         {
@@ -34,7 +36,7 @@ namespace ZiveLab.ZM
             fs = null;
             sfilename = "";
             len_head = Marshal.SizeOf(typeof(stResHeader));
-            len_data = Marshal.SizeOf(typeof(stDefTestData));
+            len_data = Marshal.SizeOf(typeof(ZIM.Packets.stDefTestData));
             tmphead = new stResHeader(0);
             bStart = false;
             bopen = false;
@@ -108,13 +110,71 @@ namespace ZiveLab.ZM
         public bool ReadHead(ref stResHeader head)
         {
             if (bopen == false) return false;
-            byte[] buf = new byte[len_head];
+            int nHeadsize = len_head;
+
+            if (sVersion == "1.0.0.0")
+            {
+                nHeadsize = Marshal.SizeOf(typeof(stResHeader1000));
+            }
+            else if (sVersion == "1.1.0.0")
+            {
+                nHeadsize = Marshal.SizeOf(typeof(stResHeader1100));
+            }
+            byte[] buf = new byte[nHeadsize];
             fs.Seek(0, SeekOrigin.Begin);
-            if(fs.Read(buf, 0, len_head) != len_head)
+            if (fs.Read(buf, 0, nHeadsize) != nHeadsize)
             {
                 return false;
             }
-            head.ToWritePtr(buf);
+            len_head = nHeadsize;
+
+            if (sVersion == "1.0.0.0")
+            {
+                stResHeader1000 hd1000 = new stResHeader1000(0);
+                hd1000.ToWritePtr(buf);
+                head.mInfo = hd1000.mInfo;
+                head.systemInfo.mSIFCfg = hd1000.inf_sif;
+                head.systemInfo.mZimCfg[0].info = hd1000.inf_sifch.info;
+                head.systemInfo.mZimCfg[0].ranges.Gen.ID = hd1000.inf_sifch.ranges.ID;
+                head.systemInfo.mZimCfg[0].ranges.Gen.iac_rng = hd1000.inf_sifch.ranges.iac_rng;
+                head.systemInfo.mZimCfg[0].ranges.Gen.Idc_rnginf.Initialize();
+                head.systemInfo.mZimCfg[0].ranges.Gen.mDummy = hd1000.inf_sifch.ranges.mDummy;
+                head.systemInfo.mZimCfg[0].ranges.Gen.mEisIRngCalInfo = hd1000.inf_sifch.ranges.mEisIRngCalInfo;
+                head.systemInfo.mZimCfg[0].ranges.Gen.mSafety = hd1000.inf_sifch.ranges.mSafety;
+                head.systemInfo.mZimCfg[0].ranges.Gen.rtd_rng = hd1000.inf_sifch.ranges.rtd_rng;
+                head.systemInfo.mZimCfg[0].ranges.Gen.vac_rng = hd1000.inf_sifch.ranges.vac_rng;
+                head.systemInfo.mZimCfg[0].ranges.Gen.vdc_rng = hd1000.inf_sifch.ranges.vdc_rng;
+                head.systemInfo.mZimCfg[1].ranges.Gen.Initialize(eZimType.UNKNOWN);
+                head.systemInfo.mZimCfg[2].ranges.Gen.Initialize(eZimType.UNKNOWN);
+                head.systemInfo.mZimCfg[3].ranges.Gen.Initialize(eZimType.UNKNOWN);
+                head.tech = hd1000.tech;
+            }
+            else if (sVersion == "1.1.0.0")
+            {
+                stResHeader1100 hd1100 = new stResHeader1100(0);
+                hd1100.ToWritePtr(buf);
+
+                head.mInfo = hd1100.mInfo;
+                head.systemInfo.mSIFCfg = hd1100.inf_sif;
+                head.systemInfo.mZimCfg[0].info = hd1100.inf_sifch.info;
+                head.systemInfo.mZimCfg[0].ranges.Gen.ID = hd1100.inf_sifch.ranges.ID;
+                head.systemInfo.mZimCfg[0].ranges.Gen.iac_rng = hd1100.inf_sifch.ranges.iac_rng;
+                head.systemInfo.mZimCfg[0].ranges.Gen.Idc_rnginf = hd1100.inf_sifch.ranges.Idc_rnginf;
+                head.systemInfo.mZimCfg[0].ranges.Gen.mDummy = hd1100.inf_sifch.ranges.mDummy;
+                head.systemInfo.mZimCfg[0].ranges.Gen.mEisIRngCalInfo = hd1100.inf_sifch.ranges.mEisIRngCalInfo;
+                head.systemInfo.mZimCfg[0].ranges.Gen.mSafety = hd1100.inf_sifch.ranges.mSafety;
+                head.systemInfo.mZimCfg[0].ranges.Gen.rtd_rng = hd1100.inf_sifch.ranges.rtd_rng;
+                head.systemInfo.mZimCfg[0].ranges.Gen.vac_rng = hd1100.inf_sifch.ranges.vac_rng;
+                head.systemInfo.mZimCfg[0].ranges.Gen.vdc_rng = hd1100.inf_sifch.ranges.vdc_rng;
+                head.systemInfo.mZimCfg[1].ranges.Gen.Initialize(eZimType.UNKNOWN);
+                head.systemInfo.mZimCfg[2].ranges.Gen.Initialize(eZimType.UNKNOWN);
+                head.systemInfo.mZimCfg[3].ranges.Gen.Initialize(eZimType.UNKNOWN);
+                head.tech = hd1100.tech;
+            }
+            else
+            {
+                head.ToWritePtr(buf);
+            }
             return true;
         }
 
@@ -359,9 +419,23 @@ namespace ZiveLab.ZM
         public int GetDatacount()
         {
             long size = fs.Length;
-            size -= len_head;
+            int nHeadsize = len_head;
+            int nDatasize = len_data;
+
+            if (sVersion == "1.0.0.0")
+            {
+                nHeadsize = Marshal.SizeOf(typeof(stResHeader1000));
+                nDatasize = Marshal.SizeOf(typeof(stDefTestData1000));
+            }
+            else if (sVersion == "1.1.0.0")
+            {
+                nHeadsize = Marshal.SizeOf(typeof(stResHeader1100));
+                nDatasize = Marshal.SizeOf(typeof(stDefTestData1100));
+            }
+
+            size -= nHeadsize;
             if (size < 1) return 0;
-            return (int)(size / len_data);
+            return (int)(size / nDatasize);
         }
 
         //public void AppendData(stDefTestData[] data, int len)
@@ -375,7 +449,7 @@ namespace ZiveLab.ZM
         //    fs.Flush();
         //}
 
-        public void AppendData(stDefTestData[] data, int len)
+        public void AppendData(ZIM.Packets.stDefTestData[] data, int len)
         {
             if (fs == null)
             {
@@ -394,7 +468,7 @@ namespace ZiveLab.ZM
         } // 예외방지
 
 
-        public void AppendData(stDefTestData data)
+        public void AppendData(ZIM.Packets.stDefTestData data)
         {
             fs.Seek(0, SeekOrigin.End);
             fs.Write(data.ToByteArray(), 0, len_data);
@@ -402,7 +476,7 @@ namespace ZiveLab.ZM
             fs.Flush();
         }
 
-        public bool Write(int index, stDefTestData data)
+        public bool Write(int index, ZIM.Packets.stDefTestData data)
         {
             int pos = len_head + len_data * index;
             fs.Seek(pos, SeekOrigin.Begin);
@@ -413,7 +487,7 @@ namespace ZiveLab.ZM
             return true;
         }
 
-        public bool read(ref stDefTestData data)
+        public bool read(ref ZIM.Packets.stDefTestData data)
         {
             byte[] buf = new byte[len_data];
             
@@ -425,7 +499,7 @@ namespace ZiveLab.ZM
             return false;
         }
 
-        public bool read(int index, ref stDefTestData data)
+        public bool read(int index, ref ZIM.Packets.stDefTestData data)
         {
             byte[] buf = new byte[len_data];
 
@@ -443,28 +517,91 @@ namespace ZiveLab.ZM
             return false;
         }
 
-        public int read(int index, ref stDefTestData[] data, int Count)
+        public int read(int index, ref ZIM.Packets.stDefTestData[] data, int Count)
         {
 
             if (index >= datacount) return 0;
 
+            int nDatasize = len_data;
+
+            if (sVersion == "1.0.0.0")
+            {
+                nDatasize = Marshal.SizeOf(typeof(stDefTestData1000));
+            }
+            else if (sVersion == "1.1.0.0")
+            {
+                nDatasize = Marshal.SizeOf(typeof(stDefTestData1100));
+            }
+            else
+            {
+                nDatasize = Marshal.SizeOf(typeof(ZIM.Packets.stDefTestData));
+            }
+
             int readbyte = 0;
             int readcount = 0;
-            byte[] buf = new byte[len_data];
+            byte[] buf = new byte[nDatasize];
 
-            int pos = len_head + len_data * index;
+            int pos = len_head + nDatasize * index;
 
             fs.Seek(pos, SeekOrigin.Begin);
 
             for (int i = 0; i < Count; i++)
             {
-                readbyte = fs.Read(buf, 0, len_data);
+                readbyte = fs.Read(buf, 0, nDatasize);
 
-                if (len_data != readbyte)
+                if (nDatasize != readbyte)
                 {
                     return 0;
                 }
-                data[i].ToWritePtr(buf);
+                else
+                {
+                    if (sVersion == "1.0.0.0")
+                    {
+                        stDefTestData1000 data1000 = new stDefTestData1000(0);
+                        data1000.ToWritePtr(buf);
+                        data[i].mType = data1000.mType;
+                        data[i].TestTime = data1000.TestTime;
+                        data[i].nCycle = data1000.nCycle;
+                        data[i].CycleTime = data1000.CycleTime;
+                        data[i].nTaskNo = data1000.nTaskNo;
+                        data[i].TaskTime = data1000.TaskTime;
+                        data[i].fFreq = data1000.fFreq;
+                        data[i].real = data1000.real;
+                        data[i].img = data1000.img;
+                        data[i].Veoc = data1000.Veoc;
+                        data[i].Vdc = data1000.Vdc;
+                        data[i].Idc = data1000.Idc;
+                        data[i].Temperature = data1000.Temperature;
+                        data[i].iacrng = data1000.iacrng;
+                        data[i].vdcrng = data1000.vdcrng;
+                        data[i].Idc = data1000.Idc;
+                    }
+                    else if (sVersion == "1.1.0.0")
+                    {
+                        stDefTestData1100 data1100 = new stDefTestData1100(0);
+                        data1100.ToWritePtr(buf);
+                        data[i].mType = data1100.mType;
+                        data[i].TestTime = data1100.TestTime;
+                        data[i].nCycle = data1100.nCycle;
+                        data[i].CycleTime = data1100.CycleTime;
+                        data[i].nTaskNo = data1100.nTaskNo;
+                        data[i].TaskTime = data1100.TaskTime;
+                        data[i].fFreq = data1100.fFreq;
+                        data[i].real = data1100.real;
+                        data[i].img = data1100.img;
+                        data[i].Veoc = data1100.Veoc;
+                        data[i].Vdc = data1100.Vdc;
+                        data[i].Idc = data1100.Idc;
+                        data[i].Temperature = data1100.Temperature;
+                        data[i].iacrng = data1100.iacrng;
+                        data[i].vdcrng = data1100.vdcrng;
+                        data[i].Idc = data1100.Idc;
+                    }
+                    else
+                    {
+                        data[i].ToWritePtr(buf);
+                    }
+                }
                 readcount++;
             }
             
@@ -487,13 +624,15 @@ namespace ZiveLab.ZM
                 {
                     return false;
                 }
-                datacount = this.GetDatacount();
 
                 bStart = false;
                 bwrite = true;
                 bopen = true;
 
+                sVersion = GetVersion();
                 ReadHead();
+                
+                datacount = this.GetDatacount();
             }
             catch (Exception e)
             {
@@ -502,6 +641,21 @@ namespace ZiveLab.ZM
             }
 
             return true;
+        }
+        public string GetVersion()
+        {
+            if (bopen == false) return "";
+
+            stVersion version = new stVersion(0);
+            int isize = Marshal.SizeOf(typeof(stVersion));
+            byte[] buf = new byte[isize];
+            fs.Seek(0, SeekOrigin.Begin);
+            if (fs.Read(buf, 0, isize) != isize)
+            {
+                return "";
+            }
+            version.ToWritePtr(buf);
+            return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Revision, version.Build);
         }
     }
 }

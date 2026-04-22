@@ -73,6 +73,11 @@ namespace ZiveLab.ZM.Dataview
             Analysis(out gdList);
         }
 
+        public void Clear_rdList()
+        {
+            _rdList.Clear();
+        }
+
         private void Analysis(out List<UnitReportData> tlist)
         {
             tlist = new List<UnitReportData>();
@@ -118,10 +123,12 @@ namespace ZiveLab.ZM.Dataview
                 bd = i / 4;
                 bdch = i % 4;
                 urd.AuxVdc[i] = rawdata.mdata[bd].mdata[bdch].Vdc;
+                urd.AuxVeoc[i] = rawdata.mdata[bd].mdata[bdch].Veoc;
                 urd.AuxPower[i] = rawdata.mdata[bd].mdata[bdch].Vdc * rawdata.Idc;
                 urd.AuxLoad[i] = (rawdata.Idc == 0) ? 0 : rawdata.mdata[bd].mdata[bdch].Vdc / rawdata.Idc;
                 AuxEner[i] = (_PrevAuxPow[i] + urd.AuxPower[i]) / 2 * (TimeSpan.FromTicks((long)(rawdata.CycleTime * 10000000)) - _PrevCycTime).TotalHours;
                 _prevAuxEner[i] = _prevAuxEner[i] + AuxEner[i];
+                urd.AuxEnergy[i] = _prevAuxEner[i];
             }
             _PrevCurr = rawdata.Idc;
             _PrevPow = urd.Power;

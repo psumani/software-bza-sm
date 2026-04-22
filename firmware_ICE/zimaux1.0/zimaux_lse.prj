@@ -1,5 +1,5 @@
 #-- Lattice, Inc.
-#-- Project file D:\workspace\software-bza-sm\firmware_ICE\zimaux1.0\zimaux_lse.prj
+#-- Project file F:\SM_Git_Repositories\software-bza-sm\firmware_ICE\zimaux1.0\zimaux_lse.prj
 
 #device
 -a SBTiCE40
@@ -34,7 +34,7 @@
 -lib work -vhd "ADC_ADS127.vhd" 
 -lib work -vhd "zimaux_pll.vhd" 
 -lib work -vhd "vdc_gen_clk.vhd" 
--p "D:/workspace/software-bza-sm/firmware_ICE/zimaux1.0"
+-p "F:/SM_Git_Repositories/software-bza-sm/firmware_ICE/zimaux1.0"
 
 #set result format/file last
 -output_edif zimaux_Implmnt/zimaux.edf

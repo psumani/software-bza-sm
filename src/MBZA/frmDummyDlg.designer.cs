@@ -206,7 +206,7 @@
             // 
             // label26
             // 
-            this.label26.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label26.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label26.Location = new System.Drawing.Point(305, 243);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(20, 25);
@@ -223,7 +223,7 @@
             // 
             // label25
             // 
-            this.label25.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label25.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label25.Location = new System.Drawing.Point(177, 243);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(31, 25);
@@ -270,7 +270,7 @@
             // 
             // label22
             // 
-            this.label22.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label22.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label22.Location = new System.Drawing.Point(305, 209);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(20, 25);
@@ -287,7 +287,7 @@
             // 
             // label23
             // 
-            this.label23.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label23.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label23.Location = new System.Drawing.Point(177, 209);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(31, 25);
@@ -297,7 +297,7 @@
             // 
             // label20
             // 
-            this.label20.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label20.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label20.Location = new System.Drawing.Point(305, 174);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(20, 25);
@@ -307,7 +307,7 @@
             // 
             // label19
             // 
-            this.label19.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label19.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label19.Location = new System.Drawing.Point(305, 140);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(20, 25);
@@ -317,7 +317,7 @@
             // 
             // label18
             // 
-            this.label18.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label18.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label18.Location = new System.Drawing.Point(305, 106);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(20, 25);
@@ -327,7 +327,7 @@
             // 
             // label17
             // 
-            this.label17.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label17.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label17.Location = new System.Drawing.Point(305, 73);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(20, 25);
@@ -337,7 +337,7 @@
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label6.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label6.Location = new System.Drawing.Point(305, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(20, 25);
@@ -347,7 +347,7 @@
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label5.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(305, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 25);
@@ -371,7 +371,7 @@
             // 
             // label16
             // 
-            this.label16.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label16.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label16.Location = new System.Drawing.Point(177, 174);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(31, 25);
@@ -381,7 +381,7 @@
             // 
             // label15
             // 
-            this.label15.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label15.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label15.Location = new System.Drawing.Point(177, 140);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(31, 25);
@@ -398,7 +398,7 @@
             // 
             // label14
             // 
-            this.label14.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label14.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label14.Location = new System.Drawing.Point(177, 106);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(31, 25);
@@ -408,7 +408,7 @@
             // 
             // label13
             // 
-            this.label13.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label13.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label13.Location = new System.Drawing.Point(177, 73);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(31, 25);
@@ -418,7 +418,7 @@
             // 
             // label12
             // 
-            this.label12.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label12.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label12.Location = new System.Drawing.Point(177, 39);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 25);
@@ -428,7 +428,7 @@
             // 
             // label11
             // 
-            this.label11.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label11.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label11.Location = new System.Drawing.Point(177, 7);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 25);

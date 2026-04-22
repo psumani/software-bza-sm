@@ -38,6 +38,14 @@ signal cmd_rdadcbuf     	: std_logic_vector(35 downto 0):= X"000000000";
 begin
 
 	MCLK	<= adcmclk;
+		--   3840( = 10Hz * 384) * 128 = 491520 
+	--   3840( = 10Hz * 384) * 256 = 983040 
+	genclk : vdc_gen_clk
+	Port map (
+			ICLK			=> CLK,		-- 16MHz
+			OCLK			=> adcmclk, -- 
+			DIVIDE		=> x"0010"  
+	);
 	
 	process(adcmclk, adc_state, MISO)
 	begin
@@ -131,13 +139,5 @@ begin
 		end if;
 	end process;
 	
-	--   3840( = 10Hz * 384) * 128 = 491520 
-	--   3840( = 10Hz * 384) * 256 = 983040 
-	genclk : vdc_gen_clk
-	Port map (
-			ICLK			=> CLK,		-- 16MHz
-			OCLK			=> adcmclk, -- 
-			DIVIDE		=> x"0010"  
-	);
 	
 end behav;

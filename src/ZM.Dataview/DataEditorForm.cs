@@ -11,6 +11,8 @@ using System.Diagnostics;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
 using System.Drawing;
+using ZiveLab.ZM.ZIM;
+using ZiveLab.ZM.ZIM.Packets;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -63,7 +65,11 @@ namespace ZiveLab.ZM.Dataview
 
             _DataHeaderValues = new DataHeaderValues();
             _dataviewset = DataviewCommon.LoadFromSetFile();
-
+            //
+            foreach (DataColItem dci in _dataviewset._dataConvSet.DataColList)
+            {
+                dci.Enable = true;
+            }
             _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
             tsbtnOpenSchedule.Visible = viewOpenSch;
             _EnAlwaysOpenPath = false;
@@ -350,6 +356,7 @@ namespace ZiveLab.ZM.Dataview
             dlg.InitialDirectory = _EnAlwaysOpenPath ? _AlwaysOpenPath : _dataviewset._GraphSetEx.OpenPath;
             dlg.Multiselect = false;
             dlg.Filter = filter;
+            _dataviewset._dataConvSet = new DataConvSet();
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -691,7 +698,7 @@ namespace ZiveLab.ZM.Dataview
 
         public void RefreshCoulmn()
         { 
-            int col = 6;
+            int col = 4; 
             if (DataFlexGrid.Cols.Count < 40) return;
             DataFlexGrid.Cols[col++].Visible = ChkDC.Checked ? true : false;
             DataFlexGrid.Cols[col++].Visible = ChkDC.Checked ? true : false;
@@ -942,7 +949,7 @@ namespace ZiveLab.ZM.Dataview
 
             _DataHeaderValues = mResFile.dhv;
             MaxAuxCount = _DataHeaderValues.MaxAuxCh;
-
+            mResFile.Clear_rdList();
             while (true)
             {
                 if((bgWorker.CancellationPending))
@@ -1130,10 +1137,11 @@ namespace ZiveLab.ZM.Dataview
                     ChkDCAux.Visible = true;
                     ChkDCAux.Enabled = true;
                 }
+            
             }
 
-            
-            
+            MaxAuxCount = _DataHeaderValues.MaxAuxCh;
+
             tsbtnPrint.Enabled = true;     
             tsbtnFileHeaderInfor.Enabled = true;
 
@@ -1145,6 +1153,7 @@ namespace ZiveLab.ZM.Dataview
             InitGridColumn(DataFlexGrid, _dataviewset._dataConvSet.GetEnabledDataColList());
 
 
+            DataFlexGrid.Rows.Count = DataFlexGrid.Rows.Fixed;
             UpdateDataFlexGrid(mResFile.gdList);
 
             _UndoItemStack.Clear();
@@ -1563,7 +1572,7 @@ namespace ZiveLab.ZM.Dataview
             int bdch = 0;
             foreach (DataColItem dci in _dataviewset._dataConvSet.DataColList)
             {
-                if(dci.Enable)
+                //if(dci.Enable)
                 {
                     switch(dci.ColumnID)
                     {
@@ -1667,11 +1676,11 @@ namespace ZiveLab.ZM.Dataview
                             bd = auxidx / 4;
                             bdch = auxidx % 4;
 
-                            if(zidx == 0)
+                            if(itype == 0)
                             {
                                 row[ri] = ApplyFormat(dci, urgd.mRawData.mdata[bd].mdata[bdch].Zre, false);
                             }
-                            else
+                            else if (itype == 1)
                             {
                                 row[ri] = ApplyFormat(dci, urgd.mRawData.mdata[bd].mdata[bdch].Zim, false);
                             }

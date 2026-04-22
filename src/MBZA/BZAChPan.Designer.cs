@@ -594,6 +594,7 @@
             this.btabout = new System.Windows.Forms.Button();
             this.legendItem108 = new NationalInstruments.UI.LegendItem();
             this.grpAuxMon = new System.Windows.Forms.GroupBox();
+            this.rdoAuxMon3 = new System.Windows.Forms.RadioButton();
             this.rdoAuxMon2 = new System.Windows.Forms.RadioButton();
             this.rdoAuxMon1 = new System.Windows.Forms.RadioButton();
             this.listAuxMon = new System.Windows.Forms.ListView();
@@ -2802,7 +2803,7 @@
             this.TabGrp2.Controls.Add(this.grp2);
             this.TabGrp2.Location = new System.Drawing.Point(4, 23);
             this.TabGrp2.Name = "TabGrp2";
-            this.TabGrp2.Size = new System.Drawing.Size(769, 563);
+            this.TabGrp2.Size = new System.Drawing.Size(419, 370);
             this.TabGrp2.TabIndex = 2;
             this.TabGrp2.Text = "tabPage3";
             this.TabGrp2.UseVisualStyleBackColor = true;
@@ -2811,7 +2812,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.ChkListLegend2);
-            this.groupBox1.Location = new System.Drawing.Point(657, 10);
+            this.groupBox1.Location = new System.Drawing.Point(307, 10);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(104, 67);
             this.groupBox1.TabIndex = 141;
@@ -2838,7 +2839,7 @@
             this.groupBox2.Controls.Add(this.ChkListItem2);
             this.groupBox2.Controls.Add(this.btDeselAll2);
             this.groupBox2.Controls.Add(this.btSelAll2);
-            this.groupBox2.Location = new System.Drawing.Point(657, 75);
+            this.groupBox2.Location = new System.Drawing.Point(307, 85);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(104, 281);
             this.groupBox2.TabIndex = 140;
@@ -3931,7 +3932,7 @@
             this.scatterPlot30,
             this.scatterPlot31,
             this.scatterPlot32});
-            this.grp2.Size = new System.Drawing.Size(647, 547);
+            this.grp2.Size = new System.Drawing.Size(297, 354);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
             this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4200,7 +4201,7 @@
             this.TabGrpRaw.Controls.Add(this.grprt);
             this.TabGrpRaw.Location = new System.Drawing.Point(4, 23);
             this.TabGrpRaw.Name = "TabGrpRaw";
-            this.TabGrpRaw.Size = new System.Drawing.Size(769, 563);
+            this.TabGrpRaw.Size = new System.Drawing.Size(419, 370);
             this.TabGrpRaw.TabIndex = 3;
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
@@ -4209,7 +4210,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.ChkListLegend3);
-            this.groupBox3.Location = new System.Drawing.Point(657, 10);
+            this.groupBox3.Location = new System.Drawing.Point(307, 10);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(104, 65);
             this.groupBox3.TabIndex = 143;
@@ -4236,7 +4237,7 @@
             this.groupBox4.Controls.Add(this.ChkListItem3);
             this.groupBox4.Controls.Add(this.btDeselAll3);
             this.groupBox4.Controls.Add(this.btSelAll3);
-            this.groupBox4.Location = new System.Drawing.Point(657, 102);
+            this.groupBox4.Location = new System.Drawing.Point(307, 92);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(104, 281);
             this.groupBox4.TabIndex = 142;
@@ -4346,7 +4347,7 @@
             this.grprt.PlotAreaColor = System.Drawing.Color.White;
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot3});
-            this.grprt.Size = new System.Drawing.Size(647, 555);
+            this.grprt.Size = new System.Drawing.Size(297, 354);
             this.grprt.TabIndex = 109;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4388,14 +4389,15 @@
             this.Raw_DataPage.Location = new System.Drawing.Point(4, 23);
             this.Raw_DataPage.Name = "Raw_DataPage";
             this.Raw_DataPage.Padding = new System.Windows.Forms.Padding(3);
-            this.Raw_DataPage.Size = new System.Drawing.Size(769, 563);
+            this.Raw_DataPage.Size = new System.Drawing.Size(419, 370);
             this.Raw_DataPage.TabIndex = 4;
             this.Raw_DataPage.Text = "Raw Data";
             this.Raw_DataPage.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.radioButton0);
             this.groupBox6.Controls.Add(this.radioButton12);
             this.groupBox6.Controls.Add(this.radioButton11);
@@ -4409,9 +4411,9 @@
             this.groupBox6.Controls.Add(this.radioButton3);
             this.groupBox6.Controls.Add(this.radioButton2);
             this.groupBox6.Controls.Add(this.radioButton1);
-            this.groupBox6.Location = new System.Drawing.Point(659, 215);
+            this.groupBox6.Location = new System.Drawing.Point(307, 106);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(103, 340);
+            this.groupBox6.Size = new System.Drawing.Size(103, 309);
             this.groupBox6.TabIndex = 145;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "[items ]";
@@ -4563,7 +4565,7 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.ChkListLegend4);
-            this.groupBox5.Location = new System.Drawing.Point(659, 72);
+            this.groupBox5.Location = new System.Drawing.Point(307, 10);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(104, 66);
             this.groupBox5.TabIndex = 144;
@@ -4749,7 +4751,7 @@
             this.rawgrp.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot1,
             this.scatterPlot2});
-            this.rawgrp.Size = new System.Drawing.Size(651, 547);
+            this.rawgrp.Size = new System.Drawing.Size(297, 354);
             this.rawgrp.TabIndex = 110;
             this.rawgrp.UseColorGenerator = true;
             this.rawgrp.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4953,7 +4955,7 @@
             // RawRead
             // 
             this.RawRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RawRead.Location = new System.Drawing.Point(667, 34);
+            this.RawRead.Location = new System.Drawing.Point(308, 78);
             this.RawRead.Name = "RawRead";
             this.RawRead.Size = new System.Drawing.Size(87, 22);
             this.RawRead.TabIndex = 114;
@@ -5020,6 +5022,7 @@
             // 
             this.grpAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.grpAuxMon.Controls.Add(this.rdoAuxMon3);
             this.grpAuxMon.Controls.Add(this.rdoAuxMon2);
             this.grpAuxMon.Controls.Add(this.rdoAuxMon1);
             this.grpAuxMon.Controls.Add(this.listAuxMon);
@@ -5030,24 +5033,39 @@
             this.grpAuxMon.TabStop = false;
             this.grpAuxMon.Text = "[Auxiliary Monitor]";
             // 
+            // rdoAuxMon3
+            // 
+            this.rdoAuxMon3.AutoSize = true;
+            this.rdoAuxMon3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoAuxMon3.Location = new System.Drawing.Point(88, 18);
+            this.rdoAuxMon3.Name = "rdoAuxMon3";
+            this.rdoAuxMon3.Size = new System.Drawing.Size(67, 17);
+            this.rdoAuxMon3.TabIndex = 3;
+            this.rdoAuxMon3.TabStop = true;
+            this.rdoAuxMon3.Text = "|Z|/Zph";
+            this.rdoAuxMon3.UseVisualStyleBackColor = true;
+            this.rdoAuxMon3.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
+            // 
             // rdoAuxMon2
             // 
             this.rdoAuxMon2.AutoSize = true;
-            this.rdoAuxMon2.Location = new System.Drawing.Point(68, 18);
+            this.rdoAuxMon2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoAuxMon2.Location = new System.Drawing.Point(40, 18);
             this.rdoAuxMon2.Name = "rdoAuxMon2";
-            this.rdoAuxMon2.Size = new System.Drawing.Size(32, 18);
+            this.rdoAuxMon2.Size = new System.Drawing.Size(55, 17);
             this.rdoAuxMon2.TabIndex = 2;
             this.rdoAuxMon2.TabStop = true;
-            this.rdoAuxMon2.Text = "Z";
+            this.rdoAuxMon2.Text = "Z\'/Z\"";
             this.rdoAuxMon2.UseVisualStyleBackColor = true;
             this.rdoAuxMon2.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
             // 
             // rdoAuxMon1
             // 
             this.rdoAuxMon1.AutoSize = true;
-            this.rdoAuxMon1.Location = new System.Drawing.Point(12, 18);
+            this.rdoAuxMon1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoAuxMon1.Location = new System.Drawing.Point(3, 18);
             this.rdoAuxMon1.Name = "rdoAuxMon1";
-            this.rdoAuxMon1.Size = new System.Drawing.Size(46, 18);
+            this.rdoAuxMon1.Size = new System.Drawing.Size(43, 17);
             this.rdoAuxMon1.TabIndex = 1;
             this.rdoAuxMon1.TabStop = true;
             this.rdoAuxMon1.Text = "Vdc";
@@ -5087,8 +5105,7 @@
             // 
             // BZAChPan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.grpAuxMon);
             this.Controls.Add(this.tabgrp);
@@ -5733,5 +5750,6 @@
         private NationalInstruments.UI.ScatterPlot scatterPlot30;
         private NationalInstruments.UI.ScatterPlot scatterPlot31;
         private NationalInstruments.UI.ScatterPlot scatterPlot32;
+        private System.Windows.Forms.RadioButton rdoAuxMon3;
     }
 }

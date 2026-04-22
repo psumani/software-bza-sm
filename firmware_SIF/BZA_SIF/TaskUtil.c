@@ -315,7 +315,7 @@ double GetTechEisNextFreq(int bd, ushort* restart, void* pvoid)
 		
 	int density = MAX(peis->density,0);
 	int aPoints;
-	double logIncrement = 1.0 / density;
+	volatile double logIncrement = 1.0 / density;
 
 	*restart = 1;
 
@@ -325,11 +325,11 @@ double GetTechEisNextFreq(int bd, ushort* restart, void* pvoid)
 	peis->finalfreq = MAX(peis->finalfreq,pch->MinFrequency);
 	peis->finalfreq = MIN(peis->finalfreq,pch->MaxFrequency);
 	
-	double dInitfreq = RoundToSignificantDigits(peis->initfreq, 6); //
-	double dFinalfreq = RoundToSignificantDigits(peis->finalfreq, 6);
+	volatile double dInitfreq = RoundToSignificantDigits(peis->initfreq, 6); //
+	volatile double dFinalfreq = RoundToSignificantDigits(peis->finalfreq, 6);
 
-	double dfreq = dInitfreq;
-	double dChkExist;
+	volatile double dfreq = dInitfreq;
+	volatile double dChkExist;
 	
 	if(dInitfreq == dFinalfreq)
 	{
@@ -805,8 +805,8 @@ void proc_test_main(int bd)
 			for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch ++)
 			{
 				
-				pch->mChStatInf.DispMag[auxch] = 0.0;
-				pch->mChStatInf.DispPhase[auxch] = 0.0;
+				pch->mChStatInf.DispMag[auxch+(bd-1)*4] = 0.0;
+				pch->mChStatInf.DispPhase[auxch+(bd-1)*4] = 0.0; //[auxch]
 				
 				pch->mChStatInf.eis_status.Aux_zdata[auxch+(bd-1)*4].real = 0.0;
 				pch->mChStatInf.eis_status.Aux_zdata[auxch+(bd-1)*4].img = 0.0;
@@ -1266,8 +1266,8 @@ void procaux_test_main()
                           
 			for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
 			{
-				pch->mChStatInf.DispMag[auxch] = 0.0;
-				pch->mChStatInf.DispPhase[auxch] = 0.0;
+				pch->mChStatInf.DispMag[auxch+(bd-1)*4] = 0.0;
+				pch->mChStatInf.DispPhase[auxch+(bd-1)*4] = 0.0;
 				
 				pch->mChStatInf.eis_status.Aux_zdata[auxch+(bd-1)*4].real = 0.0;
 				pch->mChStatInf.eis_status.Aux_zdata[auxch+(bd-1)*4].img = 0.0;
@@ -1312,6 +1312,7 @@ void procaux_test_main()
 		{
 			if(pch->mTech.type == TECH_MON)
 			{
+                          clear_impedance(0);
 				Flow_monitor(0);
 			}
 			else if(pch->mTech.type == TECH_DCH)
