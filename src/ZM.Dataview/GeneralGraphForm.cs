@@ -950,7 +950,7 @@ namespace ZiveLab.ZM.Dataview
 
             if (MaxAuxCount > 0)
             {
-                lnlAuxMenu.Visible = false; // true;
+                lnlAuxMenu.Visible = true;
                 for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
                 {
                     if (i >= MaxAuxCount)

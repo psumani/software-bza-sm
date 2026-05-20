@@ -303,8 +303,8 @@ namespace ZiveLab.ZM
             int i;
 
             // 배열 정의
-            string[] sTitle1 = new string[19] { "Channel", "Group", "Status", "Status", "Status", "Status", "Status", "Status", "Status", "Condition file", "Condition file", "Condition file", "Control", "Control", "Result file", "Result file", "Result file", "Result file", "Remote", };
-            string[] sTitle2 = new string[19] { "Channel", "Group", "     Status", "Last error", "Elapsed(s)", "Range", "Vdc(V)", "Aux", "Temp.(°C)", "File name", "Tools", "Tools", "Control", "Control", "File name", "Tools", "Tools", "Data count", "Remote", };
+            string[] sTitle1 = new string[19] { "Channel", "Group", "Status", "Status"    ,     "Status", "Status", "Status", "Status",     "Status", "Condition file", "Condition file", "Condition file", "Control", "Control", "Result file", "Result file", "Result file", "Result file", "Remote", };
+            string[] sTitle2 = new string[19] { "Channel", "Group", "Status", "Last error", "Elapsed(s)",  "Range", "Vdc(V)",    "Aux", "Temp.(°C)",      "File name",          "Tools",          "Tools", "Control", "Control",   "File name",       "Tools",       "Tools",  "Data count", "Remote", };
 
             int[] iwidth = new int[19] { 60, 50, 200, 160, 80, 80, 80, 40, 70, 150, 32, 32, 32, 32, 150, 32, 32, 90, 50, };
               
@@ -614,7 +614,7 @@ namespace ZiveLab.ZM
                     {
                         if (Value.mChInf.FileCond.Length < 5)
                         {
-                            str = "None.";
+                            str =  "None.";
                         }
                         else
                         {
@@ -910,14 +910,14 @@ namespace ZiveLab.ZM
                         else str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Vdc);
                         hgrid.SetData(row, i, str);
                     }
-                    else if (i == 7)
+                    else if (i == 8)
                     {
                         if (Value.bChkSIF == false || berror == true) str = "Unknown";
                         else if (Value.bChkCh == false) str = "Unknown";
                         else str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Temperature);
                         hgrid.SetData(row, i, str);
                     }
-                    else if (i == 8)
+                    else if (i == 9)
                     {
                         if (Value.mChInf.FileCond.Length < 5)
                         {
@@ -930,7 +930,7 @@ namespace ZiveLab.ZM
 
                         hgrid.SetData(row, i, str);
                     }
-                    else if (i == 9)
+                    else if (i == 10)
                     {
                         if (Value.bChkSIF == false || berror == true || Value.bChkCh == false || Value.mChInf.bRemote == true) btGridOpen[ch].Enabled = false;
                         else if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bConnect == false) btGridOpen[ch].Enabled = false;
@@ -946,7 +946,7 @@ namespace ZiveLab.ZM
                             }
                         }
                     }
-                    else if (i == 10)
+                    else if (i == 11)
                     {
                         if (Value.bChkSIF == false || berror == true || Value.bChkCh == false || Value.mChInf.bRemote == true) btGridView[ch].Enabled = false;
                         else if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bConnect == false) btGridView[ch].Enabled = false;
@@ -955,7 +955,7 @@ namespace ZiveLab.ZM
                             btGridView[ch].Enabled = true;
                         }
                     }
-                    else if (i == 11)
+                    else if (i == 12)
                     {
                         str = (string)btGridStart[ch].Tag;
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true || Value.mChInf.bRemote == true)
@@ -1009,7 +1009,7 @@ namespace ZiveLab.ZM
                         }
                         //hgrid.SetData(row, i, btGrid[ch].Text);
                     }
-                    else if (i == 12)
+                    else if (i == 13)
                     {
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true || Value.mChInf.bRemote == true) btGridReload[ch].Enabled = false;
                         else if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bConnect == false) btGridReload[ch].Enabled = false;
@@ -1025,7 +1025,7 @@ namespace ZiveLab.ZM
                             }
                         }
                     }
-                    else if (i == 13)
+                    else if (i == 14)
                     {
                         if (Value.mChInf.FileResult.Length < 5)
                         {
@@ -1036,17 +1036,17 @@ namespace ZiveLab.ZM
                             hgrid.SetData(row, i, Path.GetFileName(Value.mChInf.FileResult));
                         }
                     }
-                    else if (i == 14)
+                    else if (i == 15)
                     {
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true) btGridGraph[ch].Enabled = false;
                         else btGridGraph[ch].Enabled = true;
                     }
-                    else if (i == 15)
+                    else if (i == 16)
                     {
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true) btGridReport[ch].Enabled = false;
                         else btGridReport[ch].Enabled = true;
                     }
-                    else if (i == 16)
+                    else if (i == 17)
                     {
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true) str = "Unknown";
                         else

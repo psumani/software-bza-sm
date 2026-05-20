@@ -96,7 +96,6 @@ namespace ZiveLab.ZM
         private void btnOk_Click(object sender, EventArgs e)
         {
             Update();
-            gBZA.mDataViewSet = tDataViewSet;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -39,18 +39,18 @@ extern "C"
 /* I2C controller module register structures */
 typedef struct
 {
-  volatile UNS_32 i2c_txrx;      /* I2C Tx/Rx Data FIFO */
-  volatile UNS_32 i2c_stat;      /* I2C Status Register */
-  volatile UNS_32 i2c_ctrl;      /* I2C Control Register */
-  volatile UNS_32 i2c_clk_hi;    /* I2C Clock Divider high */
-  volatile UNS_32 i2c_clk_lo;    /* I2C Clock Divider low */
-  volatile UNS_32 i2c_adr;	   /* I2C Slave Address */
-  volatile UNS_32 i2c_rxfl;	   /* I2C Rx FIFO level */
-  volatile UNS_32 i2c_txfl;	   /* I2C Tx FIFO level */
-  volatile UNS_32 i2c_rxb;       /* I2C Number of bytes received */
-  volatile UNS_32 i2c_txb;       /* I2C Number of bytes transmitted */
-  volatile UNS_32 i2c_stx;       /* Slave Transmit FIFO */
-  volatile UNS_32 i2c_stxfl;	   /* Slave Transmit FIFO level */
+  UNS_32 i2c_txrx;      /* I2C Tx/Rx Data FIFO */
+  UNS_32 i2c_stat;      /* I2C Status Register */
+  UNS_32 i2c_ctrl;      /* I2C Control Register */
+  UNS_32 i2c_clk_hi;    /* I2C Clock Divider high */
+  UNS_32 i2c_clk_lo;    /* I2C Clock Divider low */
+  UNS_32 i2c_adr;	   /* I2C Slave Address */
+  UNS_32 i2c_rxfl;	   /* I2C Rx FIFO level */
+  UNS_32 i2c_txfl;	   /* I2C Tx FIFO level */
+  UNS_32 i2c_rxb;       /* I2C Number of bytes received */
+  UNS_32 i2c_txb;       /* I2C Number of bytes transmitted */
+  UNS_32 i2c_stx;       /* Slave Transmit FIFO */
+  UNS_32 i2c_stxfl;	   /* Slave Transmit FIFO level */
 } I2C_REGS_T;
 
 /**********************************************************************

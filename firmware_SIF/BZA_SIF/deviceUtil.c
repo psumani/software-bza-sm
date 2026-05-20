@@ -2417,9 +2417,8 @@ inline bool proc_eis_start(int bd) // when MCBZA, bd=0
 				return false;
 			}
 		}
-		
-		return true;
 	}	
+	return true;
 }
 
 void proc_eis_reset(int bd) // any bd any BZA type
@@ -2530,7 +2529,6 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 	int tmp[4];
 	int AuxCh = 0, bd_index = 0;
 	ushort rawdatacnt[4];
-	int data_fin = 0;
 	
 	stChStatusInf* pChStatus = &m_pGlobalVar->mChVar[bd].mChStatInf;
 	stChStatusInf* pChStatus_bd;
@@ -2615,7 +2613,6 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 			{
 				if (buf[0] == 0x8000)
 				{
-                                  data_fin = 1;
                     pChStatus->eis_status.status = DEF_EIS_STATUS_EIS_INIT;
 					return;
 				}
@@ -2673,7 +2670,7 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 				{
 					if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd_index == 0)
 					{
-						m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true; //data_fin += 1;
+						m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true;
 					}
 					else
 						pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
@@ -2890,6 +2887,8 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[bd];
 	stDefTestData* pdata = m_pTestData[bd] + pch->mChStatInf.eis_status.rescount;
 	int ierr = 0;
+	bool ActiveZ = true;
+	bool ActiveAux = false;
 
 	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
 	{
@@ -2920,52 +2919,64 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 	
 	pdata->RangeV = m_pSysConfig->mZimCfg[bd].ranges.Gen.vdc_rng[pch->mChStatInf.Vdc_rngno].realmax;
 	
-	pdata->fFreq = pch->mChStatInf.eis_status.freq;
+	
 		
 	pdata->Veoc = pch->mChStatInf.Veoc; //[0]
 	pdata->Vdc = pch->mChStatInf.Vdc; //[0]
-	pdata->Zre = pch->mChStatInf.eis_status.zdata.real; // for main board
-	pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
+	
+	
 	
 	pdata->Idc = pch->mChStatInf.Idc;  
 	pdata->Temperature = pch->mChStatInf.Temperature;
 
-	if(pch->mTech.type == TECH_MON)	
+	if(pch->mTech.type == TECH_MON)	ActiveZ = false;
+	else if(pch->mTech.type == TECH_DCH)	
+	{
+		if(pch->mTech.tech.dch.useir == 0) ActiveZ = false;
+	}
+	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0) ActiveAux = true;
+	
+	if(ActiveZ == false)
 	{
 		pdata->fFreq = 0.0;			
 		pdata->Zre = 0.0;
 		pdata->Zim = 0.0;
-
-		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0)
-		{
-			for(AuxBd=0; AuxBd < DEF_MAX_AUX_BDCNT; AuxBd++)
-			{
-				for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
-				{
-					pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
-					pdata->mData[AuxBd].mData[AuxCh].Vdc = pch->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh];
-					pdata->mData[AuxBd].mData[AuxCh].Zre = 0.0;
-					pdata->mData[AuxBd].mData[AuxCh].Zim = 0.0;
-				}
-			}
-		}
-	} 
+	}
 	else
 	{
-		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0) 
+		pdata->fFreq = pch->mChStatInf.eis_status.freq;
+		pdata->Zre = pch->mChStatInf.eis_status.zdata.real; // for main board
+		pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
+	}
+	
+	
+	for(AuxBd=0; AuxBd < DEF_MAX_AUX_BDCNT; AuxBd++)
+	{
+		for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
 		{
-			for(AuxBd=0; AuxBd < DEF_MAX_AUX_BDCNT; AuxBd++)
+			if(ActiveAux == true)
 			{
-				for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
-				{
-					pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
-					pdata->mData[AuxBd].mData[AuxCh].Vdc = (pch)->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh]; //Vdc; //[AuxCh]; //(pch+AuxBd+1)
-					pdata->mData[AuxBd].mData[AuxCh].Zre = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].real; //(pch+AuxBd+1)
-					pdata->mData[AuxBd].mData[AuxCh].Zim = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].img; //(pch+AuxBd+1)
-				}
+				pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
+				pdata->mData[AuxBd].mData[AuxCh].Vdc = pch->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh];
+			}
+			else
+			{
+				pdata->mData[AuxBd].mData[AuxCh].Veoc = 0.0;
+				pdata->mData[AuxBd].mData[AuxCh].Vdc = 0.0;
+			}
+			if(ActiveZ == false || ActiveAux == false)
+			{
+				pdata->mData[AuxBd].mData[AuxCh].Zre = 0.0;
+				pdata->mData[AuxBd].mData[AuxCh].Zim = 0.0;
+			}
+			else
+			{
+				pdata->mData[AuxBd].mData[AuxCh].Zre = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].real; //(pch+AuxBd+1)
+				pdata->mData[AuxBd].mData[AuxCh].Zim = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].img; //(pch+AuxBd+1)
 			}
 		}
 	}
+	
 	pch->mChStatInf.eis_status.rescount ++;
 	return  true;
 }

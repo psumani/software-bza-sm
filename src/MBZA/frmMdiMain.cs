@@ -1792,9 +1792,10 @@ namespace ZiveLab.ZM
         private void optionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSetOption frm = new frmSetOption();
-            if(frm.ShowDialog() == DialogResult.OK)
+            frm.tDataViewSet = gBZA.mDataViewSet;
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-
+                gBZA.mDataViewSet = frm.tDataViewSet;
             }
         }
     }

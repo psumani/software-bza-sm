@@ -117,480 +117,1665 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>273, 17</value>
-  </metadata>
+  <data name="&gt;&gt;tbCellType.Name" xml:space="preserve">
+    <value>tbCellType</value>
+  </data>
+  <data name="&gt;&gt;textUser.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.Parent" xml:space="preserve">
+    <value>groupBoxFilter</value>
+  </data>
+  <data name="&gt;&gt;tsbtnFileHeaderInfor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkCycleNo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripMain.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="ChkDCAux.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
   </data>
-  <data name="gap1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
+  <data name="tsbtnRunZMan.ToolTipText" xml:space="preserve">
+    <value>Run ZMan</value>
   </data>
-  <data name="gap1.Text" xml:space="preserve">
-    <value> </value>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
-  <data name="tsbtnOpen.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="tbCellType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 22</value>
   </data>
-  <data name="tsbtnOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
+  <data name="&gt;&gt;ChkEISAux.Name" xml:space="preserve">
+    <value>ChkEISAux</value>
   </data>
-  <data name="tsbtnOpen.Text" xml:space="preserve">
-    <value>Open data file</value>
+  <data name="&gt;&gt;btnUndo.Parent" xml:space="preserve">
+    <value>groupBox3</value>
   </data>
-  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
+  <data name="chkCycleNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 24</value>
   </data>
-  <data name="toolStripLabel1.Text" xml:space="preserve">
-    <value> </value>
+  <data name="lblCellType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 79</value>
+  </data>
+  <data name="&gt;&gt;label_User.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="legend1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 809</value>
+  </data>
+  <data name="&gt;&gt;tsbtnSaveText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textUser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>707, 104</value>
+  </data>
+  <data name="tsbtnOpenSchedule.Text" xml:space="preserve">
+    <value>Open Schedule</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tsbtnReload.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="tsbtnReload.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAa9SURBVFhHxZcJUNXnFcU/UIxRG0yMmhqjlbhrsBYERER2
-        HqBAcAFZxcgQCBYdWitaSXRMaiXRDIjGBkxRwUzHiQ2IS1hUkBEjhSibIio7LkGMkLrE+Ov9i86Y1PDQ
-        pPbOnIH3eO9/zneXcz/ULxahvVEhz6IC+3L/naccIX1QAc+gZiuU/6/+DyJ8DQn66A2CEkNRniJi7tMW
-        4aN4Z/dauAsfZm6l97znUbOkLLMH/gJCwg1QYYJQOVmwIFAQIJgv7/n1QM3riXJXxO54m2+o4wpnKKr6
-        ilHhk1GuUhbvXz+hiHAh0UhDFP0ijRm7fAJmq6wwW3kfsVMxW26N2bJpTIgy5+OsnZyniHW3fajiCC2t
-        V5gW44pykv6YNeQxREQKaZhgocL5A1f2nMigsa2JKzebuXir7pFouVXLpdv15Px7F7Ft7gIPDn2/g7aO
-        b7D/oxfKXnrCfVg3RER0nvrlmKFkluzl+p02sjt2EX8lipUtvixr9hG8/hPwIabJkyVNHgJ3whttSbsW
-        T8u1i0x+0xHlOFiPAI18kWLEchPONtVwvCOHN8+54XfanHlVZvhUTcKnsmv4nbYktNpOYM/cKnMia2Zy
-        g3YC3otGTR+gR4CkfcDiAZTWnOTzSztxLh6HruQ1XIrHs6hiJgn1q/m0Zatgy3/j4hbSGjezoiocj5LJ
-        OJ0YS0iZC803L7BxVzKGMwahXIZ3ISBCOnqBYtO+zZS3lmB1eATWh02wOTKa9LqPabrcTFZRNsn7d5Cy
-        P42UfRrSO5G1i48+386pU2fZU5vOyOx+LCrxobXjMhvTU1AzZBQdhuo//eAlg6ltqMO/0JNRWS8KBpJ2
-        NoXSijLM/zQVNUdGzlvK5GkoXS2jN1NGzF2gk3m3USzdtIr089uILl0ogpuISVyDspW0O3Wn+WS+/RMC
-        yDn/Bf3SjXgmTV4fnk3lmTO8FPZyJ7FfF+7m2JfFSbF0dFzjq8pyXGP8UNOMu0muRZAiMTOJrOoMXPY6
-        ostyobC2gLjUdzrJ/Z/r+kFOxizdLBk48BmDfCZIRuTkriO6Sa5FsAHLdsayr+ggGflZgn0cLMrFKtYW
-        5WOk/0HuQxjkOwkDZzEc+5ceg/hBLOxFjwW9MQoWBPXBKKAvRrLVDHwljb7i6w8iSNZtgJRCw8Ph/oqk
-        W8hd7qfcXcqmQSdwkQbUSuHwGxFngrIb9QiBodJMwYJAgb/s9flin779BP0FL3R+IVgjl7/9mFwLNxHg
-        +lC9PTRy2QEzpBTTX5R+kDGcKpmxFjGPFKAvNGFzZSeEDsRgvmRFXzgPZliAOf8szJZSFnLgWCEHTxzl
-        L+lb6TF99GMIWKBlwoBekpX1GRuI35uI8upGT1g/R8jaaOAWB+4mk/n9JlqppvBUGWpKd5tTu2LNUYxe
-        PI688gJ5GGz5YhvKQ/ygq5C093Ecypfl5eTd/JQ3Gi1Y0GBO5d2jvL99O8pUnylpESLmIpcM93VefH29
-        jbwbuyn5LpekvSLAVsbSpRfKWT7jKBlykF6xk76wldJM688Qz/HszjtI052zRNS6EHrOhj/Uz6HtztdY
-        hMxDTX5VjwCZBO3kgYkLab/VzieX49GVjSTv+h5O11xgRcpq8Ye/Evf39cR9Ek/ctveJS/mAP/8tnpTM
-        3ZxrbuD07RLCq93wrbTEq9yUQzc+Y3/+MQx/OxJlObELAdrlUi6WYVvf4tvvOlh9Pgqn4jG4y1JaV7OM
-        o1ezKWrPvY+cH+DLjjyyrqax6kI4s0p/h0ep6b3vJjS+zfX2G0z09ZT0i4Auw8+QKStsuPptK78vD8Cy
-        YBguRaaCScwoHI2VvLYqGP4TGCaff+Xe79YFI7AtHMXm+neFvAPv6EjURPEAS1N9AnoxNtqUhpZG4sqX
-        MCF7IFPzRmF9SMjzRjIl1wSLLmB9aAyu+ebElkdQ0fYvTlZWYxUse2GcrGILfeRaBIjnexnisMqDS82X
-        WXMqluGZxphkDWBF8VLZD/kcrsvlyA+Qc+9nfn0exxsKqagr51hxCW+9t5bnbeRiairGYzGpG+QPwk+s
-        16MnVkvtqT5TQ1LZBvr/oycJJ+PJOJCNQ5Q3uqUB6JYEoosOQrc4WBCCW1QodmGBmHg7Y2g5HvWanNps
-        7GMQPxxzxT5lz48JMyf/2HHSKlJJLUtmTfJGOY1MiWavNmKv1mKvU8V2LWW2p4gdm4vfW4jTWclG/Nnx
-        uhDojHl25hDWpyZx/VIb76YmdJI/1XCTU9q9wPw1EURuWCmG86T/aPyc0EmKpw/CQFupjvqc7H8VzkLu
-        IOTaOn2ilfrjUOo/h2qpT1+/HoMAAAAASUVORK5CYII=
-</value>
+  <data name="&gt;&gt;lblCellType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbtnReload.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="gap4.Text" xml:space="preserve">
+    <value> </value>
   </data>
-  <data name="tsbtnReload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
+  <data name="&gt;&gt;textDataMemo.Parent" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
-  <data name="tsbtnReload.Text" xml:space="preserve">
-    <value>Reload test data</value>
+  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
+    <value>toolStripLabel1</value>
   </data>
-  <data name="gap6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
   </data>
   <data name="gap6.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="tsbtnStop.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;lblCapacity1.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
-  <data name="tsbtnStop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVFhH7ZctD4FhFIafIAiiIKiCINkEhfYWwQ9QVZs/
-        QNEUxeZHYcw387UxwWZTJNtx7u0VBKfdlOfervRs17nq4/ze65bL0i4W6eBOePJzdeek9wOqSnjycw19
-        OAWBPDsdGvCbAcdCQR7NJg34zYBdLif3Wo0G/GbAJpORa6VCA34zYJlKyblUogG/GTBPJuWQz9OA3wyY
-        xOOyTqdpwG8GjGIxmSYSNOA3AwaRiAyjURrwmwH9H+ADfIAP8AFmwFAZEYHfDBgrCyLwmwEzZU8EfjNg
-        pVyIwG8GbJUbEfjNgKPyIAL/14C/f0zwZWpks3Ra+j0LT/rpnHsB4lzamL6z7DQAAAAASUVORK5CYII=
-</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
-  <data name="tsbtnStop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="textFileName.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="textFileName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="&gt;&gt;textDataMemo.Name" xml:space="preserve">
+    <value>textDataMemo</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel2.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="&gt;&gt;c1StatusBar1.Name" xml:space="preserve">
+    <value>c1StatusBar1</value>
   </data>
   <data name="tsbtnStop.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 28</value>
   </data>
-  <data name="tsbtnStop.Text" xml:space="preserve">
-    <value>Stop Loading</value>
+  <data name="&gt;&gt;ChkEISAux.Parent" xml:space="preserve">
+    <value>groupBoxViewOpt</value>
   </data>
-  <data name="gap3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
+  <data name="&gt;&gt;backgroundWorker.Name" xml:space="preserve">
+    <value>backgroundWorker</value>
   </data>
-  <data name="gap3.Text" xml:space="preserve">
-    <value> </value>
+  <data name="label_FileName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="tsbtnSave.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="textTestTime.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="tsbtnSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
-  <data name="tsbtnSave.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbtnSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="tsbtnSave.Text" xml:space="preserve">
-    <value>Save as data format</value>
-  </data>
-  <data name="gap4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="gap4.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="tsbtnOpenSchedule.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbtnOpenSchedule.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbtnOpenSchedule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="tsbtnOpenSchedule.Text" xml:space="preserve">
-    <value>Open Schedule</value>
-  </data>
-  <data name="gap5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="gap5.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="tsbtnViewGraph.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbtnViewGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF9SURBVDhPlVOxSsNgEM4TiI/gI/QRSrq1GQQhEKLgIzhk
-        c3HIEqeQTXCwIGQTSZfqYBx1sDRQUKE0YqAKqaSGJB1/7/tJSoySth8cf+6/u+8ud/cLQJIk9/0nn+Hk
-        F5tgsVg0n99DJuyds4/ZnJG+k5vWQ5qmF/vmHSc4vnxk0HPTekDWrYMuJ8CZZRmLomg7N3PQrzXo/ppk
-        DjuEKj3kxtOrAQ8u5OxmhCqOuJEAxyAIvg3D6Hc6nVtRFBnE93nPGkLBiOAqOxzCMGTtdvtVVdWB4zgj
-        6PChJCc8A1AmyK84MBVN0x4URRmTbU5Bu9Xf4/iPAFV4njdttVrxZDKJSW/mpr+oEiBLHMdvsiy/6Lo+
-        XDmZKgECXNcdUrOmaCBlr9+NMgGk1+v5KN227VkxEfwSvmt7YJomH5EkSWPLsj7LpcMHI8aJ+19VFQQ4
-        6wQ+WDZsLBZw+XYK46aCB1gQfEFZJQhCBXg7eIDLCtAYzLlOUCXWHqXnPaC9EIQfRSP6rUR8898AAAAA
-        SUVORK5CYII=
-</value>
-  </data>
-  <data name="tsbtnViewGraph.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbtnViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="tsbtnViewGraph.Text" xml:space="preserve">
-    <value>View graph</value>
-  </data>
-  <data name="tsbtnViewGraph.ToolTipText" xml:space="preserve">
-    <value>View graph</value>
-  </data>
-  <data name="toolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="toolStripLabel2.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="tsbtnSaveText.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbtnSaveText.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALtSURBVEhLnVVdaFJhGK6bRsV22Qqii/JqioxZdDGljdaS
-        vCuIoF0MSRljirCLuglxrKSLYIjYum1DSDalNqI2XHQxqQ2MTWENIvX4M/U4zJ8zfzbP1/m+nU/OOTvq
-        2gMP78/xfZ73+w5yTjXC8PDwjenp6XGHw4Fot9sRbTZbnVNTU+NWq3VIrVZ3sGPHh16vNzOgIcPhMIAx
-        EomgiIlrr9f7R6lU3mRHj4eRkRELFIAkCAIxGo2KcmNjAwSDwb+Dg4NqdlwcdCbTkV1129aWl69CA7xp
-        LBZDm+KIGY/H6/X29jZIp9NF5rrusXJHUUoRkq/Ol7Wl+ZlXXAMslEgkeAY7Ozv1OhAIoByaDAwM3GUl
-        +QAAnHa759f9fj9hMpkmoWArQpNQKAQWFhaA0+lE0efzZXt6ehSsLB/ffZ9NZvNz+tPHNyt4u2QyibbD
-        UdiHZETrucfjAbOzswFG7uyhKgcUFb1MzLSVUwl7BQ+kUik0jKOwL8zxlXZ3d99iZfkglm9/Kfx6CMh0
-        HJAk+V/MZDKIMO/t7b3PSvIR3XQOpVYu1Tfa3d1FOY7CfqNcpVI9YCX5IMmt9t+u80U8kM1m0QCOwn6j
-        vKEBxNunnfNmcz8ayOVyaABHTG4tljc1ePLo+gSx2A6K5DeQz+cbslAoiPYhmxqMjsI/2jVmo3G6WCyi
-        jXDE5NZieV9fX2ODsbExC+F7BtKrckDlwoCiKFHu7e2J9iFbGhxudIam0h/QRqVSiXcCbg2NhP2mBgaD
-        YeJwQEFng4/RQLlc5hlwa7G8qYFOp3sB7zLhfw2iS1dAKbcFKpVKnVCEW4uxqYFWq53EG/18dwdtVK1W
-        eSfg1mL5Md+Bmd70OtHA/v4+z4Bbcw1wv6mB0Wi0wB/Ca4ozH5qVxfcA1kIeHByI9iFbGuCNGKCNmO8F
-        7wS4L3xWq9Van0Cj0ehcLtea2+1ePwnn5uZ+SKXSflbuKBQKxTmZTNbZ1dV18SSUy+UXJBJJ2z8iULQO
-        iV6yQAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="tsbtnSaveText.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbtnSaveText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="tsbtnSaveText.Text" xml:space="preserve">
-    <value>Save as text file</value>
+  <data name="&gt;&gt;btnDeleteData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
   </data>
-  <data name="toolStripLabel3.Text" xml:space="preserve">
-    <value> </value>
+  <data name="btnUndo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="tsbtnExportExcel.Enabled" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;groupBoxViewOpt.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ChkDC.Name" xml:space="preserve">
+    <value>ChkDC</value>
+  </data>
+  <data name="&gt;&gt;textFileName.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;tbCellType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_Memo.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>858, 169</value>
+  </data>
+  <data name="ChkDCAux.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupBoxViewOpt.Text" xml:space="preserve">
+    <value>[ View option ]</value>
+  </data>
+  <data name="ChkEISAux.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;tbWriterName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxViewOpt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCapacity1.Name" xml:space="preserve">
+    <value>lblCapacity1</value>
+  </data>
+  <data name="textDataMemo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ChkEIS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="legend1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="ChkEIS.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="btnUndo.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="textDataMemo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>741, 22</value>
+  </data>
+  <data name="tsbtnSaveText.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="tsbtnExportExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
+  <data name="&gt;&gt;tbCycleNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbtnExportExcel.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;ChkDC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbtnExportExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
+  <data name="&gt;&gt;tsbtnExportExcel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbtnExportExcel.Text" xml:space="preserve">
-    <value>Export to excel</value>
+  <data name="&gt;&gt;textUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="gap7.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
   </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="&gt;&gt;legend1.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;gap5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gap1.Name" xml:space="preserve">
+    <value>gap1</value>
+  </data>
+  <data name="tsbtnOpenSchedule.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Data Editor</value>
+  </data>
+  <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="tsbtnOpen.Text" xml:space="preserve">
+    <value>Open data file</value>
+  </data>
   <data name="gap7.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="tsbtnRunZMan.Enabled" type="System.Boolean, mscorlib">
+  <data name="label_User.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblCapacity1.Text" xml:space="preserve">
+    <value>Capacity(mAhr)</value>
+  </data>
+  <data name="&gt;&gt;label_ScheduleFile.Name" xml:space="preserve">
+    <value>label_ScheduleFile</value>
+  </data>
+  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="&gt;&gt;label_User.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="tsbtnReload.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAABr1JREFUWEfFlwlQ1ecVxT9QjFEbTIyaGqOVuGuwFgRERHYeoEBwAVnFyBAIFh1a
+        K1pJdExqJdEMiMYGTFHBTMeJDYhLWFSQESOFKJsiKjsuQYyQusT46/2LzpjU8NCk9s6cgfd473/Od5dz
+        P9QvFqG9USHPogL7cv+dpxwhfVABz6BmK5T/r/4PInwNCfroDYISQ1GeImLu0xbho3hn91q4Cx9mbqX3
+        vOdRs6Qsswf+AkLCDVBhglA5WbAgUBAgmC/v+fVAzeuJclfE7nibb6jjCmcoqvqKUeGTUa5SFu9fP6GI
+        cCHRSEMU/SKNGbt8AmarrDBbeR+xUzFbbo3ZsmlMiDLn46ydnKeIdbd9qOIILa1XmBbjinKS/pg15DFE
+        RAppmGChwvkDV/acyKCxrYkrN5u5eKvukWi5Vcul2/Xk/HsXsW3uAg8Ofb+Dto5vsP+jF8peesJ9WDdE
+        RHSe+uWYoWSW7OX6nTayO3YRfyWKlS2+LGv2Ebz+E/AhpsmTJU0eAnfCG21JuxZPy7WLTH7TEeU4WI8A
+        jXyRYsRyE8421XC8I4c3z7nhd9qceVVm+FRNwqeya/idtiS02k5gz9wqcyJrZnKDdgLei0ZNH6BHgKR9
+        wOIBlNac5PNLO3EuHoeu5DVcisezqGImCfWr+bRlq2DLf+PiFtIaN7OiKhyPksk4nRhLSJkLzTcvsHFX
+        MoYzBqFchnchIEI6eoFi077NlLeWYHV4BNaHTbA5Mpr0uo9putxMVlE2yft3kLI/jZR9GtI7kbWLjz7f
+        zqlTZ9lTm87I7H4sKvGhteMyG9NTUDNkFB2G6j/94CWDqW2ow7/Qk1FZLwoGknY2hdKKMsz/NBU1R0bO
+        W8rkaShdLaM3U0bMXaCTebdRLN20ivTz24guXSiCm4hJXIOylbQ7daf5ZL79EwLIOf8F/dKNeCZNXh+e
+        TeWZM7wU9nInsV8X7ubYl8VJsXR0XOOrynJcY/xQ04y7Sa5FkCIxM4ms6gxc9jqiy3KhsLaAuNR3Osn9
+        n+v6QU7GLN0sGTjwGYN8JkhG5OSuI7pJrkWwAct2xrKv6CAZ+VmCfRwsysUq1hblY6T/Qe5DGOQ7CQNn
+        MRz7lx6D+EEs7EWPBb0xChYE9cEooC9GstUMfCWNvuLrDyJI1m2AlELDw+H+iqRbyF3up9xdyqZBJ3CR
+        BtRK4fAbEWeCshv1CIGh0kzBgkCBv+z1+WKfvv0E/QUvdH4hWCOXv/2YXAs3EeD6UL09NHLZATOkFNNf
+        lH6QMZwqmbEWMY8UoC80YXNlJ4QOxGC+ZEVfOA9mWIA5/yzMllIWcuBYIQdPHOUv6VvpMX30YwhYoGXC
+        gF6SlfUZG4jfm4jy6kZPWD9HyNpo4BYH7iaT+f0mWqmm8FQZakp3m1O7Ys1RjF48jrzyAnkYbPliG8pD
+        /KCrkLT3cRzKl+Xl5N38lDcaLVjQYE7l3aO8v307ylSfKWkRIuYilwz3dV58fb2NvBu7Kfkul6S9IsBW
+        xtKlF8pZPuMoGXKQXrGTvrCV0kzrzxDP8ezOO0jTnbNE1LoQes6GP9TPoe3O11iEzENNflWPAJkE7eSB
+        iQtpv9XOJ5fj0ZWNJO/6Hk7XXGBFymrxh78S9/f1xH0ST9y294lL+YA//y2elMzdnGtu4PTtEsKr3fCt
+        tMSr3JRDNz5jf/4xDH87EmU5sQsB2uVSLpZhW9/i2+86WH0+CqfiMbjLUlpXs4yjV7Mpas+9j5wf4MuO
+        PLKuprHqQjizSn+HR6npve8mNL7N9fYbTPT1lPSLgC7Dz5ApK2y4+m0rvy8PwLJgGC5FpoJJzCgcjZW8
+        tioY/hMYJp9/5d7v1gUjsC0cxeb6d4W8A+/oSNRE8QBLU30CejE22pSGlkbiypcwIXsgU/NGYX1IyPNG
+        MiXXBIsuYH1oDK755sSWR1DR9i9OVlZjFSx7YZysYgt95FoEiOd7GeKwyoNLzZdZcyqW4ZnGmGQNYEXx
+        UtkP+Ryuy+XID5Bz72d+fR7HGwqpqCvnWHEJb723ludt5GJqKsZjMakb5A/CT6zXoydWS+2pPlNDUtkG
+        +v+jJwkn48k4kI1DlDe6pQHolgSiiw5CtzhYEIJbVCh2YYGYeDtjaDke9Zqc2mzsYxA/HHPFPmXPjwkz
+        J//YcdIqUkktS2ZN8kY5jUyJZq82Yq/WYq9TxXYtZbaniB2bi99biNNZyUb82fG6EOiMeXbmENanJnH9
+        UhvvpiZ0kj/VcJNT2r3A/DURRG5YKYbzpP9o/JzQSYqnD8JAW6mO+pzsfxXOQu4g5No6faKV+uNQ6j+H
+        aqlPX78egwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnUndo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 19</value>
+  </data>
+  <data name="&gt;&gt;label_TestTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorker.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbDataCapacity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 76</value>
+  </data>
+  <data name="&gt;&gt;label_User.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="gap1.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="tbCellType.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;label_Memo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxViewOpt.Name" xml:space="preserve">
+    <value>groupBoxViewOpt</value>
+  </data>
+  <data name="&gt;&gt;tsbtnPrint.Name" xml:space="preserve">
+    <value>tsbtnPrint</value>
+  </data>
+  <data name="&gt;&gt;tbWriterName.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="ChkDCAux.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 54</value>
+  </data>
+  <data name="label_ScheduleFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="textUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
+  <data name="lblCapacity1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkCycleNo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tbWriterName.Name" xml:space="preserve">
+    <value>tbWriterName</value>
+  </data>
+  <data name="textTestTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 104</value>
+  </data>
+  <data name="&gt;&gt;label_DataCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDataCapacity.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tbCellType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="groupBoxFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="ChkEIS.Text" xml:space="preserve">
+    <value>EIS Data (</value>
+  </data>
+  <data name="&gt;&gt;gap7.Name" xml:space="preserve">
+    <value>gap7</value>
+  </data>
+  <data name="tsbtnExportExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tsbtnPrint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel5.Name" xml:space="preserve">
+    <value>toolStripLabel5</value>
+  </data>
+  <data name="&gt;&gt;label_FileName.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.Name" xml:space="preserve">
+    <value>DataFlexGrid</value>
+  </data>
+  <data name="&gt;&gt;textDataCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gap3.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;textFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ChkDC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="tbDataCapacity.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;tsbtnRunZMan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbWriterName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="tsbtnFileHeaderInfor.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="tsbtnRunZMan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="&gt;&gt;tsbtnOpen.Name" xml:space="preserve">
+    <value>tsbtnOpen</value>
+  </data>
+  <data name="&gt;&gt;tbDataCapacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbtnFileHeaderInfor.Name" xml:space="preserve">
+    <value>tsbtnFileHeaderInfor</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel2.Name" xml:space="preserve">
+    <value>toolStripLabel2</value>
+  </data>
+  <data name="&gt;&gt;chkCycleNo.Parent" xml:space="preserve">
+    <value>groupBoxFilter</value>
+  </data>
+  <data name="label_TestTime.Text" xml:space="preserve">
+    <value>Test time</value>
+  </data>
+  <data name="&gt;&gt;btnUndo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ribbonProgressBar1.Name" xml:space="preserve">
+    <value>ribbonProgressBar1</value>
+  </data>
+  <data name="panelMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 38</value>
+  </data>
+  <data name="&gt;&gt;ChkEISAux.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;textTestTime.Name" xml:space="preserve">
+    <value>textTestTime</value>
+  </data>
+  <data name="tsbtnFileHeaderInfor.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="btnUndo.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ChkDC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 21</value>
+  </data>
+  <data name="tsbtnReload.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripLabel6.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel3.Name" xml:space="preserve">
+    <value>toolStripLabel3</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 13</value>
+  </data>
+  <data name="&gt;&gt;ChkDC.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tsbtnStop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="ChkEISAux.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;legendItem1.Type" xml:space="preserve">
+    <value>NationalInstruments.UI.LegendItem, NationalInstruments.UI, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
+  </data>
+  <data name="&gt;&gt;label_DataCount.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="label_Memo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_TestTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 109</value>
+  </data>
+  <data name="tsbtnStop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        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
-        AElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAPxJREFUWEftly0PgWEUhp8gCKIgqIIg2QSF9hbBD1BVmz9A0RTF5kdhzDfztTHB
+        ZlMk23Hu7RUEp92U596u9GzXuerj/N7rlsvSLhbp4E548nN156T3A6pKePJzDX04BYE8Ox0a8JsBx0JB
+        Hs0mDfjNgF0uJ/dajQb8ZsAmk5FrpUIDfjNgmUrJuVSiAb8ZME8m5ZDP04DfDJjE47JOp2nAbwaMYjGZ
+        JhI04DcDBpGIDKNRGvCbAf0f4AN8gA/wAWbAUBkRgd8MGCsLIvCbATNlTwR+M2ClXIjAbwZslRsR+M2A
+        o/IgAv/XgL9/TPBlamSzdFr6PQtP+umcewHiXNqYvrPsNAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsbtnRunZMan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsbtnRunZMan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
+  <data name="&gt;&gt;btnDeleteData.Name" xml:space="preserve">
+    <value>btnDeleteData</value>
   </data>
-  <data name="tsbtnRunZMan.Text" xml:space="preserve">
-    <value>Run ZMAN</value>
+  <data name="&gt;&gt;textScheduleFile.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
-  <data name="tsbtnRunZMan.ToolTipText" xml:space="preserve">
-    <value>Run ZMan</value>
-  </data>
-  <data name="toolStripLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="toolStripLabel6.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="toolStripLabel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 28</value>
-  </data>
-  <data name="toolStripLabel5.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="tsbtnPrint.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbtnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        gg==
-</value>
+  <data name="groupBoxFilter.Text" xml:space="preserve">
+    <value>[ Filter ]</value>
   </data>
   <data name="tsbtnPrint.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsbtnPrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
   <data name="tsbtnPrint.Text" xml:space="preserve">
     <value>Print test data</value>
   </data>
-  <data name="toolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;label_DataCount.Name" xml:space="preserve">
+    <value>label_DataCount</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;c1StatusBar1.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.C1StatusBar, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="tsbtnSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="&gt;&gt;textTestTime.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="tbWriterName.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="label_Memo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 139</value>
+  </data>
+  <data name="textDataCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 22</value>
+  </data>
+  <data name="panelMain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;lblCellType.Name" xml:space="preserve">
+    <value>lblCellType</value>
+  </data>
+  <data name="tsbtnOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="DataFlexGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>856, 402</value>
+  </data>
+  <data name="gap4.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
   </data>
-  <data name="toolStripLabel4.Text" xml:space="preserve">
-    <value> </value>
+  <data name="&gt;&gt;tsbtnViewGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbtnFileHeaderInfor.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Schedule file writer</value>
   </data>
-  <data name="tsbtnFileHeaderInfor.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;legendItem1.Name" xml:space="preserve">
+    <value>legendItem1</value>
   </data>
-  <data name="tsbtnFileHeaderInfor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
+  <data name="&gt;&gt;btnDeleteData.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;textScheduleFile.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;tbDataCapacity.Name" xml:space="preserve">
+    <value>tbDataCapacity</value>
+  </data>
+  <data name="toolStripMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerText.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textFileName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tsbtnSaveText.Text" xml:space="preserve">
+    <value>Save as text file</value>
+  </data>
+  <data name="ChkEISAux.Text" xml:space="preserve">
+    <value>Auxilary   )</value>
+  </data>
+  <data name="ChkDCAux.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tsbtnViewGraph.ToolTipText" xml:space="preserve">
+    <value>View graph</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>753, 754</value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;chkCycleNo.Name" xml:space="preserve">
+    <value>chkCycleNo</value>
   </data>
   <data name="tsbtnFileHeaderInfor.Text" xml:space="preserve">
     <value>File Header Information</value>
   </data>
-  <data name="tsbtnFileHeaderInfor.ToolTipText" xml:space="preserve">
-    <value>Data File Information</value>
-  </data>
-  <data name="toolStripLabel7.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="gap3.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 28</value>
   </data>
-  <data name="toolStripLabel7.Text" xml:space="preserve">
+  <data name="&gt;&gt;tsbtnSave.Name" xml:space="preserve">
+    <value>tsbtnSave</value>
+  </data>
+  <data name="textScheduleFile.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblCapacity1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tsbtnReload.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="tbDataCapacity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="gap5.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="toolStripMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="tsbtnViewGraph.Text" xml:space="preserve">
+    <value>View graph</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="toolStripMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;gap4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 35</value>
+  <data name="toolStripLabel1.Text" xml:space="preserve">
+    <value> </value>
   </data>
-  <data name="toolStripMain.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="tsbtnExportExcel.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="toolStripMain.Text" xml:space="preserve">
-    <value>toolStrip1</value>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMain.Name" xml:space="preserve">
-    <value>toolStripMain</value>
+  <data name="label_FileName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
   </data>
-  <data name="&gt;&gt;toolStripMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripLabel7.Name" xml:space="preserve">
+    <value>toolStripLabel7</value>
   </data>
-  <data name="&gt;&gt;toolStripMain.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="tsbtnRunZMan.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAABfJJREFUSEullntMk1cYh78o0wgGEZExdSqbVza0MVk2DM4/lujcXCQaRNEEIdJJ
+        dN4QhyZOkYHoYNHpYhRvGU4DFqzcx6VYKqCU2oLQ+5XeW2hruSg3fzvflwgiW7LLSZ70n+b3nPc957wt
+        Ra+1a9f6REVFLcnIyFiTnp4e+V/JysqKTElJWcNisRaT2ClMOL02bty4Kicnp45zkzOYl5f3ksfjveTz
+        +f+K+vp6huLi4sHExMS6mTNnRpLoSYzgwIEDCe3t7Z6b224g58sccFO4KDteRijFM24rXr0aJAwxjIwM
+        YniYZgBDQwMYGHiB3t5e9PT0wOv1oq+vD6WlpT3BwcEnSLQfI0hNTWVrNBrv8S3piA1l4/Tic/hx9lkc
+        oY4glUpF0Y0GPG6y4OlTgsgIkUhHUKNFqIBYrIDT2QWXy4Xu7m643W5UVlb2E8FPJHrGOIGAb0RVmRbK
+        ZifOr76CFCoFCVQCHvFUqKkyo9PghcVC4yG4YTR2QSiUwWy2MuFdXV2jgqCgoDFBcnIyW61We2UdI+BV
+        DaP5UR9OhKThEHUIu1buQ12NGfc5OrQ02/C0xUyq6CToSQVq8HgimExWJtzpdDKVTBAcPHiQrVKpvHLp
+        MCTNAyg5yWPaszdoHwqulUIp96Ku1gKrpRcOO40XDsdzWK0utLTISCUWJtzhcDCiioqK/sDAwDHB/v37
+        GYGsfQjFl1TIWJKFo1O+R0bULxA2GiARk12VG6FWuaFVdxOc0GrsUKstaGhoQ2enmQm32+2MoLy8fKJA
+        qVR62x4/x4WvC5DscwQZSzPw5A8J6ekAdLoeCPhWOB398HheEOjPPtJ3L3PIBoOJCbfZbEwl5Bb1BwQE
+        jAmSkvayFQqll/9bB1IDTuIodRRp0T9D8sQNcaMTjQ+tKOHqIX3mgEzqgFRqh0xmhbTDAD5fDL3eyIRb
+        rVZG9BeCJCJQeK9vu4vD1GHso/bh9OYcXNl+D+fX38LFvQW4XySDWO5BU5sBghYpeOSA+WIb6gVymA3k
+        fEi4xWJhBCUlJf3+/v5jAjZZtCCNlcnce7qCU4GnkPROEhKpRBzbkI0zd2VIKh7BlRIO7M070NmUiMLK
+        LMQWnMadljK47C5GYLPbQF7zeMHu3bvZcrnceyOHi6z4SxDelqOuQATOvUrc+r0Clx6+xHdcYN1lYOtl
+        McxtX8MlX41tZaEIrpiEWfm++KHqHDQ6HWxWGx48eEALsicI2iQv0CQYIddyiDCANlk3zotKwa6oxfY7
+        Mqy/3A1Wpgu3ao/hJH8ZgqunYhGPwuJyCmF35uMS7xosZgu4XG7/9OnTxwTx8fFskUhEBP2QiEZgMQ3D
+        aiJXVtKIxeJVmCVfgJDGlZhb8hVm/3oIy69uQ2itPxY2UviwlgjKKHzE8UVcfjzUWg2KiorGC+Li4hhB
+        e1sfngqHoNcNwki42VSCEO1czBygEOShEOyg8J6O0EHhfTGF0IYxwYqiGdiStxUdChkKCwv7p02bNibY
+        uXMnI7DZnpPWEBRuqBUecBpqsawxDEEvfDDLRQQWEq6hME9KYf4bgmUVPmBxlmHz9V1QKBXgFHLGC2Jj
+        YxmBx+MmD8tF5gmZjmR46Ux6RBVtRahyHuZ2+2K2jcK7WgpziGCehMLCJgof833xaXU4Qi6GIy3/DBmI
+        BnA4fyN4PXJHB1eXC1KtDOvufkN2yUJYcxiWti7AItEcLG9aiPBqFhbkf4I5F1g4cfsUqV5BxkYncnNz
+        xwtiYmIYwZvho7PF0YVWZSvOVmcjumAHPrvzBVbmRSL85ueIyN2A7TcScLXsGjQqDXRaHXnVekYwderU
+        MUF0dDQjeDv89fOn77bFZIZKq0RjWxOqhTWoaa6FsFXI9Fyv00Or1ZLhpyZzSzdREBERES8QCDz0jwUt
+        oaElb4ssVnpkWxno+240GpmWGEjf6Z3T4SaTCdnZ2X2TJ08+Oyrw8/NbsWnTptLMzMzu/wv5Z+EKDw/v
+        ILFJdDQjIMuHEEbKiifsIXz7NuTQ/hHku3tIVgzhA4qiJv8JCWSepZlQkY8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="label_ScheduleFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFilter.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tsbtnRunZMan.Text" xml:space="preserve">
+    <value>Run ZMAN</value>
+  </data>
+  <data name="textDataMemo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 135</value>
+  </data>
+  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림, 9pt</value>
+  </data>
+  <data name="tbWriterName.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbCellType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 76</value>
+  </data>
+  <data name="groupBoxFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 55</value>
+  </data>
+  <data name="btnDeleteData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 19</value>
+  </data>
+  <data name="c1StatusBar1.RightPaneWidth" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerSave.Name" xml:space="preserve">
+    <value>backgroundWorkerSave</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
+    <value>btnSearch</value>
+  </data>
+  <data name="ChkEIS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="tsbtnSaveText.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel4.Name" xml:space="preserve">
+    <value>toolStripLabel4</value>
   </data>
   <data name="&gt;&gt;toolStripMain.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>114, 17</value>
+  <data name="ChkEIS.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerText.Name" xml:space="preserve">
+    <value>backgroundWorkerText</value>
+  </data>
+  <data name="groupBoxFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 184</value>
+  </data>
+  <data name="&gt;&gt;groupBoxViewOpt.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="btnDeleteData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnSearch.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="&gt;&gt;ChkDCAux.Name" xml:space="preserve">
+    <value>ChkDCAux</value>
+  </data>
+  <data name="tbCycleNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 21</value>
+  </data>
+  <data name="btnUndo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="textDataCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="label_DataCount.Text" xml:space="preserve">
+    <value>Data count</value>
+  </data>
+  <data name="&gt;&gt;timerBgChecker.Name" xml:space="preserve">
+    <value>timerBgChecker</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toolStripMain.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="textTestTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 22</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel6.Name" xml:space="preserve">
+    <value>toolStripLabel6</value>
+  </data>
+  <data name="&gt;&gt;textTestTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textDataCount.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="toolStripLabel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="&gt;&gt;btnUndo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;gap1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textScheduleFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="label_DataCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="toolStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 35</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_TestTime.Name" xml:space="preserve">
+    <value>label_TestTime</value>
+  </data>
+  <data name="&gt;&gt;label_ScheduleFile.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="toolStripLabel7.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;label_FileName.Name" xml:space="preserve">
+    <value>label_FileName</value>
+  </data>
+  <data name="&gt;&gt;gap6.Name" xml:space="preserve">
+    <value>gap6</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerExcel.Name" xml:space="preserve">
+    <value>backgroundWorkerExcel</value>
+  </data>
+  <data name="toolStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;ChkEIS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbCycleNo.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="label_Memo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tsbtnPrint.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="label_TestTime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_User.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;textFileName.Name" xml:space="preserve">
+    <value>textFileName</value>
+  </data>
+  <data name="&gt;&gt;label_User.Name" xml:space="preserve">
+    <value>label_User</value>
+  </data>
+  <data name="tsbtnViewGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAX1JREFUOE+VU7FKw2AQzhOIj+Aj9BFKurUZBCEQouAjOGRzccgSp5BNcLAgZBNJ
+        l+pgHHWwNFBQoTRioAqppIYkHX/v+0lKjJK2Hxx/7r+77y539wtAkiT3/Sef4eQXm2CxWDSf30Mm7J2z
+        j9mckb6Tm9ZDmqYX++YdJzi+fGTQc9N6QNatgy4nwJllGYuiaDs3c9CvNej+mmQOO4QqPeTG06sBDy7k
+        7GaEKo64kQDHIAi+DcPodzqdW1EUGcT3ec8aQsGI4Co7HMIwZO12+1VV1YHjOCPo8KEkJzwDUCbIrzgw
+        FU3THhRFGZNtTkG71d/j+I8AVXieN221WvFkMolJb+amv6gSIEscx2+yLL/ouj5cOZkqAQJc1x1Ss6Zo
+        IGWv340yAaTX6/ko3bbtWTER/BK+a3tgmiYfkSRJY8uyPsulwwcjxon7X1UVBDjrBD5YNmwsFnD5dgrj
+        poIHWBB8QVklCEIFeDt4gMsK0BjMuU5QJdYepec9oL0QhB9FI/qtRHzz3wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="chkCycleNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>680, 184</value>
+  </data>
+  <data name="&gt;&gt;c1StatusBar1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="toolStripLabel5.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="tsbtnSave.Text" xml:space="preserve">
+    <value>Save as data format</value>
+  </data>
+  <data name="toolStripMain.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;ChkDCAux.Parent" xml:space="preserve">
+    <value>groupBoxViewOpt</value>
+  </data>
+  <data name="tbCellType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="tsbtnViewGraph.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ChkDC.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="tsbtnReload.Text" xml:space="preserve">
+    <value>Reload test data</value>
+  </data>
+  <data name="&gt;&gt;ChkEIS.Parent" xml:space="preserve">
+    <value>groupBoxViewOpt</value>
+  </data>
+  <data name="&gt;&gt;textScheduleFile.Name" xml:space="preserve">
+    <value>textScheduleFile</value>
+  </data>
+  <data name="&gt;&gt;label_FileName.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="DataFlexGrid.ColumnInfo" xml:space="preserve">
+    <value>0,0,0,0,0,105,Columns:</value>
+  </data>
+  <data name="toolStripMain.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;tsbtnRunZMan.Name" xml:space="preserve">
+    <value>tsbtnRunZMan</value>
+  </data>
+  <data name="&gt;&gt;textUser.Name" xml:space="preserve">
+    <value>textUser</value>
+  </data>
+  <data name="label_Memo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblCapacity1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="&gt;&gt;label_Memo.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;ribbonProgressBar1.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.RibbonProgressBar, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="&gt;&gt;tsbtnSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCellType.Text" xml:space="preserve">
+    <value>Cell Type</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerSave.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_User.Text" xml:space="preserve">
+    <value>Tester</value>
+  </data>
+  <data name="DataFlexGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 245</value>
+  </data>
+  <data name="label_DataCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toolStripLabel2.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="textUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="tsbtnOpenSchedule.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbtnStop.Text" xml:space="preserve">
+    <value>Stop Loading</value>
+  </data>
+  <data name="tbDataCapacity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="btnDeleteData.Text" xml:space="preserve">
+    <value>Delete Data</value>
+  </data>
+  <data name="textUser.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="tbWriterName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>502, 76</value>
+  </data>
+  <data name="tsbtnReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="tsbtnSaveText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="tsbtnOpenSchedule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="label_User.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 7</value>
+  </data>
+  <data name="textScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 47</value>
+  </data>
+  <data name="&gt;&gt;tbCycleNo.Name" xml:space="preserve">
+    <value>tbCycleNo</value>
+  </data>
+  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 21</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbtnExportExcel.Text" xml:space="preserve">
+    <value>Export to excel</value>
+  </data>
+  <data name="&gt;&gt;legend1.Name" xml:space="preserve">
+    <value>legend1</value>
+  </data>
+  <data name="ribbonLabel2.Text" xml:space="preserve">
+    <value>0%</value>
+  </data>
+  <data name="&gt;&gt;textTestTime.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnDeleteData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbCycleNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 22</value>
+  </data>
+  <data name="label_FileName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tsbtnRunZMan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ChkEISAux.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="ChkDCAux.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 22</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel1.Name" xml:space="preserve">
+    <value>ribbonLabel1</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>DataEditorForm</value>
+  </data>
+  <data name="&gt;&gt;ChkEIS.Name" xml:space="preserve">
+    <value>ChkEIS</value>
+  </data>
+  <data name="btnSearch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;textUser.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tsbtnStop.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ChkEIS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 21</value>
+  </data>
+  <data name="&gt;&gt;textDataMemo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;tbDataCapacity.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;legend1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ChkDCAux.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripLabel4.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;DataFlexGrid.Type" xml:space="preserve">
+    <value>C1.Win.C1FlexGrid.C1FlexGrid, C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="ChkDCAux.Text" xml:space="preserve">
+    <value>Auxilary    ) </value>
+  </data>
+  <data name="&gt;&gt;tsbtnStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_FileName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 20</value>
+  </data>
+  <data name="&gt;&gt;label_Memo.Name" xml:space="preserve">
+    <value>label_Memo</value>
+  </data>
+  <data name="&gt;&gt;ChkDC.Parent" xml:space="preserve">
+    <value>groupBoxViewOpt</value>
+  </data>
+  <data name="&gt;&gt;ChkEISAux.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ChkEIS.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label_Memo.Text" xml:space="preserve">
+    <value>Memo</value>
+  </data>
+  <data name="&gt;&gt;lblCapacity1.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="label_DataCount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tsbtnReload.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="ChkEISAux.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 21</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbtnPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="btnDeleteData.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="&gt;&gt;lblCapacity1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gap3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 675</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFilter.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="tsbtnSaveText.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAu1JREFUSEudVV1oUmEYrptGxXbZCqKL8mqKjFl0MaWN1pK8K4igXQxJGWOKsIu6
+        CXGspItgiNi6bUNINqU2ojZcdDGpDYxNYQ0i9fgz9TjMnzN/Ns/X+b6dT845O+raAw/vz/F9nvf7DnJO
+        NcLw8PCN6enpcYfDgWi32xFtNludU1NT41ardUitVnewY8eHXq83M6Ahw+EwgDESiaCIiWuv1/tHqVTe
+        ZEePh5GREQsUgCQIAjEajYpyY2MDBIPBv4ODg2p2XBx0JtORXXXb1paXr0IDvGksFkOb4ogZj8fr9fb2
+        Nkin00Xmuu6xckdRShGSr86XtaX5mVdcAyyUSCR4Bjs7O/U6EAigHJoMDAzcZSX5AACcdrvn1/1+P2Ey
+        mSahYCtCk1AoBBYWFoDT6UTR5/Nle3p6FKwsH999n01m83P608c3K3i7ZDKJtsNR2IdkROu5x+MBs7Oz
+        AUbu7KEqBxQVvUzMtJVTCXsFD6RSKTSMo7AvzPGVdnd332Jl+SCWb38p/HoIyHQckCT5X8xkMogw7+3t
+        vc9K8hHddA6lVi7VN9rd3UU5jsJ+o1ylUj1gJfkgya32367zRTyQzWbRAI7CfqO8oQHE26ed82ZzPxrI
+        5XJoAEdMbi2WNzV48uj6BLHYDorkN5DP5xuyUCiI9iGbGoyOwj/aNWajcbpYLKKNcMTk1mJ5X19fY4Ox
+        sTEL4XsG0qtyQOXCgKIoUe7t7Yn2IVsaHG50hqbSH9BGpVKJdwJuDY2E/aYGBoNh4nBAQWeDj9FAuVzm
+        GXBrsbypgU6newHvMuF/DaJLV0AptwUqlUqdUIRbi7GpgVarncQb/Xx3B21UrVZ5J+DWYvkx34GZ3vQ6
+        0cD+/j7PgFtzDXC/qYHRaLTAH8JrijMfmpXF9wDWQh4cHIj2IVsa4I0YoI2Y7wXvBLgvfFar1VqfQKPR
+        6Fwu15rb7V4/Cefm5n5IpdJ+Vu4oFArFOZlM1tnV1XXxJJTL5RckEknbPyJQtA6JXrJAAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
+  <data name="legend1.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;chkCycleNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbtnExportExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="tbWriterName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="chkCycleNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="&gt;&gt;gap3.Name" xml:space="preserve">
+    <value>gap3</value>
+  </data>
+  <data name="&gt;&gt;textFileName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textFileName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="DataFlexGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="&gt;&gt;textDataCount.Name" xml:space="preserve">
+    <value>textDataCount</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ChkDC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tsbtnFileHeaderInfor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="lblCapacity1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 81</value>
+  </data>
+  <data name="textDataMemo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="label_TestTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="&gt;&gt;label_ScheduleFile.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="groupBoxViewOpt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 55</value>
+  </data>
+  <data name="textFileName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>744, 22</value>
+  </data>
+  <data name="tsbtnViewGraph.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="label_FileName.Text" xml:space="preserve">
+    <value>Data File</value>
+  </data>
+  <data name="panelMain.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="gap6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="ribbonLabel1.Text" xml:space="preserve">
+    <value>No Data</value>
+  </data>
+  <data name="textUser.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;tbWriterName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbCellType.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;timerBgChecker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textTestTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="label_Memo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="textDataMemo.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tbCycleNo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;gap6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;legend1.Type" xml:space="preserve">
+    <value>NationalInstruments.UI.WindowsForms.Legend, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
+  </data>
+  <data name="tsbtnSave.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="label_ScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 50</value>
+  </data>
+  <data name="lblCellType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gap5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="&gt;&gt;textDataCount.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblCapacity1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;textScheduleFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="lblCellType.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.Name" xml:space="preserve">
+    <value>toolStripMain</value>
+  </data>
+  <data name="&gt;&gt;tsbtnViewGraph.Name" xml:space="preserve">
+    <value>tsbtnViewGraph</value>
+  </data>
+  <data name="&gt;&gt;ChkDCAux.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tsbtnFileHeaderInfor.ToolTipText" xml:space="preserve">
+    <value>Data File Information</value>
+  </data>
+  <data name="ChkEISAux.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="&gt;&gt;label_TestTime.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;lblCellType.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="tsbtnSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        /weN3Ax3Ffp4fAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="toolStripLabel3.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="chkCycleNo.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnUndo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;tsbtnExportExcel.Name" xml:space="preserve">
+    <value>tsbtnExportExcel</value>
+  </data>
+  <data name="tsbtnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Name" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="textTestTime.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;btnDeleteData.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFilter.Name" xml:space="preserve">
+    <value>groupBoxFilter</value>
+  </data>
+  <data name="tsbtnOpen.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;gap4.Name" xml:space="preserve">
+    <value>gap4</value>
+  </data>
+  <data name="label_User.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>880, 715</value>
+  </data>
+  <data name="&gt;&gt;panelMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="DataFlexGrid.StyleInfo" xml:space="preserve">
+    <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
+  </data>
+  <data name="tsbtnRunZMan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="ChkDC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbCellType.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbCycleNo.Parent" xml:space="preserve">
+    <value>groupBoxFilter</value>
+  </data>
+  <data name="&gt;&gt;gap7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textScheduleFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>744, 22</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textDataCount.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="toolStripLabel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="label_ScheduleFile.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label_ScheduleFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tsbtnSave.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;tsbtnSaveText.Name" xml:space="preserve">
+    <value>tsbtnSaveText</value>
+  </data>
+  <data name="&gt;&gt;c1StatusBar1.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;label_TestTime.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="label_DataCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkCycleNo.Text" xml:space="preserve">
+    <value>Cycle No.</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel2.Name" xml:space="preserve">
+    <value>ribbonLabel2</value>
+  </data>
+  <data name="gap1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="&gt;&gt;label_FileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbtnOpen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbtnExportExcel.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="label_TestTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbDataCapacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 22</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 79</value>
+  </data>
+  <data name="label_FileName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textDataMemo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnDeleteData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="lblCellType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblCellType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="textDataCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>502, 104</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerExcel.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_DataCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>420, 109</value>
+  </data>
+  <data name="label_User.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 109</value>
+  </data>
+  <data name="&gt;&gt;label_DataCount.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="btnUndo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;ribbonLabel1.Type" xml:space="preserve">
+    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
+  </data>
+  <data name="groupBoxViewOpt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 183</value>
+  </data>
+  <data name="DataFlexGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="groupBoxViewOpt.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="&gt;&gt;tsbtnOpenSchedule.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textScheduleFile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tsbtnViewGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;tsbtnReload.Name" xml:space="preserve">
+    <value>tsbtnReload</value>
+  </data>
+  <data name="&gt;&gt;label_ScheduleFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUndo.Name" xml:space="preserve">
+    <value>btnUndo</value>
+  </data>
+  <data name="toolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="&gt;&gt;lblCellType.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;gap5.Name" xml:space="preserve">
+    <value>gap5</value>
+  </data>
+  <data name="textDataCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbtnOpenSchedule.Name" xml:space="preserve">
+    <value>tsbtnOpenSchedule</value>
+  </data>
+  <data name="ChkDC.Text" xml:space="preserve">
+    <value>DC Data (</value>
+  </data>
+  <data name="label_TestTime.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tsbtnStop.Name" xml:space="preserve">
+    <value>tsbtnStop</value>
+  </data>
+  <data name="label_ScheduleFile.Text" xml:space="preserve">
+    <value>Schedule File</value>
+  </data>
+  <metadata name="toolStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>273, 17</value>
   </metadata>
-  <metadata name="backgroundWorkerText.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>585, 17</value>
-  </metadata>
-  <metadata name="backgroundWorkerSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>400, 17</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="backgroundWorkerExcel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
@@ -598,1204 +1783,16 @@
   <metadata name="timerBgChecker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>204, 56</value>
   </metadata>
-  <data name="legend1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 809</value>
-  </data>
-  <data name="legend1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="legend1.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;legend1.Name" xml:space="preserve">
-    <value>legend1</value>
-  </data>
-  <data name="&gt;&gt;legend1.Type" xml:space="preserve">
-    <value>NationalInstruments.UI.WindowsForms.Legend, NationalInstruments.UI.WindowsForms, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
-  </data>
-  <data name="&gt;&gt;legend1.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;legend1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="panelMain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="DataFlexGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="DataFlexGrid.ColumnInfo" xml:space="preserve">
-    <value>0,0,0,0,0,105,Columns:</value>
-  </data>
-  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 9pt</value>
-  </data>
-  <data name="DataFlexGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 245</value>
-  </data>
-  <data name="DataFlexGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>856, 402</value>
-  </data>
-  <data name="DataFlexGrid.StyleInfo" xml:space="preserve">
-    <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
-  </data>
-  <data name="DataFlexGrid.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.Name" xml:space="preserve">
-    <value>DataFlexGrid</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.Type" xml:space="preserve">
-    <value>C1.Win.C1FlexGrid.C1FlexGrid, C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;DataFlexGrid.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnUndo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnUndo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="btnUndo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnUndo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 19</value>
-  </data>
-  <data name="btnUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btnUndo.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
-  <data name="btnUndo.Text" xml:space="preserve">
-    <value>Undo</value>
-  </data>
-  <data name="&gt;&gt;btnUndo.Name" xml:space="preserve">
-    <value>btnUndo</value>
-  </data>
-  <data name="&gt;&gt;btnUndo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnUndo.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;btnUndo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnDeleteData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnDeleteData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnDeleteData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 19</value>
-  </data>
-  <data name="btnDeleteData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btnDeleteData.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="btnDeleteData.Text" xml:space="preserve">
-    <value>Delete Data</value>
-  </data>
-  <data name="&gt;&gt;btnDeleteData.Name" xml:space="preserve">
-    <value>btnDeleteData</value>
-  </data>
-  <data name="&gt;&gt;btnDeleteData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnDeleteData.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;btnDeleteData.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>680, 184</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 54</value>
-  </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ChkEISAux.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ChkEISAux.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ChkEISAux.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 21</value>
-  </data>
-  <data name="ChkEISAux.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 17</value>
-  </data>
-  <data name="ChkEISAux.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <data name="ChkEISAux.Text" xml:space="preserve">
-    <value>Auxilary   )</value>
-  </data>
-  <data name="&gt;&gt;ChkEISAux.Name" xml:space="preserve">
-    <value>ChkEISAux</value>
-  </data>
-  <data name="&gt;&gt;ChkEISAux.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ChkEISAux.Parent" xml:space="preserve">
-    <value>groupBoxViewOpt</value>
-  </data>
-  <data name="&gt;&gt;ChkEISAux.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ChkEIS.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ChkEIS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ChkEIS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 21</value>
-  </data>
-  <data name="ChkEIS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
-  </data>
-  <data name="ChkEIS.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
-  <data name="ChkEIS.Text" xml:space="preserve">
-    <value>EIS Data (</value>
-  </data>
-  <data name="&gt;&gt;ChkEIS.Name" xml:space="preserve">
-    <value>ChkEIS</value>
-  </data>
-  <data name="&gt;&gt;ChkEIS.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ChkEIS.Parent" xml:space="preserve">
-    <value>groupBoxViewOpt</value>
-  </data>
-  <data name="&gt;&gt;ChkEIS.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ChkDCAux.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ChkDCAux.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ChkDCAux.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 22</value>
-  </data>
-  <data name="ChkDCAux.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 17</value>
-  </data>
-  <data name="ChkDCAux.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="ChkDCAux.Text" xml:space="preserve">
-    <value>Auxilary    ) </value>
-  </data>
-  <data name="&gt;&gt;ChkDCAux.Name" xml:space="preserve">
-    <value>ChkDCAux</value>
-  </data>
-  <data name="&gt;&gt;ChkDCAux.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ChkDCAux.Parent" xml:space="preserve">
-    <value>groupBoxViewOpt</value>
-  </data>
-  <data name="&gt;&gt;ChkDCAux.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ChkDC.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ChkDC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ChkDC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 21</value>
-  </data>
-  <data name="ChkDC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
-  </data>
-  <data name="ChkDC.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="ChkDC.Text" xml:space="preserve">
-    <value>DC Data (</value>
-  </data>
-  <data name="&gt;&gt;ChkDC.Name" xml:space="preserve">
-    <value>ChkDC</value>
-  </data>
-  <data name="&gt;&gt;ChkDC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ChkDC.Parent" xml:space="preserve">
-    <value>groupBoxViewOpt</value>
-  </data>
-  <data name="&gt;&gt;ChkDC.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBoxViewOpt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 183</value>
-  </data>
-  <data name="groupBoxViewOpt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 55</value>
-  </data>
-  <data name="groupBoxViewOpt.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="groupBoxViewOpt.Text" xml:space="preserve">
-    <value>[ View option ]</value>
-  </data>
-  <data name="&gt;&gt;groupBoxViewOpt.Name" xml:space="preserve">
-    <value>groupBoxViewOpt</value>
-  </data>
-  <data name="&gt;&gt;groupBoxViewOpt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxViewOpt.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;groupBoxViewOpt.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnSearch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 21</value>
-  </data>
-  <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btnSearch.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="btnSearch.Text" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
-  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
-    <value>btnSearch</value>
-  </data>
-  <data name="&gt;&gt;btnSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSearch.Parent" xml:space="preserve">
-    <value>groupBoxFilter</value>
-  </data>
-  <data name="&gt;&gt;btnSearch.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="chkCycleNo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkCycleNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkCycleNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 24</value>
-  </data>
-  <data name="chkCycleNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
-  </data>
-  <data name="chkCycleNo.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="chkCycleNo.Text" xml:space="preserve">
-    <value>Cycle No.</value>
-  </data>
-  <data name="&gt;&gt;chkCycleNo.Name" xml:space="preserve">
-    <value>chkCycleNo</value>
-  </data>
-  <data name="&gt;&gt;chkCycleNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkCycleNo.Parent" xml:space="preserve">
-    <value>groupBoxFilter</value>
-  </data>
-  <data name="&gt;&gt;chkCycleNo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbCycleNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 21</value>
-  </data>
-  <data name="tbCycleNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 22</value>
-  </data>
-  <data name="tbCycleNo.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="&gt;&gt;tbCycleNo.Name" xml:space="preserve">
-    <value>tbCycleNo</value>
-  </data>
-  <data name="&gt;&gt;tbCycleNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbCycleNo.Parent" xml:space="preserve">
-    <value>groupBoxFilter</value>
-  </data>
-  <data name="&gt;&gt;tbCycleNo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupBoxFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 184</value>
-  </data>
-  <data name="groupBoxFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 55</value>
-  </data>
-  <data name="groupBoxFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="groupBoxFilter.Text" xml:space="preserve">
-    <value>[ Filter ]</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFilter.Name" xml:space="preserve">
-    <value>groupBoxFilter</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFilter.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFilter.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ribbonLabel1.Text" xml:space="preserve">
-    <value>No Data</value>
-  </data>
-  <data name="ribbonLabel2.Text" xml:space="preserve">
-    <value>0%</value>
-  </data>
-  <data name="c1StatusBar1.RightPaneWidth" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;c1StatusBar1.Name" xml:space="preserve">
-    <value>c1StatusBar1</value>
-  </data>
-  <data name="&gt;&gt;c1StatusBar1.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.C1StatusBar, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;c1StatusBar1.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;c1StatusBar1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="tbCellType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 76</value>
-  </data>
-  <data name="tbCellType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="tbCellType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 22</value>
-  </data>
-  <data name="tbCellType.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="tbCellType.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;tbCellType.Name" xml:space="preserve">
-    <value>tbCellType</value>
-  </data>
-  <data name="&gt;&gt;tbCellType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbCellType.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;tbCellType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblCellType.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCellType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCellType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 79</value>
-  </data>
-  <data name="lblCellType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
-  </data>
-  <data name="lblCellType.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="lblCellType.Text" xml:space="preserve">
-    <value>Cell Type</value>
-  </data>
-  <data name="&gt;&gt;lblCellType.Name" xml:space="preserve">
-    <value>lblCellType</value>
-  </data>
-  <data name="&gt;&gt;lblCellType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCellType.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;lblCellType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 79</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 13</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Schedule file writer</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbWriterName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 76</value>
-  </data>
-  <data name="tbWriterName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="tbWriterName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 22</value>
-  </data>
-  <data name="tbWriterName.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="tbWriterName.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;tbWriterName.Name" xml:space="preserve">
-    <value>tbWriterName</value>
-  </data>
-  <data name="&gt;&gt;tbWriterName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbWriterName.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;tbWriterName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="textFileName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textFileName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 17</value>
-  </data>
-  <data name="textFileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>744, 22</value>
-  </data>
-  <data name="textFileName.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="textFileName.Tag" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;textFileName.Name" xml:space="preserve">
-    <value>textFileName</value>
-  </data>
-  <data name="&gt;&gt;textFileName.Type" xml:space="preserve">
-    <value>C1.Win.C1Input.C1TextBox, C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a</value>
-  </data>
-  <data name="&gt;&gt;textFileName.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textFileName.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="textDataMemo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textDataMemo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 135</value>
-  </data>
-  <data name="textDataMemo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="textDataMemo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 22</value>
-  </data>
-  <data name="textDataMemo.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;textDataMemo.Name" xml:space="preserve">
-    <value>textDataMemo</value>
-  </data>
-  <data name="&gt;&gt;textDataMemo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textDataMemo.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textDataMemo.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="textUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>707, 104</value>
-  </data>
-  <data name="textUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="textUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 22</value>
-  </data>
-  <data name="textUser.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="textUser.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;textUser.Name" xml:space="preserve">
-    <value>textUser</value>
-  </data>
-  <data name="&gt;&gt;textUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textUser.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textUser.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="textDataCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 104</value>
-  </data>
-  <data name="textDataCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="textDataCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 22</value>
-  </data>
-  <data name="textDataCount.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="textDataCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;textDataCount.Name" xml:space="preserve">
-    <value>textDataCount</value>
-  </data>
-  <data name="&gt;&gt;textDataCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textDataCount.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textDataCount.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="textScheduleFile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 47</value>
-  </data>
-  <data name="textScheduleFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="textScheduleFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>744, 22</value>
-  </data>
-  <data name="textScheduleFile.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;textScheduleFile.Name" xml:space="preserve">
-    <value>textScheduleFile</value>
-  </data>
-  <data name="&gt;&gt;textScheduleFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textScheduleFile.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textScheduleFile.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="tbDataCapacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 76</value>
-  </data>
-  <data name="tbDataCapacity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="tbDataCapacity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 22</value>
-  </data>
-  <data name="tbDataCapacity.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tbDataCapacity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;tbDataCapacity.Name" xml:space="preserve">
-    <value>tbDataCapacity</value>
-  </data>
-  <data name="&gt;&gt;tbDataCapacity.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbDataCapacity.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;tbDataCapacity.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="textTestTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 104</value>
-  </data>
-  <data name="textTestTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="textTestTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 22</value>
-  </data>
-  <data name="textTestTime.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="textTestTime.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;textTestTime.Name" xml:space="preserve">
-    <value>textTestTime</value>
-  </data>
-  <data name="&gt;&gt;textTestTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textTestTime.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textTestTime.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="label_User.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_User.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_User.Location" type="System.Drawing.Point, System.Drawing">
-    <value>671, 109</value>
-  </data>
-  <data name="label_User.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
-  <data name="label_User.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label_User.Text" xml:space="preserve">
-    <value>Tester</value>
-  </data>
-  <data name="&gt;&gt;label_User.Name" xml:space="preserve">
-    <value>label_User</value>
-  </data>
-  <data name="&gt;&gt;label_User.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_User.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label_User.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="label_Memo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_Memo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_Memo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 139</value>
-  </data>
-  <data name="label_Memo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
-  </data>
-  <data name="label_Memo.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label_Memo.Text" xml:space="preserve">
-    <value>Memo</value>
-  </data>
-  <data name="&gt;&gt;label_Memo.Name" xml:space="preserve">
-    <value>label_Memo</value>
-  </data>
-  <data name="&gt;&gt;label_Memo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_Memo.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label_Memo.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="label_ScheduleFile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_ScheduleFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_ScheduleFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 50</value>
-  </data>
-  <data name="label_ScheduleFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
-  </data>
-  <data name="label_ScheduleFile.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label_ScheduleFile.Text" xml:space="preserve">
-    <value>Schedule File</value>
-  </data>
-  <data name="&gt;&gt;label_ScheduleFile.Name" xml:space="preserve">
-    <value>label_ScheduleFile</value>
-  </data>
-  <data name="&gt;&gt;label_ScheduleFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_ScheduleFile.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label_ScheduleFile.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="label_DataCount.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_DataCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_DataCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 109</value>
-  </data>
-  <data name="label_DataCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
-  </data>
-  <data name="label_DataCount.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label_DataCount.Text" xml:space="preserve">
-    <value>Data count</value>
-  </data>
-  <data name="&gt;&gt;label_DataCount.Name" xml:space="preserve">
-    <value>label_DataCount</value>
-  </data>
-  <data name="&gt;&gt;label_DataCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_DataCount.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label_DataCount.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="lblCapacity1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCapacity1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCapacity1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 81</value>
-  </data>
-  <data name="lblCapacity1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
-  </data>
-  <data name="lblCapacity1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblCapacity1.Text" xml:space="preserve">
-    <value>Capacity(mAhr)</value>
-  </data>
-  <data name="&gt;&gt;lblCapacity1.Name" xml:space="preserve">
-    <value>lblCapacity1</value>
-  </data>
-  <data name="&gt;&gt;lblCapacity1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCapacity1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;lblCapacity1.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="label_TestTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_TestTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_TestTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 109</value>
-  </data>
-  <data name="label_TestTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
-  </data>
-  <data name="label_TestTime.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label_TestTime.Text" xml:space="preserve">
-    <value>Test time</value>
-  </data>
-  <data name="&gt;&gt;label_TestTime.Name" xml:space="preserve">
-    <value>label_TestTime</value>
-  </data>
-  <data name="&gt;&gt;label_TestTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_TestTime.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label_TestTime.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="label_FileName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_FileName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_FileName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 20</value>
-  </data>
-  <data name="label_FileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
-  </data>
-  <data name="label_FileName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label_FileName.Text" xml:space="preserve">
-    <value>Data File</value>
-  </data>
-  <data name="&gt;&gt;label_FileName.Name" xml:space="preserve">
-    <value>label_FileName</value>
-  </data>
-  <data name="&gt;&gt;label_FileName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_FileName.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label_FileName.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 7</value>
-  </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>858, 169</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="panelMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 38</value>
-  </data>
-  <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 675</value>
-  </data>
-  <data name="panelMain.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="&gt;&gt;panelMain.Name" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;panelMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelMain.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="backgroundWorkerText.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>585, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>84</value>
   </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>880, 715</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Symbol, 8.25pt</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>753, 754</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Data Editor</value>
-  </data>
-  <data name="&gt;&gt;gap1.Name" xml:space="preserve">
-    <value>gap1</value>
-  </data>
-  <data name="&gt;&gt;gap1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnOpen.Name" xml:space="preserve">
-    <value>tsbtnOpen</value>
-  </data>
-  <data name="&gt;&gt;tsbtnOpen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
-    <value>toolStripLabel1</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnReload.Name" xml:space="preserve">
-    <value>tsbtnReload</value>
-  </data>
-  <data name="&gt;&gt;tsbtnReload.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gap6.Name" xml:space="preserve">
-    <value>gap6</value>
-  </data>
-  <data name="&gt;&gt;gap6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnStop.Name" xml:space="preserve">
-    <value>tsbtnStop</value>
-  </data>
-  <data name="&gt;&gt;tsbtnStop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gap3.Name" xml:space="preserve">
-    <value>gap3</value>
-  </data>
-  <data name="&gt;&gt;gap3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnSave.Name" xml:space="preserve">
-    <value>tsbtnSave</value>
-  </data>
-  <data name="&gt;&gt;tsbtnSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gap4.Name" xml:space="preserve">
-    <value>gap4</value>
-  </data>
-  <data name="&gt;&gt;gap4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnOpenSchedule.Name" xml:space="preserve">
-    <value>tsbtnOpenSchedule</value>
-  </data>
-  <data name="&gt;&gt;tsbtnOpenSchedule.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gap5.Name" xml:space="preserve">
-    <value>gap5</value>
-  </data>
-  <data name="&gt;&gt;gap5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnViewGraph.Name" xml:space="preserve">
-    <value>tsbtnViewGraph</value>
-  </data>
-  <data name="&gt;&gt;tsbtnViewGraph.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel2.Name" xml:space="preserve">
-    <value>toolStripLabel2</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnSaveText.Name" xml:space="preserve">
-    <value>tsbtnSaveText</value>
-  </data>
-  <data name="&gt;&gt;tsbtnSaveText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel3.Name" xml:space="preserve">
-    <value>toolStripLabel3</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnExportExcel.Name" xml:space="preserve">
-    <value>tsbtnExportExcel</value>
-  </data>
-  <data name="&gt;&gt;tsbtnExportExcel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gap7.Name" xml:space="preserve">
-    <value>gap7</value>
-  </data>
-  <data name="&gt;&gt;gap7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnRunZMan.Name" xml:space="preserve">
-    <value>tsbtnRunZMan</value>
-  </data>
-  <data name="&gt;&gt;tsbtnRunZMan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel6.Name" xml:space="preserve">
-    <value>toolStripLabel6</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel5.Name" xml:space="preserve">
-    <value>toolStripLabel5</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnPrint.Name" xml:space="preserve">
-    <value>tsbtnPrint</value>
-  </data>
-  <data name="&gt;&gt;tsbtnPrint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel4.Name" xml:space="preserve">
-    <value>toolStripLabel4</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbtnFileHeaderInfor.Name" xml:space="preserve">
-    <value>tsbtnFileHeaderInfor</value>
-  </data>
-  <data name="&gt;&gt;tsbtnFileHeaderInfor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel7.Name" xml:space="preserve">
-    <value>toolStripLabel7</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorker.Name" xml:space="preserve">
-    <value>backgroundWorker</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorker.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerText.Name" xml:space="preserve">
-    <value>backgroundWorkerText</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerText.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerSave.Name" xml:space="preserve">
-    <value>backgroundWorkerSave</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerSave.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerExcel.Name" xml:space="preserve">
-    <value>backgroundWorkerExcel</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerExcel.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;timerBgChecker.Name" xml:space="preserve">
-    <value>timerBgChecker</value>
-  </data>
-  <data name="&gt;&gt;timerBgChecker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;legendItem1.Name" xml:space="preserve">
-    <value>legendItem1</value>
-  </data>
-  <data name="&gt;&gt;legendItem1.Type" xml:space="preserve">
-    <value>NationalInstruments.UI.LegendItem, NationalInstruments.UI, Version=15.0.40.49153, Culture=neutral, PublicKeyToken=dc6ad606294fc298</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel1.Name" xml:space="preserve">
-    <value>ribbonLabel1</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel1.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;ribbonProgressBar1.Name" xml:space="preserve">
-    <value>ribbonProgressBar1</value>
-  </data>
-  <data name="&gt;&gt;ribbonProgressBar1.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.RibbonProgressBar, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel2.Name" xml:space="preserve">
-    <value>ribbonLabel2</value>
-  </data>
-  <data name="&gt;&gt;ribbonLabel2.Type" xml:space="preserve">
-    <value>C1.Win.C1Ribbon.RibbonLabel, C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>DataEditorForm</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <metadata name="backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>114, 17</value>
+  </metadata>
+  <metadata name="backgroundWorkerSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>400, 17</value>
+  </metadata>
 </root>

@@ -35,7 +35,6 @@
   <ItemGroup>
     <Reference Include="C1.C1Excel.4, Version=4.1.20123.243, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
-    <Reference Include="C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20123.421, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1SplitContainer.4, Version=4.0.20123.37, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml">
@@ -144,6 +143,7 @@
   <ItemGroup>
     <EmbeddedResource Include="DataEditorForm.ko-KR.resx">
       <DependentUpon>DataEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataEditorForm.resx">
       <DependentUpon>DataEditorForm.cs</DependentUpon>

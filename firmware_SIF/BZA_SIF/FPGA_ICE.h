@@ -77,6 +77,9 @@ extern "C"
 	
 	INT_32 ICE_spi_open(void);
 	void ICE_spi_close(void);
+	
+	bool CheckStart();
+	bool CheckResult(void);
 
 #ifdef __cplusplus
 }

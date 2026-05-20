@@ -147,6 +147,7 @@
             this.okButton.Size = new System.Drawing.Size(87, 24);
             this.okButton.TabIndex = 24;
             this.okButton.Text = "Ok(&O)";
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // FrmAboutBox
             // 

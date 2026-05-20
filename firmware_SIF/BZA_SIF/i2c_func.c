@@ -433,8 +433,7 @@ void i2c_mtxrx_handler(INT_32 devid)
 		{
 			/* update status */
 			txrx_setup->status |= 
-			  ((device->regptr->i2c_stat & ((I2C_AFI | I2C_NAI)) << 8) |
-			  I2C_SETUP_STATUS_DONE);
+			  ((device->regptr->i2c_stat & ((I2C_AFI | I2C_NAI)) << 8) | I2C_SETUP_STATUS_DONE);
 			/* Disable I2C interrupt in the interrupt controller */
 			disable_i2c_irq_int(devid);
 			/* set txrx state for a new transfer */

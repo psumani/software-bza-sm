@@ -332,6 +332,9 @@
         gg==
 </value>
   </data>
+  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림, 9pt</value>
+  </data>
   <data name="btnUndo.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 20</value>
   </data>
@@ -358,9 +361,6 @@
   </data>
   <data name="ChkDC.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 20</value>
-  </data>
-  <data name="DataFlexGrid.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 9pt</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>229, 18</value>
@@ -400,74 +400,6 @@
   </data>
   <data name="tbWriterName.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 22</value>
-  </data>
-  <assembly alias="C1.Win.C1Input.4" name="C1.Win.C1Input.4, Version=4.0.20123.33290, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a" />
-  <data name="textFileName.DisplayFormat.Inherit" type="C1.Win.C1Input.FormatInfoInheritFlags, C1.Win.C1Input.4">
-    <value>All</value>
-  </data>
-  <data name="textFileName.EditFormat.Inherit" type="C1.Win.C1Input.FormatInfoInheritFlags, C1.Win.C1Input.4">
-    <value>All</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="textFileName.ErrorInfo.BeepOnError" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="textFileName.ErrorInfo.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textFileName.ErrorInfo.ErrorMessageCaption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textFileName.ErrorInfo.ShowErrorMessage" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textFileName.MaskInfo.AutoTabWhenFilled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="textFileName.MaskInfo.CopyWithLiterals" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textFileName.MaskInfo.Inherit" type="C1.Win.C1Input.MaskInfoInheritFlags, C1.Win.C1Input.4">
-    <value>All</value>
-  </data>
-  <data name="textFileName.MaskInfo.PromptChar" type="System.Char, mscorlib" xml:space="preserve">
-    <value>_</value>
-  </data>
-  <data name="textFileName.MaskInfo.ShowLiterals" type="C1.Win.C1Input.ShowLiteralsEnum, C1.Win.C1Input.4">
-    <value>ShowAlways</value>
-  </data>
-  <data name="textFileName.MaskInfo.StoredEmptyChar" type="System.Char, mscorlib" xml:space="preserve">
-    <value>_</value>
-  </data>
-  <data name="textFileName.ParseInfo.DateTimeStyle" type="C1.Win.C1Input.DateTimeStyleFlags, C1.Win.C1Input.4">
-    <value>AllowWhiteSpaces</value>
-  </data>
-  <data name="textFileName.ParseInfo.Inherit" type="C1.Win.C1Input.ParseInfoInheritFlags, C1.Win.C1Input.4">
-    <value>All</value>
-  </data>
-  <data name="textFileName.ParseInfo.NumberStyle" type="C1.Win.C1Input.NumberStyleFlags, C1.Win.C1Input.4">
-    <value>Any</value>
-  </data>
-  <data name="textFileName.PostValidation.Inherit" type="C1.Win.C1Input.PostValidationInheritFlags, C1.Win.C1Input.4">
-    <value>All</value>
-  </data>
-  <data name="textFileName.PostValidation.Validation" type="C1.Win.C1Input.PostValidationTypeEnum, C1.Win.C1Input.4">
-    <value>ValuesAndIntervals</value>
-  </data>
-  <data name="textFileName.PreValidation.Inherit" type="C1.Win.C1Input.PreValidationInheritFlags, C1.Win.C1Input.4">
-    <value>All</value>
-  </data>
-  <data name="textFileName.PreValidation.ItemSeparator" xml:space="preserve">
-    <value>|</value>
-  </data>
-  <data name="textFileName.PreValidation.PatternString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textFileName.PreValidation.RegexOptions" type="C1.Win.C1Input.RegexOptionFlags, C1.Win.C1Input.4">
-    <value>None</value>
-  </data>
-  <data name="textFileName.PreValidation.Validation" type="C1.Win.C1Input.PreValidationTypeEnum, C1.Win.C1Input.4">
-    <value>ExactList</value>
   </data>
   <data name="textUser.Location" type="System.Drawing.Point, System.Drawing">
     <value>738, 104</value>

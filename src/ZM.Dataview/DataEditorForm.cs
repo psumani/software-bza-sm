@@ -418,7 +418,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void ClearInfor()
         {
-            textFileName.Value = string.Empty;
+            textFileName.Text = string.Empty;
             textTestTime.Text = string.Empty;
             textDataCount.Text = string.Empty;
             textUser.Text = string.Empty;
@@ -1009,7 +1009,7 @@ namespace ZiveLab.ZM.Dataview
             }
             else
             {
-                textFileName.Value = text;
+                textFileName.Text = text;
                 textFileName.ForeColor = foreColor;
             }
         }
