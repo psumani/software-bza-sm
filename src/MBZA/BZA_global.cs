@@ -96,11 +96,13 @@ namespace ZiveLab.ZM
         public static int RegChCount = 0;
         public static int RegOkChCount = 0;
         public static string FileGrpVars = "";
+        public static string FileCalGrpVars = "";
         public static string FileLnkCh = "";
         public static ExtAppProc _ExtAppPath;
         public static AppConfig appcfg;
         public static DataViewSet mDataViewSet;
         public static PingHost pingHost;
+        public static st_GrpCh_vars grpvars;
         public static Dictionary<string, stLinkSIF> SifLnkLst { get; set; }
         public static Dictionary<string, stLinkSifCh> ChLnkLst {get; set; }
 
@@ -183,6 +185,120 @@ namespace ZiveLab.ZM
                 return (eDeviceType)device.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA;
             }
             return false;
+        }
+        public static int GetChgColor(int setcolor)
+        {
+            int chgColor = setcolor;
+            ColorDialog cd = new ColorDialog();
+            cd.Color = Color.FromArgb(chgColor);
+            cd.AllowFullOpen = true; // 사용자 정의 색 허용
+            cd.FullOpen = true;      // 대화상자 열 때 전체 팔레트 표시
+            cd.AnyColor = true;      // 시스템 색상 포함
+            cd.SolidColorOnly = false; // 그라데이션 색도 허용
+
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                chgColor = cd.Color.ToArgb();
+            }
+            return chgColor;
+        }
+        public static bool SaveGrpVarsToXml()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(st_GrpCh_vars));
+            try
+            {
+                using (FileStream fs = new FileStream(gBZA.FileGrpVars, FileMode.Create))
+                {
+                    serializer.Serialize(fs, grpvars);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(string.Format("Failed to save file[Error:{0}].", ex.Message), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool LoadXmlToGrpVars()
+        {
+            try
+            {
+                if (File.Exists(gBZA.FileGrpVars) == false)
+                {
+                    SaveGrpVarsToXml();
+                }
+                else
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(st_GrpCh_vars));
+                    using (FileStream fs = new FileStream(gBZA.FileGrpVars, FileMode.Open))
+                    {
+                        grpvars = (st_GrpCh_vars)serializer.Deserialize(fs);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Failed to read file[Error:{0}].", ex.Message), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool SaveAppCfg()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(AppConfig));
+                using (StreamWriter writer = new StreamWriter(MBZA_Constant.AppCfgFilename))
+                {
+                    serializer.Serialize(writer, gBZA.appcfg);
+                }
+            }
+            catch (Exception) //e
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool LoadAppCfg()
+        {
+
+            if (File.Exists(MBZA_Constant.AppCfgFilename) == false)
+            {
+                if (SaveAppCfg() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(AppConfig));
+                using (StreamReader reader = new StreamReader(MBZA_Constant.AppCfgFilename))
+                {
+                    gBZA.appcfg = (AppConfig)serializer.Deserialize(reader);
+                }
+
+            }
+            catch (Exception) //e
+            {
+
+                if (SaveAppCfg() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+            return true;
         }
 
         public static void WriteIniboolData(string Title, string Item, string IniFile, bool Value)
@@ -320,7 +436,7 @@ namespace ZiveLab.ZM
 
         public static void SaveGrpSetAll()
         {
-            gBZA.appcfg.Save();
+            gBZA.SaveAppCfg();
             SaveDataViewSet();
         }
         
@@ -408,7 +524,63 @@ namespace ZiveLab.ZM
             return LinkSifErr;
         }
 
-      
+        public static int GetRegRMChs()
+        {
+            int RegChCount = 0;
+            string sch;
+            string fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
+            SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
+            List<int> tlst = new List<int>();
+            List<int> chs = new List<int>();
+
+            tlst = mFile.LoadXmlToObj(fileinf, chs);
+
+            if (tlst.Count < 1)
+            {
+                return 0;
+            }
+
+            foreach (var ch in tlst)
+            {
+                sch = ch.ToString();
+                if (gBZA.ChLnkLst.ContainsKey(sch))
+                {
+                    var value = gBZA.ChLnkLst[sch];
+                    if (gBZA.SifLnkLst.ContainsKey(value.sSerial))
+                    {
+                        if (gBZA.SifLnkLst[value.sSerial].bLinked == true
+                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
+                        {
+                            RegChCount++;
+                            continue;
+                        }
+                    }
+                }
+            }
+            return RegChCount;
+        }
+
+        public static int GetGrpRMChs()
+        {
+            int GrpChCount = 0;
+
+            foreach (var pair in gBZA.ChLnkLst)
+            {
+                if (pair.Value.mChInf.bSelected == true)
+                {
+                    if (gBZA.SifLnkLst.ContainsKey(pair.Value.sSerial))
+                    {
+                        if (gBZA.SifLnkLst[pair.Value.sSerial].bLinked == true
+                                && gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.bConnect == true)
+                        {
+                            GrpChCount++;
+                            continue;
+                        }
+                    }
+                }
+            }
+            return GrpChCount;
+        }
 
         public static int DisonnectSifs()
         {

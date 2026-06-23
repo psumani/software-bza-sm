@@ -1,0 +1,63 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity vdc_gen_clk is
+	port (	
+			SEL_NOISE	: in		std_logic;
+			ICLK			: in		std_logic; -- 40.96000MHz
+			OCLK		   : out		std_logic  --  0.02304MHz(60Hz) or 0.01920MHz(50Hz)
+	);
+end vdc_gen_clk;
+
+architecture behav of vdc_gen_clk is
+	signal t_clk : std_logic;
+	signal divcnt : std_logic_vector(15 downto 0) := x"00000000";
+	signal olddivcnt : std_logic_vector(15 downto 0):= x"00000000";
+	
+	type state is (s_0, s_1, s_2, s_3);
+	signal div_state : state := s_0;
+
+	signal t0on : std_logic_vector(15 downto 0);
+	signal t0off : std_logic_vector(15 downto 0);
+
+begin
+		
+	divcnt	<= x"0379" when SEL_NOISE = '0' else x"042B";
+	OCLK		<= t_clk;
+	
+	process(clk, , divcnt) -- Devide n
+	begin
+		if olddivcnt /= divcnt then
+			olddivcnt /= divcnt
+			div_state	<= s_0;
+		elsif rising_edge(clk) then
+			case state0 is
+				when s_0 =>
+						t_clk <= '1';
+						t0on    <= '0' & divcnt(15 downto 1);	
+						t0off	<= divcnt - ('0' & divcnt(15 downto 1));
+						state0 <= s_1;
+				when s_1 =>
+					t_clk <= '1';
+					t0on	<= t0on - '1';
+					if t0on = x"0002" then
+						state0	<= s_2;
+					end if;
+					
+				when s_2 =>
+					t_clk <= '0';
+					state0	<= s_3;
+					
+				when s_3 =>
+					t0off	<= t0off - '1';
+					t_clk <= '0';
+					if t0off = x"0002" then
+						state0	<= s_0;
+					end if;
+				when others =>
+			end case;
+		end if;
+	end process;			
+end behav;

@@ -647,9 +647,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(19, 55);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(147, 14);
+            this.label8.Size = new System.Drawing.Size(154, 14);
             this.label8.TabIndex = 18;
-            this.label8.Text = "Nominal capacity(AH)";
+            this.label8.Text = "Nominal capacity(mAH)";
             // 
             // label7
             // 

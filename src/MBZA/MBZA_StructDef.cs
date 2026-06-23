@@ -25,11 +25,16 @@ namespace ZiveLab.ZM
         public string PathZIMFW;
         public string PathSIFFW;
         public string PathRemote;
-        public string PathData;
-        public string PathSch;
+        public bool UsePathAlwaysData;
+        public string PathAlwaysData;
+        public bool UsePathAlwaysSch;
+        public string PathAlwaysSch;
+        public string []PathData;
+        public string []PathSch;
         public string PathSysInfo;
         public string PathRangeInfo;
         public string PathLog;
+        public string PathZManData;
         public string PathSchTemp;
         
         public string FileNameZIMFW;
@@ -41,32 +46,47 @@ namespace ZiveLab.ZM
         public double Power;
 
         public int CommTimeOut;
-        public FormWindowState DTWinStatus;
+        public bool DataToolFloating;
         public Point DataToolLocation;
         public Size DataToolSize;
-        public FormWindowState RtWinStatus;
+
+        public bool RealFloating;
         public Point RealviewLocation;
         public Size RealviewSize;
-        public FormWindowState RegRtWinStatus;
+
+        public bool RegRealFloating;
         public Point RegRealviewLocation;
         public Size RegRealviewSize;
-        public FormWindowState GrpRtWinStatus;
+
+        public bool GrpRealFloating;
         public Point GroupRealviewLocation;
         public Size GroupRealviewSize;
-        public FormWindowState MainViewWinStatus;
+
+        public bool MainViewFloating;
         public Point MainViewLocation;
         public Size MainViewSize;
-        public FormWindowState MainWinStatus;
+
         public Point MainLocation;
         public Size MainSize;
+
         public Point TechLocation;
-        public FormWindowState CfgWinStatus;
+
+        public bool CfgFloating;
         public Point CfgLocation;
         public Size CfgSize;
-        public FormWindowState AuxVdcWinStatus;
+
+        public bool AuxVdcFloating;
         public Point AuxVdcLocation;
         public Size AuxVdcSize;
-        
+
+        public bool GraphFloating;
+        public Point GraphLocation;
+        public Size GraphSize;
+
+        public bool EditFloating;
+        public Point EditLocation;
+        public Size EditSize;
+
         public AppConfig()
         {
             RDummy = new double[MBZA_Constant.MAX_DUMMY];
@@ -78,14 +98,28 @@ namespace ZiveLab.ZM
             }
             Power = MBZA_Constant.DEFAULT_BZA60_POWER;
 
+            UsePathAlwaysData = false;
+            UsePathAlwaysSch = false;
+            PathAlwaysData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
+            PathAlwaysSch = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
+
+            PathZManData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "ZManData");
             PathZIMFW = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Firmware");
             PathSIFFW = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Firmware");
-            PathData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
-            PathSch = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
+            PathData = new string[10];
+            PathSch = new string[10];
+            PathData[0] = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
+            PathSch[0] = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
+            for (int i = 1; i < 10; i++)
+            {
+                PathData[i] = "";
+                PathSch[i] = "";
+            }
+            
             PathSysInfo = Path.Combine("C:\\ZIVE DATA\\ZM\\", "infor");
             PathRangeInfo = Path.Combine("C:\\ZIVE DATA\\ZM\\", "infor\\board");
             PathLog = Path.Combine("C:\\ZIVE DATA\\ZM\\", "log");
-            PathSchTemp = Path.Combine(PathSch, "Temp");
+            PathSchTemp = Path.Combine("C:\\ZIVE DATA\\ZM\\Data\\", "Temp");
             PathRemote = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Remote");
             if (!System.IO.Directory.Exists(PathLog)) System.IO.Directory.CreateDirectory(PathLog);
             FileNameZIMFW = "default.zim";
@@ -94,8 +128,8 @@ namespace ZiveLab.ZM
 
             if (!System.IO.Directory.Exists(PathZIMFW)) System.IO.Directory.CreateDirectory(PathZIMFW);
             if (!System.IO.Directory.Exists(PathSIFFW)) System.IO.Directory.CreateDirectory(PathSIFFW);
-            if (!System.IO.Directory.Exists(PathData)) System.IO.Directory.CreateDirectory(PathData);
-            if (!System.IO.Directory.Exists(PathSch)) System.IO.Directory.CreateDirectory(PathSch);
+            if (!System.IO.Directory.Exists(PathData[0])) System.IO.Directory.CreateDirectory(PathData[0]);
+            if (!System.IO.Directory.Exists(PathSch[0])) System.IO.Directory.CreateDirectory(PathSch[0]);
             if (!System.IO.Directory.Exists(PathSysInfo)) System.IO.Directory.CreateDirectory(PathSysInfo);
             if (!System.IO.Directory.Exists(PathRangeInfo)) System.IO.Directory.CreateDirectory(PathRangeInfo);
             if (!System.IO.Directory.Exists(PathLog)) System.IO.Directory.CreateDirectory(PathLog);
@@ -103,58 +137,52 @@ namespace ZiveLab.ZM
             if (!System.IO.Directory.Exists(PathSchTemp)) System.IO.Directory.CreateDirectory(PathSchTemp);
             CommTimeOut = 8000;
 
-
             InitLocationSize();
 
         }
 
-
-        public bool Save()
+        public void ApplyDataPath(string spath)
         {
-
-            /*            if (File.Exists(MBZA_Constant.AppCfgFilename) == true)
-                        {
-                            try
-                            {
-                                File.Delete(MBZA_Constant.AppCfgFilename);
-                            }
-                            catch 
-                            {
-                                MessageBox.Show("Failed to save environment variable.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return false;
-                            }
-                        }
-             */
-            try
+            for(int i= 0; i<9; i++)
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(AppConfig));
-                using (StreamWriter writer = new StreamWriter(MBZA_Constant.AppCfgFilename))
-                {
-                    serializer.Serialize(writer, this);
-                }
+                PathData[i + 1] = PathData[i];
             }
-            catch (Exception) //e
-            {
-                    return false;
-            }
-
-            return true;
+            PathData[0] = spath;
         }
+
+        public void ApplySchPath(string spath)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                PathSch[i + 1] = PathSch[i];
+            }
+            PathSch[0] = spath;
+        }
+
 
         public void InitLocationSize(int regch = 1, int grpch = 1)
         {
-            MainWinStatus = FormWindowState.Maximized;
-            MainLocation = new Point(0, 0);
-            MainSize = new Size(0, 0);
 
-            MainViewWinStatus = FormWindowState.Normal;
+            MainLocation = new Point(0, 0);
+            MainSize = new Size(1584, 796);
+
+            MainViewFloating = false;
             MainViewLocation = new Point(20, 20);
             MainViewSize = new Size(1440, 580);
 
+            GraphFloating = false;
+            GraphLocation = new Point(0, 0);
+            GraphSize = new Size(1055, 639);
+
+            EditFloating = false;
+            EditLocation = new Point(0, 0);
+            EditSize = new Size(896, 754);
+
+            RealFloating = false;
             RealviewLocation = new Point(0, 0);
             RealviewSize = new Size(600, 500);
-            RtWinStatus = FormWindowState.Normal;
 
+            RegRealFloating = false;
             RegRealviewLocation = new Point(0, 0);
             if (regch <= 1)
             {
@@ -176,8 +204,8 @@ namespace ZiveLab.ZM
             {
                 RegRealviewSize = new Size(1800, 1000);
             }
-            RegRtWinStatus = FormWindowState.Normal;
 
+            GrpRealFloating = false;
             GroupRealviewLocation = new Point(50, 50);
             if (grpch <= 1)
             {
@@ -199,101 +227,20 @@ namespace ZiveLab.ZM
             {
                 GroupRealviewSize = new Size(1800, 1000);
             }
-            GrpRtWinStatus = FormWindowState.Normal;
             TechLocation = new Point(0, 0);
 
+            CfgFloating = false;
             CfgLocation = new Point(0, 0);
-            CfgSize = new Size(1400, 580);
-            CfgWinStatus = FormWindowState.Normal;
+            CfgSize = new Size(900, 445);
 
+            DataToolFloating = false;
             DataToolLocation = new Point(0, 0);
             DataToolSize = new Size(1350, 887);
-            DTWinStatus = FormWindowState.Normal;
-        }
 
-        public bool Load()
-        {
-            AppConfig tmp = null;
+            AuxVdcFloating = false;
+            AuxVdcLocation = new Point(0, 0);
+            AuxVdcSize = new Size(680, 430);
 
-            if (File.Exists(MBZA_Constant.AppCfgFilename) == false)
-            {
-                if (Save() == false)
-                {
-                    return false;
-                }
-                return true;
-            }
-
-
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(AppConfig));
-                using (StreamReader reader = new StreamReader(MBZA_Constant.AppCfgFilename))
-                {
-                    tmp = (AppConfig)serializer.Deserialize(reader);
-                }
-
-            }
-            catch(Exception) //e
-            {
-
-                if (Save() == false)
-                {
-                    return false;
-                }
-                return true;
-            }
-            
-
-            for (int i = 0; i < MBZA_Constant.MAX_DUMMY; i++)
-            {
-                RDummy[i] = tmp.RDummy[i];
-                LDummy[i] = tmp.LDummy[i];
-            }
-            Power = tmp.Power;
-
-
-            PathZIMFW = tmp.PathZIMFW;
-            PathSIFFW = tmp.PathSIFFW;
-            PathData = tmp.PathData;
-            PathSch = tmp.PathSch;
-            PathSchTemp = tmp.PathSchTemp;
-            PathSysInfo = tmp.PathSysInfo;
-            PathRangeInfo = tmp.PathRangeInfo;
-            PathLog = tmp.PathLog;
-            PathRemote = tmp.PathRemote;
-
-            FileNameZIMFW = tmp.FileNameZIMFW;
-            FileNameSIFFW = tmp.FileNameSIFFW;
-            BatLimitFile = tmp.BatLimitFile;
-
-            CommTimeOut = tmp.CommTimeOut;
-            MainViewLocation = tmp.MainViewLocation;
-            MainViewSize = tmp.MainViewSize;
-            MainViewWinStatus = tmp.MainViewWinStatus;
-            RealviewLocation = tmp.RealviewLocation;
-            RealviewSize = tmp.RealviewSize;
-            GroupRealviewLocation = tmp.GroupRealviewLocation;
-            GroupRealviewSize = tmp.GroupRealviewSize;
-            RegRealviewLocation = tmp.RegRealviewLocation;
-            RegRealviewSize = tmp.RegRealviewSize;
-            MainLocation = tmp.MainLocation;
-            MainSize = tmp.MainSize;
-            TechLocation = tmp.TechLocation;
-            CfgLocation = tmp.CfgLocation;
-
-            if (!System.IO.Directory.Exists(PathZIMFW)) System.IO.Directory.CreateDirectory(PathZIMFW);
-            if (!System.IO.Directory.Exists(PathSIFFW)) System.IO.Directory.CreateDirectory(PathSIFFW);
-            if (!System.IO.Directory.Exists(PathData)) System.IO.Directory.CreateDirectory(PathData);
-            if (!System.IO.Directory.Exists(PathSch)) System.IO.Directory.CreateDirectory(PathSch);
-            if (!System.IO.Directory.Exists(PathSysInfo)) System.IO.Directory.CreateDirectory(PathSysInfo);
-            if (!System.IO.Directory.Exists(PathRangeInfo)) System.IO.Directory.CreateDirectory(PathRangeInfo);
-            if (!System.IO.Directory.Exists(PathLog)) System.IO.Directory.CreateDirectory(PathLog);
-            if (!System.IO.Directory.Exists(PathRemote)) System.IO.Directory.CreateDirectory(PathRemote);
-            if (!System.IO.Directory.Exists(PathSchTemp)) System.IO.Directory.CreateDirectory(PathSchTemp);
-
-
-            return true;
         }
     }
 
@@ -1029,6 +976,12 @@ namespace ZiveLab.ZM
                     rtgrp.item[ch].plot[1].lx[0].Add(d.TestTime);
                     rtgrp.item[ch].plot[1].ly[0].Add(d.Temperature);
                 }
+
+                rtgrp.item[ch].plot[2].freq[0].Add(0.0);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.TestTime);
+                if (ch == 0) tmp = d.real;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+                rtgrp.item[ch].plot[2].ly[0].Add(tmp);
             }
         }
 
@@ -1230,73 +1183,82 @@ namespace ZiveLab.ZM
                 cs = 1.0 / (2.0 * DeviceConstants.PI * d.fFreq * -1.0 * zim);
                 cp = Yimg / (2.0 * DeviceConstants.PI * d.fFreq);
 
-                //for (int i = 0; i < 3; i++)
+
+                if (barr[findex[ch]] == true)
                 {
-                    if (barr[findex[ch]] == true)
+                  
+                    if (findex[ch] == 2 )
                     {
-                        //mag
-                        if (findex[ch] == 2 && rtgrp.item[ch].plot[0].ly[1].Count > 0)
+                        if (rtgrp.item[ch].plot[0].ly[1].Count > 0 && rtgrp.item[ch].plot[0].ly[0].Count > 0)
                         {
                             Lastindex = rtgrp.item[ch].plot[0].ly[1].Count - 1;
-                            if (prrrpcalcmode == 0) tmp = zre - rtgrp.item[ch].plot[0].ly[1][Lastindex]; // psuedo r2
+
+                            if (prrrpcalcmode == 2) tmp = rtgrp.item[ch].plot[0].ly[1][Lastindex] - rtgrp.item[ch].plot[0].ly[0][Lastindex];
                             else if (prrrpcalcmode == 1) tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex]; // psuedo r3
-                            else tmp = rtgrp.item[ch].plot[0].ly[1][Lastindex] - rtgrp.item[ch].plot[0].ly[0][Lastindex]; // r1
-
-                            rtgrp.item[ch].plot[0].count[findex[ch]]++;
-                            rtgrp.item[ch].plot[0].freq[findex[ch]].Add(d.fFreq);
-                            rtgrp.item[ch].plot[0].lx[findex[ch]].Add(d.TestTime);
-                            rtgrp.item[ch].plot[0].ly[findex[ch]].Add(tmp);
-                        }
-                        else if(findex[ch] == 1 && rtgrp.item[ch].plot[0].ly[0].Count > 0) // findex = 1
-                        {
-                            Lastindex = rtgrp.item[ch].plot[0].ly[0].Count - 1;
-                            tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex];
-
-                            rtgrp.item[ch].plot[0].count[findex[ch]]++;
-                            rtgrp.item[ch].plot[0].freq[findex[ch]].Add(d.fFreq);
-                            rtgrp.item[ch].plot[0].lx[findex[ch]].Add(d.TestTime);
-                            rtgrp.item[ch].plot[0].ly[findex[ch]].Add(tmp);
+                            else tmp = zre - rtgrp.item[ch].plot[0].ly[1][Lastindex]; // psuedo r2
                             
-                        }
-                        else if(findex[ch] == 0)// findex = 0
-                        {
                             rtgrp.item[ch].plot[0].count[findex[ch]]++;
                             rtgrp.item[ch].plot[0].freq[findex[ch]].Add(d.fFreq);
                             rtgrp.item[ch].plot[0].lx[findex[ch]].Add(d.TestTime);
-                            rtgrp.item[ch].plot[0].ly[findex[ch]].Add(zre);
+                            rtgrp.item[ch].plot[0].ly[findex[ch]].Add(tmp);
                         }
-                        else
-                        {
-                            Debug.WriteLine(string.Format("qrr error"));
-                        }
-
-                        //phase
-                        //rtgrp.item[ch].plot[1].freq[findex].Add(d.fFreq);
-                        //rtgrp.item[ch].plot[1].lx[findex].Add(d.TestTime);
-                        //rtgrp.item[ch].plot[1].ly[findex].Add(d.Vdc);
-
-                        //Cs
-                        rtgrp.item[ch].plot[2].count[findex[ch]]++;
-                        rtgrp.item[ch].plot[2].freq[findex[ch]].Add(d.fFreq);
-                        rtgrp.item[ch].plot[2].lx[findex[ch]].Add(d.TestTime);
-                        rtgrp.item[ch].plot[2].ly[findex[ch]].Add(cs);
-
-                        //Cp
-                        rtgrp.item[ch].plot[3].count[findex[ch]]++;
-                        rtgrp.item[ch].plot[3].freq[findex[ch]].Add(d.fFreq);
-                        rtgrp.item[ch].plot[3].lx[findex[ch]].Add(d.TestTime);
-                        rtgrp.item[ch].plot[3].ly[findex[ch]].Add(cp);
-
-                        findex[ch]++;
-                        if (arrcnt == findex[ch]) findex[ch] = 0;
-                        //return;
                     }
-                    else
+                    else if(findex[ch] == 1 ) 
                     {
-                        findex[ch]++;
+                        if (rtgrp.item[ch].plot[0].ly[0].Count > 0)
+                        {
+                            if (arrcnt == 2)
+                            {
+                                rtgrp.item[ch].plot[0].count[findex[ch]]++;
+                                rtgrp.item[ch].plot[0].freq[findex[ch]].Add(d.fFreq);
+                                rtgrp.item[ch].plot[0].lx[findex[ch]].Add(d.TestTime);
+                                rtgrp.item[ch].plot[0].ly[findex[ch]].Add(zre);
+                            }
+                            else
+                            {
+                                Lastindex = rtgrp.item[ch].plot[0].ly[0].Count - 1;
+                                tmp = zre - rtgrp.item[ch].plot[0].ly[0][Lastindex];
+
+                                rtgrp.item[ch].plot[0].count[findex[ch]]++;
+                                rtgrp.item[ch].plot[0].freq[findex[ch]].Add(d.fFreq);
+                                rtgrp.item[ch].plot[0].lx[findex[ch]].Add(d.TestTime);
+                                rtgrp.item[ch].plot[0].ly[findex[ch]].Add(tmp);
+                            }
+                        }
+                            
                     }
-                    if (findex[ch] >= 3) findex[ch] = 0;
+                    else if(findex[ch] == 0)// findex = 0
+                    {
+                        rtgrp.item[ch].plot[0].count[findex[ch]]++;
+                        rtgrp.item[ch].plot[0].freq[findex[ch]].Add(d.fFreq);
+                        rtgrp.item[ch].plot[0].lx[findex[ch]].Add(d.TestTime);
+                        rtgrp.item[ch].plot[0].ly[findex[ch]].Add(zre);
+                    }
+
+                    //phase
+                    //rtgrp.item[ch].plot[1].freq[findex[ch]].Add(d.fFreq);
+                    //rtgrp.item[ch].plot[1].lx[findex[ch]].Add(d.TestTime);
+                    //rtgrp.item[ch].plot[1].ly[findex[ch]].Add(d.Vdc);
+
+                    //Cs
+                    rtgrp.item[ch].plot[2].count[findex[ch]]++;
+                    rtgrp.item[ch].plot[2].freq[findex[ch]].Add(d.fFreq);
+                    rtgrp.item[ch].plot[2].lx[findex[ch]].Add(d.TestTime);
+                    rtgrp.item[ch].plot[2].ly[findex[ch]].Add(cs);
+
+                    //Cp
+                    rtgrp.item[ch].plot[3].count[findex[ch]]++;
+                    rtgrp.item[ch].plot[3].freq[findex[ch]].Add(d.fFreq);
+                    rtgrp.item[ch].plot[3].lx[findex[ch]].Add(d.TestTime);
+                    rtgrp.item[ch].plot[3].ly[findex[ch]].Add(cp);
+
+                    findex[ch]++;
                 }
+                else
+                {
+                    findex[ch]++;
+                }
+                if (findex[ch] >= arrcnt) findex[ch] = 0;
             }
         }
 
@@ -1326,6 +1288,7 @@ namespace ZiveLab.ZM
                 rtgrp.item[ch].plot[0].ly[0].Add(tmp);
                 if (rtgrp.item[ch].plot[0].Maxval[0] < tmp) rtgrp.item[ch].plot[0].Maxval[0] = tmp;
                 if (rtgrp.item[ch].plot[0].Minval[0] > tmp) rtgrp.item[ch].plot[0].Minval[0] = tmp;
+
                 if (ch == 0)
                 {
                     rtgrp.item[ch].plot[1].count[0]++;
@@ -1433,6 +1396,16 @@ namespace ZiveLab.ZM
                     if (rtgrp.item[ch].plot[1].Maxval[0] < d.Temperature) rtgrp.item[ch].plot[1].Maxval[0] = d.Temperature;
                     if (rtgrp.item[ch].plot[1].Minval[0] > d.Temperature) rtgrp.item[ch].plot[1].Minval[0] = d.Temperature;
                 }
+
+                if (ch == 0) tmp = d.real;
+                else tmp = d.mdata[nAuxBd].mdata[nAuxBdCh].Zre;
+
+                rtgrp.item[ch].plot[2].count[0]++;
+                rtgrp.item[ch].plot[2].freq[0].Add(d.fFreq);
+                rtgrp.item[ch].plot[2].lx[0].Add(d.TestTime);
+                rtgrp.item[ch].plot[2].ly[0].Add(tmp);
+                if (rtgrp.item[ch].plot[2].Maxval[0] < tmp) rtgrp.item[ch].plot[2].Maxval[0] = tmp;
+                if (rtgrp.item[ch].plot[2].Minval[0] > tmp) rtgrp.item[ch].plot[2].Minval[0] = tmp;
             }
         }
 

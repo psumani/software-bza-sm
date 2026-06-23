@@ -86,30 +86,29 @@ namespace ZiveLab.ZM.ZIM.Packets
     {
         public bool ShowLegend;
         public bool ShowGrid;
-        public Color BackColor;
-        public Color GridColor;
-        public st_graph_vars_plot[] mPlot;
-        public Color[] PlotColor;
-        public bool[] show;
+        public int AxisColor;
+        public int BackColor;
+        public int GridColor;
+        public st_graph_vars_plot[] mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+        public int[] PlotColor = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
+        public bool[] show = new bool[2];
         public st_graph_vars_ni()
         {
             ShowLegend = false;
             ShowGrid = true;
-            BackColor = Color.White;
-            GridColor = Color.LightGray;
-            show = new bool[2];
+            AxisColor = Color.Black.ToArgb();
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
             for (int i = 0; i < 2; i++)
                 show[i] = true;
 
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
 
-            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
 
-            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
             {
                 mPlot[i] = new st_graph_vars_plot();
@@ -122,18 +121,18 @@ namespace ZiveLab.ZM.ZIM.Packets
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
         }
         public void LoadGefaultPlotColor(int nPlot)
         {
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
-            PlotColor[nPlot] = LstColor[nPlot];
+            PlotColor[nPlot] = LstColor[nPlot].ToArgb();
         }
 
         public void SetPlotColor(int nPlot, Color nColor)
         {
-            PlotColor[nPlot] = nColor;
+            PlotColor[nPlot] = nColor.ToArgb();
         }
 
         public void SetValue(bool value)
@@ -153,32 +152,31 @@ namespace ZiveLab.ZM.ZIM.Packets
         public bool ShowLegend;
         public bool ShowGrid1;
         public bool ShowGrid2;
-        public Color BackColor;
-        public Color GridColor;
-        public st_graph_vars_plot[] mPlot;
-        public Color[] PlotColor;
-        public bool[] show;
+        public int AxisColor;
+        public int BackColor;
+        public int GridColor;
+        public st_graph_vars_plot[] mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4];
+        public int[] PlotColor = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+        public bool[] show = new bool[4];
         public st_graph_vars_bode()
         {
-            BackColor = Color.White;
-            GridColor = Color.LightGray;
+            AxisColor = Color.Black.ToArgb();
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
             ShowLegend = false;
             ShowGrid1 = true;
             ShowGrid2 = true;
-            show = new bool[4];
             for (int i = 0; i < 4; i++)
                 show[i] = true;
 
 
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
 
-            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
 
-            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4; i++)
             {
                 mPlot[i] = new st_graph_vars_plot();
@@ -190,13 +188,79 @@ namespace ZiveLab.ZM.ZIM.Packets
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
         }
         public void LoadGefaultPlotColor(int nPlot)
         {
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
-            PlotColor[nPlot] = LstColor[nPlot];
+            PlotColor[nPlot] = LstColor[nPlot].ToArgb();
+        }
+
+        public void SetValue(bool value)
+        {
+            for (int i = 0; i < 4; i++)
+                show[i] = value;
+        }
+
+        public void SetValue(int nPlot, bool value)
+        {
+            show[nPlot] = value;
+        }
+    }
+
+    public class st_graph_vars_rt
+    {
+        public bool ShowLegend;
+        public bool ShowGrid1;
+        public bool ShowGrid2;
+        public int AxisColor;
+        public int BackColor;
+        public int GridColor;
+        public bool LineVisible;
+        public bool PointVisible;
+        public st_graph_vars_plot[] mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4];
+        public int[] PlotColor = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+        public bool[] show = new bool[4];
+        public st_graph_vars_rt()
+        {
+            AxisColor = Color.Black.ToArgb();
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
+            ShowLegend = false;
+            ShowGrid1 = true;
+            ShowGrid2 = true;
+            LineVisible = true;
+            PointVisible = true;
+            for (int i = 0; i < 4; i++)
+                show[i] = true;
+
+
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                PlotColor[i] = LstColor[i].ToArgb();
+            }
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4; i++)
+            {
+                mPlot[i] = new st_graph_vars_plot();
+            }
+        }
+
+        public void LoadGefaultPlotColor()
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
+            {
+                PlotColor[i] = LstColor[i].ToArgb();
+            }
+        }
+        public void LoadGefaultPlotColor(int nPlot)
+        {
+            List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
+            PlotColor[nPlot] = LstColor[nPlot].ToArgb();
         }
 
         public void SetValue(bool value)
@@ -230,6 +294,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             ni = new st_graph_vars_ni();
             showbode = true;
             bode = new st_graph_vars_bode();
+           
             nAuxCh = -1;
             mInfo = new st_zim_Eis_Cal_info();
             mDummy = new st_zim_dummy(0.0);
@@ -275,22 +340,23 @@ namespace ZiveLab.ZM.ZIM.Packets
         public int tRng;
         public int CRng;
         public int OtherRng;
-        public st_graph_vars_item[] showitems;
+        public st_graph_vars_item[] showitems = new st_graph_vars_item[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
         public st_graph_vars_ni ni;
         public st_graph_vars_bode bode;
+        public st_graph_vars_rt RT;
         public st_graph_vars()
         {
             bAux = false;
             nAuxChCount = 0;
             CRng = 0;
             OtherRng = 1;
-            showitems = new st_graph_vars_item[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 showitems[i] = new st_graph_vars_item();
             }
             ni = new st_graph_vars_ni();
             bode = new st_graph_vars_bode();
+            RT = new st_graph_vars_rt();
         }
         public void SetValue(bool value)
         {
@@ -316,17 +382,15 @@ namespace ZiveLab.ZM.ZIM.Packets
         }
     }
 
-
     public class st_GrpCh_Vars_Obj
     {
         public bool bExist;
         public int nAuxCh;
-        public bool[] showItems;
+        public bool[] showItems = new bool[MBZA_Constant.MAX_TECHNIQUE];
         public st_GrpCh_Vars_Obj()
         {
             bExist = false;
             nAuxCh = -1;
-            showItems = new bool[MBZA_Constant.MAX_TECHNIQUE];
             for (int i = 0; i < MBZA_Constant.MAX_TECHNIQUE; i++)
             {
                 showItems[i] = true;
@@ -355,12 +419,11 @@ namespace ZiveLab.ZM.ZIM.Packets
         public bool ShowGridX;
         public bool ShowGridY1;
         public bool ShowGridY2;
-        public Color Axis_Color;
-        public Color BackColor;
-        public Color GridColor;
+        public int Axis_Color;
+        public int BackColor;
+        public int GridColor;
 
         public int LastPlotPoint;
-        public int LastPlotPoint1;
         public int LastCursorIndex;
         public int SelPlotNo;
         public int Type;
@@ -374,9 +437,9 @@ namespace ZiveLab.ZM.ZIM.Packets
         public Point LegendPointE;
        
         public st_graph_vars_plot[] mPlot;
-        public Color[] PlotColor;
-        public int[] PlotPointer;
-        public bool[] show;
+        public int[] PlotColor = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
+        public int[] PlotPointer = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
+        public bool[] show = new bool[MBZA_Constant.MAX_GRAPH_YAXES];
 
         public st_GrpCh_Vars_Item()
         {
@@ -385,7 +448,6 @@ namespace ZiveLab.ZM.ZIM.Packets
             xTimemode = false;
             LastCursorIndex = -1;
             LastPlotPoint = 0;
-            LastPlotPoint1 = 0;
             PlotCount = 1;
             GrpPlotCount = 0;
             SelPlotNo = 0;
@@ -398,23 +460,21 @@ namespace ZiveLab.ZM.ZIM.Packets
             ShowGridY2 = true;
             ShowLine = true;
             ShowPoint = true;
-            Axis_Color = Color.Navy;
-            BackColor = Color.White;
-            GridColor = Color.LightGray;
+            Axis_Color = Color.Navy.ToArgb();
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS);
-            show = new bool[MBZA_Constant.MAX_GRAPH_YAXES];
+
             for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
             {
                 show[i] = true;
             }
-
-            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
+            
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb(); 
             }
 
-            PlotPointer = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * MBZA_Constant.MAX_GRAPH_PLOTS; i++)
             {
                 PlotPointer[i] = 0;
@@ -441,8 +501,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             ShowGridX = true;
             ShowGridY1 = true;
             ShowGridY2 = true;
-            BackColor = Color.White;
-            GridColor = Color.LightGray;
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
 
             for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
             {
@@ -451,7 +511,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4);
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
                 PlotPointer[i] = 0;
             }
 
@@ -467,18 +527,18 @@ namespace ZiveLab.ZM.ZIM.Packets
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4);
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 4; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
         }
         public void LoadGefaultPlotColor(int nPlot)
         {
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
-            PlotColor[nPlot] = LstColor[nPlot];
+            PlotColor[nPlot] = LstColor[nPlot].ToArgb();
         }
 
         public void SetPlotColor(int nPlot, Color nColor)
         {
-            PlotColor[nPlot] = nColor;
+            PlotColor[nPlot] = nColor.ToArgb();
         }
 
         public void SetValue(bool value)
@@ -509,13 +569,13 @@ namespace ZiveLab.ZM.ZIM.Packets
         public bool LegendMove;
         public Point LegendPointS;
         public Point LegendPointE;
-        public Color Axis_Color;
-        public Color BackColor;
-        public Color GridColor;
-        public st_graph_vars_plot[] mPlot;
-        public Color[] PlotColor;
-        public int[] PlotPointer;
-        public bool[] show;
+        public int Axis_Color;
+        public int BackColor;
+        public int GridColor;
+        public st_graph_vars_plot[] mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+        public int[] PlotColor = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+        public int[] PlotPointer = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
+        public bool[] show = new bool[MBZA_Constant.MAX_GRAPH_YAXES];
 
         public st_GrpRt_Vars_Item()
         {
@@ -531,29 +591,25 @@ namespace ZiveLab.ZM.ZIM.Packets
             ShowGrid = true;
             ShowLine = true;
             ShowPoint = true;
-            Axis_Color = Color.Navy;
-            BackColor = Color.White;
-            GridColor = Color.LightGray;
+            Axis_Color = Color.Navy.ToArgb();
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
-            show = new bool[MBZA_Constant.MAX_GRAPH_YAXES];
             for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
             {
                 show[i] = true;
             }
 
-            PlotColor = new Color[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
 
-            PlotPointer = new int[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
             {
                 PlotPointer[i] = 0;
             }
 
-            mPlot = new st_graph_vars_plot[MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2; i++)
             {
                 mPlot[i] = new st_graph_vars_plot();
@@ -571,8 +627,8 @@ namespace ZiveLab.ZM.ZIM.Packets
             bStopRefresh = false;
             ShowLegend = false;
             ShowGrid = true;
-            BackColor = Color.White;
-            GridColor = Color.LightGray;
+            BackColor = Color.White.ToArgb();
+            GridColor = Color.LightGray.ToArgb();
 
             for (int i = 0; i < MBZA_Constant.MAX_GRAPH_YAXES; i++)
             {
@@ -581,7 +637,7 @@ namespace ZiveLab.ZM.ZIM.Packets
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS * 2);
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
                 PlotPointer[i] = 0;
             }
 
@@ -597,18 +653,18 @@ namespace ZiveLab.ZM.ZIM.Packets
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
-                PlotColor[i] = LstColor[i];
+                PlotColor[i] = LstColor[i].ToArgb();
             }
         }
         public void LoadGefaultPlotColor(int nPlot)
         {
             List<Color> LstColor = ColorGenerator.GetDistinctColors(MBZA_Constant.MAX_AUXTYPE_CHANNELS);
-            PlotColor[nPlot] = LstColor[nPlot];
+            PlotColor[nPlot] = LstColor[nPlot].ToArgb();
         }
 
         public void SetPlotColor(int nPlot, Color nColor)
         {
-            PlotColor[nPlot] = nColor;
+            PlotColor[nPlot] = nColor.ToArgb();
         }
 
         public void SetValue(bool value)
@@ -622,22 +678,23 @@ namespace ZiveLab.ZM.ZIM.Packets
             show[nPlot] = value;
         }
     }
+
     public class st_GrpCh_vars
     {
         public bool bAux;
         public int nAuxChCount;
         public double GrpSpaceRate;
-        public st_GrpCh_Vars_Obj[] GrpObjs;
+        public st_GrpCh_Vars_Obj[] GrpObjs = new st_GrpCh_Vars_Obj[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
         public st_GrpCh_Vars_Item GrpItems1;
         public st_GrpCh_Vars_Item GrpItems2;
         public st_GrpRt_Vars_Item GrpItemsRT;
         public st_GrpRt_Vars_Item GrpItemsRaw;
+        
         public st_GrpCh_vars()
         {
             bAux = false;
             nAuxChCount = 0;
             GrpSpaceRate = 0.01;
-            GrpObjs = new st_GrpCh_Vars_Obj[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 GrpObjs[i] = new st_GrpCh_Vars_Obj();

@@ -558,7 +558,7 @@ namespace ZiveLab.ZM.FactorySetting
                 return;
             }
 
-            OpenFileDialog dlg = new OpenFileDialog();
+            OpenFileDialog dlg = new OpenFileDialog(); 
             dlg.Multiselect = false;
             dlg.DefaultExt = "sif";
             dlg.Filter = "sif files (*.sif)|*.sif|All files (*.*)|*.*";

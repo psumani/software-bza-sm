@@ -832,6 +832,7 @@ int proc_read_version(int bd)
 	return _NO_ERROR;
 }	
 
+
 int CheckThermoStat(int bd)
 {
 	UNS_8 data = 0;
@@ -1068,10 +1069,11 @@ inline void proc_adc_vdc_data(int bd)
 	{
 		for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++)
 		{
-                  if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE) continue;
 			proc_AUX_adc_vdc_data(auxbd); // procaux_adc_data(auxbd);
 		}
 	}
+	
+	SetDeviceBoard(bd);
 }
 
 inline void procaux_eis_cfg(int bd)
@@ -1119,7 +1121,9 @@ inline void proc_eis_cfg(int bd) // bd[0-3] any BZA type
 	st_zim_eisdev* preqeisdev = &m_pGlobalVar->mChVar[bd].mreqdevice.eis;
 	st_zim_eisdev* peisdev = &m_pGlobalVar->mChVar[bd].mdevice.eis;
 	UNS_8 tmp = 0;
-        UNS_16 tmp16 = 0;
+    UNS_16 tmp16 = 0;
+	
+	SetDeviceBoard(bd);
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd > 0)
 	{
 		return;
@@ -2387,37 +2391,36 @@ inline bool proc_eis_start(int bd) // when MCBZA, bd=0
 	pChStatus->Vdc = m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[0].value;
 	pChStatus->Temperature = m_pGlobalVar->mChVar[bd].mdevice.adc_rtd.data.Tvalue;
 	
-        SetDeviceBoard(bd);
-	m_pGlobalVar->mChVar[bd].mdevice.eis.config = DEF_CFG_EIS_START;
-	for(int b=0; b < DEF_MAX_AUX_BDCNT; b++)
-	{
-        m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[b] = 1;
-    }
-	if(ICE_write_byte(bd, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[bd].mdevice.eis.config) == _ERROR)
-	{
-		return false;
-	}
+    SetDeviceBoard(bd);
 	
+
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0)
 	{
-		for(auxbd=1; auxbd < DEF_MAX_AUX_CHCNT; auxbd++)
+		for(auxbd=0; auxbd < DEF_MAX_AUX_BDCNT; auxbd++)
 		{
-			if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE) continue;
-			SetDeviceBoard(auxbd);
+			if(m_pSysConfig->EnaZIM[auxbd+1] == FALSE || m_pSysConfig->ChkZIM[auxbd+1] == FALSE) continue;
+			SetDeviceBoard(auxbd+1);
 			
 			//pChStatus = &m_pGlobalVar->mChVar[auxbd].mChStatInf;
 			for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch ++)
 			{
 				//pChStatus->Vdc[auxch] = m_pGlobalVar->mChVar[auxbd].mdevice.adc_vdc[auxch].value;
-                                pChStatus->Aux_Vdc[(auxbd-1)*4+auxch] = m_pGlobalVar->mChVar[auxbd].mdevice.adc_vdc[auxch].value;
+                                pChStatus->Aux_Vdc[auxbd*4+auxch] = m_pGlobalVar->mChVar[auxbd+1].mdevice.adc_vdc[auxch].value;
 			}
-			m_pGlobalVar->mChVar[auxbd].mdevice.eis.config = DEF_CFG_EIS_START;
-			if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[auxbd].mdevice.eis.config) == _ERROR)
+			m_pGlobalVar->mChVar[auxbd+1].mdevice.eis.config = DEF_CFG_EIS_START;
+			if(ICE_write_byte(auxbd+1, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[auxbd+1].mdevice.eis.config) == _ERROR)
 			{
 				return false;
 			}
 		}
 	}	
+	
+	delay(2000);
+	m_pGlobalVar->mChVar[bd].mdevice.eis.config = DEF_CFG_EIS_START;
+	if(ICE_write_byte(bd, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[bd].mdevice.eis.config) == _ERROR)
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -2450,6 +2453,7 @@ void proc_eis_reset(int bd) // any bd any BZA type
 inline void proc_eis_stop(int bd) // when MCBZA bd=0
 {
 	int auxbd = 0;
+	SetDeviceBoard(bd);
 	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA)
 	{
 		 
@@ -2481,7 +2485,7 @@ inline void proc_eis_stop(int bd) // when MCBZA bd=0
 			return;
 		}
 	}
-	SetDeviceBoard(bd);
+	
 	m_pGlobalVar->mChVar[bd].mdevice.eis.config = DEF_CFG_EIS_RESET;		
 	if(ICE_write_byte(bd, ICE_CMD_EIS_CFG, m_pGlobalVar->mChVar[bd].mdevice.eis.config) == _ERROR)
 	{
@@ -2529,7 +2533,7 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 	int tmp[4];
 	int AuxCh = 0, bd_index = 0;
 	ushort rawdatacnt[4];
-	
+
 	stChStatusInf* pChStatus = &m_pGlobalVar->mChVar[bd].mChStatInf;
 	stChStatusInf* pChStatus_bd;
 
@@ -2670,7 +2674,7 @@ inline void proc_eis_chk_ing(int bd) //when MCBZA, bd=0
 				{
 					if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd_index == 0)
 					{
-						m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true;
+						m_pGlobalVar->mChVar[bd_index].eis_got_all_point = true; 
 					}
 					else
 						pChStatus->eis_status.status = DEF_EIS_STATUS_FFT;
@@ -2887,8 +2891,6 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[bd];
 	stDefTestData* pdata = m_pTestData[bd] + pch->mChStatInf.eis_status.rescount;
 	int ierr = 0;
-	bool ActiveZ = true;
-	bool ActiveAux = false;
 
 	if(pch->mTech.type == TECH_MON || pch->mTech.type == TECH_DCH)
 	{
@@ -2919,64 +2921,52 @@ bool proc_writedata(int bd) // when MCBZA, bd=0
 	
 	pdata->RangeV = m_pSysConfig->mZimCfg[bd].ranges.Gen.vdc_rng[pch->mChStatInf.Vdc_rngno].realmax;
 	
-	
+	pdata->fFreq = pch->mChStatInf.eis_status.freq;
 		
 	pdata->Veoc = pch->mChStatInf.Veoc; //[0]
 	pdata->Vdc = pch->mChStatInf.Vdc; //[0]
-	
-	
+	pdata->Zre = pch->mChStatInf.eis_status.zdata.real; // for main board
+	pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
 	
 	pdata->Idc = pch->mChStatInf.Idc;  
 	pdata->Temperature = pch->mChStatInf.Temperature;
 
-	if(pch->mTech.type == TECH_MON)	ActiveZ = false;
-	else if(pch->mTech.type == TECH_DCH)	
-	{
-		if(pch->mTech.tech.dch.useir == 0) ActiveZ = false;
-	}
-	if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0) ActiveAux = true;
-	
-	if(ActiveZ == false)
+	if(pch->mTech.type == TECH_MON)	
 	{
 		pdata->fFreq = 0.0;			
 		pdata->Zre = 0.0;
 		pdata->Zim = 0.0;
-	}
+
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0)
+		{
+			for(AuxBd=0; AuxBd < DEF_MAX_AUX_BDCNT; AuxBd++)
+			{
+				for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
+				{
+					pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
+					pdata->mData[AuxBd].mData[AuxCh].Vdc = pch->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh];
+					pdata->mData[AuxBd].mData[AuxCh].Zre = 0.0;
+					pdata->mData[AuxBd].mData[AuxCh].Zim = 0.0;
+				}
+			}
+		}
+	} 
 	else
 	{
-		pdata->fFreq = pch->mChStatInf.eis_status.freq;
-		pdata->Zre = pch->mChStatInf.eis_status.zdata.real; // for main board
-		pdata->Zim = pch->mChStatInf.eis_status.zdata.img;
-	}
-	
-	
-	for(AuxBd=0; AuxBd < DEF_MAX_AUX_BDCNT; AuxBd++)
-	{
-		for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0) 
 		{
-			if(ActiveAux == true)
+			for(AuxBd=0; AuxBd < DEF_MAX_AUX_BDCNT; AuxBd++)
 			{
-				pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
-				pdata->mData[AuxBd].mData[AuxCh].Vdc = pch->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh];
-			}
-			else
-			{
-				pdata->mData[AuxBd].mData[AuxCh].Veoc = 0.0;
-				pdata->mData[AuxBd].mData[AuxCh].Vdc = 0.0;
-			}
-			if(ActiveZ == false || ActiveAux == false)
-			{
-				pdata->mData[AuxBd].mData[AuxCh].Zre = 0.0;
-				pdata->mData[AuxBd].mData[AuxCh].Zim = 0.0;
-			}
-			else
-			{
-				pdata->mData[AuxBd].mData[AuxCh].Zre = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].real; //(pch+AuxBd+1)
-				pdata->mData[AuxBd].mData[AuxCh].Zim = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].img; //(pch+AuxBd+1)
+				for(AuxCh=0; AuxCh < DEF_MAX_AUX_CHCNT; AuxCh++)
+				{
+					pdata->mData[AuxBd].mData[AuxCh].Veoc = (pch)->mChStatInf.Aux_Veoc[AuxBd*4+AuxCh]; //[AuxCh];
+					pdata->mData[AuxBd].mData[AuxCh].Vdc = (pch)->mChStatInf.Aux_Vdc[AuxBd*4+AuxCh]; //Vdc; //[AuxCh]; //(pch+AuxBd+1)
+					pdata->mData[AuxBd].mData[AuxCh].Zre = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].real; //(pch+AuxBd+1)
+					pdata->mData[AuxBd].mData[AuxCh].Zim = (pch)->mChStatInf.eis_status.Aux_zdata[AuxCh+AuxBd*4].img; //(pch+AuxBd+1)
+				}
 			}
 		}
 	}
-	
 	pch->mChStatInf.eis_status.rescount ++;
 	return  true;
 }
@@ -3155,7 +3145,8 @@ bool proc_eis_begin(int bd) // when MCBZA, bd=0
 			}
 		}
 	}
-
+	
+	SetDeviceBoard(bd);
 	if(m_pGlobalVar->mChVar[bd].mChStatInf.LoadOn == 0)
 	{
 		if(m_pGlobalVar->mChVar[bd].mChStatInf.BiasOn == 1)
@@ -3181,6 +3172,8 @@ bool proc_eis_FFT(int bd) // when MCBZA, bd=0
 	int auxch;
 	volatile double dfreq;
 	ushort buf;
+	
+	SetDeviceBoard(bd);
 	if(proc_eis_data_conv(bd) == false)
 	{
 		pch->mChStatInf.LastError = DEF_LAST_ERROR_FFT;
@@ -3214,24 +3207,24 @@ bool proc_eis_FFT(int bd) // when MCBZA, bd=0
 			for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++)
 			{
 				m_pGlobalVar->mChVar[auxbd].mChStatInf.eis_status.freq = dfreq;
+				if(m_pGlobalVar->mChVar[bd].mTech.type == TECH_HFR)
+				{
+					if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
+						continue;
+					procaux_power_VAC(auxbd, false); 
+					SetDeviceBoard(auxbd);
+					setaux_device_DO(auxbd);
+					if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, (UNS_8)0) == _ERROR)
+					{
+						m_pGlobalVar->mChVar[auxbd].mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
+						return false;
+					}
+				}
 			}			
 		}
-		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0 && (m_pGlobalVar->mChVar[bd].mTech.type == TECH_HFR))
-		{
-			for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
-			{
-				if(m_pSysConfig->EnaZIM[auxbd] == FALSE || m_pSysConfig->ChkZIM[auxbd] == FALSE)
-					continue;
-				procaux_power_VAC(auxbd, false); 
-				SetDeviceBoard(auxbd);
-				setaux_device_DO(auxbd);
-				if(ICE_write_byte(auxbd, ICE_CMD_EIS_CFG, (UNS_8)0) == _ERROR)
-				{
-					m_pGlobalVar->mChVar[auxbd].mChStatInf.LastError = DEF_LAST_ERROR_COMMZIM;
-					return false;
-				}
-			}
-		}
+		
+		SetDeviceBoard(bd);
+		
 		if(pch->mFlow.timeproc == 1 && buf == 1) // not EIS, QIS
 		{
 			if(pch->mChStatInf.RunTimeStamp >= pch->mFlow.m_MsEndTimeLimit)
@@ -3429,6 +3422,7 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 		if(pch->mFlow.m_MsFlowdelayLimit <= pch->mFlow.m_MsFlowdelayStamp)
 		{ 
 			proc_adc_vdc_data(bd);
+			
 			if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && bd == 0 && m_pGlobalVar->mChVar[bd].mTech.type == TECH_HFR)
 			{
 				for(auxbd=1; auxbd<MAX_DEV_BOARD; auxbd++) 
@@ -3440,6 +3434,7 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 					setaux_device_DO(auxbd);
 				}
 			}
+			SetDeviceBoard(bd);
 			if(proc_eis_init(bd))
 			{
 				pch->meis[0].eis_raw.freq = pch->mChStatInf.eis_status.freq;
@@ -3569,6 +3564,7 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 						}
 						m_pGlobalVar->m_msTmp = 0;
 					}
+					SetDeviceBoard(bd);
 				}
 			}
 			else
@@ -3596,9 +3592,10 @@ bool proc_eis_main(int bd) // when MCBZA, bd=0
 						continue;
 					procaux_power_VAC(auxbd, false);
 				}
-				pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
-				m_pGlobalVar->mChVar[bd].mChStatInf.NextTaskNo = 1;
 			}
+			pch->mChStatInf.eis_status.status = DEF_EIS_STATUS_END;
+			m_pGlobalVar->mChVar[bd].mChStatInf.NextTaskNo = 1;
+			SetDeviceBoard(bd);
 		}
 		
 		/*		
@@ -4017,6 +4014,7 @@ void AuxProc(int bd)
 	proc_adc_rtd(bd);
 	if(m_pGlobalVar->mChVar[bd].TmpResetICE > 0) return;
 	proc_adc_vdc_data(bd);
+	
 	if(m_pGlobalVar->mChVar[bd].TmpResetICE > 0) return;
 	proc_auto_vdc_proc(bd);
 	if(m_pGlobalVar->mChVar[bd].mChStatInf.LoadOn == 0)

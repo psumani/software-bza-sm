@@ -140,6 +140,10 @@
             this.AuxMenuChannel10 = new System.Windows.Forms.ToolStripMenuItem();
             this.AuxMenuChannel11 = new System.Windows.Forms.ToolStripMenuItem();
             this.AuxMenuChannel12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.applyGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lnlAuxMenu = new System.Windows.Forms.Label();
             this.toolStripMenuAuxAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip_Top.SuspendLayout();
@@ -859,12 +863,12 @@
             // 
             // contextMenuCheckItem
             // 
+            resources.ApplyResources(this.contextMenuCheckItem, "contextMenuCheckItem");
             this.contextMenuCheckItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.checkAnOddNumber135ToolStripMenuItem,
             this.checkAnEvenNumber246ToolStripMenuItem,
             this.check11121ToolStripMenuItem});
             this.contextMenuCheckItem.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuCheckItem, "contextMenuCheckItem");
             // 
             // checkAnOddNumber135ToolStripMenuItem
             // 
@@ -886,6 +890,7 @@
             // 
             // contextMenuAux
             // 
+            resources.ApplyResources(this.contextMenuAux, "contextMenuAux");
             this.contextMenuAux.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AuxMenuChannelsAll,
             this.toolStripSeparator3,
@@ -900,9 +905,12 @@
             this.AuxMenuChannel9,
             this.AuxMenuChannel10,
             this.AuxMenuChannel11,
-            this.AuxMenuChannel12});
+            this.AuxMenuChannel12,
+            this.toolStripSeparator1,
+            this.applyGraphToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.closeMenuToolStripMenuItem});
             this.contextMenuAux.Name = "contextMenuAux";
-            resources.ApplyResources(this.contextMenuAux, "contextMenuAux");
             // 
             // AuxMenuChannelsAll
             // 
@@ -1013,12 +1021,35 @@
             resources.ApplyResources(this.AuxMenuChannel12, "AuxMenuChannel12");
             this.AuxMenuChannel12.Click += new System.EventHandler(this.AuxMenuChannel12_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // applyGraphToolStripMenuItem
+            // 
+            this.applyGraphToolStripMenuItem.Name = "applyGraphToolStripMenuItem";
+            resources.ApplyResources(this.applyGraphToolStripMenuItem, "applyGraphToolStripMenuItem");
+            this.applyGraphToolStripMenuItem.Click += new System.EventHandler(this.applyGraphToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // closeMenuToolStripMenuItem
+            // 
+            this.closeMenuToolStripMenuItem.Name = "closeMenuToolStripMenuItem";
+            resources.ApplyResources(this.closeMenuToolStripMenuItem, "closeMenuToolStripMenuItem");
+            this.closeMenuToolStripMenuItem.Click += new System.EventHandler(this.closeMenuToolStripMenuItem_Click);
+            // 
             // lnlAuxMenu
             // 
             resources.ApplyResources(this.lnlAuxMenu, "lnlAuxMenu");
             this.lnlAuxMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lnlAuxMenu.ForeColor = System.Drawing.Color.DarkGreen;
             this.lnlAuxMenu.Name = "lnlAuxMenu";
+            this.lnlAuxMenu.Click += new System.EventHandler(this.lnlAuxMenu_Click);
             this.lnlAuxMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lnlAuxMenu_MouseDown);
             this.lnlAuxMenu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lnlAuxMenu_MouseUp);
             // 
@@ -1177,6 +1208,10 @@
         private System.Windows.Forms.ToolStripButton tsbtnZTvsVdc;
         private System.Windows.Forms.ToolStripButton tsbtnErefDivIvsTimeGraph;
         private System.Windows.Forms.ToolStripButton tsbtnErefvsAbsQGraph;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem applyGraphToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem closeMenuToolStripMenuItem;
     }
 }
 

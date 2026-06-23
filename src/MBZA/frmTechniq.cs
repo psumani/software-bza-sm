@@ -296,7 +296,7 @@ namespace ZiveLab.ZM
             while (true)
             {
                 sfilename = string.Format("{0}{1}.{2}", sname, i + 1, sext);
-                str = Path.Combine(gBZA.appcfg.PathSch, sfilename);
+                str = Path.Combine(gBZA.appcfg.PathSch[0], sfilename);
                 if (File.Exists(str) == false)
                 {
                     break;
@@ -360,7 +360,7 @@ namespace ZiveLab.ZM
             }
             */
 
-            gBZA.appcfg.PathSch = Path.GetDirectoryName(sfilename);
+            gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(sfilename));
 
             if ((enTechType)mtech.type == enTechType.TECH_HFR)
             {
@@ -438,7 +438,7 @@ namespace ZiveLab.ZM
             if (len > DeviceConstants.BATIDSIZE) len = DeviceConstants.BATIDSIZE;
             Array.Clear(mtech.info.batid, 0, DeviceConstants.BATIDSIZE);
             Array.Copy(arr, mtech.info.batid, len);
-            mtech.info.Capa = Convert.ToDouble(txtcapa.Text) / 1000.0;
+            mtech.info.Capa = Convert.ToDouble(txtcapa.Text);
             txtcapa.Text = string.Format("{0:0.0##}", mtech.info.Capa);
 
             arr = Encoding.UTF8.GetBytes(txtcreator.Text);
@@ -1194,10 +1194,19 @@ namespace ZiveLab.ZM
         private void btopen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-
-            dlg.Multiselect = false;
             
-
+            dlg.Multiselect = false;
+            dlg.CustomPlaces.Clear();
+            
+            for(int i=0; i<10; i++)
+            {
+                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    dlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
+                }
+            }
+            
             if (techtype == enTechType.TECH_HFR)
             {
                 dlg.Filter = "Galvanostatic HFR (*.hfr) |*.hfr";
@@ -1238,7 +1247,7 @@ namespace ZiveLab.ZM
 
             if (bopen == false)
             {
-                dlg.InitialDirectory = gBZA.appcfg.PathSch;
+                dlg.InitialDirectory = gBZA.appcfg.PathSch[0];
                 dlg.FileName = "";
             }
             else
@@ -1368,7 +1377,17 @@ namespace ZiveLab.ZM
         {
 
             SaveFileDialog saveDlg = new SaveFileDialog();
-            
+
+            saveDlg.CustomPlaces.Clear();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    saveDlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
+                }
+            }
 
             if (techtype == enTechType.TECH_HFR)
             {
@@ -1414,7 +1433,7 @@ namespace ZiveLab.ZM
             }
             else
             {
-                saveDlg.InitialDirectory = gBZA.appcfg.PathSch;
+                saveDlg.InitialDirectory = gBZA.appcfg.PathSch[0];
                 saveDlg.FileName = Path.GetFileName(GetDefaultname());
             }
 
@@ -1434,7 +1453,7 @@ namespace ZiveLab.ZM
             }
 
 
-            gBZA.appcfg.PathSch = Path.GetDirectoryName(saveDlg.FileName);
+            gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(saveDlg.FileName));
 
             filefullpath = saveDlg.FileName;
             filename = Path.GetFileName(filefullpath);
@@ -1602,7 +1621,7 @@ namespace ZiveLab.ZM
         private void frmTechniq_FormClosing(object sender, FormClosingEventArgs e)
         {
             bClose = true;
-            gBZA.appcfg.Save();
+            gBZA.SaveAppCfg();
         }
 
         private void techtree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

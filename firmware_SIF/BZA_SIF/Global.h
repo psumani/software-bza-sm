@@ -10,6 +10,7 @@ extern bool hstimer_enable;
 
 
 //..Comm. gloval vars..
+extern ushort m_LocalPort;
 extern SOCKET m_Socket[MAX_SOCKET_NUM];
 extern eSockStatus m_SocketStatus[MAX_SOCKET_NUM];
 extern Packet _Packet[MAX_SOCKET_NUM];

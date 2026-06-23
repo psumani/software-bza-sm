@@ -2,9 +2,7 @@
 #include "global.h"
 #include "w5100.h"
 
-static ushort m_LocalPort;
 
-ushort yData;
 
 // Public Function
 byte socket(SOCKET s, byte protocol, ushort port, byte flag)
@@ -38,8 +36,6 @@ byte socket(SOCKET s, byte protocol, ushort port, byte flag)
 	
 	return 0;
 }
-
-byte test;
 
 void close(SOCKET s)
 {

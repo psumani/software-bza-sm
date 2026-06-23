@@ -258,48 +258,7 @@ namespace ZiveLab.ZM
             {
                 this.Icon = gBZA.BitmapToIcon(ZM.Properties.Resources.Monitor);
             }
-
-            /*if (iMode == 1)
-            {
-                if (gBZA.appcfg.GroupRealviewSize == new Size(0, 0) || gBZA.appcfg.GroupRealviewLocation == new Point(0, 0))
-                {
-                    this.StartPosition = FormStartPosition.CenterParent;
-                }
-                else
-                {
-                    this.Location = gBZA.appcfg.GroupRealviewLocation;
-                    this.Size = gBZA.appcfg.GroupRealviewSize;
-                    this.StartPosition = FormStartPosition.Manual;
-
-                }
-            }
-            else if(iMode == 2)
-            {
-                if (gBZA.appcfg.RealviewSize == new Size(0, 0) || gBZA.appcfg.RealviewLocation == new Point(0, 0))
-                {
-                    this.StartPosition = FormStartPosition.CenterParent;
-                }
-                else
-                {
-                    this.Location = gBZA.appcfg.RealviewLocation;
-                    this.Size = gBZA.appcfg.RealviewSize;
-                    this.StartPosition = FormStartPosition.Manual;
-                }
-            }
-            else
-            {
-                if (gBZA.appcfg.RegRealviewSize == new Size(0, 0) || gBZA.appcfg.RegRealviewLocation == new Point(0, 0))
-                {
-                    this.StartPosition = FormStartPosition.CenterParent;
-                }
-                else
-                {
-                    this.Location = gBZA.appcfg.RegRealviewLocation;
-                    this.Size = gBZA.appcfg.RegRealviewSize;
-                    this.StartPosition = FormStartPosition.Manual;
-                }
-            }
-            */
+            
             if (iMode == 0)
             {
                 if (File.Exists(fileinf))
@@ -474,7 +433,7 @@ namespace ZiveLab.ZM
         }
 
         private void frmRealview_FormClosed(object sender, FormClosedEventArgs e)
-        { 
+        {
             CloseThis?.Invoke(this, e);
         }
 
@@ -485,7 +444,6 @@ namespace ZiveLab.ZM
             Point pt = this.Location;
             if (iMode == 1)
             {
-                gBZA.appcfg.GrpRtWinStatus = this.WindowState;
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     gBZA.appcfg.GroupRealviewSize = this.Size;
@@ -494,7 +452,6 @@ namespace ZiveLab.ZM
             }
             else if (iMode == 2)
             {
-                gBZA.appcfg.RtWinStatus = this.WindowState;
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     gBZA.appcfg.RealviewSize = this.Size;
@@ -503,7 +460,6 @@ namespace ZiveLab.ZM
             }
             else
             {
-                gBZA.appcfg.RegRtWinStatus = this.WindowState;
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     gBZA.appcfg.RegRealviewSize = this.Size;
@@ -518,7 +474,6 @@ namespace ZiveLab.ZM
             if (this.WindowState == FormWindowState.Minimized) return;
             if (iMode == 1)
             {
-                gBZA.appcfg.GrpRtWinStatus = this.WindowState;
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     gBZA.appcfg.GroupRealviewSize = this.Size;
@@ -526,7 +481,6 @@ namespace ZiveLab.ZM
             }
             else if(iMode == 2)
             {
-                gBZA.appcfg.RtWinStatus = this.WindowState;
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     gBZA.appcfg.RealviewSize = this.Size;
@@ -534,7 +488,6 @@ namespace ZiveLab.ZM
             }
             else
             {
-                gBZA.appcfg.RegRtWinStatus = this.WindowState;
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     gBZA.appcfg.RegRealviewSize = this.Size;
@@ -546,7 +499,7 @@ namespace ZiveLab.ZM
         private void frmRealview_FormClosing(object sender, FormClosingEventArgs e)
         {
             bClose = true;
-           
+            gBZA.SaveAppCfg();
         }
 
         private void frmRealview_Activated(object sender, EventArgs e)

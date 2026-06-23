@@ -274,7 +274,9 @@ namespace ZiveLab.ZM
             grdChs.AutoResize = true;
             grdChs.AutoSizeMode = C1.Win.C1FlexGrid.Classic.AutoSizeSettings.flexAutoSizeColWidth;
             grdChs.AllowEditing = false;
-           
+
+            grdChs.AllowSorting = AllowSortingEnum.None;
+
             for (i = 0; i < 4; i++)
             {
                 if (i == 1)
@@ -293,7 +295,7 @@ namespace ZiveLab.ZM
                 {
                     grdChs.set_ColWidth(i, 40);
                 }
-
+                grdChs.set_ColSort(i, C1.Win.C1FlexGrid.Classic.SortSettings.flexSortNone);
                 grdChs.set_FixedAlignment(i, C1.Win.C1FlexGrid.Classic.AlignmentSettings.flexAlignCenterCenter);
                 grdChs.set_ColAlignment(i, C1.Win.C1FlexGrid.Classic.AlignmentSettings.flexAlignCenterCenter);
                 grdChs.set_TextMatrix(0, i, sTitle[i]);
@@ -327,7 +329,7 @@ namespace ZiveLab.ZM
             grdBzaCh.AutoResize = true;
             grdBzaCh.AutoSizeMode = C1.Win.C1FlexGrid.Classic.AutoSizeSettings.flexAutoSizeColWidth;
             grdBzaCh.AllowEditing = false;
-
+            grdBzaCh.AllowSorting = AllowSortingEnum.None;
             for (i = 0; i < 7; i++)
             {
                 if (i == 1)
@@ -358,7 +360,7 @@ namespace ZiveLab.ZM
                 {
                     grdBzaCh.set_ColWidth(i, 70);
                 }
-
+                grdBzaCh.set_ColSort(i, C1.Win.C1FlexGrid.Classic.SortSettings.flexSortNone);
                 grdBzaCh.set_FixedAlignment(i, C1.Win.C1FlexGrid.Classic.AlignmentSettings.flexAlignCenterCenter);
                 grdBzaCh.set_ColAlignment(i, C1.Win.C1FlexGrid.Classic.AlignmentSettings.flexAlignCenterCenter);
                 grdBzaCh.set_TextMatrix(0, i, sTitle[i]);
@@ -392,7 +394,7 @@ namespace ZiveLab.ZM
             grdBZAs.AutoResize = true;
             grdBZAs.AutoSizeMode = C1.Win.C1FlexGrid.Classic.AutoSizeSettings.flexAutoSizeColWidth;
             grdBZAs.AllowEditing = false;
-
+            grdBZAs.AllowSorting = AllowSortingEnum.None;
             for (i = 0; i < 7; i++)
             {
                 if (i == 1)
@@ -423,7 +425,7 @@ namespace ZiveLab.ZM
                 {
                     grdBZAs.set_ColWidth(i, 100);
                 }
-
+                grdBZAs.set_ColSort(i, C1.Win.C1FlexGrid.Classic.SortSettings.flexSortNone);
                 grdBZAs.set_FixedAlignment(i, C1.Win.C1FlexGrid.Classic.AlignmentSettings.flexAlignCenterCenter);
                 grdBZAs.set_ColAlignment(i, C1.Win.C1FlexGrid.Classic.AlignmentSettings.flexAlignCenterCenter);
                 grdBZAs.set_TextMatrix(0, i, sTitle[i]);

@@ -22,22 +22,117 @@ namespace ZiveLab.ZM
         public int sifch;
 
         private int grptype;
-        st_GrpCh_vars grpvars;
 
-        public frmSetPlotsColor(int ich, st_GrpCh_vars grpvars, int grptype)
+        public frmSetPlotsColor(int ich, int grptype)
         {
             InitializeComponent();
 
-            this.grpvars = grpvars;
-            this.grptype = grptype;
+            Bitmap bitmap = Properties.Resources.ColorDialog;
+            IntPtr hIcon = bitmap.GetHicon();
+            this.Icon = Icon.FromHandle(hIcon);
 
+            this.grptype = grptype;
             ch = ich;
             sch = ch.ToString();
             lnkch = gBZA.ChLnkLst[sch];
             serial = lnkch.sSerial;
             sifch = lnkch.SifCh;
 
+            this.Text = GetTitle();
+
             InitChannelColorGrid();
+        }
+
+
+        private string GetTitle()
+        {
+            string rstr = "Color settings for plots";
+
+            switch ((enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type)
+            {
+                case enTechType.TECH_HFR:
+                   if(grptype == 1)
+                    {
+                        if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
+                        {
+                            rstr += "[Zre,Eoc vs t].";
+                        }
+                        else
+                        {
+                            rstr += "[Zre,Vdc vs t].";
+                        }
+                    }
+                    else if (grptype == 2)
+                    {
+                        rstr += "[Cs,Cp vs t].";
+                    }
+                    else if (grptype == 3)
+                    {
+                        rstr += "[AC waveform].";
+                    }
+                    break;
+                case enTechType.TECH_PRR:
+                    if (grptype == 1)
+                    {
+                        rstr += "[Rs,P_Rp vs t].";
+                    }
+                    else if (grptype == 2)
+                    {
+                        rstr += "[Cs,Cp vs t].";
+                    }
+                    else if (grptype == 3)
+                    {
+                        rstr += "[AC waveform].";
+                    };
+                    break;
+                case enTechType.TECH_QIS:
+                case enTechType.TECH_EIS:
+                    if (grptype == 1)
+                    {
+                        rstr += "[Nyquist plot].";
+                    }
+                    else if (grptype == 2)
+                    {
+                        rstr += "[Bode plot].";
+                    }
+                    else if (grptype == 3)
+                    {
+                        rstr += "[AC waveform].";
+                    };
+                    break;
+                case enTechType.TECH_MON:
+                    if (grptype == 1)
+                    {
+                        rstr += "[Eoc,Temp. vs t].";
+                    }
+                    else if (grptype == 2)
+                    {
+                        rstr += ".";
+                    }
+                    else if (grptype == 3)
+                    {
+                        rstr += "[AC waveform].";
+                    };
+                    break;
+                case enTechType.TECH_DCH:
+                    if (grptype == 1)
+                    {
+                        rstr += "[Vdc,Temp. vs t].";
+                    }
+                    else if (grptype == 2)
+                    {
+                        rstr += "[Zreal vs t].";
+                    }
+                    else if (grptype == 3)
+                    {
+                        rstr += "[AC waveform].";
+                    };
+                    break;
+                default:
+                    rstr += ".";
+                    break;
+            }
+            return rstr;
         }
         private void InitChannelColorGrid()
         {
@@ -58,7 +153,7 @@ namespace ZiveLab.ZM
             dgv.Columns.Add("colLabel", "");
 
             dgv.Columns.Add("colChannel0", "Main");
-            for (int i = 1; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 1; i < gBZA.grpvars.nAuxChCount + 1; i++)
             {
                 dgv.Columns.Add("colChannel"+i, $"Aux CH{i}");
             }
@@ -174,17 +269,17 @@ namespace ZiveLab.ZM
         private void UpdateChannelColorGrid()
         {
             DataGridView dgv = dataGridView1;
-            for (int i = 0; i < grpvars.nAuxChCount + 1; i++)
+            for (int i = 0; i < gBZA.grpvars.nAuxChCount + 1; i++)
             {
                 switch (grptype)
                 {
                     case 3:
                         for (int j = 0; j < dgv.RowCount; j++)
-                            dgv.Rows[j].Cells[i + 1].Style.BackColor = grpvars.GrpItemsRT.PlotColor[i * 2 + j];
+                            dgv.Rows[j].Cells[i + 1].Style.BackColor = Color.FromArgb(gBZA.grpvars.GrpItemsRT.PlotColor[i * 2 + j]);
                         break;
                     case 1:
                         for (int j = 0; j < dgv.RowCount; j++)
-                            dgv.Rows[j].Cells[i + 1].Style.BackColor = grpvars.GrpItems1.PlotColor[i * MBZA_Constant.MAX_GRAPH_PLOTS + j];
+                            dgv.Rows[j].Cells[i + 1].Style.BackColor = Color.FromArgb(gBZA.grpvars.GrpItems1.PlotColor[i * MBZA_Constant.MAX_GRAPH_PLOTS + j]);
                         switch ((enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type)
                         {
                             case enTechType.TECH_EIS:
@@ -205,7 +300,7 @@ namespace ZiveLab.ZM
                         break;
                     case 2:
                         for (int j = 0; j < dgv.RowCount; j++)
-                            dgv.Rows[j].Cells[i + 1].Style.BackColor = grpvars.GrpItems2.PlotColor[i * MBZA_Constant.MAX_GRAPH_PLOTS + j];
+                            dgv.Rows[j].Cells[i + 1].Style.BackColor = Color.FromArgb(gBZA.grpvars.GrpItems2.PlotColor[i * MBZA_Constant.MAX_GRAPH_PLOTS + j]);
                         /*switch ((enTechType)gBZA.SifLnkLst[serial].MBZAIF.Oldtech[sifch].type)
                         {
                             case enTechType.TECH_HFR:
@@ -229,13 +324,14 @@ namespace ZiveLab.ZM
             int row = e.RowIndex;
             int col = e.ColumnIndex;
 
-            Console.WriteLine($"클릭: {row}행 {col}열");
-
             if (dataGridView1.Rows[row].Cells[col].Tag != null && dataGridView1.Rows[row].Cells[col].Tag.ToString() == "disabled")
                 return;
 
             ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = dataGridView1.Rows[row].Cells[col].Style.BackColor;
+            colorDialog.FullOpen = true;      // 대화상자 열 때 전체 팔레트 표시
+            colorDialog.AnyColor = true;      // 시스템 색상 포함
+            colorDialog.Color = dataGridView1.Rows[row].Cells[col].Style.BackColor;// 현재 색상 기본값
+
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 Color newColor = colorDialog.Color;
@@ -243,13 +339,13 @@ namespace ZiveLab.ZM
                 switch (grptype)
                 {
                     case 1:
-                        grpvars.GrpItems1.PlotColor[(col - 1) * MBZA_Constant.MAX_GRAPH_PLOTS + row] = newColor;
+                        gBZA.grpvars.GrpItems1.PlotColor[(col - 1) * MBZA_Constant.MAX_GRAPH_PLOTS + row] = newColor.ToArgb();
                         break;
                     case 2:
-                        grpvars.GrpItems2.PlotColor[(col - 1) * MBZA_Constant.MAX_GRAPH_PLOTS + row] = newColor;
+                        gBZA.grpvars.GrpItems2.PlotColor[(col - 1) * MBZA_Constant.MAX_GRAPH_PLOTS + row] = newColor.ToArgb();
                         break;
                     case 3:
-                        grpvars.GrpItemsRT.PlotColor[(col - 1) * 2 + row] = newColor;
+                        gBZA.grpvars.GrpItemsRT.PlotColor[(col - 1) * 2 + row] = newColor.ToArgb();
                         break;
                 }
             }
@@ -263,6 +359,12 @@ namespace ZiveLab.ZM
         private void buttonOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void btClost_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

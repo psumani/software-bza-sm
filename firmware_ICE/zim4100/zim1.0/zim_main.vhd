@@ -8,7 +8,7 @@ entity zim is
 	port (
 		ICE_SYSCLK		: in  	std_logic;
 		EIS_SYNCCLK		: in  	std_logic;
-		TEST_LED     	: buffer  	std_logic;
+		TEST_LED     	: out  	std_logic;
 		
 		DDS_MCLK1		: out  	std_logic;
 		DDS_CS1			: out  	std_logic;
@@ -26,7 +26,7 @@ entity zim is
 		ICE_SPI_MOSI	: in  	std_logic;
 		ICE_SPI_MISO	: out  	std_logic;
 		ICE_SPI_CE0		: in  	std_logic;
-		ICE_GPMO_0		: in  	std_logic; -- 
+		ICE_GPMO_0		: in  	std_logic;
 
 		DDS_MCLK		: out  	std_logic;
 		DDS_CS		: out  	std_logic;
@@ -62,7 +62,7 @@ entity zim is
 		IAC_OSR1		: out  	std_logic;
 		IAC_FLT0		: out  	std_logic;
 		IAC_FLT1		: out  	std_logic;
-		IAC_CLK		: buffer  	std_logic;
+		IAC_CLK		: out  	std_logic;
 		IAC_CS		: out  	std_logic;
 		IAC_SCLK		: out  	std_logic;
 		IAC_MOSI		: out  	std_logic;
@@ -111,16 +111,16 @@ entity zim is
 		ICE_IOB_104		: in  	std_logic;
 		ICE_IOB_103		: in  	std_logic;
 		ICE_IOB_102		: in  	std_logic;
-		ICE_IOB_96		: in  	std_logic; -- start sync in
-		ICE_IOB_95		: out  	std_logic; -- start out
+		ICE_IOB_96		: in  	std_logic;
+		ICE_IOB_95		: in  	std_logic;
 		ICE_IOB_94		: in  	std_logic;
 		ICE_IOB_91		: in  	std_logic;
 		ICE_IOB_82		: in  	std_logic;
 		
 		-- isolated in/out pins
-		ICE_GPMO_1		: out  	std_logic; 
+		ICE_GPMO_1		: in  	std_logic;
 		ICE_GPMO_2		: in  	std_logic;
-		ICE_GPMI_0	   	: out  	std_logic;
+		ICE_GPMI_0	   : out  	std_logic;
 		
 		ICE_IOR_138		: in  	std_logic;
 		ICE_IOR_137		: in  	std_logic;
@@ -158,16 +158,29 @@ architecture behav of zim is
 	component SPI_SLAVE is
 		Port (
 			CLK 				: in 	std_logic;	
-			RESET 			: in std_logic;
+			RESET 			: in 	std_logic;
 			SCLK 				: in 	std_logic; 	
 			CS_N 				: in 	std_logic; 	
 			MOSI 				: in 	std_logic; 	
-			MISO 				: out 	std_logic; 	
+			MISO 				: out std_logic; 	
 			DIN 				: in 	std_logic_vector(7 downto 0); 
-			DOUT 				: out 	std_logic_vector(7 downto 0); 
-			DATA_VLD 		: out 	std_logic
+			DOUT 				: out std_logic_vector(7 downto 0); 
+			DATA_VLD 		: out std_logic
 		);
 	end component;
+
+	component DDS_AD9837 is
+		Port (
+			CLK 		: in 		std_logic; 		-- system clock
+			TRIG		: in 		std_logic;
+			DATA		: in 		std_logic_vector(15 downto 0);
+			SCLK 		: out 	std_logic; 		-- SPI clock
+			CS 		: out 	std_logic; 		-- SPI chip select, active in low
+			MOSI 		: out 	std_logic 		-- SPI serial data from master to slave
+		);
+	end component;
+	
+	
 	
 	component ADC_ADS127 is
 		Port (
@@ -184,17 +197,16 @@ architecture behav of zim is
 		);
 	end component;
 
-	component DDS_AD9837 is
+	component ADC_ADS1252 is
 		Port (
-			CLK 		: in 		std_logic; 		-- system clock
-			TRIG		: in 		std_logic;
-			DATA		: in 		std_logic_vector(15 downto 0);
-			SCLK 		: out 	std_logic; 		-- SPI clock
-			CS 		: out 	std_logic; 		-- SPI chip select, active in low
-			MOSI 		: out 	std_logic 		-- SPI serial data from master to slave
+			CLK 			: in 		std_logic; 						         -- system clock :  MHz clock	
+			ADC_DATA		: out 	std_logic_vector(23 downto 0); 		-- Last read adc value
+			MCLK 			: out 	std_logic; 		-- SPI clock :  MHz
+			SCLK 			: out 	std_logic; 		-- SPI clock :  MHz
+			MISO 			: in 		std_logic 		-- SPI serial data from slave to master
 		);
 	end component;
-	
+
 	component ADC_MAX31865 is
 		Port (
 			CLK 			: in 		std_logic; 		-- system clock : 5.12 MHz clock
@@ -209,21 +221,8 @@ architecture behav of zim is
 	end component;
 	
 	
-
-	component ADC_ADS1252 is
-		Port (
-			CLK 			: in 		std_logic; 						         -- system clock :  MHz clock	
-			ADC_DATA		: out 	std_logic_vector(23 downto 0); 		-- Last read adc value
-			MCLK 			: out 	std_logic; 		-- SPI clock :  MHz
-			SCLK 			: out 	std_logic; 		-- SPI clock :  MHz
-			MISO 			: in 		std_logic 		-- SPI serial data from slave to master
-		);
-	end component;
-	
-	
-	
-	signal clk_16MHz			: std_logic := '0';
 	signal clk_32MHz			: std_logic := '0';
+	signal clk_16MHz			: std_logic := '0';
 	--pll vars
 	signal pll_reset		: std_logic := '1';
 	signal pll_outa		: std_logic := '0';
@@ -234,13 +233,6 @@ architecture behav of zim is
    --spi slave vars
 	signal clk_spislave		: std_logic := '0';
 	signal clk_spicomm		: std_logic := '0';
-	--signal cs_sync1, cs_prev : std_logic := '1';
-	signal cs_falling : std_logic := '0';
-	signal cs_sync1, cs_sync2 : std_logic := '1';
-	signal cs_prev : std_logic := '1';
-	signal cs_falling_pend : std_logic := '0';
-	signal cs_mask_cnt : integer range 0 to 3 := 0;
-	signal reset_int : std_logic := '0';
 	
 	signal comm_tx_buf 		: std_logic_vector(7 downto 0);
 	signal comm_data_vld		: std_logic := '0';
@@ -248,10 +240,10 @@ architecture behav of zim is
 	signal comm_test_buf_24	: std_logic_vector(23 downto 0);
 	
 	signal comm_state 		: def_slave_state := s_reset;
-	signal comm_response		: std_logic := '0';
+	
 	signal comm_cmd			: std_logic_vector(7 downto 0):= (others => '0');
 	signal comm_clear			: std_logic := '0';
-	
+	signal comm_response		: std_logic := '0';
 	signal comm_buf 			: def_comm_buf;
 	signal comm_index			: integer range 0 to 6 := 0;
 	signal comm_length		: integer range 0 to 6 := 0;
@@ -259,6 +251,7 @@ architecture behav of zim is
 	--signal dds vars
 	signal dds0_mclkcnt   	: std_logic_vector(7 downto 0):= x"01";
 	signal dds0_mclk			: std_logic := '0';
+	
 	signal clk_dds0			: std_logic := '0';
 	signal buf_dds0 			: std_logic_vector(15 downto 0):= x"0000";
 	signal trig_dds0			: std_logic := '0';
@@ -280,7 +273,6 @@ architecture behav of zim is
 	signal acadc_trig			: std_logic:= '0';
 	signal acadc_dtrig_i		: std_logic:= '0';
 	signal acadc_dtrig_v		: std_logic:= '0';
-	signal eis_adc_trig			: std_logic:= '0';
 	
 	signal acadc_skipcnt		: std_logic_vector(15 downto 0) := x"0000";
 	signal acadc_skipCount	: std_logic_vector(15 downto 0) := x"0000";
@@ -297,9 +289,7 @@ architecture behav of zim is
 	signal eis_state 		: def_eis_state := s_reset;
 	
 	signal eis_clk				: std_logic := '0';
-	signal tacadc_rst			: std_logic := '0';
 	signal acadc_rst			: std_logic := '0';
-	signal eis_start_cmd			: std_logic := '0';
 	signal eis_start			: std_logic := '0';
 	signal eis_stop			: std_logic := '0';
 	signal eis_end				: std_logic := '0';
@@ -308,14 +298,15 @@ architecture behav of zim is
 	signal buf_data_iac 		: std_logic_vector(23 downto 0) := x"000000";
 	signal buf_data_vac 		: std_logic_vector(23 downto 0) := x"000000";
 	
-	signal data_count    	: integer range 0 to 511 := 0; -- 1023
+	signal data_count    	: integer range 0 to 1023 := 0;
 	signal data_cntvec    	: std_logic_vector(15 downto 0):= x"0000";
-	signal data_index    	: integer range 0 to 511 := 0;
+	signal data_index    	: integer range 0 to 1023 := 0;
 	signal data_idxvec    	: std_logic_vector(15 downto 0):= x"0000";
 	
-	type def_ac_raw_buf 		is array(0 to 511) of std_logic_vector(23 downto 0);
+	type def_ac_raw_buf 		is array(0 to 1023) of std_logic_vector(23 downto 0);
 	signal iac_raw_buf 		: def_ac_raw_buf;
 	signal vac_raw_buf 		: def_ac_raw_buf;
+	
 	
 	--vdc adc vars
 	signal clk_VDC_ADC		: std_logic := '0';
@@ -323,39 +314,41 @@ architecture behav of zim is
 
 	--control vars
 	signal buf_control 		: std_logic_vector(7 downto 0):= x"00";
-	
+
 	signal wdtick_flag		: std_logic := '0';
 	signal flagcntwd			: std_logic := '0';
 	signal wdtick_cnt    	: std_logic_vector(27 downto 0):= x"0000000";
-	
-	signal SecClk				: std_logic := '0';
-	signal secclk_cnt    	: std_logic_vector(31 downto 0):= x"00000000";
-	
-	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1B58";  -- 7000
 
-	signal mclk_cnt    	: std_logic_vector(7 downto 0):= x"00";	
-	signal mclk_trig	: std_logic := '1';
-	type def_mclk_state 		is (s_reset, s_idle, s_run);
-	signal mclk_state	: def_mclk_state := s_reset;
+	signal SecClk				: std_logic := '0';
+	signal secclk_cnt    	: std_logic_vector(27 downto 0):= x"0000000";
+
+	signal buf_version 		: std_logic_vector(15 downto 0)  := x"0FA1";  -- 4001
 	
-	signal dummy : std_logic := '0';		-- for test
 begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
-	ICE_IOB_95		<= eis_start_cmd; -- output of eis start signal from SPI cmd
-	AC_ADC_SYNC		<= ICE_IOB_96;   -- MSTART
-	eis_start		<= ICE_IOB_96;  -- eis start from sync
-	TEST_LED 		<= dummy; --SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
 	
-	DDS_MCLK 		<= dds0_mclk when buf_control(6) = '0' else clk_16MHz;  -- 125KHz = 16MHz / 128
-	DDS_MCLK1 		<= not clk_16MHz; 	-- 16MHz 
+	pll_main : zim_pll 
+	port map (
+		REFERENCECLK	=> ICE_SYSCLK,
+		RESET				=> pll_reset,
+		PLLOUTCOREA		=> pll_outa,
+		PLLOUTCOREB		=> pll_outb,
+		PLLOUTGLOBALA	=> clk_32MHz,   -- 32MHz
+		PLLOUTGLOBALB	=> clk_16MHz    -- 16MHz
+	);
 	
+	AC_ADC_SYNC		<= not acadc_rst; 
+	VAC_CLK			<= not EIS_SYNCCLK;
+	IAC_CLK			<= not EIS_SYNCCLK;
+	
+	DDS_MCLK 		<= dds0_mclk;  -- 125KHz = 16MHz / 128
+	DDS_MCLK1		<= clk_16MHz;
+	
+	--DDS_MCLK1 		<= clk_16MHz 	when buf_control(6) = '0' else dds0_mclk;
 	--acadc_trig 		<= EIS_SYNCCLK; 
-	VAC_CLK			<= not EIS_SYNCCLK;  
-	IAC_CLK			<= not EIS_SYNCCLK; 
-	
-	
-	clk_spicomm 	<= clk_32MHz; 
-	clk_spislave 	<= clk_32MHz; --not 	
+
+	clk_spicomm 	<= clk_16MHz;
+	clk_spislave 	<= not clk_32MHz;	
 	
 	clk_dds0			<= clk_32MHz;	-- 32MHz 
 	clk_dds1			<= clk_32MHz;	-- 32MHz
@@ -364,19 +357,53 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
 	clk_IAC_ADC		<= clk_32MHz;	-- 32MHz  
 	clk_VAC_ADC		<= clk_32MHz;	-- 32MHz 
+	clk_VDC_ADC		<= not clk_16MHz;	-- 16MHz
+	
+	STAT_COMM		<= ICE_GPMO_2; 
+	--STAT_COMM		<= not comm_response;
 
-	clk_VDC_ADC		<= not clk_16MHz;	-- 16MHz 
-
-
+	VAC_FLT1			<= buf_device_acadc(7);
+	VAC_FLT0			<= buf_device_acadc(6);
+	VAC_OSR1			<= buf_device_acadc(5);
+	VAC_OSR0			<= buf_device_acadc(4);
+	IAC_FLT1			<= buf_device_acadc(3);
+	IAC_FLT0			<= buf_device_acadc(2);
+	IAC_OSR1			<= buf_device_acadc(1);
+	IAC_OSR0			<= buf_device_acadc(0);
+	
+	ICE_GPMI_0     <= comm_response;
+	
+--	VAC_FLT1			<= buf_device_acadc(7);
+--	VAC_FLT0			<= buf_device_acadc(6);
+--	VAC_OSR1			<= buf_device_acadc(5);
+--	VAC_OSR0			<= buf_device_acadc(4);
 --	IAC_FLT1			<= eis_end;
 --	IAC_FLT0			<= acadc_rst;
 --	IAC_OSR1			<= eis_stop;
 --	IAC_OSR0			<= eis_start;
 
-	STAT_COMM		<= ICE_GPMO_2; 
-	--STAT_COMM		<= not comm_response;
-	ICE_GPMI_0     <= comm_response;
+	AMPV_POW			<= buf_control(5);
+	VDC_RNG0			<= buf_control(4);
+	SELIRNG1			<= buf_control(3);
+	SELIRNG0			<= buf_control(2);
+	DDS_RNG_0		<= buf_control(1);
 	
+	CONT_SD <= buf_control(0) when wdtick_flag = '0' else '0';
+	
+	buf_data_iac 	<=  iac_raw_buf(data_index);
+	buf_data_vac 	<=  vac_raw_buf(data_index);
+
+	process(clk_16MHz) --16MHz / 128 = 120500Hz , 64= 0x40 :::: 
+	begin
+		if falling_edge(clk_16MHz) then 
+			dds0_mclkcnt <= dds0_mclkcnt + "1";
+			if dds0_mclkcnt = x"40" then 
+				dds0_mclk	<= not dds0_mclk; 
+				dds0_mclkcnt <= x"01";
+			end if;
+		end if;
+	end process;
+
 	process(clk_16MHz) --16MHz
 	begin
 		if rising_edge(clk_16MHz) then
@@ -397,49 +424,30 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		elsif rising_edge(clk_16MHz) then 
 			if wdtick_flag	= '0' then
 				wdtick_cnt <= wdtick_cnt + "1";
-				if wdtick_cnt = x"FFFFFFF" then
+				if wdtick_cnt = x"1E84800" then
 					wdtick_flag	<= '1'; 
 					wdtick_cnt <= x"0000000";
 				end if;
 			end if;
 		end if;
 	end process;
-	
-	process(clk_16MHz) --16MHz / 16000000 = 1Hz , 8000000 = 0x7A1200
+
+
+
+	process(clk_16MHz) --16000000 / 16000000 = 1Hz , 8000000 = 0x7A1200
 	begin
 		if rising_edge(clk_16MHz) then 
 			secclk_cnt <= secclk_cnt + "1";
-			if secclk_cnt = x"007A1200" then
+			if secclk_cnt = x"07A1200" then
 				SecClk	<= not SecClk; 
-				secclk_cnt <= x"00000000";
-			end if;
-		end if;
-	end process;
-
-
---	process(clk_32MHz) --32MHz / 256 = 125KHz , 128 = 0x80
---	begin
---		if rising_edge(clk_32MHz) then 
---			dds0_mclkcnt <= dds0_mclkcnt + "1";
---			if dds0_mclkcnt = x"80" then
---				dds0_mclk	<= not dds0_mclk; 
---				dds0_mclkcnt <= x"01";
---			end if;
---		end if;
---	end process;
-
-	process(clk_16MHz) --16MHz / 128 = 120500Hz , 64= 0x40 :::: 
-	begin
-		if falling_edge(clk_16MHz) then 
-			dds0_mclkcnt <= dds0_mclkcnt + "1";
-			if dds0_mclkcnt = x"40" then 
-				dds0_mclk	<= not dds0_mclk; 
-				dds0_mclkcnt <= x"01";
+				secclk_cnt <= x"0000000";
 			end if;
 		end if;
 	end process;
 	
-	process(eis_clk, eis_adc_trig, acadc_dtrig_i, acadc_dtrig_v, acadc_rst, eis_start, eis_stop, req_data_cnt,acadc_skipCount) --8MHz
+	TEST_LED 		<= SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
+
+	process(eis_clk, acadc_trig, acadc_dtrig_i, acadc_dtrig_v, acadc_rst, eis_start, eis_stop, req_data_cnt,acadc_skipCount) --8MHz
 	begin
 		if acadc_rst = '1' then
 			eis_state		<= s_reset;
@@ -450,7 +458,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				data_cntvec		<= x"0000";
 				acadc_skipcnt	<= x"0000";
 				eis_end 			<= '0';
-				eis_adc_trig     <= '0';
+				acadc_trig     <= '0';
 				eis_state		<= s_idle;
 				
 			when s_idle =>
@@ -459,14 +467,13 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				data_count		<= 0;
 				data_cntvec		<= x"0000";
 				acadc_skipcnt	<= x"0000";
-				eis_adc_trig     <= '0';
+				acadc_trig     <= '0';
 				
 			when s_chk_begin =>
 				eis_end 			<= '0';
-				eis_adc_trig     <= '1';
+				acadc_trig     <= '1';
 --				if acadc_trig = '1' then	
 					if eis_start = '1' then
-						dummy <= '1';
 						if acadc_skipCount = acadc_skipcnt then
 							eis_state		<= s_sample_h;
 						else
@@ -478,7 +485,6 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 --				end if;		
 	
 			when s_sample_h =>
-				dummy <= '0';
 				if acadc_dtrig_i = '1' and acadc_dtrig_v = '1' then	
 					iac_raw_buf(data_count) <= buf_adcdata_iac;
 					vac_raw_buf(data_count) <= buf_adcdata_vac;
@@ -486,7 +492,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 					data_cntvec <= data_cntvec + "1";
 					eis_state		<= s_chk_finish;
 				end if;
-
+					
 			when s_skipsmpl_h =>
 				if acadc_dtrig_i = '1' and acadc_dtrig_v = '1' then	
 					acadc_skipcnt <= acadc_skipcnt + "1";
@@ -495,12 +501,12 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				
 			when s_bypass_h =>
 				if acadc_dtrig_i = '1' and acadc_dtrig_v = '1' then	
+
 					eis_state		<= s_chk_finish;
 				end if;
 				
 			when s_chk_finish =>
-				eis_adc_trig	<= '0';
-				
+				acadc_trig	<= '0';
 				if acadc_dtrig_i = '0' and acadc_dtrig_v = '0' then
 					if data_cntvec = req_data_cnt or eis_stop = '1' then 
 						eis_end 	<= '1';
@@ -522,57 +528,9 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		end if;
 	end process;
 	
-	buf_data_iac 	<=  iac_raw_buf(data_index);
-	buf_data_vac 	<=  vac_raw_buf(data_index);
-
-	AMPV_POW			<= buf_control(5);
-	VDC_RNG0			<= not buf_control(4);
-	SELIRNG1			<= buf_control(3);
-	SELIRNG0			<= buf_control(2);
-	DDS_RNG_0		<= buf_control(1);
-	CONT_SD <= buf_control(0) when wdtick_flag = '0' else '0';
-
-	acadc_rst		<= tacadc_rst; -- not 	
-
-	VAC_FLT1			<= buf_device_acadc(7);
-	VAC_FLT0			<= buf_device_acadc(6);
-	VAC_OSR1			<= buf_device_acadc(5);
-	VAC_OSR0			<= buf_device_acadc(4);
-	IAC_FLT1			<= buf_device_acadc(3);
-	IAC_FLT0			<= buf_device_acadc(2);
-	IAC_OSR1			<= buf_device_acadc(1);
-	IAC_OSR0			<= buf_device_acadc(0);
-
-	-- RESET masking
-	process(clk_spicomm)
-	begin
-		if rising_edge(clk_spicomm) then
-			if (comm_clear='1' and cs_mask_cnt=0) or (cs_prev='1' and cs_mask_cnt=0) then
-				reset_int <= '1';
-			else
-				reset_int <= '0';
-			end if;
-		end if;
-	end process;
-
 	process(clk_spicomm, THERMOSTAT, ICE_SPI_CE0,eis_end, comm_data_vld, data_cntvec)
 	begin
 		if rising_edge(clk_spicomm) then
-			-- 2-FF sync
-			cs_sync1 <= ICE_SPI_CE0;
-			cs_sync2 <= cs_sync1;
-
-			cs_prev <= cs_sync2;
-
-			-- falling edge pending
-			if (cs_sync1='0' and cs_sync2='1') then
-				cs_falling_pend <= '1';
-				cs_mask_cnt <= 3; -- RESET masking period
-			end if;
-
-			if cs_mask_cnt > 0 then
-				cs_mask_cnt <= cs_mask_cnt - 1;
-			end if;
 
 			case comm_state is
 			when s_reset =>
@@ -593,9 +551,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				comm_index		<= 0;
 				comm_length 	<= 0;
 				comm_cmd			<= x"00";
-				--if cs_falling = '1' then --ICE_SPI_CE0
-                if cs_falling_pend = '1' and cs_mask_cnt = 0 then
-                    cs_falling_pend <= '0'; -- clear after use				
+				if ICE_SPI_CE0 = '0' then
 					comm_state			<= s_start;
 				end if;
 	
@@ -605,13 +561,12 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				flagcntwd		<= '1';
 				buf_control(7) 	<= not THERMOSTAT;
 				
-				if cs_prev = '1' then -- ICE_SPI_CE0
+				if ICE_SPI_CE0 = '1' then
 					comm_state			<= s_comm_err;
 				else
 					if comm_data_vld  = '1' then
 						comm_cmd 			<= comm_rx_buf;
 						comm_state			<= s_chk_cmd;
-						--dummy  <= '1';
 					end if;
 				end if;
 				
@@ -619,14 +574,14 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				comm_clear		<= '1';
 				comm_response	<= '0';
 				
-				if cs_prev = '1' then --ICE_SPI_CE0 comm_data_vld = '0' and 
+				if comm_data_vld = '0' and ICE_SPI_CE0 = '1' then
 					comm_state		<= s_idle;	
 --					comm_state			<= s_data_finish1;
 				end if;
 			
 			when s_chk_cmd =>	
-				--comm_clear		<= '1';
-				comm_response	<= '1';
+				comm_clear		<= '1';
+--				comm_response	<= '1';
 --				comm_index		<= 0;
 
 				comm_state		<= s_data_set;
@@ -688,7 +643,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						
 					when "0011011" =>			--ICE_CMD_EIS_CFG 		: 0x9B
 						comm_length			<= 1;
-						comm_buf(0)			<= "00000" & tacadc_rst & eis_stop & eis_start_cmd; 
+						comm_buf(0)			<= "00000" & acadc_rst & eis_stop & eis_start;
 						
 					when "0011100" =>			--ICE_CMD_EIS_SMPLS 		: 0x9C
 						comm_length			<= 2;
@@ -735,9 +690,10 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						comm_state			<= s_comm_err;
 						
 				end case;
+				
 			when  s_data_set => 
 				comm_clear		<= '1';
-				comm_response	<= '1';
+--				comm_response	<= '1';
 
 				if comm_cmd(7) = '1' then
 					comm_tx_buf <= comm_buf(comm_index);
@@ -745,18 +701,19 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 					comm_tx_buf <= x"00";
 				end if;
 				
-				if cs_prev = '1' then
+				if ICE_SPI_CE0 = '1' then
 					comm_state			<= s_comm_err;
 				else
 					if comm_data_vld = '0' then
 						comm_state			<= s_data_wrd;
 					end if;
 				end if;
+				
 			when  s_data_wrd =>
 				comm_clear			<= '0';
-				comm_response		<= '1';
+--				comm_response		<= '1';
 				
-				if cs_prev = '1' then -- ICE_SPI_CE0 = '1'
+				if ICE_SPI_CE0 = '1' then
 					comm_state			<= s_comm_err;
 				else
 					if comm_data_vld = '1' then
@@ -770,9 +727,9 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 				
 			when  s_data_chk => 	
 				comm_clear		<= '1';
-				comm_response		<= '1';
-				--dummy  <= not dummy;
-			if cs_prev = '1' then
+--				comm_response		<= '1';
+				
+				if ICE_SPI_CE0 = '1' then
 					comm_state			<= s_comm_err;
 				else
 					if comm_length = comm_index then
@@ -789,7 +746,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			when  s_data_finish => 	
 				comm_state		<= s_data_finish1;
 --				comm_clear		<= '1';
-				comm_response	<= '1';
+--				comm_response	<= '1';
 
 				case comm_cmd(6 downto 0) is	
 					when "0010000" =>		--ICE_CMD_DDS0 : 0x10
@@ -820,9 +777,9 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						req_data_cnt(7 downto 0)			<= comm_buf(1);	
 						
 					when "0011011" =>			--ICE_CMD_EIS CFG 		: 0x1B
-						tacadc_rst			<= comm_buf(0)(2);
+						acadc_rst			<= comm_buf(0)(2);
 						eis_stop				<= comm_buf(0)(1);
-						eis_start_cmd			<= comm_buf(0)(0); 
+						eis_start			<= comm_buf(0)(0);
 
 					when "0011101" =>			--ICE_CMD_EIS SET INDEX 		: 0x1D
 						data_idxvec(15 downto 8)			<= comm_buf(0);
@@ -851,11 +808,9 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			when  s_data_finish1 => 	
 				comm_clear		<= '1';
 				comm_response	<= '1';
-				
 
-				if comm_data_vld = '0' and cs_prev = '1' then -- ICE_SPI_CE0
-					comm_state		<= s_idle;
-						
+				if comm_data_vld = '0' and ICE_SPI_CE0 = '1' then
+					comm_state		<= s_idle;	
 				end if;
 				
 			when others =>
@@ -865,43 +820,20 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		end if;
 	end process;
 
-	pll_main : zim_pll 
-	port map (
-		REFERENCECLK	=> ICE_SYSCLK,
-		RESET				=> pll_reset,
-		PLLOUTCOREA		=> pll_outa,
-		PLLOUTCOREB		=> pll_outb,
-		PLLOUTGLOBALA	=> clk_32MHz,   -- 32MHz
-		PLLOUTGLOBALB	=> clk_16MHz    -- 16MHz
-	);
 	
 	
-	ADC_IAC : ADC_ADS127 
+	
+	comm_spi : SPI_SLAVE 
 	port map (
-		CLK 			=> clk_IAC_ADC, 
-		RESET			=> '0',
-		TRIG			=> eis_adc_trig, --acadc_trig, 
-		DTRIG			=> acadc_dtrig_i,	
-		ADC_DATA		=> buf_adcdata_iac, 		
-		SCLK 			=> IAC_SCLK, 	
-		CS 			=> IAC_CS, 	
-		MOSI 			=> IAC_MOSI, 	
-		MISO 			=> IAC_MISO, 	
-		DRDY 			=> IAC_DRDY 	
-	);
-
-	ADC_VAC : ADC_ADS127 
-	port map (
-		CLK 			=> clk_VAC_ADC, 	
-		RESET			=> '0',
-		TRIG			=> eis_adc_trig, 
-		DTRIG			=> acadc_dtrig_v,	
-		ADC_DATA		=> buf_adcdata_vac, 		
-		SCLK 			=> VAC_SCLK, 	
-		CS 			=> VAC_CS, 	
-		MOSI 			=> VAC_MOSI, 	
-		MISO 			=> VAC_MISO, 	
-		DRDY 			=> VAC_DRDY 	
+		CLK 		=> clk_spislave,
+		RESET		=> comm_clear,
+		SCLK 		=> ICE_SPI_SCLK,	
+		CS_N 		=> ICE_SPI_CE0, 
+		MOSI 		=> ICE_SPI_MOSI, 	
+		MISO 		=> ICE_SPI_MISO, 	
+		DIN 		=> comm_tx_buf,   	
+		DOUT 		=> comm_rx_buf, 
+		DATA_VLD => comm_data_vld
 	);
 	
 	SIG_DDS : DDS_AD9837 
@@ -924,18 +856,44 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			MOSI		=> DDS_MOSI1
 	);
 
-	comm_spi : SPI_SLAVE 
+	
+
+	ADC_IAC : ADC_ADS127 
 	port map (
-		CLK 		=> clk_spislave,
-		RESET		=> reset_int, -- (comm_clear AND cs_prev),
-		SCLK 		=> ICE_SPI_SCLK,	
-		CS_N 		=> ICE_SPI_CE0, 
-		MOSI 		=> ICE_SPI_MOSI, 	
-		MISO 		=> ICE_SPI_MISO, 	
-		DIN 		=> comm_tx_buf,   	
-		DOUT 		=> comm_rx_buf, 
-		DATA_VLD => comm_data_vld
-	);	
+		CLK 			=> clk_IAC_ADC, 
+		RESET			=> '0',
+		TRIG			=> acadc_trig, 
+		DTRIG			=> acadc_dtrig_i,	
+		ADC_DATA		=> buf_adcdata_iac, 		
+		SCLK 			=> IAC_SCLK, 	
+		CS 			=> IAC_CS, 	
+		MOSI 			=> IAC_MOSI, 	
+		MISO 			=> IAC_MISO, 	
+		DRDY 			=> IAC_DRDY 	
+	);
+
+	ADC_VAC : ADC_ADS127 
+	port map (
+		CLK 			=> clk_VAC_ADC, 	
+		RESET			=> '0',
+		TRIG			=> acadc_trig, 
+		DTRIG			=> acadc_dtrig_v,	
+		ADC_DATA		=> buf_adcdata_vac, 		
+		SCLK 			=> VAC_SCLK, 	
+		CS 			=> VAC_CS, 	
+		MOSI 			=> VAC_MOSI, 	
+		MISO 			=> VAC_MISO, 	
+		DRDY 			=> VAC_DRDY 	
+	);
+	
+	ADC_VDC : ADC_ADS1252
+	Port map (
+		CLK 			=> clk_VDC_ADC,			
+		ADC_DATA		=> buf_adcdata_vdc, 	
+		MCLK 			=> VDC_CLK, 	
+		SCLK 			=> VDC_SCLK, 	
+		MISO 			=> VDC_SDO
+	);
 
 	RTD : ADC_MAX31865 
 	port map (
@@ -948,17 +906,5 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			MISO			=> RTD_SDO, 
 			DRDY			=> RTD_DRDY 
 	);
-
-	
-	
-	ADC_VDC : ADC_ADS1252
-	Port map (
-		CLK 			=> clk_VDC_ADC,			
-		ADC_DATA		=> buf_adcdata_vdc, 	
-		MCLK 			=> VDC_CLK, 	
-		SCLK 			=> VDC_SCLK, 	
-		MISO 			=> VDC_SDO
-	);
-
 	
 end behav;

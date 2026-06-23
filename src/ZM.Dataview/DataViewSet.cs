@@ -121,8 +121,7 @@ namespace ZiveLab.ZM.Dataview
         public string XAxisFormat { get; set; }
         public string[] YAxesFormat { get; set; }        
 
-        public string OpenPath { get; set; }
-
+        public string[] OpenPath { get; set; }
 
         public GraphSetEx()    // 0 : General, 1 : Cycle, 2 : EIS
         {
@@ -133,8 +132,16 @@ namespace ZiveLab.ZM.Dataview
 
             XAxisFormat = "Zreal";
             YAxesFormat = new string[] { "-Zimg", "None", "None", "None" };
+            OpenPath = new string[] { "C:\\ZIVE DATA\\ZM\\Data\\", "", "", "", "", "", "", "", "", "" };
+        }
 
-            OpenPath = "C:\\ZIVE DATA\\ZM\\Data\\"; 
+        public void ApplyPathData(string sPath)
+        {
+            for(int i=0; i<9; i++)
+            {
+                OpenPath[i + 1] = OpenPath[i];
+            }
+            OpenPath[0] = sPath;
         }
     }
 
@@ -146,10 +153,7 @@ namespace ZiveLab.ZM.Dataview
 
         public bool UnitC { get; set; }
         public int TimeFormat { get; set; }
-        public string ResultPath { get; set; }
-        public string FilePath { get; set; }
-        public bool SplitSave { get; set; }
-        public int SplitSavePoint { get; set; }
+
         public bool CycleColumnArrange { get; set; }
 
         public List<DataColItem> DataColList { get; set; }
@@ -157,10 +161,7 @@ namespace ZiveLab.ZM.Dataview
         public DataConvSet() 
         {
             TimeFormat = 1;
-            ResultPath = "C:\\ZIVE DATA\\ZM\\Data\\";
-            FilePath = "C:\\ZIVE DATA\\ZM\\Data\\";
-            SplitSave = false;
-            SplitSavePoint = 500000;
+
             CycleColumnArrange = false;
             InitDataColList();
         }    

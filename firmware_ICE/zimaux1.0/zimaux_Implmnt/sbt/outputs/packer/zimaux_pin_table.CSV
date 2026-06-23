@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:31:51
 
-* File Generated:     Apr 22 2026 11:02:51
+* File Generated:     Jun 1 2026 16:37:45
 
 * Purpose:            Detailed IO and package pin info
 
@@ -40,9 +40,9 @@ Pin Number, Pin Type Name, Signal Name, Direction, Global Buffer, IO Standard, P
 19, PIO, not used, , , , , , leftBank
 20, PIO_GBIN, not used, , , , , , leftBank
 21, PIO_GBIN, not used, , , , , , leftBank
-22, PIO, ICE_IOL_14B, Output, , SB_LVCMOS, No Pull Up, Simple Output, leftBank
-23, PIO, ICE_IOL_17A, Output, , SB_LVCMOS, No Pull Up, Simple Output, leftBank
-24, PIO, ICE_IOL_17B, Output, , SB_LVCMOS, No Pull Up, Simple Output, leftBank
+22, PIO, not used, , , , , , leftBank
+23, PIO, not used, , , , , , leftBank
+24, PIO, not used, , , , , , leftBank
 25, PIO, not used, , , , , , leftBank
 26, PIO, not used, , , , , , leftBank
 27, VCC, not used, , , , , , UnknownBank
@@ -52,7 +52,7 @@ Pin Number, Pin Type Name, Signal Name, Direction, Global Buffer, IO Standard, P
 31, PIO, not used, , , , , , leftBank
 32, PIO, not used, , , , , , leftBank
 33, PIO, not used, , , , , , leftBank
-34, PIO, ICE_IOL_25B, Input, , SB_LVCMOS, No Pull Up, Simple Input, leftBank
+34, PIO, START_SYNC, Input, , SB_LVCMOS, No Pull Up, Simple Input, leftBank
 37, PIO, ICE_SYSCLK, Input, , SB_LVCMOS, No Pull Up, Simple Input, bottomBank
 38, PIO, TEST_LED, Output, , SB_LVCMOS, No Pull Up, Simple Output, bottomBank
 39, PIO, DDS_MCLK1, Output, , SB_LVCMOS, No Pull Up, Simple Output, bottomBank
@@ -96,7 +96,7 @@ Pin Number, Pin Type Name, Signal Name, Direction, Global Buffer, IO Standard, P
 80, PIO, ICE_GPMO_2, Input, , SB_LVCMOS, Pull Up, Simple Input, rightBank
 81, PIO, ICE_GPMI_0, Output, , SB_LVCMOS, No Pull Up, Simple Output, rightBank
 82, PIO, not used, , , , , , rightBank
-83, PIO, ICE_CHKCABLE,  , , SB_LVCMOS, No Pull Up, , rightBank
+83, PIO, ICE_CHKCABLE, Input, , SB_LVCMOS, No Pull Up, Simple Input, rightBank
 84, PIO, not used, , , , , , rightBank
 85, PIO, not used, , , , , , rightBank
 86, GND, not used, , , , , , UnknownBank
@@ -157,4 +157,4 @@ Pin Number, Pin Type Name, Signal Name, Direction, Global Buffer, IO Standard, P
 142, PIO, M_CLK3, Output, , SB_LVCMOS, No Pull Up, Simple Output, topBank
 143, PIO, M_DRDY3, Input, , SB_LVCMOS, No Pull Up, Simple Input, topBank
 144, PIO, not used, , , , , , topBank
-Total Number of Used Pins, 52
+Total Number of Used Pins, 49

@@ -438,16 +438,17 @@ namespace ZiveLab.ZM
             string stext;
             int tmp = 0;
             bool bNoCalib = false;
-            stZimCfg p;
-            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[nAuxBoard];
-            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg.mZimCfg[nAuxBoard];
-            eZimType zimtype = (eZimType)(p.info.cModel[0] - 0x30);
+            stSystemConfig p;
 
+            if (gBZA.SifLnkLst.ContainsKey(Serial)) p = gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg;
+            else p = gBZA.ChLnkLst[selch.ToString()].mDevInf.mSysCfg;
+            eZimType zimtype = (eZimType)(p.mZimCfg[nAuxBoard].info.cModel[0] - 0x30);
+            
             for (int i = 0; i < DeviceConstants.MAX_IAC_RNGCNT; i++)
             {
 
                 //stext = SM_Number.ToRangeString(p.ranges[0].iac_rng[i].realmax, "A");
-                stext = SM_Number.ToRangeString(p.ranges.Gen.iac_rng[i].realmax, "A"); // 배열
+                stext = SM_Number.ToRangeString(p.mZimCfg[0].ranges.Gen.iac_rng[i].realmax, "A"); // 배열
 
                 node = parentnode.Nodes.Add(String.Format("{0}{1}/", parentnode.Name, i), stext);
                 node.Tag = (string)parentnode.Tag + "/" + stext;
@@ -456,7 +457,7 @@ namespace ZiveLab.ZM
 
                 if(tmp == 1)
                 {
-                    if (p.ranges.Aux.iac_gain[nAuxCh].items[i].iac_gain1 == 1.0 && p.ranges.Aux.iac_gain[nAuxCh].items[i].iac_gain2 == 1.0) 
+                    if (p.mZimCfg[nAuxBoard].ranges.Aux.iac_gain[nAuxCh].items[i].iac_gain1 == 1.0 && p.mZimCfg[nAuxBoard].ranges.Aux.iac_gain[nAuxCh].items[i].iac_gain2 == 1.0) 
                     {
                         {
                             tmp = 2;

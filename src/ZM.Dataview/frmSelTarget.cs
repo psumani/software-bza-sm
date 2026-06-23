@@ -12,7 +12,6 @@ namespace ZiveLab.ZM.Dataview
 {
     public partial class frmSelTarget : Form
     {
-        public eDelimiter Delimiter { get; private set; }
         public int TargetIdx;
         public int _MaxAuxCount;
         public frmSelTarget(int langidx, int MaxAuxCount)
@@ -34,14 +33,6 @@ namespace ZiveLab.ZM.Dataview
         private void OnOK_Click(object sender, EventArgs e)
         {
             TargetIdx = cboTarget.SelectedIndex;
-            if (rbTab.Checked)
-                Delimiter = eDelimiter.Tab;
-
-            if (rbComma.Checked)
-                Delimiter = eDelimiter.Comma;
-
-            if (rbSpace.Checked)
-                Delimiter = eDelimiter.Space;
 
             DialogResult = DialogResult.OK;
         }
@@ -55,7 +46,7 @@ namespace ZiveLab.ZM.Dataview
         {
             if (_MaxAuxCount <= 0) cboTarget.Enabled = false;
 
-                cboTarget.Items.Clear();
+            cboTarget.Items.Clear();
 
             cboTarget.Items.Add("Main");
 

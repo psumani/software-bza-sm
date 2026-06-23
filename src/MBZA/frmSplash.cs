@@ -159,6 +159,7 @@ namespace ZiveLab.ZM
                         
                         if (mtype == eDeviceType.MCBZA)
                         {
+                           
                             str = string.Format("   -> {0}({1}):{2}[Firmware:{3},Model:{4},{5} boards, {6} Aux boards.]-Connected.\r\n", ScanSifCount + 1, mLinkSIF.sip, mLinkSIF.mDevInf.mConnCfg.GetSerialNumber(), mLinkSIF.mDevInf.mSysCfg.mSIFCfg.GetFirmwareVer(), Extensions.GetEnumDescription((eDeviceType)mLinkSIF.mDevInf.mSysCfg.mSIFCfg.Type), BoardCount>0?1:0, Math.Max(BoardCount - 1,0));
                         }
                         else
@@ -188,9 +189,13 @@ namespace ZiveLab.ZM
 
                     mLinkSIF.sip = ip;
                     mLinkSIF.sMac = pair.Value.sMac;
+
+
                     mLinkSIF.mDevInf.ToWritePtr(pair.Value.mDevInf.ToByteArray());
                     mLinkSIF.mFindSifCfg.ToWritePtr(pair.Value.mFindSifCfg.ToByteArray());
                     mtype = (eDeviceType)mLinkSIF.mDevInf.mSysCfg.mSIFCfg.Type;
+
+
 
                     BoardCount = 0;
                     AuxBdCount = 0;

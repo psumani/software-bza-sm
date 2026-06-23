@@ -76,33 +76,18 @@ namespace SMLib
     {
         public void SaveObjToXml(string filename, T obj)
         {
-            object toSave;
-
-            if (typeof(T) == typeof(List<stRegLinkSifCh>))
+            XmlSerializer serializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
+            using (TextWriter writer = new StreamWriter(filename))
             {
-                var originList = obj as List<stRegLinkSifCh>;
-                var converted = originList.Select(x => new stRegLinkSifChXml(x)).ToList();
-                toSave = converted;
-
-                XmlSerializer serializer = new XmlSerializer(typeof(List<stRegLinkSifChXml>));
-                using (TextWriter writer = new StreamWriter(filename))
-                {
-                    serializer.Serialize(writer, toSave);
-                }
-            }
-            else
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-                using (TextWriter writer = new StreamWriter(filename))
-                {
-                    serializer.Serialize(writer, obj);
-                }
+                serializer.Serialize(writer, obj);
+                writer.Close();
             }
         }
 
 
         public T LoadXmlToObj(string filename, T defaultValue)
         {
+            T ret;
             if (!File.Exists(filename))
             {
                 SaveObjToXml(filename, defaultValue);
@@ -111,23 +96,12 @@ namespace SMLib
 
             try
             {
-                if (typeof(T) == typeof(List<stRegLinkSifCh>))
+                XmlSerializer deserializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
+                using (TextReader reader = new StreamReader(filename))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<stRegLinkSifChXml>));
-                    using (TextReader reader = new StreamReader(filename))
-                    {
-                        var xmlList = (List<stRegLinkSifChXml>)serializer.Deserialize(reader);
-                        var result = xmlList.Select(x => x.ToOrigin()).ToList();
-                        return (T)(object)result;
-                    }
-                }
-                else
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    using (TextReader reader = new StreamReader(filename))
-                    {
-                        return (T)serializer.Deserialize(reader);
-                    }
+                    ret = (T)deserializer.Deserialize(reader);
+                    reader.Close();
+                    return ret;
                 }
             }
             catch

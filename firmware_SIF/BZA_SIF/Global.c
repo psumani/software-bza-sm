@@ -22,7 +22,7 @@ uint m_PtrDataRd[MAX_SOCKET_NUM];
 byte *_pNandBuffer;
 byte *m_PtrTemp;
 
-
+ushort m_LocalPort;
 //..SMART System info .. block 16
 stSystemConfig* m_pSysConfig;
 stConnCfg*      m_pConnCfg;

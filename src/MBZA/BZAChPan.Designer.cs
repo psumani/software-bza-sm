@@ -46,8 +46,6 @@
             this.MenuPlotGridX1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY11 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLegend1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuGraphMode1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuModeZoom1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuModeMove1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,8 +78,6 @@
             this.MenuPlotGridX2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY21 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuPlotGridY22 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuPlotLegend2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuGraphMode2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuModeZoom2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuModeMove2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,8 +112,6 @@
             this.RtMenuGraphView = new System.Windows.Forms.ToolStripMenuItem();
             this.RtMenuGraphLine = new System.Windows.Forms.ToolStripMenuItem();
             this.RtMenuGraphPoint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.RtMenuGraphLegend = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.RtMenuGraphGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.RtMenuGraphColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,6 +142,35 @@
             this.lblVeoc = new System.Windows.Forms.Label();
             this.lblzimg = new System.Windows.Forms.Label();
             this.lblzreal = new System.Windows.Forms.Label();
+            this.RawRtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.RawRtMenuGraphMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphMode1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphMode2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawpauseRefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphView = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphPoint = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphGrid = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.RawRtMenuGraphPlotColor1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphAxisColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphGridColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
+            this.RawRtMenuGraphBackColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbldatacount = new System.Windows.Forms.Label();
+            this.lblResult = new System.Windows.Forms.Label();
+            this.lblTech = new System.Windows.Forms.Label();
+            this.lblIdc = new System.Windows.Forms.Label();
+            this.btabout = new System.Windows.Forms.Button();
+            this.legendItem108 = new NationalInstruments.UI.LegendItem();
+            this.grpAuxMon = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboAuxMon1 = new System.Windows.Forms.ComboBox();
+            this.listAuxMon = new System.Windows.Forms.ListView();
             this.tabgrp = new System.Windows.Forms.TabControl();
             this.TabGrp1 = new System.Windows.Forms.TabPage();
             this.grpboxni1 = new System.Windows.Forms.GroupBox();
@@ -560,50 +583,20 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rawgrp = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.RawRtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.RawRtMenuGraphMode = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphMode1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphMode2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
-            this.RawpauseRefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphView = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphPoint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-            this.RawRtMenuGraphLegend = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
-            this.RawRtMenuGraphGrid = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphColor = new System.Windows.Forms.ToolStripMenuItem();
-            this.RawRtMenuGraphPlotColor1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
-            this.RawRtMenuGraphAxisColor = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
-            this.RawRtMenuGraphGridColor = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
-            this.RawRtMenuGraphBackColor = new System.Windows.Forms.ToolStripMenuItem();
             this.scatterPlot1 = new NationalInstruments.UI.ScatterPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
             this.yAxis1 = new NationalInstruments.UI.YAxis();
             this.scatterPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.yAxis2 = new NationalInstruments.UI.YAxis();
             this.RawRead = new System.Windows.Forms.Button();
-            this.lbldatacount = new System.Windows.Forms.Label();
-            this.lblResult = new System.Windows.Forms.Label();
-            this.lblTech = new System.Windows.Forms.Label();
-            this.lblIdc = new System.Windows.Forms.Label();
-            this.btabout = new System.Windows.Forms.Button();
-            this.legendItem108 = new NationalInstruments.UI.LegendItem();
-            this.grpAuxMon = new System.Windows.Forms.GroupBox();
-            this.rdoAuxMon3 = new System.Windows.Forms.RadioButton();
-            this.rdoAuxMon2 = new System.Windows.Forms.RadioButton();
-            this.rdoAuxMon1 = new System.Windows.Forms.RadioButton();
-            this.listAuxMon = new System.Windows.Forms.ListView();
             this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.menu_1.SuspendLayout();
             this.menu_2.SuspendLayout();
             this.RtMenuStrip.SuspendLayout();
             this.contextMenuRes.SuspendLayout();
             this.contextMenuTech.SuspendLayout();
+            this.RawRtMenuStrip.SuspendLayout();
+            this.grpAuxMon.SuspendLayout();
             this.tabgrp.SuspendLayout();
             this.TabGrp1.SuspendLayout();
             this.grpboxni1.SuspendLayout();
@@ -628,16 +621,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.RawRtlegend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).BeginInit();
-            this.RawRtMenuStrip.SuspendLayout();
-            this.grpAuxMon.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblErrStatus
             // 
+            this.lblErrStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblErrStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblErrStatus.Location = new System.Drawing.Point(6, 44);
+            this.lblErrStatus.Location = new System.Drawing.Point(6, 46);
             this.lblErrStatus.Name = "lblErrStatus";
-            this.lblErrStatus.Size = new System.Drawing.Size(470, 15);
+            this.lblErrStatus.Size = new System.Drawing.Size(583, 16);
             this.lblErrStatus.TabIndex = 34;
             this.lblErrStatus.Text = "  Error: Idle";
             // 
@@ -715,9 +708,7 @@
             this.toolStripSeparator29,
             this.MenuPlotGridX1,
             this.MenuPlotGridY11,
-            this.MenuPlotGridY12,
-            this.toolStripSeparator6,
-            this.MenuPlotLegend1});
+            this.MenuPlotGridY12});
             this.MenuGraphView1.Name = "MenuGraphView1";
             this.MenuGraphView1.Size = new System.Drawing.Size(141, 22);
             this.MenuGraphView1.Text = "Graph view";
@@ -725,52 +716,40 @@
             // MenuGraphLine1
             // 
             this.MenuGraphLine1.Name = "MenuGraphLine1";
-            this.MenuGraphLine1.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphLine1.Size = new System.Drawing.Size(152, 22);
             this.MenuGraphLine1.Text = "Line";
             // 
             // MenuGraphPoint1
             // 
             this.MenuGraphPoint1.Name = "MenuGraphPoint1";
-            this.MenuGraphPoint1.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphPoint1.Size = new System.Drawing.Size(152, 22);
             this.MenuGraphPoint1.Text = "Point";
             // 
             // toolStripSeparator29
             // 
             this.toolStripSeparator29.Name = "toolStripSeparator29";
-            this.toolStripSeparator29.Size = new System.Drawing.Size(134, 6);
+            this.toolStripSeparator29.Size = new System.Drawing.Size(149, 6);
             // 
             // MenuPlotGridX1
             // 
             this.MenuPlotGridX1.Name = "MenuPlotGridX1";
-            this.MenuPlotGridX1.Size = new System.Drawing.Size(137, 22);
+            this.MenuPlotGridX1.Size = new System.Drawing.Size(152, 22);
             this.MenuPlotGridX1.Text = "Grid axis x";
             this.MenuPlotGridX1.Click += new System.EventHandler(this.MenuPlotGridX1_Click);
             // 
             // MenuPlotGridY11
             // 
             this.MenuPlotGridY11.Name = "MenuPlotGridY11";
-            this.MenuPlotGridY11.Size = new System.Drawing.Size(137, 22);
+            this.MenuPlotGridY11.Size = new System.Drawing.Size(152, 22);
             this.MenuPlotGridY11.Text = "Grid axis y1";
             this.MenuPlotGridY11.Click += new System.EventHandler(this.MenuPlotGridY11_Click);
             // 
             // MenuPlotGridY12
             // 
             this.MenuPlotGridY12.Name = "MenuPlotGridY12";
-            this.MenuPlotGridY12.Size = new System.Drawing.Size(137, 22);
+            this.MenuPlotGridY12.Size = new System.Drawing.Size(152, 22);
             this.MenuPlotGridY12.Text = "Grid axis y2";
             this.MenuPlotGridY12.Click += new System.EventHandler(this.MenuPlotGridY12_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(134, 6);
-            // 
-            // MenuPlotLegend1
-            // 
-            this.MenuPlotLegend1.Name = "MenuPlotLegend1";
-            this.MenuPlotLegend1.Size = new System.Drawing.Size(137, 22);
-            this.MenuPlotLegend1.Text = "Legend";
-            this.MenuPlotLegend1.Click += new System.EventHandler(this.MenuPlotLegend1_Click);
             // 
             // MenuGraphMode1
             // 
@@ -967,9 +946,7 @@
             this.toolStripSeparator30,
             this.MenuPlotGridX2,
             this.MenuPlotGridY21,
-            this.MenuPlotGridY22,
-            this.toolStripSeparator9,
-            this.MenuPlotLegend2});
+            this.MenuPlotGridY22});
             this.MenuGraphView2.Name = "MenuGraphView2";
             this.MenuGraphView2.Size = new System.Drawing.Size(141, 22);
             this.MenuGraphView2.Text = "Graph view";
@@ -977,52 +954,40 @@
             // MenuGraphLine2
             // 
             this.MenuGraphLine2.Name = "MenuGraphLine2";
-            this.MenuGraphLine2.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphLine2.Size = new System.Drawing.Size(152, 22);
             this.MenuGraphLine2.Text = "Line";
             // 
             // MenuGraphPoint2
             // 
             this.MenuGraphPoint2.Name = "MenuGraphPoint2";
-            this.MenuGraphPoint2.Size = new System.Drawing.Size(137, 22);
+            this.MenuGraphPoint2.Size = new System.Drawing.Size(152, 22);
             this.MenuGraphPoint2.Text = "Point";
             // 
             // toolStripSeparator30
             // 
             this.toolStripSeparator30.Name = "toolStripSeparator30";
-            this.toolStripSeparator30.Size = new System.Drawing.Size(134, 6);
+            this.toolStripSeparator30.Size = new System.Drawing.Size(149, 6);
             // 
             // MenuPlotGridX2
             // 
             this.MenuPlotGridX2.Name = "MenuPlotGridX2";
-            this.MenuPlotGridX2.Size = new System.Drawing.Size(137, 22);
+            this.MenuPlotGridX2.Size = new System.Drawing.Size(152, 22);
             this.MenuPlotGridX2.Text = "Grid axis x";
             this.MenuPlotGridX2.Click += new System.EventHandler(this.MenuPlotGridX2_Click);
             // 
             // MenuPlotGridY21
             // 
             this.MenuPlotGridY21.Name = "MenuPlotGridY21";
-            this.MenuPlotGridY21.Size = new System.Drawing.Size(137, 22);
+            this.MenuPlotGridY21.Size = new System.Drawing.Size(152, 22);
             this.MenuPlotGridY21.Text = "Grid axis y1";
             this.MenuPlotGridY21.Click += new System.EventHandler(this.MenuPlotGridY21_Click);
             // 
             // MenuPlotGridY22
             // 
             this.MenuPlotGridY22.Name = "MenuPlotGridY22";
-            this.MenuPlotGridY22.Size = new System.Drawing.Size(137, 22);
+            this.MenuPlotGridY22.Size = new System.Drawing.Size(152, 22);
             this.MenuPlotGridY22.Text = "Grid axis y2";
             this.MenuPlotGridY22.Click += new System.EventHandler(this.MenuPlotGridY22_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(134, 6);
-            // 
-            // MenuPlotLegend2
-            // 
-            this.MenuPlotLegend2.Name = "MenuPlotLegend2";
-            this.MenuPlotLegend2.Size = new System.Drawing.Size(137, 22);
-            this.MenuPlotLegend2.Text = "Legend";
-            this.MenuPlotLegend2.Click += new System.EventHandler(this.MenuPlotLegend2_Click);
             // 
             // MenuGraphMode2
             // 
@@ -1212,10 +1177,12 @@
             // 
             // lblTestStatus
             // 
+            this.lblTestStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTestStatus.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTestStatus.Location = new System.Drawing.Point(6, 27);
             this.lblTestStatus.Name = "lblTestStatus";
-            this.lblTestStatus.Size = new System.Drawing.Size(470, 15);
+            this.lblTestStatus.Size = new System.Drawing.Size(583, 16);
             this.lblTestStatus.TabIndex = 36;
             this.lblTestStatus.Text = " Status: Idle";
             // 
@@ -1281,8 +1248,6 @@
             this.RtMenuGraphView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RtMenuGraphLine,
             this.RtMenuGraphPoint,
-            this.toolStripSeparator13,
-            this.RtMenuGraphLegend,
             this.toolStripSeparator14,
             this.RtMenuGraphGrid});
             this.RtMenuGraphView.Name = "RtMenuGraphView";
@@ -1293,7 +1258,7 @@
             // 
             this.RtMenuGraphLine.CheckOnClick = true;
             this.RtMenuGraphLine.Name = "RtMenuGraphLine";
-            this.RtMenuGraphLine.Size = new System.Drawing.Size(113, 22);
+            this.RtMenuGraphLine.Size = new System.Drawing.Size(152, 22);
             this.RtMenuGraphLine.Text = "Line";
             this.RtMenuGraphLine.Click += new System.EventHandler(this.RtMenuGraphLine_Click);
             // 
@@ -1301,31 +1266,19 @@
             // 
             this.RtMenuGraphPoint.CheckOnClick = true;
             this.RtMenuGraphPoint.Name = "RtMenuGraphPoint";
-            this.RtMenuGraphPoint.Size = new System.Drawing.Size(113, 22);
+            this.RtMenuGraphPoint.Size = new System.Drawing.Size(152, 22);
             this.RtMenuGraphPoint.Text = "Point";
             this.RtMenuGraphPoint.Click += new System.EventHandler(this.RtMenuGraphPoint_Click);
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(110, 6);
-            // 
-            // RtMenuGraphLegend
-            // 
-            this.RtMenuGraphLegend.Name = "RtMenuGraphLegend";
-            this.RtMenuGraphLegend.Size = new System.Drawing.Size(113, 22);
-            this.RtMenuGraphLegend.Text = "Legend";
-            this.RtMenuGraphLegend.Click += new System.EventHandler(this.RtMenuGraphLegend_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(110, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(149, 6);
             // 
             // RtMenuGraphGrid
             // 
             this.RtMenuGraphGrid.Name = "RtMenuGraphGrid";
-            this.RtMenuGraphGrid.Size = new System.Drawing.Size(113, 22);
+            this.RtMenuGraphGrid.Size = new System.Drawing.Size(152, 22);
             this.RtMenuGraphGrid.Text = "Grid";
             this.RtMenuGraphGrid.Click += new System.EventHandler(this.RtMenuGraphGrid_Click);
             // 
@@ -1555,6 +1508,250 @@
             this.lblzreal.TabIndex = 98;
             this.lblzreal.Text = "  Zreal: --------mΩ";
             // 
+            // RawRtMenuStrip
+            // 
+            this.RawRtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphMode,
+            this.RawRtMenuGraphView,
+            this.RawRtMenuGraphColor});
+            this.RawRtMenuStrip.Name = "RtMenuStrip";
+            this.RawRtMenuStrip.Size = new System.Drawing.Size(153, 92);
+            // 
+            // RawRtMenuGraphMode
+            // 
+            this.RawRtMenuGraphMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphMode1,
+            this.RawRtMenuGraphMode2,
+            this.toolStripSeparator23,
+            this.RawpauseRefreshToolStripMenuItem});
+            this.RawRtMenuGraphMode.Name = "RawRtMenuGraphMode";
+            this.RawRtMenuGraphMode.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphMode.Text = "Graph mode";
+            // 
+            // RawRtMenuGraphMode1
+            // 
+            this.RawRtMenuGraphMode1.CheckOnClick = true;
+            this.RawRtMenuGraphMode1.Name = "RawRtMenuGraphMode1";
+            this.RawRtMenuGraphMode1.Size = new System.Drawing.Size(145, 22);
+            this.RawRtMenuGraphMode1.Text = "V vs I";
+            this.RawRtMenuGraphMode1.Click += new System.EventHandler(this.RawRtMenuGraphMode_Click);
+            // 
+            // RawRtMenuGraphMode2
+            // 
+            this.RawRtMenuGraphMode2.CheckOnClick = true;
+            this.RawRtMenuGraphMode2.Name = "RawRtMenuGraphMode2";
+            this.RawRtMenuGraphMode2.Size = new System.Drawing.Size(145, 22);
+            this.RawRtMenuGraphMode2.Text = "I,V vs t";
+            this.RawRtMenuGraphMode2.Click += new System.EventHandler(this.RawRtMenuGraphMode_Click);
+            // 
+            // toolStripSeparator23
+            // 
+            this.toolStripSeparator23.Name = "toolStripSeparator23";
+            this.toolStripSeparator23.Size = new System.Drawing.Size(142, 6);
+            // 
+            // RawpauseRefreshToolStripMenuItem
+            // 
+            this.RawpauseRefreshToolStripMenuItem.Name = "RawpauseRefreshToolStripMenuItem";
+            this.RawpauseRefreshToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.RawpauseRefreshToolStripMenuItem.Text = "Pause refresh";
+            // 
+            // RawRtMenuGraphView
+            // 
+            this.RawRtMenuGraphView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphLine,
+            this.RawRtMenuGraphPoint,
+            this.toolStripSeparator25,
+            this.RawRtMenuGraphGrid});
+            this.RawRtMenuGraphView.Name = "RawRtMenuGraphView";
+            this.RawRtMenuGraphView.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphView.Text = "Graph view";
+            // 
+            // RawRtMenuGraphLine
+            // 
+            this.RawRtMenuGraphLine.CheckOnClick = true;
+            this.RawRtMenuGraphLine.Name = "RawRtMenuGraphLine";
+            this.RawRtMenuGraphLine.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphLine.Text = "Line";
+            // 
+            // RawRtMenuGraphPoint
+            // 
+            this.RawRtMenuGraphPoint.CheckOnClick = true;
+            this.RawRtMenuGraphPoint.Name = "RawRtMenuGraphPoint";
+            this.RawRtMenuGraphPoint.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphPoint.Text = "Point";
+            // 
+            // toolStripSeparator25
+            // 
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            this.toolStripSeparator25.Size = new System.Drawing.Size(149, 6);
+            // 
+            // RawRtMenuGraphGrid
+            // 
+            this.RawRtMenuGraphGrid.Name = "RawRtMenuGraphGrid";
+            this.RawRtMenuGraphGrid.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphGrid.Text = "Grid";
+            // 
+            // RawRtMenuGraphColor
+            // 
+            this.RawRtMenuGraphColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RawRtMenuGraphPlotColor1,
+            this.toolStripSeparator26,
+            this.RawRtMenuGraphAxisColor,
+            this.toolStripSeparator27,
+            this.RawRtMenuGraphGridColor,
+            this.toolStripSeparator28,
+            this.RawRtMenuGraphBackColor});
+            this.RawRtMenuGraphColor.Name = "RawRtMenuGraphColor";
+            this.RawRtMenuGraphColor.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphColor.Text = "Graph color";
+            // 
+            // RawRtMenuGraphPlotColor1
+            // 
+            this.RawRtMenuGraphPlotColor1.Name = "RawRtMenuGraphPlotColor1";
+            this.RawRtMenuGraphPlotColor1.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphPlotColor1.Text = "Plots";
+            // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(97, 6);
+            // 
+            // RawRtMenuGraphAxisColor
+            // 
+            this.RawRtMenuGraphAxisColor.Name = "RawRtMenuGraphAxisColor";
+            this.RawRtMenuGraphAxisColor.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphAxisColor.Text = "Axis";
+            // 
+            // toolStripSeparator27
+            // 
+            this.toolStripSeparator27.Name = "toolStripSeparator27";
+            this.toolStripSeparator27.Size = new System.Drawing.Size(97, 6);
+            // 
+            // RawRtMenuGraphGridColor
+            // 
+            this.RawRtMenuGraphGridColor.Name = "RawRtMenuGraphGridColor";
+            this.RawRtMenuGraphGridColor.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphGridColor.Text = "Grid";
+            // 
+            // toolStripSeparator28
+            // 
+            this.toolStripSeparator28.Name = "toolStripSeparator28";
+            this.toolStripSeparator28.Size = new System.Drawing.Size(97, 6);
+            // 
+            // RawRtMenuGraphBackColor
+            // 
+            this.RawRtMenuGraphBackColor.Name = "RawRtMenuGraphBackColor";
+            this.RawRtMenuGraphBackColor.Size = new System.Drawing.Size(100, 22);
+            this.RawRtMenuGraphBackColor.Text = "Back";
+            // 
+            // lbldatacount
+            // 
+            this.lbldatacount.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbldatacount.Location = new System.Drawing.Point(6, 103);
+            this.lbldatacount.Name = "lbldatacount";
+            this.lbldatacount.Size = new System.Drawing.Size(154, 15);
+            this.lbldatacount.TabIndex = 111;
+            this.lbldatacount.Text = "   Data: ";
+            this.lbldatacount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblResult
+            // 
+            this.lblResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResult.ContextMenuStrip = this.contextMenuRes;
+            this.lblResult.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(6, 84);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(583, 16);
+            this.lblResult.TabIndex = 110;
+            this.lblResult.Text = " Result: ";
+            this.lblResult.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTech
+            // 
+            this.lblTech.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTech.ContextMenuStrip = this.contextMenuTech;
+            this.lblTech.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTech.Location = new System.Drawing.Point(6, 65);
+            this.lblTech.Name = "lblTech";
+            this.lblTech.Size = new System.Drawing.Size(583, 16);
+            this.lblTech.TabIndex = 109;
+            this.lblTech.Text = " Tech. : ";
+            this.lblTech.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblIdc
+            // 
+            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdc.Location = new System.Drawing.Point(5, 161);
+            this.lblIdc.Name = "lblIdc";
+            this.lblIdc.Size = new System.Drawing.Size(154, 15);
+            this.lblIdc.TabIndex = 112;
+            this.lblIdc.Text = "    Idc: -------- A";
+            // 
+            // btabout
+            // 
+            this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btabout.Location = new System.Drawing.Point(404, 1);
+            this.btabout.Name = "btabout";
+            this.btabout.Size = new System.Drawing.Size(24, 24);
+            this.btabout.TabIndex = 95;
+            this.btabout.UseVisualStyleBackColor = true;
+            this.btabout.Click += new System.EventHandler(this.btabout_Click);
+            // 
+            // legendItem108
+            // 
+            this.legendItem108.Text = "Item 56";
+            // 
+            // grpAuxMon
+            // 
+            this.grpAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.grpAuxMon.Controls.Add(this.label1);
+            this.grpAuxMon.Controls.Add(this.cboAuxMon1);
+            this.grpAuxMon.Controls.Add(this.listAuxMon);
+            this.grpAuxMon.Location = new System.Drawing.Point(6, 338);
+            this.grpAuxMon.Name = "grpAuxMon";
+            this.grpAuxMon.Size = new System.Drawing.Size(156, 159);
+            this.grpAuxMon.TabIndex = 117;
+            this.grpAuxMon.TabStop = false;
+            this.grpAuxMon.Text = "[Auxiliary Monitor]";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 14);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Item:";
+            // 
+            // cboAuxMon1
+            // 
+            this.cboAuxMon1.FormattingEnabled = true;
+            this.cboAuxMon1.Items.AddRange(new object[] {
+            "Vdc",
+            "Zreal",
+            "Zimage",
+            "|Z|",
+            "Phase"});
+            this.cboAuxMon1.Location = new System.Drawing.Point(56, 20);
+            this.cboAuxMon1.MaxDropDownItems = 5;
+            this.cboAuxMon1.Name = "cboAuxMon1";
+            this.cboAuxMon1.Size = new System.Drawing.Size(94, 22);
+            this.cboAuxMon1.TabIndex = 4;
+            this.cboAuxMon1.SelectedIndexChanged += new System.EventHandler(this.cboAuxMon1_SelectedIndexChanged);
+            // 
+            // listAuxMon
+            // 
+            this.listAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listAuxMon.Location = new System.Drawing.Point(7, 48);
+            this.listAuxMon.Name = "listAuxMon";
+            this.listAuxMon.Size = new System.Drawing.Size(143, 103);
+            this.listAuxMon.TabIndex = 0;
+            this.listAuxMon.UseCompatibleStateImageBehavior = false;
+            // 
             // tabgrp
             // 
             this.tabgrp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1565,12 +1762,13 @@
             this.tabgrp.Controls.Add(this.TabGrpRaw);
             this.tabgrp.Controls.Add(this.Raw_DataPage);
             this.tabgrp.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabgrp.Location = new System.Drawing.Point(166, 100);
+            this.tabgrp.Location = new System.Drawing.Point(164, 102);
             this.tabgrp.Multiline = true;
             this.tabgrp.Name = "tabgrp";
             this.tabgrp.SelectedIndex = 0;
-            this.tabgrp.Size = new System.Drawing.Size(427, 397);
-            this.tabgrp.TabIndex = 100;
+            this.tabgrp.Size = new System.Drawing.Size(427, 388);
+            this.tabgrp.TabIndex = 118;
+            this.tabgrp.MouseHover += new System.EventHandler(this.tabgrp_MouseHover);
             // 
             // TabGrp1
             // 
@@ -1582,7 +1780,7 @@
             this.TabGrp1.Location = new System.Drawing.Point(4, 23);
             this.TabGrp1.Name = "TabGrp1";
             this.TabGrp1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabGrp1.Size = new System.Drawing.Size(419, 370);
+            this.TabGrp1.Size = new System.Drawing.Size(419, 361);
             this.TabGrp1.TabIndex = 1;
             this.TabGrp1.Text = "tabPage2";
             this.TabGrp1.UseVisualStyleBackColor = true;
@@ -1591,24 +1789,25 @@
             // 
             this.grpboxni1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grpboxni1.Controls.Add(this.ChkListLegend1);
-            this.grpboxni1.Location = new System.Drawing.Point(307, 10);
+            this.grpboxni1.Location = new System.Drawing.Point(291, 4);
             this.grpboxni1.Name = "grpboxni1";
-            this.grpboxni1.Size = new System.Drawing.Size(104, 67);
+            this.grpboxni1.Size = new System.Drawing.Size(120, 81);
             this.grpboxni1.TabIndex = 139;
             this.grpboxni1.TabStop = false;
             this.grpboxni1.Text = "[Legend]";
             // 
             // ChkListLegend1
             // 
-            this.ChkListLegend1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkListLegend1.CheckOnClick = true;
             this.ChkListLegend1.FormattingEnabled = true;
             this.ChkListLegend1.Items.AddRange(new object[] {
             "MAIN",
             "AUX1"});
-            this.ChkListLegend1.Location = new System.Drawing.Point(6, 21);
+            this.ChkListLegend1.Location = new System.Drawing.Point(6, 19);
             this.ChkListLegend1.Name = "ChkListLegend1";
-            this.ChkListLegend1.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend1.Size = new System.Drawing.Size(107, 55);
             this.ChkListLegend1.TabIndex = 139;
             this.ChkListLegend1.SelectedIndexChanged += new System.EventHandler(this.ChkListLegend1_SelectedIndexChanged);
             // 
@@ -1618,9 +1817,9 @@
             this.grpboxni2.Controls.Add(this.ChkListItem1);
             this.grpboxni2.Controls.Add(this.btDeselAll1);
             this.grpboxni2.Controls.Add(this.btSelAll1);
-            this.grpboxni2.Location = new System.Drawing.Point(307, 83);
+            this.grpboxni2.Location = new System.Drawing.Point(291, 91);
             this.grpboxni2.Name = "grpboxni2";
-            this.grpboxni2.Size = new System.Drawing.Size(104, 281);
+            this.grpboxni2.Size = new System.Drawing.Size(119, 158);
             this.grpboxni2.TabIndex = 138;
             this.grpboxni2.TabStop = false;
             this.grpboxni2.Text = "[items ]";
@@ -1645,9 +1844,9 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.ChkListItem1.Location = new System.Drawing.Point(6, 48);
+            this.ChkListItem1.Location = new System.Drawing.Point(8, 42);
             this.ChkListItem1.Name = "ChkListItem1";
-            this.ChkListItem1.Size = new System.Drawing.Size(91, 225);
+            this.ChkListItem1.Size = new System.Drawing.Size(104, 106);
             this.ChkListItem1.TabIndex = 138;
             this.ChkListItem1.SelectedIndexChanged += new System.EventHandler(this.ChkListItem1_SelectedIndexChanged);
             // 
@@ -1657,7 +1856,7 @@
             this.btDeselAll1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btDeselAll1.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
             this.btDeselAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btDeselAll1.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAll1.Location = new System.Drawing.Point(66, 16);
             this.btDeselAll1.Name = "btDeselAll1";
             this.btDeselAll1.Size = new System.Drawing.Size(46, 22);
             this.btDeselAll1.TabIndex = 136;
@@ -1672,7 +1871,7 @@
             this.btSelAll1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btSelAll1.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
             this.btSelAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSelAll1.Location = new System.Drawing.Point(2, 20);
+            this.btSelAll1.Location = new System.Drawing.Point(7, 16);
             this.btSelAll1.Name = "btSelAll1";
             this.btSelAll1.Size = new System.Drawing.Size(47, 22);
             this.btSelAll1.TabIndex = 135;
@@ -1696,7 +1895,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.legend1.Border = NationalInstruments.UI.Border.Dotted;
             this.legend1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.legend1.HorizontalScrollMode = NationalInstruments.UI.ScrollMode.Auto;
             this.legend1.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.legendItem11,
             this.legendItem12,
@@ -1741,12 +1939,16 @@
             this.legendItem118,
             this.legendItem119,
             this.legendItem120});
-            this.legend1.ItemSize = new System.Drawing.Size(24, 20);
-            this.legend1.Location = new System.Drawing.Point(307, 362);
+            this.legend1.ItemSize = new System.Drawing.Size(20, 20);
+            this.legend1.Location = new System.Drawing.Point(291, 256);
             this.legend1.Name = "legend1";
-            this.legend1.Size = new System.Drawing.Size(106, 4);
+            this.legend1.Size = new System.Drawing.Size(119, 99);
             this.legend1.TabIndex = 89;
+            this.legend1.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
             this.legend1.ItemsChanged += new System.ComponentModel.CollectionChangeEventHandler(this.legend1_ItemsChanged);
+            this.legend1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.legend1_MouseDown);
+            this.legend1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.legend1_MouseMove);
+            this.legend1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.legend1_MouseUp);
             // 
             // legendItem11
             // 
@@ -2465,7 +2667,7 @@
             this.scatterPlot17,
             this.scatterPlot18,
             this.scatterPlot19});
-            this.grp1.Size = new System.Drawing.Size(297, 354);
+            this.grp1.Size = new System.Drawing.Size(281, 345);
             this.grp1.TabIndex = 42;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -2803,7 +3005,7 @@
             this.TabGrp2.Controls.Add(this.grp2);
             this.TabGrp2.Location = new System.Drawing.Point(4, 23);
             this.TabGrp2.Name = "TabGrp2";
-            this.TabGrp2.Size = new System.Drawing.Size(419, 370);
+            this.TabGrp2.Size = new System.Drawing.Size(419, 361);
             this.TabGrp2.TabIndex = 2;
             this.TabGrp2.Text = "tabPage3";
             this.TabGrp2.UseVisualStyleBackColor = true;
@@ -2812,24 +3014,25 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.ChkListLegend2);
-            this.groupBox1.Location = new System.Drawing.Point(307, 10);
+            this.groupBox1.Location = new System.Drawing.Point(291, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(104, 67);
+            this.groupBox1.Size = new System.Drawing.Size(120, 81);
             this.groupBox1.TabIndex = 141;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "[Legend]";
             // 
             // ChkListLegend2
             // 
-            this.ChkListLegend2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkListLegend2.CheckOnClick = true;
             this.ChkListLegend2.FormattingEnabled = true;
             this.ChkListLegend2.Items.AddRange(new object[] {
             "MAIN",
             "AUX1"});
-            this.ChkListLegend2.Location = new System.Drawing.Point(6, 21);
+            this.ChkListLegend2.Location = new System.Drawing.Point(6, 19);
             this.ChkListLegend2.Name = "ChkListLegend2";
-            this.ChkListLegend2.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend2.Size = new System.Drawing.Size(107, 55);
             this.ChkListLegend2.TabIndex = 139;
             this.ChkListLegend2.SelectedIndexChanged += new System.EventHandler(this.ChkListLegend2_SelectedIndexChanged);
             // 
@@ -2839,9 +3042,9 @@
             this.groupBox2.Controls.Add(this.ChkListItem2);
             this.groupBox2.Controls.Add(this.btDeselAll2);
             this.groupBox2.Controls.Add(this.btSelAll2);
-            this.groupBox2.Location = new System.Drawing.Point(307, 85);
+            this.groupBox2.Location = new System.Drawing.Point(291, 91);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(104, 281);
+            this.groupBox2.Size = new System.Drawing.Size(119, 158);
             this.groupBox2.TabIndex = 140;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "[items ]";
@@ -2866,9 +3069,9 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.ChkListItem2.Location = new System.Drawing.Point(6, 48);
+            this.ChkListItem2.Location = new System.Drawing.Point(6, 42);
             this.ChkListItem2.Name = "ChkListItem2";
-            this.ChkListItem2.Size = new System.Drawing.Size(91, 225);
+            this.ChkListItem2.Size = new System.Drawing.Size(106, 106);
             this.ChkListItem2.TabIndex = 138;
             this.ChkListItem2.SelectedIndexChanged += new System.EventHandler(this.ChkListItem2_SelectedIndexChanged);
             // 
@@ -2878,7 +3081,7 @@
             this.btDeselAll2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btDeselAll2.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
             this.btDeselAll2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btDeselAll2.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAll2.Location = new System.Drawing.Point(65, 16);
             this.btDeselAll2.Name = "btDeselAll2";
             this.btDeselAll2.Size = new System.Drawing.Size(46, 22);
             this.btDeselAll2.TabIndex = 136;
@@ -2889,17 +3092,18 @@
             // 
             // btSelAll2
             // 
+            this.btSelAll2.BackColor = System.Drawing.Color.Transparent;
             this.btSelAll2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSelAll2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btSelAll2.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
             this.btSelAll2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSelAll2.Location = new System.Drawing.Point(2, 20);
+            this.btSelAll2.Location = new System.Drawing.Point(5, 16);
             this.btSelAll2.Name = "btSelAll2";
             this.btSelAll2.Size = new System.Drawing.Size(47, 22);
             this.btSelAll2.TabIndex = 135;
             this.btSelAll2.Text = "All";
             this.btSelAll2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btSelAll2.UseVisualStyleBackColor = true;
+            this.btSelAll2.UseVisualStyleBackColor = false;
             this.btSelAll2.Click += new System.EventHandler(this.btSelAll2_Click);
             // 
             // lblcsfreq2
@@ -2913,11 +3117,9 @@
             // 
             // legend2
             // 
-            this.legend2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.legend2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.legend2.Border = NationalInstruments.UI.Border.Dotted;
             this.legend2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.legend2.HorizontalScrollMode = NationalInstruments.UI.ScrollMode.Auto;
             this.legend2.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.legendItem21,
             this.legendItem22,
@@ -2975,11 +3177,15 @@
             this.legendItem105,
             this.legendItem106,
             this.legendItem107});
-            this.legend2.ItemSize = new System.Drawing.Size(24, 20);
-            this.legend2.Location = new System.Drawing.Point(658, 354);
+            this.legend2.ItemSize = new System.Drawing.Size(20, 20);
+            this.legend2.Location = new System.Drawing.Point(291, 256);
             this.legend2.Name = "legend2";
-            this.legend2.Size = new System.Drawing.Size(108, 209);
+            this.legend2.Size = new System.Drawing.Size(119, 99);
             this.legend2.TabIndex = 90;
+            this.legend2.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
+            this.legend2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.legend2_MouseDown);
+            this.legend2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.legend2_MouseMove);
+            this.legend2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.legend2_MouseUp);
             // 
             // legendItem21
             // 
@@ -3932,7 +4138,7 @@
             this.scatterPlot30,
             this.scatterPlot31,
             this.scatterPlot32});
-            this.grp2.Size = new System.Drawing.Size(297, 354);
+            this.grp2.Size = new System.Drawing.Size(281, 345);
             this.grp2.TabIndex = 43;
             this.grp2.UseColorGenerator = true;
             this.grp2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4201,7 +4407,7 @@
             this.TabGrpRaw.Controls.Add(this.grprt);
             this.TabGrpRaw.Location = new System.Drawing.Point(4, 23);
             this.TabGrpRaw.Name = "TabGrpRaw";
-            this.TabGrpRaw.Size = new System.Drawing.Size(419, 370);
+            this.TabGrpRaw.Size = new System.Drawing.Size(419, 361);
             this.TabGrpRaw.TabIndex = 3;
             this.TabGrpRaw.Text = "EIS raw";
             this.TabGrpRaw.UseVisualStyleBackColor = true;
@@ -4210,24 +4416,25 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.ChkListLegend3);
-            this.groupBox3.Location = new System.Drawing.Point(307, 10);
+            this.groupBox3.Location = new System.Drawing.Point(291, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(104, 65);
+            this.groupBox3.Size = new System.Drawing.Size(120, 81);
             this.groupBox3.TabIndex = 143;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "[Legend]";
             // 
             // ChkListLegend3
             // 
-            this.ChkListLegend3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkListLegend3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkListLegend3.CheckOnClick = true;
             this.ChkListLegend3.FormattingEnabled = true;
             this.ChkListLegend3.Items.AddRange(new object[] {
             "Current",
             "Voltage"});
-            this.ChkListLegend3.Location = new System.Drawing.Point(6, 22);
+            this.ChkListLegend3.Location = new System.Drawing.Point(6, 19);
             this.ChkListLegend3.Name = "ChkListLegend3";
-            this.ChkListLegend3.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend3.Size = new System.Drawing.Size(107, 55);
             this.ChkListLegend3.TabIndex = 139;
             this.ChkListLegend3.SelectedIndexChanged += new System.EventHandler(this.ChkListLegend3_SelectedIndexChanged);
             // 
@@ -4237,9 +4444,9 @@
             this.groupBox4.Controls.Add(this.ChkListItem3);
             this.groupBox4.Controls.Add(this.btDeselAll3);
             this.groupBox4.Controls.Add(this.btSelAll3);
-            this.groupBox4.Location = new System.Drawing.Point(307, 92);
+            this.groupBox4.Location = new System.Drawing.Point(291, 91);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(104, 281);
+            this.groupBox4.Size = new System.Drawing.Size(119, 158);
             this.groupBox4.TabIndex = 142;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "[items ]";
@@ -4264,9 +4471,9 @@
             "AUX10",
             "AUX11",
             "AUX12"});
-            this.ChkListItem3.Location = new System.Drawing.Point(6, 48);
+            this.ChkListItem3.Location = new System.Drawing.Point(6, 41);
             this.ChkListItem3.Name = "ChkListItem3";
-            this.ChkListItem3.Size = new System.Drawing.Size(91, 225);
+            this.ChkListItem3.Size = new System.Drawing.Size(106, 106);
             this.ChkListItem3.TabIndex = 138;
             this.ChkListItem3.SelectedIndexChanged += new System.EventHandler(this.ChkListItem3_SelectedIndexChanged);
             // 
@@ -4276,7 +4483,7 @@
             this.btDeselAll3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btDeselAll3.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxUnchecked;
             this.btDeselAll3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btDeselAll3.Location = new System.Drawing.Point(52, 20);
+            this.btDeselAll3.Location = new System.Drawing.Point(66, 16);
             this.btDeselAll3.Name = "btDeselAll3";
             this.btDeselAll3.Size = new System.Drawing.Size(46, 22);
             this.btDeselAll3.TabIndex = 136;
@@ -4291,7 +4498,7 @@
             this.btSelAll3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btSelAll3.Image = global::ZiveLab.ZM.Properties.Resources.CheckBoxGroup;
             this.btSelAll3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSelAll3.Location = new System.Drawing.Point(2, 20);
+            this.btSelAll3.Location = new System.Drawing.Point(5, 16);
             this.btSelAll3.Name = "btSelAll3";
             this.btSelAll3.Size = new System.Drawing.Size(47, 22);
             this.btSelAll3.TabIndex = 135;
@@ -4304,9 +4511,9 @@
             // 
             this.Rtlegend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Rtlegend.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Rtlegend.Border = NationalInstruments.UI.Border.Dotted;
             this.Rtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Rtlegend.HorizontalScrollMode = NationalInstruments.UI.ScrollMode.Auto;
             this.Rtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.RtlegendItem1,
             this.RtlegendItem2,
@@ -4322,11 +4529,15 @@
             this.RtlegendItem12,
             this.RtlegendItem13,
             this.RtlegendItem14});
-            this.Rtlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.Rtlegend.Location = new System.Drawing.Point(657, 389);
+            this.Rtlegend.ItemSize = new System.Drawing.Size(20, 20);
+            this.Rtlegend.Location = new System.Drawing.Point(291, 256);
             this.Rtlegend.Name = "Rtlegend";
-            this.Rtlegend.Size = new System.Drawing.Size(103, 170);
+            this.Rtlegend.Size = new System.Drawing.Size(119, 99);
             this.Rtlegend.TabIndex = 111;
+            this.Rtlegend.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
+            this.Rtlegend.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rtlegend_MouseDown);
+            this.Rtlegend.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Rtlegend_MouseMove);
+            this.Rtlegend.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Rtlegend_MouseUp);
             // 
             // RtlegendItem1
             // 
@@ -4347,7 +4558,7 @@
             this.grprt.PlotAreaColor = System.Drawing.Color.White;
             this.grprt.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot3});
-            this.grprt.Size = new System.Drawing.Size(297, 354);
+            this.grprt.Size = new System.Drawing.Size(281, 354);
             this.grprt.TabIndex = 109;
             this.grprt.UseColorGenerator = true;
             this.grprt.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4389,7 +4600,7 @@
             this.Raw_DataPage.Location = new System.Drawing.Point(4, 23);
             this.Raw_DataPage.Name = "Raw_DataPage";
             this.Raw_DataPage.Padding = new System.Windows.Forms.Padding(3);
-            this.Raw_DataPage.Size = new System.Drawing.Size(419, 370);
+            this.Raw_DataPage.Size = new System.Drawing.Size(419, 361);
             this.Raw_DataPage.TabIndex = 4;
             this.Raw_DataPage.Text = "Raw Data";
             this.Raw_DataPage.UseVisualStyleBackColor = true;
@@ -4411,9 +4622,9 @@
             this.groupBox6.Controls.Add(this.radioButton3);
             this.groupBox6.Controls.Add(this.radioButton2);
             this.groupBox6.Controls.Add(this.radioButton1);
-            this.groupBox6.Location = new System.Drawing.Point(307, 106);
+            this.groupBox6.Location = new System.Drawing.Point(292, 114);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(103, 309);
+            this.groupBox6.Size = new System.Drawing.Size(119, 135);
             this.groupBox6.TabIndex = 145;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "[items ]";
@@ -4421,7 +4632,7 @@
             // radioButton0
             // 
             this.radioButton0.AutoSize = true;
-            this.radioButton0.Location = new System.Drawing.Point(5, 21);
+            this.radioButton0.Location = new System.Drawing.Point(18, 22);
             this.radioButton0.Name = "radioButton0";
             this.radioButton0.Size = new System.Drawing.Size(53, 18);
             this.radioButton0.TabIndex = 12;
@@ -4432,128 +4643,128 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(5, 316);
+            this.radioButton12.Location = new System.Drawing.Point(18, 305);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(116, 18);
+            this.radioButton12.Size = new System.Drawing.Size(53, 18);
             this.radioButton12.TabIndex = 11;
             this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "radioButton12";
+            this.radioButton12.Text = "Aux2";
             this.radioButton12.UseVisualStyleBackColor = true;
             // 
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(5, 298);
+            this.radioButton11.Location = new System.Drawing.Point(18, 282);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(116, 18);
+            this.radioButton11.Size = new System.Drawing.Size(53, 18);
             this.radioButton11.TabIndex = 10;
             this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "radioButton11";
+            this.radioButton11.Text = "Aux2";
             this.radioButton11.UseVisualStyleBackColor = true;
             // 
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(5, 274);
+            this.radioButton10.Location = new System.Drawing.Point(18, 258);
             this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(116, 18);
+            this.radioButton10.Size = new System.Drawing.Size(53, 18);
             this.radioButton10.TabIndex = 9;
             this.radioButton10.TabStop = true;
-            this.radioButton10.Text = "radioButton10";
+            this.radioButton10.Text = "Aux2";
             this.radioButton10.UseVisualStyleBackColor = true;
             // 
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(5, 250);
+            this.radioButton9.Location = new System.Drawing.Point(18, 234);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(109, 18);
+            this.radioButton9.Size = new System.Drawing.Size(53, 18);
             this.radioButton9.TabIndex = 8;
             this.radioButton9.TabStop = true;
-            this.radioButton9.Text = "radioButton9";
+            this.radioButton9.Text = "Aux2";
             this.radioButton9.UseVisualStyleBackColor = true;
             // 
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(5, 218);
+            this.radioButton8.Location = new System.Drawing.Point(18, 210);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(109, 18);
+            this.radioButton8.Size = new System.Drawing.Size(53, 18);
             this.radioButton8.TabIndex = 7;
             this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "radioButton8";
+            this.radioButton8.Text = "Aux2";
             this.radioButton8.UseVisualStyleBackColor = true;
             // 
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(5, 194);
+            this.radioButton7.Location = new System.Drawing.Point(18, 186);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(109, 18);
+            this.radioButton7.Size = new System.Drawing.Size(53, 18);
             this.radioButton7.TabIndex = 6;
             this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "radioButton7";
+            this.radioButton7.Text = "Aux2";
             this.radioButton7.UseVisualStyleBackColor = true;
             // 
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(5, 170);
+            this.radioButton6.Location = new System.Drawing.Point(18, 162);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(109, 18);
+            this.radioButton6.Size = new System.Drawing.Size(53, 18);
             this.radioButton6.TabIndex = 5;
             this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "radioButton6";
+            this.radioButton6.Text = "Aux2";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(5, 146);
+            this.radioButton5.Location = new System.Drawing.Point(18, 138);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(109, 18);
+            this.radioButton5.Size = new System.Drawing.Size(53, 18);
             this.radioButton5.TabIndex = 4;
             this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "radioButton5";
+            this.radioButton5.Text = "Aux2";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(5, 117);
+            this.radioButton4.Location = new System.Drawing.Point(18, 114);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(109, 18);
+            this.radioButton4.Size = new System.Drawing.Size(53, 18);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "radioButton4";
+            this.radioButton4.Text = "Aux2";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(5, 93);
+            this.radioButton3.Location = new System.Drawing.Point(18, 91);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(109, 18);
+            this.radioButton3.Size = new System.Drawing.Size(53, 18);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton3";
+            this.radioButton3.Text = "Aux3";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(5, 69);
+            this.radioButton2.Location = new System.Drawing.Point(18, 68);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(109, 18);
+            this.radioButton2.Size = new System.Drawing.Size(53, 18);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
+            this.radioButton2.Text = "Aux2";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(5, 45);
+            this.radioButton1.Location = new System.Drawing.Point(18, 45);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(53, 18);
             this.radioButton1.TabIndex = 0;
@@ -4565,9 +4776,9 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.ChkListLegend4);
-            this.groupBox5.Location = new System.Drawing.Point(307, 10);
+            this.groupBox5.Location = new System.Drawing.Point(292, 4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(104, 66);
+            this.groupBox5.Size = new System.Drawing.Size(119, 81);
             this.groupBox5.TabIndex = 144;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "[Legend]";
@@ -4580,15 +4791,15 @@
             this.ChkListLegend4.Items.AddRange(new object[] {
             "MAIN",
             "AUX1"});
-            this.ChkListLegend4.Location = new System.Drawing.Point(6, 21);
+            this.ChkListLegend4.Location = new System.Drawing.Point(6, 19);
             this.ChkListLegend4.Name = "ChkListLegend4";
-            this.ChkListLegend4.Size = new System.Drawing.Size(91, 38);
+            this.ChkListLegend4.Size = new System.Drawing.Size(106, 55);
             this.ChkListLegend4.TabIndex = 139;
             this.ChkListLegend4.Visible = false;
             // 
             // RawRtlegend
             // 
-            this.RawRtlegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RawRtlegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RawRtlegend.Border = NationalInstruments.UI.Border.Dotted;
             this.RawRtlegend.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RawRtlegend.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
@@ -4607,10 +4818,11 @@
             this.legendItem20,
             this.legendItem29});
             this.RawRtlegend.ItemSize = new System.Drawing.Size(24, 20);
-            this.RawRtlegend.Location = new System.Drawing.Point(569, 19);
+            this.RawRtlegend.Location = new System.Drawing.Point(292, 256);
             this.RawRtlegend.Name = "RawRtlegend";
-            this.RawRtlegend.Size = new System.Drawing.Size(82, 54);
+            this.RawRtlegend.Size = new System.Drawing.Size(118, 99);
             this.RawRtlegend.TabIndex = 121;
+            this.RawRtlegend.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
             this.RawRtlegend.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseDown);
             this.RawRtlegend.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseMove);
             this.RawRtlegend.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseUp);
@@ -4751,7 +4963,7 @@
             this.rawgrp.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot1,
             this.scatterPlot2});
-            this.rawgrp.Size = new System.Drawing.Size(297, 354);
+            this.rawgrp.Size = new System.Drawing.Size(281, 345);
             this.rawgrp.TabIndex = 110;
             this.rawgrp.UseColorGenerator = true;
             this.rawgrp.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -4764,155 +4976,6 @@
             this.rawgrp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseMove);
             this.rawgrp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseUp);
             this.rawgrp.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.rawgrp_MouseWheel);
-            // 
-            // RawRtMenuStrip
-            // 
-            this.RawRtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RawRtMenuGraphMode,
-            this.RawRtMenuGraphView,
-            this.RawRtMenuGraphColor});
-            this.RawRtMenuStrip.Name = "RtMenuStrip";
-            this.RawRtMenuStrip.Size = new System.Drawing.Size(142, 70);
-            // 
-            // RawRtMenuGraphMode
-            // 
-            this.RawRtMenuGraphMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RawRtMenuGraphMode1,
-            this.RawRtMenuGraphMode2,
-            this.toolStripSeparator23,
-            this.RawpauseRefreshToolStripMenuItem});
-            this.RawRtMenuGraphMode.Name = "RawRtMenuGraphMode";
-            this.RawRtMenuGraphMode.Size = new System.Drawing.Size(141, 22);
-            this.RawRtMenuGraphMode.Text = "Graph mode";
-            // 
-            // RawRtMenuGraphMode1
-            // 
-            this.RawRtMenuGraphMode1.CheckOnClick = true;
-            this.RawRtMenuGraphMode1.Name = "RawRtMenuGraphMode1";
-            this.RawRtMenuGraphMode1.Size = new System.Drawing.Size(145, 22);
-            this.RawRtMenuGraphMode1.Text = "V vs I";
-            this.RawRtMenuGraphMode1.Click += new System.EventHandler(this.RawRtMenuGraphMode_Click);
-            // 
-            // RawRtMenuGraphMode2
-            // 
-            this.RawRtMenuGraphMode2.CheckOnClick = true;
-            this.RawRtMenuGraphMode2.Name = "RawRtMenuGraphMode2";
-            this.RawRtMenuGraphMode2.Size = new System.Drawing.Size(145, 22);
-            this.RawRtMenuGraphMode2.Text = "I,V vs t";
-            this.RawRtMenuGraphMode2.Click += new System.EventHandler(this.RawRtMenuGraphMode_Click);
-            // 
-            // toolStripSeparator23
-            // 
-            this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(142, 6);
-            // 
-            // RawpauseRefreshToolStripMenuItem
-            // 
-            this.RawpauseRefreshToolStripMenuItem.Name = "RawpauseRefreshToolStripMenuItem";
-            this.RawpauseRefreshToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.RawpauseRefreshToolStripMenuItem.Text = "Pause refresh";
-            // 
-            // RawRtMenuGraphView
-            // 
-            this.RawRtMenuGraphView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RawRtMenuGraphLine,
-            this.RawRtMenuGraphPoint,
-            this.toolStripSeparator24,
-            this.RawRtMenuGraphLegend,
-            this.toolStripSeparator25,
-            this.RawRtMenuGraphGrid});
-            this.RawRtMenuGraphView.Name = "RawRtMenuGraphView";
-            this.RawRtMenuGraphView.Size = new System.Drawing.Size(141, 22);
-            this.RawRtMenuGraphView.Text = "Graph view";
-            // 
-            // RawRtMenuGraphLine
-            // 
-            this.RawRtMenuGraphLine.CheckOnClick = true;
-            this.RawRtMenuGraphLine.Name = "RawRtMenuGraphLine";
-            this.RawRtMenuGraphLine.Size = new System.Drawing.Size(113, 22);
-            this.RawRtMenuGraphLine.Text = "Line";
-            // 
-            // RawRtMenuGraphPoint
-            // 
-            this.RawRtMenuGraphPoint.CheckOnClick = true;
-            this.RawRtMenuGraphPoint.Name = "RawRtMenuGraphPoint";
-            this.RawRtMenuGraphPoint.Size = new System.Drawing.Size(113, 22);
-            this.RawRtMenuGraphPoint.Text = "Point";
-            // 
-            // toolStripSeparator24
-            // 
-            this.toolStripSeparator24.Name = "toolStripSeparator24";
-            this.toolStripSeparator24.Size = new System.Drawing.Size(110, 6);
-            // 
-            // RawRtMenuGraphLegend
-            // 
-            this.RawRtMenuGraphLegend.Name = "RawRtMenuGraphLegend";
-            this.RawRtMenuGraphLegend.Size = new System.Drawing.Size(113, 22);
-            this.RawRtMenuGraphLegend.Text = "Legend";
-            // 
-            // toolStripSeparator25
-            // 
-            this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(110, 6);
-            // 
-            // RawRtMenuGraphGrid
-            // 
-            this.RawRtMenuGraphGrid.Name = "RawRtMenuGraphGrid";
-            this.RawRtMenuGraphGrid.Size = new System.Drawing.Size(113, 22);
-            this.RawRtMenuGraphGrid.Text = "Grid";
-            // 
-            // RawRtMenuGraphColor
-            // 
-            this.RawRtMenuGraphColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RawRtMenuGraphPlotColor1,
-            this.toolStripSeparator26,
-            this.RawRtMenuGraphAxisColor,
-            this.toolStripSeparator27,
-            this.RawRtMenuGraphGridColor,
-            this.toolStripSeparator28,
-            this.RawRtMenuGraphBackColor});
-            this.RawRtMenuGraphColor.Name = "RawRtMenuGraphColor";
-            this.RawRtMenuGraphColor.Size = new System.Drawing.Size(141, 22);
-            this.RawRtMenuGraphColor.Text = "Graph color";
-            // 
-            // RawRtMenuGraphPlotColor1
-            // 
-            this.RawRtMenuGraphPlotColor1.Name = "RawRtMenuGraphPlotColor1";
-            this.RawRtMenuGraphPlotColor1.Size = new System.Drawing.Size(100, 22);
-            this.RawRtMenuGraphPlotColor1.Text = "Plots";
-            // 
-            // toolStripSeparator26
-            // 
-            this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(97, 6);
-            // 
-            // RawRtMenuGraphAxisColor
-            // 
-            this.RawRtMenuGraphAxisColor.Name = "RawRtMenuGraphAxisColor";
-            this.RawRtMenuGraphAxisColor.Size = new System.Drawing.Size(100, 22);
-            this.RawRtMenuGraphAxisColor.Text = "Axis";
-            // 
-            // toolStripSeparator27
-            // 
-            this.toolStripSeparator27.Name = "toolStripSeparator27";
-            this.toolStripSeparator27.Size = new System.Drawing.Size(97, 6);
-            // 
-            // RawRtMenuGraphGridColor
-            // 
-            this.RawRtMenuGraphGridColor.Name = "RawRtMenuGraphGridColor";
-            this.RawRtMenuGraphGridColor.Size = new System.Drawing.Size(100, 22);
-            this.RawRtMenuGraphGridColor.Text = "Grid";
-            // 
-            // toolStripSeparator28
-            // 
-            this.toolStripSeparator28.Name = "toolStripSeparator28";
-            this.toolStripSeparator28.Size = new System.Drawing.Size(97, 6);
-            // 
-            // RawRtMenuGraphBackColor
-            // 
-            this.RawRtMenuGraphBackColor.Name = "RawRtMenuGraphBackColor";
-            this.RawRtMenuGraphBackColor.Size = new System.Drawing.Size(100, 22);
-            this.RawRtMenuGraphBackColor.Text = "Back";
             // 
             // scatterPlot1
             // 
@@ -4955,132 +5018,13 @@
             // RawRead
             // 
             this.RawRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RawRead.Location = new System.Drawing.Point(308, 78);
+            this.RawRead.Location = new System.Drawing.Point(302, 87);
             this.RawRead.Name = "RawRead";
-            this.RawRead.Size = new System.Drawing.Size(87, 22);
+            this.RawRead.Size = new System.Drawing.Size(102, 22);
             this.RawRead.TabIndex = 114;
             this.RawRead.Text = "Read";
             this.RawRead.UseVisualStyleBackColor = true;
             this.RawRead.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // lbldatacount
-            // 
-            this.lbldatacount.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldatacount.Location = new System.Drawing.Point(6, 101);
-            this.lbldatacount.Name = "lbldatacount";
-            this.lbldatacount.Size = new System.Drawing.Size(154, 15);
-            this.lbldatacount.TabIndex = 111;
-            this.lbldatacount.Text = "   Data: ";
-            this.lbldatacount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblResult
-            // 
-            this.lblResult.ContextMenuStrip = this.contextMenuRes;
-            this.lblResult.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(6, 82);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(470, 15);
-            this.lblResult.TabIndex = 110;
-            this.lblResult.Text = " Result: ";
-            this.lblResult.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblTech
-            // 
-            this.lblTech.ContextMenuStrip = this.contextMenuTech;
-            this.lblTech.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTech.Location = new System.Drawing.Point(6, 63);
-            this.lblTech.Name = "lblTech";
-            this.lblTech.Size = new System.Drawing.Size(470, 15);
-            this.lblTech.TabIndex = 109;
-            this.lblTech.Text = " Tech. : ";
-            this.lblTech.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblIdc
-            // 
-            this.lblIdc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdc.Location = new System.Drawing.Point(5, 161);
-            this.lblIdc.Name = "lblIdc";
-            this.lblIdc.Size = new System.Drawing.Size(154, 15);
-            this.lblIdc.TabIndex = 112;
-            this.lblIdc.Text = "    Idc: -------- A";
-            // 
-            // btabout
-            // 
-            this.btabout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btabout.Location = new System.Drawing.Point(404, 1);
-            this.btabout.Name = "btabout";
-            this.btabout.Size = new System.Drawing.Size(24, 24);
-            this.btabout.TabIndex = 95;
-            this.btabout.UseVisualStyleBackColor = true;
-            this.btabout.Click += new System.EventHandler(this.btabout_Click);
-            // 
-            // legendItem108
-            // 
-            this.legendItem108.Text = "Item 56";
-            // 
-            // grpAuxMon
-            // 
-            this.grpAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.grpAuxMon.Controls.Add(this.rdoAuxMon3);
-            this.grpAuxMon.Controls.Add(this.rdoAuxMon2);
-            this.grpAuxMon.Controls.Add(this.rdoAuxMon1);
-            this.grpAuxMon.Controls.Add(this.listAuxMon);
-            this.grpAuxMon.Location = new System.Drawing.Point(6, 338);
-            this.grpAuxMon.Name = "grpAuxMon";
-            this.grpAuxMon.Size = new System.Drawing.Size(156, 159);
-            this.grpAuxMon.TabIndex = 117;
-            this.grpAuxMon.TabStop = false;
-            this.grpAuxMon.Text = "[Auxiliary Monitor]";
-            // 
-            // rdoAuxMon3
-            // 
-            this.rdoAuxMon3.AutoSize = true;
-            this.rdoAuxMon3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoAuxMon3.Location = new System.Drawing.Point(88, 18);
-            this.rdoAuxMon3.Name = "rdoAuxMon3";
-            this.rdoAuxMon3.Size = new System.Drawing.Size(67, 17);
-            this.rdoAuxMon3.TabIndex = 3;
-            this.rdoAuxMon3.TabStop = true;
-            this.rdoAuxMon3.Text = "|Z|/Zph";
-            this.rdoAuxMon3.UseVisualStyleBackColor = true;
-            this.rdoAuxMon3.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
-            // 
-            // rdoAuxMon2
-            // 
-            this.rdoAuxMon2.AutoSize = true;
-            this.rdoAuxMon2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoAuxMon2.Location = new System.Drawing.Point(40, 18);
-            this.rdoAuxMon2.Name = "rdoAuxMon2";
-            this.rdoAuxMon2.Size = new System.Drawing.Size(55, 17);
-            this.rdoAuxMon2.TabIndex = 2;
-            this.rdoAuxMon2.TabStop = true;
-            this.rdoAuxMon2.Text = "Z\'/Z\"";
-            this.rdoAuxMon2.UseVisualStyleBackColor = true;
-            this.rdoAuxMon2.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
-            // 
-            // rdoAuxMon1
-            // 
-            this.rdoAuxMon1.AutoSize = true;
-            this.rdoAuxMon1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoAuxMon1.Location = new System.Drawing.Point(3, 18);
-            this.rdoAuxMon1.Name = "rdoAuxMon1";
-            this.rdoAuxMon1.Size = new System.Drawing.Size(43, 17);
-            this.rdoAuxMon1.TabIndex = 1;
-            this.rdoAuxMon1.TabStop = true;
-            this.rdoAuxMon1.Text = "Vdc";
-            this.rdoAuxMon1.UseVisualStyleBackColor = true;
-            this.rdoAuxMon1.CheckedChanged += new System.EventHandler(this.rdoAuxMon_CheckedChanged);
-            // 
-            // listAuxMon
-            // 
-            this.listAuxMon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listAuxMon.Location = new System.Drawing.Point(7, 40);
-            this.listAuxMon.Name = "listAuxMon";
-            this.listAuxMon.Size = new System.Drawing.Size(143, 111);
-            this.listAuxMon.TabIndex = 0;
-            this.listAuxMon.UseCompatibleStateImageBehavior = false;
             // 
             // lblprog
             // 
@@ -5107,8 +5051,8 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.grpAuxMon);
             this.Controls.Add(this.tabgrp);
+            this.Controls.Add(this.grpAuxMon);
             this.Controls.Add(this.lblzimg);
             this.Controls.Add(this.lblzreal);
             this.Controls.Add(this.lblVeoc);
@@ -5135,6 +5079,7 @@
             this.Controls.Add(this.lblIdc);
             this.Controls.Add(this.lblVdc);
             this.Controls.Add(this.lblTemp);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BZAChPan";
             this.Size = new System.Drawing.Size(600, 500);
@@ -5145,6 +5090,9 @@
             this.RtMenuStrip.ResumeLayout(false);
             this.contextMenuRes.ResumeLayout(false);
             this.contextMenuTech.ResumeLayout(false);
+            this.RawRtMenuStrip.ResumeLayout(false);
+            this.grpAuxMon.ResumeLayout(false);
+            this.grpAuxMon.PerformLayout();
             this.tabgrp.ResumeLayout(false);
             this.TabGrp1.ResumeLayout(false);
             this.TabGrp1.PerformLayout();
@@ -5172,9 +5120,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.RawRtlegend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AuxDataView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rawgrp)).EndInit();
-            this.RawRtMenuStrip.ResumeLayout(false);
-            this.grpAuxMon.ResumeLayout(false);
-            this.grpAuxMon.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -5200,8 +5145,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuPlotColor11;
         private System.Windows.Forms.ToolStripMenuItem MenuGridColor1;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphView1;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLegend1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphMode1;
         private System.Windows.Forms.ToolStripMenuItem MenuModeZoom1;
         private System.Windows.Forms.ToolStripMenuItem MenuModeMove1;
@@ -5218,8 +5161,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuPlotColor21;
         private System.Windows.Forms.ToolStripMenuItem MenuGridColor2;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphView2;
-        private System.Windows.Forms.ToolStripMenuItem MenuPlotLegend2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem MenuPlotGridY21;
         private System.Windows.Forms.ToolStripMenuItem MenuPlotGridY22;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphMode2;
@@ -5241,8 +5182,6 @@
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphView;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphLine;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphPoint;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripMenuItem RtMenuGraphLegend;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphGrid;
         private System.Windows.Forms.ToolStripMenuItem RtMenuGraphColor;
@@ -5294,308 +5233,13 @@
         private System.Windows.Forms.Label lblVeoc;
         private System.Windows.Forms.Label lblzimg;
         private System.Windows.Forms.Label lblzreal;
-        private System.Windows.Forms.TabControl tabgrp;
-        private System.Windows.Forms.TabPage TabGrpRaw;
-        private System.Windows.Forms.TabPage TabGrp1;
-        private NationalInstruments.UI.WindowsForms.Legend legend1;
-        private NationalInstruments.UI.LegendItem legendItem11;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot1;
-        private NationalInstruments.UI.XAxis Grp1_xAxis1;
-        private NationalInstruments.UI.YAxis Grp1_yAxis1;
-        private NationalInstruments.UI.LegendItem legendItem12;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot2;
-        private NationalInstruments.UI.LegendItem legendItem13;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot3;
-        private NationalInstruments.UI.LegendItem legendItem14;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot4;
-        private NationalInstruments.UI.YAxis Grp1_yAxis2;
-        private NationalInstruments.UI.LegendItem legendItem15;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot5;
-        private NationalInstruments.UI.LegendItem legendItem16;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot6;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph grp1;
-        private NationalInstruments.UI.XYCursor xyCursor2;
-        private System.Windows.Forms.TabPage TabGrp2;
-        private NationalInstruments.UI.WindowsForms.Legend legend2;
-        private NationalInstruments.UI.LegendItem legendItem21;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot1;
-        private NationalInstruments.UI.XAxis Grp2_xAxis1;
-        private NationalInstruments.UI.YAxis Grp2_yAxis1;
-        private NationalInstruments.UI.LegendItem legendItem22;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot2;
-        private NationalInstruments.UI.LegendItem legendItem23;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot3;
-        private NationalInstruments.UI.LegendItem legendItem24;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot4;
-        private NationalInstruments.UI.YAxis Grp2_yAxis2;
-        private NationalInstruments.UI.LegendItem legendItem25;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot5;
-        private NationalInstruments.UI.LegendItem legendItem26;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot6;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph grp2;
-        private NationalInstruments.UI.XYCursor xyCursor1;
-        private System.Windows.Forms.Label lblcsfreq1;
-        private System.Windows.Forms.Label lblcsfreq2;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot7;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot8;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot9;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot10;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot11;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot12;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot13;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot14;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot15;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot16;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot17;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot18;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot19;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot20;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot21;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot22;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot23;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot24;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot25;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot26;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot27;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot28;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot29;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot30;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot31;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot32;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot33;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot34;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot35;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot36;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot37;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot38;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot39;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot40;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot41;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot42;
-        private NationalInstruments.UI.ScatterPlot Grp1Plot43;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot7;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot8;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot9;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot10;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot11;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot12;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot13;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot14;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot15;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot16;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot17;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot18;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot19;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot20;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot21;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot22;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot23;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot24;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot25;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot26;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot27;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot28;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot29;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot30;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot31;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot32;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot33;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot34;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot35;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot36;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot37;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot38;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot39;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot40;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot41;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot42;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot43;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot44;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot45;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot46;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot47;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot48;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot49;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot50;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot51;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot52;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot53;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot54;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot55;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot56;
-
-        private NationalInstruments.UI.LegendItem legendItem17;
-        private NationalInstruments.UI.LegendItem legendItem30;
-        private NationalInstruments.UI.LegendItem legendItem31;
-        private NationalInstruments.UI.LegendItem legendItem32;
-        private NationalInstruments.UI.LegendItem legendItem33;
-        private NationalInstruments.UI.LegendItem legendItem34;
-        private NationalInstruments.UI.LegendItem legendItem35;
-        private NationalInstruments.UI.LegendItem legendItem36;
-        private NationalInstruments.UI.LegendItem legendItem37;
-        private NationalInstruments.UI.LegendItem legendItem38;
-        private NationalInstruments.UI.LegendItem legendItem39;
-        private NationalInstruments.UI.LegendItem legendItem40;
-        private NationalInstruments.UI.LegendItem legendItem41;
-        private NationalInstruments.UI.LegendItem legendItem27;
-        private NationalInstruments.UI.LegendItem legendItem28;
-        private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
-        private NationalInstruments.UI.LegendItem RtlegendItem1;
-        private NationalInstruments.UI.XAxis RTxAxis1;
-        private NationalInstruments.UI.YAxis RTyAxis1;
-        private NationalInstruments.UI.LegendItem RtlegendItem2;
-        private NationalInstruments.UI.YAxis RTyAxis2;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph grprt;
         private System.Windows.Forms.Label lbldatacount;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label lblTech;
         private System.Windows.Forms.Label lblIdc;
         private System.Windows.Forms.Button btabout;
-        private System.Windows.Forms.TabPage Raw_DataPage;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph rawgrp;
-        private NationalInstruments.UI.ScatterPlot scatterPlot1;
-        private NationalInstruments.UI.XAxis xAxis1;
-        private NationalInstruments.UI.YAxis yAxis1;
-        private NationalInstruments.UI.ScatterPlot scatterPlot2;
-        private NationalInstruments.UI.YAxis yAxis2;
-        private System.Windows.Forms.DataGridView AuxDataView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.Button RawRead;
-        private NationalInstruments.UI.LegendItem legendItem42;
-        private NationalInstruments.UI.LegendItem legendItem43;
-        private NationalInstruments.UI.LegendItem legendItem44;
-        private NationalInstruments.UI.LegendItem legendItem45;
-        private NationalInstruments.UI.LegendItem legendItem46;
-        private NationalInstruments.UI.LegendItem legendItem47;
-        private NationalInstruments.UI.LegendItem legendItem48;
-        private NationalInstruments.UI.LegendItem legendItem49;
-        private NationalInstruments.UI.LegendItem legendItem50;
-        private NationalInstruments.UI.LegendItem legendItem51;
-        private NationalInstruments.UI.LegendItem legendItem52;
-        private NationalInstruments.UI.LegendItem legendItem53;
-        private NationalInstruments.UI.LegendItem legendItem109;
-        private NationalInstruments.UI.LegendItem legendItem110;
-        private NationalInstruments.UI.LegendItem legendItem111;
-        private NationalInstruments.UI.LegendItem legendItem112;
-        private NationalInstruments.UI.LegendItem legendItem113;
-        private NationalInstruments.UI.LegendItem legendItem114;
-        private NationalInstruments.UI.LegendItem legendItem115;
-        private NationalInstruments.UI.LegendItem legendItem116;
-        private NationalInstruments.UI.LegendItem legendItem117;
-        private NationalInstruments.UI.LegendItem legendItem118;
-        private NationalInstruments.UI.LegendItem legendItem119;
-        private NationalInstruments.UI.LegendItem legendItem120;
-        private NationalInstruments.UI.LegendItem legendItem60;
-        private NationalInstruments.UI.LegendItem legendItem61;
-        private NationalInstruments.UI.LegendItem legendItem62;
-        private NationalInstruments.UI.LegendItem legendItem63;
-        private NationalInstruments.UI.LegendItem legendItem64;
-        private NationalInstruments.UI.LegendItem legendItem65;
-        private NationalInstruments.UI.LegendItem legendItem66;
-        private NationalInstruments.UI.LegendItem legendItem67;
-        private NationalInstruments.UI.LegendItem legendItem68;
-        private NationalInstruments.UI.LegendItem legendItem69;
-        private NationalInstruments.UI.LegendItem legendItem70;
-        private NationalInstruments.UI.LegendItem legendItem71;
-        private NationalInstruments.UI.LegendItem legendItem72;
-        private NationalInstruments.UI.LegendItem legendItem73;
-        private NationalInstruments.UI.LegendItem legendItem74;
-        private NationalInstruments.UI.LegendItem legendItem75;
-        private NationalInstruments.UI.LegendItem legendItem76;
-        private NationalInstruments.UI.LegendItem legendItem77;
-        private NationalInstruments.UI.LegendItem legendItem78;
-        private NationalInstruments.UI.LegendItem legendItem79;
-        private NationalInstruments.UI.LegendItem legendItem80;
-        private NationalInstruments.UI.LegendItem legendItem81;
-        private NationalInstruments.UI.LegendItem legendItem82;
-        private NationalInstruments.UI.LegendItem legendItem83;
-        private NationalInstruments.UI.LegendItem legendItem84;
-        private NationalInstruments.UI.LegendItem legendItem85;
-        private NationalInstruments.UI.LegendItem legendItem86;
-        private NationalInstruments.UI.LegendItem legendItem87;
-        private NationalInstruments.UI.LegendItem legendItem88;
-        private NationalInstruments.UI.LegendItem legendItem89;
-        private NationalInstruments.UI.LegendItem legendItem90;
-        private NationalInstruments.UI.LegendItem legendItem91;
-        private NationalInstruments.UI.LegendItem legendItem92;
-        private NationalInstruments.UI.LegendItem legendItem93;
-        private NationalInstruments.UI.LegendItem legendItem94;
-        private NationalInstruments.UI.LegendItem legendItem95;
-        private NationalInstruments.UI.LegendItem legendItem96;
-        private NationalInstruments.UI.LegendItem legendItem97;
-        private NationalInstruments.UI.LegendItem legendItem98;
-        private NationalInstruments.UI.LegendItem legendItem99;
-        private NationalInstruments.UI.LegendItem legendItem100;
-        private NationalInstruments.UI.LegendItem legendItem101;
-        private NationalInstruments.UI.LegendItem legendItem102;
-        private NationalInstruments.UI.LegendItem legendItem103;
-        private NationalInstruments.UI.LegendItem legendItem104;
-        private NationalInstruments.UI.LegendItem legendItem105;
-        private NationalInstruments.UI.LegendItem legendItem106;
-        private NationalInstruments.UI.LegendItem legendItem107;
         private NationalInstruments.UI.LegendItem legendItem108;
-        private NationalInstruments.UI.LegendItem RtlegendItem3;
-        private NationalInstruments.UI.LegendItem RtlegendItem4;
-        private NationalInstruments.UI.LegendItem RtlegendItem5;
-        private NationalInstruments.UI.LegendItem RtlegendItem6;
-        private NationalInstruments.UI.LegendItem RtlegendItem7;
-        private NationalInstruments.UI.LegendItem RtlegendItem8;
-        private NationalInstruments.UI.LegendItem RtlegendItem9;
-        private NationalInstruments.UI.LegendItem RtlegendItem10;
-        private NationalInstruments.UI.LegendItem RtlegendItem11;
-        private NationalInstruments.UI.LegendItem RtlegendItem12;
-        private NationalInstruments.UI.LegendItem RtlegendItem13;
-        private NationalInstruments.UI.LegendItem RtlegendItem14;
         private System.Windows.Forms.GroupBox grpAuxMon;
-        private System.Windows.Forms.GroupBox grpboxni2;
-        private System.Windows.Forms.Button btDeselAll1;
-        private System.Windows.Forms.Button btSelAll1;
-        private System.Windows.Forms.GroupBox grpboxni1;
-        private System.Windows.Forms.CheckedListBox ChkListLegend1;
-        private System.Windows.Forms.CheckedListBox ChkListItem1;
-        private System.Windows.Forms.RadioButton rdoAuxMon2;
-        private System.Windows.Forms.RadioButton rdoAuxMon1;
-        private System.Windows.Forms.ListView listAuxMon;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckedListBox ChkListLegend2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckedListBox ChkListItem2;
-        private System.Windows.Forms.Button btDeselAll2;
-        private System.Windows.Forms.Button btSelAll2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckedListBox ChkListLegend3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckedListBox ChkListItem3;
-        private System.Windows.Forms.Button btDeselAll3;
-        private System.Windows.Forms.Button btSelAll3;
-        private NationalInstruments.UI.ScatterPlot scatterPlot3;
-        private NationalInstruments.UI.WindowsForms.Legend RawRtlegend;
-        private NationalInstruments.UI.LegendItem legendItem1;
-        private NationalInstruments.UI.LegendItem legendItem2;
-        private NationalInstruments.UI.LegendItem legendItem3;
-        private NationalInstruments.UI.LegendItem legendItem4;
-        private NationalInstruments.UI.LegendItem legendItem5;
-        private NationalInstruments.UI.LegendItem legendItem6;
-        private NationalInstruments.UI.LegendItem legendItem7;
-        private NationalInstruments.UI.LegendItem legendItem8;
-        private NationalInstruments.UI.LegendItem legendItem9;
-        private NationalInstruments.UI.LegendItem legendItem10;
-        private NationalInstruments.UI.LegendItem legendItem18;
-        private NationalInstruments.UI.LegendItem legendItem19;
-        private NationalInstruments.UI.LegendItem legendItem20;
-        private NationalInstruments.UI.LegendItem legendItem29;
         private System.Windows.Forms.ContextMenuStrip RawRtMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphMode;
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphMode1;
@@ -5605,8 +5249,6 @@
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphView;
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphLine;
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphPoint;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
-        private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphLegend;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphGrid;
         private System.Windows.Forms.ToolStripMenuItem RawRtMenuGraphColor;
@@ -5623,53 +5265,110 @@
         private System.Windows.Forms.ToolStripMenuItem MenuGraphLine2;
         private System.Windows.Forms.ToolStripMenuItem MenuGraphPoint2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckedListBox ChkListLegend4;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.RadioButton radioButton0;
-        private System.Windows.Forms.RadioButton radioButton12;
-        private System.Windows.Forms.RadioButton radioButton11;
-        private System.Windows.Forms.RadioButton radioButton10;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot57;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot58;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot59;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot60;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot61;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot62;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot63;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot64;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot65;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot66;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot67;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot68;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot69;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot70;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot71;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot72;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot73;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot74;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot75;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot76;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot77;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot78;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot79;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot80;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot81;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot82;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot83;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot84;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot85;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot86;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot87;
+        protected internal System.Windows.Forms.ListView listAuxMon;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboAuxMon1;
+        private System.Windows.Forms.TabControl tabgrp;
+        private System.Windows.Forms.TabPage TabGrp1;
+        private System.Windows.Forms.GroupBox grpboxni1;
+        private System.Windows.Forms.CheckedListBox ChkListLegend1;
+        private System.Windows.Forms.GroupBox grpboxni2;
+        private System.Windows.Forms.CheckedListBox ChkListItem1;
+        private System.Windows.Forms.Button btDeselAll1;
+        private System.Windows.Forms.Button btSelAll1;
+        private System.Windows.Forms.Label lblcsfreq1;
+        private NationalInstruments.UI.WindowsForms.Legend legend1;
+        private NationalInstruments.UI.LegendItem legendItem11;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot1;
+        private NationalInstruments.UI.XAxis Grp1_xAxis1;
+        private NationalInstruments.UI.YAxis Grp1_yAxis1;
+        private NationalInstruments.UI.LegendItem legendItem12;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot2;
+        private NationalInstruments.UI.LegendItem legendItem13;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot3;
+        private NationalInstruments.UI.LegendItem legendItem14;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot4;
+        private NationalInstruments.UI.YAxis Grp1_yAxis2;
+        private NationalInstruments.UI.LegendItem legendItem15;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot5;
+        private NationalInstruments.UI.LegendItem legendItem16;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot6;
+        private NationalInstruments.UI.LegendItem legendItem17;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot7;
+        private NationalInstruments.UI.LegendItem legendItem30;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot8;
+        private NationalInstruments.UI.LegendItem legendItem31;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot9;
+        private NationalInstruments.UI.LegendItem legendItem32;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot10;
+        private NationalInstruments.UI.LegendItem legendItem33;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot11;
+        private NationalInstruments.UI.LegendItem legendItem34;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot12;
+        private NationalInstruments.UI.LegendItem legendItem35;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot13;
+        private NationalInstruments.UI.LegendItem legendItem36;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot14;
+        private NationalInstruments.UI.LegendItem legendItem37;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot15;
+        private NationalInstruments.UI.LegendItem legendItem38;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot16;
+        private NationalInstruments.UI.LegendItem legendItem39;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot17;
+        private NationalInstruments.UI.LegendItem legendItem40;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot18;
+        private NationalInstruments.UI.LegendItem legendItem41;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot19;
+        private NationalInstruments.UI.LegendItem legendItem42;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot20;
+        private NationalInstruments.UI.LegendItem legendItem43;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot21;
+        private NationalInstruments.UI.LegendItem legendItem44;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot22;
+        private NationalInstruments.UI.LegendItem legendItem45;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot23;
+        private NationalInstruments.UI.LegendItem legendItem46;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot24;
+        private NationalInstruments.UI.LegendItem legendItem47;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot25;
+        private NationalInstruments.UI.LegendItem legendItem48;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot26;
+        private NationalInstruments.UI.LegendItem legendItem49;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot27;
+        private NationalInstruments.UI.LegendItem legendItem50;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot28;
+        private NationalInstruments.UI.LegendItem legendItem51;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot29;
+        private NationalInstruments.UI.LegendItem legendItem52;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot30;
+        private NationalInstruments.UI.LegendItem legendItem53;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot31;
+        private NationalInstruments.UI.LegendItem legendItem109;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot32;
+        private NationalInstruments.UI.LegendItem legendItem110;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot33;
+        private NationalInstruments.UI.LegendItem legendItem111;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot34;
+        private NationalInstruments.UI.LegendItem legendItem112;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot35;
+        private NationalInstruments.UI.LegendItem legendItem113;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot36;
+        private NationalInstruments.UI.LegendItem legendItem114;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot37;
+        private NationalInstruments.UI.LegendItem legendItem115;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot38;
+        private NationalInstruments.UI.LegendItem legendItem116;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot39;
+        private NationalInstruments.UI.LegendItem legendItem117;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot40;
+        private NationalInstruments.UI.LegendItem legendItem118;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot41;
+        private NationalInstruments.UI.LegendItem legendItem119;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot42;
+        private NationalInstruments.UI.LegendItem legendItem120;
+        private NationalInstruments.UI.ScatterPlot Grp1Plot43;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph grp1;
+        private NationalInstruments.UI.XYCursor xyCursor2;
         private NationalInstruments.UI.ScatterPlot Grp1Plot44;
         private NationalInstruments.UI.ScatterPlot Grp1Plot45;
         private NationalInstruments.UI.ScatterPlot Grp1Plot46;
@@ -5716,11 +5415,6 @@
         private NationalInstruments.UI.ScatterPlot Grp1Plot87;
         private NationalInstruments.UI.ScatterPlot Grp1Plot88;
         private NationalInstruments.UI.ScatterPlot Grp1Plot89;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot88;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot89;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot90;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot91;
-        private NationalInstruments.UI.ScatterPlot Grp2Plot92;
         private NationalInstruments.UI.ScatterPlot scatterPlot4;
         private NationalInstruments.UI.ScatterPlot scatterPlot5;
         private NationalInstruments.UI.ScatterPlot scatterPlot6;
@@ -5737,6 +5431,168 @@
         private NationalInstruments.UI.ScatterPlot scatterPlot17;
         private NationalInstruments.UI.ScatterPlot scatterPlot18;
         private NationalInstruments.UI.ScatterPlot scatterPlot19;
+        private System.Windows.Forms.TabPage TabGrp2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckedListBox ChkListLegend2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckedListBox ChkListItem2;
+        private System.Windows.Forms.Button btDeselAll2;
+        private System.Windows.Forms.Button btSelAll2;
+        private System.Windows.Forms.Label lblcsfreq2;
+        private NationalInstruments.UI.WindowsForms.Legend legend2;
+        private NationalInstruments.UI.LegendItem legendItem21;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot1;
+        private NationalInstruments.UI.XAxis Grp2_xAxis1;
+        private NationalInstruments.UI.YAxis Grp2_yAxis1;
+        private NationalInstruments.UI.LegendItem legendItem22;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot2;
+        private NationalInstruments.UI.LegendItem legendItem23;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot3;
+        private NationalInstruments.UI.LegendItem legendItem24;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot4;
+        private NationalInstruments.UI.YAxis Grp2_yAxis2;
+        private NationalInstruments.UI.LegendItem legendItem25;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot5;
+        private NationalInstruments.UI.LegendItem legendItem26;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot6;
+        private NationalInstruments.UI.LegendItem legendItem27;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot7;
+        private NationalInstruments.UI.LegendItem legendItem28;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot8;
+        private NationalInstruments.UI.LegendItem legendItem60;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot9;
+        private NationalInstruments.UI.LegendItem legendItem61;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot10;
+        private NationalInstruments.UI.LegendItem legendItem62;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot11;
+        private NationalInstruments.UI.LegendItem legendItem63;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot12;
+        private NationalInstruments.UI.LegendItem legendItem64;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot13;
+        private NationalInstruments.UI.LegendItem legendItem65;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot14;
+        private NationalInstruments.UI.LegendItem legendItem66;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot15;
+        private NationalInstruments.UI.LegendItem legendItem67;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot16;
+        private NationalInstruments.UI.LegendItem legendItem68;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot17;
+        private NationalInstruments.UI.LegendItem legendItem69;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot18;
+        private NationalInstruments.UI.LegendItem legendItem70;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot19;
+        private NationalInstruments.UI.LegendItem legendItem71;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot20;
+        private NationalInstruments.UI.LegendItem legendItem72;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot21;
+        private NationalInstruments.UI.LegendItem legendItem73;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot22;
+        private NationalInstruments.UI.LegendItem legendItem74;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot23;
+        private NationalInstruments.UI.LegendItem legendItem75;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot24;
+        private NationalInstruments.UI.LegendItem legendItem76;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot25;
+        private NationalInstruments.UI.LegendItem legendItem77;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot26;
+        private NationalInstruments.UI.LegendItem legendItem78;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot27;
+        private NationalInstruments.UI.LegendItem legendItem79;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot28;
+        private NationalInstruments.UI.LegendItem legendItem80;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot29;
+        private NationalInstruments.UI.LegendItem legendItem81;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot30;
+        private NationalInstruments.UI.LegendItem legendItem82;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot31;
+        private NationalInstruments.UI.LegendItem legendItem83;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot32;
+        private NationalInstruments.UI.LegendItem legendItem84;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot33;
+        private NationalInstruments.UI.LegendItem legendItem85;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot34;
+        private NationalInstruments.UI.LegendItem legendItem86;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot35;
+        private NationalInstruments.UI.LegendItem legendItem87;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot36;
+        private NationalInstruments.UI.LegendItem legendItem88;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot37;
+        private NationalInstruments.UI.LegendItem legendItem89;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot38;
+        private NationalInstruments.UI.LegendItem legendItem90;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot39;
+        private NationalInstruments.UI.LegendItem legendItem91;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot40;
+        private NationalInstruments.UI.LegendItem legendItem92;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot41;
+        private NationalInstruments.UI.LegendItem legendItem93;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot42;
+        private NationalInstruments.UI.LegendItem legendItem94;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot43;
+        private NationalInstruments.UI.LegendItem legendItem95;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot44;
+        private NationalInstruments.UI.LegendItem legendItem96;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot45;
+        private NationalInstruments.UI.LegendItem legendItem97;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot46;
+        private NationalInstruments.UI.LegendItem legendItem98;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot47;
+        private NationalInstruments.UI.LegendItem legendItem99;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot48;
+        private NationalInstruments.UI.LegendItem legendItem100;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot49;
+        private NationalInstruments.UI.LegendItem legendItem101;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot50;
+        private NationalInstruments.UI.LegendItem legendItem102;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot51;
+        private NationalInstruments.UI.LegendItem legendItem103;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot52;
+        private NationalInstruments.UI.LegendItem legendItem104;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot53;
+        private NationalInstruments.UI.LegendItem legendItem105;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot54;
+        private NationalInstruments.UI.LegendItem legendItem106;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot55;
+        private NationalInstruments.UI.LegendItem legendItem107;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot56;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph grp2;
+        private NationalInstruments.UI.XYCursor xyCursor1;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot57;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot58;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot59;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot60;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot61;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot62;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot63;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot64;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot65;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot66;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot67;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot68;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot69;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot70;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot71;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot72;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot73;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot74;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot75;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot76;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot77;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot78;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot79;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot80;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot81;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot82;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot83;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot84;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot85;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot86;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot87;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot88;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot89;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot90;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot91;
+        private NationalInstruments.UI.ScatterPlot Grp2Plot92;
         private NationalInstruments.UI.ScatterPlot scatterPlot20;
         private NationalInstruments.UI.ScatterPlot scatterPlot21;
         private NationalInstruments.UI.ScatterPlot scatterPlot22;
@@ -5750,6 +5606,85 @@
         private NationalInstruments.UI.ScatterPlot scatterPlot30;
         private NationalInstruments.UI.ScatterPlot scatterPlot31;
         private NationalInstruments.UI.ScatterPlot scatterPlot32;
-        private System.Windows.Forms.RadioButton rdoAuxMon3;
+        private System.Windows.Forms.TabPage TabGrpRaw;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckedListBox ChkListLegend3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckedListBox ChkListItem3;
+        private System.Windows.Forms.Button btDeselAll3;
+        private System.Windows.Forms.Button btSelAll3;
+        private NationalInstruments.UI.WindowsForms.Legend Rtlegend;
+        private NationalInstruments.UI.LegendItem RtlegendItem1;
+        private NationalInstruments.UI.LegendItem RtlegendItem2;
+        private NationalInstruments.UI.LegendItem RtlegendItem3;
+        private NationalInstruments.UI.LegendItem RtlegendItem4;
+        private NationalInstruments.UI.LegendItem RtlegendItem5;
+        private NationalInstruments.UI.LegendItem RtlegendItem6;
+        private NationalInstruments.UI.LegendItem RtlegendItem7;
+        private NationalInstruments.UI.LegendItem RtlegendItem8;
+        private NationalInstruments.UI.LegendItem RtlegendItem9;
+        private NationalInstruments.UI.LegendItem RtlegendItem10;
+        private NationalInstruments.UI.LegendItem RtlegendItem11;
+        private NationalInstruments.UI.LegendItem RtlegendItem12;
+        private NationalInstruments.UI.LegendItem RtlegendItem13;
+        private NationalInstruments.UI.LegendItem RtlegendItem14;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph grprt;
+        private NationalInstruments.UI.ScatterPlot scatterPlot3;
+        private NationalInstruments.UI.XAxis RTxAxis1;
+        private NationalInstruments.UI.YAxis RTyAxis1;
+        private NationalInstruments.UI.YAxis RTyAxis2;
+        private System.Windows.Forms.TabPage Raw_DataPage;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton radioButton0;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckedListBox ChkListLegend4;
+        private NationalInstruments.UI.WindowsForms.Legend RawRtlegend;
+        private NationalInstruments.UI.LegendItem legendItem1;
+        private NationalInstruments.UI.LegendItem legendItem2;
+        private NationalInstruments.UI.LegendItem legendItem3;
+        private NationalInstruments.UI.LegendItem legendItem4;
+        private NationalInstruments.UI.LegendItem legendItem5;
+        private NationalInstruments.UI.LegendItem legendItem6;
+        private NationalInstruments.UI.LegendItem legendItem7;
+        private NationalInstruments.UI.LegendItem legendItem8;
+        private NationalInstruments.UI.LegendItem legendItem9;
+        private NationalInstruments.UI.LegendItem legendItem10;
+        private NationalInstruments.UI.LegendItem legendItem18;
+        private NationalInstruments.UI.LegendItem legendItem19;
+        private NationalInstruments.UI.LegendItem legendItem20;
+        private NationalInstruments.UI.LegendItem legendItem29;
+        private System.Windows.Forms.DataGridView AuxDataView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph rawgrp;
+        private NationalInstruments.UI.ScatterPlot scatterPlot1;
+        private NationalInstruments.UI.XAxis xAxis1;
+        private NationalInstruments.UI.YAxis yAxis1;
+        private NationalInstruments.UI.ScatterPlot scatterPlot2;
+        private NationalInstruments.UI.YAxis yAxis2;
+        private System.Windows.Forms.Button RawRead;
     }
 }

@@ -67,7 +67,7 @@ namespace ZiveLab.ZM
         {
             bClose = true;
             // mCommZim.CmdSetVdcAutoRange(1);
-            gBZA.appcfg.Save();
+            gBZA.SaveAppCfg();
         }
 
        
@@ -105,9 +105,7 @@ namespace ZiveLab.ZM
         private void frmConfig_LocationChanged(object sender, EventArgs e)
         {
             if (bClose) return;
-            if (this.WindowState == FormWindowState.Maximized && this.WindowState == FormWindowState.Minimized) return;
 
-            gBZA.appcfg.CfgWinStatus = this.WindowState;
             if (this.WindowState == FormWindowState.Normal)
             {
                 gBZA.appcfg.CfgLocation = this.Location;
@@ -118,9 +116,7 @@ namespace ZiveLab.ZM
         private void frmConfig_SizeChanged(object sender, EventArgs e)
         {
             if (bClose) return;
-            if (this.WindowState == FormWindowState.Maximized && this.WindowState == FormWindowState.Minimized) return;
-
-            gBZA.appcfg.CfgWinStatus = this.WindowState;
+          
             if (this.WindowState == FormWindowState.Normal)
             {
                 gBZA.appcfg.CfgLocation = this.Location;

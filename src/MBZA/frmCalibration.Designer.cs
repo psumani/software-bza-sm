@@ -86,6 +86,7 @@
             this.lblTestStatus = new System.Windows.Forms.Label();
             this.lblRange = new System.Windows.Forms.Label();
             this.lblTemp = new System.Windows.Forms.Label();
+            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.RtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.graphModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vVsIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,9 +105,6 @@
             this.backColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.xAxisColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.plot1ColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.plot2ColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.gridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.lnkstart = new System.Windows.Forms.LinkLabel();
@@ -281,7 +279,6 @@
             this.RTyAxis1 = new NationalInstruments.UI.YAxis();
             this.RTPlot2 = new NationalInstruments.UI.ScatterPlot();
             this.RTyAxis2 = new NationalInstruments.UI.YAxis();
-            this.lblprog = new ZiveLab.ZM.LabelProgress();
             this.menu_niquest.SuspendLayout();
             this.menu_bode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdpara)).BeginInit();
@@ -494,7 +491,7 @@
             this.gridColorToolStripMenuItem.Name = "gridColorToolStripMenuItem";
             this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.gridColorToolStripMenuItem.Text = "Grid color";
-            this.gridColorToolStripMenuItem.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click_1);
+            this.gridColorToolStripMenuItem.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click);
             // 
             // graphViewToolStripMenuItem1
             // 
@@ -635,7 +632,7 @@
             // grdpara
             // 
             this.grdpara.ColumnInfo = "2,1,0,0,0,105,Columns:0{Width:80;}\t1{Width:80;}\t";
-            this.grdpara.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdpara.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdpara.Location = new System.Drawing.Point(651, 10);
             this.grdpara.Name = "grdpara";
             this.grdpara.Rows.Count = 12;
@@ -772,6 +769,23 @@
             this.lblTemp.TabIndex = 79;
             this.lblTemp.Text = " PT-100: ------ °C";
             // 
+            // lblprog
+            // 
+            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprog.LabelColor = System.Drawing.Color.Navy;
+            this.lblprog.LabelText = "";
+            this.lblprog.Location = new System.Drawing.Point(80, 26);
+            this.lblprog.Name = "lblprog";
+            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
+            this.lblprog.OutLine_Visible = true;
+            this.lblprog.OutLine_Width = 1;
+            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lblprog.Prog_Max = 100;
+            this.lblprog.Prog_Min = 0;
+            this.lblprog.Prog_Val = 50;
+            this.lblprog.Size = new System.Drawing.Size(242, 14);
+            this.lblprog.TabIndex = 74;
+            // 
             // RtMenuStrip
             // 
             this.RtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -780,7 +794,7 @@
             this.graphViewToolStripMenuItem,
             this.graphColorToolStripMenuItem});
             this.RtMenuStrip.Name = "RtMenuStrip";
-            this.RtMenuStrip.Size = new System.Drawing.Size(142, 92);
+            this.RtMenuStrip.Size = new System.Drawing.Size(153, 114);
             // 
             // graphModeToolStripMenuItem
             // 
@@ -788,14 +802,14 @@
             this.vVsIToolStripMenuItem,
             this.tVsIVToolStripMenuItem});
             this.graphModeToolStripMenuItem.Name = "graphModeToolStripMenuItem";
-            this.graphModeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.graphModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.graphModeToolStripMenuItem.Text = "Graph mode";
             // 
             // vVsIToolStripMenuItem
             // 
             this.vVsIToolStripMenuItem.CheckOnClick = true;
             this.vVsIToolStripMenuItem.Name = "vVsIToolStripMenuItem";
-            this.vVsIToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.vVsIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.vVsIToolStripMenuItem.Text = "V vs I";
             this.vVsIToolStripMenuItem.Click += new System.EventHandler(this.vVsIToolStripMenuItem_Click);
             // 
@@ -803,7 +817,7 @@
             // 
             this.tVsIVToolStripMenuItem.CheckOnClick = true;
             this.tVsIVToolStripMenuItem.Name = "tVsIVToolStripMenuItem";
-            this.tVsIVToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.tVsIVToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tVsIVToolStripMenuItem.Text = "I,V vs t";
             this.tVsIVToolStripMenuItem.Click += new System.EventHandler(this.tVsIVToolStripMenuItem_Click);
             // 
@@ -813,20 +827,20 @@
             this.defaultToolStripMenuItem,
             this.maximumToolStripMenuItem});
             this.graphSizeToolStripMenuItem.Name = "graphSizeToolStripMenuItem";
-            this.graphSizeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.graphSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.graphSizeToolStripMenuItem.Text = "Graph size";
             // 
             // defaultToolStripMenuItem
             // 
             this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
-            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.defaultToolStripMenuItem.Text = "Default";
             this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
             // 
             // maximumToolStripMenuItem
             // 
             this.maximumToolStripMenuItem.Name = "maximumToolStripMenuItem";
-            this.maximumToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.maximumToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.maximumToolStripMenuItem.Text = "Maximum";
             this.maximumToolStripMenuItem.Click += new System.EventHandler(this.maximumToolStripMenuItem_Click);
             // 
@@ -840,14 +854,14 @@
             this.toolStripSeparator14,
             this.gridToolStripMenuItem1});
             this.graphViewToolStripMenuItem.Name = "graphViewToolStripMenuItem";
-            this.graphViewToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.graphViewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.graphViewToolStripMenuItem.Text = "Graph view";
             // 
             // lineToolStripMenuItem
             // 
             this.lineToolStripMenuItem.CheckOnClick = true;
             this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lineToolStripMenuItem.Text = "Line";
             this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
             // 
@@ -855,31 +869,31 @@
             // 
             this.pointToolStripMenuItem.CheckOnClick = true;
             this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
-            this.pointToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.pointToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pointToolStripMenuItem.Text = "Point";
             this.pointToolStripMenuItem.Click += new System.EventHandler(this.pointToolStripMenuItem_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(110, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(149, 6);
             // 
             // legendToolStripMenuItem
             // 
             this.legendToolStripMenuItem.Name = "legendToolStripMenuItem";
-            this.legendToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.legendToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.legendToolStripMenuItem.Text = "Legend";
             this.legendToolStripMenuItem.Click += new System.EventHandler(this.legendToolStripMenuItem_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(110, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(149, 6);
             // 
             // gridToolStripMenuItem1
             // 
             this.gridToolStripMenuItem1.Name = "gridToolStripMenuItem1";
-            this.gridToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.gridToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.gridToolStripMenuItem1.Text = "Grid";
             this.gridToolStripMenuItem1.Click += new System.EventHandler(this.gridToolStripMenuItem1_Click);
             // 
@@ -889,62 +903,40 @@
             this.backColorToolStripMenuItem,
             this.toolStripSeparator15,
             this.xAxisColorToolStripMenuItem,
-            this.toolStripSeparator16,
-            this.plot1ColorToolStripMenuItem,
-            this.plot2ColorToolStripMenuItem,
             this.toolStripSeparator17,
             this.gridToolStripMenuItem2});
             this.graphColorToolStripMenuItem.Name = "graphColorToolStripMenuItem";
-            this.graphColorToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.graphColorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.graphColorToolStripMenuItem.Text = "Graph color";
             // 
             // backColorToolStripMenuItem
             // 
             this.backColorToolStripMenuItem.Name = "backColorToolStripMenuItem";
-            this.backColorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.backColorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.backColorToolStripMenuItem.Text = "Back color";
             this.backColorToolStripMenuItem.Click += new System.EventHandler(this.backColorToolStripMenuItem_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(149, 6);
             // 
             // xAxisColorToolStripMenuItem
             // 
             this.xAxisColorToolStripMenuItem.Name = "xAxisColorToolStripMenuItem";
-            this.xAxisColorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.xAxisColorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.xAxisColorToolStripMenuItem.Text = "Axis color";
             this.xAxisColorToolStripMenuItem.Click += new System.EventHandler(this.xAxisColorToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(130, 6);
-            // 
-            // plot1ColorToolStripMenuItem
-            // 
-            this.plot1ColorToolStripMenuItem.Name = "plot1ColorToolStripMenuItem";
-            this.plot1ColorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.plot1ColorToolStripMenuItem.Text = "Plot1 color";
-            this.plot1ColorToolStripMenuItem.Click += new System.EventHandler(this.plot1ColorToolStripMenuItem_Click);
-            // 
-            // plot2ColorToolStripMenuItem
-            // 
-            this.plot2ColorToolStripMenuItem.Name = "plot2ColorToolStripMenuItem";
-            this.plot2ColorToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.plot2ColorToolStripMenuItem.Text = "Plot2 color";
-            this.plot2ColorToolStripMenuItem.Click += new System.EventHandler(this.plot2ColorToolStripMenuItem_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(149, 6);
             // 
             // gridToolStripMenuItem2
             // 
             this.gridToolStripMenuItem2.Name = "gridToolStripMenuItem2";
-            this.gridToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.gridToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.gridToolStripMenuItem2.Text = "Grid";
             this.gridToolStripMenuItem2.Click += new System.EventHandler(this.gridToolStripMenuItem2_Click);
             // 
@@ -2378,7 +2370,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdlist.ColumnInfo = "10,1,0,0,0,95,Columns:";
-            this.grdlist.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.grdlist.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.grdlist.Location = new System.Drawing.Point(10, 18);
             this.grdlist.Name = "grdlist";
             this.grdlist.Rows.DefaultSize = 19;
@@ -2549,23 +2541,6 @@
             this.RTyAxis2.MinorDivisions.TickVisible = true;
             this.RTyAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
             // 
-            // lblprog
-            // 
-            this.lblprog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprog.LabelColor = System.Drawing.Color.Navy;
-            this.lblprog.LabelText = "";
-            this.lblprog.Location = new System.Drawing.Point(80, 26);
-            this.lblprog.Name = "lblprog";
-            this.lblprog.OutLine_Color = System.Drawing.Color.Silver;
-            this.lblprog.OutLine_Visible = true;
-            this.lblprog.OutLine_Width = 1;
-            this.lblprog.Prog_Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblprog.Prog_Max = 100;
-            this.lblprog.Prog_Min = 0;
-            this.lblprog.Prog_Val = 50;
-            this.lblprog.Size = new System.Drawing.Size(242, 14);
-            this.lblprog.TabIndex = 74;
-            // 
             // frmCalibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2668,8 +2643,6 @@
         private System.Windows.Forms.ToolStripMenuItem pointToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem graphColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem plot1ColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem plot2ColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColor;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphColorBackcolor;
         private System.Windows.Forms.ToolStripMenuItem NiGrpMenuGraphViewGrid;
@@ -2727,7 +2700,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.Button BtRfreshFit;
         private System.Windows.Forms.Button btSaveAsApplyData;

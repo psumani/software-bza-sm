@@ -1713,41 +1713,4 @@ namespace ZiveLab.ZM
             pinnedArr.Free();
         }
     }
-
-    [StructLayout(LayoutKind.Sequential, Pack = 1), Serializable]
-    public class stRegLinkSifChXml
-    {
-        public string sCh;
-        public string Serial;
-        public string IP;
-        public string MAC;
-        public int SifCh;
-        public bool CheckSIF;
-        public bool CheckCh;
-
-        public stRegLinkSifChXml() { }
-
-        public stRegLinkSifChXml(stRegLinkSifCh origin)
-        {
-            sCh = origin.sCh;
-            Serial = origin.mLinkSifCh.sSerial;
-            IP = origin.mLinkSifCh.sip;
-            MAC = origin.mLinkSifCh.sMac;
-            SifCh = origin.mLinkSifCh.SifCh;
-            CheckSIF = origin.mLinkSifCh.bChkSIF;
-            CheckCh = origin.mLinkSifCh.bChkCh;
-        }
-
-        public stRegLinkSifCh ToOrigin()
-        {
-            stRegLinkSifCh result = new stRegLinkSifCh(sCh);
-            result.mLinkSifCh.sSerial = this.Serial;
-            result.mLinkSifCh.sip = this.IP;
-            result.mLinkSifCh.sMac = this.MAC;
-            result.mLinkSifCh.SifCh = this.SifCh;
-            result.mLinkSifCh.bChkSIF = this.CheckSIF;
-            result.mLinkSifCh.bChkCh = this.CheckCh;
-            return result;
-        }
-    }
 }

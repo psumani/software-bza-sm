@@ -305,6 +305,7 @@
             this.Memu_RstWinPos.Name = "Memu_RstWinPos";
             this.Memu_RstWinPos.Size = new System.Drawing.Size(347, 22);
             this.Memu_RstWinPos.Text = "Reset window position";
+            this.Memu_RstWinPos.Visible = false;
             this.Memu_RstWinPos.Click += new System.EventHandler(this.Memu_RstWinPos_Click);
             // 
             // optionToolStripMenuItem

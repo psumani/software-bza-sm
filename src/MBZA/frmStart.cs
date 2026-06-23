@@ -30,6 +30,7 @@ namespace ZiveLab.ZM
         bool bFirst;
         bool bError;
         bool bGroup;
+        DateTime currdate;
         public frmStart(bool tGroup, List<int> tlstch = null)
         {
             InitializeComponent();
@@ -151,7 +152,7 @@ namespace ZiveLab.ZM
             }
             else
             {
-                txtfilepath.Text = gBZA.appcfg.PathData;
+                txtfilepath.Text = gBZA.appcfg.PathData[0];
                 txtfilename.Text = "";
 
                 RefreshInformation();
@@ -198,13 +199,26 @@ namespace ZiveLab.ZM
 
         private string chkresultfile()
         {
-            string serrch = "";
-            string sname;
-            string sfilename;
-
             stLinkSifCh LnkCh = new stLinkSifCh(0);
             string sifid;
             int sifch;
+
+            string serrch = "";
+            string sname;
+            string sfilename;
+            string sPath;
+            string sTimePath;
+            string sTimefname;
+            string sTechfname;
+
+            sTimePath = currdate.ToString("yyyyMMdd");
+            sTimefname = currdate.ToString("hhmmss");
+            sfilename = txtfilename.Text.Trim();
+            sTechfname = Path.GetFileName(txttechfile.Text.Trim());
+
+            sPath = Path.Combine(txtfilepath.Text, sTechfname);
+            sPath = Path.Combine(sPath, sTimePath);
+            Directory.CreateDirectory(sPath);
 
             foreach (var val in lstch)
             {
@@ -214,10 +228,13 @@ namespace ZiveLab.ZM
 
                 gBZA.SifLnkLst[sifid].MBZAIF.mresfile[sifch].CloseFile();
 
-                sname = string.Format("{0}{1:000}.zmf", txtfilename.Text, val + 1);
-                sfilename = Path.Combine(txtfilepath.Text, sname);
+                if (sfilename.Length < 1) sname = string.Format("{0}_{1:00}.zmf", sTimefname, val + 1);
+                else sname = string.Format("{0}_{1:00}.zmf", sfilename, val + 1);
 
-                if (File.Exists(sfilename))
+                sname = Path.Combine(sPath, sname);
+                
+
+                if (File.Exists(sname))
                 {
                     serrch += string.Format("{0:00} ", val + 1);
                 }
@@ -227,12 +244,23 @@ namespace ZiveLab.ZM
 
         private bool DeleteResultfiles()
         {
-            string sname;
-            string sfilename;
-
             stLinkSifCh LnkCh = new stLinkSifCh(0);
             string sifid;
             int sifch;
+
+            string sname;
+            string sfilename;
+            string sPath;
+            string sTimePath;
+            string sTimefname;
+            string sTechfname;
+
+            sTimePath = currdate.ToString("yyyyMMdd");
+            sTimefname = currdate.ToString("hhMMss");
+            sfilename = txtfilename.Text.Trim();
+            sTechfname = Path.GetFileName(txttechfile.Text.Trim());
+            sPath = Path.Combine(txtfilepath.Text, sTechfname);
+            sPath = Path.Combine(sPath, sTimePath);
 
             foreach (var val in lstch)
             {
@@ -240,16 +268,16 @@ namespace ZiveLab.ZM
                 sifid = LnkCh.sSerial;
                 sifch = LnkCh.SifCh;
 
-                gBZA.SifLnkLst[sifid].MBZAIF.mresfile[sifch].CloseFile();
+                if (sfilename.Length < 1) sname = string.Format("{0}_{1:00}.zmf", sTimefname, val + 1);
+                else sname = string.Format("{0}_{1:00}.zmf", sfilename, val + 1);
 
-                sname = string.Format("{0}{1:000}.zmf", txtfilename.Text, val + 1);
-                sfilename = Path.Combine(txtfilepath.Text, sname);
+                sname = Path.Combine(sPath, sname);
 
-                if (File.Exists(sfilename))
+                if (File.Exists(sname))
                 {
                     try
                     {
-                        File.Delete(sfilename);
+                        File.Delete(sname);
                     }
                     catch(Exception e)
                     {
@@ -526,8 +554,12 @@ namespace ZiveLab.ZM
 
         private void btstart_Click(object sender, EventArgs e)
         {
+            string sPath;
             string sname;
+            string sTimePath;
+            string sTimefname; 
             string sfilename;
+            string sTechfname;
             string sifid;
             int sifch;
             stResHeader head = new stResHeader(0);
@@ -535,6 +567,13 @@ namespace ZiveLab.ZM
             stLinkSifCh LnkCh = new stLinkSifCh(0);
             string serr;
             string smsg = "";
+            
+            currdate = DateTime.Now;
+            sTimePath = currdate.ToString("yyyyMMdd");
+            sTimefname = currdate.ToString("hhmmss");
+            sTechfname = Path.GetFileName(txttechfile.Text.Trim());
+            sPath = Path.Combine(txtfilepath.Text, sTechfname);
+            sPath = Path.Combine(sPath, sTimePath);
 
             serr = chkrungroup();
             if (serr.Trim().Length > 0)
@@ -587,13 +626,16 @@ namespace ZiveLab.ZM
             {
                 return;
             }
-
+           
             minfo = lstTech[oldindex];
             minfo.batid = Encoding.UTF8.GetBytes(txtbatid.Text.Trim());
             minfo.Capa = Convert.ToDouble(txtcapa.Text);
             minfo.creator = Encoding.UTF8.GetBytes(txtuser.Text.Trim());
             lstTech[oldindex] = minfo;
             int index = 0;
+
+            
+
             foreach (var val in lstch)
             {
                 LnkCh = gBZA.ChLnkLst[val.ToString()];
@@ -607,7 +649,7 @@ namespace ZiveLab.ZM
                 head.mInfo.Error = 0;
                 head.tech = gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch];
                 head.systemInfo = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg;
-
+                
                 if (chkapptech.Checked == true)
                 {
                     head.mInfo.Capa = head.tech.info.Capa;
@@ -623,10 +665,13 @@ namespace ZiveLab.ZM
                     Array.Copy(minfo.creator, head.mInfo.user, minfo.creator.Length);
                 }
 
-                sname = string.Format("{0}{1:000}.zmf", txtfilename.Text, val + 1);
-                sfilename = Path.Combine(txtfilepath.Text, sname);
-                
-                
+                if(txtfilename.Text.Trim().Length < 1) sname = string.Format("{0}_{1:00}.zmf", sTimefname, val + 1);
+                else sname = string.Format("{0}_{1:00}.zmf", txtfilename.Text, val + 1);
+
+               
+                sfilename = Path.Combine(sPath, sname);
+
+
                 gBZA.SifLnkLst[sifid].MBZAIF.mHeadinf[sifch] = head.mInfo;
                 gBZA.SifLnkLst[sifid].MBZAIF.mresfile[sifch].SetHead(head);
                 
@@ -637,10 +682,8 @@ namespace ZiveLab.ZM
 
                 gBZA.ChLnkLst[val.ToString()] = LnkCh;
             }
-            sname = string.Format("{0}000.zmf", txtfilename.Text);
-            sfilename = Path.Combine(txtfilepath.Text, sname);
-            gBZA.appcfg.PathData = Path.GetDirectoryName(sfilename);
 
+            gBZA.appcfg.ApplyDataPath(txtfilepath.Text.Trim());
             gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
 
             DialogResult = DialogResult.OK;

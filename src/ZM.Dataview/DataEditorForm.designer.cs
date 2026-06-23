@@ -100,6 +100,7 @@
             this.lblCapacity1 = new System.Windows.Forms.Label();
             this.label_TestTime = new System.Windows.Forms.Label();
             this.label_FileName = new System.Windows.Forms.Label();
+            this.backgroundWorkerZSharp = new System.ComponentModel.BackgroundWorker();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.legend1)).BeginInit();
             this.panelMain.SuspendLayout();
@@ -145,148 +146,148 @@
             // 
             // gap1
             // 
-            resources.ApplyResources(this.gap1, "gap1");
             this.gap1.Name = "gap1";
+            resources.ApplyResources(this.gap1, "gap1");
             // 
             // tsbtnOpen
             // 
-            resources.ApplyResources(this.tsbtnOpen, "tsbtnOpen");
             this.tsbtnOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbtnOpen.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.open_folder;
+            resources.ApplyResources(this.tsbtnOpen, "tsbtnOpen");
             this.tsbtnOpen.Name = "tsbtnOpen";
             this.tsbtnOpen.Click += new System.EventHandler(this.tsbtnOpen_Click);
             // 
             // toolStripLabel1
             // 
-            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
             this.toolStripLabel1.Name = "toolStripLabel1";
+            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
             // 
             // tsbtnReload
             // 
-            resources.ApplyResources(this.tsbtnReload, "tsbtnReload");
             this.tsbtnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnReload, "tsbtnReload");
             this.tsbtnReload.Name = "tsbtnReload";
             this.tsbtnReload.Click += new System.EventHandler(this.tsbtnReload_Click);
             // 
             // gap6
             // 
-            resources.ApplyResources(this.gap6, "gap6");
             this.gap6.Name = "gap6";
+            resources.ApplyResources(this.gap6, "gap6");
             // 
             // tsbtnStop
             // 
-            resources.ApplyResources(this.tsbtnStop, "tsbtnStop");
             this.tsbtnStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnStop, "tsbtnStop");
             this.tsbtnStop.Name = "tsbtnStop";
             this.tsbtnStop.Click += new System.EventHandler(this.tsbtnStop_Click);
             // 
             // gap3
             // 
-            resources.ApplyResources(this.gap3, "gap3");
             this.gap3.Name = "gap3";
+            resources.ApplyResources(this.gap3, "gap3");
             // 
             // tsbtnSave
             // 
-            resources.ApplyResources(this.tsbtnSave, "tsbtnSave");
             this.tsbtnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnSave, "tsbtnSave");
             this.tsbtnSave.Name = "tsbtnSave";
             this.tsbtnSave.Click += new System.EventHandler(this.tsbtnSave_Click);
             // 
             // gap4
             // 
-            resources.ApplyResources(this.gap4, "gap4");
             this.gap4.Name = "gap4";
+            resources.ApplyResources(this.gap4, "gap4");
             // 
             // tsbtnOpenSchedule
             // 
-            resources.ApplyResources(this.tsbtnOpenSchedule, "tsbtnOpenSchedule");
             this.tsbtnOpenSchedule.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnOpenSchedule, "tsbtnOpenSchedule");
             this.tsbtnOpenSchedule.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.DeviceTest;
             this.tsbtnOpenSchedule.Name = "tsbtnOpenSchedule";
             this.tsbtnOpenSchedule.Click += new System.EventHandler(this.tsbtnOpenSchedule_Click);
             // 
             // gap5
             // 
-            resources.ApplyResources(this.gap5, "gap5");
             this.gap5.Name = "gap5";
+            resources.ApplyResources(this.gap5, "gap5");
             // 
             // tsbtnViewGraph
             // 
-            resources.ApplyResources(this.tsbtnViewGraph, "tsbtnViewGraph");
             this.tsbtnViewGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnViewGraph, "tsbtnViewGraph");
             this.tsbtnViewGraph.Name = "tsbtnViewGraph";
             this.tsbtnViewGraph.Click += new System.EventHandler(this.tsbtnViewGraph_Click);
             // 
             // toolStripLabel2
             // 
-            resources.ApplyResources(this.toolStripLabel2, "toolStripLabel2");
             this.toolStripLabel2.Name = "toolStripLabel2";
+            resources.ApplyResources(this.toolStripLabel2, "toolStripLabel2");
             // 
             // tsbtnSaveText
             // 
-            resources.ApplyResources(this.tsbtnSaveText, "tsbtnSaveText");
             this.tsbtnSaveText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnSaveText, "tsbtnSaveText");
             this.tsbtnSaveText.Name = "tsbtnSaveText";
             this.tsbtnSaveText.Click += new System.EventHandler(this.tsbtnSaveText_Click);
             // 
             // toolStripLabel3
             // 
-            resources.ApplyResources(this.toolStripLabel3, "toolStripLabel3");
             this.toolStripLabel3.Name = "toolStripLabel3";
+            resources.ApplyResources(this.toolStripLabel3, "toolStripLabel3");
             // 
             // tsbtnExportExcel
             // 
-            resources.ApplyResources(this.tsbtnExportExcel, "tsbtnExportExcel");
             this.tsbtnExportExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnExportExcel, "tsbtnExportExcel");
             this.tsbtnExportExcel.Name = "tsbtnExportExcel";
             this.tsbtnExportExcel.Click += new System.EventHandler(this.tsbtnExportExcel_Click);
             // 
             // gap7
             // 
-            resources.ApplyResources(this.gap7, "gap7");
             this.gap7.Name = "gap7";
+            resources.ApplyResources(this.gap7, "gap7");
             // 
             // tsbtnRunZMan
             // 
-            resources.ApplyResources(this.tsbtnRunZMan, "tsbtnRunZMan");
             this.tsbtnRunZMan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnRunZMan, "tsbtnRunZMan");
             this.tsbtnRunZMan.Name = "tsbtnRunZMan";
             this.tsbtnRunZMan.Click += new System.EventHandler(this.tsbtnRunZMan_Click);
             // 
             // toolStripLabel6
             // 
-            resources.ApplyResources(this.toolStripLabel6, "toolStripLabel6");
             this.toolStripLabel6.Name = "toolStripLabel6";
+            resources.ApplyResources(this.toolStripLabel6, "toolStripLabel6");
             // 
             // toolStripLabel5
             // 
-            resources.ApplyResources(this.toolStripLabel5, "toolStripLabel5");
             this.toolStripLabel5.Name = "toolStripLabel5";
+            resources.ApplyResources(this.toolStripLabel5, "toolStripLabel5");
             // 
             // tsbtnPrint
             // 
-            resources.ApplyResources(this.tsbtnPrint, "tsbtnPrint");
             this.tsbtnPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnPrint, "tsbtnPrint");
             this.tsbtnPrint.Name = "tsbtnPrint";
             this.tsbtnPrint.Click += new System.EventHandler(this.tsbtnPrint_Click);
             // 
             // toolStripLabel4
             // 
-            resources.ApplyResources(this.toolStripLabel4, "toolStripLabel4");
             this.toolStripLabel4.Name = "toolStripLabel4";
+            resources.ApplyResources(this.toolStripLabel4, "toolStripLabel4");
             // 
             // tsbtnFileHeaderInfor
             // 
-            resources.ApplyResources(this.tsbtnFileHeaderInfor, "tsbtnFileHeaderInfor");
             this.tsbtnFileHeaderInfor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.tsbtnFileHeaderInfor, "tsbtnFileHeaderInfor");
             this.tsbtnFileHeaderInfor.Image = global::ZiveLab.ZM.Dataview.Properties.Resources.fileinfor;
             this.tsbtnFileHeaderInfor.Name = "tsbtnFileHeaderInfor";
             this.tsbtnFileHeaderInfor.Click += new System.EventHandler(this.tsbtnFileHeaderInfor_Click);
             // 
             // toolStripLabel7
             // 
-            resources.ApplyResources(this.toolStripLabel7, "toolStripLabel7");
             this.toolStripLabel7.Name = "toolStripLabel7";
+            resources.ApplyResources(this.toolStripLabel7, "toolStripLabel7");
             // 
             // backgroundWorker
             // 
@@ -326,9 +327,9 @@
             // 
             // legend1
             // 
-            resources.ApplyResources(this.legend1, "legend1");
             this.legend1.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
             this.legendItem1});
+            resources.ApplyResources(this.legend1, "legend1");
             this.legend1.Name = "legend1";
             // 
             // legendItem1
@@ -349,10 +350,10 @@
             // 
             // DataFlexGrid
             // 
-            resources.ApplyResources(this.DataFlexGrid, "DataFlexGrid");
             this.DataFlexGrid.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
             this.DataFlexGrid.AllowFiltering = true;
             this.DataFlexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            resources.ApplyResources(this.DataFlexGrid, "DataFlexGrid");
             this.DataFlexGrid.AutoClipboard = true;
             this.DataFlexGrid.Name = "DataFlexGrid";
             this.DataFlexGrid.Rows.Count = 1;
@@ -387,11 +388,11 @@
             // 
             // groupBoxViewOpt
             // 
-            resources.ApplyResources(this.groupBoxViewOpt, "groupBoxViewOpt");
             this.groupBoxViewOpt.Controls.Add(this.ChkEISAux);
             this.groupBoxViewOpt.Controls.Add(this.ChkEIS);
             this.groupBoxViewOpt.Controls.Add(this.ChkDCAux);
             this.groupBoxViewOpt.Controls.Add(this.ChkDC);
+            resources.ApplyResources(this.groupBoxViewOpt, "groupBoxViewOpt");
             this.groupBoxViewOpt.Name = "groupBoxViewOpt";
             this.groupBoxViewOpt.TabStop = false;
             // 
@@ -425,10 +426,10 @@
             // 
             // groupBoxFilter
             // 
-            resources.ApplyResources(this.groupBoxFilter, "groupBoxFilter");
             this.groupBoxFilter.Controls.Add(this.btnSearch);
             this.groupBoxFilter.Controls.Add(this.chkCycleNo);
             this.groupBoxFilter.Controls.Add(this.tbCycleNo);
+            resources.ApplyResources(this.groupBoxFilter, "groupBoxFilter");
             this.groupBoxFilter.Name = "groupBoxFilter";
             this.groupBoxFilter.TabStop = false;
             // 
@@ -453,30 +454,29 @@
             // 
             // c1StatusBar1
             // 
-            resources.ApplyResources(this.c1StatusBar1, "c1StatusBar1");
             this.c1StatusBar1.LeftPaneItems.Add(this.ribbonLabel1);
             this.c1StatusBar1.LeftPaneItems.Add(this.ribbonProgressBar1);
             this.c1StatusBar1.LeftPaneItems.Add(this.ribbonLabel2);
             this.c1StatusBar1.Location = new System.Drawing.Point(0, 653);
             this.c1StatusBar1.Name = "c1StatusBar1";
+            resources.ApplyResources(this.c1StatusBar1, "c1StatusBar1");
             this.c1StatusBar1.Size = new System.Drawing.Size(880, 22);
             // 
             // ribbonLabel1
             // 
-            resources.ApplyResources(this.ribbonLabel1, "ribbonLabel1");
             this.ribbonLabel1.ForeColorOuter = System.Drawing.Color.Red;
             this.ribbonLabel1.Name = "ribbonLabel1";
+            resources.ApplyResources(this.ribbonLabel1, "ribbonLabel1");
             // 
             // ribbonProgressBar1
             // 
-            resources.ApplyResources(this.ribbonProgressBar1, "ribbonProgressBar1");
             this.ribbonProgressBar1.Name = "ribbonProgressBar1";
             this.ribbonProgressBar1.Visible = false;
             // 
             // ribbonLabel2
             // 
-            resources.ApplyResources(this.ribbonLabel2, "ribbonLabel2");
             this.ribbonLabel2.Name = "ribbonLabel2";
+            resources.ApplyResources(this.ribbonLabel2, "ribbonLabel2");
             this.ribbonLabel2.Visible = false;
             // 
             // groupBox1
@@ -602,10 +602,18 @@
             resources.ApplyResources(this.label_FileName, "label_FileName");
             this.label_FileName.Name = "label_FileName";
             // 
+            // backgroundWorkerZSharp
+            // 
+            this.backgroundWorkerZSharp.WorkerReportsProgress = true;
+            this.backgroundWorkerZSharp.WorkerSupportsCancellation = true;
+            this.backgroundWorkerZSharp.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerZSharp_DoWork);
+            this.backgroundWorkerZSharp.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerZSharp_ProgressChanged);
+            this.backgroundWorkerZSharp.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerZSharp_RunWorkerCompleted);
+            // 
             // DataEditorForm
             // 
-            resources.ApplyResources(this, "$this");
             this.AllowDrop = true;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.toolStripMain);
@@ -705,6 +713,7 @@
         private System.Windows.Forms.Label label_FileName;
         private C1.Win.C1FlexGrid.C1FlexGrid DataFlexGrid;
         private System.Windows.Forms.TextBox textFileName;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerZSharp;
     }
 }
 

@@ -124,7 +124,7 @@
             // 
             // btgrptech
             // 
-            this.btgrptech.Image = global::ZiveLab.ZM.Properties.Resources.TestSettings;
+            this.btgrptech.Image = global::ZiveLab.ZM.Properties.Resources.TestSettings24;
             this.btgrptech.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btgrptech.Location = new System.Drawing.Point(370, 6);
             this.btgrptech.Name = "btgrptech";

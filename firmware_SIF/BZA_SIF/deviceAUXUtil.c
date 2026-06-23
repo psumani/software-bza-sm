@@ -82,40 +82,66 @@ void set_AUX_dds_clk(int ch) // from set_dds_clk
 	}
 }
 
+inline ushort CheckBoardCable(int bd)
+{
+	UNS_8 data = 0;
+	
+	if(ICE_read_byte(bd, ICE_CMD_DEVICE_DO, &data) == _ERROR)
+	{
+		return 0x0;
+	}
+	if((data & 0x80)  == 0x80) return 0x1;
+	return 0x0;	
+}		
+
 /* run on AUX board only */
 void proc_AUX_adc_vdc_data(int bd)
 {
-	//int auxch;
+	int auxbd;
+	int auxch;
 	int tmpv[4];
 	st_zim_adc_vdc* pvdc;
 
-	/*if(m_pSysConfig->EnaZIM[bd] == FALSE || m_pSysConfig->ChkZIM[bd] == FALSE) 
-	{
-		for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
-		{
-			pvdc = &m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[auxch];
-			pvdc->adcval = 0x80000;
-			pvdc->value = 0.0;
-			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc[auxch] = 0.0;
-		}
-		return;
-	}*/
+	auxbd = bd - 1;
 
 	SetDeviceBoard(bd);
 	
 	if(m_pGlobalVar->mChVar[0].mChStatInf.eis_status.status <= DEF_EIS_STATUS_EIS_INIT || m_pGlobalVar->mChVar[0].mChStatInf.eis_status.status >= DEF_EIS_STATUS_EISSTOP) //
 	{
+		if(bd > 0 && m_pSysConfig->EnaZIM[bd] == TRUE && m_pSysConfig->ChkZIM[bd] == TRUE)
+		{
+			m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[auxbd] = CheckBoardCable(bd);
+		}
+		else
+		{
+			m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[auxbd] = 0x0;
+		}
+		
+		if(m_pSysConfig->EnaZIM[bd] == FALSE || m_pSysConfig->ChkZIM[bd] == FALSE || m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[auxbd] == 0x0) 
+		{
+			for(auxch=0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
+			{
+				pvdc = &m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[auxch];
+				pvdc->adcval = 0x80000;
+				pvdc->value = 0.0;
+				//m_pGlobalVar->mChVar[bd].mChStatInf.Vdc[auxch] = 0.0;
+				m_pGlobalVar->mChVar[0].mChStatInf.Aux_Vdc[auxbd*4+auxch] = 0.0; //
+			}
+			return;
+		}
+		
+		
 		if(ICE_read_adc24bit_x4(bd, ICE_AUX_CMD_V_ADC_VAL, &tmpv) == _ERROR)
 		{		 	  
 			return;
 		}
 		/* get adc_vdc[0~3]->value */
-		for(int i = 0;i<=3;i++)
+		for(auxch = 0; auxch<DEF_MAX_AUX_CHCNT; auxch++)
 		{
-			pvdc = &m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[i];
-			pvdc->adcval = tmpv[i];
+			pvdc = &m_pGlobalVar->mChVar[bd].mdevice.adc_vdc[auxch];
+			pvdc->adcval = tmpv[auxch];
 			
-			pvdc->value = (double)tmpv[i] * m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[0].factor; //DEF_ADC_VDC_RNG0_FACTOR1
+			pvdc->value = (double)tmpv[auxch] * m_pSysConfig->mZimCfg[bd].ranges.Aux.vdc_rng[0].factor; //DEF_ADC_VDC_RNG0_FACTOR1
 
 			if(m_pGlobalVar->mChVar[0].bCalib == 0)
 			{
@@ -131,8 +157,8 @@ void proc_AUX_adc_vdc_data(int bd)
 			{
 				pvdc->value = floor(pvdc->value * 100000.0 + 0.5) * 0.00001;
 			}
-			//m_pGlobalVar->mChVar[bd].mChStatInf.Vdc[i] = pvdc->value;
-			m_pGlobalVar->mChVar[0].mChStatInf.Aux_Vdc[(bd-1)*4+i] = pvdc->value; //
+			//m_pGlobalVar->mChVar[bd].mChStatInf.Vdc[auxch] = pvdc->value;
+			m_pGlobalVar->mChVar[0].mChStatInf.Aux_Vdc[auxbd*4+auxch] = pvdc->value; //
 		}		
 	}
 }

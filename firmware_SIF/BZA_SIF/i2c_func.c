@@ -433,7 +433,8 @@ void i2c_mtxrx_handler(INT_32 devid)
 		{
 			/* update status */
 			txrx_setup->status |= 
-			  ((device->regptr->i2c_stat & ((I2C_AFI | I2C_NAI)) << 8) | I2C_SETUP_STATUS_DONE);
+			  ((device->regptr->i2c_stat & ((I2C_AFI | I2C_NAI)) << 8) |
+			  I2C_SETUP_STATUS_DONE);
 			/* Disable I2C interrupt in the interrupt controller */
 			disable_i2c_irq_int(devid);
 			/* set txrx state for a new transfer */
@@ -1626,6 +1627,7 @@ INT_32 EepromWrite(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32
 
 	return status;
 }
+
 INT_32 EepromWriteAndCRC(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32 n_bytes)
 {
 	INT_32 status = _NO_ERROR;
@@ -1641,11 +1643,12 @@ INT_32 EepromWriteAndCRC(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, 
 	status = EepromWrite(devid, sAddr, mAddr+n_bytes, &crc, sizeof(crc));
 	return status;
 }
-static UNS_16 crcerr = 0;
+
 INT_32 EepromWriteReadAndCRC(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, INT_32 n_bytes)
 {
 	UNS_16 crc_read;
 	UNS_16 crc;
+	UNS_16 crcerr = 0;
 	UNS_8* buf = (UNS_8*)malloc(n_bytes + 2);
 	int retry = 0;
 	const int max_retry = 3;
@@ -1677,6 +1680,7 @@ INT_32 EepromWriteReadAndCRC(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buff
 	free(buf);
 	return _ERROR;
 }
+
 INT_32 EepromSetMemAddr(INT_32 devid,UNS_32 sAddr, UNS_16 mAddr)
 {
 	char mBuf[2];

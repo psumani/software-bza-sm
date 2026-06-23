@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_device>
+  <exe>$PROJ_DIR$\board\NXP\FlashEmbArtLPC3250_NAND.out</exe>
+  <page>2048</page>
+  <block>1 0x20000000</block>
+  <flash_base>0x200A8000</flash_base>
+  <macro>$PROJ_DIR$\board\NXP\FlashEmbArtLPC3250_NAND.mac</macro>
+  <args_doc>If "--boot" argument is used the flashloader will download
+the data into Block 0 of the NAND flash (used for flashing
+a bootloader). Else the program will be flashed into block
+sequence starting from Block 1.
+If "--clear_bad_blocks" argument is used the flashloader
+will erase bat block marks. In any case if erase or write
+operations fault, it will mark failed block again.
+Default is preserve bad blocks info.
+The "--nand_type_reg" argument is used to set MLC_ICR
+register, the value is passed to first level bootloader
+too. Default is 4.
+The "--nand_blocks" argument is used to specify number
+of NAND device blocks. Default is 1024 </args_doc>
+</flash_device>

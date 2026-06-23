@@ -1,0 +1,73 @@
+# ##############################################################################
+
+# iCEcube PCF
+
+# Version:            2020.12.27943
+
+# File Generated:     May 26 2026 13:00:50
+
+# Family & Device:    iCE40HX4K
+
+# Package:            TQ144
+
+# ##############################################################################
+
+###IOSet List 57
+set_io DDS_SCK1 42
+set_io IAC_FLT0 130
+set_io IAC_OSR0 124
+set_io RTD_SDO 34 -pullup yes
+set_io START_MAIN 60
+set_io IAC_DRDY 141
+set_io ICE_SPI_CE0 76 -pullup yes
+set_io START_SYNC 61 -pullup yes
+set_io VAC_CLK 9
+set_io VAC_CS 10
+set_io DDS_MCLK1 39
+set_io DDS_CS1 41
+set_io IAC_MOSI 138
+set_io SELIRNG1 122
+set_io VAC_OSR1 2
+set_io AC_ADC_SYNC 142
+set_io CONT_SD 120
+set_io VDC_SDO 22
+set_io AMPV_POW 28
+set_io IAC_CS 136
+set_io VDC_CLK 24
+set_io THERMOSTAT 44 -pullup yes
+set_io VAC_SCLK 11
+set_io DDS_MOSI1 43
+set_io DDS_RNG_0 115
+set_io ICE_SPI_MOSI 74 -pullup yes
+set_io VAC_FLT1 4
+set_io VAC_MISO 15
+set_io VDC_SCLK 23
+set_io DDS_MOSI 113
+set_io EIS_SYNCCLK 47 -pullup yes
+set_io IAC_SCLK 137
+set_io ICE_GPMO_1 79 -pullup yes
+set_io VAC_FLT0 3
+set_io DDS_SCK 112
+set_io IAC_FLT1 134
+set_io IAC_OSR1 125
+set_io RTD_CS 33
+set_io RTD_SCLK 32
+set_io VAC_DRDY 16
+set_io DDS_MCLK 114
+set_io RTD_SDI 31
+set_io SELIRNG0 121
+set_io DDS_CS 110
+set_io IAC_CLK 135
+set_io ICE_SYSCLK 37 -pullup yes
+set_io STAT_COMM 45
+set_io TEST_LED 38
+set_io VAC_MOSI 12
+set_io VAC_OSR0 1
+set_io IAC_MISO 139
+set_io ICE_GPMI_0 81
+set_io ICE_GPMO_2 80 -pullup yes
+set_io ICE_SPI_MISO 75
+set_io RTD_DRDY 29 -pullup yes
+set_io ICE_SPI_SCLK 73 -pullup yes
+set_io VDC_RNG0 25
+

@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 Lattice Synthesis Timing Report, Version  
-Wed Apr 22 10:54:45 2026
+Fri May 22 16:13:18 2026
 
 Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
 Copyright (c) 1995 AT&T Corp.   All rights reserved.
@@ -314,7 +314,7 @@ Report: 57.859 ns is the maximum delay for this constraint.
 
 ================================================================================
 Constraint: create_clock -period 1000.000000 -name clk2 [get_nets clk_RTD]
-            1041 items scored, 0 timing errors detected.
+            1044 items scored, 0 timing errors detected.
 --------------------------------------------------------------------------------
 
 
@@ -473,5 +473,5 @@ Timing errors: 0  Score: 0
 Constraints cover  3350 paths, 497 nets, and 1511 connections (24.0% coverage)
 
 
-Peak memory: 72515584 bytes, TRCE: 0 bytes, DLYMAN: 0 bytes
+Peak memory: 72994816 bytes, TRCE: 0 bytes, DLYMAN: 0 bytes
 CPU_TIME_REPORT: 0 secs 

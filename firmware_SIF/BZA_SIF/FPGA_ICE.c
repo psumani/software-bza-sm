@@ -299,13 +299,13 @@ INT_32 ICE_write_byte(INT_32 ch, UNS_8 cmd, UNS_8 data)
 		{
 			return _NO_ERROR;
 		}
-		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && ch > 0 && cmd == ICE_CMD_EIS_CFG)
+		if(m_pSysConfig->mSIFCfg.Type == (byte)SIF_MCBZA && ch > 0 && cmd == ICE_CMD_DEVICE_DO)
 		{
-			if(data == (rx_buf & 0xF7))
+			if(data == (rx_buf & 0x7F))
 			{
-				m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[ch-1] = 0;
 				return _NO_ERROR;
 			}
+			
 		}
 	}
 		

@@ -14,7 +14,6 @@ namespace ZiveLab.ZM.Dataview
     class ZMF_File
     {
         public string sfilename;
-        public string sLastVersion;
         public string sVersion;
         public FileStream fs;
         public stResHeader tmphead;
@@ -155,8 +154,7 @@ namespace ZiveLab.ZM.Dataview
             tmphead = new stResHeader(0);
             bopen = false;
             datacount = 0;
-            sLastVersion = string.Format("{0}.{1}.{2}.{3}", DeviceConstants.SCH_MAJOR, DeviceConstants.SCH_MINOR, DeviceConstants.SCH_REVISION, DeviceConstants.SCH_BUILD);
-
+            
             _PrevCurr = 0.0;
             _PrevPow = 0.0;
             _prevCapa = 0.0;
@@ -477,6 +475,7 @@ namespace ZiveLab.ZM.Dataview
             return result;
 
         }
+
         public bool read(ref stDefTestData data)
         {
             if (bopen == false) return false;

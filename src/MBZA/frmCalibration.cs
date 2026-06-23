@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Analysis;
 using ZiveLab.ZM.ZIM.Packets;
@@ -76,6 +77,7 @@ namespace ZiveLab.ZM
             ChgSelItem = 0;
             SelNiItem = 0;
             SelBdItem = 0;
+
             grpvars = new st_graph_vars();
 
             ChkBoxNi = new[]
@@ -149,6 +151,52 @@ namespace ZiveLab.ZM
             {
                 MessageBox.Show("Failed set calibration mode.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public bool SaveCalGrpVarsToXml()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(st_graph_vars));
+            try
+            {
+                using (FileStream fs = new FileStream(gBZA.FileCalGrpVars, FileMode.Create))
+                {
+                    serializer.Serialize(fs, grpvars);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(string.Format("Failed to save file[Error:{0}].", ex.Message), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool LoadXmlToCalGrpVars()
+        {
+            try
+            {
+                if (File.Exists(gBZA.FileGrpVars) == false)
+                {
+                    SaveCalGrpVarsToXml();
+                }
+                else
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(st_graph_vars));
+                    using (FileStream fs = new FileStream(gBZA.FileCalGrpVars, FileMode.Open))
+                    {
+                        grpvars = (st_graph_vars)serializer.Deserialize(fs);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Failed to read file[Error:{0}].", ex.Message), gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void RefreshShowPlotNi()
@@ -823,7 +871,11 @@ namespace ZiveLab.ZM
 
             ranges[0].Gen.mDummy[grpvars.tRng].R = double.Parse(grdpara[1, 1].ToString());
             ranges[0].Gen.mDummy[grpvars.tRng].Ls = double.Parse(grdpara[2, 1].ToString());
+            ranges[0].Gen.mDummy[grpvars.OtherRng].R = double.Parse(grdpara[1, 1].ToString());
+            ranges[0].Gen.mDummy[grpvars.OtherRng].Ls = double.Parse(grdpara[2, 1].ToString());
+
             
+
             items = listPacket.ToArray();
             fititems = listPacket.ToArray();
 
@@ -972,61 +1024,61 @@ namespace ZiveLab.ZM
         {
             rtmode = 0;
             rtsize = 0;
-            grprt.PlotAreaColor = Properties.Settings.Default.RtGrp_BackColor;
+            grprt.PlotAreaColor = Color.FromArgb(grpvars.RT.BackColor);
 
-            grprt.Plots[0].LineColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-            grprt.Plots[0].PointColor = Properties.Settings.Default.RtGrp_Plot1_Color;
+            grprt.Plots[0].LineColor = Color.FromArgb(grpvars.RT.PlotColor[0]);   
+            grprt.Plots[0].PointColor = Color.FromArgb(grpvars.RT.PlotColor[0]);
             grprt.Plots[0].SmoothUpdates = true;
-            grprt.Plots[1].LineColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-            grprt.Plots[1].PointColor = Properties.Settings.Default.RtGrp_Plot2_Color;
+            grprt.Plots[1].LineColor = Color.FromArgb(grpvars.RT.PlotColor[1]);
+            grprt.Plots[1].PointColor = Color.FromArgb(grpvars.RT.PlotColor[1]);
             grprt.Plots[1].SmoothUpdates = true;
 
             grprt.XAxes[0].Caption = "Voltage(V)";
             grprt.XAxes[0].CaptionVisible = true;
-            grprt.XAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            grprt.XAxes[0].CaptionForeColor = Color.FromArgb(grpvars.RT.AxisColor);  
+            grprt.XAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.XAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.XAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+            grprt.XAxes[0].MajorDivisions.GridVisible = grpvars.RT.ShowGrid1 | grpvars.RT.ShowGrid2;
 
-            grprt.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            grprt.XAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.XAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
             grprt.XAxes[0].MinorDivisions.GridVisible = false;
 
             grprt.YAxes[0].Caption = "Current(A)";
             grprt.YAxes[0].CaptionVisible = true;
-            grprt.YAxes[0].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            grprt.YAxes[0].CaptionForeColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+            grprt.YAxes[0].MajorDivisions.GridVisible = grpvars.RT.ShowGrid1;
 
-            grprt.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            grprt.YAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
             grprt.YAxes[0].MinorDivisions.GridVisible = false;
             grprt.YAxes[0].AutoSpacing = true;
 
             grprt.YAxes[1].Caption = "";
             grprt.YAxes[1].CaptionVisible = true;
-            grprt.YAxes[1].CaptionForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
+            grprt.YAxes[1].CaptionForeColor = Color.FromArgb(grpvars.RT.AxisColor);
 
-            grprt.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-            grprt.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            grprt.YAxes[1].MajorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[1].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[1].MajorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+            grprt.YAxes[1].MajorDivisions.GridVisible = grpvars.RT.ShowGrid2;
 
-            grprt.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-            grprt.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+            grprt.YAxes[1].MinorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+            grprt.YAxes[1].MinorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
             grprt.YAxes[1].MinorDivisions.GridVisible = false;
             grprt.YAxes[1].AutoSpacing = true;
 
-            lineToolStripMenuItem.Checked = Properties.Settings.Default.RtGrp_Plot_ViewLine;
-            pointToolStripMenuItem.Checked = Properties.Settings.Default.RtGrp_Plot_ViewPoint;
+            lineToolStripMenuItem.Checked = grpvars.RT.LineVisible;
+            pointToolStripMenuItem.Checked = grpvars.RT.PointVisible;
 
             legendToolStripMenuItem.Checked = false;
             RefreshRtLegend();
             
-            if (Properties.Settings.Default.RtGrp_Plot_ViewLine)
+            if (grpvars.RT.LineVisible)
             {
                 grprt.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
                 grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
@@ -1037,7 +1089,7 @@ namespace ZiveLab.ZM
                 grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.None;
             }
 
-            if (Properties.Settings.Default.RtGrp_Plot_ViewPoint)
+            if (grpvars.RT.PointVisible)
             {
                 grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
                 grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
@@ -1147,30 +1199,30 @@ namespace ZiveLab.ZM
             grp1.ResetZoomPan();
 
    
-            grp1.PlotAreaColor = Properties.Settings.Default.NiGrp_Backcolor;
+            grp1.PlotAreaColor = Color.FromArgb(grpvars.ni.BackColor);
 
             grp1.XAxes[0].Caption = "Z real(Ω)";
-            grp1.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.NiGrp_Axis_Color;
-            grp1.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.NiGrp_Axis_Color;
-            grp1.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.NiGrp_Axis_Color;
-            grp1.XAxes[0].CaptionForeColor = Properties.Settings.Default.NiGrp_Axis_Color;
+            grp1.XAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.ni.AxisColor); 
+            grp1.XAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.ni.AxisColor);
+            grp1.XAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.ni.AxisColor);
+            grp1.XAxes[0].CaptionForeColor = Color.FromArgb(grpvars.ni.AxisColor);
 
-            grp1.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.NiGrp_Grid_Color;
+            grp1.XAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.ni.GridColor); 
             grp1.XAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp1.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.NiGrp_Grid_View; 
+            grp1.XAxes[0].MajorDivisions.GridVisible = grpvars.ni.ShowGrid;
 
 
-            grp1.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.NiGrp_Grid_Color;
+            grp1.XAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.ni.GridColor);
             grp1.XAxes[0].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
             grp1.XAxes[0].MinorDivisions.GridVisible = false;
 
             grp1.YAxes[0].Caption = "-Z image(Ω)";
-            grp1.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.NiGrp_Axis_Color;
-            grp1.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.NiGrp_Axis_Color;
-            grp1.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.NiGrp_Axis_Color;
-            grp1.YAxes[0].CaptionForeColor = Properties.Settings.Default.NiGrp_Axis_Color;
+            grp1.YAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.ni.AxisColor);
+            grp1.YAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.ni.AxisColor);
+            grp1.YAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.ni.AxisColor);
+            grp1.YAxes[0].CaptionForeColor = Color.FromArgb(grpvars.ni.AxisColor);
             grp1.YAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp1.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.NiGrp_Grid_View;
+            grp1.YAxes[0].MajorDivisions.GridVisible = grpvars.ni.ShowGrid;
             grp1.YAxes[1].Visible = false;
 
             int idx = 0;
@@ -1178,8 +1230,8 @@ namespace ZiveLab.ZM
             foreach (ScatterPlot mplot in grp1.Plots)
             {
                 nItem = idx / 2;
-                mplot.LineColor = grpvars.ni.PlotColor[nItem];
-                mplot.PointColor = grpvars.ni.PlotColor[nItem];
+                mplot.LineColor = Color.FromArgb(grpvars.ni.PlotColor[nItem]);
+                mplot.PointColor = Color.FromArgb(grpvars.ni.PlotColor[nItem]);
 
                 mplot.XAxis = grp1.XAxes[0];
                 mplot.YAxis = grp1.YAxes[0];
@@ -1211,7 +1263,7 @@ namespace ZiveLab.ZM
             grp1.InteractionModeDefault = GraphDefaultInteractionMode.None;
 
 
-            grp1.Cursors[0].LabelBackColor = grpvars.ni.BackColor;
+            grp1.Cursors[0].LabelBackColor = Color.FromArgb(grpvars.ni.BackColor);
             grp1.Cursors[0].Plot = grp1.Plots[0];
             grp1.Cursors[0].Color = grp1.Cursors[0].Plot.LineColor;
             grp1.Cursors[0].LabelForeColor = grp1.Cursors[0].Plot.LineColor;
@@ -1341,46 +1393,46 @@ namespace ZiveLab.ZM
         {
             
 
-            grp2.PlotAreaColor = Properties.Settings.Default.BdGrp_Backcolor;
+            grp2.PlotAreaColor = Color.FromArgb(grpvars.bode.BackColor);
 
             grp2.XAxes[0].Caption = "Frequency(Hz)";
-            grp2.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.XAxes[0].CaptionForeColor = Properties.Settings.Default.BdGrp_Axis_Color;
+            grp2.XAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.bode.AxisColor); 
+            grp2.XAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.XAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.XAxes[0].CaptionForeColor = Color.FromArgb(grpvars.bode.AxisColor);
             grp2.XAxes[0].ScaleType = ScaleType.Logarithmic;
-            grp2.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+            grp2.XAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
             grp2.XAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.XAxes[0].MinorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view | Properties.Settings.Default.BdGrp_Grid_Y2view;
-            grp2.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+            grp2.XAxes[0].MinorDivisions.GridVisible = grpvars.bode.ShowGrid1 | grpvars.bode.ShowGrid2;
+            grp2.XAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
             grp2.XAxes[0].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
            // grp2.XAxes[0].MinorDivisions.GridVisible = false;
 
             grp2.YAxes[0].Caption = "Z magnitude(Ω)";
-            grp2.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[0].CaptionForeColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+            grp2.YAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[0].CaptionForeColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor); 
             grp2.YAxes[0].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.YAxes[0].MinorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view;
-            grp2.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+            grp2.YAxes[0].MinorDivisions.GridVisible = grpvars.bode.ShowGrid1;
+            grp2.YAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
             grp2.YAxes[0].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
             //grp2.YAxes[0].MinorDivisions.GridVisible = false;
             
 
 
             grp2.YAxes[1].Caption = "Z phase(°C)";
-            grp2.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[1].CaptionForeColor = Properties.Settings.Default.BdGrp_Axis_Color;
-            grp2.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+            grp2.YAxes[1].MajorDivisions.TickColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[1].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[1].MinorDivisions.TickColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[1].CaptionForeColor = Color.FromArgb(grpvars.bode.AxisColor);
+            grp2.YAxes[1].MajorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
             grp2.YAxes[1].MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            grp2.YAxes[1].MinorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y2view;
-            grp2.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+            grp2.YAxes[1].MinorDivisions.GridVisible = grpvars.bode.ShowGrid1;
+            grp2.YAxes[1].MinorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
             grp2.YAxes[1].MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-           // grp2.YAxes[1].MinorDivisions.GridVisible = false;
+            grp2.YAxes[1].MinorDivisions.GridVisible = false;
            
 
             int idx = 0;
@@ -1397,8 +1449,8 @@ namespace ZiveLab.ZM
                 if (plotidx == 0)
                 {
                     coloridx = nItem * 2;
-                    mplot.LineColor = grpvars.bode.PlotColor[coloridx];
-                    mplot.PointColor = grpvars.bode.PlotColor[coloridx];
+                    mplot.LineColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
+                    mplot.PointColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
                     mplot.YAxis = grp2.YAxes[0];
                     if (grpvars.bode.mPlot[idx].LineVisible) mplot.LineStyle = NationalInstruments.UI.LineStyle.Solid;
                     else mplot.LineStyle = NationalInstruments.UI.LineStyle.None;
@@ -1408,8 +1460,8 @@ namespace ZiveLab.ZM
                 else if (plotidx == 1)
                 {
                     coloridx = nItem * 2 + 1;
-                    mplot.LineColor = grpvars.bode.PlotColor[coloridx];
-                    mplot.PointColor = grpvars.bode.PlotColor[coloridx];
+                    mplot.LineColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
+                    mplot.PointColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
                     mplot.YAxis = grp2.YAxes[1];
                     if (grpvars.bode.mPlot[idx].LineVisible) mplot.LineStyle = NationalInstruments.UI.LineStyle.Solid;
                     else mplot.LineStyle = NationalInstruments.UI.LineStyle.None;
@@ -1419,8 +1471,8 @@ namespace ZiveLab.ZM
                 else if (plotidx == 2)
                 {
                     coloridx = nItem * 2;
-                    mplot.LineColor = grpvars.bode.PlotColor[coloridx];
-                    mplot.PointColor = grpvars.bode.PlotColor[coloridx];
+                    mplot.LineColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
+                    mplot.PointColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
                     mplot.YAxis = grp2.YAxes[0];
                     if (grpvars.bode.mPlot[idx].LineVisible) mplot.LineStyle = NationalInstruments.UI.LineStyle.Dot;
                     else mplot.LineStyle = NationalInstruments.UI.LineStyle.None;
@@ -1430,8 +1482,8 @@ namespace ZiveLab.ZM
                 else
                 {
                     coloridx = nItem * 2 + 1;
-                    mplot.LineColor = grpvars.bode.PlotColor[coloridx];
-                    mplot.PointColor = grpvars.bode.PlotColor[coloridx];
+                    mplot.LineColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
+                    mplot.PointColor = Color.FromArgb(grpvars.bode.PlotColor[coloridx]);
                     mplot.YAxis = grp2.YAxes[1];
                     if (grpvars.bode.mPlot[idx].LineVisible) mplot.LineStyle = NationalInstruments.UI.LineStyle.Dot;
                     else mplot.LineStyle = NationalInstruments.UI.LineStyle.None;
@@ -1449,7 +1501,7 @@ namespace ZiveLab.ZM
 
             grp2.InteractionModeDefault = GraphDefaultInteractionMode.None;
 
-            grp2.Cursors[0].LabelBackColor = grpvars.bode.BackColor;
+            grp2.Cursors[0].LabelBackColor = Color.FromArgb(grpvars.bode.BackColor);
             grp2.Cursors[0].Plot = grp2.Plots[0];
             grp2.Cursors[0].Color = grp2.Cursors[0].Plot.LineColor;
             grp2.Cursors[0].LabelForeColor = grp2.Cursors[0].Plot.LineColor;
@@ -1950,11 +2002,14 @@ namespace ZiveLab.ZM
             int nAuxBdCh;
             st_zim_Eis_Cal_info mInfo;
             double gain;
+
+
             if (SelItem == 0)
             {
                 mInfo = ranges[0].Gen.mEisIRngCalInfo[grpvars.tRng];
                 if ((grpvars.tRng % 2) == 0) gain = ranges[0].Gen.iac_rng[grpvars.CRng].gain1;
                 else gain = ranges[0].Gen.iac_rng[grpvars.CRng].gain2;
+                
             }
             else
             {
@@ -1963,6 +2018,27 @@ namespace ZiveLab.ZM
                 mInfo = ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.tRng];
                 if ((grpvars.tRng % 2) == 0) gain = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain1;
                 else gain = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain2;
+            }
+
+            for(int i=0; i<MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
+            {
+                if(i==0)
+                {
+                    grpvars.showitems[i].gain1 = ranges[0].Gen.iac_rng[grpvars.CRng].gain1;
+                    grpvars.showitems[i].gain2 = ranges[0].Gen.iac_rng[grpvars.CRng].gain2;
+                    grpvars.showitems[i].mInfo = ranges[0].Gen.mEisIRngCalInfo[grpvars.tRng];
+                }
+                else
+                {
+                    nAuxBd = (i - 1) / MBZA_Constant.MAX_AUX_CHANNEL + 1;
+                    nAuxBdCh = (i - 1) % MBZA_Constant.MAX_AUX_CHANNEL;
+
+                    grpvars.showitems[i].gain1 = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain1;
+                    grpvars.showitems[i].gain2 = ranges[nAuxBd].Aux.iac_gain[nAuxBdCh].items[grpvars.CRng].iac_gain2;
+                    grpvars.showitems[i].mInfo = ranges[nAuxBd].Aux.mEisIRngCalInfo[nAuxBdCh].items[grpvars.tRng];
+                }
+                grpvars.showitems[i].mDummy.R = ranges[0].Gen.mDummy[grpvars.tRng].R;
+                grpvars.showitems[i].mDummy.Ls = ranges[0].Gen.mDummy[grpvars.tRng].Ls;
             }
 
 
@@ -2408,23 +2484,22 @@ namespace ZiveLab.ZM
 
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.RtGrp_BackColor;
+            int ChgColor = gBZA.GetChgColor(grpvars.RT.BackColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (ChgColor != grpvars.RT.BackColor)
             {
-                Properties.Settings.Default.RtGrp_BackColor = cd.Color;
-                Properties.Settings.Default.Save();
-                grprt.PlotAreaColor = Properties.Settings.Default.RtGrp_BackColor;
-                backColorToolStripMenuItem.ForeColor = Properties.Settings.Default.RtGrp_BackColor;
+                grpvars.RT.BackColor = ChgColor;
+                SaveCalGrpVarsToXml();
+                grprt.PlotAreaColor = Color.FromArgb(grpvars.RT.BackColor);
+                backColorToolStripMenuItem.ForeColor = Color.FromArgb(grpvars.RT.BackColor);
             }
         }
 
         private void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.RtGrp_Plot_ViewLine = lineToolStripMenuItem.Checked;
-            Properties.Settings.Default.Save();
-            if (Properties.Settings.Default.RtGrp_Plot_ViewLine)
+            grpvars.RT.LineVisible = lineToolStripMenuItem.Checked;
+            SaveCalGrpVarsToXml();
+            if (grpvars.RT.LineVisible)
             {
                 grprt.Plots[0].LineStyle = NationalInstruments.UI.LineStyle.Solid;
                 grprt.Plots[1].LineStyle = NationalInstruments.UI.LineStyle.Solid;
@@ -2438,9 +2513,9 @@ namespace ZiveLab.ZM
 
         private void pointToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.RtGrp_Plot_ViewPoint = pointToolStripMenuItem.Checked;
-            Properties.Settings.Default.Save();
-            if (Properties.Settings.Default.RtGrp_Plot_ViewPoint)
+            grpvars.RT.PointVisible = pointToolStripMenuItem.Checked;
+            SaveCalGrpVarsToXml();
+            if (grpvars.RT.PointVisible)
             {
                 grprt.Plots[0].PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
                 grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.EmptySquare;
@@ -2451,44 +2526,7 @@ namespace ZiveLab.ZM
                 grprt.Plots[1].PointStyle = NationalInstruments.UI.PointStyle.None;
             }
         }
-
-        private void plot1ColorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.RtGrp_Plot1_Color;
-
-            if (cd.ShowDialog() == DialogResult.OK)
-            {
-                Properties.Settings.Default.RtGrp_Plot1_Color = cd.Color;
-                Properties.Settings.Default.Save();
-                grprt.Plots[0].LineColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-                grprt.Plots[0].PointColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-                grprt.YAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-                grprt.YAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-                grprt.YAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-              
-                plot1ColorToolStripMenuItem.ForeColor = Properties.Settings.Default.RtGrp_Plot1_Color;
-            }
-        }
-
-        private void plot2ColorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.RtGrp_Plot2_Color;
-
-            if (cd.ShowDialog() == DialogResult.OK)
-            {
-                Properties.Settings.Default.RtGrp_Plot2_Color = cd.Color;
-                Properties.Settings.Default.Save();
-                grprt.Plots[1].LineColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-                grprt.Plots[1].PointColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-                grprt.YAxes[1].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-                grprt.YAxes[1].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-                grprt.YAxes[1].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-                plot2ColorToolStripMenuItem.ForeColor = Properties.Settings.Default.RtGrp_Plot2_Color;
-            }
-        }
-
+        
         private void NiGrpMenuGraphModeZoom_Click(object sender, EventArgs e)
         {
             if (NiGrpMenuGraphModeZoom.Checked == true)
@@ -2530,66 +2568,50 @@ namespace ZiveLab.ZM
                 grp1.InteractionModeDefault = GraphDefaultInteractionMode.PanXY;
             }
         }
+
         
 
         private void xAxisColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.RtGrp_Axis_Color;
+            int ChgColor = gBZA.GetChgColor(grpvars.RT.AxisColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if(ChgColor != grpvars.RT.AxisColor)
             {
-                Properties.Settings.Default.RtGrp_Axis_Color = cd.Color;
-                Properties.Settings.Default.Save();
-                grprt.XAxes[0].MajorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
-                grprt.XAxes[0].MajorDivisions.LabelForeColor = Properties.Settings.Default.RtGrp_Axis_Color;
-                grprt.XAxes[0].MinorDivisions.TickColor = Properties.Settings.Default.RtGrp_Axis_Color;
+                grpvars.RT.AxisColor = ChgColor;
+                SaveCalGrpVarsToXml();
+
+                grprt.XAxes[0].MajorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
+                grprt.XAxes[0].MajorDivisions.LabelForeColor = Color.FromArgb(grpvars.RT.AxisColor);
+                grprt.XAxes[0].MinorDivisions.TickColor = Color.FromArgb(grpvars.RT.AxisColor);
             }
         }
 
         private void NiGrpMenuGraphColorBackcolor_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.NiGrp_Backcolor;
+            int ChgColor = gBZA.GetChgColor(grpvars.ni.BackColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (ChgColor != grpvars.ni.BackColor)
             {
-                Properties.Settings.Default.NiGrp_Backcolor = cd.Color;
-                Properties.Settings.Default.Save();
-                grp1.PlotAreaColor = Properties.Settings.Default.NiGrp_Backcolor;
+                grpvars.RT.BackColor = ChgColor;
+                SaveCalGrpVarsToXml();
+                grp1.PlotAreaColor = Color.FromArgb(grpvars.ni.BackColor);
             }
         }
-
-        private void NiGrpMenuGraphColorSrccolor_Click(object sender, EventArgs e)
-        {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.NiGrp_Plot1_color;
-
-            if (cd.ShowDialog() == DialogResult.OK)
-            {
-                Properties.Settings.Default.NiGrp_Plot1_color = cd.Color;
-                Properties.Settings.Default.Save();
-                grp1.Plots[0].LineColor = Properties.Settings.Default.NiGrp_Plot1_color;
-                grp1.Plots[0].PointColor = Properties.Settings.Default.NiGrp_Plot1_color;
-                grp1.Plots[1].LineColor = Properties.Settings.Default.NiGrp_Plot1_color;
-                grp1.Plots[1].PointColor = Properties.Settings.Default.NiGrp_Plot1_color;
-            }
-        }
-
+        
         private void NiGrpMenuGraphColorGridcolor_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.NiGrp_Grid_Color;
+            int ChgColor = gBZA.GetChgColor(grpvars.ni.GridColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (ChgColor != grpvars.ni.GridColor)
             {
-                Properties.Settings.Default.NiGrp_Grid_Color = cd.Color;
-                Properties.Settings.Default.Save();
+                grpvars.ni.GridColor = ChgColor;
+                SaveCalGrpVarsToXml();
+                
 
-                grp1.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.NiGrp_Grid_Color;
-                grp1.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.NiGrp_Grid_Color;
-                grp1.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.NiGrp_Grid_Color;
-                grp1.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.NiGrp_Grid_Color;
+                grp1.XAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.ni.GridColor);
+                grp1.XAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.ni.GridColor);
+                grp1.YAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.ni.GridColor);
+                grp1.YAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.ni.GridColor);
             }
         }
 
@@ -2876,9 +2898,9 @@ namespace ZiveLab.ZM
             if (BdGrpMenuGraphViewLegend.Checked == true) BdGrpMenuGraphViewLegend.Checked = false;
             else BdGrpMenuGraphViewLegend.Checked = true;
 
-            Properties.Settings.Default.BdGrp_Legend_View = BdGrpMenuGraphViewLegend.Checked;
-            Properties.Settings.Default.Save();
-            Bdlegend.Visible = Properties.Settings.Default.BdGrp_Legend_View;
+            grpvars.bode.ShowLegend = BdGrpMenuGraphViewLegend.Checked;
+            SaveCalGrpVarsToXml();
+            Bdlegend.Visible = grpvars.bode.ShowLegend;
         }
 
         private void NiGrpMenuGraphViewLegend_Click(object sender, EventArgs e)
@@ -2886,9 +2908,9 @@ namespace ZiveLab.ZM
             if (NiGrpMenuGraphViewLegend.Checked == true) NiGrpMenuGraphViewLegend.Checked = false;
             else NiGrpMenuGraphViewLegend.Checked = true;
 
-            Properties.Settings.Default.NiGrp_Legend_View = NiGrpMenuGraphViewLegend.Checked;
-            Properties.Settings.Default.Save();
-            Nilegend.Visible = Properties.Settings.Default.NiGrp_Legend_View;
+            grpvars.ni.ShowLegend = NiGrpMenuGraphViewLegend.Checked;
+            SaveCalGrpVarsToXml();
+            Nilegend.Visible = grpvars.ni.ShowLegend;
         }
 
         private void legendToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2903,16 +2925,11 @@ namespace ZiveLab.ZM
         {
             if(gridToolStripMenuItem.Checked) gridToolStripMenuItem.Checked = false;
             else gridToolStripMenuItem.Checked = true;
-            Properties.Settings.Default.NiGrp_Grid_View = gridToolStripMenuItem.Checked;
-            Properties.Settings.Default.Save();
+            grpvars.ni.ShowGrid = gridToolStripMenuItem.Checked;
+            SaveCalGrpVarsToXml();
 
-            grp1.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.NiGrp_Grid_View;
-            grp1.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.NiGrp_Grid_View;
-        }
-
-        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            grp1.XAxes[0].MajorDivisions.GridVisible = grpvars.ni.ShowGrid;
+            grp1.YAxes[0].MajorDivisions.GridVisible = grpvars.ni.ShowGrid;
         }
         
         private void BdGrpMenuGraphViewGridY1_Click(object sender, EventArgs e)
@@ -2920,10 +2937,10 @@ namespace ZiveLab.ZM
             if (BdGrpMenuGraphViewGridY1.Checked == true) BdGrpMenuGraphViewGridY1.Checked = false;
             else BdGrpMenuGraphViewGridY1.Checked = true;
 
-            Properties.Settings.Default.BdGrp_Grid_Y1view = BdGrpMenuGraphViewGridY1.Checked;
-            Properties.Settings.Default.Save();
-            grp2.YAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view;
-            grp2.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view | Properties.Settings.Default.BdGrp_Grid_Y2view;
+            grpvars.bode.ShowGrid1 = BdGrpMenuGraphViewGridY1.Checked;
+            SaveCalGrpVarsToXml();
+            grp2.YAxes[0].MajorDivisions.GridVisible = grpvars.bode.ShowGrid1;
+            grp2.XAxes[0].MajorDivisions.GridVisible = grpvars.bode.ShowGrid1 | grpvars.bode.ShowGrid2;
         }
 
         private void BdGrpMenuGraphViewGridY2_Click(object sender, EventArgs e)
@@ -2931,53 +2948,41 @@ namespace ZiveLab.ZM
             if (BdGrpMenuGraphViewGridY2.Checked == true) BdGrpMenuGraphViewGridY2.Checked = false;
             else BdGrpMenuGraphViewGridY2.Checked = true;
 
-            Properties.Settings.Default.BdGrp_Grid_Y2view = BdGrpMenuGraphViewGridY2.Checked;
-            Properties.Settings.Default.Save();
-            grp2.YAxes[1].MajorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y2view;
-            grp2.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.BdGrp_Grid_Y1view | Properties.Settings.Default.BdGrp_Grid_Y2view;
+            grpvars.bode.ShowGrid2 = BdGrpMenuGraphViewGridY2.Checked;
+            SaveCalGrpVarsToXml();
+            grp2.YAxes[1].MajorDivisions.GridVisible = grpvars.bode.ShowGrid2;
+            grp2.XAxes[0].MajorDivisions.GridVisible = grpvars.bode.ShowGrid1 | grpvars.bode.ShowGrid2;
         }
 
         private void gridToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (gridToolStripMenuItem1.Checked) gridToolStripMenuItem1.Checked = false;
             else gridToolStripMenuItem1.Checked = true;
-
-            Properties.Settings.Default.RtGrp_GridView = gridToolStripMenuItem1.Checked;
-            Properties.Settings.Default.Save();
-
-            grprt.XAxes[0].MajorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            grprt.YAxes[0].MinorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
-            grprt.YAxes[1].MinorDivisions.GridVisible = Properties.Settings.Default.RtGrp_GridView;
+            grpvars.RT.ShowGrid1 = gridToolStripMenuItem1.Checked;
+            grpvars.RT.ShowGrid2 = gridToolStripMenuItem1.Checked;
+            SaveCalGrpVarsToXml();
+            grprt.XAxes[0].MajorDivisions.GridVisible = grpvars.RT.ShowGrid1 | grpvars.RT.ShowGrid2;
+            grprt.YAxes[0].MinorDivisions.GridVisible = grpvars.RT.ShowGrid1;
+            grprt.YAxes[1].MinorDivisions.GridVisible = grpvars.RT.ShowGrid2;
 
         }
 
         private void gridToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.RtGrp_GridColor;
+            int ChgColor = gBZA.GetChgColor(grpvars.ni.GridColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (ChgColor != grpvars.ni.GridColor)
             {
-                Properties.Settings.Default.RtGrp_GridColor = cd.Color;
-                Properties.Settings.Default.Save();
+                grpvars.RT.GridColor = ChgColor;
+                SaveCalGrpVarsToXml();
 
-                grprt.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-                grprt.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-                grprt.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-                grprt.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-                grprt.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
-                grprt.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.RtGrp_GridColor;
+                grprt.XAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+                grprt.XAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+                grprt.YAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+                grprt.YAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+                grprt.YAxes[1].MajorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
+                grprt.YAxes[1].MinorDivisions.GridColor = Color.FromArgb(grpvars.RT.GridColor);
             }
-        }
-
-        private void Nilegend_ItemsChanged(object sender, CollectionChangeEventArgs e)
-        {
-            
-        }
-
-        private void Nilegend_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
         }
 
         private void grprt_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -3025,6 +3030,18 @@ namespace ZiveLab.ZM
             FileResult tResfile = new FileResult();
             FileResult tSaveResfile = new FileResult();
             SaveFileDialog saveDlg = new SaveFileDialog();
+
+            saveDlg.CustomPlaces.Clear();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    saveDlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
+                }
+            }
+
 
             string str = string.Format("{0}\\Cal_{1}_rng{2}_result.zmf", Serial, gBZA.SifLnkLst[Serial].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].GetSerialNumber(), grpvars.tRng);
             string sAppDatafile = Path.Combine(gBZA.appcfg.PathLog, str);
@@ -3209,33 +3226,31 @@ namespace ZiveLab.ZM
 
         private void backColorToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.BdGrp_Backcolor;
+            int ChgColor = gBZA.GetChgColor(grpvars.bode.BackColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (ChgColor != grpvars.bode.BackColor)
             {
-                Properties.Settings.Default.BdGrp_Backcolor = cd.Color;
-                Properties.Settings.Default.Save();
-                grp2.PlotAreaColor = Properties.Settings.Default.BdGrp_Backcolor;
+                grpvars.bode.BackColor = ChgColor;
+                SaveCalGrpVarsToXml();
+                grp2.PlotAreaColor = Color.FromArgb(grpvars.bode.BackColor);
             }
         }
 
-        private void gridColorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            cd.Color = Properties.Settings.Default.BdGrp_Grid_Color;
+            int ChgColor = gBZA.GetChgColor(grpvars.bode.GridColor);
 
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (ChgColor != grpvars.bode.GridColor)
             {
-                Properties.Settings.Default.BdGrp_Grid_Color = cd.Color;
-                Properties.Settings.Default.Save();
-
-                grp2.XAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
-                grp2.XAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
-                grp2.YAxes[0].MajorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
-                grp2.YAxes[0].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
-                grp2.YAxes[1].MajorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
-                grp2.YAxes[1].MinorDivisions.GridColor = Properties.Settings.Default.BdGrp_Grid_Color;
+                grpvars.bode.GridColor = ChgColor;
+                SaveCalGrpVarsToXml();
+                
+                grp2.XAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
+                grp2.XAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
+                grp2.YAxes[0].MajorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
+                grp2.YAxes[0].MinorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
+                grp2.YAxes[1].MajorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
+                grp2.YAxes[1].MinorDivisions.GridColor = Color.FromArgb(grpvars.bode.GridColor);
             }
         }
 

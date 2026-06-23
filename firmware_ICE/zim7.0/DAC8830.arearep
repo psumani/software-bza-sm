@@ -1,0 +1,11 @@
+----------------------------------------------------------------------
+Report for cell DAC8830.TECH
+Register bits:  42 of 3520 (1.193%)
+I/O cells:      0
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                             SB_DFF         6          100.0
+                            SB_DFFE        14          100.0
+                          SB_DFFESR        22          100.0
+                            SB_LUT4        66          100.0
+                              TOTAL       108

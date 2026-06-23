@@ -749,6 +749,7 @@ namespace ZiveLab.ZM.Dataview
                 setinfo = (DataViewSet)bf.Deserialize(fs);
 
                 fs.Close();
+                
             }
             catch (Exception ex)
             {

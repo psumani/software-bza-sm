@@ -11,7 +11,7 @@ namespace ZiveLab.ZM.Dataview
         private string _sfilename;
         private DataHeaderValues _DataHeaderValues;
         private int _datacount;
-
+        private DataViewSet _dataviewset;
         public string Version { set { _version = value; } }
         public string Datafilename
         {
@@ -25,11 +25,14 @@ namespace ZiveLab.ZM.Dataview
         {
             set { _DataHeaderValues = value; }
         }
+        public DataViewSet dataviewset { set { _dataviewset = value; } }
         public FileHeaderInforForm(int langidx)
         {
             InitializeComponent();
 
             SetLanguage(langidx);
+
+            _dataviewset = DataviewCommon.LoadFromSetFile();
         }
 
         public void SetLanguage(int langidx)
@@ -40,7 +43,10 @@ namespace ZiveLab.ZM.Dataview
         private void FormFileHeaderInfor_Load(object sender, EventArgs e)
         {
             string sReportname, sDatafile, sVersion, sTestduration, sLaststatus, sDatacount, sTester, sBatId, sMemo, sSchfile, sCh, sSifCh, sSifSerial, sSifFwVer, sSifType, sZimSerial, sZimType, sZimBoardType, sZimFwVer;
+            string sCapa;
             string str;
+            string unitQ1 = _dataviewset._dataConvSet.UnitC ? "C" : "mAh";
+
             richTextBox1.Clear();
 
             sReportname = Properties.Resources.Data_Report;
@@ -51,6 +57,7 @@ namespace ZiveLab.ZM.Dataview
             sDatacount = _DataHeaderValues._datacount.ToString();
             sLaststatus = ((enStatError)_DataHeaderValues._ResHead.mInfo.Error).GetDescription();
             sTester = _DataHeaderValues._ResHead.mInfo.GetUser();
+            sCapa = _DataHeaderValues._ResHead.mInfo.Capa.ToString();
             sBatId = _DataHeaderValues._ResHead.mInfo.GetBattId();
             sMemo = _DataHeaderValues._ResHead.mInfo.GetMemo();
             sSchfile = _DataHeaderValues._ResHead.GetTechFilename();
@@ -95,8 +102,9 @@ namespace ZiveLab.ZM.Dataview
             richTextBox1.AppendText(string.Format("  * {0} : {1}\r\n", Properties.Resources.Data_Count, sDatacount));
             richTextBox1.AppendText("\r\n");
             richTextBox1.AppendText(string.Format("  * {0} : {1}\r\n", Properties.Resources.Product_No_d, sBatId));
+            richTextBox1.AppendText(string.Format("  * {0} : {1}{2}\r\n", Properties.Resources.Capacity_x, sCapa, unitQ1));
             richTextBox1.AppendText(string.Format("  * {0} : {1}\r\n", Properties.Resources.Tester, sTester));
-            richTextBox1.AppendText(string.Format("  * {0} : {1}\r\n", Properties.Resources.Memo, sMemo));
+            richTextBox1.AppendText(string.Format("  * {0} : {1}\r\n", Properties.Resources.Memo, sMemo)); 
             richTextBox1.AppendText("\r\n");
         }
     }

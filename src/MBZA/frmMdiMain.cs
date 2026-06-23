@@ -16,6 +16,7 @@ using ZiveLab.ZM.ZIM.Packets;
 using ZiveLab.ZM.ZIM.Utilities;
 using ZiveLab.ZM.Dataview;
 using SMLib;
+using System.Runtime.InteropServices;
 
 namespace ZiveLab.ZM
 {
@@ -32,16 +33,15 @@ namespace ZiveLab.ZM
 
         private bool bExit;
         private bool bRefresh;
-        private frmAuxVdc auxForm;
+        public frmAuxVdc auxForm;
 
-        frmMain     frmMainView;
-        frmRealview frmRtView;
-        frmRealview frmRegRtView;
-        frmRealview frmGrpRtView;
+        public frmMain frmMainView;
+        public frmRealview frmRtView;
+        public frmRealview frmRegRtView;
+        public frmRealview frmGrpRtView;
 
-        frmConfig frmcfg;
-
-        frmDataTools frmResTools;
+        public frmConfig frmcfg;
+        public frmDataTools frmResTools;
        
         bool bClose;
         bool bFirst;
@@ -57,15 +57,23 @@ namespace ZiveLab.ZM
             this.MaxAniCnt = 10;
 
             this.Text = AppTitle;
+
+            gBZA.sMsgTitle = AppTitle;
+            
+
             gBZA._ExtAppPath = new ExtAppProc();
             gBZA.appcfg = new AppConfig();
             gBZA.mDataViewSet = new DataViewSet();
             
-            gBZA.appcfg.Load();
+            gBZA.LoadAppCfg();
+
             gBZA.LoadDataViewSet();
 
-            gBZA.sMsgTitle = AppTitle;
             gBZA.FileGrpVars = Path.Combine(gBZA.appcfg.PathSysInfo, "GraphVars.cfg");
+            gBZA.FileCalGrpVars = Path.Combine(gBZA.appcfg.PathSysInfo, "CalGraphVars.cfg");
+
+            gBZA.grpvars = new st_GrpCh_vars();
+            gBZA.LoadXmlToGrpVars();
 
             //MakeAppFolder();
 
@@ -135,27 +143,26 @@ namespace ZiveLab.ZM
             {
                 auxForm = new frmAuxVdc(ch);
 
-                auxForm.MdiParent = this;
-
+                auxForm.MdiParent = gBZA.appcfg.AuxVdcFloating? null:this;
+                auxForm.WindowState = FormWindowState.Normal;
                 if (gBZA.appcfg.AuxVdcLocation == new Point(0, 0))
                 {
-                    auxForm.WindowState = gBZA.appcfg.AuxVdcWinStatus = FormWindowState.Normal;
                     auxForm.StartPosition = FormStartPosition.CenterParent;
                     gBZA.appcfg.AuxVdcLocation = auxForm.Location;
                     gBZA.appcfg.AuxVdcSize = auxForm.Size;
-                    gBZA.appcfg.Save();
+                    gBZA.SaveAppCfg();
                 }
                 else
                 {
                     auxForm.Location = gBZA.appcfg.AuxVdcLocation;
                     auxForm.Size = gBZA.appcfg.AuxVdcSize;
                     auxForm.StartPosition = FormStartPosition.Manual;
-                    auxForm.WindowState = gBZA.appcfg.AuxVdcWinStatus;
                 }
             }
             else
             {
-                auxForm.WindowState = gBZA.appcfg.AuxVdcWinStatus = FormWindowState.Normal;
+                auxForm.MdiParent = gBZA.appcfg.AuxVdcFloating ? null : this;
+                auxForm.WindowState = FormWindowState.Normal;
                 auxForm.StartPosition = FormStartPosition.Manual;
                 auxForm.Location = gBZA.appcfg.AuxVdcLocation;
                 auxForm.Size = gBZA.appcfg.AuxVdcSize;
@@ -192,20 +199,20 @@ namespace ZiveLab.ZM
 
                 if (gBZA.appcfg.FileNameSIFFW.Length < 5) gBZA.appcfg.FileNameSIFFW = "default.sif";
 
-                if (gBZA.appcfg.PathData.Length < 5)
+                if (gBZA.appcfg.PathData[0].Length < 5)
                 {
-                    gBZA.appcfg.PathData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
+                    gBZA.appcfg.PathData[0] = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
                     gBZA.mDataViewSet._GraphSetEx.OpenPath = gBZA.appcfg.PathData;
                 }
-                if (!System.IO.Directory.Exists(gBZA.appcfg.PathData))
+                if (!System.IO.Directory.Exists(gBZA.appcfg.PathData[0]))
                 {
-                    System.IO.Directory.CreateDirectory(gBZA.appcfg.PathData);
+                    System.IO.Directory.CreateDirectory(gBZA.appcfg.PathData[0]);
                 }
 
-                if (gBZA.appcfg.PathSch.Length < 5) gBZA.appcfg.PathSch = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
-                if (!System.IO.Directory.Exists(gBZA.appcfg.PathSch))
+                if (gBZA.appcfg.PathSch.Length < 5) gBZA.appcfg.PathSch[0] = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
+                if (!System.IO.Directory.Exists(gBZA.appcfg.PathSch[0]))
                 {
-                    System.IO.Directory.CreateDirectory(gBZA.appcfg.PathSch);
+                    System.IO.Directory.CreateDirectory(gBZA.appcfg.PathSch[0]);
                 }
 
                 if (gBZA.appcfg.PathSysInfo.Length < 5) gBZA.appcfg.PathSysInfo = Path.Combine("C:\\ZIVE DATA\\ZM\\", "infor");
@@ -222,7 +229,7 @@ namespace ZiveLab.ZM
                     System.IO.Directory.CreateDirectory(gBZA.appcfg.PathRangeInfo);
                 }
 
-                if (gBZA.appcfg.PathSchTemp.Length < 5) gBZA.appcfg.PathSchTemp = Path.Combine(gBZA.appcfg.PathSch, "Temp");
+                if (gBZA.appcfg.PathSchTemp.Length < 5) gBZA.appcfg.PathSchTemp = Path.Combine(gBZA.appcfg.PathSch[0], "Temp");
                 if (!System.IO.Directory.Exists(gBZA.appcfg.PathSchTemp))
                 {
                     System.IO.Directory.CreateDirectory(gBZA.appcfg.PathSchTemp);
@@ -337,14 +344,13 @@ namespace ZiveLab.ZM
 
                 gBZA.appcfg.MainLocation = this.Location;
                 gBZA.appcfg.MainSize = this.Size;
-                gBZA.appcfg.MainWinStatus = this.WindowState;
-                gBZA.appcfg.Save();
+                gBZA.SaveAppCfg();
             }
             else
             {
                 if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Minimized)
                 {
-                    this.WindowState = gBZA.appcfg.MainWinStatus = FormWindowState.Normal;
+                    this.WindowState = FormWindowState.Normal;
                     this.StartPosition = FormStartPosition.Manual;
                     this.Location = gBZA.appcfg.MainLocation;
                     this.Size = gBZA.appcfg.MainSize;
@@ -374,22 +380,18 @@ namespace ZiveLab.ZM
                 frmRtView = new frmRealview(2);
                 frmRtView.ShowInTaskbar = false;
 
-                frmRtView.MdiParent = this;
+                frmRtView.MdiParent = gBZA.appcfg.RealFloating? null : this;
                 frmRtView.CloseThis += FrmRealview_CloseThis;
-
+                frmRtView.WindowState = FormWindowState.Normal;
                 if (gBZA.appcfg.RealviewLocation == new Point(0, 0) )
                 {
                     frmRtView.StartPosition = FormStartPosition.CenterParent;
-                    frmRtView.WindowState = FormWindowState.Normal;
-
-                    gBZA.appcfg.RtWinStatus = frmRtView.WindowState;
                     gBZA.appcfg.RealviewLocation = frmRtView.Location;
                     gBZA.appcfg.RealviewSize = frmRtView.Size;
-                    gBZA.appcfg.Save();
+                    gBZA.SaveAppCfg();
                 }
                 else
                 {
-                    frmRtView.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
                     frmRtView.StartPosition = FormStartPosition.Manual;
                     frmRtView.Location = gBZA.appcfg.RealviewLocation;
                     frmRtView.Size = gBZA.appcfg.RealviewSize;
@@ -401,13 +403,13 @@ namespace ZiveLab.ZM
             }
             else
             {
-                if(frmRtView.WindowState == FormWindowState.Minimized)
-                {
-                    frmRtView.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
-                    frmRtView.StartPosition = FormStartPosition.Manual;
-                    frmRtView.Location = gBZA.appcfg.RealviewLocation;
-                    frmRtView.Size = gBZA.appcfg.RealviewSize; 
-                }
+                frmRtView.MdiParent = gBZA.appcfg.RealFloating ? null : this;
+
+                
+                frmRtView.StartPosition = FormStartPosition.Manual;
+                frmRtView.Location = gBZA.appcfg.RealviewLocation;
+                frmRtView.Size = gBZA.appcfg.RealviewSize; 
+                
                 frmRtView.SetChannel(ch);
                 frmRtView.Activate();
             }
@@ -473,7 +475,7 @@ namespace ZiveLab.ZM
             if (frmMainView == null)
             {
                 frmMainView = new frmMain(ref evTimer);
-                frmMainView.MdiParent = this;
+                frmMainView.MdiParent = gBZA.appcfg.MainViewFloating? null : this;
                 frmMainView.evGroupRtView += EventGroupRtView;
                 frmMainView.evOpenGraph += EventOpenGraph;
                 frmMainView.evVdcView += EVentVdcView;
@@ -481,37 +483,35 @@ namespace ZiveLab.ZM
                 frmMainView.evChRtView += EventChRtView;
                 frmMainView.CloseThis += frmMain_CloseThis;
 
-                frmMainView.WindowState = gBZA.appcfg.MainViewWinStatus;
-                if (gBZA.appcfg.MainViewWinStatus == FormWindowState.Normal)
+                frmMainView.WindowState = FormWindowState.Normal;
+
+                if (gBZA.appcfg.MainViewLocation == new Point(0, 0))
                 {
-                    if (gBZA.appcfg.MainViewLocation == new Point(0, 0))
-                    {
-                        frmMainView.StartPosition = FormStartPosition.CenterParent;
+                    frmMainView.StartPosition = FormStartPosition.CenterParent;
+                    frmMainView.Size = new Size(704, 318);
 
-                        frmMainView.Size = new Size(704, 318);
-
-                        gBZA.appcfg.MainViewLocation = frmMainView.Location;
-                        gBZA.appcfg.MainViewSize = frmMainView.Size;
-                    }
-                    else
-                    {
-                        frmMainView.Location = gBZA.appcfg.MainViewLocation;
-                        frmMainView.Size = gBZA.appcfg.MainViewSize;
-                        frmMainView.StartPosition = FormStartPosition.Manual;
-                    }
+                    gBZA.appcfg.MainViewLocation = frmMainView.Location;
+                    gBZA.appcfg.MainViewSize = frmMainView.Size;
                 }
+                else
+                {
+                    frmMainView.Location = gBZA.appcfg.MainViewLocation;
+                    frmMainView.Size = gBZA.appcfg.MainViewSize;
+                    frmMainView.StartPosition = FormStartPosition.Manual;
+                }
+
                 frmMainView.Show();
             }
             else
             {
                 frmMainView.InitMainView();
-                if (frmMainView.WindowState == FormWindowState.Minimized)
-                {
-                    frmMainView.WindowState = gBZA.appcfg.MainViewWinStatus = FormWindowState.Normal;
-                    frmMainView.Location = gBZA.appcfg.MainViewLocation;
-                    frmMainView.Size = gBZA.appcfg.MainViewSize;
-                    frmMainView.StartPosition = FormStartPosition.Manual;
-                }
+                frmMainView.MdiParent = gBZA.appcfg.MainViewFloating ? null : this;
+                
+                frmMainView.WindowState = FormWindowState.Normal;
+                frmMainView.Location = gBZA.appcfg.MainViewLocation;
+                frmMainView.Size = gBZA.appcfg.MainViewSize;
+                frmMainView.StartPosition = FormStartPosition.Manual;
+                
                 frmMainView.Activate();
             }
         }
@@ -521,13 +521,10 @@ namespace ZiveLab.ZM
             if (this.Visible == false)
             {
                 this.Visible = true;
-                this.WindowState = gBZA.appcfg.MainWinStatus;
-                
-                if (this.WindowState == FormWindowState.Normal)
-                {
-                    this.Location = gBZA.appcfg.MainLocation;
-                    this.Size = gBZA.appcfg.MainSize;
-                }
+                this.WindowState = FormWindowState.Normal;
+
+                this.Location = gBZA.appcfg.MainLocation;
+                this.Size = gBZA.appcfg.MainSize;
 
                 this.Activate();
                 this.ShowInTaskbar = true;
@@ -564,7 +561,7 @@ namespace ZiveLab.ZM
             this.notifyIcon1.Visible = false;
 
             bClose = true;
-            gBZA.appcfg.Save();
+            gBZA.SaveAppCfg();
         }
 
         private void RefreshDeviceRegBZA()
@@ -607,13 +604,10 @@ namespace ZiveLab.ZM
             {
                 this.Visible = true;
 
-                this.WindowState = gBZA.appcfg.MainWinStatus;
+                this.WindowState = FormWindowState.Normal;
 
-                if (this.WindowState == FormWindowState.Normal)
-                {
-                    this.Location = gBZA.appcfg.MainLocation;
-                    this.Size = gBZA.appcfg.MainSize;
-                }
+                this.Location = gBZA.appcfg.MainLocation;
+                this.Size = gBZA.appcfg.MainSize;
                 this.Activate();
 
                 this.timer1.Start();
@@ -899,13 +893,28 @@ namespace ZiveLab.ZM
             deForm.EnAlwaysOpenPath = false;
             deForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             deForm.SchTempPath = gBZA.appcfg.PathSchTemp;
-            deForm.TimeFormat = 1;
+            deForm.PathZManData = gBZA.appcfg.PathZManData;
             deForm.OpenDataEditorEvent += EgForm_OpenDataEditorClick;
             deForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
             deForm.OpenGraphClick += DeForm_OpensGraphClick;
             
             deForm.ExtAppPath = gBZA._ExtAppPath;
-            deForm.MdiParent = this;//.MdiParent;
+            deForm.MdiParent = gBZA.appcfg.EditFloating ? null : this;
+
+            if (gBZA.appcfg.EditLocation == new Point(0, 0))
+            {
+                deForm.StartPosition = FormStartPosition.CenterScreen;
+                gBZA.appcfg.EditLocation = deForm.Location;
+                gBZA.appcfg.EditSize = deForm.Size;
+                gBZA.SaveAppCfg();
+
+            }
+            else
+            {
+                deForm.StartPosition = FormStartPosition.Manual;
+                deForm.Location = gBZA.appcfg.EditLocation;
+                deForm.Size = gBZA.appcfg.EditSize;
+            }
 
             deForm.ShowInTaskbar = false;
             deForm.Initialize(0);
@@ -1020,6 +1029,9 @@ namespace ZiveLab.ZM
         {
             GeneralGraphForm ggForm = new GeneralGraphForm(0);
 
+
+
+
             var assembly = Assembly.GetExecutingAssembly();
             AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute));
 
@@ -1029,12 +1041,27 @@ namespace ZiveLab.ZM
             ggForm.AllowTransparency = false;
             ggForm.OpenDataEditorClick += EgForm_OpenDataEditorClick;
             ggForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
-
+            ggForm.PathZManData = gBZA.appcfg.PathZManData;
             ggForm.ExtAppPath = gBZA._ExtAppPath;
             ggForm.SchTempPath = gBZA.appcfg.PathSchTemp;
-            //ggForm.UnitC = false;
-            ggForm.TimeFormat = 1;
-            ggForm.MdiParent = this;
+
+            ggForm.MdiParent = gBZA.appcfg.GraphFloating? null : this;
+
+            if (gBZA.appcfg.GraphLocation == new Point(0, 0))
+            {
+                ggForm.StartPosition = FormStartPosition.CenterScreen;
+                gBZA.appcfg.GraphLocation = ggForm.Location;
+                gBZA.appcfg.GraphSize = ggForm.Size;
+                gBZA.SaveAppCfg();
+
+            }
+            else
+            {
+                ggForm.StartPosition = FormStartPosition.Manual;
+                ggForm.Location = gBZA.appcfg.GraphLocation;
+                ggForm.Size = gBZA.appcfg.GraphSize;
+            }
+
             ggForm.ShowInTaskbar = false;
             ggForm.Show();
             
@@ -1061,23 +1088,22 @@ namespace ZiveLab.ZM
             if (frmcfg == null)
             {
                 frmcfg = new frmConfig();
-                frmcfg.MdiParent = this;
+                frmcfg.MdiParent = gBZA.appcfg.CfgFloating?  null : this;
                 frmcfg.CloseThis += frmcfg_CloseThis;
+                frmcfg.WindowState = FormWindowState.Normal;
                 if (gBZA.appcfg.CfgLocation == new Point(0, 0))
                 {
-                    frmcfg.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
                     frmcfg.StartPosition = FormStartPosition.CenterParent;
 
                     gBZA.appcfg.CfgLocation = frmcfg.Location;
                     gBZA.appcfg.CfgSize = frmcfg.Size;
-                    gBZA.appcfg.Save();
+                    gBZA.SaveAppCfg();
                 }
                 else
                 {
                     frmcfg.Location = gBZA.appcfg.CfgLocation;
                     frmcfg.Size = gBZA.appcfg.CfgSize;
                     frmcfg.StartPosition = FormStartPosition.Manual;
-                    frmcfg.WindowState = gBZA.appcfg.CfgWinStatus;
                 }
 
                 frmcfg.Show();
@@ -1085,11 +1111,10 @@ namespace ZiveLab.ZM
             }
             else
             {
+                frmcfg.MdiParent = gBZA.appcfg.CfgFloating ? null : this;
                 frmcfg.StartPosition = FormStartPosition.Manual;
-                frmcfg.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
-                frmcfg.Location = gBZA.appcfg.RealviewLocation;
-                frmcfg.Size = gBZA.appcfg.RealviewSize;
-
+                frmcfg.Location = gBZA.appcfg.CfgLocation;
+                frmcfg.Size = gBZA.appcfg.CfgSize;
                 frmcfg.Activate();
             }
             
@@ -1189,26 +1214,20 @@ namespace ZiveLab.ZM
                 {
                     frmRegRtView = new frmRealview(0);
                     frmRegRtView.ShowInTaskbar = false;
-                    frmRegRtView.MdiParent = this;
-
+                    frmRegRtView.MdiParent = gBZA.appcfg.RegRealFloating? null : this;
+                    frmRegRtView.WindowState = FormWindowState.Normal;
                     if (gBZA.appcfg.RegRealviewLocation == new Point(0, 0))
                     {
-                        frmGrpRtView.StartPosition = FormStartPosition.CenterParent;
-                        frmGrpRtView.WindowState = FormWindowState.Normal;
+                        frmRegRtView.StartPosition = FormStartPosition.CenterParent;
                         gBZA.appcfg.RegRealviewLocation = frmRegRtView.Location;
                         gBZA.appcfg.RegRealviewSize = frmRegRtView.Size;
-                        gBZA.appcfg.RegRtWinStatus = frmRegRtView.WindowState;
-                        gBZA.appcfg.Save();
+                        gBZA.SaveAppCfg();
                     }
                     else
                     {
-                        frmRegRtView.WindowState = gBZA.appcfg.RegRtWinStatus;
-                        if (frmRegRtView.WindowState == FormWindowState.Normal)
-                        {
-                            frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
-                            frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
-                            frmRegRtView.StartPosition = FormStartPosition.Manual;
-                        }
+                        frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
+                        frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
+                        frmRegRtView.StartPosition = FormStartPosition.Manual;
                     }
                   
                     frmRegRtView.CloseThis += FrmRegRealview_CloseThis;
@@ -1216,7 +1235,8 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-                    frmRegRtView.WindowState = gBZA.appcfg.RegRtWinStatus = FormWindowState.Normal;
+                    frmRegRtView.MdiParent = gBZA.appcfg.RegRealFloating ? null : this;
+                    frmRegRtView.WindowState = FormWindowState.Normal;
                     frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
                     frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
 
@@ -1258,25 +1278,20 @@ namespace ZiveLab.ZM
                 {
                     frmGrpRtView = new frmRealview(1);
                     frmGrpRtView.ShowInTaskbar = false;
-                    frmGrpRtView.MdiParent = this;
+                    frmGrpRtView.MdiParent = gBZA.appcfg.GrpRealFloating? null : this;
+                    frmGrpRtView.WindowState = FormWindowState.Normal;
                     if (gBZA.appcfg.GroupRealviewLocation == new Point(0, 0) )
                     {
                         frmGrpRtView.StartPosition = FormStartPosition.CenterParent;
-                        frmGrpRtView.WindowState = FormWindowState.Normal;
                         gBZA.appcfg.GroupRealviewLocation = frmGrpRtView.Location;
                         gBZA.appcfg.GroupRealviewSize = frmGrpRtView.Size;
-                        gBZA.appcfg.GrpRtWinStatus = frmGrpRtView.WindowState;
-                        gBZA.appcfg.Save();
+                        gBZA.SaveAppCfg();
                     }
                     else
                     {
-                        frmGrpRtView.WindowState = gBZA.appcfg.GrpRtWinStatus;
-                        if (frmGrpRtView.WindowState == FormWindowState.Normal)
-                        {
-                            frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
-                            frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
-                            frmGrpRtView.StartPosition = FormStartPosition.Manual;
-                        }
+                        frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
+                        frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
+                        frmGrpRtView.StartPosition = FormStartPosition.Manual;
                     }
 
                     frmGrpRtView.CloseThis += FrmGrpRealview_CloseThis;
@@ -1285,8 +1300,8 @@ namespace ZiveLab.ZM
                 }
                 else
                 {
-
-                    frmGrpRtView.WindowState = gBZA.appcfg.GrpRtWinStatus = FormWindowState.Normal;
+                    frmGrpRtView.MdiParent = gBZA.appcfg.GrpRealFloating ? null : this;
+                    frmGrpRtView.WindowState = FormWindowState.Normal;
                         
                     frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
                     frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
@@ -1345,13 +1360,11 @@ namespace ZiveLab.ZM
             if (this.Visible == false)
             {
                 this.Visible = true;
-                this.WindowState = gBZA.appcfg.MainWinStatus;
+                this.WindowState = FormWindowState.Normal;
 
-                if (this.WindowState == FormWindowState.Normal)
-                {
-                    this.Location = gBZA.appcfg.MainLocation;
-                    this.Size = gBZA.appcfg.MainSize;
-                }
+                this.Location = gBZA.appcfg.MainLocation;
+                this.Size = gBZA.appcfg.MainSize;
+
                 this.Activate();
 
             }
@@ -1399,22 +1412,21 @@ namespace ZiveLab.ZM
             if (frmcfg == null)
             {
                 frmcfg = new frmConfig();
-                frmcfg.MdiParent = this;
+                frmcfg.MdiParent = gBZA.appcfg.CfgFloating ? null : this;
                 frmcfg.CloseThis += frmcfg_CloseThis;
+                frmcfg.WindowState = FormWindowState.Normal;
                 if (gBZA.appcfg.CfgLocation == new Point(0, 0))
                 {
-                    frmcfg.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
                     frmcfg.StartPosition = FormStartPosition.CenterParent;
                     gBZA.appcfg.CfgLocation = frmcfg.Location;
                     gBZA.appcfg.CfgSize = frmcfg.Size;
-                    gBZA.appcfg.Save();
+                    gBZA.SaveAppCfg();
                 }
                 else
                 {
                     frmcfg.Location = gBZA.appcfg.CfgLocation;
                     frmcfg.Size = gBZA.appcfg.CfgSize;
                     frmcfg.StartPosition = FormStartPosition.Manual;
-                    frmcfg.WindowState = gBZA.appcfg.CfgWinStatus;
                 }
 
                 frmcfg.Show();
@@ -1422,11 +1434,11 @@ namespace ZiveLab.ZM
             }
             else
             {
+                frmcfg.MdiParent = gBZA.appcfg.CfgFloating ? null : this;
                 frmcfg.StartPosition = FormStartPosition.Manual;
-                frmcfg.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
-                frmcfg.Location = gBZA.appcfg.RealviewLocation;
-                frmcfg.Size = gBZA.appcfg.RealviewSize;
-
+                frmcfg.WindowState = FormWindowState.Normal;
+                frmcfg.Location = gBZA.appcfg.CfgLocation;
+                frmcfg.Size = gBZA.appcfg.CfgSize;
                 frmcfg.Activate();
             }
         }
@@ -1445,31 +1457,23 @@ namespace ZiveLab.ZM
         private void frmMdiMain_LocationChanged(object sender, EventArgs e)
         {
             if (bClose || bFirst) return;
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                return;
-            }
+
             if (this.WindowState == FormWindowState.Normal)
             {
                 gBZA.appcfg.MainLocation = this.Location;
                 gBZA.appcfg.MainSize = this.Size;
             }
-            gBZA.appcfg.MainWinStatus = this.WindowState;
         }
 
         private void frmMdiMain_SizeChanged(object sender, EventArgs e)
         {
             if (bClose || bFirst) return;
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                return;
-            }
+
             if (this.WindowState == FormWindowState.Normal)
             {
                 gBZA.appcfg.MainLocation = this.Location;
                 gBZA.appcfg.MainSize = this.Size;
             }
-            gBZA.appcfg.MainWinStatus = this.WindowState;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1535,48 +1539,36 @@ namespace ZiveLab.ZM
             {
                 if (frmRtView.WindowState == FormWindowState.Maximized || frmRtView.WindowState == FormWindowState.Minimized)
                 {
-                    frmRtView.WindowState = gBZA.appcfg.RegRtWinStatus;
-                    if (frmRtView.WindowState == FormWindowState.Normal)
-                    {
-                        frmRtView.Location = gBZA.appcfg.RegRealviewLocation;
-                        frmRtView.Size = gBZA.appcfg.RegRealviewSize;
-                    }
+                    frmRtView.WindowState = FormWindowState.Normal;
+                    frmRtView.Location = gBZA.appcfg.RegRealviewLocation;
+                    frmRtView.Size = gBZA.appcfg.RegRealviewSize;
                 }
             }
             else if (frmGrpRtView == ActiveMdiChild)
             {
                 if (frmGrpRtView.WindowState == FormWindowState.Maximized || frmGrpRtView.WindowState == FormWindowState.Minimized)
                 {
-                    frmGrpRtView.WindowState = gBZA.appcfg.GrpRtWinStatus;
-                    if (frmGrpRtView.WindowState == FormWindowState.Normal)
-                    {
-                        frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
-                        frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
-                    }
+                    frmGrpRtView.WindowState = FormWindowState.Normal;
+                    frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
+                    frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
                 }
             }
             else if (frmMainView == ActiveMdiChild)
             {
                 if (frmMainView.WindowState == FormWindowState.Maximized || frmMainView.WindowState == FormWindowState.Minimized)
                 {
-                    frmMainView.WindowState = gBZA.appcfg.MainViewWinStatus;
-                    if (frmMainView.WindowState == FormWindowState.Normal)
-                    {
-                        frmMainView.Location = gBZA.appcfg.MainViewLocation;
-                        frmMainView.Size = gBZA.appcfg.MainViewSize;
-                    }
+                    frmMainView.WindowState = FormWindowState.Normal;
+                    frmMainView.Location = gBZA.appcfg.MainViewLocation;
+                    frmMainView.Size = gBZA.appcfg.MainViewSize;
                 }
             }
             else if (frmcfg == ActiveMdiChild)
             {
                 if (frmcfg.WindowState == FormWindowState.Maximized || frmcfg.WindowState == FormWindowState.Minimized)
                 {
-                    frmcfg.WindowState = gBZA.appcfg.CfgWinStatus;
-                    if (frmcfg.WindowState == FormWindowState.Normal)
-                    {
-                        frmcfg.Location = gBZA.appcfg.CfgLocation;
-                        frmcfg.Size = gBZA.appcfg.CfgSize;
-                    }
+                    frmcfg.WindowState = FormWindowState.Normal;
+                    frmcfg.Location = gBZA.appcfg.CfgLocation;
+                    frmcfg.Size = gBZA.appcfg.CfgSize;
                 }
                 
             }
@@ -1584,12 +1576,19 @@ namespace ZiveLab.ZM
             {
                 if (frmResTools.WindowState == FormWindowState.Maximized || frmResTools.WindowState == FormWindowState.Minimized)
                 {
-                    frmResTools.WindowState = gBZA.appcfg.CfgWinStatus;
-                    if (frmResTools.WindowState == FormWindowState.Normal)
-                    {
-                        frmResTools.Location = gBZA.appcfg.DataToolLocation;
-                        frmResTools.Size = gBZA.appcfg.DataToolSize;
-                    }
+                    frmResTools.WindowState = FormWindowState.Normal;
+                    frmResTools.Location = gBZA.appcfg.DataToolLocation;
+                    frmResTools.Size = gBZA.appcfg.DataToolSize;
+                }
+
+            }
+            else if (auxForm == ActiveMdiChild)
+            {
+                if (auxForm.WindowState == FormWindowState.Maximized || auxForm.WindowState == FormWindowState.Minimized)
+                {
+                    auxForm.WindowState = FormWindowState.Normal;
+                    auxForm.Location = gBZA.appcfg.AuxVdcLocation;
+                    auxForm.Size = gBZA.appcfg.AuxVdcSize;
                 }
 
             }
@@ -1625,72 +1624,14 @@ namespace ZiveLab.ZM
             frm.ShowDialog();
         }
 
-        int GetRegRMChs()
-        {
-            int RegChCount = 0;
-            string sch;
-            string fileinf = Path.Combine(gBZA.appcfg.PathSysInfo, "realviewlist.inf");
-            SM_Config_File<List<int>> mFile = new SM_Config_File<List<int>>();
-            List<int> tlst = new List<int>();
-            List<int> chs = new List<int>();
-
-            tlst = mFile.LoadXmlToObj(fileinf, chs);
-
-            if (tlst.Count < 1)
-            {
-                return 0;
-            }
-
-            foreach (var ch in tlst)
-            {
-                sch = ch.ToString();
-                if (gBZA.ChLnkLst.ContainsKey(sch))
-                {
-                    var value = gBZA.ChLnkLst[sch];
-                    if (gBZA.SifLnkLst.ContainsKey(value.sSerial))
-                    {
-                        if (gBZA.SifLnkLst[value.sSerial].bLinked == true
-                            && gBZA.SifLnkLst[value.sSerial].MBZAIF.bConnect == true)
-                        {
-                            RegChCount++;
-                            continue;
-                        }
-                    }
-                }
-            }
-            return RegChCount;
-        }
-
-        int GetGrpRMChs()
-        {
-            int GrpChCount = 0;
-
-            foreach (var pair in gBZA.ChLnkLst)
-            {
-                if (pair.Value.mChInf.bSelected == true)
-                {
-                    if (gBZA.SifLnkLst.ContainsKey(pair.Value.sSerial))
-                    {
-                        if (gBZA.SifLnkLst[pair.Value.sSerial].bLinked == true
-                                && gBZA.SifLnkLst[pair.Value.sSerial].MBZAIF.bConnect == true)
-                        {
-                            GrpChCount++;
-                            continue;
-                        }
-                    }
-                }
-            }
-            return GrpChCount;
-        }
+        
 
         private void Memu_RstWinPos_Click(object sender, EventArgs e)
         {
-            gBZA.appcfg.InitLocationSize(GetRegRMChs(), GetGrpRMChs());
+            gBZA.appcfg.InitLocationSize(gBZA.GetRegRMChs(), gBZA.GetGrpRMChs());
 
             if (frmMainView != null)
             {
-                frmMainView.WindowState = gBZA.appcfg.MainViewWinStatus = FormWindowState.Normal;
-
                 frmMainView.Size = gBZA.appcfg.MainViewSize;
                 frmMainView.Location = gBZA.appcfg.MainViewLocation;
                 frmMainView.StartPosition = FormStartPosition.Manual;
@@ -1698,8 +1639,6 @@ namespace ZiveLab.ZM
 
             if (frmRtView != null)
             {
-                frmRtView.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
-
                 frmRtView.Size = gBZA.appcfg.RealviewSize;
                 frmRtView.StartPosition = FormStartPosition.Manual;
                 frmRtView.Location = gBZA.appcfg.RealviewLocation;
@@ -1707,8 +1646,6 @@ namespace ZiveLab.ZM
             
             if (frmRegRtView != null)
             {
-                frmRegRtView.WindowState = gBZA.appcfg.RegRtWinStatus = FormWindowState.Normal;
-
                 frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
                 frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
                 frmRegRtView.StartPosition = FormStartPosition.Manual;
@@ -1716,8 +1653,6 @@ namespace ZiveLab.ZM
 
             if (frmGrpRtView != null)
             {
-                frmGrpRtView.WindowState = gBZA.appcfg.GrpRtWinStatus = FormWindowState.Normal;
-
                 frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
                 frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
                 frmGrpRtView.StartPosition = FormStartPosition.Manual;
@@ -1725,23 +1660,24 @@ namespace ZiveLab.ZM
 
             if (frmcfg != null)
             {
-                frmcfg.WindowState = gBZA.appcfg.RtWinStatus = FormWindowState.Normal;
-
-                frmcfg.Size = gBZA.appcfg.CfgSize;
                 frmcfg.Location = gBZA.appcfg.CfgLocation;
                 frmcfg.StartPosition = FormStartPosition.Manual;
+                frmcfg.Size = gBZA.appcfg.CfgSize;
             }
 
             if (frmResTools != null)
             {
-                frmResTools.WindowState = gBZA.appcfg.DTWinStatus = FormWindowState.Normal;
-
                 frmResTools.Size = gBZA.appcfg.DataToolSize;
                 frmResTools.Location = gBZA.appcfg.DataToolLocation;
                 frmResTools.StartPosition = FormStartPosition.Manual;
             }
 
-            
+            if (auxForm != null)
+            {
+                auxForm.StartPosition = FormStartPosition.Manual;
+                auxForm.Location = gBZA.appcfg.AuxVdcLocation;
+                auxForm.Size = gBZA.appcfg.AuxVdcSize;
+            }
         }
 
         private void frmDataTools_CloseThis(object sender, EventArgs e)
@@ -1757,22 +1693,20 @@ namespace ZiveLab.ZM
             if (frmResTools == null)
             {
                 frmResTools = new frmDataTools();
-                frmResTools.MdiParent = this;
+                frmResTools.MdiParent = gBZA.appcfg.DataToolFloating? null : this;
                 frmResTools.CloseThis += frmDataTools_CloseThis;
                 if (gBZA.appcfg.DataToolLocation == new Point(0, 0))
                 {
-                    frmResTools.WindowState = gBZA.appcfg.DTWinStatus = FormWindowState.Normal;
                     frmResTools.StartPosition = FormStartPosition.CenterParent;
                     gBZA.appcfg.DataToolLocation = frmResTools.Location;
                     gBZA.appcfg.DataToolSize = frmResTools.Size;
-                    gBZA.appcfg.Save();
+                    gBZA.SaveAppCfg();
                 }
                 else
                 {
                     frmResTools.Location = gBZA.appcfg.DataToolLocation;
                     frmResTools.Size = gBZA.appcfg.DataToolSize;
                     frmResTools.StartPosition = FormStartPosition.Manual;
-                    frmResTools.WindowState = gBZA.appcfg.DTWinStatus;
                 }
 
                 frmResTools.Show();
@@ -1780,10 +1714,10 @@ namespace ZiveLab.ZM
             }
             else
             {
+                frmResTools.MdiParent = gBZA.appcfg.DataToolFloating ? null : this;
                 frmResTools.StartPosition = FormStartPosition.Manual;
-                frmResTools.WindowState = gBZA.appcfg.DTWinStatus = FormWindowState.Normal;
-                frmResTools.Location = gBZA.appcfg.RealviewLocation;
-                frmResTools.Size = gBZA.appcfg.RealviewSize;
+                frmResTools.Location = gBZA.appcfg.DataToolLocation;
+                frmResTools.Size = gBZA.appcfg.DataToolSize;
 
                 frmResTools.Activate();
             }
@@ -1791,11 +1725,11 @@ namespace ZiveLab.ZM
 
         private void optionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmSetOption frm = new frmSetOption();
-            frm.tDataViewSet = gBZA.mDataViewSet;
+            frmSetOption frm = new frmSetOption(this);
+
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                gBZA.mDataViewSet = frm.tDataViewSet;
+               
             }
         }
     }

@@ -150,6 +150,7 @@ void SetDeviceBoard(int bd)
 		}
 		
 		m_pGlobalVar->mStatusInf.Lastbd = bd;
+
 		Ch_Seldelay();
 	}
 }
@@ -312,26 +313,24 @@ double GetTechEisNextFreq(int bd, ushort* restart, void* pvoid)
 {
 	stGlobalChVar* pch = &m_pGlobalVar->mChVar[bd];
 	st_Tech_EIS* peis = (st_Tech_EIS*)pvoid;
-	double logIncrement;
-	double dInitfreq;
-	double dFinalfreq;
-	double dfreq;
-	double dChkExist;
-
+		
 	int density = MAX(peis->density,0);
-	int aPoints;	
-	
-	logIncrement = 1.0 / density;
+	int aPoints;
+	double logIncrement = 1.0 / density;
+
 	*restart = 1;
+
 
 	peis->initfreq = MAX(peis->initfreq,pch->MinFrequency);
 	peis->initfreq = MIN(peis->initfreq,pch->MaxFrequency);
 	peis->finalfreq = MAX(peis->finalfreq,pch->MinFrequency);
 	peis->finalfreq = MIN(peis->finalfreq,pch->MaxFrequency);
 	
-	dInitfreq = RoundToSignificantDigits(peis->initfreq, 6); 
-	dFinalfreq = RoundToSignificantDigits(peis->finalfreq, 6);
-	dfreq = dInitfreq;	
+	double dInitfreq = RoundToSignificantDigits(peis->initfreq, 6); //
+	double dFinalfreq = RoundToSignificantDigits(peis->finalfreq, 6);
+
+	double dfreq = dInitfreq;
+	double dChkExist;
 	
 	if(dInitfreq == dFinalfreq)
 	{
@@ -797,7 +796,6 @@ void proc_test_main(int bd)
 	if(pch->mChStatInf.TaskNo == -1)
 	{
 		memset(pch->mChStatInf.eis_status.Real_val,0x0,sizeof(st_zim_eis_raw_val)* MAX_EIS_RT_RAW_POINT);
-		
 		AuxProc(bd);
 		if(bmonitor) 
 		{

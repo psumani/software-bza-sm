@@ -424,6 +424,8 @@ void InitGlobalVar(void)
 {
 	int ch;
     
+	m_LocalPort = 0;
+	
     m_pGlobalVar->nTimeTick = m_pSysConfig->DaqTick;
     if(m_pGlobalVar->nTimeTick <= 0) m_pGlobalVar->nTimeTick = 1;
 
@@ -443,14 +445,12 @@ void InitGlobalVar(void)
 		m_pGlobalVar->mChVar[ch].ResetICE = 0;
 		m_pGlobalVar->mChVar[ch].LoadCfg = 0;
 		m_pGlobalVar->mChVar[ch].CntVdcChg = 0;
-		SetDeviceBoard(ch);
-		InitDevice(ch);
 		m_pGlobalVar->mChVar[ch].eis_got_all_point = FALSE;
 	}
 
 	for(int b=0; b < DEF_MAX_AUX_BDCNT; b++)
 	{
-        m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[b] = 1;
+        m_pGlobalVar->mChVar[0].mChStatInf.ConnCBL[b] = 0;
     }
 }
 
@@ -646,6 +646,13 @@ void Initialize(void)
 	
 		
 	Init_SPI();
+	
+	
+	for(int bd=0; bd<MAX_DEV_BOARD; bd++)
+	{
+		SetDeviceBoard(bd);
+		InitDevice(bd);
+	}
 	
 	OnLed1(true);
 	

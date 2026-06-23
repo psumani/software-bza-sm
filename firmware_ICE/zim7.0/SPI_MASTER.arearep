@@ -1,0 +1,13 @@
+----------------------------------------------------------------------
+Report for cell SPI_MASTER.TECH
+Register bits:  23 of 3520 (0.653%)
+I/O cells:      0
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                             SB_DFF         3          100.0
+                            SB_DFFE         9          100.0
+                          SB_DFFESR         3          100.0
+                           SB_DFFSR         7          100.0
+                           SB_DFFSS         1          100.0
+                            SB_LUT4        35          100.0
+                              TOTAL        58

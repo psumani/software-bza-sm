@@ -16,7 +16,7 @@ namespace ZiveLab.ZM
         public frmAuxVdc(int ch)
         {
             InitializeComponent();
-
+             
             Channel = ch;
 
             string sch = Channel.ToString();

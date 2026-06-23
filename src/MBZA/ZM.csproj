@@ -66,13 +66,17 @@
     <ManifestKeyFile>ZM_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="C1.Win.C1FlexGrid.4, Version=4.6.20123.730, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
@@ -447,6 +451,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -816,6 +821,8 @@
     <None Include="doc\Image1\greenchip1.ico" />
     <None Include="doc\Image1\redchip1.ico" />
     <None Include="Resources\SettingsFile.png" />
+    <None Include="doc\TestSettings24.png" />
+    <None Include="doc\ColorDialog.png" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />

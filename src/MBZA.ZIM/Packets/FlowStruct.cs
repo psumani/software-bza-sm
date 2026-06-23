@@ -1411,6 +1411,22 @@ namespace ZiveLab.ZM.ZIM.Packets
             NoUse = 0.0;
         }
 
+        public bool GetHFRLoadOff()
+        {
+            stTech_HFR techhfr = new stTech_HFR(0);
+            techhfr.ToWritePtr(tech);
+            if (techhfr.celloffwait == 1) return true;
+            return false;
+        }
+
+        public bool GetDCH_IR()
+        {
+            stTech_DCH techdch = new stTech_DCH(0);
+            techdch.ToWritePtr(tech);
+            if (techdch.useir == 1) return true;
+            return false;
+        }
+
         public void GetEIS(ref stTech_EIS techeis)
         {
             if (tech == null) return;

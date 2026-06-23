@@ -1,0 +1,250 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity zim is
+	port (
+		ICE_SYSCLK		: in  	std_logic;
+		EIS_SYNCCLK		: out  	std_logic;
+		TEST_LED     	: out  	std_logic := '0';
+		
+		DDS_MCLK1		: out  	std_logic;
+		DDS_CS1		: out  	std_logic;
+		DDS_SDI1		: out  	std_logic;
+		DDS_SCK1		: out  	std_logic;
+
+--		ICE_CFG_DONE	: out  	std_logic;
+--		ICE_RESET_B		: in  	std_logic;
+--		ICE_CFG_MISO	: in  	std_logic;
+--		ICE_CFG_MOSI	: in  	std_logic;  
+--		ICE_CFG_SCLK	: out  	std_logic;
+--		ICE_CFG_SSS		: out  	std_logic;
+
+		ICE_SPI_SCLK	: in  	std_logic;
+		ICE_SPI_MOSI	: in  	std_logic;
+		ICE_SPI_MISO	: out  	std_logic;
+		ICE_SPI_CE0		: in  	std_logic;
+		ICE_SPI_CE1		: in  	std_logic;
+
+		DDS_MCLK		: out  	std_logic;
+		DDS_CS		: out  	std_logic;
+		DDS_SCK		: out  	std_logic;
+		DDS_MOSI		: out  	std_logic;
+
+		DAC_CS		: out  	std_logic;
+		DAC_MOSI		: out  	std_logic;
+		DAC_SCK		: out  	std_logic;
+
+		VAC_OSR0		: out  	std_logic;
+		VAC_OSR1		: out  	std_logic;
+		VAC_FLT0		: out  	std_logic;
+		VAC_FLT1		: out  	std_logic;
+		
+		VAC_CLK		: out  	std_logic;
+		VAC_CS		: out  	std_logic;
+		VAC_SCLK		: out  	std_logic;
+		VAC_MOSI		: out  	std_logic;
+		VAC_MISO		: in  	std_logic;
+		VAC_DRDY		: in  	std_logic;
+
+		VDC_CS		: out  	std_logic;
+		VDC_SDO		: in  	std_logic;
+		VDC_SPEED		: out  	std_logic;
+		VDC_PDWN		: out  	std_logic;
+		C_VDC_RNG0		: out  	std_logic;
+		
+		C_CONT_SD		: out  	std_logic;
+		C_SELIRNG0		: out  	std_logic;
+		C_SELIRNG1		: out  	std_logic;
+		IAC_OSR0		: out  	std_logic;
+		IAC_OSR1		: out  	std_logic;
+		IAC_FLT0		: out  	std_logic;
+		IAC_FLT1		: out  	std_logic;
+		IAC_CLK		: out  	std_logic;
+		IAC_CS		: out  	std_logic;
+		IAC_SCLK		: out  	std_logic;
+		IAC_MOSI		: out  	std_logic;
+		IAC_MISO		: out  	std_logic;
+		IAC_DRDY		: in  	std_logic;
+		
+		RTD_DRDY		: in  	std_logic;
+		RTD_SDI		: out  	std_logic;
+		RTD_SCLK		: out  	std_logic;
+		RTD_CS		: out  	std_logic;
+		RTD_SDO		: in  	std_logic;
+
+		-- J14 connector pins 
+		ICE_IOT_222		: in  	std_logic;
+		ICE_IOT_221		: in  	std_logic;
+		ICE_IOT_220		: in  	std_logic;
+		ICE_IOT_198		: in  	std_logic;
+		ICE_IOT_197		: in  	std_logic;
+		ICE_IOT_178		: in  	std_logic;
+		ICE_IOT_177		: in  	std_logic;
+		ICE_IOR_141		: in  	std_logic;
+
+		-- J15 connector pins 
+		ICE_IOL_23A		: in  	std_logic;
+		ICE_IOL_18B		: in  	std_logic;
+		ICE_IOL_14A		: in  	std_logic;
+		ICE_IOL_13B		: in  	std_logic;
+		ICE_IOL_12B		: in  	std_logic;
+		ICE_IOL_12A		: in  	std_logic;
+		ICE_IOL_4B		: in  	std_logic;
+		ICE_IOL_4A		: in  	std_logic;
+
+		-- J16 connector pins 
+		ICE_IOR_140		: in  	std_logic;
+		ICE_IOR_120		: in  	std_logic;
+		ICE_IOR_119		: in  	std_logic;
+		ICE_IOR_118		: in  	std_logic;
+
+		-- J17 connector pins 
+		ICE_IOB_81		: in  	std_logic;
+		ICE_IOB_80		: in  	std_logic;
+		ICE_IOB_73		: in  	std_logic;
+		ICE_IOB_72		: in  	std_logic;
+		
+		-- J18 connector pins 
+		ICE_IOB_104		: in  	std_logic;
+		ICE_IOB_103		: in  	std_logic;
+		ICE_IOB_102		: in  	std_logic;
+		ICE_IOB_96		: in  	std_logic;
+		ICE_IOB_95		: in  	std_logic;
+		ICE_IOB_94		: in  	std_logic;
+		ICE_IOB_91		: in  	std_logic;
+		ICE_IOB_82		: in  	std_logic;
+		
+		-- isolated in/out pins
+		ICE_GPMO_0		: out  	std_logic;
+		ICE_GPMO_1		: out  	std_logic;
+		ICE_GPMI_0		: out  	std_logic;
+		
+		ICE_IOA_0		: inout  	std_logic;
+		ICE_IOA_1		: inout  	std_logic;
+		ICE_IOA_2		: inout  	std_logic;
+		ICE_IOA_3		: inout  	std_logic;
+		ICE_IOA_4		: inout  	std_logic;
+		ICE_IOA_5		: inout  	std_logic;
+		ICE_IOA_6		: inout  	std_logic;
+		ICE_IOA_7		: inout  	std_logic;
+
+		ICE_IOB_0		: in  	std_logic;
+		ICE_IOB_1		: out  	std_logic;
+		ICE_IOB_2		: in  	std_logic;
+		ICE_IOB_3		: in  	std_logic;
+		ICE_IOB_4		: in  	std_logic;
+		ICE_IOB_5		: in  	std_logic;
+		ICE_IOB_6		: in  	std_logic;
+		ICE_IOB_7		: in  	std_logic
+	);
+end zim;
+
+architecture behav of zim is
+
+	component zim_pll is
+		port(
+      			REFERENCECLK	: in 	std_logic;
+      			RESET		: in 	std_logic;
+      			PLLOUTCOREA		: out 	std_logic;
+      			PLLOUTCOREB		: out 	std_logic;
+      			PLLOUTGLOBALA	: out 	std_logic;
+      			PLLOUTGLOBALB	: out 	std_logic
+    		);
+	end component;
+
+	component SPI_SLAVE is
+		Port (
+			CLK 		: in 	std_logic;
+			RST 		: in 	std_logic; 		
+			SCLK 		: in 	std_logic; 	
+			CS_N 		: in 	std_logic; 	
+			MOSI 		: in 	std_logic; 	
+			MISO 		: out 	std_logic; 	
+			DIN 		: in 	std_logic_vector(7 downto 0); 
+			DIN_VLD 		: in 	std_logic; 
+			READY 		: out 	std_logic; 
+			DOUT 		: out 	std_logic_vector(7 downto 0); 
+			DOUT_VLD 		: out 	std_logic 
+		);
+	end component;
+
+	--pll vars
+	signal pll_reset		: std_logic := '1';
+	signal pll_outa		: std_logic := '0';
+	signal pll_outb		: std_logic := '0';
+	signal pll_gouta		: std_logic := '0';
+	signal pll_goutb		: std_logic := '0';
+	
+	signal led_vibrate		: std_logic := '0';
+	signal led_count		: integer := 0;
+	
+            --spi slave vars
+	signal clk_spislave		: std_logic := '0';
+	signal slave_tx_ena		: std_logic := '0';
+	signal slave_tx_buf 		: std_logic_vector(7 downto 0);
+	signal slave_rx_ena		: std_logic := '0';
+	signal slave_rx_buf 		: std_logic_vector(7 downto 0);
+
+	--rtd vars
+	signal rtd_cfgreg 		: std_logic_vector(7 downto 0);
+	signal rtd_rd_msb 		: std_logic_vector(7 downto 0);
+	signal rtd_rd_lsb 		: std_logic_vector(7 downto 0);
+
+	signal vdc_rd_0 		: std_logic_vector(7 downto 0);
+	signal vdc_rd_1 		: std_logic_vector(7 downto 0);
+	signal vdc_rd_2 		: std_logic_vector(7 downto 0);
+
+
+begin
+
+	TEST_LED 		<= led_vibrate;
+	clk_spislave 	<= pll_gouta;
+	
+
+
+	process(pll_goutb,led_vibrate)
+	begin
+		if falling_edge(pll_goutb) then
+			led_count <= led_count + 1;
+			if led_count >= 2048 then
+				led_count		<= 0;
+				if led_vibrate = '0' then 
+					led_vibrate <= '1';
+				else 
+					led_vibrate <= '0';
+				end if;
+			end if;
+		end if;
+	end process;
+
+	--slave_rx_buf  slave_rx_ena 
+
+	pll_main : zim_pll 
+	port map (
+		REFERENCECLK	=> ICE_SYSCLK,
+		RESET		=> pll_reset,
+		PLLOUTCOREA		=> pll_outa,
+		PLLOUTCOREB		=> pll_outb,
+		PLLOUTGLOBALA	=> pll_gouta,   -- 40.96MHz
+		PLLOUTGLOBALB	=> pll_goutb    -- 20.48MHz
+	);
+
+	comm_spi : SPI_SLAVE 
+	port map (
+		CLK 		=> clk_spislave,
+		RST 		=> ICE_SPI_CE1, 		
+		SCLK 		=> ICE_SPI_SCLK,	
+		CS_N 		=> ICE_SPI_CE0, 
+		MOSI 		=> ICE_SPI_MOSI, 	
+		MISO 		=> ICE_SPI_MISO, 	
+		DIN 		=> slave_tx_buf, 
+		DIN_VLD 		=> slave_tx_ena, 
+		READY 		=> ICE_IOB_1,    	-- READY - will use GPMI0
+		DOUT 		=> slave_rx_buf, 
+		DOUT_VLD 		=> slave_rx_ena 
+	);
+
+
+end behav;

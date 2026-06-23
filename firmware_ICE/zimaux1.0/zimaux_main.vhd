@@ -7,9 +7,9 @@ use IEEE.NUMERIC_STD.ALL;
 entity zimaux is
 	port (
 		ICE_SYSCLK		: in  	std_logic;
-		TEST_LED     	: buffer  	std_logic;	-- out
+		TEST_LED     	: out  	std_logic;	-- out
 		
-		DDS_MCLK1		: buffer  	std_logic;
+		DDS_MCLK1		: out  	std_logic;
 		DDS_CS1			: out  	std_logic;
 		DDS_MOSI1		: out  	std_logic;
 		DDS_SCK1			: out  	std_logic;
@@ -40,11 +40,11 @@ entity zimaux is
 		M_FLT1			: out  	std_logic;
 		M_POW				: out  	std_logic;
 		M_DCSEL			: out  	std_logic;
-		M_START			: buffer  	std_logic;	-- out
+		M_START			: out  	std_logic;	-- out
 		
-		M_CLK1			: buffer  	std_logic;
+		M_CLK1			: out  	std_logic;
 		M_SCLK1			: out  	std_logic;
-		M_CS1				: buffer  	std_logic;	-- out
+		M_CS1				: out  	std_logic;	-- out
 		M_MOSI1			: out  	std_logic;
 		M_MISO1			: in  	std_logic;
 		M_DRDY1			: in  	std_logic;
@@ -70,36 +70,38 @@ entity zimaux is
 		M_MISO4			: in  	std_logic;
 		M_DRDY4			: in  	std_logic;
 		
+		START_SYNC		: in  	std_logic      --ICE_IOL_25B
+		
       ------------ J5 -------------------		
-		ICE_IOL_14B		: out  	std_logic;		-- 1
-		ICE_IOL_17A		: buffer  	std_logic;		-- 2
-		ICE_IOL_17B		: out  	std_logic;			-- 3
---		ICE_IOL_18A		: out  	std_logic;			-- cannot
---		ICE_IOL_18B		: out  	std_logic;			-- cannot
---		ICE_IOL_23A		: out  	std_logic;			-- cannot
---		ICE_IOL_23B		: out  	std_logic;
---		ICE_IOL_24A		: out  	std_logic;
---		ICE_IOL_24B		: out		std_logic;
---		ICE_IOL_25A		: out  	std_logic;
-		ICE_IOL_25B		: in  	std_logic
+--		J5_1				: out  	std_logic;		-- 1  :ICE_IOL_14B
+--		J5_2				: out  	std_logic;		-- 2  :ICE_IOL_17A
+--		J5_3				: out  	std_logic;		-- 3  :ICE_IOL_17B
+--		J5_4				: out  	std_logic;		-- 4  :ICE_IOL_18A
+--		J5_5				: out  	std_logic;		-- 5  :ICE_IOL_18B
+--		J5_6				: out  	std_logic;		-- 6  :ICE_IOL_23A
+--		J5_7				: out  	std_logic;		-- 7  :ICE_IOL_23B
+--		J5_8				: out  	std_logic;		-- 8  :ICE_IOL_24A
+--		J5_9				: out		std_logic;		-- 9  :ICE_IOL_24B
+--		J5_10				: out  	std_logic;		-- 10 :ICE_IOL_25A
+		
 		----------------------------------
 		
 		------------ J6 ------------------
---		ICE_IOR_136		: out  	std_logic;
---		ICE_IOR_137		: out  	std_logic;
---		ICE_IOR_138		: out  	std_logic;
---		ICE_IOR_139		: out  	std_logic;
---		ICE_IOR_144		: out  	std_logic;
---		ICE_IOR_149		: out  	std_logic;
+--		J6_1				: out  	std_logic;		-- 1  :ICE_IOR_136
+--		J6_2				: out  	std_logic;		-- 2  :ICE_IOR_137
+--		J6_3				: out  	std_logic;		-- 3  :ICE_IOR_138
+--		J6_4				: out  	std_logic;		-- 4  :ICE_IOR_139
+--		J6_5				: out  	std_logic;		-- 5  :ICE_IOR_144
+--		J6_6				: out  	std_logic;		-- 6  :ICE_IOR_149
 		----------------------------------
 		
 		------------ J7 ------------------
---		ICE_IOR_152		: out  	std_logic;
---		ICE_IOR_160		: out  	std_logic;
---		ICE_IOR_161		: out  	std_logic;
---		ICE_IOR_164		: out  	std_logic;
---		ICE_IOR_165		: out  	std_logic;			-- cannot
---		ICE_IOR_166		: out  	std_logic;
+--		J7_1				: out  	std_logic;		-- 1  :ICE_IOR_152
+--		J7_2				: out  	std_logic;		-- 2  :ICE_IOR_160
+--		J7_3				: out  	std_logic;		-- 3  :ICE_IOR_161
+--		J7_4				: out  	std_logic;		-- 4  :ICE_IOR_164
+--		J7_5				: out  	std_logic;		-- 5  :ICE_IOR_165
+--		J7_6				: out  	std_logic;		-- 6  :ICE_IOR_166
 		----------------------------------		
 		
 		------------ Not used ------------
@@ -216,7 +218,6 @@ architecture behav of zimaux is
 	signal clk_dds				: std_logic := '0';
 	signal buf_dds 			: std_logic_vector(15 downto 0):= x"0000";
 	signal trig_dds			: std_logic := '0';
-	signal clk_adc			: std_logic := '0';  -- added
 	
 	signal SecClk				: std_logic := '0';
 	signal secclk_cnt    	: std_logic_vector(31 downto 0):= x"00000000";
@@ -308,6 +309,7 @@ architecture behav of zimaux is
 
 	--control vars
 	signal buf_control 		: std_logic_vector(7 downto 0):= x"00";
+	signal buf_ChkCable		: std_logic := '1';
 	
 	signal wdtick_flag		: std_logic := '0';
 	signal flagcntwd			: std_logic := '0';
@@ -318,10 +320,14 @@ architecture behav of zimaux is
 	type def_mclk_state 		is (s_reset, s_idle, s_run);
 	signal mclk_state	: def_mclk_state := s_reset;
 	
-	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1B58";  -- 7000 
-	signal dummy : std_logic := '0';		-- for test
-	signal is_dc : std_logic;		
+	
+	
+	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1B59";  -- 7001 
 
+	signal is_dc : std_logic:= '1';		
+	signal stsync		: std_logic := '1';
+	signal synccnt 	: std_logic_vector(7 downto 0):= x"00";
+	
 begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
 	eis_clk			<= not clk_32MHz;	-- 32MHz  
@@ -330,36 +336,46 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 	
 	DDS_MCLK1 		<= not clk_16MHz; 	-- 16MHz
 
-	ICE_IOL_14B			<= comm_response;	
-	ICE_IOL_17A			<= ICE_SPI_SCLK;
-	ICE_IOL_17B			<= dummy;
-	
-	-- M_CS1;	-- adc pull down when get started SPI
-	-- eis_start; -- when eis started and not stopped
-	-- vdc_adc_trig;	-- 1 when dc=1 and eis_start=0
-	-- acadc_dtrigH;	-- all adc finished getting one data
-	
-
-	M_CLK1			<= not EIS_SYNCCLK;  -- not 
-	M_CLK2			<= not EIS_SYNCCLK;
-	M_CLK3			<= not EIS_SYNCCLK; 
-	M_CLK4			<= not EIS_SYNCCLK; 
+	M_CLK1			<= not EIS_SYNCCLK; -- when is_dc = '0' else clk_VAC_ADC;
+	M_CLK2			<= not EIS_SYNCCLK; --  when is_dc = '0' else clk_VAC_ADC;
+	M_CLK3			<= not EIS_SYNCCLK; --  when is_dc = '0' else clk_VAC_ADC; 
+	M_CLK4			<= not EIS_SYNCCLK; --  when is_dc = '0' else clk_VAC_ADC; 
 	
 	clk_spicomm 	<= clk_32MHz; 
 	clk_spislave 	<= clk_32MHz;	-- not 
-	
 
-	is_dc			<= buf_control(1);				
+	is_dc				<= buf_control(1); -- when ICE_CHKCABLE = '0' else '0';		
 	acadc_trig		<= '1' when eis_adc_trig = '1' or vdc_adc_trig = '1' else '0';
-	process(is_dc)				
+	acadc_rst		<=	tacadc_rst; -- not 
+	
+	M_DCSEL			<= is_dc;
+	M_POW				<= is_dc;
+	
+	--M_START			<= stsync when is_dc = '0' else not eis_start; -- adc start
+	--eis_start		<= stsync and eis_start_cmd;	-- eis start from start sync
+	
+	stsync			<= '1' when is_dc = '0' and  eis_start_cmd = '1' and START_SYNC = '1' else '0';
+	
+	
+	process(clk_32MHz)				
 	begin
-		if is_dc = '1' then
-			clk_adc <= EIS_SYNCCLK;
-		else
-			clk_adc <= clk_VAC_ADC;
+		if stsync = '0' then
+			M_START	<= is_dc;
+			eis_start <= '0';
+			synccnt	<= x"00";
+		elsif rising_edge(clk_32MHz) then
+			if synccnt = x"40" then
+				M_START	<= '1';
+				eis_start <= '1';
+			else
+				M_START <= '0';
+				eis_start <= '0';
+				synccnt	<= synccnt + '1';
+			end if;
 		end if;
 	end process;
-
+	
+	
 	process(clk_16MHz) --16MHz / 16000000 = 1Hz , 8000000 = 0x7A1200
 	begin
 		if rising_edge(clk_16MHz) then 
@@ -387,23 +403,19 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 		end if;
 	end process;
 	
-	--TEST_LED 		<= SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
+	TEST_LED 		<= SecClk; --ICE_SPI_MOSI; ICE_SPI_SCLK;
 	
 	acadc_dtrigH		<= '1' when acadc_dtrig1 = '1' and acadc_dtrig2 = '1' and acadc_dtrig3 = '1' and acadc_dtrig4 = '1' else '0';
 	acadc_dtrigL		<= '1' when acadc_dtrig1 = '0' and acadc_dtrig2 = '0' and acadc_dtrig3 = '0' and acadc_dtrig4 = '0' else '0';
 	
-	acadc_rst		<=	tacadc_rst; -- not 
-	M_START			<= ICE_IOL_25B when is_dc = '0' else not eis_start; -- adc start
-	eis_start		<= ICE_IOL_25B and eis_start_cmd;	-- eis start from start sync
+	
 	
 	M_FLT1			<= buf_device_acadc(3);
 	M_FLT0			<= buf_device_acadc(2);
 	M_OSR1			<= buf_device_acadc(1);
 	M_OSR0			<= buf_device_acadc(0);
 
-	M_POW				<= not buf_control(2);
-	M_DCSEL			<= buf_control(1);
-	--M_START 			<= buf_control(0);
+
 	
 	buf_data1 		<=  raw_buf1(data_index);
 	buf_data2 		<=  raw_buf2(data_index);
@@ -414,6 +426,11 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 	DISP_COMM		<= ICE_GPMO_2; 
 	ICE_GPMI_0     <= comm_response;
 
+	buf_ChkCable	<= not ICE_CHKCABLE;
+	--	J5_1				<= comm_response;	
+	--	J5_2				<= ICE_SPI_SCLK;
+	--	J5_3				<= dummy;
+	
 	-- RESET masking
 	process(clk_spicomm)
 	begin
@@ -485,7 +502,6 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 			when s_comm_err =>	
 				comm_clear		<= '1';
 				comm_response	<= '0';
-				dummy <= not dummy;
 				if cs_prev = '1' then -- comm_data_vld = '0' and 
 					comm_state		<= s_idle;	
 --					comm_state			<= s_data_finish1;
@@ -529,7 +545,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 						
 					when "0011000" =>			--ICE_CMD_DEVICE_DO 		: 0x98
 						comm_length			<= 1;
-						comm_buf(0)			<= buf_control(7 downto 0);
+						comm_buf(0)			<= buf_ChkCable & buf_control(6 downto 0);
 
 					when "0011001" =>			--ICE_CMD_EIS_SKIP_COUNT 		: 0x99
 						comm_length			<= 2;
@@ -543,7 +559,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 					
 					when "0011011" =>			--ICE_CMD_EIS_CFG 		: 0x9B
 						comm_length			<= 1;
-						comm_buf(0)			<= "00000" & tacadc_rst & eis_stop & eis_start_cmd; -- & ICE_CHKCABLE 
+						comm_buf(0)			<= "00000" & tacadc_rst & eis_stop & eis_start_cmd; 
 						
 					when "0011100" =>			--ICE_CMD_EIS_SMPLS 		: 0x9C
 						comm_length			<= 2;
@@ -723,7 +739,6 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 
 			when s_finish =>
 				dc_state		<= s_reset;
-				TEST_LED 		<=  not TEST_LED;
 			end case;
 		end if;
 	end process;		-- end Vdc 
@@ -896,7 +911,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 	
 	CLOCK_DDS : DDS_AD9837 
 	port map (
-			CLK 		=> DDS_MCLK1, -- clk_dds, 
+			CLK 		=> clk_dds, 
 			TRIG		=> trig_dds,	
 			DATA 		=> buf_dds, 		
 			SCLK 		=> DDS_SCK1, 

@@ -157,11 +157,9 @@ namespace ZiveLab.ZM
 
                 btVdcOpen[ch] = new Button();
                 btVdcOpen[ch].BackColor = SystemColors.Control;
-                //btVdcOpen[ch].Text = "View"; //
+                btVdcOpen[ch].Text = "";
                 btVdcOpen[ch].Image = imageList_2.Images["vdcview"];
                 btVdcOpen[ch].ImageAlign = ContentAlignment.MiddleCenter;
-                //btVdcOpen[ch].TextAlign = ContentAlignment.MiddleRight; // 텍스트
-                //btVdcOpen[ch].Padding = new Padding(1, 0, 1, 0); // 간격
                 btVdcOpen[ch].Tag = ch.ToString();
                 btVdcOpen[ch].Click += btVdcopen_Click;
                 btVdcOpen[ch].MouseMove += btVdcopen_Mousemove;
@@ -325,7 +323,7 @@ namespace ZiveLab.ZM
             hgrid.Rows.Count = 2;
             hgrid.Rows.Fixed = 2;
             hgrid.SelectionMode = SelectionModeEnum.Row;
-
+            hgrid.AllowSorting = AllowSortingEnum.None;
             for (i = 0; i < hgrid.Cols.Count; i++)
             {
                 hgrid[0, i] = sTitle1[i];
@@ -349,6 +347,7 @@ namespace ZiveLab.ZM
                 hgrid.Cols[i].AllowFiltering = AllowFiltering.None;
                 hgrid.Cols[i].AllowResizing = false;
                 hgrid.Cols[i].AllowDragging = false;
+                hgrid.Cols[i].AllowSorting = false;
             }
 
             hgrid.AllowMerging = AllowMergingEnum.Custom;
@@ -833,7 +832,7 @@ namespace ZiveLab.ZM
                     }
                 }
 
-                for (i = 2; i < 17; i++)
+                for (i = 2; i < 18; i++)
                 {
                     if (i == 0)
                     {
@@ -1158,6 +1157,18 @@ namespace ZiveLab.ZM
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
+
+            dlg.CustomPlaces.Clear();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    dlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
+                }
+            }
+
             sfilt = "Galvanostatic EIS (*.eis) | *.eis|";
             sfilt += "Galvanostatic HFR (*.hfr) |*.hfr|";
             sfilt += "Pseudo Rs Rp (*.prr) | *.prr|";
@@ -1204,14 +1215,14 @@ namespace ZiveLab.ZM
             }
             else
             {
-                dlg.InitialDirectory = gBZA.appcfg.PathSch;
+                dlg.InitialDirectory = gBZA.appcfg.PathSch[0];
                 dlg.FileName = "";
             }
         
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 filename = dlg.FileName;
-                gBZA.appcfg.PathSch = Path.GetDirectoryName(dlg.FileName);
+                gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(dlg.FileName));
                 var Value = gBZA.ChLnkLst[sch];
                 Value.mChInf.FileCond = filename;
                 gBZA.ChLnkLst[sch] = Value;
@@ -1401,13 +1412,17 @@ namespace ZiveLab.ZM
                 }
                 else if (ht.Column == 6)
                 {
-                    tip = string.Format("Display of DC voltage measurements on channel {0}.", tsch);
+                    tip = string.Format("Displays the DC voltage on channel {0}.", tsch);
                 }
                 else if (ht.Column == 7)
                 {
-                    tip = string.Format("Displays the measured temperature value on channel {0}.", tsch);
+                    tip = string.Format("Displays the DC voltages of the auxiliary channels on channel {0}.", tsch);
                 }
                 else if (ht.Column == 8)
+                {
+                    tip = string.Format("Displays the measured temperature value on channel {0}.", tsch);
+                }
+                else if (ht.Column == 9)
                 {
                     if (gBZA.ChLnkLst[sch].mChInf.FileCond.Length < 5)
                     {
@@ -1418,7 +1433,7 @@ namespace ZiveLab.ZM
                         tip = string.Format("Technique file for channel {0}:{1}", tsch, gBZA.ChLnkLst[sch].mChInf.FileCond);
                     }
                 }
-                else if (ht.Column == 13)
+                else if (ht.Column == 14)
                 {
                     if (gBZA.ChLnkLst[sch].mChInf.FileResult.Length < 5)
                     {
@@ -1429,11 +1444,11 @@ namespace ZiveLab.ZM
                         tip = string.Format("Result file for channel {0}:{1}", tsch, gBZA.ChLnkLst[sch].mChInf.FileResult);
                     }
                 }
-                else if (ht.Column == 16)
+                else if (ht.Column == 17)
                 {
                     tip = string.Format("Display the number of data stored in the data file and the number of data points in BZA memory.\r\n Data number of result file (data number of BZA memory).", tsch);
                 }
-                else if (ht.Column == 17)
+                else if (ht.Column == 18)
                 {
                     tip = string.Format("Displays the remote control setting status of channel {0}.", tsch);
                 }
@@ -1546,7 +1561,7 @@ namespace ZiveLab.ZM
         {
             Button bt = (Button)sender;
             int ch = Convert.ToInt32(bt.Tag);
-            string tip = string.Format("Check the DC voltage of the auxiliary channels of channel {0}.", ch + 1);
+            string tip = string.Format("Displays the DC voltages of the auxiliary channels on channel {0}.", ch + 1);
             if (tip != gtip.GetToolTip(bt))
             {
                 if (tip.Length < 1) gtip.SetToolTip(bt, null);
@@ -1638,7 +1653,7 @@ namespace ZiveLab.ZM
 
             if (File.Exists(filename) == false)
             {
-                MessageBox.Show("The technique file is not set or there is a problem.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("The file is not selected or the selected file cannot be found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 return;
             }
             eZimType type = gBZA.SifLnkLst[sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[iSifCh].GetZIMType();
@@ -1741,7 +1756,17 @@ namespace ZiveLab.ZM
             }
 
             SaveFileDialog saveDlg = new SaveFileDialog();
-            
+            saveDlg.CustomPlaces.Clear();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(gBZA.appcfg.PathData[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    saveDlg.CustomPlaces.Add(gBZA.appcfg.PathData[i]);
+                }
+            }
+
             saveDlg.Title = "Reload and saving result data file of ZM.";
             saveDlg.DefaultExt = "*.zmf";
             saveDlg.Filter = "Result data files of ZM (*.zmf) |*.zmf";
@@ -1753,7 +1778,7 @@ namespace ZiveLab.ZM
             {
                 return;
             }
-            gBZA.appcfg.PathData = Path.GetDirectoryName(saveDlg.FileName);
+            gBZA.appcfg.ApplyDataPath(Path.GetDirectoryName(saveDlg.FileName));
             filename = saveDlg.FileName;
             var Value = gBZA.ChLnkLst[sch];
             Value.mChInf.FileResult = filename;
@@ -1915,9 +1940,16 @@ namespace ZiveLab.ZM
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
+            dlg.CustomPlaces.Clear();
 
-
-            dlg.Multiselect = false;
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    dlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
+                }
+            }
             sfilt = "Galvanostatic EIS (*.eis) | *.eis|";
             sfilt += "Galvanostatic HFR (*.hfr) |*.hfr|";
             sfilt += "Pseudo Rs Rp (*.prr) | *.prr|";
@@ -1962,7 +1994,7 @@ namespace ZiveLab.ZM
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 filename = dlg.FileName;
-                gBZA.appcfg.PathSch = Path.GetDirectoryName(dlg.FileName);
+                gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(dlg.FileName));
                 for (row = 2; row < hgrid.Rows.Count; row++)
                 {
                     if (hgrid.GetCellCheck(row, 1) == CheckEnum.Checked)
@@ -2068,7 +2100,7 @@ namespace ZiveLab.ZM
             {
                 lnk.mChInf.bSelected = (chk == CheckEnum.Checked) ? true : false;
             }
-            else if (e.Col == 17)
+            else if (e.Col == 18)
             {
                 lnk.mChInf.bRemote = (chk == CheckEnum.Checked) ? true : false;
                 gBZA.SifLnkLst[gBZA.ChLnkLst[sch].sSerial].MBZAIF.bRemote[gBZA.ChLnkLst[sch].SifCh] = lnk.mChInf.bRemote;
@@ -2092,8 +2124,6 @@ namespace ZiveLab.ZM
         private void frmMain_LocationChanged(object sender, EventArgs e)
         {
             if (bClose || bFirst) return;
-            if (this.WindowState == FormWindowState.Minimized) return;
-            gBZA.appcfg.MainViewWinStatus = this.WindowState;
             if (this.WindowState == FormWindowState.Normal)
             {
                 gBZA.appcfg.MainViewSize = this.Size;
@@ -2104,8 +2134,7 @@ namespace ZiveLab.ZM
         private void frmMain_SizeChanged(object sender, EventArgs e)
         {
             if (bClose || bFirst) return;
-            if (this.WindowState == FormWindowState.Minimized) return;
-            gBZA.appcfg.MainViewWinStatus = this.WindowState;
+
             if (this.WindowState == FormWindowState.Normal)
             {
                 gBZA.appcfg.MainViewSize = this.Size;

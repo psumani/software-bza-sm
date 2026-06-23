@@ -6,7 +6,7 @@
 
 * Build Date:         Dec  9 2020 17:45:10
 
-* File Generated:     Apr 22 2026 11:02:52
+* File Generated:     Jun 1 2026 16:37:47
 
 * Purpose:            Router runtime info
 
@@ -18,24 +18,25 @@ Executing : C:\lscc\iCEcube2.2020.12\sbt_backend\bin\win32\opt\sbrouter.exe C:\l
 I1203: Reading Design zimaux
 I1202: Reading Architecture of device iCE40HX4K
 Warning-1403: No clock is reaching the reference clock pin 'REFERENCECLK' of PLL instance 'pll_main.zim_pll_inst'. So, no clocks will be inferred at output of this PLL
-Warning-1035: Removing timing arc from pin "comm_spi.i17661_4_lut_3_lut_LC_19_5_7/in0" to pin "comm_spi.i17661_4_lut_3_lut_LC_19_5_7/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17671_4_lut_3_lut_LC_18_6_4/in0" to pin "comm_spi.i17671_4_lut_3_lut_LC_18_6_4/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17656_4_lut_3_lut_LC_16_9_4/in0" to pin "comm_spi.i17656_4_lut_3_lut_LC_16_9_4/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17646_4_lut_3_lut_LC_16_8_7/in0" to pin "comm_spi.i17646_4_lut_3_lut_LC_16_8_7/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17641_4_lut_3_lut_LC_16_8_0/in0" to pin "comm_spi.i17641_4_lut_3_lut_LC_16_8_0/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17636_4_lut_3_lut_LC_9_14_2/in0" to pin "comm_spi.i17636_4_lut_3_lut_LC_9_14_2/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17651_4_lut_3_lut_LC_8_9_7/in0" to pin "comm_spi.i17651_4_lut_3_lut_LC_8_9_7/lcout" to break the combinatorial loop
-Warning-1035: Removing timing arc from pin "comm_spi.i17666_4_lut_3_lut_LC_8_9_2/in0" to pin "comm_spi.i17666_4_lut_3_lut_LC_8_9_2/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "i18331_4_lut_4_lut_LC_10_5_6/in0" to pin "i18331_4_lut_4_lut_LC_10_5_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18291_4_lut_3_lut_LC_17_6_1/in0" to pin "comm_spi.i18291_4_lut_3_lut_LC_17_6_1/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18321_4_lut_3_lut_LC_15_8_6/in0" to pin "comm_spi.i18321_4_lut_3_lut_LC_15_8_6/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18296_4_lut_3_lut_LC_10_14_2/in0" to pin "comm_spi.i18296_4_lut_3_lut_LC_10_14_2/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18306_4_lut_3_lut_LC_9_14_7/in0" to pin "comm_spi.i18306_4_lut_3_lut_LC_9_14_7/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18301_4_lut_3_lut_LC_9_14_0/in0" to pin "comm_spi.i18301_4_lut_3_lut_LC_9_14_0/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18316_4_lut_3_lut_LC_9_13_2/in0" to pin "comm_spi.i18316_4_lut_3_lut_LC_9_13_2/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18311_4_lut_3_lut_LC_9_5_1/in0" to pin "comm_spi.i18311_4_lut_3_lut_LC_9_5_1/lcout" to break the combinatorial loop
+Warning-1035: Removing timing arc from pin "comm_spi.i18326_4_lut_3_lut_LC_7_11_2/in0" to pin "comm_spi.i18326_4_lut_3_lut_LC_7_11_2/lcout" to break the combinatorial loop
 I1209: Started routing
-I1223: Total Nets : 1631 
-I1212: Iteration  1 :   334 unrouted : 9 seconds
-I1212: Iteration  2 :   101 unrouted : 4 seconds
-I1212: Iteration  3 :    38 unrouted : 1 seconds
-I1212: Iteration  4 :     6 unrouted : 0 seconds
-I1212: Iteration  5 :     0 unrouted : 0 seconds
+I1223: Total Nets : 1721 
+I1212: Iteration  1 :   292 unrouted : 15 seconds
+I1212: Iteration  2 :    62 unrouted : 10 seconds
+I1212: Iteration  3 :    33 unrouted : 3 seconds
+I1212: Iteration  4 :     4 unrouted : 0 seconds
+I1212: Iteration  5 :     0 unrouted : 1 seconds
 I1215: Routing is successful
 I1206: Completed routing
 I1204: Writing Design zimaux
 I1210: Writing routes
 I1218: Exiting the router
-I1224: Router run-time : 27 seconds
+I1224: Router run-time : 45 seconds

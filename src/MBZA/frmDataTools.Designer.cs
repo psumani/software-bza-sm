@@ -106,6 +106,27 @@
             this.Grp1Plot25 = new NationalInstruments.UI.ScatterPlot();
             this.legendItem26 = new NationalInstruments.UI.LegendItem();
             this.Grp1Plot26 = new NationalInstruments.UI.ScatterPlot();
+            this.legendItem27 = new NationalInstruments.UI.LegendItem();
+            this.legendItem28 = new NationalInstruments.UI.LegendItem();
+            this.legendItem29 = new NationalInstruments.UI.LegendItem();
+            this.legendItem30 = new NationalInstruments.UI.LegendItem();
+            this.legendItem31 = new NationalInstruments.UI.LegendItem();
+            this.legendItem32 = new NationalInstruments.UI.LegendItem();
+            this.legendItem33 = new NationalInstruments.UI.LegendItem();
+            this.legendItem34 = new NationalInstruments.UI.LegendItem();
+            this.legendItem35 = new NationalInstruments.UI.LegendItem();
+            this.legendItem36 = new NationalInstruments.UI.LegendItem();
+            this.legendItem37 = new NationalInstruments.UI.LegendItem();
+            this.legendItem38 = new NationalInstruments.UI.LegendItem();
+            this.legendItem39 = new NationalInstruments.UI.LegendItem();
+            this.legendItem40 = new NationalInstruments.UI.LegendItem();
+            this.legendItem41 = new NationalInstruments.UI.LegendItem();
+            this.legendItem42 = new NationalInstruments.UI.LegendItem();
+            this.legendItem43 = new NationalInstruments.UI.LegendItem();
+            this.legendItem44 = new NationalInstruments.UI.LegendItem();
+            this.legendItem45 = new NationalInstruments.UI.LegendItem();
+            this.legendItem46 = new NationalInstruments.UI.LegendItem();
+            this.legendItem47 = new NationalInstruments.UI.LegendItem();
             this.grp1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.xyCursor2 = new NationalInstruments.UI.XYCursor();
             this.Grp1Plot27 = new NationalInstruments.UI.ScatterPlot();
@@ -338,10 +359,10 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Consolas", 7F);
-            this.radioButton4.Location = new System.Drawing.Point(374, 193);
+            this.radioButton4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton4.Location = new System.Drawing.Point(312, 205);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(73, 16);
+            this.radioButton4.Size = new System.Drawing.Size(95, 18);
             this.radioButton4.TabIndex = 102;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Aux Board3";
@@ -351,10 +372,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("Consolas", 7F);
-            this.radioButton3.Location = new System.Drawing.Point(295, 193);
+            this.radioButton3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.Location = new System.Drawing.Point(200, 205);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(73, 16);
+            this.radioButton3.Size = new System.Drawing.Size(95, 18);
             this.radioButton3.TabIndex = 101;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Aux Board2";
@@ -364,10 +385,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Consolas", 7F);
-            this.radioButton2.Location = new System.Drawing.Point(216, 193);
+            this.radioButton2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Location = new System.Drawing.Point(83, 205);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(73, 16);
+            this.radioButton2.Size = new System.Drawing.Size(95, 18);
             this.radioButton2.TabIndex = 100;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Aux Board1";
@@ -377,10 +398,10 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Consolas", 7F);
-            this.radioButton1.Location = new System.Drawing.Point(167, 193);
+            this.radioButton1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Location = new System.Drawing.Point(15, 205);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(43, 16);
+            this.radioButton1.Size = new System.Drawing.Size(53, 18);
             this.radioButton1.TabIndex = 99;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Main";
@@ -401,6 +422,7 @@
             // legend1
             // 
             this.legend1.Border = NationalInstruments.UI.Border.Dotted;
+            this.legend1.CanShowFocus = true;
             this.legend1.CaptionPosition = NationalInstruments.UI.CaptionPosition.Right;
             this.legend1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.legend1.Items.AddRange(new NationalInstruments.UI.LegendItem[] {
@@ -429,12 +451,34 @@
             this.legendItem23,
             this.legendItem24,
             this.legendItem25,
-            this.legendItem26});
+            this.legendItem26,
+            this.legendItem27,
+            this.legendItem28,
+            this.legendItem29,
+            this.legendItem30,
+            this.legendItem31,
+            this.legendItem32,
+            this.legendItem33,
+            this.legendItem34,
+            this.legendItem35,
+            this.legendItem36,
+            this.legendItem37,
+            this.legendItem38,
+            this.legendItem39,
+            this.legendItem40,
+            this.legendItem41,
+            this.legendItem42,
+            this.legendItem43,
+            this.legendItem44,
+            this.legendItem45,
+            this.legendItem46,
+            this.legendItem47});
             this.legend1.ItemSize = new System.Drawing.Size(20, 16);
-            this.legend1.Location = new System.Drawing.Point(484, 193);
+            this.legend1.Location = new System.Drawing.Point(391, 229);
             this.legend1.Name = "legend1";
-            this.legend1.Size = new System.Drawing.Size(65, 58);
+            this.legend1.Size = new System.Drawing.Size(130, 200);
             this.legend1.TabIndex = 97;
+            this.legend1.VerticalScrollMode = NationalInstruments.UI.ScrollMode.Visible;
             // 
             // legendItem11
             // 
@@ -443,8 +487,17 @@
             // 
             // Grp1Plot1
             // 
+            this.Grp1Plot1.Visible = false;
             this.Grp1Plot1.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot1.YAxis = this.Grp1_yAxis1;
+            // 
+            // Grp1_xAxis1
+            // 
+            this.Grp1_xAxis1.Mode = NationalInstruments.UI.AxisMode.Fixed;
+            // 
+            // Grp1_yAxis1
+            // 
+            this.Grp1_yAxis1.Mode = NationalInstruments.UI.AxisMode.Fixed;
             // 
             // legendItem12
             // 
@@ -463,6 +516,7 @@
             // 
             // Grp1Plot3
             // 
+            this.Grp1Plot3.Visible = false;
             this.Grp1Plot3.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot3.YAxis = this.Grp1_yAxis1;
             // 
@@ -473,12 +527,14 @@
             // 
             // Grp1Plot4
             // 
+            this.Grp1Plot4.Visible = false;
             this.Grp1Plot4.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot4.YAxis = this.Grp1_yAxis2;
             // 
             // Grp1_yAxis2
             // 
             this.Grp1_yAxis2.CaptionPosition = NationalInstruments.UI.YAxisPosition.Right;
+            this.Grp1_yAxis2.Mode = NationalInstruments.UI.AxisMode.Fixed;
             this.Grp1_yAxis2.Position = NationalInstruments.UI.YAxisPosition.Right;
             // 
             // legendItem15
@@ -488,6 +544,7 @@
             // 
             // Grp1Plot5
             // 
+            this.Grp1Plot5.Visible = false;
             this.Grp1Plot5.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot5.YAxis = this.Grp1_yAxis2;
             // 
@@ -500,6 +557,7 @@
             // 
             this.Grp1Plot6.LineColor = System.Drawing.Color.Maroon;
             this.Grp1Plot6.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.Grp1Plot6.Visible = false;
             this.Grp1Plot6.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot6.YAxis = this.Grp1_yAxis2;
             // 
@@ -516,6 +574,7 @@
             this.Grp1Plot7.PointColor = System.Drawing.Color.DarkGray;
             this.Grp1Plot7.PointStyle = NationalInstruments.UI.PointStyle.EmptyCircle;
             this.Grp1Plot7.ProcessSpecialValues = true;
+            this.Grp1Plot7.Visible = false;
             this.Grp1Plot7.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot7.YAxis = this.Grp1_yAxis1;
             // 
@@ -525,6 +584,7 @@
             // 
             // Grp1Plot8
             // 
+            this.Grp1Plot8.Visible = false;
             this.Grp1Plot8.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot8.YAxis = this.Grp1_yAxis1;
             // 
@@ -535,6 +595,7 @@
             // 
             // Grp1Plot9
             // 
+            this.Grp1Plot9.Visible = false;
             this.Grp1Plot9.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot9.YAxis = this.Grp1_yAxis1;
             // 
@@ -545,6 +606,7 @@
             // 
             // Grp1Plot10
             // 
+            this.Grp1Plot10.Visible = false;
             this.Grp1Plot10.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot10.YAxis = this.Grp1_yAxis1;
             // 
@@ -555,6 +617,7 @@
             // 
             // Grp1Plot11
             // 
+            this.Grp1Plot11.Visible = false;
             this.Grp1Plot11.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot11.YAxis = this.Grp1_yAxis1;
             // 
@@ -565,6 +628,7 @@
             // 
             // Grp1Plot12
             // 
+            this.Grp1Plot12.Visible = false;
             this.Grp1Plot12.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot12.YAxis = this.Grp1_yAxis1;
             // 
@@ -575,6 +639,7 @@
             // 
             // Grp1Plot13
             // 
+            this.Grp1Plot13.Visible = false;
             this.Grp1Plot13.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot13.YAxis = this.Grp1_yAxis1;
             // 
@@ -585,6 +650,7 @@
             // 
             // Grp1Plot14
             // 
+            this.Grp1Plot14.Visible = false;
             this.Grp1Plot14.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot14.YAxis = this.Grp1_yAxis1;
             // 
@@ -595,6 +661,7 @@
             // 
             // Grp1Plot15
             // 
+            this.Grp1Plot15.Visible = false;
             this.Grp1Plot15.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot15.YAxis = this.Grp1_yAxis1;
             // 
@@ -605,6 +672,7 @@
             // 
             // Grp1Plot16
             // 
+            this.Grp1Plot16.Visible = false;
             this.Grp1Plot16.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot16.YAxis = this.Grp1_yAxis1;
             // 
@@ -615,6 +683,7 @@
             // 
             // Grp1Plot17
             // 
+            this.Grp1Plot17.Visible = false;
             this.Grp1Plot17.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot17.YAxis = this.Grp1_yAxis1;
             // 
@@ -625,6 +694,7 @@
             // 
             // Grp1Plot18
             // 
+            this.Grp1Plot18.Visible = false;
             this.Grp1Plot18.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot18.YAxis = this.Grp1_yAxis1;
             // 
@@ -635,6 +705,7 @@
             // 
             // Grp1Plot19
             // 
+            this.Grp1Plot19.Visible = false;
             this.Grp1Plot19.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot19.YAxis = this.Grp1_yAxis1;
             // 
@@ -645,6 +716,7 @@
             // 
             // Grp1Plot20
             // 
+            this.Grp1Plot20.Visible = false;
             this.Grp1Plot20.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot20.YAxis = this.Grp1_yAxis1;
             // 
@@ -655,6 +727,7 @@
             // 
             // Grp1Plot21
             // 
+            this.Grp1Plot21.Visible = false;
             this.Grp1Plot21.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot21.YAxis = this.Grp1_yAxis1;
             // 
@@ -665,6 +738,7 @@
             // 
             // Grp1Plot22
             // 
+            this.Grp1Plot22.Visible = false;
             this.Grp1Plot22.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot22.YAxis = this.Grp1_yAxis1;
             // 
@@ -675,6 +749,7 @@
             // 
             // Grp1Plot23
             // 
+            this.Grp1Plot23.Visible = false;
             this.Grp1Plot23.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot23.YAxis = this.Grp1_yAxis1;
             // 
@@ -685,6 +760,7 @@
             // 
             // Grp1Plot24
             // 
+            this.Grp1Plot24.Visible = false;
             this.Grp1Plot24.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot24.YAxis = this.Grp1_yAxis1;
             // 
@@ -695,6 +771,7 @@
             // 
             // Grp1Plot25
             // 
+            this.Grp1Plot25.Visible = false;
             this.Grp1Plot25.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot25.YAxis = this.Grp1_yAxis1;
             // 
@@ -705,8 +782,93 @@
             // 
             // Grp1Plot26
             // 
+            this.Grp1Plot26.Visible = false;
             this.Grp1Plot26.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot26.YAxis = this.Grp1_yAxis1;
+            // 
+            // legendItem27
+            // 
+            this.legendItem27.Text = "Item 26";
+            // 
+            // legendItem28
+            // 
+            this.legendItem28.Text = "Item 27";
+            // 
+            // legendItem29
+            // 
+            this.legendItem29.Text = "Item 28";
+            // 
+            // legendItem30
+            // 
+            this.legendItem30.Text = "Item 29";
+            // 
+            // legendItem31
+            // 
+            this.legendItem31.Text = "Item 30";
+            // 
+            // legendItem32
+            // 
+            this.legendItem32.Text = "Item 31";
+            // 
+            // legendItem33
+            // 
+            this.legendItem33.Text = "Item 32";
+            // 
+            // legendItem34
+            // 
+            this.legendItem34.Text = "Item 33";
+            // 
+            // legendItem35
+            // 
+            this.legendItem35.Text = "Item 34";
+            // 
+            // legendItem36
+            // 
+            this.legendItem36.Text = "Item 35";
+            // 
+            // legendItem37
+            // 
+            this.legendItem37.Text = "Item 36";
+            // 
+            // legendItem38
+            // 
+            this.legendItem38.Text = "Item 37";
+            // 
+            // legendItem39
+            // 
+            this.legendItem39.Text = "Item 38";
+            // 
+            // legendItem40
+            // 
+            this.legendItem40.Text = "Item 39";
+            // 
+            // legendItem41
+            // 
+            this.legendItem41.Text = "Item 40";
+            // 
+            // legendItem42
+            // 
+            this.legendItem42.Text = "Item 41";
+            // 
+            // legendItem43
+            // 
+            this.legendItem43.Text = "Item 42";
+            // 
+            // legendItem44
+            // 
+            this.legendItem44.Text = "Item 43";
+            // 
+            // legendItem45
+            // 
+            this.legendItem45.Text = "Item 44";
+            // 
+            // legendItem46
+            // 
+            this.legendItem46.Text = "Item 45";
+            // 
+            // legendItem47
+            // 
+            this.legendItem47.Text = "Item 46";
             // 
             // grp1
             // 
@@ -714,10 +876,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grp1.Caption = " ";
-            this.grp1.CaptionBackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.grp1.CaptionBackColor = System.Drawing.SystemColors.Control;
             this.grp1.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
             this.xyCursor2});
-            this.grp1.Location = new System.Drawing.Point(15, 198);
+            this.grp1.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
+            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint) 
+            | NationalInstruments.UI.GraphInteractionModes.PanX) 
+            | NationalInstruments.UI.GraphInteractionModes.PanY) 
+            | NationalInstruments.UI.GraphInteractionModes.DragCursor) 
+            | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption) 
+            | NationalInstruments.UI.GraphInteractionModes.EditRange)));
+            this.grp1.Location = new System.Drawing.Point(15, 229);
             this.grp1.Name = "grp1";
             this.grp1.PlotAreaColor = System.Drawing.Color.White;
             this.grp1.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
@@ -768,7 +937,7 @@
             this.Grp1Plot45,
             this.Grp1Plot46,
             this.Grp1Plot47});
-            this.grp1.Size = new System.Drawing.Size(508, 443);
+            this.grp1.Size = new System.Drawing.Size(508, 412);
             this.grp1.TabIndex = 96;
             this.grp1.UseColorGenerator = true;
             this.grp1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -783,106 +952,127 @@
             // 
             // Grp1Plot27
             // 
+            this.Grp1Plot27.Visible = false;
             this.Grp1Plot27.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot27.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot28
             // 
+            this.Grp1Plot28.Visible = false;
             this.Grp1Plot28.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot28.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot29
             // 
+            this.Grp1Plot29.Visible = false;
             this.Grp1Plot29.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot29.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot30
             // 
+            this.Grp1Plot30.Visible = false;
             this.Grp1Plot30.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot30.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot31
             // 
+            this.Grp1Plot31.Visible = false;
             this.Grp1Plot31.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot31.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot32
             // 
+            this.Grp1Plot32.Visible = false;
             this.Grp1Plot32.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot32.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot33
             // 
+            this.Grp1Plot33.Visible = false;
             this.Grp1Plot33.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot33.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot34
             // 
+            this.Grp1Plot34.Visible = false;
             this.Grp1Plot34.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot34.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot35
             // 
+            this.Grp1Plot35.Visible = false;
             this.Grp1Plot35.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot35.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot36
             // 
+            this.Grp1Plot36.Visible = false;
             this.Grp1Plot36.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot36.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot37
             // 
+            this.Grp1Plot37.Visible = false;
             this.Grp1Plot37.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot37.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot38
             // 
+            this.Grp1Plot38.Visible = false;
             this.Grp1Plot38.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot38.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot39
             // 
+            this.Grp1Plot39.Visible = false;
             this.Grp1Plot39.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot39.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot40
             // 
+            this.Grp1Plot40.Visible = false;
             this.Grp1Plot40.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot40.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot41
             // 
+            this.Grp1Plot41.Visible = false;
             this.Grp1Plot41.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot41.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot42
             // 
+            this.Grp1Plot42.Visible = false;
             this.Grp1Plot42.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot42.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot43
             // 
+            this.Grp1Plot43.Visible = false;
             this.Grp1Plot43.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot43.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot44
             // 
+            this.Grp1Plot44.Visible = false;
             this.Grp1Plot44.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot44.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot45
             // 
+            this.Grp1Plot45.Visible = false;
             this.Grp1Plot45.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot45.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot46
             // 
+            this.Grp1Plot46.Visible = false;
             this.Grp1Plot46.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot46.YAxis = this.Grp1_yAxis1;
             // 
             // Grp1Plot47
             // 
+            this.Grp1Plot47.Visible = false;
             this.Grp1Plot47.XAxis = this.Grp1_xAxis1;
             this.Grp1Plot47.YAxis = this.Grp1_yAxis1;
             // 
@@ -1109,5 +1299,26 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private NationalInstruments.UI.LegendItem legendItem27;
+        private NationalInstruments.UI.LegendItem legendItem28;
+        private NationalInstruments.UI.LegendItem legendItem29;
+        private NationalInstruments.UI.LegendItem legendItem30;
+        private NationalInstruments.UI.LegendItem legendItem31;
+        private NationalInstruments.UI.LegendItem legendItem32;
+        private NationalInstruments.UI.LegendItem legendItem33;
+        private NationalInstruments.UI.LegendItem legendItem34;
+        private NationalInstruments.UI.LegendItem legendItem35;
+        private NationalInstruments.UI.LegendItem legendItem36;
+        private NationalInstruments.UI.LegendItem legendItem37;
+        private NationalInstruments.UI.LegendItem legendItem38;
+        private NationalInstruments.UI.LegendItem legendItem39;
+        private NationalInstruments.UI.LegendItem legendItem40;
+        private NationalInstruments.UI.LegendItem legendItem41;
+        private NationalInstruments.UI.LegendItem legendItem42;
+        private NationalInstruments.UI.LegendItem legendItem43;
+        private NationalInstruments.UI.LegendItem legendItem44;
+        private NationalInstruments.UI.LegendItem legendItem45;
+        private NationalInstruments.UI.LegendItem legendItem46;
+        private NationalInstruments.UI.LegendItem legendItem47;
     }
 }

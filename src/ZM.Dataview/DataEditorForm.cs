@@ -10,6 +10,7 @@ using System.Drawing.Printing;
 using System.Diagnostics;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Drawing;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
@@ -32,24 +33,22 @@ namespace ZiveLab.ZM.Dataview
         private int _LangIdx = 0;
         public int _Pad = 14;
         private bool _EnAlwaysOpenPath;
-        private string _AlwaysOpenPath;
+        private string [] _AlwaysOpenPath;
         private string _SchTempPath;
         private string _MsgBoxCaption;
-        private int _TimeFormat;
+        public string PathZManData;
 
         public bool bFileOpened;
-        public int ZSharpTarget;
         
         private DataViewSet _dataviewset;
 
         // 외부 프로그램
         private ExtAppProc _extAppPath;
-
+        
         public string MsgBoxCaption { set { _MsgBoxCaption = value; } }
         public bool EnAlwaysOpenPath { set { _EnAlwaysOpenPath = value; } }
-        public string AlwaysOpenPath { set { _AlwaysOpenPath = value; } }
+        public string [] AlwaysOpenPath { set { _AlwaysOpenPath = value; } }
         public string SchTempPath { set { _SchTempPath = value; } }
-        public int TimeFormat { set { _TimeFormat = value; } }
         public ExtAppProc ExtAppPath { set { _extAppPath = value; } }
 
         public DataViewSet dataviewset { set { _dataviewset = value; } }
@@ -59,10 +58,10 @@ namespace ZiveLab.ZM.Dataview
 
             this.Icon = Util.BitmapToIcon(Properties.Resources.Report);
             bFileOpened = false;
-            ZSharpTarget = -1;
             MaxAuxCount = 0;
             mResFile = new ZMF_File();
-
+            PathZManData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "ZManData");
+            _SchTempPath = Path.Combine("C:\\ZIVE DATA\\ZM\\Data\\", "Temp");
             _DataHeaderValues = new DataHeaderValues();
             _dataviewset = DataviewCommon.LoadFromSetFile();
             //
@@ -70,7 +69,12 @@ namespace ZiveLab.ZM.Dataview
             {
                 dci.Enable = true;
             }
-            _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
+
+            AlwaysOpenPath = new string[10];
+            for(int i=0; i<10; i++)
+            {
+                _AlwaysOpenPath[i] = "";
+            }
             tsbtnOpenSchedule.Visible = viewOpenSch;
             _EnAlwaysOpenPath = false;
 
@@ -123,7 +127,6 @@ namespace ZiveLab.ZM.Dataview
             _LangIdx = langidx;
 
             Properties.Resources.Culture = DataviewCommon.SetLanguage(this, langidx, typeof(DataEditorForm));
-            _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
 
             InitToolTip();
             InitLabel();
@@ -146,9 +149,8 @@ namespace ZiveLab.ZM.Dataview
 
         private void InitLabel()
         {
-            string unitQ1 = _dataviewset._dataConvSet.UnitC ? "C" : "mAh";
-            string unitQ2 = _dataviewset._dataConvSet.UnitC ? "C" : "Ah";
-            string unitQ3 = _dataviewset._dataConvSet.UnitC ? "C/g" : "Ah/g";
+            string unitQ1 = _dataviewset._dataConvSet.UnitC ? "C" : "mAH";
+            
 
             lblCapacity1.Text = string.Format(Properties.Resources.Capacity_x, unitQ1);
         }
@@ -353,15 +355,26 @@ namespace ZiveLab.ZM.Dataview
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = Properties.Resources.Open_Data_File;
-            dlg.InitialDirectory = _EnAlwaysOpenPath ? _AlwaysOpenPath : _dataviewset._GraphSetEx.OpenPath;
+            dlg.InitialDirectory = _EnAlwaysOpenPath ? _AlwaysOpenPath[0] : _dataviewset._GraphSetEx.OpenPath[0];
             dlg.Multiselect = false;
+
+            dlg.CustomPlaces.Clear();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(_AlwaysOpenPath[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    dlg.CustomPlaces.Add(_AlwaysOpenPath[i]);
+                }
+            }
             dlg.Filter = filter;
             _dataviewset._dataConvSet = new DataConvSet();
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 LoadProc(dlg.FileName);
-                _dataviewset._GraphSetEx.OpenPath = Path.GetDirectoryName(dlg.FileName);
+                _dataviewset._GraphSetEx.ApplyPathData(Path.GetDirectoryName(dlg.FileName));
                 DataviewCommon.SaveToSetFile(_dataviewset);
             }
         }
@@ -456,7 +469,40 @@ namespace ZiveLab.ZM.Dataview
             }            
         }
 
-        private void ConvertToTextProc(string filename, eDelimiter ed, int Target = -1)
+        private void ConvertToZSharpProc(DataHeaderValues headval, string TargetPath)
+        {
+            if (!backgroundWorkerZSharp.IsBusy)
+            {
+                tsbtnOpen.Enabled = false;
+                tsbtnReload.Enabled = false;
+                tsbtnStop.Enabled = true;
+                tsbtnSave.Enabled = false;
+                tsbtnOpenSchedule.Enabled = false;
+                tsbtnSaveText.Enabled = false;
+                tsbtnExportExcel.Enabled = false;
+                tsbtnViewGraph.Enabled = false;
+                tsbtnRunZMan.Enabled = false;
+                tsbtnPrint.Enabled = false;
+                tsbtnFileHeaderInfor.Enabled = false;
+                groupBoxFilter.Enabled = false;
+                groupBoxViewOpt.Enabled = false;
+
+                ribbonProgressBar1.Minimum = 0;
+                ribbonProgressBar1.Maximum = 100;
+                ribbonProgressBar1.Value = 0;
+                ribbonProgressBar1.Visible = true;
+                ribbonLabel2.Text = "0%";
+                ribbonLabel2.Visible = true;
+
+                object[] param = new object[] { headval, TargetPath };
+
+                this.Cursor = Cursors.AppStarting;
+                backgroundWorkerZSharp.RunWorkerAsync(param);
+            }
+        }
+
+
+        private void ConvertToTextProc(string filename, eDelimiter ed)
         {
             if (!backgroundWorkerText.IsBusy)
             {
@@ -481,8 +527,7 @@ namespace ZiveLab.ZM.Dataview
                 ribbonLabel2.Text = "0%";
                 ribbonLabel2.Visible = true;
 
-                _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
-                object[] param = new object[] { filename, ed, Target };
+                object[] param = new object[] { filename, ed};
 
                 this.Cursor = Cursors.AppStarting;
 
@@ -516,7 +561,6 @@ namespace ZiveLab.ZM.Dataview
                 ribbonLabel2.Text = "0%";
                 ribbonLabel2.Visible = true;
 
-                _TimeFormat = _dataviewset._dataConvSet.TimeFormat;
                 object[] param = new object[] { filename, eef };
 
                 this.Cursor = Cursors.AppStarting;
@@ -531,6 +575,19 @@ namespace ZiveLab.ZM.Dataview
             string extension = Path.GetExtension(_DataHeaderValues._FileName);
 
             SaveFileDialog dlg = new SaveFileDialog();
+
+            dlg.CustomPlaces.Clear();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (Directory.Exists(_AlwaysOpenPath[i]))
+                {
+                    // 왼쪽 링크 바에 커스텀 폴더 추가
+                    dlg.CustomPlaces.Add(_AlwaysOpenPath[i]);
+                }
+            }
+
+
             dlg.Title = Properties.Resources.Save_As_Data_File;
             dlg.InitialDirectory = Path.GetDirectoryName(_DataHeaderValues._FileName);
             dlg.FileName = Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName) + string.Format("({0:MMddHHmmss})", DateTime.Now) + extension;
@@ -921,6 +978,9 @@ namespace ZiveLab.ZM.Dataview
             if (backgroundWorkerSave.WorkerSupportsCancellation)
                 backgroundWorkerSave.CancelAsync();
 
+            if (backgroundWorkerZSharp.WorkerSupportsCancellation)
+                backgroundWorkerZSharp.CancelAsync();
+
             if (backgroundWorkerText.WorkerSupportsCancellation)
                 backgroundWorkerText.CancelAsync();
 
@@ -1045,7 +1105,7 @@ namespace ZiveLab.ZM.Dataview
             SetText(textScheduleFile, mResFile.tmphead.mInfo.GetTechFile());
             SetText(textUser, mResFile.tmphead.mInfo.GetUser());
             SetText(textDataMemo, mResFile.tmphead.mInfo.GetMemo());                    
-            SetText(tbDataCapacity, (mResFile.tmphead.tech.info.Capa).ToString());
+            SetText(tbDataCapacity, (mResFile.tmphead.mInfo.Capa).ToString());
             SetText(tbCellType, mResFile.tmphead.mInfo.GetBattId());
             SetText(tbWriterName, mResFile.tmphead.tech.info.GetCreater());
         }
@@ -1186,7 +1246,120 @@ namespace ZiveLab.ZM.Dataview
             DataFlexGrid.EndUpdate();
         }
 
-        private int _OldPercent;        
+        private int _OldPercent;
+
+        private void backgroundWorkerZSharp_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            object[] param = (object[])e.Argument;
+
+            DataHeaderValues headval = (DataHeaderValues)param[0];
+            string ZSharpTarget = (string)param[1];
+
+            int errcode;
+            int length;
+            int count;
+            int index;
+            string errmsg;
+            string message;
+            string sSrcFile = Path.GetFileNameWithoutExtension(headval._FileName);
+            string sTargetFile;
+            string []sTgFile = new string[headval.MaxAuxCh + 1];
+            DataFileTextWriter[] zwr = new DataFileTextWriter[headval.MaxAuxCh + 1];
+            bool[] bOpen = new bool[headval.MaxAuxCh + 1];
+ 
+            worker.ReportProgress(0);
+            for (int i=0; i< headval.MaxAuxCh + 1; i++)
+            {
+                bOpen[i] = false;
+                if (i == 0) sTargetFile = string.Format("{0}_Main.Z#",sSrcFile);
+                else sTargetFile = string.Format("{0}_A{1:00}.Z#", sSrcFile,i);
+
+                sTgFile[i] = Path.Combine(ZSharpTarget, sTargetFile);
+
+                if (File.Exists(sTgFile[i]))
+                {
+                    try
+                    {
+                        File.Delete(sTgFile[i]);
+                    }
+                    catch (Exception ex)
+                    {
+                        message = string.Format("{0} : The file could not be deleted.\r\n[{1}].", Properties.Resources.Error, sTgFile[i]);    
+                        e.Result = new BackgroundWorkerResult(message);
+                        return;
+                    }
+                }
+                zwr[i] = new DataFileTextWriter(_dataviewset._dataConvSet.UnitC);
+                if (zwr[i].Create(sTgFile[i], eDelimiter.Tab, out errmsg) == false)
+                {
+                    message = string.Format("{0} : {1}\r\n[2]", Properties.Resources.Error, errmsg, sTgFile[i]);
+                    e.Result = new BackgroundWorkerResult(message);
+                    return;
+                }
+
+                zwr[i].ColZSharp(i);
+
+                errcode = zwr[i].WriteHeader(_DataHeaderValues);
+
+                if (errcode != Define.NO_ERROR)
+                {
+                    e.Result = new BackgroundWorkerResult(Properties.Resources.Error);
+                    return;
+                }
+                zwr[i].WriteColumnZSharp(_dataviewset._dataConvSet, _Pad, i);
+
+                bOpen[i] = true;
+
+            }
+            worker.ReportProgress(2);
+            _OldPercent = -1;
+            length = DataFlexGrid.Rows.Count;
+            count = 0;
+            index = 0;
+
+            for (int r = 1; r < length; r++)
+            {
+                for (int i = 0; i < headval.MaxAuxCh + 1; i++)
+                {
+                    if ((worker.CancellationPending == true))
+                    {
+                        e.Result = new BackgroundWorkerResult(Properties.Resources.Stop);
+                        return;
+                    }
+                    else
+                    {
+                        if (bOpen[i] == false) continue;
+
+                        if (DataFlexGrid.Rows[r].IsVisible)
+                        {
+                            GridRowFlag grf = DataFlexGrid.Rows[r].UserData as GridRowFlag;
+                            UnitReportData urgd = (UnitReportData)grf.Data;
+
+                           errcode = zwr[i].ZSharpWriteData(index++, urgd, eDelimiter.Tab, _Pad, null, i);
+                        }
+                    }
+                }
+                count++;
+                worker.ReportProgress((int)((double)count / length * 97));
+                Thread.Sleep(0);
+            }
+
+            
+            worker.ReportProgress(100);
+            e.Result = new BackgroundWorkerResult(Properties.Resources.Saved, sTgFile);
+
+            for (int i = 0; i < headval.MaxAuxCh + 1; i++)
+            {
+                if(bOpen[i] == true)
+                {
+                    zwr[i].Close();
+                }
+            }
+
+
+        }
 
         private void backgroundWorkerText_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -1196,7 +1369,7 @@ namespace ZiveLab.ZM.Dataview
 
             string filename = (string)param[0];
             eDelimiter delimiter = (eDelimiter)param[1];
-            ZSharpTarget = (int)param[2];
+
             string errmsg;
 
             DataFileTextWriter dftw = new DataFileTextWriter(_dataviewset._dataConvSet.UnitC);
@@ -1210,8 +1383,8 @@ namespace ZiveLab.ZM.Dataview
             _OldPercent = -1;
   
             worker.ReportProgress(1);
-            if (ZSharpTarget >= 0) dftw.ColZSharp(ZSharpTarget);
-            else dftw.ColLanguage(_dataviewset._dataConvSet.UnitC, _LangIdx);
+
+            dftw.ColLanguage(_dataviewset._dataConvSet.UnitC, _LangIdx);
 
             int errcode = dftw.WriteHeader(_DataHeaderValues);
 
@@ -1231,8 +1404,7 @@ namespace ZiveLab.ZM.Dataview
             length = DataFlexGrid.Rows.Count;
             count = 0;
             index = 0;
-            if (ZSharpTarget >= 0) dftw.WriteColumnZSharp(_dataviewset._dataConvSet, _Pad, ZSharpTarget);
-            else    dftw.WriteColumn(_dataviewset._dataConvSet,_Pad, MaxAuxCount);
+            dftw.WriteColumn(_dataviewset._dataConvSet,_Pad, MaxAuxCount);
 
             for (int i = 1; i < length; i++)
             {
@@ -1248,8 +1420,7 @@ namespace ZiveLab.ZM.Dataview
                     {
                         GridRowFlag grf = DataFlexGrid.Rows[i].UserData as GridRowFlag;
                         UnitReportData urgd = (UnitReportData)grf.Data;
-                        if (ZSharpTarget >= 0) errcode = dftw.ZSharpWriteData(index++, urgd, delimiter, _Pad, null, ZSharpTarget);
-                        else errcode = dftw.WriteData(index++, urgd, _dataviewset._dataConvSet, delimiter, _Pad, null, MaxAuxCount);
+                        errcode = dftw.WriteData(index++, urgd, _dataviewset._dataConvSet, delimiter, _Pad, null, MaxAuxCount);
                     }
 
                     count++;
@@ -1267,6 +1438,18 @@ namespace ZiveLab.ZM.Dataview
             dftw.Close();
         }
 
+        private void backgroundWorkerZSharp_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (_OldPercent != e.ProgressPercentage)
+            {
+                _OldPercent = e.ProgressPercentage;
+
+                ribbonLabel1.Text = Properties.Resources.Saving_ddd;
+                ribbonLabel2.Text = string.Format("{0}%", e.ProgressPercentage);
+                ribbonProgressBar1.Value = e.ProgressPercentage;
+            }
+        }
+
         private void backgroundWorkerText_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (_OldPercent != e.ProgressPercentage)
@@ -1277,6 +1460,79 @@ namespace ZiveLab.ZM.Dataview
                 ribbonLabel2.Text = string.Format("{0}%", e.ProgressPercentage);
                 ribbonProgressBar1.Value = e.ProgressPercentage;
             }
+        }
+
+        private void backgroundWorkerZSharp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            BackgroundWorkerResult result = (BackgroundWorkerResult)e.Result;
+
+            tsbtnOpen.Enabled = true;
+            tsbtnReload.Enabled = true;
+            tsbtnStop.Enabled = false;
+            tsbtnSave.Enabled = true;
+            tsbtnOpenSchedule.Enabled = true;
+            tsbtnSaveText.Enabled = true;
+            tsbtnExportExcel.Enabled = true;
+
+            tsbtnViewGraph.Enabled = true;
+
+
+            groupBoxFilter.Enabled = true;
+            groupBoxViewOpt.Enabled = true;
+            tsbtnPrint.Enabled = true;
+
+            ribbonLabel1.Text = result.Result;
+            ribbonProgressBar1.Visible = false;
+            ribbonLabel2.Visible = false;
+
+            this.Cursor = Cursors.Default;
+            string[] sTgFile = (string[])result.UserData1;
+            string filename;
+            if (_DataHeaderValues.MaxAuxCh == 0)
+            {
+                filename = sTgFile[0];
+            }
+            else
+            {
+                frmSelTarget frm = new frmSelTarget(_LangIdx, _DataHeaderValues.MaxAuxCh);
+                if(frm.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }
+                filename = sTgFile[frm.TargetIdx];
+            }
+            
+            if (File.Exists(filename) == false)
+                return;
+
+
+            if (_extAppPath != null && File.Exists(_extAppPath.ZMan))
+            {
+                if (File.Exists(filename))
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo
+                    {
+                        FileName = _extAppPath.ZMan,
+                        Arguments = $"\"{filename}\"", // 문서 경로를 인자로 전달
+                        UseShellExecute = false
+                    };
+                    Process.Start(psi);
+                }
+                else
+                    Process.Start(_extAppPath.ZMan);
+            }
+            else
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "notepad.exe",
+                    Arguments = $"\"{filename}\"", // 문서 경로를 인자로 전달
+                    UseShellExecute = false
+                };
+                Process.Start(psi);
+            }
+            tsbtnRunZMan.Enabled = _extAppPath == null ? false : File.Exists(_extAppPath.ZMan);
+
         }
 
         private void backgroundWorkerText_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1312,46 +1568,14 @@ namespace ZiveLab.ZM.Dataview
             if (File.Exists(filename) == false)
                 return;
 
-            if (ZSharpTarget >= 0)
-            {
+           
+            string message = Properties.Resources.Msg_AsciiConvOk;
 
-                if (_extAppPath != null && File.Exists(_extAppPath.ZMan))
-                {
-                    if (File.Exists(filename))
-                    {
-                        ProcessStartInfo psi = new ProcessStartInfo
-                        {
-                            FileName = _extAppPath.ZMan,
-                            Arguments = $"\"{filename}\"", // 문서 경로를 인자로 전달
-                            UseShellExecute = false
-                        };
-                        Process.Start(psi);
-                    }
-                    else
-                        Process.Start(_extAppPath.ZMan);
-                }
-                else
-                {
-                    ProcessStartInfo psi = new ProcessStartInfo
-                    {
-                        FileName = "notepad.exe",
-                        Arguments = $"\"{filename}\"", // 문서 경로를 인자로 전달
-                        UseShellExecute = false
-                    };
-                    Process.Start(psi);
-                }
-            }
-            else
+            if (MessageBox.Show(message, _MsgBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string message = Properties.Resources.Msg_AsciiConvOk;
-
-                if (MessageBox.Show(message, _MsgBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    Process.Start(filename);
-                }
+                Process.Start(filename);
             }
-            tsbtnRunZMan.Enabled = _extAppPath == null ? false : File.Exists(_extAppPath.ZMan);
-            ZSharpTarget = -1;
+ 
         }
 
         private void btnDeleteData_Click(object sender, EventArgs e)
@@ -2057,7 +2281,7 @@ namespace ZiveLab.ZM.Dataview
                         UnitReportData urgd = (UnitReportData)grf.Data;
                         //UnitReportGeneralData urgd = new UnitReportGeneralData(GetGridGenRowData(dcDataFlexGrid.Rows[i]));
 
-                        excelWriter.WriteData(index++, urgd, _TimeFormat,MaxAuxCount);
+                        excelWriter.WriteData(index++, urgd, _dataviewset._dataConvSet.TimeFormat, MaxAuxCount);
                     }
 
                     count++;
@@ -2157,9 +2381,9 @@ namespace ZiveLab.ZM.Dataview
             DocumentFormat.OpenXml.Spreadsheet.Row row = new DocumentFormat.OpenXml.Spreadsheet.Row();
 
             row.Append(ConstructCell(dataIdx.ToString(), CellValues.Number));
-            row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TestTime), _TimeFormat));
+            row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.TestTime), _dataviewset._dataConvSet.TimeFormat));
             row.Append(ConstructCell((urgd.mRawData.nCycle + 1).ToString(), CellValues.Number));
-            row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), _TimeFormat));
+            row.Append(GetTimeSpanString(TimeSpan.FromSeconds(urgd.mRawData.CycleTime), _dataviewset._dataConvSet.TimeFormat));
             row.Append(ConstructCell(urgd.mRawData.Idc.ToString(), CellValues.Number));
             row.Append(ConstructCell(urgd.mRawData.Vdc.ToString(), CellValues.Number));
             row.Append(ConstructCell(urgd.Power.ToString(), CellValues.Number));
@@ -2642,11 +2866,19 @@ namespace ZiveLab.ZM.Dataview
 
                 timerBgChecker.Start();
             }
+
+            if (backgroundWorkerZSharp.IsBusy)
+            {
+                backgroundWorkerZSharp.CancelAsync();
+                e.Cancel = true;
+
+                timerBgChecker.Start();
+            }
         }
 
         private void timerBgChecker_Tick(object sender, EventArgs e)
         {
-            if (!backgroundWorker.IsBusy && !backgroundWorkerExcel.IsBusy && !backgroundWorkerSave.IsBusy && !backgroundWorkerText.IsBusy)
+            if (!backgroundWorker.IsBusy && !backgroundWorkerExcel.IsBusy && !backgroundWorkerSave.IsBusy && !backgroundWorkerText.IsBusy && !backgroundWorkerZSharp.IsBusy)
             {
                 timerBgChecker.Stop();
                 Close();                
@@ -2674,8 +2906,12 @@ namespace ZiveLab.ZM.Dataview
         {
             try
             {
-                
-                if (bFileOpened == false)
+                if (_DataHeaderValues.bDCOnly)
+                {
+                    MessageBox.Show("No impedance data.");
+                    return;
+                }
+                    if (bFileOpened == false)
                 {
                     MessageBox.Show("The data file has not been opened.");
                     return;
@@ -2685,25 +2921,21 @@ namespace ZiveLab.ZM.Dataview
                     MessageBox.Show("There is no data.");
                     return;
                 }
+                string Initdir = Path.Combine(PathZManData, Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName));
+                Directory.CreateDirectory(Initdir);
 
-                frmSelTarget dlg = new frmSelTarget(_LangIdx,MaxAuxCount);
-                if (dlg.ShowDialog() == DialogResult.OK)
+
+                CommonOpenFileDialog dialog = new CommonOpenFileDialog(Initdir);
+                dialog.IsFolderPicker = true;
+                dialog.InitialDirectory = Initdir;
+                dialog.Title = "Select the location of the saved folder for the converted Z# file.";
+
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
-                    SaveFileDialog savedlg = new SaveFileDialog();
-                    savedlg.Title = Properties.Resources.Save_Ascii_File;
-                    savedlg.InitialDirectory = Path.GetDirectoryName(_DataHeaderValues._FileName);
-
-                    if (dlg.TargetIdx <= 0) savedlg.FileName = Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName);
-                    else savedlg.FileName = string.Format("{0}_AUX{1}", Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName),dlg.TargetIdx);
-
-                    savedlg.Filter = "Z# data files(*.Z#)|*.Z#";
-                    savedlg.DefaultExt = "Z#";
-
-                    if (savedlg.ShowDialog() == DialogResult.OK)
-                    {
-                        ConvertToTextProc(savedlg.FileName, dlg.Delimiter,dlg.TargetIdx);
-                    }
+                    Initdir = dialog.FileName;
+                    ConvertToZSharpProc(_DataHeaderValues, Initdir);
                 }
+
             }
             catch (Exception)
             {
