@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="group_SetAxes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -163,7 +167,6 @@
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridViewSetAxes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -172,7 +175,7 @@
     <value>3, 18</value>
   </data>
   <data name="dataGridViewSetAxes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 137</value>
+    <value>510, 161</value>
   </data>
   <data name="dataGridViewSetAxes.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -196,7 +199,7 @@
     <value>10, 10</value>
   </data>
   <data name="group_SetAxes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 158</value>
+    <value>516, 182</value>
   </data>
   <data name="group_SetAxes.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -703,16 +706,19 @@
     <value>17</value>
   </data>
   <data name="group_DataCondition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>532, 10</value>
+    <value>533, 28</value>
   </data>
   <data name="group_DataCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 99</value>
+    <value>59, 49</value>
   </data>
   <data name="group_DataCondition.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="group_DataCondition.Text" xml:space="preserve">
     <value>[ Data Filter ]</value>
+  </data>
+  <data name="group_DataCondition.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;group_DataCondition.Name" xml:space="preserve">
     <value>group_DataCondition</value>
@@ -727,7 +733,7 @@
     <value>2</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>735, 145</value>
+    <value>532, 166</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 23</value>
@@ -751,7 +757,7 @@
     <value>1</value>
   </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>670, 145</value>
+    <value>533, 119</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 23</value>
@@ -781,7 +787,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>806, 178</value>
+    <value>603, 202</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8pt</value>

@@ -55,7 +55,7 @@ namespace ZiveLab.ZM
                     {
                         if (gBZA.SifLnkLst[serial].MBZAIF.mChRtGrp[sifch].loadoff)
                         {
-                            rstr += "[Zre,Eoc vs t].";
+                            rstr += "[Zre,Vdc vs t].";
                         }
                         else
                         {

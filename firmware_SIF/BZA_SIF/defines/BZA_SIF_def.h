@@ -16,8 +16,8 @@
 
 #define FIRMWARE_VER_MAJOR	7  
 #define FIRMWARE_VER_MINOR	0
-#define FIRMWARE_VER_REV	0
-#define FIRMWARE_VER_BUILD	3
+#define FIRMWARE_VER_REV	1
+#define FIRMWARE_VER_BUILD	0
 
 
 #define HW_ENABLE			0x1	
@@ -68,7 +68,7 @@
 #define DEF_DEVDO_DDS_RNG0		0x2
 #define DEF_DEVDO_I_RNG0		0x4
 #define DEF_DEVDO_I_RNG1		0x8
-#define DEF_DEVDO_VDC_RNG0		0x10		// max 1000v
+#define DEF_DEVDO_VDC_RNG0		0x10		
 #define DEF_DEVDO_VDC_RNG1		0xFFEF
 #define DEF_DEVDO_VAC_PWROFF	0x20
 #define DEF_DEVDO_VAC_PWRON		0xFFDF
@@ -615,7 +615,10 @@ typedef struct
 	ushort				ondelaystable;
 	
 	ushort 				celloffwait;
+	ushort 				chkCutoffV;
 	double              CutoffV;
+	ushort 				chkCutoffC;
+	double              CutoffC;
 	ushort				timeproc;
 	uint 				m_MsDurStamp;
 	uint 				m_MsDurCount;
@@ -624,6 +627,7 @@ typedef struct
 	uint 				m_MsSmplLimit;
 	uint 				m_MsEndTimeLimit;
 	uint 				OndelayTimeStamp;
+	uint 				m_MsLastCapaStamp;
 	int 				m_iteration;
 	int 				m_loopcnt;
 	uint 				m_MsFlowdelayStamp;
@@ -639,6 +643,8 @@ typedef struct
 	double				MaxI;
 	double				MaxV;
 	double 				Capa;
+	uint 				m_MsdchDur;
+	double 				DchCapa;
 } st_flow;
 
 
@@ -708,7 +714,10 @@ typedef struct
 		double frequency;
 		double interval;
 		ushort useir;
-        double nouse1[2];
+		double CutoffC;
+        ushort usecutoffV;
+        ushort usecutoffC;
+        int nouse1;
 } st_Tech_DCH;
 
 typedef union  

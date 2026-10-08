@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 Lattice Synthesis Timing Report, Version  
-Mon Jun 01 16:30:58 2026
+Tue Jul 07 18:30:45 2026
 
 Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
 Copyright (c) 1995 AT&T Corp.   All rights reserved.
@@ -19,7 +19,7 @@ Report level:    verbose report, limited to 3 items per constraint
 
 ================================================================================
 Constraint: create_clock -period 1000.000000 -name clk3 [get_nets clk_RTD]
-            1015 items scored, 0 timing errors detected.
+            1017 items scored, 0 timing errors detected.
 --------------------------------------------------------------------------------
 
 
@@ -44,15 +44,15 @@ Passed:  The following path meets requirements by 989.752ns
 L_CO        ---     0.367              C to Q              \RTD/cfg_buf_i1 (from clk_RTD)
 Route         2   e 1.258                                  \RTD/cfg_buf[1]
 LUT4        ---     0.408             I0 to O              \RTD/i4_4_lut
-Route         1   e 1.020                                  \RTD/n12_adj_1438
+Route         1   e 1.020                                  \RTD/n12_adj_1437
 LUT4        ---     0.408             I3 to O              \RTD/i7_4_lut
-Route         6   e 1.378                                  \RTD/adress_7__N_1087[7]
+Route         6   e 1.378                                  \RTD/adress_7__N_1086[7]
 LUT4        ---     0.408             I1 to O              \RTD/i1_2_lut_3_lut
-Route         2   e 1.158                                  \RTD/n20960
+Route         2   e 1.158                                  \RTD/n20959
 LUT4        ---     0.408             I0 to O              \RTD/i29_4_lut
-Route         9   e 1.459                                  \RTD/n13135
-LUT4        ---     0.408             I0 to O              \RTD/i12742_2_lut
-Route         8   e 1.435                                  \RTD/n15168
+Route         9   e 1.459                                  \RTD/n13134
+LUT4        ---     0.408             I0 to O              \RTD/i12740_2_lut
+Route         8   e 1.435                                  \RTD/n15167
                   --------
                    10.115  (23.8% logic, 76.2% route), 6 logic levels.
 
@@ -78,15 +78,15 @@ Passed:  The following path meets requirements by 989.752ns
 L_CO        ---     0.367              C to Q              \RTD/cfg_buf_i1 (from clk_RTD)
 Route         2   e 1.258                                  \RTD/cfg_buf[1]
 LUT4        ---     0.408             I0 to O              \RTD/i4_4_lut
-Route         1   e 1.020                                  \RTD/n12_adj_1438
+Route         1   e 1.020                                  \RTD/n12_adj_1437
 LUT4        ---     0.408             I3 to O              \RTD/i7_4_lut
-Route         6   e 1.378                                  \RTD/adress_7__N_1087[7]
+Route         6   e 1.378                                  \RTD/adress_7__N_1086[7]
 LUT4        ---     0.408             I1 to O              \RTD/i1_2_lut_3_lut
-Route         2   e 1.158                                  \RTD/n20960
+Route         2   e 1.158                                  \RTD/n20959
 LUT4        ---     0.408             I0 to O              \RTD/i29_4_lut
-Route         9   e 1.459                                  \RTD/n13135
-LUT4        ---     0.408             I0 to O              \RTD/i12742_2_lut
-Route         8   e 1.435                                  \RTD/n15168
+Route         9   e 1.459                                  \RTD/n13134
+LUT4        ---     0.408             I0 to O              \RTD/i12740_2_lut
+Route         8   e 1.435                                  \RTD/n15167
                   --------
                    10.115  (23.8% logic, 76.2% route), 6 logic levels.
 
@@ -112,15 +112,15 @@ Passed:  The following path meets requirements by 989.752ns
 L_CO        ---     0.367              C to Q              \RTD/cfg_buf_i1 (from clk_RTD)
 Route         2   e 1.258                                  \RTD/cfg_buf[1]
 LUT4        ---     0.408             I0 to O              \RTD/i4_4_lut
-Route         1   e 1.020                                  \RTD/n12_adj_1438
+Route         1   e 1.020                                  \RTD/n12_adj_1437
 LUT4        ---     0.408             I3 to O              \RTD/i7_4_lut
-Route         6   e 1.378                                  \RTD/adress_7__N_1087[7]
+Route         6   e 1.378                                  \RTD/adress_7__N_1086[7]
 LUT4        ---     0.408             I1 to O              \RTD/i1_2_lut_3_lut
-Route         2   e 1.158                                  \RTD/n20960
+Route         2   e 1.158                                  \RTD/n20959
 LUT4        ---     0.408             I0 to O              \RTD/i29_4_lut
-Route         9   e 1.459                                  \RTD/n13135
-LUT4        ---     0.408             I0 to O              \RTD/i12742_2_lut
-Route         8   e 1.435                                  \RTD/n15168
+Route         9   e 1.459                                  \RTD/n13134
+LUT4        ---     0.408             I0 to O              \RTD/i12740_2_lut
+Route         8   e 1.435                                  \RTD/n15167
                   --------
                    10.115  (23.8% logic, 76.2% route), 6 logic levels.
 
@@ -153,79 +153,79 @@ Passed:  The following path meets requirements by 942.141ns
 
    Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
 L_CO        ---     0.367              C to Q              \ADC_VDC/cmd_rdadctmp_i0 (from VDC_CLK)
-Route         4   e 1.397                                  cmd_rdadctmp[0]_adj_1529
+Route         4   e 1.397                                  cmd_rdadctmp[0]_adj_1528
 LUT4        ---     0.408             I1 to CO             \ADC_VDC/add_23_2
-Route         2   e 1.158                                  \ADC_VDC/n19766
+Route         2   e 1.158                                  \ADC_VDC/n19765
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_3
-Route         2   e 1.158                                  \ADC_VDC/n19767
+Route         2   e 1.158                                  \ADC_VDC/n19766
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_4
-Route         2   e 1.158                                  \ADC_VDC/n19768
+Route         2   e 1.158                                  \ADC_VDC/n19767
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_5
-Route         2   e 1.158                                  \ADC_VDC/n19769
+Route         2   e 1.158                                  \ADC_VDC/n19768
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_6
-Route         2   e 1.158                                  \ADC_VDC/n19770
+Route         2   e 1.158                                  \ADC_VDC/n19769
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_7
-Route         2   e 1.158                                  \ADC_VDC/n19771
+Route         2   e 1.158                                  \ADC_VDC/n19770
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_8
-Route         2   e 1.158                                  \ADC_VDC/n19772
+Route         2   e 1.158                                  \ADC_VDC/n19771
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_9
-Route         2   e 1.158                                  \ADC_VDC/n19773
+Route         2   e 1.158                                  \ADC_VDC/n19772
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_10
-Route         2   e 1.158                                  \ADC_VDC/n19774
+Route         2   e 1.158                                  \ADC_VDC/n19773
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_11
-Route         2   e 1.158                                  \ADC_VDC/n19775
+Route         2   e 1.158                                  \ADC_VDC/n19774
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_12
-Route         2   e 1.158                                  \ADC_VDC/n19776
+Route         2   e 1.158                                  \ADC_VDC/n19775
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_13
-Route         2   e 1.158                                  \ADC_VDC/n19777
+Route         2   e 1.158                                  \ADC_VDC/n19776
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_14
-Route         2   e 1.158                                  \ADC_VDC/n19778
+Route         2   e 1.158                                  \ADC_VDC/n19777
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_15
-Route         2   e 1.158                                  \ADC_VDC/n19779
+Route         2   e 1.158                                  \ADC_VDC/n19778
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_16
-Route         2   e 1.158                                  \ADC_VDC/n19780
+Route         2   e 1.158                                  \ADC_VDC/n19779
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_17
-Route         2   e 1.158                                  \ADC_VDC/n19781
+Route         2   e 1.158                                  \ADC_VDC/n19780
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_18
-Route         2   e 1.158                                  \ADC_VDC/n19782
+Route         2   e 1.158                                  \ADC_VDC/n19781
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_19
-Route         2   e 1.158                                  \ADC_VDC/n19783
+Route         2   e 1.158                                  \ADC_VDC/n19782
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_20
-Route         2   e 1.158                                  \ADC_VDC/n19784
+Route         2   e 1.158                                  \ADC_VDC/n19783
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_21
-Route         2   e 1.158                                  \ADC_VDC/n19785
+Route         2   e 1.158                                  \ADC_VDC/n19784
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_22
-Route         2   e 1.158                                  \ADC_VDC/n19786
+Route         2   e 1.158                                  \ADC_VDC/n19785
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_23
-Route         2   e 1.158                                  \ADC_VDC/n19787
+Route         2   e 1.158                                  \ADC_VDC/n19786
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_24
-Route         2   e 1.158                                  \ADC_VDC/n19788
+Route         2   e 1.158                                  \ADC_VDC/n19787
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_25
-Route         2   e 1.158                                  \ADC_VDC/n19789
+Route         2   e 1.158                                  \ADC_VDC/n19788
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_26
-Route         2   e 1.158                                  \ADC_VDC/n19790
+Route         2   e 1.158                                  \ADC_VDC/n19789
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_27
-Route         2   e 1.158                                  \ADC_VDC/n19791
+Route         2   e 1.158                                  \ADC_VDC/n19790
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_28
-Route         2   e 1.158                                  \ADC_VDC/n19792
+Route         2   e 1.158                                  \ADC_VDC/n19791
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_29
-Route         2   e 1.158                                  \ADC_VDC/n19793
+Route         2   e 1.158                                  \ADC_VDC/n19792
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_30
-Route         2   e 1.158                                  \ADC_VDC/n19794
+Route         2   e 1.158                                  \ADC_VDC/n19793
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_31
-Route         2   e 1.158                                  \ADC_VDC/n19795
+Route         2   e 1.158                                  \ADC_VDC/n19794
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_32
-Route         2   e 1.158                                  \ADC_VDC/n19796
+Route         2   e 1.158                                  \ADC_VDC/n19795
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_33
-Route         2   e 1.158                                  \ADC_VDC/n19797
+Route         2   e 1.158                                  \ADC_VDC/n19796
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_34
-Route         2   e 1.158                                  \ADC_VDC/n19798
+Route         2   e 1.158                                  \ADC_VDC/n19797
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_35
-Route         1   e 1.020                                  \ADC_VDC/n19799
+Route         1   e 1.020                                  \ADC_VDC/n19798
 LUT4        ---     0.408             I3 to O              \ADC_VDC/add_23_36_lut
-Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1297[34]
+Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1296[34]
 LUT4        ---     0.408             I0 to O              \ADC_VDC/adc_state_3__I_0_58_Mux_34_i15_4_lut
-Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1213[34]
+Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1212[34]
                   --------
                    57.726  (26.1% logic, 73.9% route), 37 logic levels.
 
@@ -251,77 +251,77 @@ Passed:  The following path meets requirements by 942.280ns
 L_CO        ---     0.367              C to Q              \ADC_VDC/cmd_rdadcbuf_i0 (from VDC_CLK)
 Route         2   e 1.258                                  \ADC_VDC/cmd_rdadcbuf[0]
 LUT4        ---     0.408             I0 to CO             \ADC_VDC/add_23_2
-Route         2   e 1.158                                  \ADC_VDC/n19766
+Route         2   e 1.158                                  \ADC_VDC/n19765
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_3
-Route         2   e 1.158                                  \ADC_VDC/n19767
+Route         2   e 1.158                                  \ADC_VDC/n19766
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_4
-Route         2   e 1.158                                  \ADC_VDC/n19768
+Route         2   e 1.158                                  \ADC_VDC/n19767
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_5
-Route         2   e 1.158                                  \ADC_VDC/n19769
+Route         2   e 1.158                                  \ADC_VDC/n19768
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_6
-Route         2   e 1.158                                  \ADC_VDC/n19770
+Route         2   e 1.158                                  \ADC_VDC/n19769
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_7
-Route         2   e 1.158                                  \ADC_VDC/n19771
+Route         2   e 1.158                                  \ADC_VDC/n19770
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_8
-Route         2   e 1.158                                  \ADC_VDC/n19772
+Route         2   e 1.158                                  \ADC_VDC/n19771
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_9
-Route         2   e 1.158                                  \ADC_VDC/n19773
+Route         2   e 1.158                                  \ADC_VDC/n19772
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_10
-Route         2   e 1.158                                  \ADC_VDC/n19774
+Route         2   e 1.158                                  \ADC_VDC/n19773
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_11
-Route         2   e 1.158                                  \ADC_VDC/n19775
+Route         2   e 1.158                                  \ADC_VDC/n19774
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_12
-Route         2   e 1.158                                  \ADC_VDC/n19776
+Route         2   e 1.158                                  \ADC_VDC/n19775
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_13
-Route         2   e 1.158                                  \ADC_VDC/n19777
+Route         2   e 1.158                                  \ADC_VDC/n19776
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_14
-Route         2   e 1.158                                  \ADC_VDC/n19778
+Route         2   e 1.158                                  \ADC_VDC/n19777
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_15
-Route         2   e 1.158                                  \ADC_VDC/n19779
+Route         2   e 1.158                                  \ADC_VDC/n19778
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_16
-Route         2   e 1.158                                  \ADC_VDC/n19780
+Route         2   e 1.158                                  \ADC_VDC/n19779
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_17
-Route         2   e 1.158                                  \ADC_VDC/n19781
+Route         2   e 1.158                                  \ADC_VDC/n19780
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_18
-Route         2   e 1.158                                  \ADC_VDC/n19782
+Route         2   e 1.158                                  \ADC_VDC/n19781
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_19
-Route         2   e 1.158                                  \ADC_VDC/n19783
+Route         2   e 1.158                                  \ADC_VDC/n19782
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_20
-Route         2   e 1.158                                  \ADC_VDC/n19784
+Route         2   e 1.158                                  \ADC_VDC/n19783
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_21
-Route         2   e 1.158                                  \ADC_VDC/n19785
+Route         2   e 1.158                                  \ADC_VDC/n19784
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_22
-Route         2   e 1.158                                  \ADC_VDC/n19786
+Route         2   e 1.158                                  \ADC_VDC/n19785
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_23
-Route         2   e 1.158                                  \ADC_VDC/n19787
+Route         2   e 1.158                                  \ADC_VDC/n19786
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_24
-Route         2   e 1.158                                  \ADC_VDC/n19788
+Route         2   e 1.158                                  \ADC_VDC/n19787
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_25
-Route         2   e 1.158                                  \ADC_VDC/n19789
+Route         2   e 1.158                                  \ADC_VDC/n19788
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_26
-Route         2   e 1.158                                  \ADC_VDC/n19790
+Route         2   e 1.158                                  \ADC_VDC/n19789
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_27
-Route         2   e 1.158                                  \ADC_VDC/n19791
+Route         2   e 1.158                                  \ADC_VDC/n19790
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_28
-Route         2   e 1.158                                  \ADC_VDC/n19792
+Route         2   e 1.158                                  \ADC_VDC/n19791
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_29
-Route         2   e 1.158                                  \ADC_VDC/n19793
+Route         2   e 1.158                                  \ADC_VDC/n19792
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_30
-Route         2   e 1.158                                  \ADC_VDC/n19794
+Route         2   e 1.158                                  \ADC_VDC/n19793
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_31
-Route         2   e 1.158                                  \ADC_VDC/n19795
+Route         2   e 1.158                                  \ADC_VDC/n19794
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_32
-Route         2   e 1.158                                  \ADC_VDC/n19796
+Route         2   e 1.158                                  \ADC_VDC/n19795
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_33
-Route         2   e 1.158                                  \ADC_VDC/n19797
+Route         2   e 1.158                                  \ADC_VDC/n19796
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_34
-Route         2   e 1.158                                  \ADC_VDC/n19798
+Route         2   e 1.158                                  \ADC_VDC/n19797
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_35
-Route         1   e 1.020                                  \ADC_VDC/n19799
+Route         1   e 1.020                                  \ADC_VDC/n19798
 LUT4        ---     0.408             I3 to O              \ADC_VDC/add_23_36_lut
-Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1297[34]
+Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1296[34]
 LUT4        ---     0.408             I0 to O              \ADC_VDC/adc_state_3__I_0_58_Mux_34_i15_4_lut
-Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1213[34]
+Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1212[34]
                   --------
                    57.587  (26.1% logic, 73.9% route), 37 logic levels.
 
@@ -345,77 +345,77 @@ Passed:  The following path meets requirements by 943.707ns
 
    Name    Fanout   Delay (ns)          Pins               Resource(Cell.Net)
 L_CO        ---     0.367              C to Q              \ADC_VDC/cmd_rdadctmp_i1 (from VDC_CLK)
-Route         4   e 1.397                                  cmd_rdadctmp[1]_adj_1528
+Route         4   e 1.397                                  cmd_rdadctmp[1]_adj_1527
 LUT4        ---     0.408             I1 to CO             \ADC_VDC/add_23_3
-Route         2   e 1.158                                  \ADC_VDC/n19767
+Route         2   e 1.158                                  \ADC_VDC/n19766
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_4
-Route         2   e 1.158                                  \ADC_VDC/n19768
+Route         2   e 1.158                                  \ADC_VDC/n19767
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_5
-Route         2   e 1.158                                  \ADC_VDC/n19769
+Route         2   e 1.158                                  \ADC_VDC/n19768
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_6
-Route         2   e 1.158                                  \ADC_VDC/n19770
+Route         2   e 1.158                                  \ADC_VDC/n19769
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_7
-Route         2   e 1.158                                  \ADC_VDC/n19771
+Route         2   e 1.158                                  \ADC_VDC/n19770
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_8
-Route         2   e 1.158                                  \ADC_VDC/n19772
+Route         2   e 1.158                                  \ADC_VDC/n19771
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_9
-Route         2   e 1.158                                  \ADC_VDC/n19773
+Route         2   e 1.158                                  \ADC_VDC/n19772
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_10
-Route         2   e 1.158                                  \ADC_VDC/n19774
+Route         2   e 1.158                                  \ADC_VDC/n19773
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_11
-Route         2   e 1.158                                  \ADC_VDC/n19775
+Route         2   e 1.158                                  \ADC_VDC/n19774
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_12
-Route         2   e 1.158                                  \ADC_VDC/n19776
+Route         2   e 1.158                                  \ADC_VDC/n19775
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_13
-Route         2   e 1.158                                  \ADC_VDC/n19777
+Route         2   e 1.158                                  \ADC_VDC/n19776
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_14
-Route         2   e 1.158                                  \ADC_VDC/n19778
+Route         2   e 1.158                                  \ADC_VDC/n19777
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_15
-Route         2   e 1.158                                  \ADC_VDC/n19779
+Route         2   e 1.158                                  \ADC_VDC/n19778
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_16
-Route         2   e 1.158                                  \ADC_VDC/n19780
+Route         2   e 1.158                                  \ADC_VDC/n19779
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_17
-Route         2   e 1.158                                  \ADC_VDC/n19781
+Route         2   e 1.158                                  \ADC_VDC/n19780
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_18
-Route         2   e 1.158                                  \ADC_VDC/n19782
+Route         2   e 1.158                                  \ADC_VDC/n19781
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_19
-Route         2   e 1.158                                  \ADC_VDC/n19783
+Route         2   e 1.158                                  \ADC_VDC/n19782
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_20
-Route         2   e 1.158                                  \ADC_VDC/n19784
+Route         2   e 1.158                                  \ADC_VDC/n19783
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_21
-Route         2   e 1.158                                  \ADC_VDC/n19785
+Route         2   e 1.158                                  \ADC_VDC/n19784
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_22
-Route         2   e 1.158                                  \ADC_VDC/n19786
+Route         2   e 1.158                                  \ADC_VDC/n19785
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_23
-Route         2   e 1.158                                  \ADC_VDC/n19787
+Route         2   e 1.158                                  \ADC_VDC/n19786
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_24
-Route         2   e 1.158                                  \ADC_VDC/n19788
+Route         2   e 1.158                                  \ADC_VDC/n19787
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_25
-Route         2   e 1.158                                  \ADC_VDC/n19789
+Route         2   e 1.158                                  \ADC_VDC/n19788
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_26
-Route         2   e 1.158                                  \ADC_VDC/n19790
+Route         2   e 1.158                                  \ADC_VDC/n19789
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_27
-Route         2   e 1.158                                  \ADC_VDC/n19791
+Route         2   e 1.158                                  \ADC_VDC/n19790
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_28
-Route         2   e 1.158                                  \ADC_VDC/n19792
+Route         2   e 1.158                                  \ADC_VDC/n19791
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_29
-Route         2   e 1.158                                  \ADC_VDC/n19793
+Route         2   e 1.158                                  \ADC_VDC/n19792
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_30
-Route         2   e 1.158                                  \ADC_VDC/n19794
+Route         2   e 1.158                                  \ADC_VDC/n19793
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_31
-Route         2   e 1.158                                  \ADC_VDC/n19795
+Route         2   e 1.158                                  \ADC_VDC/n19794
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_32
-Route         2   e 1.158                                  \ADC_VDC/n19796
+Route         2   e 1.158                                  \ADC_VDC/n19795
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_33
-Route         2   e 1.158                                  \ADC_VDC/n19797
+Route         2   e 1.158                                  \ADC_VDC/n19796
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_34
-Route         2   e 1.158                                  \ADC_VDC/n19798
+Route         2   e 1.158                                  \ADC_VDC/n19797
 LUT4        ---     0.408             CI to CO             \ADC_VDC/add_23_35
-Route         1   e 1.020                                  \ADC_VDC/n19799
+Route         1   e 1.020                                  \ADC_VDC/n19798
 LUT4        ---     0.408             I3 to O              \ADC_VDC/add_23_36_lut
-Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1297[34]
+Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1296[34]
 LUT4        ---     0.408             I0 to O              \ADC_VDC/adc_state_3__I_0_58_Mux_34_i15_4_lut
-Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1213[34]
+Route         1   e 1.020                                  \ADC_VDC/cmd_rdadcbuf_35__N_1212[34]
                   --------
                    56.160  (26.1% logic, 73.9% route), 36 logic levels.
 
@@ -467,5 +467,5 @@ Timing errors: 0  Score: 0
 Constraints cover  3345 paths, 492 nets, and 1498 connections (23.3% coverage)
 
 
-Peak memory: 72839168 bytes, TRCE: 0 bytes, DLYMAN: 0 bytes
+Peak memory: 73064448 bytes, TRCE: 0 bytes, DLYMAN: 0 bytes
 CPU_TIME_REPORT: 0 secs 

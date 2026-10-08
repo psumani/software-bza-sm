@@ -33,6 +33,7 @@ namespace ZiveLab.ZM
         public bool loaderr;
         public string filename;
         public string filefullpath;
+        public bool bApply;
         public bool bClose;
         public frmTechniq(int tch, string sfile = "", eZimType type = eZimType.UNKNOWN)
         {
@@ -40,6 +41,7 @@ namespace ZiveLab.ZM
 
             int i;
             bClose = false;
+            bApply = false;
             loaderr = false;
             techtype = enTechType.TECH_EIS;
 
@@ -296,7 +298,7 @@ namespace ZiveLab.ZM
             while (true)
             {
                 sfilename = string.Format("{0}{1}.{2}", sname, i + 1, sext);
-                str = Path.Combine(gBZA.appcfg.PathSch[0], sfilename);
+                str = Path.Combine(gBZA.appcfg.PathAlwaysSch, sfilename);
                 if (File.Exists(str) == false)
                 {
                     break;
@@ -359,8 +361,7 @@ namespace ZiveLab.ZM
                 }
             }
             */
-
-            gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(sfilename));
+            gBZA.MemoryRecentSchFile(Path.GetDirectoryName(sfilename)); // gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(sfilename));
 
             if ((enTechType)mtech.type == enTechType.TECH_HFR)
             {
@@ -535,7 +536,11 @@ namespace ZiveLab.ZM
                 dch.sampletime = SM_Number.atot(txtdchsmpl.Text);
                 txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
 
+                dch.usecutoffV = (ushort)(chkcutoff.Checked? 1 : 0);
                 dch.CutoffV = SM_Number.ToDouble(txtMonCutoff.Text);
+                dch.usecutoffC = (ushort)(chkcutoff1.Checked ? 1 : 0);
+                dch.CutoffC = SM_Number.ToDouble(txtMonCutoff1.Text) / 1000.0;
+
                 txtMonCutoff.Text = string.Format("{0:0.0}", dch.CutoffV);
                 //txtMonCutoff.Text = SM_Number.ToString(dch.CutoffV, enSM_TypeNumberToString.SIPrefix);
             }
@@ -611,8 +616,13 @@ namespace ZiveLab.ZM
                 cbomonctrl.Visible = false;
                 lblctrlrate.Visible = false;
 
+                chkcutoff.Visible = false;
                 lblcutoff.Visible = false;
                 txtMonCutoff.Visible = false;
+
+                chkcutoff1.Visible = false;
+                lblcutoff1.Visible = false;
+                txtMonCutoff1.Visible = false;
 
                 chkhfrcelloffwait.Visible = true;
 
@@ -681,10 +691,14 @@ namespace ZiveLab.ZM
                 cbomonctrl.Visible = false;
 
                 lblctrlrate.Visible = false;
-                
 
+                chkcutoff.Visible = false;
                 lblcutoff.Visible = false;
                 txtMonCutoff.Visible = false;
+
+                chkcutoff1.Visible = false;
+                lblcutoff1.Visible = false;
+                txtMonCutoff1.Visible = false;
 
                 lblondelay.Visible = false;
                 txtondelay.Visible = false;
@@ -751,8 +765,13 @@ namespace ZiveLab.ZM
 
                 lblctrlrate.Visible = true;
 
+                chkcutoff.Visible = true;
                 lblcutoff.Visible = true;
                 txtMonCutoff.Visible = true;
+
+                chkcutoff1.Visible = true;
+                lblcutoff1.Visible = true;
+                txtMonCutoff1.Visible = true;
 
                 mtech.ondelay = 0.0;
                 mtech.ondelaystable = 0;
@@ -781,9 +800,24 @@ namespace ZiveLab.ZM
                 
                 txtdchsmpl.Text = SM_Number.GetTimeString(dch.sampletime);
 
+                chkcutoff.Checked = (dch.usecutoffV == 1) ? true : false;
                 txtMonCutoff.Text = string.Format("{0:0.0}", dch.CutoffV);
+
+                chkcutoff1.Checked = (dch.usecutoffC == 1) ? true : false;
+                txtMonCutoff1.Text = string.Format("{0:0.0}", dch.CutoffC * 1000.0);
+                
                 txthfrfreq.Text = GetFreqString(ref dch.frequency);
                 txthfrinterval.Text = SM_Number.GetTimeString(dch.Interval);
+
+                chkcutoff.Visible = false;
+                lblcutoff.Visible = false;
+                txtMonCutoff.Visible = false;
+
+                chkcutoff1.Visible = false;
+                lblcutoff1.Visible = false;
+                txtMonCutoff1.Visible = false;
+
+
 
             }
             else
@@ -1191,22 +1225,12 @@ namespace ZiveLab.ZM
         {
         }
 
-        private void btopen_Click(object sender, EventArgs e)
+        private void SelectTechFile()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            
+
             dlg.Multiselect = false;
-            dlg.CustomPlaces.Clear();
-            
-            for(int i=0; i<10; i++)
-            {
-                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
-                {
-                    // 왼쪽 링크 바에 커스텀 폴더 추가
-                    dlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
-                }
-            }
-            
+
             if (techtype == enTechType.TECH_HFR)
             {
                 dlg.Filter = "Galvanostatic HFR (*.hfr) |*.hfr";
@@ -1247,20 +1271,135 @@ namespace ZiveLab.ZM
 
             if (bopen == false)
             {
-                dlg.InitialDirectory = gBZA.appcfg.PathSch[0];
-                dlg.FileName = "";
+                //frmSelectFolderDlg mdlg = new frmSelectFolderDlg(true);
+                //mdlg.ShowDialog();
+                //dlg.InitialDirectory = mdlg.SelectPath;
+                if (File.Exists(gBZA.appcfg.PathSch[0]))
+                {
+                    dlg.InitialDirectory = Path.GetDirectoryName(gBZA.appcfg.PathSch[0]);  
+                    dlg.FileName = Path.GetFileName(gBZA.appcfg.PathSch[0]);
+                }
+                else
+                {
+                    dlg.InitialDirectory = gBZA.appcfg.PathAlwaysSch;
+                    dlg.FileName = GetDefaultname();
+                }
             }
             else
             {
                 dlg.InitialDirectory = Path.GetDirectoryName(filefullpath);
                 dlg.FileName = Path.GetFileName(filefullpath);
             }
-            
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                if(Openfile(dlg.FileName) == false)
+                gBZA.MemoryRecentSchFile(dlg.FileName); 
+                if (Openfile(dlg.FileName) == false)
                 {
                     MessageBox.Show("Unsupported file format.\r\n Please check the file.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btopen_Click(object sender, EventArgs e)
+        {
+            bApply = false;
+
+            Button btn = sender as Button;
+            ContextMenuStrip recentMenu = new ContextMenuStrip();
+            recentMenu.Items.Clear();
+
+            ToolStripMenuItem item;
+            item = new ToolStripMenuItem("Select file.");
+            item.Tag = "Select"; // 실제 파일 경로는 Tag에 보관
+            item.ToolTipText = "Select"; // 마우스 올렸을 때 전체 경로 표시
+            item.Click += RecentSchFileItem_Click; // 클릭 이벤트 연결
+            recentMenu.Items.Add(item);
+            recentMenu.Items.Add(new ToolStripSeparator());
+            if (gBZA.recentSchFiles.Count == 0)
+            {
+                // 최근 항목이 없을 때 안내 메시지 추가
+                ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                emptyItem.Enabled = false;
+                recentMenu.Items.Add(emptyItem);
+            }
+            else
+            {
+                // 최근 항목들을 메뉴에 동적으로 추가
+                foreach (string filePath in gBZA.recentSchFiles)
+                {
+                    // 파일명만 표시하고, 전체 경로는 ToolTip이나 Tag에 저장
+                    string sShortenPath = gBZA.ShortenPath(filePath);   //Path.GetFileName(filePath);
+                    item = new ToolStripMenuItem(sShortenPath);
+
+                    item.Tag = filePath; // 실제 파일 경로는 Tag에 보관
+                    item.ToolTipText = item.ToolTipText = filePath;  // 마우스 올렸을 때 전체 경로 표시
+                    item.Click += RecentSchFileItem_Click; // 클릭 이벤트 연결
+
+                    recentMenu.Items.Add(item);
+                }
+                recentMenu.Items.Add(new ToolStripSeparator());
+                ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Recent Items");
+                clearItem.Click += (s, ev) => {
+                    gBZA.ClearRecenSchtFile();
+                };
+                recentMenu.Items.Add(clearItem);
+            }
+            recentMenu.Show(btn, new Point(btn.Width / 2, btn.Height));
+        }
+
+        private void RecentSaveSchFileItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            if (clickedItem == null) return;
+
+            string filePath = clickedItem.Tag as string;
+            if (filePath == "Default")
+            {
+                SaveAs(null);
+                return;
+            }
+            if (Directory.Exists(filePath))
+            {
+                SaveAs(filePath);
+            }
+            else
+            {
+                MessageBox.Show("Path not found.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            bApply = false;
+        }
+
+        private void RecentSchFileItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            if (clickedItem == null) return;
+
+            string filePath = clickedItem.Tag as string;
+            if (filePath == "Select")
+            {
+                SelectTechFile();
+                return;
+            }
+            if (Directory.Exists(filePath))
+            {
+                gBZA.MemoryRecentSchFile(filePath);
+                if (Openfile(filePath) == false)
+                {
+                    MessageBox.Show("Unsupported file format.\r\n Please check the file.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show(
+                                "No files found. Are you sure you want to delete them from the list?",
+                                "No files",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question
+                            );
+                if (result == DialogResult.Yes)
+                {
+                    gBZA.RemoveRecenDatatFile(filePath); // 💡 특정 경로 삭제 메서드 호출
                 }
             }
         }
@@ -1313,7 +1452,7 @@ namespace ZiveLab.ZM
 
         
 
-        private bool Save()
+        private bool Save(object sender, EventArgs e)
         {
             
             if (bopen == true && File.Exists(filefullpath) == true)
@@ -1356,12 +1495,21 @@ namespace ZiveLab.ZM
                 {
                     mtech.SetEIS(eis);
                 }
-                return fc.Save(filefullpath, mtech);
+                if (fc.Save(filefullpath, mtech) == true)
+                {
+                    if (bApply)
+                    {
+                        frmTechApply frm = new frmTechApply(filefullpath);
+                        frm.ShowDialog();
+                    }
+                }
+                else return false;
             }
             else
             {
-                return SaveAs();
+                SaveMenuProc(sender, e);
             }
+            return true;
         }
 
         private string GetFixedFilename(string sfile, int max)
@@ -1373,21 +1521,10 @@ namespace ZiveLab.ZM
             int div = (max - 6) / 2;
             return string.Format("{0}......{1}", sfile.Substring(0, div), sfile.Substring(sfile.Length - div, div));
         }
-        private bool SaveAs()
+        private bool SaveAs(string filepath)
         {
 
             SaveFileDialog saveDlg = new SaveFileDialog();
-
-            saveDlg.CustomPlaces.Clear();
-
-            for (int i = 0; i < 10; i++)
-            {
-                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
-                {
-                    // 왼쪽 링크 바에 커스텀 폴더 추가
-                    saveDlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
-                }
-            }
 
             if (techtype == enTechType.TECH_HFR)
             {
@@ -1426,6 +1563,11 @@ namespace ZiveLab.ZM
                 saveDlg.Filter = "Galvanostatic EIS (*.eis) | *.eis";
             }
             saveDlg.OverwritePrompt = false;
+
+            //frmSelectFolderDlg mdlg = new frmSelectFolderDlg(true);
+            //if (bopen == true) mdlg.SelectPath = Path.GetDirectoryName(filefullpath);
+            //mdlg.ShowDialog();
+
             if (bopen == true)
             {
                 saveDlg.InitialDirectory = Path.GetDirectoryName(filefullpath);
@@ -1433,10 +1575,26 @@ namespace ZiveLab.ZM
             }
             else
             {
-                saveDlg.InitialDirectory = gBZA.appcfg.PathSch[0];
-                saveDlg.FileName = Path.GetFileName(GetDefaultname());
+                if (filepath == null)
+                {
+                    if (File.Exists(gBZA.appcfg.PathSch[0]))
+                    {
+                        saveDlg.InitialDirectory = Path.GetDirectoryName(gBZA.appcfg.PathSch[0]);
+                        saveDlg.FileName = Path.GetFileName(gBZA.appcfg.PathSch[0]);
+                    }
+                    else
+                    {
+                        saveDlg.InitialDirectory = gBZA.appcfg.PathAlwaysSch;
+                        saveDlg.FileName = Path.GetFileName(GetDefaultname());
+                    }
+                }
+                else
+                {
+                    saveDlg.InitialDirectory = filepath;
+                    saveDlg.FileName = Path.GetFileName(GetDefaultname());
+                }
             }
-
+            
             if (saveDlg.ShowDialog() == DialogResult.Cancel)
             {
                 return false;
@@ -1452,8 +1610,7 @@ namespace ZiveLab.ZM
                 return false;
             }
 
-
-            gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(saveDlg.FileName));
+            gBZA.MemoryRecentSchFile(Path.GetDirectoryName(saveDlg.FileName)); // gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(saveDlg.FileName));
 
             filefullpath = saveDlg.FileName;
             filename = Path.GetFileName(filefullpath);
@@ -1493,30 +1650,118 @@ namespace ZiveLab.ZM
             
             this.Text = string.Format("{0}", GetFixedFilename(filename, 60));
             bopen = true;
+
+            if (bApply)
+            {
+                frmTechApply frm = new frmTechApply(filefullpath);
+                frm.ShowDialog();
+            }
             return true;
         }
 
         private void btsave_Click(object sender, EventArgs e)
         {
-            
-            if(GetWillSampleCount() > MBZA_Constant.MAX_DATA_CNT)
-            {
-                string smsg = string.Format("The current setting exceeds the maximum number of storable experimental data {0}. \r\nPlease check your settings and try again.", MBZA_Constant.MAX_DATA_CNT);
-                MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Save();
-        }
-
-        private void btsaveas_Click(object sender, EventArgs e)
-        {
+            bApply = false;
             if (GetWillSampleCount() > MBZA_Constant.MAX_DATA_CNT)
             {
                 string smsg = string.Format("The current setting exceeds the maximum number of storable experimental data {0}. \r\nPlease check your settings and try again.", MBZA_Constant.MAX_DATA_CNT);
                 MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            SaveAs();
+            SaveMenuProc(sender, e);
+        }
+        
+        private void btsaveas_Click(object sender, EventArgs e)
+        {
+            bApply = false;
+            if (GetWillSampleCount() > MBZA_Constant.MAX_DATA_CNT)
+            {
+                string smsg = string.Format("The current setting exceeds the maximum number of storable experimental data {0}. \r\nPlease check your settings and try again.", MBZA_Constant.MAX_DATA_CNT);
+                MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SaveMenuProc(sender,e);
+        }
+
+        private void SaveMenuProc(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            ContextMenuStrip recentMenu = new ContextMenuStrip();
+            recentMenu.Items.Clear();
+
+            ToolStripMenuItem item;
+            string sitem = string.Format("Default Path({0}).", gBZA.appcfg.PathAlwaysSch);
+            item = new ToolStripMenuItem(sitem);
+            item.Tag = "Default"; // 실제 파일 경로는 Tag에 보관
+            item.ToolTipText = sitem; // 마우스 올렸을 때 전체 경로 표시
+            item.Click += RecentSaveSchFileItem_Click; // 클릭 이벤트 연결
+            recentMenu.Items.Add(item);
+            recentMenu.Items.Add(new ToolStripSeparator());
+
+            if (gBZA.recentSchFiles.Count == 0)
+            {
+                // 최근 항목이 없을 때 안내 메시지 추가
+                ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                emptyItem.Enabled = false;
+                recentMenu.Items.Add(emptyItem);
+            }
+            else
+            {
+
+                System.Collections.Specialized.StringCollection recentSchPath = new System.Collections.Specialized.StringCollection();
+
+                foreach (string filefullPath in gBZA.recentSchFiles)
+                {
+                    string sPath = Path.GetDirectoryName(filefullPath);
+                    if (!recentSchPath.Contains(sPath))
+                    {
+                        recentSchPath.Insert(0, sPath);
+                    }
+                }
+
+                if (recentSchPath.Contains(gBZA.appcfg.PathAlwaysSch))
+                {
+                    recentSchPath.Remove(gBZA.appcfg.PathAlwaysSch);
+                }
+
+                if (recentSchPath.Count == 0)
+                {
+                    // 최근 항목이 없을 때 안내 메시지 추가
+                    ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                    emptyItem.Enabled = false;
+                    recentMenu.Items.Add(emptyItem);
+                }
+                else
+                {
+                    var uniqueArray = recentSchPath.Cast<string>().Distinct().ToArray();
+                    System.Collections.Specialized.StringCollection uniqueCollection = new System.Collections.Specialized.StringCollection();
+                    uniqueCollection.AddRange(uniqueArray);
+
+
+                    // 최근 항목들을 메뉴에 동적으로 추가
+                    foreach (string sPath in uniqueCollection)
+                    {
+                        // 파일명만 표시하고, 전체 경로는 ToolTip이나 Tag에 저장
+                        string sShortenPath = gBZA.ShortenPath(sPath);
+                        item = new ToolStripMenuItem(sShortenPath);
+
+                        item.Tag = sPath; // 실제 파일 경로는 Tag에 보관
+                        item.ToolTipText = sPath; // 마우스 올렸을 때 전체 경로 표시
+                        item.Click += RecentSaveSchFileItem_Click; // 클릭 이벤트 연결
+
+                        recentMenu.Items.Add(item);
+                    }
+
+                    recentMenu.Items.Add(new ToolStripSeparator());
+                    ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Recent Items");
+                    clearItem.Click += (s, ev) =>
+                    {
+                        gBZA.ClearRecenSchtFile();
+                    };
+                    recentMenu.Items.Add(clearItem);
+                }
+            }
+            recentMenu.Show(btn, new Point(btn.Width / 2, btn.Height));
         }
 
         private string CheckCanSave(string chkfile)
@@ -1543,15 +1788,13 @@ namespace ZiveLab.ZM
                 MessageBox.Show(smsg, gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            if (Save() == false)
+            bApply = true;
+            if (Save(sender,e) == false)
             {
                 return;
             }
 
-            frmTechApply frm = new frmTechApply(filefullpath);
             
-            frm.ShowDialog();
         }
 
         private void btclose_Click(object sender, EventArgs e)
@@ -1726,6 +1969,47 @@ namespace ZiveLab.ZM
         private void txthfrtotaltime_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtMonCutoff1_Leave(object sender, EventArgs e)
+        {
+            double tval = 0.0;
+            if (techtype == enTechType.TECH_DCH)
+            {
+                if (double.TryParse(txtMonCutoff1.Text, out tval) == true)
+                {
+                    dch.CutoffC = tval/ 1000.0;
+                }
+                else
+                {
+                    MessageBox.Show("There is a problem with the input of the value. \r\n Please check and try again.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                txtMonCutoff1.Text = string.Format("{0:0.0}", dch.CutoffC * 1000.0);
+            }
+        }
+
+        private void chkcutoff1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkcutoff1.Checked == false)
+            {
+                if(chkcutoff.Checked == false)
+                {
+                    MessageBox.Show("At least one cut-off condition must be set.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    chkcutoff1.Checked = true;
+                }
+            }
+        }
+
+        private void chkcutoff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkcutoff.Checked == false)
+            {
+                if (chkcutoff1.Checked == false)
+                {
+                    MessageBox.Show("At least one cut-off condition must be set.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    chkcutoff.Checked = true;
+                }
+            }
         }
     }
 }

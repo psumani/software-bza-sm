@@ -716,38 +716,38 @@
             // MenuGraphLine1
             // 
             this.MenuGraphLine1.Name = "MenuGraphLine1";
-            this.MenuGraphLine1.Size = new System.Drawing.Size(152, 22);
+            this.MenuGraphLine1.Size = new System.Drawing.Size(137, 22);
             this.MenuGraphLine1.Text = "Line";
             // 
             // MenuGraphPoint1
             // 
             this.MenuGraphPoint1.Name = "MenuGraphPoint1";
-            this.MenuGraphPoint1.Size = new System.Drawing.Size(152, 22);
+            this.MenuGraphPoint1.Size = new System.Drawing.Size(137, 22);
             this.MenuGraphPoint1.Text = "Point";
             // 
             // toolStripSeparator29
             // 
             this.toolStripSeparator29.Name = "toolStripSeparator29";
-            this.toolStripSeparator29.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator29.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuPlotGridX1
             // 
             this.MenuPlotGridX1.Name = "MenuPlotGridX1";
-            this.MenuPlotGridX1.Size = new System.Drawing.Size(152, 22);
+            this.MenuPlotGridX1.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridX1.Text = "Grid axis x";
             this.MenuPlotGridX1.Click += new System.EventHandler(this.MenuPlotGridX1_Click);
             // 
             // MenuPlotGridY11
             // 
             this.MenuPlotGridY11.Name = "MenuPlotGridY11";
-            this.MenuPlotGridY11.Size = new System.Drawing.Size(152, 22);
+            this.MenuPlotGridY11.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY11.Text = "Grid axis y1";
             this.MenuPlotGridY11.Click += new System.EventHandler(this.MenuPlotGridY11_Click);
             // 
             // MenuPlotGridY12
             // 
             this.MenuPlotGridY12.Name = "MenuPlotGridY12";
-            this.MenuPlotGridY12.Size = new System.Drawing.Size(152, 22);
+            this.MenuPlotGridY12.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY12.Text = "Grid axis y2";
             this.MenuPlotGridY12.Click += new System.EventHandler(this.MenuPlotGridY12_Click);
             // 
@@ -954,38 +954,38 @@
             // MenuGraphLine2
             // 
             this.MenuGraphLine2.Name = "MenuGraphLine2";
-            this.MenuGraphLine2.Size = new System.Drawing.Size(152, 22);
+            this.MenuGraphLine2.Size = new System.Drawing.Size(137, 22);
             this.MenuGraphLine2.Text = "Line";
             // 
             // MenuGraphPoint2
             // 
             this.MenuGraphPoint2.Name = "MenuGraphPoint2";
-            this.MenuGraphPoint2.Size = new System.Drawing.Size(152, 22);
+            this.MenuGraphPoint2.Size = new System.Drawing.Size(137, 22);
             this.MenuGraphPoint2.Text = "Point";
             // 
             // toolStripSeparator30
             // 
             this.toolStripSeparator30.Name = "toolStripSeparator30";
-            this.toolStripSeparator30.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator30.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuPlotGridX2
             // 
             this.MenuPlotGridX2.Name = "MenuPlotGridX2";
-            this.MenuPlotGridX2.Size = new System.Drawing.Size(152, 22);
+            this.MenuPlotGridX2.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridX2.Text = "Grid axis x";
             this.MenuPlotGridX2.Click += new System.EventHandler(this.MenuPlotGridX2_Click);
             // 
             // MenuPlotGridY21
             // 
             this.MenuPlotGridY21.Name = "MenuPlotGridY21";
-            this.MenuPlotGridY21.Size = new System.Drawing.Size(152, 22);
+            this.MenuPlotGridY21.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY21.Text = "Grid axis y1";
             this.MenuPlotGridY21.Click += new System.EventHandler(this.MenuPlotGridY21_Click);
             // 
             // MenuPlotGridY22
             // 
             this.MenuPlotGridY22.Name = "MenuPlotGridY22";
-            this.MenuPlotGridY22.Size = new System.Drawing.Size(152, 22);
+            this.MenuPlotGridY22.Size = new System.Drawing.Size(137, 22);
             this.MenuPlotGridY22.Text = "Grid axis y2";
             this.MenuPlotGridY22.Click += new System.EventHandler(this.MenuPlotGridY22_Click);
             // 
@@ -1258,7 +1258,7 @@
             // 
             this.RtMenuGraphLine.CheckOnClick = true;
             this.RtMenuGraphLine.Name = "RtMenuGraphLine";
-            this.RtMenuGraphLine.Size = new System.Drawing.Size(152, 22);
+            this.RtMenuGraphLine.Size = new System.Drawing.Size(102, 22);
             this.RtMenuGraphLine.Text = "Line";
             this.RtMenuGraphLine.Click += new System.EventHandler(this.RtMenuGraphLine_Click);
             // 
@@ -1266,19 +1266,19 @@
             // 
             this.RtMenuGraphPoint.CheckOnClick = true;
             this.RtMenuGraphPoint.Name = "RtMenuGraphPoint";
-            this.RtMenuGraphPoint.Size = new System.Drawing.Size(152, 22);
+            this.RtMenuGraphPoint.Size = new System.Drawing.Size(102, 22);
             this.RtMenuGraphPoint.Text = "Point";
             this.RtMenuGraphPoint.Click += new System.EventHandler(this.RtMenuGraphPoint_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(99, 6);
             // 
             // RtMenuGraphGrid
             // 
             this.RtMenuGraphGrid.Name = "RtMenuGraphGrid";
-            this.RtMenuGraphGrid.Size = new System.Drawing.Size(152, 22);
+            this.RtMenuGraphGrid.Size = new System.Drawing.Size(102, 22);
             this.RtMenuGraphGrid.Text = "Grid";
             this.RtMenuGraphGrid.Click += new System.EventHandler(this.RtMenuGraphGrid_Click);
             // 
@@ -1515,7 +1515,7 @@
             this.RawRtMenuGraphView,
             this.RawRtMenuGraphColor});
             this.RawRtMenuStrip.Name = "RtMenuStrip";
-            this.RawRtMenuStrip.Size = new System.Drawing.Size(153, 92);
+            this.RawRtMenuStrip.Size = new System.Drawing.Size(142, 70);
             // 
             // RawRtMenuGraphMode
             // 
@@ -1525,7 +1525,7 @@
             this.toolStripSeparator23,
             this.RawpauseRefreshToolStripMenuItem});
             this.RawRtMenuGraphMode.Name = "RawRtMenuGraphMode";
-            this.RawRtMenuGraphMode.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphMode.Size = new System.Drawing.Size(141, 22);
             this.RawRtMenuGraphMode.Text = "Graph mode";
             // 
             // RawRtMenuGraphMode1
@@ -1563,32 +1563,32 @@
             this.toolStripSeparator25,
             this.RawRtMenuGraphGrid});
             this.RawRtMenuGraphView.Name = "RawRtMenuGraphView";
-            this.RawRtMenuGraphView.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphView.Size = new System.Drawing.Size(141, 22);
             this.RawRtMenuGraphView.Text = "Graph view";
             // 
             // RawRtMenuGraphLine
             // 
             this.RawRtMenuGraphLine.CheckOnClick = true;
             this.RawRtMenuGraphLine.Name = "RawRtMenuGraphLine";
-            this.RawRtMenuGraphLine.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphLine.Size = new System.Drawing.Size(102, 22);
             this.RawRtMenuGraphLine.Text = "Line";
             // 
             // RawRtMenuGraphPoint
             // 
             this.RawRtMenuGraphPoint.CheckOnClick = true;
             this.RawRtMenuGraphPoint.Name = "RawRtMenuGraphPoint";
-            this.RawRtMenuGraphPoint.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphPoint.Size = new System.Drawing.Size(102, 22);
             this.RawRtMenuGraphPoint.Text = "Point";
             // 
             // toolStripSeparator25
             // 
             this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator25.Size = new System.Drawing.Size(99, 6);
             // 
             // RawRtMenuGraphGrid
             // 
             this.RawRtMenuGraphGrid.Name = "RawRtMenuGraphGrid";
-            this.RawRtMenuGraphGrid.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphGrid.Size = new System.Drawing.Size(102, 22);
             this.RawRtMenuGraphGrid.Text = "Grid";
             // 
             // RawRtMenuGraphColor
@@ -1602,7 +1602,7 @@
             this.toolStripSeparator28,
             this.RawRtMenuGraphBackColor});
             this.RawRtMenuGraphColor.Name = "RawRtMenuGraphColor";
-            this.RawRtMenuGraphColor.Size = new System.Drawing.Size(152, 22);
+            this.RawRtMenuGraphColor.Size = new System.Drawing.Size(141, 22);
             this.RawRtMenuGraphColor.Text = "Graph color";
             // 
             // RawRtMenuGraphPlotColor1

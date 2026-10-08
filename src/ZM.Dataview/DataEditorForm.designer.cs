@@ -363,6 +363,7 @@
             this.DataFlexGrid.ShowCellLabels = true;
             this.DataFlexGrid.StyleInfo = resources.GetString("DataFlexGrid.StyleInfo");
             this.DataFlexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
+            this.DataFlexGrid.Click += new System.EventHandler(this.DataFlexGrid_Click);
             // 
             // groupBox3
             // 

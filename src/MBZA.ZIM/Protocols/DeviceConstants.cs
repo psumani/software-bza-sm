@@ -15,6 +15,8 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_AUX_CHANNELS = MAX_AUX_CHANNEL * MAX_AUX_BOARD;
         public const int MAX_AUXTYPE_CHANNELS = MAX_AUX_CHANNELS + 1;
         public const int MAX_APP_CHANNEL = 32;
+        public const int MAX_RECENT_COUNT = 32;
+        public const int MAX_USERECENT_COUNT = 15;
         public const int MAX_APP_DEVICE = 8;
         public const int ChannelMapSize = 512;
         public const int MAX_GRAPH_YAXES = 2;
@@ -22,6 +24,8 @@ namespace ZiveLab.ZM.ZIM
         public const int MAX_TECHNIQUE = 6;
         public const int MAX_COM_DATA_CNT = 20;
         public const int MAX_DATA_CNT = 100000;
+        public const double  MAX_INITVALUE = -9999999.9;
+        public const double MIN_INITVALUE = 9999999.9;
         public const string AppCfgFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM.CFG";
         public const string DataViewSetFilename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_DATAVIEW.SET";
 
@@ -50,7 +54,7 @@ namespace ZiveLab.ZM.ZIM
         public const ushort TECHFILESIZE = 222;
         public const int    RANGE_XML_FILESIZE_1 = 12947;
 
-        
+        public const double DEFAULT_REALGRAPH_SPACERATE = 0.1;
     }
     
     public static class DeviceConstants

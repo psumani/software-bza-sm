@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using ZiveLab.ZM.ZIM;
 using static ZiveLab.ZM.Dataview.CoMath;
 
 namespace ZiveLab.ZM.Dataview
@@ -34,8 +35,8 @@ namespace ZiveLab.ZM.Dataview
         {
             XAxisColor = Color.FromArgb(69, 69, 69);
             YAxesColor = new Color[] { Color.FromArgb(69, 69, 69), Color.FromArgb(69, 69, 69), Color.FromArgb(69, 69, 69), Color.FromArgb(69, 69, 69) };
-            MajorGridColor = Color.FromArgb(210, 210, 210);
-            MinorGridColor = Color.FromArgb(240, 240, 240);
+            MajorGridColor = Color.FromArgb(220, 220, 220);
+            MinorGridColor = Color.FromArgb(230, 230, 230);
 
             PlotAreaColor = Color.FromArgb(240, 240, 240);
 
@@ -123,6 +124,7 @@ namespace ZiveLab.ZM.Dataview
 
         public string[] OpenPath { get; set; }
 
+        public bool [] CheckedAuxCh;
         public GraphSetEx()    // 0 : General, 1 : Cycle, 2 : EIS
         {
             ViewLine = true;
@@ -132,7 +134,17 @@ namespace ZiveLab.ZM.Dataview
 
             XAxisFormat = "Zreal";
             YAxesFormat = new string[] { "-Zimg", "None", "None", "None" };
-            OpenPath = new string[] { "C:\\ZIVE DATA\\ZM\\Data\\", "", "", "", "", "", "", "", "", "" };
+            OpenPath = new string[MBZA_Constant.MAX_RECENT_COUNT];
+            for (int i = 0; i < MBZA_Constant.MAX_RECENT_COUNT; i++)
+            {
+                OpenPath[i] = "";
+            }
+
+            CheckedAuxCh = new bool[MBZA_Constant.MAX_AUX_CHANNELS];
+            for(int i=0; i< MBZA_Constant.MAX_AUX_CHANNELS; i++)
+            {
+                CheckedAuxCh[i] = true;
+            }
         }
 
         public void ApplyPathData(string sPath)
@@ -157,11 +169,17 @@ namespace ZiveLab.ZM.Dataview
         public bool CycleColumnArrange { get; set; }
 
         public List<DataColItem> DataColList { get; set; }
-
+        public List<bool> ConvAuxList { get; set; }
         public DataConvSet() 
         {
             TimeFormat = 1;
-
+            ConvAuxList = new List<bool>();
+            ConvAuxList.Clear();
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+            {
+                ConvAuxList.Add(true);
+            }
+            
             CycleColumnArrange = false;
             InitDataColList();
         }    

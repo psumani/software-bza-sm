@@ -93,6 +93,10 @@
             this.techtree = new System.Windows.Forms.TreeView();
             this.lbltech = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.txtMonCutoff1 = new System.Windows.Forms.TextBox();
+            this.chkcutoff = new System.Windows.Forms.CheckBox();
+            this.chkcutoff1 = new System.Windows.Forms.CheckBox();
+            this.lblcutoff1 = new System.Windows.Forms.Label();
             this.tabtech.SuspendLayout();
             this.tabtech1.SuspendLayout();
             this.tabtech2.SuspendLayout();
@@ -244,6 +248,10 @@
             // tabtech2
             // 
             this.tabtech2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabtech2.Controls.Add(this.lblcutoff1);
+            this.tabtech2.Controls.Add(this.chkcutoff1);
+            this.tabtech2.Controls.Add(this.chkcutoff);
+            this.tabtech2.Controls.Add(this.txtMonCutoff1);
             this.tabtech2.Controls.Add(this.chkIr);
             this.tabtech2.Controls.Add(this.txtdchsmpl);
             this.tabtech2.Controls.Add(this.lbldchsmpl);
@@ -268,7 +276,7 @@
             // chkIr
             // 
             this.chkIr.AutoSize = true;
-            this.chkIr.Location = new System.Drawing.Point(26, 14);
+            this.chkIr.Location = new System.Drawing.Point(26, 9);
             this.chkIr.Name = "chkIr";
             this.chkIr.Size = new System.Drawing.Size(124, 18);
             this.chkIr.TabIndex = 33;
@@ -278,7 +286,7 @@
             // 
             // txtdchsmpl
             // 
-            this.txtdchsmpl.Location = new System.Drawing.Point(174, 196);
+            this.txtdchsmpl.Location = new System.Drawing.Point(174, 213);
             this.txtdchsmpl.Name = "txtdchsmpl";
             this.txtdchsmpl.Size = new System.Drawing.Size(86, 22);
             this.txtdchsmpl.TabIndex = 32;
@@ -287,7 +295,7 @@
             // lbldchsmpl
             // 
             this.lbldchsmpl.AutoSize = true;
-            this.lbldchsmpl.Location = new System.Drawing.Point(21, 200);
+            this.lbldchsmpl.Location = new System.Drawing.Point(21, 217);
             this.lbldchsmpl.Name = "lbldchsmpl";
             this.lbldchsmpl.Size = new System.Drawing.Size(105, 14);
             this.lbldchsmpl.TabIndex = 31;
@@ -297,7 +305,7 @@
             // 
             this.cbomonctrl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbomonctrl.FormattingEnabled = true;
-            this.cbomonctrl.Location = new System.Drawing.Point(175, 138);
+            this.cbomonctrl.Location = new System.Drawing.Point(175, 131);
             this.cbomonctrl.Name = "cbomonctrl";
             this.cbomonctrl.Size = new System.Drawing.Size(86, 22);
             this.cbomonctrl.TabIndex = 30;
@@ -305,7 +313,7 @@
             // 
             // txtMonCutoff
             // 
-            this.txtMonCutoff.Location = new System.Drawing.Point(175, 167);
+            this.txtMonCutoff.Location = new System.Drawing.Point(175, 158);
             this.txtMonCutoff.Name = "txtMonCutoff";
             this.txtMonCutoff.Size = new System.Drawing.Size(86, 22);
             this.txtMonCutoff.TabIndex = 29;
@@ -314,16 +322,16 @@
             // lblcutoff
             // 
             this.lblcutoff.AutoSize = true;
-            this.lblcutoff.Location = new System.Drawing.Point(21, 170);
+            this.lblcutoff.Location = new System.Drawing.Point(264, 163);
             this.lblcutoff.Name = "lblcutoff";
-            this.lblcutoff.Size = new System.Drawing.Size(133, 14);
+            this.lblcutoff.Size = new System.Drawing.Size(28, 14);
             this.lblcutoff.TabIndex = 28;
-            this.lblcutoff.Text = "Cut-off voltage(V)";
+            this.lblcutoff.Text = "(V)";
             // 
             // lblctrlrate
             // 
             this.lblctrlrate.AutoSize = true;
-            this.lblctrlrate.Location = new System.Drawing.Point(21, 140);
+            this.lblctrlrate.Location = new System.Drawing.Point(21, 133);
             this.lblctrlrate.Name = "lblctrlrate";
             this.lblctrlrate.Size = new System.Drawing.Size(126, 14);
             this.lblctrlrate.TabIndex = 26;
@@ -332,7 +340,7 @@
             // chkhfrcelloffwait
             // 
             this.chkhfrcelloffwait.AutoSize = true;
-            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 116);
+            this.chkhfrcelloffwait.Location = new System.Drawing.Point(177, 109);
             this.chkhfrcelloffwait.Name = "chkhfrcelloffwait";
             this.chkhfrcelloffwait.Size = new System.Drawing.Size(166, 18);
             this.chkhfrcelloffwait.TabIndex = 25;
@@ -342,7 +350,7 @@
             // 
             // txthfrtotaltime
             // 
-            this.txthfrtotaltime.Location = new System.Drawing.Point(174, 89);
+            this.txthfrtotaltime.Location = new System.Drawing.Point(174, 82);
             this.txthfrtotaltime.Name = "txthfrtotaltime";
             this.txthfrtotaltime.Size = new System.Drawing.Size(86, 22);
             this.txthfrtotaltime.TabIndex = 21;
@@ -352,7 +360,7 @@
             // lblhfrtotaltime
             // 
             this.lblhfrtotaltime.AutoSize = true;
-            this.lblhfrtotaltime.Location = new System.Drawing.Point(20, 92);
+            this.lblhfrtotaltime.Location = new System.Drawing.Point(20, 85);
             this.lblhfrtotaltime.Name = "lblhfrtotaltime";
             this.lblhfrtotaltime.Size = new System.Drawing.Size(98, 14);
             this.lblhfrtotaltime.TabIndex = 20;
@@ -360,7 +368,7 @@
             // 
             // txthfrinterval
             // 
-            this.txthfrinterval.Location = new System.Drawing.Point(174, 61);
+            this.txthfrinterval.Location = new System.Drawing.Point(174, 54);
             this.txthfrinterval.Name = "txthfrinterval";
             this.txthfrinterval.Size = new System.Drawing.Size(86, 22);
             this.txthfrinterval.TabIndex = 19;
@@ -369,7 +377,7 @@
             // lblhfrinterval
             // 
             this.lblhfrinterval.AutoSize = true;
-            this.lblhfrinterval.Location = new System.Drawing.Point(20, 65);
+            this.lblhfrinterval.Location = new System.Drawing.Point(20, 58);
             this.lblhfrinterval.Name = "lblhfrinterval";
             this.lblhfrinterval.Size = new System.Drawing.Size(84, 14);
             this.lblhfrinterval.TabIndex = 18;
@@ -377,7 +385,7 @@
             // 
             // txthfrfreq
             // 
-            this.txthfrfreq.Location = new System.Drawing.Point(174, 34);
+            this.txthfrfreq.Location = new System.Drawing.Point(174, 27);
             this.txthfrfreq.Name = "txthfrfreq";
             this.txthfrfreq.Size = new System.Drawing.Size(86, 22);
             this.txthfrfreq.TabIndex = 17;
@@ -386,7 +394,7 @@
             // lblhfrfreq
             // 
             this.lblhfrfreq.AutoSize = true;
-            this.lblhfrfreq.Location = new System.Drawing.Point(21, 38);
+            this.lblhfrfreq.Location = new System.Drawing.Point(21, 31);
             this.lblhfrfreq.Name = "lblhfrfreq";
             this.lblhfrfreq.Size = new System.Drawing.Size(98, 14);
             this.lblhfrfreq.TabIndex = 16;
@@ -734,6 +742,45 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // txtMonCutoff1
+            // 
+            this.txtMonCutoff1.Location = new System.Drawing.Point(175, 184);
+            this.txtMonCutoff1.Name = "txtMonCutoff1";
+            this.txtMonCutoff1.Size = new System.Drawing.Size(86, 22);
+            this.txtMonCutoff1.TabIndex = 34;
+            this.txtMonCutoff1.Leave += new System.EventHandler(this.txtMonCutoff1_Leave);
+            // 
+            // chkcutoff
+            // 
+            this.chkcutoff.AutoSize = true;
+            this.chkcutoff.Location = new System.Drawing.Point(23, 159);
+            this.chkcutoff.Name = "chkcutoff";
+            this.chkcutoff.Size = new System.Drawing.Size(131, 18);
+            this.chkcutoff.TabIndex = 35;
+            this.chkcutoff.Text = "Cut-off voltage";
+            this.chkcutoff.UseVisualStyleBackColor = true;
+            this.chkcutoff.CheckedChanged += new System.EventHandler(this.chkcutoff_CheckedChanged);
+            // 
+            // chkcutoff1
+            // 
+            this.chkcutoff1.AutoSize = true;
+            this.chkcutoff1.Location = new System.Drawing.Point(23, 183);
+            this.chkcutoff1.Name = "chkcutoff1";
+            this.chkcutoff1.Size = new System.Drawing.Size(138, 18);
+            this.chkcutoff1.TabIndex = 36;
+            this.chkcutoff1.Text = "Cut-off CAPACITY";
+            this.chkcutoff1.UseVisualStyleBackColor = true;
+            this.chkcutoff1.CheckedChanged += new System.EventHandler(this.chkcutoff1_CheckedChanged);
+            // 
+            // lblcutoff1
+            // 
+            this.lblcutoff1.AutoSize = true;
+            this.lblcutoff1.Location = new System.Drawing.Point(264, 189);
+            this.lblcutoff1.Name = "lblcutoff1";
+            this.lblcutoff1.Size = new System.Drawing.Size(49, 14);
+            this.lblcutoff1.TabIndex = 37;
+            this.lblcutoff1.Text = "(mAhr)";
+            // 
             // frmTechniq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -844,5 +891,9 @@
         private System.Windows.Forms.CheckBox chkIr;
         private System.Windows.Forms.TextBox txtdchsmpl;
         private System.Windows.Forms.Label lbldchsmpl;
+        private System.Windows.Forms.TextBox txtMonCutoff1;
+        private System.Windows.Forms.Label lblcutoff1;
+        private System.Windows.Forms.CheckBox chkcutoff1;
+        private System.Windows.Forms.CheckBox chkcutoff;
     }
 }

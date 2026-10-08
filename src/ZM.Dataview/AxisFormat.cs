@@ -106,7 +106,6 @@ namespace ZiveLab.ZM.Dataview
         public bool MinorGridVisible { get; set; }
 
         public bool UnitC { set { _UnitC = value; } }
-        
         #endregion
 
         #region 생성자

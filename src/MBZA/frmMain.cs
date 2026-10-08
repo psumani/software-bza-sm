@@ -187,7 +187,7 @@ namespace ZiveLab.ZM
             gtip.SetToolTip(btgrpstart, "Starts testing the channels selected as a group.");
             gtip.SetToolTip(btgrpstop, "Stop testing the channels selected as a group.");
             gtip.SetToolTip(btgrpmon, "It shows the real-time monitor and control window of the channel selected as a group.");
-            gtip.SetToolTip(hgrid, null);            
+            gtip.SetToolTip(hgrid, null);
         }
 
         
@@ -522,13 +522,27 @@ namespace ZiveLab.ZM
                             }
                             else
                             {
-                                if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh])
+                                if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA)
                                 {
-                                    str = (enTestState.LoadData).GetDescription();
+                                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[0])
+                                    {
+                                        str = (enTestState.LoadData).GetDescription();
+                                    }
+                                    else
+                                    {
+                                        str = GetTestStatus(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0]);
+                                    }
                                 }
                                 else
                                 {
-                                    str = GetTestStatus(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
+                                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh])
+                                    {
+                                        str = (enTestState.LoadData).GetDescription();
+                                    }
+                                    else
+                                    {
+                                        str = GetTestStatus(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh]);
+                                    }
                                 }
 
                             }
@@ -541,7 +555,11 @@ namespace ZiveLab.ZM
                         {
                             str = enStatError.ErrCommZim.GetDescription();
                         }
-                        else str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
+                        else
+                        {
+                            if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA)  str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0].LastError).GetDescription();
+                            else str = ((enStatError)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].LastError).GetDescription();
+                        }
                         hgrid.SetData(row, i, str);
                     }
                     else if (i == 4)
@@ -550,9 +568,18 @@ namespace ZiveLab.ZM
                         else if (Value.bChkCh == false) str = "00:00:00";
                         else
                         {
-                            //str = string.Format("{0:#0.000}", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].RunTimeStamp);
-                            ElapsedTime = TimeSpan.FromMilliseconds(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].RunTimeStamp);
-                            str = string.Format("{0:##00}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
+                            if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA)
+                            {
+                                //str = string.Format("{0:#0.000}", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0].RunTimeStamp);
+                                ElapsedTime = TimeSpan.FromMilliseconds(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0].RunTimeStamp);
+                                str = string.Format("{0:##00}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
+                            }
+                            else
+                            {
+                                //str = string.Format("{0:#0.000}", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].RunTimeStamp);
+                                ElapsedTime = TimeSpan.FromMilliseconds(gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].RunTimeStamp);
+                                str = string.Format("{0:##00}:{1:00}:{2:00}", ElapsedTime.Hours, ElapsedTime.Minutes, ElapsedTime.Seconds);
+                            }
                         }
                         hgrid.SetData(row, i, str);
                     }
@@ -562,20 +589,40 @@ namespace ZiveLab.ZM
                         else if (Value.bChkCh == false) str = "Unknown";
                         else
                         {
-                            stChStatusInf chstat = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh];
-                            var p = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[Value.SifCh];
-                            double crngval = p.ranges.Gen.iac_rng[0].realmax;
-
-                            if ((chstat.Iac_rngno % 2) > 0)
+                            if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA)
                             {
-                                crngval *= p.ranges.Gen.iac_rng[0].controlgain;
-                            }
+                                stChStatusInf chstat = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0];
+                                var p = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[0];
+                                double crngval = p.ranges.Gen.iac_rng[0].realmax;
 
-                            str = string.Format(
-                                "{0} / {1}",
-                                SM_Number.ToRangeString(crngval, "A"),
-                                SM_Number.ToRangeString(p.ranges.Gen.vdc_rng[0].realmax, "V")
-                            );
+                                if ((chstat.Iac_rngno % 2) > 0)
+                                {
+                                    crngval *= p.ranges.Gen.iac_rng[0].controlgain;
+                                }
+
+                                str = string.Format(
+                                    "{0} / {1}",
+                                    SM_Number.ToRangeString(crngval, "A"),
+                                    SM_Number.ToRangeString(p.ranges.Gen.vdc_rng[0].realmax, "V")
+                                );
+                            }
+                            else
+                            {
+                                stChStatusInf chstat = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh];
+                                var p = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mZimCfg[Value.SifCh];
+                                double crngval = p.ranges.Gen.iac_rng[0].realmax;
+
+                                if ((chstat.Iac_rngno % 2) > 0)
+                                {
+                                    crngval *= p.ranges.Gen.iac_rng[0].controlgain;
+                                }
+
+                                str = string.Format(
+                                    "{0} / {1}",
+                                    SM_Number.ToRangeString(crngval, "A"),
+                                    SM_Number.ToRangeString(p.ranges.Gen.vdc_rng[0].realmax, "V")
+                                );
+                            }
                         }
                         hgrid.SetData(row, i, str);
                     }
@@ -583,7 +630,11 @@ namespace ZiveLab.ZM
                     {
                         if (Value.bChkSIF == false || berror == true) str = "Unknown";
                         else if (Value.bChkCh == false) str = "Unknown";
-                        else str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Vdc);
+                        else
+                        {
+                            if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA) str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0].Vdc);
+                            else str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Vdc);
+                        }
                         hgrid.SetData(row, i, str);
                     }
                     else if (i == 7)
@@ -594,6 +645,7 @@ namespace ZiveLab.ZM
                             if((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA) btVdcOpen[ch].Enabled = true;
                             else btVdcOpen[ch].Enabled = false;
                         }
+
                         ArrGraph.Add(new HostedControl(hgrid, btVdcOpen[ch], row, i));
 
                         //if (Value.bChkSIF == false || berror == true) str = "Unknown";
@@ -606,7 +658,11 @@ namespace ZiveLab.ZM
                         //btVdcOpen[ch].Image = imageList_2.Images["vdcview"]; // icon
                         if (Value.bChkSIF == false || berror == true) str = "Unknown";
                         else if (Value.bChkCh == false) str = "Unknown";
-                        else str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Temperature);
+                        else
+                        {
+                            if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA) str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0].Temperature);
+                            else str = string.Format("{0:#0.000} ", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Temperature);
+                        }
                         hgrid.SetData(row, i, str);
                     }
                     else if (i == 9)
@@ -684,8 +740,16 @@ namespace ZiveLab.ZM
                                     //btGrid[ch].Text = "Start";
 
                                 }
-                                if (bcalibmode || gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh]) btGridStart[ch].Enabled = false;
-                                else btGridStart[ch].Enabled = true;
+                                if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA)
+                                {
+                                    if (bcalibmode || gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[0]) btGridStart[ch].Enabled = false;
+                                    else btGridStart[ch].Enabled = true;
+                                }
+                                else
+                                {
+                                    if (bcalibmode || gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh]) btGridStart[ch].Enabled = false;
+                                    else btGridStart[ch].Enabled = true;
+                                }
                             }
                         }
 
@@ -714,17 +778,33 @@ namespace ZiveLab.ZM
                             }
                             else
                             {
-
-                                if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh])
+                                if ((eDeviceType)gBZA.SifLnkLst[Value.sSerial].MBZAIF.mDevInf.mSysCfg.mSIFCfg.Type == eDeviceType.MCBZA)
                                 {
-                                    btGridReload[ch].Tag = string.Format("{0:00}_Stop", ch);
-                                    btGridReload[ch].Image = imageList.Images["stop"];
+                                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[0])
+                                    {
+                                        btGridReload[ch].Tag = string.Format("{0:00}_Stop", ch);
+                                        btGridReload[ch].Image = imageList.Images["stop"];
+                                    }
+                                    else
+                                    {
+                                        btGridReload[ch].Tag = string.Format("{0:00}_Load", ch);
+                                        btGridReload[ch].Image = imageList.Images["save"];
+
+                                    }
                                 }
                                 else
                                 {
-                                    btGridReload[ch].Tag = string.Format("{0:00}_Load", ch);
-                                    btGridReload[ch].Image = imageList.Images["save"];
+                                    if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh])
+                                    {
+                                        btGridReload[ch].Tag = string.Format("{0:00}_Stop", ch);
+                                        btGridReload[ch].Image = imageList.Images["stop"];
+                                    }
+                                    else
+                                    {
+                                        btGridReload[ch].Tag = string.Format("{0:00}_Load", ch);
+                                        btGridReload[ch].Image = imageList.Images["save"];
 
+                                    }
                                 }
                                 if (bcalibmode || brun) btGridReload[ch].Enabled = false;
                                 else btGridReload[ch].Enabled = true;
@@ -763,7 +843,9 @@ namespace ZiveLab.ZM
                         if (Value.bChkSIF == false || Value.bChkCh == false || berror == true) str = "Unknown";
                         else
                         {
-                            str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[Value.SifCh].datacount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].eis_status.rescount);
+                            if (gBZA.SifLnkLst[Value.sSerial].MBZAIF.bLoadData[Value.SifCh])
+                                str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[0].datacount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[0].eis_status.rescount);
+                            else str = string.Format("{0}({1})", gBZA.SifLnkLst[Value.sSerial].MBZAIF.mresfile[Value.SifCh].datacount, gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].eis_status.rescount);
                         }
                         hgrid.SetData(row, i, str);
                     }
@@ -1152,15 +1234,19 @@ namespace ZiveLab.ZM
             string sext;
             string sfilt;
 
+
+
             if (filename.Length < 5) sext = "";
             else sext = Path.GetExtension(filename).ToUpper();
+
+
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
 
-            dlg.CustomPlaces.Clear();
+            /*dlg.CustomPlaces.Clear();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++)
             {
                 if (Directory.Exists(gBZA.appcfg.PathSch[i]))
                 {
@@ -1168,6 +1254,7 @@ namespace ZiveLab.ZM
                     dlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
                 }
             }
+            */
 
             sfilt = "Galvanostatic EIS (*.eis) | *.eis|";
             sfilt += "Galvanostatic HFR (*.hfr) |*.hfr|";
@@ -1215,14 +1302,14 @@ namespace ZiveLab.ZM
             }
             else
             {
-                dlg.InitialDirectory = gBZA.appcfg.PathSch[0];
-                dlg.FileName = "";
+                dlg.InitialDirectory = Path.GetDirectoryName(gBZA.appcfg.PathSch[0]);
+                dlg.FileName = Path.GetFileName(gBZA.appcfg.PathSch[0]);
             }
         
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 filename = dlg.FileName;
-                gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(dlg.FileName));
+                gBZA.MemoryRecentSchFile(dlg.FileName); 
                 var Value = gBZA.ChLnkLst[sch];
                 Value.mChInf.FileCond = filename;
                 gBZA.ChLnkLst[sch] = Value;
@@ -1778,7 +1865,7 @@ namespace ZiveLab.ZM
             {
                 return;
             }
-            gBZA.appcfg.ApplyDataPath(Path.GetDirectoryName(saveDlg.FileName));
+            gBZA.MemoryRecentDataFile(Path.GetDirectoryName(saveDlg.FileName)); // gBZA.appcfg.ApplyDataPath(Path.GetDirectoryName(saveDlg.FileName));
             filename = saveDlg.FileName;
             var Value = gBZA.ChLnkLst[sch];
             Value.mChInf.FileResult = filename;
@@ -1909,11 +1996,10 @@ namespace ZiveLab.ZM
             }
         }
 
-        private void btgrptech_Click(object sender, EventArgs e)
+        private void SelectTechFile()
         {
-            
             int row = GetGroupFirstRow();
-            if(row == 0)
+            if (row == 0)
             {
                 MessageBox.Show("There is no channel selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1940,16 +2026,7 @@ namespace ZiveLab.ZM
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
-            dlg.CustomPlaces.Clear();
 
-            for (int i = 0; i < 10; i++)
-            {
-                if (Directory.Exists(gBZA.appcfg.PathSch[i]))
-                {
-                    // 왼쪽 링크 바에 커스텀 폴더 추가
-                    dlg.CustomPlaces.Add(gBZA.appcfg.PathSch[i]);
-                }
-            }
             sfilt = "Galvanostatic EIS (*.eis) | *.eis|";
             sfilt += "Galvanostatic HFR (*.hfr) |*.hfr|";
             sfilt += "Pseudo Rs Rp (*.prr) | *.prr|";
@@ -1989,12 +2066,44 @@ namespace ZiveLab.ZM
                 dlg.DefaultExt = "eis";
                 dlg.FilterIndex = 1;
             }
-            dlg.InitialDirectory = Path.GetDirectoryName(filename);
-            dlg.FileName = Path.GetFileName(filename);
+
+
+            //frmSelectFolderDlg mSeldlg = new frmSelectFolderDlg(true);
+            //if (filename.Length >= 5) mSeldlg.SelectPath = Path.GetDirectoryName(filename);
+            //mSeldlg.ShowDialog();
+            //dlg.InitialDirectory = mSeldlg.SelectPath;
+            if (File.Exists(filename))
+            {
+                dlg.InitialDirectory = Path.GetDirectoryName(filename);
+                dlg.FileName = Path.GetFileName(filename);
+            }
+            else
+            {
+                dlg.FileName = "";
+                if (gBZA.appcfg.UsePathAlwaysSch)
+                {
+                    dlg.InitialDirectory = gBZA.appcfg.PathAlwaysSch;
+                }
+                else
+                {
+                    if (gBZA.appcfg.PathData[0].Trim().Length < 5) dlg.InitialDirectory = gBZA.appcfg.PathAlwaysSch;
+                    else
+                    {
+                        if (!File.Exists(gBZA.appcfg.PathData[0])) dlg.InitialDirectory = gBZA.appcfg.PathAlwaysSch;
+                        else
+                        {
+                            dlg.InitialDirectory = Path.GetDirectoryName(gBZA.appcfg.PathData[0]);
+                            dlg.FileName = Path.GetFileName(gBZA.appcfg.PathData[0]);
+                        }
+                    }
+                }
+                
+            }
+           
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 filename = dlg.FileName;
-                gBZA.appcfg.ApplySchPath(Path.GetDirectoryName(dlg.FileName));
+                gBZA.MemoryRecentSchFile(dlg.FileName); // 
                 for (row = 2; row < hgrid.Rows.Count; row++)
                 {
                     if (hgrid.GetCellCheck(row, 1) == CheckEnum.Checked)
@@ -2020,10 +2129,130 @@ namespace ZiveLab.ZM
                         Value = gBZA.ChLnkLst[sch];
                         Value.mChInf.FileCond = filename;
                         gBZA.ChLnkLst[sch] = Value;
-                        
+
                     }
                 }
                 gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
+            }
+        }
+
+        private void btgrptech_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            ContextMenuStrip recentMenu = new ContextMenuStrip();
+            recentMenu.Items.Clear();
+
+            ToolStripMenuItem item;
+            item = new ToolStripMenuItem("Select file.");
+            item.Tag = "Select"; // 실제 파일 경로는 Tag에 보관
+            item.ToolTipText = "Select"; // 마우스 올렸을 때 전체 경로 표시
+            item.Click += RecentSchFileItem_Click; // 클릭 이벤트 연결
+            recentMenu.Items.Add(item);
+            recentMenu.Items.Add(new ToolStripSeparator());
+            if (gBZA.recentSchFiles.Count == 0)
+            {
+                // 최근 항목이 없을 때 안내 메시지 추가
+                ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                emptyItem.Enabled = false;
+                recentMenu.Items.Add(emptyItem);
+            }
+            else
+            {
+                // 최근 항목들을 메뉴에 동적으로 추가
+                foreach (string sfile in gBZA.recentSchFiles)
+                {
+                    // 파일명만 표시하고, 전체 경로는 ToolTip이나 Tag에 저장
+                    string sShortenPath = gBZA.ShortenPath(sfile); //Path.GetFileName(filePath);
+                    item = new ToolStripMenuItem(sShortenPath);
+
+                    item.Tag = sfile; // 실제 파일 경로는 Tag에 보관
+                    item.ToolTipText = sfile; // 마우스 올렸을 때 전체 경로 표시
+                    item.Click += RecentSchFileItem_Click; // 클릭 이벤트 연결
+
+                    recentMenu.Items.Add(item);
+                }
+                recentMenu.Items.Add(new ToolStripSeparator());
+                ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Recent Items");
+                clearItem.Click += (s, ev) => {
+                    gBZA.ClearRecenSchtFile();
+                };
+                recentMenu.Items.Add(clearItem);
+            }
+            recentMenu.Show(btn, new Point(btn.Width /2, btn.Height));
+        }
+
+        private void RecentSchFileItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            if (clickedItem == null) return;
+
+
+            int row = GetGroupFirstRow();
+            if (row == 0)
+            {
+                MessageBox.Show("There is no channel selected.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string sch = (string)hgrid.GetData(row, 0);
+            int ich = Convert.ToInt32(sch);
+            sch = (ich - 1).ToString();
+            string sSerial = gBZA.ChLnkLst[sch].sSerial;
+            int iSifCh = gBZA.ChLnkLst[sch].SifCh;
+            stLinkSifCh Value;
+
+            string filename = clickedItem.Tag as string;
+            if(filename == "Select")
+            {
+                SelectTechFile();
+                return;
+            }
+
+            if (File.Exists(filename))
+            {
+                gBZA.MemoryRecentSchFile(filename); 
+                for (row = 2; row < hgrid.Rows.Count; row++)
+                {
+                    if (hgrid.GetCellCheck(row, 1) == CheckEnum.Checked)
+                    {
+                        sch = (string)hgrid.GetData(row, 0);
+                        ich = Convert.ToInt32(sch);
+                        sch = (ich - 1).ToString();
+                        sSerial = gBZA.ChLnkLst[sch].sSerial;
+                        iSifCh = gBZA.ChLnkLst[sch].SifCh;
+
+                        if (gBZA.SifLnkLst.ContainsKey(sSerial))
+                        {
+                            if (gBZA.SifLnkLst[sSerial].MBZAIF.bConnect)
+                            {
+                                if (gBZA.CheckStatusRun(gBZA.SifLnkLst[sSerial].MBZAIF.mChStatInf[iSifCh]))
+                                {
+                                    continue;
+                                }
+                            }
+                            gBZA.SifLnkLst[sSerial].MBZAIF.condfilename[iSifCh] = filename;
+                        }
+
+                        Value = gBZA.ChLnkLst[sch];
+                        Value.mChInf.FileCond = filename;
+                        gBZA.ChLnkLst[sch] = Value;
+
+                    }
+                }
+                gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show(
+                                "No files found. Are you sure you want to delete them from the list?",
+                                "No files",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question
+                            );
+                if (result == DialogResult.Yes)
+                {
+                    gBZA.RemoveRecenDatatFile(filename); // 💡 특정 경로 삭제 메서드 호출
+                }
             }
         }
 

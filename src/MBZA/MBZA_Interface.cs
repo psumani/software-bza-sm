@@ -50,9 +50,6 @@ namespace ZiveLab.ZM
         
         public CommObj mCommZim;
         public Thread Th;
-
-        public stSystemConfig[] msystemInfo;
-
         public stButtonElements buttonElements;
 
         public MBZA_Interface(int mSetTimeOut = 8000)
@@ -1022,6 +1019,7 @@ namespace ZiveLab.ZM
 
                         if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
                         {
+                            /*
                             if (techtype == enTechType.TECH_EIS || techtype == enTechType.TECH_QIS)
                             {
                                 for (int i = 0; i < testdata.Length; i++)
@@ -1037,6 +1035,7 @@ namespace ZiveLab.ZM
                                     }
                                 }
                             }
+                            */
                             mresfile[ch].AppendData(testdata, loadcount);
                             mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
                         }
@@ -1093,6 +1092,7 @@ namespace ZiveLab.ZM
 
                         if (mCommZim.ReadData(ch, mresfile[ch].datacount, loadcount, ref testdata) == true)
                         {
+                            /*
                             if (techtype == enTechType.TECH_EIS || techtype == enTechType.TECH_QIS)
                             {
                                 for (int i = 0; i < testdata.Length; i++)
@@ -1108,6 +1108,7 @@ namespace ZiveLab.ZM
                                     }
                                 }
                             }
+                            */
                             mresfile[ch].AppendData(testdata, loadcount);
                             mChRtGrp[ch].Append(testdata, loadcount, ref OldCycle[ch]);
                         }

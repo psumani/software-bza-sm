@@ -146,6 +146,7 @@
             this.closeMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lnlAuxMenu = new System.Windows.Forms.Label();
             this.toolStripMenuAuxAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblFreq = new System.Windows.Forms.Label();
             this.toolStrip_Top.SuspendLayout();
             this.toolStrip_Bottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c1SplitContainer1)).BeginInit();
@@ -626,6 +627,7 @@
             this.tscbY1Axis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbY1Axis.Name = "tscbY1Axis";
             this.tscbY1Axis.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.tscbY1Axis.Click += new System.EventHandler(this.tscbY1Axis_Click);
             // 
             // toolStripLabel40
             // 
@@ -781,6 +783,7 @@
             | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption) 
             | NationalInstruments.UI.GraphInteractionModes.EditRange)));
             this.scGraph.Name = "scGraph";
+            this.scGraph.PlotAreaColor = System.Drawing.Color.White;
             this.scGraph.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot1});
             this.scGraph.SelectionColor = System.Drawing.Color.Red;
@@ -793,6 +796,7 @@
             this.scGraph.XAxisRangeChanged += new NationalInstruments.UI.XAxisEventHandler(this.scGraph_XAxisRangeChanged);
             this.scGraph.YAxisRangeChanged += new NationalInstruments.UI.YAxisEventHandler(this.scGraph_YAxisRangeChanged);
             this.scGraph.AfterMoveCursor += new NationalInstruments.UI.AfterMoveXYCursorEventHandler(this.scGraph_AfterMoveCursor);
+            this.scGraph.CursorsChanged += new System.ComponentModel.CollectionChangeEventHandler(this.scGraph_CursorsChanged);
             this.scGraph.InteractionModeDefaultChanged += new System.EventHandler(this.scGraph_InteractionModeDefaultChanged);
             this.scGraph.PlotAreaMouseDown += new System.Windows.Forms.MouseEventHandler(this.scGraph_PlotAreaMouseDown);
             this.scGraph.PlotAreaMouseMove += new System.Windows.Forms.MouseEventHandler(this.scGraph_PlotAreaMouseMove);
@@ -800,6 +804,7 @@
             this.scGraph.PlotAreaMouseWheel += new System.Windows.Forms.MouseEventHandler(this.scGraph_PlotAreaMouseWheel);
             this.scGraph.Zoom += new NationalInstruments.UI.ActionEventHandler(this.scGraph_Zoom);
             this.scGraph.Pan += new NationalInstruments.UI.ActionEventHandler(this.scGraph_Pan);
+            this.scGraph.CursorChanged += new System.EventHandler(this.scGraph_CursorChanged);
             this.scGraph.Paint += new System.Windows.Forms.PaintEventHandler(this.scGraph_Paint);
             this.scGraph.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scGraph_KeyDown);
             // 
@@ -808,6 +813,7 @@
             this.xyCursor.LabelFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xyCursor.LabelVisible = true;
             this.xyCursor.Plot = this.scatterPlot1;
+            this.xyCursor.SnapMode = NationalInstruments.UI.CursorSnapMode.NearestPoint;
             this.xyCursor.Visible = false;
             // 
             // scatterPlot1
@@ -1058,11 +1064,18 @@
             this.toolStripMenuAuxAll.Name = "toolStripMenuAuxAll";
             resources.ApplyResources(this.toolStripMenuAuxAll, "toolStripMenuAuxAll");
             // 
+            // lblFreq
+            // 
+            resources.ApplyResources(this.lblFreq, "lblFreq");
+            this.lblFreq.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblFreq.Name = "lblFreq";
+            // 
             // GeneralGraphForm
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.lblFreq);
             this.Controls.Add(this.lnlAuxMenu);
             this.Controls.Add(this.c1SplitContainer1);
             this.Controls.Add(this.toolStrip_Bottom);
@@ -1212,6 +1225,7 @@
         private System.Windows.Forms.ToolStripMenuItem applyGraphToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem closeMenuToolStripMenuItem;
+        private System.Windows.Forms.Label lblFreq;
     }
 }
 

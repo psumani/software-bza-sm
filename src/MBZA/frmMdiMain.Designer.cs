@@ -59,6 +59,8 @@
             this.closeAllDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.MainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -341,10 +343,25 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manualMToolStripMenuItem,
+            this.toolStripSeparator27,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // manualMToolStripMenuItem
+            // 
+            this.manualMToolStripMenuItem.Image = global::ZiveLab.ZM.Properties.Resources.HelpApplication;
+            this.manualMToolStripMenuItem.Name = "manualMToolStripMenuItem";
+            this.manualMToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.manualMToolStripMenuItem.Text = "User Manual(&M)";
+            this.manualMToolStripMenuItem.Click += new System.EventHandler(this.manualMToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator27
+            // 
+            this.toolStripSeparator27.Name = "toolStripSeparator27";
+            this.toolStripSeparator27.Size = new System.Drawing.Size(190, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -771,5 +788,7 @@
         private System.Windows.Forms.ToolStripMenuItem Memu_RstWinPos;
         private System.Windows.Forms.ToolStripMenuItem MenuconvPrrDataToTextFile;
         private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manualMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
     }
 }

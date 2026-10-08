@@ -683,7 +683,6 @@ namespace ZiveLab.ZM.ZIM.Packets
     {
         public bool bAux;
         public int nAuxChCount;
-        public double GrpSpaceRate;
         public st_GrpCh_Vars_Obj[] GrpObjs = new st_GrpCh_Vars_Obj[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
         public st_GrpCh_Vars_Item GrpItems1;
         public st_GrpCh_Vars_Item GrpItems2;
@@ -694,7 +693,6 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             bAux = false;
             nAuxChCount = 0;
-            GrpSpaceRate = 0.01;
             for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 GrpObjs[i] = new st_GrpCh_Vars_Obj();
@@ -710,7 +708,6 @@ namespace ZiveLab.ZM.ZIM.Packets
         {
             bAux = false;
             nAuxChCount = 0;
-            GrpSpaceRate = 0.01;
             for (int i = 0; i < MBZA_Constant.MAX_TECHNIQUE; i++)
             {
                 GrpObjs[i].Initialize();

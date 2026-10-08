@@ -14,7 +14,7 @@ int main()
 	m_pGlobalVar->m_MsI2CdelayStamp = 0;
 	m_pGlobalVar->m_msRefreshDC = 0;
 	m_pGlobalVar->m_msAux = 0;
-        m_pGlobalVar->m_msTmp = 0;
+    m_pGlobalVar->m_msTmp = 0;
 	m_pGlobalVar->bd_idx = -1;
 	m_pGlobalVar->m_AuxCh = -1;
 	m_pGlobalVar->m_msADC = 0;

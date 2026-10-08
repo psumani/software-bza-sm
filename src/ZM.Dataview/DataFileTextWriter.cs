@@ -401,17 +401,17 @@ namespace ZiveLab.ZM.Dataview
             list.Add(line);
             list.Add("");
 
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Test_Data_File, sDatafile));
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Schedule_File_Name, sSchfile));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Test_Data_File, sDatafile));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Schedule_File_Name, sSchfile));
             list.Add("");
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.ChInfo, string.Format("{0}/ {2}/ SIF(v{1}):{3}-{4}", sCh, sSifFwVer, sSifType, sSifSerial, sSifCh)));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.ChInfo, string.Format("{0}/ {2}/ SIF(v{1}):{3}-{4}", sCh, sSifFwVer, sSifType, sSifSerial, sSifCh)));
             if(_DataHeaderValues._ResHead.systemInfo.mSIFCfg.GetDeviceType() == eDeviceType.MCBZA)
             {
                 for (int i = 1; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
                 {
                     if (_DataHeaderValues._ResHead.systemInfo.ChkZIM[i] == 1)
                     {
-                        list.Add(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, 
+                        list.Add(string.Format("* {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, 
                             string.Format("{0}(v{1})/ {2}", 
                             _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetZimTypeString(), _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetFirmwareVer(),
                             _DataHeaderValues._ResHead.systemInfo.mZimCfg[i].GetSerialNumber())));
@@ -419,116 +419,18 @@ namespace ZiveLab.ZM.Dataview
                 }
             }
             list.Add("");
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Product_No_d, sBatId));
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Test_Duration, sTestduration));
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Test_LastStatus, sLaststatus));
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Data_Count, sDatacount));
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Tester, sTester));
-            list.Add(string.Format("  * {0} : {1}", Properties.Resources.Memo, sMemo));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Product_No_d, sBatId));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Test_Duration, sTestduration));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Test_LastStatus, sLaststatus));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Data_Count, sDatacount));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Tester, sTester));
+            list.Add(string.Format("* {0} : {1}", Properties.Resources.Memo, sMemo));
             list.Add("");
 
             return list.ToArray();
         }
 
-        /*
-        public bool WriteHeader(string sfilename, stResHeader hd, int datacount)
-        {
-            try
-            { 
-                string sReportname, sDatafile, sVersion, sTestduration, sLaststatus, sDatacount, sTester, sBatId, sMemo, sSchfile, sCh, sSifCh, sSifSerial, sSifFwVer, sSifType, sZimSerial, sZimType, sZimBoardType, sZimFwVer;
-                sReportname = string.Empty;
-
-                sReportname = Properties.Resources.Data_Report;
-                
-
-                int bytelength = CoTypeString.GetStringByteLength(sReportname);
-                string line = string.Empty;
-                for (int i = 0; i < sReportname.Length; i++)
-                {
-                    line += "=";
-                }
-
-                sDatafile = sfilename;
-                sVersion = hd.mInfo.GetVersion();
-                sTestduration = hd.mInfo.GetTestDuration();
-                sDatacount = datacount.ToString();
-                sLaststatus = ((enStatError)hd.mInfo.Error).GetDescription();
-                sTester = hd.mInfo.GetUser();
-                sBatId = hd.mInfo.GetBattId();
-                sMemo = hd.mInfo.GetMemo();
-                sSchfile = hd.GetTechFilename();
-                sCh = hd.mInfo.GetChannel();
-                sSifCh = hd.mInfo.GetSifBoardNo();
-
-                sSifSerial = hd.systemInfo.mSIFCfg.GetSerialNumber();
-                sSifFwVer = hd.systemInfo.mSIFCfg.GetFirmwareVer();
-                sSifType = string.Format("{0}({1})", hd.systemInfo.mSIFCfg.GetProductTypeString(), hd.systemInfo.mSIFCfg.GetTypeString());
-                sZimSerial = hd.systemInfo.mZimCfg[hd.mInfo.sifch].GetSerialNumber();
-                sZimType = hd.systemInfo.mZimCfg[hd.mInfo.sifch].GetZimTypeString();
-                sZimBoardType = hd.systemInfo.mZimCfg[hd.mInfo.sifch].GetBoardTypeString();
-                sZimFwVer = hd.systemInfo.mZimCfg[hd.mInfo.sifch].GetFirmwareVer();
-
-                line = line.PadRight(bytelength, '-');
-
-                _StreamWriter.WriteLine(line);
-                _StreamWriter.WriteLine(sReportname);
-                _StreamWriter.WriteLine(line);
-                _StreamWriter.WriteLine("");
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Test_Data_File, sDatafile));
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Schedule_File_Name, sSchfile));
-                _StreamWriter.WriteLine("");
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.ChInfo, string.Format("{0}/ {2}/ SIF(v{1}):{3}-{4}", sCh, sSifFwVer, sSifType, sSifSerial, sSifCh)));
-                if (hd.systemInfo.mSIFCfg.GetDeviceType() == eDeviceType.MCBZA)
-                {
-                    for (int i = 1; i < MBZA_Constant.MAX_DEV_CHANNEL; i++)
-                    {
-                        if (hd.systemInfo.ChkZIM[i] == 1)
-                        {
-                            _StreamWriter.WriteLine(string.Format("  * {0}[{1}] : {2}", Properties.Resources.AuxBoardInfo, i, string.Format("{0}(v{1})/ {2}/ SIF(v{1}):{3}-{4}", hd.systemInfo.mZimCfg[i].GetZimTypeString(), hd.systemInfo.mZimCfg[i].GetFirmwareVer(), hd.systemInfo.mZimCfg[i].GetSerialNumber())));
-                        }
-                    }
-                }
-                _StreamWriter.WriteLine("");
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Product_No_d, sBatId));
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Test_Duration, sTestduration));
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Test_LastStatus, sLaststatus));
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Data_Count, sDatacount));
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Tester, sTester));
-                _StreamWriter.WriteLine(string.Format("  * {0} : {1}", Properties.Resources.Memo, sMemo));
-                _StreamWriter.WriteLine("");
-
-                string column = string.Empty;
-                string colline = string.Empty;
-
-                for (int i = 0; i < _ColumnGeneral.Length; i++)
-                {
-                    if (i < _ColumnGeneral.Length - 1)
-                    {
-                        column += string.Format("{0}{1}", _ColumnGeneral[i], _Delimeter);
-                        colline += string.Format("{0}{1}", _ColGeneralLine[i], _Delimeter);
-                    }
-                    else
-                    {
-                        column += string.Format("{0}", _ColumnGeneral[i]);
-                        colline += string.Format("{0}", _ColGeneralLine[i]);
-                    }
-                }
-             
-                if (_Delimeter != ",")
-                    _StreamWriter.WriteLine(colline);
-                _StreamWriter.WriteLine(column);
-                if (_Delimeter != ",")
-                    _StreamWriter.WriteLine(colline);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            return true;
-        }        
-        */
-
+        
         public int WriteHeader(DataHeaderValues _DataHeaderValues)
         {
             try

@@ -14,6 +14,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Drawing;
 using ZiveLab.ZM.ZIM;
 using ZiveLab.ZM.ZIM.Packets;
+using System.Linq;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -37,7 +38,8 @@ namespace ZiveLab.ZM.Dataview
         private string _SchTempPath;
         private string _MsgBoxCaption;
         public string PathZManData;
-
+        private string PathAlwaysData;
+        
         public bool bFileOpened;
         
         private DataViewSet _dataviewset;
@@ -52,7 +54,7 @@ namespace ZiveLab.ZM.Dataview
         public ExtAppProc ExtAppPath { set { _extAppPath = value; } }
 
         public DataViewSet dataviewset { set { _dataviewset = value; } }
-        public DataEditorForm(bool viewOpenSch = true)
+        public DataEditorForm(string sLastPath = "", bool viewOpenSch = true)
         {
             InitializeComponent();
 
@@ -62,8 +64,13 @@ namespace ZiveLab.ZM.Dataview
             mResFile = new ZMF_File();
             PathZManData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "ZManData");
             _SchTempPath = Path.Combine("C:\\ZIVE DATA\\ZM\\Data\\", "Temp");
+            PathAlwaysData = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
             _DataHeaderValues = new DataHeaderValues();
             _dataviewset = DataviewCommon.LoadFromSetFile();
+
+            DataviewCommon.loadRecentDataFile(ref _dataviewset);
+            if (sLastPath.Trim().Length > 3) DataviewCommon.MemoryRecentDataFile(ref _dataviewset, sLastPath);
+
             //
             foreach (DataColItem dci in _dataviewset._dataConvSet.DataColList)
             {
@@ -348,14 +355,38 @@ namespace ZiveLab.ZM.Dataview
                      
         }
 
-        private void tsbtnOpen_Click(object sender, EventArgs e)
+        private void RecentSelDataFileItem_Click(object sender, EventArgs e)
         {
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            if (clickedItem == null) return;
+
+            string sPath = PathAlwaysData;
+            string stPath = PathAlwaysData;
+            string filePath = clickedItem.Tag as string;
+
+            if (filePath == "Select")
+            {
+                if (DataviewCommon.recentDataFiles.Count > 0)
+                {
+                    stPath =_dataviewset._GraphSetEx.OpenPath[0];
+                    if (Directory.Exists(stPath)) sPath = stPath;
+
+                }
+            }
+            else
+            {
+                if (Directory.Exists(filePath)) sPath = filePath;
+            }
+
             string filter = string.Format("{0}(*.zmf)|*.zmf|{1} (*.*)|*.*", Properties.Resources.BZADataFiles, Properties.Resources.All_Files);
-  
+
+            //frmSelectDataFolderDlg mSeldlg = new frmSelectDataFolderDlg(_AlwaysOpenPath);
+            //mSeldlg.ShowDialog();
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = Properties.Resources.Open_Data_File;
-            dlg.InitialDirectory = _EnAlwaysOpenPath ? _AlwaysOpenPath[0] : _dataviewset._GraphSetEx.OpenPath[0];
+            //dlg.InitialDirectory = mSeldlg.SelectPath;
+            dlg.InitialDirectory = sPath;
             dlg.Multiselect = false;
 
             dlg.CustomPlaces.Clear();
@@ -374,11 +405,90 @@ namespace ZiveLab.ZM.Dataview
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 LoadProc(dlg.FileName);
-                _dataviewset._GraphSetEx.ApplyPathData(Path.GetDirectoryName(dlg.FileName));
+                DataviewCommon.MemoryRecentDataFile(ref _dataviewset, Path.GetDirectoryName(dlg.FileName));
                 DataviewCommon.SaveToSetFile(_dataviewset);
             }
         }
 
+        private void OpenMenuProc(object sender, EventArgs e)
+        {
+            ToolStripButton btn = sender as ToolStripButton;
+            ContextMenuStrip recentMenu = new ContextMenuStrip();
+            recentMenu.Items.Clear();
+
+            ToolStripMenuItem item;
+            item = new ToolStripMenuItem("Select file.");
+            item.Tag = "Select"; // 실제 파일 경로는 Tag에 보관
+            item.ToolTipText = "Select"; // 마우스 올렸을 때 전체 경로 표시
+            item.Click += RecentSelDataFileItem_Click; // 클릭 이벤트 연결
+            recentMenu.Items.Add(item);
+            recentMenu.Items.Add(new ToolStripSeparator());
+
+            if (DataviewCommon.recentDataFiles.Count == 0)
+            {
+                // 최근 항목이 없을 때 안내 메시지 추가
+                ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                emptyItem.Enabled = false;
+                recentMenu.Items.Add(emptyItem);
+            }
+            else
+            {
+                if (DataviewCommon.recentDataFiles.Contains(PathAlwaysData))
+                {
+                    DataviewCommon.recentDataFiles.Remove(PathAlwaysData);
+                }
+
+                if (DataviewCommon.recentDataFiles.Count == 0)
+                {
+                    // 최근 항목이 없을 때 안내 메시지 추가
+                    ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                    emptyItem.Enabled = false;
+                    recentMenu.Items.Add(emptyItem);
+                }
+                else
+                {
+                    var uniqueArray = DataviewCommon.recentDataFiles.Cast<string>().Distinct().ToArray();
+                    System.Collections.Specialized.StringCollection uniqueCollection = new System.Collections.Specialized.StringCollection();
+                    uniqueCollection.AddRange(uniqueArray);
+
+
+                    // 최근 항목들을 메뉴에 동적으로 추가
+                    foreach (string sPath in uniqueCollection)
+                    {
+                        // 파일명만 표시하고, 전체 경로는 ToolTip이나 Tag에 저장
+                        string sShortenPath = DataviewCommon.ShortenPath(sPath);
+                        item = new ToolStripMenuItem(sShortenPath);
+
+                        item.Tag = sPath; // 실제 파일 경로는 Tag에 보관
+                        item.ToolTipText = sPath; // 마우스 올렸을 때 전체 경로 표시
+                        item.Click += RecentSelDataFileItem_Click; // 클릭 이벤트 연결
+
+                        recentMenu.Items.Add(item);
+                    }
+
+                    recentMenu.Items.Add(new ToolStripSeparator());
+                    ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Recent Items");
+                    clearItem.Click += (s, ev) =>
+                    {
+                        DataviewCommon.ClearRecenDatatFile(ref _dataviewset);
+                    };
+                    recentMenu.Items.Add(clearItem);
+                }
+            }
+
+            Rectangle bounds = btn.Bounds;
+            Point screenPoint = btn.Owner.PointToScreen(bounds.Location);
+            int x = screenPoint.X + (bounds.Width / 2);
+            int y = screenPoint.Y + bounds.Height;
+
+            recentMenu.Show(new Point(x, y));
+        }
+
+        private void tsbtnOpen_Click(object sender, EventArgs e)
+        {
+            OpenMenuProc(sender,e);
+        }
+         
         private void tsbtnReload_Click(object sender, EventArgs e)
         {
             Reload();
@@ -469,7 +579,7 @@ namespace ZiveLab.ZM.Dataview
             }            
         }
 
-        private void ConvertToZSharpProc(DataHeaderValues headval, string TargetPath)
+        private void ConvertToZSharpProc(DataHeaderValues headval, string TargetPath,List<bool> tlstauxch)
         {
             if (!backgroundWorkerZSharp.IsBusy)
             {
@@ -494,7 +604,7 @@ namespace ZiveLab.ZM.Dataview
                 ribbonLabel2.Text = "0%";
                 ribbonLabel2.Visible = true;
 
-                object[] param = new object[] { headval, TargetPath };
+                object[] param = new object[] { headval, TargetPath, tlstauxch };
 
                 this.Cursor = Cursors.AppStarting;
                 backgroundWorkerZSharp.RunWorkerAsync(param);
@@ -1256,6 +1366,7 @@ namespace ZiveLab.ZM.Dataview
 
             DataHeaderValues headval = (DataHeaderValues)param[0];
             string ZSharpTarget = (string)param[1];
+            List<bool> lstauxch = (List<bool>)param[2];
 
             int errcode;
             int length;
@@ -1265,16 +1376,20 @@ namespace ZiveLab.ZM.Dataview
             string message;
             string sSrcFile = Path.GetFileNameWithoutExtension(headval._FileName);
             string sTargetFile;
-            string []sTgFile = new string[headval.MaxAuxCh + 1];
-            DataFileTextWriter[] zwr = new DataFileTextWriter[headval.MaxAuxCh + 1];
-            bool[] bOpen = new bool[headval.MaxAuxCh + 1];
+            string []sTgFile = new string[MBZA_Constant.MAX_AUX_CHANNELS + 1];
+            DataFileTextWriter[] zwr = new DataFileTextWriter[MBZA_Constant.MAX_AUX_CHANNELS + 1];
  
             worker.ReportProgress(0);
-            for (int i=0; i< headval.MaxAuxCh + 1; i++)
+            for (int i=0; i< MBZA_Constant.MAX_AUX_CHANNELS + 1; i++)
             {
-                bOpen[i] = false;
-                if (i == 0) sTargetFile = string.Format("{0}_Main.Z#",sSrcFile);
-                else sTargetFile = string.Format("{0}_A{1:00}.Z#", sSrcFile,i);
+                sTgFile[i] = "";
+                if (i == 0) sTargetFile = string.Format("{0}_Main.Z#", sSrcFile);
+                else
+                {
+                    if (headval.MaxAuxCh <= 0) continue;
+                    if (lstauxch[i - 1] == false) continue;
+                    sTargetFile = string.Format("{0}_A{1:00}.Z#", sSrcFile, i);
+                }
 
                 sTgFile[i] = Path.Combine(ZSharpTarget, sTargetFile);
 
@@ -1309,9 +1424,6 @@ namespace ZiveLab.ZM.Dataview
                     return;
                 }
                 zwr[i].WriteColumnZSharp(_dataviewset._dataConvSet, _Pad, i);
-
-                bOpen[i] = true;
-
             }
             worker.ReportProgress(2);
             _OldPercent = -1;
@@ -1321,7 +1433,7 @@ namespace ZiveLab.ZM.Dataview
 
             for (int r = 1; r < length; r++)
             {
-                for (int i = 0; i < headval.MaxAuxCh + 1; i++)
+                for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS + 1; i++)
                 {
                     if ((worker.CancellationPending == true))
                     {
@@ -1330,8 +1442,11 @@ namespace ZiveLab.ZM.Dataview
                     }
                     else
                     {
-                        if (bOpen[i] == false) continue;
-
+                        if (i > 0 )
+                        {
+                            if (headval.MaxAuxCh <= 0) continue;
+                            if (lstauxch[i - 1] == false) continue;
+                        }
                         if (DataFlexGrid.Rows[r].IsVisible)
                         {
                             GridRowFlag grf = DataFlexGrid.Rows[r].UserData as GridRowFlag;
@@ -1348,14 +1463,17 @@ namespace ZiveLab.ZM.Dataview
 
             
             worker.ReportProgress(100);
-            e.Result = new BackgroundWorkerResult(Properties.Resources.Saved, sTgFile);
 
-            for (int i = 0; i < headval.MaxAuxCh + 1; i++)
+            e.Result = new object[] { Properties.Resources.Saved, headval, sTgFile, lstauxch };
+
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS + 1; i++)
             {
-                if(bOpen[i] == true)
+                if (i > 0)
                 {
-                    zwr[i].Close();
+                    if (headval.MaxAuxCh <= 0) continue;
+                    if (lstauxch[i - 1] == false) continue;
                 }
+                zwr[i].Close();
             }
 
 
@@ -1464,8 +1582,13 @@ namespace ZiveLab.ZM.Dataview
 
         private void backgroundWorkerZSharp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            BackgroundWorkerResult result = (BackgroundWorkerResult)e.Result;
+            object[] resArr = (object[])e.Result;
 
+            string sResult = (string)resArr[0];
+            DataHeaderValues dhv = (DataHeaderValues)resArr[1];
+            string[] sTgFile = (string[])resArr[2];
+            List<bool> lstauxch = (List<bool>)resArr[3];
+            
             tsbtnOpen.Enabled = true;
             tsbtnReload.Enabled = true;
             tsbtnStop.Enabled = false;
@@ -1481,20 +1604,19 @@ namespace ZiveLab.ZM.Dataview
             groupBoxViewOpt.Enabled = true;
             tsbtnPrint.Enabled = true;
 
-            ribbonLabel1.Text = result.Result;
+            ribbonLabel1.Text = sResult;
             ribbonProgressBar1.Visible = false;
             ribbonLabel2.Visible = false;
 
             this.Cursor = Cursors.Default;
-            string[] sTgFile = (string[])result.UserData1;
             string filename;
-            if (_DataHeaderValues.MaxAuxCh == 0)
+            if (dhv.MaxAuxCh == 0)
             {
                 filename = sTgFile[0];
             }
             else
             {
-                frmSelTarget frm = new frmSelTarget(_LangIdx, _DataHeaderValues.MaxAuxCh);
+                frmSelTarget frm = new frmSelTarget(_LangIdx, dhv.MaxAuxCh, lstauxch);
                 if(frm.ShowDialog() == DialogResult.Cancel)
                 {
                     return;
@@ -2906,6 +3028,7 @@ namespace ZiveLab.ZM.Dataview
         {
             try
             {
+                List<bool> lstauxch = new List<bool>(); ;
                 if (_DataHeaderValues.bDCOnly)
                 {
                     MessageBox.Show("No impedance data.");
@@ -2924,6 +3047,24 @@ namespace ZiveLab.ZM.Dataview
                 string Initdir = Path.Combine(PathZManData, Path.GetFileNameWithoutExtension(_DataHeaderValues._FileName));
                 Directory.CreateDirectory(Initdir);
 
+                if (_DataHeaderValues.MaxAuxCh > 0)
+                {
+                    frmSelAuxConvZMan frm = new frmSelAuxConvZMan(_dataviewset, _DataHeaderValues);
+
+                    if (frm.DialogResult == DialogResult.OK)
+                    {
+                        lstauxch = frm.lstaux;
+                        _dataviewset._dataConvSet.ConvAuxList = frm.dvs._dataConvSet.ConvAuxList;
+                        DataviewCommon.SaveToSetFile(_dataviewset);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The operation has been canceled.");
+                        return;
+                    }
+
+                }
+
 
                 CommonOpenFileDialog dialog = new CommonOpenFileDialog(Initdir);
                 dialog.IsFolderPicker = true;
@@ -2933,7 +3074,7 @@ namespace ZiveLab.ZM.Dataview
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     Initdir = dialog.FileName;
-                    ConvertToZSharpProc(_DataHeaderValues, Initdir);
+                    ConvertToZSharpProc(_DataHeaderValues, Initdir, lstauxch);
                 }
 
             }
@@ -2972,6 +3113,11 @@ namespace ZiveLab.ZM.Dataview
         private void ChkEISAux_CheckedChanged(object sender, EventArgs e)
         {
             RefreshCoulmn();
+        }
+
+        private void DataFlexGrid_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public class BackgroundWorkerResult

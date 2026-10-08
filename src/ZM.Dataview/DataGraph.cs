@@ -14,6 +14,7 @@ namespace ZiveLab.ZM.Dataview
         public uint Cycle { get; set; }
         public uint MaxAuxCh { get; set; }
         public bool[] EnableAuxbd { get; set; }
+
         public double []XData { get; set; }
         public double []YData { get; set; }
 
@@ -26,7 +27,6 @@ namespace ZiveLab.ZM.Dataview
         public GraphDataFormat()
         {
             int i;
-
             XData = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             XDataStr = new string[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             XDataObj = new object[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
@@ -57,12 +57,15 @@ namespace ZiveLab.ZM.Dataview
     {
         public uint Step { get; set; }
         public uint Cycle { get; set; }
-
+        public double Freq { get; set; }
         public double []Data { get; set; }
         public string []DataStr { get; set; }
         public object []DataObj { get; set; }
         public GraphDataFormatX()
         {
+            Freq = 0.0;
+            Step = 0;
+            Cycle = 0;
             Data = new double[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             DataStr = new string[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
             DataObj = new object[MBZA_Constant.MAX_AUXTYPE_CHANNELS];
@@ -136,11 +139,11 @@ namespace ZiveLab.ZM.Dataview
                 return null;
 
             GraphDataList gdList = new GraphDataList();
-
-            for(int i = 0; i < DataX.DataList.Count; i++)
+            gdList.Clear();
+            for (int i = 0; i < DataX.DataList.Count; i++)
             {
                 GraphDataFormat gdf = new GraphDataFormat();
-
+                
                 gdf.Step = DataX.DataList[i].Step;
                 gdf.Cycle = DataX.DataList[i].Cycle;
                 for (int j = 0; j < MBZA_Constant.MAX_AUXTYPE_CHANNELS; j++)

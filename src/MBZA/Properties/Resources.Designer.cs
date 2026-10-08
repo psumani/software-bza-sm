@@ -603,6 +603,16 @@ namespace ZiveLab.ZM.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap HelpApplication {
+            get {
+                object obj = ResourceManager.GetObject("HelpApplication", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Link {
             get {
                 object obj = ResourceManager.GetObject("Link", resourceCulture);
@@ -916,6 +926,16 @@ namespace ZiveLab.ZM.Properties {
         internal static System.Drawing.Bitmap PanY {
             get {
                 object obj = ResourceManager.GetObject("PanY", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap PathListBoxItem {
+            get {
+                object obj = ResourceManager.GetObject("PathListBoxItem", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

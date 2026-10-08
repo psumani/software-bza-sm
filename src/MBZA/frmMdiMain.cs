@@ -64,10 +64,18 @@ namespace ZiveLab.ZM
             gBZA._ExtAppPath = new ExtAppProc();
             gBZA.appcfg = new AppConfig();
             gBZA.mDataViewSet = new DataViewSet();
-            
+
+            if (!File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                Properties.Settings.Default.Save();
+            }
+
             gBZA.LoadAppCfg();
 
             gBZA.LoadDataViewSet();
+
+            gBZA.loadRecentDataFile();
+            gBZA.loadRecentSchFile();
 
             gBZA.FileGrpVars = Path.Combine(gBZA.appcfg.PathSysInfo, "GraphVars.cfg");
             gBZA.FileCalGrpVars = Path.Combine(gBZA.appcfg.PathSysInfo, "CalGraphVars.cfg");
@@ -75,7 +83,7 @@ namespace ZiveLab.ZM
             gBZA.grpvars = new st_GrpCh_vars();
             gBZA.LoadXmlToGrpVars();
 
-            //MakeAppFolder();
+            MakeAppFolder();
 
             bRefresh = false;
             bExit = false;
@@ -134,6 +142,8 @@ namespace ZiveLab.ZM
             {
                 gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
             }
+
+            
         }
 
         
@@ -199,32 +209,17 @@ namespace ZiveLab.ZM
 
                 if (gBZA.appcfg.FileNameSIFFW.Length < 5) gBZA.appcfg.FileNameSIFFW = "default.sif";
 
-                if (gBZA.appcfg.PathData[0].Length < 5)
-                {
-                    gBZA.appcfg.PathData[0] = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data");
-                    gBZA.mDataViewSet._GraphSetEx.OpenPath = gBZA.appcfg.PathData;
-                }
-                if (!System.IO.Directory.Exists(gBZA.appcfg.PathData[0]))
-                {
-                    System.IO.Directory.CreateDirectory(gBZA.appcfg.PathData[0]);
-                }
-
-                if (gBZA.appcfg.PathSch.Length < 5) gBZA.appcfg.PathSch[0] = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
-                if (!System.IO.Directory.Exists(gBZA.appcfg.PathSch[0]))
-                {
-                    System.IO.Directory.CreateDirectory(gBZA.appcfg.PathSch[0]);
-                }
-
+                
                 if (gBZA.appcfg.PathSysInfo.Length < 5) gBZA.appcfg.PathSysInfo = Path.Combine("C:\\ZIVE DATA\\ZM\\", "infor");
 
-                if (!System.IO.Directory.Exists(Path.GetDirectoryName(gBZA.appcfg.PathSysInfo)))
+                if (!System.IO.Directory.Exists(gBZA.appcfg.PathSysInfo))
                 {
                     System.IO.Directory.CreateDirectory(gBZA.appcfg.PathSysInfo);
                 }
 
                 if (gBZA.appcfg.PathRangeInfo.Length < 5) gBZA.appcfg.PathRangeInfo = Path.Combine("C:\\ZIVE DATA\\ZM\\", "infor\\board");
 
-                if (!System.IO.Directory.Exists(Path.GetDirectoryName(gBZA.appcfg.PathRangeInfo)))
+                if (!System.IO.Directory.Exists(gBZA.appcfg.PathRangeInfo))
                 {
                     System.IO.Directory.CreateDirectory(gBZA.appcfg.PathRangeInfo);
                 }
@@ -237,7 +232,7 @@ namespace ZiveLab.ZM
 
                 if (gBZA.appcfg.PathLog.Length < 5) gBZA.appcfg.PathLog = Path.Combine("C:\\ZIVE DATA\\ZM\\", "log");
 
-                if (!System.IO.Directory.Exists(Path.GetDirectoryName(gBZA.appcfg.PathLog)))
+                if (!System.IO.Directory.Exists(gBZA.appcfg.PathLog))
                 {
                     System.IO.Directory.CreateDirectory(gBZA.appcfg.PathLog);
                 }
@@ -1002,6 +997,11 @@ namespace ZiveLab.ZM
             frmTech.WindowState = FormWindowState.Normal;
         }
 
+        private void GgForm_RefreshDataViewSet(object sender, EventArgs e)
+        {
+            gBZA.LoadDataViewSet();
+        }
+
         private void EgForm_OpenTechEditorClick(object sender, EventArgs e)
         {
             DataViewEventArgs dvea = (DataViewEventArgs)e;
@@ -1027,20 +1027,18 @@ namespace ZiveLab.ZM
 
         private void OpenGraph(string[] filename = null) // 폼생성
         {
-            GeneralGraphForm ggForm = new GeneralGraphForm(0);
-
-
-
+            string sLatPath = "";
+            if (gBZA.appcfg.PathData[0].Trim().Length > 5) sLatPath = gBZA.appcfg.PathData[0];
+            GeneralGraphForm ggForm = new GeneralGraphForm(0, sLatPath);
 
             var assembly = Assembly.GetExecutingAssembly();
             AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute));
 
             ggForm.MsgBoxCaption = titleAttribute.Title;
-            ggForm.EnAlwaysOpenPath = false;
-            ggForm.AlwaysOpenPath = gBZA.appcfg.PathData;
             ggForm.AllowTransparency = false;
             ggForm.OpenDataEditorClick += EgForm_OpenDataEditorClick;
             ggForm.OpenSchEditorClick += EgForm_OpenTechEditorClick;
+            ggForm.RefreshDataViewSet += GgForm_RefreshDataViewSet;
             ggForm.PathZManData = gBZA.appcfg.PathZManData;
             ggForm.ExtAppPath = gBZA._ExtAppPath;
             ggForm.SchTempPath = gBZA.appcfg.PathSchTemp;
@@ -1730,6 +1728,22 @@ namespace ZiveLab.ZM
             if (frm.ShowDialog() == DialogResult.OK)
             {
                
+            }
+        }
+
+        private void manualMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Manual");
+                Directory.CreateDirectory(folderPath);
+                // explorer.exe와 경로를 함께 전달하여 실행
+                Process.Start("explorer.exe", folderPath);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                // 폴더가 존재하지 않거나 권한이 없을 때 예외 처리
+                Console.WriteLine($"폴더를 찾을 수 없습니다: {ex.Message}");
             }
         }
     }

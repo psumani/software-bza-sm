@@ -11,8 +11,6 @@ namespace ZiveLab.ZM
     {
         private int Channel;
         private Timer refreshTimer;
-        //private double VdcThreshold = 1.0;
-        public static double VdcThreshold = 1.0;
         public frmAuxVdc(int ch)
         {
             InitializeComponent();
@@ -22,8 +20,8 @@ namespace ZiveLab.ZM
             string sch = Channel.ToString();
 
 
-            this.Text = string.Format("Auxiliary DC Voltage Monitoring of channel {0}.", Channel + 1);
-
+            this.Text = string.Format("Auxiliary Cell Voltage Monitor[{0}].", Channel + 1);
+            
             if (gBZA.ChLnkLst.ContainsKey(sch) == false)
             {
                 MessageBox.Show("The channel information could not be found, or the channel does not support auxiliary channels.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -40,11 +38,27 @@ namespace ZiveLab.ZM
             }
 
             if ((eDeviceType)Value.mDevInf.mSysCfg.mSIFCfg.Type != eDeviceType.MCBZA)
+             {
+                 MessageBox.Show("The channel information could not be found, or the channel does not support auxiliary channels.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                 this.DialogResult = DialogResult.OK;
+                 return;
+             }
+             
+            CheckBox chkbox;
+            for (int i = 0; i<MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
-                MessageBox.Show("The channel information could not be found, or the channel does not support auxiliary channels.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                this.DialogResult = DialogResult.OK;
-                return;
+                chkbox = this.Controls.Find($"chkauxvdc{i + 1}", true).FirstOrDefault() as CheckBox;
+                chkbox.Checked = gBZA.appcfg.ViewMonAuxCh[i];
             }
+
+            cbocalctype.Items.Clear();
+
+            cbocalctype.Items.Add("StDev");
+            cbocalctype.Items.Add("Average");
+            cbocalctype.Items.Add("Maximum");
+            cbocalctype.Items.Add("Minimum");
+
+            cbocalctype.SelectedIndex = 0;
 
             InitChart();
             this.Load += FrmAuxVdc_Load;
@@ -73,7 +87,7 @@ namespace ZiveLab.ZM
 
 
             this.Text = string.Format("Auxiliary DC Voltage Monitoring of channel {0}.", Channel + 1);
-
+            
             if (gBZA.ChLnkLst.ContainsKey(sch) == false)
             {
                 MessageBox.Show("The channel information could not be found, or the channel does not support auxiliary channels.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -88,14 +102,14 @@ namespace ZiveLab.ZM
                 this.DialogResult = DialogResult.OK;
                 return;
             }
-
+            
             if ((eDeviceType)Value.mDevInf.mSysCfg.mSIFCfg.Type != eDeviceType.MCBZA)
             {
                 MessageBox.Show("The channel information could not be found, or the channel does not support auxiliary channels.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 this.DialogResult = DialogResult.OK;
                 return;
             }
-
+            
             Channel = ch;
             this.Text = string.Format("Auxiliary DC Voltage Monitoring of channel {0}.", Channel + 1);
         }
@@ -125,6 +139,8 @@ namespace ZiveLab.ZM
             chart1.ChartAreas[0].AxisX.IsLabelAutoFit = false;
             chart1.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
 
+            
+
             Legend legend = new Legend("Legend1");
             chart1.Legends.Add(legend);
             legend.BackColor = this.BackColor;
@@ -132,7 +148,7 @@ namespace ZiveLab.ZM
 
             LegendItem itemGreen = new LegendItem();
             //itemGreen.Name = "Stable";
-            itemGreen.Name = $"Above Voltage({VdcThreshold:##0.000} V)";
+            itemGreen.Name = $"Above Voltage({gBZA.appcfg.VdcThreshold:##0.000} V)";
             itemGreen.Color = Color.Green;
             legend.CustomItems.Add(itemGreen);
 
@@ -149,7 +165,7 @@ namespace ZiveLab.ZM
                 var legend = chart1.Legends[0];
                 if (legend.CustomItems.Count > 0)
                 {
-                    legend.CustomItems[0].Name = $"Above Voltage({VdcThreshold:##0.000} V)";
+                    legend.CustomItems[0].Name = $"Above Voltage({gBZA.appcfg.VdcThreshold:##0.000} V)";
                 }
             }
         }
@@ -157,9 +173,6 @@ namespace ZiveLab.ZM
 
         private void RefreshChart(object sender, EventArgs e)
         {
-
-            
-
             string sch = Channel.ToString();
             if (gBZA.ChLnkLst.ContainsKey(sch) == false)
             {
@@ -175,69 +188,144 @@ namespace ZiveLab.ZM
                 this.DialogResult = DialogResult.OK;
                 return;
             }
-
+            
             if ((eDeviceType)Value.mDevInf.mSysCfg.mSIFCfg.Type != eDeviceType.MCBZA)
             {
                 MessageBox.Show("The channel information could not be found, or the channel does not support auxiliary channels.", gBZA.sMsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 this.DialogResult = DialogResult.OK;
                 return;
             }
-
-            var auxValues = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Aux_Vdc;
-
-
+            
+            
+            
             if (chart1 == null || chart1.IsDisposed) return;
             if (chart1.Series.Count == 0) return;
-
+            
             var series0 = chart1.Series[0];
             series0.Points.Clear();
+    
 
-            for (int i = 0; i < 12; i++)
+
+            var auxValues = gBZA.SifLnkLst[Value.sSerial].MBZAIF.mChStatInf[Value.SifCh].Aux_Vdc;
+            double[] RaW = new double[MBZA_Constant.MAX_AUX_CHANNELS];
+            double vdcValue;
+            double VMax = MBZA_Constant.MAX_INITVALUE;
+            double VMin = MBZA_Constant.MIN_INITVALUE;
+            double VAvg = 0.0; 
+            double VTotal = 0.0;
+            int nCount = 0;
+            double std = 1.0;
+
+            int ChartPoint = 0;
+
+            int auxbd;
+
+            chart1.ChartAreas[0].AxisY.StripLines[0].IntervalOffset = gBZA.appcfg.VdcThreshold;
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
             {
-                series0.Points.AddXY("Ch" + (i + 1), 0);
-                series0.Points[i].Color = Color.Transparent;
-            }
+                RaW[i] = 0.0;
+                auxbd = i / 4 + 1;
+                CheckBox chkbox = this.Controls.Find($"chkauxvdc{i + 1}", true).FirstOrDefault() as CheckBox;
+                if (chkbox == null) continue;
 
-            for (int i = 0; i < auxValues.Length && i < 12; i++)
-            {
-                double vdcValue = auxValues[i];
-
-                if (vdcValue > 0)
+                
+                if (Value.mDevInf.mSysCfg.EnaZIM[auxbd] == 0 || Value.mDevInf.mSysCfg.ChkZIM[auxbd] == 0)
                 {
-                    series0.Points[i].SetValueY(vdcValue);
+                    chkbox.Enabled = false;
+                    chkbox.Checked = false;
+                    chkbox.Text = $"Ch {i + 1,2}: None.";
+                    continue;
+                }
+                
+                chkbox.Enabled = true;
+                vdcValue = auxValues[i];
+                chkbox.Text = $"Ch {i + 1,2}: {vdcValue,7:##0.000} V";
+                if (chkbox.Checked == false) continue;
 
-                    if (vdcValue >= VdcThreshold)
-                        series0.Points[i].Color = Color.Green;
+                RaW[nCount] = vdcValue;
+                if (VMax < vdcValue) VMax = vdcValue;
+                if (VMin > vdcValue) VMin = vdcValue;
+                VTotal += vdcValue;
+                nCount++;
+                
+
+
+                series0.Points.AddXY("Ch" + (i + 1), vdcValue);
+                series0.Points[ChartPoint].Color = Color.Transparent;
+
+               // if (vdcValue > 0 )
+                {
+                    if (vdcValue >= gBZA.appcfg.VdcThreshold)
+                        series0.Points[ChartPoint].Color = Color.Green;
                     else
-                        series0.Points[i].Color = Color.Red;
+                        series0.Points[ChartPoint].Color = Color.Red;
+                }
+                ChartPoint++;
+            }
+            VAvg = VTotal / nCount;
+
+            double dTemp = 0.0;
+            VTotal = 0.0;
+            for (int i = 0; i < nCount; i++)
+            {
+                dTemp = RaW[i] - VAvg;
+                VTotal += (dTemp * dTemp);
+            }
+            if (VTotal <= 0.0f || nCount <= 1) std = 0.0f;
+            else
+            {
+                VTotal /= (nCount-1);
+                std = Math.Sqrt(VTotal);
+            }
+
+            if(cbocalctype.SelectedIndex == 1) txtcalc.Text = $"{VAvg,7:##0.000} V";
+            else if (cbocalctype.SelectedIndex == 2) txtcalc.Text = $"{VMax,7:##0.000} V";
+            else if (cbocalctype.SelectedIndex == 3) txtcalc.Text = $"{VMin,7:##0.000} V";
+            else txtcalc.Text = $"{std,6:##0.0##} V";
+            
+            if (gBZA.appcfg.VdcAutoRange)
+            {
+                double absmax = VMax - VMin;
+                if (absmax == 0) absmax = 0.1;
+                if (VMax == 0.0)
+                {
+                     chart1.ChartAreas[0].AxisY.Maximum = absmax * 0.1;
+                }
+                else
+                {
+                    chart1.ChartAreas[0].AxisY.Maximum = VMax + (absmax * 0.1);
                 }
 
-                Label lbl = this.Controls.Find($"AuxVdclabel{i + 1}", true).FirstOrDefault() as Label;
-                if (lbl != null)
+                if (VMin == 0.0)
                 {
-                    lbl.Text = $"Ch {i + 1,2}: {vdcValue,6:##0.00} V";
+                    chart1.ChartAreas[0].AxisY.Minimum = absmax * -0.1;
+                }
+                else
+                {
+                    chart1.ChartAreas[0].AxisY.Minimum = VMin - (absmax * 0.1);
                 }
             }
+            else
+            {
+                chart1.ChartAreas[0].AxisY.Maximum = gBZA.appcfg.VdcMaxVal;
+                chart1.ChartAreas[0].AxisY.Minimum = gBZA.appcfg.VdcMinVal;
+            }
+            
         }
-
-        //private void VdcSetButton_Click(object sender, EventArgs e)
-        //{
-        //    using (frmSetVdcReference form = new frmSetVdcReference())
-        //    {
-        //        form.StartPosition = FormStartPosition.CenterParent;
-        //        form.ShowDialog(this);
-        //    }
-        //}
 
         private void VdcSetButton_Click(object sender, EventArgs e)
         {
-            using (frmSetVdcReference form = new frmSetVdcReference(VdcThreshold))
+            using (frmSetVdcReference form = new frmSetVdcReference(gBZA.appcfg.VdcThreshold, gBZA.appcfg.VdcMaxVal, gBZA.appcfg.VdcMinVal, gBZA.appcfg.VdcAutoRange))
             {
                 form.StartPosition = FormStartPosition.CenterParent;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
-                    VdcThreshold = form.ReferenceValue;
+                    gBZA.appcfg.VdcThreshold = form.ReferenceValue;
+                    gBZA.appcfg.VdcMaxVal = form.MaxValue;
+                    gBZA.appcfg.VdcMinVal = form.MinValue;
+                    gBZA.appcfg.VdcAutoRange = form.AutoRange;
                     UpdateLegendAndLabel();
+                    gBZA.SaveAppCfg();
                 }
             }
         }
@@ -245,6 +333,78 @@ namespace ZiveLab.ZM
         private void chart1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkauxvdc1_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[0] = chkauxvdc1.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc2_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[1] = chkauxvdc2.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc3_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[2] = chkauxvdc3.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc4_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[3] = chkauxvdc4.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc5_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[4] = chkauxvdc5.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc6_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[5] = chkauxvdc6.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc7_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[6] = chkauxvdc7.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc8_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[7] = chkauxvdc8.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc9_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[8] = chkauxvdc9.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc10_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[9] = chkauxvdc10.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc11_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[10] = chkauxvdc11.Checked;
+            gBZA.SaveAppCfg();
+        }
+
+        private void chkauxvdc12_CheckedChanged(object sender, EventArgs e)
+        {
+            gBZA.appcfg.ViewMonAuxCh[11] = chkauxvdc12.Checked;
+            gBZA.SaveAppCfg();
         }
     }
 }

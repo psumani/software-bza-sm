@@ -39,7 +39,6 @@ namespace ZiveLab.ZM
         
 
         int LegItems;
-        double GrpSpaceRate;
         bool xTimemode;
         FormatString fs_ss;
         FormatString fs_mm;
@@ -109,7 +108,6 @@ namespace ZiveLab.ZM
             barr[2] = false;
 
             bSearch = false;
-            GrpSpaceRate = 0.05;
             enType = enTechType1.TECH_ERR;
             sFilename = "";
 
@@ -2661,7 +2659,7 @@ namespace ZiveLab.ZM
 
             LetPlotsInvisible();
             string sVolt = "Vdc";
-            if (mHead.tech.GetHFRLoadOff()) sVolt = "Eoc";
+            if (mHead.tech.GetHFRLoadOff()) sVolt = "Vdc";
 
 
             grp1.XAxes[0].Caption = "Time";
@@ -2780,10 +2778,6 @@ namespace ZiveLab.ZM
 
         private void RefreshGraphEIS()
         {
-            //double maxval;
-            //double minval;
-            //double cmpval;
-
             int plotcount = mRtData.rtgrp.item[0].plot[0].ly[0].Count;
 
             double[] tx = null;
@@ -2818,103 +2812,6 @@ namespace ZiveLab.ZM
             }
             grp1.XAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[0].Mode = AxisMode.AutoScaleLoose;
-            //grp1.YAxes[1].Mode = AxisMode.Fixed;
-
-            // set y axis
-            /*maxval = mRtData.rtgrp.item[0].plot[0].Maxval[0];
-            minval = mRtData.rtgrp.item[0].plot[0].Minval[0];
-
-            for(int i=1; i< MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[0])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[0];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[0])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[0];
-                }
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[1])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[1];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[1])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[1];
-                }
-            }
-            cmpval = Math.Abs(maxval);
-            if (cmpval < Math.Abs(minval))
-            {
-                cmpval = Math.Abs(minval);
-            }
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval)
-            {
-                if (maxval == 0.0)
-                {
-                    minval = -1.0;
-                    maxval = +1.0;
-                }
-                else
-                {
-                    minval -= minval * 0.1;
-                    maxval += maxval * 0.1;
-                }
-            }
-            else if (maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[0].Range = new Range(minval, maxval);
-
-            // set x axis
-            maxval = mRtData.rtgrp.item[0].plot[0].Maxval[2];
-            minval = mRtData.rtgrp.item[0].plot[0].Minval[2];
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[2])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[2];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[2])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[2];
-                }
-            }
-
-            cmpval = Math.Abs(maxval);
-            if (cmpval < Math.Abs(minval))
-            {
-                cmpval = Math.Abs(minval);
-            }
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval)
-            {
-                if (maxval == 0.0)
-                {
-                    minval = -1.0;
-                    maxval = +1.0;
-                }
-                else
-                {
-                    minval -= minval * 0.1;
-                    maxval += maxval * 0.1;
-                }
-            }
-            else if (maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            
-            grp1.XAxes[0].Range = new Range(minval, maxval);
-            */
         }
 
 
@@ -2926,14 +2823,7 @@ namespace ZiveLab.ZM
 
         private void RefreshGraphHFR()
         {
-            //double maxval;
-           // double minval;
-            //double cmpval;
             int nPlot = 0;
-
-            // item[0].plot[0]: main Zre
-            // item[0].plot[1]: vdc
-            // item[ch].plot[0]: aux Zre
             int plotcount = mRtData.rtgrp.item[0].plot[1].ly[0].Count;
 
             InitGraphType();
@@ -2983,79 +2873,7 @@ namespace ZiveLab.ZM
             grp1.XAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[1].Mode = AxisMode.AutoScaleLoose;
-
-            // y axis0
-            /*cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Maxval[0]);
-            if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]))
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]);
-            }
-            maxval = mRtData.rtgrp.item[0].plot[0].Maxval[0];
-            minval = mRtData.rtgrp.item[0].plot[0].Minval[0];
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[0])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[0];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[0])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[0];
-                }
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[1])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[1];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[1])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[1];
-                }
-            }
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[0].Range = new Range(minval, maxval);
-
-            // y axis1
-            maxval = mRtData.rtgrp.item[0].plot[1].Maxval[0];
-            minval = mRtData.rtgrp.item[0].plot[1].Minval[0];
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[1].Maxval[0])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[1].Maxval[0];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[1].Minval[0])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[1].Minval[0];
-                }
-                if (maxval < mRtData.rtgrp.item[i].plot[1].Maxval[1])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[1].Maxval[1];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[1].Minval[1])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[1].Minval[1];
-                }
-            }
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[1].Range = new Range(minval, maxval);
-            */
-
+            
             RefreshGraphAxisTimeView(time);
         }
 
@@ -3086,11 +2904,6 @@ namespace ZiveLab.ZM
         }
         private void RefreshGraphPRR()
         {
-
-            //double maxval;
-            //double minval;
-            //double cmpval;
-
             if (mRtData.arrcnt == 0) return;
 
             int plotcount = mRtData.rtgrp.item[0].plot[0].ly[0].Count;
@@ -3141,107 +2954,7 @@ namespace ZiveLab.ZM
             grp1.XAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[1].Mode = AxisMode.AutoScaleLoose;
-
-            /*
-            cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Maxval[0]);
-            if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]))
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]);
-            }
-            maxval = mRtData.rtgrp.item[0].plot[0].Maxval[0];
-            minval = mRtData.rtgrp.item[0].plot[0].Minval[0];
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[0])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[0];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[0])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[0];
-                }
-                if (mRtData.arrcnt >= 3)
-                {
-                    if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[1])
-                    {
-                        maxval = mRtData.rtgrp.item[i].plot[0].Maxval[1];
-                    }
-                    if (minval > mRtData.rtgrp.item[i].plot[0].Minval[1])
-                    {
-                        minval = mRtData.rtgrp.item[i].plot[0].Minval[1];
-                    }
-                }
-            }
             
-
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[0].Range = new Range(minval, maxval);
-            if (mRtData.arrcnt >= 3)
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Maxval[2]);
-                if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[2]))
-                {
-                    cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[2]);
-                }
-                maxval = mRtData.rtgrp.item[0].plot[0].Maxval[2];
-                minval = mRtData.rtgrp.item[0].plot[0].Minval[2];
-            }
-            else
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Maxval[1]);
-                if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[1]))
-                {
-                    cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[1]);
-                }
-                maxval = mRtData.rtgrp.item[0].plot[0].Maxval[1];
-                minval = mRtData.rtgrp.item[0].plot[0].Minval[1];
-            }
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                
-                if (mRtData.arrcnt >= 3)
-                {
-                    if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[2])
-                    {
-                        maxval = mRtData.rtgrp.item[i].plot[0].Maxval[2];
-                    }
-                    if (minval > mRtData.rtgrp.item[i].plot[0].Minval[2])
-                    {
-                        minval = mRtData.rtgrp.item[i].plot[0].Minval[2];
-                    }
-                }
-                else
-                {
-                    if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[1])
-                    {
-                        maxval = mRtData.rtgrp.item[i].plot[0].Maxval[1];
-                    }
-                    if (minval > mRtData.rtgrp.item[i].plot[0].Minval[1])
-                    {
-                        minval = mRtData.rtgrp.item[i].plot[0].Minval[1];
-                    }
-                }
-            }
-
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[1].Range = new Range(minval, maxval);
-            */
             RefreshGraphAxisTimeView(time);
         }
 
@@ -3249,11 +2962,7 @@ namespace ZiveLab.ZM
         {
             double maxval;
             double minval;
-            double cmpval;
-
-            // item[0].plot[0]: main vdc
-            // item[0].plot[1]: temperature
-            // item[ch].plot[0]: aux vdc
+            double runscale; ;
             int plotcount = mRtData.rtgrp.item[0].plot[1].ly[0].Count;
  
             InitGraphType();
@@ -3298,66 +3007,19 @@ namespace ZiveLab.ZM
             grp1.XAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[1].Mode = AxisMode.Fixed;
-           /* cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Maxval[0]);
-            if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]))
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]);
-            }
-            maxval = mRtData.rtgrp.item[0].plot[0].Maxval[0];
-            minval = mRtData.rtgrp.item[0].plot[0].Minval[0];
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[0])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[0];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[0])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[0];
-                }
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[1])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[1];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[1])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[1];
-                }
-            }
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[0].Range = new Range(minval, maxval);
-            */
+           
             tx = mRtData.rtgrp.item[0].plot[1].lx[0].ToArray();
             ty = mRtData.rtgrp.item[0].plot[1].ly[0].ToArray();
             Array.Copy(tx, 0, ptx, 0, plotcount);
             Array.Copy(ty, 0, pty, 0, plotcount);
             grp1.Plots[1].PlotXYAppend(ptx, pty);
-            //grp1.Plots[1+nPlot1].PlotXY(rtgrp.plot[1].lx[0].ToArray(), rtgrp.plot[1].ly[0].ToArray());
 
-            cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[1].Maxval[0]);
-            if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[1].Minval[0]))
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[1].Minval[0]);
-            }
-            
-            maxval = mRtData.rtgrp.item[0].plot[1].Maxval[0] + (cmpval * GrpSpaceRate);
-            minval = mRtData.rtgrp.item[0].plot[1].Minval[0] - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
+            maxval = mRtData.rtgrp.item[0].plot[1].Maxval[0];
+            minval = mRtData.rtgrp.item[0].plot[1].Minval[0];
+            runscale = mRtData.rtgrp.item[0].plot[1].RunScale[0];
+            gBZA.GraphSpaceProc(ref maxval, ref minval, runscale);
             grp1.YAxes[1].Range = new Range(minval, maxval);
 
-            
             RefreshGraphAxisTimeView(time);
         }
 
@@ -3365,13 +3027,9 @@ namespace ZiveLab.ZM
         {
             double maxval;
             double minval;
-            double cmpval;
-
-            // item[0].plot[0]: main vdc
-            // item[0].plot[1]: temperature
-            // item[ch].plot[0]: aux vdc
+            double runscale;
             int plotcount = mRtData.rtgrp.item[0].plot[1].ly[0].Count;
-
+        
             InitGraphType();
 
             if (plotcount == 0) return;
@@ -3416,58 +3074,18 @@ namespace ZiveLab.ZM
             grp1.XAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[0].Mode = AxisMode.AutoScaleLoose;
             grp1.YAxes[1].Mode = AxisMode.Fixed;
-            // vdc y axis
-            /*cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Maxval[0]);
-            if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]))
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[0].Minval[0]);
-            }
-            maxval = mRtData.rtgrp.item[0].plot[0].Maxval[0];
-            minval = mRtData.rtgrp.item[0].plot[0].Minval[0];
-
-            for (int i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
-            {
-                if (mRtData.bChannel[i] == false) continue;
-                if (maxval < mRtData.rtgrp.item[i].plot[0].Maxval[0])
-                {
-                    maxval = mRtData.rtgrp.item[i].plot[0].Maxval[0];
-                }
-                if (minval > mRtData.rtgrp.item[i].plot[0].Minval[0])
-                {
-                    minval = mRtData.rtgrp.item[i].plot[0].Minval[0];
-                }
-            }
-            maxval = maxval + (cmpval * GrpSpaceRate);
-            minval = minval - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
-            grp1.YAxes[0].Range = new Range(minval, maxval);
-            */
+            
             tx = mRtData.rtgrp.item[0].plot[1].lx[0].ToArray();
             ty = mRtData.rtgrp.item[0].plot[1].ly[0].ToArray();
             Array.Copy(tx, 0, ptx, 0, plotcount);
             Array.Copy(ty, 0, pty, 0, plotcount);
             grp1.Plots[1].PlotXYAppend(ptx, pty);
-        
-            cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[1].Maxval[0]);
-            if (cmpval < Math.Abs(mRtData.rtgrp.item[0].plot[1].Minval[0]))
-            {
-                cmpval = Math.Abs(mRtData.rtgrp.item[0].plot[1].Minval[0]);
-            }
 
-            maxval = mRtData.rtgrp.item[0].plot[1].Maxval[0] + (cmpval * GrpSpaceRate);
-            minval = mRtData.rtgrp.item[0].plot[1].Minval[0] - (cmpval * GrpSpaceRate);
-            if (minval == maxval && maxval == 0.0)
-            {
-                minval = -1.0;
-                maxval = +1.0;
-            }
+            maxval = mRtData.rtgrp.item[0].plot[1].Maxval[0];
+            minval = mRtData.rtgrp.item[0].plot[1].Minval[0];
+            runscale = mRtData.rtgrp.item[0].plot[1].RunScale[0];
+            gBZA.GraphSpaceProc(ref maxval, ref minval, runscale);
             grp1.YAxes[1].Range = new Range(minval, maxval);
-
-           
 
             RefreshGraphAxisTimeView(time);
         }

@@ -19,7 +19,7 @@ I/O cells:      0
                             SB_DFFR        47          100.0
                             SB_DFFS         9          100.0
                            SB_DFFSR         4          100.0
-                            SB_LUT4      1375          100.0
+                            SB_LUT4      1374          100.0
                    SB_PLL40_2F_CORE         1          100.0
                       SB_RAM512x8NW         6          100.0
 SUB MODULES
@@ -32,7 +32,7 @@ SUB MODULES
                           SPI_SLAVE         1
                         vdc_gen_clk         1
                             zim_pll         1
-                              TOTAL      2342
+                              TOTAL      2341
 ----------------------------------------------------------------------
 Report for cell SPI_SLAVE.v1
 Instance Path : comm_spi

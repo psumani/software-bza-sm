@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZiveLab.ZM.ZIM;
 
 namespace ZiveLab.ZM.Dataview
 {
@@ -14,11 +15,13 @@ namespace ZiveLab.ZM.Dataview
     {
         public int TargetIdx;
         public int _MaxAuxCount;
-        public frmSelTarget(int langidx, int MaxAuxCount)
+        public List<bool> ListAux;
+        public List<int> ListAuxch;
+        public frmSelTarget(int langidx, int MaxAuxCount, List<bool> tListAux)
         {
             InitializeComponent();
             this.Icon = Util.BitmapToIcon(Properties.Resources.SelectCell);
-
+            ListAux = tListAux;
             _MaxAuxCount = MaxAuxCount;
             TargetIdx = 0;
             SetLanguage(langidx);
@@ -32,7 +35,7 @@ namespace ZiveLab.ZM.Dataview
 
         private void OnOK_Click(object sender, EventArgs e)
         {
-            TargetIdx = cboTarget.SelectedIndex;
+            TargetIdx = ListAuxch[cboTarget.SelectedIndex];
 
             DialogResult = DialogResult.OK;
         }
@@ -50,10 +53,18 @@ namespace ZiveLab.ZM.Dataview
 
             cboTarget.Items.Add("Main");
 
-            for (int i = 0; i < _MaxAuxCount; i++)
+            ListAuxch = new List<int>();
+            ListAuxch.Clear();
+            ListAuxch.Add(0);
+            for (int i = 0; i < MBZA_Constant.MAX_AUX_BOARD; i++)
             {
-                cboTarget.Items.Add(string.Format("Aux {0}",i+1));
+                if (ListAux[i])
+                {
+                    cboTarget.Items.Add(string.Format("Aux {0}", i + 1));
+                    ListAuxch.Add(i+1);
+                }
             }
+
             cboTarget.SelectedIndex = 0;
 
 

@@ -106,6 +106,9 @@ namespace ZiveLab.ZM
         public static Dictionary<string, stLinkSIF> SifLnkLst { get; set; }
         public static Dictionary<string, stLinkSifCh> ChLnkLst {get; set; }
 
+        public static System.Collections.Specialized.StringCollection recentDataFiles;
+        public static System.Collections.Specialized.StringCollection recentSchFiles;
+
         public static bool CheckPing(string sip)
         {
             Ping ping = new Ping();
@@ -118,6 +121,345 @@ namespace ZiveLab.ZM
         }
 
         #region Inifile utilities
+        
+        public static void RemoveRecenDatatFile(string filePath)
+        {
+            if (recentDataFiles != null && recentDataFiles.Contains(filePath))
+            {
+                // 목록에서 삭제
+                recentDataFiles.Remove(filePath);
+
+                // 변경사항 저장
+                int i;
+                for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) appcfg.PathData[i] = "";
+
+                i = 0;
+                foreach (string spath in recentDataFiles)
+                {
+                    appcfg.PathData[i] = spath;
+                    i++;
+                }
+                SaveAppCfg();
+
+                MessageBox.Show("The route has been deleted from the list.", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        public static void ClearRecenDatatFile()
+        {
+            if (recentDataFiles != null)
+            {
+                // 목록에서 삭제
+                recentDataFiles.Clear();
+
+                // 변경사항 저장
+                int i;
+                for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) appcfg.PathData[i] = "";
+                
+                SaveAppCfg();
+            }
+        }
+
+        public static void loadRecentDataFile()
+        {
+            int i;
+            recentDataFiles = new System.Collections.Specialized.StringCollection();
+            
+            for (i= MBZA_Constant.MAX_USERECENT_COUNT-1; i >= 0; i--)
+            {
+                if (appcfg.PathData[i].Trim().Length > 5)
+                {
+                    if (recentDataFiles.Contains(appcfg.PathData[i]))
+                    {
+                        recentDataFiles.Remove(appcfg.PathData[i]);
+                    }
+                    if (Directory.Exists(appcfg.PathData[i])) recentDataFiles.Insert(0, appcfg.PathData[i]);
+                }
+            }
+            for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++)
+            {
+               appcfg.PathData[i] = "";
+            }
+
+            i = 0;
+            foreach (string spath in recentDataFiles)
+            {
+                appcfg.PathData[i] = spath;
+                i++;
+            }
+            SaveAppCfg();
+        }
+
+        public static void MemoryRecentDataFile(string newpath)
+        {
+            if (newpath.Trim().Length > 5)
+            {
+                if (recentDataFiles.Contains(newpath))
+                {
+                    recentDataFiles.Remove(newpath);
+                }
+                if (Directory.Exists(newpath)) recentDataFiles.Insert(0, newpath);
+            }
+            int i;
+            for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) appcfg.PathData[i] = "";
+
+            i = 0;
+            foreach (string spath in recentDataFiles)
+            {
+                appcfg.PathData[i] = spath;
+                i++;
+            }
+            SaveAppCfg();
+        }
+
+
+        public static void loadRecentSchFile()
+        {
+            int i;
+            recentSchFiles = new System.Collections.Specialized.StringCollection();
+
+            for (i = MBZA_Constant.MAX_USERECENT_COUNT-1; i >= 0; i--)
+            {
+                if (appcfg.PathSch[i].Trim().Length > 5)
+                {
+                    if (recentSchFiles.Contains(appcfg.PathSch[i]))
+                    {
+                        recentSchFiles.Remove(appcfg.PathSch[i]);
+                    }
+                    if(File.Exists(appcfg.PathSch[i]))
+                        recentSchFiles.Insert(0, appcfg.PathSch[i]);
+                }
+            }
+            for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++)
+            {
+                appcfg.PathSch[i] = "";
+            }
+
+            i = 0;
+            foreach (string path in recentSchFiles)
+            {
+                appcfg.PathSch[i] = path;
+                i++;
+            }
+            SaveAppCfg();
+        }
+
+        public static void MemoryRecentSchFile(string newfilename)
+        {
+            if (newfilename.Trim().Length > 5)
+            {
+                if (recentSchFiles.Contains(newfilename))
+                {
+                    recentSchFiles.Remove(newfilename);
+                }
+                if (File.Exists(newfilename)) recentSchFiles.Insert(0, newfilename);
+            }
+            int i;
+            for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) appcfg.PathSch[i] = "";
+
+            i = 0;
+            foreach (string sfilename in recentSchFiles)
+            {
+                appcfg.PathSch[i] = sfilename;
+                i++;
+            }
+            SaveAppCfg();
+        }
+
+        public static void ClearRecenSchtFile()
+        {
+            if (recentSchFiles != null)
+            {
+                // 목록에서 삭제
+                recentSchFiles.Clear();
+
+                // 변경사항 저장
+                int i;
+                for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) appcfg.PathSch[i] = "";
+
+                SaveAppCfg();
+            }
+        }
+
+        public static void RemoveRecenSchtFile(string filename)
+        {
+            if (recentSchFiles != null && recentSchFiles.Contains(filename))
+            {
+                // 목록에서 삭제
+                recentSchFiles.Remove(filename);
+
+                // 변경사항 저장
+                int i;
+                for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) appcfg.PathSch[i] = "";
+
+                i = 0;
+                foreach (string sfile in recentSchFiles)
+                {
+                    appcfg.PathSch[i] = sfile;
+                    i++;
+                }
+                SaveAppCfg();
+
+                MessageBox.Show("The route has been deleted from the list.", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
+        public static string ShortenPath(string path, int maxLength = 50)
+        {
+            // 1. 예외 처리: 경로가 이미 제한 길이보다 짧으면 그대로 반환
+            if (string.IsNullOrEmpty(path) || path.Length <= maxLength)
+            {
+                return path;
+            }
+
+            string ellipsis = "...";
+
+            // 2. 남길 글자 수 계산 (총 제한 길이 - "..."의 길이)
+            int keepLength = maxLength - ellipsis.Length; // 30 - 3 = 27
+
+            // 3. 앞부분과 뒷부분에 각각 나눌 글자 수 설정 (홀수일 경우 뒷부분에 1글자 더 배정)
+            int headLength = keepLength / 2;             // 27 / 2 = 13글자
+            int tailLength = keepLength - headLength;     // 27 - 13 = 14글자
+
+            // 4. 문자열 잘라서 조합하기
+            string head = path.Substring(0, headLength);
+            string tail = path.Substring(path.Length - tailLength);
+
+            return head + ellipsis + tail;
+        }
+
+
+        public static void GraphSpaceProc(ref double max, ref double min, double scale)
+        {
+            double maxval = max;
+            double minval = min;
+            double range = maxval - minval;
+            double minAllowedSpan = Math.Max(scale * 0.1, 0.01);
+            double margin = 0.0;
+            double center;
+            if (range < minAllowedSpan)
+            {
+                center = (max + min) / 2.0;
+                minval = center - (minAllowedSpan / 2.0);
+                maxval = center + (minAllowedSpan / 2.0);
+            }
+            else
+            {
+                margin = range * 0.1;
+                minval = min - margin;
+                maxval = max + margin;
+            }
+            max = maxval;
+            min = minval;
+        }
+        
+
+        public static void GraphNyquestProc(Size size, ref double xmax, ref double xmin, ref double max, ref double min)
+        {
+            double dRate = 1.0;
+            double txmax = xmax;
+            double txmin = xmin;
+            double tmax = max;
+            double tmin = min;
+
+            if (size.Width == 0 || size.Height == 0) dRate = 1.0;
+		    else dRate = (double)size.Width / (double)size.Height;
+
+		    if(txmin >=  0.0 )
+            {
+			    if((txmax * 0.1) < txmin)
+                {
+                    txmax += Math.Abs(txmin);
+                    txmin = 0.0;
+			    }
+			    else
+                {
+                    txmin -= (Math.Abs(txmax) * 0.1);
+                    txmax += Math.Abs(txmax) * 0.1; 
+			    }
+		    }
+		    else {
+                txmin -= (Math.Abs(txmax) * 0.1);
+                txmax += Math.Abs(txmax) * 0.1; 
+		    }
+
+		    if(tmin >= 0.0 )
+            {
+			    if((tmax * 0.1) < tmin)
+                {
+                    tmax += Math.Abs(tmin);
+                    tmin = 0.0;
+			    }
+			    else
+                {
+                    tmin -= Math.Abs(tmax) * 0.1;
+                    tmax += Math.Abs(tmax) * 0.1; 
+			    }
+		    }
+		    else
+            {
+                tmin -= (Math.Abs(tmax) * 0.1);
+                tmax += (Math.Abs(tmax) * 0.1); 
+		    }
+
+		    if(txmax >= tmax)
+            {
+			    if((txmax / dRate) < tmax)
+                {
+                    txmax = tmax * dRate;
+			    }
+			    else
+                {
+                    tmax = txmax / dRate;
+			    }
+		    }
+		    else
+            {
+			    if((tmax * dRate) < txmax)
+                {
+                    tmax = txmax / dRate;
+			    }
+			    else {
+                    txmax = tmax * dRate;
+			    }
+		    }
+
+		    if(txmin <= tmin)
+            {
+			    if(txmin != 0.0)
+                {
+				    if((txmin / 2.0) < tmin) tmin = txmin / 2.0;
+				    else txmin = tmin * 2.0;
+			    }
+			    else tmin = txmin;
+		    }
+		    else
+            {
+			    if(tmin == 0.0) txmin = tmin;
+			    else
+                {
+				    if((tmin / 2.0) < txmin) txmin = tmin / 2.0;
+				    else tmin = txmin * 2.0;
+			    }
+		    }
+
+			double dRange = Math.Abs(txmax - txmin) /2.0 * 0.01;
+			if(dRange == 0.0)  dRange = Math.Abs(txmax) / 2.0 * 0.01;
+            txmax = txmax + dRange;
+            txmin = txmin - dRange;
+
+            dRange = Math.Abs(tmax - tmin) / 2.0 * 0.01;
+            if (dRange == 0.0) dRange = Math.Abs(tmax) / 2.0 * 0.01;
+            tmax = tmax + dRange;
+            tmin = tmin - dRange;
+
+            xmax = txmax;
+            xmin = txmin;
+            max = tmax;
+            min = tmin;
+	    }
+
 
         public static string GetCalibLogFileName(string SifSerial, string ZimSerial)
         {
@@ -286,7 +628,16 @@ namespace ZiveLab.ZM
                 {
                     gBZA.appcfg = (AppConfig)serializer.Deserialize(reader);
                 }
-
+                if(gBZA.appcfg.VdcThreshold == double.NaN) gBZA.appcfg.VdcThreshold = 1.0;
+                if (gBZA.appcfg.ViewMonAuxCh == null)
+                {
+                    gBZA.appcfg.ViewMonAuxCh = new bool[MBZA_Constant.MAX_AUX_CHANNELS];
+                    for (int i = 1; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+                    {
+                        gBZA.appcfg.ViewMonAuxCh[i] = true;
+                    }
+                }
+                     
             }
             catch (Exception) //e
             {
@@ -454,6 +805,11 @@ namespace ZiveLab.ZM
             try
             {
                 mDataViewSet = CoSerialize.SerializeFromFile<DataViewSet>(MBZA_Constant.DataViewSetFilename);
+                if (mDataViewSet._GraphSetEx.CheckedAuxCh == null)
+                {
+                    mDataViewSet._GraphSetEx.CheckedAuxCh = new bool[MBZA_Constant.MAX_AUX_CHANNELS];
+                    for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++) mDataViewSet._GraphSetEx.CheckedAuxCh[i] = true;
+                }
             }
             catch 
             {

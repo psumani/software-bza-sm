@@ -1211,8 +1211,10 @@ namespace ZiveLab.ZM.ZIM.Packets
         public double frequency;
         public double Interval;
         public ushort useir;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public double[] nouse1;
+        public double CutoffC;
+        public ushort usecutoffV;
+        public ushort usecutoffC;
+        public int nouse1;
 
         public stTech_DCH(int init)
         {
@@ -1222,11 +1224,11 @@ namespace ZiveLab.ZM.ZIM.Packets
             useir = 0;
             frequency = 1000.0;
             Interval = 200.0;
-            nouse1 = new double[2];
-            for (int i = 0; i < 2; i++)
-            {
-                nouse1[i] = 0.0;
-            }
+
+            CutoffC = 0.0;
+            usecutoffV = 1;
+            usecutoffC = 0;
+            nouse1 = 0;
         }
 
         public void initialize()
@@ -1237,10 +1239,10 @@ namespace ZiveLab.ZM.ZIM.Packets
             useir = 0;
             frequency = 1000.0;
             Interval = 200.0;
-            for (int i = 0; i < 2; i++)
-            {
-                nouse1[i] = 0.0;
-            }
+            CutoffC = 0.0;
+            usecutoffV = 1;
+            usecutoffC = 0;
+            nouse1 = 0;
         }
         public byte[] ToByteArray()
         {
@@ -1481,8 +1483,6 @@ namespace ZiveLab.ZM.ZIM.Packets
 
         public void GetDCH(ref stTech_DCH techdch)
         {
-            techdch.nouse1[0] = 0.0;
-            techdch.nouse1[1] = 0.0;
             techdch.ToWritePtr(tech);
         }
 

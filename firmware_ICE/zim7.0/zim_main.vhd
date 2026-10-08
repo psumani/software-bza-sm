@@ -328,7 +328,7 @@ architecture behav of zim is
 	
 	signal stdelay_cnt    	: std_logic_vector(15 downto 0):= x"0000";
 	
-	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1B59";  -- 7001
+	signal buf_version 		: std_logic_vector(15 downto 0)  := x"1B5E";  -- 7001
 
 	signal mclk_cnt    	: std_logic_vector(7 downto 0):= x"00";	
 	signal mclk_trig	: std_logic := '1';
@@ -561,7 +561,7 @@ begin   -- pll_gouta = 32MHz, pll_goutb = 16MHz
 	buf_data_vac 	<=  vac_raw_buf(data_index);
 
 	AMPV_POW			<= buf_control(5);
-	VDC_RNG0			<= not buf_control(4);
+	VDC_RNG0			<= buf_control(4);
 	SELIRNG1			<= buf_control(3);
 	SELIRNG0			<= buf_control(2);
 	DDS_RNG_0		<= buf_control(1);

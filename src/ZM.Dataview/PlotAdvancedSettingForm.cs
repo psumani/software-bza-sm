@@ -8,8 +8,8 @@ namespace ZiveLab.ZM.Dataview
     {
         private object m_OldValue;
 
-        private AxisFormat m_XAxisFormat;
-        private AxisFormat[] m_YAxesFormat;
+        public AxisFormat m_XAxisFormat;
+        public AxisFormat[] m_YAxesFormat;
 
         private DataFilter _DataFilter;
 
@@ -66,7 +66,9 @@ namespace ZiveLab.ZM.Dataview
             dataGridViewSetAxes.Rows.Add();
             dataGridViewSetAxes.Rows[2].HeaderCell.Value = Properties.Resources.ScaleType;
             dataGridViewSetAxes.Rows.Add();
-            dataGridViewSetAxes.Rows[3].HeaderCell.Value = Properties.Resources.Color;
+            dataGridViewSetAxes.Rows[3].HeaderCell.Value = Properties.Resources.AxisColor;
+            dataGridViewSetAxes.Rows.Add();
+            dataGridViewSetAxes.Rows[4].HeaderCell.Value = Properties.Resources.GridColor;
 
             int cellidx = 0;
             int rowidx = 0;
@@ -95,7 +97,7 @@ namespace ZiveLab.ZM.Dataview
             ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).Style.ForeColor = Color.White;
             ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).Style.SelectionBackColor = m_XAxisFormat.AxisColor;
             ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx++]).Style.SelectionForeColor = Color.White;
-
+            
             for (int i = 0; i < 4; i++)
             {
                 rowidx = 0;
@@ -117,12 +119,14 @@ namespace ZiveLab.ZM.Dataview
                 ((MyDGVCheckBoxCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).Label = Properties.Resources.Logarithm;
                 ((MyDGVCheckBoxCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).ValueType = typeof(bool);
                 dataGridViewSetAxes.Rows[rowidx++].Cells[cellidx].Value = m_YAxesFormat[i].ScaleType == NationalInstruments.UI.ScaleType.Linear ? false : true;
+
                 dataGridViewSetAxes.Rows[rowidx].Cells[cellidx] = new DataGridViewButtonCell();
                 ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).FlatStyle = FlatStyle.Popup;
                 ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).Style.BackColor = m_YAxesFormat[i].AxisColor;
                 ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).Style.ForeColor = Color.White;
                 ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx]).Style.SelectionBackColor = m_YAxesFormat[i].AxisColor;
                 ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[rowidx].Cells[cellidx++]).Style.SelectionForeColor = Color.White;
+
             }
         }        
 
@@ -330,25 +334,15 @@ namespace ZiveLab.ZM.Dataview
         {
             int cellidx = 0;
 
-            //m_XAxisFormat.AxisMode = ((bool)dataGridViewSetAxes.Rows[1].Cells[cellidx].Value == true) ? AxisMode.AutoScaleLoose : AxisMode.Fixed;
-            //m_XAxisFormat.RangeMax = double.Parse((string)dataGridViewSetAxes.Rows[2].Cells[cellidx].Value);
-            //m_XAxisFormat.RangeMin = double.Parse((string)dataGridViewSetAxes.Rows[3].Cells[cellidx].Value);
             m_XAxisFormat.Inverted = (bool)dataGridViewSetAxes.Rows[1].Cells[cellidx].Value;
             m_XAxisFormat.ScaleType = (bool)dataGridViewSetAxes.Rows[2].Cells[cellidx].Value ? NationalInstruments.UI.ScaleType.Logarithmic : NationalInstruments.UI.ScaleType.Linear;
             m_XAxisFormat.AxisColor = ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[3].Cells[cellidx++]).Style.BackColor;
 
-            //m_XAxisFormat.AxisMode = m_XAxisFormat.ScaleType == NationalInstruments.UI.ScaleType.Linear ? AxisMode.Fixed : AxisMode.AutoScaleLoose;
-
             for (int i = 0; i < 4; i++)
             {
-                //m_YAxesFormat[i].AxisMode = ((bool)dataGridViewSetAxes.Rows[1].Cells[cellidx].Value == true) ? AxisMode.AutoScaleLoose : AxisMode.Fixed;
-                //m_YAxesFormat[i].RangeMax = double.Parse((string)dataGridViewSetAxes.Rows[2].Cells[cellidx].Value);
-                //m_YAxesFormat[i].RangeMin = double.Parse((string)dataGridViewSetAxes.Rows[3].Cells[cellidx].Value);
                 m_YAxesFormat[i].Inverted = (bool)dataGridViewSetAxes.Rows[1].Cells[cellidx].Value;
                 m_YAxesFormat[i].ScaleType = (bool)dataGridViewSetAxes.Rows[2].Cells[cellidx].Value ? NationalInstruments.UI.ScaleType.Logarithmic : NationalInstruments.UI.ScaleType.Linear;
                 m_YAxesFormat[i].AxisColor = ((DataGridViewButtonCell)dataGridViewSetAxes.Rows[3].Cells[cellidx++]).Style.BackColor;
-
-                //m_YAxesFormat[i].AxisMode = m_YAxesFormat[i].ScaleType == NationalInstruments.UI.ScaleType.Linear ? AxisMode.Fixed : AxisMode.AutoScaleLoose;
             }
 
             _DataFilter.TimeEnable = checkboxTime.Checked;

@@ -9,27 +9,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZiveLab.ZM.Dataview;
+using ZiveLab.ZM.ZIM;
 
 namespace ZiveLab.ZM
 {
     public partial class frmSetOption : Form
     {
-        private frmMdiMain MdiParent;
+        private frmMdiMain mMdiParent;
         public frmSetOption(frmMdiMain tMdiparent = null)
         {
             InitializeComponent();
             this.Icon = gBZA.BitmapToIcon(Properties.Resources.SettingsFile);
-            MdiParent = tMdiparent;
+            mMdiParent = tMdiparent;
             cboTimeFormat.Items.Clear();
 
             cboTimeFormat.Items.Add("TimeText");
             cboTimeFormat.Items.Add("Normal");
             cboTimeFormat.Items.Add("Exponent");
    
-            cboCUnit.Items.Clear();
-
-            cboCUnit.Items.Add("Ah");
-            cboCUnit.Items.Add("Coulomb");
 
             ListData.Items.Clear();
             foreach (DataColItem gdcol in gBZA.mDataViewSet._dataConvSet.DataColList)
@@ -47,21 +44,17 @@ namespace ZiveLab.ZM
         private void Update(bool bUpdate = true)
         {
             UpdateDataItems(bUpdate);
-            UpdateRecentDataPath(bUpdate);
-            UpdateRecentSchPath(bUpdate);
+
 
             if (bUpdate)
             {
+
                 gBZA.appcfg.PathZManData = txtZmanDataPath.Text;
 
                 gBZA.appcfg.UsePathAlwaysData = chkUseDefaultDataPath.Checked;
                 gBZA.appcfg.PathAlwaysData = txtDataPath.Text;
                 gBZA.appcfg.UsePathAlwaysSch = chkUseDefaultSchPath.Checked;
                 gBZA.appcfg.PathAlwaysSch = txtSchPath.Text;
-
-                gBZA.mDataViewSet._dataConvSet.TimeFormat = cboTimeFormat.SelectedIndex;
-                gBZA.mDataViewSet._dataConvSet.UnitC = (cboCUnit.SelectedIndex == 1) ? true : false;
-
                 gBZA.SaveAppCfg();
                 gBZA.SaveDataViewSet();
             }
@@ -73,10 +66,9 @@ namespace ZiveLab.ZM
                 txtDataPath.Text = gBZA.appcfg.PathAlwaysData;
                 chkUseDefaultSchPath.Checked = gBZA.appcfg.UsePathAlwaysSch;
                 txtSchPath.Text = gBZA.appcfg.PathAlwaysSch;
+                numGrpRatio.Value = Convert.ToDecimal(gBZA.appcfg.GrpSpaceRate);
 
                 cboTimeFormat.SelectedIndex = gBZA.mDataViewSet._dataConvSet.TimeFormat;
-                cboCUnit.SelectedIndex = gBZA.mDataViewSet._dataConvSet.UnitC ? 1 : 0;
-
                 ChkFloatCfg.Checked = gBZA.appcfg.CfgFloating;
                 ChkFloatMainView.Checked = gBZA.appcfg.MainViewFloating;
                 ChkFloatSingleCh.Checked = gBZA.appcfg.RealFloating;
@@ -108,64 +100,7 @@ namespace ZiveLab.ZM
                 }
             }
         }
-
-        private void UpdateRecentDataPath(bool bUpdate = true)
-        {
-            if(bUpdate)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    gBZA.appcfg.PathData[i] = lstRecentDataPath.Items[i].SubItems[1].Text;
-                }
-            }
-            else
-            {
-                lstRecentDataPath.Clear();
-                lstRecentDataPath.View = View.Details;
-                lstRecentDataPath.FullRowSelect = true;
-                lstRecentDataPath.GridLines = true;
-                
-                lstRecentDataPath.Columns.Clear();
-                lstRecentDataPath.Columns.Add("Index",100);
-                lstRecentDataPath.Columns.Add("Remembered path", lstRecentDataPath.Width-100);
-
-                for (int i=0; i<10; i++)
-                {
-                    ListViewItem item = new ListViewItem(string.Format("{0}", i + 1)); // First column
-                    item.SubItems.Add(gBZA.appcfg.PathData[i]);                // Second column              
-                    lstRecentDataPath.Items.Add(item);
-                }
-            }
-        }
-
-        private void UpdateRecentSchPath(bool bUpdate = true)
-        {
-            if (bUpdate)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    gBZA.appcfg.PathSch[i] = lstRecentSchPath.Items[i].SubItems[1].Text;
-                }
-            }
-            else
-            {
-                lstRecentSchPath.Clear();
-                lstRecentSchPath.View = View.Details;
-                lstRecentSchPath.FullRowSelect = true;
-                lstRecentSchPath.GridLines = true;
-
-                lstRecentSchPath.Columns.Clear();
-                lstRecentSchPath.Columns.Add("Index", 100);
-                lstRecentSchPath.Columns.Add("Remembered path", lstRecentSchPath.Width - 100);
-                
-                for (int i = 0; i < 10; i++)
-                {
-                    ListViewItem item = new ListViewItem(string.Format("{0}", i + 1)); // First column
-                    item.SubItems.Add(gBZA.appcfg.PathSch[i]);                // Second column              
-                    lstRecentSchPath.Items.Add(item);
-                }
-            }
-        }
+        
 
 
         private void frmSetOption_Load(object sender, EventArgs e)
@@ -225,25 +160,6 @@ namespace ZiveLab.ZM
         {
             txtDataPath.Text = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
         }
-
-        private void btInitRecentDataPath_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                lstRecentDataPath.Items[i].SubItems[1].Text = "";
-            }
-            lstRecentDataPath.Items[0].SubItems[1].Text = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Data"); 
-        }
-
-        private void btInitRecentSchPath_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                lstRecentSchPath.Items[i].SubItems[1].Text = "";
-            }
-            lstRecentSchPath.Items[0].SubItems[1].Text = Path.Combine("C:\\ZIVE DATA\\ZM\\", "Sch");
-        }
-
         private void btChkallDataItem_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < ListData.Items.Count; i++)
@@ -263,53 +179,53 @@ namespace ZiveLab.ZM
         private void lnkResetWindows_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-            if (MdiParent.frmMainView != null)
+            if (mMdiParent.frmMainView != null)
             {
-                MdiParent.frmMainView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmMainView.Size = gBZA.appcfg.MainViewSize;
-                MdiParent.frmMainView.Location = gBZA.appcfg.MainViewLocation;
+                mMdiParent.frmMainView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmMainView.Size = gBZA.appcfg.MainViewSize;
+                mMdiParent.frmMainView.Location = gBZA.appcfg.MainViewLocation;
             }
 
-            if (MdiParent.frmRtView != null)
+            if (mMdiParent.frmRtView != null)
             {
-                MdiParent.frmRtView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmRtView.Size = gBZA.appcfg.RealviewSize;
-                MdiParent.frmRtView.Location = gBZA.appcfg.RealviewLocation;
+                mMdiParent.frmRtView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmRtView.Size = gBZA.appcfg.RealviewSize;
+                mMdiParent.frmRtView.Location = gBZA.appcfg.RealviewLocation;
             }
 
-            if (MdiParent.frmRegRtView != null)
+            if (mMdiParent.frmRegRtView != null)
             {
-                MdiParent.frmRegRtView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
-                MdiParent.frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
+                mMdiParent.frmRegRtView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
+                mMdiParent.frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
             }
 
-            if (MdiParent.frmGrpRtView != null)
+            if (mMdiParent.frmGrpRtView != null)
             {
-                MdiParent.frmGrpRtView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
-                MdiParent.frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
+                mMdiParent.frmGrpRtView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
+                mMdiParent.frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
             }
 
-            if (MdiParent.frmcfg != null)
+            if (mMdiParent.frmcfg != null)
             {
-                MdiParent.frmcfg.Location = gBZA.appcfg.CfgLocation;
-                MdiParent.frmcfg.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmcfg.Size = gBZA.appcfg.CfgSize;
+                mMdiParent.frmcfg.Location = gBZA.appcfg.CfgLocation;
+                mMdiParent.frmcfg.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmcfg.Size = gBZA.appcfg.CfgSize;
             }
 
-            if (MdiParent.frmResTools != null)
+            if (mMdiParent.frmResTools != null)
             {
-                MdiParent.frmResTools.Size = gBZA.appcfg.DataToolSize;
-                MdiParent.frmResTools.Location = gBZA.appcfg.DataToolLocation;
-                MdiParent.frmResTools.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmResTools.Size = gBZA.appcfg.DataToolSize;
+                mMdiParent.frmResTools.Location = gBZA.appcfg.DataToolLocation;
+                mMdiParent.frmResTools.StartPosition = FormStartPosition.Manual;
             }
 
-            if (MdiParent.auxForm != null)
+            if (mMdiParent.auxForm != null)
             {
-                MdiParent.auxForm.StartPosition = FormStartPosition.Manual;
-                MdiParent.auxForm.Location = gBZA.appcfg.AuxVdcLocation;
-                MdiParent.auxForm.Size = gBZA.appcfg.AuxVdcSize;
+                mMdiParent.auxForm.StartPosition = FormStartPosition.Manual;
+                mMdiParent.auxForm.Location = gBZA.appcfg.AuxVdcLocation;
+                mMdiParent.auxForm.Size = gBZA.appcfg.AuxVdcSize;
             }
         }
 
@@ -320,15 +236,14 @@ namespace ZiveLab.ZM
 
         private void btApply1_Click(object sender, EventArgs e)
         {
-            UpdateRecentDataPath(true);
-            UpdateRecentSchPath(true);
+           
             gBZA.appcfg.PathZManData = txtZmanDataPath.Text;
-
             gBZA.appcfg.UsePathAlwaysData = chkUseDefaultDataPath.Checked;
             gBZA.appcfg.PathAlwaysData = txtDataPath.Text;
             gBZA.appcfg.UsePathAlwaysSch = chkUseDefaultSchPath.Checked;
             gBZA.appcfg.PathAlwaysSch = txtSchPath.Text;
-
+            gBZA.appcfg.GrpSpaceRate = (double)numGrpRatio.Value;
+            
             gBZA.SaveAppCfg();
         }
 
@@ -336,7 +251,6 @@ namespace ZiveLab.ZM
         {
             UpdateDataItems(true);
             gBZA.mDataViewSet._dataConvSet.TimeFormat = cboTimeFormat.SelectedIndex;
-            gBZA.mDataViewSet._dataConvSet.UnitC = (cboCUnit.SelectedIndex == 1) ? true : false;
             gBZA.SaveDataViewSet();
 
         }
@@ -399,11 +313,11 @@ namespace ZiveLab.ZM
         {
             gBZA.appcfg.MainLocation = new Point(0, 0);
             gBZA.appcfg.MainSize = new Size(1584, 796);
-            
 
-            MdiParent.StartPosition = FormStartPosition.Manual;
-            MdiParent.Location = gBZA.appcfg.MainLocation;
-            MdiParent.Size = gBZA.appcfg.MainSize;
+
+            mMdiParent.StartPosition = FormStartPosition.Manual;
+            mMdiParent.Location = gBZA.appcfg.MainLocation;
+            mMdiParent.Size = gBZA.appcfg.MainSize;
 
             gBZA.SaveAppCfg();
         }
@@ -413,11 +327,11 @@ namespace ZiveLab.ZM
             gBZA.appcfg.CfgLocation = new Point(0, 0);
             gBZA.appcfg.CfgSize = new Size(900, 445);
             
-            if (MdiParent.frmcfg != null)
+            if (mMdiParent.frmcfg != null)
             {
-                MdiParent.frmcfg.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmcfg.Size = gBZA.appcfg.RealviewSize;
-                MdiParent.frmcfg.Location = gBZA.appcfg.RealviewLocation;
+                mMdiParent.frmcfg.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmcfg.Size = gBZA.appcfg.RealviewSize;
+                mMdiParent.frmcfg.Location = gBZA.appcfg.RealviewLocation;
             }
 
             gBZA.SaveAppCfg();
@@ -428,11 +342,11 @@ namespace ZiveLab.ZM
             gBZA.appcfg.MainViewLocation = new Point(20, 20);
             gBZA.appcfg.MainViewSize = new Size(1440, 580);
             
-            if (MdiParent.frmMainView != null)
+            if (mMdiParent.frmMainView != null)
             {
-                MdiParent.frmMainView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmMainView.Size = gBZA.appcfg.MainViewSize;
-                MdiParent.frmMainView.Location = gBZA.appcfg.MainViewLocation;
+                mMdiParent.frmMainView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmMainView.Size = gBZA.appcfg.MainViewSize;
+                mMdiParent.frmMainView.Location = gBZA.appcfg.MainViewLocation;
             }
 
             gBZA.SaveAppCfg();
@@ -443,11 +357,11 @@ namespace ZiveLab.ZM
             gBZA.appcfg.RealviewLocation = new Point(0, 0);
             gBZA.appcfg.RealviewSize = new Size(600, 500);
 
-            if (MdiParent.frmRtView != null)
+            if (mMdiParent.frmRtView != null)
             {
-                MdiParent.frmRtView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmRtView.Size = gBZA.appcfg.RealviewSize;
-                MdiParent.frmRtView.Location = gBZA.appcfg.RealviewLocation;
+                mMdiParent.frmRtView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmRtView.Size = gBZA.appcfg.RealviewSize;
+                mMdiParent.frmRtView.Location = gBZA.appcfg.RealviewLocation;
             }
 
             gBZA.SaveAppCfg();
@@ -479,11 +393,11 @@ namespace ZiveLab.ZM
             }
 
 
-            if (MdiParent.frmRegRtView != null)
+            if (mMdiParent.frmRegRtView != null)
             {
-                MdiParent.frmRegRtView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
-                MdiParent.frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
+                mMdiParent.frmRegRtView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmRegRtView.Size = gBZA.appcfg.RegRealviewSize;
+                mMdiParent.frmRegRtView.Location = gBZA.appcfg.RegRealviewLocation;
             }
 
             gBZA.SaveAppCfg();
@@ -514,11 +428,11 @@ namespace ZiveLab.ZM
                 gBZA.appcfg.GroupRealviewSize = new Size(1800, 1000);
             }
 
-            if (MdiParent.frmGrpRtView != null)
+            if (mMdiParent.frmGrpRtView != null)
             {
-                MdiParent.frmGrpRtView.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
-                MdiParent.frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
+                mMdiParent.frmGrpRtView.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmGrpRtView.Size = gBZA.appcfg.GroupRealviewSize;
+                mMdiParent.frmGrpRtView.Location = gBZA.appcfg.GroupRealviewLocation;
             }
 
             gBZA.SaveAppCfg();
@@ -552,11 +466,11 @@ namespace ZiveLab.ZM
             gBZA.appcfg.DataToolLocation = new Point(0, 0);
             gBZA.appcfg.DataToolSize = new Size(1350, 887);
 
-            if (MdiParent.frmResTools != null)
+            if (mMdiParent.frmResTools != null)
             {
-                MdiParent.frmResTools.StartPosition = FormStartPosition.Manual;
-                MdiParent.frmResTools.Size = gBZA.appcfg.DataToolSize;
-                MdiParent.frmResTools.Location = gBZA.appcfg.DataToolLocation;
+                mMdiParent.frmResTools.StartPosition = FormStartPosition.Manual;
+                mMdiParent.frmResTools.Size = gBZA.appcfg.DataToolSize;
+                mMdiParent.frmResTools.Location = gBZA.appcfg.DataToolLocation;
             }
 
             gBZA.SaveAppCfg();
@@ -567,16 +481,19 @@ namespace ZiveLab.ZM
             gBZA.appcfg.AuxVdcLocation = new Point(0, 0);
             gBZA.appcfg.AuxVdcSize = new Size(680, 430);
 
-            frmMdiMain MdiParent = ((frmMdiMain)this.Parent);
-            if (MdiParent.auxForm != null)
+            if (mMdiParent.auxForm != null)
             {
-                MdiParent.auxForm.StartPosition = FormStartPosition.Manual;
-                MdiParent.auxForm.Location = gBZA.appcfg.AuxVdcLocation;
-                MdiParent.auxForm.Size = gBZA.appcfg.AuxVdcSize;
+                mMdiParent.auxForm.StartPosition = FormStartPosition.Manual;
+                mMdiParent.auxForm.Location = gBZA.appcfg.AuxVdcLocation;
+                mMdiParent.auxForm.Size = gBZA.appcfg.AuxVdcSize;
             }
-
             
             gBZA.SaveAppCfg();
+        }
+
+        private void btclose1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

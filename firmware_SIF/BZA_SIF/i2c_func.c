@@ -1491,7 +1491,6 @@ INT_32 EepromWriteRead(INT_32 devid,UNS_32 sAddr, UNS_32 mAddr, void *buffer, IN
 		i2c_Defaultdelay1();
 		tCnt = MIN(32 - (mMemAddr & 0x1F), mCnt);/*if(mCnt < 32) tCnt = mCnt;
 		else tCnt = 32;*/
-		i2c_Defaultdelay1();
 		mBuffer[0] = (char)((mMemAddr >> 8) & 0xFF);
 		mBuffer[1] = (char)(mMemAddr & 0xFF);
 		
@@ -1701,7 +1700,7 @@ INT_32 SetupI2C(INT_32 devid,UNS_32 sAddr)
 	mSetup.rate = 1040;     // 520;	//2000
 	mSetup.low_phase = 1040;    // 520;	//1000
 	mSetup.high_phase = 1040;    //520;  // 1000
-	mSetup.pins_drive = I2C_PINS_LOW_DRIVE;
+	mSetup.pins_drive = I2C_PINS_LOW_DRIVE; //I2C_PINS_LOW_DRIVE;
 	
 	return i2c_ioctl((INT_32)&i2cdat[devid],I2C_SETUP,(INT_32)&mSetup);
 }
@@ -2380,14 +2379,13 @@ INT_32 Init_I2C(void)
 }
 
 void I2C_Recover(INT_32 devid) {
-    // 1) I2C 인터럽트 비활성화
+    
     disable_i2c_irq_int(devid);
 
-    // 2) I2C 컨트롤러 소프트 리셋
     I2C_CFG_T *device = (I2C_CFG_T *)devid;
     device->regptr->i2c_ctrl = I2C_RESET;
     device->regptr->i2c_stat = I2C_AFI | I2C_TDI;
-
-    // 3) 다시 SetupI2C 호출해서 클럭/주소 재설정
-    SetupI2C(0, 0);  // devid에 맞는 index로
+    SetupI2C(0, 0); 
 }
+
+

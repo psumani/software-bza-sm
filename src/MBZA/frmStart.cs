@@ -152,11 +152,21 @@ namespace ZiveLab.ZM
             }
             else
             {
-                txtfilepath.Text = gBZA.appcfg.PathData[0];
-                txtfilename.Text = "";
 
+                string sPath = gBZA.appcfg.PathAlwaysData;
+                if (gBZA.appcfg.UsePathAlwaysData == false)
+                {
+                    if (gBZA.appcfg.PathData[0].Trim().Length > 5)
+                    {
+                        sPath = gBZA.appcfg.PathData[0];
+                        if (!Directory.Exists(sPath)) sPath = gBZA.appcfg.PathAlwaysData;
+                    }
+                }
+                    
                 RefreshInformation();
-
+   
+                txtfilepath.Text = sPath;
+                txtfilename.Text = "";
                 txtmemo.Text = "";
                 bFirst = false;
             }
@@ -164,16 +174,137 @@ namespace ZiveLab.ZM
 
         private void btselpath_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.Title = "Set result file location.";
-            dialog.InitialDirectory = txtfilepath.Text;
-            dialog.IsFolderPicker = true;
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            SaveMenuProc(sender, e);
+        }
+
+        private void RecentSaveDataFileItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            if (clickedItem == null) return;
+            string sPath;
+
+            string filePath = clickedItem.Tag as string;
+            if (filePath == "Default") sPath = gBZA.appcfg.PathAlwaysData;
+            else if (filePath == "Select")
             {
-                txtfilepath.Text = dialog.FileName;
+                //frmSelectFolderDlg mSeldlg = new frmSelectFolderDlg(true);
+                //mSeldlg.ShowDialog();
+
+                CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                dialog.Title = "Set result file location.";
+                if (gBZA.appcfg.PathData[0].Trim().Length < 5) sPath = gBZA.appcfg.PathAlwaysData;
+                else
+                {
+                    sPath = gBZA.appcfg.PathData[0];
+                    if (!Directory.Exists(sPath)) sPath = gBZA.appcfg.PathAlwaysData;
+                }
+                dialog.InitialDirectory = sPath;
+                dialog.IsFolderPicker = true;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    sPath = dialog.FileName;
+                }
+                else sPath = txtfilepath.Text;
             }
-            this.Enabled = true;
+            else if (Directory.Exists(filePath))
+            {
+                sPath = filePath;
+            }
+            else
+            {
+                sPath = txtfilepath.Text;
+            }
+            txtfilepath.Text = sPath;
+        }
+
+        private void SaveMenuProc(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            ContextMenuStrip recentMenu = new ContextMenuStrip();
+            recentMenu.Items.Clear();
+
+            ToolStripMenuItem item;
+            item = new ToolStripMenuItem("Select folder.");
+            item.Tag = "Select"; // 실제 파일 경로는 Tag에 보관
+            item.ToolTipText = "Select"; // 마우스 올렸을 때 전체 경로 표시
+            item.Click += RecentSaveDataFileItem_Click; // 클릭 이벤트 연결
+            recentMenu.Items.Add(item);
+            recentMenu.Items.Add(new ToolStripSeparator());
+
+            string sitem = string.Format("Default Path({0}).", gBZA.appcfg.PathAlwaysData);
+            item = new ToolStripMenuItem(sitem);
+            item.Tag = "Default"; // 실제 파일 경로는 Tag에 보관
+            item.ToolTipText = sitem; // 마우스 올렸을 때 전체 경로 표시
+            item.Click += RecentSaveDataFileItem_Click; // 클릭 이벤트 연결
+            recentMenu.Items.Add(item);
+            recentMenu.Items.Add(new ToolStripSeparator());
+
+            if (gBZA.recentDataFiles.Count == 0)
+            {
+                // 최근 항목이 없을 때 안내 메시지 추가
+                ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                emptyItem.Enabled = false;
+                recentMenu.Items.Add(emptyItem);
+            }
+            else
+            {
+
+                System.Collections.Specialized.StringCollection recentDataPath = new System.Collections.Specialized.StringCollection();
+
+                foreach (string filePath in gBZA.recentDataFiles)
+                {
+                    if (!recentDataPath.Contains(filePath))
+                    {
+                        recentDataPath.Insert(0, filePath);
+                    }
+                }
+                
+                if (recentDataPath.Contains(gBZA.appcfg.PathAlwaysData))
+                {
+                    recentDataPath.Remove(gBZA.appcfg.PathAlwaysData);
+                }
+
+
+                if (recentDataPath.Count == 0)
+                {
+                    // 최근 항목이 없을 때 안내 메시지 추가
+                    ToolStripMenuItem emptyItem = new ToolStripMenuItem("There are no recent items.");
+                    emptyItem.Enabled = false;
+                    recentMenu.Items.Add(emptyItem);
+                }
+                else
+                {
+                    var uniqueArray = recentDataPath.Cast<string>().Distinct().ToArray();
+                    System.Collections.Specialized.StringCollection uniqueCollection = new System.Collections.Specialized.StringCollection();
+                    uniqueCollection.AddRange(uniqueArray);
+
+
+                    // 최근 항목들을 메뉴에 동적으로 추가
+                    foreach (string sPath in uniqueCollection)
+                    {
+                        // 파일명만 표시하고, 전체 경로는 ToolTip이나 Tag에 저장
+                        string sShortenPath = gBZA.ShortenPath(sPath);
+                        item = new ToolStripMenuItem(sShortenPath);
+
+                        item.Tag = sPath; // 실제 파일 경로는 Tag에 보관
+                        item.ToolTipText = sPath; // 마우스 올렸을 때 전체 경로 표시
+                        item.Click += RecentSaveDataFileItem_Click; // 클릭 이벤트 연결
+
+                        recentMenu.Items.Add(item);
+
+                        recentMenu.Items.Add(new ToolStripSeparator());
+                    }
+
+                    
+                    ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Recent Items");
+                    clearItem.Click += (s, ev) =>
+                    {
+                        gBZA.ClearRecenDatatFile();
+                    };
+                    recentMenu.Items.Add(clearItem);
+                }
+            }
+            recentMenu.Show(btn, new Point(btn.Width / 2, btn.Height));
         }
 
         private void listbox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,7 +444,9 @@ namespace ZiveLab.ZM
                 gBZA.SifLnkLst[sifid].MBZAIF.tech[sifch] = tech;
                 //tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc;
                 tmpI = (double)gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.mSafety.MaxPower / gBZA.SifLnkLst[sifid].MBZAIF.mChStatInf[sifch].Vdc; // 배열
-                irng = getLimitRangeI(sifid, sifch, tmpI);
+
+
+                irng = getLimitRangeI(sifid, sifch, tmpI, (enTechType)tech.type);
                 if (tech.irange < irng)
                 {
                     serrch += string.Format("   ->{0:00}::Range use error exceeding permissible power.\r\n ", val + 1);
@@ -386,7 +519,7 @@ namespace ZiveLab.ZM
             return serrch;
         }
 
-        private ushort getLimitRangeI(string sifid, int sifch, double current)
+        private ushort getLimitRangeI(string sifid, int sifch, double current, enTechType type)
         {
             ushort orng = 0;
             ushort rng = 0;
@@ -397,11 +530,13 @@ namespace ZiveLab.ZM
                 //tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges[0].iac_rng[rng].realmax;
                 tmp = gBZA.SifLnkLst[sifid].MBZAIF.mDevInf.mSysCfg.mZimCfg[sifch].ranges.Gen.iac_rng[rng].realmax; // 배열
 
+                if (type == enTechType.TECH_DCH) tmp *= 0.5;
+
                 if (tmp1 < tmp)
                 {
                     orng++;
                     tmp = tmp * 0.2;
-                    if (current < tmp)
+                    if (tmp1 < tmp)
                     {
                         orng++;
                         if ((DeviceConstants.MAX_IAC_RNGCNT - 1) <= rng) break;
@@ -682,8 +817,7 @@ namespace ZiveLab.ZM
 
                 gBZA.ChLnkLst[val.ToString()] = LnkCh;
             }
-
-            gBZA.appcfg.ApplyDataPath(txtfilepath.Text.Trim());
+            gBZA.MemoryRecentDataFile(txtfilepath.Text.Trim()); //gBZA.appcfg. ApplyDataPath(txtfilepath.Text.Trim());
             gBZA.SaveLinkChToXml(gBZA.FileLnkCh);
 
             DialogResult = DialogResult.OK;

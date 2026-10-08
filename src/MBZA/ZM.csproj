@@ -170,6 +170,12 @@
     <Compile Include="frmMdiMain.Designer.cs">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSelectFolderDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectFolderDlg.Designer.cs">
+      <DependentUpon>frmSelectFolderDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSetBatPara.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,9 @@
     <EmbeddedResource Include="frmMdiMain.resx">
       <DependentUpon>frmMdiMain.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectFolderDlg.resx">
+      <DependentUpon>frmSelectFolderDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetBatPara.resx">
       <DependentUpon>frmSetBatPara.cs</DependentUpon>
@@ -823,6 +832,8 @@
     <None Include="Resources\SettingsFile.png" />
     <None Include="doc\TestSettings24.png" />
     <None Include="doc\ColorDialog.png" />
+    <None Include="doc\PathListBoxItem.png" />
+    <None Include="doc\HelpApplication.png" />
     <Content Include="zm.ico" />
     <None Include="doc\Image\zm.ico" />
     <None Include="doc\Image\zm1.ico" />

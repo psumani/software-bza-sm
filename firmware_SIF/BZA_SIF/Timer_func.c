@@ -45,7 +45,7 @@ static void ISR_MSTimer(void)
 	m_pGlobalVar->m_MsI2CdelayStamp ++;
 	m_pGlobalVar->m_msAux ++;
 	m_pGlobalVar->m_msRefreshDC ++;
-        m_pGlobalVar->m_msTmp ++;
+    m_pGlobalVar->m_msTmp ++;
 	if(m_pGlobalVar->m_MsI2CdelayStamp > 1000000) m_pGlobalVar->m_MsI2CdelayStamp = 1000000;
 	if(m_pGlobalVar->m_msFind > 1000000) m_pGlobalVar->m_msFind = 1000000;
 	if(m_pGlobalVar->m_msAux > 1000000) m_pGlobalVar->m_msAux = 1000000;

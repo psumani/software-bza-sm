@@ -732,6 +732,98 @@ namespace ZiveLab.ZM.Dataview
     }
     public class DataviewCommon
     {
+        public static System.Collections.Specialized.StringCollection recentDataFiles;
+        public static void loadRecentDataFile(ref DataViewSet tdataviewset)
+        {
+            int i;
+            recentDataFiles = new System.Collections.Specialized.StringCollection();
+            recentDataFiles.Clear();
+            for (i = MBZA_Constant.MAX_USERECENT_COUNT - 1; i >= 0; i--)
+            {
+                if (tdataviewset._GraphSetEx.OpenPath[i].Trim().Length > 5)
+                {
+                    if (recentDataFiles.Contains(tdataviewset._GraphSetEx.OpenPath[i]))
+                    {
+                        recentDataFiles.Remove(tdataviewset._GraphSetEx.OpenPath[i]);
+                    }
+                    if (Directory.Exists(tdataviewset._GraphSetEx.OpenPath[i])) recentDataFiles.Insert(0, tdataviewset._GraphSetEx.OpenPath[i]);
+                }
+            }
+            for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++)
+            {
+                tdataviewset._GraphSetEx.OpenPath[i] = "";
+            }
+
+            i = 0;
+            foreach (string spath in recentDataFiles)
+            {
+                tdataviewset._GraphSetEx.OpenPath[i] = spath;
+                i++;
+            }
+            SaveToSetFile(tdataviewset);
+        }
+
+        public static void MemoryRecentDataFile(ref DataViewSet tdataviewset, string newpath)
+        {
+            if (newpath.Trim().Length > 5)
+            {
+                if (recentDataFiles.Contains(newpath))
+                {
+                    recentDataFiles.Remove(newpath);
+                }
+                recentDataFiles.Insert(0, newpath);
+            }
+            int i;
+            for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) tdataviewset._GraphSetEx.OpenPath[i] = "";
+
+            i = 0;
+            foreach (string spath in recentDataFiles)
+            {
+                tdataviewset._GraphSetEx.OpenPath[i] = spath;
+                i++;
+            }
+            SaveToSetFile(tdataviewset);
+        }
+
+        public static string ShortenPath(string path, int maxLength = 50)
+        {
+            // 1. 예외 처리: 경로가 이미 제한 길이보다 짧으면 그대로 반환
+            if (string.IsNullOrEmpty(path) || path.Length <= maxLength)
+            {
+                return path;
+            }
+
+            string ellipsis = "...";
+
+            // 2. 남길 글자 수 계산 (총 제한 길이 - "..."의 길이)
+            int keepLength = maxLength - ellipsis.Length; // 30 - 3 = 27
+
+            // 3. 앞부분과 뒷부분에 각각 나눌 글자 수 설정 (홀수일 경우 뒷부분에 1글자 더 배정)
+            int headLength = keepLength / 2;             // 27 / 2 = 13글자
+            int tailLength = keepLength - headLength;     // 27 - 13 = 14글자
+
+            // 4. 문자열 잘라서 조합하기
+            string head = path.Substring(0, headLength);
+            string tail = path.Substring(path.Length - tailLength);
+
+            return head + ellipsis + tail;
+        }
+
+        public static void ClearRecenDatatFile(ref DataViewSet tdataviewset)
+        {
+            if (recentDataFiles != null)
+            {
+                // 목록에서 삭제
+                recentDataFiles.Clear();
+
+                // 변경사항 저장
+                int i;
+                for (i = 0; i < MBZA_Constant.MAX_USERECENT_COUNT; i++) tdataviewset._GraphSetEx.OpenPath[i] = "";
+
+                SaveToSetFile(tdataviewset);
+            }
+        }
+
         public static DataViewSet LoadFromSetFile(string filename = "C:\\ZIVE DATA\\ZM\\INFOR\\ZM_DATAVIEW.SET")
         {
             DataViewSet setinfo = null;
@@ -744,10 +836,16 @@ namespace ZiveLab.ZM.Dataview
                     SaveToSetFile(setinfo, filename);
                     return setinfo;
                 }
+
                 FileStream fs = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 BinaryFormatter bf = new BinaryFormatter();
                 setinfo = (DataViewSet)bf.Deserialize(fs);
 
+                if(setinfo._GraphSetEx.CheckedAuxCh == null)
+                {
+                    setinfo._GraphSetEx.CheckedAuxCh = new bool[MBZA_Constant.MAX_AUX_CHANNELS];
+                    for (int i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++) setinfo._GraphSetEx.CheckedAuxCh[i] = true;
+                }
                 fs.Close();
                 
             }
@@ -915,6 +1013,113 @@ namespace ZiveLab.ZM.Dataview
                         resources.ApplyResources(sub, sub.Name, info);
                 }
             }
+        }
+
+        public static void GraphNyquestProc(Size size, ref double xmax, ref double xmin, ref double max, ref double min)
+        {
+            double dRate = 1.0;
+            double txmax = xmax;
+            double txmin = xmin;
+            double tmax = max;
+            double tmin = min;
+
+            if (size.Width == 0 || size.Height == 0) dRate = 1.0;
+            else dRate = (double)size.Width / (double)size.Height;
+
+            if (txmin >= 0.0)
+            {
+                if ((txmax * 0.1) < txmin)
+                {
+                    txmax += Math.Abs(txmin);
+                    txmin = 0.0;
+                }
+                else
+                {
+                    txmin -= (Math.Abs(txmax) * 0.1);
+                    txmax += Math.Abs(txmax) * 0.1;
+                }
+            }
+            else
+            {
+                txmin -= (Math.Abs(txmax) * 0.1);
+                txmax += Math.Abs(txmax) * 0.1;
+            }
+
+            if (tmin >= 0.0)
+            {
+                if ((tmax * 0.1) < tmin)
+                {
+                    tmax += Math.Abs(tmin);
+                    tmin = 0.0;
+                }
+                else
+                {
+                    tmin -= Math.Abs(tmax) * 0.1;
+                    tmax += Math.Abs(tmax) * 0.1;
+                }
+            }
+            else
+            {
+                tmin -= (Math.Abs(tmax) * 0.1);
+                tmax += (Math.Abs(tmax) * 0.1);
+            }
+
+            if (txmax >= tmax)
+            {
+                if ((txmax / dRate) < tmax)
+                {
+                    txmax = tmax * dRate;
+                }
+                else
+                {
+                    tmax = txmax / dRate;
+                }
+            }
+            else
+            {
+                if ((tmax * dRate) < txmax)
+                {
+                    tmax = txmax / dRate;
+                }
+                else
+                {
+                    txmax = tmax * dRate;
+                }
+            }
+
+            if (txmin <= tmin)
+            {
+                if (txmin != 0.0)
+                {
+                    if ((txmin / 2.0) < tmin) tmin = txmin / 2.0;
+                    else txmin = tmin * 2.0;
+                }
+                else tmin = txmin;
+            }
+            else
+            {
+                if (tmin == 0.0) txmin = tmin;
+                else
+                {
+                    if ((tmin / 2.0) < txmin) txmin = tmin / 2.0;
+                    else tmin = txmin * 2.0;
+                }
+            }
+
+            double dRange = Math.Abs(txmax - txmin) / 2.0 * 0.01;
+            if (dRange == 0.0) dRange = Math.Abs(txmax) / 2.0 * 0.01;
+            txmax = txmax + dRange;
+            txmin = txmin - dRange;
+
+            dRange = Math.Abs(tmax - tmin) / 2.0 * 0.01;
+            if (dRange == 0.0) dRange = Math.Abs(tmax) / 2.0 * 0.01;
+            tmax = tmax + dRange;
+            tmin = tmin - dRange;
+
+            xmax = txmax;
+            xmin = txmin;
+            max = tmax;
+            min = tmin;
         }
 
         static public Range GetGraphXaisRange(double[] data, double asmx, double asm, double asmxl, double asml, bool xaxis = false, bool log = false)

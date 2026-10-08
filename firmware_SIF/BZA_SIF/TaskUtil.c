@@ -635,16 +635,18 @@ inline void proc_init_test(int bd)
 	pch->mFlow.MaxI = pTech->info.MaxI;
 	pch->mFlow.MaxV = pTech->info.MaxV;
 	pch->mFlow.Capa = pTech->info.Capa;
-
+	pch->mFlow.DchCapa = 0.0;
+	pch->mFlow.m_MsLastCapaStamp = 0;
+	
 	proc_eis_setrange(bd,pch->mFlow.Iac_rngno);
 	
 	if(pch->mFlow.Vdc_rngno == 0) pch->AutoVdcRange = 1;
 	else
 	{
 		pch->AutoVdcRange = 0;
-		if(pch->mFlow.Vdc_rngno == 1) 
+		if(pch->mFlow.Vdc_rngno == 0) 
 		{
-			preqdo->data |= DEF_DEVDO_VDC_RNG0;
+			preqdo->data |= DEF_DEVDO_VDC_RNG0;	
 		}
 		else
 		{
@@ -681,7 +683,11 @@ inline void proc_init_test(int bd)
 		
 		proc_eis_LoadOn(bd, 0); 
 
+		pch->mFlow.chkCutoffV = 0;
 		pch->mFlow.CutoffV = 0.0;
+		pch->mFlow.chkCutoffC = 0;
+		pch->mFlow.CutoffC = 0.0;
+				
 		pch->mFlow.timeproc = 1;
 		pch->mFlow.m_MsSmplLimit = (uint)(pTech->tech.mon.sampletime * 1000.0);
 		pch->mFlow.m_MsDurLimit = 0;
@@ -708,7 +714,11 @@ inline void proc_init_test(int bd)
 		
 		if(pTech->tech.dch.useir == 0) proc_eis_LoadOn(bd, 1); 
 
+		pch->mFlow.chkCutoffV = pTech->tech.dch.usecutoffV;
 		pch->mFlow.CutoffV = pTech->tech.dch.CutoffV;
+		pch->mFlow.chkCutoffC = pTech->tech.dch.usecutoffC;
+		pch->mFlow.CutoffC = pTech->tech.dch.CutoffC;
+		
 		pch->mFlow.timeproc = 1;
 		pch->mFlow.m_MsFlowdelayLimit = 0;
 		pch->mFlow.m_MsSmplLimit = (uint)(pTech->tech.dch.sampletime * 1000.0);

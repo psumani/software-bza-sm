@@ -164,8 +164,8 @@ namespace ZiveLab.ZM.ZIM.Analysis
             for (i = 0; i < MBZA_Constant.MAX_AUXTYPE_CHANNELS; i++)
             {
                 dtotal[i] = 0.0;
-                dmax[i] = -99999999999.9;
-                dmin[i] = 9999999999.0;
+                dmax[i] = MBZA_Constant.MAX_INITVALUE;
+                dmin[i] = MBZA_Constant.MIN_INITVALUE;
                 Cnt[i] = 0;
             }
             

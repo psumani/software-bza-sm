@@ -109,6 +109,18 @@
       <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileStructDef.cs" />
+    <Compile Include="frmSelAuxConvZMan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelAuxConvZMan.Designer.cs">
+      <DependentUpon>frmSelAuxConvZMan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectDataFolderDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectDataFolderDlg.Designer.cs">
+      <DependentUpon>frmSelectDataFolderDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSelTarget.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +186,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FileHeaderInforForm.resx">
       <DependentUpon>FileHeaderInforForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelAuxConvZMan.resx">
+      <DependentUpon>frmSelAuxConvZMan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectDataFolderDlg.resx">
+      <DependentUpon>frmSelectDataFolderDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSelTarget.resx">
       <DependentUpon>frmSelTarget.cs</DependentUpon>
@@ -292,6 +310,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Image\SelectCell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\PathListBoxItem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

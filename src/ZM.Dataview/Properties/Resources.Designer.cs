@@ -521,6 +521,15 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   Axis Color과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string AxisColor {
+            get {
+                return ResourceManager.GetString("AxisColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Base과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Base {
@@ -1488,6 +1497,15 @@ namespace ZiveLab.ZM.Dataview.Properties {
         }
         
         /// <summary>
+        ///   Grid color과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string GridColor {
+            get {
+                return ResourceManager.GetString("GridColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Bitmap Grpbode {
@@ -2048,6 +2066,16 @@ namespace ZiveLab.ZM.Dataview.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap PathListBoxItem {
+            get {
+                object obj = ResourceManager.GetObject("PathListBoxItem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap pd1 {
             get {
                 object obj = ResourceManager.GetObject("pd1", resourceCulture);
@@ -2353,7 +2381,7 @@ namespace ZiveLab.ZM.Dataview.Properties {
         /// </summary>
         internal static string Run_ZMan {
             get {
-                return ResourceManager.GetString("Create a Z# file and run ZMAN.", resourceCulture);
+                return ResourceManager.GetString("Run_ZMan", resourceCulture);
             }
         }
         

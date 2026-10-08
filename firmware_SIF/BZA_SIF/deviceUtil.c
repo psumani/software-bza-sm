@@ -1208,7 +1208,7 @@ inline int Get_Rng_A(int bd)
 	while(1)
 	{
 		tmp =m_pSysConfig->mZimCfg[bd].ranges.Gen.iac_rng[rng].realmax;
-		
+		if(m_pGlobalVar->mChVar[bd].mTech.type == TECH_DCH) tmp *= 0.5;
 		if(maxA < tmp)
 		{
 			orng ++;
@@ -1238,9 +1238,7 @@ inline void proc_auto_vdc_proc(int bd)
 	double dtmp = fabs(pvdc->value);
 	double dtmp1 = m_pSysConfig->mZimCfg[bd].ranges.Gen.vdc_rng[1].realmax * 1.1;
 	double dtmp2 = m_pSysConfig->mZimCfg[bd].ranges.Gen.vdc_rng[1].realmax *0.95;
-	
-	
-	
+
 	if(dtmp > dtmp1) 
 	{
 		if(m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno == 1)
@@ -3705,20 +3703,47 @@ void Flow_discharger(int bd) // if MCBZA, bd=0
 		bWrite = true;
 	}
 
-
-	if(pch->mChStatInf.Vdc <= pch->mFlow.CutoffV) //[0]
+	if(pch->mFlow.m_MsLastCapaStamp < pch->mChStatInf.TaskTimeStamp)
 	{
-		pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
-		if(bWrite == false)
+		pch->mFlow.m_MsLastCapaStamp = pch->mChStatInf.TaskTimeStamp;
+		pch->mFlow.DchCapa += pch->mChStatInf.Idc * ((pch->mChStatInf.TaskTimeStamp - pch->mFlow.m_MsLastCapaStamp) / 3500.0);
+																   
+	}
+	
+	if(pch->mFlow.chkCutoffV == 1)
+	{
+		if(pch->mChStatInf.Vdc <= pch->mFlow.CutoffV) //[0]
 		{
-			proc_adc_vdc_data(bd);
-			if(proc_writedata(bd) == false)
+			pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
+			if(bWrite == false)
 			{
-				pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+				proc_adc_vdc_data(bd);
+				if(proc_writedata(bd) == false)
+				{
+					pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+				}
 			}
+			proc_stop_test(bd, pch->mChStatInf.LastError);
+			return;
 		}
-		proc_stop_test(bd, pch->mChStatInf.LastError);
-		return;
+	}
+	
+	if(pch->mFlow.chkCutoffC == 1)
+	{
+		if(pch->mFlow.DchCapa <= pch->mFlow.CutoffC) //[0]
+		{
+			pch->mChStatInf.LastError = DEF_LAST_ERROR_AUTOSTOP;
+			if(bWrite == false)
+			{
+				proc_adc_vdc_data(bd);
+				if(proc_writedata(bd) == false)
+				{
+					pch->mChStatInf.LastError = DEF_LAST_ERROR_MEMORY;
+				}
+			}
+			proc_stop_test(bd, pch->mChStatInf.LastError);
+			return;
+		}
 	}
 	
 	if(pch->mTech.tech.dch.useir == 1)
@@ -3882,6 +3907,7 @@ bool chkTestCondition(int bd)
 	return bret;
 }
 
+
 void set_device_DO(int bd)
 {
 	
@@ -3898,10 +3924,10 @@ void set_device_DO(int bd)
 		{
 			return;
 		}
-		if(preqdo->data & 0x10)
-			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 1;
-		else
+		if(preqdo->data & DEF_DEVDO_VDC_RNG0)
 			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
+		else
+			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 1;
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_rngno = (preqdo->data >> 1 & 0x7);
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_in_rngno = (preqdo->data >> 2 & 0x3);
 		
@@ -3938,10 +3964,10 @@ void setaux_device_DO(int bd)
 		{
 			return;
 		}
-		if(preqdo->data & 0x10)
-			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 1;
-		else
+		if(preqdo->data & DEF_DEVDO_VDC_RNG0)
 			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 0;
+		else
+			m_pGlobalVar->mChVar[bd].mChStatInf.Vdc_rngno = 1;
 	
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_rngno = m_pGlobalVar->mChVar[0].mChStatInf.Iac_rngno; // not measure Iac 
 		m_pGlobalVar->mChVar[bd].mChStatInf.Iac_in_rngno = m_pGlobalVar->mChVar[0].mChStatInf.Iac_in_rngno;

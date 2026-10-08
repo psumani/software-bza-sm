@@ -1695,7 +1695,7 @@ namespace ZiveLab.ZM.Dataview
 
             gdfx.Step = (uint)urgd.mRawData.nTaskNo;
             gdfx.Cycle = (uint)urgd.mRawData.nCycle;
-         
+            gdfx.Freq = urgd.MainZ.Frequency;
             switch (gdxy.DataX.AxisName)
             {
                 case "Log(Frequency)":
@@ -1704,6 +1704,7 @@ namespace ZiveLab.ZM.Dataview
                     gdfx.DataObj[0] = urgd.MainZ.Frequency;
 
                     for (i = 0; i < MBZA_Constant.MAX_AUX_CHANNELS; i++)
+
                     {
                         gdfx.Data[i+1] = urgd.AuxZ[i].Frequency;
                         gdfx.DataStr[i+1] = CoTypeString.DoubleToString(urgd.AuxZ[i].Frequency);
